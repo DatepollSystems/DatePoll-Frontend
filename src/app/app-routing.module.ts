@@ -4,9 +4,16 @@ import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
 import {HomeComponent} from './home/home.component';
 import {SignupComponent} from './auth/signup/signup.component';
 import {SigninComponent} from './auth/signin/signin.component';
+import {InfoComponent} from './info/info.component';
+import {ImprintComponent} from './info/imprint/imprint.component';
+import {PrivacyPolicyComponent} from './info/privacy-policy/privacy-policy.component';
 
 const appRoutes = [
   { path: '', redirectTo: '/home', pathMatch: 'full'},
+  { path: 'info', component: InfoComponent, children: [
+      { path: 'imprint', component: ImprintComponent },
+      { path: 'privacypolicy', component: PrivacyPolicyComponent }
+    ] },
   { path: 'home', component: HomeComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'signin', component: SigninComponent },

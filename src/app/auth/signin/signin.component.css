@@ -1,7 +1,28 @@
+@font-face { font-family: signFont; src: url('../../../assets/fonts/signFont.TTF'); }
+
 span {
-  margin-bottom: 25px;
+  margin-bottom: 30px;
+}
+
+#sign-container {
+  background: url("../../../assets/signBackground.svg") no-repeat;
+  background-size: cover;
+  height: 100%;
+  width: 100%;
+  padding-top: 15vh;
 }
 
 form {
-  margin-top: 30vh;
+  padding: 3vh 3vh 6vh;
+  background-color: #37474F;
+  border-radius: 20px;
+  color: white;
 }
+
+.projectName {
+  padding-left: 1vh;
+  font-family: signFont, monospace;
+  font-size: 2.5vh;
+  border-left: thick solid orange;
+}
+

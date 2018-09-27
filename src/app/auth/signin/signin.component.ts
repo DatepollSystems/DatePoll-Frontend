@@ -1,27 +1,27 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {NgForm} from '@angular/forms';
 import {AuthService} from '../auth.service';
-import {DataStorageService} from '../../data-storage.service';
 
 @Component({
   selector: 'app-signin',
   templateUrl: './signin.component.html',
   styleUrls: ['./signin.component.css']
 })
-export class SigninComponent implements OnInit {
+export class SigninComponent implements OnInit, OnDestroy {
 
-  constructor(private authService: AuthService, private dataStorageService: DataStorageService) { }
+  constructor(private authService: AuthService) { }
 
-  message: string;
+  apiUrl: string;
+  projectName = '';
 
   ngOnInit() {
-    this.dataStorageService.getServerStartMessage().subscribe(
-      (servers: any[]) => {
-        console.log(servers);
+    let url = window.location.href;
+    let arr = url.split('/');
+    this.projectName = arr[2] + ' | Hier kann stehen was sie wollen';
+  }
 
-      },
-      (error) => console.log(error)
-    );
+  ngOnDestroy() {
+    document.body.style.backgroundColor = '#ffffff';
   }
 
   onSignin(form: NgForm) {
