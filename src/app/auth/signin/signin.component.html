@@ -1,28 +1,70 @@
 <div id="sign-container">
-  <div class="col-sm-12 col-md-10 col-lg-4 offset-sm-0 offset-md-1 offset-lg-4">
-    <form (ngSubmit)="onSignin(f)" #f="ngForm">
-      <div class="row">
-        <div class="projectName col-12">{{ projectName }}</div>
-        <div class="col-12" style="margin-top: 10px; font-size: 5vh">DatePoll | Sign In</div>
-      </div>
+  <div class="row">
+    <div class="col s12 m8 l6 xl4 offset-m2 offset-l3 offset-xl4">
+      <form (ngSubmit)="onSignin(f)" #f="ngForm">
+        <mz-card
+          class="blue-grey darken-1 white-text"
+          [horizontal]="true"
+          [hoverable]="true">
 
-      <div class="form-group">
-        <label for="email">Email address</label>
-        <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp"
-               placeholder="Enter email" required ngModel>
-        <small id="emailHelp" class="form-text" style="color: white">We'll never share your email with anyone else.
-        </small>
-      </div>
+          <mz-card-title>
+            <blockquote class="projectName">
+              {{projectName}}
+            </blockquote>
+          </mz-card-title>
 
-      <div class="form-group">
-        <label for="password">Password</label>
-        <input type="password" class="form-control" id="password" name="password" placeholder="Enter password" required
-               minlength="6" ngModel>
-      </div>
+          <mz-card-title>
+            DatePoll |  {{ 'SIGNIN' | translate }}
+          </mz-card-title>
 
-      <a routerLink="/signup" class="btn btn-info float-left">Not signed up yet?</a>
+          <mz-card-content>
+            <mz-input-container class="white-text">
+              <i mz-icon-mdi mz-input-prefix
+                 [icon]="'email'">
+              </i>
+              <input mz-input ngModel email
+                     [label]="'Email address'"
+                     id="email"
+                     name="email"
+                     type="email"
+                     required
+                     minlength="5"
+                     class="white-text">
+            </mz-input-container>
 
-      <button type="submit" class="btn btn-primary float-right" [disabled]="!f.valid">Sign in</button>
-    </form>
+            <mz-input-container class="white-text">
+              <i mz-icon-mdi mz-input-prefix
+                 [icon]="'lock'">
+              </i>
+              <input mz-input ngModel
+                     [label]="'Password'"
+                     id="password"
+                     name="password"
+                     minlength="6"
+                     required
+                     type="password"
+                     class="white-text">
+            </mz-input-container>
+          </mz-card-content>
+
+          <mz-card-action>
+
+              <a routerLink="/signup" class="btn btn-info left">{{ 'SIGNIN_NOT_SIGNED_UP' | translate }}</a>
+
+              <button
+                mz-button
+                type="submit"
+                class="btn right blue"
+                [disabled]="!f.valid">
+                {{ 'SIGNIN' | translate }}
+                <i mz-icon-mdi class="mdi mdi-owl right" [icon]="'send'"></i>
+              </button>
+
+          </mz-card-action>
+        </mz-card>
+      </form>
+    </div>
   </div>
 </div>
+
+<app-outer-footer></app-outer-footer>

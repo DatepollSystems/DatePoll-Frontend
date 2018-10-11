@@ -1,29 +1,28 @@
-<div class="ui-grid">
-  <div class="ui-sm-12 ui-md-10 ui-lg-4 ui-md-offset-1 ui-lg-offset-4">
-    <form (ngSubmit)="onSignup(f)" #f="ngForm" style="height: 50vh">
-      <div class="ui-grid">
-        <h1>Sign up</h1>
-      </div>
-      <div class="ui-grid">
-        <span class="ui-float-label ui-grid">
-          <input id="email" type="email" name="email" class="ui-grid-col-12" pInputText ngModel required>
-          <label for="email">Email</label>
-        </span>
-      </div>
-      <div class="ui-gird">
-         <span class="ui-float-label ui-grid">
-          <input id="password" type="password" name="password" required minlength="6" class="ui-grid-col-12" pPassword ngModel>
-          <label for="password">Password</label>
-        </span>
+<div id="sign-container">
+  <div class="col-sm-12 col-md-10 col-lg-6 offset-sm-0 offset-md-1 offset-lg-3">
+    <form (ngSubmit)="onSignup(f)" #f="ngForm">
+      <div class="row">
+        <div class="projectName col-12">{{ projectName }}</div>
+        <div class="col-12" style="margin-top: 10px; font-size: 5vh">DatePoll | Sign Up</div>
       </div>
 
-      <div class="ui-grid">
-        <a routerLink="/signin" style="float: left;" pButton class="ui-button-secondary" label="Already signed up?"></a>
-
-        <button style="float: right;" pButton type="submit" [disabled]="!f.valid" label="Sign Up"></button>
+      <div class="form-group">
+        <label for="email">Email address</label>
+        <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp"
+               placeholder="Enter email" required ngModel>
+        <small id="emailHelp" class="form-text" style="color: white">We'll never share your email with anyone else.
+        </small>
       </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" class="form-control" id="password" name="password" placeholder="Enter password" required
+               minlength="6" ngModel>
+      </div>
+
+      <a routerLink="/signin" class="btn btn-info float-left">Already signed up?</a>
+
+      <button type="submit" class="btn btn-primary float-right" [disabled]="!f.valid">Sign up</button>
     </form>
   </div>
 </div>
-
-

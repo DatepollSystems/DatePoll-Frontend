@@ -7,21 +7,14 @@ import {AuthService} from '../auth.service';
   templateUrl: './signin.component.html',
   styleUrls: ['./signin.component.css']
 })
-export class SigninComponent implements OnInit, OnDestroy {
+export class SigninComponent implements OnInit {
 
   constructor(private authService: AuthService) { }
 
   apiUrl: string;
-  projectName = '';
+  projectName = 'priv. uni. Buergerkorps Eggenburg';
 
   ngOnInit() {
-    let url = window.location.href;
-    let arr = url.split('/');
-    this.projectName = arr[2] + ' | Hier kann stehen was sie wollen';
-  }
-
-  ngOnDestroy() {
-    document.body.style.backgroundColor = '#ffffff';
   }
 
   onSignin(form: NgForm) {
