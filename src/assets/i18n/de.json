@@ -1,0 +1,26 @@
+{
+  "LANGUAGE": "Sprache",
+  "LANGUAGE_GERMAN": "Deutsch",
+  "LANGUAGE_ENGLISH": "Englisch",
+
+  "SIGNIN": "Anmelden",
+  "SIGNIN_NOT_SIGNED_UP": "Kein Konto?",
+
+  "ABOUT": "Über",
+
+  "IMPRINT": "Impressum",
+  "PRIVACY_POLICY": "Datenschutzerklärung",
+
+  "SETTINGS": "Einstellungen",
+
+  "SETTINGS_PERSONAL_DATA": "Persönliche Daten",
+  "SETTINGS_PERSONAL_DATA_DESCRIPTION": "Bearbeiten Sie Ihre Persönlichen Daten.",
+  "SETTINGS_PERSONAL_DATA_PERSONAL_DATA_CHANGE": "Persönliche Daten ändern",
+  "SETTINGS_PERSONAL_DATA_PERSONAL_NUMBER_CHANGE": "Telefonnummern ändern",
+  "SETTINGS_PERSONAL_DATA_PERSONAL_EMAIL_CHANGE": "Email-Adresse ändern",
+
+  "SETTINGS_SECURITY": "Anmeldung & Sicherheit",
+  "SETTINGS_SECURITY_DESCRIPTION": "Legen Sie die Einstellungen für Ihr Passwort und der Zwei-Faktor-Authentifizierung fest.",
+  "SETTINGS_SECURITY_CHANGE_PASSWORD": "Password ändern",
+  "SETTINGS_SECURITY_CHANGE_2FA": "Zwei-Faktor-Authentifizierung einstellen"
+}
