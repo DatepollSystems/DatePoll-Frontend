@@ -1,0 +1,138 @@
+<mz-dropdown
+  [id]="'dropdown-language'"
+  [align]="'left'"
+  [belowOrigin]="false"
+  [constrainWidth]="true"
+  [dropdownButtonId]="'btn-dropdown-language'"
+  [gutter]="true"
+  [hover]="true"
+  [stopPropagation]="true"
+>
+  <mz-dropdown-item><a class="black-text" (click)="setLang('en')">{{'LANGUAGE_ENGLISH' | translate }}</a></mz-dropdown-item>
+  <mz-dropdown-divider></mz-dropdown-divider>
+  <mz-dropdown-item><a class="black-text" (click)="setLang('de')">{{'LANGUAGE_GERMAN' | translate }}</a></mz-dropdown-item>
+</mz-dropdown>
+
+<div class="container">
+  <div class="row">
+    <div class="col l6 s12">
+      <h5 class="white-text">DatePoll</h5>
+      <p class="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
+    </div>
+    <div class="col l4 offset-l2 s12">
+      <h5 class="white-text">Links</h5>
+      <ul>
+        <li><a href="https://buergerkorps-eggenburg.at" target="_blank">Bürgerkorps Eggenburg</a></li>
+        <li><a (click)="feedbackModal.openModal()">Feedback</a></li>
+        <li><a (click)="aboutModal.openModal()">{{'ABOUT' | translate}}</a></li>
+        <li><a id="btn-dropdown-language">{{'LANGUAGE' | translate }}</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+<div class="footer-copyright blue-grey darken-3">
+  <div class="container">
+    <div class="left">Mady with&nbsp;</div>
+    <div class="red-text left">&hearts;&nbsp;</div>
+    <div class="left">
+      by all
+      <a
+        class="blue-text"
+        href="https://gitlab.com/groups/BuergerkorpsEggenburg/-/group_members"
+        target="_blank">Contributors
+      </a>
+    </div>
+
+    <a class="right" routerLink="/info/imprint">{{'IMPRINT' | translate }} & {{'PRIVACY_POLICY' | translate }}</a>
+  </div>
+</div>
+
+<mz-modal #feedbackModal class="black-text">
+  <mz-modal-header>
+    <h4>Give us a feedback</h4>
+  </mz-modal-header>
+  <mz-modal-content>
+    <div class="row">
+      <mz-textarea-container style="height: 2300px">
+        <i mz-icon-mdi mz-textarea-prefix
+           [icon]="'message-reply-text'">
+        </i>
+        <textarea mz-textarea style="min-height: 20vh"
+                  [label]="'Feedback'"
+                  placeholder="Hier kannst du Verbesserungsvorschläge und Kritik kund tun. Wir werden alles lesen und versuchen darauf einzugehen"
+                  id="comment-textarea"
+                  length="3000"></textarea>
+      </mz-textarea-container>
+    </div>
+
+    <div class="row">
+      <mz-checkbox-container>
+        <input mz-checkbox
+               mz-tooltip
+               [html]="true"
+               [tooltip]="'<b class=\'red-text\'>Bei Aktivierung</b> werden Screensize, Browsertyp, Browserversion, Is Mobile, Operating system und ob Cookies eingeschaltet sind mit gesendet.'"
+               [filledIn]="true"
+               [label]="'Browserdaten mitsenden'"
+               [checked]="sendBrowserData"
+               (change)="sendBrowserData = !sendBrowserData"
+               type="checkbox">
+      </mz-checkbox-container>
+    </div>
+
+  </mz-modal-content>
+  <mz-modal-footer>
+    <button mz-button [flat]="true" mz-modal-close style="margin-right: 10px;">Abbrechen</button>
+    <button mz-button [flat]="true" class="green" (click)="sendFeedback()">Senden</button>
+  </mz-modal-footer>
+</mz-modal>
+
+<mz-modal #aboutModal [fixedFooter]="true" class="black-text">
+  <mz-modal-header>
+    <h4>About</h4>
+  </mz-modal-header>
+  <mz-modal-content>
+    <mz-collection>
+      <mz-collection-header><h5>License: GNU Affero General Public License v3.0</h5></mz-collection-header>
+      <mz-collection-item>Version: {{version}}</mz-collection-item>
+      <mz-collection-item>
+        Frontend source code:
+        <a href="https://gitlab.com/BuergerkorpsEggenburg/datepoll-frontend" target="_blank" rel="noopener">GitLab</a>
+      </mz-collection-item>
+      <mz-collection-item>
+        Backend source code:
+        <a href="https://gitlab.com/BuergerkorpsEggenburg/datepoll-backend" target="_blank" rel="noopener">GitLab</a>
+      </mz-collection-item>
+    </mz-collection>
+
+    <mz-collection>
+      <mz-collection-header><h5>Frontend libraries</h5></mz-collection-header>
+      <mz-collection-item>
+        Framework:
+        <a href="https://angular.io/" target="_blank" rel="noopener">Angular</a>
+      </mz-collection-item>
+      <mz-collection-item>
+        CSS Framework:
+        <a href="https://materializecss.com/" target="_blank" rel="noopener">MaterializeCSS</a>
+      </mz-collection-item>
+      <mz-collection-item>
+        MaterializeCSS Angular wrap around:
+        <a href="https://sherweb.github.io/ngx-materialize/home" target="_blank" rel="noopener">Ngx-Materialize</a>
+      </mz-collection-item>
+      <mz-collection-item>
+        <a href="https://jquery.com/" target="_blank" rel="noopener">jQuery</a>
+      </mz-collection-item>
+    </mz-collection>
+
+    <mz-collection>
+      <mz-collection-header><h5>Backend libraries</h5></mz-collection-header>
+      <mz-collection-item>
+        Framework:
+        <a href="https://nodejs.org" target="_blank" rel="noopener">Node.js</a>
+      </mz-collection-item>
+    </mz-collection>
+  </mz-modal-content>
+  <mz-modal-footer>
+    <button mz-button [flat]="true" mz-modal-close>Close</button>
+  </mz-modal-footer>
+</mz-modal>
+

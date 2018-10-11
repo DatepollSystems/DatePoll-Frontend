@@ -1,0 +1,26 @@
+{
+  "LANGUAGE": "Language",
+  "LANGUAGE_GERMAN": "German",
+  "LANGUAGE_ENGLISH": "English",
+
+  "SIGNIN": "Sign in",
+  "SIGNIN_NOT_SIGNED_UP": "Not signed up?",
+
+  "ABOUT": "About",
+
+  "IMPRINT": "Imprint",
+  "PRIVACY_POLICY": "Privacy Policy",
+
+  "SETTINGS": "Settings",
+
+  "SETTINGS_PERSONAL_DATA": "Personal data",
+  "SETTINGS_PERSONAL_DATA_DESCRIPTION": "Edit your personal data.",
+  "SETTINGS_PERSONAL_DATA_PERSONAL_DATA_CHANGE": "Change your personal data",
+  "SETTINGS_PERSONAL_DATA_PERSONAL_NUMBER_CHANGE": "Change your telephone number",
+  "SETTINGS_PERSONAL_DATA_PERSONAL_EMAIL_CHANGE": "Change your email address",
+
+  "SETTINGS_SECURITY": "Signin & Security",
+  "SETTINGS_SECURITY_DESCRIPTION": "Define the settings for your password and for the Two-factor authentication.",
+  "SETTINGS_SECURITY_CHANGE_PASSWORD": "Change your password",
+  "SETTINGS_SECURITY_CHANGE_2FA": "Set up your Two-factor authentication"
+}

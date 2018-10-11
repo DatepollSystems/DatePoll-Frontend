@@ -1,0 +1,14 @@
+<div class="row">
+  <div class="col s12 md4 lg2 xl2">
+    <mz-collection>
+      <a mz-collection-link routerLink="imprint" routerLinkActive="active">Impressum</a>
+      <a mz-collection-link routerLink="privacypolicy" routerLinkActive="active">Datenschutzerklärung</a>
+      <a mz-collection-link onclick="window.history.go(-1); return false;">Go back <div mz-secondary-content><i mz-icon-mdi [icon]="'arrow-left'"></i></div></a>
+    </mz-collection>
+  </div>
+  <div class="col s12 md8 lg8 xl8">
+    <router-outlet></router-outlet>
+  </div>
+</div>
+
+<app-outer-footer></app-outer-footer>

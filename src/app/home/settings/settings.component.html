@@ -1,0 +1,41 @@
+<div class="row">
+  <div class="col s12 m6">
+    <div class="card hoverable">
+      <div class="card-content">
+        <span class="card-title" style="font-size: 36px;">
+          <i mz-icon-mdi
+             [icon]="'account-card-details'"
+             class="blue-text"
+             [size]="'36px'"></i>
+          {{'SETTINGS_PERSONAL_DATA' | translate}}
+        </span>
+        <p>{{'SETTINGS_PERSONAL_DATA_DESCRIPTION' | translate}}</p>
+
+        <div class="card-content-links">
+          <a href="#">{{'SETTINGS_PERSONAL_DATA_PERSONAL_DATA_CHANGE' | translate}}</a><br>
+          <a href="#">{{'SETTINGS_PERSONAL_DATA_PERSONAL_NUMBER_CHANGE' | translate}}</a><br>
+          <a href="#">{{'SETTINGS_PERSONAL_DATA_PERSONAL_EMAIL_CHANGE' | translate}}</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col s12 m6">
+    <div class="card hoverable">
+      <div class="card-content">
+        <span class="card-title" style="font-size: 36px;">
+          <i mz-icon-mdi
+             [icon]="'security-lock'"
+             class="blue-text"
+             [size]="'36px'"></i>
+          {{'SETTINGS_SECURITY' | translate}}
+        </span>
+        <p>{{'SETTINGS_SECURITY_DESCRIPTION' | translate}}</p>
+
+        <div class="card-content-links">
+          <a href="#">{{'SETTINGS_SECURITY_CHANGE_PASSWORD' | translate}}</a><br>
+          <a href="#">{{'SETTINGS_SECURITY_CHANGE_2FA' | translate}}</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
