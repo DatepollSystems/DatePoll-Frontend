@@ -7,6 +7,8 @@ import {SigninComponent} from './auth/signin/signin.component';
 import {InfoComponent} from './info/info.component';
 import {ImprintComponent} from './info/imprint/imprint.component';
 import {PrivacyPolicyComponent} from './info/privacy-policy/privacy-policy.component';
+import {StartComponent} from './home/start/start.component';
+import {SettingsComponent} from './home/settings/settings.component';
 
 const appRoutes = [
   { path: '', redirectTo: '/home', pathMatch: 'full'},
@@ -14,7 +16,10 @@ const appRoutes = [
       { path: 'imprint', component: ImprintComponent },
       { path: 'privacypolicy', component: PrivacyPolicyComponent }
     ] },
-  { path: 'home', component: HomeComponent },
+  { path: 'home', component: HomeComponent, children: [
+      { path: '', pathMath: 'full', component: StartComponent },
+      { path: 'settings', component: SettingsComponent}
+    ] },
   { path: 'signup', component: SignupComponent },
   { path: 'signin', component: SigninComponent },
   { path: 'not-found', component: PageNotFoundComponent },

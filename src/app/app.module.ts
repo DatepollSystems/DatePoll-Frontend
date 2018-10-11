@@ -1,10 +1,8 @@
 import {BrowserModule} from '@angular/platform-browser';
-import {NgModule} from '@angular/core';
+import {NgModule, APP_INITIALIZER} from '@angular/core';
 
 import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {ButtonModule} from 'primeng/button';
-import {InputTextModule, MenuModule, PasswordModule, ToolbarModule} from 'primeng/primeng';
 import {SignupComponent} from './auth/signup/signup.component';
 import {SigninComponent} from './auth/signin/signin.component';
 import {AppRoutingModule} from './app-routing.module';
@@ -17,6 +15,21 @@ import {FooterComponent} from './footer/footer.component';
 import { InfoComponent } from './info/info.component';
 import { ImprintComponent } from './info/imprint/imprint.component';
 import { PrivacyPolicyComponent } from './info/privacy-policy/privacy-policy.component';
+import {MaterializeComponentModule} from './materialize.module';
+import {OuterFooterComponent} from './footer/outer-footer/outer-footer.component';
+import {InnerFooterComponent} from './footer/inner-footer/inner-footer.component';
+import {UserService} from './auth/user.service';
+import { StartComponent } from './home/start/start.component';
+import { SettingsComponent } from './home/settings/settings.component';
+import {TranslateService} from './translate.service';
+import {HttpClientModule} from '@angular/common/http';
+import { TranslatePipe } from './translate.pipe';
+import {CookieService} from 'angular2-cookie/core';
+
+export function setupTranslateFactory(
+  service: TranslateService): Function {
+  return () => service.use('DEFAULT');
+}
 
 @NgModule({
   declarations: [
@@ -28,20 +41,33 @@ import { PrivacyPolicyComponent } from './info/privacy-policy/privacy-policy.com
     FooterComponent,
     InfoComponent,
     ImprintComponent,
-    PrivacyPolicyComponent
+    PrivacyPolicyComponent,
+    OuterFooterComponent,
+    InnerFooterComponent,
+    StartComponent,
+    SettingsComponent,
+    TranslatePipe
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,
     AppRoutingModule,
-    ButtonModule,
-    InputTextModule,
-    PasswordModule,
-    ToolbarModule,
-    MenuModule
+    HttpClientModule,
+    MaterializeComponentModule.forRoot()
   ],
-  providers: [AuthService, DataStorageService],
+  providers: [
+    AuthService,
+    DataStorageService,
+    UserService,
+    CookieService,
+    TranslateService,
+    {
+      provide: APP_INITIALIZER,
+      useFactory: setupTranslateFactory,
+      deps: [ TranslateService ],
+      multi: true
+    }],
   bootstrap: [AppComponent]
 })
 export class AppModule {
