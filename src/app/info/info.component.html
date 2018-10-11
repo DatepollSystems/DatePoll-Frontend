@@ -1,15 +1,14 @@
-<div class="container-fluid" style="padding-top: 2vh">
-  <div class="row">
-    <div class="col-sm-12 col-md-4 col-lg-3">
-      <div class="list-group">
-        <div class="list-group-item list-group-item-info">Navigate with me</div>
-        <a routerLink="imprint" routerLinkActive="active" class="list-group-item list-group-item-action">Impressum</a>
-        <a routerLink="privacypolicy" routerLinkActive="active" class="list-group-item list-group-item-action">Datenschutzerklärung</a>
-        <a routerLink="/signin" class="list-group-item list-group-item-action">Back to login</a>
-      </div>
-    </div>
-    <div class="col-sm-12 col-md-8 col-lg-9">
-      <router-outlet></router-outlet>
-    </div>
+<div class="row">
+  <div class="col s12 md4 lg2 xl2">
+    <mz-collection>
+      <a mz-collection-link routerLink="imprint" routerLinkActive="active">Impressum</a>
+      <a mz-collection-link routerLink="privacypolicy" routerLinkActive="active">Datenschutzerklärung</a>
+      <a mz-collection-link onclick="window.history.go(-1); return false;">Go back <div mz-secondary-content><i mz-icon-mdi [icon]="'arrow-left'"></i></div></a>
+    </mz-collection>
+  </div>
+  <div class="col s12 md8 lg8 xl8">
+    <router-outlet></router-outlet>
   </div>
 </div>
+
+<app-outer-footer></app-outer-footer>

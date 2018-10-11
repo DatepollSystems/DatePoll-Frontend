@@ -1,1 +1,12 @@
+li a {
+  color: #eeeeee;
+}
 
+li a:hover {
+ color: #bdbdbd;
+  cursor: pointer;
+}
+
+mz-dropdown-item a:hover {
+  cursor: pointer;
+}
