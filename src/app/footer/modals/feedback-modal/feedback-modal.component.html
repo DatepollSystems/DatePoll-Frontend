@@ -1,0 +1,38 @@
+<mz-modal class="black-text">
+  <mz-modal-header>
+    <h4>Give us a feedback</h4>
+  </mz-modal-header>
+  <mz-modal-content>
+    <div class="row">
+      <mz-textarea-container style="height: 2300px">
+        <i mz-icon-mdi mz-textarea-prefix
+           [icon]="'message-reply-text'">
+        </i>
+        <textarea mz-textarea style="min-height: 20vh"
+                  [label]="'Feedback'"
+                  placeholder="Hier kannst du Verbesserungsvorschläge und Kritik kund tun. Wir werden alles lesen und versuchen darauf einzugehen"
+                  id="comment-textarea"
+                  length="3000"></textarea>
+      </mz-textarea-container>
+    </div>
+
+    <div class="row">
+      <mz-checkbox-container>
+        <input mz-checkbox
+               mz-tooltip
+               [html]="true"
+               [tooltip]="'<b class=\'red-text\'>Bei Aktivierung</b> werden Screensize, Browsertyp, Browserversion, Is Mobile, Operating system und ob Cookies eingeschaltet sind mit gesendet.'"
+               [filledIn]="true"
+               [label]="'Browserdaten mitsenden'"
+               [checked]="sendBrowserData"
+               (change)="sendBrowserData = !sendBrowserData"
+               type="checkbox">
+      </mz-checkbox-container>
+    </div>
+
+  </mz-modal-content>
+  <mz-modal-footer>
+    <button mz-button [flat]="true" mz-modal-close style="margin-right: 10px;">Abbrechen</button>
+    <button mz-button [flat]="true" class="green" (click)="sendFeedback()">Senden</button>
+  </mz-modal-footer>
+</mz-modal>

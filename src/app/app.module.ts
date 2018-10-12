@@ -25,6 +25,9 @@ import {TranslateService} from './translate.service';
 import {HttpClientModule} from '@angular/common/http';
 import { TranslatePipe } from './translate.pipe';
 import {CookieService} from 'angular2-cookie/core';
+import { FeedbackModalComponent } from './footer/modals/feedback-modal/feedback-modal.component';
+import { AboutModalComponent } from './footer/modals/about-modal/about-modal.component';
+import {MzModalService} from 'ngx-materialize';
 
 export function setupTranslateFactory(
   service: TranslateService): Function {
@@ -46,7 +49,9 @@ export function setupTranslateFactory(
     InnerFooterComponent,
     StartComponent,
     SettingsComponent,
-    TranslatePipe
+    TranslatePipe,
+    FeedbackModalComponent,
+    AboutModalComponent
   ],
   imports: [
     BrowserModule,
@@ -56,12 +61,17 @@ export function setupTranslateFactory(
     HttpClientModule,
     MaterializeComponentModule.forRoot()
   ],
+  entryComponents: [
+    FeedbackModalComponent,
+    AboutModalComponent
+  ],
   providers: [
     AuthService,
     DataStorageService,
     UserService,
     CookieService,
     TranslateService,
+    MzModalService,
     {
       provide: APP_INITIALIZER,
       useFactory: setupTranslateFactory,

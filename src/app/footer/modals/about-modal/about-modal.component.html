@@ -1,0 +1,49 @@
+<mz-modal [fixedFooter]="true" class="black-text">
+  <mz-modal-header>
+    <h4>{{"ABOUT" | translate}}</h4>
+  </mz-modal-header>
+  <mz-modal-content>
+    <mz-collection>
+      <mz-collection-header><h5>License: GNU Affero General Public License v3.0</h5></mz-collection-header>
+      <mz-collection-item>Version: {{version}}</mz-collection-item>
+      <mz-collection-item>
+        Frontend source code:
+        <a href="https://gitlab.com/BuergerkorpsEggenburg/datepoll-frontend" target="_blank" rel="noopener">GitLab</a>
+      </mz-collection-item>
+      <mz-collection-item>
+        Backend source code:
+        <a href="https://gitlab.com/BuergerkorpsEggenburg/datepoll-backend" target="_blank" rel="noopener">GitLab</a>
+      </mz-collection-item>
+    </mz-collection>
+
+    <mz-collection>
+      <mz-collection-header><h5>Frontend libraries</h5></mz-collection-header>
+      <mz-collection-item>
+        Framework:
+        <a href="https://angular.io/" target="_blank" rel="noopener">Angular</a>
+      </mz-collection-item>
+      <mz-collection-item>
+        CSS Framework:
+        <a href="https://materializecss.com/" target="_blank" rel="noopener">MaterializeCSS</a>
+      </mz-collection-item>
+      <mz-collection-item>
+        MaterializeCSS Angular wrap around:
+        <a href="https://sherweb.github.io/ngx-materialize/home" target="_blank" rel="noopener">Ngx-Materialize</a>
+      </mz-collection-item>
+      <mz-collection-item>
+        <a href="https://jquery.com/" target="_blank" rel="noopener">jQuery</a>
+      </mz-collection-item>
+    </mz-collection>
+
+    <mz-collection>
+      <mz-collection-header><h5>Backend libraries</h5></mz-collection-header>
+      <mz-collection-item>
+        Framework:
+        <a href="https://nodejs.org" target="_blank" rel="noopener">Node.js</a>
+      </mz-collection-item>
+    </mz-collection>
+  </mz-modal-content>
+  <mz-modal-footer>
+    <button mz-button [flat]="true" mz-modal-close>Close</button>
+  </mz-modal-footer>
+</mz-modal>
