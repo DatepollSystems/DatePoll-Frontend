@@ -4,7 +4,7 @@
   </mz-modal-header>
   <mz-modal-content>
     <mz-collection>
-      <mz-collection-header><h5>License: GNU Affero General Public License v3.0</h5></mz-collection-header>
+      <mz-collection-header><h5>{{"ABOUT_LICENSE" | translate}}: GNU Affero General Public License v3.0</h5></mz-collection-header>
       <mz-collection-item>Version: {{version}}</mz-collection-item>
       <mz-collection-item>
         Frontend source code:
@@ -19,15 +19,12 @@
     <mz-collection>
       <mz-collection-header><h5>Frontend libraries</h5></mz-collection-header>
       <mz-collection-item>
-        Framework:
         <a href="https://angular.io/" target="_blank" rel="noopener">Angular</a>
       </mz-collection-item>
       <mz-collection-item>
-        CSS Framework:
         <a href="https://materializecss.com/" target="_blank" rel="noopener">MaterializeCSS</a>
       </mz-collection-item>
       <mz-collection-item>
-        MaterializeCSS Angular wrap around:
         <a href="https://sherweb.github.io/ngx-materialize/home" target="_blank" rel="noopener">Ngx-Materialize</a>
       </mz-collection-item>
       <mz-collection-item>
@@ -38,12 +35,11 @@
     <mz-collection>
       <mz-collection-header><h5>Backend libraries</h5></mz-collection-header>
       <mz-collection-item>
-        Framework:
         <a href="https://nodejs.org" target="_blank" rel="noopener">Node.js</a>
       </mz-collection-item>
     </mz-collection>
   </mz-modal-content>
   <mz-modal-footer>
-    <button mz-button [flat]="true" mz-modal-close>Close</button>
+    <button mz-button [flat]="true" mz-modal-close>{{"CLOSE" | translate}}</button>
   </mz-modal-footer>
 </mz-modal>

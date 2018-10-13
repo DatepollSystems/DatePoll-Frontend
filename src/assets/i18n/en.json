@@ -1,4 +1,6 @@
 {
+  "CLOSE": "Schließen",
+
   "LANGUAGE": "Language",
   "LANGUAGE_GERMAN": "German",
   "LANGUAGE_ENGLISH": "English",
@@ -7,6 +9,7 @@
   "SIGNIN_NOT_SIGNED_UP": "Not signed up?",
 
   "ABOUT": "About",
+  "ABOUT_LICENSE": "License>",
 
   "IMPRINT": "Imprint",
   "PRIVACY_POLICY": "Privacy Policy",

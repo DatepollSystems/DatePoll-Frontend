@@ -1,4 +1,6 @@
 {
+  "CLOSE": "Schließen",
+
   "LANGUAGE": "Sprache",
   "LANGUAGE_GERMAN": "Deutsch",
   "LANGUAGE_ENGLISH": "Englisch",
@@ -7,7 +9,7 @@
   "SIGNIN_NOT_SIGNED_UP": "Kein Konto?",
 
   "ABOUT": "Über",
-  "ABOUT_MODAL": "About",
+  "ABOUT_LICENSE": "Lizenz",
 
   "IMPRINT": "Impressum",
   "PRIVACY_POLICY": "Datenschutzerklärung",
