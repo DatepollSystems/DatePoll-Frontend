@@ -32,7 +32,10 @@
 
   </mz-modal-content>
   <mz-modal-footer>
-    <button mz-button [flat]="true" mz-modal-close style="margin-right: 10px;">{{'CLOSE' | translate}}</button>
-    <button mz-button [flat]="true" class="green" (click)="sendFeedback()">{{'SUBMIT' | translate}}</button>
+    <button mz-button [float]="true" [flat]="true" mz-modal-close class="hide-on-med-and-up left">
+      <i mz-icon-mdi class="black-text" [icon]="'close'"></i>
+    </button>
+    <button mz-button [flat]="true" mz-modal-close class="hide-on-small-and-down"  style="margin-right: 10px;">{{'CLOSE' | translate}}</button>
+    <button mz-button [flat]="true" mz-modal-close class="green" (click)="sendFeedback()">{{'SUBMIT' | translate}}</button>
   </mz-modal-footer>
 </mz-modal>
