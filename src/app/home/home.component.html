@@ -1,17 +1,20 @@
 <header>
-  <mz-navbar [navbarClass]="'white'">
-    <a routerLink="" class="brand-logo black-text center">DatePoll</a>
-    <mz-navbar-item-container [align]="'left'">
-      <mz-navbar-item>
-        <a id="btn-sidenav" class="hide-on-large-only">
-          <i mz-icon-mdi
-             [class]="'black-text'"
-             [icon]="'menu'">
-          </i>
-        </a>
-      </mz-navbar-item>
-    </mz-navbar-item-container>
-  </mz-navbar>
+
+  <div class="navbar-fixed">
+    <mz-navbar [navbarClass]="'white'">
+      <a routerLink="" class="brand-logo black-text center">DatePoll</a>
+      <mz-navbar-item-container [align]="'left'">
+        <mz-navbar-item>
+          <a id="btn-sidenav" class="hide-on-large-only">
+            <i mz-icon-mdi
+               [class]="'black-text'"
+               [icon]="'menu'">
+            </i>
+          </a>
+        </mz-navbar-item>
+      </mz-navbar-item-container>
+    </mz-navbar>
+  </div>
 
   <mz-sidenav
     [fixed]="true"
