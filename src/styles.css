@@ -14,6 +14,10 @@ header, main {
   }
 }
 
+a:hover {
+  cursor: pointer;
+}
+
 
 *, *::after, *::before {
   box-sizing: inherit;
