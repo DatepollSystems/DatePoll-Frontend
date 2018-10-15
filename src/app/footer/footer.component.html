@@ -8,9 +8,11 @@
   [hover]="true"
   [stopPropagation]="true"
 >
-  <mz-dropdown-item><a class="black-text" (click)="setLang('en')">{{'LANGUAGE_ENGLISH' | translate }}</a></mz-dropdown-item>
+  <mz-dropdown-item><a class="black-text" (click)="setLang('en')">{{'LANGUAGE_ENGLISH' | translate }}</a>
+  </mz-dropdown-item>
   <mz-dropdown-divider></mz-dropdown-divider>
-  <mz-dropdown-item><a class="black-text" (click)="setLang('de')">{{'LANGUAGE_GERMAN' | translate }}</a></mz-dropdown-item>
+  <mz-dropdown-item><a class="black-text" (click)="setLang('de')">{{'LANGUAGE_GERMAN' | translate }}</a>
+  </mz-dropdown-item>
 </mz-dropdown>
 
 <div class="container">
@@ -22,7 +24,7 @@
     <div class="col l4 offset-l2 s12">
       <h5 class="white-text">Links</h5>
       <ul>
-        <li><a href="https://buergerkorps-eggenburg.at" target="_blank">Bürgerkorps Eggenburg</a></li>
+        <li><a href="https://buergerkorps-eggenburg.at" target="_blank" rel="noopener">Bürgerkorps Eggenburg</a></li>
         <li><a (click)="openFeedbackModal()">Feedback</a></li>
         <li><a (click)="openAboutModal()">{{'ABOUT' | translate}}</a></li>
         <li><a id="btn-dropdown-language">{{'LANGUAGE' | translate }}</a></li>
@@ -36,10 +38,8 @@
     <div class="red-text left">&hearts;&nbsp;</div>
     <div class="left">
       by all
-      <a
-        class="blue-text"
-        href="https://gitlab.com/groups/BuergerkorpsEggenburg/-/group_members"
-        target="_blank">Contributors
+      <a class="blue-text" rel="noopener" href="https://gitlab.com/groups/BuergerkorpsEggenburg/-/group_members"
+         target="_blank">Contributors
       </a>
     </div>
 
