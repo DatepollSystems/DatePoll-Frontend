@@ -12,7 +12,7 @@
         <p>{{'SETTINGS_PERSONAL_DATA_DESCRIPTION' | translate}}</p>
 
         <div class="card-content-links">
-          <a href="#">{{'SETTINGS_PERSONAL_DATA_PERSONAL_DATA_CHANGE' | translate}}</a><br>
+          <a (click)="openPersonalDataModal()">{{'SETTINGS_PERSONAL_DATA_PERSONAL_DATA_CHANGE' | translate}}</a><br>
           <a href="#">{{'SETTINGS_PERSONAL_DATA_PERSONAL_NUMBER_CHANGE' | translate}}</a><br>
           <a href="#">{{'SETTINGS_PERSONAL_DATA_PERSONAL_EMAIL_CHANGE' | translate}}</a>
         </div>

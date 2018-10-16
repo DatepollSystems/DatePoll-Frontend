@@ -9,7 +9,7 @@ header, main {
 }
 
 .brand-logo {
-  margin-left: 15px;
+  margin-left: 25px;
 }
 
 @media only screen and (max-width : 992px) {
@@ -24,6 +24,11 @@ header, main {
 
 a:hover {
   cursor: pointer;
+}
+
+.input-label {
+  font-size: 1.5vh;
+  color: gray
 }
 
 /*Loading animation*/
