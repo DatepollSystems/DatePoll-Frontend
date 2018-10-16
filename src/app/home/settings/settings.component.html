@@ -13,8 +13,8 @@
 
         <div class="card-content-links">
           <a (click)="openPersonalDataModal()">{{'SETTINGS_PERSONAL_DATA_PERSONAL_DATA_CHANGE' | translate}}</a><br>
-          <a href="#">{{'SETTINGS_PERSONAL_DATA_PERSONAL_NUMBER_CHANGE' | translate}}</a><br>
-          <a href="#">{{'SETTINGS_PERSONAL_DATA_PERSONAL_EMAIL_CHANGE' | translate}}</a>
+          <a (click)="openPhoneNumberModal()">{{'SETTINGS_PERSONAL_DATA_PERSONAL_NUMBER_CHANGE' | translate}}</a><br>
+          <a (click)="openEmailAddressModal()">{{'SETTINGS_PERSONAL_DATA_PERSONAL_EMAIL_CHANGE' | translate}}</a>
         </div>
       </div>
     </div>
@@ -32,8 +32,8 @@
         <p>{{'SETTINGS_SECURITY_DESCRIPTION' | translate}}</p>
 
         <div class="card-content-links">
-          <a href="#">{{'SETTINGS_SECURITY_CHANGE_PASSWORD' | translate}}</a><br>
-          <a href="#">{{'SETTINGS_SECURITY_CHANGE_2FA' | translate}}</a>
+          <a (click)="openPasswordModal()">{{'SETTINGS_SECURITY_CHANGE_PASSWORD' | translate}}</a><br>
+          <a (click)="openTwoFactorAuthenticationModal()">{{'SETTINGS_SECURITY_CHANGE_2FA' | translate}}</a>
         </div>
       </div>
     </div>
