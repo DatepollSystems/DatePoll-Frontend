@@ -1,17 +1,19 @@
 <header>
-  <mz-navbar [navbarClass]="'white'">
-    <a routerLink="" class="brand-logo black-text center">DatePoll</a>
-    <mz-navbar-item-container [align]="'left'">
-      <mz-navbar-item>
-        <a id="btn-sidenav" class="hide-on-large-only">
-          <i mz-icon-mdi
-             [class]="'black-text'"
-             [icon]="'menu'">
-          </i>
-        </a>
-      </mz-navbar-item>
-    </mz-navbar-item-container>
-  </mz-navbar>
+  <div class="navbar-fixed">
+    <mz-navbar [navbarClass]="'white'">
+      <a routerLink="" class="brand-logo black-text">DatePoll</a>
+      <mz-navbar-item-container [align]="'left'">
+        <mz-navbar-item>
+          <a id="btn-sidenav" class="hide-on-large-only">
+            <i mz-icon-mdi
+               [class]="'black-text'"
+               [icon]="'menu'">
+            </i>
+          </a>
+        </mz-navbar-item>
+      </mz-navbar-item-container>
+    </mz-navbar>
+  </div>
 
   <mz-sidenav
     [fixed]="true"
@@ -23,7 +25,7 @@
     <mz-sidenav-header>
       <div class="user-view" style="background-image: url('./assets/sidenav-background.svg'); background-size: cover">
         <img class="circle avatar" src="./../../assets/sidenav-demo-avatar.png">
-        <div class="white-text name">{{name}}</div>
+        <div class="white-text name">{{firstname}} {{surname}}</div>
         <div class="white-text email">{{email}}</div>
       </div>
     </mz-sidenav-header>

@@ -8,13 +8,30 @@ header, main {
   padding-left: 300px;
 }
 
+.brand-logo {
+  margin-left: 25px;
+}
+
 @media only screen and (max-width : 992px) {
   header, main {
     padding-left: 0;
   }
+
+  .brand-logo {
+    margin-left: 0;
+  }
 }
 
+a:hover {
+  cursor: pointer;
+}
 
+.input-label {
+  font-size: 1.5vh;
+  color: gray
+}
+
+/*Loading animation*/
 *, *::after, *::before {
   box-sizing: inherit;
 }

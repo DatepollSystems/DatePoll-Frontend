@@ -1,52 +1,93 @@
+import {Subject} from 'rxjs';
+
 export class UserService {
+
+  constructor() {}
+
+  private title = 'Dr.';
   private firstname = 'Max';
   private surname = 'Musterboy';
   private email = 'max.musterboy@gmail.com';
-  private title = 'Dr.';
 
-  private location = 'Krems';
   private streetname = 'Kasernstraße';
   private streetnumber = '6-12';
   private zipcode = '3500';
+  private location = 'Krems';
 
-  private birthdate = '2000-12-12';
-  private joindate = '2000-12-12';
+  private birthday = '2000-12-24';
+  private joindate = '2000-12-24';
 
-  getFirstname() {
-    return this.firstname;
+  firstnameChange: Subject<string> = new Subject<string>();
+  surnameChange: Subject<string> = new Subject<string>();
+  emailChange: Subject<string> = new Subject<string>();
+
+  setTitle(title: string) {
+    this.title = title;
   }
-
-  getSurname() {
-    return this.surname;
-  }
-
-  getEmail() {
-    return this.email;
-  }
-
   getTitle() {
     return this.title;
   }
 
-  getFirstAndSurname() {
-    return this.firstname + ' ' + this.surname;
+  setFirstname(firstname: string) {
+    this.firstname = firstname;
+    this.firstnameChange.next(this.firstname);
+  }
+  getFirstname() {
+    return this.firstname;
   }
 
-  getCompleteName() {
-    return this.title + ' ' + this.firstname + ' ' + this.surname;
+  setSurname(surname: string) {
+    this.surname = surname;
+    this.surnameChange.next(this.surname);
+  }
+  getSurname() {
+    return this.surname;
   }
 
-  getCompleteLocation() {
-    return this.streetname + ' ' + this.streetnumber + ', ' + this.zipcode + ' ' + this.location;
+  setEmail(email: string) {
+    this.email = email;
+    this.emailChange.next(this.email);
+  }
+  getEmail() {
+    return this.email;
+  }
+
+  setBirthday(birthday: string) {
+    this.birthday = birthday;
+  }
+  getBirthday() {
+    return this.birthday;
+  }
+
+  setStreetname(streetname: string) {
+    this.streetname = streetname;
+  }
+  getStreetname() {
+    return this.streetname;
+  }
+
+  setStreetnumber(streetnumber: string) {
+    this.streetnumber = streetnumber;
+  }
+  getStreetnumber() {
+    return this.streetnumber;
+  }
+
+  setZipcode(zipcode: string) {
+    this.zipcode = zipcode;
+  }
+  getZipcode() {
+    return this.zipcode;
+  }
+
+  setLocation(location: string) {
+    this.location = location;
+  }
+  getLocation() {
+    return this.location;
   }
 
   getJoindate() {
     return this.joindate;
   }
-
-  getBirthdate() {
-    return this.birthdate;
-  }
-
-  constructor() {}
 }

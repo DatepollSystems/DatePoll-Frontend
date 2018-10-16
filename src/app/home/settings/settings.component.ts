@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {UserService} from '../../auth/user.service';
+import {MzModalService} from 'ngx-materialize';
+import {PersonalDataComponent} from './personal-data/personal-data.component';
 
 @Component({
   selector: 'app-settings',
@@ -8,18 +9,12 @@ import {UserService} from '../../auth/user.service';
 })
 export class SettingsComponent implements OnInit {
 
-  name: string;
-  location: string;
-  joindate: string;
-  birthday: string;
-
-  constructor(private userService: UserService) {
-    this.name = this.userService.getCompleteName();
-    this.location = this.userService.getCompleteLocation();
-    this.joindate = this.userService.getJoindate();
-    this.birthday = this.userService.getBirthdate();
-  }
+  constructor(private modalService: MzModalService) { }
 
   ngOnInit() { }
+
+  openPersonalDataModal() {
+    this.modalService.open(PersonalDataComponent);
+  }
 
 }

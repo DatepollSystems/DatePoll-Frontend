@@ -1,4 +1,8 @@
 {
+  "CLOSE": "Close",
+  "SUBMIT": "Submit",
+  "SAVE": "Save",
+
   "LANGUAGE": "Language",
   "LANGUAGE_GERMAN": "German",
   "LANGUAGE_ENGLISH": "English",
@@ -7,6 +11,7 @@
   "SIGNIN_NOT_SIGNED_UP": "Not signed up?",
 
   "ABOUT": "About",
+  "ABOUT_LICENSE": "License>",
 
   "IMPRINT": "Imprint",
   "PRIVACY_POLICY": "Privacy Policy",
@@ -18,6 +23,15 @@
   "SETTINGS_PERSONAL_DATA_PERSONAL_DATA_CHANGE": "Change your personal data",
   "SETTINGS_PERSONAL_DATA_PERSONAL_NUMBER_CHANGE": "Change your telephone number",
   "SETTINGS_PERSONAL_DATA_PERSONAL_EMAIL_CHANGE": "Change your email address",
+
+  "SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_TITLE": "Title",
+  "SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_FIRSTNAME": "Firstname",
+  "SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_SURNAME": "Surname",
+  "SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_BIRTHDAY": "Birthday",
+  "SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_STREETNAME": "Streetname",
+  "SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_STREETNUMBER": "Number",
+  "SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_ZIPCODE": "Zip code",
+  "SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_LOCATION": "Location",
 
   "SETTINGS_SECURITY": "Signin & Security",
   "SETTINGS_SECURITY_DESCRIPTION": "Define the settings for your password and for the Two-factor authentication.",

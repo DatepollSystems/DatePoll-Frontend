@@ -1,4 +1,8 @@
 {
+  "CLOSE": "Abbrechen",
+  "SUBMIT": "Senden",
+  "SAVE": "Speichern",
+
   "LANGUAGE": "Sprache",
   "LANGUAGE_GERMAN": "Deutsch",
   "LANGUAGE_ENGLISH": "Englisch",
@@ -7,6 +11,7 @@
   "SIGNIN_NOT_SIGNED_UP": "Kein Konto?",
 
   "ABOUT": "Über",
+  "ABOUT_LICENSE": "Lizenz",
 
   "IMPRINT": "Impressum",
   "PRIVACY_POLICY": "Datenschutzerklärung",
@@ -19,8 +24,17 @@
   "SETTINGS_PERSONAL_DATA_PERSONAL_NUMBER_CHANGE": "Telefonnummern ändern",
   "SETTINGS_PERSONAL_DATA_PERSONAL_EMAIL_CHANGE": "Email-Adresse ändern",
 
+  "SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_TITLE": "Titel",
+  "SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_FIRSTNAME": "Vorname",
+  "SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_SURNAME": "Nachname",
+  "SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_BIRTHDAY": "Geburtsdatum",
+  "SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_STREETNAME": "Straßenname",
+  "SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_STREETNUMBER": "Nummer",
+  "SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_ZIPCODE": "Postleitzahl",
+  "SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_LOCATION": "Ort",
+
   "SETTINGS_SECURITY": "Anmeldung & Sicherheit",
-  "SETTINGS_SECURITY_DESCRIPTION": "Legen Sie die Einstellungen für Ihr Passwort und der Zwei-Faktor-Authentifizierung fest.",
+  "SETTINGS_SECURITY_DESCRIPTION": "Legen Sie die Einstellungen für Ihr Passwort und für die Zwei-Faktor-Authentifizierung fest.",
   "SETTINGS_SECURITY_CHANGE_PASSWORD": "Password ändern",
   "SETTINGS_SECURITY_CHANGE_2FA": "Zwei-Faktor-Authentifizierung einstellen"
 }

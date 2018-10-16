@@ -12,19 +12,27 @@ import {FormsModule} from '@angular/forms';
 import {AuthService} from './auth/auth.service';
 import {DataStorageService} from './data-storage.service';
 import {FooterComponent} from './footer/footer.component';
-import { InfoComponent } from './info/info.component';
-import { ImprintComponent } from './info/imprint/imprint.component';
-import { PrivacyPolicyComponent } from './info/privacy-policy/privacy-policy.component';
+import {InfoComponent} from './info/info.component';
+import {ImprintComponent} from './info/imprint/imprint.component';
+import {PrivacyPolicyComponent} from './info/privacy-policy/privacy-policy.component';
 import {MaterializeComponentModule} from './materialize.module';
 import {OuterFooterComponent} from './footer/outer-footer/outer-footer.component';
 import {InnerFooterComponent} from './footer/inner-footer/inner-footer.component';
 import {UserService} from './auth/user.service';
-import { StartComponent } from './home/start/start.component';
-import { SettingsComponent } from './home/settings/settings.component';
+import {StartComponent} from './home/start/start.component';
+import {SettingsComponent} from './home/settings/settings.component';
 import {TranslateService} from './translate.service';
 import {HttpClientModule} from '@angular/common/http';
-import { TranslatePipe } from './translate.pipe';
+import {TranslatePipe} from './translate.pipe';
 import {CookieService} from 'angular2-cookie/core';
+import {FeedbackModalComponent} from './footer/modals/feedback-modal/feedback-modal.component';
+import {AboutModalComponent} from './footer/modals/about-modal/about-modal.component';
+import {MzModalService} from 'ngx-materialize';
+import {PersonalDataComponent} from './home/settings/personal-data/personal-data.component';
+import {PhoneNumberComponent} from './home/settings/phone-number/phone-number.component';
+import {EmailAddressComponent} from './home/settings/email-address/email-address.component';
+import {PasswordComponent} from './home/settings/password/password.component';
+import {TwoFactorAuthenticationComponent} from './home/settings/two-factor-authentication/two-factor-authentication.component';
 
 export function setupTranslateFactory(
   service: TranslateService): Function {
@@ -46,7 +54,14 @@ export function setupTranslateFactory(
     InnerFooterComponent,
     StartComponent,
     SettingsComponent,
-    TranslatePipe
+    TranslatePipe,
+    FeedbackModalComponent,
+    AboutModalComponent,
+    PersonalDataComponent,
+    PhoneNumberComponent,
+    EmailAddressComponent,
+    PasswordComponent,
+    TwoFactorAuthenticationComponent
   ],
   imports: [
     BrowserModule,
@@ -56,19 +71,33 @@ export function setupTranslateFactory(
     HttpClientModule,
     MaterializeComponentModule.forRoot()
   ],
+  entryComponents: [
+    FeedbackModalComponent,
+    AboutModalComponent,
+    PersonalDataComponent,
+    PhoneNumberComponent,
+    EmailAddressComponent,
+    PasswordComponent,
+    TwoFactorAuthenticationComponent
+  ],
   providers: [
     AuthService,
     DataStorageService,
     UserService,
-    CookieService,
+    {provide: CookieService, useFactory: cookieServiceFactory},
     TranslateService,
+    MzModalService,
     {
       provide: APP_INITIALIZER,
       useFactory: setupTranslateFactory,
-      deps: [ TranslateService ],
+      deps: [TranslateService],
       multi: true
     }],
   bootstrap: [AppComponent]
 })
 export class AppModule {
+}
+
+export function cookieServiceFactory() {
+  return new CookieService();
 }
