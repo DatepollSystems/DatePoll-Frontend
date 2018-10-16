@@ -29,6 +29,10 @@ import {FeedbackModalComponent} from './footer/modals/feedback-modal/feedback-mo
 import {AboutModalComponent} from './footer/modals/about-modal/about-modal.component';
 import {MzModalService} from 'ngx-materialize';
 import {PersonalDataComponent} from './home/settings/personal-data/personal-data.component';
+import {PhoneNumberComponent} from './home/settings/phone-number/phone-number.component';
+import {EmailAddressComponent} from './home/settings/email-address/email-address.component';
+import {PasswordComponent} from './home/settings/password/password.component';
+import {TwoFactorAuthenticationComponent} from './home/settings/two-factor-authentication/two-factor-authentication.component';
 
 export function setupTranslateFactory(
   service: TranslateService): Function {
@@ -53,7 +57,11 @@ export function setupTranslateFactory(
     TranslatePipe,
     FeedbackModalComponent,
     AboutModalComponent,
-    PersonalDataComponent
+    PersonalDataComponent,
+    PhoneNumberComponent,
+    EmailAddressComponent,
+    PasswordComponent,
+    TwoFactorAuthenticationComponent
   ],
   imports: [
     BrowserModule,
@@ -66,7 +74,11 @@ export function setupTranslateFactory(
   entryComponents: [
     FeedbackModalComponent,
     AboutModalComponent,
-    PersonalDataComponent
+    PersonalDataComponent,
+    PhoneNumberComponent,
+    EmailAddressComponent,
+    PasswordComponent,
+    TwoFactorAuthenticationComponent
   ],
   providers: [
     AuthService,
