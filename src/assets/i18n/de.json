@@ -1,7 +1,8 @@
 {
-  "CLOSE": "Abbrechen",
+  "CLOSE": "Schließen",
   "SUBMIT": "Senden",
   "SAVE": "Speichern",
+  "ACTION": "Aktionen",
 
   "LANGUAGE": "Sprache",
   "LANGUAGE_GERMAN": "Deutsch",
@@ -32,6 +33,12 @@
   "SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_STREETNUMBER": "Nummer",
   "SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_ZIPCODE": "Postleitzahl",
   "SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_LOCATION": "Ort",
+
+  "SETTINGS_PERSONAL_DATA_MODAL_PHONE_NUMBER_LABEL": "Bezeichnung",
+  "SETTINGS_PERSONAL_DATA_MODAL_PHONE_NUMBER_PHONE_NUMBER": "Telefonnummer",
+  "SETTINGS_PERSONAL_DATA_MODAL_PHONE_NUMBER_PHONE_NUMBER_NOT_VALID": "Die Telefonnummer ist nicht valide!",
+  "SETTINGS_PERSONAL_DATA_MODAL_PHONE_NUMBER_ADD": "Nummer hinzufügen",
+  "SETTINGS_PERSONAL_DATA_MODAL_PHONE_NUMBER_NOT_VALID": "Bitte gib eine Bezeichnung und eine Telefonnummer an!",
 
   "SETTINGS_SECURITY": "Anmeldung & Sicherheit",
   "SETTINGS_SECURITY_DESCRIPTION": "Legen Sie die Einstellungen für Ihr Passwort und für die Zwei-Faktor-Authentifizierung fest.",

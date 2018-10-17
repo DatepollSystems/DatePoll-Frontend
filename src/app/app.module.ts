@@ -33,6 +33,7 @@ import {PhoneNumberComponent} from './home/settings/phone-number/phone-number.co
 import {EmailAddressComponent} from './home/settings/email-address/email-address.component';
 import {PasswordComponent} from './home/settings/password/password.component';
 import {TwoFactorAuthenticationComponent} from './home/settings/two-factor-authentication/two-factor-authentication.component';
+import {CustomFormsModule} from 'ng2-validation';
 
 export function setupTranslateFactory(
   service: TranslateService): Function {
@@ -67,6 +68,7 @@ export function setupTranslateFactory(
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,
+    CustomFormsModule,
     AppRoutingModule,
     HttpClientModule,
     MaterializeComponentModule.forRoot()

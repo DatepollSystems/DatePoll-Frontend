@@ -1,12 +1,75 @@
 <mz-modal [fixedFooter]="true">
   <mz-modal-header>
-    <h4>Modal Title</h4>
+    <h4>{{'SETTINGS_PERSONAL_DATA_PERSONAL_NUMBER_CHANGE' | translate}}</h4>
   </mz-modal-header>
   <mz-modal-content>
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    <form (ngSubmit)="addPhoneNumber(f)" #f="ngForm">
+      <div class="row">
+        <div class="input-field col s12 m6 l2">
+          <input id="label" name="label" type="text" ngModel required maxlength="32" minlength="1">
+          <label for="label">{{'SETTINGS_PERSONAL_DATA_MODAL_PHONE_NUMBER_LABEL' | translate}}</label>
+        </div>
+
+        <div class="input-field col s12 m6 l6">
+          <input id="phoneNumber" name="phoneNumber" type="text" ngModel #phoneNumber="ngModel" required maxlength="32"
+                 minlength="1" phone="AT" style="margin-bottom: 0">
+          <label for="phoneNumber">{{'SETTINGS_PERSONAL_DATA_MODAL_PHONE_NUMBER_PHONE_NUMBER' | translate}}</label>
+          <small class="input-error" *ngIf="phoneNumber?.errors?.phone">
+            {{'SETTINGS_PERSONAL_DATA_MODAL_PHONE_NUMBER_PHONE_NUMBER_NOT_VALID' |
+            translate}}
+          </small>
+        </div>
+
+        <button mz-button class="green col s12 m12 l4" style="margin-top: 15px;"
+                type="submit" [disabled]="!f.valid">
+          {{'SETTINGS_PERSONAL_DATA_MODAL_PHONE_NUMBER_ADD' | translate}}
+          <i mz-icon-mdi
+             [align]="'right'"
+             [icon]="'playlist-plus'">
+          </i>
+        </button>
+      </div>
+    </form>
+
+    <div class="row">
+      <table class="bordered highlight responsive-table">
+        <thead>
+        <tr>
+          <th>{{'SETTINGS_PERSONAL_DATA_MODAL_PHONE_NUMBER_LABEL' | translate}}</th>
+          <th>{{'SETTINGS_PERSONAL_DATA_MODAL_PHONE_NUMBER_PHONE_NUMBER' | translate}}</th>
+          <th>{{'ACTION' | translate}}</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr *ngFor="let phoneNumber of phoneNumbers; let i = index">
+          <td>{{phoneNumber.getLabel()}}</td>
+          <td>{{phoneNumber.getPhoneNumber()}}</td>
+          <td>
+            <button mz-button mz-tooltip (click)="removePhoneNumber(phoneNumber)"
+                    [flat]="true"
+                    [float]="true"
+                    [tooltip]="'Deletion <b class=\'red-text\'>cannot</b> be undone.'"
+                    [position]="'right'"
+                    [html]="true">
+              <i mz-icon-mdi class="black-text" [icon]="'delete-forever'"></i>
+            </button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div id="notValid" hidden>{{'SETTINGS_PERSONAL_DATA_MODAL_PHONE_NUMBER_NOT_VALID' | translate}}</div>
   </mz-modal-content>
   <mz-modal-footer>
-    <button mz-button [flat]="true" mz-modal-close>Disagree</button>
-    <button mz-button [flat]="true" mz-modal-close>Agree</button>
+    <button mz-button [float]="true" [flat]="true" mz-modal-close class="hide-on-med-and-up left">
+      <i mz-icon-mdi class="black-text" [icon]="'close'"></i>
+    </button>
+    <button mz-button [flat]="true" mz-modal-close class="hide-on-small-and-down" style="margin-right: 10px;">
+      {{'CLOSE' | translate}}
+    </button>
+    <button mz-button [flat]="true" mz-modal-close class="green" (click)="savePhoneNumbers()">{{'SAVE' | translate}}
+    </button>
   </mz-modal-footer>
 </mz-modal>

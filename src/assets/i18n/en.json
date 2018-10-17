@@ -2,6 +2,7 @@
   "CLOSE": "Close",
   "SUBMIT": "Submit",
   "SAVE": "Save",
+  "ACTION": "Action",
 
   "LANGUAGE": "Language",
   "LANGUAGE_GERMAN": "German",
@@ -32,6 +33,12 @@
   "SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_STREETNUMBER": "Number",
   "SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_ZIPCODE": "Zip code",
   "SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_LOCATION": "Location",
+
+  "SETTINGS_PERSONAL_DATA_MODAL_PHONE_NUMBER_LABEL": "Label",
+  "SETTINGS_PERSONAL_DATA_MODAL_PHONE_NUMBER_PHONE_NUMBER": "Phone number",
+  "SETTINGS_PERSONAL_DATA_MODAL_PHONE_NUMBER_PHONE_NUMBER_NOT_VALID": "Phone number not valid!",
+  "SETTINGS_PERSONAL_DATA_MODAL_PHONE_NUMBER_ADD": "Add this number",
+  "SETTINGS_PERSONAL_DATA_MODAL_PHONE_NUMBER_NOT_VALID": "Please enter a label and a phone number!",
 
   "SETTINGS_SECURITY": "Signin & Security",
   "SETTINGS_SECURITY_DESCRIPTION": "Define the settings for your password and for the Two-factor authentication.",
