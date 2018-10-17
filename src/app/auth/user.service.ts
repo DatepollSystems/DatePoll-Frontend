@@ -2,7 +2,13 @@ import {Subject} from 'rxjs';
 
 export class UserService {
 
-  constructor() {}
+  constructor() {
+    this.phoneNumbers = [];
+
+    this.phoneNumbers.push(new PhoneNumber('Home', '+43 664 2567390'));
+    this.phoneNumbers.push(new PhoneNumber('Work', '+43 664 5925905'));
+    this.phoneNumbers.push(new PhoneNumber('Private', '+43 664 7590367'));
+  }
 
   private title = 'Dr.';
   private firstname = 'Max';
@@ -11,11 +17,13 @@ export class UserService {
 
   private streetname = 'Kasernstraße';
   private streetnumber = '6-12';
-  private zipcode = '3500';
+  private zipcode = 3500;
   private location = 'Krems';
 
   private birthday = '2000-12-24';
   private joindate = '2000-12-24';
+
+  private phoneNumbers: PhoneNumber[];
 
   firstnameChange: Subject<string> = new Subject<string>();
   surnameChange: Subject<string> = new Subject<string>();
@@ -24,6 +32,7 @@ export class UserService {
   setTitle(title: string) {
     this.title = title;
   }
+
   getTitle() {
     return this.title;
   }
@@ -32,6 +41,7 @@ export class UserService {
     this.firstname = firstname;
     this.firstnameChange.next(this.firstname);
   }
+
   getFirstname() {
     return this.firstname;
   }
@@ -40,6 +50,7 @@ export class UserService {
     this.surname = surname;
     this.surnameChange.next(this.surname);
   }
+
   getSurname() {
     return this.surname;
   }
@@ -48,6 +59,7 @@ export class UserService {
     this.email = email;
     this.emailChange.next(this.email);
   }
+
   getEmail() {
     return this.email;
   }
@@ -55,6 +67,7 @@ export class UserService {
   setBirthday(birthday: string) {
     this.birthday = birthday;
   }
+
   getBirthday() {
     return this.birthday;
   }
@@ -62,6 +75,7 @@ export class UserService {
   setStreetname(streetname: string) {
     this.streetname = streetname;
   }
+
   getStreetname() {
     return this.streetname;
   }
@@ -69,13 +83,15 @@ export class UserService {
   setStreetnumber(streetnumber: string) {
     this.streetnumber = streetnumber;
   }
+
   getStreetnumber() {
     return this.streetnumber;
   }
 
-  setZipcode(zipcode: string) {
+  setZipcode(zipcode: number) {
     this.zipcode = zipcode;
   }
+
   getZipcode() {
     return this.zipcode;
   }
@@ -83,6 +99,7 @@ export class UserService {
   setLocation(location: string) {
     this.location = location;
   }
+
   getLocation() {
     return this.location;
   }
@@ -90,4 +107,32 @@ export class UserService {
   getJoindate() {
     return this.joindate;
   }
+
+  setPhoneNumbers(phoneNumbers: any) {
+    this.phoneNumbers = phoneNumbers;
+  }
+
+  getPhoneNumbers() {
+    return this.phoneNumbers;
+  }
+}
+
+export class PhoneNumber {
+
+  private label: string;
+  private phoneNumber: string;
+
+  constructor(label: string, phoneNumber: string) {
+    this.label = label;
+    this.phoneNumber = phoneNumber;
+  }
+
+  public getLabel() {
+    return this.label;
+  }
+
+  public getPhoneNumber() {
+    return this.phoneNumber;
+  }
+
 }

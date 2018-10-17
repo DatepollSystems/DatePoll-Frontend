@@ -31,6 +31,10 @@ a:hover {
   color: gray
 }
 
+.input-error {
+  color: red;
+}
+
 /*Loading animation*/
 *, *::after, *::before {
   box-sizing: inherit;

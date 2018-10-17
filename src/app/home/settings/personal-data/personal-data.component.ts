@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {MzBaseModal} from 'ngx-materialize';
+import {MzBaseModal, MzToastService} from 'ngx-materialize';
 import {UserService} from '../../../auth/user.service';
 
 @Component({
@@ -8,7 +8,6 @@ import {UserService} from '../../../auth/user.service';
   styleUrls: ['./personal-data.component.css']
 })
 export class PersonalDataComponent extends MzBaseModal {
-
   title: string;
   firstname: string;
   surname: string;
@@ -17,9 +16,8 @@ export class PersonalDataComponent extends MzBaseModal {
 
   streetname: string;
   streetnumber: string;
-  zipcode: string;
+  zipcode: number;
   location: string;
-
 
   constructor(private userService: UserService) {
     super();
@@ -70,6 +68,5 @@ export class PersonalDataComponent extends MzBaseModal {
 
     console.log('Saving...');
     console.log('----------------------');
-  }
-
+ }
 }
