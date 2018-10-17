@@ -19,7 +19,7 @@ export class PersonalDataComponent extends MzBaseModal {
   zipcode: number;
   location: string;
 
-  constructor(private userService: UserService, private toastService: MzToastService) {
+  constructor(private userService: UserService) {
     super();
 
     this.title = this.userService.getTitle();
