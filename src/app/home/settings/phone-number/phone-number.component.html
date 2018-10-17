@@ -20,7 +20,7 @@
           </small>
         </div>
 
-        <button mz-button class="green col s12 m12 l4" style="margin-top: 15px;"
+        <button mz-button class="green col s12 m12 l4" style="margin-top: 1.8vh;"
                 type="submit" [disabled]="!f.valid">
           {{'SETTINGS_PERSONAL_DATA_MODAL_PHONE_NUMBER_ADD' | translate}}
           <i mz-icon-mdi
@@ -30,6 +30,8 @@
         </button>
       </div>
     </form>
+
+    <div id="notValid" hidden>{{'SETTINGS_PERSONAL_DATA_MODAL_PHONE_NUMBER_NOT_VALID' | translate}}</div>
 
     <div class="row">
       <table class="bordered highlight responsive-table">
@@ -59,8 +61,6 @@
         </tbody>
       </table>
     </div>
-
-    <div id="notValid" hidden>{{'SETTINGS_PERSONAL_DATA_MODAL_PHONE_NUMBER_NOT_VALID' | translate}}</div>
   </mz-modal-content>
   <mz-modal-footer>
     <button mz-button [float]="true" [flat]="true" mz-modal-close class="hide-on-med-and-up left">
