@@ -8,7 +8,6 @@ import {UserService} from '../../../auth/user.service';
   styleUrls: ['./personal-data.component.css']
 })
 export class PersonalDataComponent extends MzBaseModal {
-
   title: string;
   firstname: string;
   surname: string;
@@ -19,7 +18,6 @@ export class PersonalDataComponent extends MzBaseModal {
   streetnumber: string;
   zipcode: number;
   location: string;
-
 
   constructor(private userService: UserService, private toastService: MzToastService) {
     super();
@@ -49,41 +47,6 @@ export class PersonalDataComponent extends MzBaseModal {
   };
 
   saveData() {
-    if (this.title.length > 64) {
-      this.toastService.show(document.getElementById('titleNotValid').innerText, 4000, 'red');
-      return;
-    }
-
-    if (this.firstname.length > 128) {
-      this.toastService.show(document.getElementById('firstnameNotValid').innerText, 4000, 'red');
-      return;
-    }
-
-    if (this.surname.length > 128) {
-      this.toastService.show(document.getElementById('surnameNotValid').innerText, 4000, 'red');
-      return;
-    }
-
-    if (this.streetname.length > 128) {
-      this.toastService.show(document.getElementById('streetnameNotValid').innerText, 4000, 'red');
-      return;
-    }
-
-    if (this.streetnumber.length > 16) {
-      this.toastService.show(document.getElementById('streetnumberNotValid').innerText, 4000, 'red');
-      return;
-    }
-
-    if (this.zipcode < 1000 || this.zipcode > 9999) {
-      this.toastService.show(document.getElementById('zipcodeNotValid').innerText, 4000, 'red');
-      return;
-    }
-
-    if (this.location.length > 128) {
-      this.toastService.show(document.getElementById('locationNotValid').innerText, 4000, 'red');
-      return;
-    }
-
     console.log('----------------------');
     console.log('Title: ' + this.title);
     console.log('Firstname: ' + this.firstname);
@@ -105,6 +68,5 @@ export class PersonalDataComponent extends MzBaseModal {
 
     console.log('Saving...');
     console.log('----------------------');
-  }
-
+ }
 }

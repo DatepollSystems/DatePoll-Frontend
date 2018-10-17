@@ -3,74 +3,95 @@
     <h4>{{'SETTINGS_PERSONAL_DATA_PERSONAL_DATA_CHANGE' | translate}}</h4>
   </mz-modal-header>
   <mz-modal-content>
-    <div class="row">
-      <div class="input-field col s5 m4 l2">
-        <div class="input-label">{{'SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_TITLE' | translate}}</div>
-        <input id="title" type="text" [(ngModel)]="title" maxlength="64"
-               placeholder="{{'SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_TITLE' | translate}}">
+    <form (ngSubmit)="saveData()" #form="ngForm">
+      <div class="row">
+        <div class="input-field col s5 m4 l2">
+          <div class="input-label">{{'SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_TITLE' | translate}}</div>
+          <input ngModel id="title" name="title" type="text" [(ngModel)]="title" maxlength="64" #titleModel="ngModel"
+                 placeholder="{{'SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_TITLE' | translate}}">
+          <small class="input-error" *ngIf="titleModel.invalid">
+            {{'SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_TITLE_NOT_VALID' | translate}}
+          </small>
+        </div>
+
+        <div class="input-field col s7 m4 l5">
+          <div class="input-label">{{'SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_FIRSTNAME' | translate}}</div>
+          <input ngModel id="firstname" name="firstname" type="text" [(ngModel)]="firstname"
+                 maxlength="128" minlength="1" #firstnameModel="ngModel" required
+                 placeholder="{{'SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_FIRSTNAME' | translate}}">
+          <small class="input-error" *ngIf="firstnameModel.invalid">
+            {{'SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_FIRSTNAME_NOT_VALID' | translate}}
+          </small>
+        </div>
+
+        <div class="input-field col s12 m4 l5">
+          <div class="input-label">{{'SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_SURNAME' | translate}}</div>
+          <input ngModel id="surname" name="surname" type="text" [(ngModel)]="surname"
+                 maxlength="128" minlength="1" #surnameModel="ngModel" required
+                 placeholder="{{'SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_SURNAME' | translate}}">
+          <small class="input-error" *ngIf="surnameModel.invalid">
+            {{'SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_SURNAME_NOT_VALID' | translate}}
+          </small>
+        </div>
       </div>
 
-      <div class="input-field col s7 m4 l5">
-        <div class="input-label">{{'SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_FIRSTNAME' | translate}}</div>
-        <input id="firstname" type="text" [(ngModel)]="firstname" maxlength="128"
-               placeholder="{{'SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_FIRSTNAME' | translate}}">
+      <div class="row">
+        <mz-datepicker-container class="col s12">
+          <div class="input-label">{{'SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_BIRTHDAY' | translate}}</div>
+          <input ngModel mz-datepicker
+                 [options]="datepickerOptions"
+                 [(ngModel)]="birthday"
+                 id="datepicker"
+                 name="datepicker"
+                 placeholder="{{'SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_BIRTHDAY' | translate}}"
+                 type="text">
+        </mz-datepicker-container>
       </div>
 
-      <div class="input-field col s12 m4 l5">
-        <div class="input-label">{{'SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_SURNAME' | translate}}</div>
-        <input id="surname" type="text" [(ngModel)]="surname" maxlength="128"
-               placeholder="{{'SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_SURNAME' | translate}}">
-      </div>
-    </div>
+      <div class="row">
+        <div class="input-field col s8 m10 l10">
+          <div class="input-label">{{'SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_STREETNAME' | translate}}</div>
+          <input ngModel id="streetname" name="streetname" type="text" [(ngModel)]="streetname"
+                 maxlength="128" #streetnameModel="ngModel"
+                 placeholder="{{'SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_STREETNAME' | translate}}">
+          <small class="input-error" *ngIf="streetnameModel.invalid">
+            {{'SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_STREETNAME_NOT_VALID' | translate}}
+          </small>
+        </div>
 
-    <div class="row">
-      <mz-datepicker-container class="col s12">
-        <div class="input-label">{{'SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_BIRTHDAY' | translate}}</div>
-        <input mz-datepicker
-               [options]="datepickerOptions"
-               [(ngModel)]="birthday"
-               id="datepicker"
-               placeholder="{{'SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_BIRTHDAY' | translate}}"
-               type="text">
-      </mz-datepicker-container>
-    </div>
-
-    <div class="row">
-      <div class="input-field col s8 m10 l10">
-        <div class="input-label">{{'SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_STREETNAME' | translate}}</div>
-        <input id="streetname" type="text" [(ngModel)]="streetname"
-               placeholder="{{'SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_STREETNAME' | translate}}">
+        <div class="input-field col s4 m2 l2">
+          <div class="input-label">{{'SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_STREETNUMBER' | translate}}</div>
+          <input ngModel id="streetnumber" name="streetnumber" type="text" [(ngModel)]="streetnumber"
+                 maxlength="16" #streetnumberModel="ngModel"
+                 placeholder="{{'SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_STREETNUMBER' | translate}}">
+          <small class="input-error" *ngIf="streetnumberModel.invalid">
+            {{'SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_STREETNUMBER_NOT_VALID' | translate}}
+          </small>
+        </div>
       </div>
 
-      <div class="input-field col s4 m2 l2">
-        <div class="input-label">{{'SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_STREETNUMBER' | translate}}</div>
-        <input id="streetnumber" type="text" [(ngModel)]="streetnumber"
-               placeholder="{{'SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_STREETNUMBER' | translate}}">
+      <div class="row">
+        <div class="input-field col s4 m3 l3">
+          <div class="input-label">{{'SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_ZIPCODE' | translate}}</div>
+          <input ngModel id="zipcode" name="zipcode" type="number" [(ngModel)]="zipcode"
+                 [range]="[1000, 9999]" #zipcodeModel="ngModel"
+                 placeholder="{{'SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_ZIPCODE' | translate}}">
+          <small class="input-error" *ngIf="zipcodeModel.invalid">
+            {{'SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_ZIPCODE_NOT_VALID' | translate}}
+          </small>
+        </div>
+
+        <div class="input-field col s8 m9 l9">
+          <div class="input-label">{{'SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_LOCATION' | translate}}</div>
+          <input ngModel id="location" name="location" type="text" [(ngModel)]="location"
+                 maxlength="128" #locationModel="ngModel"
+                 placeholder="{{'SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_LOCATION' | translate}}">
+          <small class="input-error" *ngIf="locationModel.invalid">
+            {{'SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_LOCATION_NOT_VALID' | translate}}
+          </small>
+        </div>
       </div>
-    </div>
-
-    <div class="row">
-      <div class="input-field col s4 m3 l2">
-        <div class="input-label">{{'SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_ZIPCODE' | translate}}</div>
-        <input id="zipcode" type="number" [(ngModel)]="zipcode"
-               placeholder="{{'SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_ZIPCODE' | translate}}">
-      </div>
-
-      <div class="input-field col s8 m9 l10">
-        <div class="input-label">{{'SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_LOCATION' | translate}}</div>
-        <input id="location" type="text" [(ngModel)]="location"
-               placeholder="{{'SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_LOCATION' | translate}}">
-      </div>
-    </div>
-
-    <div id="titleNotValid" hidden>{{'SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_TITLE_NOT_VALID' | translate}}</div>
-    <div id="firstnameNotValid" hidden>{{'SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_FIRSTNAME_NOT_VALID' | translate}}</div>
-    <div id="surnameNotValid" hidden>{{'SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_SURNAME_NOT_VALID' | translate}}</div>
-    <div id="streetnameNotValid" hidden>{{'SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_STREETNAME_NOT_VALID' | translate}}</div>
-    <div id="streetnumberNotValid" hidden>{{'SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_STREETNUMBER_NOT_VALID' | translate}}</div>
-    <div id="zipcodeNotValid" hidden>{{'SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_ZIPCODE_NOT_VALID' | translate}}</div>
-    <div id="locationNotValid" hidden>{{'SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_LOCATION_NOT_VALID' | translate}}</div>
-
+    </form>
   </mz-modal-content>
   <mz-modal-footer>
     <button mz-button [float]="true" [flat]="true" mz-modal-close class="hide-on-med-and-up left">
@@ -79,6 +100,8 @@
     <button mz-button [flat]="true" mz-modal-close class="hide-on-small-and-down" style="margin-right: 10px;">
       {{'CLOSE' | translate}}
     </button>
-    <button mz-button [flat]="true" mz-modal-close class="green" (click)="saveData()">{{'SAVE' | translate}}</button>
+    <button mz-button [flat]="true" mz-modal-close class="green" (click)="form.ngSubmit.emit()"
+            [disabled]="!form.form.valid">{{'SAVE' | translate}}
+    </button>
   </mz-modal-footer>
 </mz-modal>
