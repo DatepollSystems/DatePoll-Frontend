@@ -10,7 +10,7 @@ import {NgForm} from '@angular/forms';
 })
 export class PhoneNumberComponent extends MzBaseModal {
 
-  private phoneNumbers: PhoneNumber[];
+  public phoneNumbers: PhoneNumber[];
 
   constructor(private userService: UserService, private toastService: MzToastService) {
     super();
