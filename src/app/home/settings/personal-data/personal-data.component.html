@@ -3,6 +3,8 @@
     <h4>{{'SETTINGS_PERSONAL_DATA_PERSONAL_DATA_CHANGE' | translate}}</h4>
   </mz-modal-header>
   <mz-modal-content>
+    <app-do-not-forget-to-save></app-do-not-forget-to-save>
+
     <form (ngSubmit)="saveData()" #form="ngForm">
       <div class="row">
         <div class="input-field col s5 m4 l2">

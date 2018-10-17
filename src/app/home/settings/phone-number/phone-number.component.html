@@ -3,6 +3,8 @@
     <h4>{{'SETTINGS_PERSONAL_DATA_PERSONAL_NUMBER_CHANGE' | translate}}</h4>
   </mz-modal-header>
   <mz-modal-content>
+    <app-do-not-forget-to-save></app-do-not-forget-to-save>
+
     <form (ngSubmit)="addPhoneNumber(f)" #f="ngForm">
       <div class="row">
         <div class="input-field col s12 m6 l2">
@@ -48,13 +50,11 @@
           <td>{{phoneNumber.getLabel()}}</td>
           <td>{{phoneNumber.getPhoneNumber()}}</td>
           <td>
-            <button mz-button mz-tooltip (click)="removePhoneNumber(phoneNumber)"
+            <button mz-button
+                    (click)="removePhoneNumber(phoneNumber)"
                     [flat]="true"
-                    [float]="true"
-                    [tooltip]="'Deletion <b class=\'red-text\'>cannot</b> be undone.'"
-                    [position]="'right'"
-                    [html]="true">
-              <i mz-icon-mdi class="black-text" [icon]="'delete-forever'"></i>
+                    [float]="true">
+              <i mz-icon-mdi class="black-text" [icon]="'delete'"></i>
             </button>
           </td>
         </tr>
