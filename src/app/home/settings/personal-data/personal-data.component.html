@@ -6,19 +6,19 @@
     <div class="row">
       <div class="input-field col s5 m4 l2">
         <div class="input-label">{{'SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_TITLE' | translate}}</div>
-        <input id="title" type="text" [(ngModel)]="title"
+        <input id="title" type="text" [(ngModel)]="title" maxlength="64"
                placeholder="{{'SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_TITLE' | translate}}">
       </div>
 
       <div class="input-field col s7 m4 l5">
         <div class="input-label">{{'SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_FIRSTNAME' | translate}}</div>
-        <input id="firstname" type="text" [(ngModel)]="firstname"
+        <input id="firstname" type="text" [(ngModel)]="firstname" maxlength="128"
                placeholder="{{'SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_FIRSTNAME' | translate}}">
       </div>
 
       <div class="input-field col s12 m4 l5">
         <div class="input-label">{{'SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_SURNAME' | translate}}</div>
-        <input id="surname" type="text" [(ngModel)]="surname"
+        <input id="surname" type="text" [(ngModel)]="surname" maxlength="128"
                placeholder="{{'SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_SURNAME' | translate}}">
       </div>
     </div>
@@ -52,7 +52,7 @@
     <div class="row">
       <div class="input-field col s4 m3 l2">
         <div class="input-label">{{'SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_ZIPCODE' | translate}}</div>
-        <input id="zipcode" type="text" [(ngModel)]="zipcode"
+        <input id="zipcode" type="number" [(ngModel)]="zipcode"
                placeholder="{{'SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_ZIPCODE' | translate}}">
       </div>
 
@@ -62,6 +62,14 @@
                placeholder="{{'SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_LOCATION' | translate}}">
       </div>
     </div>
+
+    <div id="titleNotValid" hidden>{{'SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_TITLE_NOT_VALID' | translate}}</div>
+    <div id="firstnameNotValid" hidden>{{'SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_FIRSTNAME_NOT_VALID' | translate}}</div>
+    <div id="surnameNotValid" hidden>{{'SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_SURNAME_NOT_VALID' | translate}}</div>
+    <div id="streetnameNotValid" hidden>{{'SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_STREETNAME_NOT_VALID' | translate}}</div>
+    <div id="streetnumberNotValid" hidden>{{'SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_STREETNUMBER_NOT_VALID' | translate}}</div>
+    <div id="zipcodeNotValid" hidden>{{'SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_ZIPCODE_NOT_VALID' | translate}}</div>
+    <div id="locationNotValid" hidden>{{'SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_LOCATION_NOT_VALID' | translate}}</div>
 
   </mz-modal-content>
   <mz-modal-footer>

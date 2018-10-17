@@ -17,7 +17,7 @@ export class UserService {
 
   private streetname = 'Kasernstraße';
   private streetnumber = '6-12';
-  private zipcode = '3500';
+  private zipcode = 3500;
   private location = 'Krems';
 
   private birthday = '2000-12-24';
@@ -88,7 +88,7 @@ export class UserService {
     return this.streetnumber;
   }
 
-  setZipcode(zipcode: string) {
+  setZipcode(zipcode: number) {
     this.zipcode = zipcode;
   }
 
