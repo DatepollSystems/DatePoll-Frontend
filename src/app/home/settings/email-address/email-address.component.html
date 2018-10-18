@@ -1,12 +1,126 @@
-<mz-modal [fixedFooter]="true">
+<mz-modal>
   <mz-modal-header>
-    <h4>Modal Title</h4>
+    <h4>{{'SETTINGS_PERSONAL_DATA_PERSONAL_EMAIL_CHANGE' | translate}}</h4>
   </mz-modal-header>
   <mz-modal-content>
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    <form #oldEmailSendForm="ngForm" (ngSubmit)="sendOldEmailVerification()" [hidden]="oldEmailValidation">
+      <mz-card [hoverable]="true" class="red" *ngIf="oldEmailAddressIncorrect">
+        <mz-card-content>
+          {{'SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_EMAIL_ADDRESS_INCORRECT' | translate}}
+        </mz-card-content>
+      </mz-card>
+
+      <div class="row">
+        <div class="input-field col s12 m12 l12">
+          <div class="input-label">{{'SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_EMAIL_ADDRESS' | translate}}</div>
+          <input id="oldEmail" name="oldEmail" type="email" ngModel [(ngModel)]="oldEmailAddress"
+                 required maxlength="128" email #oldEmailModel="ngModel"
+                 placeholder="{{'SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_EMAIL_ADDRESS_PLACEHOLDER' | translate}}">
+          <small class="input-error" *ngIf="oldEmailModel.invalid">
+            {{'SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_EMAIL_ADDRESS_NOT_VALID' | translate}}
+          </small>
+        </div>
+      </div>
+    </form>
+
+    <form #codeValidateForm="ngForm" (ngSubmit)="checkCode()" [hidden]="codeValidation">
+      <mz-card [hoverable]="true" class="green" *ngIf="!verificationCodeIncorrect">
+        <mz-card-content>
+          {{'SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_VALIDATION_EMAIL_SENT' | translate}}
+        </mz-card-content>
+      </mz-card>
+
+      <mz-card [hoverable]="true" class="red" *ngIf="verificationCodeIncorrect">
+        <mz-card-content>
+          {{'SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_CODE_INCORRECT' | translate}}
+        </mz-card-content>
+      </mz-card>
+
+      <div class="row">
+        <div class="input-field col s12 m12 l12">
+          <div class="input-label">{{'SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_CODE' | translate}}</div>
+          <input id="code" name="code" type="number" ngModel [(ngModel)]="verificationCode"
+                 required number [range]="[100000, 999999]"
+                 placeholder="{{'SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_CODE_PLACEHOLDER' | translate}}">
+        </div>
+      </div>
+    </form>
+
+    <form #newEmailSendForm="ngForm" (ngSubmit)="sendNewEmailVerification()" [hidden]="newEmailEnter">
+      <mz-card [hoverable]="true" class="green">
+        <mz-card-content>
+          {{'SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_CODE_CORRECT' | translate}}
+        </mz-card-content>
+      </mz-card>
+
+      <div class="row">
+        <div class="input-field col s12 m12 l12">
+          <div class="input-label">{{'SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_EMAIL_ADDRESS' | translate}}</div>
+          <input id="newEmail" name="newEmail" type="email" ngModel [(ngModel)]="newEmail"
+                 required maxlength="128" email #newEmailModel="ngModel"
+                 placeholder="{{'SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_NEW_EMAIL_ADDRESS_PLACEHOLDER' | translate}}">
+          <small class="input-error" *ngIf="newEmailModel.invalid">
+            {{'SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_EMAIL_ADDRESS_NOT_VALID' | translate}}
+          </small>
+        </div>
+      </div>
+    </form>
+
+    <form #newCodeValidateForm="ngForm" (ngSubmit)="checkNewCode()" [hidden]="newEmailCodeValidation">
+      <mz-card [hoverable]="true" class="green" *ngIf="!newVerificationCodeIncorrect">
+        <mz-card-content>
+          {{'SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_VALIDATION_EMAIL_SENT' | translate}}
+        </mz-card-content>
+      </mz-card>
+
+      <mz-card [hoverable]="true" class="red" *ngIf="newVerificationCodeIncorrect">
+        <mz-card-content>
+          {{'SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_CODE_INCORRECT' | translate}}
+        </mz-card-content>
+      </mz-card>
+
+      <div class="row">
+        <div class="input-field col s12 m12 l12">
+          <div class="input-label">{{'SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_CODE' | translate}}</div>
+          <input id="newCode" name="newCode" type="number" ngModel [(ngModel)]="newVerificationCode"
+                 required number [range]="[100000, 999999]"
+                 placeholder="{{'SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_CODE_PLACEHOLDER' | translate}}">
+        </div>
+      </div>
+    </form>
+
+    <mz-card [hoverable]="true" class="green" *ngIf="!finished">
+      <mz-card-content>
+        {{'SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_FINISHED' | translate}}
+      </mz-card-content>
+    </mz-card>
+
   </mz-modal-content>
   <mz-modal-footer>
-    <button mz-button [flat]="true" mz-modal-close>Disagree</button>
-    <button mz-button [flat]="true" mz-modal-close>Agree</button>
+    <button mz-button [float]="true" [flat]="true" mz-modal-close class="hide-on-med-and-up left">
+      <i mz-icon-mdi class="black-text" [icon]="'close'"></i>
+    </button>
+
+    <button mz-button [flat]="true" mz-modal-close class="hide-on-small-and-down" style="margin-right: 10px;">
+      {{'CLOSE' | translate}}
+    </button>
+
+    <button mz-button [flat]="true" class="green" (click)="oldEmailSendForm.ngSubmit.emit()" *ngIf="!oldEmailValidation"
+            [disabled]="!oldEmailSendForm.form.valid">{{'NEXT' | translate}}
+    </button>
+
+    <button mz-button [flat]="true" class="green" (click)="codeValidateForm.ngSubmit.emit()" *ngIf="!codeValidation"
+            [disabled]="!codeValidateForm.form.valid">{{'NEXT' | translate}}
+    </button>
+
+    <button mz-button [flat]="true" class="green" (click)="newEmailSendForm.ngSubmit.emit()" *ngIf="!newEmailEnter"
+            [disabled]="!newEmailSendForm.form.valid">{{'NEXT' | translate}}
+    </button>
+
+    <button mz-button [flat]="true" class="green" (click)="newCodeValidateForm.ngSubmit.emit()" *ngIf="!newEmailCodeValidation"
+            [disabled]="!newCodeValidateForm.form.valid">{{'NEXT' | translate}}
+    </button>
   </mz-modal-footer>
 </mz-modal>
+
+

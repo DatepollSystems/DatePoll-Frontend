@@ -8,8 +8,92 @@ import {MzBaseModal} from 'ngx-materialize';
 })
 export class EmailAddressComponent extends MzBaseModal {
 
+  oldEmailValidation = false;
+  codeValidation = true;
+  newEmailEnter = true;
+  newEmailCodeValidation = true;
+  finished = true;
+
+  oldEmailAddress: string;
+  oldEmailAddressIncorrect = false;
+
+  verificationCode: number;
+  verificationCodeIncorrect = false;
+
+  newEmail: string;
+
+  newVerificationCode: number;
+  newVerificationCodeIncorrect = false;
+
   constructor() {
     super();
+  }
+
+  sendOldEmailVerification() {
+    // Incorrect test
+    if (this.oldEmailAddress === 'falsch@falsch.falsch') {
+      this.oldEmailAddressIncorrect = true;
+
+      console.log('Email Adress is incorrect! Email: ' + this.oldEmailAddress);
+
+      return;
+    }
+
+    this.oldEmailAddressIncorrect = false;
+
+    // Hide
+    this.oldEmailValidation = true;
+    // Show
+    this.codeValidation = false;
+
+    console.log('Email Adress is correct!');
+  }
+
+  checkCode() {
+    // Invalid test
+    if (this.verificationCode === 666666) {
+      this.verificationCodeIncorrect = true;
+
+      console.log('Validation code is incorrect! Code: ' + this.verificationCode);
+
+      return;
+    }
+
+    this.verificationCodeIncorrect = false;
+
+    // Hide
+    this.codeValidation = true;
+    // Show
+    this.newEmailEnter = false;
+
+    console.log('Validation code is correct!');
+  }
+
+  sendNewEmailVerification() {
+    // Hide
+    this.newEmailEnter = true;
+    // Show
+    this.newEmailCodeValidation = false;
+  }
+
+  checkNewCode() {
+    // Invalid test
+    if (this.newVerificationCode === 666666) {
+      this.newVerificationCodeIncorrect = true;
+
+      console.log('Validation code is incorrect! Code: ' + this.newVerificationCode);
+
+      return;
+    }
+
+    this.newVerificationCodeIncorrect = false;
+
+    // Hide
+    this.newEmailCodeValidation = true;
+    // Show
+    this.finished = false;
+
+    console.log('Validation code is correct!');
   }
 
 }

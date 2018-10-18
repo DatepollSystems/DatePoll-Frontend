@@ -2,6 +2,7 @@
   "CLOSE": "Schließen",
   "SUBMIT": "Senden",
   "SAVE": "Speichern",
+  "NEXT": "Weiter",
   "ACTION": "Aktionen",
   "DO_NOT_FORGET_TO_SAVE": "Vergiss nicht zu speichern!",
 
@@ -47,6 +48,18 @@
   "SETTINGS_PERSONAL_DATA_MODAL_PHONE_NUMBER_PHONE_NUMBER_NOT_VALID": "Die Telefonnummer ist nicht valide!",
   "SETTINGS_PERSONAL_DATA_MODAL_PHONE_NUMBER_ADD": "Nummer hinzufügen",
   "SETTINGS_PERSONAL_DATA_MODAL_PHONE_NUMBER_NOT_VALID": "Bitte gib eine Bezeichnung und eine Telefonnummer an!",
+
+  "SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_VALIDATION_EMAIL_SENT": "Es wurde eine E-Mail mit einen Code an Ihre E-Mail Adresse versendet! Bitte kopieren Sie den Code und geben Sie ihn hier ein.",
+  "SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_EMAIL_ADDRESS": "E-Mail Adresse",
+  "SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_EMAIL_ADDRESS_PLACEHOLDER": "Gib deine aktuelle E-Mail Adresse ein",
+  "SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_EMAIL_ADDRESS_NOT_VALID": "Diese Email-Adresse ist nicht valide",
+  "SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_EMAIL_ADDRESS_INCORRECT": "Die von Ihnen eingegebene E-Mail Adresse ist inkorrekt!",
+  "SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_CODE": "Code",
+  "SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_CODE_PLACEHOLDER": "Geben sie den Code ein welcher Ihnen per E-Mail gesendet wurde.",
+  "SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_CODE_INCORRECT": "Der von Ihnen eingegebene Code ist inkorrekt!",
+  "SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_CODE_CORRECT": "Der Code ist korrekt! Bitte gib nun deine neue E-Mail Adresse ein.",
+  "SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_NEW_EMAIL_ADDRESS_PLACEHOLDER": "Gib deine neue E-Mail Adresse ein",
+  "SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_FINISHED": "Ihre E-Mail Adresse wurde erfolgreich geändert!",
 
   "SETTINGS_SECURITY": "Anmeldung & Sicherheit",
   "SETTINGS_SECURITY_DESCRIPTION": "Legen Sie die Einstellungen für Ihr Passwort und für die Zwei-Faktor-Authentifizierung fest.",
