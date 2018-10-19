@@ -34,12 +34,7 @@ import {EmailAddressComponent} from './home/settings/email-address/email-address
 import {PasswordComponent} from './home/settings/password/password.component';
 import {TwoFactorAuthenticationComponent} from './home/settings/two-factor-authentication/two-factor-authentication.component';
 import {CustomFormsModule} from 'ng2-validation';
-import { DoNotForgetToSaveComponent } from './do-not-forget-to-save/do-not-forget-to-save.component';
-
-export function setupTranslateFactory(
-  service: TranslateService): Function {
-  return () => service.use('DEFAULT');
-}
+import {DoNotForgetToSaveComponent} from './do-not-forget-to-save/do-not-forget-to-save.component';
 
 @NgModule({
   declarations: [
@@ -75,6 +70,7 @@ export function setupTranslateFactory(
     HttpClientModule,
     MaterializeComponentModule.forRoot()
   ],
+  // Without this entryComponents dynamic modal loading does not work
   entryComponents: [
     FeedbackModalComponent,
     AboutModalComponent,
@@ -88,7 +84,6 @@ export function setupTranslateFactory(
     AuthService,
     DataStorageService,
     UserService,
-    {provide: CookieService, useFactory: cookieServiceFactory},
     TranslateService,
     MzModalService,
     {
@@ -96,10 +91,21 @@ export function setupTranslateFactory(
       useFactory: setupTranslateFactory,
       deps: [TranslateService],
       multi: true
-    }],
+    },
+    {
+      provide: CookieService,
+      useFactory: cookieServiceFactory
+    }
+  ],
   bootstrap: [AppComponent]
 })
+
 export class AppModule {
+}
+
+export function setupTranslateFactory(
+  service: TranslateService): Function {
+  return () => service.use('DEFAULT');
 }
 
 export function cookieServiceFactory() {
