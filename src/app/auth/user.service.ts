@@ -3,117 +3,117 @@ import {Subject} from 'rxjs';
 export class UserService {
 
   constructor() {
-    this.phoneNumbers = [];
+    this._phoneNumbers = [];
 
-    this.phoneNumbers.push(new PhoneNumber('Home', '+43 664 2567390'));
-    this.phoneNumbers.push(new PhoneNumber('Work', '+43 664 5925905'));
-    this.phoneNumbers.push(new PhoneNumber('Private', '+43 664 7590367'));
+    this._phoneNumbers.push(new PhoneNumber('Home', '+43 664 2567390'));
+    this._phoneNumbers.push(new PhoneNumber('Work', '+43 664 5925905'));
+    this._phoneNumbers.push(new PhoneNumber('Private', '+43 664 7590367'));
   }
 
-  private title = 'Dr.';
-  private firstname = 'Max';
-  private surname = 'Musterboy';
-  private email = 'max.musterboy@gmail.com';
+  private _title = 'Dr.';
+  private _firstname = 'Max';
+  private _surname = 'Musterboy';
+  private _email = 'max.musterboy@gmail.com';
 
-  private streetname = 'Kasernstraße';
-  private streetnumber = '6-12';
-  private zipcode = 3500;
-  private location = 'Krems';
+  private _streetname = 'Kasernstraße';
+  private _streetnumber = '6-12';
+  private _zipcode = 3500;
+  private _location = 'Krems';
 
-  private birthday = '2000-12-24';
-  private joindate = '2000-12-24';
+  private _birthday = '2000-12-24';
+  private _joindate = '2000-12-24';
 
-  private phoneNumbers: PhoneNumber[];
+  private _phoneNumbers: PhoneNumber[];
 
-  firstnameChange: Subject<string> = new Subject<string>();
-  surnameChange: Subject<string> = new Subject<string>();
-  emailChange: Subject<string> = new Subject<string>();
+  public firstnameChange: Subject<string> = new Subject<string>();
+  public surnameChange: Subject<string> = new Subject<string>();
+  public emailChange: Subject<string> = new Subject<string>();
 
   setTitle(title: string) {
-    this.title = title;
+    this._title = title;
   }
 
-  getTitle() {
-    return this.title;
+  getTitle(): string {
+    return this._title;
   }
 
   setFirstname(firstname: string) {
-    this.firstname = firstname;
-    this.firstnameChange.next(this.firstname);
+    this._firstname = firstname;
+    this.firstnameChange.next(this._firstname);
   }
 
-  getFirstname() {
-    return this.firstname;
+  getFirstname(): string {
+    return this._firstname;
   }
 
   setSurname(surname: string) {
-    this.surname = surname;
-    this.surnameChange.next(this.surname);
+    this._surname = surname;
+    this.surnameChange.next(this._surname);
   }
 
-  getSurname() {
-    return this.surname;
+  getSurname(): string {
+    return this._surname;
   }
 
   setEmail(email: string) {
-    this.email = email;
-    this.emailChange.next(this.email);
+    this._email = email;
+    this.emailChange.next(this._email);
   }
 
-  getEmail() {
-    return this.email;
+  getEmail(): string {
+    return this._email;
   }
 
   setBirthday(birthday: string) {
-    this.birthday = birthday;
+    this._birthday = birthday;
   }
 
-  getBirthday() {
-    return this.birthday;
+  getBirthday(): string {
+    return this._birthday;
   }
 
   setStreetname(streetname: string) {
-    this.streetname = streetname;
+    this._streetname = streetname;
   }
 
-  getStreetname() {
-    return this.streetname;
+  getStreetname(): string {
+    return this._streetname;
   }
 
   setStreetnumber(streetnumber: string) {
-    this.streetnumber = streetnumber;
+    this._streetnumber = streetnumber;
   }
 
-  getStreetnumber() {
-    return this.streetnumber;
+  getStreetnumber(): string {
+    return this._streetnumber;
   }
 
   setZipcode(zipcode: number) {
-    this.zipcode = zipcode;
+    this._zipcode = zipcode;
   }
 
-  getZipcode() {
-    return this.zipcode;
+  getZipcode(): number {
+    return this._zipcode;
   }
 
   setLocation(location: string) {
-    this.location = location;
+    this._location = location;
   }
 
-  getLocation() {
-    return this.location;
+  getLocation(): string {
+    return this._location;
   }
 
-  getJoindate() {
-    return this.joindate;
+  getJoindate(): string {
+    return this._joindate;
   }
 
   setPhoneNumbers(phoneNumbers: any) {
-    this.phoneNumbers = phoneNumbers;
+    this._phoneNumbers = phoneNumbers;
   }
 
   getPhoneNumbers() {
-    return this.phoneNumbers;
+    return this._phoneNumbers;
   }
 }
 
