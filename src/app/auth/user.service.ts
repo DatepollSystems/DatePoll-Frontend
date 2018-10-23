@@ -118,9 +118,8 @@ export class UserService {
 }
 
 export class PhoneNumber {
-
-  private label: string;
-  private phoneNumber: string;
+  private readonly label: string;
+  private readonly phoneNumber: string;
 
   constructor(label: string, phoneNumber: string) {
     this.label = label;
