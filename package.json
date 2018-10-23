@@ -21,6 +21,8 @@
     "@angular/platform-browser-dynamic": "^6.1.10",
     "@angular/router": "^6.1.10",
     "@mdi/font": "^2.8.94",
+    "@swimlane/ngx-charts": "^9.0.0",
+    "@swimlane/ngx-datatable": "^13.1.0",
     "angular2-cookie": "^1.2.6",
     "core-js": "^2.5.4",
     "firebase": "^5.5.4",
