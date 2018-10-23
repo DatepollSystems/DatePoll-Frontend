@@ -35,7 +35,7 @@ import {PasswordComponent} from './home/settings/password/password.component';
 import {TwoFactorAuthenticationComponent} from './home/settings/two-factor-authentication/two-factor-authentication.component';
 import {CustomFormsModule} from 'ng2-validation';
 import {DoNotForgetToSaveComponent} from './do-not-forget-to-save/do-not-forget-to-save.component';
-import { CinemaComponent } from './home/cinema/cinema.component';
+import {CinemaComponent} from './home/cinema/cinema.component';
 
 @NgModule({
   declarations: [
