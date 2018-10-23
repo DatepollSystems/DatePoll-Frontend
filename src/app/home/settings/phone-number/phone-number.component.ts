@@ -1,7 +1,8 @@
 import {Component} from '@angular/core';
 import {MzBaseModal, MzToastService} from 'ngx-materialize';
-import {PhoneNumber, UserService} from '../../../auth/user.service';
+import {MyUserService} from '../../../auth/my-user.service';
 import {NgForm} from '@angular/forms';
+import {PhoneNumber} from '../../../users.service';
 
 @Component({
   selector: 'app-phone-number',
@@ -12,10 +13,10 @@ export class PhoneNumberComponent extends MzBaseModal {
 
   public phoneNumbers: PhoneNumber[];
 
-  constructor(private userService: UserService, private toastService: MzToastService) {
+  constructor(private myUserService: MyUserService, private toastService: MzToastService) {
     super();
 
-    this.phoneNumbers = userService.getPhoneNumbers();
+    this.phoneNumbers = myUserService.getPhoneNumbers();
   }
 
   addPhoneNumber(form: NgForm) {
@@ -48,6 +49,6 @@ export class PhoneNumberComponent extends MzBaseModal {
   }
 
   savePhoneNumbers() {
-    this.userService.setPhoneNumbers(this.phoneNumbers);
+    this.myUserService.setPhoneNumbers(this.phoneNumbers);
   }
 }

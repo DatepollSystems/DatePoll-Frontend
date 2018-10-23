@@ -1,33 +1,55 @@
 import {Subject} from 'rxjs';
+import {PhoneNumber} from '../users.service';
 
-export class UserService {
+export class MyUserService {
+  private _ID: number;
 
-  constructor() {
-    this._phoneNumbers = [];
+  private _title: string;
+  private _firstname: string;
+  private _surname: string;
+  private _email: string;
 
-    this._phoneNumbers.push(new PhoneNumber('Home', '+43 664 2567390'));
-    this._phoneNumbers.push(new PhoneNumber('Work', '+43 664 5925905'));
-    this._phoneNumbers.push(new PhoneNumber('Private', '+43 664 7590367'));
-  }
+  private _streetname: string;
+  private _streetnumber: string;
+  private _zipcode: number;
+  private _location: string;
 
-  private _title = 'Dr.';
-  private _firstname = 'Max';
-  private _surname = 'Musterboy';
-  private _email = 'max.musterboy@gmail.com';
-
-  private _streetname = 'Kasernstraße';
-  private _streetnumber = '6-12';
-  private _zipcode = 3500;
-  private _location = 'Krems';
-
-  private _birthday = '2000-12-24';
-  private _joindate = '2000-12-24';
+  private _birthday: string;
+  private _joindate: string;
 
   private _phoneNumbers: PhoneNumber[];
 
   public firstnameChange: Subject<string> = new Subject<string>();
   public surnameChange: Subject<string> = new Subject<string>();
   public emailChange: Subject<string> = new Subject<string>();
+
+  constructor() {
+    this._phoneNumbers = [];
+
+    this.setID(1);
+    this.setTitle('Dr.');
+    this.setFirstname('Max');
+    this.setSurname('Musterboy');
+    this.setEmail('max.musterboy@gmail.com');
+    this.setStreetname('Kasernstraße');
+    this.setStreetnumber('6-12');
+    this.setZipcode(3500);
+    this.setLocation('Krems');
+    this.setBirthday('2000-12-24');
+    this.setJoindate('2000-12-24');
+
+    this._phoneNumbers.push(new PhoneNumber('Home', '+43 664 2567390'));
+    this._phoneNumbers.push(new PhoneNumber('Work', '+43 664 5925905'));
+    this._phoneNumbers.push(new PhoneNumber('Private', '+43 664 7590367'));
+  }
+
+  setID(ID: number) {
+    this._ID = ID;
+  }
+
+  getID(): number {
+    return this._ID;
+  }
 
   setTitle(title: string) {
     this._title = title;
@@ -104,6 +126,10 @@ export class UserService {
     return this._location;
   }
 
+  setJoindate(joindate: string) {
+    this._joindate = joindate;
+  }
+
   getJoindate(): string {
     return this._joindate;
   }
@@ -114,24 +140,6 @@ export class UserService {
 
   getPhoneNumbers() {
     return this._phoneNumbers;
-  }
-}
-
-export class PhoneNumber {
-  private readonly label: string;
-  private readonly phoneNumber: string;
-
-  constructor(label: string, phoneNumber: string) {
-    this.label = label;
-    this.phoneNumber = phoneNumber;
-  }
-
-  public getLabel() {
-    return this.label;
-  }
-
-  public getPhoneNumber() {
-    return this.phoneNumber;
   }
 
 }

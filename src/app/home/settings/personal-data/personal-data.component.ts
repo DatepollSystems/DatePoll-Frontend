@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import {MzBaseModal, MzToastService} from 'ngx-materialize';
-import {UserService} from '../../../auth/user.service';
+import {MyUserService} from '../../../auth/my-user.service';
 
 @Component({
   selector: 'app-personaldata',
@@ -19,19 +19,19 @@ export class PersonalDataComponent extends MzBaseModal {
   zipcode: number;
   location: string;
 
-  constructor(private userService: UserService) {
+  constructor(private myUserService: MyUserService) {
     super();
 
-    this.title = this.userService.getTitle();
-    this.firstname = this.userService.getFirstname();
-    this.surname = this.userService.getSurname();
+    this.title = this.myUserService.getTitle();
+    this.firstname = this.myUserService.getFirstname();
+    this.surname = this.myUserService.getSurname();
 
-    this.birthday = this.userService.getBirthday();
+    this.birthday = this.myUserService.getBirthday();
 
-    this.streetname = this.userService.getStreetname();
-    this.streetnumber = this.userService.getStreetnumber();
-    this.zipcode = this.userService.getZipcode();
-    this.location = this.userService.getLocation();
+    this.streetname = this.myUserService.getStreetname();
+    this.streetnumber = this.myUserService.getStreetnumber();
+    this.zipcode = this.myUserService.getZipcode();
+    this.location = this.myUserService.getLocation();
   }
 
   public datepickerOptions: Pickadate.DateOptions = {
@@ -57,14 +57,14 @@ export class PersonalDataComponent extends MzBaseModal {
     console.log('Zipcode: ' + this.zipcode);
     console.log('Location: ' + this.location);
 
-    this.userService.setTitle(this.title);
-    this.userService.setFirstname(this.firstname);
-    this.userService.setSurname(this.surname);
-    this.userService.setBirthday(this.birthday);
-    this.userService.setStreetname(this.streetname);
-    this.userService.setStreetnumber(this.streetnumber);
-    this.userService.setZipcode(this.zipcode);
-    this.userService.setLocation(this.location);
+    this.myUserService.setTitle(this.title);
+    this.myUserService.setFirstname(this.firstname);
+    this.myUserService.setSurname(this.surname);
+    this.myUserService.setBirthday(this.birthday);
+    this.myUserService.setStreetname(this.streetname);
+    this.myUserService.setStreetnumber(this.streetnumber);
+    this.myUserService.setZipcode(this.zipcode);
+    this.myUserService.setLocation(this.location);
 
     console.log('Saving...');
     console.log('----------------------');

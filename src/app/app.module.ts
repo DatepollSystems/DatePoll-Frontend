@@ -18,7 +18,7 @@ import {PrivacyPolicyComponent} from './info/privacy-policy/privacy-policy.compo
 import {MaterializeComponentModule} from './materialize.module';
 import {OuterFooterComponent} from './footer/outer-footer/outer-footer.component';
 import {InnerFooterComponent} from './footer/inner-footer/inner-footer.component';
-import {UserService} from './auth/user.service';
+import {MyUserService} from './auth/my-user.service';
 import {StartComponent} from './home/start/start.component';
 import {SettingsComponent} from './home/settings/settings.component';
 import {TranslateService} from './translate.service';
@@ -35,6 +35,7 @@ import {PasswordComponent} from './home/settings/password/password.component';
 import {TwoFactorAuthenticationComponent} from './home/settings/two-factor-authentication/two-factor-authentication.component';
 import {CustomFormsModule} from 'ng2-validation';
 import {DoNotForgetToSaveComponent} from './do-not-forget-to-save/do-not-forget-to-save.component';
+import { CinemaComponent } from './home/cinema/cinema.component';
 
 @NgModule({
   declarations: [
@@ -59,7 +60,8 @@ import {DoNotForgetToSaveComponent} from './do-not-forget-to-save/do-not-forget-
     EmailAddressComponent,
     PasswordComponent,
     TwoFactorAuthenticationComponent,
-    DoNotForgetToSaveComponent
+    DoNotForgetToSaveComponent,
+    CinemaComponent
   ],
   imports: [
     BrowserModule,
@@ -83,7 +85,7 @@ import {DoNotForgetToSaveComponent} from './do-not-forget-to-save/do-not-forget-
   providers: [
     AuthService,
     DataStorageService,
-    UserService,
+    MyUserService,
     TranslateService,
     MzModalService,
     {

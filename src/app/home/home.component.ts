@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {UserService} from '../auth/user.service';
+import {MyUserService} from '../auth/my-user.service';
 import {Subscription} from 'rxjs';
 
 @Component({
@@ -12,25 +12,28 @@ export class HomeComponent implements OnInit {
   surname: string;
   email: string;
 
+  showCinema = true;
+  showPoll = true;
+
   private firstnameSubscription: Subscription;
   private surnameSubscription: Subscription;
   private emailSubscription: Subscription;
 
-  constructor(private userService: UserService) {
-    this.firstname = this.userService.getFirstname();
-    this.surname = this.userService.getSurname();
-    this.email = this.userService.getEmail();
+  constructor(private myUserService: MyUserService) {
+    this.firstname = this.myUserService.getFirstname();
+    this.surname = this.myUserService.getSurname();
+    this.email = this.myUserService.getEmail();
 
-    this.firstnameSubscription = userService.firstnameChange.subscribe((value) => {
+    this.firstnameSubscription = myUserService.firstnameChange.subscribe((value) => {
       this.firstname = value;
     });
 
-    this.surnameSubscription = userService.surnameChange.subscribe((value) => {
+    this.surnameSubscription = myUserService.surnameChange.subscribe((value) => {
       this.surname = value;
     });
 
 
-    this.emailSubscription = userService.emailChange.subscribe((value) => {
+    this.emailSubscription = myUserService.emailChange.subscribe((value) => {
       this.email = value;
     });
   }

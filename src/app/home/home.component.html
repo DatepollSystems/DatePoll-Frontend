@@ -29,17 +29,41 @@
         <div class="white-text email">{{email}}</div>
       </div>
     </mz-sidenav-header>
-    <mz-sidenav-subheader>Link Subheader</mz-sidenav-subheader>
-    <mz-sidenav-link routerLinkActive='[active]="true"'>
+    <mz-sidenav-link>
       <a class="waves-effect" routerLink="">Home</a>
     </mz-sidenav-link>
     <mz-sidenav-divider></mz-sidenav-divider>
+
+    <div *ngIf="showPoll">
+      <mz-sidenav-subheader>{{'NAV_POLLS' | translate}}</mz-sidenav-subheader>
+      <mz-sidenav-link>
+        <a class="waves-effect">{{'NAV_POLLS' | translate}}</a>
+      </mz-sidenav-link>
+      <mz-sidenav-link>
+        <a class="waves-effect">{{'NAV_ANALYSES' | translate}}</a>
+      </mz-sidenav-link>
+      <mz-sidenav-link>
+        <a class="waves-effect">{{'NAV_ADMINISTRATION' | translate}}</a>
+      </mz-sidenav-link>
+      <mz-sidenav-divider></mz-sidenav-divider>
+    </div>
+
+    <div *ngIf="showCinema">
+      <mz-sidenav-subheader>{{'NAV_CINEMA' | translate}}</mz-sidenav-subheader>
+      <mz-sidenav-link>
+        <a class="waves-effect">{{'NAV_TICKETS' | translate}}</a>
+      </mz-sidenav-link>
+      <mz-sidenav-link>
+        <a class="waves-effect">{{'NAV_CINEMA_SERVICE' | translate}}</a>
+      </mz-sidenav-link>
+      <mz-sidenav-link>
+        <a class="waves-effect">{{'NAV_ADMINISTRATION' | translate}}</a>
+      </mz-sidenav-link>
+      <mz-sidenav-divider></mz-sidenav-divider>
+    </div>
+
     <mz-sidenav-link>
-      <a class="waves-effect" href="#">Active Link</a>
-    </mz-sidenav-link>
-    <mz-sidenav-divider></mz-sidenav-divider>
-    <mz-sidenav-link>
-      <a routerLink="settings" class="waves-effect">{{ 'SETTINGS' | translate }}</a>
+      <a routerLink="settings" class="waves-effect">{{ 'NAV_SETTINGS' | translate }}</a>
     </mz-sidenav-link>
 
   </mz-sidenav>

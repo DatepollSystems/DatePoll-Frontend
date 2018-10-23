@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import {MzBaseModal} from 'ngx-materialize';
-import {UserService} from '../../../auth/user.service';
+import {MyUserService} from '../../../auth/my-user.service';
 
 @Component({
   selector: 'app-email-address',
@@ -26,13 +26,13 @@ export class EmailAddressComponent extends MzBaseModal {
   newVerificationCode: number;
   newVerificationCodeIncorrect = false;
 
-  constructor(private userService: UserService) {
+  constructor(private myUserService: MyUserService) {
     super();
   }
 
   sendOldEmailVerification() {
     // Incorrect test
-    if (this.oldEmailAddress !== this.userService.getEmail()) {
+    if (this.oldEmailAddress !== this.myUserService.getEmail()) {
       this.oldEmailAddressIncorrect = true;
 
       console.log('Email Adress is incorrect! Email: ' + this.oldEmailAddress);
@@ -96,7 +96,7 @@ export class EmailAddressComponent extends MzBaseModal {
 
     console.log('Validation code is correct!');
 
-    this.userService.setEmail(this.newEmail);
+    this.myUserService.setEmail(this.newEmail);
     console.log('Email address changed successfully!');
   }
 

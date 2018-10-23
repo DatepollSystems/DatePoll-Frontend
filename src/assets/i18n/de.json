@@ -6,12 +6,10 @@
   "ACTION": "Aktionen",
   "DO_NOT_FORGET_TO_SAVE": "Vergiss nicht zu speichern!",
 
+
   "LANGUAGE": "Sprache",
   "LANGUAGE_GERMAN": "Deutsch",
   "LANGUAGE_ENGLISH": "Englisch",
-
-  "SIGNIN": "Anmelden",
-  "SIGNIN_NOT_SIGNED_UP": "Kein Konto?",
 
   "ABOUT": "Über",
   "ABOUT_LICENSE": "Lizenz",
@@ -19,7 +17,21 @@
   "IMPRINT": "Impressum",
   "PRIVACY_POLICY": "Datenschutzerklärung",
 
-  "SETTINGS": "Einstellungen",
+
+  "SIGNIN": "Anmelden",
+  "SIGNIN_NOT_SIGNED_UP": "Kein Konto?",
+
+
+  "NAV_SETTINGS": "Einstellungen",
+
+  "NAV_POLLS": "Abstimmungen",
+  "NAV_ANALYSES": "Auswertung",
+  "NAV_ADMINISTRATION": "Administration",
+
+  "NAV_CINEMA": "Kino",
+  "NAV_TICKETS": "Tickets",
+  "NAV_CINEMA_SERVICE": "Kinodienst",
+
 
   "SETTINGS_PERSONAL_DATA": "Persönliche Daten",
   "SETTINGS_PERSONAL_DATA_DESCRIPTION": "Bearbeiten Sie Ihre Persönlichen Daten.",
