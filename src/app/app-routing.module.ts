@@ -14,22 +14,26 @@ import {MovieServiceComponent} from './home/cinema/movie-service/movie-service.c
 import {MovieAdministrationComponent} from './home/cinema/movie-administration/movie-administration.component';
 
 const appRoutes = [
-  { path: '', redirectTo: '/home', pathMatch: 'full'},
-  { path: 'info', component: InfoComponent, children: [
-      { path: 'imprint', component: ImprintComponent },
-      { path: 'privacypolicy', component: PrivacyPolicyComponent }
-    ] },
-  { path: 'home', component: HomeComponent, children: [
-      { path: '', pathMath: 'full', component: StartComponent },
-      { path: 'cinema/tickets', component: MovieTicketsComponent },
-      { path: 'cinema/service', component: MovieServiceComponent },
-      { path: 'cinema/settings', component: MovieAdministrationComponent},
-      { path: 'settings', component: SettingsComponent}
-    ] },
-  { path: 'signup', component: SignupComponent },
-  { path: 'signin', component: SigninComponent },
-  { path: 'not-found', component: PageNotFoundComponent },
-  { path: '**', redirectTo: '/not-found' }
+  {path: '', redirectTo: '/home', pathMatch: 'full'},
+  {
+    path: 'info', component: InfoComponent, children: [
+      {path: 'imprint', component: ImprintComponent},
+      {path: 'privacypolicy', component: PrivacyPolicyComponent}
+    ]
+  },
+  {
+    path: 'home', component: HomeComponent, children: [
+      {path: '', pathMath: 'full', component: StartComponent},
+      {path: 'cinema/tickets', component: MovieTicketsComponent},
+      {path: 'cinema/service', component: MovieServiceComponent},
+      {path: 'cinema/settings', component: MovieAdministrationComponent},
+      {path: 'settings', component: SettingsComponent}
+    ]
+  },
+  {path: 'signup', component: SignupComponent},
+  {path: 'signin', component: SigninComponent},
+  {path: 'not-found', component: PageNotFoundComponent},
+  {path: '**', redirectTo: '/not-found'}
 ];
 
 @NgModule({
@@ -37,4 +41,5 @@ const appRoutes = [
   exports: [RouterModule]
 })
 
-export class AppRoutingModule { }
+export class AppRoutingModule {
+}
