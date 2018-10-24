@@ -14,8 +14,8 @@ export class MyUserService {
   private _zipcode: number;
   private _location: string;
 
-  private _birthday: string;
-  private _joindate: string;
+  private _birthday: Date;
+  private _joindate: Date;
 
   private _phoneNumbers: PhoneNumber[];
 
@@ -35,8 +35,8 @@ export class MyUserService {
     this.setStreetnumber('6-12');
     this.setZipcode(3500);
     this.setLocation('Krems');
-    this.setBirthday('2000-12-24');
-    this.setJoindate('2000-12-24');
+    this.setBirthday(new Date('2000-12-24'));
+    this.setJoindate(new Date('2000-12-24'));
 
     this._phoneNumbers.push(new PhoneNumber('Home', '+43 664 2567390'));
     this._phoneNumbers.push(new PhoneNumber('Work', '+43 664 5925905'));
@@ -86,11 +86,11 @@ export class MyUserService {
     return this._email;
   }
 
-  setBirthday(birthday: string) {
+  setBirthday(birthday: Date) {
     this._birthday = birthday;
   }
 
-  getBirthday(): string {
+  getBirthday(): Date {
     return this._birthday;
   }
 
@@ -126,11 +126,11 @@ export class MyUserService {
     return this._location;
   }
 
-  setJoindate(joindate: string) {
+  setJoindate(joindate: Date) {
     this._joindate = joindate;
   }
 
-  getJoindate(): string {
+  getJoindate(): Date {
     return this._joindate;
   }
 

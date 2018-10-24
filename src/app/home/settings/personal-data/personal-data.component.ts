@@ -12,7 +12,7 @@ export class PersonalDataComponent extends MzBaseModal {
   firstname: string;
   surname: string;
 
-  birthday: string;
+  birthday: Date;
 
   streetname: string;
   streetnumber: string;
