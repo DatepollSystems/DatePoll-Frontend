@@ -9,6 +9,9 @@ import {ImprintComponent} from './info/imprint/imprint.component';
 import {PrivacyPolicyComponent} from './info/privacy-policy/privacy-policy.component';
 import {StartComponent} from './home/start/start.component';
 import {SettingsComponent} from './home/settings/settings.component';
+import {MovieTicketsComponent} from './home/cinema/movie-tickets/movie-tickets.component';
+import {MovieServiceComponent} from './home/cinema/movie-service/movie-service.component';
+import {MovieAdministrationComponent} from './home/cinema/movie-administration/movie-administration.component';
 
 const appRoutes = [
   { path: '', redirectTo: '/home', pathMatch: 'full'},
@@ -18,6 +21,9 @@ const appRoutes = [
     ] },
   { path: 'home', component: HomeComponent, children: [
       { path: '', pathMath: 'full', component: StartComponent },
+      { path: 'cinema/tickets', component: MovieTicketsComponent },
+      { path: 'cinema/service', component: MovieServiceComponent },
+      { path: 'cinema/settings', component: MovieAdministrationComponent},
       { path: 'settings', component: SettingsComponent}
     ] },
   { path: 'signup', component: SignupComponent },

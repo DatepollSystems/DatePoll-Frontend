@@ -35,7 +35,9 @@ import {PasswordComponent} from './home/settings/password/password.component';
 import {TwoFactorAuthenticationComponent} from './home/settings/two-factor-authentication/two-factor-authentication.component';
 import {CustomFormsModule} from 'ng2-validation';
 import {DoNotForgetToSaveComponent} from './do-not-forget-to-save/do-not-forget-to-save.component';
-import {CinemaComponent} from './home/cinema/cinema.component';
+import {MovieTicketsComponent} from './home/cinema/movie-tickets/movie-tickets.component';
+import {MovieServiceComponent} from './home/cinema/movie-service/movie-service.component';
+import {MovieAdministrationComponent} from './home/cinema/movie-administration/movie-administration.component';
 
 @NgModule({
   declarations: [
@@ -61,7 +63,9 @@ import {CinemaComponent} from './home/cinema/cinema.component';
     PasswordComponent,
     TwoFactorAuthenticationComponent,
     DoNotForgetToSaveComponent,
-    CinemaComponent
+    MovieTicketsComponent,
+    MovieServiceComponent,
+    MovieAdministrationComponent
   ],
   imports: [
     BrowserModule,

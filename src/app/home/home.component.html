@@ -51,13 +51,13 @@
     <div *ngIf="showCinema">
       <mz-sidenav-subheader>{{'NAV_CINEMA' | translate}}</mz-sidenav-subheader>
       <mz-sidenav-link>
-        <a class="waves-effect">{{'NAV_TICKETS' | translate}}</a>
+        <a routerLink="cinema/tickets" class="waves-effect">{{'NAV_TICKETS' | translate}}</a>
       </mz-sidenav-link>
       <mz-sidenav-link>
-        <a class="waves-effect">{{'NAV_CINEMA_SERVICE' | translate}}</a>
+        <a routerLink="cinema/service" class="waves-effect">{{'NAV_CINEMA_SERVICE' | translate}}</a>
       </mz-sidenav-link>
       <mz-sidenav-link>
-        <a class="waves-effect">{{'NAV_ADMINISTRATION' | translate}}</a>
+        <a routerLink="cinema/settings" class="waves-effect">{{'NAV_ADMINISTRATION' | translate}}</a>
       </mz-sidenav-link>
       <mz-sidenav-divider></mz-sidenav-divider>
     </div>
