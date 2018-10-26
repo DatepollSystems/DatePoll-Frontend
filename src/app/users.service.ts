@@ -29,10 +29,10 @@ export class User {
   private _surname: string;
   private _email: string;
 
-  private _birthday: string;
+  private _birthday: Date;
   private _phoneNumbers: PhoneNumber[];
 
-  constructor(ID: number, title: string, firstname: string, surname: string, email: string, birthday: string) {
+  constructor(ID: number, title: string, firstname: string, surname: string, email: string, birthday: Date) {
     this._ID = ID;
 
     this._title = title;
@@ -60,7 +60,7 @@ export class User {
     return this._email;
   }
 
-  getBirthday(): string {
+  getBirthday(): Date {
     return this._birthday;
   }
 

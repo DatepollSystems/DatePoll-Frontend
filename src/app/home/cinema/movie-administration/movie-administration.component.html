@@ -1,3 +1,23 @@
-<p>
-  movie-administration works!
-</p>
+<div class="row">
+  <input
+    type='text'
+    style='padding:8px;'
+    class="col s12"
+    placeholder='Type to filter the name column...'
+    (keyup)='updateFilter($event)'
+  />
+</div>
+
+<div class="row">
+  <ngx-datatable
+    #table
+    class='material'
+    [columns]="columns"
+    [columnMode]="'force'"
+    [headerHeight]="50"
+    [footerHeight]="50"
+    [rowHeight]="'auto'"
+    [limit]="10"
+    [rows]='rows'>
+  </ngx-datatable>
+</div>

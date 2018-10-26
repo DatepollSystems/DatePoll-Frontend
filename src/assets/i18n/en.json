@@ -31,6 +31,15 @@
   "NAV_CINEMA_SERVICE": "Cinema service",
 
 
+  "CINEMA_TICKETS_BOOK_A_TICKET": "Book a ticket",
+  "CINEMA_TICKETS_DATE": "Date: ",
+  "CINEMA_TICKETS_TRAILER": "Trailer: ",
+  "CINEMA_TICKETS_WORKER": "Worker: ",
+  "CINEMA_TICKETS_EMERGENCY_WORKER": "Emergency worker: ",
+  "CINEMA_TICKETS_AVAILABLE_TICKETS": "Available tickets: ",
+  "CINEMA_TICKETS_NO_MOVIES_AVAILABLE": "There aren't any movies available",
+
+
   "SETTINGS_PERSONAL_DATA": "Personal data",
   "SETTINGS_PERSONAL_DATA_DESCRIPTION": "Edit your personal data.",
   "SETTINGS_PERSONAL_DATA_PERSONAL_DATA_CHANGE": "Change your personal data",

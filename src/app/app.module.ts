@@ -38,6 +38,9 @@ import {DoNotForgetToSaveComponent} from './do-not-forget-to-save/do-not-forget-
 import {MovieTicketsComponent} from './home/cinema/movie-tickets/movie-tickets.component';
 import {MovieServiceComponent} from './home/cinema/movie-service/movie-service.component';
 import {MovieAdministrationComponent} from './home/cinema/movie-administration/movie-administration.component';
+import {MovieTicketComponent} from './home/cinema/movie-tickets/movie-ticket/movie-ticket.component';
+import {NgxDatatableModule} from '@swimlane/ngx-datatable';
+import {NgxChartsModule} from '@swimlane/ngx-charts';
 
 @NgModule({
   declarations: [
@@ -65,7 +68,8 @@ import {MovieAdministrationComponent} from './home/cinema/movie-administration/m
     DoNotForgetToSaveComponent,
     MovieTicketsComponent,
     MovieServiceComponent,
-    MovieAdministrationComponent
+    MovieAdministrationComponent,
+    MovieTicketComponent
   ],
   imports: [
     BrowserModule,
@@ -74,6 +78,8 @@ import {MovieAdministrationComponent} from './home/cinema/movie-administration/m
     CustomFormsModule,
     AppRoutingModule,
     HttpClientModule,
+    NgxDatatableModule,
+    NgxChartsModule,
     MaterializeComponentModule.forRoot()
   ],
   // Without this entryComponents dynamic modal loading does not work

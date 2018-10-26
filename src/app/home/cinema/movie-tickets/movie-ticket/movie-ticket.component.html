@@ -1,0 +1,134 @@
+<div class="col s12 m6 l6 hide-on-med-and-down">
+  <div class="card horizontal hoverable">
+    <div class="card-image">
+      <img src="{{imageLink}}">
+    </div>
+    <div class="card-stacked">
+      <div class="card-content">
+        <span class="card-title">{{name}}</span>
+        <table>
+          <tbody>
+          <tr>
+            <td>{{'CINEMA_TICKETS_DATE' | translate}}</td>
+            <td>
+              {{date | date:'dd/MM/yyyy'}}
+            </td>
+          </tr>
+          <tr>
+            <td>{{'CINEMA_TICKETS_TRAILER' | translate}}</td>
+            <td>
+              <a href="{{trailerLink}}"
+                 rel="noopener"
+                 target="_blank"
+                 class="btn-floating light-blue waves-circle"
+                 mz-tooltip
+                 [tooltip]="'Schau dir den <b class=\'red-text\'>Trailer</b> an'"
+                 [position]="'top'"
+                 [html]="true">
+                <i mz-icon-mdi
+                   [size]="'24px'"
+                   [icon]="'open-in-new'">
+                </i>
+              </a>
+            </td>
+          </tr>
+          <tr>
+            <td>{{'CINEMA_TICKETS_WORKER' | translate}}</td>
+            <td>
+              {{worker.getFirstname() + ' ' + worker.getSurname()}}
+            </td>
+          </tr>
+          <tr>
+            <td>{{'CINEMA_TICKETS_EMERGENCY_WORKER' | translate}}</td>
+            <td>
+              {{emergencyWorker.getFirstname() + ' ' + emergencyWorker.getSurname()}}
+            </td>
+          </tr>
+          <tr>
+            <td>{{'CINEMA_TICKETS_AVAILABLE_TICKETS' | translate}}</td>
+            <td>
+              {{20 - bookedTickets}}
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="card-action">
+        <a class="btn green waves-effect" href="#">{{'CINEMA_TICKETS_BOOK_A_TICKET' | translate}}</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="col s12 m6 hide-on-large-only">
+  <div class="card">
+    <div class="card-image waves-effect waves-block waves-light">
+      <img class="activator" src="{{imageLink}}">
+    </div>
+    <div class="card-content">
+      <span class="card-title activator grey-text text-darken-4">
+        {{name}}
+        <i mz-icon-mdi
+           [align]="'right'"
+           [icon]="'dots-vertical'">
+        </i>
+      </span>
+      <p><a class="btn green waves-effect" href="#">{{'CINEMA_TICKETS_BOOK_A_TICKET' | translate}}</a></p>
+    </div>
+    <div class="card-reveal">
+      <span class="card-title grey-text text-darken-4" style="margin-bottom: 15px;">
+        {{name}}
+         <i mz-icon-mdi
+            [align]="'right'"
+            [icon]="'close'">
+        </i>
+      </span>
+      <table>
+        <tbody>
+        <tr>
+          <td>{{'CINEMA_TICKETS_DATE' | translate}}</td>
+          <td>
+            {{date | date:'dd/MM/yyyy'}}
+          </td>
+        </tr>
+        <tr>
+          <td>{{'CINEMA_TICKETS_TRAILER' | translate}}</td>
+          <td>
+            <a href="{{trailerLink}}"
+               rel="noopener"
+               target="_blank"
+               class="btn-floating light-blue waves-circle"
+               mz-tooltip
+               [tooltip]="'Schau dir den <b class=\'red-text\'>Trailer</b> an'"
+               [position]="'top'"
+               [html]="true">
+              <i mz-icon-mdi
+                 [size]="'24px'"
+                 [icon]="'open-in-new'">
+              </i>
+            </a>
+          </td>
+        </tr>
+        <tr>
+          <td>{{'CINEMA_TICKETS_WORKER' | translate}}</td>
+          <td>
+            {{worker.getFirstname() + ' ' + worker.getSurname()}}
+          </td>
+        </tr>
+        <tr>
+          <td>{{'CINEMA_TICKETS_EMERGENCY_WORKER' | translate}}</td>
+          <td>
+            {{emergencyWorker.getFirstname() + ' ' + emergencyWorker.getSurname()}}
+          </td>
+        </tr>
+        <tr>
+          <td>{{'CINEMA_TICKETS_AVAILABLE_TICKETS' | translate}}</td>
+          <td>
+            {{20 - bookedTickets}}
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

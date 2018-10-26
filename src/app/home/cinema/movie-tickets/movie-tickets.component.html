@@ -1,3 +1,25 @@
-<p>
-  movie-tickets works!
-</p>
+<div class="row">
+  <app-movie-ticket
+    *ngFor="let movie of movies"
+    [name]="movie.getName()"
+    [date]="movie.getDate()"
+    [trailerLink]="movie.getTrailerlink()"
+    [imageLink]="movie.getImageLink()"
+    [worker]="movie.getWorker()"
+    [emergencyWorker]="movie.getEmergencyWorker()"
+    [bookedTickets]="movie.getBookedTickets()">
+  </app-movie-ticket>
+</div>
+
+<div *ngIf="movies.length == 0" style="margin-top: 25%">
+  <div class="row center-align">
+    <i mz-icon-mdi
+       [icon]="'alert-circle-outline'"
+       [size]="'48px'">
+    </i>
+  </div>
+
+  <div class="row center-align" >
+    {{'CINEMA_TICKETS_NO_MOVIES_AVAILABLE' | translate}}
+  </div>
+</div>
