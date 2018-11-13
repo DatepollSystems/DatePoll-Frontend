@@ -1,22 +1,28 @@
-import {Component} from '@angular/core';
-import {MzBaseModal, MzToastService} from 'ngx-materialize';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {MyUserService} from '../../../auth/my-user.service';
 import {NgForm} from '@angular/forms';
 import {PhoneNumber} from '../../../users.service';
+import {MatSort, MatTableDataSource} from '@angular/material';
 
 @Component({
   selector: 'app-phone-number',
   templateUrl: './phone-number.component.html',
   styleUrls: ['./phone-number.component.css']
 })
-export class PhoneNumberComponent extends MzBaseModal {
+export class PhoneNumberComponent {
 
   public phoneNumbers: PhoneNumber[];
 
-  constructor(private myUserService: MyUserService, private toastService: MzToastService) {
-    super();
+  displayedColumns: string[] = ['label', 'phonenumber', 'action'];
+  dataSource: MatTableDataSource<PhoneNumber>;
 
-    this.phoneNumbers = myUserService.getPhoneNumbers();
+  constructor(private _myUserService: MyUserService) {
+    this.phoneNumbers = _myUserService.getPhoneNumbers();
+    this.dataSource = new MatTableDataSource(this.phoneNumbers);
+  }
+
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
   addPhoneNumber(form: NgForm) {
@@ -25,14 +31,17 @@ export class PhoneNumberComponent extends MzBaseModal {
       || form.value.label === null
       || form.value.phoneNumber === null) {
 
-      this.toastService.show(document.getElementById('notValid').innerText, 4000, 'red');
-
       return;
     }
 
     this.phoneNumbers.push(new PhoneNumber(form.value.label, form.value.phoneNumber));
-
+    this.dataSource = new MatTableDataSource(this.phoneNumbers);
     form.reset();
+
+    console.log('Telephone number added!');
+
+    this._myUserService.setPhoneNumbers(this.phoneNumbers);
+    console.log('All phone numbers saved!');
   }
 
   removePhoneNumber(phoneNumber: PhoneNumber) {
@@ -46,9 +55,11 @@ export class PhoneNumberComponent extends MzBaseModal {
     }
 
     this.phoneNumbers.splice(index, 1);
-  }
+    this.dataSource = new MatTableDataSource(this.phoneNumbers);
 
-  savePhoneNumbers() {
-    this.myUserService.setPhoneNumbers(this.phoneNumbers);
+    console.log('Telephone number removed!');
+
+    this._myUserService.setPhoneNumbers(this.phoneNumbers);
+    console.log('All phone numbers saved!');
   }
 }

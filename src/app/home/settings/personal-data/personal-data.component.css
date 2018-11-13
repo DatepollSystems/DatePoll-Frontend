@@ -1,0 +1,17 @@
+#datepicker-field {
+  display: unset;
+}
+
+#datepicker-field-mobile {
+  display: none;
+}
+
+@media only screen and (max-width: 992px) {
+  #datepicker-field {
+    display: none;
+  }
+
+  #datepicker-field-mobile {
+    display: unset;
+  }
+}
