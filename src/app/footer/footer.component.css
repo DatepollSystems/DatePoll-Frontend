@@ -1,12 +1,34 @@
+#footerContainer {
+  padding-top: 15px;
+  padding-bottom: 15px;
+  background-color: #455A64;
+  color: white;
+}
+
+#footerBarContainer {
+  background-color: #37474F;
+  padding: 15px;
+  color: rgba(255,255,255,.8);
+}
+
+.footer-heading {
+  font-size: 24px;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+li {
+  color: white;
+}
+
 li a {
   color: #eeeeee;
 }
 
 li a:hover {
- color: #bdbdbd;
-  cursor: pointer;
-}
-
-mz-dropdown-item a:hover {
+  color: #bdbdbd;
   cursor: pointer;
 }
