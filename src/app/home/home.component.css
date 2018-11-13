@@ -1,3 +1,36 @@
 .my-container {
-  padding: 20px;
+  padding: 25px;
+  height: 90vh;
+}
+
+/*mat-sidenav {*/
+  /*width: 600px;*/
+/*}*/
+
+.sidenav-head {
+  background-image: url("./../../assets/sidenav-background.svg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding-right: 20px;
+  padding-left: 10px;
+  padding-bottom: 10px;
+  padding-top: 20px;
+}
+
+.sidenav-head-entry {
+  color: white;
+  margin-top: 15px;
+  font-size: 16px;
+}
+
+.sidenav-head-avatar {
+  height: 10vh;
+}
+
+.activated {
+  background-color: #BDBDBD !important;
+}
+
+.activated:hover {
+  background-color: #BDBDBD !important;
 }
