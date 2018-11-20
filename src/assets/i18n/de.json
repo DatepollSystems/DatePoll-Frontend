@@ -5,6 +5,7 @@
   "NEXT": "Weiter",
   "ACTION": "Aktionen",
   "DONE": "Fertig",
+  "OPEN": "Öffnen",
   "DO_NOT_FORGET_TO_SAVE": "Vergiss nicht zu speichern!",
 
 
@@ -45,13 +46,26 @@
   "CINEMA_TICKETS_BOOK_A_TICKET": "Karten reservieren",
   "CINEMA_TICKETS_DATE": "Datum: ",
   "CINEMA_TICKETS_TRAILER": "Trailer: ",
+  "CINEMA_TICLETS_TRAILER_WATCH": "Anschauen",
   "CINEMA_TICKETS_WORKER": "Kinodienst: ",
   "CINEMA_TICKETS_EMERGENCY_WORKER": "Notfall-Kinodienst: ",
   "CINEMA_TICKETS_AVAILABLE_TICKETS": "Freie Karten: ",
   "CINEMA_TICKETS_NO_MOVIES_AVAILABLE": "Derzeit sind keine Filme verfügbar",
 
   "CINEMA_TICKETS_ADMINISTRATION_SEARCH": "Suche nach einem Film...",
+  "CINEMA_TICKETS_ADMINISTRATION_NAME": "Filmname",
+  "CINEMA_TICKETS_ADMINISTRATION_DATE": "Datum",
+  "CINEMA_TICKETS_ADMINISTRATION_TRAILER": "Trailer",
+  "CINEMA_TICKETS_ADMINISTRATION_POSTER": "Poster",
+  "CINEMA_TICKETS_ADMINISTRATION_POSTER_WATCH": "Anschauen",
+  "CINEMA_TICKETS_ADMINISTRATION_WORKER": "Kinodienst",
+  "CINEMA_TICKETS_ADMINISTRATION_EMERGENCY_WORKER": "Notfall-Kinodienst",
+  "CINEMA_TICKETS_ADMINISTRATION_BOOKED_TICKETS": "Gebuchte Karten",
 
+  "CINEMA_TICKETS_ADMINISTRATION_MOVIE_EDIT_MODAL_EDIT": "Bearbeite ",
+  "CINEMA_TICKETS_ADMINISTRATION_MOVIE_EDIT_MODAL_NAME_INVALID": "Der Name darf weder leer noch mehr als 128 Zeichen haben!",
+  "CINEMA_TICKETS_ADMINISTRATION_MOVIE_EDIT_MODAL_TRAILER_INVALID": "Der Trailerlink darf weder leer noch mehr als 512 Zeichen haben!",
+  "CINEMA_TICKETS_ADMINISTRATION_MOVIE_EDIT_MODAL_POSTER_INVALID": "Der Posterlink darf weder leer noch mehr als 512 Zeichen haben!",
 
   "SETTINGS_PERSONAL_DATA": "Persönliche Daten",
   "SETTINGS_PERSONAL_DATA_DESCRIPTION": "Bearbeiten Sie Ihre Persönlichen Daten.",

@@ -14,6 +14,30 @@ a:hover {
   cursor: pointer;
 }
 
+.success-button {
+  background-color: #4CAF50;
+  color: #ffffff
+}
+
+/* Show different datepicker for mobile and desktop */
+#datepicker-field {
+  display: unset;
+}
+
+#datepicker-field-mobile {
+  display: none;
+}
+
+@media only screen and (max-width: 992px) {
+  #datepicker-field {
+    display: none;
+  }
+
+  #datepicker-field-mobile {
+    display: unset;
+  }
+}
+
 /* Disable stepper */
 .mat-vertical-stepper-header{
   pointer-events: none !important;

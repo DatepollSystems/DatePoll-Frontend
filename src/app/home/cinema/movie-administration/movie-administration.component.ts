@@ -1,84 +1,40 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {DatatableComponent} from '@swimlane/ngx-datatable';
-import {CinemaService} from '../cinema.service';
+import {CinemaService, Movie} from '../cinema.service';
+import {MovieEditModalComponent} from './movie-edit-modal/movie-edit-modal.component';
+import {MatDialog, MatPaginator, MatTableDataSource} from '@angular/material';
 
 @Component({
   selector: 'app-movie-administration',
   templateUrl: './movie-administration.component.html',
   styleUrls: ['./movie-administration.component.css']
 })
-export class MovieAdministrationComponent implements OnInit {
-  rows = [];
+export class MovieAdministrationComponent implements OnInit{
 
-  temp = [];
+  displayedColumns: string[] = ['name', 'date', 'trailer', 'poster', 'worker', 'emergencyWorker', 'bookedTickets'];
+  dataSource: MatTableDataSource<Movie>;
 
-  columns = [
-    { name: 'Name' },
-    { name: 'Date' },
-    { name: 'Trailer' },
-    { name: 'Poster' },
-    { name: 'Worker' },
-    { name: 'E Worker' },
-    { name: 'Bookedtickets' },
-  ];
-  @ViewChild(DatatableComponent) table: DatatableComponent;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  constructor(private cinemaService: CinemaService) {
-    // this.fetch((data) => {
-    //   // cache our list
-    //   this.temp = [...data];
-    //
-    //   // push our inital complete list
-    //   this.rows = data;
-    // });
+  ngOnInit() {
+    this.dataSource.paginator = this.paginator;
+  }
 
-    console.log(this.cinemaService.getMovies());
+  constructor(private cinemaService: CinemaService, private dialog: MatDialog) {
+    this.dataSource = new MatTableDataSource(this.cinemaService.getMovies());
+  }
 
-    for (let i = 0; i < this.cinemaService.getMovies().length; i++) {
-      const movie = this.cinemaService.getMovies()[i];
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
 
-      this.rows.push({name: movie.getName(),
-        date: movie.getDate(),
-        trailer: movie.getTrailerlink(),
-        poster: movie.getImageLink(),
-        worker: movie.getWorker().getFirstname(),
-        eworker: movie.getEmergencyWorker().getFirstname(), bookedtickets: movie.getBookedTickets()});
-
-      this.temp.push({name: movie.getName(),
-        date: movie.getDate(),
-        trailer: movie.getTrailerlink(),
-        poster: movie.getImageLink(),
-        worker: movie.getWorker().getFirstname(),
-        eworker: movie.getEmergencyWorker().getFirstname(), bookedtickets: movie.getBookedTickets()});
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
     }
   }
 
-  fetch(cb) {
-    const req = new XMLHttpRequest();
-    req.open('GET', `https://swimlane.github.io/ngx-datatable/assets/data/company.json`);
-
-    req.onload = () => {
-      cb(JSON.parse(req.response));
-    };
-
-    req.send();
-  }
-
-  updateFilter(event) {
-    const val = event.target.value.toLowerCase();
-
-    // filter our data
-    const temp = this.temp.filter(function(d) {
-      return d.name.toLowerCase().indexOf(val) !== -1 || !val;
+  onEdit(id: number) {
+    this.cinemaService.setSelectedMovie(this.cinemaService.getMovieByID(id));
+    this.dialog.open(MovieEditModalComponent, {
+      width: '80vh',
     });
-
-    // update the rows
-    this.rows = temp;
-    // Whenever the filter changes, always go back to the first page
-    this.table.offset = 0;
   }
-
-  ngOnInit(): void {
-  }
-
 }

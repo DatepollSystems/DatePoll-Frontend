@@ -1,14 +1,16 @@
-<div class="row">
-  <div class="col s12 md4 lg2 xl2">
-    <mz-collection>
-      <a mz-collection-link routerLink="imprint" routerLinkActive="active">Impressum</a>
-      <a mz-collection-link routerLink="privacypolicy" routerLinkActive="active">Datenschutzerklärung</a>
-      <a mz-collection-link onclick="window.history.go(-1); return false;">Go back <div mz-secondary-content><i mz-icon-mdi [icon]="'arrow-left'"></i></div></a>
-    </mz-collection>
-  </div>
-  <div class="col s12 md8 lg8 xl8">
-    <router-outlet></router-outlet>
+<div class="container-fluid" style="min-height: 90%">
+  <div class="row">
+    <div class="col-12 col-sm-12 col-md-4 col-lg-2">
+      <mat-action-list>
+        <button mat-list-item mat-ripple routerLinkActive="active" routerLink="imprint"> Impressum </button>
+        <button mat-list-item mat-ripple routerLinkActive="active" routerLink="privacypolicy"> Datenschutzerklärung </button>
+        <button mat-list-item mat-ripple routerLink="/signin">Go back</button>
+      </mat-action-list>
+
+    </div>
+    <div class="col-12 col-sm-12 col-md-8 col-lg-8">
+      <router-outlet></router-outlet>
+    </div>
   </div>
 </div>
-
-<app-outer-footer></app-outer-footer>
+<app-footer></app-footer>

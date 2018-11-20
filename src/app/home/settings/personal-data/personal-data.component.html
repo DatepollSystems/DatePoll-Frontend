@@ -2,7 +2,7 @@
 <mat-dialog-content>
   <app-do-not-forget-to-save></app-do-not-forget-to-save>
 
-  <form (ngSubmit)="saveData()" #form="ngForm" style="margin-top: 25px;">
+  <form (ngSubmit)="saveData()" #form="ngForm">
     <div class="row">
       <mat-form-field class="col-5 col-sm-5 col-md-4 col-lg-2">
         <input matInput id="title" name="title" type="text"
@@ -51,7 +51,6 @@
         <mat-datepicker-toggle matSuffix [for]="picker_mobile"></mat-datepicker-toggle>
         <mat-datepicker touchUi #picker_mobile></mat-datepicker>
       </mat-form-field>
-
     </div>
 
     <div class="row">
@@ -101,7 +100,7 @@
 </mat-dialog-content>
 <mat-dialog-actions align="end">
   <button mat-button mat-dialog-close>{{'CLOSE' | translate}}</button>
-  <button mat-button mat-dialog-close (click)="form.ngSubmit.emit()" style="background-color: #4CAF50; color: #ffffff"
+  <button mat-button mat-dialog-close (click)="form.ngSubmit.emit()" class="success-button"
           [disabled]="!form.form.valid">{{'SAVE' | translate}}
   </button>
 </mat-dialog-actions>

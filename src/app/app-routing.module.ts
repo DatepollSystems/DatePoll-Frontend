@@ -21,8 +21,7 @@ const appRoutes = [
       {path: 'privacypolicy', component: PrivacyPolicyComponent}
     ]
   },
-  {
-    path: 'home', component: HomeComponent, children: [
+  {path: 'home', component: HomeComponent, children: [
       {path: '', pathMath: 'full', component: StartComponent},
       {path: 'cinema/tickets', component: MovieTicketsComponent},
       {path: 'cinema/service', component: MovieServiceComponent},

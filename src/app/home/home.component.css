@@ -1,6 +1,6 @@
 .my-container {
   padding: 25px;
-  height: 90vh;
+  min-height: 80vh;
 }
 
 /*mat-sidenav {*/
@@ -8,13 +8,9 @@
 /*}*/
 
 .sidenav-head {
-  background-image: url("./../../assets/sidenav-background.svg");
-  background-repeat: no-repeat;
+  background: url("./../../assets/sidenav-background.svg") no-repeat;
   background-size: cover;
-  padding-right: 20px;
-  padding-left: 10px;
-  padding-bottom: 10px;
-  padding-top: 20px;
+  padding: 20px 20px 10px 10px;
 }
 
 .sidenav-head-entry {

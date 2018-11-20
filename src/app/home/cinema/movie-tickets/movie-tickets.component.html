@@ -1,5 +1,7 @@
 <div class="row">
   <app-movie-ticket
+    class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-3"
+    style="margin-bottom: 15px;"
     *ngFor="let movie of movies"
     [name]="movie.getName()"
     [date]="movie.getDate()"
@@ -12,14 +14,11 @@
 </div>
 
 <div *ngIf="movies.length == 0" style="margin-top: 25%">
-  <div class="row center-align">
-    <i mz-icon-mdi
-       [icon]="'alert-circle-outline'"
-       [size]="'48px'">
-    </i>
-  </div>
-
-  <div class="row center-align" >
-    {{'CINEMA_TICKETS_NO_MOVIES_AVAILABLE' | translate}}
+  <div class="row">
+    <div class="col-6 offset-3" style="text-align: center; font-size: 2.5vh;">
+      <mat-icon>remove_circle_outline</mat-icon>
+      <br>
+      {{'CINEMA_TICKETS_NO_MOVIES_AVAILABLE' | translate}}
+    </div>
   </div>
 </div>
