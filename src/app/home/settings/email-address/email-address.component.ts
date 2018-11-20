@@ -1,103 +1,123 @@
-import { Component } from '@angular/core';
-import {MzBaseModal} from 'ngx-materialize';
+import {Component, ViewChild} from '@angular/core';
 import {MyUserService} from '../../../auth/my-user.service';
+import {MatSnackBar} from '@angular/material';
 
 @Component({
   selector: 'app-email-address',
   templateUrl: './email-address.component.html',
   styleUrls: ['./email-address.component.css']
 })
-export class EmailAddressComponent extends MzBaseModal {
-
-  oldEmailValidation = false;
-  codeValidation = true;
-  newEmailEnter = true;
-  newEmailCodeValidation = true;
-  finished = true;
+export class EmailAddressComponent {
+  @ViewChild('stepper') stepper;
 
   oldEmailAddress: string;
-  oldEmailAddressIncorrect = false;
+  oldEmailVerificationCode: number;
 
-  verificationCode: number;
-  verificationCodeIncorrect = false;
+  newEmailAddress: string;
+  newEmailVerificationCode: number;
 
-  newEmail: string;
+  constructor(private _myUserService: MyUserService, private _snackBar: MatSnackBar,) {
+  }
 
-  newVerificationCode: number;
-  newVerificationCodeIncorrect = false;
-
-  constructor(private myUserService: MyUserService) {
-    super();
+  nextStep() {
+    this.stepper.selectedIndex++;
   }
 
   sendOldEmailVerification() {
     // Incorrect test
-    if (this.oldEmailAddress !== this.myUserService.getEmail()) {
-      this.oldEmailAddressIncorrect = true;
+    if (this.oldEmailAddress !== this._myUserService.getEmail()) {
+      this._snackBar.openFromComponent(EmailAddressNotCorrectComponent, {
+        duration: 4000
+      });
 
-      console.log('Email Adress is incorrect! Email: ' + this.oldEmailAddress);
-
+      console.log('Email-Address is incorrect! Email: ' + this.oldEmailAddress);
       return;
     }
 
-    this.oldEmailAddressIncorrect = false;
-
-    // Hide
-    this.oldEmailValidation = true;
-    // Show
-    this.codeValidation = false;
-
-    console.log('Email Adress is correct!');
+    console.log('Email-Address is correct!');
+    this.nextStep();
   }
 
-  checkCode() {
+  checkOldEmailVerificationCode() {
     // Invalid test
-    if (this.verificationCode === 666666) {
-      this.verificationCodeIncorrect = true;
+    if (this.oldEmailVerificationCode === 666666) {
+      this._snackBar.openFromComponent(VerificationCodeNotCorrectComponent, {
+        duration: 4000
+      });
 
-      console.log('Validation code is incorrect! Code: ' + this.verificationCode);
-
+      console.log('Validation code is incorrect! Code: ' + this.oldEmailVerificationCode);
       return;
     }
 
-    this.verificationCodeIncorrect = false;
-
-    // Hide
-    this.codeValidation = true;
-    // Show
-    this.newEmailEnter = false;
-
     console.log('Validation code is correct!');
+    this.nextStep();
   }
 
   sendNewEmailVerification() {
-    // Hide
-    this.newEmailEnter = true;
-    // Show
-    this.newEmailCodeValidation = false;
-  }
+    if (this.newEmailAddress === this.oldEmailAddress) {
+      this._snackBar.openFromComponent(NewEmailIsOldEmailComponent, {
+        duration: 4000
+      });
 
-  checkNewCode() {
-    // Invalid test
-    if (this.newVerificationCode === 666666) {
-      this.newVerificationCodeIncorrect = true;
-
-      console.log('Validation code is incorrect! Code: ' + this.newVerificationCode);
-
+      console.log('User Error: Old email address is new email address!');
       return;
     }
 
-    this.newVerificationCodeIncorrect = false;
-
-    // Hide
-    this.newEmailCodeValidation = true;
-    // Show
-    this.finished = false;
-
-    console.log('Validation code is correct!');
-
-    this.myUserService.setEmail(this.newEmail);
-    console.log('Email address changed successfully!');
+    console.log('Email sent');
+    this.nextStep();
   }
 
+  checkNewEmailVerificationCode() {
+    // Invalid test
+    if (this.newEmailVerificationCode === 666666) {
+      this._snackBar.openFromComponent(VerificationCodeNotCorrectComponent, {
+        duration: 4000
+      });
+
+      console.log('Validation code is incorrect! Code: ' + this.newEmailVerificationCode);
+      return;
+    }
+    console.log('Validation code is correct!');
+
+    this._myUserService.setEmail(this.newEmailAddress);
+    console.log('Email address changed successfully!');
+
+    this.nextStep();
+  }
+}
+
+@Component({
+  selector: 'app-email-address-email-address-enter-incorrect',
+  template: '<div class="test">{{"SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_ENTER_OLD_EMAiL_ADDRESS_INCORRECT" | translate}}</div>',
+  styles: [`
+    .test {
+      color: #FF7043;
+    }
+  `],
+})
+export class EmailAddressNotCorrectComponent {
+}
+
+@Component({
+  selector: 'app-email-address-verification-code-enter-incorrect',
+  template: '<div class="test">{{"SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_ENTER_VERIFICATION_CODE_INCORRECT" | translate}}</div>',
+  styles: [`
+    .test {
+      color: #FF7043;
+    }
+  `],
+})
+export class VerificationCodeNotCorrectComponent {
+}
+
+@Component({
+  selector: 'app-email-address-no-change',
+  template: '<div class="test">{{"SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_NEW_EMAIL_IS_OLD_EMAIL" | translate}}</div>',
+  styles: [`
+    .test {
+      color: #FF7043;
+    }
+  `],
+})
+export class NewEmailIsOldEmailComponent {
 }

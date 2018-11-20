@@ -39,6 +39,8 @@
   "CINEMA_TICKETS_AVAILABLE_TICKETS": "Available tickets: ",
   "CINEMA_TICKETS_NO_MOVIES_AVAILABLE": "There aren't any movies available",
 
+  "CINEMA_TICKETS_ADMINISTRATION_SEARCH": "Search for a film...",
+
 
   "SETTINGS_PERSONAL_DATA": "Personal data",
   "SETTINGS_PERSONAL_DATA_DESCRIPTION": "Edit your personal data.",

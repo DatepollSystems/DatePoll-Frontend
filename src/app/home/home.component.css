@@ -1,3 +1,32 @@
 .my-container {
-  padding: 20px;
+  padding: 25px;
+  min-height: 80vh;
+}
+
+/*mat-sidenav {*/
+  /*width: 600px;*/
+/*}*/
+
+.sidenav-head {
+  background: url("./../../assets/sidenav-background.svg") no-repeat;
+  background-size: cover;
+  padding: 20px 20px 10px 10px;
+}
+
+.sidenav-head-entry {
+  color: white;
+  margin-top: 15px;
+  font-size: 16px;
+}
+
+.sidenav-head-avatar {
+  height: 10vh;
+}
+
+.activated {
+  background-color: #BDBDBD !important;
+}
+
+.activated:hover {
+  background-color: #BDBDBD !important;
 }

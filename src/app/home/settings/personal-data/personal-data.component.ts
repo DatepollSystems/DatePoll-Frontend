@@ -1,5 +1,4 @@
-import { Component } from '@angular/core';
-import {MzBaseModal, MzToastService} from 'ngx-materialize';
+import {Component} from '@angular/core';
 import {MyUserService} from '../../../auth/my-user.service';
 
 @Component({
@@ -7,7 +6,7 @@ import {MyUserService} from '../../../auth/my-user.service';
   templateUrl: './personal-data.component.html',
   styleUrls: ['./personal-data.component.css']
 })
-export class PersonalDataComponent extends MzBaseModal {
+export class PersonalDataComponent {
   title: string;
   firstname: string;
   surname: string;
@@ -20,8 +19,6 @@ export class PersonalDataComponent extends MzBaseModal {
   location: string;
 
   constructor(private myUserService: MyUserService) {
-    super();
-
     this.title = this.myUserService.getTitle();
     this.firstname = this.myUserService.getFirstname();
     this.surname = this.myUserService.getSurname();
@@ -33,18 +30,6 @@ export class PersonalDataComponent extends MzBaseModal {
     this.zipcode = this.myUserService.getZipcode();
     this.location = this.myUserService.getLocation();
   }
-
-  public datepickerOptions: Pickadate.DateOptions = {
-    clear: 'Clear', // Clear button text
-    close: 'Ok',    // Ok button text
-    today: 'Today', // Today button text
-    closeOnClear: false,
-    closeOnSelect: false,
-    format: 'dddd, dd mmm, yyyy', // Visible date format (defaulted to formatSubmit if provided otherwise 'd mmmm, yyyy')
-    formatSubmit: 'yyyy-mm-dd',   // Return value format (used to set/get value)
-    selectMonths: true, // Creates a dropdown to control month
-    selectYears: 200,    // Creates a dropdown of 10 years to control year,
-  };
 
   saveData() {
     console.log('----------------------');
@@ -68,5 +53,5 @@ export class PersonalDataComponent extends MzBaseModal {
 
     console.log('Saving...');
     console.log('----------------------');
- }
+  }
 }

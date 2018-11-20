@@ -8,6 +8,8 @@ export class CinemaService {
 
   private _movies: Movie[];
 
+  private _selectedMovie: Movie = null;
+
   constructor(private usersService: UsersService) {
     this._movies = [];
 
@@ -26,19 +28,42 @@ export class CinemaService {
   }
 
   public getMovies(): Movie[] {
-    return this._movies;
+    return this._movies.slice();
+  }
+
+  public setMovies(movies: Movie[]) {
+    this._movies = movies;
   }
 
   public getNotShownMovies(): Movie[] {
     const returnMovies = [];
 
-    for(let i = 0; i < this._movies.length; i++) {
+    for (let i = 0; i < this._movies.length; i++) {
       if (new Date().getTime() < this._movies[i].getDate().getTime()) {
         returnMovies.push(this._movies[i]);
       }
     }
 
     return returnMovies;
+  }
+
+  public setSelectedMovie(movie: Movie) {
+    this._selectedMovie = movie;
+  }
+
+  public getSelectedMovie(): Movie {
+    return this._selectedMovie;
+  }
+
+  public getMovieByID(id: number) {
+    let movie;
+    for (let i = 0; i < this._movies.length; i++) {
+      if (this._movies[i].getID() === id) {
+        movie = this._movies[i];
+      }
+    }
+
+    return movie;
   }
 }
 
@@ -54,10 +79,11 @@ export class Movie {
 
   private _bookedTickets: number;
 
-  constructor(ID: number, name: string, date: Date, trailerLink: string, imageLink: string, worker: User, emergencyWorker: User, bookedTickets: number) {
+  constructor(ID: number, name: string, movieDate: Date, trailerLink: string, imageLink: string, worker: User, emergencyWorker: User,
+              bookedTickets: number) {
     this._ID = ID;
     this._name = name;
-    this._date = date;
+    this._date = movieDate;
     this._trailerLink = trailerLink;
     this._imageLink = imageLink;
     this._worker = worker;
@@ -65,20 +91,48 @@ export class Movie {
     this._bookedTickets = bookedTickets;
   }
 
+  public getID(): number {
+    return this._ID;
+  }
+
   public getName(): string {
     return this._name;
+  }
+
+  public setName(name: string) {
+    this._name = name;
   }
 
   public getDate(): Date {
     return this._date;
   }
 
+  public setDate(date: Date) {
+    this._date = date;
+  }
+
+  public getBeautifullDate(): string {
+    const day = this._date.getDate();
+    const monthIndex = this._date.getMonth();
+    const year = this._date.getFullYear();
+
+    return day + '/' + (monthIndex + 1) + '/' + year;
+  }
+
   public getTrailerlink(): string {
     return this._trailerLink;
   }
 
+  public setTrailerLink(link: string) {
+    this._trailerLink = link;
+  }
+
   public getImageLink(): string {
     return this._imageLink;
+  }
+
+  public setImageLink(link: string) {
+    this._imageLink = link;
   }
 
   public getWorker(): User {
@@ -91,5 +145,9 @@ export class Movie {
 
   public getBookedTickets(): number {
     return this._bookedTickets;
+  }
+
+  public setBookedTickets(bookedTickets: number) {
+    this._bookedTickets = bookedTickets;
   }
 }

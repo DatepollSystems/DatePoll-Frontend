@@ -1,77 +1,53 @@
-<header>
-  <div class="navbar-fixed">
-    <mz-navbar [navbarClass]="'white'">
-      <a routerLink="" class="brand-logo black-text">DatePoll</a>
-      <mz-navbar-item-container [align]="'left'">
-        <mz-navbar-item>
-          <a id="btn-sidenav" class="hide-on-large-only">
-            <i mz-icon-mdi
-               [class]="'black-text'"
-               [icon]="'menu'">
-            </i>
-          </a>
-        </mz-navbar-item>
-      </mz-navbar-item-container>
-    </mz-navbar>
-  </div>
+<mat-sidenav-container>
+  <mat-sidenav #sidenav [mode]="navBarMode" [(opened)]="navBarOpened">
+    <div class="sidenav-head">
+      <img class="sidenav-head-avatar" src="./../../assets/sidenav-demo-avatar.png" />
 
-  <mz-sidenav
-    [fixed]="true"
-    [draggable]="true"
-    [id]="'sidenav-demo'"
-    [collapseButtonId]="'btn-sidenav'"
-    [closeOnClick]="true">
 
-    <mz-sidenav-header>
-      <div class="user-view" style="background-image: url('./assets/sidenav-background.svg'); background-size: cover">
-        <img class="circle avatar" src="./../../assets/sidenav-demo-avatar.png">
-        <div class="white-text name">{{firstname}} {{surname}}</div>
-        <div class="white-text email">{{email}}</div>
+      <div class="sidenav-head-entry row">
+        <div class="col-12"> {{firstname}} {{surname}}</div>
       </div>
-    </mz-sidenav-header>
-    <mz-sidenav-link>
-      <a class="waves-effect" routerLink="">Home</a>
-    </mz-sidenav-link>
-    <mz-sidenav-divider></mz-sidenav-divider>
-
-    <div *ngIf="showPoll">
-      <mz-sidenav-subheader>{{'NAV_POLLS' | translate}}</mz-sidenav-subheader>
-      <mz-sidenav-link>
-        <a class="waves-effect">{{'NAV_POLLS' | translate}}</a>
-      </mz-sidenav-link>
-      <mz-sidenav-link>
-        <a class="waves-effect">{{'NAV_ANALYSES' | translate}}</a>
-      </mz-sidenav-link>
-      <mz-sidenav-link>
-        <a class="waves-effect">{{'NAV_ADMINISTRATION' | translate}}</a>
-      </mz-sidenav-link>
-      <mz-sidenav-divider></mz-sidenav-divider>
+      <div class="sidenav-head-entry row">
+        <div class="col-12">{{email}}</div>
+      </div>
     </div>
 
-    <div *ngIf="showCinema">
-      <mz-sidenav-subheader>{{'NAV_CINEMA' | translate}}</mz-sidenav-subheader>
-      <mz-sidenav-link>
-        <a routerLink="cinema/tickets" class="waves-effect">{{'NAV_TICKETS' | translate}}</a>
-      </mz-sidenav-link>
-      <mz-sidenav-link>
-        <a routerLink="cinema/service" class="waves-effect">{{'NAV_CINEMA_SERVICE' | translate}}</a>
-      </mz-sidenav-link>
-      <mz-sidenav-link>
-        <a routerLink="cinema/settings" class="waves-effect">{{'NAV_ADMINISTRATION' | translate}}</a>
-      </mz-sidenav-link>
-      <mz-sidenav-divider></mz-sidenav-divider>
+    <mat-nav-list>
+      <a routerLink="/home" mat-list-item>
+        Home<mat-icon>home</mat-icon>
+      </a>
+      <mat-divider></mat-divider>
+
+      <div *ngIf="showPoll">
+          <a mat-list-item>{{'NAV_POLLS' | translate}}</a>
+
+          <a mat-list-item>{{'NAV_ANALYSES' | translate}}</a>
+
+          <a mat-list-item>{{'NAV_ADMINISTRATION' | translate}}</a>
+        <mat-divider></mat-divider>
+      </div>
+
+      <div *ngIf="showCinema">
+          <a mat-list-item routerLink="cinema/tickets" routerLinkActive="activated">{{'NAV_TICKETS' | translate}}</a>
+          <a mat-list-item routerLink="cinema/service" routerLinkActive="activated">{{'NAV_CINEMA_SERVICE' | translate}}</a>
+          <a mat-list-item routerLink="cinema/settings" routerLinkActive="activated">{{'NAV_ADMINISTRATION' | translate}}</a>
+        <mat-divider></mat-divider>
+      </div>
+
+
+      <a mat-list-item routerLink="settings" routerLinkActive="activated">{{ 'NAV_SETTINGS' | translate }}</a>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <mat-toolbar color="primary" class="z-depth-4">
+      <mat-icon style="cursor: pointer;" (click)="sidenav.toggle()">menu</mat-icon>
+      <span routerLink="" style="cursor: pointer; margin-left: 15px;">DatePoll</span>
+    </mat-toolbar>
+
+    <div class="my-container">
+      <router-outlet></router-outlet>
     </div>
-
-    <mz-sidenav-link>
-      <a routerLink="settings" class="waves-effect">{{ 'NAV_SETTINGS' | translate }}</a>
-    </mz-sidenav-link>
-
-  </mz-sidenav>
-</header>
-
-<main style="min-height: 90%">
-  <div class="my-container">
-    <router-outlet></router-outlet>
-  </div>
-</main>
-<app-inner-footer></app-inner-footer>
+    <app-footer></app-footer>
+  </mat-sidenav-content>
+</mat-sidenav-container>
