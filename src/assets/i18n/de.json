@@ -50,7 +50,15 @@
   "CINEMA_TICKETS_WORKER": "Kinodienst: ",
   "CINEMA_TICKETS_EMERGENCY_WORKER": "Notfall-Kinodienst: ",
   "CINEMA_TICKETS_AVAILABLE_TICKETS": "Freie Karten: ",
+  "CINEMA_TICKETS_SOLD_OUT": "Ausgebucht",
   "CINEMA_TICKETS_NO_MOVIES_AVAILABLE": "Derzeit sind keine Filme verfügbar",
+
+  "CINEMA_TICKETS_BOOKING_MODAL_HEADER": "Buche Tickets für ",
+  "CINEMA_TICKETS_BOOKING_MODAL_WARNING": "Karten sind in erster Linie für Vereinsmitglieder. Sollten kurz vor Kinobeginn noch Karten frei sein, können diese jederzeit an Freunde oder Familienmitglieder weitergeben werden! ",
+  "CINEMA_TICKETS_BOOKING_MODAL_NUMBER_OF_TICKETS": "Kartenanzahl",
+  "CINEMA_TICKETS_BOOKING_MODAL_NUMBER_OF_TICKETS_INVALID_1": "Gib bitte eine Zahl zwischen 1 und ",
+  "CINEMA_TICKETS_BOOKING_MODAL_NUMBER_OF_TICKETS_INVALID_2": " ein!",
+  "CINEMA_TICKETS_BOOKING_MODAL_AVAILABLE_TICKETS": "Freie Karten: ",
 
   "CINEMA_TICKETS_ADMINISTRATION_SEARCH": "Suche nach einem Film...",
   "CINEMA_TICKETS_ADMINISTRATION_NAME": "Filmname",

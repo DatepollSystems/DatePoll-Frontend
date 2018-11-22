@@ -13,7 +13,7 @@ export class CinemaService {
   constructor(private usersService: UsersService) {
     this._movies = [];
 
-    for (let i = 1; i < 19; i++) {
+    for (let i = 1; i < 21; i++) {
       const worker = new User(i, '', 'Bob' + i, 'Super' + i, i + 'boy@gmail.com', new Date('2018-12-3'));
 
       this._movies.push(new Movie(i, 'Toller Film ' + i,
@@ -21,7 +21,8 @@ export class CinemaService {
         'https://google.com',
         'http://cdn.collider.com/wp-content/uploads/Inception-movie-poster-3.jpg',
         worker,
-        worker, i));
+        worker,
+        i));
 
       usersService.getUsers().push(worker);
     }

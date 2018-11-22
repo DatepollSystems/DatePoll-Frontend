@@ -1,23 +1,32 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {User} from '../../../../users.service';
+import {MatDialog} from '@angular/material';
+import {MovieBookTicketsModalComponent} from './movie-book-tickets-modal/movie-book-tickets-modal.component';
+import {Movie} from '../../cinema.service';
 
 @Component({
   selector: 'app-movie-ticket',
   templateUrl: './movie-ticket.component.html',
   styleUrls: ['./movie-ticket.component.css']
 })
-export class MovieTicketComponent implements OnInit {
+export class MovieTicketComponent implements OnInit{
 
-  @Input('name') name: string;
-  @Input('date') date: Date;
-  @Input('trailerLink') trailerLink: string;
-  @Input('imageLink') imageLink: string;
-  @Input('worker') worker: User;
-  @Input('emergencyWorker') emergencyWorker: User;
-  @Input('bookedTickets') bookedTickets: number;
+  @Input('movie') movie: Movie;
+  soldOut: boolean;
 
-  constructor() { }
+  constructor(private dialog: MatDialog) { }
 
-  ngOnInit() { }
+  ngOnInit(): void {
+    if (this.movie.getBookedTickets() >= 20) {
+      this.soldOut = true;
+    } else {
+      this.soldOut = false;
+    }
+  }
 
+  bookTickets() {
+    this.dialog.open(MovieBookTicketsModalComponent, {
+      width: '45vh',
+      data: {movie: this.movie},
+    });
+  }
 }

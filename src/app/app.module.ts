@@ -45,6 +45,9 @@ import {MovieEditModalComponent} from './home/cinema/movie-administration/movie-
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {MaterialModule} from './material-module';
 import {MAT_DATE_LOCALE} from '@angular/material';
+import {
+  MovieBookTicketsModalComponent
+} from './home/cinema/movie-tickets/movie-ticket/movie-book-tickets-modal/movie-book-tickets-modal.component';
 
 @NgModule({
   declarations: [
@@ -75,7 +78,8 @@ import {MAT_DATE_LOCALE} from '@angular/material';
     MovieServiceComponent,
     MovieAdministrationComponent,
     MovieTicketComponent,
-    MovieEditModalComponent
+    MovieEditModalComponent,
+    MovieBookTicketsModalComponent
   ],
   imports: [
     BrowserModule,
@@ -103,7 +107,8 @@ import {MAT_DATE_LOCALE} from '@angular/material';
 
     //   PasswordComponent,
     //   TwoFactorAuthenticationComponent,
-    MovieEditModalComponent
+    MovieEditModalComponent,
+    MovieBookTicketsModalComponent
   ],
   providers: [
     AuthService,

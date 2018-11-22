@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {CinemaService, Movie} from '../../cinema.service';
+import {MAT_DIALOG_DATA} from '@angular/material';
 
 @Component({
   selector: 'app-movie-edit-modal',
@@ -8,6 +9,8 @@ import {CinemaService, Movie} from '../../cinema.service';
 })
 export class MovieEditModalComponent {
 
+  movie: Movie;
+
   id: number;
   name: string;
   date: Date;
@@ -15,21 +18,17 @@ export class MovieEditModalComponent {
   imageLink: string;
   bookedTickets: number;
 
-  constructor(private cinemaService: CinemaService) {
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any, private cinemaService: CinemaService) {
+    this.movie = data.movie;
 
-    const movie = cinemaService.getSelectedMovie();
-    if (movie === null) {
-      console.log('Movie is null!');
-    } else {
-      console.log('Movie to edit:', movie);
+    console.log('Movie to edit:', this.movie);
 
-      this.id = movie.getID();
-      this.name = movie.getName();
-      this.date = movie.getDate();
-      this.trailerLink = movie.getTrailerlink();
-      this.imageLink = movie.getImageLink();
-      this.bookedTickets = movie.getBookedTickets();
-    }
+    this.id = this.movie.getID();
+    this.name = this.movie.getName();
+    this.date = this.movie.getDate();
+    this.trailerLink = this.movie.getTrailerlink();
+    this.imageLink = this.movie.getImageLink();
+    this.bookedTickets = this.movie.getBookedTickets();
   }
 
   save() {

@@ -25,7 +25,7 @@ const appRoutes = [
       {path: '', pathMath: 'full', component: StartComponent},
       {path: 'cinema/tickets', component: MovieTicketsComponent},
       {path: 'cinema/service', component: MovieServiceComponent},
-      {path: 'cinema/settings', component: MovieAdministrationComponent},
+      {path: 'cinema/administration', component: MovieAdministrationComponent},
       {path: 'settings', component: SettingsComponent}
     ]
   },
