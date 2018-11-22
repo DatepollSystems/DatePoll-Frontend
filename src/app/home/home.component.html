@@ -1,5 +1,5 @@
 <mat-sidenav-container>
-  <mat-sidenav #sidenav [mode]="navBarMode" [(opened)]="navBarOpened">
+  <mat-sidenav #sidenav [mode]="navBarMode" [(opened)]="navBarOpened" style="position: fixed">
     <div class="sidenav-head">
       <img class="sidenav-head-avatar" src="./../../assets/sidenav-demo-avatar.png" />
 
@@ -39,7 +39,7 @@
   </mat-sidenav>
 
   <mat-sidenav-content>
-    <mat-toolbar color="primary" class="z-depth-4">
+    <mat-toolbar color="primary" class="z-depth-5" style="position: fixed; z-index: 1000">
       <mat-icon class="toolbar-sidenav-toggler" (click)="sidenav.toggle()">menu</mat-icon>
       <span routerLink="" class="toolbar-heading">DatePoll</span>
     </mat-toolbar>
