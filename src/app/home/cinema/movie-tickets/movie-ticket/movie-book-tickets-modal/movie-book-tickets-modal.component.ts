@@ -9,10 +9,10 @@ import {Movie} from '../../../cinema.service';
 })
 export class MovieBookTicketsModalComponent {
 
-  private movie: Movie;
-  private freeTickets: number;
+  movie: Movie;
+  freeTickets: number;
 
-  private ticketsToBook: number;
+  ticketsToBook: number;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any) {
     this.movie = data.movie;
