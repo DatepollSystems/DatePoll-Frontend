@@ -1,12 +1,122 @@
-<mz-modal [fixedFooter]="true">
-  <mz-modal-header>
-    <h4>Modal Title</h4>
-  </mz-modal-header>
-  <mz-modal-content>
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-  </mz-modal-content>
-  <mz-modal-footer>
-    <button mz-button [flat]="true" mz-modal-close>Disagree</button>
-    <button mz-button [flat]="true" mz-modal-close>Agree</button>
-  </mz-modal-footer>
-</mz-modal>
+<h2 mat-dialog-title>{{'SETTINGS_PERSONAL_DATA_PERSONAL_EMAIL_CHANGE' | translate}}</h2>
+<mat-dialog-content>
+  <mat-vertical-stepper #stepper [linear]="true">
+    <mat-step [editable]="false">
+      <form #oldEmailSendForm="ngForm" (ngSubmit)="sendOldEmailVerification()">
+        <ng-template matStepLabel>{{'SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_ENTER_OLD_EMAIL_ADDRESS' | translate}}
+        </ng-template>
+        <mat-form-field class="col-12">
+          <input matInput id="oldEmail" name="oldEmail" type="email"
+                 ngModel [(ngModel)]="oldEmailAddress" #oldEmailModel="ngModel"
+                 required maxlength="128" email
+                 placeholder="{{'SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_EMAIL_ADDRESS' | translate}}">
+          <mat-error *ngIf="oldEmailModel.invalid">
+            {{'SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_EMAIL_ADDRESS_NOT_VALID' | translate}}
+          </mat-error>
+        </mat-form-field>
+        <div>
+          <button mat-button
+                  [disabled]="!oldEmailSendForm.form.valid"
+                  type="submit">
+            {{'NEXT' | translate}}
+          </button>
+        </div>
+      </form>
+    </mat-step>
+
+    <mat-step [editable]="false">
+      <form #oldEmailVerificationForm="ngForm" (ngSubmit)="checkOldEmailVerificationCode()">
+        <ng-template matStepLabel>{{'SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_ENTER_VERIFICATION_CODE' | translate}}
+        </ng-template>
+        <mat-card style="margin-top: 10px; margin-bottom: 15px; background-color: #689F38;">
+          <mat-card-content>
+            {{'SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_VERIFICATION_EMAIL_SENT' | translate}}
+          </mat-card-content>
+        </mat-card>
+        <mat-form-field class="col-12">
+          <input matInput id="oldEmailVerificationCode" name="oldEmailVerificationCode" type="number"
+                 ngModel [(ngModel)]="oldEmailVerificationCode" #oldEmailVerificationCodeModel="ngModel"
+                 required number [range]="[100000, 999999]" min="100000" max="999999"
+                 placeholder="{{'SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_VERIFICATION_CODE' | translate}}">
+          <mat-error *ngIf="oldEmailVerificationCodeModel.invalid">
+            {{'SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_VERIFICATION_CODE_NOT_VALID' | translate}}
+          </mat-error>
+        </mat-form-field>
+        <div>
+          <button mat-button
+                  [disabled]="!oldEmailVerificationForm.form.valid"
+                  type="submit">
+            {{'NEXT' | translate}}
+          </button>
+        </div>
+      </form>
+    </mat-step>
+
+    <mat-step [editable]="false">
+      <form #newEmailSendForm="ngForm" (ngSubmit)="sendNewEmailVerification()">
+        <ng-template matStepLabel>{{'SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_ENTER_NEW_EMAIL_ADDRESS' | translate}}
+        </ng-template>
+        <mat-form-field class="col-12">
+          <input matInput id="newEmail" name="newEmail" type="email"
+                 ngModel [(ngModel)]="newEmailAddress" #newEmailAddressModel="ngModel"
+                 required maxlength="128" email
+                 placeholder="{{'SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_EMAIL_ADDRESS' | translate}}">
+          <mat-error *ngIf="newEmailAddressModel.invalid">
+            {{'SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_EMAIL_ADDRESS_NOT_VALID' | translate}}
+          </mat-error>
+        </mat-form-field>
+        <div>
+          <button mat-button
+                  [disabled]="!newEmailSendForm.form.valid"
+                  type="submit">
+            {{'NEXT' | translate}}
+          </button>
+        </div>
+      </form>
+    </mat-step>
+
+    <mat-step [editable]="false">
+      <form #newEmailVerificationForm="ngForm" (ngSubmit)="checkNewEmailVerificationCode()">
+        <ng-template matStepLabel>{{'SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_ENTER_VERIFICATION_CODE' | translate}}
+        </ng-template>
+        <mat-card style="margin-top: 10px; margin-bottom: 15px; background-color: #689F38;">
+          <mat-card-content>
+            {{'SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_VERIFICATION_EMAIL_SENT' | translate}}
+          </mat-card-content>
+        </mat-card>
+        <mat-form-field class="col-12">
+          <input matInput id="newEmailVerificationCode" name="newEmailVerificationCode" type="number"
+                 ngModel [(ngModel)]="newEmailVerificationCode" #newEmailVerificationCodeModel="ngModel"
+                 required number [range]="[100000, 999999]" min="100000" max="999999"
+                 placeholder="{{'SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_VERIFICATION_CODE' | translate}}">
+          <mat-error *ngIf="newEmailVerificationCodeModel.invalid">
+            {{'SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_VERIFICATION_CODE_NOT_VALID' | translate}}
+          </mat-error>
+        </mat-form-field>
+        <div>
+          <button mat-button
+                  [disabled]="!newEmailVerificationForm.form.valid"
+                  type="submit">
+            {{'NEXT' | translate}}
+          </button>
+        </div>
+      </form>
+    </mat-step>
+
+    <mat-step [editable]="false">
+      <ng-template matStepLabel>{{'DONE' | translate}}</ng-template>
+      <mat-card style="margin-top: 10px; margin-bottom: 15px; background-color: #689F38;">
+        <mat-card-content>
+          {{'SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_FINISHED' | translate}}
+        </mat-card-content>
+      </mat-card>
+    </mat-step>
+
+  </mat-vertical-stepper>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>{{'CLOSE' | translate}}</button>
+</mat-dialog-actions>
+
+
+

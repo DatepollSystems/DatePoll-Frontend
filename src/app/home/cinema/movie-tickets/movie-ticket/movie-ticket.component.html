@@ -1,0 +1,39 @@
+<mat-card class="mat-elevation-z3">
+  <mat-card-header>
+    <mat-card-title-group>
+      <mat-card-title>{{movie.getName()}}<b *ngIf="soldOut"> |&#32;{{'CINEMA_TICKETS_SOLD_OUT' | translate}}</b></mat-card-title>
+      <mat-card-subtitle>{{movie.getBeautifullDate()}}</mat-card-subtitle>
+    </mat-card-title-group>
+  </mat-card-header>
+  <img mat-card-image src="{{movie.getImageLink()}}" alt="Movie image">
+  <mat-card-content>
+    <div class="row">
+      <div class="col-12">
+        {{'CINEMA_TICKETS_WORKER' | translate}} {{movie.getWorker().getCompleteName()}}
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12">
+        {{'CINEMA_TICKETS_EMERGENCY_WORKER' | translate}} {{movie.getEmergencyWorker().getCompleteName()}}
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12">
+        {{'CINEMA_TICKETS_TRAILER' | translate}}
+        <a href="{{movie.getTrailerlink()}}" rel="noopener" target="_blank">{{'CINEMA_TICLETS_TRAILER_WATCH' | translate}}</a>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12">
+        {{'CINEMA_TICKETS_AVAILABLE_TICKETS' | translate}} {{20 - movie.getBookedTickets()}}
+      </div>
+    </div>
+
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-button (click)="bookTickets()" [disabled]="soldOut">{{'CINEMA_TICKETS_BOOK_A_TICKET' | translate}}</button>
+  </mat-card-actions>
+</mat-card>

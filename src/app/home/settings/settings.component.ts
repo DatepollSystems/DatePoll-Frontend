@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import {MzModalService} from 'ngx-materialize';
+import {Component, OnInit} from '@angular/core';
 import {PersonalDataComponent} from './personal-data/personal-data.component';
 import {PhoneNumberComponent} from './phone-number/phone-number.component';
 import {EmailAddressComponent} from './email-address/email-address.component';
 import {PasswordComponent} from './password/password.component';
 import {TwoFactorAuthenticationComponent} from './two-factor-authentication/two-factor-authentication.component';
+import {MatDialog} from '@angular/material';
+import {FeedbackModalComponent} from '../../footer/modals/feedback-modal/feedback-modal.component';
 
 @Component({
   selector: 'app-settings',
@@ -13,28 +14,36 @@ import {TwoFactorAuthenticationComponent} from './two-factor-authentication/two-
 })
 export class SettingsComponent implements OnInit {
 
-  constructor(private modalService: MzModalService) { }
+  constructor(private dialog: MatDialog) {
+  }
 
-  ngOnInit() { }
+  ngOnInit() {
+  }
 
   openPersonalDataModal() {
-    this.modalService.open(PersonalDataComponent);
+    this.dialog.open(PersonalDataComponent, {
+      width: '50vh',
+    });
   }
 
   openPhoneNumberModal() {
-    this.modalService.open(PhoneNumberComponent);
+    this.dialog.open(PhoneNumberComponent, {
+      width: '70vh',
+    });
   }
 
   openEmailAddressModal() {
-    this.modalService.open(EmailAddressComponent);
+    this.dialog.open(EmailAddressComponent, {
+      width: '80vh',
+    });
   }
 
   openPasswordModal() {
-    this.modalService.open(PasswordComponent);
+    // this.modalService.open(PasswordComponent);
   }
 
   openTwoFactorAuthenticationModal() {
-    this.modalService.open(TwoFactorAuthenticationComponent);
+    // this.modalService.open(TwoFactorAuthenticationComponent);
   }
 
 }

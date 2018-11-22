@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import {MzBaseModal} from 'ngx-materialize';
+import { Component } from '@angular/core';
 import {environment} from '../../../../environments/environment';
 
 @Component({
@@ -7,7 +6,7 @@ import {environment} from '../../../../environments/environment';
   templateUrl: './about-modal.component.html',
   styleUrls: ['./about-modal.component.css']
 })
-export class AboutModalComponent extends MzBaseModal{
+export class AboutModalComponent {
 
   version = environment.version;
 }

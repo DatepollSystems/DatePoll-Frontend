@@ -2,15 +2,16 @@
   "CLOSE": "Schließen",
   "SUBMIT": "Senden",
   "SAVE": "Speichern",
+  "NEXT": "Weiter",
   "ACTION": "Aktionen",
+  "DONE": "Fertig",
+  "OPEN": "Öffnen",
   "DO_NOT_FORGET_TO_SAVE": "Vergiss nicht zu speichern!",
+
 
   "LANGUAGE": "Sprache",
   "LANGUAGE_GERMAN": "Deutsch",
   "LANGUAGE_ENGLISH": "Englisch",
-
-  "SIGNIN": "Anmelden",
-  "SIGNIN_NOT_SIGNED_UP": "Kein Konto?",
 
   "ABOUT": "Über",
   "ABOUT_LICENSE": "Lizenz",
@@ -18,7 +19,61 @@
   "IMPRINT": "Impressum",
   "PRIVACY_POLICY": "Datenschutzerklärung",
 
-  "SETTINGS": "Einstellungen",
+  "GIVE_US_FEEDBACK": "Gib uns Feedback",
+  "FEEDBACK_PLACEHOLDER": "Hier kannst du Verbesserungsvorschläge und Kritik kund tun. Wir werden alles lesen und versuchen darauf einzugehen",
+  "SEND_BROWSER_DATA": "Browserdaten mitsenden",
+  "SEND_BROWSER_DATA_TOOLTIP": "Bei Aktivierung werden Screensize, Browsertyp, Browserversion, Is Mobile, Operating system und ob Cookies eingeschaltet sind mit gesendet.",
+
+
+  "SIGNIN": "Anmelden",
+  "SIGNIN_NOT_SIGNED_UP": "Kein Konto?",
+  "SIGNIN_EMAIL": "Email-Adresse",
+  "SIGNIN_PASSWORD": "Passwort",
+  "SIGNIN_KEEP_YOUR_PASSWORD_SECRET": "Behalte dein Passwort geheim",
+
+
+  "NAV_SETTINGS": "Einstellungen",
+
+  "NAV_POLLS": "Abstimmungen",
+  "NAV_ANALYSES": "Auswertung",
+  "NAV_ADMINISTRATION": "Administration",
+
+  "NAV_CINEMA": "Kino",
+  "NAV_TICKETS": "Tickets",
+  "NAV_CINEMA_SERVICE": "Kinodienst",
+
+
+  "CINEMA_TICKETS_BOOK_A_TICKET": "Karten reservieren",
+  "CINEMA_TICKETS_DATE": "Datum: ",
+  "CINEMA_TICKETS_TRAILER": "Trailer: ",
+  "CINEMA_TICLETS_TRAILER_WATCH": "Anschauen",
+  "CINEMA_TICKETS_WORKER": "Kinodienst: ",
+  "CINEMA_TICKETS_EMERGENCY_WORKER": "Notfall-Kinodienst: ",
+  "CINEMA_TICKETS_AVAILABLE_TICKETS": "Freie Karten: ",
+  "CINEMA_TICKETS_SOLD_OUT": "Ausgebucht",
+  "CINEMA_TICKETS_NO_MOVIES_AVAILABLE": "Derzeit sind keine Filme verfügbar",
+
+  "CINEMA_TICKETS_BOOKING_MODAL_HEADER": "Buche Tickets für ",
+  "CINEMA_TICKETS_BOOKING_MODAL_WARNING": "Karten sind in erster Linie für Vereinsmitglieder. Sollten kurz vor Kinobeginn noch Karten frei sein, können diese jederzeit an Freunde oder Familienmitglieder weitergeben werden! ",
+  "CINEMA_TICKETS_BOOKING_MODAL_NUMBER_OF_TICKETS": "Kartenanzahl",
+  "CINEMA_TICKETS_BOOKING_MODAL_NUMBER_OF_TICKETS_INVALID_1": "Gib bitte eine Zahl zwischen 1 und ",
+  "CINEMA_TICKETS_BOOKING_MODAL_NUMBER_OF_TICKETS_INVALID_2": " ein!",
+  "CINEMA_TICKETS_BOOKING_MODAL_AVAILABLE_TICKETS": "Freie Karten: ",
+
+  "CINEMA_TICKETS_ADMINISTRATION_SEARCH": "Suche nach einem Film...",
+  "CINEMA_TICKETS_ADMINISTRATION_NAME": "Filmname",
+  "CINEMA_TICKETS_ADMINISTRATION_DATE": "Datum",
+  "CINEMA_TICKETS_ADMINISTRATION_TRAILER": "Trailer",
+  "CINEMA_TICKETS_ADMINISTRATION_POSTER": "Poster",
+  "CINEMA_TICKETS_ADMINISTRATION_POSTER_WATCH": "Anschauen",
+  "CINEMA_TICKETS_ADMINISTRATION_WORKER": "Kinodienst",
+  "CINEMA_TICKETS_ADMINISTRATION_EMERGENCY_WORKER": "Notfall-Kinodienst",
+  "CINEMA_TICKETS_ADMINISTRATION_BOOKED_TICKETS": "Gebuchte Karten",
+
+  "CINEMA_TICKETS_ADMINISTRATION_MOVIE_EDIT_MODAL_EDIT": "Bearbeite ",
+  "CINEMA_TICKETS_ADMINISTRATION_MOVIE_EDIT_MODAL_NAME_INVALID": "Der Name darf weder leer noch mehr als 128 Zeichen haben!",
+  "CINEMA_TICKETS_ADMINISTRATION_MOVIE_EDIT_MODAL_TRAILER_INVALID": "Der Trailerlink darf weder leer noch mehr als 512 Zeichen haben!",
+  "CINEMA_TICKETS_ADMINISTRATION_MOVIE_EDIT_MODAL_POSTER_INVALID": "Der Posterlink darf weder leer noch mehr als 512 Zeichen haben!",
 
   "SETTINGS_PERSONAL_DATA": "Persönliche Daten",
   "SETTINGS_PERSONAL_DATA_DESCRIPTION": "Bearbeiten Sie Ihre Persönlichen Daten.",
@@ -42,13 +97,31 @@
   "SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_LOCATION": "Ort",
   "SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_LOCATION_NOT_VALID": "Der Ort darf nicht mehr als 128 Zeichen haben!",
 
+  "SETTINGS_PERSONAL_DATA_MODAL_PHONE_NUMBER_SEARCH": "Suchen...",
   "SETTINGS_PERSONAL_DATA_MODAL_PHONE_NUMBER_LABEL": "Bezeichnung",
+  "SETTINGS_PERSONAL_DATA_MODAL_PHONE_NUMBER_LABEL_INVALID": "1-32 Zeichen",
   "SETTINGS_PERSONAL_DATA_MODAL_PHONE_NUMBER_PHONE_NUMBER": "Telefonnummer",
+  "SETTINGS_PERSONAL_DATA_MODAL_PHONE_NUMBER_DELETE_TOOLTIP": "Löschen",
   "SETTINGS_PERSONAL_DATA_MODAL_PHONE_NUMBER_PHONE_NUMBER_NOT_VALID": "Die Telefonnummer ist nicht valide!",
   "SETTINGS_PERSONAL_DATA_MODAL_PHONE_NUMBER_ADD": "Nummer hinzufügen",
   "SETTINGS_PERSONAL_DATA_MODAL_PHONE_NUMBER_NOT_VALID": "Bitte gib eine Bezeichnung und eine Telefonnummer an!",
 
-  "SETTINGS_SECURITY": "Anmeldung & Sicherheit",
+
+  "SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_EMAIL_ADDRESS": "E-Mail Adresse",
+  "SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_EMAIL_ADDRESS_NOT_VALID": "Diese Email-Adresse ist invalide",
+  "SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_VERIFICATION_CODE": "Verifizierungscode",
+  "SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_VERIFICATION_CODE_NOT_VALID": "Der Verifizierungscode ist invalide",
+
+  "SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_ENTER_OLD_EMAIL_ADDRESS": "Gib deine alte Email-Adresse ein",
+  "SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_ENTER_OLD_EMAiL_ADDRESS_INCORRECT": "Die Email-Adresse ist inkorrekt!",
+  "SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_ENTER_VERIFICATION_CODE": "Gib den Verifizierungscode ein",
+  "SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_ENTER_VERIFICATION_CODE_INCORRECT": "Der Verifizierungscode ist inkorrekt!",
+  "SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_NEW_EMAIL_IS_OLD_EMAIL": "Bitte geben Sie Ihre neue Email Adresse ein!",
+  "SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_VERIFICATION_EMAIL_SENT": "Es wurde eine E-Mail mit einem Verifizierungscode an Ihre E-Mail Adresse versendet! Bitte geben Sie diesen Code hier ein.",
+  "SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_ENTER_NEW_EMAIL_ADDRESS": "Gib deine neue E-Mail Adresse ein",
+  "SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_FINISHED": "Ihre E-Mail Adresse wurde erfolgreich geändert!",
+
+  "SETTINGS_SECURITY": "Sicherheit",
   "SETTINGS_SECURITY_DESCRIPTION": "Legen Sie die Einstellungen für Ihr Passwort und für die Zwei-Faktor-Authentifizierung fest.",
   "SETTINGS_SECURITY_CHANGE_PASSWORD": "Password ändern",
   "SETTINGS_SECURITY_CHANGE_2FA": "Zwei-Faktor-Authentifizierung einstellen"

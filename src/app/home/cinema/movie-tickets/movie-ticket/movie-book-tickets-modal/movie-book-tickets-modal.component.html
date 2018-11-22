@@ -1,0 +1,36 @@
+<h2 mat-dialog-title>{{'CINEMA_TICKETS_BOOKING_MODAL_HEADER' | translate}} {{movie.getName()}}</h2>
+<mat-dialog-content>
+  <div class="row">
+    <div class="col-12">
+      <mat-card style="background-color: #29B6F6"><b>Info! </b>{{'CINEMA_TICKETS_BOOKING_MODAL_WARNING' | translate}}</mat-card>
+    </div>
+  </div>
+
+  <form (ngSubmit)="bookTickets()" #form="ngForm" style="margin-top: 20px; margin-bottom: 20px;">
+    <div class="row">
+        <mat-form-field class="col-12">
+          <input matInput id="ticketsToBook" name="ticketsToBook" type="number"
+                 [(ngModel)]="ticketsToBook" ngModel #ticketsToBookModel="ngModel"
+                 [range]="[1, freeTickets]" number required
+                 placeholder="{{'CINEMA_TICKETS_BOOKING_MODAL_NUMBER_OF_TICKETS' | translate}}">
+          <mat-error *ngIf="ticketsToBookModel.invalid">
+            {{'CINEMA_TICKETS_BOOKING_MODAL_NUMBER_OF_TICKETS_INVALID_1' | translate}} {{freeTickets}} {{'CINEMA_TICKETS_BOOKING_MODAL_NUMBER_OF_TICKETS_INVALID_2' | translate}}
+          </mat-error>
+        </mat-form-field>
+    </div>
+  </form>
+
+  <div class="row">
+    <div class="col-12">
+      <b>{{'CINEMA_TICKETS_BOOKING_MODAL_AVAILABLE_TICKETS' | translate}} {{freeTickets}}</b>
+    </div>
+  </div>
+
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>{{'CLOSE' | translate}}</button>
+  <button mat-button [mat-dialog-close]="true" (click)="form.ngSubmit.emit()" class="success-button"
+          [disabled]="!form.form.valid">
+    {{'SUBMIT' | translate}}
+  </button>
+</mat-dialog-actions>

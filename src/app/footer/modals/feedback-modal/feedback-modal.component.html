@@ -1,41 +1,25 @@
-<mz-modal class="black-text">
-  <mz-modal-header>
-    <h4>Give us a feedback</h4>
-  </mz-modal-header>
-  <mz-modal-content>
-    <div class="row">
-      <mz-textarea-container style="height: 2300px">
-        <i mz-icon-mdi mz-textarea-prefix
-           [icon]="'message-reply-text'">
-        </i>
-        <textarea mz-textarea style="min-height: 20vh"
-                  [label]="'Feedback'"
-                  placeholder="Hier kannst du Verbesserungsvorschläge und Kritik kund tun. Wir werden alles lesen und versuchen darauf einzugehen"
-                  id="comment-textarea"
-                  length="3000"></textarea>
-      </mz-textarea-container>
-    </div>
+<h2 mat-dialog-title>{{'GIVE_US_FEEDBACK' | translate}}</h2>
+<mat-dialog-content>
+  <div fxLayout="column" fxLayoutAlign="space-around stretch">
+    <mat-form-field appearance="outline">
+      <mat-label>Feedback</mat-label>
+      <textarea matInput style="height: 45vh;" placeholder="{{'FEEDBACK_PLACEHOLDER' | translate}}" [(ngModel)]="feedback"></textarea>
+    </mat-form-field>
 
-    <div class="row">
-      <mz-checkbox-container>
-        <input mz-checkbox
-               mz-tooltip
-               [html]="true"
-               [tooltip]="'<b class=\'red-text\'>Bei Aktivierung</b> werden Screensize, Browsertyp, Browserversion, Is Mobile, Operating system und ob Cookies eingeschaltet sind mit gesendet.'"
-               [filledIn]="true"
-               [label]="'Browserdaten mitsenden'"
-               [checked]="sendBrowserData"
-               (change)="sendBrowserData = !sendBrowserData"
-               type="checkbox">
-      </mz-checkbox-container>
-    </div>
 
-  </mz-modal-content>
-  <mz-modal-footer>
-    <button mz-button [float]="true" [flat]="true" mz-modal-close class="hide-on-med-and-up left">
-      <i mz-icon-mdi class="black-text" [icon]="'close'"></i>
-    </button>
-    <button mz-button [flat]="true" mz-modal-close class="hide-on-small-and-down"  style="margin-right: 10px;">{{'CLOSE' | translate}}</button>
-    <button mz-button [flat]="true" mz-modal-close class="green" (click)="sendFeedback()">{{'SUBMIT' | translate}}</button>
-  </mz-modal-footer>
-</mz-modal>
+    <div fxLayout="column" fxLayoutAlign=" start">
+      <mat-checkbox
+        color="primary"
+        matTooltip="{{'SEND_BROWSER_DATA_TOOLTIP' | translate}}"
+        [(ngModel)]="sendBrowserData">
+        {{'SEND_BROWSER_DATA' | translate}}
+      </mat-checkbox>
+    </div>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>{{'CLOSE' | translate}}</button>
+  <button mat-button [mat-dialog-close]="true" (click)="sendFeedback()" color="primary">
+    {{'SUBMIT' | translate}}
+  </button>
+</mat-dialog-actions>

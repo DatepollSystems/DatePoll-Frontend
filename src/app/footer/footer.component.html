@@ -1,50 +1,37 @@
-<mz-dropdown
-  [id]="'dropdown-language'"
-  [align]="'left'"
-  [belowOrigin]="false"
-  [constrainWidth]="true"
-  [dropdownButtonId]="'btn-dropdown-language'"
-  [gutter]="true"
-  [hover]="true"
-  [stopPropagation]="true"
->
-  <mz-dropdown-item><a class="black-text" (click)="setLang('en')">{{'LANGUAGE_ENGLISH' | translate }}</a>
-  </mz-dropdown-item>
-  <mz-dropdown-divider></mz-dropdown-divider>
-  <mz-dropdown-item><a class="black-text" (click)="setLang('de')">{{'LANGUAGE_GERMAN' | translate }}</a>
-  </mz-dropdown-item>
-</mz-dropdown>
-
-<div class="container">
-  <div class="row">
-    <div class="col l6 s12">
-      <h5 class="white-text">DatePoll</h5>
-      <p class="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
-    </div>
-    <div class="col l4 offset-l2 s12">
-      <h5 class="white-text">Links</h5>
+<footer>
+  <div id="footerContainer" fxLayout="row" fxLayoutAlign="space-around start">
+    <div class="footer-heading">DatePoll</div>
+    <div fxLayout="column" fxLayoutAlign="space-around start">
+      <div class="footer-heading">Links</div>
       <ul>
         <li><a href="https://buergerkorps-eggenburg.at" target="_blank" rel="noopener">Bürgerkorps Eggenburg</a></li>
         <li><a (click)="openFeedbackModal()">Feedback</a></li>
         <li><a (click)="openAboutModal()">{{'ABOUT' | translate}}</a></li>
-        <li><a id="btn-dropdown-language">{{'LANGUAGE' | translate }}</a></li>
+        <li>
+          <mat-select placeholder="{{'LANGUAGE' | translate}}" (openedChange)="setLang()" [(value)]="selected">
+            <mat-option value="de">{{'LANGUAGE_GERMAN' | translate}}</mat-option>
+            <mat-option value="en">{{'LANGUAGE_ENGLISH' | translate}}</mat-option>
+          </mat-select>
+        </li>
       </ul>
     </div>
   </div>
-</div>
-<div class="footer-copyright blue-grey darken-3">
-  <div class="container">
-    <div class="left">Mady with&nbsp;</div>
-    <div class="red-text left">&hearts;&nbsp;</div>
-    <div class="left">
-      by all
-      <a class="blue-text" rel="noopener" href="https://gitlab.com/groups/BuergerkorpsEggenburg/-/group_members"
-         target="_blank">Contributors
-      </a>
+
+  <div id="footerBarContainer" fxLayout="row" fxLayoutAlign="space-around center">
+    <div>
+      <div style="float: left;">Mady with&nbsp;</div>
+      <div style="float: left; color: red">&hearts;&nbsp;</div>
+      <div style="float: left;">
+        by all
+        <a style="color: #2196f3" rel="noopener" target="_blank"
+           href="https://gitlab.com/groups/BuergerkorpsEggenburg/-/group_members">Contributors</a>
+      </div>
     </div>
 
-    <a class="right" routerLink="/info/imprint">{{'IMPRINT' | translate }} & {{'PRIVACY_POLICY' | translate }}</a>
+    <div>
+      <a style="color: #2196f3" routerLink="/info/imprint">
+        {{'IMPRINT' | translate }} & {{'PRIVACY_POLICY' | translate }}</a>
+    </div>
   </div>
-</div>
-
+</footer>
 

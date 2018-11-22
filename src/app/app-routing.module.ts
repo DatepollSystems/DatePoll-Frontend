@@ -9,21 +9,30 @@ import {ImprintComponent} from './info/imprint/imprint.component';
 import {PrivacyPolicyComponent} from './info/privacy-policy/privacy-policy.component';
 import {StartComponent} from './home/start/start.component';
 import {SettingsComponent} from './home/settings/settings.component';
+import {MovieTicketsComponent} from './home/cinema/movie-tickets/movie-tickets.component';
+import {MovieServiceComponent} from './home/cinema/movie-service/movie-service.component';
+import {MovieAdministrationComponent} from './home/cinema/movie-administration/movie-administration.component';
 
 const appRoutes = [
-  { path: '', redirectTo: '/home', pathMatch: 'full'},
-  { path: 'info', component: InfoComponent, children: [
-      { path: 'imprint', component: ImprintComponent },
-      { path: 'privacypolicy', component: PrivacyPolicyComponent }
-    ] },
-  { path: 'home', component: HomeComponent, children: [
-      { path: '', pathMath: 'full', component: StartComponent },
-      { path: 'settings', component: SettingsComponent}
-    ] },
-  { path: 'signup', component: SignupComponent },
-  { path: 'signin', component: SigninComponent },
-  { path: 'not-found', component: PageNotFoundComponent },
-  { path: '**', redirectTo: '/not-found' }
+  {path: '', redirectTo: '/home', pathMatch: 'full'},
+  {
+    path: 'info', component: InfoComponent, children: [
+      {path: 'imprint', component: ImprintComponent},
+      {path: 'privacypolicy', component: PrivacyPolicyComponent}
+    ]
+  },
+  {path: 'home', component: HomeComponent, children: [
+      {path: '', pathMath: 'full', component: StartComponent},
+      {path: 'cinema/tickets', component: MovieTicketsComponent},
+      {path: 'cinema/service', component: MovieServiceComponent},
+      {path: 'cinema/administration', component: MovieAdministrationComponent},
+      {path: 'settings', component: SettingsComponent}
+    ]
+  },
+  {path: 'signup', component: SignupComponent},
+  {path: 'signin', component: SigninComponent},
+  {path: 'not-found', component: PageNotFoundComponent},
+  {path: '**', redirectTo: '/not-found'}
 ];
 
 @NgModule({
@@ -31,4 +40,5 @@ const appRoutes = [
   exports: [RouterModule]
 })
 
-export class AppRoutingModule { }
+export class AppRoutingModule {
+}

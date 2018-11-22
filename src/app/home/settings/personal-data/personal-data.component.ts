@@ -1,50 +1,35 @@
-import { Component } from '@angular/core';
-import {MzBaseModal, MzToastService} from 'ngx-materialize';
-import {UserService} from '../../../auth/user.service';
+import {Component} from '@angular/core';
+import {MyUserService} from '../../../auth/my-user.service';
 
 @Component({
   selector: 'app-personaldata',
   templateUrl: './personal-data.component.html',
   styleUrls: ['./personal-data.component.css']
 })
-export class PersonalDataComponent extends MzBaseModal {
+export class PersonalDataComponent {
   title: string;
   firstname: string;
   surname: string;
 
-  birthday: string;
+  birthday: Date;
 
   streetname: string;
   streetnumber: string;
   zipcode: number;
   location: string;
 
-  constructor(private userService: UserService) {
-    super();
+  constructor(private myUserService: MyUserService) {
+    this.title = this.myUserService.getTitle();
+    this.firstname = this.myUserService.getFirstname();
+    this.surname = this.myUserService.getSurname();
 
-    this.title = this.userService.getTitle();
-    this.firstname = this.userService.getFirstname();
-    this.surname = this.userService.getSurname();
+    this.birthday = this.myUserService.getBirthday();
 
-    this.birthday = this.userService.getBirthday();
-
-    this.streetname = this.userService.getStreetname();
-    this.streetnumber = this.userService.getStreetnumber();
-    this.zipcode = this.userService.getZipcode();
-    this.location = this.userService.getLocation();
+    this.streetname = this.myUserService.getStreetname();
+    this.streetnumber = this.myUserService.getStreetnumber();
+    this.zipcode = this.myUserService.getZipcode();
+    this.location = this.myUserService.getLocation();
   }
-
-  public datepickerOptions: Pickadate.DateOptions = {
-    clear: 'Clear', // Clear button text
-    close: 'Ok',    // Ok button text
-    today: 'Today', // Today button text
-    closeOnClear: false,
-    closeOnSelect: false,
-    format: 'dddd, dd mmm, yyyy', // Visible date format (defaulted to formatSubmit if provided otherwise 'd mmmm, yyyy')
-    formatSubmit: 'yyyy-mm-dd',   // Return value format (used to set/get value)
-    selectMonths: true, // Creates a dropdown to control month
-    selectYears: 200,    // Creates a dropdown of 10 years to control year,
-  };
 
   saveData() {
     console.log('----------------------');
@@ -57,16 +42,16 @@ export class PersonalDataComponent extends MzBaseModal {
     console.log('Zipcode: ' + this.zipcode);
     console.log('Location: ' + this.location);
 
-    this.userService.setTitle(this.title);
-    this.userService.setFirstname(this.firstname);
-    this.userService.setSurname(this.surname);
-    this.userService.setBirthday(this.birthday);
-    this.userService.setStreetname(this.streetname);
-    this.userService.setStreetnumber(this.streetnumber);
-    this.userService.setZipcode(this.zipcode);
-    this.userService.setLocation(this.location);
+    this.myUserService.setTitle(this.title);
+    this.myUserService.setFirstname(this.firstname);
+    this.myUserService.setSurname(this.surname);
+    this.myUserService.setBirthday(this.birthday);
+    this.myUserService.setStreetname(this.streetname);
+    this.myUserService.setStreetnumber(this.streetnumber);
+    this.myUserService.setZipcode(this.zipcode);
+    this.myUserService.setLocation(this.location);
 
     console.log('Saving...');
     console.log('----------------------');
- }
+  }
 }

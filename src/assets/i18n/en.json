@@ -5,12 +5,10 @@
   "ACTION": "Action",
   "DO_NOT_FORGET_TO_SAVE": "Don't forget to save!",
 
+
   "LANGUAGE": "Language",
   "LANGUAGE_GERMAN": "German",
   "LANGUAGE_ENGLISH": "English",
-
-  "SIGNIN": "Sign in",
-  "SIGNIN_NOT_SIGNED_UP": "Not signed up?",
 
   "ABOUT": "About",
   "ABOUT_LICENSE": "License>",
@@ -18,7 +16,31 @@
   "IMPRINT": "Imprint",
   "PRIVACY_POLICY": "Privacy Policy",
 
-  "SETTINGS": "Settings",
+
+  "SIGNIN": "Sign in",
+  "SIGNIN_NOT_SIGNED_UP": "Not signed up?",
+
+
+  "NAV_SETTINGS": "Settings",
+  "NAV_POLLS": "Polls",
+  "NAV_ANALYSES": "Analyses",
+  "NAV_ADMINISTRATION": "Administration",
+
+  "NAV_CINEMA": "Cinema",
+  "NAV_TICKETS": "Tickets",
+  "NAV_CINEMA_SERVICE": "Cinema service",
+
+
+  "CINEMA_TICKETS_BOOK_A_TICKET": "Book a ticket",
+  "CINEMA_TICKETS_DATE": "Date: ",
+  "CINEMA_TICKETS_TRAILER": "Trailer: ",
+  "CINEMA_TICKETS_WORKER": "Worker: ",
+  "CINEMA_TICKETS_EMERGENCY_WORKER": "Emergency worker: ",
+  "CINEMA_TICKETS_AVAILABLE_TICKETS": "Available tickets: ",
+  "CINEMA_TICKETS_NO_MOVIES_AVAILABLE": "There aren't any movies available",
+
+  "CINEMA_TICKETS_ADMINISTRATION_SEARCH": "Search for a film...",
+
 
   "SETTINGS_PERSONAL_DATA": "Personal data",
   "SETTINGS_PERSONAL_DATA_DESCRIPTION": "Edit your personal data.",
@@ -47,6 +69,18 @@
   "SETTINGS_PERSONAL_DATA_MODAL_PHONE_NUMBER_PHONE_NUMBER_NOT_VALID": "Phone number not valid!",
   "SETTINGS_PERSONAL_DATA_MODAL_PHONE_NUMBER_ADD": "Add this number",
   "SETTINGS_PERSONAL_DATA_MODAL_PHONE_NUMBER_NOT_VALID": "Please enter a label and a phone number!",
+
+  "SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_VALIDATION_EMAIL_SENT": "We have sent you an email with an verification code. Please copy this code and enter it here.",
+  "SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_EMAIL_ADDRESS": "Email address",
+  "SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_EMAIL_ADDRESS_PLACEHOLDER": "Enter your current email address",
+  "SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_EMAIL_ADDRESS_NOT_VALID": "This email address is not valid",
+  "SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_EMAIL_ADDRESS_INCORRECT": "Your email address is incorrect!",
+  "SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_CODE": "Code",
+  "SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_CODE_PLACEHOLDER": "Enter the verification code which you got per email",
+  "SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_CODE_INCORRECT": "The verification code is incorrect!",
+  "SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_CODE_CORRECT": "The verification code is correct. Please enter your new email address.",
+  "SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_NEW_EMAIL_ADDRESS_PLACEHOLDER": "Enter your new email address",
+  "SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_FINISHED": "Your email address was successfully updated!",
 
   "SETTINGS_SECURITY": "Signin & Security",
   "SETTINGS_SECURITY_DESCRIPTION": "Define the settings for your password and for the Two-factor authentication.",
