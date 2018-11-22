@@ -14,11 +14,6 @@ a:hover {
   cursor: pointer;
 }
 
-.success-button {
-  background-color: #4CAF50;
-  color: #ffffff
-}
-
 /* Show different datepicker for mobile and desktop */
 #datepicker-field {
   display: unset;
@@ -48,11 +43,7 @@ a:hover {
   margin-bottom: 0;
 }
 
-.input-label {
-  font-size: 1.5vh;
-  color: gray
-}
-
-.input-error {
-  color: red;
+.success-button {
+  background-color: #4CAF50;
+  color: #ffffff
 }
