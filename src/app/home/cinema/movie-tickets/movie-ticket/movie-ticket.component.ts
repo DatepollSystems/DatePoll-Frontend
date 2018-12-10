@@ -16,11 +16,7 @@ export class MovieTicketComponent implements OnInit{
   constructor(private dialog: MatDialog) { }
 
   ngOnInit(): void {
-    if (this.movie.getBookedTickets() >= 20) {
-      this.soldOut = true;
-    } else {
-      this.soldOut = false;
-    }
+    this.soldOut = this.movie.getBookedTickets() >= 20;
   }
 
   bookTickets() {
