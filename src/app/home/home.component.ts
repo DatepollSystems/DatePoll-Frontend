@@ -1,15 +1,19 @@
-import {Component, NgZone, OnInit} from '@angular/core';
+import {Component, NgZone, ViewChild} from '@angular/core';
 import {MyUserService} from '../auth/my-user.service';
 import {Subscription} from 'rxjs';
+import {MatSidenav} from '@angular/material';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent {
   navBarOpened = false;
   navBarMode = 'over';
+
+  @ViewChild('sidenav')
+  private sidenav: MatSidenav;
 
   firstname: string;
   surname: string;
@@ -46,19 +50,26 @@ export class HomeComponent implements OnInit {
 
     this.firstnameSubscription = myUserService.firstnameChange.subscribe((value) => {
       this.firstname = value;
+      this.resizeNav();
     });
 
     this.surnameSubscription = myUserService.surnameChange.subscribe((value) => {
       this.surname = value;
+      this.resizeNav();
     });
 
 
     this.emailSubscription = myUserService.emailChange.subscribe((value) => {
       this.email = value;
+      this.resizeNav();
     });
   }
 
-  ngOnInit() {
+  resizeNav() {
+    this.sidenav.close();
+    setTimeout(() => {
+      this.sidenav.open();
+    }, 250);
   }
 
 }

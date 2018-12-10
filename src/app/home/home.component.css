@@ -4,12 +4,27 @@
   min-height: 80vh;
 }
 
+mat-toolbar {
+  position: fixed;
+  z-index: 1000;
+}
+
 .toolbar-sidenav-toggler {
   cursor: pointer;
 }
 
 .toolbar-heading {
   cursor: pointer; margin-left: 15px;
+}
+
+mat-sidenav {
+  position: fixed;
+  max-width: 320px;
+}
+
+/* Overwrite default behaviour */
+mat-nav-list {
+  padding: 0;
 }
 
 .sidenav-head {
@@ -23,17 +38,14 @@
   margin-top: 15px;
   text-align: center;
   font-size: 16px;
+  word-break: break-all;
+  max-width: 320px;
 }
 
 .sidenav-head-avatar {
   height: 10vh;
   margin-left: 25%;
   margin-right: 25%;
-}
-
-/* Overwrite default behaviour */
-mat-nav-list {
-  padding: 0;
 }
 
 .activated {
