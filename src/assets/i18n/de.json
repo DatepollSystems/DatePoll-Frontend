@@ -74,6 +74,7 @@
   "CINEMA_TICKETS_ADMINISTRATION_MOVIE_EDIT_MODAL_NAME_INVALID": "Der Name darf weder leer noch mehr als 128 Zeichen haben!",
   "CINEMA_TICKETS_ADMINISTRATION_MOVIE_EDIT_MODAL_TRAILER_INVALID": "Der Trailerlink darf weder leer noch mehr als 512 Zeichen haben!",
   "CINEMA_TICKETS_ADMINISTRATION_MOVIE_EDIT_MODAL_POSTER_INVALID": "Der Posterlink darf weder leer noch mehr als 512 Zeichen haben!",
+  "CINEMA_TICKETS_ADMINISTRATION_MOVIE_EDIT_MODAL_POSTER_PREVIEW": "Poster Vorschau:",
 
   "SETTINGS_PERSONAL_DATA": "Persönliche Daten",
   "SETTINGS_PERSONAL_DATA_DESCRIPTION": "Bearbeiten Sie Ihre Persönlichen Daten.",

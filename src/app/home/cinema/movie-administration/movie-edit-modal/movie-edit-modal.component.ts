@@ -21,8 +21,6 @@ export class MovieEditModalComponent {
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, private cinemaService: CinemaService) {
     this.movie = data.movie;
 
-    console.log('Movie to edit:', this.movie);
-
     this.id = this.movie.getID();
     this.name = this.movie.getName();
     this.date = this.movie.getDate();
