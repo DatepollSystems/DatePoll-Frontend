@@ -1,5 +1,4 @@
 import {Injectable} from '@angular/core';
-import {User, UsersService} from '../../users.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,21 +9,26 @@ export class CinemaService {
 
   private _selectedMovie: Movie = null;
 
-  constructor(private usersService: UsersService) {
+  constructor() {
     this._movies = [];
 
+    let day;
+
     for (let i = 1; i < 21; i++) {
-      const worker = new User(i, '', 'Bob' + i, 'Super' + i, i + 'boy@gmail.com', new Date('2018-12-3'));
+      // Fixes a iOS bug
+      if (i < 10) {
+        day = '0' + i;
+      } else {
+        day = i;
+      }
 
       this._movies.push(new Movie(i, 'Toller Film ' + i,
-        new Date('2018-12-' + i),
+        new Date('2019-01-' + day),
         'https://google.com',
         'http://cdn.collider.com/wp-content/uploads/Inception-movie-poster-3.jpg',
-        worker,
-        worker,
+        'Bob' + i,
+        'Nachname' + i,
         i));
-
-      usersService.getUsers().push(worker);
     }
   }
 
@@ -75,20 +79,20 @@ export class Movie {
   private _trailerLink: string;
   private _imageLink: string;
 
-  private _worker: User;
-  private _emergencyWorker: User;
+  private _workerName: string;
+  private _emergencyWorkerName: string;
 
   private _bookedTickets: number;
 
-  constructor(ID: number, name: string, movieDate: Date, trailerLink: string, imageLink: string, worker: User, emergencyWorker: User,
-              bookedTickets: number) {
+  constructor(ID: number, name: string, movieDate: Date, trailerLink: string, imageLink: string, workerName: string,
+              emergencyWorkerName: string, bookedTickets: number) {
     this._ID = ID;
     this._name = name;
     this._date = movieDate;
     this._trailerLink = trailerLink;
     this._imageLink = imageLink;
-    this._worker = worker;
-    this._emergencyWorker = emergencyWorker;
+    this._workerName = workerName;
+    this._emergencyWorkerName = emergencyWorkerName;
     this._bookedTickets = bookedTickets;
   }
 
@@ -136,12 +140,12 @@ export class Movie {
     this._imageLink = link;
   }
 
-  public getWorker(): User {
-    return this._worker;
+  public getWorkerName(): string {
+    return this._workerName;
   }
 
-  public getEmergencyWorker(): User {
-    return this._emergencyWorker;
+  public getEmergencyWorkerName(): string {
+    return this._emergencyWorkerName;
   }
 
   public getBookedTickets(): number {

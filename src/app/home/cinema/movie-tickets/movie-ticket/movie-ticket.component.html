@@ -2,20 +2,20 @@
   <mat-card-header>
     <mat-card-title-group>
       <mat-card-title>{{movie.getName()}}<b *ngIf="soldOut"> |&#32;{{'CINEMA_TICKETS_SOLD_OUT' | translate}}</b></mat-card-title>
-      <mat-card-subtitle>{{movie.getBeautifullDate()}}</mat-card-subtitle>
+      <mat-card-subtitle>{{movie.getDate() | date:'dd/MM/yyyy'}}</mat-card-subtitle>
     </mat-card-title-group>
   </mat-card-header>
   <img mat-card-image src="{{movie.getImageLink()}}" alt="Movie image">
   <mat-card-content>
     <div class="row">
       <div class="col-12">
-        {{'CINEMA_TICKETS_WORKER' | translate}} {{movie.getWorker().getCompleteName()}}
+        {{'CINEMA_TICKETS_WORKER' | translate}} {{movie.getWorkerName()}}
       </div>
     </div>
 
     <div class="row">
       <div class="col-12">
-        {{'CINEMA_TICKETS_EMERGENCY_WORKER' | translate}} {{movie.getEmergencyWorker().getCompleteName()}}
+        {{'CINEMA_TICKETS_EMERGENCY_WORKER' | translate}} {{movie.getEmergencyWorkerName()}}
       </div>
     </div>
 
