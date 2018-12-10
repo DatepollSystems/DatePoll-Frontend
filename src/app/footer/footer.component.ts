@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {TranslateService} from '../translate.service';
+import {TranslateService} from '../translation/translate.service';
 import {FeedbackModalComponent} from './modals/feedback-modal/feedback-modal.component';
 import {AboutModalComponent} from './modals/about-modal/about-modal.component';
 import {CookieService} from 'angular2-cookie/core';

@@ -18,9 +18,9 @@ import {PrivacyPolicyComponent} from './info/privacy-policy/privacy-policy.compo
 import {MyUserService} from './auth/my-user.service';
 import {StartComponent} from './home/start/start.component';
 import {SettingsComponent} from './home/settings/settings.component';
-import {TranslateService} from './translate.service';
+import {TranslateService} from './translation/translate.service';
 import {HttpClientModule} from '@angular/common/http';
-import {TranslatePipe} from './translate.pipe';
+import {TranslatePipe} from './translation/translate.pipe';
 import {CookieService} from 'angular2-cookie/core';
 import {FeedbackModalComponent} from './footer/modals/feedback-modal/feedback-modal.component';
 import {AboutModalComponent} from './footer/modals/about-modal/about-modal.component';
