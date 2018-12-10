@@ -1,8 +1,7 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {MyUserService} from '../../../auth/my-user.service';
+import {Component} from '@angular/core';
+import {MyUserService, PhoneNumber} from '../../../auth/my-user.service';
 import {NgForm} from '@angular/forms';
-import {PhoneNumber} from '../../../users.service';
-import {MatSort, MatTableDataSource} from '@angular/material';
+import {MatTableDataSource} from '@angular/material';
 
 @Component({
   selector: 'app-phone-number',

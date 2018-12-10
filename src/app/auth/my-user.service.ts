@@ -1,5 +1,4 @@
 import {Subject} from 'rxjs';
-import {PhoneNumber} from '../users.service';
 
 export class MyUserService {
   private _ID: number;
@@ -142,4 +141,22 @@ export class MyUserService {
     return this._phoneNumbers;
   }
 
+}
+
+export class PhoneNumber {
+  private readonly label: string;
+  private readonly phoneNumber: string;
+
+  constructor(label: string, phoneNumber: string) {
+    this.label = label;
+    this.phoneNumber = phoneNumber;
+  }
+
+  public getLabel() {
+    return this.label;
+  }
+
+  public getPhoneNumber() {
+    return this.phoneNumber;
+  }
 }
