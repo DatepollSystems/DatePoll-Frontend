@@ -7,8 +7,6 @@ export class CinemaService {
 
   private _movies: Movie[];
 
-  private _selectedMovie: Movie = null;
-
   constructor() {
     this._movies = [];
 
@@ -50,14 +48,6 @@ export class CinemaService {
     }
 
     return returnMovies;
-  }
-
-  public setSelectedMovie(movie: Movie) {
-    this._selectedMovie = movie;
-  }
-
-  public getSelectedMovie(): Movie {
-    return this._selectedMovie;
   }
 
   public getMovieByID(id: number) {
@@ -114,14 +104,6 @@ export class Movie {
 
   public setDate(date: Date) {
     this._date = date;
-  }
-
-  public getBeautifullDate(): string {
-    const day = this._date.getDate();
-    const monthIndex = this._date.getMonth();
-    const year = this._date.getFullYear();
-
-    return day + '/' + (monthIndex + 1) + '/' + year;
   }
 
   public getTrailerlink(): string {
