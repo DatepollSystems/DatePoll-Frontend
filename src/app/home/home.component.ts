@@ -66,10 +66,12 @@ export class HomeComponent {
   }
 
   resizeNav() {
-    this.sidenav.close();
-    setTimeout(() => {
-      this.sidenav.open();
-    }, 250);
+    if (this.navBarOpened) {
+      this.sidenav.close();
+      setTimeout(() => {
+        this.sidenav.open();
+      }, 250);
+    }
   }
 
 }
