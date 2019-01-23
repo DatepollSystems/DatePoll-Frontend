@@ -1,58 +1,56 @@
 <div id="sign-container">
-  <div fxLayout="row" fxLayoutAlign="center center">
-    <form (ngSubmit)="onSignin(f)" #f="ngForm">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-10 col-md-8 col-lg-6 offset-sm-1 offset-md-2 offset-lg-4">
+        <form (ngSubmit)="onSignin(f)" #f="ngForm">
+          <mat-card>
+            <mat-card-title-group>
+              <mat-card-title>
+                <div class="projectName">
+                  {{projectName}}
+                </div>
+              </mat-card-title>
 
-      <mat-card>
-        <mat-card-title-group>
-          <div fxLayout="column" fxLayoutAlign="space-around start">
-            <mat-card-title>
-              <div class="projectName">
-                {{projectName}}
-              </div>
-            </mat-card-title>
+              <mat-card-title>
+                DatePoll | {{ 'SIGNIN' | translate }}
+              </mat-card-title>
+            </mat-card-title-group>
 
-            <mat-card-title>
-              DatePoll | {{ 'SIGNIN' | translate }}
-            </mat-card-title>
-          </div>
-        </mat-card-title-group>
+            <mat-card-content class="row">
+              <mat-form-field class="col-12">
+                <span matPrefix>@ &nbsp;</span>
+                <input matInput ngModel
+                       id="email" name="email" type="email"
+                       email required minlength="5"
+                       placeholder="{{'SIGNIN_EMAIL' | translate}}">
+                <mat-icon matSuffix>email</mat-icon>
+              </mat-form-field>
 
-        <mat-card-content>
-          <div fxLayout="column" fxLayoutAlign="space-around none" >
-            <mat-form-field>
-              <span matPrefix>@ &nbsp;</span>
-              <input matInput ngModel
-                     id="email" name="email" type="email"
-                     email required minlength="5"
-                     placeholder="{{'SIGNIN_EMAIL' | translate}}">
-              <mat-icon matSuffix>email</mat-icon>
-            </mat-form-field>
+              <mat-form-field class="col-12">
+                <input matInput ngModel
+                       id="password" name="password" type="password"
+                       minlength="6" required
+                       placeholder="{{'SIGNIN_PASSWORD' | translate}}">
+                <mat-hint align="start"><strong>{{'SIGNIN_KEEP_YOUR_PASSWORD_SECRET' | translate}}</strong></mat-hint>
+              </mat-form-field>
+            </mat-card-content>
 
-            <mat-form-field>
-              <input matInput ngModel
-                     id="password" name="password" type="password"
-                     minlength="6" required
-                     placeholder="{{'SIGNIN_PASSWORD' | translate}}">
-              <mat-hint align="start"><strong>{{'SIGNIN_KEEP_YOUR_PASSWORD_SECRET' | translate}}</strong> </mat-hint>
-            </mat-form-field>
-          </div>
+            <mat-card-actions>
+              <button mat-raised-button routerLink="/signup">{{ 'SIGNIN_NOT_SIGNED_UP' | translate }}</button>
 
-        </mat-card-content>
-
-        <mat-card-actions>
-          <button mat-raised-button routerLink="/signup">{{ 'SIGNIN_NOT_SIGNED_UP' | translate }}</button>
-
-          <button
-            mat-raised-button
-            color="primary"
-            type="submit"
-            [disabled]="!f.valid">
-            {{ 'SIGNIN' | translate }}
-            <mat-icon aria-label="Example icon-button with a heart icon">send</mat-icon>
-          </button>
-        </mat-card-actions>
-      </mat-card>
-    </form>
+              <button
+                mat-raised-button
+                color="primary"
+                type="submit"
+                [disabled]="!f.valid">
+                {{ 'SIGNIN' | translate }}
+                <mat-icon aria-label="Example icon-button with a heart icon">send</mat-icon>
+              </button>
+            </mat-card-actions>
+          </mat-card>
+        </form>
+      </div>
+    </div>
   </div>
 </div>
 
