@@ -3,7 +3,7 @@ image: trion/ng-cli-karma
 cache:
   paths:
     - node_modules/
-    -
+
 stages:
   - deploy
 
