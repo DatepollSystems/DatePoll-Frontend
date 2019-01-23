@@ -1,4 +1,5 @@
 # DatePoll-Frontend
+[![pipeline status](https://gitlab.com/BuergerkorpsEggenburg/datepoll-frontend/badges/development/pipeline.svg)](https://gitlab.com/BuergerkorpsEggenburg/datepoll-frontend/commits/development)
 
 ## Installation
  - Clone the repo
