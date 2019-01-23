@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {CinemaService, Movie} from '../cinema.service';
 import {MovieEditModalComponent} from './movie-edit-modal/movie-edit-modal.component';
 import {MatDialog, MatTableDataSource} from '@angular/material';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-movie-administration',
@@ -15,12 +16,18 @@ export class MovieAdministrationComponent implements OnInit {
 
   // @ViewChild(MatPaginator) paginator: MatPaginator;
 
+  private moviesSubscription: Subscription;
+
   ngOnInit() {
     // this.dataSource.paginator = this.paginator;
   }
 
   constructor(private cinemaService: CinemaService, private dialog: MatDialog) {
     this.dataSource = new MatTableDataSource(this.cinemaService.getMovies());
+
+    this.moviesSubscription = cinemaService.moviesChange.subscribe((value) => {
+      this.dataSource = new MatTableDataSource(value);
+    });
   }
 
   applyFilter(filterValue: string) {

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {CinemaService, Movie} from '../cinema.service';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-movie-tickets',
@@ -9,9 +10,14 @@ import {CinemaService, Movie} from '../cinema.service';
 export class MovieTicketsComponent implements OnInit {
 
   movies: Movie[];
+  private moviesSubscription: Subscription;
 
   constructor(private cinemaService: CinemaService) {
     this.movies = this.cinemaService.getNotShownMovies();
+
+    this.moviesSubscription = cinemaService.notShownMoviesChange.subscribe((value) => {
+      this.movies = value;
+    });
   }
 
   ngOnInit() {

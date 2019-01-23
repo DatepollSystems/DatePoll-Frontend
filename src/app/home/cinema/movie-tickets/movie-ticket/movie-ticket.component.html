@@ -8,14 +8,24 @@
   <img mat-card-image src="{{movie.getImageLink()}}" alt="Movie image">
   <mat-card-content>
     <div class="row">
-      <div class="col-12">
+      <div class="col-12" *ngIf="movie.getWorkerName() != null">
         {{'CINEMA_TICKETS_WORKER' | translate}} {{movie.getWorkerName()}}
+      </div>
+
+      <div class="col-12" *ngIf="movie.getWorkerName() == null">
+        {{'CINEMA_TICKETS_WORKER' | translate}}
+        <button mat-flat-button>{{'CINEMA_TICKETS_APPLY' | translate}}</button>
       </div>
     </div>
 
     <div class="row">
-      <div class="col-12">
+      <div class="col-12" *ngIf="movie.getEmergencyWorkerName() != null">
         {{'CINEMA_TICKETS_EMERGENCY_WORKER' | translate}} {{movie.getEmergencyWorkerName()}}
+      </div>
+
+      <div class="col-12" *ngIf="movie.getEmergencyWorkerName() == null">
+        {{'CINEMA_TICKETS_EMERGENCY_WORKER' | translate}}
+        <button mat-flat-button>{{'CINEMA_TICKETS_APPLY' | translate}}</button>
       </div>
     </div>
 
