@@ -46,6 +46,7 @@ import {MAT_DATE_LOCALE} from '@angular/material';
 import {
   MovieBookTicketsModalComponent
 } from './home/cinema/movie-tickets/movie-ticket/movie-book-tickets-modal/movie-book-tickets-modal.component';
+import {HttpModule} from '@angular/http';
 
 @NgModule({
   declarations: [
@@ -87,6 +88,7 @@ import {
     CustomFormsModule,
     AppRoutingModule,
     HttpClientModule,
+    HttpModule,
     NgxChartsModule,
     MaterialModule
   ],
