@@ -39,10 +39,8 @@ import {MovieTicketsComponent} from './home/cinema/movie-tickets/movie-tickets.c
 import {MovieServiceComponent} from './home/cinema/movie-service/movie-service.component';
 import {MovieAdministrationComponent} from './home/cinema/movie-administration/movie-administration.component';
 import {MovieTicketComponent} from './home/cinema/movie-tickets/movie-ticket/movie-ticket.component';
-import {NgxDatatableModule} from '@swimlane/ngx-datatable';
 import {NgxChartsModule} from '@swimlane/ngx-charts';
 import {MovieEditModalComponent} from './home/cinema/movie-administration/movie-edit-modal/movie-edit-modal.component';
-import {FlexLayoutModule} from '@angular/flex-layout';
 import {MaterialModule} from './material-module';
 import {MAT_DATE_LOCALE} from '@angular/material';
 import {
@@ -89,9 +87,7 @@ import {
     CustomFormsModule,
     AppRoutingModule,
     HttpClientModule,
-    NgxDatatableModule,
     NgxChartsModule,
-    FlexLayoutModule,
     MaterialModule
   ],
   // Without this entryComponents dynamic modal loading does not work
