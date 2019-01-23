@@ -17,8 +17,6 @@ deploy_stage:
   script:
     - rm ./package-lock.json
     - npm install
-    - ./node_modules/@angular/cli/bin/ng test --progress false --single-run=true --watch=false
-    - ./node_modules/@angular/cli/bin/ng e2e --progress false --watch=false
     - ./node_modules/@angular/cli/bin/ng build --progress false --prod
     - cd dist/DatePoll-Frontend
     - ls
