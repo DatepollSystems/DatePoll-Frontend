@@ -47,6 +47,7 @@ import {
   MovieBookTicketsModalComponent
 } from './home/cinema/movie-tickets/movie-ticket/movie-book-tickets-modal/movie-book-tickets-modal.component';
 import {HttpModule} from '@angular/http';
+import {NgxMatSelectSearchModule} from 'ngx-mat-select-search';
 
 @NgModule({
   declarations: [
@@ -90,7 +91,8 @@ import {HttpModule} from '@angular/http';
     HttpClientModule,
     HttpModule,
     NgxChartsModule,
-    MaterialModule
+    MaterialModule,
+    NgxMatSelectSearchModule
   ],
   // Without this entryComponents dynamic modal loading does not work
   entryComponents: [
