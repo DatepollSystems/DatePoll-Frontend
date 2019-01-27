@@ -1,49 +1,59 @@
 <mat-card class="mat-elevation-z3">
   <mat-card-header>
     <mat-card-title-group>
-      <mat-card-title>{{movie.getName()}}<b *ngIf="soldOut"> |&#32;{{'CINEMA_TICKETS_SOLD_OUT' | translate}}</b></mat-card-title>
+      <mat-card-title>{{movie.getName()}}<b *ngIf="soldOut"> |&#32;{{'CINEMA_TICKETS_SOLD_OUT' | translate}}</b>
+      </mat-card-title>
       <mat-card-subtitle>{{movie.getDate() | date:'dd/MM/yyyy'}}</mat-card-subtitle>
     </mat-card-title-group>
   </mat-card-header>
   <img mat-card-image src="{{movie.getImageLink()}}" alt="Movie image">
   <mat-card-content>
-    <div class="row">
-      <div class="col-12" *ngIf="movie.getWorkerName() != null">
-        {{'CINEMA_TICKETS_WORKER' | translate}} {{movie.getWorkerName()}}
-      </div>
+    <div class="row" *ngIf="movie.getWorkerName() != null">
+      {{'CINEMA_TICKETS_WORKER' | translate}} {{movie.getWorkerName()}}
+    </div>
 
-      <div class="col-12" *ngIf="movie.getWorkerName() == null">
+    <div class="row" *ngIf="movie.getWorkerName() == null">
+      <div class="col-12">
         {{'CINEMA_TICKETS_WORKER' | translate}}
-        <button mat-flat-button>{{'CINEMA_TICKETS_APPLY' | translate}}</button>
+        <div style="float: right">
+          <a href="#">{{'CINEMA_TICKETS_APPLY' | translate}}</a>
+        </div>
       </div>
     </div>
 
-    <div class="row">
-      <div class="col-12" *ngIf="movie.getEmergencyWorkerName() != null">
-        {{'CINEMA_TICKETS_EMERGENCY_WORKER' | translate}} {{movie.getEmergencyWorkerName()}}
-      </div>
+    <div class="row" *ngIf="movie.getEmergencyWorkerName() != null">
+      {{'CINEMA_TICKETS_EMERGENCY_WORKER' | translate}} {{movie.getEmergencyWorkerName()}}
+    </div>
 
-      <div class="col-12" *ngIf="movie.getEmergencyWorkerName() == null">
+    <div class="row" *ngIf="movie.getEmergencyWorkerName() == null">
+      <div class="col-12">
         {{'CINEMA_TICKETS_EMERGENCY_WORKER' | translate}}
-        <button mat-flat-button>{{'CINEMA_TICKETS_APPLY' | translate}}</button>
+        <div style="float: right">
+          <a href="#">{{'CINEMA_TICKETS_APPLY' | translate}}</a>
+        </div>
       </div>
     </div>
 
     <div class="row">
       <div class="col-12">
         {{'CINEMA_TICKETS_TRAILER' | translate}}
-        <a href="{{movie.getTrailerlink()}}" rel="noopener" target="_blank">{{'CINEMA_TICLETS_TRAILER_WATCH' | translate}}</a>
+        <div style="float: right">
+          <a href="{{movie.getTrailerlink()}}" rel="noopener"
+             target="_blank">{{'CINEMA_TICLETS_TRAILER_WATCH' | translate}}</a>
+        </div>
       </div>
     </div>
 
     <div class="row">
       <div class="col-12">
-        {{'CINEMA_TICKETS_AVAILABLE_TICKETS' | translate}} {{20 - movie.getBookedTickets()}}
+        {{'CINEMA_TICKETS_AVAILABLE_TICKETS' | translate}}
+        <div style="float: right">{{20 - movie.getBookedTickets()}}</div>
       </div>
     </div>
 
   </mat-card-content>
   <mat-card-actions>
-    <button mat-button (click)="bookTickets()" [disabled]="soldOut">{{'CINEMA_TICKETS_BOOK_A_TICKET' | translate}}</button>
+    <button mat-button (click)="bookTickets()"
+            [disabled]="soldOut">{{'CINEMA_TICKETS_BOOK_A_TICKET' | translate}}</button>
   </mat-card-actions>
 </mat-card>

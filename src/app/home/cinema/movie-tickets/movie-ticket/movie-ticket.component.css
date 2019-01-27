@@ -1,9 +1,5 @@
-table{
-  border: 1px solid black;
-  border-radius: 25px;
-}
-
-td {
-  border-top: 1px solid black;
-  border-bottom: 1px solid black;
+.row {
+  padding-bottom: 5px;
+  padding-top: 5px !important;
+  border-bottom: black solid 0.08vh
 }
