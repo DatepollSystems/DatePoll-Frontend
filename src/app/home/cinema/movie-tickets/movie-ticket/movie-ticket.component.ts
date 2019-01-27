@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {MatDialog} from '@angular/material';
 import {MovieBookTicketsModalComponent} from './movie-book-tickets-modal/movie-book-tickets-modal.component';
-import {Movie} from '../../cinema.service';
+import {Movie} from '../../movie';
 
 @Component({
   selector: 'app-movie-ticket',

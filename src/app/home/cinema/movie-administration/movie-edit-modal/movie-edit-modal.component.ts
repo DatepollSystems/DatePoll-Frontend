@@ -1,6 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {CinemaService, Movie} from '../../cinema.service';
+import {CinemaService} from '../../cinema.service';
 import {MAT_DIALOG_DATA} from '@angular/material';
+import {Movie} from '../../movie';
 
 @Component({
   selector: 'app-movie-edit-modal',

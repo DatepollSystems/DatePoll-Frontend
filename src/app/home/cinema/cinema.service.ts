@@ -3,11 +3,14 @@ import {Http, Response} from '@angular/http';
 import {map} from 'rxjs/operators';
 import {environment} from '../../../environments/environment';
 import {Subject} from 'rxjs';
+import {Movie} from './movie';
+import {Year} from './year';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CinemaService {
+  apiUrl = environment.apiUrl;
 
   private _lastFetchedMovies: Date = null;
   private _movies: Movie[];
@@ -17,50 +20,24 @@ export class CinemaService {
   private _notShownMovies: Movie[];
   public notShownMoviesChange: Subject<Movie[]> = new Subject<Movie[]>();
 
-  apiUrl = environment.apiUrl;
+  private _lastFetchedYears: Date = null;
+  private _years: Year[];
+  public yearsChange: Subject<Year[]> = new Subject<Year[]>();
 
   constructor(private http: Http) {
     this._movies = [];
     this._notShownMovies = [];
-
-    // let day;
-    //
-    // for (let i = 1; i < 21; i++) {
-    //   // Fixes a iOS bug
-    //   if (i < 10) {
-    //     day = '0' + i;
-    //   } else {
-    //     day = i;
-    //   }
-    //
-    //   this._movies.push(new Movie(i, 'Toller Film ' + i,
-    //     new Date('2019-01-' + day),
-    //     'https://google.com',
-    //     'http://cdn.collider.com/wp-content/uploads/Inception-movie-poster-3.jpg',
-    //     'Bob' + i,
-    //     'Nachname' + i,
-    //     i));
-    // }
+    this._years = [];
   }
 
   public getMovies(): Movie[] {
     this.checkAndFetchMovies();
-    return this._movies;
+    return this._movies.slice();
   }
 
   public setMovies(movies: Movie[]) {
     this._movies = movies;
     this.moviesChange.next(this._movies.slice());
-  }
-
-  public getNotShownMovies(): Movie[] {
-    this.checkAndFetchNotShownMovies();
-    return this._notShownMovies;
-  }
-
-  public setNotShownMovies(movies: Movie[]) {
-    this._notShownMovies = movies;
-    this.notShownMoviesChange.next(this._notShownMovies.slice());
   }
 
   public getMovieByID(id: number) {
@@ -96,7 +73,7 @@ export class CinemaService {
           for (const movie of fetchedMovies) {
             const date = new Date(movie.date);
             const localMovie = new Movie(movie.id, movie.name, date, movie.trailerLink,
-              movie.posterLink, movie.workerName, movie.emergencyWorkerName, movie.bookedTickets);
+              movie.posterLink, movie.workerName, movie.emergencyWorkerName, movie.bookedTickets, movie.movie_year_id);
             movies.push(localMovie);
           }
           this.setMovies(movies);
@@ -114,6 +91,17 @@ export class CinemaService {
         return data.movies;
       }
     ));
+  }
+
+
+  public getNotShownMovies(): Movie[] {
+    this.checkAndFetchNotShownMovies();
+    return this._notShownMovies;
+  }
+
+  public setNotShownMovies(movies: Movie[]) {
+    this._notShownMovies = movies;
+    this.notShownMoviesChange.next(this._notShownMovies.slice());
   }
 
   private checkAndFetchNotShownMovies() {
@@ -138,7 +126,7 @@ export class CinemaService {
           for (const movie of fetchedMovies) {
             const date = new Date(movie.date);
             const localMovie = new Movie(movie.id, movie.name, date, movie.trailerLink,
-              movie.posterLink, movie.workerName, movie.emergencyWorkerName, movie.bookedTickets);
+              movie.posterLink, movie.workerName, movie.emergencyWorkerName, movie.bookedTickets, movie.movie_year_id);
             movies.push(localMovie);
           }
           this.setNotShownMovies(movies);
@@ -157,81 +145,55 @@ export class CinemaService {
       }
     ));
   }
-}
 
-export class Movie {
-  private _ID: number;
-  private _name: string;
-  private _date: Date;
-  private _trailerLink: string;
-  private _posterLink: string;
 
-  private _workerName: string;
-  private _emergencyWorkerName: string;
-
-  private _bookedTickets: number;
-
-  constructor(ID: number, name: string, movieDate: Date, trailerLink: string, posterLink: string, workerName: string,
-              emergencyWorkerName: string, bookedTickets: number) {
-    this._ID = ID;
-    this._name = name;
-    this._date = movieDate;
-    this._trailerLink = trailerLink;
-    this._posterLink = posterLink;
-    this._workerName = workerName;
-    this._emergencyWorkerName = emergencyWorkerName;
-    this._bookedTickets = bookedTickets;
+  public getYears(): Year[] {
+    this.checkAndFetchYears();
+    return this._years.slice();
   }
 
-  public getID(): number {
-    return this._ID;
+  public setYears(years: Year[]) {
+    this._years = years;
+    this.yearsChange.next(this._years.slice());
   }
 
-  public getName(): string {
-    return this._name;
+  private checkAndFetchYears() {
+    if (this._lastFetchedYears === null) {
+      this._lastFetchedYears = new Date();
+      console.log('fetchYears | Set date: ' + this._lastFetchedYears.getTime());
+    } else {
+      const delta = (new Date().getTime() - this._lastFetchedYears.getTime()) / 1000;
+      if (delta > 60) {
+        this._years = [];
+        this._lastFetchedYears = new Date();
+        console.log('fetchYears | Reset date, new date: ' + this._lastFetchedYears.getTime());
+      } else {
+        console.log('fetchYears | Seconds since last fetch: ' + delta);
+      }
+    }
+
+    if (this._years.length === 0) {
+      this.fetchYears().subscribe(
+        (fetchedYears: any[]) => {
+          const years = [];
+          for (const year of fetchedYears) {
+            const localYear = new Year(year.id, year.year);
+            years.push(localYear);
+          }
+          this.setYears(years);
+        },
+        (error) => console.log(error)
+      );
+    }
   }
 
-  public setName(name: string) {
-    this._name = name;
-  }
-
-  public getDate(): Date {
-    return this._date;
-  }
-
-  public setDate(date: Date) {
-    this._date = date;
-  }
-
-  public getTrailerlink(): string {
-    return this._trailerLink;
-  }
-
-  public setTrailerLink(link: string) {
-    this._trailerLink = link;
-  }
-
-  public getImageLink(): string {
-    return this._posterLink;
-  }
-
-  public setImageLink(link: string) {
-    this._posterLink = link;
-  }
-
-  public getWorkerName(): string {
-    return this._workerName;
-  }
-
-  public getEmergencyWorkerName(): string {
-    return this._emergencyWorkerName;
-  }
-
-  public getBookedTickets(): number {
-    return this._bookedTickets;
-  }
-
-  public setBookedTickets(bookedTickets: number) {
-    this._bookedTickets = bookedTickets;
+  private fetchYears() {
+    return this.http.get(this.apiUrl + '/v1/cinema/year').pipe(map(
+      (response: Response) => {
+        const data = response.json();
+        console.log(data);
+        return data.years;
+      }
+    ));
   }
 }
