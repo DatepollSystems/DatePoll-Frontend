@@ -77,7 +77,7 @@ export class CinemaService {
         this._lastFetchedMovies = new Date();
         console.log('fetchMovies | Reset date, new date: ' + this._lastFetchedMovies.getTime());
       } else {
-        console.log('fetchNotShownMovies | Seconds since last fetch: ' + delta);
+        console.log('fetchMovies | Seconds since last fetch: ' + delta);
       }
     }
 
