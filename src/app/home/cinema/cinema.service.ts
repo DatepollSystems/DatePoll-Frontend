@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Http, Response} from '@angular/http';
+import {Headers, Http, Response} from '@angular/http';
 import {map} from 'rxjs/operators';
 import {environment} from '../../../environments/environment';
 import {Subject} from 'rxjs';
@@ -30,6 +30,12 @@ export class CinemaService {
     this._years = [];
   }
 
+  public addMovie(movie: any) {
+    const headers = new Headers({'Content-Type' : 'application/json'});
+
+    return this.http.post(this.apiUrl + '/v1/cinema/movie', movie, {headers: headers});
+  }
+
   public getMovies(): Movie[] {
     this.checkAndFetchMovies();
     return this._movies.slice();
@@ -51,7 +57,12 @@ export class CinemaService {
     return movie;
   }
 
-  private checkAndFetchMovies() {
+  public checkAndFetchMovies(force: boolean = false) {
+    if (force) {
+      this._lastFetchedMovies = null;
+      this._movies = [];
+    }
+
     if (this._lastFetchedMovies === null) {
       this._lastFetchedMovies = new Date();
       console.log('fetchMovies | Set date: ' + this._lastFetchedMovies.getTime());
@@ -147,6 +158,12 @@ export class CinemaService {
   }
 
 
+  public addYear(year: any) {
+    const headers = new Headers({'Content-Type' : 'application/json'});
+
+    return this.http.post(this.apiUrl + '/v1/cinema/year', year, {headers: headers});
+  }
+
   public getYears(): Year[] {
     this.checkAndFetchYears();
     return this._years.slice();
@@ -157,7 +174,12 @@ export class CinemaService {
     this.yearsChange.next(this._years.slice());
   }
 
-  private checkAndFetchYears() {
+  public checkAndFetchYears(force: boolean = false) {
+    if (force) {
+      this._lastFetchedYears = null;
+      this._years = [];
+    }
+
     if (this._lastFetchedYears === null) {
       this._lastFetchedYears = new Date();
       console.log('fetchYears | Set date: ' + this._lastFetchedYears.getTime());

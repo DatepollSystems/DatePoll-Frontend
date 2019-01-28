@@ -48,6 +48,7 @@ import {
 } from './home/cinema/movie-tickets/movie-ticket/movie-book-tickets-modal/movie-book-tickets-modal.component';
 import {HttpModule} from '@angular/http';
 import {NgxMatSelectSearchModule} from 'ngx-mat-select-search';
+import { MovieCreateModalComponent } from './home/cinema/movie-administration/movie-create-modal/movie-create-modal.component';
 
 @NgModule({
   declarations: [
@@ -79,7 +80,8 @@ import {NgxMatSelectSearchModule} from 'ngx-mat-select-search';
     MovieAdministrationComponent,
     MovieTicketComponent,
     MovieEditModalComponent,
-    MovieBookTicketsModalComponent
+    MovieBookTicketsModalComponent,
+    MovieCreateModalComponent
   ],
   imports: [
     BrowserModule,
@@ -107,6 +109,7 @@ import {NgxMatSelectSearchModule} from 'ngx-mat-select-search';
 
     //   PasswordComponent,
     //   TwoFactorAuthenticationComponent,
+    MovieCreateModalComponent,
     MovieEditModalComponent,
     MovieBookTicketsModalComponent
   ],

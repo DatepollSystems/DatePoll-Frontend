@@ -7,6 +7,7 @@ import {Movie} from '../movie';
 import {Year} from '../year';
 import {FormControl} from '@angular/forms';
 import {take, takeUntil} from 'rxjs/operators';
+import {MovieCreateModalComponent} from './movie-create-modal/movie-create-modal.component';
 
 @Component({
   selector: 'app-movie-administration',
@@ -48,24 +49,18 @@ export class MovieAdministrationComponent implements OnInit, AfterViewInit, OnDe
     this.yearsSubscription = cinemaService.yearsChange.subscribe((value) => {
       this.years = value;
       this.filteredYears.next(this.years.slice());
-      this.setInitialValue();
       this.yearCtrl.setValue(this.years[this.years.length - 1]);
       this.selectedYear = this.years[this.years.length - 1];
+      this.setInitialValue();
+
+      this.refreshTable();
     });
 
     this.movies = this.cinemaService.getMovies();
     if (this.selectedYear === null) {
       this.dataSource = new MatTableDataSource(this.movies);
     } else {
-      const moviesToShow = [];
-
-      for (let i = 0; i < this.movies.length; i++) {
-        if (this.movies[i].getMovieYearID() === this.selectedYear.getID()) {
-          moviesToShow.push(this.movies[i]);
-        }
-      }
-
-      this.dataSource = new MatTableDataSource(moviesToShow);
+      this.refreshTable();
     }
 
     this.moviesSubscription = cinemaService.moviesChange.subscribe((value) => {
@@ -74,15 +69,7 @@ export class MovieAdministrationComponent implements OnInit, AfterViewInit, OnDe
       if (this.selectedYear === null) {
         this.dataSource = new MatTableDataSource(this.movies);
       } else {
-        const moviesToShow = [];
-
-        for (let i = 0; i < this.movies.length; i++) {
-          if (this.movies[i].getMovieYearID() === this.selectedYear.getID()) {
-            moviesToShow.push(this.movies[i]);
-          }
-        }
-
-        this.dataSource = new MatTableDataSource(moviesToShow);
+        this.refreshTable();
       }
     });
   }
@@ -111,6 +98,18 @@ export class MovieAdministrationComponent implements OnInit, AfterViewInit, OnDe
   ngOnDestroy() {
     this._onDestroy.next();
     this._onDestroy.complete();
+  }
+
+  refreshTable() {
+    const moviesToShow = [];
+
+    for (let i = 0; i < this.movies.length; i++) {
+      if (this.movies[i].getMovieYearID() === this.selectedYear.getID()) {
+        moviesToShow.push(this.movies[i]);
+      }
+    }
+
+    this.dataSource = new MatTableDataSource(moviesToShow);
   }
 
   applyFilter(filterValue: string) {
@@ -168,6 +167,12 @@ export class MovieAdministrationComponent implements OnInit, AfterViewInit, OnDe
     if (this.filterValue !== null) {
       this.applyFilter(this.filterValue);
     }
+  }
+
+  onCreate() {
+    this.dialog.open(MovieCreateModalComponent, {
+      width: '80vh'
+    });
   }
 
   onEdit(id: number) {
