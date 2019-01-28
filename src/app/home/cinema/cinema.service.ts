@@ -36,6 +36,12 @@ export class CinemaService {
     return this.http.post(this.apiUrl + '/v1/cinema/movie', movie, {headers: headers});
   }
 
+  public updateMovie(movieID: number, movie: any) {
+    const headers = new Headers({'Content-Type' : 'application/json'});
+
+    return this.http.put(this.apiUrl + '/v1/cinema/movie/' + movieID, movie, {headers: headers});
+  }
+
   public getMovies(): Movie[] {
     this.checkAndFetchMovies();
     return this._movies.slice();
