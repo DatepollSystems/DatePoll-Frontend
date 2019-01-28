@@ -1,4 +1,4 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component, Inject} from '@angular/core';
 import {CinemaService} from '../../cinema.service';
 import {MAT_DIALOG_DATA} from '@angular/material';
 import {Movie} from '../../movie';

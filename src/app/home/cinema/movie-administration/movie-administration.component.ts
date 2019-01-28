@@ -1,12 +1,16 @@
 import {AfterViewInit, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {CinemaService} from '../cinema.service';
-import {MovieEditModalComponent} from './movie-edit-modal/movie-edit-modal.component';
+import {Response} from '@angular/http';
+import {FormControl} from '@angular/forms';
 import {MatDialog, MatSelect, MatTableDataSource} from '@angular/material';
+
 import {ReplaySubject, Subject, Subscription} from 'rxjs';
+import {take, takeUntil} from 'rxjs/operators';
+
 import {Movie} from '../movie';
 import {Year} from '../year';
-import {FormControl} from '@angular/forms';
-import {take, takeUntil} from 'rxjs/operators';
+
+import {CinemaService} from '../cinema.service';
+import {MovieEditModalComponent} from './movie-edit-modal/movie-edit-modal.component';
 import {MovieCreateModalComponent} from './movie-create-modal/movie-create-modal.component';
 
 @Component({
@@ -17,7 +21,7 @@ import {MovieCreateModalComponent} from './movie-create-modal/movie-create-modal
 export class MovieAdministrationComponent implements OnInit, AfterViewInit, OnDestroy {
 
   // @ViewChild(MatPaginator) paginator: MatPaginator;
-  displayedColumns: string[] = ['name', 'date', 'trailer', 'poster', 'worker', 'emergencyWorker', 'bookedTickets'];
+  displayedColumns: string[] = ['name', 'date', 'trailer', 'poster', 'worker', 'emergencyWorker', 'bookedTickets', 'deleteMovie'];
   filterValue: string = null;
 
   /** control for the selected years */
@@ -180,5 +184,16 @@ export class MovieAdministrationComponent implements OnInit, AfterViewInit, OnDe
       width: '80vh',
       data: {movie: this.cinemaService.getMovieByID(id)}
     });
+  }
+
+  deleteMovie(id: number) {
+    this.cinemaService.deleteMovie(id).subscribe(
+      (response: Response) => {
+        const data = response.json();
+        console.log(data);
+        this.cinemaService.checkAndFetchMovies(true);
+      },
+      (error) => console.log(error)
+    );
   }
 }

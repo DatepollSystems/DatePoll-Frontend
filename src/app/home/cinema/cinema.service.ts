@@ -1,8 +1,11 @@
 import {Injectable} from '@angular/core';
 import {Headers, Http, Response} from '@angular/http';
-import {map} from 'rxjs/operators';
+
 import {environment} from '../../../environments/environment';
+
 import {Subject} from 'rxjs';
+import {map} from 'rxjs/operators';
+
 import {Movie} from './movie';
 import {Year} from './year';
 
@@ -40,6 +43,10 @@ export class CinemaService {
     const headers = new Headers({'Content-Type' : 'application/json'});
 
     return this.http.put(this.apiUrl + '/v1/cinema/movie/' + movieID, movie, {headers: headers});
+  }
+
+  public deleteMovie(movieID: number) {
+    return this.http.delete(this.apiUrl + '/v1/cinema/movie/' + movieID);
   }
 
   public getMovies(): Movie[] {
