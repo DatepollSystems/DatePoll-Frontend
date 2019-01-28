@@ -64,18 +64,16 @@ export class CinemaService {
   }
 
   public checkAndFetchMovies(force: boolean = false) {
-    if (force) {
-      this._lastFetchedMovies = null;
-      this._movies = [];
-    }
+    let fetchMovies = false;
 
     if (this._lastFetchedMovies === null) {
+      fetchMovies = true;
       this._lastFetchedMovies = new Date();
       console.log('fetchMovies | Set date: ' + this._lastFetchedMovies.getTime());
     } else {
       const delta = (new Date().getTime() - this._lastFetchedMovies.getTime()) / 1000;
       if (delta > 60) {
-        this._movies = [];
+        fetchMovies = true;
         this._lastFetchedMovies = new Date();
         console.log('fetchMovies | Reset date, new date: ' + this._lastFetchedMovies.getTime());
       } else {
@@ -83,7 +81,7 @@ export class CinemaService {
       }
     }
 
-    if (this._movies.length === 0) {
+    if (fetchMovies || force) {
       this.fetchMovies().subscribe(
         (fetchedMovies: any[]) => {
           const movies = [];
@@ -181,18 +179,16 @@ export class CinemaService {
   }
 
   public checkAndFetchYears(force: boolean = false) {
-    if (force) {
-      this._lastFetchedYears = null;
-      this._years = [];
-    }
+    let fetchYears = false;
 
     if (this._lastFetchedYears === null) {
+      fetchYears = true;
       this._lastFetchedYears = new Date();
       console.log('fetchYears | Set date: ' + this._lastFetchedYears.getTime());
     } else {
       const delta = (new Date().getTime() - this._lastFetchedYears.getTime()) / 1000;
       if (delta > 60) {
-        this._years = [];
+        fetchYears = true;
         this._lastFetchedYears = new Date();
         console.log('fetchYears | Reset date, new date: ' + this._lastFetchedYears.getTime());
       } else {
@@ -200,7 +196,7 @@ export class CinemaService {
       }
     }
 
-    if (this._years.length === 0) {
+    if (fetchYears || force) {
       this.fetchYears().subscribe(
         (fetchedYears: any[]) => {
           const years = [];
