@@ -17,3 +17,10 @@
   margin-top: 2vh;
   margin-bottom: 2vh;
 }
+
+mat-card {
+  margin-bottom: 2.5vh;
+  width: 100%;
+  margin-left: 15px;
+  margin-right: 15px;
+}

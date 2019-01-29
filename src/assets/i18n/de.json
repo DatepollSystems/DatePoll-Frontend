@@ -31,6 +31,8 @@
   "SIGNIN_EMAIL": "Email-Adresse",
   "SIGNIN_PASSWORD": "Passwort",
   "SIGNIN_KEEP_YOUR_PASSWORD_SECRET": "Behalte dein Passwort geheim",
+  "SIGNIN_EMAIL_OR_PASSWORD_INCORRECT": "Die Email-Adresse oder das Passwort sind inkorrekt!",
+  "SIGNIN_SUCCESSFUL": "Passwort korrekt! Sie werden in kürze weitergeleitet...",
 
 
   "NAV_SETTINGS": "Einstellungen",

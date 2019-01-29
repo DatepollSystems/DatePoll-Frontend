@@ -42,7 +42,7 @@ import {MovieTicketComponent} from './home/cinema/movie-tickets/movie-ticket/mov
 import {NgxChartsModule} from '@swimlane/ngx-charts';
 import {MovieEditModalComponent} from './home/cinema/movie-administration/movie-edit-modal/movie-edit-modal.component';
 import {MaterialModule} from './material-module';
-import {MAT_DATE_LOCALE} from '@angular/material';
+import {MAT_DATE_LOCALE, MAT_SNACK_BAR_DEFAULT_OPTIONS} from '@angular/material';
 import {
   MovieBookTicketsModalComponent
 } from './home/cinema/movie-tickets/movie-ticket/movie-book-tickets-modal/movie-book-tickets-modal.component';
@@ -130,6 +130,7 @@ import { MovieCreateModalComponent } from './home/cinema/movie-administration/mo
     },
     // Set the datetimepicker time format to day/month/year
     {provide: MAT_DATE_LOCALE, useValue: 'en-GB'},
+    {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 2500}}
   ],
   bootstrap: [AppComponent]
 })

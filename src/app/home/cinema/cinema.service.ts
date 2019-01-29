@@ -8,6 +8,7 @@ import {map} from 'rxjs/operators';
 
 import {Movie} from './movie';
 import {Year} from './year';
+import {AuthService} from '../../auth/auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -27,7 +28,7 @@ export class CinemaService {
   private _years: Year[];
   public yearsChange: Subject<Year[]> = new Subject<Year[]>();
 
-  constructor(private http: Http) {
+  constructor(private http: Http, private authService: AuthService) {
     this._movies = [];
     this._notShownMovies = [];
     this._years = [];
@@ -106,7 +107,9 @@ export class CinemaService {
   }
 
   private fetchMovies() {
-    return this.http.get(this.apiUrl + '/v1/cinema/movie').pipe(map(
+    const token = this.authService.getToken();
+
+    return this.http.get(this.apiUrl + '/v1/cinema/movie?token=' + token).pipe(map(
       (response: Response) => {
         const data = response.json();
         console.log(data);
@@ -159,7 +162,9 @@ export class CinemaService {
   }
 
   private fetchNotShownMovies() {
-    return this.http.get(this.apiUrl + '/v1/cinema/notShownMovies').pipe(map(
+    const token = this.authService.getToken();
+
+    return this.http.get(this.apiUrl + '/v1/cinema/notShownMovies?token=' + token).pipe(map(
       (response: Response) => {
         const data = response.json();
         console.log(data);
@@ -219,7 +224,9 @@ export class CinemaService {
   }
 
   private fetchYears() {
-    return this.http.get(this.apiUrl + '/v1/cinema/year').pipe(map(
+    const token = this.authService.getToken();
+
+    return this.http.get(this.apiUrl + '/v1/cinema/year?token=' + token).pipe(map(
       (response: Response) => {
         const data = response.json();
         console.log(data);

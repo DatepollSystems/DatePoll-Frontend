@@ -16,23 +16,40 @@
               </mat-card-title>
             </mat-card-title-group>
 
-            <mat-card-content class="row">
-              <mat-form-field class="col-12">
-                <span matPrefix>@ &nbsp;</span>
-                <input matInput ngModel
-                       id="email" name="email" type="email"
-                       email required minlength="5"
-                       placeholder="{{'SIGNIN_EMAIL' | translate}}">
-                <mat-icon matSuffix>email</mat-icon>
-              </mat-form-field>
+            <mat-card-content>
+              <div class="row" *ngIf="loginSuccess">
+                <mat-card style="background-color: #43A047;" matRipple>
+                  <mat-card-content class="last-child">{{'SIGNIN_SUCCESSFUL' | translate}}</mat-card-content>
+                </mat-card>
+              </div>
 
-              <mat-form-field class="col-12">
-                <input matInput ngModel
-                       id="password" name="password" type="password"
-                       minlength="6" required
-                       placeholder="{{'SIGNIN_PASSWORD' | translate}}">
-                <mat-hint align="start"><strong>{{'SIGNIN_KEEP_YOUR_PASSWORD_SECRET' | translate}}</strong></mat-hint>
-              </mat-form-field>
+              <div class="row" *ngIf="loginFail">
+                <mat-card style="background-color: #E65100;  color: white" matRipple>
+                  <mat-card-content class="last-child">{{'SIGNIN_EMAIL_OR_PASSWORD_INCORRECT' | translate}}</mat-card-content>
+                </mat-card>
+              </div>
+
+
+              <div class="row">
+                <mat-form-field class="col-12">
+                  <span matPrefix>@ &nbsp;</span>
+                  <input matInput ngModel
+                         id="email" name="email" type="email"
+                         email required minlength="5"
+                         placeholder="{{'SIGNIN_EMAIL' | translate}}">
+                  <mat-icon matSuffix>email</mat-icon>
+                </mat-form-field>
+              </div>
+
+              <div class="row">
+                <mat-form-field class="col-12">
+                  <input matInput ngModel
+                         id="password" name="password" type="password"
+                         minlength="5" required
+                         placeholder="{{'SIGNIN_PASSWORD' | translate}}">
+                  <mat-hint align="start"><strong>{{'SIGNIN_KEEP_YOUR_PASSWORD_SECRET' | translate}}</strong></mat-hint>
+                </mat-form-field>
+              </div>
             </mat-card-content>
 
             <mat-card-actions>
