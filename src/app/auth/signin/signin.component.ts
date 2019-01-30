@@ -12,13 +12,13 @@ import {AuthService} from '../auth.service';
   styleUrls: ['./signin.component.css']
 })
 export class SigninComponent implements OnInit {
-  private projectName = 'priv. uni. Buergerkorps Eggenburg';
+  protected projectName = 'priv. uni. Buergerkorps Eggenburg';
 
-  private state = 'login';
+  protected state = 'login';
 
-  private loginSuccess = false;
-  private loginFail = false;
-  private showPasswordEqaulsAlert = false;
+  protected loginSuccess = false;
+  protected loginFail = false;
+  protected showPasswordEqaulsAlert = false;
 
   private email: string;
   private password: string;
@@ -32,7 +32,7 @@ export class SigninComponent implements OnInit {
     }
   }
 
-  onSignin(form: NgForm) {
+  protected onSignin(form: NgForm) {
     this.email = form.value.email;
     this.password = form.value.password;
 
@@ -58,7 +58,7 @@ export class SigninComponent implements OnInit {
     );
   }
 
-  onChangePasswordAfterSignin(form: NgForm) {
+  protected onChangePasswordAfterSignin(form: NgForm) {
     const password = form.value.password;
     const password_repeat = form.value.password_repeat;
 
