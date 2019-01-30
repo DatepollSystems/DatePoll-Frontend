@@ -12,13 +12,13 @@ import {AuthService} from '../auth.service';
   styleUrls: ['./signin.component.css']
 })
 export class SigninComponent implements OnInit {
-  protected projectName = 'priv. uni. Buergerkorps Eggenburg';
+  projectName = 'priv. uni. Buergerkorps Eggenburg';
 
-  protected state = 'login';
+  state = 'login';
 
-  protected loginSuccess = false;
-  protected loginFail = false;
-  protected showPasswordEqaulsAlert = false;
+  loginSuccess = false;
+  loginFail = false;
+  showPasswordEqaulsAlert = false;
 
   private email: string;
   private password: string;
