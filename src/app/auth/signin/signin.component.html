@@ -1,72 +1,71 @@
 <div id="sign-container">
   <div class="container">
     <div class="row">
-      <div class="col-sm-10 col-md-8 col-lg-6 offset-sm-1 offset-md-2 offset-lg-4">
+      <mat-card class="col-10 col-sm-10 col-md-8 col-lg-6 offset-1 offset-sm-1 offset-md-2 offset-lg-3">
         <form (ngSubmit)="onSignin(f)" #f="ngForm">
-          <mat-card>
-            <mat-card-title-group>
-              <mat-card-title>
-                <div class="projectName">
-                  {{projectName}}
-                </div>
-              </mat-card-title>
-
-              <mat-card-title>
-                DatePoll | {{ 'SIGNIN' | translate }}
-              </mat-card-title>
-            </mat-card-title-group>
-
-            <mat-card-content>
-              <div class="row" *ngIf="loginSuccess">
-                <mat-card style="background-color: #43A047;" matRipple>
-                  <mat-card-content class="last-child">{{'SIGNIN_SUCCESSFUL' | translate}}</mat-card-content>
-                </mat-card>
+          <mat-card-title-group>
+            <mat-card-title>
+              <div class="projectName">
+                {{projectName}}
               </div>
+            </mat-card-title>
 
-              <div class="row" *ngIf="loginFail">
-                <mat-card style="background-color: #E65100;  color: white" matRipple>
-                  <mat-card-content class="last-child">{{'SIGNIN_EMAIL_OR_PASSWORD_INCORRECT' | translate}}</mat-card-content>
-                </mat-card>
-              </div>
+            <mat-card-title>
+              DatePoll | {{ 'SIGNIN' | translate }}
+            </mat-card-title>
+          </mat-card-title-group>
+
+          <mat-card-content>
+            <div class="row" *ngIf="loginSuccess">
+              <mat-card style="background-color: #43A047;" matRipple>
+                <mat-card-content class="last-child">{{'SIGNIN_SUCCESSFUL' | translate}}</mat-card-content>
+              </mat-card>
+            </div>
+
+            <div class="row" *ngIf="loginFail">
+              <mat-card style="background-color: #E65100;  color: white" matRipple>
+                <mat-card-content
+                  class="last-child">{{'SIGNIN_EMAIL_OR_PASSWORD_INCORRECT' | translate}}</mat-card-content>
+              </mat-card>
+            </div>
 
 
-              <div class="row">
-                <mat-form-field class="col-12">
-                  <span matPrefix>@ &nbsp;</span>
-                  <input matInput ngModel
-                         id="email" name="email" type="email"
-                         email required minlength="5"
-                         placeholder="{{'SIGNIN_EMAIL' | translate}}">
-                  <mat-icon matSuffix>email</mat-icon>
-                </mat-form-field>
-              </div>
+            <div class="row">
+              <mat-form-field class="col-12">
+                <span matPrefix>@ &nbsp;</span>
+                <input matInput ngModel
+                       id="email" name="email" type="email"
+                       email required minlength="5"
+                       placeholder="{{'SIGNIN_EMAIL' | translate}}">
+                <mat-icon matSuffix>email</mat-icon>
+              </mat-form-field>
+            </div>
 
-              <div class="row">
-                <mat-form-field class="col-12">
-                  <input matInput ngModel
-                         id="password" name="password" type="password"
-                         minlength="5" required
-                         placeholder="{{'SIGNIN_PASSWORD' | translate}}">
-                  <mat-hint align="start"><strong>{{'SIGNIN_KEEP_YOUR_PASSWORD_SECRET' | translate}}</strong></mat-hint>
-                </mat-form-field>
-              </div>
-            </mat-card-content>
+            <div class="row">
+              <mat-form-field class="col-12">
+                <input matInput ngModel
+                       id="password" name="password" type="password"
+                       minlength="5" required
+                       placeholder="{{'SIGNIN_PASSWORD' | translate}}">
+                <mat-hint align="start"><strong>{{'SIGNIN_KEEP_YOUR_PASSWORD_SECRET' | translate}}</strong></mat-hint>
+              </mat-form-field>
+            </div>
+          </mat-card-content>
 
-            <mat-card-actions>
-              <button mat-raised-button routerLink="/signup">{{ 'SIGNIN_NOT_SIGNED_UP' | translate }}</button>
+          <mat-card-actions>
+            <button mat-raised-button routerLink="/signup">{{ 'SIGNIN_NOT_SIGNED_UP' | translate }}</button>
 
-              <button
-                mat-raised-button
-                color="primary"
-                type="submit"
-                [disabled]="!f.valid">
-                {{ 'SIGNIN' | translate }}
-                <mat-icon aria-label="Example icon-button with a heart icon">send</mat-icon>
-              </button>
-            </mat-card-actions>
-          </mat-card>
+            <button
+              mat-raised-button
+              color="primary"
+              type="submit"
+              [disabled]="!f.valid">
+              {{ 'SIGNIN' | translate }}
+              <mat-icon aria-label="Example icon-button with a heart icon">send</mat-icon>
+            </button>
+          </mat-card-actions>
         </form>
-      </div>
+      </mat-card>
     </div>
   </div>
 </div>
