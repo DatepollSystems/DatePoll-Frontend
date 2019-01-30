@@ -36,8 +36,9 @@ export class CinemaService {
 
   public addMovie(movie: any) {
     const headers = new Headers({'Content-Type' : 'application/json'});
+    const token = this.authService.getToken();
 
-    return this.http.post(this.apiUrl + '/v1/cinema/movie', movie, {headers: headers});
+    return this.http.post(this.apiUrl + '/v1/cinema/movie?token=' + token, movie, {headers: headers});
   }
 
   public updateMovie(movieID: number, movie: any) {
@@ -176,8 +177,9 @@ export class CinemaService {
 
   public addYear(year: any) {
     const headers = new Headers({'Content-Type' : 'application/json'});
+    const token = this.authService.getToken();
 
-    return this.http.post(this.apiUrl + '/v1/cinema/year', year, {headers: headers});
+    return this.http.post(this.apiUrl + '/v1/cinema/year?token=' + token, year, {headers: headers});
   }
 
   public getYears(): Year[] {
