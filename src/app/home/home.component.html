@@ -1,7 +1,7 @@
 <mat-sidenav-container>
   <mat-sidenav #sidenav [mode]="navBarMode" [(opened)]="navBarOpened">
     <div class="sidenav-head">
-      <img class="sidenav-head-avatar" src="./../../assets/sidenav-demo-avatar.png" />
+      <img class="sidenav-head-avatar" src="./../../assets/sidenav-demo-avatar.png"/>
 
       <div class="sidenav-head-entry row">
         <div class="col-12"> {{firstname}} {{surname}}</div>
@@ -12,28 +12,32 @@
     </div>
 
     <mat-nav-list>
-      <a mat-list-item routerLink="/home">
-        Home<mat-icon>home</mat-icon>
-      </a>
+      <a mat-list-item routerLink="/home"><mat-icon>home</mat-icon> Home</a>
       <mat-divider></mat-divider>
 
       <div *ngIf="showPoll">
-          <a mat-list-item>{{'NAV_POLLS' | translate}}</a>
+        <a mat-list-item>{{'NAV_POLLS' | translate}}</a>
 
-          <a mat-list-item>{{'NAV_ANALYSES' | translate}}</a>
+        <a mat-list-item>{{'NAV_ANALYSES' | translate}}</a>
 
-          <a mat-list-item>{{'NAV_ADMINISTRATION' | translate}}</a>
+        <a mat-list-item>{{'NAV_ADMINISTRATION' | translate}}</a>
         <mat-divider></mat-divider>
       </div>
 
       <div *ngIf="showCinema">
-          <a mat-list-item routerLink="cinema/tickets" routerLinkActive="activated">{{'NAV_TICKETS' | translate}}</a>
-          <a mat-list-item routerLink="cinema/service" routerLinkActive="activated">{{'NAV_CINEMA_SERVICE' | translate}}</a>
-          <a mat-list-item routerLink="cinema/administration" routerLinkActive="activated">{{'NAV_ADMINISTRATION' | translate}}</a>
+        <a mat-list-item routerLink="cinema/tickets" routerLinkActive="activated">{{'NAV_TICKETS' | translate}}</a>
+        <a mat-list-item routerLink="cinema/service"
+           routerLinkActive="activated">{{'NAV_CINEMA_SERVICE' | translate}}</a>
+        <a mat-list-item routerLink="cinema/administration"
+           routerLinkActive="activated">{{'NAV_ADMINISTRATION' | translate}}</a>
         <mat-divider></mat-divider>
       </div>
 
       <a mat-list-item routerLink="settings" routerLinkActive="activated">{{ 'NAV_SETTINGS' | translate }}</a>
+
+      <a mat-list-item (click)="logout()" style="position: absolute; bottom: 0; left: 0;">
+        <mat-icon>power_settings_new</mat-icon> Logout
+      </a>
     </mat-nav-list>
   </mat-sidenav>
 

@@ -1,7 +1,11 @@
 import {Component, NgZone, ViewChild} from '@angular/core';
-import {MyUserService} from '../auth/my-user.service';
-import {Subscription} from 'rxjs';
 import {MatSidenav} from '@angular/material';
+import {Router} from '@angular/router';
+import {Subscription} from 'rxjs';
+
+import {MyUserService} from '../auth/my-user.service';
+import {AuthService} from '../auth/auth.service';
+
 
 @Component({
   selector: 'app-home',
@@ -26,7 +30,11 @@ export class HomeComponent {
   private surnameSubscription: Subscription;
   private emailSubscription: Subscription;
 
-  constructor(private ngZone: NgZone, private myUserService: MyUserService) {
+  constructor(
+    private ngZone: NgZone,
+    private myUserService: MyUserService,
+    private authService: AuthService,
+    private router: Router) {
     if ((window.screen.width) > 992) {
       this.navBarOpened = true;
       this.navBarMode = 'side';
@@ -71,6 +79,14 @@ export class HomeComponent {
       setTimeout(() => {
         this.sidenav.open();
       }, 250);
+    }
+  }
+
+  logout() {
+    if (this.authService.logout()) {
+      this.router.navigate(['/signin']);
+    } else {
+      console.log('homeComponent | logout | Something went wrong');
     }
   }
 

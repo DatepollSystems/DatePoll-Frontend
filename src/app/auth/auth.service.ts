@@ -20,17 +20,16 @@ export class AuthService {
     private http: Http,
     private router: Router,
     private cookieService: CookieService,
-    private snackBar: MatSnackBar) {
-  }
+    private snackBar: MatSnackBar) { }
 
-  signupUser(email: string, password: string) {
+  public signupUser(email: string, password: string) {
     // firebase.auth().createUserWithEmailAndPassword(email, password)
     //   .catch(
     //     error => console.log(error)
     //   );
   }
 
-  signinUser(email: string, password: string) {
+  public signinUser(email: string, password: string) {
     this._email = email;
     this._password = password;
 
@@ -42,6 +41,23 @@ export class AuthService {
     };
 
     return this.http.post(this.apiUrl + '/auth/signin', signInObject, {headers: headers});
+  }
+
+  public logout() {
+    let cookieEnabled = (navigator.cookieEnabled);
+
+    if (typeof navigator.cookieEnabled === 'undefined' && !cookieEnabled) {
+      document.cookie = 'testcookie';
+      cookieEnabled = (document.cookie.indexOf('testcookie') !== -1);
+    }
+
+    if (cookieEnabled) {
+      this.cookieService.remove('token');
+    }
+
+    this._token = null;
+    console.log('authService | Logout successful');
+    return true;
   }
 
   public getToken(): string {
@@ -76,12 +92,39 @@ export class AuthService {
   }
 
   public setToken(token: string) {
-    this.cookieService.put('token', token, {expires: 'Tue, 24-Jan-2050 12:12:12 GMT'});
+    let cookieEnabled = (navigator.cookieEnabled);
+
+    if (typeof navigator.cookieEnabled === 'undefined' && !cookieEnabled) {
+      document.cookie = 'testcookie';
+      cookieEnabled = (document.cookie.indexOf('testcookie') !== -1);
+    }
+
+    const twentyMinutesLater = new Date();
+    twentyMinutesLater.setMinutes(twentyMinutesLater.getMinutes() + 60);
+
+    if (cookieEnabled) {
+      this.cookieService.put('token', token, {expires: twentyMinutesLater});
+    }
     this._token = token;
   }
 
   public isAutenticated(): boolean {
-    // TODO: cookie logged in etc
+    let cookieEnabled = (navigator.cookieEnabled);
+
+    if (typeof navigator.cookieEnabled === 'undefined' && !cookieEnabled) {
+      document.cookie = 'testcookie';
+      cookieEnabled = (document.cookie.indexOf('testcookie') !== -1);
+    }
+
+    if (cookieEnabled) {
+      console.log('authService | Cookies enabled!');
+      if (this.cookieService.get('token') == null) {
+        return false;
+      } else {
+        this._token = this.cookieService.get('token');
+      }
+    }
+
     return this._token != null;
   }
 }
