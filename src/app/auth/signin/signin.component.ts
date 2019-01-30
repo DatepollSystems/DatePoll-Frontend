@@ -1,9 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {NgForm} from '@angular/forms';
-import {AuthService} from '../auth.service';
 import {Response} from '@angular/http';
 import {Router} from '@angular/router';
 import {MatSnackBar} from '@angular/material';
+
+import {AuthService} from '../auth.service';
 
 @Component({
   selector: 'app-signin',
@@ -22,7 +23,8 @@ export class SigninComponent implements OnInit {
   private email: string;
   private password: string;
 
-  constructor(private router: Router, private snackBar: MatSnackBar, private authService: AuthService) { }
+  constructor(private router: Router, private snackBar: MatSnackBar, private authService: AuthService) {
+  }
 
   ngOnInit(): void {
     if (this.authService.isAutenticated()) {

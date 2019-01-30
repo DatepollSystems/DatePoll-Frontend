@@ -1,4 +1,7 @@
-@font-face { font-family: signFont; src: url('../../../assets/fonts/signFont.TTF'); }
+@font-face {
+  font-family: signFont;
+  src: url('../../../assets/fonts/signFont.TTF');
+}
 
 #sign-container {
   background: url("../../../assets/signBackground.svg") no-repeat;

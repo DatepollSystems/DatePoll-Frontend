@@ -1,4 +1,4 @@
-import {Component, NgZone, ViewChild} from '@angular/core';
+import {Component, NgZone, OnInit, ViewChild} from '@angular/core';
 import {MatSidenav} from '@angular/material';
 import {Router} from '@angular/router';
 import {Subscription} from 'rxjs';
@@ -12,7 +12,7 @@ import {AuthService} from '../auth/auth.service';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit {
   navBarOpened = false;
   navBarMode = 'over';
 
@@ -73,6 +73,12 @@ export class HomeComponent {
     });
   }
 
+  ngOnInit(): void {
+    if (!this.authService.isAutenticated()) {
+      this.router.navigate(['/signin']);
+    }
+  }
+
   resizeNav() {
     if (this.navBarOpened) {
       this.sidenav.close();
@@ -89,5 +95,4 @@ export class HomeComponent {
       console.log('homeComponent | logout | Something went wrong');
     }
   }
-
 }

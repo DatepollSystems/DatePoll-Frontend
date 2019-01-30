@@ -35,14 +35,14 @@ export class CinemaService {
   }
 
   public addMovie(movie: any) {
-    const headers = new Headers({'Content-Type' : 'application/json'});
+    const headers = new Headers({'Content-Type': 'application/json'});
     const token = this.authService.getToken();
 
     return this.http.post(this.apiUrl + '/v1/cinema/movie?token=' + token, movie, {headers: headers});
   }
 
   public updateMovie(movieID: number, movie: any) {
-    const headers = new Headers({'Content-Type' : 'application/json'});
+    const headers = new Headers({'Content-Type': 'application/json'});
 
     return this.http.put(this.apiUrl + '/v1/cinema/movie/' + movieID, movie, {headers: headers});
   }
@@ -176,7 +176,7 @@ export class CinemaService {
 
 
   public addYear(year: any) {
-    const headers = new Headers({'Content-Type' : 'application/json'});
+    const headers = new Headers({'Content-Type': 'application/json'});
     const token = this.authService.getToken();
 
     return this.http.post(this.apiUrl + '/v1/cinema/year?token=' + token, year, {headers: headers});

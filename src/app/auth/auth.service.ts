@@ -18,7 +18,8 @@ export class AuthService {
     private http: Http,
     private router: Router,
     private cookieService: CookieService,
-    private snackBar: MatSnackBar) { }
+    private snackBar: MatSnackBar) {
+  }
 
   public signupUser(email: string, password: string) {
     // firebase.auth().createUserWithEmailAndPassword(email, password)
