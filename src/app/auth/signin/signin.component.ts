@@ -10,11 +10,17 @@ import {MatSnackBar} from '@angular/material';
   templateUrl: './signin.component.html',
   styleUrls: ['./signin.component.css']
 })
-export class SigninComponent implements OnInit{
-  projectName = 'priv. uni. Buergerkorps Eggenburg';
+export class SigninComponent implements OnInit {
+  private projectName = 'priv. uni. Buergerkorps Eggenburg';
 
-  loginSuccess = false;
-  loginFail = false;
+  private state = 'login';
+
+  private loginSuccess = false;
+  private loginFail = false;
+  private showPasswordEqaulsAlert = false;
+
+  private email: string;
+  private password: string;
 
   constructor(private router: Router, private snackBar: MatSnackBar, private authService: AuthService) { }
 
@@ -25,19 +31,22 @@ export class SigninComponent implements OnInit{
   }
 
   onSignin(form: NgForm) {
-    const email = form.value.email;
-    const password = form.value.password;
+    this.email = form.value.email;
+    this.password = form.value.password;
 
-    this.authService.signinUser(email, password).subscribe(
+    this.authService.signinUser(this.email, this.password).subscribe(
       (response: Response) => {
         const data = response.json();
         console.log(data);
-        this.authService.setToken(data.token);
-        console.log('signIn | token: ' + data.token);
-        this.loginSuccess = true;
-        this.loginFail = false;
-        this.router.navigate(['/home']);
-        this.snackBar.open('Login erfolgreich');
+        if (data.msg != null) {
+          if (data.msg === 'changePassword') {
+            this.state = data.msg;
+          }
+
+          return;
+        }
+
+        this.performLogin(data.token);
       },
       (error) => {
         console.log(error);
@@ -45,6 +54,33 @@ export class SigninComponent implements OnInit{
         this.loginSuccess = false;
       }
     );
+  }
+
+  onChangePasswordAfterSignin(form: NgForm) {
+    const password = form.value.password;
+    const password_repeat = form.value.password_repeat;
+
+    if (password !== password_repeat) {
+      this.showPasswordEqaulsAlert = true;
+      return;
+    }
+    this.showPasswordEqaulsAlert = false;
+
+    this.authService.changePasswordAfterSignin(this.email, this.password, password).subscribe(
+      (response: Response) => {
+        const data = response.json();
+        this.performLogin(data.token);
+      }, (error) => console.log(error)
+    );
+  }
+
+  private performLogin(token: string) {
+    this.authService.setToken(token);
+    console.log('signIn | token: ' + token);
+    this.loginSuccess = true;
+    this.loginFail = false;
+    this.router.navigate(['/home']);
+    this.snackBar.open('Login erfolgreich');
   }
 
 }

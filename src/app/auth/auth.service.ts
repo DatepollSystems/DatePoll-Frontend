@@ -13,8 +13,6 @@ export class AuthService {
   private apiUrl = environment.apiUrl;
 
   private _token: string = null;
-  private _email;
-  private _password;
 
   constructor(
     private http: Http,
@@ -30,9 +28,6 @@ export class AuthService {
   }
 
   public signinUser(email: string, password: string) {
-    this._email = email;
-    this._password = password;
-
     const headers = new Headers({'Content-Type': 'application/json'});
 
     const signInObject = {
@@ -41,6 +36,18 @@ export class AuthService {
     };
 
     return this.http.post(this.apiUrl + '/auth/signin', signInObject, {headers: headers});
+  }
+
+  public changePasswordAfterSignin(email: string, oldPassword: string, newPassword: string) {
+    const headers = new Headers({'Content-Type': 'application/json'});
+
+    const changePasswordAfterSigninObject = {
+      'email': email,
+      'old_password': oldPassword,
+      'new_password': newPassword
+    };
+
+    return this.http.post(this.apiUrl + '/auth/changePasswortAfterSignin', changePasswordAfterSigninObject, {headers: headers});
   }
 
   public logout() {

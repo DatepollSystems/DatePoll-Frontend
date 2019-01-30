@@ -17,3 +17,8 @@
   margin-top: 2vh;
   margin-bottom: 2vh;
 }
+
+.my-alert {
+  margin: 10px 15px;
+  width: 100%;
+}
