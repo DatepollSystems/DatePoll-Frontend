@@ -68,12 +68,17 @@ export class AuthService {
     return true;
   }
 
-  public getToken(): string {
+  public getToken(functionUser: string = null): string {
     if (this._token == null && this.cookieService.get('token') == null) {
       this.router.navigate(['/signin']);
     } else if (this._token == null) {
       this._token = this.cookieService.get('token');
-      console.log('authService | get token from cookie: ' + this._token);
+
+      if (functionUser != null) {
+        console.log('authService | ' + functionUser + ' | get token from cookie: ' + this._token);
+      } else {
+        console.log('authService | get token from cookie: ' + this._token);
+      }
     }
 
     const headers = new Headers({'Content-Type': 'application/json'});
@@ -86,7 +91,11 @@ export class AuthService {
         const data = response.json();
         console.log(data);
         this.setToken(data.token);
-        console.log('authService | getToken | refresh | new token: ' + data.token);
+        if (functionUser != null) {
+          console.log('authService | ' + functionUser + ' | getToken | refresh | new token: ' + data.token);
+        } else {
+          console.log('authService | getToken | refresh | new token: ' + data.token);
+        }
       },
       (error) => {
         console.log(error);
@@ -116,7 +125,7 @@ export class AuthService {
     this._token = token;
   }
 
-  public isAutenticated(): boolean {
+  public isAutenticated(functionUser: string = null): boolean {
     let cookieEnabled = (navigator.cookieEnabled);
 
     if (typeof navigator.cookieEnabled === 'undefined' && !cookieEnabled) {
@@ -125,12 +134,14 @@ export class AuthService {
     }
 
     if (cookieEnabled) {
-      console.log('authService | Cookies enabled!');
+      console.log('authService | ' + functionUser + ' | Cookies enabled');
       if (this.cookieService.get('token') == null) {
         return false;
       } else {
         this._token = this.cookieService.get('token');
       }
+    } else {
+      console.log('authService | ' + functionUser + ' | Cookies disabled');
     }
 
     return this._token != null;

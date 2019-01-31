@@ -35,6 +35,7 @@ export class HomeComponent implements OnInit {
     private myUserService: MyUserService,
     private authService: AuthService,
     private router: Router) {
+
     if ((window.screen.width) > 992) {
       this.navBarOpened = true;
       this.navBarMode = 'side';
@@ -66,7 +67,6 @@ export class HomeComponent implements OnInit {
       this.resizeNav();
     });
 
-
     this.emailSubscription = myUserService.emailChange.subscribe((value) => {
       this.email = value;
       this.resizeNav();
@@ -74,9 +74,12 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (!this.authService.isAutenticated()) {
+    if (!this.authService.isAutenticated('homeComponent')) {
       this.router.navigate(['/signin']);
+      return;
     }
+
+    this.myUserService.fetchMyself();
   }
 
   resizeNav() {

@@ -22,30 +22,10 @@ mat-sidenav {
   max-width: 320px;
 }
 
-/* Overwrite default behaviour */
-mat-nav-list {
-  padding: 0;
-}
-
-.sidenav-head {
-  background: url("./../../assets/sidenav-background.svg") no-repeat;
-  background-size: cover;
-  padding: 20px;
-}
-
-.sidenav-head-entry {
-  color: white;
+.sidenav-head-text {
+  margin-left: 15px;
   margin-top: 15px;
-  text-align: center;
-  font-size: 16px;
-  word-break: break-all;
-  max-width: 320px;
-}
-
-.sidenav-head-avatar {
-  height: 10vh;
-  margin-left: 25%;
-  margin-right: 25%;
+  margin-right: 15px;
 }
 
 .activated {

@@ -36,19 +36,21 @@ export class CinemaService {
 
   public addMovie(movie: any) {
     const headers = new Headers({'Content-Type': 'application/json'});
-    const token = this.authService.getToken();
+    const token = this.authService.getToken('addMovie');
 
     return this.http.post(this.apiUrl + '/v1/cinema/movie?token=' + token, movie, {headers: headers});
   }
 
   public updateMovie(movieID: number, movie: any) {
+    const token = this.authService.getToken('updateMovie');
     const headers = new Headers({'Content-Type': 'application/json'});
 
-    return this.http.put(this.apiUrl + '/v1/cinema/movie/' + movieID, movie, {headers: headers});
+    return this.http.put(this.apiUrl + '/v1/cinema/movie/' + movieID + '?token=' + token, movie, {headers: headers});
   }
 
   public deleteMovie(movieID: number) {
-    return this.http.delete(this.apiUrl + '/v1/cinema/movie/' + movieID);
+    const token = this.authService.getToken('deleteMovie');
+    return this.http.delete(this.apiUrl + '/v1/cinema/movie/' + movieID + '?token=' + token);
   }
 
   public getMovies(): Movie[] {
@@ -108,7 +110,7 @@ export class CinemaService {
   }
 
   private fetchMovies() {
-    const token = this.authService.getToken();
+    const token = this.authService.getToken('fetchMovies');
 
     return this.http.get(this.apiUrl + '/v1/cinema/movie?token=' + token).pipe(map(
       (response: Response) => {
@@ -163,7 +165,7 @@ export class CinemaService {
   }
 
   private fetchNotShownMovies() {
-    const token = this.authService.getToken();
+    const token = this.authService.getToken('fetchNotShownMovies');
 
     return this.http.get(this.apiUrl + '/v1/cinema/notShownMovies?token=' + token).pipe(map(
       (response: Response) => {
@@ -177,7 +179,7 @@ export class CinemaService {
 
   public addYear(year: any) {
     const headers = new Headers({'Content-Type': 'application/json'});
-    const token = this.authService.getToken();
+    const token = this.authService.getToken('addYear');
 
     return this.http.post(this.apiUrl + '/v1/cinema/year?token=' + token, year, {headers: headers});
   }
@@ -226,7 +228,7 @@ export class CinemaService {
   }
 
   private fetchYears() {
-    const token = this.authService.getToken();
+    const token = this.authService.getToken('fetchYears');
 
     return this.http.get(this.apiUrl + '/v1/cinema/year?token=' + token).pipe(map(
       (response: Response) => {

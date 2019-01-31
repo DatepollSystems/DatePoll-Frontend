@@ -53,20 +53,19 @@ export class MovieCreateModalComponent {
   }
 
   addMovie(yearID: number) {
-    const dd = this.date.getDate();
-    const mm = this.date.getMonth() + 1;
+    const d = new Date(this.date);
+    let month = '' + (d.getMonth() + 1),
+      day = '' + d.getDate();
+    const year = d.getFullYear();
 
-    let ddd;
-    let mmm;
+    if (month.length < 2) {
+      month = '0' + month;
+    }
+    if (day.length < 2) {
+      day = '0' + day;
+    }
 
-    const yyyy = this.date.getFullYear();
-    if (dd < 10) {
-      ddd = '0' + dd;
-    }
-    if (mm < 10) {
-      mmm = '0' + mm;
-    }
-    const dateformat = yyyy + '-' + mmm + '-' + ddd;
+    const dateformat = [year, month, day].join('-');
 
     const movieObject = {
       'name': this.name,

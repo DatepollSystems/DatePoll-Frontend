@@ -39,7 +39,7 @@
       <mat-form-field class="col-12 " id="datepicker-field">
         <input matInput [matDatepicker]="picker"
                id="datepicker" name="datepicker" [(ngModel)]="birthday"
-               placeholder="{{'SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_BIRTHDAY' | translate}}">
+               required placeholder="{{'SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_BIRTHDAY' | translate}}">
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
@@ -57,7 +57,7 @@
       <mat-form-field class="col-8 col-sm-8 col-md-10 col-lg-10">
         <input matInput id="streetname" name="streetname" type="text"
                [(ngModel)]="streetname" ngModel #streetnameModel="ngModel"
-               maxlength="128"
+               required maxlength="128"
                placeholder="{{'SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_STREETNAME' | translate}}">
         <mat-error *ngIf="streetnameModel.invalid">
           {{'SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_STREETNAME_NOT_VALID' | translate}}
@@ -67,7 +67,7 @@
       <mat-form-field class="col-4 col-sm-4 col-md-2 col-lg-2">
         <input matInput id="streetnumber" name="streetnumber" type="text"
                [(ngModel)]="streetnumber" ngModel #streetnumberModel="ngModel"
-               maxlength="16"
+               required maxlength="16"
                placeholder="{{'SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_STREETNUMBER' | translate}}">
         <mat-error *ngIf="streetnumberModel.invalid">
           {{'SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_STREETNUMBER_NOT_VALID' | translate}}
@@ -79,7 +79,7 @@
       <mat-form-field class="col-4 col-sm-4 col-md-3 col-lg-3">
         <input matInput id="zipcode" name="zipcode" type="number"
                [(ngModel)]="zipcode" ngModel #zipcodeModel="ngModel"
-               [range]="[1000, 9999]" number
+               required [range]="[1000, 9999]" number
                placeholder="{{'SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_ZIPCODE' | translate}}">
         <mat-error *ngIf="zipcodeModel.invalid">
           {{'SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_ZIPCODE_NOT_VALID' | translate}}
@@ -89,7 +89,7 @@
       <mat-form-field class="col-8 col-sm-8 col-md-9 col-lg-9">
         <input matInput id="location" name="location" type="text"
                [(ngModel)]="location" ngModel #locationModel="ngModel"
-               maxlength="128"
+               required maxlength="128"
                placeholder="{{'SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_LOCATION' | translate}}">
         <mat-error *ngIf="locationModel.invalid">
           {{'SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_LOCATION_NOT_VALID' | translate}}

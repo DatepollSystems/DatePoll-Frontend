@@ -1,17 +1,21 @@
 <mat-sidenav-container>
   <mat-sidenav #sidenav [mode]="navBarMode" [(opened)]="navBarOpened">
-    <div class="sidenav-head">
-      <img class="sidenav-head-avatar" src="./../../assets/sidenav-demo-avatar.png"/>
+    <!--<div class="sidenav-head">-->
+      <!--&lt;!&ndash;<img class="sidenav-head-avatar" src="./../../assets/sidenav-demo-avatar.png"/>&ndash;&gt;-->
 
-      <div class="sidenav-head-entry row">
-        <div class="col-12"> {{firstname}} {{surname}}</div>
-      </div>
-      <div class="sidenav-head-entry row">
-        <div class="col-12">{{email}}</div>
-      </div>
-    </div>
+      <!--<div class="sidenav-head-entry row">-->
+        <!--<div class="col-12"> {{firstname}} {{surname}}</div>-->
+      <!--</div>-->
+      <!--<div class="sidenav-head-entry row">-->
+        <!--<div class="col-12">{{email}}</div>-->
+      <!--</div>-->
+    <!--</div>-->
+
+    <h2 class="sidenav-head-text">Hallo {{firstname}},</h2>
+    <h4 class="sidenav-head-text">{{email}}</h4>
 
     <mat-nav-list>
+      <mat-divider></mat-divider>
       <a mat-list-item routerLink="/home"><mat-icon>home</mat-icon> Home</a>
       <mat-divider></mat-divider>
 

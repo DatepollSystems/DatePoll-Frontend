@@ -1,6 +1,16 @@
 import {Subject} from 'rxjs';
+import {Headers, Http, Response} from '@angular/http';
+import {environment} from '../../environments/environment';
+import {map} from 'rxjs/operators';
+import {Injectable} from '@angular/core';
+import {AuthService} from './auth.service';
 
+@Injectable({
+  providedIn: 'root'
+})
 export class MyUserService {
+  apiUrl = environment.apiUrl;
+
   private _ID: number;
 
   private _title: string;
@@ -22,24 +32,80 @@ export class MyUserService {
   public surnameChange: Subject<string> = new Subject<string>();
   public emailChange: Subject<string> = new Subject<string>();
 
-  constructor() {
+  constructor(private http: Http, private authService: AuthService) {
+    this.fetchMyself();
     this._phoneNumbers = [];
-
-    this.setID(1);
-    this.setTitle('Dr.');
-    this.setFirstname('Max');
-    this.setSurname('Musterboy');
-    this.setEmail('max.musterboy@gmail.com');
-    this.setStreetname('Kasernstraße');
-    this.setStreetnumber('6-12');
-    this.setZipcode(3500);
-    this.setLocation('Krems');
-    this.setBirthday(new Date('2000-12-24'));
-    this.setJoindate(new Date('2000-12-24'));
 
     this._phoneNumbers.push(new PhoneNumber('Home', '+43 664 2567390'));
     this._phoneNumbers.push(new PhoneNumber('Work', '+43 664 5925905'));
     this._phoneNumbers.push(new PhoneNumber('Private', '+43 664 7590367'));
+  }
+
+  fetchMyself() {
+    if (this.authService.isAutenticated('fetchMyself')) {
+      const token = this.authService.getToken('fetchMyself');
+
+      this.http.get(this.apiUrl + '/v1/user/myself?token=' + token).pipe(map(
+        (response: Response) => {
+          const data = response.json();
+          console.log(data);
+          return data;
+        }
+      )).subscribe(
+        (data: any) => {
+          this.setID(data.id);
+          this.setTitle(data.title);
+          this.setFirstname(data.firstname);
+          this.setSurname(data.surname);
+          this.setEmail(data.email);
+          this.setStreetname(data.streetname);
+          this.setStreetnumber(data.streetnumber);
+          this.setZipcode(data.zipcode);
+          this.setLocation(data.location);
+          this.setBirthday(data.birthday);
+          this.setJoindate(data.join_date);
+        },
+        (error) => console.log(error)
+      );
+    }
+  }
+
+  updateMyself() {
+    const token = this.authService.getToken('updateMyself');
+    const headers = new Headers({'Content-Type': 'application/json'});
+
+    const d = new Date(this.getBirthday());
+    let month = '' + (d.getMonth() + 1),
+      day = '' + d.getDate();
+    const year = d.getFullYear();
+
+    if (month.length < 2) {
+      month = '0' + month;
+    }
+    if (day.length < 2) {
+      day = '0' + day;
+    }
+
+    const dateformat = [year, month, day].join('-');
+
+    const userObject = {
+      'title': this.getTitle(),
+      'firstname': this.getFirstname(),
+      'surname': this.getSurname(),
+      'streetname': this.getStreetname(),
+      'streetnumber': this.getStreetnumber(),
+      'zipcode': this.getZipcode(),
+      'location': this.getLocation(),
+      'birthday': dateformat
+    };
+
+    this.http.put(this.apiUrl + '/v1/user/myself?token=' + token, userObject, {headers: headers}).subscribe(
+      (response: Response) => {
+        const data = response.json();
+        console.log(data);
+      },
+      (error) => console.log(error)
+    );
   }
 
   setID(ID: number) {
