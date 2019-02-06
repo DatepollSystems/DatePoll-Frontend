@@ -1,7 +1,7 @@
 import {AfterViewInit, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {Response} from '@angular/http';
 import {FormControl} from '@angular/forms';
-import {MatDialog, MatSelect, MatTableDataSource} from '@angular/material';
+import {MatDialog, MatSelect, MatSort, MatTableDataSource} from '@angular/material';
 
 import {ReplaySubject, Subject, Subscription} from 'rxjs';
 import {take, takeUntil} from 'rxjs/operators';
@@ -23,6 +23,8 @@ export class MovieAdministrationComponent implements OnInit, AfterViewInit, OnDe
   // @ViewChild(MatPaginator) paginator: MatPaginator;
   displayedColumns: string[] = ['name', 'date', 'trailer', 'poster', 'worker', 'emergencyWorker', 'bookedTickets', 'deleteMovie'];
   filterValue: string = null;
+
+  @ViewChild(MatSort) sort: MatSort;
 
   /** control for the selected years */
   public yearCtrl: FormControl = new FormControl();
@@ -63,6 +65,7 @@ export class MovieAdministrationComponent implements OnInit, AfterViewInit, OnDe
     this.movies = this.cinemaService.getMovies();
     if (this.selectedYear === null) {
       this.dataSource = new MatTableDataSource(this.movies);
+      this.dataSource.sort = this.sort;
     } else {
       this.refreshTable();
     }
@@ -72,6 +75,7 @@ export class MovieAdministrationComponent implements OnInit, AfterViewInit, OnDe
 
       if (this.selectedYear === null) {
         this.dataSource = new MatTableDataSource(this.movies);
+        this.dataSource.sort = this.sort;
       } else {
         this.refreshTable();
       }
@@ -114,11 +118,13 @@ export class MovieAdministrationComponent implements OnInit, AfterViewInit, OnDe
     }
 
     this.dataSource = new MatTableDataSource(moviesToShow);
+    this.dataSource.sort = this.sort;
   }
 
   applyFilter(filterValue: string) {
     this.filterValue = filterValue;
     this.dataSource.filter = this.filterValue.trim().toLowerCase();
+    this.dataSource.sort = this.sort;
 
     // if (this.dataSource.paginator) {
     //   this.dataSource.paginator.firstPage();
@@ -168,6 +174,7 @@ export class MovieAdministrationComponent implements OnInit, AfterViewInit, OnDe
     }
 
     this.dataSource = new MatTableDataSource(moviesToShow);
+    this.dataSource.sort = this.sort;
     if (this.filterValue !== null) {
       this.applyFilter(this.filterValue);
     }
