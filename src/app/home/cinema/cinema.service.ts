@@ -9,6 +9,7 @@ import {map} from 'rxjs/operators';
 import {Movie} from './movie';
 import {Year} from './year';
 import {AuthService} from '../../auth/auth.service';
+import {HttpService} from '../../http.service';
 
 @Injectable({
   providedIn: 'root'
@@ -28,7 +29,7 @@ export class CinemaService {
   private _years: Year[];
   public yearsChange: Subject<Year[]> = new Subject<Year[]>();
 
-  constructor(private http: Http, private authService: AuthService) {
+  constructor(private http: Http, private authService: AuthService, private httpService: HttpService) {
     this._movies = [];
     this._notShownMovies = [];
     this._years = [];
@@ -93,8 +94,10 @@ export class CinemaService {
     }
 
     if (fetchMovies || force) {
-      this.fetchMovies().subscribe(
-        (fetchedMovies: any[]) => {
+      this.httpService.loggedInV1GETRequest('/cinema/movie', 'fetchMovies').subscribe(
+        (data: any) => {
+          const fetchedMovies = data.movies;
+
           const movies = [];
           for (const movie of fetchedMovies) {
             const date = new Date(movie.date);
@@ -107,18 +110,6 @@ export class CinemaService {
         (error) => console.log(error)
       );
     }
-  }
-
-  private fetchMovies() {
-    const token = this.authService.getToken('fetchMovies');
-
-    return this.http.get(this.apiUrl + '/v1/cinema/movie?token=' + token).pipe(map(
-      (response: Response) => {
-        const data = response.json();
-        console.log(data);
-        return data.movies;
-      }
-    ));
   }
 
 
@@ -148,8 +139,10 @@ export class CinemaService {
     }
 
     if (this._notShownMovies.length === 0) {
-      this.fetchNotShownMovies().subscribe(
-        (fetchedMovies: any[]) => {
+      this.httpService.loggedInV1GETRequest('/cinema/notShownMovies', 'fetchNotShownMovies').subscribe(
+        (data: any) => {
+          const fetchedMovies = data.movies;
+
           const movies = [];
           for (const movie of fetchedMovies) {
             const date = new Date(movie.date);
@@ -162,18 +155,6 @@ export class CinemaService {
         (error) => console.log(error)
       );
     }
-  }
-
-  private fetchNotShownMovies() {
-    const token = this.authService.getToken('fetchNotShownMovies');
-
-    return this.http.get(this.apiUrl + '/v1/cinema/notShownMovies?token=' + token).pipe(map(
-      (response: Response) => {
-        const data = response.json();
-        console.log(data);
-        return data.movies;
-      }
-    ));
   }
 
 
@@ -213,8 +194,10 @@ export class CinemaService {
     }
 
     if (fetchYears || force) {
-      this.fetchYears().subscribe(
-        (fetchedYears: any[]) => {
+      this.httpService.loggedInV1GETRequest('/cinema/year', 'fetchYears').subscribe(
+        (data: any) => {
+          const fetchedYears = data.years;
+
           const years = [];
           for (const year of fetchedYears) {
             const localYear = new Year(year.id, year.year);
@@ -225,17 +208,5 @@ export class CinemaService {
         (error) => console.log(error)
       );
     }
-  }
-
-  private fetchYears() {
-    const token = this.authService.getToken('fetchYears');
-
-    return this.http.get(this.apiUrl + '/v1/cinema/year?token=' + token).pipe(map(
-      (response: Response) => {
-        const data = response.json();
-        console.log(data);
-        return data.years;
-      }
-    ));
   }
 }

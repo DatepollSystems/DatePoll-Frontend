@@ -49,6 +49,7 @@ import {
 import {HttpModule} from '@angular/http';
 import {NgxMatSelectSearchModule} from 'ngx-mat-select-search';
 import {MovieCreateModalComponent} from './home/cinema/movie-administration/movie-create-modal/movie-create-modal.component';
+import {HttpService} from './http.service';
 
 @NgModule({
   declarations: [
@@ -118,6 +119,7 @@ import {MovieCreateModalComponent} from './home/cinema/movie-administration/movi
     DataStorageService,
     MyUserService,
     TranslateService,
+    HttpService,
     {
       provide: APP_INITIALIZER,
       useFactory: setupTranslateFactory,

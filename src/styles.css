@@ -48,3 +48,11 @@ a:hover {
   background-color: #4CAF50;
   color: #ffffff
 }
+
+.success-mat-card {
+  background-color: #689F38;
+}
+
+.error-mat-card {
+  background-color: #FF5722;
+}
