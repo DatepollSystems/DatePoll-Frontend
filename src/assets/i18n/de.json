@@ -91,6 +91,7 @@
   "CINEMA_TICKETS_ADMINISTRATION_MOVIE_EDIT_MODAL_POSTER_INVALID": "Der Posterlink darf weder leer sein, noch mehr als 512 Zeichen haben!",
   "CINEMA_TICKETS_ADMINISTRATION_MOVIE_EDIT_MODAL_POSTER_PREVIEW": "Poster Vorschau:",
 
+
   "SETTINGS_PERSONAL_DATA": "Persönliche Daten",
   "SETTINGS_PERSONAL_DATA_DESCRIPTION": "Bearbeiten Sie Ihre Persönlichen Daten.",
   "SETTINGS_PERSONAL_DATA_PERSONAL_DATA_CHANGE": "Persönliche Daten ändern",
@@ -128,14 +129,21 @@
   "SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_VERIFICATION_CODE": "Verifizierungscode",
   "SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_VERIFICATION_CODE_NOT_VALID": "Der Verifizierungscode ist invalide",
 
-  "SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_ENTER_OLD_EMAIL_ADDRESS": "Gib deine alte Email-Adresse ein",
-  "SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_ENTER_OLD_EMAiL_ADDRESS_INCORRECT": "Die Email-Adresse ist inkorrekt!",
-  "SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_ENTER_VERIFICATION_CODE": "Gib den Verifizierungscode ein",
-  "SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_ENTER_VERIFICATION_CODE_INCORRECT": "Der Verifizierungscode ist inkorrekt!",
-  "SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_NEW_EMAIL_IS_OLD_EMAIL": "Bitte geben Sie Ihre neue Email Adresse ein!",
+  "SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_START": "Start",
+  "SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_START_DESCRIPTION": "Achtung! Sie sind dabei Ihre Email-Adresse zu ändern!",
+
   "SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_VERIFICATION_EMAIL_SENT": "Es wurde eine E-Mail mit einem Verifizierungscode an Ihre E-Mail Adresse versendet! Bitte geben Sie diesen Code hier ein.",
+
+  "SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_ENTER_VERIFICATION_CODE": "Gib den Verifizierungscode ein",
+  "SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_VERIFICATION_CODE_INCORRECT": "Der eingegeben Verifizierungsode ist inkorrekt!",
+  "SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_OLD_EMAIL_VERIFICATION_CODE_CORRECT": "Der Code ist korrekt! Gib nun deine neue Email-Adresse ein.",
+
+  "SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_NEW_EMAIL_IS_OLD_EMAIL": "Sie können nicht Ihre alte Email Adresse als neue verwenden! Bitte geben Sie Ihre neue Email Adresse ein.",
   "SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_ENTER_NEW_EMAIL_ADDRESS": "Gib deine neue E-Mail Adresse ein",
   "SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_FINISHED": "Ihre E-Mail Adresse wurde erfolgreich geändert!",
+
+  "SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_RATE_LIMIT_EXCEEDED": "Du hast die maximale Anzahl an Fehlversuchen für diesen Code erreicht!",
+
 
   "SETTINGS_SECURITY": "Sicherheit",
   "SETTINGS_SECURITY_DESCRIPTION": "Legen Sie die Einstellungen für Ihr Passwort und für die Zwei-Faktor-Authentifizierung fest.",

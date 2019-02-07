@@ -1,5 +1,5 @@
 import {BrowserModule} from '@angular/platform-browser';
-import {NgModule, APP_INITIALIZER} from '@angular/core';
+import {APP_INITIALIZER, NgModule} from '@angular/core';
 
 import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -26,11 +26,7 @@ import {FeedbackModalComponent} from './footer/modals/feedback-modal/feedback-mo
 import {AboutModalComponent} from './footer/modals/about-modal/about-modal.component';
 import {PersonalDataComponent} from './home/settings/personal-data/personal-data.component';
 import {PhoneNumberComponent} from './home/settings/phone-number/phone-number.component';
-import {
-  EmailAddressComponent,
-  EmailAddressNotCorrectComponent, NewEmailIsOldEmailComponent,
-  VerificationCodeNotCorrectComponent
-} from './home/settings/email-address/email-address.component';
+import {EmailAddressComponent} from './home/settings/email-address/email-address.component';
 import {PasswordComponent} from './home/settings/password/password.component';
 import {TwoFactorAuthenticationComponent} from './home/settings/two-factor-authentication/two-factor-authentication.component';
 import {CustomFormsModule} from 'ng2-validation';
@@ -43,9 +39,7 @@ import {NgxChartsModule} from '@swimlane/ngx-charts';
 import {MovieEditModalComponent} from './home/cinema/movie-administration/movie-edit-modal/movie-edit-modal.component';
 import {MaterialModule} from './material-module';
 import {MAT_DATE_LOCALE, MAT_SNACK_BAR_DEFAULT_OPTIONS} from '@angular/material';
-import {
-  MovieBookTicketsModalComponent
-} from './home/cinema/movie-tickets/movie-ticket/movie-book-tickets-modal/movie-book-tickets-modal.component';
+import {MovieBookTicketsModalComponent} from './home/cinema/movie-tickets/movie-ticket/movie-book-tickets-modal/movie-book-tickets-modal.component';
 import {HttpModule} from '@angular/http';
 import {NgxMatSelectSearchModule} from 'ngx-mat-select-search';
 import {MovieCreateModalComponent} from './home/cinema/movie-administration/movie-create-modal/movie-create-modal.component';
@@ -70,9 +64,6 @@ import {HttpService} from './http.service';
     PersonalDataComponent,
     PhoneNumberComponent,
     EmailAddressComponent,
-    EmailAddressNotCorrectComponent,
-    VerificationCodeNotCorrectComponent,
-    NewEmailIsOldEmailComponent,
     PasswordComponent,
     TwoFactorAuthenticationComponent,
     DoNotForgetToSaveComponent,
@@ -104,9 +95,6 @@ import {HttpService} from './http.service';
     PersonalDataComponent,
     PhoneNumberComponent,
     EmailAddressComponent,
-    EmailAddressNotCorrectComponent,
-    VerificationCodeNotCorrectComponent,
-    NewEmailIsOldEmailComponent,
 
     //   PasswordComponent,
     //   TwoFactorAuthenticationComponent,
