@@ -39,14 +39,9 @@ a:hover {
   pointer-events: none !important;
 }
 
-/* Fix ripple bug which expand the card*/
-.mat-card .last-child {
-  margin-bottom: 0;
-}
-
-.success-button {
-  background-color: #4CAF50;
-  color: #ffffff
+mat-card {
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .success-mat-card {
@@ -55,4 +50,14 @@ a:hover {
 
 .error-mat-card {
   background-color: #FF5722;
+}
+
+/* Fix ripple bug which expand the card*/
+.mat-card .last-child {
+  margin-bottom: 0;
+}
+
+.success-button {
+  background-color: #4CAF50;
+  color: #ffffff
 }

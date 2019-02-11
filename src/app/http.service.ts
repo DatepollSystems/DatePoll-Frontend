@@ -30,4 +30,16 @@ export class HttpService {
 
     return this.http.post(this.apiUrl + '/v1' + url + '?token=' + token, body, {headers: headers});
   }
+
+  public loggedInV1PUTRequest(url: string, body: any, functionUser: string = null) {
+    const token = this.authService.getToken(functionUser);
+    const headers = new Headers({'Content-Type': 'application/json'});
+
+    return this.http.put(this.apiUrl + '/v1' + url + '?token=' + token, body, {headers: headers});
+  }
+
+  public loggedInV1DELETERequest(url: string, functionUser: string = null) {
+    const token = this.authService.getToken(functionUser);
+    return this.http.delete(this.apiUrl + '/v1' + url + '?token=' + token);
+  }
 }

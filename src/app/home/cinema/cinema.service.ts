@@ -1,22 +1,15 @@
 import {Injectable} from '@angular/core';
-import {Headers, Http, Response} from '@angular/http';
-
-import {environment} from '../../../environments/environment';
-
 import {Subject} from 'rxjs';
-import {map} from 'rxjs/operators';
 
-import {Movie} from './movie';
-import {Year} from './year';
 import {AuthService} from '../../auth/auth.service';
 import {HttpService} from '../../http.service';
+import {Movie} from './movie';
+import {Year} from './year';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CinemaService {
-  apiUrl = environment.apiUrl;
-
   private _lastFetchedMovies: Date = null;
   private _movies: Movie[];
   public moviesChange: Subject<Movie[]> = new Subject<Movie[]>();
@@ -29,29 +22,22 @@ export class CinemaService {
   private _years: Year[];
   public yearsChange: Subject<Year[]> = new Subject<Year[]>();
 
-  constructor(private http: Http, private authService: AuthService, private httpService: HttpService) {
+  constructor(private authService: AuthService, private httpService: HttpService) {
     this._movies = [];
     this._notShownMovies = [];
     this._years = [];
   }
 
   public addMovie(movie: any) {
-    const headers = new Headers({'Content-Type': 'application/json'});
-    const token = this.authService.getToken('addMovie');
-
-    return this.http.post(this.apiUrl + '/v1/cinema/movie?token=' + token, movie, {headers: headers});
+    return this.httpService.loggedInV1POSTRequest('/cinema/movie', movie, 'addMovie');
   }
 
   public updateMovie(movieID: number, movie: any) {
-    const token = this.authService.getToken('updateMovie');
-    const headers = new Headers({'Content-Type': 'application/json'});
-
-    return this.http.put(this.apiUrl + '/v1/cinema/movie/' + movieID + '?token=' + token, movie, {headers: headers});
+    return this.httpService.loggedInV1PUTRequest('/cinema/movie/' + movieID, movie, 'updateMovie');
   }
 
   public deleteMovie(movieID: number) {
-    const token = this.authService.getToken('deleteMovie');
-    return this.http.delete(this.apiUrl + '/v1/cinema/movie/' + movieID + '?token=' + token);
+    return this.httpService.loggedInV1DELETERequest('/cinema/movie/' + movieID, 'deleteMovie');
   }
 
   public getMovies(): Movie[] {
@@ -159,10 +145,7 @@ export class CinemaService {
 
 
   public addYear(year: any) {
-    const headers = new Headers({'Content-Type': 'application/json'});
-    const token = this.authService.getToken('addYear');
-
-    return this.http.post(this.apiUrl + '/v1/cinema/year?token=' + token, year, {headers: headers});
+    return this.httpService.loggedInV1POSTRequest('/cinema/year', year, 'addYear');
   }
 
   public getYears(): Year[] {

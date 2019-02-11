@@ -1,6 +1,5 @@
 import {Component, ViewChild} from '@angular/core';
 import {Response} from '@angular/http';
-import {MatSnackBar} from '@angular/material';
 
 import {MyUserService} from '../../../auth/my-user.service';
 import {HttpService} from '../../../http.service';
@@ -30,7 +29,6 @@ export class EmailAddressComponent {
 
   constructor(
     private _myUserService: MyUserService,
-    private _snackBar: MatSnackBar,
     private httpService: HttpService) {
   }
 
