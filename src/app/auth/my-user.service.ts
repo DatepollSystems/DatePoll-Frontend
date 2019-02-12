@@ -52,7 +52,8 @@ export class MyUserService {
           return data;
         }
       )).subscribe(
-        (data: any) => {
+        (dataComplete: any) => {
+          const data = dataComplete.user
           this.setID(data.id);
           this.setTitle(data.title);
           this.setFirstname(data.firstname);
