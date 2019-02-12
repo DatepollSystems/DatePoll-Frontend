@@ -18,8 +18,8 @@ deploy_stage:
     - rm ./package-lock.json
     - npm install
     - ./node_modules/@angular/cli/bin/ng build --progress false --prod
-    - cd dist/DatePoll-Frontend
+    - cd dist/
     - ls
     - sshpass -V
     - export SSHPASS=$SSH_PASSWORD
-    - sshpass -e scp -o stricthostkeychecking=no -r . $SSH_USERNAME@$SSH_HOST:/var/www/datepoll
+    - sshpass -e scp -o stricthostkeychecking=no -r DatePoll-Frontend/* $SSH_USERNAME@$SSH_HOST:/var/www/datepoll
