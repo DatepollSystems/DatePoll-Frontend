@@ -67,26 +67,18 @@
         </form>
 
         <form (ngSubmit)="onChangePasswordAfterSignin(f)" #f="ngForm" *ngIf="state === 'changePassword'">
-          <div class="row">
-            <mat-card style="background-color: #43A047;" class="my-alert" matRipple>
-              <mat-card-content class="last-child">
+
+          <mat-card class="success-mat-card" matRipple>
+            <mat-card-content class="last-child">
                 {{'SIGNIN_YOU_NEED_TO_CHANGE_PASSWORD' | translate}}
               </mat-card-content>
             </mat-card>
-          </div>
 
-          <div class="row" *ngIf="showPasswordEqaulsAlert">
-            <mat-card style="background-color: #E65100;" class="my-alert" matRipple>
-              <mat-card-content class="last-child">
-                {{'SIGNIN_PASSWORD_ARE_NOT_EQUAL' | translate}}
-              </mat-card-content>
-            </mat-card>
-          </div>
 
           <mat-card-content>
             <div class="row">
               <mat-form-field class="col-12">
-                <input matInput ngModel
+                <input matInput ngModel #passwordModel="ngModel"
                        name="password" type="password"
                        minlength="5" required
                        placeholder="{{'SIGNIN_NEW_PASSWORD' | translate}}">
@@ -95,11 +87,14 @@
 
             <div class="row">
               <mat-form-field class="col-12">
-                <input matInput ngModel
+                <input matInput ngModel #passwordRepeatModel="ngModel" [equalTo]="passwordModel"
                        name="password_repeat" type="password"
                        minlength="5" required
                        placeholder="{{'SIGNIN_NEW_PASSWORD_REPEAT' | translate}}">
               </mat-form-field>
+              <mat-error *ngIf="passwordRepeatModel.errors?.equalTo" class="col-12">
+                {{'SIGNIN_PASSWORD_ARE_NOT_EQUAL' | translate}}
+              </mat-error>
             </div>
           </mat-card-content>
 

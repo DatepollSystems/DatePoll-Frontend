@@ -18,7 +18,6 @@ export class SigninComponent implements OnInit {
 
   loginSuccess = false;
   loginFail = false;
-  showPasswordEqaulsAlert = false;
 
   private email: string;
   private password: string;
@@ -60,13 +59,6 @@ export class SigninComponent implements OnInit {
 
   protected onChangePasswordAfterSignin(form: NgForm) {
     const password = form.value.password;
-    const password_repeat = form.value.password_repeat;
-
-    if (password !== password_repeat) {
-      this.showPasswordEqaulsAlert = true;
-      return;
-    }
-    this.showPasswordEqaulsAlert = false;
 
     this.authService.changePasswordAfterSignin(this.email, this.password, password).subscribe(
       (response: Response) => {
