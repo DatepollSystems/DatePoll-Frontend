@@ -39,7 +39,9 @@ export class SettingsComponent implements OnInit {
   }
 
   openPasswordModal() {
-    // this.modalService.open(PasswordComponent);
+    this.dialog.open(PasswordComponent, {
+      width: '80vh',
+    });
   }
 
   openTwoFactorAuthenticationModal() {

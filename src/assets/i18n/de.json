@@ -148,5 +148,14 @@
   "SETTINGS_SECURITY": "Sicherheit",
   "SETTINGS_SECURITY_DESCRIPTION": "Legen Sie die Einstellungen für Ihr Passwort und für die Zwei-Faktor-Authentifizierung fest.",
   "SETTINGS_SECURITY_CHANGE_PASSWORD": "Password ändern",
-  "SETTINGS_SECURITY_CHANGE_2FA": "Zwei-Faktor-Authentifizierung einstellen"
+  "SETTINGS_SECURITY_CHANGE_2FA": "Zwei-Faktor-Authentifizierung einstellen",
+
+  "SETTINGS_SECURITY_MODAL_CHANGE_PASSWORD_TITLE_START": "Geben Sie Ihr altes Passwort ein",
+  "SETTINGS_SECURITY_MODAL_CHANGE_PASSWORD_OLD_PASSWORD_INCORRECT": "Ihr eingegebenes Password ist inkorrekt!",
+  "SETTINGS_SECURITY_MODAL_CHANGE_PASSWORD_TITLE_NEW_PASSWORD": "Geben Sie Ihr neues Passwort ein",
+  "SETTINGS_SECURITY_MODAL_CHANGE_PASSWORD_NEW_PASSWORD": "Neues Passwort",
+  "SETTINGS_SECURITY_MODAL_CHANGE_PASSWORD_NEW_PASSWORD_REPEAT": "Neues Passwort erneut eingeben",
+  "SETTINGS_SECURITY_MODAL_CHANGE_PASSWORD_NEW_PASSWORDS_ARE_NOT_EQUAL": "Die Passwörter stimmen nicht über ein",
+  "SETTINGS_SECURITY_MODAL_CHANGE_PASSWORD_OLD_PASSWORD": "Altes Passwort",
+  "SETTINGS_SECURITY_MODAL_CHANGE_PASSWORD_FINISHED": "Ihr Passwort wurde erfolgreich geändert!"
 }

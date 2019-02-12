@@ -95,8 +95,7 @@ import {HttpService} from './http.service';
     PersonalDataComponent,
     PhoneNumberComponent,
     EmailAddressComponent,
-
-    //   PasswordComponent,
+    PasswordComponent,
     //   TwoFactorAuthenticationComponent,
     MovieCreateModalComponent,
     MovieEditModalComponent,
