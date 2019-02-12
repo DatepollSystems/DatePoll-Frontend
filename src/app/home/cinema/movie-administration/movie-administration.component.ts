@@ -10,6 +10,7 @@ import {Movie} from '../movie';
 import {Year} from '../year';
 
 import {CinemaService} from '../cinema.service';
+import {SettingsService} from '../../../settings.service';
 import {MovieEditModalComponent} from './movie-edit-modal/movie-edit-modal.component';
 import {MovieCreateModalComponent} from './movie-create-modal/movie-create-modal.component';
 
@@ -19,7 +20,6 @@ import {MovieCreateModalComponent} from './movie-create-modal/movie-create-modal
   styleUrls: ['./movie-administration.component.css']
 })
 export class MovieAdministrationComponent implements OnInit, AfterViewInit, OnDestroy {
-
   // @ViewChild(MatPaginator) paginator: MatPaginator;
   displayedColumns: string[] = ['name', 'date', 'trailer', 'poster', 'worker', 'emergencyWorker', 'bookedTickets', 'deleteMovie'];
   filterValue: string = null;
@@ -49,7 +49,11 @@ export class MovieAdministrationComponent implements OnInit, AfterViewInit, OnDe
 
   private selectedYear: Year = null;
 
-  constructor(private cinemaService: CinemaService, private dialog: MatDialog) {
+  constructor(
+    private cinemaService: CinemaService,
+    private settingsService: SettingsService,
+    private dialog: MatDialog) {
+
     this.years = this.cinemaService.getYears();
     this.selectedYear = this.years[this.years.length - 1];
     this.yearsSubscription = cinemaService.yearsChange.subscribe((value) => {
@@ -83,6 +87,7 @@ export class MovieAdministrationComponent implements OnInit, AfterViewInit, OnDe
   }
 
   ngOnInit() {
+    this.settingsService.checkShowCinema();
     // this.dataSource.paginator = this.paginator;
 
     // set initial selection

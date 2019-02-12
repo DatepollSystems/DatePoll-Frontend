@@ -42,4 +42,17 @@ export class HttpService {
     const token = this.authService.getToken(functionUser);
     return this.http.delete(this.apiUrl + '/v1' + url + '?token=' + token);
   }
+
+  public settingRequest(url: string, functionUser: string = null) {
+    return this.http.get(this.apiUrl + '/settings' +  url).pipe(map(
+      (response: Response) => {
+        const data = response.json();
+        if (functionUser != null) {
+          console.log(functionUser + ' Request:');
+        }
+        console.log(data);
+        return data;
+      }
+    ));
+  }
 }

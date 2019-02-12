@@ -5,6 +5,7 @@ import {Subscription} from 'rxjs';
 
 import {MyUserService} from '../auth/my-user.service';
 import {AuthService} from '../auth/auth.service';
+import {SettingsService} from '../settings.service';
 
 
 @Component({
@@ -19,22 +20,30 @@ export class HomeComponent implements OnInit {
   @ViewChild('sidenav')
   private sidenav: MatSidenav;
 
+  private firstnameSubscription: Subscription;
   firstname: string;
+
+  private surnameSubscription: Subscription;
   surname: string;
+
+  private emailSubscription: Subscription;
   email: string;
 
+  private showCinemaSubscription: Subscription;
   showCinema = true;
-  showPoll = false;
 
-  private firstnameSubscription: Subscription;
-  private surnameSubscription: Subscription;
-  private emailSubscription: Subscription;
+  showPoll = false;
 
   constructor(
     private ngZone: NgZone,
     private myUserService: MyUserService,
     private authService: AuthService,
+    private settingsService: SettingsService,
     private router: Router) {
+
+    this.showCinemaSubscription = settingsService.showCinemaChange.subscribe((value) => {
+      this.showCinema = value;
+    });
 
     if ((window.screen.width) > 992) {
       this.navBarOpened = true;
@@ -71,6 +80,8 @@ export class HomeComponent implements OnInit {
       this.email = value;
       this.resizeNav();
     });
+
+    this.showCinema = settingsService.getShowCinema();
   }
 
   ngOnInit(): void {
