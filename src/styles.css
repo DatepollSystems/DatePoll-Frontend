@@ -52,6 +52,10 @@ mat-card {
   background-color: #FF5722;
 }
 
+.info-mat-card {
+  background-color: #29B6F6;
+}
+
 /* Fix ripple bug which expand the card*/
 .mat-card .last-child {
   margin-bottom: 0;

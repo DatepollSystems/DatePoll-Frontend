@@ -2,7 +2,11 @@
 <mat-dialog-content>
   <div class="row">
     <div class="col-12">
-      <mat-card style="background-color: #29B6F6"><b>Info! </b>{{'CINEMA_TICKETS_BOOKING_MODAL_WARNING' | translate}}</mat-card>
+      <mat-card class="info-mat-card" matRipple>
+        <mat-card-content class="last-child">
+          <b>Info! </b>{{'CINEMA_TICKETS_BOOKING_MODAL_WARNING' | translate}}
+        </mat-card-content>
+      </mat-card>
     </div>
   </div>
 
