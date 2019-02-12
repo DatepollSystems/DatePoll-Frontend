@@ -10,7 +10,6 @@ import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
 import {HomeComponent} from './home/home.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AuthService} from './auth/auth.service';
-import {DataStorageService} from './data-storage.service';
 import {FooterComponent} from './footer/footer.component';
 import {InfoComponent} from './info/info.component';
 import {ImprintComponent} from './info/imprint/imprint.component';
@@ -44,6 +43,7 @@ import {HttpModule} from '@angular/http';
 import {NgxMatSelectSearchModule} from 'ngx-mat-select-search';
 import {MovieCreateModalComponent} from './home/cinema/movie-administration/movie-create-modal/movie-create-modal.component';
 import {HttpService} from './http.service';
+import {CinemaService} from './home/cinema/cinema.service';
 
 @NgModule({
   declarations: [
@@ -103,10 +103,10 @@ import {HttpService} from './http.service';
   ],
   providers: [
     AuthService,
-    DataStorageService,
     MyUserService,
     TranslateService,
     HttpService,
+    CinemaService,
     {
       provide: APP_INITIALIZER,
       useFactory: setupTranslateFactory,
