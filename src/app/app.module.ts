@@ -29,7 +29,6 @@ import {EmailAddressComponent} from './home/settings/email-address/email-address
 import {PasswordComponent} from './home/settings/password/password.component';
 import {TwoFactorAuthenticationComponent} from './home/settings/two-factor-authentication/two-factor-authentication.component';
 import {CustomFormsModule} from 'ng2-validation';
-import {DoNotForgetToSaveComponent} from './home/do-not-forget-to-save/do-not-forget-to-save.component';
 import {MovieTicketsComponent} from './home/cinema/movie-tickets/movie-tickets.component';
 import {MovieServiceComponent} from './home/cinema/movie-service/movie-service.component';
 import {MovieAdministrationComponent} from './home/cinema/movie-administration/movie-administration.component';
@@ -46,6 +45,7 @@ import {HttpService} from './services/http.service';
 import {CinemaService} from './home/cinema/cinema.service';
 import {UsersExportBottomSheetComponent, UsersManagementComponent} from './home/management/users-management/users-management.component';
 import {ExcelService} from './services/excel.service';
+import {DoNotForgetToSaveComponent} from './do-not-forget-to-save/do-not-forget-to-save.component';
 
 @NgModule({
   declarations: [
