@@ -21,6 +21,8 @@ export class HomeComponent implements OnInit {
   @ViewChild('sidenav')
   private sidenav: MatSidenav;
 
+  public myUserService: MyUserService;
+
   cinemaMovieAdministration: string;
   managementAdministration: string;
 
@@ -40,10 +42,12 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private ngZone: NgZone,
-    private myUserService: MyUserService,
+    myUserService: MyUserService,
     private authService: AuthService,
     private settingsService: SettingsService,
     private router: Router) {
+
+    this.myUserService = myUserService;
 
     this.cinemaMovieAdministration = Permissions.CINEMA_MOVIE_ADMINISTRATION;
     this.managementAdministration = Permissions.MANAGEMENT_ADMINISTRATION;
