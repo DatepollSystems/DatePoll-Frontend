@@ -45,7 +45,7 @@ import {HttpService} from './services/http.service';
 import {CinemaService} from './home/cinema/cinema.service';
 import {UsersExportBottomSheetComponent, UsersManagementComponent} from './home/management/users-management/users-management.component';
 import {ExcelService} from './services/excel.service';
-import {DoNotForgetToSaveComponent} from './do-not-forget-to-save/do-not-forget-to-save.component';
+import {DoNotForgetToSaveComponent} from './home/do-not-forget-to-save/do-not-forget-to-save.component';
 
 @NgModule({
   declarations: [
