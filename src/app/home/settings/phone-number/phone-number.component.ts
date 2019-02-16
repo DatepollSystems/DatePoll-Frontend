@@ -1,7 +1,10 @@
 import {Component} from '@angular/core';
-import {MyUserService, PhoneNumber} from '../../../auth/my-user.service';
+import {MyUserService} from '../../my-user.service';
 import {NgForm} from '@angular/forms';
 import {MatTableDataSource} from '@angular/material';
+import {PhoneNumber} from '../../phoneNumber.model';
+import {Response} from '@angular/http';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-phone-number',
@@ -10,6 +13,7 @@ import {MatTableDataSource} from '@angular/material';
 })
 export class PhoneNumberComponent {
 
+  phoneNumbersSubscription: Subscription;
   public phoneNumbers: PhoneNumber[];
 
   displayedColumns: string[] = ['label', 'phonenumber', 'action'];
@@ -18,6 +22,11 @@ export class PhoneNumberComponent {
   constructor(private _myUserService: MyUserService) {
     this.phoneNumbers = _myUserService.getPhoneNumbers();
     this.dataSource = new MatTableDataSource(this.phoneNumbers);
+
+    this.phoneNumbersSubscription = this._myUserService.phoneNumberChange.subscribe((value) => {
+      this.phoneNumbers = value;
+      this.dataSource = new MatTableDataSource(this.phoneNumbers);
+    });
   }
 
   applyFilter(filterValue: string) {
@@ -33,32 +42,41 @@ export class PhoneNumberComponent {
       return;
     }
 
-    this.phoneNumbers.push(new PhoneNumber(form.value.label, form.value.phoneNumber));
-    this.dataSource = new MatTableDataSource(this.phoneNumbers);
-    form.reset();
+    const phoneNumberObject = {
+      'label': form.value.label,
+      'number': form.value.phoneNumber
+    };
 
-    console.log('Telephone number added!');
-
-    this._myUserService.setPhoneNumbers(this.phoneNumbers);
-    console.log('All phone numbers saved!');
+    this._myUserService.addPhoneNumber(phoneNumberObject).subscribe(
+      (response: Response) => {
+        const data = response.json();
+        console.log(data);
+        const phoneNumber = new PhoneNumber(data.phone_number_id, this._myUserService.getID(), form.value.label, form.value.phoneNumber);
+        this.phoneNumbers.push(phoneNumber);
+        this.dataSource = new MatTableDataSource(this.phoneNumbers);
+        this._myUserService.setPhoneNumbers(this.phoneNumbers);
+        form.reset();
+      },
+      (error) => console.log(error)
+    );
   }
 
-  removePhoneNumber(phoneNumber: PhoneNumber) {
-    let index;
+  removePhoneNumber(phoneNumberID: number) {
+    this._myUserService.removePhoneNumber(phoneNumberID).subscribe(
+      (response: Response) => {
+        const data = response.json();
+        console.log(data);
+        this.phoneNumbers = [];
 
-    for (let i = 0; i < this.phoneNumbers.length; i++) {
-      if (this.phoneNumbers[i].getPhoneNumber() === phoneNumber.getPhoneNumber()
-        && this.phoneNumbers[i].getLabel() === phoneNumber.getLabel()) {
-        index = i;
-      }
-    }
-
-    this.phoneNumbers.splice(index, 1);
-    this.dataSource = new MatTableDataSource(this.phoneNumbers);
-
-    console.log('Telephone number removed!');
-
-    this._myUserService.setPhoneNumbers(this.phoneNumbers);
-    console.log('All phone numbers saved!');
+        for (let i = 0; i < this._myUserService.getPhoneNumbers().length; i++) {
+          if (this._myUserService.getPhoneNumbers()[i].getID() !== phoneNumberID) {
+            this.phoneNumbers.push(this._myUserService.getPhoneNumbers()[i]);
+          }
+        }
+        this._myUserService.setPhoneNumbers(this.phoneNumbers);
+        this.dataSource = new MatTableDataSource(this.phoneNumbers);
+      },
+      (error) => console.log(error)
+    );
   }
 }

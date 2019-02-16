@@ -14,7 +14,7 @@ import {FooterComponent} from './footer/footer.component';
 import {InfoComponent} from './info/info.component';
 import {ImprintComponent} from './info/imprint/imprint.component';
 import {PrivacyPolicyComponent} from './info/privacy-policy/privacy-policy.component';
-import {MyUserService} from './auth/my-user.service';
+import {MyUserService} from './home/my-user.service';
 import {StartComponent} from './home/start/start.component';
 import {SettingsComponent} from './home/settings/settings.component';
 import {TranslateService} from './translation/translate.service';
@@ -29,7 +29,7 @@ import {EmailAddressComponent} from './home/settings/email-address/email-address
 import {PasswordComponent} from './home/settings/password/password.component';
 import {TwoFactorAuthenticationComponent} from './home/settings/two-factor-authentication/two-factor-authentication.component';
 import {CustomFormsModule} from 'ng2-validation';
-import {DoNotForgetToSaveComponent} from './do-not-forget-to-save/do-not-forget-to-save.component';
+import {DoNotForgetToSaveComponent} from './home/do-not-forget-to-save/do-not-forget-to-save.component';
 import {MovieTicketsComponent} from './home/cinema/movie-tickets/movie-tickets.component';
 import {MovieServiceComponent} from './home/cinema/movie-service/movie-service.component';
 import {MovieAdministrationComponent} from './home/cinema/movie-administration/movie-administration.component';
@@ -42,8 +42,10 @@ import {MovieBookTicketsModalComponent} from './home/cinema/movie-tickets/movie-
 import {HttpModule} from '@angular/http';
 import {NgxMatSelectSearchModule} from 'ngx-mat-select-search';
 import {MovieCreateModalComponent} from './home/cinema/movie-administration/movie-create-modal/movie-create-modal.component';
-import {HttpService} from './http.service';
+import {HttpService} from './services/http.service';
 import {CinemaService} from './home/cinema/cinema.service';
+import {UsersExportBottomSheetComponent, UsersManagementComponent} from './home/management/users-management/users-management.component';
+import {ExcelService} from './services/excel.service';
 
 @NgModule({
   declarations: [
@@ -73,7 +75,9 @@ import {CinemaService} from './home/cinema/cinema.service';
     MovieTicketComponent,
     MovieEditModalComponent,
     MovieBookTicketsModalComponent,
-    MovieCreateModalComponent
+    MovieCreateModalComponent,
+    UsersManagementComponent,
+    UsersExportBottomSheetComponent
   ],
   imports: [
     BrowserModule,
@@ -99,7 +103,8 @@ import {CinemaService} from './home/cinema/cinema.service';
     //   TwoFactorAuthenticationComponent,
     MovieCreateModalComponent,
     MovieEditModalComponent,
-    MovieBookTicketsModalComponent
+    MovieBookTicketsModalComponent,
+    UsersExportBottomSheetComponent
   ],
   providers: [
     AuthService,
@@ -107,6 +112,7 @@ import {CinemaService} from './home/cinema/cinema.service';
     TranslateService,
     HttpService,
     CinemaService,
+    ExcelService,
     {
       provide: APP_INITIALIZER,
       useFactory: setupTranslateFactory,

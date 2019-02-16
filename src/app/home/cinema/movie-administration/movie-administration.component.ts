@@ -10,9 +10,12 @@ import {Movie} from '../movie';
 import {Year} from '../year';
 
 import {CinemaService} from '../cinema.service';
-import {SettingsService} from '../../../settings.service';
+import {SettingsService} from '../../../services/settings.service';
 import {MovieEditModalComponent} from './movie-edit-modal/movie-edit-modal.component';
 import {MovieCreateModalComponent} from './movie-create-modal/movie-create-modal.component';
+import {MyUserService} from '../../my-user.service';
+import {Permissions} from '../../../permissions';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-movie-administration',
@@ -49,10 +52,20 @@ export class MovieAdministrationComponent implements OnInit, AfterViewInit, OnDe
 
   private selectedYear: Year = null;
 
+  private permissionSubscription: Subscription;
+
   constructor(
     private cinemaService: CinemaService,
+    private myUserService: MyUserService,
     private settingsService: SettingsService,
+    private router: Router,
     private dialog: MatDialog) {
+
+    this.permissionSubscription = myUserService.permissionsChange.subscribe((value) => {
+      if (!this.myUserService.hasPermission(Permissions.CINEMA_MOVIE_ADMINISTRATION)) {
+        this.router.navigate(['/home']);
+      }
+    });
 
     this.years = this.cinemaService.getYears();
     this.selectedYear = this.years[this.years.length - 1];
@@ -88,12 +101,16 @@ export class MovieAdministrationComponent implements OnInit, AfterViewInit, OnDe
 
   ngOnInit() {
     this.settingsService.checkShowCinema();
+
+    if (!this.myUserService.hasPermission(Permissions.CINEMA_MOVIE_ADMINISTRATION)) {
+      this.router.navigate(['/home']);
+    }
     // this.dataSource.paginator = this.paginator;
 
     // set initial selection
     this.yearCtrl.setValue(this.years[1]);
 
-    // load the initial bank list
+    // load the initial years list
     this.filteredYears.next(this.years.slice());
 
     // listen for search field value changes

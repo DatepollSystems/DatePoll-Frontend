@@ -1,16 +1,15 @@
 import {Subject} from 'rxjs';
-import {Headers, Http, Response} from '@angular/http';
-import {environment} from '../../environments/environment';
-import {map} from 'rxjs/operators';
+import {Response} from '@angular/http';
 import {Injectable} from '@angular/core';
-import {AuthService} from './auth.service';
+import {AuthService} from '../auth/auth.service';
+import {HttpService} from '../services/http.service';
+import {Permissions} from '../permissions';
+import {PhoneNumber} from './phoneNumber.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MyUserService {
-  apiUrl = environment.apiUrl;
-
   private _ID: number;
 
   private _title: string;
@@ -26,34 +25,25 @@ export class MyUserService {
   private _birthday: Date;
   private _joindate: Date;
 
-  private _phoneNumbers: PhoneNumber[];
+  private _phoneNumbers = [];
+  public phoneNumberChange: Subject<PhoneNumber[]> = new Subject<PhoneNumber[]>();
+
+  private _permissions: string[];
+  public permissionsChange: Subject<string[]> = new Subject<string[]>();
 
   public firstnameChange: Subject<string> = new Subject<string>();
   public surnameChange: Subject<string> = new Subject<string>();
   public emailChange: Subject<string> = new Subject<string>();
 
-  constructor(private http: Http, private authService: AuthService) {
+  constructor(private authService: AuthService, private httpService: HttpService) {
     this.fetchMyself();
-    this._phoneNumbers = [];
-
-    this._phoneNumbers.push(new PhoneNumber('Home', '+43 664 2567390'));
-    this._phoneNumbers.push(new PhoneNumber('Work', '+43 664 5925905'));
-    this._phoneNumbers.push(new PhoneNumber('Private', '+43 664 7590367'));
   }
 
   fetchMyself() {
     if (this.authService.isAutenticated('fetchMyself')) {
-      const token = this.authService.getToken('fetchMyself');
-
-      this.http.get(this.apiUrl + '/v1/user/myself?token=' + token).pipe(map(
-        (response: Response) => {
-          const data = response.json();
-          console.log(data);
-          return data;
-        }
-      )).subscribe(
+      this.httpService.loggedInV1GETRequest('/user/myself', 'fetchMyself').subscribe(
         (dataComplete: any) => {
-          const data = dataComplete.user
+          const data = dataComplete.user;
           this.setID(data.id);
           this.setTitle(data.title);
           this.setFirstname(data.firstname);
@@ -65,6 +55,15 @@ export class MyUserService {
           this.setLocation(data.location);
           this.setBirthday(data.birthday);
           this.setJoindate(data.join_date);
+          this.setPermissions(data.permissions);
+
+          const localPhoneNumbers = [];
+          const localPhoneNumbersData = data.telephoneNumbers;
+          for (let i = 0; i < localPhoneNumbersData.length; i++) {
+            localPhoneNumbers.push(
+              new PhoneNumber(localPhoneNumbersData[i].id, this.getID(), localPhoneNumbersData[i].label, localPhoneNumbersData[i].number));
+          }
+          this.setPhoneNumbers(localPhoneNumbers);
         },
         (error) => console.log(error)
       );
@@ -72,9 +71,6 @@ export class MyUserService {
   }
 
   updateMyself() {
-    const token = this.authService.getToken('updateMyself');
-    const headers = new Headers({'Content-Type': 'application/json'});
-
     const d = new Date(this.getBirthday());
     let month = '' + (d.getMonth() + 1),
       day = '' + d.getDate();
@@ -100,7 +96,7 @@ export class MyUserService {
       'birthday': dateformat
     };
 
-    this.http.put(this.apiUrl + '/v1/user/myself?token=' + token, userObject, {headers: headers}).subscribe(
+    this.httpService.loggedInV1PUTRequest('/user/myself', userObject, 'updateMyself').subscribe(
       (response: Response) => {
         const data = response.json();
         console.log(data);
@@ -200,30 +196,49 @@ export class MyUserService {
     return this._joindate;
   }
 
-  setPhoneNumbers(phoneNumbers: any) {
+  public addPhoneNumber(phoneNumberObject: any) {
+    return this.httpService.loggedInV1POSTRequest('/user/myself/phoneNumber', phoneNumberObject, 'addPhoneNumber');
+  }
+
+  public removePhoneNumber(phoneNumberID: number) {
+    return this.httpService.loggedInV1DELETERequest('/user/myself/phoneNumber/' + phoneNumberID, 'removePhoneNumber');
+  }
+
+  setPhoneNumbers(phoneNumbers: PhoneNumber[]) {
     this._phoneNumbers = phoneNumbers;
+    this.phoneNumberChange.next(this._phoneNumbers);
   }
 
-  getPhoneNumbers() {
-    return this._phoneNumbers;
+  getPhoneNumbers(): PhoneNumber[] {
+    return this._phoneNumbers.slice();
   }
 
-}
-
-export class PhoneNumber {
-  private readonly label: string;
-  private readonly phoneNumber: string;
-
-  constructor(label: string, phoneNumber: string) {
-    this.label = label;
-    this.phoneNumber = phoneNumber;
+  getPermissions(): string[] {
+    if (this._permissions == null) {
+      return null;
+    }
+    return this._permissions.slice();
   }
 
-  public getLabel() {
-    return this.label;
+  setPermissions(permissions: string[]) {
+    this._permissions = permissions;
+    this.permissionsChange.next(this._permissions);
   }
 
-  public getPhoneNumber() {
-    return this.phoneNumber;
+  hasPermission(permission: string) {
+    if (this.getPermissions() === null) {
+      return true;
+    }
+
+    for (let i = 0; i < this.getPermissions().length; i++) {
+      if (this.getPermissions()[i] === Permissions.ROOT_ADMINISTRATION) {
+        return true;
+      }
+
+      if (this.getPermissions()[i] === permission) {
+        return true;
+      }
+    }
+    return false;
   }
 }

@@ -54,7 +54,7 @@
         <td mat-cell *matCellDef="let phoneNumber">
           <button mat-icon-button [matTooltipPosition]="'right'"
                   matTooltip="{{'SETTINGS_PERSONAL_DATA_MODAL_PHONE_NUMBER_DELETE_TOOLTIP' | translate}}"
-                  (click)="removePhoneNumber(phoneNumber)">
+                  (click)="removePhoneNumber(phoneNumber.getID())">
             <mat-icon>delete_foreve</mat-icon>
           </button>
         </td>

@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {Subject} from 'rxjs';
 
 import {AuthService} from '../../auth/auth.service';
-import {HttpService} from '../../http.service';
+import {HttpService} from '../../services/http.service';
 import {Movie} from './movie';
 import {Year} from './year';
 

@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpService} from './http.service';
 import {Subject} from 'rxjs';
 import {Router} from '@angular/router';
@@ -8,7 +8,8 @@ import {Router} from '@angular/router';
 })
 export class SettingsService {
 
-  constructor(private httpService: HttpService, private router: Router) { }
+  constructor(private httpService: HttpService, private router: Router) {
+  }
 
   public showCinemaChange: Subject<boolean> = new Subject<boolean>();
   private _showCinema = true;

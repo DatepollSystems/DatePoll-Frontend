@@ -1,8 +1,8 @@
 import {Component, ViewChild} from '@angular/core';
 import {Response} from '@angular/http';
 
-import {MyUserService} from '../../../auth/my-user.service';
-import {HttpService} from '../../../http.service';
+import {MyUserService} from '../../my-user.service';
+import {HttpService} from '../../../services/http.service';
 
 @Component({
   selector: 'app-email-address',

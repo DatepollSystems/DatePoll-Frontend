@@ -1,5 +1,5 @@
 import {Component, ViewChild} from '@angular/core';
-import {HttpService} from '../../../http.service';
+import {HttpService} from '../../../services/http.service';
 import {Response} from '@angular/http';
 
 @Component({
