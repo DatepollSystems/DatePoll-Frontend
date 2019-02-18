@@ -41,7 +41,7 @@ export class MovieCreateModalComponent {
           console.log(data);
           yearID = data.year.id;
           console.log('createMovie | yearID: ' + yearID);
-          this.cinemaService.checkAndFetchYears(true);
+          this.cinemaService.fetchYears();
           this.addMovie(yearID);
         },
         (error) => console.log(error)
@@ -80,7 +80,7 @@ export class MovieCreateModalComponent {
       (response: Response) => {
         const data = response.json();
         console.log(data);
-        this.cinemaService.checkAndFetchMovies(true);
+        this.cinemaService.fetchMovies();
       },
       (error) => console.log(error)
     );

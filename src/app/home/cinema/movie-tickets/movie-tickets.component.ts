@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import {CinemaService} from '../cinema.service';
 import {Subscription} from 'rxjs';
-import {Movie} from '../movie';
+
+import {CinemaService} from '../cinema.service';
 import {SettingsService} from '../../../services/settings.service';
+
+import {Movie} from '../movie.model';
+
 
 @Component({
   selector: 'app-movie-tickets',

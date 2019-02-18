@@ -10,6 +10,8 @@ export class Movie {
 
   private _bookedTickets: number;
 
+  private _bookedTicketsForYourself: number;
+
   private _movieYearID: number;
 
   constructor(ID: number, name: string, movieDate: Date, trailerLink: string, posterLink: string, workerName: string,
@@ -33,32 +35,16 @@ export class Movie {
     return this._name;
   }
 
-  public setName(name: string) {
-    this._name = name;
-  }
-
   public getDate(): Date {
     return this._date;
-  }
-
-  public setDate(date: Date) {
-    this._date = date;
   }
 
   public getTrailerlink(): string {
     return this._trailerLink;
   }
 
-  public setTrailerLink(link: string) {
-    this._trailerLink = link;
-  }
-
   public getImageLink(): string {
     return this._posterLink;
-  }
-
-  public setImageLink(link: string) {
-    this._posterLink = link;
   }
 
   public getWorkerName(): string {
@@ -81,7 +67,11 @@ export class Movie {
     return this._movieYearID;
   }
 
-  public setMovieYearID(movieYearID: number) {
-    this._movieYearID = movieYearID;
+  public setBookedTicketsForYourself(bookedTickets: number) {
+    this._bookedTicketsForYourself = bookedTickets;
+  }
+
+  public getBookedTicketsForYourself(): number {
+    return this._bookedTicketsForYourself;
   }
 }

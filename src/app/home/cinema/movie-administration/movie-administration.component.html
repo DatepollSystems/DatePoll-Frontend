@@ -1,5 +1,17 @@
 <mat-card class="mat-elevation-z8">
   <mat-card-content>
+    <div class="row">
+      <div class="col-11">
+        <h1>{{'NAV_CINEMA_ADMINISTRATION' | translate}}</h1>
+      </div>
+      <div class="col-1">
+        <button mat-icon-button (click)="refreshMovies()"
+                matTooltipPosition="left"
+                matTooltip="{{'CINEMA_TICKETS_ADMINISTRATION_REFRESH' | translate}}">
+          <mat-icon>refresh</mat-icon>
+        </button>
+      </div>
+    </div>
     <div class="row" style="margin-bottom: 15px;">
       <div class="col-2 col-sm-4 col-lg-1">
         <button mat-fab color="accent" (click)="onCreate()">

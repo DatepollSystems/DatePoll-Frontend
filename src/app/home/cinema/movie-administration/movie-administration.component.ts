@@ -6,8 +6,8 @@ import {MatDialog, MatSelect, MatSort, MatTableDataSource} from '@angular/materi
 import {ReplaySubject, Subject, Subscription} from 'rxjs';
 import {take, takeUntil} from 'rxjs/operators';
 
-import {Movie} from '../movie';
-import {Year} from '../year';
+import {Movie} from '../movie.model';
+import {Year} from '../year.model';
 
 import {CinemaService} from '../cinema.service';
 import {SettingsService} from '../../../services/settings.service';
@@ -211,7 +211,7 @@ export class MovieAdministrationComponent implements OnInit, AfterViewInit, OnDe
   onEdit(id: number) {
     this.dialog.open(MovieEditModalComponent, {
       width: '80vh',
-      data: {movie: this.cinemaService.getMovieByID(id)}
+      data: {movie: this.cinemaService.getMovieByID(this.movies, id)}
     });
   }
 
@@ -220,9 +220,14 @@ export class MovieAdministrationComponent implements OnInit, AfterViewInit, OnDe
       (response: Response) => {
         const data = response.json();
         console.log(data);
-        this.cinemaService.checkAndFetchMovies(true);
+        this.cinemaService.fetchMovies();
       },
       (error) => console.log(error)
     );
+  }
+
+  refreshMovies() {
+    this.cinemaService.fetchYears();
+    this.cinemaService.fetchMovies();
   }
 }

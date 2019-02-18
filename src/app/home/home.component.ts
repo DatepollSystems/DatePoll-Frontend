@@ -72,13 +72,13 @@ export class HomeComponent implements OnInit {
     this.firstname = this.myUserService.getFirstname();
     this.firstnameSubscription = myUserService.firstnameChange.subscribe((value) => {
       this.firstname = value;
-      this.resizeNav();
+      // this.resizeNav();
     });
 
     this.surname = this.myUserService.getSurname();
     this.surnameSubscription = myUserService.surnameChange.subscribe((value) => {
       this.surname = value;
-      this.resizeNav();
+      // this.resizeNav();
     });
 
     this.email = this.myUserService.getEmail();

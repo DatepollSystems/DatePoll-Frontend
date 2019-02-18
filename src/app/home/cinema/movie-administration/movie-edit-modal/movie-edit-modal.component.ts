@@ -1,7 +1,7 @@
 import {Component, Inject} from '@angular/core';
 import {CinemaService} from '../../cinema.service';
 import {MAT_DIALOG_DATA} from '@angular/material';
-import {Movie} from '../../movie';
+import {Movie} from '../../movie.model';
 import {Response} from '@angular/http';
 
 @Component({
@@ -54,7 +54,7 @@ export class MovieEditModalComponent {
           console.log(data);
           yearID = data.year.id;
           console.log('updateMovie | yearID: ' + yearID);
-          this.cinemaService.checkAndFetchYears(true);
+          this.cinemaService.fetchYears();
           this.updateMovie(yearID);
         },
         (error) => console.log(error)
@@ -93,7 +93,7 @@ export class MovieEditModalComponent {
       (response: Response) => {
         const data = response.json();
         console.log(data);
-        this.cinemaService.checkAndFetchMovies(true);
+        this.cinemaService.fetchMovies();
       },
       (error) => console.log(error)
     );
