@@ -1,0 +1,8 @@
+mat-card {
+  background-color: #43A047;
+  margin-bottom: 2.5vh;
+}
+
+mat-card-content {
+  user-select: none;
+}
