@@ -13,9 +13,15 @@ export class MyUserService {
   private _ID: number;
 
   private _title: string;
+
   private _firstname: string;
+  public firstnameChange: Subject<string> = new Subject<string>();
+
   private _surname: string;
+  public surnameChange: Subject<string> = new Subject<string>();
+
   private _email: string;
+  public emailChange: Subject<string> = new Subject<string>();
 
   private _streetname: string;
   private _streetnumber: string;
@@ -31,43 +37,37 @@ export class MyUserService {
   private _permissions: string[];
   public permissionsChange: Subject<string[]> = new Subject<string[]>();
 
-  public firstnameChange: Subject<string> = new Subject<string>();
-  public surnameChange: Subject<string> = new Subject<string>();
-  public emailChange: Subject<string> = new Subject<string>();
-
   constructor(private authService: AuthService, private httpService: HttpService) {
     this.fetchMyself();
   }
 
   fetchMyself() {
-    if (this.authService.isAutenticated('fetchMyself')) {
-      this.httpService.loggedInV1GETRequest('/user/myself', 'fetchMyself').subscribe(
-        (dataComplete: any) => {
-          const data = dataComplete.user;
-          this.setID(data.id);
-          this.setTitle(data.title);
-          this.setFirstname(data.firstname);
-          this.setSurname(data.surname);
-          this.setEmail(data.email);
-          this.setStreetname(data.streetname);
-          this.setStreetnumber(data.streetnumber);
-          this.setZipcode(data.zipcode);
-          this.setLocation(data.location);
-          this.setBirthday(data.birthday);
-          this.setJoindate(data.join_date);
-          this.setPermissions(data.permissions);
+    this.httpService.loggedInV1GETRequest('/user/myself', 'fetchMyself').subscribe(
+      (dataComplete: any) => {
+        const data = dataComplete.user;
+        this.setID(data.id);
+        this.setTitle(data.title);
+        this.setFirstname(data.firstname);
+        this.setSurname(data.surname);
+        this.setEmail(data.email);
+        this.setStreetname(data.streetname);
+        this.setStreetnumber(data.streetnumber);
+        this.setZipcode(data.zipcode);
+        this.setLocation(data.location);
+        this.setBirthday(data.birthday);
+        this.setJoindate(data.join_date);
+        this.setPermissions(data.permissions);
 
-          const localPhoneNumbers = [];
-          const localPhoneNumbersData = data.telephoneNumbers;
-          for (let i = 0; i < localPhoneNumbersData.length; i++) {
-            localPhoneNumbers.push(
-              new PhoneNumber(localPhoneNumbersData[i].id, this.getID(), localPhoneNumbersData[i].label, localPhoneNumbersData[i].number));
-          }
-          this.setPhoneNumbers(localPhoneNumbers);
-        },
-        (error) => console.log(error)
-      );
-    }
+        const localPhoneNumbers = [];
+        const localPhoneNumbersData = data.telephoneNumbers;
+        for (let i = 0; i < localPhoneNumbersData.length; i++) {
+          localPhoneNumbers.push(
+            new PhoneNumber(localPhoneNumbersData[i].id, this.getID(), localPhoneNumbersData[i].label, localPhoneNumbersData[i].number));
+        }
+        this.setPhoneNumbers(localPhoneNumbers);
+      },
+      (error) => console.log(error)
+    );
   }
 
   updateMyself() {
