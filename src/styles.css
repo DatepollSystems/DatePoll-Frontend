@@ -34,6 +34,10 @@ a:hover {
   }
 }
 
+.not-selectable {
+  user-select: none;
+}
+
 /* Disable stepper */
 .mat-vertical-stepper-header{
   pointer-events: none !important;

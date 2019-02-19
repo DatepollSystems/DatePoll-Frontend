@@ -1,3 +1,48 @@
-<p>
-  movie-service works!
-</p>
+<mat-accordion [multi]="true" *ngIf="movieOrders.length != 0">
+  <mat-expansion-panel *ngFor="let movieOrder of movieOrders" [expanded]="movieOrder.getTicketOrders().length != 0">
+    <mat-expansion-panel-header>
+      <mat-panel-title>{{movieOrder.getMovieName()}}</mat-panel-title>
+      <mat-panel-description>{{'CINEMA_TICKETS_SERVICE_BOOKING' | translate}}: {{movieOrder.getTicketOrders().length}}</mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <mat-list *ngIf="movieOrder.getTicketOrders().length == 0">
+      <mat-list-item>
+        {{'CINEMA_TICKETS_SERVICE_NO_TICKETS_BOOKED' | translate}}
+      </mat-list-item>
+    </mat-list>
+
+    <mat-list *ngIf="movieOrder.getTicketOrders().length != 0">
+      <mat-list-item>
+        <div matLine>
+          {{'CINEMA_TICKETS_SERVICE_USERNAME' | translate}}
+          <div style="float: right">{{'CINEMA_TICKETS_SERVICE_TICKET_AMOUNT' | translate}}</div>
+        </div>
+      </mat-list-item>
+      <mat-list-item *ngFor="let ticket of movieOrder.getTicketOrders()">
+        <div matLine>
+          {{ticket.getUserName()}}
+          <div style="float: right">{{ticket.getAmount()}}</div>
+        </div>
+      </mat-list-item>
+    </mat-list>
+
+  </mat-expansion-panel>
+</mat-accordion>
+
+<div *ngIf="movieOrders.length == 0" style="margin-top: 25%">
+  <div class="row" style="margin-bottom: 15px;">
+    <div class="col-12" style="text-align: center;">
+      <mat-icon>remove_circle_outline</mat-icon>
+    </div>
+  </div>
+  <div class="row" style="margin-bottom: 15px;">
+    <div class="col-12" style="text-align: center; font-size: 2.5vh;">
+      {{'CINEMA_TICKETS_SERVICE_NOT_APPLIED_FOR_SERVICE' | translate}}
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12" style="text-align: center">
+      <button routerLink="/home/cinema/tickets" mat-flat-button color="primary">{{'CINEMA_TICKETS_SERVICE_NOT_APPLIED_FOR_SERVICE_APPLY_NOW' | translate}}</button>
+    </div>
+  </div>
+</div>

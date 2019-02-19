@@ -1,6 +1,6 @@
 import {Component, Inject} from '@angular/core';
 import {Response} from '@angular/http';
-import {MAT_DIALOG_DATA} from '@angular/material';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 
 import {HttpService} from '../../../../../services/http.service';
 import {MyUserService} from '../../../../my-user.service';
@@ -21,6 +21,7 @@ export class MovieBookTicketsModalComponent {
   ticketsToBook: number;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any,
+              public dialogRef: MatDialogRef<MovieBookTicketsModalComponent>,
               private httpService: HttpService,
               private myUserService: MyUserService,
               private cinemaService: CinemaService) {
@@ -46,5 +47,6 @@ export class MovieBookTicketsModalComponent {
         this.cinemaService.fetchNotShownMovies();
       }
     );
+    this.dialogRef.close();
   }
 }

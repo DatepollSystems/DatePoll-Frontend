@@ -46,6 +46,7 @@ import {CinemaService} from './home/cinema/cinema.service';
 import {UsersExportBottomSheetComponent, UsersManagementComponent} from './home/management/users-management/users-management.component';
 import {ExcelService} from './services/excel.service';
 import {DoNotForgetToSaveComponent} from './home/do-not-forget-to-save/do-not-forget-to-save.component';
+import {MovieTicketsService} from './home/cinema/movieTickets.service';
 
 @NgModule({
   declarations: [
@@ -113,6 +114,7 @@ import {DoNotForgetToSaveComponent} from './home/do-not-forget-to-save/do-not-fo
     HttpService,
     CinemaService,
     ExcelService,
+    MovieTicketsService,
     {
       provide: APP_INITIALIZER,
       useFactory: setupTranslateFactory,

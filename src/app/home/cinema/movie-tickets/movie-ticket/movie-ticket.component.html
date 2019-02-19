@@ -9,27 +9,39 @@
   <img mat-card-image src="{{movie.getImageLink()}}" alt="Movie image">
   <mat-card-content>
     <div class="row" *ngIf="movie.getWorkerName() != null">
-      {{'CINEMA_TICKETS_WORKER' | translate}} {{movie.getWorkerName()}}
+      <div class="col-12">
+        {{'CINEMA_TICKETS_WORKER' | translate}}
+        <div style="float: right">
+          {{movie.getWorkerName()}}
+          [<a (click)="signOutForWorker()" *ngIf="movie.getWorkerID() == myUserService.getID()">X</a>]
+        </div>
+      </div>
     </div>
 
     <div class="row" *ngIf="movie.getWorkerName() == null">
       <div class="col-12">
         {{'CINEMA_TICKETS_WORKER' | translate}}
         <div style="float: right">
-          <a href="#">{{'CINEMA_TICKETS_APPLY' | translate}}</a>
+          <a (click)="applyForWorker()">{{'CINEMA_TICKETS_APPLY' | translate}}</a>
         </div>
       </div>
     </div>
 
     <div class="row" *ngIf="movie.getEmergencyWorkerName() != null">
-      {{'CINEMA_TICKETS_EMERGENCY_WORKER' | translate}} {{movie.getEmergencyWorkerName()}}
+      <div class="col-12">
+        {{'CINEMA_TICKETS_EMERGENCY_WORKER' | translate}}
+        <div style="float: right">
+          {{movie.getEmergencyWorkerName()}}
+          [<a (click)="signOutForEmergencyWorker()" *ngIf="movie.getEmergencyWorkerID() == myUserService.getID()">X</a>]
+        </div>
+      </div>
     </div>
 
     <div class="row" *ngIf="movie.getEmergencyWorkerName() == null">
       <div class="col-12">
         {{'CINEMA_TICKETS_EMERGENCY_WORKER' | translate}}
         <div style="float: right">
-          <a href="#">{{'CINEMA_TICKETS_APPLY' | translate}}</a>
+          <a (click)="applyForEmergencyWorker()">{{'CINEMA_TICKETS_APPLY' | translate}}</a>
         </div>
       </div>
     </div>
