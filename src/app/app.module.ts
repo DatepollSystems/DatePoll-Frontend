@@ -37,7 +37,8 @@ import {NgxChartsModule} from '@swimlane/ngx-charts';
 import {MovieEditModalComponent} from './home/cinema/movie-administration/movie-edit-modal/movie-edit-modal.component';
 import {MaterialModule} from './material-module';
 import {MAT_DATE_LOCALE, MAT_SNACK_BAR_DEFAULT_OPTIONS} from '@angular/material';
-import {MovieBookTicketsModalComponent} from './home/cinema/movie-tickets/movie-ticket/movie-book-tickets-modal/movie-book-tickets-modal.component';
+import {MovieBookTicketsModalComponent} from
+    './home/cinema/movie-tickets/movie-ticket/movie-book-tickets-modal/movie-book-tickets-modal.component';
 import {HttpModule} from '@angular/http';
 import {NgxMatSelectSearchModule} from 'ngx-mat-select-search';
 import {MovieCreateModalComponent} from './home/cinema/movie-administration/movie-create-modal/movie-create-modal.component';
@@ -47,6 +48,7 @@ import {UsersExportBottomSheetComponent, UsersManagementComponent} from './home/
 import {ExcelService} from './services/excel.service';
 import {DoNotForgetToSaveComponent} from './home/do-not-forget-to-save/do-not-forget-to-save.component';
 import {MovieTicketsService} from './home/cinema/movieTickets.service';
+import {HomepageService} from './home/start/homepage.service';
 
 @NgModule({
   declarations: [
@@ -78,7 +80,7 @@ import {MovieTicketsService} from './home/cinema/movieTickets.service';
     MovieBookTicketsModalComponent,
     MovieCreateModalComponent,
     UsersManagementComponent,
-    UsersExportBottomSheetComponent
+    UsersExportBottomSheetComponent,
   ],
   imports: [
     BrowserModule,
@@ -115,6 +117,7 @@ import {MovieTicketsService} from './home/cinema/movieTickets.service';
     CinemaService,
     ExcelService,
     MovieTicketsService,
+    HomepageService,
     {
       provide: APP_INITIALIZER,
       useFactory: setupTranslateFactory,

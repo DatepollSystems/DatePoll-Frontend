@@ -58,7 +58,7 @@
       <ng-container matColumnDef="date">
         <th mat-header-cell *matHeaderCellDef
             mat-sort-header> {{'CINEMA_TICKETS_ADMINISTRATION_DATE' | translate}} </th>
-        <td mat-cell *matCellDef="let movie"> {{movie.getDate() | date:'dd/MM/yyyy' }} </td>
+        <td mat-cell *matCellDef="let movie"> {{movie.getDate() | date:'dd.MM.yyyy' }} </td>
       </ng-container>
 
       <!-- Trailer Column -->

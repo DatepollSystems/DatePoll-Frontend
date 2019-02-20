@@ -54,6 +54,18 @@
   "NAV_MANAGEMENT_USERS": "Mitgliederverwaltung",
 
 
+  "STARTPAGE_BIRTHDAY": "Geburtstage des Monat",
+  "STARTPAGE_BIRTHDAY_NAME": "Name",
+  "STARTPAGE_BIRTHDAY_DATE": "Geburtsdatum",
+
+  "STARTPAGE_BOOKINGS": "Deine Reservierungen",
+  "STARTPAGE_MOVIE_NAME": "Filmname",
+  "STARTPAGE_MOVIE_DATE": "Datum",
+  "STARTPAGE_BOOKED_TICKETS": "Gebuchte Karten",
+  "STARTPAGE_CINEMA_SERVICE": "Kinodienst",
+  "STARTPAGE_EMERGENCY_CINEMA_SERVICE": "Notfall-Kinodienst",
+
+
   "CINEMA_TICKETS_BOOK_A_TICKET": "Karten reservieren",
   "CINEMA_TICKETS_DATE": "Datum:",
   "CINEMA_TICKETS_TRAILER": "Trailer:",
@@ -73,12 +85,13 @@
   "CINEMA_TICKETS_BOOKING_MODAL_NUMBER_OF_TICKETS_INVALID_1": "Gib bitte eine Zahl zwischen 1 und ",
   "CINEMA_TICKETS_BOOKING_MODAL_NUMBER_OF_TICKETS_INVALID_2": " ein!",
   "CINEMA_TICKETS_BOOKING_MODAL_AVAILABLE_TICKETS": "Freie Karten: ",
+  "CINEMA_TICKETS_BOOKING_MODAL_BOOK": "Reservieren",
 
-  "CINEMA_TICKETS_SERVICE_BOOKING": "Buchungen",
+  "CINEMA_TICKETS_SERVICE_BOOKING": "Reservierungen",
   "CINEMA_TICKETS_SERVICE_USERNAME": "Name",
   "CINEMA_TICKETS_SERVICE_TICKET_AMOUNT": "Kartenanzahl",
-  "CINEMA_TICKETS_SERVICE_NO_TICKETS_BOOKED": "Keine gebuchten Karten",
-  "CINEMA_TICKETS_SERVICE_NOT_APPLIED_FOR_SERVICE": "Sie haben sich noch für keinen Kinodienst gemeldet",
+  "CINEMA_TICKETS_SERVICE_NO_TICKETS_BOOKED": "Keine reservierten Karten",
+  "CINEMA_TICKETS_SERVICE_NOT_APPLIED_FOR_SERVICE": "Du hast dich noch für keinen Kinodienst gemeldet",
   "CINEMA_TICKETS_SERVICE_NOT_APPLIED_FOR_SERVICE_APPLY_NOW": "Melde dich jetzt für den Kinodienst",
 
   "CINEMA_TICKETS_ADMINISTRATION_REFRESH": "Filmliste neuladen",

@@ -2,7 +2,12 @@
   <mat-expansion-panel *ngFor="let movieOrder of movieOrders" [expanded]="movieOrder.getTicketOrders().length != 0">
     <mat-expansion-panel-header>
       <mat-panel-title>{{movieOrder.getMovieName()}}</mat-panel-title>
-      <mat-panel-description>{{'CINEMA_TICKETS_SERVICE_BOOKING' | translate}}: {{movieOrder.getTicketOrders().length}}</mat-panel-description>
+      <mat-panel-description *ngIf="movieOrder.getTicketOrders().length != 0">
+        {{'CINEMA_TICKETS_SERVICE_BOOKING' | translate}}: {{movieOrder.getTicketOrders().length}}
+      </mat-panel-description>
+      <mat-panel-description *ngIf="movieOrder.getTicketOrders().length == 0">
+        {{'CINEMA_TICKETS_SERVICE_NO_TICKETS_BOOKED' | translate}}
+      </mat-panel-description>
     </mat-expansion-panel-header>
 
     <mat-list *ngIf="movieOrder.getTicketOrders().length == 0">
