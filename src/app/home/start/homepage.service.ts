@@ -18,7 +18,8 @@ export class HomepageService {
   private _bookings: HomeBookingsModel[] = [];
   public bookingsChange: Subject<HomeBookingsModel[]> = new Subject<HomeBookingsModel[]>();
 
-  constructor(private httpService: HttpService) { }
+  constructor(private httpService: HttpService) {
+  }
 
   private setBirthdays(birthdays: HomeBirthdayModel[]) {
     this._birthdays = birthdays;

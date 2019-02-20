@@ -1,9 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import {HomepageService} from './homepage.service';
+import {Component, OnInit} from '@angular/core';
+
 import {Subscription} from 'rxjs';
+
+import {HomepageService} from './homepage.service';
+import {CinemaService} from '../cinema/cinema.service';
+
 import {HomeBirthdayModel} from './birthdays.model';
 import {HomeBookingsModel} from './bookings.model';
-import {CinemaService} from '../cinema/cinema.service';
 
 @Component({
   selector: 'app-start',
