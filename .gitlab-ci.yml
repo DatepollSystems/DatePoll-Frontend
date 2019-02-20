@@ -17,6 +17,7 @@ deploy_stage:
   script:
     - rm ./package-lock.json
     - npm install
+    - npm audit fix
     - ./node_modules/@angular/cli/bin/ng build --progress false --prod
     - cd dist/
     - ls
