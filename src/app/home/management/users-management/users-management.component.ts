@@ -5,6 +5,9 @@ import {Subscription} from 'rxjs';
 import {UsersService} from '../users.service';
 import {User} from '../user.model';
 import {ExcelService} from '../../../services/excel.service';
+import {Permissions} from '../../../permissions';
+import {MyUserService} from '../../my-user.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-users-management',
@@ -23,8 +26,18 @@ export class UsersManagementComponent implements OnInit {
   users: User[];
   dataSource: MatTableDataSource<User>;
 
+  private permissionSubscription: Subscription;
+
   constructor(private bottomSheet: MatBottomSheet,
+              private myUserService: MyUserService,
+              private router: Router,
               private usersService: UsersService) {
+
+    this.permissionSubscription = myUserService.permissionsChange.subscribe((value) => {
+      if (!this.myUserService.hasPermission(Permissions.MANAGEMENT_ADMINISTRATION)) {
+        this.router.navigate(['/home']);
+      }
+    });
 
     this.users = usersService.getUsers();
     this.usersSubscription = usersService.usersChange.subscribe((value) => {
@@ -36,6 +49,10 @@ export class UsersManagementComponent implements OnInit {
   }
 
   ngOnInit() {
+    if (!this.myUserService.hasPermission(Permissions.MANAGEMENT_ADMINISTRATION)) {
+      this.router.navigate(['/home']);
+    }
+
     this.dataSource = new MatTableDataSource(this.users);
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
