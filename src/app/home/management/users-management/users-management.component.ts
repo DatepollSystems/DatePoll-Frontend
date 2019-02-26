@@ -2,8 +2,8 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {MatBottomSheet, MatBottomSheetRef, MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
 import {Subscription} from 'rxjs';
 
-import {UsersService} from '../users.service';
-import {User} from '../user.model';
+import {UsersService} from './users.service';
+import {User} from './user.model';
 import {ExcelService} from '../../../services/excel.service';
 import {Permissions} from '../../../permissions';
 import {MyUserService} from '../../my-user.service';

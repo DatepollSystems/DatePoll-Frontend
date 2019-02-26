@@ -1,4 +1,4 @@
-import {PhoneNumber} from '../phoneNumber.model';
+import {PhoneNumber} from '../../phoneNumber.model';
 
 export class User {
   private readonly _id: number;
