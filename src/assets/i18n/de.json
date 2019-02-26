@@ -78,6 +78,8 @@
   "CINEMA_TICKETS_NO_MOVIES_AVAILABLE": "Derzeit sind keine Filme verfügbar",
   "CINEMA_TICKETS_BOOKED_TICKETS": "Gebuchte Karten:",
   "CINEMA_TICKETS_CANCEL_BOOKED_TICKETS": "Stornieren",
+  "CINEMA_TICKETS_CANCEL_BOOKED_TICKETS_TOOLTIP": "Storniere alle gebuchten Karten",
+  "CINEMA_TICKETS_CANCEL_CINEMA_SERVICE_TOOLTIP": "Abmelden",
 
   "CINEMA_TICKETS_BOOKING_MODAL_HEADER": "Buche Tickets für ",
   "CINEMA_TICKETS_BOOKING_MODAL_WARNING": "Karten sind in erster Linie für Vereinsmitglieder. Sollten kurz vor Kinobeginn noch Karten frei sein, können diese jederzeit an Freunde oder Familienmitglieder weitergeben werden! ",

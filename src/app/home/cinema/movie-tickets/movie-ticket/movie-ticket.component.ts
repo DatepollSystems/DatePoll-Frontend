@@ -22,10 +22,15 @@ export class MovieTicketComponent implements OnInit {
   moviesSubscription: Subscription;
   soldOut: boolean;
 
+  myUserService: MyUserService;
+
   constructor(private dialog: MatDialog,
               private cinemaService: CinemaService,
-              private myUserService: MyUserService,
-              private httpService: HttpService) { }
+              myUserService: MyUserService,
+              private httpService: HttpService) {
+    this.myUserService = myUserService;
+  }
+
 
   ngOnInit(): void {
     this.soldOut = this.movie.getBookedTickets() >= 20;
