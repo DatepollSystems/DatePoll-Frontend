@@ -7,7 +7,7 @@
       <mat-form-field class="col-12 col-sm-12 col-md-10 col-lg-10">
         <input matInput id="name" name="name" type="text"
                [(ngModel)]="name" ngModel #nameModel="ngModel"
-               maxlength="128" required minlength="1"
+               maxlength="190" required minlength="1"
                placeholder="{{'CINEMA_TICKETS_ADMINISTRATION_NAME' | translate}}">
         <mat-error *ngIf="nameModel.invalid">
           {{'CINEMA_TICKETS_ADMINISTRATION_MOVIE_EDIT_MODAL_NAME_INVALID' | translate}}
@@ -44,7 +44,7 @@
       <mat-form-field class="col-12">
         <input matInput id="trailerLink" name="trailerLink" type="text"
                [(ngModel)]="trailerLink" ngModel #trailerLinkModel="ngModel"
-               maxlength="512" required minlength="6"
+               maxlength="190" required minlength="6"
                placeholder="{{'CINEMA_TICKETS_ADMINISTRATION_TRAILER' | translate}}">
         <mat-error *ngIf="trailerLinkModel.invalid">
           {{'CINEMA_TICKETS_ADMINISTRATION_MOVIE_EDIT_MODAL_TRAILER_INVALID' | translate}}
@@ -56,7 +56,7 @@
       <mat-form-field class="col-12">
         <input matInput id="imageLink" name="imageLink" type="text"
                [(ngModel)]="imageLink" ngModel #imageLinkModel="ngModel"
-               maxlength="512" required minlength="6"
+               maxlength="190" required minlength="6"
                placeholder="{{'CINEMA_TICKETS_ADMINISTRATION_POSTER' | translate}}">
         <mat-error *ngIf="imageLinkModel.invalid">
           {{'CINEMA_TICKETS_ADMINISTRATION_MOVIE_EDIT_MODAL_POSTER_INVALID' | translate}}
