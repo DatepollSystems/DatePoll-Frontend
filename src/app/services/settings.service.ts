@@ -15,7 +15,7 @@ export class SettingsService {
   private _showCinema = true;
 
   public getShowCinema(): boolean {
-    this.httpService.settingRequest('/cinema', 'settingsCinema').subscribe(
+    this.httpService.getSettingRequest('/cinema', 'settingsCinema').subscribe(
       (response: any) => {
         this.setShowCinema(response.enabled);
       },
@@ -28,6 +28,12 @@ export class SettingsService {
   public setShowCinema(showCinema: boolean) {
     this._showCinema = showCinema;
     this.showCinemaChange.next(this._showCinema);
+
+    const body = {
+      'isEnabled': showCinema
+    };
+
+    this.httpService.setSettingsRequest('/cinema', body, 'setCinemaFeatureEnabled');
   }
 
   public checkShowCinema() {
@@ -35,11 +41,5 @@ export class SettingsService {
       this.router.navigate(['/home']);
       return;
     }
-
-    this.showCinemaChange.subscribe((value) => {
-      if (!value) {
-        this.router.navigate(['/home']);
-      }
-    });
   }
 }

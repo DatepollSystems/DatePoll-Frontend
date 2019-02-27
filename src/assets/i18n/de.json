@@ -52,6 +52,7 @@
   "NAV_CINEMA_ADMINISTRATION": "Filmverwaltung",
 
   "NAV_MANAGEMENT_USERS": "Mitgliederverwaltung",
+  "NAV_MANAGEMENT_DATEPOLL": "DatePoll-Verwaltung",
 
 
   "STARTPAGE_BIRTHDAY": "Geburtstage des Monat",
@@ -201,6 +202,8 @@
   "MANAGEMENT_USERS_LOCATION": "Ortsname",
   "MANAGEMENT_USERS_ACTIONS": "Aktionen",
   "MANAGEMENT_USERS_ACTIONS_EDIT_TOOLTIP": "Bearbeite dieses Mitglied",
-  "MANAGEMENT_USERS_ACTIONS_DELETE_TOOLTIP": "Lösche dieses Mitglied"
+  "MANAGEMENT_USERS_ACTIONS_DELETE_TOOLTIP": "Lösche dieses Mitglied",
+
+  "MANAGEMENT_DATEPOLL_CINEMA_SERVICE": "Kinoservice"
 
 }

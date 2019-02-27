@@ -37,8 +37,7 @@ import {NgxChartsModule} from '@swimlane/ngx-charts';
 import {MovieEditModalComponent} from './home/cinema/movie-administration/movie-edit-modal/movie-edit-modal.component';
 import {MaterialModule} from './material-module';
 import {MAT_DATE_LOCALE, MAT_SNACK_BAR_DEFAULT_OPTIONS} from '@angular/material';
-import {MovieBookTicketsModalComponent} from
-    './home/cinema/movie-tickets/movie-ticket/movie-book-tickets-modal/movie-book-tickets-modal.component';
+import {MovieBookTicketsModalComponent} from './home/cinema/movie-tickets/movie-ticket/movie-book-tickets-modal/movie-book-tickets-modal.component';
 import {HttpModule} from '@angular/http';
 import {NgxMatSelectSearchModule} from 'ngx-mat-select-search';
 import {MovieCreateModalComponent} from './home/cinema/movie-administration/movie-create-modal/movie-create-modal.component';
@@ -49,6 +48,7 @@ import {ExcelService} from './services/excel.service';
 import {DoNotForgetToSaveComponent} from './home/do-not-forget-to-save/do-not-forget-to-save.component';
 import {MovieTicketsService} from './home/cinema/movieTickets.service';
 import {HomepageService} from './home/start/homepage.service';
+import {DatepollManagementComponent} from './home/management/datepoll-management/datepoll-management.component';
 
 @NgModule({
   declarations: [
@@ -81,6 +81,7 @@ import {HomepageService} from './home/start/homepage.service';
     MovieCreateModalComponent,
     UsersManagementComponent,
     UsersExportBottomSheetComponent,
+    DatepollManagementComponent,
   ],
   imports: [
     BrowserModule,

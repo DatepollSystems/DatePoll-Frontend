@@ -10,7 +10,8 @@ import {AuthService} from '../auth/auth.service';
 export class HttpService {
   apiUrl = environment.apiUrl;
 
-  constructor(private authService: AuthService, private http: Http) { }
+  constructor(private authService: AuthService, private http: Http) {
+  }
 
   public loggedInV1GETRequest(url: string, functionUser: string = null) {
     const token = this.authService.getToken(functionUser);
@@ -43,8 +44,8 @@ export class HttpService {
     return this.http.delete(this.apiUrl + '/v1' + url + '?token=' + token);
   }
 
-  public settingRequest(url: string, functionUser: string = null) {
-    return this.http.get(this.apiUrl + '/settings' +  url).pipe(map(
+  public getSettingRequest(url: string, functionUser: string = null) {
+    return this.http.get(this.apiUrl + '/settings' + url).pipe(map(
       (response: Response) => {
         const data = response.json();
         if (functionUser != null) {
@@ -54,5 +55,17 @@ export class HttpService {
         return data;
       }
     ));
+  }
+
+  public setSettingsRequest(url: string, body: any, functionUser: string = null) {
+    const token = this.authService.getToken(functionUser);
+    const headers = new Headers({'Content-Type': 'application/json'});
+
+    return this.http.post(this.apiUrl + '/settings/administration' + url + '?token=' + token, body, {headers: headers}).subscribe(
+      (response: any) => {
+        console.log(response.json());
+      },
+      (error) => console.log(error)
+    );
   }
 }

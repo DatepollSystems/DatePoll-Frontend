@@ -34,12 +34,17 @@
         <mat-icon>settings</mat-icon> {{ 'NAV_USER_SETTINGS' | translate }}
       </a>
 
+      <mat-divider></mat-divider>
       <div *ngIf="myUserService.hasPermission(managementAdministration)">
-        <mat-divider></mat-divider>
         <a mat-list-item routerLink="management/user" routerLinkActive="activated">
           <mat-icon>contacts</mat-icon> {{'NAV_MANAGEMENT_USERS' | translate}}
         </a>
-        <mat-divider></mat-divider>
+      </div>
+
+      <div *ngIf="myUserService.hasPermission(settingsAdministration)">
+        <a mat-list-item routerLink="management/datepoll" routerLinkActive="activated">
+          <mat-icon>settings_input_component</mat-icon> {{'NAV_MANAGEMENT_DATEPOLL' | translate}}
+        </a>
       </div>
 
       <a mat-list-item (click)="logout()" class="sidenav-end">

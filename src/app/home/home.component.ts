@@ -23,8 +23,9 @@ export class HomeComponent implements OnInit {
 
   public myUserService: MyUserService;
 
-  cinemaMovieAdministration: string;
-  managementAdministration: string;
+  cinemaMovieAdministration = Permissions.CINEMA_MOVIE_ADMINISTRATION;
+  managementAdministration = Permissions.MANAGEMENT_ADMINISTRATION;
+  settingsAdministration = Permissions.SETTINGS_ADMINISTRATION;
 
   private firstnameSubscription: Subscription;
   firstname: string;
@@ -48,9 +49,6 @@ export class HomeComponent implements OnInit {
     private router: Router) {
 
     this.myUserService = myUserService;
-
-    this.cinemaMovieAdministration = Permissions.CINEMA_MOVIE_ADMINISTRATION;
-    this.managementAdministration = Permissions.MANAGEMENT_ADMINISTRATION;
 
     if ((window.screen.width) > 992) {
       this.navBarOpened = true;
