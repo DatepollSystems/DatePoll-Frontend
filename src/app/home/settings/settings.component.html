@@ -1,44 +1,67 @@
 <div class="row">
   <div class="col-12 offset-lg-1 col-lg-5">
     <mat-card style="margin-bottom: 15px;">
-      <div class="row">
-        <mat-card-title>
-          <mat-icon svgIcon="account-card-details" style="color: #2196F3"></mat-icon>
-          {{'SETTINGS_PERSONAL_DATA' | translate}}
-        </mat-card-title>
-      </div>
+      <mat-card-title>
+        <mat-icon svgIcon="account-card-details" style="color: #2196F3"></mat-icon>
+        {{'SETTINGS_PERSONAL_DATA' | translate}}
+      </mat-card-title>
 
       <mat-card-content class="mat-typography">
-        <div>{{'SETTINGS_PERSONAL_DATA_DESCRIPTION' | translate}}</div>
-
-        <div class="card-content-links">
-          <a (click)="openPersonalDataModal()">{{'SETTINGS_PERSONAL_DATA_PERSONAL_DATA_CHANGE' | translate}}</a><br>
-          <a (click)="openPhoneNumberModal()">{{'SETTINGS_PERSONAL_DATA_PERSONAL_NUMBER_CHANGE' | translate}}</a><br>
-          <a (click)="openEmailAddressModal()">{{'SETTINGS_PERSONAL_DATA_PERSONAL_EMAIL_CHANGE' | translate}}</a>
+        <div class="row">
+          <div class="col-12">{{'SETTINGS_PERSONAL_DATA_DESCRIPTION' | translate}}</div>
         </div>
+
+        <br>
+
+        <div class="row">
+          <div class="col-12">
+            <a (click)="openPersonalDataModal()">{{'SETTINGS_PERSONAL_DATA_PERSONAL_DATA_CHANGE' | translate}}</a>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12">
+            <a (click)="openPhoneNumberModal()">{{'SETTINGS_PERSONAL_DATA_PERSONAL_NUMBER_CHANGE' | translate}}</a>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12">
+            <a (click)="openEmailAddressModal()">{{'SETTINGS_PERSONAL_DATA_PERSONAL_EMAIL_CHANGE' | translate}}</a>
+          </div>
+        </div>
+
       </mat-card-content>
     </mat-card>
   </div>
 
   <div class="col-12 col-lg-5">
     <mat-card>
-      <div class="row">
-        <mat-card-title>
-          <mat-icon svgIcon="security-lock" style="color: #2196F3"></mat-icon>
-          {{'SETTINGS_SECURITY' | translate}}
-        </mat-card-title>
-      </div>
+      <mat-card-title>
+        <mat-icon svgIcon="security-lock" style="color: #2196F3"></mat-icon>
+        {{'SETTINGS_SECURITY' | translate}}
+      </mat-card-title>
 
-      <div class="row">
       <mat-card-content>
-        <div>{{'SETTINGS_SECURITY_DESCRIPTION' | translate}}</div>
+        <div class="row">
+          <div class="col-12">{{'SETTINGS_SECURITY_DESCRIPTION' | translate}}</div>
+        </div>
 
-        <div class="card-content-links">
-          <a (click)="openPasswordModal()">{{'SETTINGS_SECURITY_CHANGE_PASSWORD' | translate}}</a><br>
-          <a (click)="openTwoFactorAuthenticationModal()">{{'SETTINGS_SECURITY_CHANGE_2FA' | translate}}</a>
+        <br>
+
+        <div class="row">
+          <div class="col-12">
+          <a (click)="openPasswordModal()">{{'SETTINGS_SECURITY_CHANGE_PASSWORD' | translate}}</a>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12">
+            <a (click)="openTwoFactorAuthenticationModal()">{{'SETTINGS_SECURITY_CHANGE_2FA' | translate}}</a>
+            (Not implemented yet)
+          </div>
         </div>
       </mat-card-content>
-      </div>
     </mat-card>
   </div>
 </div>

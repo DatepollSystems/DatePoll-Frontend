@@ -1,6 +1,8 @@
 import {Component, ViewChild} from '@angular/core';
-import {MyUserService} from '../../../auth/my-user.service';
-import {MatSnackBar} from '@angular/material';
+import {Response} from '@angular/http';
+
+import {MyUserService} from '../../my-user.service';
+import {HttpService} from '../../../services/http.service';
 
 @Component({
   selector: 'app-email-address',
@@ -8,15 +10,26 @@ import {MatSnackBar} from '@angular/material';
   styleUrls: ['./email-address.component.css']
 })
 export class EmailAddressComponent {
+
   @ViewChild('stepper') stepper;
 
-  oldEmailAddress: string;
   oldEmailVerificationCode: number;
 
   newEmailAddress: string;
   newEmailVerificationCode: number;
 
-  constructor(private _myUserService: MyUserService, private _snackBar: MatSnackBar,) {
+  showOldEmailVerificiationEmailSendingSpinner = false;
+  showOldEmailVerificationCodeIncorrectCard = false;
+  showOldEmailVerificationCodeRateLimitExceededCard = false;
+
+  showNewEmailVerificationEmailSendingSpinner = false;
+  showNewEmailIsOldEmailCard = false;
+  showNewEmailVerificationCodeIncorrectCard = false;
+  showNewEmailVerificationCodeRateLimitExceededCard = false;
+
+  constructor(
+    private _myUserService: MyUserService,
+    private httpService: HttpService) {
   }
 
   nextStep() {
@@ -24,100 +37,168 @@ export class EmailAddressComponent {
   }
 
   sendOldEmailVerification() {
-    // Incorrect test
-    if (this.oldEmailAddress !== this._myUserService.getEmail()) {
-      this._snackBar.openFromComponent(EmailAddressNotCorrectComponent, {
-        duration: 4000
-      });
+    this.showOldEmailVerificiationEmailSendingSpinner = true;
 
-      console.log('Email-Address is incorrect! Email: ' + this.oldEmailAddress);
-      return;
-    }
-
-    console.log('Email-Address is correct!');
-    this.nextStep();
+    this.httpService.loggedInV1GETRequest('/user/myself/changeEmail/oldEmailAddressVerification', 'sendOldEmailVerification').subscribe(
+      (response: any) => {
+        if (response.msg === 'Sent') {
+          this.nextStep();
+        }
+      },
+      (error) => {
+        console.log(error);
+        console.log('sendOldEmailVerification | Email was not sent!');
+      }
+    );
   }
 
   checkOldEmailVerificationCode() {
-    // Invalid test
-    if (this.oldEmailVerificationCode === 666666) {
-      this._snackBar.openFromComponent(VerificationCodeNotCorrectComponent, {
-        duration: 4000
-      });
+    this.showOldEmailVerificationCodeIncorrectCard = false;
+    this.showOldEmailVerificationCodeRateLimitExceededCard = false;
 
-      console.log('Validation code is incorrect! Code: ' + this.oldEmailVerificationCode);
-      return;
-    }
+    const body = {
+      'code': this.oldEmailVerificationCode,
+    };
 
-    console.log('Validation code is correct!');
-    this.nextStep();
+    this.httpService.loggedInV1POSTRequest('/user/myself/changeEmail/oldEmailAddressVerificationCodeVerification',
+      body,
+      'checkOldEmailVerificationCode')
+      .subscribe(
+        (response: Response) => {
+          const data = response.json();
+          console.log(data);
+          const msg = data.msg;
+
+          switch (msg) {
+            case 'code_correct':
+              this.nextStep();
+              break;
+
+            case 'code_incorrect':
+              console.log('checkOldEmailVerificationCode | Code incorrect | Code: ' + this.oldEmailVerificationCode);
+              this.showOldEmailVerificationCodeIncorrectCard = true;
+
+              break;
+
+            case 'rate_limit_exceeded':
+              console.log('checkOldEmailVerificationCode | Rate limit exceeded');
+              this.showOldEmailVerificationCodeRateLimitExceededCard = true;
+
+              break;
+
+            default:
+              console.log(msg);
+              break;
+          }
+        },
+        (error) => {
+          console.log(error);
+          this.showOldEmailVerificationCodeIncorrectCard = true;
+        }
+      );
   }
 
   sendNewEmailVerification() {
-    if (this.newEmailAddress === this.oldEmailAddress) {
-      this._snackBar.openFromComponent(NewEmailIsOldEmailComponent, {
-        duration: 4000
-      });
+    this.showNewEmailIsOldEmailCard = false;
 
-      console.log('User Error: Old email address is new email address!');
+    if (this.newEmailAddress === this._myUserService.getEmail()) {
+      this.showNewEmailIsOldEmailCard = true;
       return;
     }
 
-    console.log('Email sent');
-    this.nextStep();
+    this.showNewEmailVerificationEmailSendingSpinner = true;
+
+    const body = {
+      'email': this.newEmailAddress
+    };
+
+    this.httpService.loggedInV1POSTRequest('/user/myself/changeEmail/newEmailAddressVerification', body,
+      'sendNewEmailVerification').subscribe(
+      (response: Response) => {
+        const data = response.json();
+        console.log(data);
+
+        if (data.msg === 'Sent') {
+          this.nextStep();
+        }
+      },
+      (error) => {
+        console.log(error);
+        console.log('sendNewEmailVerification | Email was not sent!');
+      }
+    );
   }
 
   checkNewEmailVerificationCode() {
-    // Invalid test
-    if (this.newEmailVerificationCode === 666666) {
-      this._snackBar.openFromComponent(VerificationCodeNotCorrectComponent, {
-        duration: 4000
-      });
+    this.showNewEmailVerificationCodeIncorrectCard = false;
+    this.showNewEmailVerificationCodeRateLimitExceededCard = false;
 
-      console.log('Validation code is incorrect! Code: ' + this.newEmailVerificationCode);
-      return;
-    }
-    console.log('Validation code is correct!');
+    const body = {
+      'code': this.newEmailVerificationCode,
+    };
 
-    this._myUserService.setEmail(this.newEmailAddress);
-    console.log('Email address changed successfully!');
+    this.httpService.loggedInV1POSTRequest('/user/myself/changeEmail/newEmailAddressVerificationCodeVerification',
+      body,
+      'checkNewEmailVerificationCode')
+      .subscribe(
+        (response: Response) => {
+          const data = response.json();
+          console.log(data);
+          const msg = data.msg;
 
-    this.nextStep();
+          switch (msg) {
+            case 'code_correct':
+              this.changeEmail();
+              break;
+
+            case 'code_incorrect':
+              console.log('checkNewEmailVerificationCode | Code incorrect | Code: ' + this.newEmailVerificationCode);
+              this.showNewEmailVerificationCodeIncorrectCard = true;
+
+              break;
+
+            case 'rate_limit_exceeded':
+              console.log('checkNewEmailVerificationCode | Rate limit exceeded');
+              this.showNewEmailVerificationCodeRateLimitExceededCard = true;
+
+              break;
+
+            default:
+              console.log('checkNewEmailVerificationCode | Unknown message: ' + msg);
+              break;
+          }
+        },
+        (error) => {
+          console.log(error);
+          this.showNewEmailVerificationCodeIncorrectCard = true;
+        }
+      );
   }
-}
 
-@Component({
-  selector: 'app-email-address-email-address-enter-incorrect',
-  template: '<div class="test">{{"SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_ENTER_OLD_EMAiL_ADDRESS_INCORRECT" | translate}}</div>',
-  styles: [`
-    .test {
-      color: #FF7043;
-    }
-  `],
-})
-export class EmailAddressNotCorrectComponent {
-}
+  private changeEmail() {
+    const body = {
+      'oldEmailCode': this.oldEmailVerificationCode,
+      'newEmailCode': this.newEmailVerificationCode,
+      'newEmailAddress': this.newEmailAddress
+    };
 
-@Component({
-  selector: 'app-email-address-verification-code-enter-incorrect',
-  template: '<div class="test">{{"SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_ENTER_VERIFICATION_CODE_INCORRECT" | translate}}</div>',
-  styles: [`
-    .test {
-      color: #FF7043;
-    }
-  `],
-})
-export class VerificationCodeNotCorrectComponent {
-}
+    this.httpService.loggedInV1POSTRequest('/user/myself/changeEmail/changeEmailAddress', body, 'changeEmail').subscribe(
+      (response: Response) => {
+        const data = response.json();
+        console.log(data);
+        const msg = data.msg;
 
-@Component({
-  selector: 'app-email-address-no-change',
-  template: '<div class="test">{{"SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_NEW_EMAIL_IS_OLD_EMAIL" | translate}}</div>',
-  styles: [`
-    .test {
-      color: #FF7043;
-    }
-  `],
-})
-export class NewEmailIsOldEmailComponent {
+        if (msg === 'email_changed') {
+          this._myUserService.setEmail(this.newEmailAddress);
+          console.log('changeEmail | Email address changed successfully!');
+          this.nextStep();
+        } else {
+          console.log('changeEmail | Email not changed! Message: ' + msg);
+        }
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
 }

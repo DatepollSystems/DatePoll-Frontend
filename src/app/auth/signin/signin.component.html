@@ -1,58 +1,107 @@
-<div id="sign-container">
-  <div fxLayout="row" fxLayoutAlign="center center">
-    <form (ngSubmit)="onSignin(f)" #f="ngForm">
-
-      <mat-card>
+<div id="signin-container">
+  <div class="container">
+    <div class="row">
+      <mat-card id="signin-card" class="col-10 col-sm-10 col-md-8 col-lg-6 offset-1 offset-sm-1 offset-md-2 offset-lg-3">
         <mat-card-title-group>
-          <div fxLayout="column" fxLayoutAlign="space-around start">
-            <mat-card-title>
-              <div class="projectName">
-                {{projectName}}
-              </div>
-            </mat-card-title>
+          <mat-card-title>
+            <div class="projectName">
+              {{projectName}}
+            </div>
+          </mat-card-title>
 
-            <mat-card-title>
-              DatePoll | {{ 'SIGNIN' | translate }}
-            </mat-card-title>
-          </div>
+          <mat-card-title>
+            DatePoll | {{ 'SIGNIN' | translate }}
+          </mat-card-title>
         </mat-card-title-group>
 
-        <mat-card-content>
-          <div fxLayout="column" fxLayoutAlign="space-around none" >
-            <mat-form-field>
-              <span matPrefix>@ &nbsp;</span>
-              <input matInput ngModel
-                     id="email" name="email" type="email"
-                     email required minlength="5"
-                     placeholder="{{'SIGNIN_EMAIL' | translate}}">
-              <mat-icon matSuffix>email</mat-icon>
-            </mat-form-field>
+        <form (ngSubmit)="onSignin(f)" #f="ngForm" *ngIf="state === 'login'">
+          <mat-card-content>
+              <mat-card matRipple class="error-mat-card row" *ngIf="loginSuccess">
+                <mat-card-content class="last-child">{{'SIGNIN_SUCCESSFUL' | translate}}</mat-card-content>
+              </mat-card>
 
-            <mat-form-field>
-              <input matInput ngModel
-                     id="password" name="password" type="password"
-                     minlength="6" required
-                     placeholder="{{'SIGNIN_PASSWORD' | translate}}">
-              <mat-hint align="start"><strong>{{'SIGNIN_KEEP_YOUR_PASSWORD_SECRET' | translate}}</strong> </mat-hint>
-            </mat-form-field>
-          </div>
+            <div class="row">
+              <mat-form-field class="col-12">
+                <span matPrefix>@ &nbsp;</span>
+                <input matInput ngModel
+                       id="email" name="email" type="email"
+                       email required minlength="5"
+                       placeholder="{{'SIGNIN_EMAIL' | translate}}">
+                <mat-icon matSuffix>email</mat-icon>
+              </mat-form-field>
+            </div>
 
-        </mat-card-content>
+            <div class="row">
+              <mat-form-field class="col-12">
+                <input matInput ngModel
+                       id="password" name="password" type="password"
+                       minlength="5" required
+                       placeholder="{{'SIGNIN_PASSWORD' | translate}}">
+                <mat-hint *ngIf="loginFail"><strong style="color: red">{{'SIGNIN_EMAIL_OR_PASSWORD_INCORRECT' | translate}}</strong></mat-hint>
+              </mat-form-field>
+            </div>
+          </mat-card-content>
 
-        <mat-card-actions>
-          <button mat-raised-button routerLink="/signup">{{ 'SIGNIN_NOT_SIGNED_UP' | translate }}</button>
+          <mat-card-actions>
+            <button
+              mat-raised-button
+              color="primary"
+              type="submit"
+              *ngIf="!showLoadingSpinnerDuringLogin"
+              [disabled]="!f.valid">
+              {{ 'SIGNIN' | translate }}
+              <mat-icon aria-label="Example icon-button with a heart icon">send</mat-icon>
+            </button>
+            <mat-progress-bar *ngIf="showLoadingSpinnerDuringLogin" class="col-12" mode="indeterminate"></mat-progress-bar>
+          </mat-card-actions>
+        </form>
 
-          <button
-            mat-raised-button
-            color="primary"
-            type="submit"
-            [disabled]="!f.valid">
-            {{ 'SIGNIN' | translate }}
-            <mat-icon aria-label="Example icon-button with a heart icon">send</mat-icon>
-          </button>
-        </mat-card-actions>
+        <form (ngSubmit)="onChangePasswordAfterSignin(f)" #f="ngForm" *ngIf="state === 'changePassword'">
+
+          <mat-card class="success-mat-card" matRipple>
+            <mat-card-content class="last-child">
+                {{'SIGNIN_YOU_NEED_TO_CHANGE_PASSWORD' | translate}}
+              </mat-card-content>
+            </mat-card>
+
+
+          <mat-card-content>
+            <div class="row">
+              <mat-form-field class="col-12">
+                <input matInput ngModel #passwordModel="ngModel"
+                       name="password" type="password"
+                       minlength="5" required
+                       placeholder="{{'SIGNIN_NEW_PASSWORD' | translate}}">
+              </mat-form-field>
+            </div>
+
+            <div class="row">
+              <mat-form-field class="col-12">
+                <input matInput ngModel #passwordRepeatModel="ngModel" [equalTo]="passwordModel"
+                       name="password_repeat" type="password"
+                       minlength="5" required
+                       placeholder="{{'SIGNIN_NEW_PASSWORD_REPEAT' | translate}}">
+              </mat-form-field>
+              <mat-error *ngIf="passwordRepeatModel.errors?.equalTo" class="col-12">
+                {{'SIGNIN_PASSWORD_ARE_NOT_EQUAL' | translate}}
+              </mat-error>
+            </div>
+          </mat-card-content>
+
+          <mat-card-actions>
+            <button
+              mat-raised-button
+              color="primary"
+              type="submit"
+              [disabled]="!f.valid">
+              {{ 'SIGNIN_AND_CHANGE_PASSWORD' | translate }}
+              <mat-icon aria-label="Submit icon">send</mat-icon>
+            </button>
+          </mat-card-actions>
+        </form>
+
       </mat-card>
-    </form>
+    </div>
   </div>
 </div>
 

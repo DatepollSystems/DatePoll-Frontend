@@ -1,8 +1,12 @@
-<h2 mat-dialog-title>{{'CINEMA_TICKETS_BOOKING_MODAL_HEADER' | translate}} {{movie.getName()}}</h2>
+<h2 mat-dialog-title>{{'CINEMA_TICKETS_BOOKING_MODAL_HEADER' | translate}} {{movie.name}}</h2>
 <mat-dialog-content>
   <div class="row">
     <div class="col-12">
-      <mat-card style="background-color: #29B6F6"><b>Info! </b>{{'CINEMA_TICKETS_BOOKING_MODAL_WARNING' | translate}}</mat-card>
+      <mat-card class="info-mat-card" matRipple>
+        <mat-card-content class="last-child">
+          <b>Info! </b>{{'CINEMA_TICKETS_BOOKING_MODAL_WARNING' | translate}}
+        </mat-card-content>
+      </mat-card>
     </div>
   </div>
 
@@ -31,6 +35,6 @@
   <button mat-button mat-dialog-close>{{'CLOSE' | translate}}</button>
   <button mat-button [mat-dialog-close]="true" (click)="form.ngSubmit.emit()" class="success-button"
           [disabled]="!form.form.valid">
-    {{'SUBMIT' | translate}}
+    {{'CINEMA_TICKETS_BOOKING_MODAL_BOOK' | translate}}
   </button>
 </mat-dialog-actions>

@@ -1,50 +1,65 @@
 <mat-sidenav-container>
   <mat-sidenav #sidenav [mode]="navBarMode" [(opened)]="navBarOpened">
-    <div class="sidenav-head">
-      <img class="sidenav-head-avatar" src="./../../assets/sidenav-demo-avatar.png" />
-
-      <div class="sidenav-head-entry row">
-        <div class="col-12"> {{firstname}} {{surname}}</div>
-      </div>
-      <div class="sidenav-head-entry row">
-        <div class="col-12">{{email}}</div>
-      </div>
-    </div>
+    <h2 class="sidenav-head-text">Hallo {{firstname}},</h2>
+    <h4 class="sidenav-head-text">{{email}}</h4>
 
     <mat-nav-list>
-      <a routerLink="/home" mat-list-item>
-        Home<mat-icon>home</mat-icon>
-      </a>
+      <mat-divider></mat-divider>
+      <a mat-list-item routerLink="/home"><mat-icon>home</mat-icon> Home</a>
       <mat-divider></mat-divider>
 
       <div *ngIf="showPoll">
-          <a mat-list-item>{{'NAV_POLLS' | translate}}</a>
+        <a mat-list-item>{{'NAV_POLLS' | translate}}</a>
 
-          <a mat-list-item>{{'NAV_ANALYSES' | translate}}</a>
+        <a mat-list-item>{{'NAV_ANALYSES' | translate}}</a>
 
-          <a mat-list-item>{{'NAV_ADMINISTRATION' | translate}}</a>
+        <a mat-list-item>{{'NAV_ADMINISTRATION' | translate}}</a>
         <mat-divider></mat-divider>
       </div>
 
       <div *ngIf="showCinema">
-          <a mat-list-item routerLink="cinema/tickets" routerLinkActive="activated">{{'NAV_TICKETS' | translate}}</a>
-          <a mat-list-item routerLink="cinema/service" routerLinkActive="activated">{{'NAV_CINEMA_SERVICE' | translate}}</a>
-          <a mat-list-item routerLink="cinema/administration" routerLinkActive="activated">{{'NAV_ADMINISTRATION' | translate}}</a>
+        <a mat-list-item routerLink="cinema/tickets" routerLinkActive="activated">
+          <mat-icon>movie</mat-icon> {{'NAV_CINEMA_TICKETS' | translate}}
+        </a>
+        <a mat-list-item routerLink="cinema/service" routerLinkActive="activated">
+          <mat-icon>card_giftcard</mat-icon> {{'NAV_CINEMA_SERVICE' | translate}}
+        </a>
+        <a mat-list-item routerLink="cinema/administration" routerLinkActive="activated"
+           *ngIf="myUserService.hasPermission(cinemaMovieAdministration)">
+          <mat-icon>build</mat-icon> {{'NAV_CINEMA_ADMINISTRATION' | translate}}</a>
         <mat-divider></mat-divider>
       </div>
 
+      <a mat-list-item routerLink="settings/personal" routerLinkActive="activated">
+        <mat-icon>settings</mat-icon> {{ 'NAV_USER_SETTINGS' | translate }}
+      </a>
 
-      <a mat-list-item routerLink="settings" routerLinkActive="activated">{{ 'NAV_SETTINGS' | translate }}</a>
+      <mat-divider></mat-divider>
+      <div *ngIf="myUserService.hasPermission(managementAdministration)">
+        <a mat-list-item routerLink="management/user" routerLinkActive="activated">
+          <mat-icon>contacts</mat-icon> {{'NAV_MANAGEMENT_USERS' | translate}}
+        </a>
+      </div>
+
+      <div *ngIf="myUserService.hasPermission(settingsAdministration)">
+        <a mat-list-item routerLink="management/datepoll" routerLinkActive="activated">
+          <mat-icon>settings_input_component</mat-icon> {{'NAV_MANAGEMENT_DATEPOLL' | translate}}
+        </a>
+      </div>
+
+      <a mat-list-item (click)="logout()" class="sidenav-end">
+        <mat-icon>power_settings_new</mat-icon> Logout
+      </a>
     </mat-nav-list>
   </mat-sidenav>
 
   <mat-sidenav-content>
-    <mat-toolbar color="primary" class="z-depth-4">
+    <mat-toolbar color="primary" class="z-depth-5">
       <mat-icon class="toolbar-sidenav-toggler" (click)="sidenav.toggle()">menu</mat-icon>
       <span routerLink="" class="toolbar-heading">DatePoll</span>
     </mat-toolbar>
 
-    <div class="my-container">
+    <div class="my-container" id="my-container">
       <router-outlet></router-outlet>
     </div>
     <app-footer></app-footer>

@@ -8,6 +8,7 @@ html, body {
 
 a {
   text-decoration: none;
+  color: #2196F3;
 }
 
 a:hover {
@@ -33,9 +34,33 @@ a:hover {
   }
 }
 
+.not-selectable {
+  user-select: none;
+}
+
 /* Disable stepper */
 .mat-vertical-stepper-header{
   pointer-events: none !important;
+}
+
+mat-card {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.success-mat-card {
+  user-select: none;
+  background-color: #689F38;
+}
+
+.error-mat-card {
+  user-select: none;
+  background-color: #FF5722;
+}
+
+.info-mat-card {
+  user-select: none;
+  background-color: #29B6F6;
 }
 
 /* Fix ripple bug which expand the card*/
@@ -46,4 +71,8 @@ a:hover {
 .success-button {
   background-color: #4CAF50;
   color: #ffffff
+}
+
+.info-button {
+  background-color: #29B6F6;
 }

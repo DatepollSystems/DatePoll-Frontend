@@ -1,6 +1,9 @@
-@font-face { font-family: signFont; src: url('../../../assets/fonts/signFont.TTF'); }
+@font-face {
+  font-family: signFont;
+  src: url('../../../assets/fonts/signFont.TTF');
+}
 
-#sign-container {
+#signin-container {
   background: url("../../../assets/signBackground.svg") no-repeat;
   background-size: cover;
   height: 100%;
@@ -16,4 +19,15 @@
   padding-left: 1vh;
   margin-top: 2vh;
   margin-bottom: 2vh;
+}
+
+#signin-card {
+  padding-bottom: 10px;
+  padding-top: 0;
+}
+
+mat-card-actions {
+  padding-bottom: 0;
+  margin-bottom: 0;
+  margin-left: 1px;
 }

@@ -1,4 +1,5 @@
 {
+  "CREATE": "Erstellen",
   "CLOSE": "Schließen",
   "SUBMIT": "Senden",
   "SAVE": "Speichern",
@@ -7,6 +8,7 @@
   "DONE": "Fertig",
   "OPEN": "Öffnen",
   "DO_NOT_FORGET_TO_SAVE": "Vergiss nicht zu speichern!",
+  "LOADING": "Laden...",
 
 
   "LANGUAGE": "Sprache",
@@ -30,28 +32,56 @@
   "SIGNIN_EMAIL": "Email-Adresse",
   "SIGNIN_PASSWORD": "Passwort",
   "SIGNIN_KEEP_YOUR_PASSWORD_SECRET": "Behalte dein Passwort geheim",
+  "SIGNIN_EMAIL_OR_PASSWORD_INCORRECT": "Die Email-Adresse oder das Passwort sind inkorrekt!",
+  "SIGNIN_SUCCESSFUL": "Passwort korrekt! Sie werden in kürze weitergeleitet...",
+  "SIGNIN_NEW_PASSWORD": "Neues Passwort",
+  "SIGNIN_NEW_PASSWORD_REPEAT": "Neues Passwort wiederholen",
+  "SIGNIN_AND_CHANGE_PASSWORD": "Passwort ändern und anmelden",
+  "SIGNIN_YOU_NEED_TO_CHANGE_PASSWORD": "Bitte änder das Passwort nach der ersten Anmeldung!",
+  "SIGNIN_PASSWORD_ARE_NOT_EQUAL": "Die Passwörter stimmen nicht überein",
 
 
-  "NAV_SETTINGS": "Einstellungen",
+  "NAV_USER_SETTINGS": "Persönliche Einstellungen",
 
   "NAV_POLLS": "Abstimmungen",
   "NAV_ANALYSES": "Auswertung",
   "NAV_ADMINISTRATION": "Administration",
 
   "NAV_CINEMA": "Kino",
-  "NAV_TICKETS": "Tickets",
+  "NAV_CINEMA_TICKETS": "Filmkarten",
   "NAV_CINEMA_SERVICE": "Kinodienst",
+  "NAV_CINEMA_ADMINISTRATION": "Filmverwaltung",
+
+  "NAV_MANAGEMENT_USERS": "Mitgliederverwaltung",
+  "NAV_MANAGEMENT_DATEPOLL": "DatePoll-Verwaltung",
+
+
+  "STARTPAGE_BIRTHDAY": "Geburtstage des Monat",
+  "STARTPAGE_BIRTHDAY_NAME": "Name",
+  "STARTPAGE_BIRTHDAY_DATE": "Geburtsdatum",
+
+  "STARTPAGE_BOOKINGS": "Deine Reservierungen",
+  "STARTPAGE_MOVIE_NAME": "Filmname",
+  "STARTPAGE_MOVIE_DATE": "Datum",
+  "STARTPAGE_BOOKED_TICKETS": "Gebuchte Karten",
+  "STARTPAGE_CINEMA_SERVICE": "Kinodienst",
+  "STARTPAGE_EMERGENCY_CINEMA_SERVICE": "Notfall-Kinodienst",
 
 
   "CINEMA_TICKETS_BOOK_A_TICKET": "Karten reservieren",
-  "CINEMA_TICKETS_DATE": "Datum: ",
-  "CINEMA_TICKETS_TRAILER": "Trailer: ",
+  "CINEMA_TICKETS_DATE": "Datum:",
+  "CINEMA_TICKETS_TRAILER": "Trailer:",
   "CINEMA_TICLETS_TRAILER_WATCH": "Anschauen",
   "CINEMA_TICKETS_WORKER": "Kinodienst: ",
-  "CINEMA_TICKETS_EMERGENCY_WORKER": "Notfall-Kinodienst: ",
-  "CINEMA_TICKETS_AVAILABLE_TICKETS": "Freie Karten: ",
+  "CINEMA_TICKETS_EMERGENCY_WORKER": "Notfall-Kinodienst:",
+  "CINEMA_TICKETS_APPLY": "Melden",
+  "CINEMA_TICKETS_AVAILABLE_TICKETS": "Freie Karten:",
   "CINEMA_TICKETS_SOLD_OUT": "Ausgebucht",
   "CINEMA_TICKETS_NO_MOVIES_AVAILABLE": "Derzeit sind keine Filme verfügbar",
+  "CINEMA_TICKETS_BOOKED_TICKETS": "Gebuchte Karten:",
+  "CINEMA_TICKETS_CANCEL_BOOKED_TICKETS": "Stornieren",
+  "CINEMA_TICKETS_CANCEL_BOOKED_TICKETS_TOOLTIP": "Storniere alle gebuchten Karten",
+  "CINEMA_TICKETS_CANCEL_CINEMA_SERVICE_TOOLTIP": "Abmelden",
 
   "CINEMA_TICKETS_BOOKING_MODAL_HEADER": "Buche Tickets für ",
   "CINEMA_TICKETS_BOOKING_MODAL_WARNING": "Karten sind in erster Linie für Vereinsmitglieder. Sollten kurz vor Kinobeginn noch Karten frei sein, können diese jederzeit an Freunde oder Familienmitglieder weitergeben werden! ",
@@ -59,7 +89,16 @@
   "CINEMA_TICKETS_BOOKING_MODAL_NUMBER_OF_TICKETS_INVALID_1": "Gib bitte eine Zahl zwischen 1 und ",
   "CINEMA_TICKETS_BOOKING_MODAL_NUMBER_OF_TICKETS_INVALID_2": " ein!",
   "CINEMA_TICKETS_BOOKING_MODAL_AVAILABLE_TICKETS": "Freie Karten: ",
+  "CINEMA_TICKETS_BOOKING_MODAL_BOOK": "Reservieren",
 
+  "CINEMA_TICKETS_SERVICE_BOOKING": "Reservierungen",
+  "CINEMA_TICKETS_SERVICE_USERNAME": "Name",
+  "CINEMA_TICKETS_SERVICE_TICKET_AMOUNT": "Kartenanzahl",
+  "CINEMA_TICKETS_SERVICE_NO_TICKETS_BOOKED": "Keine reservierten Karten",
+  "CINEMA_TICKETS_SERVICE_NOT_APPLIED_FOR_SERVICE": "Du hast dich noch für keinen Kinodienst gemeldet",
+  "CINEMA_TICKETS_SERVICE_NOT_APPLIED_FOR_SERVICE_APPLY_NOW": "Melde dich jetzt für den Kinodienst",
+
+  "CINEMA_TICKETS_ADMINISTRATION_REFRESH": "Filmliste neuladen",
   "CINEMA_TICKETS_ADMINISTRATION_SEARCH": "Suche nach einem Film...",
   "CINEMA_TICKETS_ADMINISTRATION_NAME": "Filmname",
   "CINEMA_TICKETS_ADMINISTRATION_DATE": "Datum",
@@ -69,11 +108,19 @@
   "CINEMA_TICKETS_ADMINISTRATION_WORKER": "Kinodienst",
   "CINEMA_TICKETS_ADMINISTRATION_EMERGENCY_WORKER": "Notfall-Kinodienst",
   "CINEMA_TICKETS_ADMINISTRATION_BOOKED_TICKETS": "Gebuchte Karten",
+  "CINEMA_TICKETS_ADMINISTRATION_ACTION": "Aktionen",
+  "CINEMA_TICKETS_ADMINISTRATION_DELETE_MOVIE_BUTTON_TOOLTIP": "Lösche diesen Film",
+  "CINEMA_TICKETS_ADMINISTRATION_UPDATE_MOVIE_BUTTON_TOOLTIP": "Editiere diesen Film",
+  "CINEMA_TICKETS_ADMINISTRATION_YEAR_SELECT_PLACEHOLDER": "Jahr",
+
+  "CINEMA_TICKETS_ADMINISTRATION_MOVIE_CREATE_MODAL_CREATE": "Lege einen neuen Film an",
 
   "CINEMA_TICKETS_ADMINISTRATION_MOVIE_EDIT_MODAL_EDIT": "Bearbeite ",
-  "CINEMA_TICKETS_ADMINISTRATION_MOVIE_EDIT_MODAL_NAME_INVALID": "Der Name darf weder leer noch mehr als 128 Zeichen haben!",
-  "CINEMA_TICKETS_ADMINISTRATION_MOVIE_EDIT_MODAL_TRAILER_INVALID": "Der Trailerlink darf weder leer noch mehr als 512 Zeichen haben!",
-  "CINEMA_TICKETS_ADMINISTRATION_MOVIE_EDIT_MODAL_POSTER_INVALID": "Der Posterlink darf weder leer noch mehr als 512 Zeichen haben!",
+  "CINEMA_TICKETS_ADMINISTRATION_MOVIE_EDIT_MODAL_NAME_INVALID": "Der Name darf weder leer sein, noch mehr als 128 Zeichen haben!",
+  "CINEMA_TICKETS_ADMINISTRATION_MOVIE_EDIT_MODAL_TRAILER_INVALID": "Der Trailerlink darf weder leer sein, noch mehr als 512 Zeichen haben!",
+  "CINEMA_TICKETS_ADMINISTRATION_MOVIE_EDIT_MODAL_POSTER_INVALID": "Der Posterlink darf weder leer sein, noch mehr als 512 Zeichen haben!",
+  "CINEMA_TICKETS_ADMINISTRATION_MOVIE_EDIT_MODAL_POSTER_PREVIEW": "Poster Vorschau:",
+
 
   "SETTINGS_PERSONAL_DATA": "Persönliche Daten",
   "SETTINGS_PERSONAL_DATA_DESCRIPTION": "Bearbeiten Sie Ihre Persönlichen Daten.",
@@ -112,17 +159,52 @@
   "SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_VERIFICATION_CODE": "Verifizierungscode",
   "SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_VERIFICATION_CODE_NOT_VALID": "Der Verifizierungscode ist invalide",
 
-  "SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_ENTER_OLD_EMAIL_ADDRESS": "Gib deine alte Email-Adresse ein",
-  "SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_ENTER_OLD_EMAiL_ADDRESS_INCORRECT": "Die Email-Adresse ist inkorrekt!",
-  "SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_ENTER_VERIFICATION_CODE": "Gib den Verifizierungscode ein",
-  "SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_ENTER_VERIFICATION_CODE_INCORRECT": "Der Verifizierungscode ist inkorrekt!",
-  "SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_NEW_EMAIL_IS_OLD_EMAIL": "Bitte geben Sie Ihre neue Email Adresse ein!",
+  "SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_START": "Start",
+  "SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_START_DESCRIPTION": "Achtung! Sie sind dabei Ihre Email-Adresse zu ändern!",
+
   "SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_VERIFICATION_EMAIL_SENT": "Es wurde eine E-Mail mit einem Verifizierungscode an Ihre E-Mail Adresse versendet! Bitte geben Sie diesen Code hier ein.",
+
+  "SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_ENTER_VERIFICATION_CODE": "Gib den Verifizierungscode ein",
+  "SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_VERIFICATION_CODE_INCORRECT": "Der eingegeben Verifizierungsode ist inkorrekt!",
+  "SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_OLD_EMAIL_VERIFICATION_CODE_CORRECT": "Der Code ist korrekt! Gib nun deine neue Email-Adresse ein.",
+
+  "SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_NEW_EMAIL_IS_OLD_EMAIL": "Sie können nicht Ihre alte Email Adresse als neue verwenden! Bitte geben Sie Ihre neue Email Adresse ein.",
   "SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_ENTER_NEW_EMAIL_ADDRESS": "Gib deine neue E-Mail Adresse ein",
   "SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_FINISHED": "Ihre E-Mail Adresse wurde erfolgreich geändert!",
+
+  "SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_RATE_LIMIT_EXCEEDED": "Du hast die maximale Anzahl an Fehlversuchen für diesen Code erreicht!",
+
 
   "SETTINGS_SECURITY": "Sicherheit",
   "SETTINGS_SECURITY_DESCRIPTION": "Legen Sie die Einstellungen für Ihr Passwort und für die Zwei-Faktor-Authentifizierung fest.",
   "SETTINGS_SECURITY_CHANGE_PASSWORD": "Password ändern",
-  "SETTINGS_SECURITY_CHANGE_2FA": "Zwei-Faktor-Authentifizierung einstellen"
+  "SETTINGS_SECURITY_CHANGE_2FA": "Zwei-Faktor-Authentifizierung einstellen",
+
+  "SETTINGS_SECURITY_MODAL_CHANGE_PASSWORD_TITLE_START": "Geben Sie Ihr altes Passwort ein",
+  "SETTINGS_SECURITY_MODAL_CHANGE_PASSWORD_OLD_PASSWORD_INCORRECT": "Ihr eingegebenes Password ist inkorrekt!",
+  "SETTINGS_SECURITY_MODAL_CHANGE_PASSWORD_TITLE_NEW_PASSWORD": "Geben Sie Ihr neues Passwort ein",
+  "SETTINGS_SECURITY_MODAL_CHANGE_PASSWORD_NEW_PASSWORD": "Neues Passwort",
+  "SETTINGS_SECURITY_MODAL_CHANGE_PASSWORD_NEW_PASSWORD_REPEAT": "Neues Passwort erneut eingeben",
+  "SETTINGS_SECURITY_MODAL_CHANGE_PASSWORD_NEW_PASSWORDS_ARE_NOT_EQUAL": "Die Passwörter stimmen nicht über ein",
+  "SETTINGS_SECURITY_MODAL_CHANGE_PASSWORD_OLD_PASSWORD": "Altes Passwort",
+  "SETTINGS_SECURITY_MODAL_CHANGE_PASSWORD_FINISHED": "Ihr Passwort wurde erfolgreich geändert!",
+
+
+  "MANAGEMENT_USERS_SEARCH": "Suche...",
+  "MANAGEMENT_USERS_TITLE": "Titel",
+  "MANAGEMENT_USERS_FIRSTNAME": "Vorname",
+  "MANAGEMENT_USERS_SURNAME": "Nachname",
+  "MANAGEMENT_USERS_EMAIL": "Email",
+  "MANAGEMENT_USERS_BIRTHDAY": "Geburtstag",
+  "MANAGEMENT_USERS_JOIN_DATE": "Beitrittsdatum",
+  "MANAGEMENT_USERS_STREETNAME": "Straßenname",
+  "MANAGEMENT_USERS_STREETNUMBER": "Hausnummer",
+  "MANAGEMENT_USERS_ZIPCODE": "Postleitzahl",
+  "MANAGEMENT_USERS_LOCATION": "Ortsname",
+  "MANAGEMENT_USERS_ACTIONS": "Aktionen",
+  "MANAGEMENT_USERS_ACTIONS_EDIT_TOOLTIP": "Bearbeite dieses Mitglied",
+  "MANAGEMENT_USERS_ACTIONS_DELETE_TOOLTIP": "Lösche dieses Mitglied",
+
+  "MANAGEMENT_DATEPOLL_CINEMA_SERVICE": "Kinoservice"
+
 }

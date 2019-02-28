@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {MyUserService} from '../../../auth/my-user.service';
+import {MyUserService} from '../../my-user.service';
 
 @Component({
   selector: 'app-personaldata',
@@ -32,15 +32,15 @@ export class PersonalDataComponent {
   }
 
   saveData() {
-    console.log('----------------------');
-    console.log('Title: ' + this.title);
-    console.log('Firstname: ' + this.firstname);
-    console.log('Surname: ' + this.surname);
-    console.log('Birthday: ' + this.birthday);
-    console.log('Streetname: ' + this.streetname);
-    console.log('Streetnumber: ' + this.streetnumber);
-    console.log('Zipcode: ' + this.zipcode);
-    console.log('Location: ' + this.location);
+    console.log('personalData | Update user');
+    console.log('personalData | Title: ' + this.title);
+    console.log('personalData | Firstname: ' + this.firstname);
+    console.log('personalData | Surname: ' + this.surname);
+    console.log('personalData | Birthday: ' + this.birthday);
+    console.log('personalData | Streetname: ' + this.streetname);
+    console.log('personalData | Streetnumber: ' + this.streetnumber);
+    console.log('personalData | Zipcode: ' + this.zipcode);
+    console.log('personalData | Location: ' + this.location);
 
     this.myUserService.setTitle(this.title);
     this.myUserService.setFirstname(this.firstname);
@@ -51,7 +51,8 @@ export class PersonalDataComponent {
     this.myUserService.setZipcode(this.zipcode);
     this.myUserService.setLocation(this.location);
 
-    console.log('Saving...');
-    console.log('----------------------');
+    console.log('personalData | Saving...');
+    this.myUserService.updateMyself();
+    console.log('personalData | Saved');
   }
 }

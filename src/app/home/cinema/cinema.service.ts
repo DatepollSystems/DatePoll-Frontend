@@ -1,154 +1,226 @@
 import {Injectable} from '@angular/core';
-import {User, UsersService} from '../../users.service';
+import {Subject} from 'rxjs';
+
+import {AuthService} from '../../auth/auth.service';
+import {HttpService} from '../../services/http.service';
+
+import {Movie} from './movie.model';
+import {Year} from './year.model';
+import {Response} from '@angular/http';
+import {HomepageService} from '../start/homepage.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CinemaService {
-
   private _movies: Movie[];
+  public moviesChange: Subject<Movie[]> = new Subject<Movie[]>();
 
-  private _selectedMovie: Movie = null;
+  private _notShownMovies: Movie[] = null;
+  public notShownMoviesChange: Subject<Movie[]> = new Subject<Movie[]>();
 
-  constructor(private usersService: UsersService) {
+  private _years: Year[];
+  public yearsChange: Subject<Year[]> = new Subject<Year[]>();
+
+  constructor(private authService: AuthService, private httpService: HttpService, private homePageService: HomepageService) {
     this._movies = [];
+    this._years = [];
+  }
 
-    for (let i = 1; i < 21; i++) {
-      const worker = new User(i, '', 'Bob' + i, 'Super' + i, i + 'boy@gmail.com', new Date('2018-12-3'));
+  public addMovie(movie: any) {
+    return this.httpService.loggedInV1POSTRequest('/cinema/administration/movie', movie, 'addMovie');
+  }
 
-      this._movies.push(new Movie(i, 'Toller Film ' + i,
-        new Date('2018-12-' + i),
-        'https://google.com',
-        'http://cdn.collider.com/wp-content/uploads/Inception-movie-poster-3.jpg',
-        worker,
-        worker,
-        i));
+  public updateMovie(movieID: number, movie: any) {
+    return this.httpService.loggedInV1PUTRequest('/cinema/administration/movie/' + movieID, movie, 'updateMovie');
+  }
 
-      usersService.getUsers().push(worker);
-    }
+  public deleteMovie(movieID: number) {
+    return this.httpService.loggedInV1DELETERequest('/cinema/administration/movie/' + movieID, 'deleteMovie');
   }
 
   public getMovies(): Movie[] {
+    this.fetchMovies();
     return this._movies.slice();
   }
 
   public setMovies(movies: Movie[]) {
     this._movies = movies;
+    this.moviesChange.next(this._movies.slice());
   }
+
+  public getMovieByID(movies: Movie[], id: number) {
+    for (let i = 0; i < movies.length; i++) {
+      if (movies[i].id === id) {
+        return movies[i];
+      }
+    }
+
+    return null;
+  }
+
+  public fetchMovies() {
+    this.httpService.loggedInV1GETRequest('/cinema/administration/movie', 'fetchMovies').subscribe(
+      (data: any) => {
+        const fetchedMovies = data.movies;
+
+        const movies = [];
+        for (const movie of fetchedMovies) {
+          let workerID = -1;
+          let emergencyWorkerID = -1;
+
+          if (movie.workerID != null) {
+            workerID = movie.workerID;
+          }
+
+          if (movie.emergencyWorkerID != null) {
+            emergencyWorkerID = movie.emergencyWorkerID;
+          }
+
+          const date = new Date(movie.date);
+          const localMovie = new Movie(movie.id, movie.name, date, movie.trailerLink, movie.posterLink, workerID, movie.workerName,
+            emergencyWorkerID, movie.emergencyWorkerName, movie.bookedTickets, movie.movie_year_id);
+          movies.push(localMovie);
+        }
+        this.setMovies(movies);
+      },
+      (error) => console.log(error)
+    );
+  }
+
 
   public getNotShownMovies(): Movie[] {
-    const returnMovies = [];
-
-    for (let i = 0; i < this._movies.length; i++) {
-      if (new Date().getTime() < this._movies[i].getDate().getTime()) {
-        returnMovies.push(this._movies[i]);
-      }
+    this.fetchNotShownMovies();
+    if (this._notShownMovies == null) {
+      return null;
     }
-
-    return returnMovies;
+    return this._notShownMovies.slice();
   }
 
-  public setSelectedMovie(movie: Movie) {
-    this._selectedMovie = movie;
+  public setNotShownMovies(movies: Movie[]) {
+    this._notShownMovies = movies;
+    this.notShownMoviesChange.next(this._notShownMovies.slice());
   }
 
-  public getSelectedMovie(): Movie {
-    return this._selectedMovie;
+  public fetchNotShownMovies() {
+    this.httpService.loggedInV1GETRequest('/cinema/notShownMovies', 'fetchNotShownMovies').subscribe(
+      (data: any) => {
+        const fetchedMovies = data.movies;
+
+        const movies = [];
+        for (const movie of fetchedMovies) {
+          let workerID = -1;
+          let emergencyWorkerID = -1;
+
+          if (movie.workerID != null) {
+            workerID = movie.workerID;
+          }
+
+          if (movie.emergencyWorkerID != null) {
+            emergencyWorkerID = movie.emergencyWorkerID;
+          }
+
+          const date = new Date(movie.date);
+          const localMovie = new Movie(movie.id, movie.name, date, movie.trailerLink, movie.posterLink, workerID, movie.workerName,
+            emergencyWorkerID, movie.emergencyWorkerName, movie.bookedTickets, movie.movie_year_id);
+          localMovie.bookedTicketsForYourself = movie.bookedTicketsForYourself;
+          movies.push(localMovie);
+        }
+        this.setNotShownMovies(movies);
+      },
+      (error) => console.log(error)
+    );
   }
 
-  public getMovieByID(id: number) {
-    let movie;
-    for (let i = 0; i < this._movies.length; i++) {
-      if (this._movies[i].getID() === id) {
-        movie = this._movies[i];
+
+  public addYear(year: any) {
+    return this.httpService.loggedInV1POSTRequest('/cinema/administration/year', year, 'addYear');
+  }
+
+  public getYears(): Year[] {
+    this.fetchYears();
+    return this._years.slice();
+  }
+
+  public setYears(years: Year[]) {
+    this._years = years;
+    this.yearsChange.next(this._years.slice());
+  }
+
+  public fetchYears() {
+    this.httpService.loggedInV1GETRequest('/cinema/administration/year', 'fetchYears').subscribe(
+      (data: any) => {
+        const fetchedYears = data.years;
+
+        const years = [];
+        for (const year of fetchedYears) {
+          const localYear = new Year(year.id, year.year);
+          years.push(localYear);
+        }
+        this.setYears(years);
+      },
+      (error) => console.log(error)
+    );
+  }
+
+
+  public applyForWorker(movieID: number) {
+    this.httpService.loggedInV1POSTRequest('/cinema/worker/' + movieID, {}, 'applyForWorker').subscribe(
+      (response: Response) => {
+        const data = response.json();
+        console.log(data);
+        this.fetchNotShownMovies();
+        this.homePageService.fetchData();
+      },
+      (error) => {
+        console.log(error);
+        this.fetchNotShownMovies();
+        this.homePageService.fetchData();
       }
-    }
-
-    return movie;
-  }
-}
-
-export class Movie {
-  private _ID: number;
-  private _name: string;
-  private _date: Date;
-  private _trailerLink: string;
-  private _imageLink: string;
-
-  private _worker: User;
-  private _emergencyWorker: User;
-
-  private _bookedTickets: number;
-
-  constructor(ID: number, name: string, movieDate: Date, trailerLink: string, imageLink: string, worker: User, emergencyWorker: User,
-              bookedTickets: number) {
-    this._ID = ID;
-    this._name = name;
-    this._date = movieDate;
-    this._trailerLink = trailerLink;
-    this._imageLink = imageLink;
-    this._worker = worker;
-    this._emergencyWorker = emergencyWorker;
-    this._bookedTickets = bookedTickets;
+    );
   }
 
-  public getID(): number {
-    return this._ID;
+  public signOutForWorker(movieID: number) {
+    this.httpService.loggedInV1DELETERequest('/cinema/worker/' + movieID, 'signOutForWorker').subscribe(
+      (response: Response) => {
+        const data = response.json();
+        console.log(data);
+        this.fetchNotShownMovies();
+      },
+      (error) => {
+        console.log(error);
+        this.fetchNotShownMovies();
+      }
+    );
   }
 
-  public getName(): string {
-    return this._name;
+  public applyForEmergencyWorker(movieID: number) {
+    this.httpService.loggedInV1POSTRequest('/cinema/emergencyWorker/' + movieID, {}, 'applyForEmergencyWorker').subscribe(
+      (response: Response) => {
+        const data = response.json();
+        console.log(data);
+        this.fetchNotShownMovies();
+        this.homePageService.fetchData();
+      },
+      (error) => {
+        console.log(error);
+        this.fetchNotShownMovies();
+        this.homePageService.fetchData();
+      }
+    );
   }
 
-  public setName(name: string) {
-    this._name = name;
-  }
-
-  public getDate(): Date {
-    return this._date;
-  }
-
-  public setDate(date: Date) {
-    this._date = date;
-  }
-
-  public getBeautifullDate(): string {
-    const day = this._date.getDate();
-    const monthIndex = this._date.getMonth();
-    const year = this._date.getFullYear();
-
-    return day + '/' + (monthIndex + 1) + '/' + year;
-  }
-
-  public getTrailerlink(): string {
-    return this._trailerLink;
-  }
-
-  public setTrailerLink(link: string) {
-    this._trailerLink = link;
-  }
-
-  public getImageLink(): string {
-    return this._imageLink;
-  }
-
-  public setImageLink(link: string) {
-    this._imageLink = link;
-  }
-
-  public getWorker(): User {
-    return this._worker;
-  }
-
-  public getEmergencyWorker(): User {
-    return this._emergencyWorker;
-  }
-
-  public getBookedTickets(): number {
-    return this._bookedTickets;
-  }
-
-  public setBookedTickets(bookedTickets: number) {
-    this._bookedTickets = bookedTickets;
+  public signOutForEmergencyWorker(movieID: number) {
+    this.httpService.loggedInV1DELETERequest('/cinema/emergencyWorker/' + movieID, 'signOutForEmergencyWorker').subscribe(
+      (response: Response) => {
+        const data = response.json();
+        console.log(data);
+        this.fetchNotShownMovies();
+      },
+      (error) => {
+        console.log(error);
+        this.fetchNotShownMovies();
+      }
+    );
   }
 }

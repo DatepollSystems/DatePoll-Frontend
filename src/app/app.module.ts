@@ -1,59 +1,58 @@
 import {BrowserModule} from '@angular/platform-browser';
-import {NgModule, APP_INITIALIZER} from '@angular/core';
+import {APP_INITIALIZER, NgModule} from '@angular/core';
 
 import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {SignupComponent} from './auth/signup/signup.component';
 import {SigninComponent} from './auth/signin/signin.component';
 import {AppRoutingModule} from './app-routing.module';
 import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
 import {HomeComponent} from './home/home.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AuthService} from './auth/auth.service';
-import {DataStorageService} from './data-storage.service';
 import {FooterComponent} from './footer/footer.component';
 import {InfoComponent} from './info/info.component';
 import {ImprintComponent} from './info/imprint/imprint.component';
 import {PrivacyPolicyComponent} from './info/privacy-policy/privacy-policy.component';
-import {MyUserService} from './auth/my-user.service';
+import {MyUserService} from './home/my-user.service';
 import {StartComponent} from './home/start/start.component';
 import {SettingsComponent} from './home/settings/settings.component';
-import {TranslateService} from './translate.service';
+import {TranslateService} from './translation/translate.service';
 import {HttpClientModule} from '@angular/common/http';
-import {TranslatePipe} from './translate.pipe';
+import {TranslatePipe} from './translation/translate.pipe';
 import {CookieService} from 'angular2-cookie/core';
 import {FeedbackModalComponent} from './footer/modals/feedback-modal/feedback-modal.component';
 import {AboutModalComponent} from './footer/modals/about-modal/about-modal.component';
 import {PersonalDataComponent} from './home/settings/personal-data/personal-data.component';
 import {PhoneNumberComponent} from './home/settings/phone-number/phone-number.component';
-import {
-  EmailAddressComponent,
-  EmailAddressNotCorrectComponent, NewEmailIsOldEmailComponent,
-  VerificationCodeNotCorrectComponent
-} from './home/settings/email-address/email-address.component';
+import {EmailAddressComponent} from './home/settings/email-address/email-address.component';
 import {PasswordComponent} from './home/settings/password/password.component';
 import {TwoFactorAuthenticationComponent} from './home/settings/two-factor-authentication/two-factor-authentication.component';
 import {CustomFormsModule} from 'ng2-validation';
-import {DoNotForgetToSaveComponent} from './do-not-forget-to-save/do-not-forget-to-save.component';
 import {MovieTicketsComponent} from './home/cinema/movie-tickets/movie-tickets.component';
 import {MovieServiceComponent} from './home/cinema/movie-service/movie-service.component';
 import {MovieAdministrationComponent} from './home/cinema/movie-administration/movie-administration.component';
 import {MovieTicketComponent} from './home/cinema/movie-tickets/movie-ticket/movie-ticket.component';
-import {NgxDatatableModule} from '@swimlane/ngx-datatable';
 import {NgxChartsModule} from '@swimlane/ngx-charts';
 import {MovieEditModalComponent} from './home/cinema/movie-administration/movie-edit-modal/movie-edit-modal.component';
-import {FlexLayoutModule} from '@angular/flex-layout';
 import {MaterialModule} from './material-module';
-import {MAT_DATE_LOCALE} from '@angular/material';
-import {
-  MovieBookTicketsModalComponent
-} from './home/cinema/movie-tickets/movie-ticket/movie-book-tickets-modal/movie-book-tickets-modal.component';
+import {MAT_DATE_LOCALE, MAT_SNACK_BAR_DEFAULT_OPTIONS} from '@angular/material';
+import {MovieBookTicketsModalComponent} from './home/cinema/movie-tickets/movie-ticket/movie-book-tickets-modal/movie-book-tickets-modal.component';
+import {HttpModule} from '@angular/http';
+import {NgxMatSelectSearchModule} from 'ngx-mat-select-search';
+import {MovieCreateModalComponent} from './home/cinema/movie-administration/movie-create-modal/movie-create-modal.component';
+import {HttpService} from './services/http.service';
+import {CinemaService} from './home/cinema/cinema.service';
+import {UsersExportBottomSheetComponent, UsersManagementComponent} from './home/management/users-management/users-management.component';
+import {ExcelService} from './services/excel.service';
+import {DoNotForgetToSaveComponent} from './home/do-not-forget-to-save/do-not-forget-to-save.component';
+import {MovieTicketsService} from './home/cinema/movieTickets.service';
+import {HomepageService} from './home/start/homepage.service';
+import {DatepollManagementComponent} from './home/management/datepoll-management/datepoll-management.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TranslatePipe,
-    SignupComponent,
     SigninComponent,
     PageNotFoundComponent,
     FooterComponent,
@@ -68,9 +67,6 @@ import {
     PersonalDataComponent,
     PhoneNumberComponent,
     EmailAddressComponent,
-    EmailAddressNotCorrectComponent,
-    VerificationCodeNotCorrectComponent,
-    NewEmailIsOldEmailComponent,
     PasswordComponent,
     TwoFactorAuthenticationComponent,
     DoNotForgetToSaveComponent,
@@ -79,7 +75,11 @@ import {
     MovieAdministrationComponent,
     MovieTicketComponent,
     MovieEditModalComponent,
-    MovieBookTicketsModalComponent
+    MovieBookTicketsModalComponent,
+    MovieCreateModalComponent,
+    UsersManagementComponent,
+    UsersExportBottomSheetComponent,
+    DatepollManagementComponent,
   ],
   imports: [
     BrowserModule,
@@ -89,10 +89,10 @@ import {
     CustomFormsModule,
     AppRoutingModule,
     HttpClientModule,
-    NgxDatatableModule,
+    HttpModule,
     NgxChartsModule,
-    FlexLayoutModule,
-    MaterialModule
+    MaterialModule,
+    NgxMatSelectSearchModule
   ],
   // Without this entryComponents dynamic modal loading does not work
   entryComponents: [
@@ -101,20 +101,22 @@ import {
     PersonalDataComponent,
     PhoneNumberComponent,
     EmailAddressComponent,
-    EmailAddressNotCorrectComponent,
-    VerificationCodeNotCorrectComponent,
-    NewEmailIsOldEmailComponent,
-
-    //   PasswordComponent,
+    PasswordComponent,
     //   TwoFactorAuthenticationComponent,
+    MovieCreateModalComponent,
     MovieEditModalComponent,
-    MovieBookTicketsModalComponent
+    MovieBookTicketsModalComponent,
+    UsersExportBottomSheetComponent
   ],
   providers: [
     AuthService,
-    DataStorageService,
     MyUserService,
     TranslateService,
+    HttpService,
+    CinemaService,
+    ExcelService,
+    MovieTicketsService,
+    HomepageService,
     {
       provide: APP_INITIALIZER,
       useFactory: setupTranslateFactory,
@@ -127,6 +129,7 @@ import {
     },
     // Set the datetimepicker time format to day/month/year
     {provide: MAT_DATE_LOCALE, useValue: 'en-GB'},
+    {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 2500}}
   ],
   bootstrap: [AppComponent]
 })

@@ -1,18 +1,36 @@
-<div class="row">
-  <app-movie-ticket
-    class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-3"
-    style="margin-bottom: 15px;"
-    *ngFor="let movie of movies"
-    [movie]="movie">
-  </app-movie-ticket>
+<div *ngIf="movies == null" style="margin-top: 25%">
+  <div class="row" style="margin-bottom: 15px;">
+    <div class="col-12">
+      <mat-progress-spinner mode="indeterminate" style="margin: auto"></mat-progress-spinner>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12" style="text-align: center;">
+      <h2>{{'LOADING' | translate}}</h2>
+    </div>
+  </div>
 </div>
 
-<div *ngIf="movies.length == 0" style="margin-top: 25%">
-  <div class="row">
-    <div class="col-6 offset-3" style="text-align: center; font-size: 2.5vh;">
-      <mat-icon>remove_circle_outline</mat-icon>
-      <br>
-      {{'CINEMA_TICKETS_NO_MOVIES_AVAILABLE' | translate}}
+<div *ngIf="movies != null">
+  <div class="row" style="margin-bottom: 15px;">
+    <app-movie-ticket
+      class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-3"
+      *ngFor="let movie of movies"
+      [movie]="movie">
+    </app-movie-ticket>
+  </div>
+
+  <div *ngIf="movies.length == 0" style="margin-top: 25%">
+    <div class="row" style="margin-bottom: 15px;">
+      <div class="col-12" style="text-align: center;">
+        <mat-icon>remove_circle_outline</mat-icon>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12" style="text-align: center; font-size: 2.5vh;">
+        {{'CINEMA_TICKETS_NO_MOVIES_AVAILABLE' | translate}}
+      </div>
     </div>
   </div>
 </div>

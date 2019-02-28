@@ -2,37 +2,43 @@
 <mat-dialog-content>
   <mat-vertical-stepper #stepper [linear]="true">
     <mat-step [editable]="false">
-      <form #oldEmailSendForm="ngForm" (ngSubmit)="sendOldEmailVerification()">
-        <ng-template matStepLabel>{{'SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_ENTER_OLD_EMAIL_ADDRESS' | translate}}
-        </ng-template>
-        <mat-form-field class="col-12">
-          <input matInput id="oldEmail" name="oldEmail" type="email"
-                 ngModel [(ngModel)]="oldEmailAddress" #oldEmailModel="ngModel"
-                 required maxlength="128" email
-                 placeholder="{{'SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_EMAIL_ADDRESS' | translate}}">
-          <mat-error *ngIf="oldEmailModel.invalid">
-            {{'SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_EMAIL_ADDRESS_NOT_VALID' | translate}}
-          </mat-error>
-        </mat-form-field>
-        <div>
-          <button mat-button
-                  [disabled]="!oldEmailSendForm.form.valid"
-                  type="submit">
-            {{'NEXT' | translate}}
-          </button>
-        </div>
-      </form>
+      <ng-template matStepLabel>{{'SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_START' | translate}}</ng-template>
+      <mat-card class="error-mat-card" matRipple>
+        <mat-card-content class="last-child">
+          {{'SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_START_DESCRIPTION' | translate}}
+        </mat-card-content>
+      </mat-card>
+
+      <mat-progress-bar mode="indeterminate" *ngIf="showOldEmailVerificiationEmailSendingSpinner"></mat-progress-bar>
+
+      <button mat-button (click)="sendOldEmailVerification()" *ngIf="!showOldEmailVerificiationEmailSendingSpinner">
+        {{'NEXT' | translate}}
+      </button>
     </mat-step>
 
     <mat-step [editable]="false">
+      <ng-template matStepLabel>{{'SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_ENTER_VERIFICATION_CODE' | translate}}
+      </ng-template>
+
+      <mat-card class="success-mat-card" matRipple>
+        <mat-card-content class="last-child">
+          {{'SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_VERIFICATION_EMAIL_SENT' | translate}}
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card class="error-mat-card" *ngIf="showOldEmailVerificationCodeIncorrectCard" matRipple>
+        <mat-card-content class="last-child">
+          {{'SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_VERIFICATION_CODE_INCORRECT' | translate}}
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card class="error-mat-card" *ngIf="showOldEmailVerificationCodeRateLimitExceededCard" matRipple>
+        <mat-card-content class="last-child">
+          {{'SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_RATE_LIMIT_EXCEEDED' | translate}}
+        </mat-card-content>
+      </mat-card>
+
       <form #oldEmailVerificationForm="ngForm" (ngSubmit)="checkOldEmailVerificationCode()">
-        <ng-template matStepLabel>{{'SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_ENTER_VERIFICATION_CODE' | translate}}
-        </ng-template>
-        <mat-card style="margin-top: 10px; margin-bottom: 15px; background-color: #689F38;">
-          <mat-card-content>
-            {{'SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_VERIFICATION_EMAIL_SENT' | translate}}
-          </mat-card-content>
-        </mat-card>
         <mat-form-field class="col-12">
           <input matInput id="oldEmailVerificationCode" name="oldEmailVerificationCode" type="number"
                  ngModel [(ngModel)]="oldEmailVerificationCode" #oldEmailVerificationCodeModel="ngModel"
@@ -43,9 +49,8 @@
           </mat-error>
         </mat-form-field>
         <div>
-          <button mat-button
-                  [disabled]="!oldEmailVerificationForm.form.valid"
-                  type="submit">
+          <button mat-button type="submit"
+                  [disabled]="!oldEmailVerificationForm.form.valid">
             {{'NEXT' | translate}}
           </button>
         </div>
@@ -53,9 +58,22 @@
     </mat-step>
 
     <mat-step [editable]="false">
+      <ng-template matStepLabel>{{'SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_ENTER_NEW_EMAIL_ADDRESS' | translate}}
+      </ng-template>
+
+      <mat-card class="success-mat-card" matRipple>
+        <mat-card-content class="last-child">
+          {{'SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_OLD_EMAIL_VERIFICATION_CODE_CORRECT' | translate}}
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card class="error-mat-card" *ngIf="showNewEmailIsOldEmailCard" matRipple>
+        <mat-card-content class="last-child">
+          {{'SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_NEW_EMAIL_IS_OLD_EMAIL' | translate}}
+        </mat-card-content>
+      </mat-card>
+
       <form #newEmailSendForm="ngForm" (ngSubmit)="sendNewEmailVerification()">
-        <ng-template matStepLabel>{{'SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_ENTER_NEW_EMAIL_ADDRESS' | translate}}
-        </ng-template>
         <mat-form-field class="col-12">
           <input matInput id="newEmail" name="newEmail" type="email"
                  ngModel [(ngModel)]="newEmailAddress" #newEmailAddressModel="ngModel"
@@ -65,10 +83,12 @@
             {{'SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_EMAIL_ADDRESS_NOT_VALID' | translate}}
           </mat-error>
         </mat-form-field>
+
+        <mat-progress-bar mode="indeterminate" *ngIf="showNewEmailVerificationEmailSendingSpinner"></mat-progress-bar>
+
         <div>
-          <button mat-button
-                  [disabled]="!newEmailSendForm.form.valid"
-                  type="submit">
+          <button mat-button type="submit"
+                  [disabled]="!newEmailSendForm.form.valid" *ngIf="!showNewEmailVerificationEmailSendingSpinner">
             {{'NEXT' | translate}}
           </button>
         </div>
@@ -76,14 +96,28 @@
     </mat-step>
 
     <mat-step [editable]="false">
+      <ng-template matStepLabel>{{'SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_ENTER_VERIFICATION_CODE' | translate}}
+      </ng-template>
+
+      <mat-card class="success-mat-card" matRipple>
+        <mat-card-content class="last-child">
+          {{'SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_VERIFICATION_EMAIL_SENT' | translate}}
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card class="error-mat-card" *ngIf="showNewEmailVerificationCodeIncorrectCard" matRipple>
+        <mat-card-content class="last-child">
+          {{'SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_VERIFICATION_CODE_INCORRECT' | translate}}
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card class="error-mat-card" *ngIf="showNewEmailVerificationCodeRateLimitExceededCard" matRipple>
+        <mat-card-content class="last-child">
+          {{'SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_RATE_LIMIT_EXCEEDED' | translate}}
+        </mat-card-content>
+      </mat-card>
+
       <form #newEmailVerificationForm="ngForm" (ngSubmit)="checkNewEmailVerificationCode()">
-        <ng-template matStepLabel>{{'SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_ENTER_VERIFICATION_CODE' | translate}}
-        </ng-template>
-        <mat-card style="margin-top: 10px; margin-bottom: 15px; background-color: #689F38;">
-          <mat-card-content>
-            {{'SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_VERIFICATION_EMAIL_SENT' | translate}}
-          </mat-card-content>
-        </mat-card>
         <mat-form-field class="col-12">
           <input matInput id="newEmailVerificationCode" name="newEmailVerificationCode" type="number"
                  ngModel [(ngModel)]="newEmailVerificationCode" #newEmailVerificationCodeModel="ngModel"
@@ -105,8 +139,8 @@
 
     <mat-step [editable]="false">
       <ng-template matStepLabel>{{'DONE' | translate}}</ng-template>
-      <mat-card style="margin-top: 10px; margin-bottom: 15px; background-color: #689F38;">
-        <mat-card-content>
+      <mat-card class="success-mat-card" matRipple>
+        <mat-card-content class="last-child">
           {{'SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_FINISHED' | translate}}
         </mat-card-content>
       </mat-card>

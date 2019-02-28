@@ -1,20 +1,7 @@
-mat-card {
-  padding: 2.5vh;
-}
-
 mat-card-title {
   font-size: 36px;
 }
 
 mat-card-content {
   font-size: 16px;
-}
-
-.card-content-links {
-  padding-top: 20px;
-  color: #2196F3;
-}
-
-.card-content-links > a:hover {
-  color: #1976d2;
 }

@@ -1,6 +1,13 @@
-import {Component, NgZone, OnInit} from '@angular/core';
-import {MyUserService} from '../auth/my-user.service';
+import {Component, NgZone, OnInit, ViewChild} from '@angular/core';
+import {MatSidenav} from '@angular/material';
+import {Router} from '@angular/router';
 import {Subscription} from 'rxjs';
+
+import {MyUserService} from './my-user.service';
+import {AuthService} from '../auth/auth.service';
+import {SettingsService} from '../services/settings.service';
+import {Permissions} from '../permissions';
+
 
 @Component({
   selector: 'app-home',
@@ -11,18 +18,38 @@ export class HomeComponent implements OnInit {
   navBarOpened = false;
   navBarMode = 'over';
 
-  firstname: string;
-  surname: string;
-  email: string;
+  @ViewChild('sidenav')
+  private sidenav: MatSidenav;
 
-  showCinema = true;
-  showPoll = false;
+  public myUserService: MyUserService;
+
+  cinemaMovieAdministration = Permissions.CINEMA_MOVIE_ADMINISTRATION;
+  managementAdministration = Permissions.MANAGEMENT_ADMINISTRATION;
+  settingsAdministration = Permissions.SETTINGS_ADMINISTRATION;
 
   private firstnameSubscription: Subscription;
-  private surnameSubscription: Subscription;
-  private emailSubscription: Subscription;
+  firstname: string;
 
-  constructor(private ngZone: NgZone, private myUserService: MyUserService) {
+  private surnameSubscription: Subscription;
+  surname: string;
+
+  private emailSubscription: Subscription;
+  email: string;
+
+  private showCinemaSubscription: Subscription;
+  showCinema = true;
+
+  showPoll = false;
+
+  constructor(
+    private ngZone: NgZone,
+    myUserService: MyUserService,
+    private authService: AuthService,
+    private settingsService: SettingsService,
+    private router: Router) {
+
+    this.myUserService = myUserService;
+
     if ((window.screen.width) > 992) {
       this.navBarOpened = true;
       this.navBarMode = 'side';
@@ -41,24 +68,52 @@ export class HomeComponent implements OnInit {
     };
 
     this.firstname = this.myUserService.getFirstname();
-    this.surname = this.myUserService.getSurname();
-    this.email = this.myUserService.getEmail();
-
     this.firstnameSubscription = myUserService.firstnameChange.subscribe((value) => {
       this.firstname = value;
+      // this.resizeNav();
     });
 
+    this.surname = this.myUserService.getSurname();
     this.surnameSubscription = myUserService.surnameChange.subscribe((value) => {
       this.surname = value;
+      // this.resizeNav();
     });
 
-
+    this.email = this.myUserService.getEmail();
     this.emailSubscription = myUserService.emailChange.subscribe((value) => {
       this.email = value;
+      // this.resizeNav();
+    });
+
+    this.showCinema = settingsService.getShowCinema();
+    this.showCinemaSubscription = settingsService.showCinemaChange.subscribe((value) => {
+      this.showCinema = value;
     });
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
+    if (!this.authService.isAutenticated('homeComponent')) {
+      this.router.navigate(['/signin']);
+      return;
+    }
+
+    this.myUserService.fetchMyself();
   }
 
+  resizeNav() {
+    if (this.navBarOpened) {
+      this.sidenav.close();
+      setTimeout(() => {
+        this.sidenav.open();
+      }, 250);
+    }
+  }
+
+  logout() {
+    if (this.authService.logout()) {
+      this.router.navigate(['/signin']);
+    } else {
+      console.log('homeComponent | logout | Something went wrong');
+    }
+  }
 }

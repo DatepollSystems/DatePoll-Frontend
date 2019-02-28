@@ -1,5 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import {CinemaService, Movie} from '../cinema.service';
+import {Subscription} from 'rxjs';
+
+import {CinemaService} from '../cinema.service';
+import {SettingsService} from '../../../services/settings.service';
+
+import {Movie} from '../movie.model';
+
 
 @Component({
   selector: 'app-movie-tickets',
@@ -8,13 +14,19 @@ import {CinemaService, Movie} from '../cinema.service';
 })
 export class MovieTicketsComponent implements OnInit {
 
-  movies: Movie[];
+  movies: Movie[] = null;
+  private moviesSubscription: Subscription;
 
-  constructor(private cinemaService: CinemaService) {
+  constructor(private cinemaService: CinemaService, private settingsService: SettingsService) {
     this.movies = this.cinemaService.getNotShownMovies();
+
+    this.moviesSubscription = cinemaService.notShownMoviesChange.subscribe((value) => {
+      this.movies = value;
+    });
   }
 
   ngOnInit() {
+    this.settingsService.checkShowCinema();
   }
 
 }

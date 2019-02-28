@@ -1,15 +1,62 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+
+import {Subscription} from 'rxjs';
+
+import {HomepageService} from './homepage.service';
+import {CinemaService} from '../cinema/cinema.service';
+
+import {HomeBirthdayModel} from './birthdays.model';
+import {HomeBookingsModel} from './bookings.model';
 
 @Component({
   selector: 'app-start',
   templateUrl: './start.component.html',
   styleUrls: ['./start.component.css']
 })
-export class StartComponent implements OnInit {
+export class StartComponent implements OnInit, OnDestroy {
 
-  constructor() { }
+  birthdays: HomeBirthdayModel[];
+  birthdaysSubscription: Subscription;
+
+  bookings: HomeBookingsModel[];
+  bookingsSubscription: Subscription;
+
+  constructor(private homePageService: HomepageService, public cinemaService: CinemaService) {
+    this.birthdays = homePageService.getBirthdays();
+    this.birthdaysSubscription = homePageService.birthdaysChange.subscribe((value) => {
+      this.birthdays = value;
+      this.setBackgroundImage();
+    });
+
+    this.bookings = homePageService.getBookings();
+    this.bookingsSubscription = homePageService.bookingsChange.subscribe((value) => {
+      this.bookings = value;
+      this.setBackgroundImage();
+    });
+  }
 
   ngOnInit() {
+    this.setBackgroundImage();
+  }
+
+  setBackgroundImage() {
+    if (this.birthdays.length === 0 && this.bookings.length === 0) {
+      const currentDate = new Date();
+
+      if (currentDate.getHours() >= 19 || currentDate.getHours() <= 7) {
+        document.getElementById('my-container').style.backgroundImage = 'url(/assets/startpage-background-night.jpg)';
+      } else {
+        document.getElementById('my-container').style.backgroundImage = 'url(/assets/startpage-background-day.jpg)';
+      }
+
+      document.getElementById('my-container').style.backgroundSize = 'cover';
+    } else {
+      document.getElementById('my-container').style.background = 'none';
+    }
+  }
+
+  ngOnDestroy() {
+    document.getElementById('my-container').style.background = 'none';
   }
 
 }

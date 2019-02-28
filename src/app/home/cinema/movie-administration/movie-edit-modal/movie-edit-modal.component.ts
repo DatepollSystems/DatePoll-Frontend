@@ -1,6 +1,8 @@
-import {Component, Inject, OnInit} from '@angular/core';
-import {CinemaService, Movie} from '../../cinema.service';
+import {Component, Inject} from '@angular/core';
+import {CinemaService} from '../../cinema.service';
 import {MAT_DIALOG_DATA} from '@angular/material';
+import {Movie} from '../../movie.model';
+import {Response} from '@angular/http';
 
 @Component({
   selector: 'app-movie-edit-modal',
@@ -18,34 +20,82 @@ export class MovieEditModalComponent {
   imageLink: string;
   bookedTickets: number;
 
+
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, private cinemaService: CinemaService) {
     this.movie = data.movie;
 
-    console.log('Movie to edit:', this.movie);
-
-    this.id = this.movie.getID();
-    this.name = this.movie.getName();
-    this.date = this.movie.getDate();
-    this.trailerLink = this.movie.getTrailerlink();
-    this.imageLink = this.movie.getImageLink();
-    this.bookedTickets = this.movie.getBookedTickets();
+    this.id = this.movie.id;
+    this.name = this.movie.name;
+    this.date = this.movie.date;
+    this.trailerLink = this.movie.trailerLink;
+    this.imageLink = this.movie.posterLink;
+    this.bookedTickets = this.movie.bookedTickets;
   }
 
   save() {
-    const movies = this.cinemaService.getMovies();
-    let movie;
+    const year = this.date.getFullYear();
 
-    for (let i = 0; i < movies.length; i++) {
-      if (movies[i].getID() === this.id) {
-        movie = movies[i];
-        movie.setName(this.name);
-        movie.setDate(this.date);
-        movie.setTrailerLink(this.trailerLink);
-        movie.setImageLink(this.imageLink);
-        movie.setBookedTickets(this.bookedTickets);
+    const years = this.cinemaService.getYears();
+    let yearID = null;
 
-        console.log('Movie updated!');
+    for (let i = 0; i < years.length; i++) {
+      if (years[i].year.toString().toLowerCase() === year.toString().toLowerCase()) {
+        yearID = years[i].id;
+        break;
       }
     }
+
+    if (yearID === null) {
+      console.log('updateMovie | no yearID found!');
+      const yearObject = {'year': year};
+      this.cinemaService.addYear(yearObject).subscribe(
+        (response: Response) => {
+          const data = response.json();
+          console.log(data);
+          yearID = data.year.id;
+          console.log('updateMovie | yearID: ' + yearID);
+          this.cinemaService.fetchYears();
+          this.updateMovie(yearID);
+        },
+        (error) => console.log(error)
+      );
+    } else {
+      console.log('updateMovie | Using existing yearID');
+      this.updateMovie(yearID);
+    }
+  }
+
+  updateMovie(yearID: number) {
+    const d = new Date(this.date);
+    let month = '' + (d.getMonth() + 1),
+      day = '' + d.getDate();
+    const year = d.getFullYear();
+
+    if (month.length < 2) {
+      month = '0' + month;
+    }
+    if (day.length < 2) {
+      day = '0' + day;
+    }
+
+    const dateformat = [year, month, day].join('-');
+
+    const movieObject = {
+      'name': this.name,
+      'date': dateformat,
+      'trailerLink': this.trailerLink,
+      'posterLink': this.imageLink,
+      'bookedTickets': this.bookedTickets,
+      'movie_year_id': yearID
+    };
+    console.log(movieObject);
+    this.cinemaService.updateMovie(this.movie.id, movieObject).subscribe(
+      (response: Response) => {
+        const data = response.json();
+        console.log(data);
+        this.cinemaService.fetchMovies();
+      },
+      (error) => console.log(error)
+    );
   }
 }

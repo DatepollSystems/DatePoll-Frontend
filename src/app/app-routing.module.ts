@@ -2,7 +2,6 @@ import {NgModule} from '@angular/core';
 import {RouterModule} from '@angular/router';
 import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
 import {HomeComponent} from './home/home.component';
-import {SignupComponent} from './auth/signup/signup.component';
 import {SigninComponent} from './auth/signin/signin.component';
 import {InfoComponent} from './info/info.component';
 import {ImprintComponent} from './info/imprint/imprint.component';
@@ -12,6 +11,8 @@ import {SettingsComponent} from './home/settings/settings.component';
 import {MovieTicketsComponent} from './home/cinema/movie-tickets/movie-tickets.component';
 import {MovieServiceComponent} from './home/cinema/movie-service/movie-service.component';
 import {MovieAdministrationComponent} from './home/cinema/movie-administration/movie-administration.component';
+import {UsersManagementComponent} from './home/management/users-management/users-management.component';
+import {DatepollManagementComponent} from './home/management/datepoll-management/datepoll-management.component';
 
 const appRoutes = [
   {path: '', redirectTo: '/home', pathMatch: 'full'},
@@ -21,15 +22,17 @@ const appRoutes = [
       {path: 'privacypolicy', component: PrivacyPolicyComponent}
     ]
   },
-  {path: 'home', component: HomeComponent, children: [
-      {path: '', pathMath: 'full', component: StartComponent},
+  {
+    path: 'home', component: HomeComponent, children: [
+      {path: '', pathMatch: 'full', component: StartComponent},
       {path: 'cinema/tickets', component: MovieTicketsComponent},
       {path: 'cinema/service', component: MovieServiceComponent},
       {path: 'cinema/administration', component: MovieAdministrationComponent},
-      {path: 'settings', component: SettingsComponent}
+      {path: 'settings/personal', component: SettingsComponent},
+      {path: 'management/user', component: UsersManagementComponent},
+      {path: 'management/datepoll', component: DatepollManagementComponent}
     ]
   },
-  {path: 'signup', component: SignupComponent},
   {path: 'signin', component: SigninComponent},
   {path: 'not-found', component: PageNotFoundComponent},
   {path: '**', redirectTo: '/not-found'}

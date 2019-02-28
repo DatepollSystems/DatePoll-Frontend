@@ -1,6 +1,12 @@
 .my-container {
-  padding: 25px;
+  margin-top: 6vh;
+  padding: 15px;
   min-height: 80vh;
+}
+
+mat-toolbar {
+  position: fixed;
+  z-index: 1000;
 }
 
 .toolbar-sidenav-toggler {
@@ -11,28 +17,15 @@
   cursor: pointer; margin-left: 15px;
 }
 
-.sidenav-head {
-  background: url("./../../assets/sidenav-background.svg") no-repeat;
-  background-size: cover;
-  padding: 20px;
+mat-sidenav {
+  position: fixed;
+  max-width: 320px;
 }
 
-.sidenav-head-entry {
-  color: white;
+.sidenav-head-text {
+  margin-left: 15px;
   margin-top: 15px;
-  text-align: center;
-  font-size: 16px;
-}
-
-.sidenav-head-avatar {
-  height: 10vh;
-  margin-left: 25%;
-  margin-right: 25%;
-}
-
-/* Overwrite default behaviour */
-mat-nav-list {
-  padding: 0;
+  margin-right: 15px;
 }
 
 .activated {
@@ -41,4 +34,13 @@ mat-nav-list {
 
 .activated:hover {
   background-color: #BDBDBD !important;
+}
+
+.sidenav-end {
+  position: absolute;
+  bottom: 0; left: 0;
+}
+
+mat-icon {
+  margin-right: 5px;
 }
