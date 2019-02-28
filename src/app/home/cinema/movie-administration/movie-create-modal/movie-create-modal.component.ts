@@ -26,8 +26,8 @@ export class MovieCreateModalComponent {
     let yearID = null;
 
     for (let i = 0; i < years.length; i++) {
-      if (years[i].getYear().toString().toLowerCase() === year.toString().toLowerCase()) {
-        yearID = years[i].getID();
+      if (years[i].year.toString().toLowerCase() === year.toString().toLowerCase()) {
+        yearID = years[i].id;
         break;
       }
     }

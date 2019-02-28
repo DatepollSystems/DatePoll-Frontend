@@ -14,7 +14,7 @@ import {Movie} from '../movie.model';
 })
 export class MovieTicketsComponent implements OnInit {
 
-  movies: Movie[];
+  movies: Movie[] = null;
   private moviesSubscription: Subscription;
 
   constructor(private cinemaService: CinemaService, private settingsService: SettingsService) {

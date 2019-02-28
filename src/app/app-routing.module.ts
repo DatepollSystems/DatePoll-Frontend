@@ -2,7 +2,6 @@ import {NgModule} from '@angular/core';
 import {RouterModule} from '@angular/router';
 import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
 import {HomeComponent} from './home/home.component';
-import {SignupComponent} from './auth/signup/signup.component';
 import {SigninComponent} from './auth/signin/signin.component';
 import {InfoComponent} from './info/info.component';
 import {ImprintComponent} from './info/imprint/imprint.component';
@@ -34,7 +33,6 @@ const appRoutes = [
       {path: 'management/datepoll', component: DatepollManagementComponent}
     ]
   },
-  {path: 'signup', component: SignupComponent},
   {path: 'signin', component: SigninComponent},
   {path: 'not-found', component: PageNotFoundComponent},
   {path: '**', redirectTo: '/not-found'}

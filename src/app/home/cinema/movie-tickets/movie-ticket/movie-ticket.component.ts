@@ -18,7 +18,9 @@ import {Movie} from '../../movie.model';
 })
 export class MovieTicketComponent implements OnInit {
 
-  @Input('movie') movie: Movie;
+  @Input()
+  movie: Movie;
+
   moviesSubscription: Subscription;
   soldOut: boolean;
 
@@ -33,10 +35,10 @@ export class MovieTicketComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.soldOut = this.movie.getBookedTickets() >= 20;
+    this.soldOut = this.movie.bookedTickets >= 20;
 
     this.moviesSubscription = this.cinemaService.moviesChange.subscribe((value) => {
-      this.movie = this.cinemaService.getMovieByID(value, this.movie.getID());
+      this.movie = this.cinemaService.getMovieByID(value, this.movie.id);
     });
   }
 
@@ -48,7 +50,7 @@ export class MovieTicketComponent implements OnInit {
   }
 
   cancelTickets() {
-    this.httpService.loggedInV1DELETERequest('/cinema/booking/' + this.movie.getID(), 'cancelTickets').subscribe(
+    this.httpService.loggedInV1DELETERequest('/cinema/booking/' + this.movie.id, 'cancelTickets').subscribe(
       (reponse: Response) => {
         const data = reponse.json();
         console.log(data);
@@ -62,18 +64,18 @@ export class MovieTicketComponent implements OnInit {
   }
 
   applyForWorker() {
-    this.cinemaService.applyForWorker(this.movie.getID());
+    this.cinemaService.applyForWorker(this.movie.id);
   }
 
   signOutForWorker() {
-    this.cinemaService.signOutForWorker(this.movie.getID());
+    this.cinemaService.signOutForWorker(this.movie.id);
   }
 
   applyForEmergencyWorker() {
-    this.cinemaService.applyForEmergencyWorker(this.movie.getID());
+    this.cinemaService.applyForEmergencyWorker(this.movie.id);
   }
 
   signOutForEmergencyWorker() {
-    this.cinemaService.signOutForEmergencyWorker(this.movie.getID());
+    this.cinemaService.signOutForEmergencyWorker(this.movie.id);
   }
 }

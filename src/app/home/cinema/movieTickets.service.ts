@@ -7,7 +7,7 @@ import {HttpService} from '../../services/http.service';
   providedIn: 'root'
 })
 export class MovieTicketsService {
-  private _movieOrders: MovieOrder[] = [];
+  private _movieOrders: MovieOrder[];
   public movieOrdersChange: Subject<MovieOrder[]> = new Subject<MovieOrder[]>();
 
   constructor(private httpService: HttpService) { }
@@ -19,6 +19,9 @@ export class MovieTicketsService {
 
   public getMovieOrders(): MovieOrder[] {
     this.fetchMovieOrders();
+    if (this._movieOrders == null) {
+      return null;
+    }
     return this._movieOrders.slice();
   }
 
@@ -47,24 +50,16 @@ export class MovieTicketsService {
 }
 
 export class MovieOrder {
-  private _movieID: number;
-  private readonly _movieName: string;
-  private readonly _date: Date;
+  public movieID: number;
+  public readonly movieName: string;
+  public readonly date: Date;
 
   private _ticketOrders: TicketOrder[] = [];
 
   constructor(movieID: number, movieName: string, date: Date) {
-    this._movieID = movieID;
-    this._movieName = movieName;
-    this._date = date;
-  }
-
-  public getMovieName(): string {
-    return this._movieName;
-  }
-
-  public getDate(): Date {
-    return this._date;
+    this.movieID = movieID;
+    this.movieName = movieName;
+    this.date = date;
   }
 
   public setTicketOrders(ticketOrders: TicketOrder[]) {
@@ -77,25 +72,13 @@ export class MovieOrder {
 }
 
 export class TicketOrder {
-  private readonly _userID: number;
-  private readonly _userName: string;
-  private readonly _amount: number;
+  public readonly userID: number;
+  public readonly userName: string;
+  public readonly amount: number;
 
   constructor(userID: number, userName: string, amount: number) {
-    this._userID = userID;
-    this._userName = userName;
-    this._amount = amount;
-  }
-
-  public getUserID(): number {
-    return this._userID;
-  }
-
-  public getUserName(): string {
-    return this._userName;
-  }
-
-  public getAmount(): number {
-    return this._amount;
+    this.userID = userID;
+    this.userName = userName;
+    this.amount = amount;
   }
 }

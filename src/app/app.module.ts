@@ -3,7 +3,6 @@ import {APP_INITIALIZER, NgModule} from '@angular/core';
 
 import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {SignupComponent} from './auth/signup/signup.component';
 import {SigninComponent} from './auth/signin/signin.component';
 import {AppRoutingModule} from './app-routing.module';
 import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
@@ -54,7 +53,6 @@ import {DatepollManagementComponent} from './home/management/datepoll-management
   declarations: [
     AppComponent,
     TranslatePipe,
-    SignupComponent,
     SigninComponent,
     PageNotFoundComponent,
     FooterComponent,

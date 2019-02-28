@@ -49,14 +49,17 @@ mat-card {
 }
 
 .success-mat-card {
+  user-select: none;
   background-color: #689F38;
 }
 
 .error-mat-card {
+  user-select: none;
   background-color: #FF5722;
 }
 
 .info-mat-card {
+  user-select: none;
   background-color: #29B6F6;
 }
 

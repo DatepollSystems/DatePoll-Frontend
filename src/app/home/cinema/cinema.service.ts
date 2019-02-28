@@ -16,7 +16,7 @@ export class CinemaService {
   private _movies: Movie[];
   public moviesChange: Subject<Movie[]> = new Subject<Movie[]>();
 
-  private _notShownMovies: Movie[];
+  private _notShownMovies: Movie[] = null;
   public notShownMoviesChange: Subject<Movie[]> = new Subject<Movie[]>();
 
   private _years: Year[];
@@ -24,7 +24,6 @@ export class CinemaService {
 
   constructor(private authService: AuthService, private httpService: HttpService, private homePageService: HomepageService) {
     this._movies = [];
-    this._notShownMovies = [];
     this._years = [];
   }
 
@@ -52,7 +51,7 @@ export class CinemaService {
 
   public getMovieByID(movies: Movie[], id: number) {
     for (let i = 0; i < movies.length; i++) {
-      if (movies[i].getID() === id) {
+      if (movies[i].id === id) {
         return movies[i];
       }
     }
@@ -92,7 +91,10 @@ export class CinemaService {
 
   public getNotShownMovies(): Movie[] {
     this.fetchNotShownMovies();
-    return this._notShownMovies;
+    if (this._notShownMovies == null) {
+      return null;
+    }
+    return this._notShownMovies.slice();
   }
 
   public setNotShownMovies(movies: Movie[]) {
@@ -121,7 +123,7 @@ export class CinemaService {
           const date = new Date(movie.date);
           const localMovie = new Movie(movie.id, movie.name, date, movie.trailerLink, movie.posterLink, workerID, movie.workerName,
             emergencyWorkerID, movie.emergencyWorkerName, movie.bookedTickets, movie.movie_year_id);
-          localMovie.setBookedTicketsForYourself(movie.bookedTicketsForYourself);
+          localMovie.bookedTicketsForYourself = movie.bookedTicketsForYourself;
           movies.push(localMovie);
         }
         this.setNotShownMovies(movies);

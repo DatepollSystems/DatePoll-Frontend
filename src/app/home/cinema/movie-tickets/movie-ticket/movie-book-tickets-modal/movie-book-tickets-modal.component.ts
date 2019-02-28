@@ -27,12 +27,12 @@ export class MovieBookTicketsModalComponent {
               private cinemaService: CinemaService) {
     this.movie = data.movie;
 
-    this.freeTickets = 20 - this.movie.getBookedTickets();
+    this.freeTickets = 20 - this.movie.bookedTickets;
   }
 
   bookTickets() {
     const bookingObject = {
-      'movie_id': this.movie.getID(),
+      'movie_id': this.movie.id,
       'ticketAmount': this.ticketsToBook
     };
 
