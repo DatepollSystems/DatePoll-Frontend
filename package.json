@@ -1,6 +1,7 @@
 {
   "name": "date-poll-frontend",
   "version": "0.0.1",
+  "required_version": 1,
   "scripts": {
     "ng": "ng",
     "start": "ng serve",

@@ -1,7 +1,41 @@
-<h2 mat-dialog-title>{{'ABOUT' | translate}}</h2>
+<h1 mat-dialog-title>{{'ABOUT' | translate}}</h1>
 <mat-dialog-content>
-  <h1>DatePoll</h1>
-  <h3>Version: {{version}}</h3>
+  <mat-tab-group mat-align-tabs="center">
+    <mat-tab label="{{'ABOUT_GENERAL' | translate}}">
+      <div class="col-12 entry">
+        <h3>{{'ABOUT_DESCRIPTION' | translate}}</h3>
+      </div>
+      <mat-divider></mat-divider>
+      <div class="col-12 entry">
+        <h3>Author: <a href="https://dafnik.me" target="_blank" rel="noopener">Dominik Dafert</a></h3>
+      </div>
+    </mat-tab>
+    <mat-tab label="{{'ABOUT_TECHNICAL' | translate}}">
+      <div class="col-12 entry">
+        <h3>{{'ABOUT_FRONTEND_VERSION' | translate}}{{frontendVersion}}</h3>
+      </div>
+      <mat-divider></mat-divider>
+      <div class="col-12 entry">
+        <h3>{{'ABOUT_BACKEND_VERSION' | translate}}{{backendVersion}}</h3>
+      </div>
+      <mat-divider></mat-divider>
+      <div class="col-12 entry">
+        <h3>{{'ABOUT_NEEDED_BACKEND_VERSION' | translate}}{{requiredBackendVersion}}</h3>
+      </div>
+      <mat-divider></mat-divider>
+      <div class="col-12 entry">
+        <h3><a href="https://gitlab.com/BuergerkorpsEggenburg/datepoll-frontend/" target="_blank"
+               rel="noopener">Frontend Source Code</a></h3>
+      </div>
+      <mat-divider></mat-divider>
+      <div class="col-12 entry">
+        <h3><a href="https://gitlab.com/BuergerkorpsEggenburg/datepoll-backend-php/" target="_blank"
+               rel="noopener">Backend Source Code</a></h3>
+      </div>
+
+    </mat-tab>
+  </mat-tab-group>
+
 </mat-dialog-content>
 <mat-dialog-actions align="end">
   <button mat-button mat-dialog-close>{{'CLOSE' | translate}}</button>

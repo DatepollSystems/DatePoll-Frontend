@@ -51,7 +51,9 @@ export class FooterComponent {
   }
 
   openAboutModal() {
-    this.dialog.open(AboutModalComponent);
+    this.dialog.open(AboutModalComponent, {
+      width: '45vh',
+    });
   }
 
 }
