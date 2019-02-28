@@ -54,7 +54,7 @@ export class MovieAdministrationComponent implements OnInit, AfterViewInit, OnDe
 
   private permissionSubscription: Subscription;
 
-  private moviesLoaded = true;
+  moviesLoaded = true;
 
   constructor(
     private cinemaService: CinemaService,
