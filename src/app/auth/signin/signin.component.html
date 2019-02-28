@@ -16,19 +16,9 @@
 
         <form (ngSubmit)="onSignin(f)" #f="ngForm" *ngIf="state === 'login'">
           <mat-card-content>
-            <div class="row" *ngIf="loginSuccess">
-              <mat-card style="background-color: #43A047;" matRipple class="my-alert">
+              <mat-card matRipple class="error-mat-card row" *ngIf="loginSuccess">
                 <mat-card-content class="last-child">{{'SIGNIN_SUCCESSFUL' | translate}}</mat-card-content>
               </mat-card>
-            </div>
-
-            <div class="row" *ngIf="loginFail">
-              <mat-card style="background-color: #E65100;  color: white" matRipple class="my-alert">
-                <mat-card-content
-                  class="last-child">{{'SIGNIN_EMAIL_OR_PASSWORD_INCORRECT' | translate}}</mat-card-content>
-              </mat-card>
-            </div>
-
 
             <div class="row">
               <mat-form-field class="col-12">
@@ -47,22 +37,22 @@
                        id="password" name="password" type="password"
                        minlength="5" required
                        placeholder="{{'SIGNIN_PASSWORD' | translate}}">
-                <mat-hint align="start"><strong>{{'SIGNIN_KEEP_YOUR_PASSWORD_SECRET' | translate}}</strong></mat-hint>
+                <mat-hint *ngIf="loginFail"><strong style="color: red">{{'SIGNIN_EMAIL_OR_PASSWORD_INCORRECT' | translate}}</strong></mat-hint>
               </mat-form-field>
             </div>
           </mat-card-content>
 
           <mat-card-actions>
-            <!--<button mat-raised-button routerLink="/signup">{{ 'SIGNIN_NOT_SIGNED_UP' | translate }}</button>-->
-
             <button
               mat-raised-button
               color="primary"
               type="submit"
+              *ngIf="!showLoadingSpinnerDuringLogin"
               [disabled]="!f.valid">
               {{ 'SIGNIN' | translate }}
               <mat-icon aria-label="Example icon-button with a heart icon">send</mat-icon>
             </button>
+            <mat-progress-bar *ngIf="showLoadingSpinnerDuringLogin" class="col-12" mode="indeterminate"></mat-progress-bar>
           </mat-card-actions>
         </form>
 

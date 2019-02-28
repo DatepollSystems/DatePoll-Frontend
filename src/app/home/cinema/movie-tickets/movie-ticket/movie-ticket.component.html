@@ -1,25 +1,25 @@
 <mat-card class="mat-elevation-z3">
   <mat-card-header>
     <mat-card-title-group>
-      <mat-card-title>{{movie.getName()}}<b *ngIf="soldOut"> |&#32;{{'CINEMA_TICKETS_SOLD_OUT' | translate}}</b>
+      <mat-card-title>{{movie.name}}<b *ngIf="soldOut"> |&#32;{{'CINEMA_TICKETS_SOLD_OUT' | translate}}</b>
       </mat-card-title>
-      <mat-card-subtitle>{{movie.getDate() | date:'dd.MM.yyyy'}}</mat-card-subtitle>
+      <mat-card-subtitle>{{movie.date | date:'dd.MM.yyyy'}}</mat-card-subtitle>
     </mat-card-title-group>
   </mat-card-header>
-  <img mat-card-image src="{{movie.getImageLink()}}" alt="Movie image">
+  <img mat-card-image src="{{movie.posterLink}}" alt="Movie image">
   <mat-card-content>
-    <div class="row" *ngIf="movie.getWorkerName() != null">
+    <div class="row" *ngIf="movie.workerName != null">
       <div class="col-12">
         {{'CINEMA_TICKETS_WORKER' | translate}}
         <div style="float: right">
-          {{movie.getWorkerName()}}
-          [<a (click)="signOutForWorker()" *ngIf="movie.getWorkerID() == myUserService.getID()"
+          {{movie.workerName}}
+          [<a (click)="signOutForWorker()" *ngIf="movie.workerID == myUserService.getID()"
               matTooltip="{{'CINEMA_TICKETS_CANCEL_CINEMA_SERVICE_TOOLTIP' | translate}}" matTooltipPosition="right">X</a>]
         </div>
       </div>
     </div>
 
-    <div class="row" *ngIf="movie.getWorkerName() == null">
+    <div class="row" *ngIf="movie.workerName == null">
       <div class="col-12">
         {{'CINEMA_TICKETS_WORKER' | translate}}
         <div style="float: right">
@@ -28,18 +28,18 @@
       </div>
     </div>
 
-    <div class="row" *ngIf="movie.getEmergencyWorkerName() != null">
+    <div class="row" *ngIf="movie.emergencyWorkerName != null">
       <div class="col-12">
         {{'CINEMA_TICKETS_EMERGENCY_WORKER' | translate}}
         <div style="float: right">
-          {{movie.getEmergencyWorkerName()}}
-          [<a (click)="signOutForEmergencyWorker()" *ngIf="movie.getEmergencyWorkerID() == myUserService.getID()"
+          {{movie.emergencyWorkerName}}
+          [<a (click)="signOutForEmergencyWorker()" *ngIf="movie.emergencyWorkerID == myUserService.getID()"
               matTooltip="{{'CINEMA_TICKETS_CANCEL_CINEMA_SERVICE_TOOLTIP' | translate}}" matTooltipPosition="right">X</a>]
         </div>
       </div>
     </div>
 
-    <div class="row" *ngIf="movie.getEmergencyWorkerName() == null">
+    <div class="row" *ngIf="movie.emergencyWorkerName == null">
       <div class="col-12">
         {{'CINEMA_TICKETS_EMERGENCY_WORKER' | translate}}
         <div style="float: right">
@@ -52,7 +52,7 @@
       <div class="col-12">
         {{'CINEMA_TICKETS_TRAILER' | translate}}
         <div style="float: right">
-          <a href="{{movie.getTrailerlink()}}" rel="noopener"
+          <a href="{{movie.trailerLink}}" rel="noopener"
              target="_blank">{{'CINEMA_TICLETS_TRAILER_WATCH' | translate}}</a>
         </div>
       </div>
@@ -61,15 +61,15 @@
     <div class="row">
       <div class="col-12">
         {{'CINEMA_TICKETS_AVAILABLE_TICKETS' | translate}}
-        <div style="float: right">{{20 - movie.getBookedTickets()}}</div>
+        <div style="float: right">{{20 - movie.bookedTickets}}</div>
       </div>
     </div>
 
-    <div class="row" *ngIf="movie.getBookedTicketsForYourself() != 0">
+    <div class="row" *ngIf="movie.bookedTicketsForYourself != 0">
       <div class="col-12">
         {{'CINEMA_TICKETS_BOOKED_TICKETS' | translate}}
         <div style="float: right">
-          {{movie.getBookedTicketsForYourself()}} [<a (click)="cancelTickets()"
+          {{movie.bookedTicketsForYourself}} [<a (click)="cancelTickets()"
               matTooltip="{{'CINEMA_TICKETS_CANCEL_BOOKED_TICKETS_TOOLTIP' | translate}}" matTooltipPosition="right"
               >{{'CINEMA_TICKETS_CANCEL_BOOKED_TICKETS' | translate}}</a>]
         </div>

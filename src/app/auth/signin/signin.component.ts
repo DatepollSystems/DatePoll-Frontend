@@ -19,6 +19,8 @@ export class SigninComponent implements OnInit {
   loginSuccess = false;
   loginFail = false;
 
+  showLoadingSpinnerDuringLogin = false;
+
   private email: string;
   private password: string;
 
@@ -32,6 +34,8 @@ export class SigninComponent implements OnInit {
   }
 
   protected onSignin(form: NgForm) {
+    this.showLoadingSpinnerDuringLogin = true;
+
     this.email = form.value.email;
     this.password = form.value.password;
 
@@ -51,6 +55,8 @@ export class SigninComponent implements OnInit {
       },
       (error) => {
         console.log(error);
+        this.showLoadingSpinnerDuringLogin = false;
+
         this.loginFail = true;
         this.loginSuccess = false;
       }

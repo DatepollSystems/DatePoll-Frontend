@@ -54,6 +54,8 @@ export class MovieAdministrationComponent implements OnInit, AfterViewInit, OnDe
 
   private permissionSubscription: Subscription;
 
+  private moviesLoaded = true;
+
   constructor(
     private cinemaService: CinemaService,
     private myUserService: MyUserService,
@@ -66,6 +68,8 @@ export class MovieAdministrationComponent implements OnInit, AfterViewInit, OnDe
         this.router.navigate(['/home']);
       }
     });
+
+    this.moviesLoaded = false;
 
     this.years = this.cinemaService.getYears();
     this.selectedYear = this.years[this.years.length - 1];
@@ -87,7 +91,13 @@ export class MovieAdministrationComponent implements OnInit, AfterViewInit, OnDe
       this.refreshTable();
     }
 
+    if (this.movies.length > 0) {
+      this.moviesLoaded = true;
+    }
+
     this.moviesSubscription = cinemaService.moviesChange.subscribe((value) => {
+      this.moviesLoaded = true;
+
       this.movies = value;
 
       if (this.selectedYear === null) {
@@ -134,7 +144,7 @@ export class MovieAdministrationComponent implements OnInit, AfterViewInit, OnDe
     const moviesToShow = [];
 
     for (let i = 0; i < this.movies.length; i++) {
-      if (this.movies[i].getMovieYearID() === this.selectedYear.getID()) {
+      if (this.movies[i].movieYearID === this.selectedYear.id) {
         moviesToShow.push(this.movies[i]);
       }
     }
@@ -162,7 +172,7 @@ export class MovieAdministrationComponent implements OnInit, AfterViewInit, OnDe
         // the form control (i.e. _initializeSelection())
         // this needs to be done after the filteredYears are loaded initially
         // and after the mat-option elements are available
-        this.yearSelect.compareWith = (a: Year, b: Year) => a && b && a.getID() === b.getID();
+        this.yearSelect.compareWith = (a: Year, b: Year) => a && b && a.id === b.id;
       });
   }
 
@@ -180,7 +190,7 @@ export class MovieAdministrationComponent implements OnInit, AfterViewInit, OnDe
     }
     // filter the years
     this.filteredYears.next(
-      this.years.filter(bank => bank.getYear().toString().toLowerCase().indexOf(search) > -1)
+      this.years.filter(year => year.year.toString().toLowerCase().indexOf(search) > -1)
     );
   }
 
@@ -190,7 +200,7 @@ export class MovieAdministrationComponent implements OnInit, AfterViewInit, OnDe
     const moviesToShow = [];
 
     for (let i = 0; i < this.movies.length; i++) {
-      if (this.movies[i].getMovieYearID() === this.selectedYear.getID()) {
+      if (this.movies[i].movieYearID === this.selectedYear.id) {
         moviesToShow.push(this.movies[i]);
       }
     }

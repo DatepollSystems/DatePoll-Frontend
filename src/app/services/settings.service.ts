@@ -28,6 +28,10 @@ export class SettingsService {
   public setShowCinema(showCinema: boolean) {
     this._showCinema = showCinema;
     this.showCinemaChange.next(this._showCinema);
+  }
+
+  public setAdminShowCinema(showCinema: boolean) {
+    this.setShowCinema(showCinema);
 
     const body = {
       'isEnabled': showCinema

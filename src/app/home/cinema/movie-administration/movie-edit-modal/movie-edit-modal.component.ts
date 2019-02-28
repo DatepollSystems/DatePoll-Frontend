@@ -24,12 +24,12 @@ export class MovieEditModalComponent {
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, private cinemaService: CinemaService) {
     this.movie = data.movie;
 
-    this.id = this.movie.getID();
-    this.name = this.movie.getName();
-    this.date = this.movie.getDate();
-    this.trailerLink = this.movie.getTrailerlink();
-    this.imageLink = this.movie.getImageLink();
-    this.bookedTickets = this.movie.getBookedTickets();
+    this.id = this.movie.id;
+    this.name = this.movie.name;
+    this.date = this.movie.date;
+    this.trailerLink = this.movie.trailerLink;
+    this.imageLink = this.movie.posterLink;
+    this.bookedTickets = this.movie.bookedTickets;
   }
 
   save() {
@@ -39,8 +39,8 @@ export class MovieEditModalComponent {
     let yearID = null;
 
     for (let i = 0; i < years.length; i++) {
-      if (years[i].getYear().toString().toLowerCase() === year.toString().toLowerCase()) {
-        yearID = years[i].getID();
+      if (years[i].year.toString().toLowerCase() === year.toString().toLowerCase()) {
+        yearID = years[i].id;
         break;
       }
     }
@@ -89,7 +89,7 @@ export class MovieEditModalComponent {
       'movie_year_id': yearID
     };
     console.log(movieObject);
-    this.cinemaService.updateMovie(this.movie.getID(), movieObject).subscribe(
+    this.cinemaService.updateMovie(this.movie.id, movieObject).subscribe(
       (response: Response) => {
         const data = response.json();
         console.log(data);

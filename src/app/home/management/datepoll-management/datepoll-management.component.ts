@@ -38,7 +38,7 @@ export class DatepollManagementComponent implements OnInit {
   }
 
   cinemaServiceChange(ob: MatSlideToggleChange) {
-    this.settingsService.setShowCinema(ob.checked);
+    this.settingsService.setAdminShowCinema(ob.checked);
   }
 
 }

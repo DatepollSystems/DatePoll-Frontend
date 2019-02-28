@@ -82,7 +82,7 @@ export class HomeComponent implements OnInit {
     this.email = this.myUserService.getEmail();
     this.emailSubscription = myUserService.emailChange.subscribe((value) => {
       this.email = value;
-      this.resizeNav();
+      // this.resizeNav();
     });
 
     this.showCinema = settingsService.getShowCinema();
