@@ -136,6 +136,9 @@ export class MovieAdministrationComponent implements OnInit, AfterViewInit, OnDe
   }
 
   ngOnDestroy() {
+    this.moviesSubscription.unsubscribe();
+    this.yearsSubscription.unsubscribe();
+    this.permissionSubscription.unsubscribe();
     this._onDestroy.next();
     this._onDestroy.complete();
   }

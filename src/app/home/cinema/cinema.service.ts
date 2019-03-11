@@ -186,10 +186,12 @@ export class CinemaService {
         const data = response.json();
         console.log(data);
         this.fetchNotShownMovies();
+        this.homePageService.fetchData();
       },
       (error) => {
         console.log(error);
         this.fetchNotShownMovies();
+        this.homePageService.fetchData();
       }
     );
   }
@@ -216,10 +218,12 @@ export class CinemaService {
         const data = response.json();
         console.log(data);
         this.fetchNotShownMovies();
+        this.homePageService.fetchData();
       },
       (error) => {
         console.log(error);
         this.fetchNotShownMovies();
+        this.homePageService.fetchData();
       }
     );
   }

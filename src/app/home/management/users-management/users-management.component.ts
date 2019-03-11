@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {MatBottomSheet, MatBottomSheetRef, MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
 import {Subscription} from 'rxjs';
 
@@ -14,7 +14,7 @@ import {Router} from '@angular/router';
   templateUrl: './users-management.component.html',
   styleUrls: ['./users-management.component.css']
 })
-export class UsersManagementComponent implements OnInit {
+export class UsersManagementComponent implements OnInit, OnDestroy {
   displayedColumns: string[] = ['title', 'firstname', 'surname', 'email', 'birthday', 'join_date', 'streetname', 'streetnumber',
     'zipcode', 'location', 'actions'];
   filterValue: string = null;
@@ -56,6 +56,11 @@ export class UsersManagementComponent implements OnInit {
     this.dataSource = new MatTableDataSource(this.users);
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
+  }
+
+  ngOnDestroy() {
+    this.usersSubscription.unsubscribe();
+    this.permissionSubscription.unsubscribe();
   }
 
   applyFilter(filterValue: string) {

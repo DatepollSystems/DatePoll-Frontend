@@ -14,8 +14,8 @@
             </thead>
             <tbody>
             <tr *ngFor="let birthday of birthdays">
-              <td>{{birthday.getName()}}</td>
-              <td>{{birthday.getDate() | date:'dd.MM.yyyy'}}</td>
+              <td>{{birthday.name}}</td>
+              <td>{{birthday.date | date:'dd.MM.yyyy'}}</td>
             </tr>
             </tbody>
           </table>
@@ -41,16 +41,24 @@
             </thead>
             <tbody>
             <tr *ngFor="let booking of bookings">
-              <td>{{booking.getName()}}</td>
-              <td>{{booking.getDate() | date:'dd.MM.yyyy'}}</td>
-              <td>{{booking.getBookedTickets()}}</td>
-              <td *ngIf="booking.getWorkerName() != null">{{booking.getWorkerName()}}</td>
-              <td *ngIf="booking.getWorkerName() == null"><a
-                (click)="cinemaService.applyForWorker(booking.getMovieID())">Melden</a></td>
+              <td>{{booking.name}}</td>
+              <td>{{booking.date | date:'dd.MM.yyyy'}}</td>
+              <td>{{booking.bookedTickets}}</td>
+              <td *ngIf="booking.workerName != null">
+                {{booking.workerName}}
+                [<a (click)="cinemaService.signOutForWorker(booking.movieID)" *ngIf="booking.workerID == myUserService.getID()"
+                    matTooltip="{{'CINEMA_TICKETS_CANCEL_CINEMA_SERVICE_TOOLTIP' | translate}}" matTooltipPosition="right">X</a>]
+              </td>
+              <td *ngIf="booking.workerName == null"><a
+                (click)="cinemaService.applyForWorker(booking.movieID)">Melden</a></td>
 
-              <td *ngIf="booking.getEmergencyWorkerName() != null">{{booking.getEmergencyWorkerName()}}</td>
-              <td *ngIf="booking.getEmergencyWorkerName() == null"><a
-                (click)="cinemaService.applyForEmergencyWorker(booking.getMovieID())">Melden</a></td>
+              <td *ngIf="booking.emergencyWorkerName != null">
+                {{booking.emergencyWorkerName}}
+                [<a (click)="cinemaService.signOutForEmergencyWorker(booking.movieID)" *ngIf="booking.emergencyWorkerID == myUserService.getID()"
+                    matTooltip="{{'CINEMA_TICKETS_CANCEL_CINEMA_SERVICE_TOOLTIP' | translate}}" matTooltipPosition="right">X</a>]
+              </td>
+              <td *ngIf="booking.emergencyWorkerName == null"><a
+                (click)="cinemaService.applyForEmergencyWorker(booking.movieID)">Melden</a></td>
             </tr>
             </tbody>
           </table>
