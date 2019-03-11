@@ -17,7 +17,6 @@ import {Movie} from '../../movie.model';
   styleUrls: ['./movie-ticket.component.css']
 })
 export class MovieTicketComponent implements OnInit {
-
   @Input()
   movie: Movie;
 
@@ -32,7 +31,6 @@ export class MovieTicketComponent implements OnInit {
               private httpService: HttpService) {
     this.myUserService = myUserService;
   }
-
 
   ngOnInit(): void {
     this.soldOut = this.movie.bookedTickets >= 20;
