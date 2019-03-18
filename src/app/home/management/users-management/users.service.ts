@@ -3,6 +3,7 @@ import {HttpService} from '../../../services/http.service';
 import {User} from './user.model';
 import {Subject} from 'rxjs';
 import {PhoneNumber} from '../../phoneNumber.model';
+import {Response} from '@angular/http';
 
 @Injectable({
   providedIn: 'root'
@@ -36,7 +37,7 @@ export class UsersService {
           const localPhoneNumbers = [];
           const localPhoneNumbersData = user.telephoneNumbers;
           for (let i = 0; i < localPhoneNumbersData.length; i++) {
-            localPhoneNumbers.push(new PhoneNumber(localPhoneNumbersData[i].id, user.id, localPhoneNumbersData[i].label,
+            localPhoneNumbers.push(new PhoneNumber(localPhoneNumbersData[i].id, localPhoneNumbersData[i].label,
               localPhoneNumbersData[i].number));
           }
 
@@ -45,7 +46,7 @@ export class UsersService {
 
           const localUser = new User(user.id, user.email, user.email_verified, user.force_password_change, user.title,
             user.firstname, user.surname, birthday, join_date, user.streetname, user.streetnumber, user.zipcode,
-            user.location, localPhoneNumbers);
+            user.location, user.activated, user.activity, localPhoneNumbers);
           users.push(localUser);
         }
         this.setUsers(users);
@@ -57,7 +58,7 @@ export class UsersService {
   public getUserByID(userID: number): User {
     const users = this.getUsers();
     for (let i = 0; i < users.length; i++) {
-      if (users[i].getID() === userID) {
+      if (users[i].id === userID) {
         return users[i];
       }
     }
@@ -65,12 +66,18 @@ export class UsersService {
     return null;
   }
 
-  public addUser(user: User) {
-
+  public addUser(user: any) {
+    return this.httpService.loggedInV1POSTRequest('/management/users', user, 'addUser');
   }
 
   public deleteUser(userID: number) {
-
+    this.httpService.loggedInV1DELETERequest('/management/users/' + userID, 'deleteUser').subscribe(
+      (response: Response) => {
+        const data = response.json();
+        console.log(data);
+        this.fetchUsers();
+      }
+    );
   }
 
   public updateUser(userID: number, user: User) {

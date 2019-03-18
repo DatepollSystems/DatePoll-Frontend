@@ -62,7 +62,7 @@ export class MyUserService {
         const localPhoneNumbersData = data.telephoneNumbers;
         for (let i = 0; i < localPhoneNumbersData.length; i++) {
           localPhoneNumbers.push(
-            new PhoneNumber(localPhoneNumbersData[i].id, this.getID(), localPhoneNumbersData[i].label, localPhoneNumbersData[i].number));
+            new PhoneNumber(localPhoneNumbersData[i].id, localPhoneNumbersData[i].label, localPhoneNumbersData[i].number));
         }
         this.setPhoneNumbers(localPhoneNumbers);
       },

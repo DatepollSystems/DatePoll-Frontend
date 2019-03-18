@@ -44,10 +44,15 @@ export class SigninComponent implements OnInit {
         const data = response.json();
         console.log(data);
         if (data.msg != null) {
+          if (data.msg === 'notActivated') {
+            this.state = data.msg;
+          }
+
           if (data.msg === 'changePassword') {
             this.state = data.msg;
           }
 
+          this.showLoadingSpinnerDuringLogin = false;
           return;
         }
 

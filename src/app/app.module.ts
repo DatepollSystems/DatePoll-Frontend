@@ -48,6 +48,7 @@ import {DoNotForgetToSaveComponent} from './home/do-not-forget-to-save/do-not-fo
 import {MovieTicketsService} from './home/cinema/movieTickets.service';
 import {HomepageService} from './home/start/homepage.service';
 import {DatepollManagementComponent} from './home/management/datepoll-management/datepoll-management.component';
+import {UserCreateModalComponent} from './home/management/users-management/user-create-modal/user-create-modal.component';
 
 @NgModule({
   declarations: [
@@ -80,6 +81,7 @@ import {DatepollManagementComponent} from './home/management/datepoll-management
     UsersManagementComponent,
     UsersExportBottomSheetComponent,
     DatepollManagementComponent,
+    UserCreateModalComponent,
   ],
   imports: [
     BrowserModule,
@@ -106,7 +108,8 @@ import {DatepollManagementComponent} from './home/management/datepoll-management
     MovieCreateModalComponent,
     MovieEditModalComponent,
     MovieBookTicketsModalComponent,
-    UsersExportBottomSheetComponent
+    UsersExportBottomSheetComponent,
+    UserCreateModalComponent
   ],
   providers: [
     AuthService,

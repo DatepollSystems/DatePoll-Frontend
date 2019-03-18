@@ -19,13 +19,15 @@ mat-toolbar {
 
 mat-sidenav {
   position: fixed;
-  max-width: 320px;
+  width: 100%;
+  max-width: 300px;
 }
 
 .sidenav-head-text {
   margin-left: 15px;
   margin-top: 15px;
   margin-right: 15px;
+  word-break: break-all;
 }
 
 .activated {

@@ -51,7 +51,7 @@ export class PhoneNumberComponent {
       (response: Response) => {
         const data = response.json();
         console.log(data);
-        const phoneNumber = new PhoneNumber(data.phone_number_id, this._myUserService.getID(), form.value.label, form.value.phoneNumber);
+        const phoneNumber = new PhoneNumber(data.phone_number_id, form.value.label, form.value.phoneNumber);
         this.phoneNumbers.push(phoneNumber);
         this.dataSource = new MatTableDataSource(this.phoneNumbers);
         this._myUserService.setPhoneNumbers(this.phoneNumbers);
@@ -69,7 +69,7 @@ export class PhoneNumberComponent {
         this.phoneNumbers = [];
 
         for (let i = 0; i < this._myUserService.getPhoneNumbers().length; i++) {
-          if (this._myUserService.getPhoneNumbers()[i].getID() !== phoneNumberID) {
+          if (this._myUserService.getPhoneNumbers()[i].id !== phoneNumberID) {
             this.phoneNumbers.push(this._myUserService.getPhoneNumbers()[i]);
           }
         }
