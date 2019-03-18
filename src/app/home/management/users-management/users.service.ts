@@ -35,7 +35,7 @@ export class UsersService {
         const users = [];
         for (const user of fetchedUsers) {
           const localPhoneNumbers = [];
-          const localPhoneNumbersData = user.telephoneNumbers;
+          const localPhoneNumbersData = user.phoneNumbers;
           for (let i = 0; i < localPhoneNumbersData.length; i++) {
             localPhoneNumbers.push(new PhoneNumber(localPhoneNumbersData[i].id, localPhoneNumbersData[i].label,
               localPhoneNumbersData[i].number));
