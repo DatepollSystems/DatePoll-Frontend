@@ -12,6 +12,8 @@ import {HttpService} from '../../../services/http.service';
 import {User} from './user.model';
 import {Permissions} from '../../../permissions';
 import {UserCreateModalComponent} from './user-create-modal/user-create-modal.component';
+import {MovieEditModalComponent} from '../../cinema/movie-administration/movie-edit-modal/movie-edit-modal.component';
+import {UserUpdateModalComponent} from './user-update-modal/user-update-modal.component';
 
 @Component({
   selector: 'app-users-management',
@@ -90,8 +92,11 @@ export class UsersManagementComponent implements OnInit, OnDestroy {
     });
   }
 
-  onEdit(userID: number) {
-
+  onEdit(user: User) {
+    this.dialog.open(UserUpdateModalComponent, {
+      width: '80vh',
+      data: {user: user}
+    });
   }
 
   onDelete(userID: number) {

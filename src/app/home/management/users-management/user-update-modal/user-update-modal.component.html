@@ -1,0 +1,240 @@
+<h1 mat-dialog-title>{{'MANAGEMENT_USERS_UPDATE_USER_MODAL_TITLE' | translate}} {{firstname}} {{surname}}</h1>
+<div mat-dialog-content>
+  <form (ngSubmit)="create(form)" #form="ngForm">
+    <div class="row">
+      <mat-form-field class="col-12 col-sm-12 col-md-3 col-lg-2 col-xl-2">
+        <!-- Title -->
+        <input matInput id="title" name="title" type="text"
+               ngModel #titleModel="ngModel" [(ngModel)]="title"
+               maxlength="190"
+               placeholder="{{'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_TITLE' | translate}}">
+        <mat-error *ngIf="titleModel.invalid">
+          {{'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_TITLE_INCORRECT' | translate}}
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Email -->
+      <mat-form-field class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
+        <input matInput id="email" name="email" type="email"
+               ngModel #emailModel="ngModel" [(ngModel)]="email"
+               maxlength="190" required minlength="1" email=""
+               placeholder="{{'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_EMAIL_ADDRESS' | translate}}">
+        <mat-error *ngIf="emailModel.invalid">
+          {{'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_EMAIL_ADDRESS_INCORRECT' | translate}}
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Firstname -->
+      <mat-form-field class="col-12 col-sm-12 col-md-4 col-lg-3 col-xl-3">
+        <input matInput id="firstname" name="firstname" type="text"
+               ngModel #firstnameModel="ngModel" [(ngModel)]="firstname"
+               maxlength="190" required minlength="1"
+               placeholder="{{'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_FIRSTNAME' | translate}}">
+        <mat-error *ngIf="firstnameModel.invalid">
+          {{'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_FIRSTNAME_INCORRECT' | translate}}
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Surname -->
+      <mat-form-field class="col-12 col-sm-12 col-md-5 col-lg-3 col-xl-3">
+        <input matInput id="surname" name="surname" type="text"
+               ngModel #surnameModel="ngModel" [(ngModel)]="surname"
+               maxlength="190" required minlength="1"
+               placeholder="{{'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_SURNAME' | translate}}">
+        <mat-error *ngIf="surnameModel.invalid">
+          {{'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_SURNAME_INCORRECT' | translate}}
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Birthday -->
+      <mat-form-field class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 datepicker-field">
+        <input matInput [matDatepicker]="picker_birthday"
+               name="datepicker" [(ngModel)]="birthday" id="datepicker-birthday"
+               placeholder="{{'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_BIRTHDAY' | translate}}">
+        <mat-datepicker-toggle matSuffix [for]="picker_birthday"></mat-datepicker-toggle>
+        <mat-datepicker #picker_birthday></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 datepicker-field-mobile">
+        <input matInput [matDatepicker]="picker_mobile_birthday"
+               name="datepicker-mobile" [(ngModel)]="birthday"  id="datepicker-birthday-mobile"
+               placeholder="{{'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_BIRTHDAY' | translate}}">
+        <mat-datepicker-toggle matSuffix [for]="picker_mobile_birthday"></mat-datepicker-toggle>
+        <mat-datepicker touchUi #picker_mobile_birthday></mat-datepicker>
+      </mat-form-field>
+
+      <!-- Join date -->
+      <mat-form-field class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 datepicker-field">
+        <input matInput [matDatepicker]="picker_joindate"
+               name="datepicker" [(ngModel)]="join_date" id="datepicker-join_date"
+               placeholder="{{'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_JOIN_DATE' | translate}}">
+        <mat-datepicker-toggle matSuffix [for]="picker_joindate"></mat-datepicker-toggle>
+        <mat-datepicker #picker_joindate></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 datepicker-field-mobile">
+        <input matInput [matDatepicker]="picker_mobile_joindate"
+               name="datepicker-mobile" [(ngModel)]="join_date" id="datepicker-join_date-mobile"
+               placeholder="{{'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_JOIN_DATE' | translate}}">
+        <mat-datepicker-toggle matSuffix [for]="picker_mobile_joindate"></mat-datepicker-toggle>
+        <mat-datepicker touchUi #picker_mobile_joindate></mat-datepicker>
+      </mat-form-field>
+
+      <!-- Streetname -->
+      <mat-form-field class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+        <input matInput id="streetname" name="streetname" type="text"
+               ngModel #streetnameModel="ngModel" [(ngModel)]="streetname"
+               maxlength="190" required minlength="1"
+               placeholder="{{'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_STREETNAME' | translate}}">
+        <mat-error *ngIf="streetnameModel.invalid">
+          {{'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_STREETNAME_INCORRECT' | translate}}
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Streetnumber -->
+      <mat-form-field class="col-12 col-sm-12 col-md-6 col-lg-2 col-xl-2">
+        <input matInput id="streetnumber" name="streetnumber" type="text"
+               ngModel #streetnumberModel="ngModel" [(ngModel)]="streetnumber"
+               maxlength="190" required minlength="1"
+               placeholder="{{'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_STREETNUMBER' | translate}}">
+        <mat-error *ngIf="streetnumberModel.invalid">
+          {{'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_STREETNUMBER_INCORRECT' | translate}}
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Zipcode -->
+      <mat-form-field class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4">
+        <input matInput id="zipcode" name="zipcode" type="number"
+               ngModel #zipcodeModel="ngModel" [(ngModel)]="zipcode"
+               min="1000" max="9999" number
+               placeholder="{{'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_ZIPCODE' | translate}}">
+        <mat-error *ngIf="zipcodeModel.invalid">
+          {{'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_ZIPCODE_INCORRECT' | translate}}
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Location -->
+      <mat-form-field class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+        <input matInput id="location" name="location" type="text"
+               ngModel #locationModel="ngModel" [(ngModel)]="location"
+               maxlength="190" required minlength="1"
+               placeholder="{{'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_LOCATION' | translate}}">
+        <mat-error *ngIf="locationModel.invalid">
+          {{'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_LOCATION_INCORRECT' | translate}}
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Activity -->
+      <mat-form-field class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+        <input matInput id="activity" name="activity" type="text"
+               ngModel #activityModel="ngModel" [(ngModel)]="activity"
+               maxlength="190" required minlength="1"
+               placeholder="{{'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_ACTIVITY' | translate}}">
+        <mat-error *ngIf="activityModel.invalid">
+          {{'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_ACTIVITY_INCORRECT' | translate}}
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="row">
+      <div class="col-12">
+        <mat-divider></mat-divider>
+      </div>
+    </div>
+
+    <!-- Phone number -->
+    <div class="row" style="margin-top: 15px;">
+      <div class="col-12">
+        <span style="font-size: 16px">{{'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_PHONE_NUMBERS' | translate}}</span>
+      </div>
+    </div>
+
+    <form (ngSubmit)="addPhoneNumber(phoneNumberForm)" #phoneNumberForm="ngForm">
+      <div class="row">
+        <mat-form-field class="col-12 col-sm-12 col-md-4 col-lg-3">
+          <input matInput id="label" name="label" type="text"
+                 ngModel #labelModel="ngModel"
+                 required maxlength="190" minlength="1"
+                 placeholder="{{'SETTINGS_PERSONAL_DATA_MODAL_PHONE_NUMBER_LABEL' | translate}}">
+          <mat-error *ngIf="labelModel.invalid">
+            {{'SETTINGS_PERSONAL_DATA_MODAL_PHONE_NUMBER_LABEL_INVALID' | translate}}
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="col-12 col-sm-12 col-md-6 col-lg-6">
+          <input matInput id="phoneNumber" name="phoneNumber" type="text"
+                 ngModel #phoneNumberModel="ngModel"
+                 required maxlength="190" minlength="1" phone="AT"
+                 placeholder="{{'SETTINGS_PERSONAL_DATA_MODAL_PHONE_NUMBER_PHONE_NUMBER' | translate}}">
+          <mat-error *ngIf="phoneNumberModel.invalid">
+            {{'SETTINGS_PERSONAL_DATA_MODAL_PHONE_NUMBER_PHONE_NUMBER_NOT_VALID' | translate}}
+          </mat-error>
+        </mat-form-field>
+
+        <div class="col-12 col-sm-12 col-md-2 col-lg-3">
+          <button mat-raised-button class="success-button" id="addPhoneNumber-button"
+                  type="submit" [disabled]="!phoneNumberForm.valid">
+            {{'SETTINGS_PERSONAL_DATA_MODAL_PHONE_NUMBER_ADD' | translate}}
+            <mat-icon aria-label="Submit button">send</mat-icon>
+          </button>
+        </div>
+      </div>
+    </form>
+
+    <div class="row">
+      <div class="col-12">
+        <table mat-table [dataSource]="dataSource" class="col-12">
+
+          <ng-container matColumnDef="label">
+            <th mat-header-cell
+                *matHeaderCellDef> {{'SETTINGS_PERSONAL_DATA_MODAL_PHONE_NUMBER_LABEL' | translate}} </th>
+            <td mat-cell *matCellDef="let phoneNumber"> {{phoneNumber.label}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="phonenumber">
+            <th mat-header-cell
+                *matHeaderCellDef> {{'SETTINGS_PERSONAL_DATA_MODAL_PHONE_NUMBER_PHONE_NUMBER' | translate}} </th>
+            <td mat-cell *matCellDef="let phoneNumber"> {{phoneNumber.phoneNumber}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="action">
+            <th mat-header-cell *matHeaderCellDef> {{'ACTION' | translate}} </th>
+            <td mat-cell *matCellDef="let phoneNumber">
+              <button mat-icon-button [matTooltipPosition]="'right'"
+                      matTooltip="{{'SETTINGS_PERSONAL_DATA_MODAL_PHONE_NUMBER_DELETE_TOOLTIP' | translate}}"
+                      (click)="removePhoneNumber(phoneNumber.id)">
+                <mat-icon>delete_foreve</mat-icon>
+              </button>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="row" style="margin-top: 15px; margin-bottom: 15px">
+      <div class="col-12">
+        <mat-divider></mat-divider>
+      </div>
+    </div>
+
+    <!-- Activity -->
+    <div class="row">
+      <div class="col-12">
+        <mat-checkbox id="activated" name="activated" ngModel color="accent" [(ngModel)]="activated"
+                      matTooltip="{{'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_ACTIVATED_DESCRIPTION' | translate}}" matTooltipPosition="right">
+          {{'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_ACTIVATED' | translate}}
+        </mat-checkbox>
+      </div>
+    </div>
+
+  </form>
+  <mat-progress-bar mode="indeterminate" *ngIf="sendingRequest"></mat-progress-bar>
+</div>
+<div mat-dialog-actions style="margin-top: 15px">
+  <button mat-button [mat-dialog-close]>{{'CLOSE' | translate}}</button>
+  <button mat-button (click)="form.ngSubmit.emit()" class="success-button"
+          [disabled]="!form.form.valid">{{'SAVE' | translate}}</button>
+</div>

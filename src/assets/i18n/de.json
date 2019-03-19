@@ -240,6 +240,8 @@
   "MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_ACTIVATED_DESCRIPTION": "Wenn Account aktivieren angekreuzt ist, wird direkt nach der Erstellung des Benutzers eine Einladungsemail versendet",
   "MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_PHONE_NUMBERS": "Telefonnummern",
 
+  "MANAGEMENT_USERS_UPDATE_USER_MODAL_TITLE": "Bearbeite ",
+
   "MANAGEMENT_DATEPOLL_CINEMA_SERVICE": "Kinoservice"
 
 }

@@ -80,7 +80,7 @@ export class UsersService {
     );
   }
 
-  public updateUser(userID: number, user: User) {
-
+  public updateUser(userID: number, user: any) {
+    return this.httpService.loggedInV1PUTRequest('/management/users/' + userID, user, 'updateUser');
   }
 }
