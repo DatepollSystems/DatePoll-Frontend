@@ -13,6 +13,7 @@ import {MovieServiceComponent} from './home/cinema/movie-service/movie-service.c
 import {MovieAdministrationComponent} from './home/cinema/movie-administration/movie-administration.component';
 import {UsersManagementComponent} from './home/management/users-management/users-management.component';
 import {DatepollManagementComponent} from './home/management/datepoll-management/datepoll-management.component';
+import {GroupsManagementComponent} from './home/management/groups-management/groups-management.component';
 
 const appRoutes = [
   {path: '', redirectTo: '/home', pathMatch: 'full'},
@@ -30,6 +31,7 @@ const appRoutes = [
       {path: 'cinema/administration', component: MovieAdministrationComponent},
       {path: 'settings/personal', component: SettingsComponent},
       {path: 'management/user', component: UsersManagementComponent},
+      {path: 'management/group', component: GroupsManagementComponent},
       {path: 'management/datepoll', component: DatepollManagementComponent}
     ]
   },

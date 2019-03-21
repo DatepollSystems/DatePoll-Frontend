@@ -50,6 +50,12 @@ import {HomepageService} from './home/start/homepage.service';
 import {DatepollManagementComponent} from './home/management/datepoll-management/datepoll-management.component';
 import {UserCreateModalComponent} from './home/management/users-management/user-create-modal/user-create-modal.component';
 import {UserUpdateModalComponent} from './home/management/users-management/user-update-modal/user-update-modal.component';
+import { GroupsManagementComponent } from './home/management/groups-management/groups-management.component';
+import {GroupsService} from './home/management/groups-management/groups.service';
+import { GroupCreateModalComponent } from './home/management/groups-management/group-create-modal/group-create-modal.component';
+import { GroupUpdateModalComponent } from './home/management/groups-management/group-update-modal/group-update-modal.component';
+import { SubgroupUpdateModalComponent } from './home/management/groups-management/subgroup-update-modal/subgroup-update-modal.component';
+import { SubgroupCreateModalComponent } from './home/management/groups-management/subgroup-create-modal/subgroup-create-modal.component';
 
 @NgModule({
   declarations: [
@@ -83,7 +89,12 @@ import {UserUpdateModalComponent} from './home/management/users-management/user-
     UsersExportBottomSheetComponent,
     DatepollManagementComponent,
     UserCreateModalComponent,
-    UserUpdateModalComponent
+    UserUpdateModalComponent,
+    GroupsManagementComponent,
+    GroupCreateModalComponent,
+    GroupUpdateModalComponent,
+    SubgroupUpdateModalComponent,
+    SubgroupCreateModalComponent
   ],
   imports: [
     BrowserModule,
@@ -112,7 +123,11 @@ import {UserUpdateModalComponent} from './home/management/users-management/user-
     MovieBookTicketsModalComponent,
     UsersExportBottomSheetComponent,
     UserCreateModalComponent,
-    UserUpdateModalComponent
+    UserUpdateModalComponent,
+    GroupCreateModalComponent,
+    GroupUpdateModalComponent,
+    SubgroupUpdateModalComponent,
+    SubgroupCreateModalComponent
   ],
   providers: [
     AuthService,
@@ -123,6 +138,7 @@ import {UserUpdateModalComponent} from './home/management/users-management/user-
     ExcelService,
     MovieTicketsService,
     HomepageService,
+    GroupsService,
     {
       provide: APP_INITIALIZER,
       useFactory: setupTranslateFactory,

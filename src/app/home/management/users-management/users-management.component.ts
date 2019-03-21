@@ -1,5 +1,4 @@
 import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {Response} from '@angular/http';
 import {Router} from '@angular/router';
 import {MatBottomSheet, MatBottomSheetRef, MatDialog, MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
 import {Subscription} from 'rxjs';
@@ -12,7 +11,6 @@ import {HttpService} from '../../../services/http.service';
 import {User} from './user.model';
 import {Permissions} from '../../../permissions';
 import {UserCreateModalComponent} from './user-create-modal/user-create-modal.component';
-import {MovieEditModalComponent} from '../../cinema/movie-administration/movie-edit-modal/movie-edit-modal.component';
 import {UserUpdateModalComponent} from './user-update-modal/user-update-modal.component';
 
 @Component({
@@ -39,8 +37,7 @@ export class UsersManagementComponent implements OnInit, OnDestroy {
     private bottomSheet: MatBottomSheet,
     private dialog: MatDialog,
     private myUserService: MyUserService,
-    private usersService: UsersService,
-    private httpService: HttpService) {
+    private usersService: UsersService) {
 
     this.permissionSubscription = myUserService.permissionsChange.subscribe((value) => {
       if (!this.myUserService.hasPermission(Permissions.MANAGEMENT_ADMINISTRATION)) {

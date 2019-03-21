@@ -61,6 +61,7 @@
   "NAV_CINEMA_ADMINISTRATION": "Filmverwaltung",
 
   "NAV_MANAGEMENT_USERS": "Mitgliederverwaltung",
+  "NAV_MANAGEMENT_GROUPS": "Gruppenverwaltung",
   "NAV_MANAGEMENT_DATEPOLL": "DatePoll-Verwaltung",
 
 
@@ -241,6 +242,32 @@
   "MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_PHONE_NUMBERS": "Telefonnummern",
 
   "MANAGEMENT_USERS_UPDATE_USER_MODAL_TITLE": "Bearbeite ",
+
+
+  "MANAGEMENT_GROUPS_SEARCH": "Suche nach einer Gruppe oder einem Register",
+  "MANAGEMENT_GROUPS_SEARCH_NOTHING_FOUND": "Leider wurde nichts gefunden :(",
+  "MANAGEMENT_GROUPS_GROUP_DELETE_TOOLTIP": "Lösche diese Gruppe",
+  "MANAGEMENT_GROUPS_GROUP_EDIT_TOOLTIP": "Editiere diese Gruppe",
+  "MANAGEMENT_GROUPS_SUBGROUP": "Register:",
+  "MANAGEMENT_GROUPS_SUBGROUP_DELETE_TOOLTIP": "Lösche dieses Register",
+  "MANAGEMENT_GROUPS_SUBGROUP_EDIT_TOOLTIP": "Editiere dieses Register",
+  "MANAGEMENT_GROUPS_NO_SUBGROUPS_FOR_THIS_GROUP": "Für diese Gruppe gibt es noch kein Register",
+
+  "MANAGEMENT_GROUPS_CREATE_GROUP_MODAL_TITLE": "Lege eine neue Gruppe an",
+  "MANAGEMENT_GROUPS_CREATE_GROUP_MODAL_FORM_NAME": "Gruppenname",
+  "MANAGEMENT_GROUPS_CREATE_GROUP_MODAL_FORM_NAME_INCORRECT": "Der Name darf weder leer sein, noch mehr als 190 Zeichen haben!",
+  "MANAGEMENT_GROUPS_CREATE_GROUP_MODAL_FORM_DESCRIPTION": "Beschreibung",
+  "MANAGEMENT_GROUPS_CREATE_GROUP_MODAL_FORM_DESCRIPTION_INCORRECT": "Die Beschreibung darf nicht mehr als 190 Zeichen haben!",
+
+  "MANAGEMENT_GROUPS_UPDATE_GROUP_MODAL_TITLE": "Bearbeite die Gruppe ",
+
+  "MANAGEMENT_GROUPS_CREATE_SUBGROUP_MODAL_TITLE": "Lege eine neues Register an",
+  "MANAGEMENT_GROUPS_CREATE_SUBGROUP_MODAL_FORM_NAME": "Registername",
+  "MANAGEMENT_GROUPS_CREATE_SUBGROUP_MODAL_FORM_NAME_INCORRECT": "Der Name darf weder leer sein, noch mehr als 190 Zeichen haben!",
+  "MANAGEMENT_GROUPS_CREATE_SUBGROUP_MODAL_FORM_DESCRIPTION": "Beschreibung",
+  "MANAGEMENT_GROUPS_CREATE_SUBGROUP_MODAL_FORM_DESCRIPTION_INCORRECT": "Die Beschreibung darf nicht mehr als 190 Zeichen haben!",
+
+  "MANAGEMENT_GROUPS_UPDATE_SUBGROUP_MODAL_TITLE": "Bearbeite das Register ",
 
   "MANAGEMENT_DATEPOLL_CINEMA_SERVICE": "Kinoservice"
 
