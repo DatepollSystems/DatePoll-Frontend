@@ -1,11 +1,18 @@
 <mat-card class="mat-elevation-z8">
   <mat-card-content>
     <div class="row">
-      <div class="col-8 col-md-9 col-lg-10">
+      <div class="col-10 col-md-9 col-lg-9">
         <h1>{{'NAV_MANAGEMENT_USERS' | translate}}</h1>
       </div>
-      <div class="col-4 col-md-3 col-lg-2">
+      <div class="col-lg-2 d-none d-lg-block">
         <button mat-raised-button class="col-12 info-button" (click)="openExportUsersBottomSheet()">Export</button>
+      </div>
+      <div class="col-2 col-md-1 col-lg-1">
+        <button mat-icon-button (click)="refreshUsers()"
+                matTooltipPosition="below"
+                matTooltip="{{'MANAGEMENT_USERS_REFRESH' | translate}}">
+          <mat-icon>refresh</mat-icon>
+        </button>
       </div>
     </div>
 
@@ -128,6 +135,7 @@
       <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
+    <mat-progress-bar *ngIf="!usersLoaded" mode="indeterminate"></mat-progress-bar>
 
     <mat-paginator [pageSizeOptions]="[10, 20, 50, 100]" showFirstLastButtons></mat-paginator>
   </mat-card-content>

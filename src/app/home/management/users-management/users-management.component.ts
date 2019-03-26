@@ -19,6 +19,8 @@ import {UserUpdateModalComponent} from './user-update-modal/user-update-modal.co
   styleUrls: ['./users-management.component.css']
 })
 export class UsersManagementComponent implements OnInit, OnDestroy {
+  usersLoaded = true;
+
   displayedColumns: string[] = ['title', 'firstname', 'surname', 'email', 'birthday', 'join_date', 'streetname', 'streetnumber',
     'zipcode', 'location', 'phoneNumbers', 'activity', 'actions'];
   filterValue: string = null;
@@ -45,12 +47,19 @@ export class UsersManagementComponent implements OnInit, OnDestroy {
       }
     });
 
+    this.usersLoaded = false;
+
     this.users = usersService.getUsers();
+
+    if (this.users.length > 0) {
+      this.usersLoaded = true;
+    }
+
     this.usersSubscription = usersService.usersChange.subscribe((value) => {
+      this.usersLoaded = true;
+
       this.users = value;
-      this.dataSource = new MatTableDataSource(this.users);
-      this.dataSource.sort = this.sort;
-      this.dataSource.paginator = this.paginator;
+      this.refreshTable();
     });
   }
 
@@ -59,14 +68,18 @@ export class UsersManagementComponent implements OnInit, OnDestroy {
       this.router.navigate(['/home']);
     }
 
-    this.dataSource = new MatTableDataSource(this.users);
-    this.dataSource.sort = this.sort;
-    this.dataSource.paginator = this.paginator;
+    this.refreshTable();
   }
 
   ngOnDestroy() {
     this.usersSubscription.unsubscribe();
     this.permissionSubscription.unsubscribe();
+  }
+
+  refreshTable() {
+    this.dataSource = new MatTableDataSource(this.users);
+    this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
   }
 
   applyFilter(filterValue: string) {
@@ -98,6 +111,13 @@ export class UsersManagementComponent implements OnInit, OnDestroy {
 
   onDelete(userID: number) {
     this.usersService.deleteUser(userID);
+  }
+
+  refreshUsers() {
+    this.usersLoaded = false;
+    this.users = [];
+    this.refreshTable();
+    this.usersService.fetchUsers();
   }
 
 }

@@ -1,8 +1,15 @@
 <mat-card class="mat-elevation-z8">
   <mat-card-content>
     <div class="row">
-      <div class="col-8 col-md-9 col-lg-10">
+      <div class="col-11 col-md-11 col-lg-11">
         <h1>{{'NAV_MANAGEMENT_GROUPS' | translate}}</h1>
+      </div>
+      <div class="col-1 col-md-1 col-lg-1">
+        <button mat-icon-button (click)="refreshGroups()"
+                matTooltipPosition="right"
+                matTooltip="{{'MANAGEMENT_GROUPS_REFRESH' | translate}}">
+          <mat-icon>refresh</mat-icon>
+        </button>
       </div>
     </div>
 
@@ -86,9 +93,13 @@
       </div>
     </div>
 
-    <div class="row" *ngIf="sortedGroups.length == 0">
-      <div class="col-12" style="text-align: center">
-        <h2>{{'MANAGEMENT_GROUPS_SEARCH_NOTHING_FOUND' | translate}}</h2>
+    <mat-progress-bar *ngIf="!groupsLoaded" mode="indeterminate"></mat-progress-bar>
+
+    <div *ngIf="groupsLoaded">
+      <div class="row" *ngIf="sortedGroups.length == 0">
+        <div class="col-12" style="text-align: center">
+          <h2>{{'MANAGEMENT_GROUPS_SEARCH_NOTHING_FOUND' | translate}}</h2>
+        </div>
       </div>
     </div>
   </mat-card-content>

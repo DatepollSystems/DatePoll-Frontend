@@ -215,6 +215,7 @@
   "MANAGEMENT_USERS_ACTIONS": "Aktionen",
   "MANAGEMENT_USERS_ACTIONS_EDIT_TOOLTIP": "Bearbeite dieses Mitglied",
   "MANAGEMENT_USERS_ACTIONS_DELETE_TOOLTIP": "Lösche dieses Mitglied",
+  "MANAGEMENT_USERS_REFRESH": "Mitgliederliste neuladen",
 
   "MANAGEMENT_USERS_CREATE_USER_MODAL_TITLE": "Lege ein neues Mitglied an",
   "MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_TITLE": "Titel",
@@ -252,6 +253,7 @@
   "MANAGEMENT_GROUPS_SUBGROUP_DELETE_TOOLTIP": "Lösche dieses Register",
   "MANAGEMENT_GROUPS_SUBGROUP_EDIT_TOOLTIP": "Editiere dieses Register",
   "MANAGEMENT_GROUPS_NO_SUBGROUPS_FOR_THIS_GROUP": "Für diese Gruppe gibt es noch kein Register",
+  "MANAGEMENT_GROUPS_REFRESH": "Gruppenliste neuladen",
 
   "MANAGEMENT_GROUPS_CREATE_GROUP_MODAL_TITLE": "Lege eine neue Gruppe an",
   "MANAGEMENT_GROUPS_CREATE_GROUP_MODAL_FORM_NAME": "Gruppenname",

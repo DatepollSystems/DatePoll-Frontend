@@ -10,12 +10,10 @@ import {Subgroup} from './subgroup.model';
   providedIn: 'root'
 })
 export class GroupsService {
-
   private _groups: Group[] = [];
   public groupsChange: Subject<Group[]> = new Subject<Group[]>();
 
-  constructor(private httpService: HttpService) {
-  }
+  constructor(private httpService: HttpService) { }
 
   public setGroups(groups: Group[]) {
     this._groups = groups;

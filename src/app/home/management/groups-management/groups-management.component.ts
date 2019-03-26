@@ -23,6 +23,7 @@ import {Permissions} from '../../../permissions';
   styleUrls: ['./groups-management.component.css']
 })
 export class GroupsManagementComponent implements OnInit, OnDestroy {
+  groupsLoaded = true;
 
   groups: Group[];
   groupsSubscription: Subscription;
@@ -37,17 +38,26 @@ export class GroupsManagementComponent implements OnInit, OnDestroy {
     private dialog: MatDialog,
     private groupsService: GroupsService) {
 
-    this.groups = this.groupsService.getGroups();
-    this.sortedGroups = this.groups;
-    this.groupsSubscription = this.groupsService.groupsChange.subscribe((value) => {
-      this.groups = value;
-      this.sortedGroups = this.groups;
-    });
-
     this.permissionSubscription = myUserService.permissionsChange.subscribe((value) => {
       if (!this.myUserService.hasPermission(Permissions.MANAGEMENT_ADMINISTRATION)) {
         this.router.navigate(['/home']);
       }
+    });
+
+    this.groupsLoaded = false;
+
+    this.groups = this.groupsService.getGroups();
+    this.sortedGroups = this.groups;
+
+    if (this.groups.length > 0) {
+      this.groupsLoaded = true;
+    }
+
+    this.groupsSubscription = this.groupsService.groupsChange.subscribe((value) => {
+      this.groupsLoaded = true;
+
+      this.groups = value;
+      this.sortedGroups = this.groups;
     });
   }
 
@@ -77,6 +87,13 @@ export class GroupsManagementComponent implements OnInit, OnDestroy {
         }
       }
     }
+  }
+
+  refreshGroups() {
+    this.groupsLoaded = false;
+    this.groups = [];
+    this.sortedGroups = this.groups;
+    this.groupsService.fetchGroups();
   }
 
   onCreateGroup() {

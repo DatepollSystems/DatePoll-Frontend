@@ -240,6 +240,10 @@ export class MovieAdministrationComponent implements OnInit, AfterViewInit, OnDe
   }
 
   refreshMovies() {
+    this.moviesLoaded = false;
+    this.movies = [];
+    this.years = [];
+    this.refreshTable();
     this.cinemaService.fetchYears();
     this.cinemaService.fetchMovies();
   }
