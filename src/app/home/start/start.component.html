@@ -46,19 +46,29 @@
               <td>{{booking.bookedTickets}}</td>
               <td *ngIf="booking.workerName != null">
                 {{booking.workerName}}
-                [<a (click)="cinemaService.signOutForWorker(booking.movieID)" *ngIf="booking.workerID == myUserService.getID()"
-                    matTooltip="{{'CINEMA_TICKETS_CANCEL_CINEMA_SERVICE_TOOLTIP' | translate}}" matTooltipPosition="right">X</a>]
+                <button mat-icon-button (click)="cinemaService.signOutForWorker(booking.movieID)"
+                        *ngIf="booking.workerID == myUserService.getID()" matTooltipPosition="right"
+                        matTooltip="{{'CINEMA_TICKETS_CANCEL_CINEMA_SERVICE_TOOLTIP' | translate}}">
+                  <mat-icon aria-label="Cancel worker">cancel</mat-icon>
+                </button>
               </td>
-              <td *ngIf="booking.workerName == null"><a
-                (click)="cinemaService.applyForWorker(booking.movieID)">Melden</a></td>
+              <td *ngIf="booking.workerName == null">
+                <button (click)="cinemaService.applyForWorker(booking.movieID)"
+                        mat-stroked-button>{{'CINEMA_TICKETS_APPLY' | translate}}</button>
+              </td>
 
               <td *ngIf="booking.emergencyWorkerName != null">
                 {{booking.emergencyWorkerName}}
-                [<a (click)="cinemaService.signOutForEmergencyWorker(booking.movieID)" *ngIf="booking.emergencyWorkerID == myUserService.getID()"
-                    matTooltip="{{'CINEMA_TICKETS_CANCEL_CINEMA_SERVICE_TOOLTIP' | translate}}" matTooltipPosition="right">X</a>]
+                <button mat-icon-button (click)="cinemaService.signOutForEmergencyWorker(booking.movieID)"
+                        *ngIf="booking.emergencyWorkerID == myUserService.getID()" matTooltipPosition="right"
+                        matTooltip="{{'CINEMA_TICKETS_CANCEL_CINEMA_SERVICE_TOOLTIP' | translate}}">
+                  <mat-icon aria-label="Cancel worker">cancel</mat-icon>
+                </button>
               </td>
-              <td *ngIf="booking.emergencyWorkerName == null"><a
-                (click)="cinemaService.applyForEmergencyWorker(booking.movieID)">Melden</a></td>
+              <td *ngIf="booking.emergencyWorkerName == null">
+                <button (click)="cinemaService.applyForEmergencyWorker(booking.movieID)"
+                        mat-stroked-button>{{'CINEMA_TICKETS_APPLY' | translate}}</button>
+              </td>
             </tr>
             </tbody>
           </table>
