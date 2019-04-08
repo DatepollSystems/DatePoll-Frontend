@@ -1,5 +1,4 @@
 import {Component, ViewChild} from '@angular/core';
-import {Response} from '@angular/http';
 
 import {MyUserService} from '../../my-user.service';
 import {HttpService} from '../../../services/http.service';
@@ -64,8 +63,7 @@ export class EmailAddressComponent {
       body,
       'checkOldEmailVerificationCode')
       .subscribe(
-        (response: Response) => {
-          const data = response.json();
+        (data: any) => {
           console.log(data);
           const msg = data.msg;
 
@@ -114,8 +112,7 @@ export class EmailAddressComponent {
 
     this.httpService.loggedInV1POSTRequest('/user/myself/changeEmail/newEmailAddressVerification', body,
       'sendNewEmailVerification').subscribe(
-      (response: Response) => {
-        const data = response.json();
+      (data: any) => {
         console.log(data);
 
         if (data.msg === 'Sent') {
@@ -138,41 +135,38 @@ export class EmailAddressComponent {
     };
 
     this.httpService.loggedInV1POSTRequest('/user/myself/changeEmail/newEmailAddressVerificationCodeVerification',
-      body,
-      'checkNewEmailVerificationCode')
-      .subscribe(
-        (response: Response) => {
-          const data = response.json();
-          console.log(data);
-          const msg = data.msg;
+      body, 'checkNewEmailVerificationCode').subscribe(
+      (data: any) => {
+        console.log(data);
+        const msg = data.msg;
 
-          switch (msg) {
-            case 'code_correct':
-              this.changeEmail();
-              break;
+        switch (msg) {
+          case 'code_correct':
+            this.changeEmail();
+            break;
 
-            case 'code_incorrect':
-              console.log('checkNewEmailVerificationCode | Code incorrect | Code: ' + this.newEmailVerificationCode);
-              this.showNewEmailVerificationCodeIncorrectCard = true;
+          case 'code_incorrect':
+            console.log('checkNewEmailVerificationCode | Code incorrect | Code: ' + this.newEmailVerificationCode);
+            this.showNewEmailVerificationCodeIncorrectCard = true;
 
-              break;
+            break;
 
-            case 'rate_limit_exceeded':
-              console.log('checkNewEmailVerificationCode | Rate limit exceeded');
-              this.showNewEmailVerificationCodeRateLimitExceededCard = true;
+          case 'rate_limit_exceeded':
+            console.log('checkNewEmailVerificationCode | Rate limit exceeded');
+            this.showNewEmailVerificationCodeRateLimitExceededCard = true;
 
-              break;
+            break;
 
-            default:
-              console.log('checkNewEmailVerificationCode | Unknown message: ' + msg);
-              break;
-          }
-        },
-        (error) => {
-          console.log(error);
-          this.showNewEmailVerificationCodeIncorrectCard = true;
+          default:
+            console.log('checkNewEmailVerificationCode | Unknown message: ' + msg);
+            break;
         }
-      );
+      },
+      (error) => {
+        console.log(error);
+        this.showNewEmailVerificationCodeIncorrectCard = true;
+      }
+    );
   }
 
   private changeEmail() {
@@ -183,8 +177,7 @@ export class EmailAddressComponent {
     };
 
     this.httpService.loggedInV1POSTRequest('/user/myself/changeEmail/changeEmailAddress', body, 'changeEmail').subscribe(
-      (response: Response) => {
-        const data = response.json();
+      (data: any) => {
         console.log(data);
         const msg = data.msg;
 

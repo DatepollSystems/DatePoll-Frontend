@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {Response} from '@angular/http';
 import {NgForm} from '@angular/forms';
 import {MatDialogRef} from '@angular/material';
 
@@ -34,8 +33,7 @@ export class GroupCreateModalComponent {
 
     this.sendingRequest = true;
     this.groupsService.addGroup(group).subscribe(
-      (response: Response) => {
-        const data = response.json();
+      (data: any) => {
         console.log(data);
         this.groupsService.fetchGroups();
         this.dialogRef.close();

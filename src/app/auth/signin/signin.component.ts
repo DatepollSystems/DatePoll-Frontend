@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {NgForm} from '@angular/forms';
-import {Response} from '@angular/http';
 import {Router} from '@angular/router';
 import {MatSnackBar} from '@angular/material';
 
@@ -40,8 +39,7 @@ export class SigninComponent implements OnInit {
     this.password = form.value.password;
 
     this.authService.signinUser(this.email, this.password).subscribe(
-      (response: Response) => {
-        const data = response.json();
+      (data: any) => {
         console.log(data);
         if (data.msg != null) {
           if (data.msg === 'notActivated') {
@@ -72,8 +70,7 @@ export class SigninComponent implements OnInit {
     const password = form.value.password;
 
     this.authService.changePasswordAfterSignin(this.email, this.password, password).subscribe(
-      (response: Response) => {
-        const data = response.json();
+      (data: any) => {
         this.performLogin(data.token);
       }, (error) => console.log(error)
     );

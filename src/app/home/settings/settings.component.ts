@@ -6,6 +6,7 @@ import {PasswordComponent} from './password/password.component';
 import {TwoFactorAuthenticationComponent} from './two-factor-authentication/two-factor-authentication.component';
 import {MatDialog} from '@angular/material';
 import {FeedbackModalComponent} from '../../footer/modals/feedback-modal/feedback-modal.component';
+import {CalendarTokenComponent} from './calendar-token/calendar-token.component';
 
 @Component({
   selector: 'app-settings',
@@ -40,6 +41,12 @@ export class SettingsComponent implements OnInit {
 
   openPasswordModal() {
     this.dialog.open(PasswordComponent, {
+      width: '80vh',
+    });
+  }
+
+  openCalendarTokenModal() {
+    this.dialog.open(CalendarTokenComponent, {
       width: '80vh',
     });
   }

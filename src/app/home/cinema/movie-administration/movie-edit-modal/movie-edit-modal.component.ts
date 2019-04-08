@@ -1,8 +1,8 @@
 import {Component, Inject} from '@angular/core';
-import {CinemaService} from '../../cinema.service';
 import {MAT_DIALOG_DATA} from '@angular/material';
+
+import {CinemaService} from '../../cinema.service';
 import {Movie} from '../../movie.model';
-import {Response} from '@angular/http';
 
 @Component({
   selector: 'app-movie-edit-modal',
@@ -49,8 +49,7 @@ export class MovieEditModalComponent {
       console.log('updateMovie | no yearID found!');
       const yearObject = {'year': year};
       this.cinemaService.addYear(yearObject).subscribe(
-        (response: Response) => {
-          const data = response.json();
+        (data: any) => {
           console.log(data);
           yearID = data.year.id;
           console.log('updateMovie | yearID: ' + yearID);
@@ -90,8 +89,7 @@ export class MovieEditModalComponent {
     };
     console.log(movieObject);
     this.cinemaService.updateMovie(this.movie.id, movieObject).subscribe(
-      (response: Response) => {
-        const data = response.json();
+      (data: any) => {
         console.log(data);
         this.cinemaService.fetchMovies();
       },

@@ -3,11 +3,9 @@ import {Subject} from 'rxjs';
 
 import {AuthService} from '../../auth/auth.service';
 import {HttpService} from '../../services/http.service';
-
+import {HomepageService} from '../start/homepage.service';
 import {Movie} from './movie.model';
 import {Year} from './year.model';
-import {Response} from '@angular/http';
-import {HomepageService} from '../start/homepage.service';
 
 @Injectable({
   providedIn: 'root'
@@ -166,8 +164,7 @@ export class CinemaService {
 
   public applyForWorker(movieID: number) {
     this.httpService.loggedInV1POSTRequest('/cinema/worker/' + movieID, {}, 'applyForWorker').subscribe(
-      (response: Response) => {
-        const data = response.json();
+      (data: any) => {
         console.log(data);
         this.fetchNotShownMovies();
         this.homePageService.fetchData();
@@ -182,8 +179,7 @@ export class CinemaService {
 
   public signOutForWorker(movieID: number) {
     this.httpService.loggedInV1DELETERequest('/cinema/worker/' + movieID, 'signOutForWorker').subscribe(
-      (response: Response) => {
-        const data = response.json();
+      (data: any) => {
         console.log(data);
         this.fetchNotShownMovies();
         this.homePageService.fetchData();
@@ -198,8 +194,7 @@ export class CinemaService {
 
   public applyForEmergencyWorker(movieID: number) {
     this.httpService.loggedInV1POSTRequest('/cinema/emergencyWorker/' + movieID, {}, 'applyForEmergencyWorker').subscribe(
-      (response: Response) => {
-        const data = response.json();
+      (data: any) => {
         console.log(data);
         this.fetchNotShownMovies();
         this.homePageService.fetchData();
@@ -214,8 +209,7 @@ export class CinemaService {
 
   public signOutForEmergencyWorker(movieID: number) {
     this.httpService.loggedInV1DELETERequest('/cinema/emergencyWorker/' + movieID, 'signOutForEmergencyWorker').subscribe(
-      (response: Response) => {
-        const data = response.json();
+      (data: any) => {
         console.log(data);
         this.fetchNotShownMovies();
         this.homePageService.fetchData();

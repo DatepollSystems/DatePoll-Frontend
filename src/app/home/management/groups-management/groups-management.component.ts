@@ -1,5 +1,4 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Response} from '@angular/http';
 import {Router} from '@angular/router';
 import {MatDialog} from '@angular/material';
 
@@ -111,8 +110,7 @@ export class GroupsManagementComponent implements OnInit, OnDestroy {
 
   onDeleteGroup(groupID: number) {
     this.groupsService.deleteGroup(groupID).subscribe(
-      (response: Response) => {
-        const data = response.json();
+      (data: any) => {
         console.log(data);
         this.groupsService.fetchGroups();
       },
@@ -139,8 +137,7 @@ export class GroupsManagementComponent implements OnInit, OnDestroy {
 
   onDeleteSubgroup(subgroupID: number) {
     this.groupsService.deleteSubgroup(subgroupID).subscribe(
-      (response: Response) => {
-        const data = response.json();
+      (data: any) => {
         console.log(data);
         this.groupsService.fetchGroups();
       },

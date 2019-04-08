@@ -1,5 +1,4 @@
 import {Component, Inject} from '@angular/core';
-import {Response} from '@angular/http';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 
 import {HttpService} from '../../../../../services/http.service';
@@ -37,8 +36,7 @@ export class MovieBookTicketsModalComponent {
     };
 
     this.httpService.loggedInV1POSTRequest('/cinema/booking', bookingObject, 'bookTickets').subscribe(
-      (reponse: Response) => {
-        const data = reponse.json();
+      (data: any) => {
         console.log(data);
         this.cinemaService.fetchNotShownMovies();
       },

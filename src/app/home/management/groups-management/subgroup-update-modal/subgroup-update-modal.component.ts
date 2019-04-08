@@ -1,8 +1,8 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
-import {GroupsService} from '../groups.service';
 import {NgForm} from '@angular/forms';
-import {Response} from '@angular/http';
+
+import {GroupsService} from '../groups.service';
 
 @Component({
   selector: 'app-subgroup-update-modal',
@@ -46,8 +46,7 @@ export class SubgroupUpdateModalComponent {
 
     this.sendingRequest = true;
     this.groupsService.updateSubgroup(subgroup, this.subgroupID).subscribe(
-      (response: Response) => {
-        const data = response.json();
+      (data: any) => {
         console.log(data);
         this.groupsService.fetchGroups();
         this.dialogRef.close();

@@ -187,8 +187,7 @@ export class UserUpdateModalComponent implements OnInit {
     this.sendingRequest = true;
 
     this.usersService.updateUser(this.user.id, userObject).subscribe(
-      (response: Response) => {
-        const data = response.json();
+      (data: any) => {
         console.log(data);
         this.usersService.fetchUsers();
         this.dialogRef.close();

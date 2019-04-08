@@ -1,6 +1,5 @@
 import {Component, ViewChild} from '@angular/core';
 import {HttpService} from '../../../services/http.service';
-import {Response} from '@angular/http';
 
 @Component({
   selector: 'app-password',
@@ -31,8 +30,7 @@ export class PasswordComponent {
     };
 
     this.httpService.loggedInV1POSTRequest('/user/myself/changePassword/checkOldPassword', body, 'checkOldPassword').subscribe(
-      (response: Response) => {
-        const data = response.json();
+      (data: any) => {
         console.log(data);
         if (data.msg === 'password_correct') {
           console.log('checkOldPasswort | Password is correct');
@@ -57,8 +55,7 @@ export class PasswordComponent {
     };
 
     this.httpService.loggedInV1POSTRequest('/user/myself/changePassword/changePassword', body, 'changePassword').subscribe(
-      (response: Response) => {
-        const data = response.json();
+      (data: any) => {
         console.log(data);
         if (data.msg === 'password_changed') {
           console.log('changePassword | Changed successful');

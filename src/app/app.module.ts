@@ -37,7 +37,6 @@ import {MovieEditModalComponent} from './home/cinema/movie-administration/movie-
 import {MaterialModule} from './material-module';
 import {MAT_DATE_LOCALE, MAT_SNACK_BAR_DEFAULT_OPTIONS} from '@angular/material';
 import {MovieBookTicketsModalComponent} from './home/cinema/movie-tickets/movie-ticket/movie-book-tickets-modal/movie-book-tickets-modal.component';
-import {HttpModule} from '@angular/http';
 import {NgxMatSelectSearchModule} from 'ngx-mat-select-search';
 import {MovieCreateModalComponent} from './home/cinema/movie-administration/movie-create-modal/movie-create-modal.component';
 import {HttpService} from './services/http.service';
@@ -50,12 +49,14 @@ import {HomepageService} from './home/start/homepage.service';
 import {DatepollManagementComponent} from './home/management/datepoll-management/datepoll-management.component';
 import {UserCreateModalComponent} from './home/management/users-management/user-create-modal/user-create-modal.component';
 import {UserUpdateModalComponent} from './home/management/users-management/user-update-modal/user-update-modal.component';
-import { GroupsManagementComponent } from './home/management/groups-management/groups-management.component';
+import {GroupsManagementComponent} from './home/management/groups-management/groups-management.component';
 import {GroupsService} from './home/management/groups-management/groups.service';
-import { GroupCreateModalComponent } from './home/management/groups-management/group-create-modal/group-create-modal.component';
-import { GroupUpdateModalComponent } from './home/management/groups-management/group-update-modal/group-update-modal.component';
-import { SubgroupUpdateModalComponent } from './home/management/groups-management/subgroup-update-modal/subgroup-update-modal.component';
-import { SubgroupCreateModalComponent } from './home/management/groups-management/subgroup-create-modal/subgroup-create-modal.component';
+import {GroupCreateModalComponent} from './home/management/groups-management/group-create-modal/group-create-modal.component';
+import {GroupUpdateModalComponent} from './home/management/groups-management/group-update-modal/group-update-modal.component';
+import {SubgroupUpdateModalComponent} from './home/management/groups-management/subgroup-update-modal/subgroup-update-modal.component';
+import {SubgroupCreateModalComponent} from './home/management/groups-management/subgroup-create-modal/subgroup-create-modal.component';
+import {CalendarTokenComponent} from './home/settings/calendar-token/calendar-token.component';
+import {ClipboardModule} from 'ngx-clipboard';
 
 @NgModule({
   declarations: [
@@ -94,7 +95,8 @@ import { SubgroupCreateModalComponent } from './home/management/groups-managemen
     GroupCreateModalComponent,
     GroupUpdateModalComponent,
     SubgroupUpdateModalComponent,
-    SubgroupCreateModalComponent
+    SubgroupCreateModalComponent,
+    CalendarTokenComponent
   ],
   imports: [
     BrowserModule,
@@ -104,10 +106,10 @@ import { SubgroupCreateModalComponent } from './home/management/groups-managemen
     CustomFormsModule,
     AppRoutingModule,
     HttpClientModule,
-    HttpModule,
     NgxChartsModule,
     MaterialModule,
-    NgxMatSelectSearchModule
+    NgxMatSelectSearchModule,
+    ClipboardModule
   ],
   // Without this entryComponents dynamic modal loading does not work
   entryComponents: [
@@ -117,6 +119,7 @@ import { SubgroupCreateModalComponent } from './home/management/groups-managemen
     PhoneNumberComponent,
     EmailAddressComponent,
     PasswordComponent,
+    CalendarTokenComponent,
     //   TwoFactorAuthenticationComponent,
     MovieCreateModalComponent,
     MovieEditModalComponent,

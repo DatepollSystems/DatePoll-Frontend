@@ -1,6 +1,6 @@
-import {Subject} from 'rxjs';
-import {Response} from '@angular/http';
 import {Injectable} from '@angular/core';
+import {Subject} from 'rxjs';
+
 import {AuthService} from '../auth/auth.service';
 import {HttpService} from '../services/http.service';
 import {Permissions} from '../permissions';
@@ -97,8 +97,7 @@ export class MyUserService {
     };
 
     this.httpService.loggedInV1PUTRequest('/user/myself', userObject, 'updateMyself').subscribe(
-      (response: Response) => {
-        const data = response.json();
+      (data: any) => {
         console.log(data);
       },
       (error) => console.log(error)

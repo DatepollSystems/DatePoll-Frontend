@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {NgForm} from '@angular/forms';
+import {MatDialogRef, MatTableDataSource} from '@angular/material';
+
 import {UsersService} from '../users.service';
 import {PhoneNumber} from '../../../phoneNumber.model';
-import {MatDialogRef, MatTableDataSource} from '@angular/material';
-import {Response} from '@angular/http';
 
 @Component({
   selector: 'app-user-create-modal',
@@ -153,8 +153,7 @@ export class UserCreateModalComponent implements OnInit {
     this.sendingRequest = true;
 
     this.usersService.addUser(userObject).subscribe(
-      (response: Response) => {
-        const data = response.json();
+      (data: any) => {
         console.log(data);
         this.usersService.fetchUsers();
         this.dialogRef.close();

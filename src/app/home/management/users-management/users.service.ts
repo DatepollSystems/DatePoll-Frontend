@@ -1,9 +1,9 @@
 import {Injectable} from '@angular/core';
-import {HttpService} from '../../../services/http.service';
-import {User} from './user.model';
 import {Subject} from 'rxjs';
+
+import {HttpService} from '../../../services/http.service';
 import {PhoneNumber} from '../../phoneNumber.model';
-import {Response} from '@angular/http';
+import {User} from './user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -72,8 +72,7 @@ export class UsersService {
 
   public deleteUser(userID: number) {
     this.httpService.loggedInV1DELETERequest('/management/users/' + userID, 'deleteUser').subscribe(
-      (response: Response) => {
-        const data = response.json();
+      (data: any) => {
         console.log(data);
         this.fetchUsers();
       }

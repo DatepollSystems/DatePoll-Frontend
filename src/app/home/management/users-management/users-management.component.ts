@@ -6,7 +6,6 @@ import {Subscription} from 'rxjs';
 import {UsersService} from './users.service';
 import {MyUserService} from '../../my-user.service';
 import {ExcelService} from '../../../services/excel.service';
-import {HttpService} from '../../../services/http.service';
 
 import {User} from './user.model';
 import {Permissions} from '../../../permissions';

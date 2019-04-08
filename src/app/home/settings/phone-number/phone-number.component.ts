@@ -1,10 +1,10 @@
 import {Component} from '@angular/core';
-import {MyUserService} from '../../my-user.service';
 import {NgForm} from '@angular/forms';
 import {MatTableDataSource} from '@angular/material';
-import {PhoneNumber} from '../../phoneNumber.model';
-import {Response} from '@angular/http';
 import {Subscription} from 'rxjs';
+
+import {MyUserService} from '../../my-user.service';
+import {PhoneNumber} from '../../phoneNumber.model';
 
 @Component({
   selector: 'app-phone-number',
@@ -48,8 +48,7 @@ export class PhoneNumberComponent {
     };
 
     this._myUserService.addPhoneNumber(phoneNumberObject).subscribe(
-      (response: Response) => {
-        const data = response.json();
+      (data: any) => {
         console.log(data);
         const phoneNumber = new PhoneNumber(data.phone_number_id, form.value.label, form.value.phoneNumber);
         this.phoneNumbers.push(phoneNumber);
@@ -63,8 +62,7 @@ export class PhoneNumberComponent {
 
   removePhoneNumber(phoneNumberID: number) {
     this._myUserService.removePhoneNumber(phoneNumberID).subscribe(
-      (response: Response) => {
-        const data = response.json();
+      (data: any) => {
         console.log(data);
         this.phoneNumbers = [];
 

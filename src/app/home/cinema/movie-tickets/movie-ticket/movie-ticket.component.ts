@@ -1,5 +1,4 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Response} from '@angular/http';
 import {MatDialog} from '@angular/material';
 
 import {Subscription} from 'rxjs';
@@ -49,8 +48,7 @@ export class MovieTicketComponent implements OnInit {
 
   cancelTickets() {
     this.httpService.loggedInV1DELETERequest('/cinema/booking/' + this.movie.id, 'cancelTickets').subscribe(
-      (reponse: Response) => {
-        const data = reponse.json();
+      (data: any) => {
         console.log(data);
         this.cinemaService.fetchNotShownMovies();
       },
