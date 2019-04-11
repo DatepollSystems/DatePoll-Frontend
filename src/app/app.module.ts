@@ -1,25 +1,47 @@
-import {BrowserModule} from '@angular/platform-browser';
 import {APP_INITIALIZER, NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {HttpClientModule} from '@angular/common/http';
+
+import {CustomFormsModule} from 'ng2-validation';
+import {NgxChartsModule} from '@swimlane/ngx-charts';
+import {MaterialModule} from './material-module';
+import {NgxMatSelectSearchModule} from 'ngx-mat-select-search';
+import {ClipboardModule} from 'ngx-clipboard';
+
+import {AppRoutingModule} from './app-routing.module';
+
+
+import {TranslatePipe} from './translation/translate.pipe';
+
+
+import {CookieService} from 'angular2-cookie/core';
+
+import {AuthService} from './auth/auth.service';
+import {MyUserService} from './home/my-user.service';
+import {TranslateService} from './translation/translate.service';
+import {HttpService} from './services/http.service';
+import {CinemaService} from './home/cinema/cinema.service';
+import {MovieTicketsService} from './home/cinema/movieTickets.service';
+import {HomepageService} from './home/start/homepage.service';
+import {ExcelService} from './services/excel.service';
+import {GroupsService} from './home/management/groups-management/groups.service';
+import {UsersService} from './home/management/users-management/users.service';
+
+
+import {MAT_DATE_LOCALE, MAT_SNACK_BAR_DEFAULT_OPTIONS} from '@angular/material';
 
 import {AppComponent} from './app.component';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {SigninComponent} from './auth/signin/signin.component';
-import {AppRoutingModule} from './app-routing.module';
 import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
 import {HomeComponent} from './home/home.component';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {AuthService} from './auth/auth.service';
 import {FooterComponent} from './footer/footer.component';
 import {InfoComponent} from './info/info.component';
 import {ImprintComponent} from './info/imprint/imprint.component';
 import {PrivacyPolicyComponent} from './info/privacy-policy/privacy-policy.component';
-import {MyUserService} from './home/my-user.service';
 import {StartComponent} from './home/start/start.component';
 import {SettingsComponent} from './home/settings/settings.component';
-import {TranslateService} from './translation/translate.service';
-import {HttpClientModule} from '@angular/common/http';
-import {TranslatePipe} from './translation/translate.pipe';
-import {CookieService} from 'angular2-cookie/core';
 import {FeedbackModalComponent} from './footer/modals/feedback-modal/feedback-modal.component';
 import {AboutModalComponent} from './footer/modals/about-modal/about-modal.component';
 import {PersonalDataComponent} from './home/settings/personal-data/personal-data.component';
@@ -27,36 +49,28 @@ import {PhoneNumberComponent} from './home/settings/phone-number/phone-number.co
 import {EmailAddressComponent} from './home/settings/email-address/email-address.component';
 import {PasswordComponent} from './home/settings/password/password.component';
 import {TwoFactorAuthenticationComponent} from './home/settings/two-factor-authentication/two-factor-authentication.component';
-import {CustomFormsModule} from 'ng2-validation';
 import {MovieTicketsComponent} from './home/cinema/movie-tickets/movie-tickets.component';
 import {MovieServiceComponent} from './home/cinema/movie-service/movie-service.component';
 import {MovieAdministrationComponent} from './home/cinema/movie-administration/movie-administration.component';
 import {MovieTicketComponent} from './home/cinema/movie-tickets/movie-ticket/movie-ticket.component';
-import {NgxChartsModule} from '@swimlane/ngx-charts';
 import {MovieEditModalComponent} from './home/cinema/movie-administration/movie-edit-modal/movie-edit-modal.component';
-import {MaterialModule} from './material-module';
-import {MAT_DATE_LOCALE, MAT_SNACK_BAR_DEFAULT_OPTIONS} from '@angular/material';
 import {MovieBookTicketsModalComponent} from './home/cinema/movie-tickets/movie-ticket/movie-book-tickets-modal/movie-book-tickets-modal.component';
-import {NgxMatSelectSearchModule} from 'ngx-mat-select-search';
 import {MovieCreateModalComponent} from './home/cinema/movie-administration/movie-create-modal/movie-create-modal.component';
-import {HttpService} from './services/http.service';
-import {CinemaService} from './home/cinema/cinema.service';
 import {UsersExportBottomSheetComponent, UsersManagementComponent} from './home/management/users-management/users-management.component';
-import {ExcelService} from './services/excel.service';
 import {DoNotForgetToSaveComponent} from './home/do-not-forget-to-save/do-not-forget-to-save.component';
-import {MovieTicketsService} from './home/cinema/movieTickets.service';
-import {HomepageService} from './home/start/homepage.service';
 import {DatepollManagementComponent} from './home/management/datepoll-management/datepoll-management.component';
 import {UserCreateModalComponent} from './home/management/users-management/user-create-modal/user-create-modal.component';
 import {UserUpdateModalComponent} from './home/management/users-management/user-update-modal/user-update-modal.component';
 import {GroupsManagementComponent} from './home/management/groups-management/groups-management.component';
-import {GroupsService} from './home/management/groups-management/groups.service';
 import {GroupCreateModalComponent} from './home/management/groups-management/group-create-modal/group-create-modal.component';
 import {GroupUpdateModalComponent} from './home/management/groups-management/group-update-modal/group-update-modal.component';
 import {SubgroupUpdateModalComponent} from './home/management/groups-management/subgroup-update-modal/subgroup-update-modal.component';
 import {SubgroupCreateModalComponent} from './home/management/groups-management/subgroup-create-modal/subgroup-create-modal.component';
 import {CalendarTokenComponent} from './home/settings/calendar-token/calendar-token.component';
-import {ClipboardModule} from 'ngx-clipboard';
+import {GroupUserListModalComponent} from './home/management/groups-management/group-user-list-modal/group-user-list-modal.component';
+import {SubgroupUserListModalComponent} from './home/management/groups-management/subgroup-user-list-modal/subgroup-user-list-modal.component';
+import { GroupUserRoleUpdateModalComponent } from './home/management/groups-management/group-user-list-modal/group-user-role-update-modal/group-user-role-update-modal.component';
+import { SubgroupUserRoleUpdateModalComponent } from './home/management/groups-management/subgroup-user-list-modal/subgroup-user-role-update-modal/subgroup-user-role-update-modal.component';
 
 @NgModule({
   declarations: [
@@ -96,7 +110,11 @@ import {ClipboardModule} from 'ngx-clipboard';
     GroupUpdateModalComponent,
     SubgroupUpdateModalComponent,
     SubgroupCreateModalComponent,
-    CalendarTokenComponent
+    CalendarTokenComponent,
+    GroupUserListModalComponent,
+    SubgroupUserListModalComponent,
+    GroupUserRoleUpdateModalComponent,
+    SubgroupUserRoleUpdateModalComponent
   ],
   imports: [
     BrowserModule,
@@ -104,12 +122,12 @@ import {ClipboardModule} from 'ngx-clipboard';
     FormsModule,
     ReactiveFormsModule,
     CustomFormsModule,
-    AppRoutingModule,
     HttpClientModule,
     NgxChartsModule,
     MaterialModule,
     NgxMatSelectSearchModule,
-    ClipboardModule
+    ClipboardModule,
+    AppRoutingModule,
   ],
   // Without this entryComponents dynamic modal loading does not work
   entryComponents: [
@@ -130,7 +148,11 @@ import {ClipboardModule} from 'ngx-clipboard';
     GroupCreateModalComponent,
     GroupUpdateModalComponent,
     SubgroupUpdateModalComponent,
-    SubgroupCreateModalComponent
+    SubgroupCreateModalComponent,
+    GroupUserListModalComponent,
+    SubgroupUserListModalComponent,
+    GroupUserRoleUpdateModalComponent,
+    SubgroupUserRoleUpdateModalComponent
   ],
   providers: [
     AuthService,
@@ -142,6 +164,7 @@ import {ClipboardModule} from 'ngx-clipboard';
     MovieTicketsService,
     HomepageService,
     GroupsService,
+    UsersService,
     {
       provide: APP_INITIALIZER,
       useFactory: setupTranslateFactory,

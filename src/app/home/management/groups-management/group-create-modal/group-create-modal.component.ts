@@ -13,8 +13,7 @@ export class GroupCreateModalComponent {
 
   sendingRequest = false;
 
-  constructor(private groupsService: GroupsService, private dialogRef: MatDialogRef<GroupCreateModalComponent>) {
-  }
+  constructor(private groupsService: GroupsService, private dialogRef: MatDialogRef<GroupCreateModalComponent>) { }
 
   onCreate(form: NgForm) {
     const name = form.controls.name.value;

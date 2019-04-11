@@ -88,7 +88,6 @@
   "CINEMA_TICKETS_SOLD_OUT": "Ausgebucht",
   "CINEMA_TICKETS_NO_MOVIES_AVAILABLE": "Derzeit sind keine Filme verfügbar",
   "CINEMA_TICKETS_BOOKED_TICKETS": "Gebuchte Karten:",
-  "CINEMA_TICKETS_CANCEL_BOOKED_TICKETS": "Stornieren",
   "CINEMA_TICKETS_CANCEL_BOOKED_TICKETS_TOOLTIP": "Storniere alle gebuchten Karten",
   "CINEMA_TICKETS_CANCEL_CINEMA_SERVICE_TOOLTIP": "Abmelden",
 
@@ -248,6 +247,9 @@
   "MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_PHONE_NUMBERS": "Telefonnummern",
 
   "MANAGEMENT_USERS_UPDATE_USER_MODAL_TITLE": "Bearbeite ",
+  "MANAGEMENT_USERS_UPDATE_USER_MODAL_FREE_GROUPS": "Freie Gruppen und Register",
+  "MANAGEMENT_USERS_UPDATE_USER_MODAL_JOINED_GROUPS": "Beigetretene Gruppen und Register",
+  "MANAGEMENT_USERS_UPDATE_USER_MODAL_NO_GROUPS": "Es gibt keine Gruppen oder Register zum auswählen",
 
 
   "MANAGEMENT_GROUPS_SEARCH": "Suche nach einer Gruppe oder einem Register",
@@ -259,6 +261,8 @@
   "MANAGEMENT_GROUPS_SUBGROUP_EDIT_TOOLTIP": "Editiere dieses Register",
   "MANAGEMENT_GROUPS_NO_SUBGROUPS_FOR_THIS_GROUP": "Für diese Gruppe gibt es noch kein Register",
   "MANAGEMENT_GROUPS_REFRESH": "Gruppenliste neuladen",
+  "MANAGEMENT_GROUPS_INFO_TOOLTIP": "Zeige die Mitglieder der Gruppe an",
+  "MANAGEMENT_GROUPS_SUBGROUP_INFO_TOOLTIP": "Zeige die Mitglieder des Registers an",
 
   "MANAGEMENT_GROUPS_CREATE_GROUP_MODAL_TITLE": "Lege eine neue Gruppe an",
   "MANAGEMENT_GROUPS_CREATE_GROUP_MODAL_FORM_NAME": "Gruppenname",
@@ -275,6 +279,18 @@
   "MANAGEMENT_GROUPS_CREATE_SUBGROUP_MODAL_FORM_DESCRIPTION_INCORRECT": "Die Beschreibung darf nicht mehr als 190 Zeichen haben!",
 
   "MANAGEMENT_GROUPS_UPDATE_SUBGROUP_MODAL_TITLE": "Bearbeite das Register ",
+
+  "MANAGEMENT_GROUPS_INFO_GROUP_MODAL_TITLE": "Mitglieder - ",
+  "MANAGEMENT_GROUPS_INFO_GROUP_MODAL_TABLE_HEADER_ROLE": "Role",
+  "MANAGEMENT_GROUPS_INFO_GROUP_MODAL_TABLE_ACTION_REMOVE": "Entferne dieses Mitglied aus der Gruppe",
+  "MANAGEMENT_GROUPS_INFO_GROUP_MDOAL_TABLE_ACTION_EDIT": "Bearbeite die Rolle des Mitglieds in der Gruppe",
+
+  "MANAGEMENT_GROUPS_INFO_GROUP_MODAL_ROLE_UPDATE_MODAL_TITLE": "Bearbeite die Rolle von ",
+  "MANAGEMENT_GROUPS_INFO_GROUP_MODAL_ROLE_UPDATE_MODAL_ROLE": "Rolle",
+  "MANAGEMENT_GROUPS_INFO_GROUP_MODAL_ROLE_UPDATE_MODAL_ROLE_INCORRECT": "Die Rolle darf nicht mehr als 190 Zeichen haben!",
+
+  "MANAGEMENT_GROUPS_INFO_SUBGROUP_MODAL_TABLE_ACTION_REMOVE": "Entferne dieses Mitglied aus der Gruppe",
+  "MANAGEMENT_GROUPS_INFO_SUBGROUP_MDOAL_TABLE_ACTION_EDIT": "Bearbeite die Rolle des Mitglieds in der Gruppe",
 
   "MANAGEMENT_DATEPOLL_CINEMA_SERVICE": "Kinoservice"
 

@@ -13,8 +13,16 @@ export class UsersService {
   private _users: User[];
   public usersChange: Subject<User[]> = new Subject<User[]>();
 
+  private _joinedGroups: any[];
+  public joinedGroupsChange: Subject<any[]> = new Subject<any[]>();
+
+  private _freeGroups: any[];
+  public freeGroupsChange: Subject<any[]> = new Subject<any[]>();
+
   constructor(private httpService: HttpService) {
     this._users = [];
+    this._joinedGroups = [];
+    this._freeGroups = [];
   }
 
   public getUsers(): User[] {
@@ -55,17 +63,6 @@ export class UsersService {
     );
   }
 
-  public getUserByID(userID: number): User {
-    const users = this.getUsers();
-    for (let i = 0; i < users.length; i++) {
-      if (users[i].id === userID) {
-        return users[i];
-      }
-    }
-
-    return null;
-  }
-
   public addUser(user: any) {
     return this.httpService.loggedInV1POSTRequest('/management/users', user, 'addUser');
   }
@@ -81,5 +78,121 @@ export class UsersService {
 
   public updateUser(userID: number, user: any) {
     return this.httpService.loggedInV1PUTRequest('/management/users/' + userID, user, 'updateUser');
+  }
+
+
+  public getJoinedOfUser(userID: number): any[] {
+    this.fetchJoinedOfUser(userID);
+    return this._joinedGroups.slice();
+  }
+
+  public setJoinedOfUser(groups: any[]) {
+    this._joinedGroups = groups;
+    this.joinedGroupsChange.next(this._joinedGroups.slice());
+  }
+
+  public fetchJoinedOfUser(userID: number) {
+    this.httpService.loggedInV1GETRequest('/management/groups/joined/' + userID, 'fetchJoinedGroupsOfUser').subscribe(
+      (data: any) => {
+        console.log(data);
+
+        const groups = [];
+
+        const groupsDTO = data.groups;
+        for (let i = 0; i < groupsDTO.length; i++) {
+          const groupDTO = groupsDTO[i];
+
+          const groupObject = {
+            'id': groupDTO.id,
+            'name': groupDTO.name,
+            'type': 'parentgroup'
+          };
+
+          groups.push(groupObject);
+        }
+
+        this.httpService.loggedInV1GETRequest('/management/subgroups/joined/' + userID, 'fetchJoinedSubgroupsOfUser').subscribe(
+          (subgroupData: any) => {
+            console.log(subgroupData);
+
+            const subgroupsDTO = subgroupData.subgroups;
+            for (let i = 0; i < subgroupsDTO.length; i++) {
+              const subgroupDTO = subgroupsDTO[i];
+
+              const subgroupObject = {
+                'id': subgroupDTO.id,
+                'name': subgroupDTO.name,
+                'type': 'subgroup',
+                'group_id': subgroupDTO.group_id
+              };
+
+              groups.push(subgroupObject);
+            }
+
+            this.setJoinedOfUser(groups);
+          },
+          (error) => console.log(error)
+        );
+      },
+      (error) => console.log(error)
+    );
+  }
+
+
+  public getFreeOfUser(userID: number): any[] {
+    this.fetchFreeOfUser(userID);
+    return this._freeGroups.slice();
+  }
+
+  public setFreeOfUser(groups: any[]) {
+    this._freeGroups = groups;
+    this.freeGroupsChange.next(this._freeGroups.slice());
+  }
+
+  public fetchFreeOfUser(userID: number) {
+    this.httpService.loggedInV1GETRequest('/management/groups/free/' + userID, 'fetchFreeGroupsOfUser').subscribe(
+      (data: any) => {
+        console.log(data);
+
+        const groups = [];
+
+        const groupsDTO = data.groups;
+        for (let i = 0; i < groupsDTO.length; i++) {
+          const groupDTO = groupsDTO[i];
+
+          const groupObject = {
+            'id': groupDTO.id,
+            'name': groupDTO.name,
+            'type': 'parentgroup'
+          };
+
+          groups.push(groupObject);
+        }
+
+        this.httpService.loggedInV1GETRequest('/management/subgroups/free/' + userID, 'fetchFreeSubgroupsOfUser').subscribe(
+          (subgroupData: any) => {
+            console.log(subgroupData);
+
+            const subgroupsDTO = subgroupData.subgroups;
+            for (let i = 0; i < subgroupsDTO.length; i++) {
+              const subgroupDTO = subgroupsDTO[i];
+
+              const subgroupObject = {
+                'id': subgroupDTO.id,
+                'name': subgroupDTO.name,
+                'type': 'subgroup',
+                'group_id': subgroupDTO.group_id
+              };
+
+              groups.push(subgroupObject);
+            }
+
+            this.setFreeOfUser(groups);
+          },
+          (error) => console.log(error)
+        );
+      },
+      (error) => console.log(error)
+    );
   }
 }

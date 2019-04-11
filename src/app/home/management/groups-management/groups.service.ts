@@ -13,7 +13,14 @@ export class GroupsService {
   private _groups: Group[] = [];
   public groupsChange: Subject<Group[]> = new Subject<Group[]>();
 
-  constructor(private httpService: HttpService) { }
+  private _group: any = null;
+  public groupChange: Subject<any> = new Subject<any>();
+
+  private _subgroup: any = null;
+  public subgroupChange: Subject<any> = new Subject<any>();
+
+  constructor(private httpService: HttpService) {
+  }
 
   public setGroups(groups: Group[]) {
     this._groups = groups;
@@ -47,6 +54,7 @@ export class GroupsService {
     );
   }
 
+
   public addGroup(group: any) {
     return this.httpService.loggedInV1POSTRequest('/management/groups', group, 'addGroup');
   }
@@ -59,6 +67,36 @@ export class GroupsService {
     return this.httpService.loggedInV1DELETERequest('/management/groups/' + groupID, 'deleteGroup');
   }
 
+  public addUserToGroup(userID: number, groupID: number, role: string = null) {
+    const dto = {
+      'user_id': userID,
+      'group_id': groupID,
+      'role': role
+    };
+
+    return this.httpService.loggedInV1POSTRequest('/management/groups/addUser', dto, 'addUserToGroup');
+  }
+
+  public removeUserFromGroup(userID: number, groupID: number) {
+    const dto = {
+      'user_id': userID,
+      'group_id': groupID
+    };
+
+    return this.httpService.loggedInV1POSTRequest('/management/groups/removeUser', dto, 'removeUserFromGroup');
+  }
+
+  public updateUserInGroup(userID: number, groupID: number, role: string = null) {
+    const dto = {
+      'user_id': userID,
+      'group_id': groupID,
+      'role': role
+    };
+
+    return this.httpService.loggedInV1POSTRequest('/management/groups/updateUser', dto, 'updateUserInGroup');
+  }
+
+
   public addSubgroup(subgroup: any) {
     return this.httpService.loggedInV1POSTRequest('/management/subgroups', subgroup, 'addSubgroup');
   }
@@ -69,5 +107,75 @@ export class GroupsService {
 
   public deleteSubgroup(subgroupID: number) {
     return this.httpService.loggedInV1DELETERequest('/management/subgroups/' + subgroupID, 'deleteSubgroup');
+  }
+
+  public addUserToSubgroup(userID: number, subgroupID: number, role: string = null) {
+    const dto = {
+      'user_id': userID,
+      'subgroup_id': subgroupID,
+      'role': role
+    };
+
+    return this.httpService.loggedInV1POSTRequest('/management/subgroups/addUser', dto, 'addUserToSubgroup');
+  }
+
+  public removeUserFromSubgroup(userID: number, subgroupID: number) {
+    const dto = {
+      'user_id': userID,
+      'subgroup_id': subgroupID
+    };
+
+    return this.httpService.loggedInV1POSTRequest('/management/subgroups/removeUser', dto, 'removeUserFromSubgroup');
+  }
+
+  public updateUserInSubgroup(userID: number, subgroupID: number, role: string = null) {
+    const dto = {
+      'user_id': userID,
+      'subgroup_id': subgroupID,
+      'role': role
+    };
+
+    return this.httpService.loggedInV1POSTRequest('/management/subgroups/updateUser', dto, 'updateUserInSubgroup');
+  }
+
+
+  public getGroup(groupID: number) {
+    this.fetchGroup(groupID);
+    return this._group;
+  }
+
+  public setGroup(group: any) {
+    this._group = group;
+    this.groupChange.next(this._group);
+  }
+
+  public fetchGroup(groupID: number) {
+    this.httpService.loggedInV1GETRequest('/management/groups/' + groupID, 'fetchGroup').subscribe(
+      (data: any) => {
+        console.log(data);
+        this.setGroup(data.group);
+      },
+      (error) => console.log(error)
+    );
+  }
+
+  public getSubgroup(subgroupID: number) {
+    this.fetchSubgroup(subgroupID);
+    return this._subgroup;
+  }
+
+  public setSubgroup(subgroup: any) {
+    this._subgroup = subgroup;
+    this.subgroupChange.next(this._subgroup);
+  }
+
+  public fetchSubgroup(subgroupID: number) {
+    this.httpService.loggedInV1GETRequest('/management/subgroups/' + subgroupID, 'fetchSubgroup').subscribe(
+      (data: any) => {
+        console.log(data);
+        this.setSubgroup(data.subgroup);
+      },
+      (error) => console.log(error)
+    );
   }
 }

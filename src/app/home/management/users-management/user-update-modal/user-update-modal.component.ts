@@ -1,17 +1,20 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component, Inject, OnDestroy} from '@angular/core';
 import {NgForm} from '@angular/forms';
 import {UsersService} from '../users.service';
 import {PhoneNumber} from '../../../phoneNumber.model';
 import {MAT_DIALOG_DATA, MatDialogRef, MatTableDataSource} from '@angular/material';
-import {Response} from '@angular/http';
 import {User} from '../user.model';
+import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
+import {Subscription} from 'rxjs';
+import {GroupsService} from '../../groups-management/groups.service';
+import {forEach} from '@angular-devkit/schematics';
 
 @Component({
   selector: 'app-user-update-modal',
   templateUrl: './user-update-modal.component.html',
   styleUrls: ['./user-update-modal.component.css']
 })
-export class UserUpdateModalComponent implements OnInit {
+export class UserUpdateModalComponent implements OnDestroy {
 
   displayedColumns: string[] = ['label', 'phonenumber', 'action'];
   dataSource: MatTableDataSource<PhoneNumber>;
@@ -37,9 +40,18 @@ export class UserUpdateModalComponent implements OnInit {
   phoneNumberCount = 0;
   phoneNumbers: PhoneNumber[] = [];
 
+  joinedCopy: any[] = [];
+  joined: any[] = [];
+  joinedSubscription: Subscription;
+
+  freeCopy: any[] = [];
+  free: any[] = [];
+  freeSubscription: Subscription;
+
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     private dialogRef: MatDialogRef<UserUpdateModalComponent>,
+    private groupsService: GroupsService,
     private usersService: UsersService) {
 
     this.user = data.user;
@@ -58,9 +70,25 @@ export class UserUpdateModalComponent implements OnInit {
     this.phoneNumbers = this.user.getPhoneNumbers();
 
     this.dataSource = new MatTableDataSource(this.phoneNumbers);
+
+    this.joined = this.usersService.getJoinedOfUser(this.user.id);
+    this.joinedCopy = this.joined.slice();
+    this.joinedSubscription = this.usersService.joinedGroupsChange.subscribe((value) => {
+      this.joined = value;
+      this.joinedCopy = this.joined.slice();
+    });
+
+    this.free = this.usersService.getFreeOfUser(this.user.id);
+    this.freeCopy = this.free.slice();
+    this.freeSubscription = this.usersService.freeGroupsChange.subscribe((value) => {
+      this.free = value;
+      this.freeCopy = this.free.slice();
+    });
   }
 
-  ngOnInit() {
+  ngOnDestroy() {
+    this.joinedSubscription.unsubscribe();
+    this.freeSubscription.unsubscribe();
   }
 
   addPhoneNumber(form: NgForm) {
@@ -82,7 +110,9 @@ export class UserUpdateModalComponent implements OnInit {
     this.dataSource = new MatTableDataSource(this.phoneNumbers);
   }
 
-  create(form: NgForm) {
+  update(form: NgForm) {
+    this.sendingRequest = true;
+
     const title = form.controls.title.value;
     const email = form.controls.email.value;
     const firstname = form.controls.firstname.value;
@@ -139,6 +169,78 @@ export class UserUpdateModalComponent implements OnInit {
     console.log('update User | activity: ' + activity);
     console.log('update User | activated: ' + activated);
 
+    for (let i = 0; i < this.joined.length; i++) {
+      const group = this.joined[i];
+
+      let toUpdate = true;
+
+      for (let j = 0; j < this.joinedCopy.length; j++) {
+        if (group.type.includes(this.joinedCopy[j].type)) {
+          if (group.id === this.joinedCopy[j].id) {
+            toUpdate = false;
+            console.log('toUpdate | joined | false | ' + group.name + ' | ' + this.joinedCopy[j].name);
+            break;
+          }
+        }
+      }
+
+      if (toUpdate) {
+        console.log('toUpdate | joined | true | ' + group.name);
+
+        if (group.type.includes('parentgroup')) {
+          this.groupsService.addUserToGroup(this.user.id, group.id).subscribe(
+            (data: any) => {
+              console.log(data);
+            },
+            (error) => console.log(error)
+          );
+        } else {
+          this.groupsService.addUserToSubgroup(this.user.id, group.id).subscribe(
+            (data: any) => {
+              console.log(data);
+            },
+            (error) => console.log(error)
+          );
+        }
+      }
+    }
+
+    for (let i = 0; i < this.free.length; i++) {
+      const group = this.free[i];
+
+      let toUpdate = true;
+
+      for (let j = 0; j < this.freeCopy.length; j++) {
+        if (group.type.includes(this.freeCopy[j].type)) {
+          if (group.id === this.freeCopy[j].id) {
+            toUpdate = false;
+            console.log('toUpdate | free | false | ' + group.name + ' | ' + this.freeCopy[j].name);
+            break;
+          }
+        }
+      }
+
+      if (toUpdate) {
+        console.log('toUpdate | free | true | ' + group.name);
+
+        if (group.type.includes('parentgroup')) {
+          this.groupsService.removeUserFromGroup(this.user.id, group.id).subscribe(
+            (data: any) => {
+              console.log(data);
+            },
+            (error) => console.log(error)
+          );
+        } else {
+          this.groupsService.removeUserFromSubgroup(this.user.id, group.id).subscribe(
+            (data: any) => {
+              console.log(data);
+            },
+            (error) => console.log(error)
+          );
+        }
+      }
+    }
+
     const phoneNumbersObject = [];
 
     for (let i = 0; i < this.phoneNumbers.length; i++) {
@@ -184,8 +286,6 @@ export class UserUpdateModalComponent implements OnInit {
     document.getElementById('phoneNumber').setAttribute('disabled', 'disabled');
     document.getElementById('label').setAttribute('disabled', 'disabled');
 
-    this.sendingRequest = true;
-
     this.usersService.updateUser(this.user.id, userObject).subscribe(
       (data: any) => {
         console.log(data);
@@ -200,4 +300,87 @@ export class UserUpdateModalComponent implements OnInit {
     );
   }
 
+  dropToJoined(event: CdkDragDrop<string[]>) {
+    if (event.previousContainer === event.container) {
+      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+    } else {
+      const group = event.previousContainer.data[event.previousIndex];
+
+      transferArrayItem(event.previousContainer.data, event.container.data, event.previousIndex, event.currentIndex);
+
+      console.log('Element to move: ');
+      console.log(group);
+
+      // @ts-ignore
+      const type = group.type;
+
+      if (type.includes('subgroup')) {
+        console.log('Element is a subgroup');
+
+        // @ts-ignore
+        const groupID = group.group_id;
+        for (let i = 0; i < this.free.length; i++) {
+          const freeType = this.free[i].type;
+          if (freeType.includes('parentgroup')) {
+            if (this.free[i].id === groupID) {
+              console.log('Detected the parent group which is not in joined!');
+              console.log('Parent group element: ');
+              const saveGroup = this.free[i];
+              console.log(saveGroup);
+              this.joined.push(saveGroup);
+              this.free.splice(i, 1);
+            }
+          }
+        }
+      }
+    }
+  }
+
+  dropToFree(event: CdkDragDrop<string[]>) {
+    if (event.previousContainer === event.container) {
+      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+    } else {
+      const group = event.previousContainer.data[event.previousIndex];
+
+      transferArrayItem(event.previousContainer.data, event.container.data, event.previousIndex, event.currentIndex);
+
+      console.log('Element to move: ');
+      console.log(group);
+
+      // @ts-ignore
+      const type = group.type;
+
+      if (type.includes('parentgroup')) {
+        console.log('Element is a parentgroup');
+
+        const toSplice = [];
+
+        // @ts-ignore
+        const groupID = group.id;
+        for (let i = 0; i < this.joined.length; i++) {
+          console.log('Is in joined: ' + this.joined[i].name);
+
+          const joinedType = this.joined[i].type;
+
+          if (joinedType.includes('subgroup')) {
+            console.log('Is subgroup: ' + this.joined[i].name);
+
+            if (this.joined[i].group_id === groupID) {
+              console.log('Detected subgroup which is not in free!');
+              console.log('Subgroup element: ');
+              const saveSubgroup = this.joined[i];
+              console.log(saveSubgroup);
+              this.free.push(saveSubgroup);
+            } else {
+              toSplice.push(this.joined[i]);
+            }
+          } else {
+            toSplice.push(this.joined[i]);
+          }
+        }
+
+        this.joined = toSplice;
+      }
+    }
+  }
 }

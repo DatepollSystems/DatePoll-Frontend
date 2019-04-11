@@ -11,6 +11,8 @@ import {GroupCreateModalComponent} from './group-create-modal/group-create-modal
 import {GroupUpdateModalComponent} from './group-update-modal/group-update-modal.component';
 import {SubgroupCreateModalComponent} from './subgroup-create-modal/subgroup-create-modal.component';
 import {SubgroupUpdateModalComponent} from './subgroup-update-modal/subgroup-update-modal.component';
+import {SubgroupUserListModalComponent} from './subgroup-user-list-modal/subgroup-user-list-modal.component';
+import {GroupUserListModalComponent} from './group-user-list-modal/group-user-list-modal.component';
 
 import {Group} from './group.model';
 import {Subgroup} from './subgroup.model';
@@ -121,6 +123,13 @@ export class GroupsManagementComponent implements OnInit, OnDestroy {
     );
   }
 
+  onInfoGroup(groupID: number) {
+    this.dialog.open(GroupUserListModalComponent, {
+      width: '80vh',
+      data: {groupID: groupID}
+    });
+  }
+
   onCreateSubgroup(groupID: number) {
     this.dialog.open(SubgroupCreateModalComponent, {
       width: '80vh',
@@ -146,6 +155,13 @@ export class GroupsManagementComponent implements OnInit, OnDestroy {
         this.groupsService.fetchGroups();
       }
     );
+  }
+
+  onInfoSubgroup(subgroupID: number) {
+    this.dialog.open(SubgroupUserListModalComponent, {
+      width: '80vh',
+      data: {subgroupID: subgroupID}
+    });
   }
 
 }

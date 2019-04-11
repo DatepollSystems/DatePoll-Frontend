@@ -1,6 +1,6 @@
 <h1 mat-dialog-title>{{'MANAGEMENT_USERS_UPDATE_USER_MODAL_TITLE' | translate}} {{firstname}} {{surname}}</h1>
 <div mat-dialog-content>
-  <form (ngSubmit)="create(form)" #form="ngForm">
+  <form (ngSubmit)="update(form)" #form="ngForm">
     <div class="row">
       <mat-form-field class="col-12 col-sm-12 col-md-3 col-lg-2 col-xl-2">
         <!-- Title -->
@@ -57,7 +57,7 @@
 
       <mat-form-field class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 datepicker-field-mobile">
         <input matInput [matDatepicker]="picker_mobile_birthday"
-               name="datepicker-mobile" [(ngModel)]="birthday"  id="datepicker-birthday-mobile"
+               name="datepicker-mobile" [(ngModel)]="birthday" id="datepicker-birthday-mobile"
                placeholder="{{'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_BIRTHDAY' | translate}}">
         <mat-datepicker-toggle matSuffix [for]="picker_mobile_birthday"></mat-datepicker-toggle>
         <mat-datepicker touchUi #picker_mobile_birthday></mat-datepicker>
@@ -221,11 +221,42 @@
     </div>
 
     <div class="row">
-      <div class="col-12">
-        <mat-action-list>
-          <button mat-list-item> Save </button>
-          <button mat-list-item> Undo </button>
-        </mat-action-list>
+      <div class="col-12 col-md-6">
+        <h2>{{'MANAGEMENT_USERS_UPDATE_USER_MODAL_FREE_GROUPS' | translate}}</h2>
+
+        <div
+          cdkDropList
+          #freeList="cdkDropList"
+          [cdkDropListData]="free"
+          [cdkDropListConnectedTo]="[joinedList]"
+          class="group-list"
+          (cdkDropListDropped)="dropToFree($event)">
+          <div class="group-box not-selectable" *ngFor="let item of free" cdkDrag [cdkDragDisabled]="sendingRequest">
+            <b *ngIf="item.type === 'parentgroup'">{{item.name}}</b>
+            <div *ngIf="item.type === 'subgroup'">{{item.name}}</div>
+          </div>
+          <div class="group-box"
+               *ngIf="free.length === 0">{{'MANAGEMENT_USERS_UPDATE_USER_MODAL_NO_GROUPS' | translate}}</div>
+        </div>
+      </div>
+
+      <div class="col-12 col-md-6">
+        <h2>{{'MANAGEMENT_USERS_UPDATE_USER_MODAL_JOINED_GROUPS' | translate}}</h2>
+
+        <div
+          cdkDropList
+          #joinedList="cdkDropList"
+          [cdkDropListData]="joined"
+          [cdkDropListConnectedTo]="[freeList]"
+          class="group-list"
+          (cdkDropListDropped)="dropToJoined($event)">
+          <div class="group-box not-selectable" *ngFor="let item of joined" cdkDrag [cdkDragDisabled]="sendingRequest">
+            <b *ngIf="item.type === 'parentgroup'">{{item.name}}</b>
+            <div *ngIf="item.type === 'subgroup'">{{item.name}}</div>
+          </div>
+          <div class="group-box"
+               *ngIf="joined.length === 0">{{'MANAGEMENT_USERS_UPDATE_USER_MODAL_NO_GROUPS' | translate}}</div>
+        </div>
       </div>
     </div>
 
@@ -239,16 +270,23 @@
     <div class="row">
       <div class="col-12">
         <mat-checkbox id="activated" name="activated" ngModel color="accent" [(ngModel)]="activated"
-                      matTooltip="{{'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_ACTIVATED_DESCRIPTION' | translate}}" matTooltipPosition="right">
+                      matTooltipPosition="right"
+                      matTooltip="{{'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_ACTIVATED_DESCRIPTION' | translate}}">
           {{'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_ACTIVATED' | translate}}
         </mat-checkbox>
       </div>
     </div>
 
+    <div class="row" style="margin-top: 15px; margin-bottom: 15px">
+      <div class="col-12">
+        <mat-divider></mat-divider>
+      </div>
+    </div>
+
   </form>
-  <mat-progress-bar mode="indeterminate" *ngIf="sendingRequest"></mat-progress-bar>
 </div>
 <div mat-dialog-actions style="margin-top: 15px">
+  <mat-progress-bar mode="indeterminate" *ngIf="sendingRequest" style="margin-bottom: 10px;"></mat-progress-bar>
   <button mat-button [mat-dialog-close]>{{'CLOSE' | translate}}</button>
   <button mat-button (click)="form.ngSubmit.emit()" class="success-button"
           [disabled]="!form.form.valid">{{'SAVE' | translate}}</button>

@@ -32,15 +32,22 @@
         <mat-card class="mat-elevation-z4">
           <mat-card-content>
             <div class="row">
-              <div class="col-8 col-sm-8 col-md-8 col-lg-10" style="font-size: 20px; margin-top: 15px;">{{group.name}}</div>
+              <div class="col-8 col-sm-8 col-md-8 col-lg-10"
+                   style="font-size: 20px; margin-top: 15px;">{{group.name}}</div>
               <div class="col-4 col-sm-4 col-md-4 col-lg-2">
                 <button mat-icon-button color="warn" style="float: right" (click)="onDeleteGroup(group.id)"
-                        matTooltip="{{'MANAGEMENT_GROUPS_GROUP_DELETE_TOOLTIP' | translate}}" matTooltipPosition="above">
+                        matTooltip="{{'MANAGEMENT_GROUPS_GROUP_DELETE_TOOLTIP' | translate}}"
+                        matTooltipPosition="above">
                   <mat-icon>delete</mat-icon>
                 </button>
                 <button mat-icon-button color="accent" style="float: right" (click)="onUpdateGroup(group)"
                         matTooltip="{{'MANAGEMENT_GROUPS_GROUP_EDIT_TOOLTIP' | translate}}" matTooltipPosition="above">
                   <mat-icon>create</mat-icon>
+                </button>
+                <button mat-icon-button style="float: right" (click)="onInfoGroup(group.id)"
+                        matTooltip="{{'MANAGEMENT_GROUPS_INFO_TOOLTIP' | translate}}"
+                        matTooltipPosition="above">
+                  <mat-icon>info</mat-icon>
                 </button>
               </div>
             </div>
@@ -63,12 +70,19 @@
                 <mat-card class="mat-elevation-z3">
                   <mat-card-content>
                     <button mat-icon-button color="warn" (click)="onDeleteSubgroup(subgroup.id)"
-                            matTooltip="{{'MANAGEMENT_GROUPS_SUBGROUP_DELETE_TOOLTIP' | translate}}" matTooltipPosition="left">
+                            matTooltip="{{'MANAGEMENT_GROUPS_SUBGROUP_DELETE_TOOLTIP' | translate}}"
+                            matTooltipPosition="left">
                       <mat-icon>delete</mat-icon>
                     </button>
                     <button mat-icon-button color="accent" (click)="onUpdateSubgroup(group.id, subgroup)"
-                            matTooltip="{{'MANAGEMENT_GROUPS_SUBGROUP_EDIT_TOOLTIP' | translate}}" matTooltipPosition="above">
+                            matTooltip="{{'MANAGEMENT_GROUPS_SUBGROUP_EDIT_TOOLTIP' | translate}}"
+                            matTooltipPosition="above">
                       <mat-icon>create</mat-icon>
+                    </button>
+                    <button mat-icon-button (click)="onInfoSubgroup(subgroup.id)"
+                            matTooltip="{{'MANAGEMENT_GROUPS_SUBGROUP_INFO_TOOLTIP' | translate}}"
+                            matTooltipPosition="above">
+                      <mat-icon>info</mat-icon>
                     </button>
                     {{subgroup.name}}
                     <span *ngIf="subgroup.description != null && subgroup.description.length != 0">
