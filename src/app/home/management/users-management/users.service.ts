@@ -123,7 +123,8 @@ export class UsersService {
                 'id': subgroupDTO.id,
                 'name': subgroupDTO.name,
                 'type': 'subgroup',
-                'group_id': subgroupDTO.group_id
+                'group_id': subgroupDTO.group_id,
+                'group_name': subgroupDTO.group_name
               };
 
               groups.push(subgroupObject);
@@ -181,7 +182,8 @@ export class UsersService {
                 'id': subgroupDTO.id,
                 'name': subgroupDTO.name,
                 'type': 'subgroup',
-                'group_id': subgroupDTO.group_id
+                'group_id': subgroupDTO.group_id,
+                'group_name': subgroupDTO.group_name
               };
 
               groups.push(subgroupObject);

@@ -229,11 +229,13 @@
           #freeList="cdkDropList"
           [cdkDropListData]="free"
           [cdkDropListConnectedTo]="[joinedList]"
-          class="group-list"
+          class="group-list" id="free-list"
           (cdkDropListDropped)="dropToFree($event)">
           <div class="group-box not-selectable" *ngFor="let item of free" cdkDrag [cdkDragDisabled]="sendingRequest">
             <b *ngIf="item.type === 'parentgroup'">{{item.name}}</b>
-            <div *ngIf="item.type === 'subgroup'">{{item.name}}</div>
+            <div *ngIf="item.type === 'subgroup'">
+              <b>[{{item.group_name}}]</b> {{item.name}}
+            </div>
           </div>
           <div class="group-box"
                *ngIf="free.length === 0">{{'MANAGEMENT_USERS_UPDATE_USER_MODAL_NO_GROUPS' | translate}}</div>
@@ -248,11 +250,13 @@
           #joinedList="cdkDropList"
           [cdkDropListData]="joined"
           [cdkDropListConnectedTo]="[freeList]"
-          class="group-list"
+          class="group-list" id="joined-list"
           (cdkDropListDropped)="dropToJoined($event)">
           <div class="group-box not-selectable" *ngFor="let item of joined" cdkDrag [cdkDragDisabled]="sendingRequest">
             <b *ngIf="item.type === 'parentgroup'">{{item.name}}</b>
-            <div *ngIf="item.type === 'subgroup'">{{item.name}}</div>
+            <div *ngIf="item.type === 'subgroup'">
+              <b>[{{item.group_name}}]</b> {{item.name}}
+            </div>
           </div>
           <div class="group-box"
                *ngIf="joined.length === 0">{{'MANAGEMENT_USERS_UPDATE_USER_MODAL_NO_GROUPS' | translate}}</div>

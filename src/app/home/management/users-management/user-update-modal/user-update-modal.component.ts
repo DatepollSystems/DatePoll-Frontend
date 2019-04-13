@@ -1,13 +1,14 @@
 import {Component, Inject, OnDestroy} from '@angular/core';
 import {NgForm} from '@angular/forms';
-import {UsersService} from '../users.service';
-import {PhoneNumber} from '../../../phoneNumber.model';
 import {MAT_DIALOG_DATA, MatDialogRef, MatTableDataSource} from '@angular/material';
-import {User} from '../user.model';
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
+
 import {Subscription} from 'rxjs';
+
+import {UsersService} from '../users.service';
 import {GroupsService} from '../../groups-management/groups.service';
-import {forEach} from '@angular-devkit/schematics';
+import {PhoneNumber} from '../../../phoneNumber.model';
+import {User} from '../user.model';
 
 @Component({
   selector: 'app-user-update-modal',
@@ -76,6 +77,12 @@ export class UserUpdateModalComponent implements OnDestroy {
     this.joinedSubscription = this.usersService.joinedGroupsChange.subscribe((value) => {
       this.joined = value;
       this.joinedCopy = this.joined.slice();
+
+      setTimeout(function () {
+        document.getElementById('joined-list').style.height = document.getElementById('free-list').clientHeight.toString() + 'px';
+        console.log('Free hight:' + document.getElementById('free-list').clientHeight);
+        console.log('Joined hight:' + document.getElementById('joined-list').clientHeight);
+      }, 1000);
     });
 
     this.free = this.usersService.getFreeOfUser(this.user.id);
@@ -83,6 +90,12 @@ export class UserUpdateModalComponent implements OnDestroy {
     this.freeSubscription = this.usersService.freeGroupsChange.subscribe((value) => {
       this.free = value;
       this.freeCopy = this.free.slice();
+
+      setTimeout(function () {
+        document.getElementById('free-list').style.height = document.getElementById('joined-list').clientHeight.toString() + 'px';
+        console.log('Free hight:' + document.getElementById('free-list').clientHeight);
+        console.log('Joined hight:' + document.getElementById('joined-list').clientHeight);
+      }, 1000);
     });
   }
 
