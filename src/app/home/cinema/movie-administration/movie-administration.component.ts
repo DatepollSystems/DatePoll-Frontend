@@ -1,7 +1,7 @@
 import {AfterViewInit, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {Response} from '@angular/http';
 import {FormControl} from '@angular/forms';
 import {MatDialog, MatSelect, MatSort, MatTableDataSource} from '@angular/material';
+import {Router} from '@angular/router';
 
 import {ReplaySubject, Subject, Subscription} from 'rxjs';
 import {take, takeUntil} from 'rxjs/operators';
@@ -10,12 +10,11 @@ import {Movie} from '../movie.model';
 import {Year} from '../year.model';
 
 import {CinemaService} from '../cinema.service';
+import {MyUserService} from '../../my-user.service';
 import {SettingsService} from '../../../services/settings.service';
 import {MovieEditModalComponent} from './movie-edit-modal/movie-edit-modal.component';
 import {MovieCreateModalComponent} from './movie-create-modal/movie-create-modal.component';
-import {MyUserService} from '../../my-user.service';
 import {Permissions} from '../../../permissions';
-import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-movie-administration',
@@ -136,6 +135,9 @@ export class MovieAdministrationComponent implements OnInit, AfterViewInit, OnDe
   }
 
   ngOnDestroy() {
+    this.moviesSubscription.unsubscribe();
+    this.yearsSubscription.unsubscribe();
+    this.permissionSubscription.unsubscribe();
     this._onDestroy.next();
     this._onDestroy.complete();
   }
@@ -227,8 +229,7 @@ export class MovieAdministrationComponent implements OnInit, AfterViewInit, OnDe
 
   deleteMovie(id: number) {
     this.cinemaService.deleteMovie(id).subscribe(
-      (response: Response) => {
-        const data = response.json();
+      (data: any) => {
         console.log(data);
         this.cinemaService.fetchMovies();
       },
@@ -237,6 +238,10 @@ export class MovieAdministrationComponent implements OnInit, AfterViewInit, OnDe
   }
 
   refreshMovies() {
+    this.moviesLoaded = false;
+    this.movies = [];
+    this.years = [];
+    this.refreshTable();
     this.cinemaService.fetchYears();
     this.cinemaService.fetchMovies();
   }

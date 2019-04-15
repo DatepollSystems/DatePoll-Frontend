@@ -1,0 +1,36 @@
+<h1 mat-dialog-title>{{'MANAGEMENT_GROUPS_CREATE_GROUP_MODAL_TITLE' | translate}}</h1>
+<div mat-dialog-content>
+  <form (ngSubmit)="onCreate(form)" #form="ngForm">
+    <div class="row">
+      <mat-form-field class="col-12">
+        <!-- Title -->
+        <input matInput id="name" name="name" type="text"
+               ngModel #nameModel="ngModel"
+               maxlength="190" required
+               placeholder="{{'MANAGEMENT_GROUPS_CREATE_GROUP_MODAL_FORM_NAME' | translate}}">
+        <mat-error *ngIf="nameModel.invalid">
+          {{'MANAGEMENT_GROUPS_CREATE_GROUP_MODAL_FORM_NAME_INCORRECT' | translate}}
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="row" style="margin-top: 18px">
+      <mat-form-field class="col-12">
+        <!-- Title -->
+        <input matInput id="description" name="description" type="text"
+               ngModel #descriptionModel="ngModel"
+               maxlength="190"
+               placeholder="{{'MANAGEMENT_GROUPS_CREATE_GROUP_MODAL_FORM_DESCRIPTION' | translate}}">
+        <mat-error *ngIf="descriptionModel.invalid">
+          {{'MANAGEMENT_GROUPS_CREATE_GROUP_MODAL_FORM_DESCRIPTION_INCORRECT' | translate}}
+        </mat-error>
+      </mat-form-field>
+    </div>
+  </form>
+  <mat-progress-bar mode="indeterminate" *ngIf="sendingRequest"></mat-progress-bar>
+</div>
+<div mat-dialog-actions style="margin-top: 15px">
+  <button mat-button [mat-dialog-close]>{{'CLOSE' | translate}}</button>
+  <button mat-button (click)="form.ngSubmit.emit()" class="success-button"
+          [disabled]="!form.form.valid">{{'PUT' | translate}}</button>
+</div>

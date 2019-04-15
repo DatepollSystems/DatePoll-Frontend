@@ -100,6 +100,22 @@
           </mat-card-actions>
         </form>
 
+        <div *ngIf="state === 'notActivated'">
+          <mat-card class="error-mat-card" matRipple>
+            <mat-card-content class="last-child">
+              <h3>{{'SIGNIN_ACCOUNT_NOT_ACTIVATED' | translate}}</h3>
+            </mat-card-content>
+          </mat-card>
+
+          <mat-card-actions>
+            <button
+              mat-flat-button
+              color="primary" (click)="state = 'login'">
+              {{ 'NEXT' | translate }}
+            </button>
+          </mat-card-actions>
+        </div>
+
       </mat-card>
     </div>
   </div>

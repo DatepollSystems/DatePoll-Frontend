@@ -1,6 +1,6 @@
-import {Subject} from 'rxjs';
-import {Response} from '@angular/http';
 import {Injectable} from '@angular/core';
+import {Subject} from 'rxjs';
+
 import {AuthService} from '../auth/auth.service';
 import {HttpService} from '../services/http.service';
 import {Permissions} from '../permissions';
@@ -62,7 +62,7 @@ export class MyUserService {
         const localPhoneNumbersData = data.telephoneNumbers;
         for (let i = 0; i < localPhoneNumbersData.length; i++) {
           localPhoneNumbers.push(
-            new PhoneNumber(localPhoneNumbersData[i].id, this.getID(), localPhoneNumbersData[i].label, localPhoneNumbersData[i].number));
+            new PhoneNumber(localPhoneNumbersData[i].id, localPhoneNumbersData[i].label, localPhoneNumbersData[i].number));
         }
         this.setPhoneNumbers(localPhoneNumbers);
       },
@@ -97,8 +97,7 @@ export class MyUserService {
     };
 
     this.httpService.loggedInV1PUTRequest('/user/myself', userObject, 'updateMyself').subscribe(
-      (response: Response) => {
-        const data = response.json();
+      (data: any) => {
         console.log(data);
       },
       (error) => console.log(error)

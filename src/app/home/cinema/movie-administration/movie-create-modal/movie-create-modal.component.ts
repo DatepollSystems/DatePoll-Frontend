@@ -36,8 +36,7 @@ export class MovieCreateModalComponent {
       console.log('createMovie | no yearID found!');
       const yearObject = {'year': year};
       this.cinemaService.addYear(yearObject).subscribe(
-        (response: Response) => {
-          const data = response.json();
+        (data: any) => {
           console.log(data);
           yearID = data.year.id;
           console.log('createMovie | yearID: ' + yearID);
@@ -77,8 +76,7 @@ export class MovieCreateModalComponent {
     };
     console.log(movieObject);
     this.cinemaService.addMovie(movieObject).subscribe(
-      (response: Response) => {
-        const data = response.json();
+      (data: any) => {
         console.log(data);
         this.cinemaService.fetchMovies();
       },

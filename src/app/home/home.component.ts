@@ -28,13 +28,13 @@ export class HomeComponent implements OnInit {
   settingsAdministration = Permissions.SETTINGS_ADMINISTRATION;
 
   private firstnameSubscription: Subscription;
-  firstname: string;
+  firstname: string = null;
 
   private surnameSubscription: Subscription;
-  surname: string;
+  surname: string = null;
 
   private emailSubscription: Subscription;
-  email: string;
+  email: string = null;
 
   private showCinemaSubscription: Subscription;
   showCinema = true;
@@ -70,19 +70,16 @@ export class HomeComponent implements OnInit {
     this.firstname = this.myUserService.getFirstname();
     this.firstnameSubscription = myUserService.firstnameChange.subscribe((value) => {
       this.firstname = value;
-      // this.resizeNav();
     });
 
     this.surname = this.myUserService.getSurname();
     this.surnameSubscription = myUserService.surnameChange.subscribe((value) => {
       this.surname = value;
-      // this.resizeNav();
     });
 
     this.email = this.myUserService.getEmail();
     this.emailSubscription = myUserService.emailChange.subscribe((value) => {
       this.email = value;
-      // this.resizeNav();
     });
 
     this.showCinema = settingsService.getShowCinema();

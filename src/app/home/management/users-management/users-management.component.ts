@@ -1,22 +1,27 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {MatBottomSheet, MatBottomSheetRef, MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Router} from '@angular/router';
+import {MatBottomSheet, MatBottomSheetRef, MatDialog, MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
 import {Subscription} from 'rxjs';
 
 import {UsersService} from './users.service';
-import {User} from './user.model';
-import {ExcelService} from '../../../services/excel.service';
-import {Permissions} from '../../../permissions';
 import {MyUserService} from '../../my-user.service';
-import {Router} from '@angular/router';
+import {ExcelService} from '../../../services/excel.service';
+
+import {User} from './user.model';
+import {Permissions} from '../../../permissions';
+import {UserCreateModalComponent} from './user-create-modal/user-create-modal.component';
+import {UserUpdateModalComponent} from './user-update-modal/user-update-modal.component';
 
 @Component({
   selector: 'app-users-management',
   templateUrl: './users-management.component.html',
   styleUrls: ['./users-management.component.css']
 })
-export class UsersManagementComponent implements OnInit {
+export class UsersManagementComponent implements OnInit, OnDestroy {
+  usersLoaded = true;
+
   displayedColumns: string[] = ['title', 'firstname', 'surname', 'email', 'birthday', 'join_date', 'streetname', 'streetnumber',
-    'zipcode', 'location', 'actions'];
+    'zipcode', 'location', 'phoneNumbers', 'activity', 'actions'];
   filterValue: string = null;
 
   @ViewChild(MatSort) sort: MatSort;
@@ -28,10 +33,12 @@ export class UsersManagementComponent implements OnInit {
 
   private permissionSubscription: Subscription;
 
-  constructor(private bottomSheet: MatBottomSheet,
-              private myUserService: MyUserService,
-              private router: Router,
-              private usersService: UsersService) {
+  constructor(
+    private router: Router,
+    private bottomSheet: MatBottomSheet,
+    private dialog: MatDialog,
+    private myUserService: MyUserService,
+    private usersService: UsersService) {
 
     this.permissionSubscription = myUserService.permissionsChange.subscribe((value) => {
       if (!this.myUserService.hasPermission(Permissions.MANAGEMENT_ADMINISTRATION)) {
@@ -39,12 +46,19 @@ export class UsersManagementComponent implements OnInit {
       }
     });
 
+    this.usersLoaded = false;
+
     this.users = usersService.getUsers();
+
+    if (this.users.length > 0) {
+      this.usersLoaded = true;
+    }
+
     this.usersSubscription = usersService.usersChange.subscribe((value) => {
+      this.usersLoaded = true;
+
       this.users = value;
-      this.dataSource = new MatTableDataSource(this.users);
-      this.dataSource.sort = this.sort;
-      this.dataSource.paginator = this.paginator;
+      this.refreshTable();
     });
   }
 
@@ -53,6 +67,15 @@ export class UsersManagementComponent implements OnInit {
       this.router.navigate(['/home']);
     }
 
+    this.refreshTable();
+  }
+
+  ngOnDestroy() {
+    this.usersSubscription.unsubscribe();
+    this.permissionSubscription.unsubscribe();
+  }
+
+  refreshTable() {
     this.dataSource = new MatTableDataSource(this.users);
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
@@ -64,7 +87,7 @@ export class UsersManagementComponent implements OnInit {
     this.dataSource.sort = this.sort;
 
     if (this.dataSource.paginator) {
-       this.dataSource.paginator.firstPage();
+      this.dataSource.paginator.firstPage();
     }
   }
 
@@ -73,15 +96,27 @@ export class UsersManagementComponent implements OnInit {
   }
 
   onCreate() {
-
+    this.dialog.open(UserCreateModalComponent, {
+      width: '80vh'
+    });
   }
 
-  onEdit(userID: number) {
-
+  onEdit(user: User) {
+    this.dialog.open(UserUpdateModalComponent, {
+      width: '80vh',
+      data: {user: user}
+    });
   }
 
   onDelete(userID: number) {
+    this.usersService.deleteUser(userID);
+  }
 
+  refreshUsers() {
+    this.usersLoaded = false;
+    this.users = [];
+    this.refreshTable();
+    this.usersService.fetchUsers();
   }
 
 }
@@ -93,7 +128,8 @@ export class UsersManagementComponent implements OnInit {
 })
 export class UsersExportBottomSheetComponent {
   constructor(private bottomSheetRef: MatBottomSheetRef<UsersExportBottomSheetComponent>, private excelService: ExcelService,
-              private usersService: UsersService) {}
+              private usersService: UsersService) {
+  }
 
   exportExcelSheet() {
     const users = this.usersService.getUsers();
@@ -101,15 +137,15 @@ export class UsersExportBottomSheetComponent {
 
     for (let i = 0; i < users.length; i++) {
       const user = {
-        'Titel': users[i].getTitle(),
-        'Vorname': users[i].getFirstname(),
-        'Nachname': users[i].getSurname(),
-        'Gebrutsdatum': users[i].getBirthday().getDate() + '-' + (users[i].getBirthday().getMonth() + 1) + '-'
-          + users[i].getBirthday().getFullYear(),
-        'Beitrittsdatum': users[i].getJoinDate().getDate() + '-' + (users[i].getJoinDate().getMonth() + 1) + '-'
-          + users[i].getJoinDate().getFullYear(),
-        'Address': users[i].getStreetname() + ' ' + users[i].getStreetnumber() + ' ' + users[i].getZipcode() + ' ' + users[i].getLocation(),
-        'Email-Adresse': users[i].getEmail(),
+        'Titel': users[i].title,
+        'Vorname': users[i].firstname,
+        'Nachname': users[i].surname,
+        'Gebrutsdatum': users[i].birthday.getDate() + '-' + (users[i].birthday.getMonth() + 1) + '-'
+          + users[i].birthday.getFullYear(),
+        'Beitrittsdatum': users[i].join_date.getDate() + '-' + (users[i].join_date.getMonth() + 1) + '-'
+          + users[i].join_date.getFullYear(),
+        'Address': users[i].streetname + ' ' + users[i].streetnumber + ' ' + users[i].zipcode + ' ' + users[i].location,
+        'Email-Adresse': users[i].email,
         'Telefonnummern': users[i].getPhoneNumbersAsString()
       };
 

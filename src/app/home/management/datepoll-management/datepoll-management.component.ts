@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {MatSlideToggleChange} from '@angular/material';
 import {SettingsService} from '../../../services/settings.service';
 import {Subscription} from 'rxjs';
@@ -11,7 +11,7 @@ import {Router} from '@angular/router';
   templateUrl: './datepoll-management.component.html',
   styleUrls: ['./datepoll-management.component.css']
 })
-export class DatepollManagementComponent implements OnInit {
+export class DatepollManagementComponent implements OnInit, OnDestroy {
 
   cinemaServiceEnabled = true;
   cinemaServiceEnabledChange: Subscription;
@@ -35,6 +35,11 @@ export class DatepollManagementComponent implements OnInit {
     if (!this.myUserService.hasPermission(Permissions.SETTINGS_ADMINISTRATION)) {
       this.router.navigate(['/home']);
     }
+  }
+
+  ngOnDestroy(): void {
+    this.cinemaServiceEnabledChange.unsubscribe();
+    this.permissionSubscription.unsubscribe();
   }
 
   cinemaServiceChange(ob: MatSlideToggleChange) {

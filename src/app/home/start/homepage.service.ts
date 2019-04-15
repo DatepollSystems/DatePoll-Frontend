@@ -49,7 +49,7 @@ export class HomepageService {
         const bookingsToSave = [];
         for (let i = 0; i < bookings.length; i++) {
           bookingsToSave.push(new HomeBookingsModel(bookings[i].movieID, bookings[i].movieName, bookings[i].amount, bookings[i].movieDate,
-            bookings[i].workerName, bookings[i].emergencyWorkerName));
+            bookings[i].workerID, bookings[i].workerName, bookings[i].emergencyWorkerID, bookings[i].emergencyWorkerName));
         }
 
         this.setBookings(bookingsToSave);

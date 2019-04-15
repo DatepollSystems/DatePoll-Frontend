@@ -1,6 +1,6 @@
 <div class="row">
-  <div class="col-12 col-lg-4">
-    <mat-card *ngIf="birthdays.length != 0" class="mat-elevation-z4">
+  <div class="col-12 col-lg-4" *ngIf="birthdays.length != 0">
+    <mat-card class="mat-elevation-z4">
       <mat-card-content>
         <mat-card-title>{{'STARTPAGE_BIRTHDAY' | translate}}</mat-card-title>
 
@@ -14,8 +14,8 @@
             </thead>
             <tbody>
             <tr *ngFor="let birthday of birthdays">
-              <td>{{birthday.getName()}}</td>
-              <td>{{birthday.getDate() | date:'dd.MM.yyyy'}}</td>
+              <td>{{birthday.name}}</td>
+              <td>{{birthday.date | date:'dd.MM.yyyy'}}</td>
             </tr>
             </tbody>
           </table>
@@ -23,8 +23,8 @@
       </mat-card-content>
     </mat-card>
   </div>
-  <div class="col-12 col-lg-8">
-    <mat-card *ngIf="bookings.length != 0" class="mat-elevation-z4">
+  <div class="col-12 col-lg-8" *ngIf="bookings.length != 0">
+    <mat-card class="mat-elevation-z4">
       <mat-card-content>
         <mat-card-title>{{'STARTPAGE_BOOKINGS' | translate}}</mat-card-title>
 
@@ -41,16 +41,34 @@
             </thead>
             <tbody>
             <tr *ngFor="let booking of bookings">
-              <td>{{booking.getName()}}</td>
-              <td>{{booking.getDate() | date:'dd.MM.yyyy'}}</td>
-              <td>{{booking.getBookedTickets()}}</td>
-              <td *ngIf="booking.getWorkerName() != null">{{booking.getWorkerName()}}</td>
-              <td *ngIf="booking.getWorkerName() == null"><a
-                (click)="cinemaService.applyForWorker(booking.getMovieID())">Melden</a></td>
+              <td>{{booking.name}}</td>
+              <td>{{booking.date | date:'dd.MM.yyyy'}}</td>
+              <td>{{booking.bookedTickets}}</td>
+              <td *ngIf="booking.workerName != null">
+                {{booking.workerName}}
+                <button mat-icon-button (click)="cinemaService.signOutForWorker(booking.movieID)"
+                        *ngIf="booking.workerID == myUserService.getID()" matTooltipPosition="right"
+                        matTooltip="{{'CINEMA_TICKETS_CANCEL_CINEMA_SERVICE_TOOLTIP' | translate}}">
+                  <mat-icon aria-label="Cancel worker">cancel</mat-icon>
+                </button>
+              </td>
+              <td *ngIf="booking.workerName == null">
+                <button (click)="cinemaService.applyForWorker(booking.movieID)"
+                        mat-stroked-button>{{'CINEMA_TICKETS_APPLY' | translate}}</button>
+              </td>
 
-              <td *ngIf="booking.getEmergencyWorkerName() != null">{{booking.getEmergencyWorkerName()}}</td>
-              <td *ngIf="booking.getEmergencyWorkerName() == null"><a
-                (click)="cinemaService.applyForEmergencyWorker(booking.getMovieID())">Melden</a></td>
+              <td *ngIf="booking.emergencyWorkerName != null">
+                {{booking.emergencyWorkerName}}
+                <button mat-icon-button (click)="cinemaService.signOutForEmergencyWorker(booking.movieID)"
+                        *ngIf="booking.emergencyWorkerID == myUserService.getID()" matTooltipPosition="right"
+                        matTooltip="{{'CINEMA_TICKETS_CANCEL_CINEMA_SERVICE_TOOLTIP' | translate}}">
+                  <mat-icon aria-label="Cancel worker">cancel</mat-icon>
+                </button>
+              </td>
+              <td *ngIf="booking.emergencyWorkerName == null">
+                <button (click)="cinemaService.applyForEmergencyWorker(booking.movieID)"
+                        mat-stroked-button>{{'CINEMA_TICKETS_APPLY' | translate}}</button>
+              </td>
             </tr>
             </tbody>
           </table>

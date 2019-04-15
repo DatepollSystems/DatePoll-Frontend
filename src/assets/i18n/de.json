@@ -9,6 +9,7 @@
   "OPEN": "Öffnen",
   "DO_NOT_FORGET_TO_SAVE": "Vergiss nicht zu speichern!",
   "LOADING": "Laden...",
+  "PUT": "Anlegen",
 
 
   "LANGUAGE": "Sprache",
@@ -16,6 +17,12 @@
   "LANGUAGE_ENGLISH": "Englisch",
 
   "ABOUT": "Über",
+  "ABOUT_GENERAL": "Allgemeines",
+  "ABOUT_TECHNICAL": "Technisches",
+  "ABOUT_DESCRIPTION": "DatePoll ist eine Vereinsmanagement Applikation mit dem Schwerpunkt auf Schützen und Musik.",
+  "ABOUT_FRONTEND_VERSION": "Version der Webapplication: ",
+  "ABOUT_BACKEND_VERSION": "Version des Backends: ",
+  "ABOUT_NEEDED_BACKEND_VERSION": "Benötigte Backend Version (Zahl): ",
   "ABOUT_LICENSE": "Lizenz",
 
   "IMPRINT": "Impressum",
@@ -33,6 +40,7 @@
   "SIGNIN_PASSWORD": "Passwort",
   "SIGNIN_KEEP_YOUR_PASSWORD_SECRET": "Behalte dein Passwort geheim",
   "SIGNIN_EMAIL_OR_PASSWORD_INCORRECT": "Die Email-Adresse oder das Passwort sind inkorrekt!",
+  "SIGNIN_ACCOUNT_NOT_ACTIVATED": "Dein Account ist derzeit deaktiviert! Probier es doch später wieder...",
   "SIGNIN_SUCCESSFUL": "Passwort korrekt! Sie werden in kürze weitergeleitet...",
   "SIGNIN_NEW_PASSWORD": "Neues Passwort",
   "SIGNIN_NEW_PASSWORD_REPEAT": "Neues Passwort wiederholen",
@@ -53,6 +61,7 @@
   "NAV_CINEMA_ADMINISTRATION": "Filmverwaltung",
 
   "NAV_MANAGEMENT_USERS": "Mitgliederverwaltung",
+  "NAV_MANAGEMENT_GROUPS": "Gruppenverwaltung",
   "NAV_MANAGEMENT_DATEPOLL": "DatePoll-Verwaltung",
 
 
@@ -79,7 +88,6 @@
   "CINEMA_TICKETS_SOLD_OUT": "Ausgebucht",
   "CINEMA_TICKETS_NO_MOVIES_AVAILABLE": "Derzeit sind keine Filme verfügbar",
   "CINEMA_TICKETS_BOOKED_TICKETS": "Gebuchte Karten:",
-  "CINEMA_TICKETS_CANCEL_BOOKED_TICKETS": "Stornieren",
   "CINEMA_TICKETS_CANCEL_BOOKED_TICKETS_TOOLTIP": "Storniere alle gebuchten Karten",
   "CINEMA_TICKETS_CANCEL_CINEMA_SERVICE_TOOLTIP": "Abmelden",
 
@@ -129,20 +137,20 @@
   "SETTINGS_PERSONAL_DATA_PERSONAL_EMAIL_CHANGE": "Email-Adresse ändern",
 
   "SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_TITLE": "Titel",
-  "SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_TITLE_NOT_VALID": "Der Titel darf nicht mehr als 64 Zeichen haben!",
+  "SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_TITLE_NOT_VALID": "Der Titel darf nicht mehr als 190 Zeichen haben!",
   "SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_FIRSTNAME": "Vorname",
-  "SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_FIRSTNAME_NOT_VALID": "Der Vorname darf weder leer sein noch mehr als 128 Zeichen haben!",
+  "SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_FIRSTNAME_NOT_VALID": "Der Vorname darf weder leer sein noch mehr als 190 Zeichen haben!",
   "SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_SURNAME": "Nachname",
-  "SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_SURNAME_NOT_VALID": "Der Nachname darf weder leer sein noch mehr als 128 Zeichen haben!",
+  "SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_SURNAME_NOT_VALID": "Der Nachname darf weder leer sein noch mehr als 190 Zeichen haben!",
   "SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_BIRTHDAY": "Geburtsdatum",
   "SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_STREETNAME": "Straßenname",
-  "SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_STREETNAME_NOT_VALID": "Der Straßenname darf nicht mehr als 128 Zeichen haben!",
+  "SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_STREETNAME_NOT_VALID": "Der Straßenname darf nicht mehr als 190 Zeichen haben!",
   "SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_STREETNUMBER": "Nummer",
-  "SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_STREETNUMBER_NOT_VALID": "Die Straßennummer darf nicht mehr als 16 Zeichen haben!",
+  "SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_STREETNUMBER_NOT_VALID": "Die Straßennummer darf nicht mehr als 190 Zeichen haben!",
   "SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_ZIPCODE": "Postleitzahl",
   "SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_ZIPCODE_NOT_VALID": "Die Postleitzahl muss eine vierstellige Zahl sein!",
   "SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_LOCATION": "Ort",
-  "SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_LOCATION_NOT_VALID": "Der Ort darf nicht mehr als 128 Zeichen haben!",
+  "SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_LOCATION_NOT_VALID": "Der Ort darf nicht mehr als 190 Zeichen haben!",
 
   "SETTINGS_PERSONAL_DATA_MODAL_PHONE_NUMBER_SEARCH": "Suchen...",
   "SETTINGS_PERSONAL_DATA_MODAL_PHONE_NUMBER_LABEL": "Bezeichnung",
@@ -179,6 +187,7 @@
   "SETTINGS_SECURITY_DESCRIPTION": "Legen Sie die Einstellungen für Ihr Passwort und für die Zwei-Faktor-Authentifizierung fest.",
   "SETTINGS_SECURITY_CHANGE_PASSWORD": "Password ändern",
   "SETTINGS_SECURITY_CHANGE_2FA": "Zwei-Faktor-Authentifizierung einstellen",
+  "SETTINGS_SECURITY_CALENDAR": "Kalenderverwaltung",
 
   "SETTINGS_SECURITY_MODAL_CHANGE_PASSWORD_TITLE_START": "Geben Sie Ihr altes Passwort ein",
   "SETTINGS_SECURITY_MODAL_CHANGE_PASSWORD_OLD_PASSWORD_INCORRECT": "Ihr eingegebenes Password ist inkorrekt!",
@@ -188,6 +197,10 @@
   "SETTINGS_SECURITY_MODAL_CHANGE_PASSWORD_NEW_PASSWORDS_ARE_NOT_EQUAL": "Die Passwörter stimmen nicht über ein",
   "SETTINGS_SECURITY_MODAL_CHANGE_PASSWORD_OLD_PASSWORD": "Altes Passwort",
   "SETTINGS_SECURITY_MODAL_CHANGE_PASSWORD_FINISHED": "Ihr Passwort wurde erfolgreich geändert!",
+
+  "SETTINGS_SECURITY_MDOAL_CALENDAR_INPUT_TITLE": "Persönlicher Kalender",
+  "SETTINGS_SECURITY_MODAL_COPY_TOKEN_TOOLTIP": "In die Zwischenablage kopieren",
+  "SETTINGS_SECURITY_MODAL_RESET_TOKEN": "Zurücksetzen",
 
 
   "MANAGEMENT_USERS_SEARCH": "Suche...",
@@ -201,9 +214,83 @@
   "MANAGEMENT_USERS_STREETNUMBER": "Hausnummer",
   "MANAGEMENT_USERS_ZIPCODE": "Postleitzahl",
   "MANAGEMENT_USERS_LOCATION": "Ortsname",
+  "MANAGEMENT_USERS_PHONENUMBERS": "Telefonnummern",
+  "MANAGEMENT_USERS_ACTIVITY": "Aktivität",
   "MANAGEMENT_USERS_ACTIONS": "Aktionen",
   "MANAGEMENT_USERS_ACTIONS_EDIT_TOOLTIP": "Bearbeite dieses Mitglied",
   "MANAGEMENT_USERS_ACTIONS_DELETE_TOOLTIP": "Lösche dieses Mitglied",
+  "MANAGEMENT_USERS_REFRESH": "Mitgliederliste neuladen",
+
+  "MANAGEMENT_USERS_CREATE_USER_MODAL_TITLE": "Lege ein neues Mitglied an",
+  "MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_TITLE": "Titel",
+  "MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_TITLE_INCORRECT": "Der Titel darf nicht mehr als 190 Zeichen haben!",
+  "MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_EMAIL_ADDRESS": "Email-Adresse",
+  "MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_EMAIL_ADDRESS_INCORRECT": "Die angegeben Email-Adresse ist invalide!",
+  "MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_FIRSTNAME": "Vorname",
+  "MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_FIRSTNAME_INCORRECT": "Der Vorname darf weder leer sein, noch mehr als 190 Zeichen haben!",
+  "MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_SURNAME": "Nachname",
+  "MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_SURNAME_INCORRECT": "Der Nachname darf weder leer sein, noch mehr als 190 Zeichen haben!",
+  "MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_BIRTHDAY": "Geburtstag",
+  "MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_JOIN_DATE": "Beitrittsdatum",
+  "MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_STREETNAME": "Straßenname",
+  "MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_STREETNAME_INCORRECT": "Der Straßenname darf weder leer sein, noch mehr als 190 Zeichen haben!",
+  "MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_STREETNUMBER": "Hausnummer",
+  "MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_STREETNUMBER_INCORRECT": "Die Hausnummer darf weder leer sein, noch mehr als 190 Zeichen haben!",
+  "MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_ZIPCODE": "Postleitzahl",
+  "MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_ZIPCODE_INCORRECT": "Die Postleitzahl muss eine vierstellige Ziffer sein!",
+  "MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_LOCATION": "Ortsname",
+  "MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_LOCATION_INCORRECT": "Der Ortsname darf weder leer sein, noch mehr als 190 Zeichen haben!",
+  "MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_ACTIVITY": "Aktivität",
+  "MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_ACTIVITY_INCORRECT": "Die Aktivität darf weder leer sein, noch mehr als 190 Zeichen haben!",
+  "MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_ACTIVATED": "Account aktivieren",
+  "MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_ACTIVATED_DESCRIPTION": "Wenn Account aktivieren angekreuzt ist, wird direkt nach der Erstellung des Benutzers eine Einladungsemail versendet",
+  "MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_PHONE_NUMBERS": "Telefonnummern",
+
+  "MANAGEMENT_USERS_UPDATE_USER_MODAL_TITLE": "Bearbeite ",
+  "MANAGEMENT_USERS_UPDATE_USER_MODAL_FREE_GROUPS": "Freie Gruppen und Register",
+  "MANAGEMENT_USERS_UPDATE_USER_MODAL_JOINED_GROUPS": "Beigetretene Gruppen / Register",
+  "MANAGEMENT_USERS_UPDATE_USER_MODAL_NO_GROUPS": "Es gibt keine Gruppen oder Register zum auswählen",
+
+
+  "MANAGEMENT_GROUPS_SEARCH": "Suche nach einer Gruppe oder einem Register",
+  "MANAGEMENT_GROUPS_SEARCH_NOTHING_FOUND": "Leider wurde nichts gefunden :(",
+  "MANAGEMENT_GROUPS_GROUP_DELETE_TOOLTIP": "Lösche diese Gruppe",
+  "MANAGEMENT_GROUPS_GROUP_EDIT_TOOLTIP": "Editiere diese Gruppe",
+  "MANAGEMENT_GROUPS_SUBGROUP": "Register:",
+  "MANAGEMENT_GROUPS_SUBGROUP_DELETE_TOOLTIP": "Lösche dieses Register",
+  "MANAGEMENT_GROUPS_SUBGROUP_EDIT_TOOLTIP": "Editiere dieses Register",
+  "MANAGEMENT_GROUPS_NO_SUBGROUPS_FOR_THIS_GROUP": "Für diese Gruppe gibt es noch kein Register",
+  "MANAGEMENT_GROUPS_REFRESH": "Gruppenliste neuladen",
+  "MANAGEMENT_GROUPS_INFO_TOOLTIP": "Zeige die Mitglieder der Gruppe an",
+  "MANAGEMENT_GROUPS_SUBGROUP_INFO_TOOLTIP": "Zeige die Mitglieder des Registers an",
+
+  "MANAGEMENT_GROUPS_CREATE_GROUP_MODAL_TITLE": "Lege eine neue Gruppe an",
+  "MANAGEMENT_GROUPS_CREATE_GROUP_MODAL_FORM_NAME": "Gruppenname",
+  "MANAGEMENT_GROUPS_CREATE_GROUP_MODAL_FORM_NAME_INCORRECT": "Der Name darf weder leer sein, noch mehr als 190 Zeichen haben!",
+  "MANAGEMENT_GROUPS_CREATE_GROUP_MODAL_FORM_DESCRIPTION": "Beschreibung",
+  "MANAGEMENT_GROUPS_CREATE_GROUP_MODAL_FORM_DESCRIPTION_INCORRECT": "Die Beschreibung darf nicht mehr als 190 Zeichen haben!",
+
+  "MANAGEMENT_GROUPS_UPDATE_GROUP_MODAL_TITLE": "Bearbeite die Gruppe ",
+
+  "MANAGEMENT_GROUPS_CREATE_SUBGROUP_MODAL_TITLE": "Lege eine neues Register an",
+  "MANAGEMENT_GROUPS_CREATE_SUBGROUP_MODAL_FORM_NAME": "Registername",
+  "MANAGEMENT_GROUPS_CREATE_SUBGROUP_MODAL_FORM_NAME_INCORRECT": "Der Name darf weder leer sein, noch mehr als 190 Zeichen haben!",
+  "MANAGEMENT_GROUPS_CREATE_SUBGROUP_MODAL_FORM_DESCRIPTION": "Beschreibung",
+  "MANAGEMENT_GROUPS_CREATE_SUBGROUP_MODAL_FORM_DESCRIPTION_INCORRECT": "Die Beschreibung darf nicht mehr als 190 Zeichen haben!",
+
+  "MANAGEMENT_GROUPS_UPDATE_SUBGROUP_MODAL_TITLE": "Bearbeite das Register ",
+
+  "MANAGEMENT_GROUPS_INFO_GROUP_MODAL_TITLE": "Mitglieder - ",
+  "MANAGEMENT_GROUPS_INFO_GROUP_MODAL_TABLE_HEADER_ROLE": "Rolle",
+  "MANAGEMENT_GROUPS_INFO_GROUP_MODAL_TABLE_ACTION_REMOVE": "Entferne dieses Mitglied aus der Gruppe",
+  "MANAGEMENT_GROUPS_INFO_GROUP_MDOAL_TABLE_ACTION_EDIT": "Bearbeite die Rolle des Mitglieds in der Gruppe",
+
+  "MANAGEMENT_GROUPS_INFO_GROUP_MODAL_ROLE_UPDATE_MODAL_TITLE": "Bearbeite die Rolle von ",
+  "MANAGEMENT_GROUPS_INFO_GROUP_MODAL_ROLE_UPDATE_MODAL_ROLE": "Rolle",
+  "MANAGEMENT_GROUPS_INFO_GROUP_MODAL_ROLE_UPDATE_MODAL_ROLE_INCORRECT": "Die Rolle darf nicht mehr als 190 Zeichen haben!",
+
+  "MANAGEMENT_GROUPS_INFO_SUBGROUP_MODAL_TABLE_ACTION_REMOVE": "Entferne dieses Mitglied aus der Gruppe",
+  "MANAGEMENT_GROUPS_INFO_SUBGROUP_MDOAL_TABLE_ACTION_EDIT": "Bearbeite die Rolle des Mitglieds in der Gruppe",
 
   "MANAGEMENT_DATEPOLL_CINEMA_SERVICE": "Kinoservice"
 

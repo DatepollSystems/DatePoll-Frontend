@@ -1,0 +1,120 @@
+<mat-card class="mat-elevation-z8">
+  <mat-card-content>
+    <div class="row">
+      <div class="col-11 col-md-11 col-lg-11">
+        <h1>{{'NAV_MANAGEMENT_GROUPS' | translate}}</h1>
+      </div>
+      <div class="col-1 col-md-1 col-lg-1">
+        <button mat-icon-button (click)="refreshGroups()"
+                matTooltipPosition="right"
+                matTooltip="{{'MANAGEMENT_GROUPS_REFRESH' | translate}}">
+          <mat-icon>refresh</mat-icon>
+        </button>
+      </div>
+    </div>
+
+    <div class="row" style="margin-bottom: 15px;">
+      <div class="col-2 col-sm-4 col-lg-1">
+        <button mat-fab color="accent" (click)="onCreateGroup()">
+          <mat-icon>add</mat-icon>
+        </button>
+      </div>
+      <div class="col-10 col-sm-8 col-lg-11">
+        <mat-form-field class="col-12">
+          <input matInput (keyup)="applyFilter($event.target.value)"
+                 placeholder="{{'MANAGEMENT_GROUPS_SEARCH' | translate}}">
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12" *ngFor="let group of sortedGroups">
+        <mat-card class="mat-elevation-z4">
+          <mat-card-content>
+            <div class="row">
+              <div class="col-8 col-sm-8 col-md-8 col-lg-10"
+                   style="font-size: 20px; margin-top: 15px;">{{group.name}}</div>
+              <div class="col-4 col-sm-4 col-md-4 col-lg-2">
+                <button mat-icon-button color="warn" style="float: right" (click)="onDeleteGroup(group.id)"
+                        matTooltip="{{'MANAGEMENT_GROUPS_GROUP_DELETE_TOOLTIP' | translate}}"
+                        matTooltipPosition="above">
+                  <mat-icon>delete</mat-icon>
+                </button>
+                <button mat-icon-button color="accent" style="float: right" (click)="onUpdateGroup(group)"
+                        matTooltip="{{'MANAGEMENT_GROUPS_GROUP_EDIT_TOOLTIP' | translate}}" matTooltipPosition="above">
+                  <mat-icon>create</mat-icon>
+                </button>
+                <button mat-icon-button style="float: right" (click)="onInfoGroup(group.id)"
+                        matTooltip="{{'MANAGEMENT_GROUPS_INFO_TOOLTIP' | translate}}"
+                        matTooltipPosition="above">
+                  <mat-icon>info</mat-icon>
+                </button>
+              </div>
+            </div>
+            <div class="row" style="margin-bottom: 10px;">
+              <div class="col-12"><i>{{group.description}}</i></div>
+            </div>
+            <mat-divider></mat-divider>
+            <div class="row" style="padding-top: 10px;">
+              <div class="col-8 col-sm-8 col-md-10 col-lg-10 col-xl-11" style="font-size: 18px; padding-top: 15px;">
+                {{'MANAGEMENT_GROUPS_SUBGROUP' | translate}}
+              </div>
+              <div class="col-4 col-sm-4 col-md-2 col-lg-2 col-xl-1">
+                <button mat-fab color="accent" (click)="onCreateSubgroup(group.id)">
+                  <mat-icon>add</mat-icon>
+                </button>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12" *ngFor="let subgroup of group.getSubgroups()">
+                <mat-card class="mat-elevation-z3">
+                  <mat-card-content>
+                    <button mat-icon-button color="warn" (click)="onDeleteSubgroup(subgroup.id)"
+                            matTooltip="{{'MANAGEMENT_GROUPS_SUBGROUP_DELETE_TOOLTIP' | translate}}"
+                            matTooltipPosition="left">
+                      <mat-icon>delete</mat-icon>
+                    </button>
+                    <button mat-icon-button color="accent" (click)="onUpdateSubgroup(group.id, subgroup)"
+                            matTooltip="{{'MANAGEMENT_GROUPS_SUBGROUP_EDIT_TOOLTIP' | translate}}"
+                            matTooltipPosition="above">
+                      <mat-icon>create</mat-icon>
+                    </button>
+                    <button mat-icon-button (click)="onInfoSubgroup(subgroup.id)"
+                            matTooltip="{{'MANAGEMENT_GROUPS_SUBGROUP_INFO_TOOLTIP' | translate}}"
+                            matTooltipPosition="above">
+                      <mat-icon>info</mat-icon>
+                    </button>
+                    {{subgroup.name}}
+                    <span *ngIf="subgroup.description != null && subgroup.description.length != 0">
+                      <mat-divider></mat-divider>
+                      <div class="row" style="margin-top: 15px;">
+                        <div class="col-12">
+                          <i>{{subgroup.description}}</i>
+                        </div>
+                      </div>
+                    </span>
+                  </mat-card-content>
+                </mat-card>
+              </div>
+            </div>
+            <div class="row" *ngIf="group.getSubgroups().length == 0">
+              <div class="col-12">
+                {{'MANAGEMENT_GROUPS_NO_SUBGROUPS_FOR_THIS_GROUP' | translate}}
+              </div>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+
+    <mat-progress-bar *ngIf="!groupsLoaded" mode="indeterminate"></mat-progress-bar>
+
+    <div *ngIf="groupsLoaded">
+      <div class="row" *ngIf="sortedGroups.length == 0">
+        <div class="col-12" style="text-align: center">
+          <h2>{{'MANAGEMENT_GROUPS_SEARCH_NOTHING_FOUND' | translate}}</h2>
+        </div>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>

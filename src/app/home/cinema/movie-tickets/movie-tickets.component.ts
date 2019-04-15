@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Subscription} from 'rxjs';
 
 import {CinemaService} from '../cinema.service';
@@ -12,7 +12,7 @@ import {Movie} from '../movie.model';
   templateUrl: './movie-tickets.component.html',
   styleUrls: ['./movie-tickets.component.css']
 })
-export class MovieTicketsComponent implements OnInit {
+export class MovieTicketsComponent implements OnInit, OnDestroy {
 
   movies: Movie[] = null;
   private moviesSubscription: Subscription;
@@ -29,4 +29,7 @@ export class MovieTicketsComponent implements OnInit {
     this.settingsService.checkShowCinema();
   }
 
+  ngOnDestroy() {
+    this.moviesSubscription.unsubscribe();
+  }
 }

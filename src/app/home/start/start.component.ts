@@ -7,6 +7,7 @@ import {CinemaService} from '../cinema/cinema.service';
 
 import {HomeBirthdayModel} from './birthdays.model';
 import {HomeBookingsModel} from './bookings.model';
+import {MyUserService} from '../my-user.service';
 
 @Component({
   selector: 'app-start',
@@ -21,7 +22,7 @@ export class StartComponent implements OnInit, OnDestroy {
   bookings: HomeBookingsModel[];
   bookingsSubscription: Subscription;
 
-  constructor(private homePageService: HomepageService, public cinemaService: CinemaService) {
+  constructor(private homePageService: HomepageService, public cinemaService: CinemaService, public myUserService: MyUserService) {
     this.birthdays = homePageService.getBirthdays();
     this.birthdaysSubscription = homePageService.birthdaysChange.subscribe((value) => {
       this.birthdays = value;
@@ -56,6 +57,9 @@ export class StartComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
+    this.bookingsSubscription.unsubscribe();
+    this.birthdaysSubscription.unsubscribe();
+
     document.getElementById('my-container').style.background = 'none';
   }
 

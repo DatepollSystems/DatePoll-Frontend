@@ -24,6 +24,14 @@ a:hover {
   display: none;
 }
 
+.datepicker-field {
+  display: unset !important;
+}
+
+.datepicker-field-mobile {
+  display: none !important;
+}
+
 @media only screen and (max-width: 992px) {
   #datepicker-field {
     display: none;
@@ -31,6 +39,14 @@ a:hover {
 
   #datepicker-field-mobile {
     display: unset;
+  }
+
+  .datepicker-field {
+    display: none !important;
+  }
+
+  .datepicker-field-mobile {
+    display: unset !important;
   }
 }
 

@@ -1,10 +1,10 @@
 import {Injectable} from '@angular/core';
-import {Headers, Http, Response} from '@angular/http';
 import {Router} from '@angular/router';
 
 import {environment} from '../../environments/environment';
 import {CookieService} from 'angular2-cookie/core';
 import {MatSnackBar} from '@angular/material';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +15,7 @@ export class AuthService {
   private _token: string = null;
 
   constructor(
-    private http: Http,
+    private http: HttpClient,
     private router: Router,
     private cookieService: CookieService,
     private snackBar: MatSnackBar) {
@@ -29,7 +29,7 @@ export class AuthService {
   }
 
   public signinUser(email: string, password: string) {
-    const headers = new Headers({'Content-Type': 'application/json'});
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
 
     const signInObject = {
       'email': email,
@@ -40,7 +40,7 @@ export class AuthService {
   }
 
   public changePasswordAfterSignin(email: string, oldPassword: string, newPassword: string) {
-    const headers = new Headers({'Content-Type': 'application/json'});
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
 
     const changePasswordAfterSigninObject = {
       'email': email,
@@ -81,14 +81,13 @@ export class AuthService {
       }
     }
 
-    const headers = new Headers({'Content-Type': 'application/json'});
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
 
     const refreshObject = {
       'token': this._token
     };
     this.http.post(this.apiUrl + '/auth/refresh?token=' + this._token, refreshObject, {headers: headers}).subscribe(
-      (response: Response) => {
-        const data = response.json();
+      (data: any) => {
         console.log(data);
         this.setToken(data.token);
         if (functionUser != null) {

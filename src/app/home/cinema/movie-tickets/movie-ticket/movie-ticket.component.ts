@@ -1,5 +1,4 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Response} from '@angular/http';
 import {MatDialog} from '@angular/material';
 
 import {Subscription} from 'rxjs';
@@ -17,7 +16,6 @@ import {Movie} from '../../movie.model';
   styleUrls: ['./movie-ticket.component.css']
 })
 export class MovieTicketComponent implements OnInit {
-
   @Input()
   movie: Movie;
 
@@ -33,7 +31,6 @@ export class MovieTicketComponent implements OnInit {
     this.myUserService = myUserService;
   }
 
-
   ngOnInit(): void {
     this.soldOut = this.movie.bookedTickets >= 20;
 
@@ -44,15 +41,14 @@ export class MovieTicketComponent implements OnInit {
 
   bookTickets() {
     this.dialog.open(MovieBookTicketsModalComponent, {
-      width: '45vh',
+      width: '60vh',
       data: {movie: this.movie},
     });
   }
 
   cancelTickets() {
     this.httpService.loggedInV1DELETERequest('/cinema/booking/' + this.movie.id, 'cancelTickets').subscribe(
-      (reponse: Response) => {
-        const data = reponse.json();
+      (data: any) => {
         console.log(data);
         this.cinemaService.fetchNotShownMovies();
       },
