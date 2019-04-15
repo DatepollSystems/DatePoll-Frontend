@@ -1,7 +1,8 @@
 <h2 mat-dialog-title>{{'SETTINGS_SECURITY_CALENDAR' | translate}}</h2>
 <mat-dialog-content>
-  <div class="row" *ngIf="calendarToken != null">
-      <mat-form-field class="col-12 col-sm-12 col-md-12 col-lg-10" appearance="outline">
+  <div class="row justify-content-between" *ngIf="calendarToken != null">
+    <div class="col-12 col-sm-12 col-md-12 col-lg-9 align-self-center">
+      <mat-form-field appearance="outline">
         <mat-label>{{'SETTINGS_SECURITY_MDOAL_CALENDAR_INPUT_TITLE' | translate}}</mat-label>
         <input matInput readonly value="{{calendarToken}}">
         <button mat-icon-button matSuffix (click)="copyTokenToClipboard()"
@@ -9,9 +10,10 @@
           <mat-icon>file_copy</mat-icon>
         </button>
       </mat-form-field>
+    </div>
 
-    <div class="col-12 col-sm-12 col-md-12 col-lg-2">
-      <button style="margin-top: 12px; width: 100%" mat-flat-button color="warn"
+    <div class="col-12 col-sm-12 col-md-12 col-lg-3">
+      <button style="width: 100%; margin-bottom: 0; margin-top: 12px;" mat-flat-button color="warn"
               (click)="resetCalendarToken()">{{'SETTINGS_SECURITY_MODAL_RESET_TOKEN' | translate}}</button>
     </div>
   </div>
@@ -21,6 +23,6 @@
     </div>
   </div>
 </mat-dialog-content>
-<mat-dialog-actions align="end">
+<mat-dialog-actions>
   <button mat-button mat-dialog-close>{{'CLOSE' | translate}}</button>
 </mat-dialog-actions>

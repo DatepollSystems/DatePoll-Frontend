@@ -41,7 +41,7 @@ export class MovieTicketComponent implements OnInit {
 
   bookTickets() {
     this.dialog.open(MovieBookTicketsModalComponent, {
-      width: '45vh',
+      width: '60vh',
       data: {movie: this.movie},
     });
   }

@@ -150,32 +150,36 @@
     </div>
 
     <form (ngSubmit)="addPhoneNumber(phoneNumberForm)" #phoneNumberForm="ngForm">
-      <div class="row">
-        <mat-form-field class="col-12 col-sm-12 col-md-4 col-lg-3">
-          <input matInput id="label" name="label" type="text"
-                 ngModel #labelModel="ngModel"
-                 required maxlength="190" minlength="1"
-                 placeholder="{{'SETTINGS_PERSONAL_DATA_MODAL_PHONE_NUMBER_LABEL' | translate}}">
-          <mat-error *ngIf="labelModel.invalid">
-            {{'SETTINGS_PERSONAL_DATA_MODAL_PHONE_NUMBER_LABEL_INVALID' | translate}}
-          </mat-error>
-        </mat-form-field>
+      <div class="row justify-content-around" style="margin-top: 15px;">
+        <div class="col-12 col-sm-12 col-md-6 col-lg-3">
+          <mat-form-field>
+            <input matInput id="label" name="label" type="text"
+                   ngModel #labelModel="ngModel"
+                   required maxlength="190" minlength="1"
+                   placeholder="{{'SETTINGS_PERSONAL_DATA_MODAL_PHONE_NUMBER_LABEL' | translate}}">
+            <mat-error *ngIf="labelModel.invalid">
+              {{'SETTINGS_PERSONAL_DATA_MODAL_PHONE_NUMBER_LABEL_INVALID' | translate}}
+            </mat-error>
+          </mat-form-field>
+        </div>
 
-        <mat-form-field class="col-12 col-sm-12 col-md-6 col-lg-6">
-          <input matInput id="phoneNumber" name="phoneNumber" type="text"
-                 ngModel #phoneNumberModel="ngModel"
-                 required maxlength="190" minlength="1" phone="AT"
-                 placeholder="{{'SETTINGS_PERSONAL_DATA_MODAL_PHONE_NUMBER_PHONE_NUMBER' | translate}}">
-          <mat-error *ngIf="phoneNumberModel.invalid">
-            {{'SETTINGS_PERSONAL_DATA_MODAL_PHONE_NUMBER_PHONE_NUMBER_NOT_VALID' | translate}}
-          </mat-error>
-        </mat-form-field>
+        <div class="col-12 col-sm-12 col-md-6 col-lg-5">
+          <mat-form-field>
+            <input matInput id="phoneNumber" name="phoneNumber" type="text"
+                   ngModel #phoneNumberModel="ngModel"
+                   required maxlength="190" minlength="1" phone="AT"
+                   placeholder="{{'SETTINGS_PERSONAL_DATA_MODAL_PHONE_NUMBER_PHONE_NUMBER' | translate}}">
+            <mat-error *ngIf="phoneNumberModel.invalid">
+              {{'SETTINGS_PERSONAL_DATA_MODAL_PHONE_NUMBER_PHONE_NUMBER_NOT_VALID' | translate}}
+            </mat-error>
+          </mat-form-field>
+        </div>
 
-        <div class="col-12 col-sm-12 col-md-2 col-lg-3">
-          <button mat-raised-button class="success-button" id="addPhoneNumber-button"
+        <div class="col-12 col-sm-12 col-md-12 col-lg-4">
+          <button mat-raised-button class="success-button" id="addPhoneNumber-button" style="width: 100%"
                   type="submit" [disabled]="!phoneNumberForm.valid">
             {{'SETTINGS_PERSONAL_DATA_MODAL_PHONE_NUMBER_ADD' | translate}}
-            <mat-icon aria-label="Submit button">send</mat-icon>
+            <mat-icon aria-label="Submit button">library_add</mat-icon>
           </button>
         </div>
       </div>

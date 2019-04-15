@@ -248,7 +248,7 @@
 
   "MANAGEMENT_USERS_UPDATE_USER_MODAL_TITLE": "Bearbeite ",
   "MANAGEMENT_USERS_UPDATE_USER_MODAL_FREE_GROUPS": "Freie Gruppen und Register",
-  "MANAGEMENT_USERS_UPDATE_USER_MODAL_JOINED_GROUPS": "Beigetretene Gruppen und Register",
+  "MANAGEMENT_USERS_UPDATE_USER_MODAL_JOINED_GROUPS": "Beigetretene Gruppen / Register",
   "MANAGEMENT_USERS_UPDATE_USER_MODAL_NO_GROUPS": "Es gibt keine Gruppen oder Register zum auswählen",
 
 

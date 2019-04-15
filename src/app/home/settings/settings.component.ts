@@ -1,11 +1,10 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
+
 import {PersonalDataComponent} from './personal-data/personal-data.component';
 import {PhoneNumberComponent} from './phone-number/phone-number.component';
 import {EmailAddressComponent} from './email-address/email-address.component';
 import {PasswordComponent} from './password/password.component';
-import {TwoFactorAuthenticationComponent} from './two-factor-authentication/two-factor-authentication.component';
 import {MatDialog} from '@angular/material';
-import {FeedbackModalComponent} from '../../footer/modals/feedback-modal/feedback-modal.component';
 import {CalendarTokenComponent} from './calendar-token/calendar-token.component';
 
 @Component({
@@ -13,23 +12,20 @@ import {CalendarTokenComponent} from './calendar-token/calendar-token.component'
   templateUrl: './settings.component.html',
   styleUrls: ['./settings.component.css']
 })
-export class SettingsComponent implements OnInit {
+export class SettingsComponent {
 
   constructor(private dialog: MatDialog) {
   }
 
-  ngOnInit() {
-  }
-
   openPersonalDataModal() {
     this.dialog.open(PersonalDataComponent, {
-      width: '50vh',
+      width: '80vh',
     });
   }
 
   openPhoneNumberModal() {
     this.dialog.open(PhoneNumberComponent, {
-      width: '70vh',
+      width: '80vh',
     });
   }
 
