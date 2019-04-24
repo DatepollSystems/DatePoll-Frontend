@@ -22,4 +22,4 @@ deploy_stage:
     - ls
     - sshpass -V
     - export SSHPASS=$SSH_PASSWORD
-    - sshpass -e scp -o stricthostkeychecking=no -r DatePoll-Frontend/* $SSH_USERNAME@$SSH_HOST:/var/www/datepoll
+    - sshpass -e scp -o stricthostkeychecking=no -p $SSH_PORT -r DatePoll-Frontend/* $SSH_USERNAME@$SSH_HOST:/var/www/datepoll
