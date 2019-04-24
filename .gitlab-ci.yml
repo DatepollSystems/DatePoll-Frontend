@@ -21,4 +21,4 @@ deploy_stage:
     - cd dist/
     - ls
     - sshpass -V
-    - sshpass -p '$SSH_PASSWORD' scp -r -o UserKnownHostsFile=/dev/null -P $SSH_PORT ./DatePoll-Frontend/*  $SSH_USERNAME@$SSH_HOST:/var/www/datepoll/
+    - sshpass -p $SSH_PASSWORD scp -r -o UserKnownHostsFile=/dev/null -P $SSH_PORT ./DatePoll-Frontend/*  $SSH_USERNAME@$SSH_HOST:/var/www/datepoll/
