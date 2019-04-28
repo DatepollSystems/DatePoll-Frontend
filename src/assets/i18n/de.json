@@ -77,6 +77,17 @@
   "STARTPAGE_EMERGENCY_CINEMA_SERVICE": "Notfall-Kinodienst",
 
 
+  "CALENDAR": "Kalender",
+
+  "CALENDAR_PREVIOUS": "Zurück",
+  "CALENDAR_TODAY": "Heute",
+  "CALENDAR_NEXT": "Weiter",
+
+  "CALENDAR_MONTH": "Monat",
+  "CALENDAR_WEEK": "Woche",
+  "CALENDAR_DAY": "Tag",
+
+
   "CINEMA_TICKETS_BOOK_A_TICKET": "Karten reservieren",
   "CINEMA_TICKETS_DATE": "Datum:",
   "CINEMA_TICKETS_TRAILER": "Trailer:",

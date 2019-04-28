@@ -3,17 +3,22 @@ import {BrowserModule} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
+import {registerLocaleData} from '@angular/common';
+import localeDe from '@angular/common/locales/de';
 
 import {CustomFormsModule} from 'ng2-validation';
 import {NgxChartsModule} from '@swimlane/ngx-charts';
 import {MaterialModule} from './material-module';
 import {NgxMatSelectSearchModule} from 'ngx-mat-select-search';
 import {ClipboardModule} from 'ngx-clipboard';
+import {CalendarModule, DateAdapter} from 'angular-calendar';
+import {adapterFactory} from 'angular-calendar/date-adapters/date-fns';
 
 import {AppRoutingModule} from './app-routing.module';
 
 
 import {TranslatePipe} from './translation/translate.pipe';
+import {NoSanitizePipe} from './no-sanitize.pipe';
 
 
 import {CookieService} from 'angular2-cookie/core';
@@ -69,8 +74,11 @@ import {SubgroupCreateModalComponent} from './home/management/groups-management/
 import {CalendarTokenComponent} from './home/settings/calendar-token/calendar-token.component';
 import {GroupUserListModalComponent} from './home/management/groups-management/group-user-list-modal/group-user-list-modal.component';
 import {SubgroupUserListModalComponent} from './home/management/groups-management/subgroup-user-list-modal/subgroup-user-list-modal.component';
-import { GroupUserRoleUpdateModalComponent } from './home/management/groups-management/group-user-list-modal/group-user-role-update-modal/group-user-role-update-modal.component';
-import { SubgroupUserRoleUpdateModalComponent } from './home/management/groups-management/subgroup-user-list-modal/subgroup-user-role-update-modal/subgroup-user-role-update-modal.component';
+import {GroupUserRoleUpdateModalComponent} from './home/management/groups-management/group-user-list-modal/group-user-role-update-modal/group-user-role-update-modal.component';
+import {SubgroupUserRoleUpdateModalComponent} from './home/management/groups-management/subgroup-user-list-modal/subgroup-user-role-update-modal/subgroup-user-role-update-modal.component';
+import {CalendarComponent} from './home/calendar/calendar.component';
+
+registerLocaleData(localeDe);
 
 @NgModule({
   declarations: [
@@ -114,7 +122,9 @@ import { SubgroupUserRoleUpdateModalComponent } from './home/management/groups-m
     GroupUserListModalComponent,
     SubgroupUserListModalComponent,
     GroupUserRoleUpdateModalComponent,
-    SubgroupUserRoleUpdateModalComponent
+    SubgroupUserRoleUpdateModalComponent,
+    CalendarComponent,
+    NoSanitizePipe
   ],
   imports: [
     BrowserModule,
@@ -128,6 +138,10 @@ import { SubgroupUserRoleUpdateModalComponent } from './home/management/groups-m
     NgxMatSelectSearchModule,
     ClipboardModule,
     AppRoutingModule,
+    CalendarModule.forRoot({
+      provide: DateAdapter,
+      useFactory: adapterFactory
+    })
   ],
   // Without this entryComponents dynamic modal loading does not work
   entryComponents: [

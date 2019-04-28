@@ -1,3 +1,5 @@
+@import "../node_modules/angular-calendar/css/angular-calendar.css";
+
 /* Use roboto font reset everything  */
 html, body {
   height: 100%;
@@ -15,7 +17,7 @@ a:hover {
   cursor: pointer;
 }
 
-/* Show different datepicker for mobile and desktop */
+/* ----- Show different datepicker for mobile and desktop ----- */
 #datepicker-field {
   display: unset;
 }
@@ -49,6 +51,7 @@ a:hover {
     display: unset !important;
   }
 }
+/* ------------------------------------------------------------- */
 
 .not-selectable {
   user-select: none;
@@ -64,6 +67,7 @@ mat-card {
   margin-bottom: 10px;
 }
 
+/* Different mat-card styles */
 .success-mat-card {
   user-select: none;
   background-color: #689F38;
@@ -84,6 +88,7 @@ mat-card {
   margin-bottom: 0;
 }
 
+/* Different button styles */
 .success-button {
   background-color: #4CAF50;
   color: #ffffff

@@ -14,6 +14,7 @@ import {MovieAdministrationComponent} from './home/cinema/movie-administration/m
 import {UsersManagementComponent} from './home/management/users-management/users-management.component';
 import {DatepollManagementComponent} from './home/management/datepoll-management/datepoll-management.component';
 import {GroupsManagementComponent} from './home/management/groups-management/groups-management.component';
+import {CalendarComponent} from './home/calendar/calendar.component';
 
 const appRoutes = [
   {path: '', redirectTo: '/home', pathMatch: 'full'},
@@ -26,6 +27,7 @@ const appRoutes = [
   {
     path: 'home', component: HomeComponent, children: [
       {path: '', pathMatch: 'full', component: StartComponent},
+      {path: 'calendar', component: CalendarComponent},
       {path: 'cinema/tickets', component: MovieTicketsComponent},
       {path: 'cinema/service', component: MovieServiceComponent},
       {path: 'cinema/administration', component: MovieAdministrationComponent},
