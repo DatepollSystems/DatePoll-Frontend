@@ -1,7 +1,6 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
 import {environment} from '../../../../environments/environment';
-import {Http, Response} from '@angular/http';
-import {map} from 'rxjs/operators';
 
 @Component({
   selector: 'app-about-modal',
@@ -15,14 +14,8 @@ export class AboutModalComponent {
   backendVersion = 'Loading..';
   requiredBackendVersion = environment.required_version;
 
-  constructor(private http: Http) {
-    http.get(this.apiUrl + '/').pipe(map(
-      (response: Response) => {
-        const data = response.json();
-        console.log(data);
-        return data;
-    }
-    )).subscribe(
+  constructor(private http: HttpClient) {
+    http.get(this.apiUrl + '/').subscribe(
       (data: any) => {
         this.backendVersion = data.version;
       },
