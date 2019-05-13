@@ -51,7 +51,6 @@ export class AuthService {
 
           this.setToken(data.token);
           console.log('authService | IamLoggedIn | Successful | JWT Token: ' + this._token);
-          this.router.navigate(['/home']);
         },
         (error) => {
           console.log(error);
