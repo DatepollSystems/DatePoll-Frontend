@@ -14,7 +14,7 @@
       </div>
       <div class="col-7 col-sm-7 col-md-8 col-lg-10" style="text-align: right">
         {{movie.workerName}}
-        <button mat-icon-button (click)="signOutForWorker()"
+        <button mat-icon-button (click)="signOutForWorker(signOutForWorkerButton)" #signOutForWorkerButton
                 *ngIf="movie.workerID == myUserService.getID()" matTooltipPosition="right"
                 matTooltip="{{'CINEMA_TICKETS_CANCEL_CINEMA_SERVICE_TOOLTIP' | translate}}">
           <mat-icon aria-label="Cancel worker">cancel</mat-icon>
@@ -27,7 +27,7 @@
         {{'CINEMA_TICKETS_WORKER' | translate}}
       </div>
       <div class="col" style="text-align: right">
-        <button (click)="applyForWorker()" mat-stroked-button
+        <button (click)="applyForWorker(applyForWorkerButton)" mat-stroked-button #applyForWorkerButton
                 color="primary">{{'CINEMA_TICKETS_APPLY' | translate}}</button>
       </div>
     </div>
@@ -38,7 +38,7 @@
       </div>
       <div class="col-7 col-sm-7 col-md-8 col-lg-7" style="text-align: right">
         {{movie.emergencyWorkerName}}
-        <button mat-icon-button (click)="signOutForEmergencyWorker()"
+        <button mat-icon-button (click)="signOutForEmergencyWorker(signOutForEmergencyWorkerButton)" #signOutForEmergencyWorkerButton
                 *ngIf="movie.emergencyWorkerID == myUserService.getID()" matTooltipPosition="right"
                 matTooltip="{{'CINEMA_TICKETS_CANCEL_CINEMA_SERVICE_TOOLTIP' | translate}}">
           <mat-icon aria-label="Cancel worker">cancel</mat-icon>
@@ -51,7 +51,7 @@
         {{'CINEMA_TICKETS_EMERGENCY_WORKER' | translate}}
       </div>
       <div class="col" style="text-align: end">
-        <button (click)="applyForEmergencyWorker()" mat-stroked-button
+        <button (click)="applyForEmergencyWorker(applyForEmergencyWorkerButton)" mat-stroked-button #applyForEmergencyWorkerButton
                 color="accent">{{'CINEMA_TICKETS_APPLY' | translate}}</button>
       </div>
     </div>

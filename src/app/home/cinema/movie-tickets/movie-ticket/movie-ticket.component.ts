@@ -59,19 +59,23 @@ export class MovieTicketComponent implements OnInit {
     );
   }
 
-  applyForWorker() {
+  applyForWorker(element) {
+    element.disabled = true;
     this.cinemaService.applyForWorker(this.movie.id);
   }
 
-  signOutForWorker() {
+  signOutForWorker(element) {
+    element.disabled = true;
     this.cinemaService.signOutForWorker(this.movie.id);
   }
 
-  applyForEmergencyWorker() {
+  applyForEmergencyWorker(element) {
+    element.disabled = true;
     this.cinemaService.applyForEmergencyWorker(this.movie.id);
   }
 
-  signOutForEmergencyWorker() {
+  signOutForEmergencyWorker(element) {
+    element.disabled = true;
     this.cinemaService.signOutForEmergencyWorker(this.movie.id);
   }
 }
