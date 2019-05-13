@@ -6,6 +6,7 @@ import {EmailAddressComponent} from './email-address/email-address.component';
 import {PasswordComponent} from './password/password.component';
 import {MatDialog} from '@angular/material';
 import {CalendarTokenComponent} from './calendar-token/calendar-token.component';
+import {SessionsComponent} from './sessions/sessions.component';
 
 @Component({
   selector: 'app-settings',
@@ -44,6 +45,12 @@ export class SettingsComponent {
   openCalendarTokenModal() {
     this.dialog.open(CalendarTokenComponent, {
       width: '80vh',
+    });
+  }
+
+  onSessionManagmentModal() {
+    this.dialog.open(SessionsComponent, {
+      width: '80vh'
     });
   }
 

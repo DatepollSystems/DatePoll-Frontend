@@ -40,6 +40,17 @@
                 <mat-hint *ngIf="loginFail"><strong style="color: red">{{'SIGNIN_EMAIL_OR_PASSWORD_INCORRECT' | translate}}</strong></mat-hint>
               </mat-form-field>
             </div>
+
+            <div class="row">
+              <div class="col-12">
+                <mat-slide-toggle
+                  color="primary"
+                  name="stayLoggedIn"
+                  [(ngModel)]="stayLoggedIn">
+                  {{'SIGNIN_STAY_LOGGED_IN' | translate}}
+                </mat-slide-toggle>
+              </div>
+            </div>
           </mat-card-content>
 
           <mat-card-actions>

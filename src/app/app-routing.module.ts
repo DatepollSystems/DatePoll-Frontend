@@ -15,9 +15,10 @@ import {UsersManagementComponent} from './home/management/users-management/users
 import {DatepollManagementComponent} from './home/management/datepoll-management/datepoll-management.component';
 import {GroupsManagementComponent} from './home/management/groups-management/groups-management.component';
 import {CalendarComponent} from './home/calendar/calendar.component';
+import {AuthGuard} from './auth/auth-guard.service';
 
 const appRoutes = [
-  {path: '', redirectTo: '/home', pathMatch: 'full'},
+  {path: '', redirectTo: '/signin', pathMatch: 'full'},
   {
     path: 'info', component: InfoComponent, children: [
       {path: 'imprint', component: ImprintComponent},
@@ -25,7 +26,7 @@ const appRoutes = [
     ]
   },
   {
-    path: 'home', component: HomeComponent, children: [
+    path: 'home', component: HomeComponent, canActivate: [AuthGuard], children: [
       {path: '', pathMatch: 'full', component: StartComponent},
       {path: 'calendar', component: CalendarComponent},
       {path: 'cinema/tickets', component: MovieTicketsComponent},

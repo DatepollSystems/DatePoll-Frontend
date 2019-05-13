@@ -38,6 +38,7 @@
   "SIGNIN_NOT_SIGNED_UP": "Kein Konto?",
   "SIGNIN_EMAIL": "Email-Adresse",
   "SIGNIN_PASSWORD": "Passwort",
+  "SIGNIN_STAY_LOGGED_IN": "Angemeldet bleiben",
   "SIGNIN_KEEP_YOUR_PASSWORD_SECRET": "Behalte dein Passwort geheim",
   "SIGNIN_EMAIL_OR_PASSWORD_INCORRECT": "Die Email-Adresse oder das Passwort sind inkorrekt!",
   "SIGNIN_ACCOUNT_NOT_ACTIVATED": "Dein Account ist derzeit deaktiviert! Probier es doch später wieder...",
@@ -199,6 +200,7 @@
   "SETTINGS_SECURITY_CHANGE_PASSWORD": "Password ändern",
   "SETTINGS_SECURITY_CHANGE_2FA": "Zwei-Faktor-Authentifizierung einstellen",
   "SETTINGS_SECURITY_CALENDAR": "Kalenderverwaltung",
+  "SETTINGS_SECURITY_SESSIONS": "Sessionverwaltung",
 
   "SETTINGS_SECURITY_MODAL_CHANGE_PASSWORD_TITLE_START": "Geben Sie Ihr altes Passwort ein",
   "SETTINGS_SECURITY_MODAL_CHANGE_PASSWORD_OLD_PASSWORD_INCORRECT": "Ihr eingegebenes Password ist inkorrekt!",
@@ -210,8 +212,11 @@
   "SETTINGS_SECURITY_MODAL_CHANGE_PASSWORD_FINISHED": "Ihr Passwort wurde erfolgreich geändert!",
 
   "SETTINGS_SECURITY_MDOAL_CALENDAR_INPUT_TITLE": "Persönlicher Kalender",
-  "SETTINGS_SECURITY_MODAL_COPY_TOKEN_TOOLTIP": "In die Zwischenablage kopieren",
-  "SETTINGS_SECURITY_MODAL_RESET_TOKEN": "Zurücksetzen",
+  "SETTINGS_SECURITY_MODAL_CALENDAR_COPY_TOKEN_TOOLTIP": "In die Zwischenablage kopieren",
+  "SETTINGS_SECURITY_MODAL_CALENDAR_RESET_TOKEN": "Zurücksetzen",
+
+  "SETTINGS_SECURITY_MODAL_SESSION_REMOVED_SUCCESSFUL": "Die Session wurde erfolgreich abgemeldet!",
+  "SETTINGS_SECURITY_MODAL_SESSION_NO_SESSIONS_AVAILABLE": "Es sind keine Sessions mit DatePoll verbunden!",
 
 
   "MANAGEMENT_USERS_SEARCH": "Suche...",

@@ -12,6 +12,7 @@ import {MaterialModule} from './material-module';
 import {NgxMatSelectSearchModule} from 'ngx-mat-select-search';
 import {ClipboardModule} from 'ngx-clipboard';
 import {CalendarModule, DateAdapter} from 'angular-calendar';
+import {SimpleNotificationsModule} from 'angular2-notifications';
 import {adapterFactory} from 'angular-calendar/date-adapters/date-fns';
 
 import {AppRoutingModule} from './app-routing.module';
@@ -24,15 +25,11 @@ import {NoSanitizePipe} from './no-sanitize.pipe';
 import {CookieService} from 'angular2-cookie/core';
 
 import {AuthService} from './auth/auth.service';
-import {MyUserService} from './home/my-user.service';
+import {AuthGuard} from './auth/auth-guard.service';
 import {TranslateService} from './translation/translate.service';
 import {HttpService} from './services/http.service';
-import {CinemaService} from './home/cinema/cinema.service';
-import {MovieTicketsService} from './home/cinema/movieTickets.service';
-import {HomepageService} from './home/start/homepage.service';
 import {ExcelService} from './services/excel.service';
-import {GroupsService} from './home/management/groups-management/groups.service';
-import {UsersService} from './home/management/users-management/users.service';
+import {SessionsService} from './home/settings/sessions/sessions.service';
 
 
 import {MAT_DATE_LOCALE, MAT_SNACK_BAR_DEFAULT_OPTIONS} from '@angular/material';
@@ -77,6 +74,7 @@ import {SubgroupUserListModalComponent} from './home/management/groups-managemen
 import {GroupUserRoleUpdateModalComponent} from './home/management/groups-management/group-user-list-modal/group-user-role-update-modal/group-user-role-update-modal.component';
 import {SubgroupUserRoleUpdateModalComponent} from './home/management/groups-management/subgroup-user-list-modal/subgroup-user-role-update-modal/subgroup-user-role-update-modal.component';
 import {CalendarComponent} from './home/calendar/calendar.component';
+import {SessionsComponent} from './home/settings/sessions/sessions.component';
 
 registerLocaleData(localeDe);
 
@@ -124,7 +122,8 @@ registerLocaleData(localeDe);
     GroupUserRoleUpdateModalComponent,
     SubgroupUserRoleUpdateModalComponent,
     CalendarComponent,
-    NoSanitizePipe
+    NoSanitizePipe,
+    SessionsComponent
   ],
   imports: [
     BrowserModule,
@@ -138,6 +137,10 @@ registerLocaleData(localeDe);
     NgxMatSelectSearchModule,
     ClipboardModule,
     AppRoutingModule,
+    SimpleNotificationsModule.forRoot({
+      position: ['top', 'right'],
+      timeOut: 5000
+    }),
     CalendarModule.forRoot({
       provide: DateAdapter,
       useFactory: adapterFactory
@@ -152,6 +155,7 @@ registerLocaleData(localeDe);
     EmailAddressComponent,
     PasswordComponent,
     CalendarTokenComponent,
+    SessionsComponent,
     //   TwoFactorAuthenticationComponent,
     MovieCreateModalComponent,
     MovieEditModalComponent,
@@ -170,15 +174,11 @@ registerLocaleData(localeDe);
   ],
   providers: [
     AuthService,
-    MyUserService,
+    AuthGuard,
     TranslateService,
     HttpService,
-    CinemaService,
     ExcelService,
-    MovieTicketsService,
-    HomepageService,
-    GroupsService,
-    UsersService,
+    SessionsService,
     {
       provide: APP_INITIALIZER,
       useFactory: setupTranslateFactory,
