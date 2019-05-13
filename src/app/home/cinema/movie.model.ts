@@ -34,6 +34,8 @@ export class Movie implements CalendarEvent {
     this.movieYearID = movieYearID;
 
     this.start = movieDate;
+    this.start.setHours(20);
+    this.start.setMinutes(30);
     this.title = name;
   }
 

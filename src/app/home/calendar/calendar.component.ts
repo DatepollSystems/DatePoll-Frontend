@@ -117,7 +117,7 @@ export class CalendarComponent implements OnInit, OnDestroy {
         if (this.myUserService.hasPermission(Permissions.CINEMA_MOVIE_ADMINISTRATION)) {
           this.movies[i].actions = [
             {
-              label: '[Ändern] ',
+              label: '[&#9997;] ',
               onClick: ({event}: { event: CalendarEvent }): void => {
                 this.dialog.open(MovieEditModalComponent, {
                   width: '80vh',
@@ -126,7 +126,7 @@ export class CalendarComponent implements OnInit, OnDestroy {
               }
             },
             {
-              label: '[Entfernen]',
+              label: '[&#10060;]',
               onClick: ({event}: { event: CalendarEvent }): void => {
                 this.cinemaService.deleteMovie(this.movies[i].id).subscribe(
                   (data: any) => {
