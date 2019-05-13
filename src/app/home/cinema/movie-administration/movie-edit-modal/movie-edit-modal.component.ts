@@ -92,6 +92,7 @@ export class MovieEditModalComponent {
       (data: any) => {
         console.log(data);
         this.cinemaService.fetchMovies();
+        this.cinemaService.fetchNotShownMovies();
       },
       (error) => console.log(error)
     );

@@ -1,8 +1,13 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, TemplateRef, ViewChild} from '@angular/core';
+import {OnInit, ChangeDetectionStrategy, Component, OnDestroy, ChangeDetectorRef} from '@angular/core';
 import {addDays, addHours, endOfDay, endOfMonth, isSameDay, isSameMonth, startOfDay, subDays} from 'date-fns';
-import {Subject} from 'rxjs';
+import {Subject, Subscription} from 'rxjs';
 import {CalendarEvent, CalendarEventAction, CalendarEventTimesChangedEvent, CalendarView} from 'angular-calendar';
-import {DomSanitizer} from '@angular/platform-browser';
+import {CinemaService} from '../cinema/cinema.service';
+import {Movie} from '../cinema/movie.model';
+import {MyUserService} from '../my-user.service';
+import {Permissions} from '../../permissions';
+import {MovieEditModalComponent} from '../cinema/movie-administration/movie-edit-modal/movie-edit-modal.component';
+import {MatDialog} from '@angular/material';
 
 const colors: any = {
   red: {
@@ -25,41 +30,19 @@ const colors: any = {
   styleUrls: ['./calendar.component.css'],
   templateUrl: './calendar.component.html'
 })
-export class CalendarComponent {
-  @ViewChild('modalContent') modalContent: TemplateRef<any>;
+export class CalendarComponent implements OnInit, OnDestroy {
+  locale = 'de';
 
   view: CalendarView = CalendarView.Month;
-
-  locale = 'de';
 
   CalendarView = CalendarView;
 
   viewDate: Date = new Date();
 
-  modalData: {
-    action: string;
-    event: CalendarEvent;
-  };
-
-  actions: CalendarEventAction[] = [
-    {
-      label: 'Ändern ',
-      onClick: ({event}: { event: CalendarEvent }): void => {
-        this.handleEvent('Edited', event);
-      }
-    },
-    {
-      label: 'Entfernen',
-      onClick: ({event}: { event: CalendarEvent }): void => {
-        this.events = this.events.filter(iEvent => iEvent !== event);
-        this.handleEvent('Deleted', event);
-      }
-    }
-  ];
-
   refresh: Subject<any> = new Subject();
 
-  events: CalendarEvent[] = [
+  events: CalendarEvent[] = [];
+  /*events: CalendarEvent[] = [
     {
       start: subDays(startOfDay(new Date()), 1),
       end: addDays(new Date(), 1),
@@ -98,11 +81,70 @@ export class CalendarComponent {
       },
       draggable: true
     }
-  ];
+  ];*/
 
-  activeDayIsOpen: boolean = true;
+  activeDayIsOpen = false;
 
-  constructor(private sanitizer: DomSanitizer) {
+  private movies: Movie[];
+  private moviesSubscription: Subscription;
+
+  constructor(private cinemaService: CinemaService,
+              private myUserService: MyUserService,
+              private cdr: ChangeDetectorRef,
+              private dialog: MatDialog) { }
+
+  ngOnInit() {
+    this.cinemaService.fetchYears();
+    this.movies = this.cinemaService.getNotShownMovies();
+    this.refreshCalendar();
+
+    this.moviesSubscription = this.cinemaService.notShownMoviesChange.subscribe((value) => {
+      this.movies = value;
+      this.refreshCalendar();
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.moviesSubscription.unsubscribe();
+  }
+
+  refreshCalendar() {
+    this.activeDayIsOpen = false;
+    this.events = [];
+
+    if (this.movies != null) {
+      for (let i = 0; i < this.movies.length; i++) {
+        if (this.myUserService.hasPermission(Permissions.CINEMA_MOVIE_ADMINISTRATION)) {
+          this.movies[i].actions = [
+            {
+              label: '[Ändern] ',
+              onClick: ({event}: { event: CalendarEvent }): void => {
+                this.dialog.open(MovieEditModalComponent, {
+                  width: '80vh',
+                  data: {movie: this.movies[i]}
+                });
+              }
+            },
+            {
+              label: '[Entfernen]',
+              onClick: ({event}: { event: CalendarEvent }): void => {
+                this.cinemaService.deleteMovie(this.movies[i].id).subscribe(
+                  (data: any) => {
+                    console.log(data);
+                    this.cinemaService.fetchMovies();
+                    this.cinemaService.fetchNotShownMovies();
+                  },
+                  (error) => console.log(error)
+                );
+              }
+            }
+          ];
+        }
+        this.events.push(this.movies[i]);
+      }
+    }
+
+    this.cdr.detectChanges();
   }
 
   dayClicked({date, events}: { date: Date; events: CalendarEvent[] }): void {
@@ -127,33 +169,6 @@ export class CalendarComponent {
       }
       return iEvent;
     });
-    this.handleEvent('Dropped or resized', event);
-  }
-
-  handleEvent(action: string, event: CalendarEvent): void {
-    // this.modalData = {event, action};
-    // this.modal.open(this.modalContent, {size: 'lg'});
-  }
-
-  addEvent(): void {
-    this.events = [
-      ...this.events,
-      {
-        title: 'New event',
-        start: startOfDay(new Date()),
-        end: endOfDay(new Date()),
-        color: colors.red,
-        draggable: true,
-        resizable: {
-          beforeStart: true,
-          afterEnd: true
-        }
-      }
-    ];
-  }
-
-  deleteEvent(eventToDelete: CalendarEvent) {
-    this.events = this.events.filter(event => event !== eventToDelete);
   }
 
   setView(view: CalendarView) {

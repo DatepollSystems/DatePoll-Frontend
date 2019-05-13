@@ -1,4 +1,7 @@
-export class Movie {
+import {CalendarEvent} from 'angular-calendar';
+import {EventAction} from 'calendar-utils';
+
+export class Movie implements CalendarEvent {
   public id: number;
   public name: string;
   public date: Date;
@@ -29,5 +32,26 @@ export class Movie {
     this.emergencyWorkerName = emergencyWorkerName;
     this.bookedTickets = bookedTickets;
     this.movieYearID = movieYearID;
+
+    this.start = movieDate;
+    this.title = name;
   }
+
+  start: Date;
+  title: string;
+
+  public actions: EventAction[];
+
+  allDay = false;
+  color = {
+    primary: '#1e90ff',
+    secondary: '#D1E8FF'
+  };
+  draggable: false;
+
+  end: null;
+
+  meta = null;
+  resizable: { beforeStart: false; afterEnd: false };
+
 }

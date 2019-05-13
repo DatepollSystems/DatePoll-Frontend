@@ -50,6 +50,7 @@
       </div>
 
       <div *ngIf="myUserService.hasPermission(settingsAdministration)">
+        <mat-divider></mat-divider>
         <a mat-list-item routerLink="management/datepoll" routerLinkActive="activated">
           <mat-icon>settings_input_component</mat-icon> {{'NAV_MANAGEMENT_DATEPOLL' | translate}}
         </a>
