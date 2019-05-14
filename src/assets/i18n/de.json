@@ -264,6 +264,7 @@
   "MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_ACTIVATED": "Account aktivieren",
   "MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_ACTIVATED_DESCRIPTION": "Wenn Account aktivieren angekreuzt ist, wird direkt nach der Erstellung des Benutzers eine Einladungsemail versendet",
   "MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_PHONE_NUMBERS": "Telefonnummern",
+  "MANAGEMENT_USERS_CREATE_USER_MODAL_NO_JOINED_GROUPS": "Das Mitglied ist noch keiner Gruppe oder Register zugeteilt",
 
   "MANAGEMENT_USERS_UPDATE_USER_MODAL_TITLE": "Bearbeite ",
   "MANAGEMENT_USERS_UPDATE_USER_MODAL_FREE_GROUPS": "Freie Gruppen und Register",
