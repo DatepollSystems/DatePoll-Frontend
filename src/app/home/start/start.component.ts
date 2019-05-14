@@ -22,7 +22,7 @@ export class StartComponent implements OnInit, OnDestroy {
   bookings: HomeBookingsModel[];
   bookingsSubscription: Subscription;
 
-  constructor(private homePageService: HomepageService, public cinemaService: CinemaService, public myUserService: MyUserService) {
+  constructor(private homePageService: HomepageService, private cinemaService: CinemaService, public myUserService: MyUserService) {
     this.birthdays = homePageService.getBirthdays();
     this.birthdaysSubscription = homePageService.birthdaysChange.subscribe((value) => {
       this.birthdays = value;
@@ -61,6 +61,26 @@ export class StartComponent implements OnInit, OnDestroy {
     this.birthdaysSubscription.unsubscribe();
 
     document.getElementById('my-container').style.background = 'none';
+  }
+
+  applyForWorker(movieID: number, element: any) {
+    element.disabled = true;
+    this.cinemaService.applyForWorker(movieID);
+  }
+
+  signOutForWorker(movieID: number, element: any) {
+    element.disabled = true;
+    this.cinemaService.signOutForWorker(movieID);
+  }
+
+  applyForEmergencyWorker(movieID: number, element: any) {
+    element.disabled = true;
+    this.cinemaService.applyForEmergencyWorker(movieID);
+  }
+
+  signOutForEmergencyWorker(movieID: number, element: any) {
+    element.disabled = true;
+    this.cinemaService.signOutForEmergencyWorker(movieID);
   }
 
 }
