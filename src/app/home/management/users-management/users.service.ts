@@ -54,7 +54,7 @@ export class UsersService {
 
           const localUser = new User(user.id, user.email, user.email_verified, user.force_password_change, user.title,
             user.firstname, user.surname, birthday, join_date, user.streetname, user.streetnumber, user.zipcode,
-            user.location, user.activated, user.activity, localPhoneNumbers);
+            user.location, user.activated, user.activity, localPhoneNumbers, user.permissions);
           users.push(localUser);
         }
         this.setUsers(users);

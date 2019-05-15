@@ -1,4 +1,4 @@
-import {Component, OnDestroy} from '@angular/core';
+import {Component, OnDestroy, TemplateRef, ViewChild} from '@angular/core';
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 import {NgForm} from '@angular/forms';
 import {MatDialogRef, MatTableDataSource} from '@angular/material';
@@ -6,6 +6,7 @@ import {Subscription} from 'rxjs';
 
 import {UsersService} from '../users.service';
 import {GroupsService} from '../../groups-management/groups.service';
+import {NotificationsService, NotificationType} from 'angular2-notifications';
 
 import {PhoneNumber} from '../../../phoneNumber.model';
 import {Group} from '../../groups-management/group.model';
@@ -16,6 +17,8 @@ import {Group} from '../../groups-management/group.model';
   styleUrls: ['./user-create-modal.component.css']
 })
 export class UserCreateModalComponent implements OnDestroy {
+
+  @ViewChild('successfullyCreatedUser') successfullyCreatedUser: TemplateRef<any>;
 
   displayedColumns: string[] = ['label', 'phonenumber', 'action'];
   dataSource: MatTableDataSource<PhoneNumber>;
@@ -33,8 +36,12 @@ export class UserCreateModalComponent implements OnDestroy {
   joined: any[] = [];
   free: any[] = [];
 
-  constructor(private usersService: UsersService, private dialogRef: MatDialogRef<UserCreateModalComponent>,
-              private groupsService: GroupsService) {
+  permissions: string[] = [];
+
+  constructor(private usersService: UsersService,
+              private dialogRef: MatDialogRef<UserCreateModalComponent>,
+              private groupsService: GroupsService,
+              private notificationsService: NotificationsService) {
     this.dataSource = new MatTableDataSource(this.phoneNumbers);
 
     this.groups = this.groupsService.getGroups();
@@ -78,8 +85,8 @@ export class UserCreateModalComponent implements OnDestroy {
 
     setTimeout(function () {
       document.getElementById('joined-list').style.height = document.getElementById('free-list').clientHeight.toString() + 'px';
-      console.log('Free hight:' + document.getElementById('free-list').clientHeight);
-      console.log('Joined hight:' + document.getElementById('joined-list').clientHeight);
+      console.log('Free height:' + document.getElementById('free-list').clientHeight);
+      console.log('Joined height:' + document.getElementById('joined-list').clientHeight);
     }, 1000);
   }
 
@@ -102,7 +109,25 @@ export class UserCreateModalComponent implements OnDestroy {
     this.dataSource = new MatTableDataSource(this.phoneNumbers);
   }
 
+  addPermission(form: NgForm) {
+    const permission = form.controls.permission.value;
+    this.permissions.push(permission);
+    form.reset();
+  }
+
+  removePermission(permission: string) {
+    const permissions = [];
+    for (let i = 0; i < this.permissions.length; i++) {
+      if (!this.permissions[i].includes(permission)) {
+        permissions.push(this.permissions[i]);
+      }
+    }
+    this.permissions = permissions;
+  }
+
   create(form: NgForm) {
+    this.sendingRequest = true;
+
     const title = form.controls.title.value;
     const email = form.controls.email.value;
     const firstname = form.controls.firstname.value;
@@ -182,7 +207,8 @@ export class UserCreateModalComponent implements OnDestroy {
       'location': location,
       'activated': activated,
       'activity': activity,
-      'phoneNumbers': phoneNumbersObject
+      'phoneNumbers': phoneNumbersObject,
+      'permissions': this.permissions
     };
     console.log(userObject);
 
@@ -203,8 +229,10 @@ export class UserCreateModalComponent implements OnDestroy {
     document.getElementById('addPhoneNumber-button').setAttribute('disabled', 'disabled');
     document.getElementById('phoneNumber').setAttribute('disabled', 'disabled');
     document.getElementById('label').setAttribute('disabled', 'disabled');
+    document.getElementById('addPermission-button').setAttribute('disabled', 'disabled');
+    document.getElementById('permission').setAttribute('disabled', 'disabled');
 
-    this.sendingRequest = true;
+    this.dialogRef.close();
 
     this.usersService.addUser(userObject).subscribe(
       (data: any) => {
@@ -240,12 +268,11 @@ export class UserCreateModalComponent implements OnDestroy {
         }
 
         this.usersService.fetchUsers();
-        this.dialogRef.close();
+        this.notificationsService.html(this.successfullyCreatedUser, NotificationType.Success, null, 'success');
       },
       (error) => {
         console.log(error);
         this.usersService.fetchUsers();
-        this.dialogRef.close();
       }
     );
   }

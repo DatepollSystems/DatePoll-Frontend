@@ -265,11 +265,21 @@
   "MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_ACTIVATED_DESCRIPTION": "Wenn Account aktivieren angekreuzt ist, wird direkt nach der Erstellung des Benutzers eine Einladungsemail versendet",
   "MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_PHONE_NUMBERS": "Telefonnummern",
   "MANAGEMENT_USERS_CREATE_USER_MODAL_NO_JOINED_GROUPS": "Das Mitglied ist noch keiner Gruppe oder Register zugeteilt",
+  "MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_PERMISSIONS": "Berechtigungen",
+  "MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_PERMISSIONS_SMALL_0": "Falls du mehr über Berechtigungen erfahren willst, rufe einfach folgenden ",
+  "MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_PERMISSIONS_SMALL_1": " auf.",
+  "MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_ADD_PERMISSION": "Hinzufügen",
+  "MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_REMOVE_PERMISSION_TOOLTIP": "Entferne diese Berechtigung",
+  "MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_PERMISSION": "Berechtigung",
+  "MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_PERMISSION_INCORRECT": "Die Berechtigung darf nicht mehr als 190 Zeichen haben!",
+  "MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_NO_PERMISSIONS_AVAILABLE": "Dieses Mitglied besitzt noch keine Berechtigungen",
+  "MANAGEMENT_USERS_CREATE_USER_MODAL_SUCCESSFULLY_CREATED_USER": "Das Mitglied wurde erfolgreich angelegt!",
 
   "MANAGEMENT_USERS_UPDATE_USER_MODAL_TITLE": "Bearbeite ",
   "MANAGEMENT_USERS_UPDATE_USER_MODAL_FREE_GROUPS": "Freie Gruppen und Register",
   "MANAGEMENT_USERS_UPDATE_USER_MODAL_JOINED_GROUPS": "Beigetretene Gruppen / Register",
   "MANAGEMENT_USERS_UPDATE_USER_MODAL_NO_GROUPS": "Es gibt keine Gruppen oder Register zum auswählen",
+  "MANAGEMENT_USERS_UPDATE_USER_MODAL_SUCCESSFULLY_UPDATED_USER": "Die Änderungen wurden erfolgreich übernommen!",
 
 
   "MANAGEMENT_GROUPS_SEARCH": "Suche nach einer Gruppe oder einem Register",

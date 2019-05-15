@@ -1,4 +1,4 @@
-import {Component, Inject, OnDestroy} from '@angular/core';
+import {Component, Inject, OnDestroy, TemplateRef, ViewChild} from '@angular/core';
 import {NgForm} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialogRef, MatTableDataSource} from '@angular/material';
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
@@ -9,6 +9,7 @@ import {UsersService} from '../users.service';
 import {GroupsService} from '../../groups-management/groups.service';
 import {PhoneNumber} from '../../../phoneNumber.model';
 import {User} from '../user.model';
+import {NotificationsService, NotificationType} from 'angular2-notifications';
 
 @Component({
   selector: 'app-user-update-modal',
@@ -16,6 +17,8 @@ import {User} from '../user.model';
   styleUrls: ['./user-update-modal.component.css']
 })
 export class UserUpdateModalComponent implements OnDestroy {
+
+  @ViewChild('successfullyUpdatedUser') successfullyUpdatedUser: TemplateRef<any>;
 
   displayedColumns: string[] = ['label', 'phonenumber', 'action'];
   dataSource: MatTableDataSource<PhoneNumber>;
@@ -41,6 +44,8 @@ export class UserUpdateModalComponent implements OnDestroy {
   phoneNumberCount = 0;
   phoneNumbers: PhoneNumber[] = [];
 
+  permissions: string[] = [];
+
   joinedCopy: any[] = [];
   joined: any[] = [];
   joinedSubscription: Subscription;
@@ -53,7 +58,8 @@ export class UserUpdateModalComponent implements OnDestroy {
     @Inject(MAT_DIALOG_DATA) public data: any,
     private dialogRef: MatDialogRef<UserUpdateModalComponent>,
     private groupsService: GroupsService,
-    private usersService: UsersService) {
+    private usersService: UsersService,
+    private notificationsService: NotificationsService) {
 
     this.user = data.user;
     this.title = this.user.title;
@@ -69,6 +75,7 @@ export class UserUpdateModalComponent implements OnDestroy {
     this.activity = this.user.activity;
     this.activated = this.user.activated;
     this.phoneNumbers = this.user.getPhoneNumbers();
+    this.permissions = this.user.getPermissions();
 
     this.dataSource = new MatTableDataSource(this.phoneNumbers);
 
@@ -80,8 +87,8 @@ export class UserUpdateModalComponent implements OnDestroy {
 
       setTimeout(function () {
         document.getElementById('joined-list').style.height = document.getElementById('free-list').clientHeight.toString() + 'px';
-        console.log('Free hight:' + document.getElementById('free-list').clientHeight);
-        console.log('Joined hight:' + document.getElementById('joined-list').clientHeight);
+        console.log('Free height:' + document.getElementById('free-list').clientHeight);
+        console.log('Joined height:' + document.getElementById('joined-list').clientHeight);
       }, 1000);
     });
 
@@ -93,8 +100,8 @@ export class UserUpdateModalComponent implements OnDestroy {
 
       setTimeout(function () {
         document.getElementById('free-list').style.height = document.getElementById('joined-list').clientHeight.toString() + 'px';
-        console.log('Free hight:' + document.getElementById('free-list').clientHeight);
-        console.log('Joined hight:' + document.getElementById('joined-list').clientHeight);
+        console.log('Free height:' + document.getElementById('free-list').clientHeight);
+        console.log('Joined height:' + document.getElementById('joined-list').clientHeight);
       }, 1000);
     });
   }
@@ -121,6 +128,22 @@ export class UserUpdateModalComponent implements OnDestroy {
 
     this.phoneNumbers = localPhoneNumbers;
     this.dataSource = new MatTableDataSource(this.phoneNumbers);
+  }
+
+  addPermission(form: NgForm) {
+    const permission = form.controls.permission.value;
+    this.permissions.push(permission);
+    form.reset();
+  }
+
+  removePermission(permission: string) {
+    const permissions = [];
+    for (let i = 0; i < this.permissions.length; i++) {
+      if (!this.permissions[i].includes(permission)) {
+        permissions.push(this.permissions[i]);
+      }
+    }
+    this.permissions = permissions;
   }
 
   update(form: NgForm) {
@@ -181,6 +204,69 @@ export class UserUpdateModalComponent implements OnDestroy {
     console.log('update User | location: ' + location);
     console.log('update User | activity: ' + activity);
     console.log('update User | activated: ' + activated);
+
+    const phoneNumbersObject = [];
+
+    for (let i = 0; i < this.phoneNumbers.length; i++) {
+      const phoneNumberObject = {
+        'label': this.phoneNumbers[i].label,
+        'number': this.phoneNumbers[i].phoneNumber
+      };
+      phoneNumbersObject.push(phoneNumberObject);
+    }
+
+    const userObject = {
+      'title': title,
+      'email': email,
+      'firstname': firstname,
+      'surname': surname,
+      'birthday': birthdayformatted,
+      'join_date': join_dateformatted,
+      'streetname': streetname,
+      'streetnumber': streetnumber,
+      'zipcode': zipcode,
+      'location': location,
+      'activated': activated,
+      'activity': activity,
+      'phoneNumbers': phoneNumbersObject,
+      'permissions': this.permissions
+    };
+    console.log(userObject);
+
+    form.controls.title.disable();
+    form.controls.email.disable();
+    form.controls.firstname.disable();
+    form.controls.surname.disable();
+    form.controls.streetname.disable();
+    form.controls.streetnumber.disable();
+    form.controls.zipcode.disable();
+    form.controls.location.disable();
+    form.controls.activity.disable();
+    form.controls.activated.disable();
+    document.getElementById('datepicker-birthday').setAttribute('disabled', 'disabled');
+    document.getElementById('datepicker-birthday-mobile').setAttribute('disabled', 'disabled');
+    document.getElementById('datepicker-join_date').setAttribute('disabled', 'disabled');
+    document.getElementById('datepicker-join_date-mobile').setAttribute('disabled', 'disabled');
+    document.getElementById('addPhoneNumber-button').setAttribute('disabled', 'disabled');
+    document.getElementById('phoneNumber').setAttribute('disabled', 'disabled');
+    document.getElementById('label').setAttribute('disabled', 'disabled');
+    document.getElementById('addPermission-button').setAttribute('disabled', 'disabled');
+    document.getElementById('permission').setAttribute('disabled', 'disabled');
+
+    this.dialogRef.close();
+
+    this.usersService.updateUser(this.user.id, userObject).subscribe(
+      (data: any) => {
+        console.log(data);
+
+        this.usersService.fetchUsers();
+        this.notificationsService.html(this.successfullyUpdatedUser, NotificationType.Success, null, 'success');
+      },
+      (error) => {
+        console.log(error);
+        this.usersService.fetchUsers();
+      }
+    );
 
     for (let i = 0; i < this.joined.length; i++) {
       const group = this.joined[i];
@@ -253,64 +339,6 @@ export class UserUpdateModalComponent implements OnDestroy {
         }
       }
     }
-
-    const phoneNumbersObject = [];
-
-    for (let i = 0; i < this.phoneNumbers.length; i++) {
-      const phoneNumberObject = {
-        'label': this.phoneNumbers[i].label,
-        'number': this.phoneNumbers[i].phoneNumber
-      };
-      phoneNumbersObject.push(phoneNumberObject);
-    }
-
-    const userObject = {
-      'title': title,
-      'email': email,
-      'firstname': firstname,
-      'surname': surname,
-      'birthday': birthdayformatted,
-      'join_date': join_dateformatted,
-      'streetname': streetname,
-      'streetnumber': streetnumber,
-      'zipcode': zipcode,
-      'location': location,
-      'activated': activated,
-      'activity': activity,
-      'phoneNumbers': phoneNumbersObject
-    };
-    console.log(userObject);
-
-    form.controls.title.disable();
-    form.controls.email.disable();
-    form.controls.firstname.disable();
-    form.controls.surname.disable();
-    form.controls.streetname.disable();
-    form.controls.streetnumber.disable();
-    form.controls.zipcode.disable();
-    form.controls.location.disable();
-    form.controls.activity.disable();
-    form.controls.activated.disable();
-    document.getElementById('datepicker-birthday').setAttribute('disabled', 'disabled');
-    document.getElementById('datepicker-birthday-mobile').setAttribute('disabled', 'disabled');
-    document.getElementById('datepicker-join_date').setAttribute('disabled', 'disabled');
-    document.getElementById('datepicker-join_date-mobile').setAttribute('disabled', 'disabled');
-    document.getElementById('addPhoneNumber-button').setAttribute('disabled', 'disabled');
-    document.getElementById('phoneNumber').setAttribute('disabled', 'disabled');
-    document.getElementById('label').setAttribute('disabled', 'disabled');
-
-    this.usersService.updateUser(this.user.id, userObject).subscribe(
-      (data: any) => {
-        console.log(data);
-        this.usersService.fetchUsers();
-        this.dialogRef.close();
-      },
-      (error) => {
-        console.log(error);
-        this.usersService.fetchUsers();
-        this.dialogRef.close();
-      }
-    );
   }
 
   dropToJoined(event: CdkDragDrop<string[]>) {

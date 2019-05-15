@@ -136,6 +136,7 @@
       </mat-form-field>
     </div>
 
+    <!-- Divider -->
     <div class="row">
       <div class="col-12">
         <mat-divider></mat-divider>
@@ -143,87 +144,91 @@
     </div>
 
     <!-- Phone number -->
-    <div class="row" style="margin-top: 15px;">
-      <div class="col-12">
-        <span style="font-size: 16px">{{'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_PHONE_NUMBERS' | translate}}</span>
+    <div>
+      <div class="row" style="margin-top: 15px;">
+        <div class="col-12">
+          <span style="font-size: 16px">{{'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_PHONE_NUMBERS' | translate}}</span>
+        </div>
+      </div>
+
+      <form (ngSubmit)="addPhoneNumber(phoneNumberForm)" #phoneNumberForm="ngForm">
+        <div class="row justify-content-around" style="margin-top: 15px;">
+          <div class="col-12 col-sm-12 col-md-6 col-lg-3">
+            <mat-form-field>
+              <input matInput id="label" name="label" type="text"
+                     ngModel #labelModel="ngModel"
+                     required maxlength="190" minlength="1"
+                     placeholder="{{'SETTINGS_PERSONAL_DATA_MODAL_PHONE_NUMBER_LABEL' | translate}}">
+              <mat-error *ngIf="labelModel.invalid">
+                {{'SETTINGS_PERSONAL_DATA_MODAL_PHONE_NUMBER_LABEL_INVALID' | translate}}
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="col-12 col-sm-12 col-md-6 col-lg-5">
+            <mat-form-field>
+              <input matInput id="phoneNumber" name="phoneNumber" type="text"
+                     ngModel #phoneNumberModel="ngModel"
+                     required maxlength="190" minlength="1" phone="AT"
+                     placeholder="{{'SETTINGS_PERSONAL_DATA_MODAL_PHONE_NUMBER_PHONE_NUMBER' | translate}}">
+              <mat-error *ngIf="phoneNumberModel.invalid">
+                {{'SETTINGS_PERSONAL_DATA_MODAL_PHONE_NUMBER_PHONE_NUMBER_NOT_VALID' | translate}}
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="col-12 col-sm-12 col-md-12 col-lg-4">
+            <button mat-raised-button class="success-button" id="addPhoneNumber-button" style="width: 100%"
+                    type="submit" [disabled]="!phoneNumberForm.valid">
+              {{'SETTINGS_PERSONAL_DATA_MODAL_PHONE_NUMBER_ADD' | translate}}
+              <mat-icon aria-label="Submit button">library_add</mat-icon>
+            </button>
+          </div>
+        </div>
+      </form>
+
+      <div class="row">
+        <div class="col-12">
+          <table mat-table [dataSource]="dataSource" class="col-12">
+
+            <ng-container matColumnDef="label">
+              <th mat-header-cell
+                  *matHeaderCellDef> {{'SETTINGS_PERSONAL_DATA_MODAL_PHONE_NUMBER_LABEL' | translate}} </th>
+              <td mat-cell *matCellDef="let phoneNumber"> {{phoneNumber.label}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="phonenumber">
+              <th mat-header-cell
+                  *matHeaderCellDef> {{'SETTINGS_PERSONAL_DATA_MODAL_PHONE_NUMBER_PHONE_NUMBER' | translate}} </th>
+              <td mat-cell *matCellDef="let phoneNumber"> {{phoneNumber.phoneNumber}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="action">
+              <th mat-header-cell *matHeaderCellDef> {{'ACTION' | translate}} </th>
+              <td mat-cell *matCellDef="let phoneNumber">
+                <button mat-icon-button [matTooltipPosition]="'right'"
+                        matTooltip="{{'SETTINGS_PERSONAL_DATA_MODAL_PHONE_NUMBER_DELETE_TOOLTIP' | translate}}"
+                        (click)="removePhoneNumber(phoneNumber.id)">
+                  <mat-icon>delete_foreve</mat-icon>
+                </button>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+        </div>
       </div>
     </div>
 
-    <form (ngSubmit)="addPhoneNumber(phoneNumberForm)" #phoneNumberForm="ngForm">
-      <div class="row justify-content-around" style="margin-top: 15px;">
-        <div class="col-12 col-sm-12 col-md-6 col-lg-3">
-          <mat-form-field>
-            <input matInput id="label" name="label" type="text"
-                   ngModel #labelModel="ngModel"
-                   required maxlength="190" minlength="1"
-                   placeholder="{{'SETTINGS_PERSONAL_DATA_MODAL_PHONE_NUMBER_LABEL' | translate}}">
-            <mat-error *ngIf="labelModel.invalid">
-              {{'SETTINGS_PERSONAL_DATA_MODAL_PHONE_NUMBER_LABEL_INVALID' | translate}}
-            </mat-error>
-          </mat-form-field>
-        </div>
-
-        <div class="col-12 col-sm-12 col-md-6 col-lg-5">
-          <mat-form-field>
-            <input matInput id="phoneNumber" name="phoneNumber" type="text"
-                   ngModel #phoneNumberModel="ngModel"
-                   required maxlength="190" minlength="1" phone="AT"
-                   placeholder="{{'SETTINGS_PERSONAL_DATA_MODAL_PHONE_NUMBER_PHONE_NUMBER' | translate}}">
-            <mat-error *ngIf="phoneNumberModel.invalid">
-              {{'SETTINGS_PERSONAL_DATA_MODAL_PHONE_NUMBER_PHONE_NUMBER_NOT_VALID' | translate}}
-            </mat-error>
-          </mat-form-field>
-        </div>
-
-        <div class="col-12 col-sm-12 col-md-12 col-lg-4">
-          <button mat-raised-button class="success-button" id="addPhoneNumber-button" style="width: 100%"
-                  type="submit" [disabled]="!phoneNumberForm.valid">
-            {{'SETTINGS_PERSONAL_DATA_MODAL_PHONE_NUMBER_ADD' | translate}}
-            <mat-icon aria-label="Submit button">library_add</mat-icon>
-          </button>
-        </div>
-      </div>
-    </form>
-
-    <div class="row">
-      <div class="col-12">
-        <table mat-table [dataSource]="dataSource" class="col-12">
-
-          <ng-container matColumnDef="label">
-            <th mat-header-cell
-                *matHeaderCellDef> {{'SETTINGS_PERSONAL_DATA_MODAL_PHONE_NUMBER_LABEL' | translate}} </th>
-            <td mat-cell *matCellDef="let phoneNumber"> {{phoneNumber.label}} </td>
-          </ng-container>
-
-          <ng-container matColumnDef="phonenumber">
-            <th mat-header-cell
-                *matHeaderCellDef> {{'SETTINGS_PERSONAL_DATA_MODAL_PHONE_NUMBER_PHONE_NUMBER' | translate}} </th>
-            <td mat-cell *matCellDef="let phoneNumber"> {{phoneNumber.phoneNumber}} </td>
-          </ng-container>
-
-          <ng-container matColumnDef="action">
-            <th mat-header-cell *matHeaderCellDef> {{'ACTION' | translate}} </th>
-            <td mat-cell *matCellDef="let phoneNumber">
-              <button mat-icon-button [matTooltipPosition]="'right'"
-                      matTooltip="{{'SETTINGS_PERSONAL_DATA_MODAL_PHONE_NUMBER_DELETE_TOOLTIP' | translate}}"
-                      (click)="removePhoneNumber(phoneNumber.id)">
-                <mat-icon>delete_foreve</mat-icon>
-              </button>
-            </td>
-          </ng-container>
-
-          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-        </table>
-      </div>
-    </div>
-
+    <!-- Divider -->
     <div class="row" style="margin-top: 15px; margin-bottom: 15px">
       <div class="col-12">
         <mat-divider></mat-divider>
       </div>
     </div>
 
+    <!-- Group management -->
     <div class="row">
       <div class="col-12 col-md-6">
         <h2>{{'MANAGEMENT_USERS_UPDATE_USER_MODAL_FREE_GROUPS' | translate}}</h2>
@@ -268,6 +273,69 @@
       </div>
     </div>
 
+    <!-- Divider -->
+    <div class="row" style="margin-top: 15px; margin-bottom: 15px">
+      <div class="col-12">
+        <mat-divider></mat-divider>
+      </div>
+    </div>
+
+    <!-- Permissions -->
+    <div>
+      <div class="row">
+        <div class="col-12">
+          <span style="font-size: 16px">{{'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_PERMISSIONS' | translate}}</span>
+        </div>
+        <div class="col-12">
+          <small>
+            {{'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_PERMISSIONS_SMALL_0' | translate}}
+            <a
+              href="https://gitlab.com/BuergerkorpsEggenburg/datepoll-backend-php/wikis/Permissions">Link</a>{{'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_PERMISSIONS_SMALL_1' | translate}}
+          </small>
+        </div>
+      </div>
+
+      <form (ngSubmit)="addPermission(permissionsForm)" #permissionsForm="ngForm">
+        <div class="row justify-content-around">
+          <div class="col-12 col-sm-12 col-md-8 col-lg-8">
+            <mat-form-field>
+              <input matInput id="permission" name="permission" type="text"
+                     ngModel #permissionModel="ngModel"
+                     maxlength="190" required
+                     placeholder="{{'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_PERMISSION' | translate}}">
+              <mat-error *ngIf="permissionModel.invalid">
+                {{'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_PERMISSION_INCORRECT' | translate}}
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="col-12 col-sm-12 col-md-4 col-lg-4">
+            <button mat-raised-button class="success-button" style="width: 100%" id="addPermission-button"
+                    type="submit" [disabled]="!permissionsForm.valid">
+              {{'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_ADD_PERMISSION' | translate}}
+              <mat-icon aria-label="Submit button">playlist_add</mat-icon>
+            </button>
+          </div>
+        </div>
+      </form>
+
+      <div class="row">
+        <mat-list class="col-12">
+          <mat-list-item *ngFor="let permission of permissions">
+            <span matLine>{{ permission }}</span>
+            <button mat-icon-button (click)="removePermission(permission)" matTooltipPosition="right"
+                    matTooltip="{{'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_REMOVE_PERMISSION_TOOLTIP' | translate}}">
+              <mat-icon>delete_forever</mat-icon>
+            </button>
+          </mat-list-item>
+          <mat-list-item *ngIf="permissions.length == 0">
+            {{'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_NO_PERMISSIONS_AVAILABLE' | translate}}
+          </mat-list-item>
+        </mat-list>
+      </div>
+    </div>
+
+    <!-- Divider -->
     <div class="row" style="margin-top: 15px; margin-bottom: 15px">
       <div class="col-12">
         <mat-divider></mat-divider>
@@ -285,12 +353,6 @@
       </div>
     </div>
 
-    <div class="row" style="margin-top: 15px; margin-bottom: 15px">
-      <div class="col-12">
-        <mat-divider></mat-divider>
-      </div>
-    </div>
-
   </form>
 </div>
 <div mat-dialog-actions style="margin-top: 15px">
@@ -299,3 +361,7 @@
   <button mat-button (click)="form.ngSubmit.emit()" class="success-button"
           [disabled]="!form.form.valid">{{'SAVE' | translate}}</button>
 </div>
+
+<ng-template #successfullyUpdatedUser>
+  <h2>{{'MANAGEMENT_USERS_UPDATE_USER_MODAL_SUCCESSFULLY_UPDATED_USER' | translate}}</h2>
+</ng-template>
