@@ -22,6 +22,10 @@ export class AuthService {
     private cookieService: CookieService,
     private snackBar: MatSnackBar) {
 
+    this.getJWTTokenBySessionToken();
+  }
+
+  private getJWTTokenBySessionToken() {
     if (this.isCookieEnabled()) {
       if (this.cookieService.get('sessionToken') == null) {
         this._hasSessionToken = false;
@@ -164,9 +168,13 @@ export class AuthService {
       },
       (error) => {
         console.log(error);
-        // The most probable thing which happened is that the token is not longer valid
-        this.router.navigate(['/signin']);
-        this.snackBar.open('Bitte melde dich erneut an!');
+        if (this._hasSessionToken) {
+          this.getJWTTokenBySessionToken();
+        } else {
+          // The most probable thing which happened is that the token is not longer valid
+          this.router.navigate(['/signin']);
+          this.snackBar.open('Bitte melde dich erneut an!');
+        }
       }
     );
 
