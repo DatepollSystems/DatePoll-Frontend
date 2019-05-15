@@ -109,7 +109,7 @@ export class AuthService {
       'new_password': newPassword
     };
 
-    return this.http.post(this.apiUrl + '/auth/changePasswortAfterSignin', changePasswordAfterSigninObject, {headers: headers});
+    return this.http.post(this.apiUrl + '/auth/changePasswordAfterSignin', changePasswordAfterSigninObject, {headers: headers});
   }
 
   public logout(deleteSessionToken = true) {
