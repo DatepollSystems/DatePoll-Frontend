@@ -54,15 +54,26 @@
           </mat-card-content>
 
           <mat-card-actions>
-            <button
-              mat-raised-button
-              color="primary"
-              type="submit"
-              *ngIf="!showLoadingSpinnerDuringLogin"
-              [disabled]="!f.valid">
-              {{ 'SIGNIN' | translate }}
-              <mat-icon aria-label="Example icon-button with a heart icon">send</mat-icon>
-            </button>
+            <div class="row justify-content-between">
+              <div class="col">
+                <button
+                  mat-raised-button
+                  color="primary"
+                  type="submit"
+                  *ngIf="!showLoadingSpinnerDuringLogin"
+                  [disabled]="!f.valid">
+                  {{ 'SIGNIN' | translate }}
+                  <mat-icon aria-label="Example icon-button with a heart icon">send</mat-icon>
+                </button>
+              </div>
+              <div class="col">
+                <a routerLink="/forgotPassword" style="float: right" mat-raised-button color="accent">
+                  Password vergessen?
+                  <mat-icon>verified_user</mat-icon>
+                </a>
+              </div>
+            </div>
+
             <mat-progress-bar *ngIf="showLoadingSpinnerDuringLogin" class="col-12" mode="indeterminate"></mat-progress-bar>
           </mat-card-actions>
         </form>

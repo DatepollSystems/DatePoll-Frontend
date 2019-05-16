@@ -16,6 +16,7 @@ import {DatepollManagementComponent} from './home/management/datepoll-management
 import {GroupsManagementComponent} from './home/management/groups-management/groups-management.component';
 import {CalendarComponent} from './home/calendar/calendar.component';
 import {AuthGuard} from './auth/auth-guard.service';
+import {ForgotPasswordComponent} from './auth/forgot-password/forgot-password.component';
 
 const appRoutes = [
   {path: '', redirectTo: '/signin', pathMatch: 'full'},
@@ -39,6 +40,7 @@ const appRoutes = [
     ]
   },
   {path: 'signin', component: SigninComponent},
+  {path: 'forgotPassword', component: ForgotPasswordComponent},
   {path: 'not-found', component: PageNotFoundComponent},
   {path: '**', redirectTo: '/not-found'}
 ];

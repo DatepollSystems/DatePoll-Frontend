@@ -75,6 +75,7 @@ import {GroupUserRoleUpdateModalComponent} from './home/management/groups-manage
 import {SubgroupUserRoleUpdateModalComponent} from './home/management/groups-management/subgroup-user-list-modal/subgroup-user-role-update-modal/subgroup-user-role-update-modal.component';
 import {CalendarComponent} from './home/calendar/calendar.component';
 import {SessionsComponent} from './home/settings/sessions/sessions.component';
+import { ForgotPasswordComponent } from './auth/forgot-password/forgot-password.component';
 
 registerLocaleData(localeDe);
 
@@ -123,7 +124,8 @@ registerLocaleData(localeDe);
     SubgroupUserRoleUpdateModalComponent,
     CalendarComponent,
     NoSanitizePipe,
-    SessionsComponent
+    SessionsComponent,
+    ForgotPasswordComponent
   ],
   imports: [
     BrowserModule,

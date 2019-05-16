@@ -10,6 +10,7 @@
   "DO_NOT_FORGET_TO_SAVE": "Vergiss nicht zu speichern!",
   "LOADING": "Laden...",
   "PUT": "Anlegen",
+  "BACK": "Zurück",
 
 
   "LANGUAGE": "Sprache",
@@ -48,6 +49,12 @@
   "SIGNIN_AND_CHANGE_PASSWORD": "Passwort ändern und anmelden",
   "SIGNIN_YOU_NEED_TO_CHANGE_PASSWORD": "Bitte änder das Passwort nach der ersten Anmeldung!",
   "SIGNIN_PASSWORD_ARE_NOT_EQUAL": "Die Passwörter stimmen nicht überein",
+
+  "FORGOT_PASSWORD": "Setzte dein Passwort zurück",
+  "FORGOT_PASSWORD_UNKOWN_EMAIL": "Für diese Email-Addresse gibt es keinen DatePoll-Account",
+  "FORGOT_PASSWORD_CODE_INCORRECT": "Der eingegebene Verifizierungscode ist inkorrekt!",
+  "FORGOT_PASSWORD_RATE_LIMIT_EXCEEDED": "Du hast zu oft versucht den Code einzugeben. Bitte lade die Seite neu!",
+  "FORGOT_PASSWORD_SUCCESSFUL": "Dein Passwort wurde erfolgreich geändert! Du wirst in 5 Sekunden weitergeleitet.",
 
 
   "NAV_USER_SETTINGS": "Persönliche Einstellungen",

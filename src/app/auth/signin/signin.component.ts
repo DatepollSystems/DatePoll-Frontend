@@ -11,7 +11,8 @@ import {AuthService} from '../auth.service';
   styleUrls: ['./signin.component.css']
 })
 export class SigninComponent implements OnInit {
-  projectName = 'priv. uni. Buergerkorps Eggenburg';
+  public static projectName = 'priv. uni. Buergerkorps Eggenburg';
+  projectName = SigninComponent.projectName;
 
   state = 'login';
 
