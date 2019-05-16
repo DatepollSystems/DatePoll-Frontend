@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
 import {MatBottomSheet, MatBottomSheetRef, MatDialog, MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
 import {Subscription} from 'rxjs';
@@ -11,6 +11,8 @@ import {User} from './user.model';
 import {Permissions} from '../../../permissions';
 import {UserCreateModalComponent} from './user-create-modal/user-create-modal.component';
 import {UserUpdateModalComponent} from './user-update-modal/user-update-modal.component';
+import {GroupsService} from '../groups-management/groups.service';
+import {NotificationsService, NotificationType} from 'angular2-notifications';
 
 @Component({
   selector: 'app-users-management',
@@ -127,32 +129,26 @@ export class UsersManagementComponent implements OnInit, OnDestroy {
   styles: ['mat-icon { margin-right: 15px }']
 })
 export class UsersExportBottomSheetComponent {
+  @ViewChild('waitForExport') waitForExport: TemplateRef<any>;
+  @ViewChild('successfullyExported') successfullyExported: TemplateRef<any>;
+
   constructor(private bottomSheetRef: MatBottomSheetRef<UsersExportBottomSheetComponent>, private excelService: ExcelService,
-              private usersService: UsersService) {
+              private usersService: UsersService, private notificationsService: NotificationsService) {
   }
 
   exportExcelSheet() {
-    const users = this.usersService.getUsers();
-    const exportUsers = [];
-
-    for (let i = 0; i < users.length; i++) {
-      const user = {
-        'Titel': users[i].title,
-        'Vorname': users[i].firstname,
-        'Nachname': users[i].surname,
-        'Gebrutsdatum': users[i].birthday.getDate() + '-' + (users[i].birthday.getMonth() + 1) + '-'
-          + users[i].birthday.getFullYear(),
-        'Beitrittsdatum': users[i].join_date.getDate() + '-' + (users[i].join_date.getMonth() + 1) + '-'
-          + users[i].join_date.getFullYear(),
-        'Address': users[i].streetname + ' ' + users[i].streetnumber + ' ' + users[i].zipcode + ' ' + users[i].location,
-        'Email-Adresse': users[i].email,
-        'Telefonnummern': users[i].getPhoneNumbersAsString()
-      };
-
-      exportUsers.push(user);
-    }
-
-    this.excelService.exportAsExcelFile(exportUsers, 'Mitglieder');
+    this.notificationsService.html(this.waitForExport, NotificationType.Info, null, 'info');
     this.bottomSheetRef.dismiss();
+
+    this.usersService.export().subscribe(
+      (data: any) => {
+        console.log(data);
+
+        this.excelService.exportAsExcelFile(data.users, 'Mitglieder');
+
+        this.notificationsService.html(this.successfullyExported, NotificationType.Success, null, 'success');
+      },
+      (error) => console.log(error)
+    );
   }
 }

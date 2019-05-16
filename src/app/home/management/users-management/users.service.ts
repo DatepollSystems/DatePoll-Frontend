@@ -197,4 +197,9 @@ export class UsersService {
       (error) => console.log(error)
     );
   }
+
+
+  public export() {
+    return this.httpService.loggedInV1GETRequest('/management/export/users');
+  }
 }
