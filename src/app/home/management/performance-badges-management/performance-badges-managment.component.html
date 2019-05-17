@@ -1,0 +1,118 @@
+<div class="row">
+  <div class="col-12">
+    <mat-card class="mat-elevation-z3">
+      <mat-card-title>{{'NAV_MANAGEMENT_PERFORMANCE_BADGES' | translate}}</mat-card-title>
+      <mat-card-content>
+        <div class="row">
+          <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
+            <mat-card class="mat-elevation-z3">
+              <mat-card-title>{{'MANAGEMENT_PERFORMANCE_BADGES_TITLE_PERFORMANCE_BADGES' | translate}}</mat-card-title>
+              <mat-card-content>
+                <form (ngSubmit)="addPerformanceBadge(addPerformanceBadgeForm)" #addPerformanceBadgeForm="ngForm" class="row">
+                  <div class="col-12 col-sm-12 col-md-8 col-lg-8">
+                    <mat-form-field>
+                      <input matInput id="performanceBadgeName" name="performanceBadgeName" type="text"
+                             ngModel #performanceBadgeNameModel="ngModel"
+                             required maxlength="190" minlength="1"
+                             placeholder="{{'MANAGEMENT_PERFORMANCE_BADGES_ADD_PERFORMANCE_BADGE_NAME' | translate}}">
+                      <mat-error *ngIf="performanceBadgeNameModel.invalid">
+                        {{'MANAGEMENT_PERFORMANCE_BADGES_ADD_PERFORMANCE_BADGE_NAME_INCORRECT' | translate}}
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-12 col-sm-12 col-md-4 col-lg-4">
+                    <button mat-raised-button class="success-button" style="width: 100%; text-align: center"
+                            type="submit" [disabled]="!addPerformanceBadgeForm.valid">
+                      {{'ADD' | translate}}
+                      <mat-icon aria-label="Submit button">library_add</mat-icon>
+                    </button>
+                  </div>
+                </form>
+
+                <div class="row">
+                  <mat-list class="col-12">
+                    <mat-list-item *ngFor="let performanceBadge of performanceBadges">
+                      <span matLine>{{ performanceBadge.name }}</span>
+                      <button mat-icon-button (click)="updatePerformanceBadge(performanceBadge)"
+                              matTooltipPosition="above"
+                              matTooltip="{{'MANAGEMENT_PERFORMANCE_BADGES_UPDATE_PERFORMANCE_BADGE_TOOLTIP' | translate}}">
+                        <mat-icon>create</mat-icon>
+                      </button>
+                      <button mat-icon-button
+                              (click)="removePerformanceBadge(performanceBadge.id, removePerformanceBadgeButton)"
+                              #removePerformanceBadgeButton matTooltipPosition="above"
+                              matTooltip="{{'MANAGEMENT_PERFORMANCE_BADGES_REMOVE_PERFORMANCE_BADGE_TOOLTIP' | translate}}">
+                        <mat-icon>delete_forever</mat-icon>
+                      </button>
+                      <mat-divider></mat-divider>
+                    </mat-list-item>
+                  </mat-list>
+                </div>
+              </mat-card-content>
+            </mat-card>
+          </div>
+
+          <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
+            <mat-card class="mat-elevation-z3">
+              <mat-card-title>{{'MANAGEMENT_PERFORMANCE_BADGES_TITLE_INSTRUMENTS' | translate}}</mat-card-title>
+              <mat-card-content>
+                <form (ngSubmit)="addInstrument(addInstrumentForm)" #addInstrumentForm="ngForm" class="row">
+                  <div class="col-12 col-sm-12 col-md-8 col-lg-8">
+                    <mat-form-field>
+                      <input matInput id="instrumentName" name="instrumentName" type="text"
+                             ngModel #instrumentNameModel="ngModel"
+                             required maxlength="190" minlength="1"
+                             placeholder="{{'MANAGEMENT_PERFORMANCE_BADGES_ADD_INSTRUMENT_NAME' | translate}}">
+                      <mat-error *ngIf="instrumentNameModel.invalid">
+                        {{'MANAGEMENT_PERFORMANCE_BADGES_ADD_INSTRUMENT_NAME_INCORRECT' | translate}}
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-12 col-sm-12 col-md-4 col-lg-4">
+                    <button mat-raised-button class="success-button" style="width: 100%; text-align: center"
+                            type="submit" [disabled]="!addInstrumentForm.valid">
+                      {{'ADD' | translate}}
+                      <mat-icon aria-label="Submit button">library_add</mat-icon>
+                    </button>
+                  </div>
+                </form>
+
+                <div class="row">
+                  <mat-list class="col-12">
+                    <mat-list-item *ngFor="let instrument of instruments">
+                      <span matLine>{{ instrument.name }}</span>
+                      <button mat-icon-button (click)="updateInstrument(instrument)"
+                              matTooltipPosition="above"
+                              matTooltip="{{'MANAGEMENT_PERFORMANCE_BADGES_UPDATE_INSTRUMENT_TOOLTIP' | translate}}">
+                        <mat-icon>create</mat-icon>
+                      </button>
+                      <button mat-icon-button (click)="removeInstrument(instrument.id, removeInstrumentButton)"
+                              #removeInstrumentButton matTooltipPosition="above"
+                              matTooltip="{{'MANAGEMENT_PERFORMANCE_BADGES_REMOVE_INSTRUMENT_TOOLTIP' | translate}}">
+                        <mat-icon>delete_forever</mat-icon>
+                      </button>
+                      <mat-divider></mat-divider>
+                    </mat-list-item>
+                  </mat-list>
+                </div>
+              </mat-card-content>
+            </mat-card>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
+
+<ng-template #successfullyAddedPerformanceBadge>
+  <h2>{{'MANAGEMENT_PERFORMANCE_BADGES_ADD_PERFORMANCE_BADGE_SUCCESSFUL' | translate}}</h2>
+</ng-template>
+<ng-template #successfullyRemovedPerformanceBadge>
+  <h2>{{'MANAGEMENT_PERFORMANCE_BADGES_REMOVED_PERFORMANCE_BADGE_SUCCESSFUL' | translate}}</h2>
+</ng-template>
+<ng-template #successfullyAddedInstrument>
+  <h2>{{'MANAGEMENT_PERFORMANCE_BADGES_ADD_INSTRUMENT_SUCCESSFUL' | translate}}</h2>
+</ng-template>
+<ng-template #successfullyRemovedInstrument>
+  <h2>{{'MANAGEMENT_PERFORMANCE_BADGES_REMOVED_INSTRUMENT_SUCCESSFUL' | translate}}</h2>
+</ng-template>

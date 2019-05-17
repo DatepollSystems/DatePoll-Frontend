@@ -75,7 +75,10 @@ import {GroupUserRoleUpdateModalComponent} from './home/management/groups-manage
 import {SubgroupUserRoleUpdateModalComponent} from './home/management/groups-management/subgroup-user-list-modal/subgroup-user-role-update-modal/subgroup-user-role-update-modal.component';
 import {CalendarComponent} from './home/calendar/calendar.component';
 import {SessionsComponent} from './home/settings/sessions/sessions.component';
-import { ForgotPasswordComponent } from './auth/forgot-password/forgot-password.component';
+import {ForgotPasswordComponent} from './auth/forgot-password/forgot-password.component';
+import {PerformanceBadgesManagmentComponent} from './home/management/performance-badges-management/performance-badges-managment.component';
+import { PerformanceBadgeUpdateModalComponent } from './home/management/performance-badges-management/performance-badge-update-modal/performance-badge-update-modal.component';
+import { InstrumentUpdateModalComponent } from './home/management/performance-badges-management/instrument-update-modal/instrument-update-modal.component';
 
 registerLocaleData(localeDe);
 
@@ -125,7 +128,10 @@ registerLocaleData(localeDe);
     CalendarComponent,
     NoSanitizePipe,
     SessionsComponent,
-    ForgotPasswordComponent
+    ForgotPasswordComponent,
+    PerformanceBadgesManagmentComponent,
+    PerformanceBadgeUpdateModalComponent,
+    InstrumentUpdateModalComponent
   ],
   imports: [
     BrowserModule,
@@ -172,7 +178,9 @@ registerLocaleData(localeDe);
     GroupUserListModalComponent,
     SubgroupUserListModalComponent,
     GroupUserRoleUpdateModalComponent,
-    SubgroupUserRoleUpdateModalComponent
+    SubgroupUserRoleUpdateModalComponent,
+    PerformanceBadgeUpdateModalComponent,
+    InstrumentUpdateModalComponent
   ],
   providers: [
     AuthService,

@@ -17,6 +17,7 @@ import {GroupsManagementComponent} from './home/management/groups-management/gro
 import {CalendarComponent} from './home/calendar/calendar.component';
 import {AuthGuard} from './auth/auth-guard.service';
 import {ForgotPasswordComponent} from './auth/forgot-password/forgot-password.component';
+import {PerformanceBadgesManagmentComponent} from './home/management/performance-badges-management/performance-badges-managment.component';
 
 const appRoutes = [
   {path: '', redirectTo: '/signin', pathMatch: 'full'},
@@ -36,6 +37,7 @@ const appRoutes = [
       {path: 'settings/personal', component: SettingsComponent},
       {path: 'management/user', component: UsersManagementComponent},
       {path: 'management/group', component: GroupsManagementComponent},
+      {path: 'management/performanceBadges', component: PerformanceBadgesManagmentComponent},
       {path: 'management/datepoll', component: DatepollManagementComponent}
     ]
   },

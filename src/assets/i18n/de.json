@@ -11,6 +11,7 @@
   "LOADING": "Laden...",
   "PUT": "Anlegen",
   "BACK": "Zurück",
+  "ADD": "Hinzufügen",
 
 
   "LANGUAGE": "Sprache",
@@ -70,6 +71,7 @@
 
   "NAV_MANAGEMENT_USERS": "Mitgliederverwaltung",
   "NAV_MANAGEMENT_GROUPS": "Gruppenverwaltung",
+  "NAV_MANAGEMENT_PERFORMANCE_BADGES": "Leistungsabzeichenverwaltung",
   "NAV_MANAGEMENT_DATEPOLL": "DatePoll-Verwaltung",
 
 
@@ -332,6 +334,28 @@
   "MANAGEMENT_GROUPS_INFO_SUBGROUP_MODAL_TABLE_ACTION_REMOVE": "Entferne dieses Mitglied aus der Gruppe",
   "MANAGEMENT_GROUPS_INFO_SUBGROUP_MDOAL_TABLE_ACTION_EDIT": "Bearbeite die Rolle des Mitglieds in der Gruppe",
 
-  "MANAGEMENT_DATEPOLL_CINEMA_SERVICE": "Kinoservice"
 
+  "MANAGEMENT_PERFORMANCE_BADGES_TITLE_PERFORMANCE_BADGES": "Leistungsabzeichen",
+  "MANAGEMENT_PERFORMANCE_BADGES_TITLE_INSTRUMENTS": "Instrumente",
+  "MANAGEMENT_PERFORMANCE_BADGES_REMOVE_PERFORMANCE_BADGE_TOOLTIP": "Entferne dieses Leistungsabzeichen",
+  "MANAGEMENT_PERFORMANCE_BADGES_REMOVED_PERFORMANCE_BADGE_SUCCESSFUL": "Das Leistungsabzeichen wurde erfolgreich entfernt!",
+  "MANAGEMENT_PERFORMANCE_BADGES_REMOVE_INSTRUMENT_TOOLTIP": "Entferne dieses Instrument",
+  "MANAGEMENT_PERFORMANCE_BADGES_REMOVED_INSTRUMENT_SUCCESSFUL": "Das Instrument wurde erfolgreich entfernt!",
+
+  "MANAGEMENT_PERFORMANCE_BADGES_UPDATE_PERFORMANCE_BADGE_TOOLTIP": "Bearbeite dieses Leistungsabzeichen",
+  "MANAGEMENT_PERFORMANCE_BADGES_UPDATE_PERFORMANCE_BADGE_MODAL_TITLE": "Bearbeite das Leistungsabzeichen: ",
+  "MANAGEMENT_PERFORMANCE_BADGES_UPDATE_PERFORMANCE_BADGE_SUCCESSFUL": "Das Leistungsabzeichen wurde erfolgreich bearbeitet!",
+  "MANAGEMENT_PERFORMANCE_BADGES_UPDATE_INSTRUMENT_TOOLTIP": "Bearbeite dieses Instrument",
+  "MANAGEMENT_PERFORMANCE_BADGES_UPDATE_INSTRUMENT_MODAL_TITLE": "Bearbeite das Instrument: ",
+  "MANAGEMENT_PERFORMANCE_BADGES_UPDATE_INSTRUMENT_SUCCESSFUL": "Das Instrument wurde erfolgreich bearbeitet!",
+
+  "MANAGEMENT_PERFORMANCE_BADGES_ADD_PERFORMANCE_BADGE_NAME": "Leistungsabzeichenname",
+  "MANAGEMENT_PERFORMANCE_BADGES_ADD_PERFORMANCE_BADGE_NAME_INCORRECT": "Der Name darf weder leer sein, noch mehr als 190 Zeichen haben!",
+  "MANAGEMENT_PERFORMANCE_BADGES_ADD_PERFORMANCE_BADGE_SUCCESSFUL": "Das Leistungabzeichen wurde erfolgreich hinzugefügt!",
+  "MANAGEMENT_PERFORMANCE_BADGES_ADD_INSTRUMENT_NAME": "Instrumentenname",
+  "MANAGEMENT_PERFORMANCE_BADGES_ADD_INSTRUMENT_NAME_INCORRECT": "Der Name darf weder leer sein, noch mehr als 190 Zeichen haben!",
+  "MANAGEMENT_PERFORMANCE_BADGES_ADD_INSTRUMENT_SUCCESSFUL": "Das Instrument wurde erfolgreich hinzugefügt!",
+
+
+  "MANAGEMENT_DATEPOLL_CINEMA_SERVICE": "Kinoservice"
 }

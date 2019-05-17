@@ -49,6 +49,12 @@
         </a>
       </div>
 
+      <div *ngIf="myUserService.hasPermission(managementAdministration)">
+        <a mat-list-item routerLink="management/performanceBadges" routerLinkActive="activated">
+          <mat-icon>star_rate</mat-icon> {{'NAV_MANAGEMENT_PERFORMANCE_BADGES' | translate}}
+        </a>
+      </div>
+
       <div *ngIf="myUserService.hasPermission(settingsAdministration)">
         <mat-divider></mat-divider>
         <a mat-list-item routerLink="management/datepoll" routerLinkActive="activated">
