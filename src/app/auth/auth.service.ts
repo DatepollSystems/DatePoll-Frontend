@@ -53,8 +53,13 @@ export class AuthService {
         (data: any) => {
           console.log(data);
 
+          const hadToken = (this._token != null || this.cookieService.get('token'));
+
           this.setToken(data.token);
           console.log('authService | IamLoggedIn | Successful | JWT Token: ' + this._token);
+          if (!hadToken) {
+            this.router.navigate(['/home']);
+          }
         },
         (error) => {
           console.log(error);
@@ -63,6 +68,8 @@ export class AuthService {
           this.logout(false);
         }
       );
+    } else if (!this._hasSessionToken && this._token == null && this.cookieService.get('token') == null) {
+      this.router.navigate(['/signin']);
     }
   }
 
@@ -139,9 +146,7 @@ export class AuthService {
   }
 
   public getToken(functionUser: string = null): string {
-    if (this._token == null && this.cookieService.get('token') == null) {
-      this.router.navigate(['/signin']);
-    } else if (this._token == null) {
+    if (this._token == null) {
       this._token = this.cookieService.get('token');
 
       if (functionUser != null) {
@@ -201,7 +206,7 @@ export class AuthService {
     this._sessionToken = token;
   }
 
-  public isAuthenticated(functionUser: string = null): boolean {
+  public isAuthenticated(functionUser: string = "Unknown"): boolean {
     let result = false;
 
     if (this.isCookieEnabled()) {

@@ -20,7 +20,7 @@ import {ForgotPasswordComponent} from './auth/forgot-password/forgot-password.co
 import {PerformanceBadgesManagmentComponent} from './home/management/performance-badges-management/performance-badges-managment.component';
 
 const appRoutes = [
-  {path: '', redirectTo: '/signin', pathMatch: 'full'},
+  {path: '', redirectTo: '/home', pathMatch: 'full'},
   {
     path: 'info', component: InfoComponent, children: [
       {path: 'imprint', component: ImprintComponent},

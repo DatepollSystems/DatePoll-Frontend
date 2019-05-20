@@ -1,8 +1,10 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpService} from '../../../services/http.service';
 import {Instrument} from './instrument.model';
 import {Subject} from 'rxjs';
 import {PerformanceBadge} from './performanceBadge.model';
+import {UserPerformanceBadge} from '../users-management/userPerformanceBadge.model';
+import {User} from '../users-management/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +17,11 @@ export class PerformanceBadgesService {
   private instruments: Instrument[];
   public instrumentsChange: Subject<Instrument[]> = new Subject<Instrument[]>();
 
-  constructor(private httpService: HttpService) { }
+  private userPerformanceBadges: UserPerformanceBadge[] = [];
+  public userPerformanceBadgesChange: Subject<UserPerformanceBadge[]> = new Subject<UserPerformanceBadge[]>();
+
+  constructor(private httpService: HttpService) {
+  }
 
   public setPerformanceBadges(performanceBadges: PerformanceBadge[]) {
     this.performanceBadges = performanceBadges;
@@ -119,5 +125,68 @@ export class PerformanceBadgesService {
 
   public removeInstrument(id: number) {
     return this.httpService.loggedInV1DELETERequest('/management/instruments/' + id, 'removeInstrument');
+  }
+
+
+  public addUserHasPerformanceBadgeWithInstrument(userId: number, userPerformanceBadge: UserPerformanceBadge) {
+    const d = new Date(userPerformanceBadge.date);
+    let month = '' + (d.getMonth() + 1),
+      day = '' + d.getDate();
+    const year = d.getFullYear();
+
+    if (month.length < 2) {
+      month = '0' + month;
+    }
+    if (day.length < 2) {
+      day = '0' + day;
+    }
+    const dateFormatted = [year, month, day].join('-');
+
+    const dto = {
+      'user_id': userId,
+      'instrument_id': userPerformanceBadge.instrumentId,
+      'performanceBadge_id': userPerformanceBadge.performanceBadgeId,
+      'date': dateFormatted,
+      'grade': userPerformanceBadge.grade,
+      'note': userPerformanceBadge.note
+    };
+
+    return this.httpService.loggedInV1POSTRequest('/management/performanceBadgeWithInstrument', dto,
+      'addUserHasPerformanceBadgeWithInstrument');
+  }
+
+  public removeUserHasPerformanceBadgeWithInstrument(userPerformanceBadgeId: number) {
+    return this.httpService.loggedInV1DELETERequest('/management/performanceBadgeWithInstrument/' + userPerformanceBadgeId,
+      'removeUserHasPerformanceBadgeWithInstrument');
+  }
+
+  public getUserPerformanceBadges(userId: number): UserPerformanceBadge[] {
+    this.fetchUserPerformanceBadges(userId);
+    return this.userPerformanceBadges.slice();
+  }
+
+  private fetchUserPerformanceBadges(userId: number) {
+    this.httpService.loggedInV1GETRequest('/management/performanceBadgesForUser/' + userId, 'fetchUserPerformanceBadges').subscribe(
+      (data: any) => {
+        console.log(data);
+
+        const userPerformanceBadgesToSave = [];
+        const userPerformanceBadges = data.performanceBadges;
+        for (let i = 0; i < userPerformanceBadges.length; i++) {
+          const userPerformanceBadge = userPerformanceBadges[i];
+          userPerformanceBadgesToSave.push(new UserPerformanceBadge(userPerformanceBadge.id, userPerformanceBadge.performanceBadge_id,
+            userPerformanceBadge.instrument_id, userPerformanceBadge.performanceBadge_name, userPerformanceBadge.instrument_name,
+            userPerformanceBadge.date, userPerformanceBadge.grade, userPerformanceBadge.note));
+        }
+
+        this.setUserPerformanceBadges(userPerformanceBadgesToSave);
+      },
+      (error) => console.log(error)
+    );
+  }
+
+  private setUserPerformanceBadges(userPerformanceBadges: UserPerformanceBadge[]) {
+    this.userPerformanceBadges = userPerformanceBadges;
+    this.userPerformanceBadgesChange.next(this.userPerformanceBadges.slice());
   }
 }

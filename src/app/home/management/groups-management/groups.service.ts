@@ -35,6 +35,7 @@ export class GroupsService {
   public fetchGroups() {
     this.httpService.loggedInV1GETRequest('/management/groups', 'fetchGroups').subscribe(
       (data: any) => {
+        console.log(data);
         const groupsToStore = [];
 
         const groupsData = data.groups;

@@ -10,6 +10,10 @@ import {GroupsService} from '../../groups-management/groups.service';
 import {PhoneNumber} from '../../../phoneNumber.model';
 import {User} from '../user.model';
 import {NotificationsService, NotificationType} from 'angular2-notifications';
+import {UserPerformanceBadge} from '../userPerformanceBadge.model';
+import {PerformanceBadge} from '../../performance-badges-management/performanceBadge.model';
+import {Instrument} from '../../performance-badges-management/instrument.model';
+import {PerformanceBadgesService} from '../../performance-badges-management/performance-badges.service';
 
 @Component({
   selector: 'app-user-update-modal',
@@ -54,11 +58,24 @@ export class UserUpdateModalComponent implements OnDestroy {
   free: any[] = [];
   freeSubscription: Subscription;
 
+  userPerformanceBadgeCount = 0;
+  userPerformanceBadgesCopy: UserPerformanceBadge[];
+  userPerformanceBadges: UserPerformanceBadge[];
+  userPerformanceBadgesSubscription: Subscription;
+  performanceBadges: PerformanceBadge[] = [];
+  performanceBadgesSubscription: Subscription;
+  selectedPerformanceBadge: PerformanceBadge;
+  instruments: Instrument[] = [];
+  instrumentsSubscription: Subscription;
+  selectedInstrument: Instrument;
+  performanceBadgeDate: Date = null;
+
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     private dialogRef: MatDialogRef<UserUpdateModalComponent>,
     private groupsService: GroupsService,
     private usersService: UsersService,
+    private performanceBadgesService: PerformanceBadgesService,
     private notificationsService: NotificationsService) {
 
     this.user = data.user;
@@ -104,11 +121,41 @@ export class UserUpdateModalComponent implements OnDestroy {
         console.log('Joined height:' + document.getElementById('joined-list').clientHeight);
       }, 1000);
     });
+
+    this.performanceBadges = this.performanceBadgesService.getPerformanceBadges();
+    this.performanceBadgesSubscription = this.performanceBadgesService.performanceBadgesChange.subscribe((value) => {
+      this.performanceBadges = value;
+    });
+
+    this.instruments = this.performanceBadgesService.getInstruments();
+    this.instrumentsSubscription = this.performanceBadgesService.instrumentsChange.subscribe((value) => {
+      this.instruments = value;
+    });
+
+    this.userPerformanceBadges = this.performanceBadgesService.getUserPerformanceBadges(this.user.id);
+    this.userPerformanceBadgesCopy = this.userPerformanceBadges.slice();
+    for (let i = 0; i < this.userPerformanceBadges.length; i++) {
+      if (this.userPerformanceBadgeCount <= this.userPerformanceBadges[i].id) {
+        this.userPerformanceBadgeCount = this.userPerformanceBadges[i].id + 1;
+      }
+    }
+    this.userPerformanceBadgesSubscription = this.performanceBadgesService.userPerformanceBadgesChange.subscribe((value) => {
+      this.userPerformanceBadges = value;
+      this.userPerformanceBadgesCopy = this.userPerformanceBadges.slice();
+      for (let i = 0; i < this.userPerformanceBadges.length; i++) {
+        if (this.userPerformanceBadgeCount <= this.userPerformanceBadges[i].id) {
+          this.userPerformanceBadgeCount = this.userPerformanceBadges[i].id + 1;
+        }
+      }
+    });
   }
 
   ngOnDestroy() {
     this.joinedSubscription.unsubscribe();
     this.freeSubscription.unsubscribe();
+    this.performanceBadgesSubscription.unsubscribe();
+    this.instrumentsSubscription.unsubscribe();
+    this.userPerformanceBadgesSubscription.unsubscribe();
   }
 
   addPhoneNumber(form: NgForm) {
@@ -144,6 +191,44 @@ export class UserUpdateModalComponent implements OnDestroy {
       }
     }
     this.permissions = permissions;
+  }
+
+  addPerformanceBadge(form: NgForm) {
+    if (this.selectedInstrument == null || this.selectedPerformanceBadge == null) {
+      return;
+    }
+
+    let grade = form.controls.performanceBadgeGrade.value;
+    let node = form.controls.performanceBadgeNote.value;
+    if (grade != null) {
+      if (grade.length === 0) {
+        grade = null;
+      }
+    }
+    if (node != null) {
+      if (node.length === 0) {
+        node = null;
+      }
+    }
+
+    this.userPerformanceBadges.push(new UserPerformanceBadge(this.userPerformanceBadgeCount, this.selectedPerformanceBadge.id,
+      this.selectedInstrument.id, this.selectedPerformanceBadge.name, this.selectedInstrument.name, this.performanceBadgeDate,
+      grade, node));
+
+    form.reset();
+    this.userPerformanceBadgeCount++;
+    this.performanceBadgeDate = null;
+  }
+
+  removePerformanceBadge(id: number) {
+    const localUserPerformanceBadges = [];
+    for (let i = 0; i < this.userPerformanceBadges.length; i++) {
+      if (this.userPerformanceBadges[i].id !== id) {
+        localUserPerformanceBadges.push(this.userPerformanceBadges[i]);
+      }
+    }
+
+    this.userPerformanceBadges = localUserPerformanceBadges;
   }
 
   update(form: NgForm) {
@@ -252,6 +337,13 @@ export class UserUpdateModalComponent implements OnDestroy {
     document.getElementById('label').setAttribute('disabled', 'disabled');
     document.getElementById('addPermission-button').setAttribute('disabled', 'disabled');
     document.getElementById('permission').setAttribute('disabled', 'disabled');
+    document.getElementById('addPerformanceBadge-button').setAttribute('disabled', 'disabled');
+    document.getElementById('instrument').setAttribute('disabled', 'disabled');
+    document.getElementById('performanceBadge').setAttribute('disabled', 'disabled');
+    document.getElementById('datepicker-performanceBadge').setAttribute('disabled', 'disabled');
+    document.getElementById('datepicker-performanceBadge-mobile').setAttribute('disabled', 'disabled');
+    document.getElementById('performanceBadge-grade').setAttribute('disabled', 'disabled');
+    document.getElementById('performanceBadge-note').setAttribute('disabled', 'disabled');
 
     this.dialogRef.close();
 
@@ -268,6 +360,58 @@ export class UserUpdateModalComponent implements OnDestroy {
       }
     );
 
+    /** Performance badges **/
+    for (let i = 0; i < this.userPerformanceBadges.length; i++) {
+      const userPerformanceBadge = this.userPerformanceBadges[i];
+
+      let toUpdate = true;
+
+      for (let j = 0; j < this.userPerformanceBadgesCopy.length; j++) {
+        const userPerformanceBadgeCopy = this.userPerformanceBadgesCopy[j];
+        if (userPerformanceBadge.id === userPerformanceBadgeCopy.id) {
+          toUpdate = false;
+          console.log('performanceBadges | toAdd | false | ' + userPerformanceBadge.performanceBadgeName + ' | '
+            + userPerformanceBadge.instrumentName);
+          break;
+        }
+      }
+
+      if (toUpdate) {
+        console.log('performanceBadges | toAdd | true | ' + userPerformanceBadge.performanceBadgeName + ' | '
+          + userPerformanceBadge.instrumentName);
+        this.performanceBadgesService.addUserHasPerformanceBadgeWithInstrument(this.user.id, userPerformanceBadge).subscribe(
+          (data: any) => console.log(data),
+          (error) => console.log(error)
+        );
+      }
+    }
+
+    for (let i = 0; i < this.userPerformanceBadgesCopy.length; i++) {
+      const userPerformanceBadgeCopy = this.userPerformanceBadgesCopy[i];
+
+      let toDelete = true;
+
+      for (let j = 0; j < this.userPerformanceBadges.length; j++) {
+        const userPerformanceBadge = this.userPerformanceBadges[j];
+        if (userPerformanceBadgeCopy.id === userPerformanceBadge.id) {
+          toDelete = false;
+          console.log('performanceBadges | toDelete | false | ' + userPerformanceBadge.performanceBadgeName + ' | '
+            + userPerformanceBadge.instrumentName);
+          break;
+        }
+      }
+
+      if (toDelete) {
+        console.log('performanceBadges | toDelete | true | ' + userPerformanceBadgeCopy.performanceBadgeName + ' | '
+          + userPerformanceBadgeCopy.instrumentName);
+        this.performanceBadgesService.removeUserHasPerformanceBadgeWithInstrument(userPerformanceBadgeCopy.id).subscribe(
+          (data: any) => console.log(data),
+          (error) => console.log(error)
+        );
+      }
+    }
+
+    /** Groups and subgroups **/
     for (let i = 0; i < this.joined.length; i++) {
       const group = this.joined[i];
 

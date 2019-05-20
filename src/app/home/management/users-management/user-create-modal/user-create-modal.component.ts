@@ -10,6 +10,10 @@ import {NotificationsService, NotificationType} from 'angular2-notifications';
 
 import {PhoneNumber} from '../../../phoneNumber.model';
 import {Group} from '../../groups-management/group.model';
+import {PerformanceBadgesService} from '../../performance-badges-management/performance-badges.service';
+import {PerformanceBadge} from '../../performance-badges-management/performanceBadge.model';
+import {Instrument} from '../../performance-badges-management/instrument.model';
+import {UserPerformanceBadge} from '../userPerformanceBadge.model';
 
 @Component({
   selector: 'app-user-create-modal',
@@ -38,10 +42,21 @@ export class UserCreateModalComponent implements OnDestroy {
 
   permissions: string[] = [];
 
+  userPerformanceBadgeCount = 0;
+  userPerformanceBadges: UserPerformanceBadge[] = [];
+  performanceBadges: PerformanceBadge[] = [];
+  performanceBadgesSubscription: Subscription;
+  selectedPerformanceBadge: PerformanceBadge;
+  instruments: Instrument[] = [];
+  instrumentsSubscription: Subscription;
+  selectedInstrument: Instrument;
+  performanceBadgeDate: Date = null;
+
   constructor(private usersService: UsersService,
               private dialogRef: MatDialogRef<UserCreateModalComponent>,
               private groupsService: GroupsService,
-              private notificationsService: NotificationsService) {
+              private notificationsService: NotificationsService,
+              private performanceBadgesService: PerformanceBadgesService) {
     this.dataSource = new MatTableDataSource(this.phoneNumbers);
 
     this.groups = this.groupsService.getGroups();
@@ -50,13 +65,28 @@ export class UserCreateModalComponent implements OnDestroy {
       this.groups = value;
       this.remakeFreeAndJoinedList();
     });
+
+    this.performanceBadges = this.performanceBadgesService.getPerformanceBadges();
+    this.performanceBadgesSubscription = this.performanceBadgesService.performanceBadgesChange.subscribe((value) => {
+      this.performanceBadges = value;
+    });
+
+    this.instruments = this.performanceBadgesService.getInstruments();
+    this.instrumentsSubscription = this.performanceBadgesService.instrumentsChange.subscribe((value) => {
+      this.instruments = value;
+    });
   }
 
   ngOnDestroy() {
     this.groupsSubscription.unsubscribe();
+    this.performanceBadgesSubscription.unsubscribe();
+    this.instrumentsSubscription.unsubscribe();
   }
 
   remakeFreeAndJoinedList() {
+    this.free = [];
+    this.joined = [];
+
     for (let i = 0; i < this.groups.length; i++) {
       const group = this.groups[i];
 
@@ -123,6 +153,44 @@ export class UserCreateModalComponent implements OnDestroy {
       }
     }
     this.permissions = permissions;
+  }
+
+  addPerformanceBadge(form: NgForm) {
+    if (this.selectedInstrument == null || this.selectedPerformanceBadge == null) {
+      return;
+    }
+
+    let grade = form.controls.performanceBadgeGrade.value;
+    let node = form.controls.performanceBadgeNote.value;
+    if (grade != null) {
+      if (grade.length === 0) {
+        grade = null;
+      }
+    }
+    if (node != null) {
+      if (node.length === 0) {
+        node = null;
+      }
+    }
+
+    this.userPerformanceBadges.push(new UserPerformanceBadge(this.userPerformanceBadgeCount, this.selectedPerformanceBadge.id,
+      this.selectedInstrument.id, this.selectedPerformanceBadge.name, this.selectedInstrument.name, this.performanceBadgeDate,
+      grade, node));
+
+    this.userPerformanceBadgeCount++;
+    form.reset();
+    this.performanceBadgeDate = null;
+  }
+
+  removePerformanceBadge(id: number) {
+    const localUserPerformanceBadges = [];
+    for (let i = 0; i < this.userPerformanceBadges.length; i++) {
+      if (this.userPerformanceBadges[i].id !== id) {
+        localUserPerformanceBadges.push(this.userPerformanceBadges[i]);
+      }
+    }
+
+    this.userPerformanceBadges = localUserPerformanceBadges;
   }
 
   create(form: NgForm) {
@@ -231,6 +299,13 @@ export class UserCreateModalComponent implements OnDestroy {
     document.getElementById('label').setAttribute('disabled', 'disabled');
     document.getElementById('addPermission-button').setAttribute('disabled', 'disabled');
     document.getElementById('permission').setAttribute('disabled', 'disabled');
+    document.getElementById('addPerformanceBadge-button').setAttribute('disabled', 'disabled');
+    document.getElementById('instrument').setAttribute('disabled', 'disabled');
+    document.getElementById('performanceBadge').setAttribute('disabled', 'disabled');
+    document.getElementById('datepicker-performanceBadge').setAttribute('disabled', 'disabled');
+    document.getElementById('datepicker-performanceBadge-mobile').setAttribute('disabled', 'disabled');
+    document.getElementById('performanceBadge-grade').setAttribute('disabled', 'disabled');
+    document.getElementById('performanceBadge-note').setAttribute('disabled', 'disabled');
 
     this.dialogRef.close();
 
@@ -239,12 +314,11 @@ export class UserCreateModalComponent implements OnDestroy {
         console.log(data);
 
         console.log('create User | User created!');
+        const userID = data.user.id;
+        console.log('create User | Userid: ' + userID);
 
         if (this.joined.length > 0) {
           console.log('create User | Adding user to groups and subgroups');
-
-          const userID = data.user.id;
-          console.log('create User | Userid: ' + userID);
 
           for (let i = 0; i < this.joined.length; i++) {
             const group = this.joined[i];
@@ -264,6 +338,19 @@ export class UserCreateModalComponent implements OnDestroy {
                 (error) => console.log(error)
               );
             }
+          }
+        }
+
+        if (this.userPerformanceBadges.length > 0) {
+          console.log('create User | Adding performance badges');
+
+          for (let i = 0; i < this.userPerformanceBadges.length; i++) {
+            this.performanceBadgesService.addUserHasPerformanceBadgeWithInstrument(userID, this.userPerformanceBadges[i]).subscribe(
+              (sdata: any) => {
+                console.log(sdata);
+              },
+              (error) => console.log(error)
+            );
           }
         }
 

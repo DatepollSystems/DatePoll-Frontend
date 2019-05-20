@@ -77,8 +77,8 @@ import {CalendarComponent} from './home/calendar/calendar.component';
 import {SessionsComponent} from './home/settings/sessions/sessions.component';
 import {ForgotPasswordComponent} from './auth/forgot-password/forgot-password.component';
 import {PerformanceBadgesManagmentComponent} from './home/management/performance-badges-management/performance-badges-managment.component';
-import { PerformanceBadgeUpdateModalComponent } from './home/management/performance-badges-management/performance-badge-update-modal/performance-badge-update-modal.component';
-import { InstrumentUpdateModalComponent } from './home/management/performance-badges-management/instrument-update-modal/instrument-update-modal.component';
+import {PerformanceBadgeUpdateModalComponent} from './home/management/performance-badges-management/performance-badge-update-modal/performance-badge-update-modal.component';
+import {InstrumentUpdateModalComponent} from './home/management/performance-badges-management/instrument-update-modal/instrument-update-modal.component';
 
 registerLocaleData(localeDe);
 
