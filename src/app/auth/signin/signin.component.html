@@ -67,7 +67,8 @@
                 </button>
               </div>
               <div class="col">
-                <a routerLink="/forgotPassword" style="float: right" mat-raised-button color="accent">
+                <a routerLink="/forgotPassword" style="float: right" mat-raised-button color="accent"
+                   *ngIf="!showLoadingSpinnerDuringLogin">
                   Password vergessen?
                   <mat-icon>verified_user</mat-icon>
                 </a>
@@ -78,6 +79,7 @@
           </mat-card-actions>
         </form>
 
+        <!-- Change password after sign in-->
         <form (ngSubmit)="onChangePasswordAfterSignin(f)" #f="ngForm" *ngIf="state === 'changePassword'">
 
           <mat-card class="success-mat-card" matRipple>
