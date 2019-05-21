@@ -178,4 +178,8 @@ export class CalendarComponent implements OnInit, OnDestroy {
   closeOpenMonthViewDay() {
     this.activeDayIsOpen = false;
   }
+
+  handleEvent(test: any, test1: any) {
+
+  }
 }

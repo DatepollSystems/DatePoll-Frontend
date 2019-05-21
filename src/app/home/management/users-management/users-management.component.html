@@ -1,18 +1,27 @@
-<mat-card class="mat-elevation-z8">
+<mat-card class="mat-elevation-z3">
   <mat-card-content>
-    <div class="row">
-      <div class="col-10 col-md-9 col-lg-9">
+    <div class="row justify-content-between">
+      <div class="col">
         <h1>{{'NAV_MANAGEMENT_USERS' | translate}}</h1>
       </div>
-      <div class="col-lg-2 d-none d-lg-block">
-        <button mat-raised-button class="col-12 info-button" (click)="openExportUsersBottomSheet()">Export</button>
-      </div>
-      <div class="col-2 col-md-1 col-lg-1">
-        <button mat-icon-button (click)="refreshUsers()"
-                matTooltipPosition="below"
-                matTooltip="{{'MANAGEMENT_USERS_REFRESH' | translate}}">
-          <mat-icon>refresh</mat-icon>
+      <div class="col" style="text-align: end">
+        <button mat-icon-button [matMenuTriggerFor]="menu">
+          <mat-icon>more_vert</mat-icon>
         </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="refreshUsers()">
+            <mat-icon>refresh</mat-icon>
+            <span>{{'MANAGEMENT_USERS_REFRESH' | translate}}</span>
+          </button>
+          <button mat-menu-item (click)="openExportUsersBottomSheet()">
+            <mat-icon>cloud_download</mat-icon>
+            <span>Export</span>
+          </button>
+          <button mat-menu-item (click)="onActivateAll()">
+            <mat-icon>contact_mail</mat-icon>
+            <span>{{'MANAGEMENT_USERS_ACTIVATE_ALL' | translate}}</span>
+          </button>
+        </mat-menu>
       </div>
     </div>
 
@@ -140,3 +149,7 @@
     <mat-paginator [pageSizeOptions]="[10, 20, 50, 100]" showFirstLastButtons></mat-paginator>
   </mat-card-content>
 </mat-card>
+
+<ng-template #successfullyActivatedAllUsers>
+  <h2>{{'MANAGEMENT_USERS_ACTIVATE_ALL_FINISHED' | translate}}</h2>
+</ng-template>

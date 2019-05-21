@@ -248,9 +248,10 @@
   "MANAGEMENT_USERS_ACTIONS_EDIT_TOOLTIP": "Bearbeite dieses Mitglied",
   "MANAGEMENT_USERS_ACTIONS_DELETE_TOOLTIP": "Lösche dieses Mitglied",
   "MANAGEMENT_USERS_REFRESH": "Mitgliederliste neuladen",
-
   "MANAGEMENT_USERS_EXPORT_LOADING": "Die Mitgliederliste wird angefertig... Dies kann einige Sekunden dauern! Bitte schließe den Browser in dieser Zeit nicht.",
   "MANAGEMENT_USERS_EXPORT_FINISHED": "Die Mitgliederliste wurde erfolgreich exportiert!",
+  "MANAGEMENT_USERS_ACTIVATE_ALL": "Alle Mitglieder aktivieren",
+  "MANAGEMENT_USERS_ACTIVATE_ALL_FINISHED": "Alle nicht aktivierten Mitglieder wurden erfolgreich aktiviert!",
 
   "MANAGEMENT_USERS_CREATE_USER_MODAL_TITLE": "Lege ein neues Mitglied an",
   "MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_TITLE": "Titel",

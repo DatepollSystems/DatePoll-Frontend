@@ -46,7 +46,8 @@ export class MovieTicketComponent implements OnInit {
     });
   }
 
-  cancelTickets() {
+  cancelTickets(element: any) {
+    element.disabled = true;
     this.httpService.loggedInV1DELETERequest('/cinema/booking/' + this.movie.id, 'cancelTickets').subscribe(
       (data: any) => {
         console.log(data);

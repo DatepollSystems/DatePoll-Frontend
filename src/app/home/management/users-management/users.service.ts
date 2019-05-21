@@ -202,4 +202,8 @@ export class UsersService {
   public export() {
     return this.httpService.loggedInV1GETRequest('/management/export/users');
   }
+
+  public activateAll() {
+    return this.httpService.loggedInV1POSTRequest('/management/users/activate', {}, 'activateAll');
+  }
 }

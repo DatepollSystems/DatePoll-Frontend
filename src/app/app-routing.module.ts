@@ -19,7 +19,7 @@ const appRoutes = [
         loadChildren:
           './home/management/performance-badges-management/performance-badges-management.module#PerformanceBadgesManagementModule'},
       {path: 'management/datepoll',
-        loadChildren: './home/management/datepoll-management/datepoll-management.module#DatepollManagementRoutingModule'}
+        loadChildren: './home/management/datepoll-management/datepoll-management.module#DatepollManagementModule'}
     ]
   },
   {path: 'not-found', component: PageNotFoundComponent},

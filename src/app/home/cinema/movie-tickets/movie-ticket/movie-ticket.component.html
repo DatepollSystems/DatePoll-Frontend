@@ -81,7 +81,7 @@
       </div>
       <div class="col" style="text-align: right">
         {{movie.bookedTicketsForYourself}}
-        <button mat-icon-button (click)="cancelTickets()"
+        <button mat-icon-button (click)="cancelTickets(cancelTicketsButton)" #cancelTicketsButton
                 matTooltipPosition="right"
                 matTooltip="{{'CINEMA_TICKETS_CANCEL_BOOKED_TICKETS_TOOLTIP' | translate}}">
           <mat-icon aria-label="Cancel worker">cancel</mat-icon>

@@ -11,7 +11,6 @@ import {User} from './user.model';
 import {Permissions} from '../../../permissions';
 import {UserCreateModalComponent} from './user-create-modal/user-create-modal.component';
 import {UserUpdateModalComponent} from './user-update-modal/user-update-modal.component';
-import {GroupsService} from '../groups-management/groups.service';
 import {NotificationsService, NotificationType} from 'angular2-notifications';
 
 @Component({
@@ -20,6 +19,7 @@ import {NotificationsService, NotificationType} from 'angular2-notifications';
   styleUrls: ['./users-management.component.css']
 })
 export class UsersManagementComponent implements OnInit, OnDestroy {
+  @ViewChild('successfullyActivatedAllUsers') successfullyActivatedAllUsers: TemplateRef<any>;
   usersLoaded = true;
 
   displayedColumns: string[] = ['title', 'firstname', 'surname', 'email', 'birthday', 'join_date', 'streetname', 'streetnumber',
@@ -40,6 +40,7 @@ export class UsersManagementComponent implements OnInit, OnDestroy {
     private bottomSheet: MatBottomSheet,
     private dialog: MatDialog,
     private myUserService: MyUserService,
+    private notificationsService: NotificationsService,
     private usersService: UsersService) {
 
     this.permissionSubscription = myUserService.permissionsChange.subscribe((value) => {
@@ -95,6 +96,17 @@ export class UsersManagementComponent implements OnInit, OnDestroy {
 
   openExportUsersBottomSheet(): void {
     this.bottomSheet.open(UsersExportBottomSheetComponent);
+  }
+
+  onActivateAll() {
+    this.usersService.activateAll().subscribe(
+      (data: any) => {
+        console.log(data);
+        this.usersService.fetchUsers();
+        this.notificationsService.html(this.successfullyActivatedAllUsers, NotificationType.Success, null, 'success');
+      },
+      (error) => console.log(error)
+    );
   }
 
   onCreate() {
