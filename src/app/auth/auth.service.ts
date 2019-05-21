@@ -69,7 +69,7 @@ export class AuthService {
         }
       );
     } else if (!this._hasSessionToken && this._token == null && this.cookieService.get('token') == null) {
-      this.router.navigate(['/signin']);
+      this.router.navigate(['/auth/signin']);
     }
   }
 
@@ -142,7 +142,7 @@ export class AuthService {
     this._token = null;
     this._sessionToken = null;
     console.log('authService | Logout successful');
-    this.router.navigate(['/signin']);
+    this.router.navigate(['/auth/signin']);
   }
 
   public getToken(functionUser: string = null): string {
@@ -177,7 +177,7 @@ export class AuthService {
           this.getJWTTokenBySessionToken();
         } else {
           // The most probable thing which happened is that the token is not longer valid
-          this.router.navigate(['/signin']);
+          this.router.navigate(['/auth/signin']);
           this.snackBar.open('Bitte melde dich erneut an!');
         }
       }

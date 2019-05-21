@@ -20,13 +20,13 @@
       </div>
 
       <div *ngIf="showCinema">
-        <a mat-list-item routerLink="cinema/tickets" routerLinkActive="activated">
+        <a mat-list-item routerLink="/home/cinema/tickets" routerLinkActive="activated">
           <mat-icon>movie</mat-icon> {{'NAV_CINEMA_TICKETS' | translate}}
         </a>
-        <a mat-list-item routerLink="cinema/service" routerLinkActive="activated">
+        <a mat-list-item routerLink="/home/cinema/service" routerLinkActive="activated">
           <mat-icon>card_giftcard</mat-icon> {{'NAV_CINEMA_SERVICE' | translate}}
         </a>
-        <a mat-list-item routerLink="cinema/administration" routerLinkActive="activated"
+        <a mat-list-item routerLink="/home/cinema/administration" routerLinkActive="activated"
            *ngIf="myUserService.hasPermission(cinemaMovieAdministration)">
           <mat-icon>local_movies</mat-icon> {{'NAV_CINEMA_ADMINISTRATION' | translate}}</a>
         <mat-divider></mat-divider>
