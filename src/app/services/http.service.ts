@@ -14,12 +14,16 @@ export class HttpService {
   }
 
   public loggedInV1GETRequest(url: string, functionUser: string = null) {
+    this.log('GET', url, functionUser);
+
     const token = this.authService.getToken(functionUser);
 
     return this.http.get(this.apiUrl + '/v1' + url + '?token=' + token);
   }
 
   public loggedInV1POSTRequest(url: string, body: any, functionUser: string = null) {
+    this.log('POST', url, functionUser);
+
     const token = this.authService.getToken(functionUser);
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
 
@@ -27,6 +31,8 @@ export class HttpService {
   }
 
   public loggedInV1PUTRequest(url: string, body: any, functionUser: string = null) {
+    this.log('PUT', url, functionUser);
+
     const token = this.authService.getToken(functionUser);
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
 
@@ -34,13 +40,15 @@ export class HttpService {
   }
 
   public loggedInV1DELETERequest(url: string, functionUser: string = null) {
+    this.log('DELETE', url, functionUser);
+
     const token = this.authService.getToken(functionUser);
     return this.http.delete(this.apiUrl + '/v1' + url + '?token=' + token);
   }
 
   public getSettingRequest(url: string, functionUser: string = null) {
     if (functionUser != null) {
-      console.log(functionUser + ' Request:');
+      console.log('getSettingsRequest | ' + functionUser );
     }
     return this.http.get(this.apiUrl + '/settings' + url);
   }
@@ -55,5 +63,13 @@ export class HttpService {
       },
       (error) => console.log(error)
     );
+  }
+
+  private log(type: string, url: string, functionUser: string = null) {
+    if (functionUser != null) {
+      console.log('httpService | ' + type + ' Request | URL: ' + url + ' | Function user: ' + functionUser);
+    } else {
+      console.log('httpService | ' + type + ' Request | URL: ' + url);
+    }
   }
 }

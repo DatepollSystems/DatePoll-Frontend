@@ -1,6 +1,6 @@
-<div class="row">
-  <div class="col-12 offset-lg-1 col-lg-5">
-    <mat-card style="margin-bottom: 15px;">
+<div class="row justify-content-around">
+  <div class="col-12 col-sm-12 col-md-6 col-lg-5">
+    <mat-card style="margin-bottom: 15px;" class="mat-elevation-z3">
       <mat-card-title>
         <mat-icon svgIcon="account-card-details" style="color: #2196F3"></mat-icon>
         {{'SETTINGS_PERSONAL_DATA' | translate}}
@@ -35,8 +35,8 @@
     </mat-card>
   </div>
 
-  <div class="col-12 col-lg-5">
-    <mat-card>
+  <div class="col-12 col-sm-12 col-md-6 col-lg-5">
+    <mat-card class="mat-elevation-z3">
       <mat-card-title>
         <mat-icon svgIcon="security-lock" style="color: #2196F3"></mat-icon>
         {{'SETTINGS_SECURITY' | translate}}
@@ -63,10 +63,15 @@
 
         <div class="row">
           <div class="col-12">
-            <a (click)="openTwoFactorAuthenticationModal()">{{'SETTINGS_SECURITY_CHANGE_2FA' | translate}}</a>
-            (Not implemented yet)
+            <a (click)="onSessionManagmentModal()">{{'SETTINGS_SECURITY_SESSIONS' | translate}}</a>
           </div>
         </div>
+
+<!--        <div class="row">-->
+<!--          <div class="col-12">-->
+<!--            <a (click)="openTwoFactorAuthenticationModal()">{{'SETTINGS_SECURITY_CHANGE_2FA' | translate}}</a>-->
+<!--          </div>-->
+<!--        </div>-->
       </mat-card-content>
     </mat-card>
   </div>

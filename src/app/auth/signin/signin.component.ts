@@ -11,7 +11,8 @@ import {AuthService} from '../auth.service';
   styleUrls: ['./signin.component.css']
 })
 export class SigninComponent implements OnInit {
-  projectName = 'priv. uni. Buergerkorps Eggenburg';
+  public static projectName = 'priv. uni. Buergerkorps Eggenburg';
+  projectName = SigninComponent.projectName;
 
   state = 'login';
 
@@ -22,13 +23,17 @@ export class SigninComponent implements OnInit {
 
   private email: string;
   private password: string;
+  private stayLoggedIn = false;
 
   constructor(private router: Router, private snackBar: MatSnackBar, private authService: AuthService) {
   }
 
   ngOnInit(): void {
-    if (this.authService.isAutenticated('signInComponent')) {
+    if (this.authService.isAuthenticated('signInComponent')) {
+      console.log('signInComponent | isAuthenticated | Routing user to /home');
       this.router.navigate(['/home']);
+    } else {
+      console.log('signInComponent | isAuthenticated | Do not route user to /home ');
     }
   }
 
@@ -38,7 +43,9 @@ export class SigninComponent implements OnInit {
     this.email = form.value.email;
     this.password = form.value.password;
 
-    this.authService.signinUser(this.email, this.password).subscribe(
+    console.log('signInComponent | Stay logged in: ' + this.stayLoggedIn);
+
+    this.authService.signinUser(this.email, this.password, this.stayLoggedIn).subscribe(
       (data: any) => {
         console.log(data);
         if (data.msg != null) {
@@ -54,7 +61,12 @@ export class SigninComponent implements OnInit {
           return;
         }
 
-        this.performLogin(data.token);
+        this.uiLogin();
+        if (data.sessionToken != null) {
+          this.authService.performLogin(data.token, data.sessionToken);
+        } else {
+          this.authService.performLogin(data.token);
+        }
       },
       (error) => {
         console.log(error);
@@ -71,17 +83,15 @@ export class SigninComponent implements OnInit {
 
     this.authService.changePasswordAfterSignin(this.email, this.password, password).subscribe(
       (data: any) => {
-        this.performLogin(data.token);
+        this.uiLogin();
+        this.authService.performLogin(data.token);
       }, (error) => console.log(error)
     );
   }
 
-  private performLogin(token: string) {
-    this.authService.setToken(token);
-    console.log('signIn | token: ' + token);
+  private uiLogin() {
     this.loginSuccess = true;
     this.loginFail = false;
-    this.router.navigate(['/home']);
     this.snackBar.open('Login erfolgreich');
   }
 

@@ -17,10 +17,11 @@ export class User {
   public activated: boolean;
   public activity: string;
   private _phoneNumbers: PhoneNumber[] = [];
+  private _permissions: string[] = [];
 
   constructor(id: number, email: string, email_verified: boolean, force_password_change: boolean, title: string,
               firstname: string, surname: string, birthday: Date, join_date: Date, streetname: string, streetnumber: string,
-              zipcode: number, location: string, activated: boolean, activity: string, phoneNumbers: PhoneNumber[]) {
+              zipcode: number, location: string, activated: boolean, activity: string, phoneNumbers: PhoneNumber[], permissions: string[]) {
     this.id = id;
     this.email = email;
     this.email_verified = email_verified;
@@ -37,6 +38,7 @@ export class User {
     this.activated = activated;
     this.activity = activity;
     this._phoneNumbers = phoneNumbers;
+    this._permissions = permissions;
   }
 
   public getPhoneNumbers(): PhoneNumber[] {
@@ -50,5 +52,9 @@ export class User {
     }
 
     return phoneNumber;
+  }
+
+  public getPermissions(): string[] {
+    return this._permissions.slice();
   }
 }

@@ -46,7 +46,8 @@ export class MovieTicketComponent implements OnInit {
     });
   }
 
-  cancelTickets() {
+  cancelTickets(element: any) {
+    element.disabled = true;
     this.httpService.loggedInV1DELETERequest('/cinema/booking/' + this.movie.id, 'cancelTickets').subscribe(
       (data: any) => {
         console.log(data);
@@ -59,19 +60,23 @@ export class MovieTicketComponent implements OnInit {
     );
   }
 
-  applyForWorker() {
+  applyForWorker(element) {
+    element.disabled = true;
     this.cinemaService.applyForWorker(this.movie.id);
   }
 
-  signOutForWorker() {
+  signOutForWorker(element) {
+    element.disabled = true;
     this.cinemaService.signOutForWorker(this.movie.id);
   }
 
-  applyForEmergencyWorker() {
+  applyForEmergencyWorker(element) {
+    element.disabled = true;
     this.cinemaService.applyForEmergencyWorker(this.movie.id);
   }
 
-  signOutForEmergencyWorker() {
+  signOutForEmergencyWorker(element) {
+    element.disabled = true;
     this.cinemaService.signOutForEmergencyWorker(this.movie.id);
   }
 }

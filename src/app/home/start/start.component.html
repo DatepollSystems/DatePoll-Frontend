@@ -46,27 +46,27 @@
               <td>{{booking.bookedTickets}}</td>
               <td *ngIf="booking.workerName != null">
                 {{booking.workerName}}
-                <button mat-icon-button (click)="cinemaService.signOutForWorker(booking.movieID)"
+                <button mat-icon-button (click)="signOutForWorker(booking.movieID, signOutForWorkerButton)" #signOutForWorkerButton
                         *ngIf="booking.workerID == myUserService.getID()" matTooltipPosition="right"
                         matTooltip="{{'CINEMA_TICKETS_CANCEL_CINEMA_SERVICE_TOOLTIP' | translate}}">
                   <mat-icon aria-label="Cancel worker">cancel</mat-icon>
                 </button>
               </td>
               <td *ngIf="booking.workerName == null">
-                <button (click)="cinemaService.applyForWorker(booking.movieID)"
+                <button (click)="applyForWorker(booking.movieID, applyForWorkerButton)" #applyForWorkerButton
                         mat-stroked-button>{{'CINEMA_TICKETS_APPLY' | translate}}</button>
               </td>
 
               <td *ngIf="booking.emergencyWorkerName != null">
                 {{booking.emergencyWorkerName}}
-                <button mat-icon-button (click)="cinemaService.signOutForEmergencyWorker(booking.movieID)"
+                <button mat-icon-button (click)="signOutForEmergencyWorker(booking.movieID, signOutForEmergencyWorkerButton)" #signOutForEmergencyWorkerButton
                         *ngIf="booking.emergencyWorkerID == myUserService.getID()" matTooltipPosition="right"
                         matTooltip="{{'CINEMA_TICKETS_CANCEL_CINEMA_SERVICE_TOOLTIP' | translate}}">
                   <mat-icon aria-label="Cancel worker">cancel</mat-icon>
                 </button>
               </td>
               <td *ngIf="booking.emergencyWorkerName == null">
-                <button (click)="cinemaService.applyForEmergencyWorker(booking.movieID)"
+                <button (click)="applyForEmergencyWorker(booking.movieID, applyForEmergencyWorkerButton)" #applyForEmergencyWorkerButton
                         mat-stroked-button>{{'CINEMA_TICKETS_APPLY' | translate}}</button>
               </td>
             </tr>

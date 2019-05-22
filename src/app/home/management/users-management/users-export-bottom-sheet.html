@@ -7,3 +7,11 @@
     <span mat-line>PDF (Not implemented yet)</span>
   </mat-list-item>
 </mat-nav-list>
+
+<ng-template #waitForExport>
+  <h2>{{'MANAGEMENT_USERS_EXPORT_LOADING' | translate}}</h2>
+</ng-template>
+
+<ng-template #successfullyExported>
+  <h2>{{'MANAGEMENT_USERS_EXPORT_FINISHED' | translate}}</h2>
+</ng-template>

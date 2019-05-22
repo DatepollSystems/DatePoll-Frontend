@@ -10,6 +10,8 @@
   "DO_NOT_FORGET_TO_SAVE": "Vergiss nicht zu speichern!",
   "LOADING": "Laden...",
   "PUT": "Anlegen",
+  "BACK": "Zurück",
+  "ADD": "Hinzufügen",
 
 
   "LANGUAGE": "Sprache",
@@ -34,10 +36,15 @@
   "SEND_BROWSER_DATA_TOOLTIP": "Bei Aktivierung werden Screensize, Browsertyp, Browserversion, Is Mobile, Operating system und ob Cookies eingeschaltet sind mit gesendet.",
 
 
+  "404_TITLE": "Was du auch immer gesucht hast, wir haben es leider nicht gefunden.",
+  "404_SUBTITLE": "Du kannst entweder zurück gehen oder dir weiterhin dieses tolle Bild einer Katze anschauen!",
+  "404_GO_BACK": "Zurück",
+
   "SIGNIN": "Anmelden",
   "SIGNIN_NOT_SIGNED_UP": "Kein Konto?",
   "SIGNIN_EMAIL": "Email-Adresse",
   "SIGNIN_PASSWORD": "Passwort",
+  "SIGNIN_STAY_LOGGED_IN": "Angemeldet bleiben",
   "SIGNIN_KEEP_YOUR_PASSWORD_SECRET": "Behalte dein Passwort geheim",
   "SIGNIN_EMAIL_OR_PASSWORD_INCORRECT": "Die Email-Adresse oder das Passwort sind inkorrekt!",
   "SIGNIN_ACCOUNT_NOT_ACTIVATED": "Dein Account ist derzeit deaktiviert! Probier es doch später wieder...",
@@ -47,6 +54,12 @@
   "SIGNIN_AND_CHANGE_PASSWORD": "Passwort ändern und anmelden",
   "SIGNIN_YOU_NEED_TO_CHANGE_PASSWORD": "Bitte änder das Passwort nach der ersten Anmeldung!",
   "SIGNIN_PASSWORD_ARE_NOT_EQUAL": "Die Passwörter stimmen nicht überein",
+
+  "FORGOT_PASSWORD": "Setzte dein Passwort zurück",
+  "FORGOT_PASSWORD_UNKOWN_EMAIL": "Für diese Email-Addresse gibt es keinen DatePoll-Account",
+  "FORGOT_PASSWORD_CODE_INCORRECT": "Der eingegebene Verifizierungscode ist inkorrekt!",
+  "FORGOT_PASSWORD_RATE_LIMIT_EXCEEDED": "Du hast zu oft versucht den Code einzugeben. Bitte lade die Seite neu!",
+  "FORGOT_PASSWORD_SUCCESSFUL": "Dein Passwort wurde erfolgreich geändert! Du wirst in 5 Sekunden weitergeleitet.",
 
 
   "NAV_USER_SETTINGS": "Persönliche Einstellungen",
@@ -62,6 +75,7 @@
 
   "NAV_MANAGEMENT_USERS": "Mitgliederverwaltung",
   "NAV_MANAGEMENT_GROUPS": "Gruppenverwaltung",
+  "NAV_MANAGEMENT_PERFORMANCE_BADGES": "Leistungsabzeichenverwaltung",
   "NAV_MANAGEMENT_DATEPOLL": "DatePoll-Verwaltung",
 
 
@@ -117,7 +131,7 @@
   "CINEMA_TICKETS_SERVICE_NOT_APPLIED_FOR_SERVICE": "Du hast dich noch für keinen Kinodienst gemeldet",
   "CINEMA_TICKETS_SERVICE_NOT_APPLIED_FOR_SERVICE_APPLY_NOW": "Melde dich jetzt für den Kinodienst",
 
-  "CINEMA_TICKETS_ADMINISTRATION_REFRESH": "Filmliste neuladen",
+  "CINEMA_TICKETS_ADMINISTRATION_REFRESH": "Filmliste aktualisieren",
   "CINEMA_TICKETS_ADMINISTRATION_SEARCH": "Suche nach einem Film...",
   "CINEMA_TICKETS_ADMINISTRATION_NAME": "Filmname",
   "CINEMA_TICKETS_ADMINISTRATION_DATE": "Datum",
@@ -199,6 +213,7 @@
   "SETTINGS_SECURITY_CHANGE_PASSWORD": "Password ändern",
   "SETTINGS_SECURITY_CHANGE_2FA": "Zwei-Faktor-Authentifizierung einstellen",
   "SETTINGS_SECURITY_CALENDAR": "Kalenderverwaltung",
+  "SETTINGS_SECURITY_SESSIONS": "Sessionverwaltung",
 
   "SETTINGS_SECURITY_MODAL_CHANGE_PASSWORD_TITLE_START": "Geben Sie Ihr altes Passwort ein",
   "SETTINGS_SECURITY_MODAL_CHANGE_PASSWORD_OLD_PASSWORD_INCORRECT": "Ihr eingegebenes Password ist inkorrekt!",
@@ -210,8 +225,14 @@
   "SETTINGS_SECURITY_MODAL_CHANGE_PASSWORD_FINISHED": "Ihr Passwort wurde erfolgreich geändert!",
 
   "SETTINGS_SECURITY_MDOAL_CALENDAR_INPUT_TITLE": "Persönlicher Kalender",
-  "SETTINGS_SECURITY_MODAL_COPY_TOKEN_TOOLTIP": "In die Zwischenablage kopieren",
-  "SETTINGS_SECURITY_MODAL_RESET_TOKEN": "Zurücksetzen",
+  "SETTINGS_SECURITY_MODAL_CALENDAR_COPY_TOKEN_TOOLTIP": "In die Zwischenablage kopieren",
+  "SETTINGS_SECURITY_MODAL_CALENDAR_RESET_TOKEN": "Zurücksetzen",
+
+  "SETTINGS_SECURITY_MODAL_SESSION_REMOVE_TOOLTIP": "Beende die Session",
+  "SETTINGS_SECURITY_MODAL_SESSION_REMOVED_SUCCESSFUL": "Die Session wurde erfolgreich abgemeldet!",
+  "SETTINGS_SECURITY_MODAL_SESSION_NO_SESSIONS_AVAILABLE": "Es sind keine Sessions mit DatePoll verbunden!",
+  "SETTINGS_SECURITY_MODAL_SESSION_INFORMATION": "Informationen",
+  "SETTINGS_SECURITY_MODAL_SESSION_LAST_USED": "Zuletzt benutzt",
 
 
   "MANAGEMENT_USERS_SEARCH": "Suche...",
@@ -230,7 +251,11 @@
   "MANAGEMENT_USERS_ACTIONS": "Aktionen",
   "MANAGEMENT_USERS_ACTIONS_EDIT_TOOLTIP": "Bearbeite dieses Mitglied",
   "MANAGEMENT_USERS_ACTIONS_DELETE_TOOLTIP": "Lösche dieses Mitglied",
-  "MANAGEMENT_USERS_REFRESH": "Mitgliederliste neuladen",
+  "MANAGEMENT_USERS_REFRESH": "Mitgliederliste aktualisieren",
+  "MANAGEMENT_USERS_EXPORT_LOADING": "Die Mitgliederliste wird angefertig... Dies kann einige Sekunden dauern! Bitte schließe den Browser in dieser Zeit nicht.",
+  "MANAGEMENT_USERS_EXPORT_FINISHED": "Die Mitgliederliste wurde erfolgreich exportiert!",
+  "MANAGEMENT_USERS_ACTIVATE_ALL": "Alle Mitglieder aktivieren",
+  "MANAGEMENT_USERS_ACTIVATE_ALL_FINISHED": "Alle nicht aktivierten Mitglieder wurden erfolgreich aktiviert!",
 
   "MANAGEMENT_USERS_CREATE_USER_MODAL_TITLE": "Lege ein neues Mitglied an",
   "MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_TITLE": "Titel",
@@ -256,11 +281,30 @@
   "MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_ACTIVATED": "Account aktivieren",
   "MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_ACTIVATED_DESCRIPTION": "Wenn Account aktivieren angekreuzt ist, wird direkt nach der Erstellung des Benutzers eine Einladungsemail versendet",
   "MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_PHONE_NUMBERS": "Telefonnummern",
+  "MANAGEMENT_USERS_CREATE_USER_MODAL_NO_JOINED_GROUPS": "Das Mitglied ist noch keiner Gruppe oder Register zugeteilt",
+  "MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_PERMISSIONS": "Berechtigungen",
+  "MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_PERMISSIONS_SMALL_0": "Falls du mehr über Berechtigungen erfahren willst, rufe einfach folgenden ",
+  "MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_PERMISSIONS_SMALL_1": " auf.",
+  "MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_REMOVE_PERMISSION_TOOLTIP": "Entferne diese Berechtigung",
+  "MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_PERMISSION": "Berechtigung",
+  "MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_PERMISSION_INCORRECT": "Die Berechtigung darf nicht mehr als 190 Zeichen haben!",
+  "MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_NO_PERMISSIONS_AVAILABLE": "Dieses Mitglied besitzt noch keine Berechtigungen",
+  "MANAGEMENT_USERS_CREATE_USER_MODAL_SUCCESSFULLY_CREATED_USER": "Das Mitglied wurde erfolgreich angelegt!",
+  "MANAGEMENT_USERS_CREATE_USER_MODAL_PERFORMANCE_BADGES_TITLE": "Leistungsabzeichen",
+  "MANAGEMENT_USERS_CREATE_USER_MODAL_PERFORMANCE_BADGES_REMOVE_TOOLTIP": "Entferne diesem Mitglied das Leistungsabzeichen",
+  "MANAGEMENT_USERS_CREATE_USER_MODAL_PERFORMANCE_BADGES_NO_AVAILABLE": "Dieses Mitglied hat noch keine Leistungsabzeichen",
+  "MANAGEMENT_USERS_CREATE_USER_MODAL_PERFORMANCE_BADGES_WITH": "mit",
+  "MANAGEMENT_USERS_CREATE_USER_MODAL_PERFORMANCE_BADGES_DATE": "Datum",
+  "MANAGEMENT_USERS_CREATE_USER_MODAL_PERFORMANCE_BADGES_GRADE": "Erfolg",
+  "MANAGEMENT_USERS_CREATE_USER_MODAL_PERFORMANCE_BADGES_GRADE_INCORRECT": "Der Erfolg darf nicht mehr als 190 Zeichen haben!",
+  "MANAGEMENT_USERS_CREATE_USER_MODAL_PERFORMANCE_BADGES_NOTE": "Anmerkung",
+  "MANAGEMENT_USERS_CREATE_USER_MODAL_PERFORMANCE_BADGES_NOTE_INCORRECT": "Die Anmerkung darf nicht mehr als 190 Zeichen haben!",
 
   "MANAGEMENT_USERS_UPDATE_USER_MODAL_TITLE": "Bearbeite ",
   "MANAGEMENT_USERS_UPDATE_USER_MODAL_FREE_GROUPS": "Freie Gruppen und Register",
   "MANAGEMENT_USERS_UPDATE_USER_MODAL_JOINED_GROUPS": "Beigetretene Gruppen / Register",
   "MANAGEMENT_USERS_UPDATE_USER_MODAL_NO_GROUPS": "Es gibt keine Gruppen oder Register zum auswählen",
+  "MANAGEMENT_USERS_UPDATE_USER_MODAL_SUCCESSFULLY_UPDATED_USER": "Die Änderungen wurden erfolgreich übernommen!",
 
 
   "MANAGEMENT_GROUPS_SEARCH": "Suche nach einer Gruppe oder einem Register",
@@ -271,7 +315,7 @@
   "MANAGEMENT_GROUPS_SUBGROUP_DELETE_TOOLTIP": "Lösche dieses Register",
   "MANAGEMENT_GROUPS_SUBGROUP_EDIT_TOOLTIP": "Editiere dieses Register",
   "MANAGEMENT_GROUPS_NO_SUBGROUPS_FOR_THIS_GROUP": "Für diese Gruppe gibt es noch kein Register",
-  "MANAGEMENT_GROUPS_REFRESH": "Gruppenliste neuladen",
+  "MANAGEMENT_GROUPS_REFRESH": "Gruppenliste aktualisieren",
   "MANAGEMENT_GROUPS_INFO_TOOLTIP": "Zeige die Mitglieder der Gruppe an",
   "MANAGEMENT_GROUPS_SUBGROUP_INFO_TOOLTIP": "Zeige die Mitglieder des Registers an",
 
@@ -303,6 +347,29 @@
   "MANAGEMENT_GROUPS_INFO_SUBGROUP_MODAL_TABLE_ACTION_REMOVE": "Entferne dieses Mitglied aus der Gruppe",
   "MANAGEMENT_GROUPS_INFO_SUBGROUP_MDOAL_TABLE_ACTION_EDIT": "Bearbeite die Rolle des Mitglieds in der Gruppe",
 
-  "MANAGEMENT_DATEPOLL_CINEMA_SERVICE": "Kinoservice"
 
+  "MANAGEMENT_PERFORMANCE_BADGES_TITLE_PERFORMANCE_BADGES": "Leistungsabzeichen",
+  "MANAGEMENT_PERFORMANCE_BADGES_TITLE_INSTRUMENTS": "Instrumente",
+  "MANAGEMENT_PERFORMANCE_BADGES_REMOVE_PERFORMANCE_BADGE_TOOLTIP": "Entferne dieses Leistungsabzeichen",
+  "MANAGEMENT_PERFORMANCE_BADGES_REMOVED_PERFORMANCE_BADGE_SUCCESSFUL": "Das Leistungsabzeichen wurde erfolgreich entfernt!",
+  "MANAGEMENT_PERFORMANCE_BADGES_REMOVE_INSTRUMENT_TOOLTIP": "Entferne dieses Instrument",
+  "MANAGEMENT_PERFORMANCE_BADGES_REMOVED_INSTRUMENT_SUCCESSFUL": "Das Instrument wurde erfolgreich entfernt!",
+  "MANAGEMENT_PERFORMANCE_BADGES_REFRESH": "Leistungsabzeichen und Instrumente aktualisieren",
+
+  "MANAGEMENT_PERFORMANCE_BADGES_UPDATE_PERFORMANCE_BADGE_TOOLTIP": "Bearbeite dieses Leistungsabzeichen",
+  "MANAGEMENT_PERFORMANCE_BADGES_UPDATE_PERFORMANCE_BADGE_MODAL_TITLE": "Bearbeite das Leistungsabzeichen: ",
+  "MANAGEMENT_PERFORMANCE_BADGES_UPDATE_PERFORMANCE_BADGE_SUCCESSFUL": "Das Leistungsabzeichen wurde erfolgreich bearbeitet!",
+  "MANAGEMENT_PERFORMANCE_BADGES_UPDATE_INSTRUMENT_TOOLTIP": "Bearbeite dieses Instrument",
+  "MANAGEMENT_PERFORMANCE_BADGES_UPDATE_INSTRUMENT_MODAL_TITLE": "Bearbeite das Instrument: ",
+  "MANAGEMENT_PERFORMANCE_BADGES_UPDATE_INSTRUMENT_SUCCESSFUL": "Das Instrument wurde erfolgreich bearbeitet!",
+
+  "MANAGEMENT_PERFORMANCE_BADGES_ADD_PERFORMANCE_BADGE_NAME": "Leistungsabzeichenname",
+  "MANAGEMENT_PERFORMANCE_BADGES_ADD_PERFORMANCE_BADGE_NAME_INCORRECT": "Der Name darf weder leer sein, noch mehr als 190 Zeichen haben!",
+  "MANAGEMENT_PERFORMANCE_BADGES_ADD_PERFORMANCE_BADGE_SUCCESSFUL": "Das Leistungabzeichen wurde erfolgreich hinzugefügt!",
+  "MANAGEMENT_PERFORMANCE_BADGES_ADD_INSTRUMENT_NAME": "Instrumentenname",
+  "MANAGEMENT_PERFORMANCE_BADGES_ADD_INSTRUMENT_NAME_INCORRECT": "Der Name darf weder leer sein, noch mehr als 190 Zeichen haben!",
+  "MANAGEMENT_PERFORMANCE_BADGES_ADD_INSTRUMENT_SUCCESSFUL": "Das Instrument wurde erfolgreich hinzugefügt!",
+
+
+  "MANAGEMENT_DATEPOLL_CINEMA_SERVICE": "Kinoservice"
 }
