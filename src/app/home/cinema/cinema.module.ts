@@ -7,7 +7,7 @@ import {NgxMatSelectSearchModule} from 'ngx-mat-select-search';
 
 import {MaterialModule} from '../../material-module';
 import {TranslationModule} from '../../translation/translation.module';
-import {CommonComponentsModule} from '../common-components.module';
+import {CommonComponentsModule} from '../../services/common-components.module';
 import {CinemaRoutingModule} from './cinema-routing.module';
 
 import {MovieCreateModalComponent} from './movie-administration/movie-create-modal/movie-create-modal.component';

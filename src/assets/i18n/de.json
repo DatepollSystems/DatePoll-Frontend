@@ -36,6 +36,10 @@
   "SEND_BROWSER_DATA_TOOLTIP": "Bei Aktivierung werden Screensize, Browsertyp, Browserversion, Is Mobile, Operating system und ob Cookies eingeschaltet sind mit gesendet.",
 
 
+  "404_TITLE": "Was du auch immer gesucht hast, wir haben es leider nicht gefunden.",
+  "404_SUBTITLE": "Du kannst entweder zurück gehen oder dir weiterhin dieses tolle Bild einer Katze anschauen!",
+  "404_GO_BACK": "Zurück",
+
   "SIGNIN": "Anmelden",
   "SIGNIN_NOT_SIGNED_UP": "Kein Konto?",
   "SIGNIN_EMAIL": "Email-Adresse",
@@ -127,7 +131,7 @@
   "CINEMA_TICKETS_SERVICE_NOT_APPLIED_FOR_SERVICE": "Du hast dich noch für keinen Kinodienst gemeldet",
   "CINEMA_TICKETS_SERVICE_NOT_APPLIED_FOR_SERVICE_APPLY_NOW": "Melde dich jetzt für den Kinodienst",
 
-  "CINEMA_TICKETS_ADMINISTRATION_REFRESH": "Filmliste neuladen",
+  "CINEMA_TICKETS_ADMINISTRATION_REFRESH": "Filmliste aktualisieren",
   "CINEMA_TICKETS_ADMINISTRATION_SEARCH": "Suche nach einem Film...",
   "CINEMA_TICKETS_ADMINISTRATION_NAME": "Filmname",
   "CINEMA_TICKETS_ADMINISTRATION_DATE": "Datum",
@@ -247,7 +251,7 @@
   "MANAGEMENT_USERS_ACTIONS": "Aktionen",
   "MANAGEMENT_USERS_ACTIONS_EDIT_TOOLTIP": "Bearbeite dieses Mitglied",
   "MANAGEMENT_USERS_ACTIONS_DELETE_TOOLTIP": "Lösche dieses Mitglied",
-  "MANAGEMENT_USERS_REFRESH": "Mitgliederliste neuladen",
+  "MANAGEMENT_USERS_REFRESH": "Mitgliederliste aktualisieren",
   "MANAGEMENT_USERS_EXPORT_LOADING": "Die Mitgliederliste wird angefertig... Dies kann einige Sekunden dauern! Bitte schließe den Browser in dieser Zeit nicht.",
   "MANAGEMENT_USERS_EXPORT_FINISHED": "Die Mitgliederliste wurde erfolgreich exportiert!",
   "MANAGEMENT_USERS_ACTIVATE_ALL": "Alle Mitglieder aktivieren",
@@ -311,7 +315,7 @@
   "MANAGEMENT_GROUPS_SUBGROUP_DELETE_TOOLTIP": "Lösche dieses Register",
   "MANAGEMENT_GROUPS_SUBGROUP_EDIT_TOOLTIP": "Editiere dieses Register",
   "MANAGEMENT_GROUPS_NO_SUBGROUPS_FOR_THIS_GROUP": "Für diese Gruppe gibt es noch kein Register",
-  "MANAGEMENT_GROUPS_REFRESH": "Gruppenliste neuladen",
+  "MANAGEMENT_GROUPS_REFRESH": "Gruppenliste aktualisieren",
   "MANAGEMENT_GROUPS_INFO_TOOLTIP": "Zeige die Mitglieder der Gruppe an",
   "MANAGEMENT_GROUPS_SUBGROUP_INFO_TOOLTIP": "Zeige die Mitglieder des Registers an",
 
@@ -350,6 +354,7 @@
   "MANAGEMENT_PERFORMANCE_BADGES_REMOVED_PERFORMANCE_BADGE_SUCCESSFUL": "Das Leistungsabzeichen wurde erfolgreich entfernt!",
   "MANAGEMENT_PERFORMANCE_BADGES_REMOVE_INSTRUMENT_TOOLTIP": "Entferne dieses Instrument",
   "MANAGEMENT_PERFORMANCE_BADGES_REMOVED_INSTRUMENT_SUCCESSFUL": "Das Instrument wurde erfolgreich entfernt!",
+  "MANAGEMENT_PERFORMANCE_BADGES_REFRESH": "Leistungsabzeichen und Instrumente aktualisieren",
 
   "MANAGEMENT_PERFORMANCE_BADGES_UPDATE_PERFORMANCE_BADGE_TOOLTIP": "Bearbeite dieses Leistungsabzeichen",
   "MANAGEMENT_PERFORMANCE_BADGES_UPDATE_PERFORMANCE_BADGE_MODAL_TITLE": "Bearbeite das Leistungsabzeichen: ",

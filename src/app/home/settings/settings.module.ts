@@ -6,7 +6,7 @@ import {CustomFormsModule} from 'ng2-validation';
 
 import {MaterialModule} from '../../material-module';
 import {TranslationModule} from '../../translation/translation.module';
-import {CommonComponentsModule} from '../common-components.module';
+import {CommonComponentsModule} from '../../services/common-components.module';
 
 import {SettingsComponent} from './settings.component';
 import {PersonalDataComponent} from './personal-data/personal-data.component';

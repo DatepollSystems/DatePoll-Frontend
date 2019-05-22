@@ -13,8 +13,6 @@ import {AppRoutingModule} from './app-routing.module';
 import {TranslationModule} from './translation/translation.module';
 import {FooterModule} from './footer/footer.module';
 
-import {NoSanitizePipe} from './no-sanitize.pipe';
-
 
 import {CookieService} from 'angular2-cookie/core';
 
@@ -45,7 +43,6 @@ registerLocaleData(localeDe);
     PageNotFoundComponent,
     HomeComponent,
     StartComponent,
-    NoSanitizePipe,
   ],
   imports: [
     BrowserModule,

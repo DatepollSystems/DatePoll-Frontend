@@ -50,6 +50,13 @@ export class PerformanceBadgesManagmentComponent implements OnDestroy {
     this.instrumentsSubscription.unsubscribe();
   }
 
+  onRefresh() {
+    this.performanceBadges = null;
+    this.instruments = null;
+    this.performanceBadgesService.fetchPerformanceBadges();
+    this.performanceBadgesService.fetchInstruments();
+  }
+
   addPerformanceBadge(form: NgForm) {
     const name = form.controls.performanceBadgeName.value;
 

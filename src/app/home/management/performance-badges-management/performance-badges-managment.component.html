@@ -2,8 +2,15 @@
   <div class="col-12">
     <mat-card class="mat-elevation-z3">
       <mat-card-content>
-        <div class="row">
-          <div class="col-12"><h1>{{'NAV_MANAGEMENT_PERFORMANCE_BADGES' | translate}}</h1></div>
+        <div class="row justify-content-between">
+          <div class="col"><h1>{{'NAV_MANAGEMENT_PERFORMANCE_BADGES' | translate}}</h1></div>
+          <div class="col" style="text-align: end">
+            <button mat-icon-button (click)="onRefresh()"
+                    matTooltipPosition="right"
+                    matTooltip="{{'MANAGEMENT_PERFORMANCE_BADGES_REFRESH' | translate}}">
+              <mat-icon>refresh</mat-icon>
+            </button>
+          </div>
         </div>
         <div class="row">
           <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">

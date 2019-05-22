@@ -5,6 +5,7 @@ import {environment} from '../../environments/environment';
 import {CookieService} from 'angular2-cookie/core';
 import {MatSnackBar} from '@angular/material';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {Browser} from '../services/browser';
 
 @Injectable({
   providedIn: 'root'
@@ -42,11 +43,12 @@ export class AuthService {
 
       const headers = new HttpHeaders().set('Content-Type', 'application/json');
 
-      const browser = get_browser_info();
+      const browser = Browser.getInfos();
 
       const object = {
         'sessionToken': this._sessionToken,
-        'sessionInformation': browser.name + '; ' + browser.version
+        'sessionInformation': browser.name + ' - ' + browser.majorVersion + '; OS: ' + browser.os +
+          '; Phone: ' + browser.mobile
       };
 
       this.http.post(this.apiUrl + '/auth/IamLoggedIn', object, {headers: headers}).subscribe(
@@ -78,14 +80,15 @@ export class AuthService {
 
     let signInObject;
 
-    const browser = get_browser_info();
+    const browser = Browser.getInfos();
 
     if (stayLoggedIn) {
       signInObject = {
         'email': email,
         'password': password,
         'stayLoggedIn': stayLoggedIn,
-        'sessionInformation': browser.name + '; ' + browser.version
+        'sessionInformation': browser.name + ' - ' + browser.majorVersion + '; OS: ' + browser.os +
+          '; Phone: ' + browser.mobile
       };
     } else {
       signInObject = {
@@ -206,7 +209,7 @@ export class AuthService {
     this._sessionToken = token;
   }
 
-  public isAuthenticated(functionUser: string = "Unknown"): boolean {
+  public isAuthenticated(functionUser: string = 'Unknown'): boolean {
     let result = false;
 
     if (this.isCookieEnabled()) {
@@ -237,27 +240,4 @@ export class AuthService {
 
     return cookieEnabled;
   }
-}
-
-function get_browser_info() {
-  const ua = navigator.userAgent;
-  let tem, M = ua.match(/(opera|chrome|safari|firefox|msie|trident(?=\/))\/?\s*(\d+)/i) || [];
-  if (/trident/i.test(M[1])) {
-    tem = /\brv[ :]+(\d+)/g.exec(ua) || [];
-    return {name: 'IE ', version: (tem[1] || '')};
-  }
-  if (M[1] === 'Chrome') {
-    tem = ua.match(/\bOPR\/(\d+)/);
-    if (tem != null) {
-      return {name: 'Opera', version: tem[1]};
-    }
-  }
-  M = M[2] ? [M[1], M[2]] : [navigator.appName, navigator.appVersion, '-?'];
-  if ((tem = ua.match(/version\/(\d+)/i)) != null) {
-    M.splice(1, 1, tem[1]);
-  }
-  return {
-    name: M[0],
-    version: M[1]
-  };
 }
