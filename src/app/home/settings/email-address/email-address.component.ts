@@ -40,6 +40,7 @@ export class EmailAddressComponent {
 
     this.httpService.loggedInV1GETRequest('/user/myself/changeEmail/oldEmailAddressVerification', 'sendOldEmailVerification').subscribe(
       (response: any) => {
+        console.log(response);
         if (response.msg === 'Sent') {
           this.nextStep();
         }

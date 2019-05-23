@@ -22,6 +22,7 @@ export class CalendarTokenComponent {
   private fetchCalendarToken() {
     this.httpService.loggedInV1GETRequest('/user/myself/token/calendar', 'fetchCalendarToken').subscribe(
       (data: any) => {
+        console.log(data);
         this.calendarToken = this.apiUrl + '/user/calendar/' + data.token;
       },
       (error) => console.log(error)

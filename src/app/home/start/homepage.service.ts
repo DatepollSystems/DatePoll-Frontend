@@ -44,6 +44,8 @@ export class HomepageService {
   public fetchData() {
     this.httpService.loggedInV1GETRequest('/user/homepage', 'fetchHomepageData').subscribe(
       (data: any) => {
+        console.log(data);
+
         const bookings = data.bookings;
 
         const bookingsToSave = [];

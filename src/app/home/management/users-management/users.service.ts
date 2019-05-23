@@ -38,6 +38,7 @@ export class UsersService {
   public fetchUsers() {
     this.httpService.loggedInV1GETRequest('/management/users', 'fetchUsers').subscribe(
       (data: any) => {
+        console.log(data);
         const fetchedUsers = data.users;
 
         const users = [];

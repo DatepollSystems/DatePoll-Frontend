@@ -2,18 +2,21 @@ import {Component, Inject, OnDestroy, TemplateRef, ViewChild} from '@angular/cor
 import {NgForm} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialogRef, MatTableDataSource} from '@angular/material';
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
-
 import {Subscription} from 'rxjs';
+
+import {NotificationsService, NotificationType} from 'angular2-notifications';
 
 import {UsersService} from '../users.service';
 import {GroupsService} from '../../groups-management/groups.service';
+import {PerformanceBadgesService} from '../../performance-badges-management/performance-badges.service';
+import {MyUserService} from '../../../my-user.service';
+
+import {Permissions} from '../../../../permissions';
 import {PhoneNumber} from '../../../phoneNumber.model';
 import {User} from '../user.model';
-import {NotificationsService, NotificationType} from 'angular2-notifications';
 import {UserPerformanceBadge} from '../userPerformanceBadge.model';
 import {PerformanceBadge} from '../../performance-badges-management/performanceBadge.model';
 import {Instrument} from '../../performance-badges-management/instrument.model';
-import {PerformanceBadgesService} from '../../performance-badges-management/performance-badges.service';
 
 @Component({
   selector: 'app-user-update-modal',
@@ -48,6 +51,7 @@ export class UserUpdateModalComponent implements OnDestroy {
   phoneNumberCount = 0;
   phoneNumbers: PhoneNumber[] = [];
 
+  hasPermissionToChangePermission = false;
   permissions: string[] = [];
 
   joinedCopy: any[] = [];
@@ -73,6 +77,7 @@ export class UserUpdateModalComponent implements OnDestroy {
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     private dialogRef: MatDialogRef<UserUpdateModalComponent>,
+    private myUserService: MyUserService,
     private groupsService: GroupsService,
     private usersService: UsersService,
     private performanceBadgesService: PerformanceBadgesService,
@@ -148,6 +153,8 @@ export class UserUpdateModalComponent implements OnDestroy {
         }
       }
     });
+
+    this.hasPermissionToChangePermission = this.myUserService.hasPermission(Permissions.ROOT_ADMINISTRATION);
   }
 
   ngOnDestroy() {

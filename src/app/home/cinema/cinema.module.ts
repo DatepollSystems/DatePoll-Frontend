@@ -11,7 +11,6 @@ import {CommonComponentsModule} from '../../services/common-components.module';
 import {CinemaRoutingModule} from './cinema-routing.module';
 
 import {MovieCreateModalComponent} from './movie-administration/movie-create-modal/movie-create-modal.component';
-import {MovieEditModalComponent} from './movie-administration/movie-edit-modal/movie-edit-modal.component';
 import {MovieBookTicketsModalComponent} from './movie-tickets/movie-ticket/movie-book-tickets-modal/movie-book-tickets-modal.component';
 import {MovieTicketsComponent} from './movie-tickets/movie-tickets.component';
 import {MovieServiceComponent} from './movie-service/movie-service.component';
@@ -24,7 +23,6 @@ import {MovieTicketComponent} from './movie-tickets/movie-ticket/movie-ticket.co
     MovieServiceComponent,
     MovieAdministrationComponent,
     MovieTicketComponent,
-    MovieEditModalComponent,
     MovieBookTicketsModalComponent,
     MovieCreateModalComponent
   ],
@@ -41,7 +39,6 @@ import {MovieTicketComponent} from './movie-tickets/movie-ticket/movie-ticket.co
   ],
   entryComponents: [
     MovieCreateModalComponent,
-    MovieEditModalComponent,
     MovieBookTicketsModalComponent
   ]
 })

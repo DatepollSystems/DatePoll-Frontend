@@ -44,6 +44,8 @@ export class MyUserService {
   fetchMyself() {
     this.httpService.loggedInV1GETRequest('/user/myself', 'fetchMyself').subscribe(
       (dataComplete: any) => {
+        console.log(dataComplete);
+
         const data = dataComplete.user;
         this.setID(data.id);
         this.setTitle(data.title);
@@ -59,7 +61,7 @@ export class MyUserService {
         this.setPermissions(data.permissions);
 
         const localPhoneNumbers = [];
-        const localPhoneNumbersData = data.telephoneNumbers;
+        const localPhoneNumbersData = data.phoneNumbers;
         for (let i = 0; i < localPhoneNumbersData.length; i++) {
           localPhoneNumbers.push(
             new PhoneNumber(localPhoneNumbersData[i].id, localPhoneNumbersData[i].label, localPhoneNumbersData[i].number));

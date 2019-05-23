@@ -60,6 +60,8 @@ export class CinemaService {
   public fetchMovies() {
     this.httpService.loggedInV1GETRequest('/cinema/administration/movie', 'fetchMovies').subscribe(
       (data: any) => {
+        console.log(data);
+
         const fetchedMovies = data.movies;
 
         const movies = [];
@@ -103,6 +105,8 @@ export class CinemaService {
   public fetchNotShownMovies() {
     this.httpService.loggedInV1GETRequest('/cinema/notShownMovies', 'fetchNotShownMovies').subscribe(
       (data: any) => {
+        console.log(data);
+
         const fetchedMovies = data.movies;
 
         const movies = [];
@@ -148,6 +152,8 @@ export class CinemaService {
   public fetchYears() {
     this.httpService.loggedInV1GETRequest('/cinema/administration/year', 'fetchYears').subscribe(
       (data: any) => {
+        console.log(data);
+
         const fetchedYears = data.years;
 
         const years = [];
