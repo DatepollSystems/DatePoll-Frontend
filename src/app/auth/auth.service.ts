@@ -17,6 +17,8 @@ export class AuthService {
   private _sessionToken: string = null;
   private _token: string = null;
 
+  private timeIn5Minutes: Date = new Date(new Date().getTime() - 5 * 60000);
+
   constructor(
     private http: HttpClient,
     private router: Router,
@@ -159,32 +161,41 @@ export class AuthService {
       }
     }
 
-    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    const now = new Date();
 
-    const refreshObject = {
-      'token': this._token
-    };
-    this.http.post(this.apiUrl + '/auth/refresh?token=' + this._token, refreshObject, {headers: headers}).subscribe(
-      (data: any) => {
-        console.log(data);
-        this.setToken(data.token);
-        if (functionUser != null) {
-          console.log('authService | ' + functionUser + ' | getToken | refresh | new token: ' + data.token);
-        } else {
-          console.log('authService | getToken | refresh | new token: ' + data.token);
+    if (this.timeIn5Minutes < now) {
+      this.timeIn5Minutes = new Date(new Date().getTime() + 5 * 60000);
+
+      const headers = new HttpHeaders().set('Content-Type', 'application/json');
+
+      const refreshObject = {
+        'token': this._token
+      };
+      this.http.post(this.apiUrl + '/auth/refresh?token=' + this._token, refreshObject, {headers: headers}).subscribe(
+        (data: any) => {
+          console.log(data);
+          this.setToken(data.token);
+          if (functionUser != null) {
+            console.log('authService | ' + functionUser + ' | getToken | refresh | new token: ' + data.token);
+          } else {
+            console.log('authService | getToken | refresh | new token: ' + data.token);
+          }
+        },
+        (error) => {
+          console.log(error);
+          if (this._hasSessionToken) {
+            this.getJWTTokenBySessionToken();
+          } else {
+            // The most probable thing which happened is that the token is not longer valid
+            this.router.navigate(['/auth/signin']);
+            this.snackBar.open('Bitte melde dich erneut an!');
+          }
         }
-      },
-      (error) => {
-        console.log(error);
-        if (this._hasSessionToken) {
-          this.getJWTTokenBySessionToken();
-        } else {
-          // The most probable thing which happened is that the token is not longer valid
-          this.router.navigate(['/auth/signin']);
-          this.snackBar.open('Bitte melde dich erneut an!');
-        }
-      }
-    );
+      );
+    } else {
+      console.log('authService | getToken | not refreshing | Refreshing in: ' +
+        ((this.timeIn5Minutes.getTime() - now.getTime()) / 60000).toFixed(2) + ' minutes');
+    }
 
     return this._token;
   }
