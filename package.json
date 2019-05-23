@@ -1,6 +1,6 @@
 {
   "name": "datepoll-frontend",
-  "version": "0.1.1-beta",
+  "version": "0.1.2-beta",
   "required_version": 2,
   "scripts": {
     "ng": "ng",
