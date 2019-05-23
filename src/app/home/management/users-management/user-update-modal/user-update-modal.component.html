@@ -384,7 +384,7 @@
     </div>
 
     <!-- Permissions -->
-    <div>
+    <div *ngIf="hasPermissionToChangePermission">
       <div class="row">
         <div class="col-12">
           <span style="font-size: 16px">{{'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_PERMISSIONS' | translate}}</span>
@@ -392,8 +392,8 @@
         <div class="col-12">
           <small>
             {{'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_PERMISSIONS_SMALL_0' | translate}}
-            <a
-              href="https://gitlab.com/BuergerkorpsEggenburg/datepoll-backend-php/wikis/Permissions">Link</a>{{'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_PERMISSIONS_SMALL_1' | translate}}
+            <a href="https://gitlab.com/BuergerkorpsEggenburg/datepoll-backend-php/wikis/Permissions"
+              target="_blank" rel="noopener">Link</a>{{'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_PERMISSIONS_SMALL_1' | translate}}
           </small>
         </div>
       </div>

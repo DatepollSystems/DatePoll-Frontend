@@ -4,16 +4,19 @@ import {NgForm} from '@angular/forms';
 import {MatDialogRef, MatTableDataSource} from '@angular/material';
 import {Subscription} from 'rxjs';
 
+import {NotificationsService, NotificationType} from 'angular2-notifications';
+
 import {UsersService} from '../users.service';
 import {GroupsService} from '../../groups-management/groups.service';
-import {NotificationsService, NotificationType} from 'angular2-notifications';
+import {PerformanceBadgesService} from '../../performance-badges-management/performance-badges.service';
+import {MyUserService} from '../../../my-user.service';
 
 import {PhoneNumber} from '../../../phoneNumber.model';
 import {Group} from '../../groups-management/group.model';
-import {PerformanceBadgesService} from '../../performance-badges-management/performance-badges.service';
 import {PerformanceBadge} from '../../performance-badges-management/performanceBadge.model';
 import {Instrument} from '../../performance-badges-management/instrument.model';
 import {UserPerformanceBadge} from '../userPerformanceBadge.model';
+import {Permissions} from '../../../../permissions';
 
 @Component({
   selector: 'app-user-create-modal',
@@ -40,6 +43,7 @@ export class UserCreateModalComponent implements OnDestroy {
   joined: any[] = [];
   free: any[] = [];
 
+  hasPermissionToChangePermission = false;
   permissions: string[] = [];
 
   userPerformanceBadgeCount = 0;
@@ -53,6 +57,7 @@ export class UserCreateModalComponent implements OnDestroy {
   performanceBadgeDate: Date = null;
 
   constructor(private usersService: UsersService,
+              private myUserService: MyUserService,
               private dialogRef: MatDialogRef<UserCreateModalComponent>,
               private groupsService: GroupsService,
               private notificationsService: NotificationsService,
@@ -75,6 +80,8 @@ export class UserCreateModalComponent implements OnDestroy {
     this.instrumentsSubscription = this.performanceBadgesService.instrumentsChange.subscribe((value) => {
       this.instruments = value;
     });
+
+    this.hasPermissionToChangePermission = this.myUserService.hasPermission(Permissions.ROOT_ADMINISTRATION);
   }
 
   ngOnDestroy() {
