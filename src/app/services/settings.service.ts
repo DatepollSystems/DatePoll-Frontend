@@ -17,6 +17,7 @@ export class SettingsService {
   public getShowCinema(): boolean {
     this.httpService.getSettingRequest('/cinema', 'settingsCinema').subscribe(
       (response: any) => {
+        console.log(response);
         this.setShowCinema(response.enabled);
       },
       (error) => console.log(error)
