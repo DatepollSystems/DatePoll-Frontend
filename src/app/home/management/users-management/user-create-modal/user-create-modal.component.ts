@@ -48,11 +48,7 @@ export class UserCreateModalComponent implements OnDestroy {
 
   userPerformanceBadgeCount = 0;
   userPerformanceBadges: UserPerformanceBadge[] = [];
-  performanceBadges: PerformanceBadge[] = [];
-  performanceBadgesSubscription: Subscription;
   selectedPerformanceBadge: PerformanceBadge;
-  instruments: Instrument[] = [];
-  instrumentsSubscription: Subscription;
   selectedInstrument: Instrument;
   performanceBadgeDate: Date = null;
 
@@ -71,23 +67,11 @@ export class UserCreateModalComponent implements OnDestroy {
       this.remakeFreeAndJoinedList();
     });
 
-    this.performanceBadges = this.performanceBadgesService.getPerformanceBadges();
-    this.performanceBadgesSubscription = this.performanceBadgesService.performanceBadgesChange.subscribe((value) => {
-      this.performanceBadges = value;
-    });
-
-    this.instruments = this.performanceBadgesService.getInstruments();
-    this.instrumentsSubscription = this.performanceBadgesService.instrumentsChange.subscribe((value) => {
-      this.instruments = value;
-    });
-
     this.hasPermissionToChangePermission = this.myUserService.hasPermission(Permissions.ROOT_ADMINISTRATION);
   }
 
   ngOnDestroy() {
     this.groupsSubscription.unsubscribe();
-    this.performanceBadgesSubscription.unsubscribe();
-    this.instrumentsSubscription.unsubscribe();
   }
 
   remakeFreeAndJoinedList() {
@@ -162,6 +146,16 @@ export class UserCreateModalComponent implements OnDestroy {
     this.permissions = permissions;
   }
 
+  onPerformanceBadgeChanged(performanceBadge: PerformanceBadge) {
+    console.log('Selected performance badge: ' + performanceBadge.name);
+    this.selectedPerformanceBadge = performanceBadge;
+  }
+
+  onInstrumentChanged(instrument: Instrument) {
+    console.log('Selected instrument: ' + instrument.name);
+    this.selectedInstrument = instrument;
+  }
+
   addPerformanceBadge(form: NgForm) {
     if (this.selectedInstrument == null || this.selectedPerformanceBadge == null) {
       return;
@@ -187,6 +181,8 @@ export class UserCreateModalComponent implements OnDestroy {
     this.userPerformanceBadgeCount++;
     form.reset();
     this.performanceBadgeDate = null;
+    this.selectedInstrument = null;
+    this.selectedPerformanceBadge = null;
   }
 
   removePerformanceBadge(id: number) {

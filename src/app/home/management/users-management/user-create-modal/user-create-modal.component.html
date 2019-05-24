@@ -289,24 +289,11 @@
       </div>
       <form class="row" #performanceBadgeForm="ngForm" (ngSubmit)="addPerformanceBadge(performanceBadgeForm)">
         <div class="col-12 col-sm-12 col-md-6 col-lg-3">
-          <mat-form-field>
-            <mat-label>Instrument</mat-label>
-            <mat-select name="instrument" id="instrument" required [(ngModel)]="selectedInstrument">
-              <mat-option *ngFor="let instrument of instruments" [value]="instrument">
-                {{instrument.name}}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
+          <app-instrument-select (instrumentChanged)="onInstrumentChanged($event)"></app-instrument-select>
         </div>
+
         <div class="col-12 col-sm-12 col-md-6 col-lg-3">
-          <mat-form-field>
-            <mat-label>Abzeichen</mat-label>
-            <mat-select name="performanceBadge" id="performanceBadge" required [(ngModel)]="selectedPerformanceBadge">
-              <mat-option *ngFor="let performanceBadge of performanceBadges" [value]="performanceBadge">
-                {{performanceBadge.name}}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
+          <app-performance-badge-select (performanceBadgeChanged)="onPerformanceBadgeChanged($event)"></app-performance-badge-select>
         </div>
 
         <mat-form-field class="col-12 col-sm-12 col-md-6 col-lg-3 datepicker-field">

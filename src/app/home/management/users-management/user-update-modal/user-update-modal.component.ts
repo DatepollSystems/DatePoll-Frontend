@@ -66,11 +66,8 @@ export class UserUpdateModalComponent implements OnDestroy {
   userPerformanceBadgesCopy: UserPerformanceBadge[];
   userPerformanceBadges: UserPerformanceBadge[];
   userPerformanceBadgesSubscription: Subscription;
-  performanceBadges: PerformanceBadge[] = [];
-  performanceBadgesSubscription: Subscription;
+
   selectedPerformanceBadge: PerformanceBadge;
-  instruments: Instrument[] = [];
-  instrumentsSubscription: Subscription;
   selectedInstrument: Instrument;
   performanceBadgeDate: Date = null;
 
@@ -127,16 +124,6 @@ export class UserUpdateModalComponent implements OnDestroy {
       }, 1000);
     });
 
-    this.performanceBadges = this.performanceBadgesService.getPerformanceBadges();
-    this.performanceBadgesSubscription = this.performanceBadgesService.performanceBadgesChange.subscribe((value) => {
-      this.performanceBadges = value;
-    });
-
-    this.instruments = this.performanceBadgesService.getInstruments();
-    this.instrumentsSubscription = this.performanceBadgesService.instrumentsChange.subscribe((value) => {
-      this.instruments = value;
-    });
-
     this.userPerformanceBadges = this.performanceBadgesService.getUserPerformanceBadges(this.user.id);
     this.userPerformanceBadgesCopy = this.userPerformanceBadges.slice();
     for (let i = 0; i < this.userPerformanceBadges.length; i++) {
@@ -160,8 +147,6 @@ export class UserUpdateModalComponent implements OnDestroy {
   ngOnDestroy() {
     this.joinedSubscription.unsubscribe();
     this.freeSubscription.unsubscribe();
-    this.performanceBadgesSubscription.unsubscribe();
-    this.instrumentsSubscription.unsubscribe();
     this.userPerformanceBadgesSubscription.unsubscribe();
   }
 
@@ -200,6 +185,16 @@ export class UserUpdateModalComponent implements OnDestroy {
     this.permissions = permissions;
   }
 
+  onPerformanceBadgeChanged(performanceBadge: PerformanceBadge) {
+    console.log('Selected performance badge: ' + performanceBadge.name);
+    this.selectedPerformanceBadge = performanceBadge;
+  }
+
+  onInstrumentChanged(instrument: Instrument) {
+    console.log('Selected instrument: ' + instrument.name);
+    this.selectedInstrument = instrument;
+  }
+
   addPerformanceBadge(form: NgForm) {
     if (this.selectedInstrument == null || this.selectedPerformanceBadge == null) {
       return;
@@ -225,6 +220,8 @@ export class UserUpdateModalComponent implements OnDestroy {
     form.reset();
     this.userPerformanceBadgeCount++;
     this.performanceBadgeDate = null;
+    this.selectedInstrument = null;
+    this.selectedPerformanceBadge = null;
   }
 
   removePerformanceBadge(id: number) {
