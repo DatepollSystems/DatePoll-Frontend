@@ -303,8 +303,6 @@ export class UserCreateModalComponent implements OnDestroy {
     document.getElementById('addPermission-button').setAttribute('disabled', 'disabled');
     document.getElementById('permission').setAttribute('disabled', 'disabled');
     document.getElementById('addPerformanceBadge-button').setAttribute('disabled', 'disabled');
-    document.getElementById('instrument').setAttribute('disabled', 'disabled');
-    document.getElementById('performanceBadge').setAttribute('disabled', 'disabled');
     document.getElementById('datepicker-performanceBadge').setAttribute('disabled', 'disabled');
     document.getElementById('datepicker-performanceBadge-mobile').setAttribute('disabled', 'disabled');
     document.getElementById('performanceBadge-grade').setAttribute('disabled', 'disabled');
