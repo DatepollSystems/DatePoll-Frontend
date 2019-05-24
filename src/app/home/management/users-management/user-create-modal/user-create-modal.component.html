@@ -333,8 +333,8 @@
         </mat-form-field>
 
         <div class="col-12 col-sm-12 col-md-12 col-lg-3">
-          <button mat-raised-button class="success-button" style="width: 100%" id="addPerformanceBadge-button"
-                  type="submit" [disabled]="!performanceBadgeForm.valid">
+          <button mat-raised-button class="success-button" style="width: 100%" id="addPerformanceBadge-button" type="submit"
+                  [disabled]="!performanceBadgeForm.valid || selectedInstrument == null || selectedPerformanceBadge == null">
             {{'ADD' | translate}}
             <mat-icon aria-label="Submit button">playlist_add</mat-icon>
           </button>
