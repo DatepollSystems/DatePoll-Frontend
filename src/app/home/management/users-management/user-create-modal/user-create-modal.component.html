@@ -2,6 +2,12 @@
 <div mat-dialog-content>
   <form (ngSubmit)="create(form)" #form="ngForm">
     <div class="row">
+      <div class="col-12">
+        <app-do-not-forget-to-save></app-do-not-forget-to-save>
+      </div>
+    </div>
+
+    <div class="row">
       <!-- Title -->
       <mat-form-field class="col-12 col-sm-12 col-md-3 col-lg-2 col-xl-2">
         <input matInput id="title" name="title" type="text"
@@ -13,14 +19,14 @@
         </mat-error>
       </mat-form-field>
 
-      <!-- Email -->
+      <!-- Username -->
       <mat-form-field class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
-        <input matInput id="email" name="email" type="email"
-               ngModel #emailModel="ngModel"
-               maxlength="190" required minlength="1" email=""
-               placeholder="{{'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_EMAIL_ADDRESS' | translate}}">
-        <mat-error *ngIf="emailModel.invalid">
-          {{'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_EMAIL_ADDRESS_INCORRECT' | translate}}
+        <input matInput id="username" name="username" type="text"
+               ngModel #usernameModel="ngModel"
+               maxlength="190" required minlength="1"
+               placeholder="{{'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_USERNAME' | translate}}">
+        <mat-error *ngIf="usernameModel.invalid">
+          {{'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_USERNAME_INCORRECT' | translate}}
         </mat-error>
       </mat-form-field>
 
@@ -49,7 +55,7 @@
       <!-- Birthday -->
       <mat-form-field class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 datepicker-field">
         <input matInput [matDatepicker]="picker_birthday"
-               name="datepicker" [(ngModel)]="birthday" id="datepicker-birthday"
+               name="datepicker-birthday" [(ngModel)]="birthday" id="datepicker-birthday"
                placeholder="{{'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_BIRTHDAY' | translate}}">
         <mat-datepicker-toggle matSuffix [for]="picker_birthday"></mat-datepicker-toggle>
         <mat-datepicker #picker_birthday></mat-datepicker>
@@ -57,7 +63,7 @@
 
       <mat-form-field class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 datepicker-field-mobile">
         <input matInput [matDatepicker]="picker_mobile_birthday"
-               name="datepicker-mobile" [(ngModel)]="birthday" id="datepicker-birthday-mobile"
+               name="datepicker-birthday-mobile" [(ngModel)]="birthday" id="datepicker-birthday-mobile"
                placeholder="{{'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_BIRTHDAY' | translate}}">
         <mat-datepicker-toggle matSuffix [for]="picker_mobile_birthday"></mat-datepicker-toggle>
         <mat-datepicker touchUi #picker_mobile_birthday></mat-datepicker>
@@ -66,7 +72,7 @@
       <!-- Join date -->
       <mat-form-field class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 datepicker-field">
         <input matInput [matDatepicker]="picker_joindate"
-               name="datepicker" [(ngModel)]="join_date" id="datepicker-join_date"
+               name="datepicker-join_date" [(ngModel)]="join_date" id="datepicker-join_date"
                placeholder="{{'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_JOIN_DATE' | translate}}">
         <mat-datepicker-toggle matSuffix [for]="picker_joindate"></mat-datepicker-toggle>
         <mat-datepicker #picker_joindate></mat-datepicker>
@@ -74,7 +80,7 @@
 
       <mat-form-field class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 datepicker-field-mobile">
         <input matInput [matDatepicker]="picker_mobile_joindate"
-               name="datepicker-mobile" [(ngModel)]="join_date" id="datepicker-join_date-mobile"
+               name="datepicker-join_date-mobile" [(ngModel)]="join_date" id="datepicker-join_date-mobile"
                placeholder="{{'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_JOIN_DATE' | translate}}">
         <mat-datepicker-toggle matSuffix [for]="picker_mobile_joindate"></mat-datepicker-toggle>
         <mat-datepicker touchUi #picker_mobile_joindate></mat-datepicker>
@@ -137,7 +143,18 @@
     </div>
 
     <!-- Divider -->
-    <div class="row">
+    <div class="row" style="margin-top: 15px; margin-bottom: 15px">
+      <div class="col-12">
+        <mat-divider></mat-divider>
+      </div>
+    </div>
+
+    <!-- Email addresses -->
+    <app-email-addresses-list [emailAddressesInput]="emailAddresses"
+                              (emailAddressesChanged)="onEmailAddressChanged($event)"></app-email-addresses-list>
+
+    <!-- Divider -->
+    <div class="row" style="margin-top: 15px; margin-bottom: 15px">
       <div class="col-12">
         <mat-divider></mat-divider>
       </div>
@@ -289,24 +306,12 @@
       </div>
       <form class="row" #performanceBadgeForm="ngForm" (ngSubmit)="addPerformanceBadge(performanceBadgeForm)">
         <div class="col-12 col-sm-12 col-md-6 col-lg-3">
-          <mat-form-field>
-            <mat-label>Instrument</mat-label>
-            <mat-select name="instrument" id="instrument" required [(ngModel)]="selectedInstrument">
-              <mat-option *ngFor="let instrument of instruments" [value]="instrument">
-                {{instrument.name}}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
+          <app-instrument-select (instrumentChanged)="onInstrumentChanged($event)"></app-instrument-select>
         </div>
+
         <div class="col-12 col-sm-12 col-md-6 col-lg-3">
-          <mat-form-field>
-            <mat-label>Abzeichen</mat-label>
-            <mat-select name="performanceBadge" id="performanceBadge" required [(ngModel)]="selectedPerformanceBadge">
-              <mat-option *ngFor="let performanceBadge of performanceBadges" [value]="performanceBadge">
-                {{performanceBadge.name}}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
+          <app-performance-badge-select
+            (performanceBadgeChanged)="onPerformanceBadgeChanged($event)"></app-performance-badge-select>
         </div>
 
         <mat-form-field class="col-12 col-sm-12 col-md-6 col-lg-3 datepicker-field">
@@ -319,7 +324,8 @@
 
         <mat-form-field class="col-12 col-sm-12 col-md-6 col-lg-3 datepicker-field-mobile">
           <input matInput [matDatepicker]="picker_mobile_performanceBadge"
-                 name="datepicker-performanceBadge-mobile" [(ngModel)]="performanceBadgeDate" id="datepicker-performanceBadge-mobile"
+                 name="datepicker-performanceBadge-mobile" [(ngModel)]="performanceBadgeDate"
+                 id="datepicker-performanceBadge-mobile"
                  placeholder="{{'MANAGEMENT_USERS_CREATE_USER_MODAL_PERFORMANCE_BADGES_DATE' | translate}}">
           <mat-datepicker-toggle matSuffix [for]="picker_mobile_performanceBadge"></mat-datepicker-toggle>
           <mat-datepicker touchUi #picker_mobile_performanceBadge></mat-datepicker>
@@ -347,7 +353,8 @@
 
         <div class="col-12 col-sm-12 col-md-12 col-lg-3">
           <button mat-raised-button class="success-button" style="width: 100%" id="addPerformanceBadge-button"
-                  type="submit" [disabled]="!performanceBadgeForm.valid">
+                  type="submit"
+                  [disabled]="!performanceBadgeForm.valid || selectedInstrument == null || selectedPerformanceBadge == null">
             {{'ADD' | translate}}
             <mat-icon aria-label="Submit button">playlist_add</mat-icon>
           </button>
@@ -361,7 +368,8 @@
               {{'MANAGEMENT_USERS_CREATE_USER_MODAL_PERFORMANCE_BADGES_WITH' | translate}}
               {{ userPerformanceBadge.instrumentName }}
             </span>
-            <span matLine *ngIf="userPerformanceBadge.date != null">Datum: {{userPerformanceBadge.date | date:'dd.MM.yyyy'}}</span>
+            <span matLine
+                  *ngIf="userPerformanceBadge.date != null">Datum: {{userPerformanceBadge.date | date:'dd.MM.yyyy'}}</span>
             <span matLine *ngIf="userPerformanceBadge.grade != null">Erfolg: {{userPerformanceBadge.grade}}</span>
             <span matLine *ngIf="userPerformanceBadge.note != null">Anmerkung: {{userPerformanceBadge.note}}</span>
             <button mat-icon-button (click)="removePerformanceBadge(userPerformanceBadge.id)" matTooltipPosition="right"
@@ -393,7 +401,8 @@
           <small>
             {{'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_PERMISSIONS_SMALL_0' | translate}}
             <a href="https://gitlab.com/BuergerkorpsEggenburg/datepoll-backend-php/wikis/Permissions"
-              target="_blank" re="noopener">Link</a>{{'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_PERMISSIONS_SMALL_1' | translate}}
+               target="_blank"
+               re="noopener">Link</a>{{'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_PERMISSIONS_SMALL_1' | translate}}
           </small>
         </div>
       </div>

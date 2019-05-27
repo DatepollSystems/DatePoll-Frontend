@@ -22,8 +22,8 @@ export class UsersManagementComponent implements OnInit, OnDestroy {
   @ViewChild('successfullyActivatedAllUsers') successfullyActivatedAllUsers: TemplateRef<any>;
   usersLoaded = true;
 
-  displayedColumns: string[] = ['title', 'firstname', 'surname', 'email', 'birthday', 'join_date', 'streetname', 'streetnumber',
-    'zipcode', 'location', 'phoneNumbers', 'activity', 'actions'];
+  displayedColumns: string[] = ['title', 'firstname', 'surname', 'emails', 'birthday', 'join_date', 'streetname', 'streetnumber',
+    'zipcode', 'location', 'phoneNumbers', 'activity', 'username', 'actions'];
   filterValue: string = null;
 
   @ViewChild(MatSort) sort: MatSort;

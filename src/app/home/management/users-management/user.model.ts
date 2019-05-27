@@ -2,8 +2,7 @@ import {PhoneNumber} from '../../phoneNumber.model';
 
 export class User {
   public readonly id: number;
-  public email: string;
-  public email_verified: boolean;
+  public username: string;
   public force_password_change: boolean;
   public title: string;
   public firstname: string;
@@ -18,13 +17,14 @@ export class User {
   public activity: string;
   private _phoneNumbers: PhoneNumber[] = [];
   private _permissions: string[] = [];
+  private readonly _emailAddresses: string[] = [];
 
-  constructor(id: number, email: string, email_verified: boolean, force_password_change: boolean, title: string,
+  constructor(id: number, username: string, emailAddresses: string[], force_password_change: boolean, title: string,
               firstname: string, surname: string, birthday: Date, join_date: Date, streetname: string, streetnumber: string,
               zipcode: number, location: string, activated: boolean, activity: string, phoneNumbers: PhoneNumber[], permissions: string[]) {
     this.id = id;
-    this.email = email;
-    this.email_verified = email_verified;
+    this.username = username;
+    this._emailAddresses = emailAddresses;
     this.force_password_change = force_password_change;
     this.title = title;
     this.firstname = firstname;
@@ -56,5 +56,18 @@ export class User {
 
   public getPermissions(): string[] {
     return this._permissions.slice();
+  }
+
+  public getEmailAddresses(): string[] {
+    return this._emailAddresses.slice();
+  }
+
+  public getEmailAddressesAsString(): string {
+    let email = '';
+    for (let i = 0; i < this._emailAddresses.length; i++) {
+      email += this._emailAddresses[i] + ', ';
+    }
+
+    return email;
   }
 }

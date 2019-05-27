@@ -37,7 +37,8 @@ export class UserUpdateModalComponent implements OnDestroy {
   title: string;
   firstname: string;
   surname: string;
-  email: string;
+  username: string;
+  emailAddresses: string[];
   birthday: Date;
   join_date: Date;
 
@@ -66,11 +67,8 @@ export class UserUpdateModalComponent implements OnDestroy {
   userPerformanceBadgesCopy: UserPerformanceBadge[];
   userPerformanceBadges: UserPerformanceBadge[];
   userPerformanceBadgesSubscription: Subscription;
-  performanceBadges: PerformanceBadge[] = [];
-  performanceBadgesSubscription: Subscription;
+
   selectedPerformanceBadge: PerformanceBadge;
-  instruments: Instrument[] = [];
-  instrumentsSubscription: Subscription;
   selectedInstrument: Instrument;
   performanceBadgeDate: Date = null;
 
@@ -85,9 +83,10 @@ export class UserUpdateModalComponent implements OnDestroy {
 
     this.user = data.user;
     this.title = this.user.title;
+    this.username = this.user.username;
+    this.emailAddresses = this.user.getEmailAddresses();
     this.firstname = this.user.firstname;
     this.surname = this.user.surname;
-    this.email = this.user.email;
     this.birthday = this.user.birthday;
     this.join_date = this.user.join_date;
     this.streetname = this.user.streetname;
@@ -127,16 +126,6 @@ export class UserUpdateModalComponent implements OnDestroy {
       }, 1000);
     });
 
-    this.performanceBadges = this.performanceBadgesService.getPerformanceBadges();
-    this.performanceBadgesSubscription = this.performanceBadgesService.performanceBadgesChange.subscribe((value) => {
-      this.performanceBadges = value;
-    });
-
-    this.instruments = this.performanceBadgesService.getInstruments();
-    this.instrumentsSubscription = this.performanceBadgesService.instrumentsChange.subscribe((value) => {
-      this.instruments = value;
-    });
-
     this.userPerformanceBadges = this.performanceBadgesService.getUserPerformanceBadges(this.user.id);
     this.userPerformanceBadgesCopy = this.userPerformanceBadges.slice();
     for (let i = 0; i < this.userPerformanceBadges.length; i++) {
@@ -160,9 +149,11 @@ export class UserUpdateModalComponent implements OnDestroy {
   ngOnDestroy() {
     this.joinedSubscription.unsubscribe();
     this.freeSubscription.unsubscribe();
-    this.performanceBadgesSubscription.unsubscribe();
-    this.instrumentsSubscription.unsubscribe();
     this.userPerformanceBadgesSubscription.unsubscribe();
+  }
+
+  onEmailAddressChanged(emailAddresses: string[]) {
+    this.emailAddresses = emailAddresses;
   }
 
   addPhoneNumber(form: NgForm) {
@@ -200,6 +191,16 @@ export class UserUpdateModalComponent implements OnDestroy {
     this.permissions = permissions;
   }
 
+  onPerformanceBadgeChanged(performanceBadge: PerformanceBadge) {
+    console.log('Selected performance badge: ' + performanceBadge.name);
+    this.selectedPerformanceBadge = performanceBadge;
+  }
+
+  onInstrumentChanged(instrument: Instrument) {
+    console.log('Selected instrument: ' + instrument.name);
+    this.selectedInstrument = instrument;
+  }
+
   addPerformanceBadge(form: NgForm) {
     if (this.selectedInstrument == null || this.selectedPerformanceBadge == null) {
       return;
@@ -225,6 +226,8 @@ export class UserUpdateModalComponent implements OnDestroy {
     form.reset();
     this.userPerformanceBadgeCount++;
     this.performanceBadgeDate = null;
+    this.selectedInstrument = null;
+    this.selectedPerformanceBadge = null;
   }
 
   removePerformanceBadge(id: number) {
@@ -242,7 +245,7 @@ export class UserUpdateModalComponent implements OnDestroy {
     this.sendingRequest = true;
 
     const title = form.controls.title.value;
-    const email = form.controls.email.value;
+    const username = form.controls.username.value;
     const firstname = form.controls.firstname.value;
     const surname = form.controls.surname.value;
     const streetname = form.controls.streetname.value;
@@ -285,7 +288,7 @@ export class UserUpdateModalComponent implements OnDestroy {
     const join_dateformatted = [year, month, day].join('-');
 
     console.log('update User | title: ' + title);
-    console.log('update User | email: ' + email);
+    console.log('update User | username: ' + username);
     console.log('update User | firstname: ' + firstname);
     console.log('update User | surname: ' + surname);
     console.log('update User | birthday: ' + birthdayformatted);
@@ -309,7 +312,7 @@ export class UserUpdateModalComponent implements OnDestroy {
 
     const userObject = {
       'title': title,
-      'email': email,
+      'username': username,
       'firstname': firstname,
       'surname': surname,
       'birthday': birthdayformatted,
@@ -320,13 +323,14 @@ export class UserUpdateModalComponent implements OnDestroy {
       'location': location,
       'activated': activated,
       'activity': activity,
+      'emailAddresses': this.emailAddresses,
       'phoneNumbers': phoneNumbersObject,
       'permissions': this.permissions
     };
     console.log(userObject);
 
     form.controls.title.disable();
-    form.controls.email.disable();
+    form.controls.username.disable();
     form.controls.firstname.disable();
     form.controls.surname.disable();
     form.controls.streetname.disable();
@@ -335,6 +339,7 @@ export class UserUpdateModalComponent implements OnDestroy {
     form.controls.location.disable();
     form.controls.activity.disable();
     form.controls.activated.disable();
+    document.getElementById('addEmail-button').setAttribute('disabled', 'disabled');
     document.getElementById('datepicker-birthday').setAttribute('disabled', 'disabled');
     document.getElementById('datepicker-birthday-mobile').setAttribute('disabled', 'disabled');
     document.getElementById('datepicker-join_date').setAttribute('disabled', 'disabled');
@@ -345,8 +350,6 @@ export class UserUpdateModalComponent implements OnDestroy {
     document.getElementById('addPermission-button').setAttribute('disabled', 'disabled');
     document.getElementById('permission').setAttribute('disabled', 'disabled');
     document.getElementById('addPerformanceBadge-button').setAttribute('disabled', 'disabled');
-    document.getElementById('instrument').setAttribute('disabled', 'disabled');
-    document.getElementById('performanceBadge').setAttribute('disabled', 'disabled');
     document.getElementById('datepicker-performanceBadge').setAttribute('disabled', 'disabled');
     document.getElementById('datepicker-performanceBadge-mobile').setAttribute('disabled', 'disabled');
     document.getElementById('performanceBadge-grade').setAttribute('disabled', 'disabled');

@@ -11,7 +11,7 @@ import {AuthService} from '../auth.service';
   styleUrls: ['./signin.component.css']
 })
 export class SigninComponent implements OnInit {
-  public static projectName = 'priv. uni. Buergerkorps Eggenburg';
+  public static projectName = 'priv. unif. Buergerkorps Eggenburg';
   projectName = SigninComponent.projectName;
 
   state = 'login';
@@ -21,7 +21,7 @@ export class SigninComponent implements OnInit {
 
   showLoadingSpinnerDuringLogin = false;
 
-  private email: string;
+  private username: string;
   private password: string;
   private stayLoggedIn = false;
 
@@ -40,12 +40,12 @@ export class SigninComponent implements OnInit {
   protected onSignin(form: NgForm) {
     this.showLoadingSpinnerDuringLogin = true;
 
-    this.email = form.value.email;
+    this.username = form.value.username;
     this.password = form.value.password;
 
     console.log('signInComponent | Stay logged in: ' + this.stayLoggedIn);
 
-    this.authService.signinUser(this.email, this.password, this.stayLoggedIn).subscribe(
+    this.authService.signinUser(this.username, this.password, this.stayLoggedIn).subscribe(
       (data: any) => {
         console.log(data);
         if (data.msg != null) {
@@ -81,7 +81,7 @@ export class SigninComponent implements OnInit {
   protected onChangePasswordAfterSignin(form: NgForm) {
     const password = form.value.password;
 
-    this.authService.changePasswordAfterSignin(this.email, this.password, password).subscribe(
+    this.authService.changePasswordAfterSignin(this.username, this.password, password).subscribe(
       (data: any) => {
         this.uiLogin();
         this.authService.performLogin(data.token);

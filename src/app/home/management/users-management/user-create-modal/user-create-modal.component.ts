@@ -32,6 +32,7 @@ export class UserCreateModalComponent implements OnDestroy {
 
   sendingRequest = false;
 
+  emailAddresses: string[] = [];
   birthday: Date;
   join_date: Date;
   phoneNumberCount = 0;
@@ -48,11 +49,7 @@ export class UserCreateModalComponent implements OnDestroy {
 
   userPerformanceBadgeCount = 0;
   userPerformanceBadges: UserPerformanceBadge[] = [];
-  performanceBadges: PerformanceBadge[] = [];
-  performanceBadgesSubscription: Subscription;
   selectedPerformanceBadge: PerformanceBadge;
-  instruments: Instrument[] = [];
-  instrumentsSubscription: Subscription;
   selectedInstrument: Instrument;
   performanceBadgeDate: Date = null;
 
@@ -71,23 +68,11 @@ export class UserCreateModalComponent implements OnDestroy {
       this.remakeFreeAndJoinedList();
     });
 
-    this.performanceBadges = this.performanceBadgesService.getPerformanceBadges();
-    this.performanceBadgesSubscription = this.performanceBadgesService.performanceBadgesChange.subscribe((value) => {
-      this.performanceBadges = value;
-    });
-
-    this.instruments = this.performanceBadgesService.getInstruments();
-    this.instrumentsSubscription = this.performanceBadgesService.instrumentsChange.subscribe((value) => {
-      this.instruments = value;
-    });
-
     this.hasPermissionToChangePermission = this.myUserService.hasPermission(Permissions.ROOT_ADMINISTRATION);
   }
 
   ngOnDestroy() {
     this.groupsSubscription.unsubscribe();
-    this.performanceBadgesSubscription.unsubscribe();
-    this.instrumentsSubscription.unsubscribe();
   }
 
   remakeFreeAndJoinedList() {
@@ -127,6 +112,10 @@ export class UserCreateModalComponent implements OnDestroy {
     }, 1000);
   }
 
+  onEmailAddressChanged(emailAddresses: string[]) {
+    this.emailAddresses = emailAddresses;
+  }
+
   addPhoneNumber(form: NgForm) {
     this.phoneNumbers.push(new PhoneNumber(this.phoneNumberCount, form.value.label, form.value.phoneNumber));
     this.phoneNumberCount++;
@@ -162,6 +151,16 @@ export class UserCreateModalComponent implements OnDestroy {
     this.permissions = permissions;
   }
 
+  onPerformanceBadgeChanged(performanceBadge: PerformanceBadge) {
+    console.log('Selected performance badge: ' + performanceBadge.name);
+    this.selectedPerformanceBadge = performanceBadge;
+  }
+
+  onInstrumentChanged(instrument: Instrument) {
+    console.log('Selected instrument: ' + instrument.name);
+    this.selectedInstrument = instrument;
+  }
+
   addPerformanceBadge(form: NgForm) {
     if (this.selectedInstrument == null || this.selectedPerformanceBadge == null) {
       return;
@@ -187,6 +186,8 @@ export class UserCreateModalComponent implements OnDestroy {
     this.userPerformanceBadgeCount++;
     form.reset();
     this.performanceBadgeDate = null;
+    this.selectedInstrument = null;
+    this.selectedPerformanceBadge = null;
   }
 
   removePerformanceBadge(id: number) {
@@ -204,7 +205,7 @@ export class UserCreateModalComponent implements OnDestroy {
     this.sendingRequest = true;
 
     const title = form.controls.title.value;
-    const email = form.controls.email.value;
+    const username = form.controls.username.value;
     const firstname = form.controls.firstname.value;
     const surname = form.controls.surname.value;
     const streetname = form.controls.streetname.value;
@@ -247,7 +248,7 @@ export class UserCreateModalComponent implements OnDestroy {
     const join_dateformatted = [year, month, day].join('-');
 
     console.log('create User | title: ' + title);
-    console.log('create User | email: ' + email);
+    console.log('create User | username: ' + username);
     console.log('create User | firstname: ' + firstname);
     console.log('create User | surname: ' + surname);
     console.log('create User | birthday: ' + birthdayformatted);
@@ -271,7 +272,7 @@ export class UserCreateModalComponent implements OnDestroy {
 
     const userObject = {
       'title': title,
-      'email': email,
+      'username': username,
       'firstname': firstname,
       'surname': surname,
       'birthday': birthdayformatted,
@@ -282,13 +283,14 @@ export class UserCreateModalComponent implements OnDestroy {
       'location': location,
       'activated': activated,
       'activity': activity,
+      'emailAddresses': this.emailAddresses,
       'phoneNumbers': phoneNumbersObject,
       'permissions': this.permissions
     };
     console.log(userObject);
 
+    form.controls.username.disable();
     form.controls.title.disable();
-    form.controls.email.disable();
     form.controls.firstname.disable();
     form.controls.surname.disable();
     form.controls.streetname.disable();
@@ -297,6 +299,7 @@ export class UserCreateModalComponent implements OnDestroy {
     form.controls.location.disable();
     form.controls.activity.disable();
     form.controls.activated.disable();
+    document.getElementById('addEmail-button').setAttribute('disabled', 'disabled');
     document.getElementById('datepicker-birthday').setAttribute('disabled', 'disabled');
     document.getElementById('datepicker-birthday-mobile').setAttribute('disabled', 'disabled');
     document.getElementById('datepicker-join_date').setAttribute('disabled', 'disabled');
@@ -307,8 +310,6 @@ export class UserCreateModalComponent implements OnDestroy {
     document.getElementById('addPermission-button').setAttribute('disabled', 'disabled');
     document.getElementById('permission').setAttribute('disabled', 'disabled');
     document.getElementById('addPerformanceBadge-button').setAttribute('disabled', 'disabled');
-    document.getElementById('instrument').setAttribute('disabled', 'disabled');
-    document.getElementById('performanceBadge').setAttribute('disabled', 'disabled');
     document.getElementById('datepicker-performanceBadge').setAttribute('disabled', 'disabled');
     document.getElementById('datepicker-performanceBadge-mobile').setAttribute('disabled', 'disabled');
     document.getElementById('performanceBadge-grade').setAttribute('disabled', 'disabled');
