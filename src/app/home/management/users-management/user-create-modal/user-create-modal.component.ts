@@ -32,6 +32,7 @@ export class UserCreateModalComponent implements OnDestroy {
 
   sendingRequest = false;
 
+  emailAddresses: string[] = [];
   birthday: Date;
   join_date: Date;
   phoneNumberCount = 0;
@@ -109,6 +110,10 @@ export class UserCreateModalComponent implements OnDestroy {
       console.log('Free height:' + document.getElementById('free-list').clientHeight);
       console.log('Joined height:' + document.getElementById('joined-list').clientHeight);
     }, 1000);
+  }
+
+  onEmailAddressChanged(emailAddresses: string[]) {
+    this.emailAddresses = emailAddresses;
   }
 
   addPhoneNumber(form: NgForm) {
@@ -200,7 +205,7 @@ export class UserCreateModalComponent implements OnDestroy {
     this.sendingRequest = true;
 
     const title = form.controls.title.value;
-    const email = form.controls.email.value;
+    const username = form.controls.username.value;
     const firstname = form.controls.firstname.value;
     const surname = form.controls.surname.value;
     const streetname = form.controls.streetname.value;
@@ -243,7 +248,7 @@ export class UserCreateModalComponent implements OnDestroy {
     const join_dateformatted = [year, month, day].join('-');
 
     console.log('create User | title: ' + title);
-    console.log('create User | email: ' + email);
+    console.log('create User | username: ' + username);
     console.log('create User | firstname: ' + firstname);
     console.log('create User | surname: ' + surname);
     console.log('create User | birthday: ' + birthdayformatted);
@@ -267,7 +272,7 @@ export class UserCreateModalComponent implements OnDestroy {
 
     const userObject = {
       'title': title,
-      'email': email,
+      'username': username,
       'firstname': firstname,
       'surname': surname,
       'birthday': birthdayformatted,
@@ -278,13 +283,14 @@ export class UserCreateModalComponent implements OnDestroy {
       'location': location,
       'activated': activated,
       'activity': activity,
+      'emailAddresses': this.emailAddresses,
       'phoneNumbers': phoneNumbersObject,
       'permissions': this.permissions
     };
     console.log(userObject);
 
+    form.controls.username.disable();
     form.controls.title.disable();
-    form.controls.email.disable();
     form.controls.firstname.disable();
     form.controls.surname.disable();
     form.controls.streetname.disable();
@@ -293,6 +299,7 @@ export class UserCreateModalComponent implements OnDestroy {
     form.controls.location.disable();
     form.controls.activity.disable();
     form.controls.activated.disable();
+    document.getElementById('addEmail-button').setAttribute('disabled', 'disabled');
     document.getElementById('datepicker-birthday').setAttribute('disabled', 'disabled');
     document.getElementById('datepicker-birthday-mobile').setAttribute('disabled', 'disabled');
     document.getElementById('datepicker-join_date').setAttribute('disabled', 'disabled');

@@ -2,8 +2,14 @@
 <div mat-dialog-content>
   <form (ngSubmit)="update(form)" #form="ngForm">
     <div class="row">
+      <div class="col-12">
+        <app-do-not-forget-to-save></app-do-not-forget-to-save>
+      </div>
+    </div>
+
+    <div class="row">
+      <!-- Title -->
       <mat-form-field class="col-12 col-sm-12 col-md-3 col-lg-2 col-xl-2">
-        <!-- Title -->
         <input matInput id="title" name="title" type="text"
                ngModel #titleModel="ngModel" [(ngModel)]="title"
                maxlength="190"
@@ -13,14 +19,14 @@
         </mat-error>
       </mat-form-field>
 
-      <!-- Email -->
+      <!-- Username -->
       <mat-form-field class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
-        <input matInput id="email" name="email" type="email"
-               ngModel #emailModel="ngModel" [(ngModel)]="email"
-               maxlength="190" required minlength="1" email=""
-               placeholder="{{'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_EMAIL_ADDRESS' | translate}}">
-        <mat-error *ngIf="emailModel.invalid">
-          {{'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_EMAIL_ADDRESS_INCORRECT' | translate}}
+        <input matInput id="username" name="username" type="text"
+               ngModel #usernameModel="ngModel" [(ngModel)]="username"
+               maxlength="190" required minlength="1"
+               placeholder="{{'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_USERNAME' | translate}}">
+        <mat-error *ngIf="usernameModel.invalid">
+          {{'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_USERNAME_INCORRECT' | translate}}
         </mat-error>
       </mat-form-field>
 
@@ -137,7 +143,18 @@
     </div>
 
     <!-- Divider -->
-    <div class="row">
+    <div class="row" style="margin-top: 15px; margin-bottom: 15px">
+      <div class="col-12">
+        <mat-divider></mat-divider>
+      </div>
+    </div>
+
+    <!-- Email addresses -->
+    <app-email-addresses-list [emailAddressesInput]="emailAddresses"
+                              (emailAddressesChanged)="onEmailAddressChanged($event)"></app-email-addresses-list>
+
+    <!-- Divider -->
+    <div class="row" style="margin-top: 15px; margin-bottom: 15px">
       <div class="col-12">
         <mat-divider></mat-divider>
       </div>
@@ -292,7 +309,8 @@
           <app-instrument-select (instrumentChanged)="onInstrumentChanged($event)"></app-instrument-select>
         </div>
         <div class="col-12 col-sm-12 col-md-6 col-lg-3">
-          <app-performance-badge-select (performanceBadgeChanged)="onPerformanceBadgeChanged($event)"></app-performance-badge-select>
+          <app-performance-badge-select
+            (performanceBadgeChanged)="onPerformanceBadgeChanged($event)"></app-performance-badge-select>
         </div>
 
         <mat-form-field class="col-12 col-sm-12 col-md-6 col-lg-3 datepicker-field">
@@ -305,7 +323,8 @@
 
         <mat-form-field class="col-12 col-sm-12 col-md-6 col-lg-3 datepicker-field-mobile">
           <input matInput [matDatepicker]="picker_mobile_performanceBadge"
-                 name="datepicker-performanceBadge-mobile" [(ngModel)]="performanceBadgeDate" id="datepicker-performanceBadge-mobile"
+                 name="datepicker-performanceBadge-mobile" [(ngModel)]="performanceBadgeDate"
+                 id="datepicker-performanceBadge-mobile"
                  placeholder="{{'MANAGEMENT_USERS_CREATE_USER_MODAL_PERFORMANCE_BADGES_DATE' | translate}}">
           <mat-datepicker-toggle matSuffix [for]="picker_mobile_performanceBadge"></mat-datepicker-toggle>
           <mat-datepicker touchUi #picker_mobile_performanceBadge></mat-datepicker>
@@ -332,7 +351,8 @@
         </mat-form-field>
 
         <div class="col-12 col-sm-12 col-md-12 col-lg-3">
-          <button mat-raised-button class="success-button" style="width: 100%" id="addPerformanceBadge-button" type="submit"
+          <button mat-raised-button class="success-button" style="width: 100%" id="addPerformanceBadge-button"
+                  type="submit"
                   [disabled]="!performanceBadgeForm.valid || selectedInstrument == null || selectedPerformanceBadge == null">
             {{'ADD' | translate}}
             <mat-icon aria-label="Submit button">playlist_add</mat-icon>
@@ -347,7 +367,8 @@
               {{'MANAGEMENT_USERS_CREATE_USER_MODAL_PERFORMANCE_BADGES_WITH' | translate}}
               {{ userPerformanceBadge.instrumentName }}
             </span>
-            <span matLine *ngIf="userPerformanceBadge.date != null">Datum: {{userPerformanceBadge.date | date:'dd.MM.yyyy'}}</span>
+            <span matLine
+                  *ngIf="userPerformanceBadge.date != null">Datum: {{userPerformanceBadge.date | date:'dd.MM.yyyy'}}</span>
             <span matLine *ngIf="userPerformanceBadge.grade != null">Erfolg: {{userPerformanceBadge.grade}}</span>
             <span matLine *ngIf="userPerformanceBadge.note != null">Anmerkung: {{userPerformanceBadge.note}}</span>
             <button mat-icon-button (click)="removePerformanceBadge(userPerformanceBadge.id)" matTooltipPosition="right"
@@ -379,7 +400,8 @@
           <small>
             {{'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_PERMISSIONS_SMALL_0' | translate}}
             <a href="https://gitlab.com/BuergerkorpsEggenburg/datepoll-backend-php/wikis/Permissions"
-              target="_blank" rel="noopener">Link</a>{{'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_PERMISSIONS_SMALL_1' | translate}}
+               target="_blank"
+               rel="noopener">Link</a>{{'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_PERMISSIONS_SMALL_1' | translate}}
           </small>
         </div>
       </div>

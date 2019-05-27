@@ -32,8 +32,8 @@ export class HomeComponent {
   private surnameSubscription: Subscription;
   surname: string = null;
 
-  private emailSubscription: Subscription;
-  email: string = null;
+  private usernameSubscription: Subscription;
+  username: string = null;
 
   private showCinemaSubscription: Subscription;
   showCinema = true;
@@ -75,9 +75,9 @@ export class HomeComponent {
       this.surname = value;
     });
 
-    this.email = this.myUserService.getEmail();
-    this.emailSubscription = myUserService.emailChange.subscribe((value) => {
-      this.email = value;
+    this.username = this.myUserService.getUsername();
+    this.usernameSubscription = this.myUserService.usernameChange.subscribe((value) => {
+      this.username = value;
     });
 
     this.showCinema = settingsService.getShowCinema();

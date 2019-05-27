@@ -20,8 +20,10 @@ export class MyUserService {
   private _surname: string;
   public surnameChange: Subject<string> = new Subject<string>();
 
-  private _email: string;
-  public emailChange: Subject<string> = new Subject<string>();
+  private _username: string;
+  public usernameChange: Subject<string> = new Subject<string>();
+
+  private _emailAddresses: string[];
 
   private _streetname: string;
   private _streetnumber: string;
@@ -51,7 +53,8 @@ export class MyUserService {
         this.setTitle(data.title);
         this.setFirstname(data.firstname);
         this.setSurname(data.surname);
-        this.setEmail(data.email);
+        this.setUsername(data.username);
+        this.setEmailAddresses(data.emailAddresses);
         this.setStreetname(data.streetname);
         this.setStreetnumber(data.streetnumber);
         this.setZipcode(data.zipcode);
@@ -140,13 +143,13 @@ export class MyUserService {
     return this._surname;
   }
 
-  setEmail(email: string) {
-    this._email = email;
-    this.emailChange.next(this._email);
+  setUsername(username: string) {
+    this._username = username;
+    this.usernameChange.next(this._username);
   }
 
-  getEmail(): string {
-    return this._email;
+  getUsername(): string {
+    return this._username;
   }
 
   setBirthday(birthday: Date) {
@@ -195,6 +198,19 @@ export class MyUserService {
 
   getJoindate(): Date {
     return this._joindate;
+  }
+
+  setEmailAddresses(emailAddresses: string[]) {
+    this._emailAddresses = emailAddresses;
+
+    const request = {
+      'emailAddresses': this._emailAddresses
+    };
+    return this.httpService.loggedInV1POSTRequest('/user/myself/changeEmailAddresses', request, 'updateEmailAddresses');
+  }
+
+  public getEmailAddresses(): string[] {
+    return this._emailAddresses.slice();
   }
 
   public addPhoneNumber(phoneNumberObject: any) {

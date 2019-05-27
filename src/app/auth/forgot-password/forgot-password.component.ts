@@ -15,15 +15,15 @@ export class ForgotPasswordComponent implements OnInit {
   private apiUrl = environment.apiUrl + '/auth/forgotPassword/';
   projectName = SigninComponent.projectName;
 
-  // States: SUBMIT_EMAIL | SUBMIT_CODE | SUBMIT_PASSWORD | FINISHED
-  state = 'SUBMIT_EMAIL';
+  // States: SUBMIT_USERNAME | SUBMIT_CODE | SUBMIT_PASSWORD | FINISHED
+  state = 'SUBMIT_USERNAME';
 
-  emailAddress: string;
+  username: string;
   verificationCode: number;
 
   sendingRequest = false;
 
-  unknownEmailAlert = false;
+  unknownUsernameAlert = false;
   verificationCodeIncorrect = false;
   verificationCodeRateLimitExceeded = false;
 
@@ -34,8 +34,8 @@ export class ForgotPasswordComponent implements OnInit {
   }
 
   onSubmitForm(form: NgForm) {
-    if (this.state.includes('SUBMIT_EMAIL')) {
-      this.onSubmitEmail(form);
+    if (this.state.includes('SUBMIT_USERNAME')) {
+      this.onSubmitUsername(form);
     } else if (this.state.includes('SUBMIT_CODE')) {
       this.onCheckCode(form);
     } else if (this.state.includes('SUBMIT_PASSWORD')) {
@@ -45,20 +45,20 @@ export class ForgotPasswordComponent implements OnInit {
     }
   }
 
-  onSubmitEmail(form: NgForm) {
-    this.unknownEmailAlert = false;
+  onSubmitUsername(form: NgForm) {
+    this.unknownUsernameAlert = false;
 
-    const emailAddress = form.controls.email.value;
+    const username = form.controls.username.value;
 
     const dto = {
-      'emailAddress': emailAddress
+      'username': username
     };
 
     this.sendingRequest = true;
     this.http.post(this.apiUrl + 'sendEmail', dto).subscribe(
       (data: any) => {
         console.log(data);
-        this.emailAddress = emailAddress;
+        this.username = username;
         this.state = 'SUBMIT_CODE';
 
         this.sendingRequest = false;
@@ -66,8 +66,8 @@ export class ForgotPasswordComponent implements OnInit {
       (error) => {
         console.log(error);
         if (error.error.code != null) {
-          if (error.error.code.includes('unknown_email')) {
-            this.unknownEmailAlert = true;
+          if (error.error.code.includes('unknown_username')) {
+            this.unknownUsernameAlert = true;
           }
         }
         this.sendingRequest = false;
@@ -82,7 +82,7 @@ export class ForgotPasswordComponent implements OnInit {
     const code = form.controls.emailVerificationCode.value;
 
     const dto = {
-      'emailAddress': this.emailAddress,
+      'username': this.username,
       'code': code
     };
 
@@ -112,7 +112,7 @@ export class ForgotPasswordComponent implements OnInit {
     const password = form.controls.password.value;
 
     const dto = {
-      'emailAddress': this.emailAddress,
+      'username': this.username,
       'code': this.verificationCode,
       'new_password': password
     };
@@ -124,7 +124,7 @@ export class ForgotPasswordComponent implements OnInit {
         this.state = 'FINISHED';
         this.sendingRequest = false;
         setTimeout(() => {
-          this.router.navigate(['/signin']);
+          this.router.navigate(['/auth/signin']);
         }, 5000);
       },
       (error) => {

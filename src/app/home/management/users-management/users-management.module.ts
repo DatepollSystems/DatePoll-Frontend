@@ -14,6 +14,7 @@ import {UserCreateModalComponent} from './user-create-modal/user-create-modal.co
 import {UserUpdateModalComponent} from './user-update-modal/user-update-modal.component';
 import {PerformanceBadgeSelectComponent} from './performance-badge-select/performance-badge-select.component';
 import {InstrumentSelectComponent} from './instrument-select/instrument-select.component';
+import {CommonComponentsModule} from '../../../services/common-components.module';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import {InstrumentSelectComponent} from './instrument-select/instrument-select.c
     MaterialModule,
     TranslationModule,
     NgxMatSelectSearchModule,
-    UsersManagementRoutingModule
+    UsersManagementRoutingModule,
+    CommonComponentsModule
   ]
 })
 export class UsersManagementModule {

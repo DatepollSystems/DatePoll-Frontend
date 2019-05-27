@@ -22,12 +22,11 @@
 
             <div class="row">
               <mat-form-field class="col-12">
-                <span matPrefix>@ &nbsp;</span>
                 <input matInput ngModel
-                       id="email" name="email" type="email"
-                       email required minlength="5"
-                       placeholder="{{'SIGNIN_EMAIL' | translate}}">
-                <mat-icon matSuffix>email</mat-icon>
+                       id="username" name="username" type="text"
+                       required minlength="3" maxlength="190"
+                       placeholder="{{'SIGNIN_USERNAME' | translate}}">
+                <mat-icon matSuffix>account_circle</mat-icon>
               </mat-form-field>
             </div>
 
@@ -37,7 +36,7 @@
                        id="password" name="password" type="password"
                        minlength="5" required
                        placeholder="{{'SIGNIN_PASSWORD' | translate}}">
-                <mat-hint *ngIf="loginFail"><strong style="color: red">{{'SIGNIN_EMAIL_OR_PASSWORD_INCORRECT' | translate}}</strong></mat-hint>
+                <mat-hint *ngIf="loginFail"><strong style="color: red">{{'SIGNIN_USERNAME_OR_PASSWORD_INCORRECT' | translate}}</strong></mat-hint>
               </mat-form-field>
             </div>
 

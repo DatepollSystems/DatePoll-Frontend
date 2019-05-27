@@ -9,11 +9,13 @@ import {TranslationModule} from '../translation/translation.module';
 
 import {DoNotForgetToSaveComponent} from '../home/do-not-forget-to-save/do-not-forget-to-save.component';
 import {MovieEditModalComponent} from '../home/cinema/movie-administration/movie-edit-modal/movie-edit-modal.component';
+import {EmailAddressesListComponent} from '../home/management/users-management/email-addresses-list/email-addresses-list.component';
 
 @NgModule({
   declarations: [
     DoNotForgetToSaveComponent,
-    MovieEditModalComponent
+    MovieEditModalComponent,
+    EmailAddressesListComponent
   ],
   entryComponents: [
     MovieEditModalComponent
@@ -28,7 +30,8 @@ import {MovieEditModalComponent} from '../home/cinema/movie-administration/movie
   ],
   exports: [
     DoNotForgetToSaveComponent,
-    MovieEditModalComponent
+    MovieEditModalComponent,
+    EmailAddressesListComponent
   ]
 })
 export class CommonComponentsModule {}

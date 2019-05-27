@@ -77,7 +77,7 @@ export class AuthService {
     }
   }
 
-  public signinUser(email: string, password: string, stayLoggedIn: boolean) {
+  public signinUser(username: string, password: string, stayLoggedIn: boolean) {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
 
     let signInObject;
@@ -86,7 +86,7 @@ export class AuthService {
 
     if (stayLoggedIn) {
       signInObject = {
-        'email': email,
+        'username': username,
         'password': password,
         'stayLoggedIn': stayLoggedIn,
         'sessionInformation': browser.name + ' - ' + browser.majorVersion + '; OS: ' + browser.os +
@@ -94,7 +94,7 @@ export class AuthService {
       };
     } else {
       signInObject = {
-        'email': email,
+        'username': username,
         'password': password
       };
     }
@@ -112,11 +112,11 @@ export class AuthService {
     this.router.navigate(['/home']);
   }
 
-  public changePasswordAfterSignin(email: string, oldPassword: string, newPassword: string) {
+  public changePasswordAfterSignin(username: string, oldPassword: string, newPassword: string) {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
 
     const changePasswordAfterSigninObject = {
-      'email': email,
+      'username': username,
       'old_password': oldPassword,
       'new_password': newPassword
     };

@@ -42,11 +42,11 @@
 
   "SIGNIN": "Anmelden",
   "SIGNIN_NOT_SIGNED_UP": "Kein Konto?",
-  "SIGNIN_EMAIL": "Email-Adresse",
+  "SIGNIN_USERNAME": "Benutzername",
   "SIGNIN_PASSWORD": "Passwort",
   "SIGNIN_STAY_LOGGED_IN": "Angemeldet bleiben",
   "SIGNIN_KEEP_YOUR_PASSWORD_SECRET": "Behalte dein Passwort geheim",
-  "SIGNIN_EMAIL_OR_PASSWORD_INCORRECT": "Die Email-Adresse oder das Passwort sind inkorrekt!",
+  "SIGNIN_USERNAME_OR_PASSWORD_INCORRECT": "Der Benutzername oder das Passwort sind inkorrekt!",
   "SIGNIN_ACCOUNT_NOT_ACTIVATED": "Dein Account ist derzeit deaktiviert! Probier es doch später wieder...",
   "SIGNIN_SUCCESSFUL": "Passwort korrekt! Sie werden in kürze weitergeleitet...",
   "SIGNIN_NEW_PASSWORD": "Neues Passwort",
@@ -56,7 +56,9 @@
   "SIGNIN_PASSWORD_ARE_NOT_EQUAL": "Die Passwörter stimmen nicht überein",
 
   "FORGOT_PASSWORD": "Setzte dein Passwort zurück",
-  "FORGOT_PASSWORD_UNKOWN_EMAIL": "Für diese Email-Addresse gibt es keinen DatePoll-Account",
+  "FORGOT_PASSWORD_UNKOWN_USERNAME": "Für diesen Benutzernamen gibt es keinen DatePoll-Account",
+  "FORGOT_PASSWORD_CODE": "Verifizierungscode",
+  "FORGOT_PASSWORD_CODE_INVALID": "Der Verifizierungscode muss eine 6-stellige Zahl sein.",
   "FORGOT_PASSWORD_CODE_INCORRECT": "Der eingegebene Verifizierungscode ist inkorrekt!",
   "FORGOT_PASSWORD_RATE_LIMIT_EXCEEDED": "Du hast zu oft versucht den Code einzugeben. Bitte lade die Seite neu!",
   "FORGOT_PASSWORD_SUCCESSFUL": "Dein Passwort wurde erfolgreich geändert! Du wirst in 5 Sekunden weitergeleitet.",
@@ -159,7 +161,7 @@
   "SETTINGS_PERSONAL_DATA_DESCRIPTION": "Bearbeiten Sie Ihre Persönlichen Daten.",
   "SETTINGS_PERSONAL_DATA_PERSONAL_DATA_CHANGE": "Persönliche Daten ändern",
   "SETTINGS_PERSONAL_DATA_PERSONAL_NUMBER_CHANGE": "Telefonnummern ändern",
-  "SETTINGS_PERSONAL_DATA_PERSONAL_EMAIL_CHANGE": "Email-Adresse ändern",
+  "SETTINGS_PERSONAL_DATA_PERSONAL_EMAIL_ADDRESSES_CHANGE": "Email-Adressen ändern",
 
   "SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_TITLE": "Titel",
   "SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_TITLE_NOT_VALID": "Der Titel darf nicht mehr als 190 Zeichen haben!",
@@ -186,26 +188,7 @@
   "SETTINGS_PERSONAL_DATA_MODAL_PHONE_NUMBER_ADD": "Nummer hinzufügen",
   "SETTINGS_PERSONAL_DATA_MODAL_PHONE_NUMBER_NOT_VALID": "Bitte gib eine Bezeichnung und eine Telefonnummer an!",
 
-
-  "SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_EMAIL_ADDRESS": "E-Mail Adresse",
-  "SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_EMAIL_ADDRESS_NOT_VALID": "Diese Email-Adresse ist invalide",
-  "SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_VERIFICATION_CODE": "Verifizierungscode",
-  "SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_VERIFICATION_CODE_NOT_VALID": "Der Verifizierungscode ist invalide",
-
-  "SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_START": "Start",
-  "SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_START_DESCRIPTION": "Achtung! Sie sind dabei Ihre Email-Adresse zu ändern!",
-
-  "SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_VERIFICATION_EMAIL_SENT": "Es wurde eine E-Mail mit einem Verifizierungscode an Ihre E-Mail Adresse versendet! Bitte geben Sie diesen Code hier ein.",
-
-  "SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_ENTER_VERIFICATION_CODE": "Gib den Verifizierungscode ein",
-  "SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_VERIFICATION_CODE_INCORRECT": "Der eingegeben Verifizierungsode ist inkorrekt!",
-  "SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_OLD_EMAIL_VERIFICATION_CODE_CORRECT": "Der Code ist korrekt! Gib nun deine neue Email-Adresse ein.",
-
-  "SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_NEW_EMAIL_IS_OLD_EMAIL": "Sie können nicht Ihre alte Email Adresse als neue verwenden! Bitte geben Sie Ihre neue Email Adresse ein.",
-  "SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_ENTER_NEW_EMAIL_ADDRESS": "Gib deine neue E-Mail Adresse ein",
-  "SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_FINISHED": "Ihre E-Mail Adresse wurde erfolgreich geändert!",
-
-  "SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_RATE_LIMIT_EXCEEDED": "Du hast die maximale Anzahl an Fehlversuchen für diesen Code erreicht!",
+  "SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_SAVED_SUCCESSFUL": "Deine Email-Adressen wurden erfolgreich gespeichert!",
 
 
   "SETTINGS_SECURITY": "Sicherheit",
@@ -239,7 +222,8 @@
   "MANAGEMENT_USERS_TITLE": "Titel",
   "MANAGEMENT_USERS_FIRSTNAME": "Vorname",
   "MANAGEMENT_USERS_SURNAME": "Nachname",
-  "MANAGEMENT_USERS_EMAIL": "Email",
+  "MANAGEMENT_USERS_USERNAME": "Username",
+  "MANAGEMENT_USERS_EMAIL_ADDRESSES": "Email-Adressen",
   "MANAGEMENT_USERS_BIRTHDAY": "Geburtstag",
   "MANAGEMENT_USERS_JOIN_DATE": "Beitrittsdatum",
   "MANAGEMENT_USERS_STREETNAME": "Straßenname",
@@ -260,8 +244,12 @@
   "MANAGEMENT_USERS_CREATE_USER_MODAL_TITLE": "Lege ein neues Mitglied an",
   "MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_TITLE": "Titel",
   "MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_TITLE_INCORRECT": "Der Titel darf nicht mehr als 190 Zeichen haben!",
+  "MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_USERNAME": "Benutzername",
+  "MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_USERNAME_INCORRECT": "Der Benutzername darf weeder leer sein, noch mehr als 190 Zeichen haben!",
   "MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_EMAIL_ADDRESS": "Email-Adresse",
   "MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_EMAIL_ADDRESS_INCORRECT": "Die angegeben Email-Adresse ist invalide!",
+  "MANAGEMENT_USERS_CREATE_USER_MODAL_LIST_EMAIL_ADDRESSES": "Email-Adressen",
+  "MANAGEMENT_USERS_CREATE_USER_MODAL_LIST_EMAIL_ADDRESSES_REMOVE_TOOLTIP": "Entferne diese Email-Adresse",
   "MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_FIRSTNAME": "Vorname",
   "MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_FIRSTNAME_INCORRECT": "Der Vorname darf weder leer sein, noch mehr als 190 Zeichen haben!",
   "MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_SURNAME": "Nachname",
