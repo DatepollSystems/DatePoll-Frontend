@@ -9,7 +9,7 @@ import {NotificationsService, NotificationType} from 'angular2-notifications';
   styleUrls: ['./email-address.component.css']
 })
 export class EmailAddressComponent {
-  @ViewChild('successfullySavedEmailAddresses') successfullySavedEmailAddresses: TemplateRef<any>;
+  @ViewChild('successfullySavedEmailAddresses', {static: true}) successfullySavedEmailAddresses: TemplateRef<any>;
 
   emailAddresses: string[];
 

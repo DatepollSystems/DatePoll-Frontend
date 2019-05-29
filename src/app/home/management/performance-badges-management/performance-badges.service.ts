@@ -4,7 +4,6 @@ import {Instrument} from './instrument.model';
 import {Subject} from 'rxjs';
 import {PerformanceBadge} from './performanceBadge.model';
 import {UserPerformanceBadge} from '../users-management/userPerformanceBadge.model';
-import {User} from '../users-management/user.model';
 
 @Injectable({
   providedIn: 'root'

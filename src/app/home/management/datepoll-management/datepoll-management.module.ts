@@ -24,4 +24,5 @@ import {DatepollManagementComponent} from './datepoll-management.component';
     DatepollManagementRoutingModule
   ]
 })
-export class DatepollManagementModule {}
+export class DatepollManagementModule {
+}

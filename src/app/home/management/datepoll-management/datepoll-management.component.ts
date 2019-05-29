@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {MatSlideToggleChange} from '@angular/material';
+import {MatSlideToggleChange} from '@angular/material/slide-toggle';
 import {SettingsService} from '../../../services/settings.service';
 import {Subscription} from 'rxjs';
 import {MyUserService} from '../../my-user.service';

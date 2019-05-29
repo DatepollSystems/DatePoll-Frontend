@@ -1,5 +1,5 @@
 import {Component, Inject, TemplateRef, ViewChild} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {NgForm} from '@angular/forms';
 
 import {PerformanceBadgesService} from '../performance-badges.service';
@@ -13,7 +13,7 @@ import {Instrument} from '../instrument.model';
 })
 export class InstrumentUpdateModalComponent {
 
-  @ViewChild('successfullyUpdatedInstrument') successfullyUpdatedInstrument: TemplateRef<any>;
+  @ViewChild('successfullyUpdatedInstrument', {static: true}) successfullyUpdatedInstrument: TemplateRef<any>;
 
   instrument: Instrument;
   name: string;

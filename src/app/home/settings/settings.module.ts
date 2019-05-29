@@ -52,4 +52,5 @@ import {SettingsRoutingModule} from './settings-routing.module';
     SettingsComponent
   ]
 })
-export class SettingsModule {}
+export class SettingsModule {
+}

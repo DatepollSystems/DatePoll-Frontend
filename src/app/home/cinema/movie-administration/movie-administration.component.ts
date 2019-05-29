@@ -1,6 +1,9 @@
 import {AfterViewInit, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {FormControl} from '@angular/forms';
-import {MatDialog, MatSelect, MatSort, MatTableDataSource} from '@angular/material';
+import {MatDialog} from '@angular/material/dialog';
+import {MatSelect} from '@angular/material/select';
+import {MatSort} from '@angular/material/sort';
+import {MatTableDataSource} from '@angular/material/table';
 import {Router} from '@angular/router';
 
 import {ReplaySubject, Subject, Subscription} from 'rxjs';
@@ -26,7 +29,7 @@ export class MovieAdministrationComponent implements OnInit, AfterViewInit, OnDe
   displayedColumns: string[] = ['name', 'date', 'trailer', 'poster', 'worker', 'emergencyWorker', 'bookedTickets', 'deleteMovie'];
   filterValue: string = null;
 
-  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
 
   /** control for the selected years */
   public yearCtrl: FormControl = new FormControl();
@@ -37,7 +40,7 @@ export class MovieAdministrationComponent implements OnInit, AfterViewInit, OnDe
   /** list of years filtered by search keyword */
   public filteredYears: ReplaySubject<Year[]> = new ReplaySubject<Year[]>(1);
 
-  @ViewChild('yearSelect') yearSelect: MatSelect;
+  @ViewChild('yearSelect', {static: true}) yearSelect: MatSelect;
 
   /** Subject that emits when the component has been destroyed. */
   protected _onDestroy = new Subject<void>();

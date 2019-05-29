@@ -4,10 +4,12 @@ import {SigninComponent} from './signin/signin.component';
 import {ForgotPasswordComponent} from './forgot-password/forgot-password.component';
 
 const authRoutes: Routes = [
-  {path: '', children: [
+  {
+    path: '', children: [
       {path: 'signin', component: SigninComponent},
       {path: 'forgotPassword', component: ForgotPasswordComponent},
-    ]}
+    ]
+  }
 ];
 
 @NgModule({
@@ -16,4 +18,5 @@ const authRoutes: Routes = [
   ],
   exports: [RouterModule]
 })
-export class AuthRoutingModule {}
+export class AuthRoutingModule {
+}

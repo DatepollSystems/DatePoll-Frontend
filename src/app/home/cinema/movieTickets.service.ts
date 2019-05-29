@@ -10,7 +10,8 @@ export class MovieTicketsService {
   private _movieOrders: MovieOrder[];
   public movieOrdersChange: Subject<MovieOrder[]> = new Subject<MovieOrder[]>();
 
-  constructor(private httpService: HttpService) { }
+  constructor(private httpService: HttpService) {
+  }
 
   public setMovieOrders(movieOrders: MovieOrder[]) {
     this._movieOrders = movieOrders;
@@ -26,7 +27,7 @@ export class MovieTicketsService {
   }
 
   public fetchMovieOrders() {
-    this.httpService.loggedInV1GETRequest( '/cinema/worker', 'fetchMovieOrders').subscribe(
+    this.httpService.loggedInV1GETRequest('/cinema/worker', 'fetchMovieOrders').subscribe(
       (completeData: any) => {
         const movies = completeData.movies;
 

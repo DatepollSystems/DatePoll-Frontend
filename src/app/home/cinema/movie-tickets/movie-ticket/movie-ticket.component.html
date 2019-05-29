@@ -1,7 +1,8 @@
 <mat-card class="mat-elevation-z3">
   <mat-card-header>
     <mat-card-title-group>
-      <mat-card-title>{{movie.name}}<span *ngIf="soldOut"> |&#32; <b>{{'CINEMA_TICKETS_SOLD_OUT' | translate}}</b></span>
+      <mat-card-title>{{movie.name}}<span
+        *ngIf="soldOut"> |&#32; <b>{{'CINEMA_TICKETS_SOLD_OUT' | translate}}</b></span>
       </mat-card-title>
       <mat-card-subtitle>{{movie.date | date:'dd.MM.yyyy'}}</mat-card-subtitle>
     </mat-card-title-group>
@@ -38,7 +39,8 @@
       </div>
       <div class="col-7 col-sm-7 col-md-8 col-lg-7" style="text-align: right">
         {{movie.emergencyWorkerName}}
-        <button mat-icon-button (click)="signOutForEmergencyWorker(signOutForEmergencyWorkerButton)" #signOutForEmergencyWorkerButton
+        <button mat-icon-button (click)="signOutForEmergencyWorker(signOutForEmergencyWorkerButton)"
+                #signOutForEmergencyWorkerButton
                 *ngIf="movie.emergencyWorkerID == myUserService.getID()" matTooltipPosition="right"
                 matTooltip="{{'CINEMA_TICKETS_CANCEL_CINEMA_SERVICE_TOOLTIP' | translate}}">
           <mat-icon aria-label="Cancel worker">cancel</mat-icon>
@@ -51,7 +53,8 @@
         {{'CINEMA_TICKETS_EMERGENCY_WORKER' | translate}}
       </div>
       <div class="col" style="text-align: end">
-        <button (click)="applyForEmergencyWorker(applyForEmergencyWorkerButton)" mat-stroked-button #applyForEmergencyWorkerButton
+        <button (click)="applyForEmergencyWorker(applyForEmergencyWorkerButton)" mat-stroked-button
+                #applyForEmergencyWorkerButton
                 color="accent">{{'CINEMA_TICKETS_APPLY' | translate}}</button>
       </div>
     </div>

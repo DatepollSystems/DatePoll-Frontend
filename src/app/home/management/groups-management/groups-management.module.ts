@@ -50,4 +50,5 @@ import {SubgroupUserRoleUpdateModalComponent} from './subgroup-user-list-modal/s
     GroupsManagementRoutingModule
   ]
 })
-export class GroupsManagementModule {}
+export class GroupsManagementModule {
+}

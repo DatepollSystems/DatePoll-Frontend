@@ -14,7 +14,8 @@ mat-toolbar {
 }
 
 .toolbar-heading {
-  cursor: pointer; margin-left: 15px;
+  cursor: pointer;
+  margin-left: 15px;
 }
 
 mat-sidenav {
@@ -40,7 +41,8 @@ mat-sidenav {
 
 .sidenav-end {
   position: absolute;
-  bottom: 0; left: 0;
+  bottom: 0;
+  left: 0;
 }
 
 mat-icon {

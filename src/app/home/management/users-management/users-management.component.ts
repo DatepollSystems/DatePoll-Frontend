@@ -1,6 +1,10 @@
 import {Component, OnDestroy, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
-import {MatBottomSheet, MatBottomSheetRef, MatDialog, MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
+import {MatBottomSheet, MatBottomSheetRef} from '@angular/material/bottom-sheet';
+import {MatDialog} from '@angular/material/dialog';
+import {MatPaginator} from '@angular/material/paginator';
+import {MatSort} from '@angular/material/sort';
+import {MatTableDataSource} from '@angular/material/table';
 import {Subscription} from 'rxjs';
 
 import {UsersService} from './users.service';
@@ -19,15 +23,15 @@ import {NotificationsService, NotificationType} from 'angular2-notifications';
   styleUrls: ['./users-management.component.css']
 })
 export class UsersManagementComponent implements OnInit, OnDestroy {
-  @ViewChild('successfullyActivatedAllUsers') successfullyActivatedAllUsers: TemplateRef<any>;
+  @ViewChild('successfullyActivatedAllUsers', {static: true}) successfullyActivatedAllUsers: TemplateRef<any>;
   usersLoaded = true;
 
   displayedColumns: string[] = ['title', 'firstname', 'surname', 'emails', 'birthday', 'join_date', 'streetname', 'streetnumber',
     'zipcode', 'location', 'phoneNumbers', 'activity', 'username', 'actions'];
   filterValue: string = null;
 
-  @ViewChild(MatSort) sort: MatSort;
-  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
   private usersSubscription: Subscription;
   users: User[];
@@ -141,8 +145,8 @@ export class UsersManagementComponent implements OnInit, OnDestroy {
   styles: ['mat-icon { margin-right: 15px }']
 })
 export class UsersExportBottomSheetComponent {
-  @ViewChild('waitForExport') waitForExport: TemplateRef<any>;
-  @ViewChild('successfullyExported') successfullyExported: TemplateRef<any>;
+  @ViewChild('waitForExport', {static: true}) waitForExport: TemplateRef<any>;
+  @ViewChild('successfullyExported', {static: true}) successfullyExported: TemplateRef<any>;
 
   constructor(private bottomSheetRef: MatBottomSheetRef<UsersExportBottomSheetComponent>, private excelService: ExcelService,
               private usersService: UsersService, private notificationsService: NotificationsService) {

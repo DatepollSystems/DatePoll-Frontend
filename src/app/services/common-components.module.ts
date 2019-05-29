@@ -34,4 +34,5 @@ import {EmailAddressesListComponent} from '../home/management/users-management/e
     EmailAddressesListComponent
   ]
 })
-export class CommonComponentsModule {}
+export class CommonComponentsModule {
+}

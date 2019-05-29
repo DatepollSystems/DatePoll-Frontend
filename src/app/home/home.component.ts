@@ -1,5 +1,5 @@
 import {Component, NgZone, ViewChild} from '@angular/core';
-import {MatSidenav} from '@angular/material';
+import {MatSidenav} from '@angular/material/sidenav';
 import {Subscription} from 'rxjs';
 
 import {MyUserService} from './my-user.service';
@@ -17,7 +17,7 @@ export class HomeComponent {
   navBarOpened = false;
   navBarMode = 'over';
 
-  @ViewChild('sidenav')
+  @ViewChild('sidenav', {static: true})
   private sidenav: MatSidenav;
 
   public myUserService: MyUserService;

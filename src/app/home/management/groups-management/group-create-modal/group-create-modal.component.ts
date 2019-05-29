@@ -1,6 +1,6 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {NgForm} from '@angular/forms';
-import {MatDialogRef} from '@angular/material';
+import {MatDialogRef} from '@angular/material/dialog';
 
 import {GroupsService} from '../groups.service';
 
@@ -13,7 +13,8 @@ export class GroupCreateModalComponent {
 
   sendingRequest = false;
 
-  constructor(private groupsService: GroupsService, private dialogRef: MatDialogRef<GroupCreateModalComponent>) { }
+  constructor(private groupsService: GroupsService, private dialogRef: MatDialogRef<GroupCreateModalComponent>) {
+  }
 
   onCreate(form: NgForm) {
     const name = form.controls.name.value;

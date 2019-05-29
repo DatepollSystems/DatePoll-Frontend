@@ -12,15 +12,15 @@
 
   <form (ngSubmit)="bookTickets()" #form="ngForm" style="margin-top: 20px; margin-bottom: 20px;">
     <div class="row">
-        <mat-form-field class="col-12">
-          <input matInput id="ticketsToBook" name="ticketsToBook" type="number"
-                 [(ngModel)]="ticketsToBook" ngModel #ticketsToBookModel="ngModel"
-                 [range]="[1, freeTickets]" number required
-                 placeholder="{{'CINEMA_TICKETS_BOOKING_MODAL_NUMBER_OF_TICKETS' | translate}}">
-          <mat-error *ngIf="ticketsToBookModel.invalid">
-            {{'CINEMA_TICKETS_BOOKING_MODAL_NUMBER_OF_TICKETS_INVALID_1' | translate}} {{freeTickets}} {{'CINEMA_TICKETS_BOOKING_MODAL_NUMBER_OF_TICKETS_INVALID_2' | translate}}
-          </mat-error>
-        </mat-form-field>
+      <mat-form-field class="col-12">
+        <input matInput id="ticketsToBook" name="ticketsToBook" type="number"
+               [(ngModel)]="ticketsToBook" ngModel #ticketsToBookModel="ngModel"
+               [range]="[1, freeTickets]" number required
+               placeholder="{{'CINEMA_TICKETS_BOOKING_MODAL_NUMBER_OF_TICKETS' | translate}}">
+        <mat-error *ngIf="ticketsToBookModel.invalid">
+          {{'CINEMA_TICKETS_BOOKING_MODAL_NUMBER_OF_TICKETS_INVALID_1' | translate}} {{freeTickets}} {{'CINEMA_TICKETS_BOOKING_MODAL_NUMBER_OF_TICKETS_INVALID_2' | translate}}
+        </mat-error>
+      </mat-form-field>
     </div>
   </form>
 

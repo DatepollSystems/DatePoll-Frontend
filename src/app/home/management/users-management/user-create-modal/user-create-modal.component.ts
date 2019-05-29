@@ -1,7 +1,8 @@
 import {Component, OnDestroy, TemplateRef, ViewChild} from '@angular/core';
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 import {NgForm} from '@angular/forms';
-import {MatDialogRef, MatTableDataSource} from '@angular/material';
+import {MatDialogRef} from '@angular/material/dialog';
+import {MatTableDataSource} from '@angular/material/table';
 import {Subscription} from 'rxjs';
 
 import {NotificationsService, NotificationType} from 'angular2-notifications';
@@ -25,7 +26,7 @@ import {Permissions} from '../../../../permissions';
 })
 export class UserCreateModalComponent implements OnDestroy {
 
-  @ViewChild('successfullyCreatedUser') successfullyCreatedUser: TemplateRef<any>;
+  @ViewChild('successfullyCreatedUser', {static: true}) successfullyCreatedUser: TemplateRef<any>;
 
   displayedColumns: string[] = ['label', 'phonenumber', 'action'];
   dataSource: MatTableDataSource<PhoneNumber>;

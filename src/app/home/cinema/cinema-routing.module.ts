@@ -6,11 +6,13 @@ import {MovieServiceComponent} from './movie-service/movie-service.component';
 import {MovieAdministrationComponent} from './movie-administration/movie-administration.component';
 
 const cinemaRoutes: Routes = [
-  {path: '', children: [
+  {
+    path: '', children: [
       {path: 'tickets', component: MovieTicketsComponent},
       {path: 'service', component: MovieServiceComponent},
       {path: 'administration', component: MovieAdministrationComponent},
-    ]}
+    ]
+  }
 ];
 
 @NgModule({
@@ -19,4 +21,5 @@ const cinemaRoutes: Routes = [
   ],
   exports: [RouterModule]
 })
-export class CinemaRoutingModule {}
+export class CinemaRoutingModule {
+}

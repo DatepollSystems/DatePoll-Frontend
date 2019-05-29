@@ -1,13 +1,13 @@
-import {OnInit, ChangeDetectionStrategy, Component, OnDestroy, ChangeDetectorRef} from '@angular/core';
-import {addDays, addHours, endOfDay, endOfMonth, isSameDay, isSameMonth, startOfDay, subDays} from 'date-fns';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
+import {isSameDay, isSameMonth} from 'date-fns';
 import {Subject, Subscription} from 'rxjs';
-import {CalendarEvent, CalendarEventAction, CalendarEventTimesChangedEvent, CalendarView} from 'angular-calendar';
+import {CalendarEvent, CalendarEventTimesChangedEvent, CalendarView} from 'angular-calendar';
 import {CinemaService} from '../cinema/cinema.service';
 import {Movie} from '../cinema/movie.model';
 import {MyUserService} from '../my-user.service';
 import {Permissions} from '../../permissions';
 import {MovieEditModalComponent} from '../cinema/movie-administration/movie-edit-modal/movie-edit-modal.component';
-import {MatDialog} from '@angular/material';
+import {MatDialog} from '@angular/material/dialog';
 
 const colors: any = {
   red: {
@@ -91,7 +91,8 @@ export class CalendarComponent implements OnInit, OnDestroy {
   constructor(private cinemaService: CinemaService,
               private myUserService: MyUserService,
               private cdr: ChangeDetectorRef,
-              private dialog: MatDialog) { }
+              private dialog: MatDialog) {
+  }
 
   ngOnInit() {
     this.cinemaService.fetchYears();

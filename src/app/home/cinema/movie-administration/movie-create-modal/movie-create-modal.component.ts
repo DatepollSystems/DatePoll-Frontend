@@ -1,6 +1,5 @@
 import {Component} from '@angular/core';
 import {CinemaService} from '../../cinema.service';
-import {Response} from '@angular/http';
 
 @Component({
   selector: 'app-movie-create-modal',

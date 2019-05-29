@@ -17,7 +17,8 @@
             <mat-card class="mat-elevation-z3">
               <mat-card-title>{{'MANAGEMENT_PERFORMANCE_BADGES_TITLE_PERFORMANCE_BADGES' | translate}}</mat-card-title>
               <mat-card-content *ngIf="performanceBadges != null">
-                <form (ngSubmit)="addPerformanceBadge(addPerformanceBadgeForm)" #addPerformanceBadgeForm="ngForm" class="row">
+                <form (ngSubmit)="addPerformanceBadge(addPerformanceBadgeForm)" #addPerformanceBadgeForm="ngForm"
+                      class="row">
                   <div class="col-12 col-sm-12 col-md-8 col-lg-8">
                     <mat-form-field>
                       <input matInput id="performanceBadgeName" name="performanceBadgeName" type="text"

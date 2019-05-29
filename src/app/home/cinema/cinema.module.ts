@@ -26,7 +26,7 @@ import {MovieTicketComponent} from './movie-tickets/movie-ticket/movie-ticket.co
     MovieBookTicketsModalComponent,
     MovieCreateModalComponent
   ],
-  imports : [
+  imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
@@ -42,4 +42,5 @@ import {MovieTicketComponent} from './movie-tickets/movie-ticket/movie-ticket.co
     MovieBookTicketsModalComponent
   ]
 })
-export class CinemaModule {}
+export class CinemaModule {
+}

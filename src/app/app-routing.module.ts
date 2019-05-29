@@ -7,19 +7,31 @@ import {AuthGuard} from './auth/auth-guard.service';
 
 const appRoutes = [
   {path: '', redirectTo: '/home', pathMatch: 'full'},
-  {path: 'auth', loadChildren: './auth/auth.module#AuthModule'},
-  {path: 'home', component: HomeComponent, canActivate: [AuthGuard], children: [
+  {path: 'auth', loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)},
+  {
+    path: 'home', component: HomeComponent, canActivate: [AuthGuard], children: [
       {path: '', pathMatch: 'full', component: StartComponent},
-      {path: 'cinema', loadChildren: './home/cinema/cinema.module#CinemaModule'},
-      {path: 'calendar', loadChildren: './home/calendar/calendar-component.module#CalendarComponentModule'},
-      {path: 'settings/personal', loadChildren: './home/settings/settings.module#SettingsModule'},
-      {path: 'management/user', loadChildren: './home/management/users-management/users-management.module#UsersManagementModule'},
-      {path: 'management/group', loadChildren: './home/management/groups-management/groups-management.module#GroupsManagementModule'},
-      {path: 'management/performanceBadges',
+      {path: 'cinema', loadChildren: () => import('./home/cinema/cinema.module').then(m => m.CinemaModule)},
+      {path: 'calendar', loadChildren: () => import('./home/calendar/calendar-component.module').then(m => m.CalendarComponentModule)},
+      {path: 'settings/personal', loadChildren: () => import('./home/settings/settings.module').then(m => m.SettingsModule)},
+      {
+        path: 'management/user', loadChildren:
+          () => import('./home/management/users-management/users-management.module').then(m => m.UsersManagementModule)
+      },
+      {
+        path: 'management/group', loadChildren:
+          () => import('./home/management/groups-management/groups-management.module').then(m => m.GroupsManagementModule)
+      },
+      {
+        path: 'management/performanceBadges',
         loadChildren:
-          './home/management/performance-badges-management/performance-badges-management.module#PerformanceBadgesManagementModule'},
-      {path: 'management/datepoll',
-        loadChildren: './home/management/datepoll-management/datepoll-management.module#DatepollManagementModule'}
+          () => import('./home/management/performance-badges-management/performance-badges-management.module').then(m => m.PerformanceBadgesManagementModule)
+      },
+      {
+        path: 'management/datepoll',
+        loadChildren:
+          () => import('./home/management/datepoll-management/datepoll-management.module').then(m => m.DatepollManagementModule)
+      }
     ]
   },
   {path: 'not-found', component: PageNotFoundComponent},

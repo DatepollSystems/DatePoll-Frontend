@@ -8,7 +8,7 @@ import {HttpService} from '../../../services/http.service';
 })
 export class PasswordComponent {
 
-  @ViewChild('stepper') stepper;
+  @ViewChild('stepper', {static: true}) stepper;
 
   showCheckingOldPasswordSpinner = false;
   showOldPasswordIncorrectCard = false;

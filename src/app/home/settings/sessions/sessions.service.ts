@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpService} from '../../../services/http.service';
 import {Session} from './session.model';
 import {Subject} from 'rxjs';
@@ -11,7 +11,8 @@ export class SessionsService {
   private _sessions: Session[] = null;
   public sessionsChange: Subject<Session[]> = new Subject<Session[]>();
 
-  constructor(private httpService: HttpService) { }
+  constructor(private httpService: HttpService) {
+  }
 
   public getSessions(): Session[] {
     this.fetchSessions();

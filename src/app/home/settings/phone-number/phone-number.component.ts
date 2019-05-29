@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {NgForm} from '@angular/forms';
-import {MatTableDataSource} from '@angular/material';
+import {MatTableDataSource} from '@angular/material/table';
 import {Subscription} from 'rxjs';
 
 import {MyUserService} from '../../my-user.service';

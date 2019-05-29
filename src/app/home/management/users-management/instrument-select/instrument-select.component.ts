@@ -1,7 +1,7 @@
 import {Component, EventEmitter, OnDestroy, OnInit, Output} from '@angular/core';
 import {FormControl} from '@angular/forms';
 
-import {Subject, Subscription, ReplaySubject} from 'rxjs';
+import {ReplaySubject, Subject, Subscription} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
 
 import {PerformanceBadgesService} from '../../performance-badges-management/performance-badges.service';

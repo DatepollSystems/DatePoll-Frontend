@@ -1,6 +1,7 @@
 import {Component, Inject, OnDestroy, TemplateRef, ViewChild} from '@angular/core';
 import {NgForm} from '@angular/forms';
-import {MAT_DIALOG_DATA, MatDialogRef, MatTableDataSource} from '@angular/material';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import {MatTableDataSource} from '@angular/material/table';
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 import {Subscription} from 'rxjs';
 
@@ -25,7 +26,7 @@ import {Instrument} from '../../performance-badges-management/instrument.model';
 })
 export class UserUpdateModalComponent implements OnDestroy {
 
-  @ViewChild('successfullyUpdatedUser') successfullyUpdatedUser: TemplateRef<any>;
+  @ViewChild('successfullyUpdatedUser', {static: true}) successfullyUpdatedUser: TemplateRef<any>;
 
   displayedColumns: string[] = ['label', 'phonenumber', 'action'];
   dataSource: MatTableDataSource<PhoneNumber>;

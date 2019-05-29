@@ -3,7 +3,7 @@ import {Router} from '@angular/router';
 
 import {environment} from '../../environments/environment';
 import {CookieService} from 'angular2-cookie/core';
-import {MatSnackBar} from '@angular/material';
+import {MatSnackBar} from '@angular/material/snack-bar';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Browser} from '../services/browser';
 
