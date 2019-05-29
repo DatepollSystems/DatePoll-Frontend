@@ -19,7 +19,6 @@ export class MovieTicketComponent implements OnInit {
   @Input()
   movie: Movie;
 
-  moviesSubscription: Subscription;
   soldOut: boolean;
 
   myUserService: MyUserService;
@@ -33,10 +32,6 @@ export class MovieTicketComponent implements OnInit {
 
   ngOnInit(): void {
     this.soldOut = this.movie.bookedTickets >= 20;
-
-    this.moviesSubscription = this.cinemaService.moviesChange.subscribe((value) => {
-      this.movie = this.cinemaService.getMovieByID(value, this.movie.id);
-    });
   }
 
   bookTickets() {

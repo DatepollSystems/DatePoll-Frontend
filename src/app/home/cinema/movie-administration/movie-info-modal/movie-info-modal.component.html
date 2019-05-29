@@ -1,0 +1,89 @@
+<h1 mat-dialog-title>{{'CINEMA_TICKETS_ADMINISTRATION_MOVIE_INFO_MODAL_INFO' | translate}} {{name}}</h1>
+<div mat-dialog-content>
+  <div class="row">
+    <mat-form-field class="col-12 col-sm-12 col-md-10 col-lg-10">
+      <input matInput id="name" name="name" type="text"
+             [(ngModel)]="name" disabled
+             placeholder="{{'CINEMA_TICKETS_ADMINISTRATION_NAME' | translate}}">
+    </mat-form-field>
+
+    <mat-form-field class="col-12 col-sm-12 col-md-2 col-lg-2">
+      <input matInput id="bookedTickets" name="bookedTickets" type="number"
+             [(ngModel)]="bookedTickets" disabled
+             placeholder="{{'CINEMA_TICKETS_ADMINISTRATION_BOOKED_TICKETS' | translate}}">
+    </mat-form-field>
+  </div>
+
+  <div class="row">
+    <mat-form-field class="col-12 " id="datepicker-field">
+      <input matInput disabled
+             id="datepicker" name="datepicker" [(ngModel)]="date"
+             placeholder="{{'CINEMA_TICKETS_ADMINISTRATION_DATE' | translate}}">
+    </mat-form-field>
+
+    <mat-form-field class="col-12" id="datepicker-field-mobile">
+      <input matInput disabled
+             id="datepicker-mobile" name="datepicker-mobile" [(ngModel)]="date"
+             placeholder="{{'CINEMA_TICKETS_ADMINISTRATION_DATE' | translate}}">
+    </mat-form-field>
+  </div>
+
+  <div class="row">
+    <mat-form-field class="col-12">
+      <input matInput id="trailerLink" name="trailerLink" type="text"
+             [(ngModel)]="trailerLink" disabled
+             placeholder="{{'CINEMA_TICKETS_ADMINISTRATION_TRAILER' | translate}}">
+    </mat-form-field>
+  </div>
+
+  <div class="row">
+    <mat-form-field class="col-12">
+      <input matInput id="imageLink" name="imageLink" type="text"
+             [(ngModel)]="imageLink" disabled
+             placeholder="{{'CINEMA_TICKETS_ADMINISTRATION_POSTER' | translate}}">
+    </mat-form-field>
+  </div>
+
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        {{'CINEMA_TICKETS_ADMINISTRATION_MOVIE_EDIT_MODAL_POSTER_PREVIEW' | translate}}
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <img class="col-12 col-sm-12 col-md-8 col-lg-4 offset-md-2 offset-lg-4" src="{{imageLink}}"
+         alt="Poster of the movie"/>
+  </mat-expansion-panel>
+
+  <div class="row" style="margin-top: 15px;">
+    <mat-form-field class="col-12">
+      <input matInput (keyup)="applyFilter($event.target.value)"
+             placeholder="{{'SEARCH' | translate}}"/>
+    </mat-form-field>
+  </div>
+  <div class="row">
+    <table mat-table [dataSource]="dataSource" class="col-12">
+
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef> {{'CINEMA_TICKETS_ADMINISTRATION_MOVIE_INFO_MODAL_TABLE_NAME' | translate}} </th>
+        <td mat-cell *matCellDef="let booking"> {{booking.firstname + ' ' + booking.surname}} </td>
+        <td mat-footer-cell *matFooterCellDef> {{'CINEMA_TICKETS_BOOKED_TICKETS' | translate}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="amount">
+        <th mat-header-cell
+            *matHeaderCellDef> {{'CINEMA_TICKETS_ADMINISTRATION_MOVIE_INFO_MODAL_TABLE_AMOUNT' | translate}} </th>
+        <td mat-cell *matCellDef="let booking"> {{booking.amount}} </td>
+        <td mat-footer-cell *matFooterCellDef> {{bookedTickets}} </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
+    </table>
+  </div>
+
+</div>
+<div mat-dialog-actions>
+  <button mat-button [mat-dialog-close]>{{'CLOSE' | translate}}</button>
+</div>

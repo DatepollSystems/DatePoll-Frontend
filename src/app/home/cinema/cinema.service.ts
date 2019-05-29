@@ -4,7 +4,7 @@ import {Subject} from 'rxjs';
 import {AuthService} from '../../auth/auth.service';
 import {HttpService} from '../../services/http.service';
 import {HomepageService} from '../start/homepage.service';
-import {Movie} from './movie.model';
+import {Movie, MovieBookingUser} from './movie.model';
 import {Year} from './year.model';
 
 @Injectable({
@@ -47,16 +47,6 @@ export class CinemaService {
     this.moviesChange.next(this._movies.slice());
   }
 
-  public getMovieByID(movies: Movie[], id: number) {
-    for (let i = 0; i < movies.length; i++) {
-      if (movies[i].id === id) {
-        return movies[i];
-      }
-    }
-
-    return null;
-  }
-
   public fetchMovies() {
     this.httpService.loggedInV1GETRequest('/cinema/administration/movie', 'fetchMovies').subscribe(
       (data: any) => {
@@ -80,6 +70,15 @@ export class CinemaService {
           const date = new Date(movie.date);
           const localMovie = new Movie(movie.id, movie.name, date, movie.trailerLink, movie.posterLink, workerID, movie.workerName,
             emergencyWorkerID, movie.emergencyWorkerName, movie.bookedTickets, movie.movie_year_id);
+
+          const localBookings = [];
+          const bookings = movie.bookings;
+          for (let i = 0; i < bookings.length; i++) {
+            const booking = bookings[i];
+            const localMovieBookingUser = new MovieBookingUser(booking.firstname, booking.surname, booking.amount);
+            localBookings.push(localMovieBookingUser);
+          }
+          localMovie.setBookingsUsers(localBookings);
           movies.push(localMovie);
         }
         this.setMovies(movies);

@@ -18,6 +18,7 @@ import {SettingsService} from '../../../services/settings.service';
 import {MovieEditModalComponent} from './movie-edit-modal/movie-edit-modal.component';
 import {MovieCreateModalComponent} from './movie-create-modal/movie-create-modal.component';
 import {Permissions} from '../../../permissions';
+import {MovieInfoModalComponent} from './movie-info-modal/movie-info-modal.component';
 
 @Component({
   selector: 'app-movie-administration',
@@ -223,10 +224,17 @@ export class MovieAdministrationComponent implements OnInit, AfterViewInit, OnDe
     });
   }
 
-  onEdit(id: number) {
+  onEdit(movie: Movie) {
     this.dialog.open(MovieEditModalComponent, {
       width: '80vh',
-      data: {movie: this.cinemaService.getMovieByID(this.movies, id)}
+      data: {movie: movie}
+    });
+  }
+
+  onInfo(movie: Movie) {
+    this.dialog.open(MovieInfoModalComponent, {
+      width: '80vh',
+      data: {movie: movie}
     });
   }
 

@@ -20,7 +20,6 @@ export class MovieEditModalComponent {
   imageLink: string;
   bookedTickets: number;
 
-
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, private cinemaService: CinemaService) {
     this.movie = data.movie;
 

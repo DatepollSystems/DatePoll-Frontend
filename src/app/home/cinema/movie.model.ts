@@ -19,6 +19,8 @@ export class Movie implements CalendarEvent {
 
   public movieYearID: number;
 
+  private bookingUsers: MovieBookingUser[] = [];
+
   constructor(id: number, name: string, movieDate: Date, trailerLink: string, posterLink: string, workerID: number, workerName: string,
               emergencyWorkerID: number, emergencyWorkerName: string, bookedTickets: number, movieYearID: number) {
     this.id = id;
@@ -56,4 +58,23 @@ export class Movie implements CalendarEvent {
   meta = null;
   resizable: { beforeStart: false; afterEnd: false };
 
+  public setBookingsUsers(bookingUsers: MovieBookingUser[]) {
+    this.bookingUsers = bookingUsers;
+  }
+
+  public getBookingUsers() {
+    return this.bookingUsers.slice();
+  }
+}
+
+export class MovieBookingUser {
+  public readonly firstname: string;
+  public readonly surname: string;
+  public readonly amount: number;
+
+  constructor(firstname: string, surname: string, amount: number) {
+    this.firstname = firstname;
+    this.surname = surname;
+    this.amount = amount;
+  }
 }
