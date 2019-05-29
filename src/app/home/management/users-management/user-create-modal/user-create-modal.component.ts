@@ -33,6 +33,8 @@ export class UserCreateModalComponent implements OnDestroy {
 
   sendingRequest = false;
 
+  usernames: string[] = [];
+
   emailAddresses: string[] = [];
   birthday: Date;
   join_date: Date;
@@ -70,6 +72,11 @@ export class UserCreateModalComponent implements OnDestroy {
     });
 
     this.hasPermissionToChangePermission = this.myUserService.hasPermission(Permissions.ROOT_ADMINISTRATION);
+
+    const users = this.usersService.getUsers();
+    for (let i = 0; i < users.length; i++) {
+      this.usernames.push(users[i].username);
+    }
   }
 
   ngOnDestroy() {
@@ -111,6 +118,17 @@ export class UserCreateModalComponent implements OnDestroy {
       console.log('Free height:' + document.getElementById('free-list').clientHeight);
       console.log('Joined height:' + document.getElementById('joined-list').clientHeight);
     }, 1000);
+  }
+
+  onUsernameChange(usernameModel) {
+    usernameModel.control.setErrors(null);
+    for (let i = 0; i < this.usernames.length; i++) {
+      if (this.usernames[i] === usernameModel.viewModel) {
+        console.log('in | ' + this.usernames[i] + ' | ' + usernameModel.viewModel);
+        usernameModel.control.setErrors({'alreadyTaken': true});
+        break;
+      }
+    }
   }
 
   onEmailAddressChanged(emailAddresses: string[]) {

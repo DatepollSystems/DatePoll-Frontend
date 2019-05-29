@@ -33,11 +33,14 @@ export class UserUpdateModalComponent implements OnDestroy {
 
   sendingRequest = false;
 
+  usernames: string[] = [];
+
   user: User;
 
   title: string;
   firstname: string;
   surname: string;
+  usernameCopy: string;
   username: string;
   emailAddresses: string[];
   birthday: Date;
@@ -85,6 +88,7 @@ export class UserUpdateModalComponent implements OnDestroy {
     this.user = data.user;
     this.title = this.user.title;
     this.username = this.user.username;
+    this.usernameCopy = this.user.username;
     this.emailAddresses = this.user.getEmailAddresses();
     this.firstname = this.user.firstname;
     this.surname = this.user.surname;
@@ -145,12 +149,30 @@ export class UserUpdateModalComponent implements OnDestroy {
     });
 
     this.hasPermissionToChangePermission = this.myUserService.hasPermission(Permissions.ROOT_ADMINISTRATION);
+
+    const users = this.usersService.getUsers();
+    for (let i = 0; i < users.length; i++) {
+      this.usernames.push(users[i].username);
+    }
   }
 
   ngOnDestroy() {
     this.joinedSubscription.unsubscribe();
     this.freeSubscription.unsubscribe();
     this.userPerformanceBadgesSubscription.unsubscribe();
+  }
+
+  onUsernameChange(usernameModel) {
+    usernameModel.control.setErrors(null);
+    for (let i = 0; i < this.usernames.length; i++) {
+      if (this.usernames[i] === usernameModel.viewModel) {
+        if (usernameModel.viewModel !== this.usernameCopy) {
+          console.log('in | ' + this.usernames[i] + ' | ' + usernameModel.viewModel);
+          usernameModel.control.setErrors({'alreadyTaken': true});
+          break;
+        }
+      }
+    }
   }
 
   onEmailAddressChanged(emailAddresses: string[]) {

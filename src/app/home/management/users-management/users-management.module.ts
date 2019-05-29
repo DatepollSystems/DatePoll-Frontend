@@ -15,6 +15,7 @@ import {UserUpdateModalComponent} from './user-update-modal/user-update-modal.co
 import {PerformanceBadgeSelectComponent} from './performance-badge-select/performance-badge-select.component';
 import {InstrumentSelectComponent} from './instrument-select/instrument-select.component';
 import {CommonComponentsModule} from '../../../services/common-components.module';
+import { AppDividerComponent } from './app-divider/app-divider.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import {CommonComponentsModule} from '../../../services/common-components.module
     UserCreateModalComponent,
     UserUpdateModalComponent,
     PerformanceBadgeSelectComponent,
-    InstrumentSelectComponent
+    InstrumentSelectComponent,
+    AppDividerComponent
   ],
   entryComponents: [
     UsersExportBottomSheetComponent,
