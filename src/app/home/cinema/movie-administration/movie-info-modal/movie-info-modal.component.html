@@ -3,26 +3,26 @@
   <div class="row">
     <mat-form-field class="col-12 col-sm-12 col-md-10 col-lg-10">
       <input matInput id="name" name="name" type="text"
-             [(ngModel)]="name" disabled
+             [(ngModel)]="name" readonly
              placeholder="{{'CINEMA_TICKETS_ADMINISTRATION_NAME' | translate}}">
     </mat-form-field>
 
     <mat-form-field class="col-12 col-sm-12 col-md-2 col-lg-2">
       <input matInput id="bookedTickets" name="bookedTickets" type="number"
-             [(ngModel)]="bookedTickets" disabled
+             [(ngModel)]="bookedTickets" readonly
              placeholder="{{'CINEMA_TICKETS_ADMINISTRATION_BOOKED_TICKETS' | translate}}">
     </mat-form-field>
   </div>
 
   <div class="row">
     <mat-form-field class="col-12 " id="datepicker-field">
-      <input matInput disabled
+      <input matInput readonly
              id="datepicker" name="datepicker" [(ngModel)]="date"
              placeholder="{{'CINEMA_TICKETS_ADMINISTRATION_DATE' | translate}}">
     </mat-form-field>
 
     <mat-form-field class="col-12" id="datepicker-field-mobile">
-      <input matInput disabled
+      <input matInput readonly
              id="datepicker-mobile" name="datepicker-mobile" [(ngModel)]="date"
              placeholder="{{'CINEMA_TICKETS_ADMINISTRATION_DATE' | translate}}">
     </mat-form-field>
@@ -31,7 +31,7 @@
   <div class="row">
     <mat-form-field class="col-12">
       <input matInput id="trailerLink" name="trailerLink" type="text"
-             [(ngModel)]="trailerLink" disabled
+             [(ngModel)]="trailerLink" readonly
              placeholder="{{'CINEMA_TICKETS_ADMINISTRATION_TRAILER' | translate}}">
     </mat-form-field>
   </div>
@@ -39,7 +39,7 @@
   <div class="row">
     <mat-form-field class="col-12">
       <input matInput id="imageLink" name="imageLink" type="text"
-             [(ngModel)]="imageLink" disabled
+             [(ngModel)]="imageLink" readonly
              placeholder="{{'CINEMA_TICKETS_ADMINISTRATION_POSTER' | translate}}">
     </mat-form-field>
   </div>
