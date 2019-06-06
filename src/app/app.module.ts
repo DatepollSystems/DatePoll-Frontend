@@ -82,7 +82,7 @@ registerLocaleData(localeDe);
       useFactory: cookieServiceFactory
     },
     // Set the datetimepicker time format to day/month/year
-    {provide: MAT_DATE_LOCALE, useValue: 'en-GB'},
+    {provide: MAT_DATE_LOCALE, useValue: 'de-DE'},
     {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 2500}}
   ],
   bootstrap: [AppComponent]

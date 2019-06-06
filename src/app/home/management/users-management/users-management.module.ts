@@ -16,6 +16,8 @@ import {PerformanceBadgeSelectComponent} from './performance-badge-select/perfor
 import {InstrumentSelectComponent} from './instrument-select/instrument-select.component';
 import {CommonComponentsModule} from '../../../services/common-components.module';
 import { AppDividerComponent } from './app-divider/app-divider.component';
+import {DateAdapter} from '@angular/material';
+import {CustomDateAdapter} from '../../../services/custom-date-adapter';
 
 @NgModule({
   declarations: [
@@ -42,6 +44,9 @@ import { AppDividerComponent } from './app-divider/app-divider.component';
     NgxMatSelectSearchModule,
     UsersManagementRoutingModule,
     CommonComponentsModule
+  ],
+  providers: [
+    {provide: DateAdapter, useClass: CustomDateAdapter}
   ]
 })
 export class UsersManagementModule {
