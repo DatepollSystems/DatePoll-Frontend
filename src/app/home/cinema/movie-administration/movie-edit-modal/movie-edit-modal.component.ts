@@ -3,6 +3,7 @@ import {MAT_DIALOG_DATA} from '@angular/material/dialog';
 
 import {CinemaService} from '../../cinema.service';
 import {Movie} from '../../movie.model';
+import {Converter} from '../../../../services/converter';
 
 @Component({
   selector: 'app-movie-edit-modal',
@@ -64,23 +65,9 @@ export class MovieEditModalComponent {
   }
 
   updateMovie(yearID: number) {
-    const d = new Date(this.date);
-    let month = '' + (d.getMonth() + 1),
-      day = '' + d.getDate();
-    const year = d.getFullYear();
-
-    if (month.length < 2) {
-      month = '0' + month;
-    }
-    if (day.length < 2) {
-      day = '0' + day;
-    }
-
-    const dateformat = [year, month, day].join('-');
-
     const movieObject = {
       'name': this.name,
-      'date': dateformat,
+      'date': Converter.getDateFormatted(this.date),
       'trailerLink': this.trailerLink,
       'posterLink': this.imageLink,
       'bookedTickets': this.bookedTickets,
