@@ -56,6 +56,7 @@ export class UsersManagementComponent implements OnInit, OnDestroy {
     this.usersLoaded = false;
 
     this.users = usersService.getUsers();
+    this.refreshTable();
 
     if (this.users.length > 0) {
       this.usersLoaded = true;

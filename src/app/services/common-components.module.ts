@@ -13,13 +13,15 @@ import {DoNotForgetToSaveComponent} from '../home/do-not-forget-to-save/do-not-f
 import {MovieEditModalComponent} from '../home/cinema/movie-administration/movie-edit-modal/movie-edit-modal.component';
 import {EmailAddressesListComponent} from '../home/management/users-management/email-addresses-list/email-addresses-list.component';
 import {MovieInfoModalComponent} from '../home/cinema/movie-administration/movie-info-modal/movie-info-modal.component';
+import { GroupAndSubgroupSelectComponent } from './shared-components/group-and-subgroup-select/group-and-subgroup-select.component';
 
 @NgModule({
   declarations: [
     DoNotForgetToSaveComponent,
     MovieEditModalComponent,
     MovieInfoModalComponent,
-    EmailAddressesListComponent
+    EmailAddressesListComponent,
+    GroupAndSubgroupSelectComponent
   ],
   entryComponents: [
     MovieEditModalComponent,
@@ -37,7 +39,8 @@ import {MovieInfoModalComponent} from '../home/cinema/movie-administration/movie
     DoNotForgetToSaveComponent,
     MovieEditModalComponent,
     MovieInfoModalComponent,
-    EmailAddressesListComponent
+    EmailAddressesListComponent,
+    GroupAndSubgroupSelectComponent
   ],
   providers: [
     {provide: DateAdapter, useClass: CustomDateAdapter}

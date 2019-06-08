@@ -236,49 +236,8 @@
     <app-divider></app-divider>
 
     <!-- Group management -->
-    <div class="row d-none d-sm-none d-md-flex">
-      <div class="col-12 col-md-6">
-        <h2>{{'MANAGEMENT_USERS_UPDATE_USER_MODAL_FREE_GROUPS' | translate}}</h2>
-
-        <div
-          cdkDropList
-          #freeList="cdkDropList"
-          [cdkDropListData]="free"
-          [cdkDropListConnectedTo]="[joinedList]"
-          class="group-list" id="free-list"
-          (cdkDropListDropped)="dropToFree($event)">
-          <div class="group-box not-selectable" *ngFor="let item of free" cdkDrag [cdkDragDisabled]="sendingRequest">
-            <b *ngIf="item.type === 'parentgroup'">{{item.name}}</b>
-            <div *ngIf="item.type === 'subgroup'">
-              <b>[{{item.group_name}}]</b> {{item.name}}
-            </div>
-          </div>
-          <div class="group-box"
-               *ngIf="free.length === 0">{{'MANAGEMENT_USERS_UPDATE_USER_MODAL_NO_GROUPS' | translate}}</div>
-        </div>
-      </div>
-
-      <div class="col-12 col-md-6">
-        <h2>{{'MANAGEMENT_USERS_UPDATE_USER_MODAL_JOINED_GROUPS' | translate}}</h2>
-
-        <div
-          cdkDropList
-          #joinedList="cdkDropList"
-          [cdkDropListData]="joined"
-          [cdkDropListConnectedTo]="[freeList]"
-          class="group-list" id="joined-list"
-          (cdkDropListDropped)="dropToJoined($event)">
-          <div class="group-box not-selectable" *ngFor="let item of joined" cdkDrag [cdkDragDisabled]="sendingRequest">
-            <b *ngIf="item.type === 'parentgroup'">{{item.name}}</b>
-            <div *ngIf="item.type === 'subgroup'">
-              <b>[{{item.group_name}}]</b> {{item.name}}
-            </div>
-          </div>
-          <div class="group-box"
-               *ngIf="joined.length === 0">{{'MANAGEMENT_USERS_CREATE_USER_MODAL_NO_JOINED_GROUPS' | translate}}</div>
-        </div>
-      </div>
-    </div>
+    <app-group-and-subgroup-select [free]="free" [joined]="joined" (freeChanged)="onFreeChange($event)"
+                                   (joinedChanged)="onJoinedChange($event)"></app-group-and-subgroup-select>
 
     <app-divider></app-divider>
 
