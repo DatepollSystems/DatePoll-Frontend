@@ -16,12 +16,20 @@ export class DatepollManagementComponent implements OnInit, OnDestroy {
   cinemaServiceEnabled = true;
   cinemaServiceEnabledChange: Subscription;
 
+  eventsServiceEnabled = true;
+  eventsServiceEnabledChange: Subscription;
+
   permissionSubscription: Subscription;
 
   constructor(private settingsService: SettingsService, private myUserService: MyUserService, private router: Router) {
     this.cinemaServiceEnabled = settingsService.getShowCinema();
     this.cinemaServiceEnabledChange = settingsService.showCinemaChange.subscribe((value) => {
       this.cinemaServiceEnabled = value;
+    });
+
+    this.eventsServiceEnabled = settingsService.getShowEvents();
+    this.eventsServiceEnabledChange = settingsService.showEventsChange.subscribe((value) => {
+      this.eventsServiceEnabled = value;
     });
 
     this.permissionSubscription = myUserService.permissionsChange.subscribe((value) => {
@@ -39,11 +47,16 @@ export class DatepollManagementComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.cinemaServiceEnabledChange.unsubscribe();
+    this.eventsServiceEnabledChange.unsubscribe();
     this.permissionSubscription.unsubscribe();
   }
 
   cinemaServiceChange(ob: MatSlideToggleChange) {
     this.settingsService.setAdminShowCinema(ob.checked);
+  }
+
+  eventsServiceChange(ob: MatSlideToggleChange) {
+    this.settingsService.setAdminShowEvents(ob.checked);
   }
 
 }

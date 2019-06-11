@@ -13,12 +13,16 @@
         {{'CALENDAR' | translate}}</a>
       <mat-divider></mat-divider>
 
-      <div *ngIf="showPoll">
-        <a mat-list-item>{{'NAV_POLLS' | translate}}</a>
+      <div *ngIf="showEvents">
+        <a mat-list-item>
+          <mat-icon>polls</mat-icon>
+          {{'NAV_EVENTS_EVENTS' | translate}}
+        </a>
 
-        <a mat-list-item>{{'NAV_ANALYSES' | translate}}</a>
-
-        <a mat-list-item>{{'NAV_ADMINISTRATION' | translate}}</a>
+        <a mat-list-item routerLink="/home/events/administration">
+          <mat-icon>class</mat-icon>
+          {{'NAV_EVENTS_ADMINISTRATION' | translate}}
+        </a>
         <mat-divider></mat-divider>
       </div>
 

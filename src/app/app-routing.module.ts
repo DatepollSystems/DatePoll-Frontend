@@ -12,6 +12,7 @@ const appRoutes = [
     path: 'home', component: HomeComponent, canActivate: [AuthGuard], children: [
       {path: '', pathMatch: 'full', component: StartComponent},
       {path: 'cinema', loadChildren: () => import('./home/cinema/cinema.module').then(m => m.CinemaModule)},
+      {path: 'events', loadChildren: () => import('./home/events/events.module').then(m => m.EventsModule)},
       {path: 'calendar', loadChildren: () => import('./home/calendar/calendar-component.module').then(m => m.CalendarComponentModule)},
       {path: 'settings/personal', loadChildren: () => import('./home/settings/settings.module').then(m => m.SettingsModule)},
       {
@@ -25,7 +26,8 @@ const appRoutes = [
       {
         path: 'management/performanceBadges',
         loadChildren:
-          () => import('./home/management/performance-badges-management/performance-badges-management.module').then(m => m.PerformanceBadgesManagementModule)
+          () => import('./home/management/performance-badges-management/performance-badges-management.module').
+            then(m => m.PerformanceBadgesManagementModule)
       },
       {
         path: 'management/datepoll',

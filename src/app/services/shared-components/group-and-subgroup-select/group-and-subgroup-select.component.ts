@@ -13,6 +13,9 @@ export class GroupAndSubgroupSelectComponent {
   @Input()
   free: any[] = [];
 
+  @Input()
+  parentGroupLock = true;
+
   @Output() joinedChanged = new EventEmitter();
   @Output() freeChanged = new EventEmitter();
 
@@ -32,21 +35,23 @@ export class GroupAndSubgroupSelectComponent {
       // @ts-ignore
       const type = group.type;
 
-      if (type.includes('subgroup')) {
-        console.log('Element is a subgroup');
+      if (this.parentGroupLock) {
+        if (type.includes('subgroup')) {
+          console.log('Element is a subgroup');
 
-        // @ts-ignore
-        const groupID = group.group_id;
-        for (let i = 0; i < this.free.length; i++) {
-          const freeType = this.free[i].type;
-          if (freeType.includes('parentgroup')) {
-            if (this.free[i].id === groupID) {
-              console.log('Detected the parent group which is not in joined!');
-              console.log('Parent group element: ');
-              const saveGroup = this.free[i];
-              console.log(saveGroup);
-              this.joined.push(saveGroup);
-              this.free.splice(i, 1);
+          // @ts-ignore
+          const groupID = group.group_id;
+          for (let i = 0; i < this.free.length; i++) {
+            const freeType = this.free[i].type;
+            if (freeType.includes('parentgroup')) {
+              if (this.free[i].id === groupID) {
+                console.log('Detected the parent group which is not in joined!');
+                console.log('Parent group element: ');
+                const saveGroup = this.free[i];
+                console.log(saveGroup);
+                this.joined.push(saveGroup);
+                this.free.splice(i, 1);
+              }
             }
           }
         }
@@ -71,36 +76,38 @@ export class GroupAndSubgroupSelectComponent {
       // @ts-ignore
       const type = group.type;
 
-      if (type.includes('parentgroup')) {
-        console.log('Element is a parentgroup');
+      if (this.parentGroupLock) {
+        if (type.includes('parentgroup')) {
+          console.log('Element is a parentgroup');
 
-        const toSplice = [];
+          const toSplice = [];
 
-        // @ts-ignore
-        const groupID = group.id;
-        for (let i = 0; i < this.joined.length; i++) {
-          console.log('Is in joined: ' + this.joined[i].name);
+          // @ts-ignore
+          const groupID = group.id;
+          for (let i = 0; i < this.joined.length; i++) {
+            console.log('Is in joined: ' + this.joined[i].name);
 
-          const joinedType = this.joined[i].type;
+            const joinedType = this.joined[i].type;
 
-          if (joinedType.includes('subgroup')) {
-            console.log('Is subgroup: ' + this.joined[i].name);
+            if (joinedType.includes('subgroup')) {
+              console.log('Is subgroup: ' + this.joined[i].name);
 
-            if (this.joined[i].group_id === groupID) {
-              console.log('Detected subgroup which is not in free!');
-              console.log('Subgroup element: ');
-              const saveSubgroup = this.joined[i];
-              console.log(saveSubgroup);
-              this.free.push(saveSubgroup);
+              if (this.joined[i].group_id === groupID) {
+                console.log('Detected subgroup which is not in free!');
+                console.log('Subgroup element: ');
+                const saveSubgroup = this.joined[i];
+                console.log(saveSubgroup);
+                this.free.push(saveSubgroup);
+              } else {
+                toSplice.push(this.joined[i]);
+              }
             } else {
               toSplice.push(this.joined[i]);
             }
-          } else {
-            toSplice.push(this.joined[i]);
           }
-        }
 
-        this.joined = toSplice;
+          this.joined = toSplice;
+        }
       }
 
       this.joinedChanged.emit(this.joined.slice());

@@ -15,6 +15,7 @@
   "SEARCH": "Suchen...",
 
 
+
   "LANGUAGE": "Sprache",
   "LANGUAGE_GERMAN": "Deutsch",
   "LANGUAGE_ENGLISH": "Englisch",
@@ -37,9 +38,12 @@
   "SEND_BROWSER_DATA_TOOLTIP": "Bei Aktivierung werden Screensize, Browsertyp, Browserversion, Is Mobile, Operating system und ob Cookies eingeschaltet sind mit gesendet.",
 
 
+
   "404_TITLE": "Was du auch immer gesucht hast, wir haben es leider nicht gefunden.",
   "404_SUBTITLE": "Du kannst entweder zurück gehen oder dir weiterhin dieses tolle Bild einer Katze anschauen!",
   "404_GO_BACK": "Zurück",
+
+
 
   "SIGNIN": "Anmelden",
   "SIGNIN_NOT_SIGNED_UP": "Kein Konto?",
@@ -65,11 +69,11 @@
   "FORGOT_PASSWORD_SUCCESSFUL": "Dein Passwort wurde erfolgreich geändert! Du wirst in 5 Sekunden weitergeleitet.",
 
 
+
   "NAV_USER_SETTINGS": "Persönliche Einstellungen",
 
-  "NAV_POLLS": "Abstimmungen",
-  "NAV_ANALYSES": "Auswertung",
-  "NAV_ADMINISTRATION": "Administration",
+  "NAV_EVENTS_EVENTS": "Events",
+  "NAV_EVENTS_ADMINISTRATION": "Eventverwaltung",
 
   "NAV_CINEMA": "Kino",
   "NAV_CINEMA_TICKETS": "Filmkarten",
@@ -80,6 +84,7 @@
   "NAV_MANAGEMENT_GROUPS": "Gruppenverwaltung",
   "NAV_MANAGEMENT_PERFORMANCE_BADGES": "Leistungsabzeichenverwaltung",
   "NAV_MANAGEMENT_DATEPOLL": "DatePoll-Verwaltung",
+
 
 
   "STARTPAGE_BIRTHDAY": "Geburtstage des Monat",
@@ -94,6 +99,7 @@
   "STARTPAGE_EMERGENCY_CINEMA_SERVICE": "Notfall-Kinodienst",
 
 
+
   "CALENDAR": "Kalender",
 
   "CALENDAR_PREVIOUS": "Zurück",
@@ -103,6 +109,7 @@
   "CALENDAR_MONTH": "Monat",
   "CALENDAR_WEEK": "Woche",
   "CALENDAR_DAY": "Tag",
+
 
 
   "CINEMA_TICKETS_BOOK_A_TICKET": "Karten reservieren",
@@ -161,6 +168,7 @@
   "CINEMA_TICKETS_ADMINISTRATION_MOVIE_INFO_MODAL_INFO": "Informationen über den Film ",
   "CINEMA_TICKETS_ADMINISTRATION_MOVIE_INFO_MODAL_TABLE_NAME": "Name",
   "CINEMA_TICKETS_ADMINISTRATION_MOVIE_INFO_MODAL_TABLE_AMOUNT": "Kartenanzahl",
+
 
 
   "SETTINGS_PERSONAL_DATA": "Persönliche Daten",
@@ -222,6 +230,7 @@
   "SETTINGS_SECURITY_MODAL_SESSION_NO_SESSIONS_AVAILABLE": "Es sind keine Sessions mit DatePoll verbunden!",
   "SETTINGS_SECURITY_MODAL_SESSION_INFORMATION": "Informationen",
   "SETTINGS_SECURITY_MODAL_SESSION_LAST_USED": "Zuletzt benutzt",
+
 
 
   "MANAGEMENT_USERS_SEARCH": "Suche...",
@@ -299,9 +308,6 @@
   "MANAGEMENT_USERS_CREATE_USER_MODAL_PERFORMANCE_BADGES_NOTE_INCORRECT": "Die Anmerkung darf nicht mehr als 190 Zeichen haben!",
 
   "MANAGEMENT_USERS_UPDATE_USER_MODAL_TITLE": "Bearbeite ",
-  "MANAGEMENT_USERS_UPDATE_USER_MODAL_FREE_GROUPS": "Freie Gruppen und Register",
-  "MANAGEMENT_USERS_UPDATE_USER_MODAL_JOINED_GROUPS": "Beigetretene Gruppen / Register",
-  "MANAGEMENT_USERS_UPDATE_USER_MODAL_NO_GROUPS": "Es gibt keine Gruppen oder Register zum auswählen",
   "MANAGEMENT_USERS_UPDATE_USER_MODAL_SUCCESSFULLY_UPDATED_USER": "Die Änderungen wurden erfolgreich übernommen!",
 
 
@@ -369,5 +375,58 @@
   "MANAGEMENT_PERFORMANCE_BADGES_ADD_INSTRUMENT_SUCCESSFUL": "Das Instrument wurde erfolgreich hinzugefügt!",
 
 
-  "MANAGEMENT_DATEPOLL_CINEMA_SERVICE": "Kinoservice"
+  "MANAGEMENT_DATEPOLL_CINEMA_SERVICE": "Kinoservice",
+  "MANAGEMENT_DATEPOLL_EVENTS_SERVICE": "Events",
+
+
+
+  "EVENTS_ADMINISTRATION_MENU_REFRESH": "Eventliste aktualisieren",
+  "EVENTS_ADMINISTRATION_MENU_SHOW_ALL_EVENTS": "Zeige vergangene Events an",
+  "EVENTS_ADMINISTRATION_TABLE_NAME": "Name",
+  "EVENTS_ADMINISTRATION_TABLE_START_DATE": "Start-Datum",
+  "EVENTS_ADMINISTRATION_TABLE_END_DATE": "End-Datum",
+  "EVENTS_ADMINISTRATION_TABLE_DESCRIPTION": "Beschreibung",
+  "EVENTS_ADMINISTRATION_TABLE_ACTION_TOOLTIP_INFO": "Zeige Informationen über dieses Event",
+  "EVENTS_ADMINISTRATION_TABLE_ACTION_TOOLTIP_EDIT": "Bearbeite dieses Event",
+  "EVENTS_ADMINISTRATION_TABLE_ACTION_TOOLTIP_DELETE": "Lösche dieses Event",
+  "EVENTS_ADMINISTRATION_EVENT_SUCCESSFULLY_DELETED": "Das Event wurde erfolgreich gelöscht!",
+
+  "EVENTS_STANDARD_DECISIONS_MANAGEMENT": "Standard-Antworten-Verwaltung",
+  "EVENTS_STANDARD_DECISIONS_MANAGEMENT_SUCCESSFULLY_ADDED": "Die Standard-Antwort wurde erfolgreich gespeichert!",
+  "EVENTS_STANDARD_DECISIONS_MANAGEMENT_SUCCESSFULLY_REMOVED": "Die Standard-Antwort wurde erfolgreich entfernt!",
+  "EVENTS_STANDARD_DECISIONS_MANAGEMENT_ADD_STANDARD_DECISION": "Antwortmöglichkeit",
+  "EVENTS_STANDARD_DECISIONS_MANAGEMENT_ADD_STANDARD_DECISION_INCORRECT": "Die Antwortmöglichkeit darf weder leer sein, noch mehr als 190 Zeichen haben.",
+  "EVENTS_STANDARD_DECISIONS_MANAGEMENT_REMOVE_STANDARD_DECISION_BUTTON_TOOLTIP": "Entferne diese Antwortmöglichkeit",
+
+  "EVENTS_ADMINISTRATION_CREATE_EVENT": "Lege ein neues Event an",
+  "EVENTS_ADMINISTRATION_CREATE_EVENT_SUCCESSFULLY_CREATED": "Das Event wurde erfolgreich angelegt!",
+  "EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_NAME": "Name",
+  "EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_NAME_INCORRECT": "Der Name darf weder leer sein, noch mehr als 190 Zeichen haben!",
+  "EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_START_DATE": "Start-Datum",
+  "EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_END_DATE": "End-Datum",
+  "EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE": "Datum",
+  "EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_HOURS": "Stunden",
+  "EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_HOURS_INCORRECT": "0 - 24 Uhr",
+  "EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_MINUTES": "Minuten",
+  "EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_MINUTES_INCORRECT": "0 - 60 Minuten",
+  "EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DESCRIPTION": "Beschreibung (optional)",
+  "EVENTS_ADMINISTRATION_CREATE_EVENT_GROUPS": "Gruppeneinteilung",
+  "EVENTS_ADMINISTRATION_CREATE_EVENT_GROUPS_DESCRIPTION": "Sollte keine Gruppe ausgewäht werden gilt das Event für alle Mitglieder",
+  "EVENTS_ADMINISTRATION_CREATE_EVENT_GROUPS_FREE": "Alle Gruppen und Register",
+  "EVENTS_ADMINISTRATION_CREATE_EVENT_GROUPS_FREE_EMPTY": "Es wurden alle Gruppen und Register ausgewählt.",
+  "EVENTS_ADMINISTRATION_CREATE_EVENT_GROUPS_JOINED": "Ausgewählte Gruppen und Register",
+  "EVENTS_ADMINISTRATION_CREATE_EVENT_GROUPS_JOINED_EMPTY": "Wähle eine Gruppe oder ein Register.",
+  "EVENTS_ADMINISTRATION_CREATE_EVENT_DECISIONS": "Antwortmöglichkeiten",
+
+  "EVENTS_ADMINISTRATION_UPDATE_EVENT": "Bearbeite das Event ",
+  "EVENTS_ADMINISTRATION_UPDATE_EVENT_SUCCESSFULLY_UPDATED": "Das Event wurde erfolgreich gespeichert!",
+
+  "EVENTS_ADMINISTRATION_INFO_EVENT": "Informationen über ",
+  "EVENTS_ADMINISTRATION_INFO_EVENT_SINGLE_SUBGROUPS": "Einzelne Register",
+  "EVENTS_ADMINISTRATION_INFO_EVENT_NO_USERS": "In diesem Register sind keine Mitglieder",
+  "EVENTS_ADMINISTRATION_INFO_EVENT_UNKNOWN_VOTING": "Unbekannt",
+  "EVENTS_ADMINISTRATION_INFO_EVENT_MEMBERS_IN": "Alle Mitglieder in ",
+  "EVENTS_ADMINISTRATION_INFO_EVENT_REGISTER": "Register: ",
+  "EVENTS_ADMINISTRATION_INFO_EVENT_CHART_FOR": "Diagramm für ",
+  "EVENTS_ADMINISTRATION_INFO_EVENT_COMPLETE_CHART": "Digramm für alle"
 }

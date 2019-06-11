@@ -38,7 +38,8 @@ export class HomeComponent {
   private showCinemaSubscription: Subscription;
   showCinema = true;
 
-  showPoll = false;
+  private showEventsSubscription: Subscription;
+  showEvents = true;
 
   constructor(
     private ngZone: NgZone,
@@ -83,6 +84,11 @@ export class HomeComponent {
     this.showCinema = settingsService.getShowCinema();
     this.showCinemaSubscription = settingsService.showCinemaChange.subscribe((value) => {
       this.showCinema = value;
+    });
+
+    this.showEvents = settingsService.getShowEvents();
+    this.showEventsSubscription = settingsService.showEventsChange.subscribe((value) => {
+      this.showEvents = value;
     });
   }
 

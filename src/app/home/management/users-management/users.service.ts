@@ -87,7 +87,7 @@ export class UsersService {
     return this._joinedGroups.slice();
   }
 
-  public setJoinedOfUser(groups: any[]) {
+  private setJoinedOfUser(groups: any[]) {
     this._joinedGroups = groups;
     this.joinedGroupsChange.next(this._joinedGroups.slice());
   }

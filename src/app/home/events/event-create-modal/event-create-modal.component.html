@@ -1,0 +1,146 @@
+<h1 mat-dialog-title>{{'EVENTS_ADMINISTRATION_CREATE_EVENT' | translate}}</h1>
+<div mat-dialog-content>
+  <form (ngSubmit)="create(form)" #form="ngForm">
+    <div class="row">
+      <div class="col-12">
+        <app-do-not-forget-to-save></app-do-not-forget-to-save>
+      </div>
+    </div>
+
+    <!-- Name -->
+    <div class="row">
+      <mat-form-field class="col-12">
+        <input matInput id="name" name="name" type="text"
+               ngModel #nameModel="ngModel"
+               maxlength="190" required minlength="1"
+               placeholder="{{'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_NAME' | translate}}">
+        <mat-error *ngIf="nameModel.invalid">
+          {{'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_NAME_INCORRECT' | translate}}
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <!-- Start date -->
+    <div class="row" style="margin-top: 15px">
+      <h3 class="col-12">{{'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_START_DATE' | translate}}</h3>
+    </div>
+    <div class="row">
+      <mat-form-field class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 datepicker-field">
+        <input matInput [matDatepicker]="picker_startDate" required
+               name="datepicker-startDate" [(ngModel)]="startDate" id="datepicker-startDate"
+               placeholder="{{'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE' | translate}}">
+        <mat-datepicker-toggle matSuffix [for]="picker_startDate"></mat-datepicker-toggle>
+        <mat-datepicker #picker_startDate></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 datepicker-field-mobile">
+        <input matInput [matDatepicker]="picker_mobile_startDate" required
+               name="datepicker-startDate-mobile" [(ngModel)]="startDate" id="datepicker-startDate-mobile"
+               placeholder="{{'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE' | translate}}">
+        <mat-datepicker-toggle matSuffix [for]="picker_mobile_startDate"></mat-datepicker-toggle>
+        <mat-datepicker touchUi #picker_mobile_startDate></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field class="col-6 col-sm-6 col-md-3 col-lg-3 col-xl-3">
+        <input matInput id="hours-startDate" name="startDateHours" type="number"
+               ngModel #startDateHoursModel="ngModel"
+               min="0" max="24" required
+               placeholder="{{'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_HOURS' | translate}}">
+        <mat-error *ngIf="startDateHoursModel.invalid">
+          {{'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_HOURS_INCORRECT' | translate}}
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="col-6 col-sm-6 col-md-3 col-lg-3 col-xl-3">
+        <input matInput id="minutes-startDate" name="startDateMinutes" type="number"
+               ngModel #startDateMinutesModel="ngModel"
+               min="0" max="60" required
+               placeholder="{{'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_MINUTES' | translate}}">
+        <mat-error *ngIf="startDateMinutesModel.invalid">
+          {{'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_MINUTES_INCORRECT' | translate}}
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <!-- End date -->
+    <div class="row">
+      <h3 class="col-12">{{'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_END_DATE' | translate}}</h3>
+    </div>
+    <div class="row">
+      <mat-form-field class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 datepicker-field">
+        <input matInput [matDatepicker]="picker_endDate" required
+               name="datepicker-endDate" [(ngModel)]="endDate" id="datepicker-endDate"
+               placeholder="{{'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE' | translate}}">
+        <mat-datepicker-toggle matSuffix [for]="picker_endDate"></mat-datepicker-toggle>
+        <mat-datepicker #picker_endDate></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 datepicker-field-mobile">
+        <input matInput [matDatepicker]="picker_mobile_endDate" required
+               name="datepicker-endDate-mobile" [(ngModel)]="endDate" id="datepicker-endDate-mobile"
+               placeholder="{{'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE' | translate}}">
+        <mat-datepicker-toggle matSuffix [for]="picker_mobile_endDate"></mat-datepicker-toggle>
+        <mat-datepicker touchUi #picker_mobile_endDate></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field class="col-6 col-sm-6 col-md-3 col-lg-3 col-xl-3">
+        <input matInput id="hours-endDate" name="endDateHours" type="number"
+               ngModel #endDateHoursModel="ngModel"
+               min="0" max="24" required
+               placeholder="{{'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_HOURS' | translate}}">
+        <mat-error *ngIf="endDateHoursModel.invalid">
+          {{'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_HOURS_INCORRECT' | translate}}
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="col-6 col-sm-6 col-md-3 col-lg-3 col-xl-3">
+        <input matInput id="minutes-endDate" name="endDateMinutes" type="number"
+               ngModel #endDateMinutesModel="ngModel"
+               min="0" max="60" required
+               placeholder="{{'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_MINUTES' | translate}}">
+        <mat-error *ngIf="endDateMinutesModel.invalid">
+          {{'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_MINUTES' | translate}}
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <!-- Decisions -->
+    <app-event-decisions-list [decisions]="decisions"
+                              (decisionsChanged)="onDecisionsChange($event)"></app-event-decisions-list>
+
+    <!-- Group management -->
+    <app-group-and-subgroup-select [free]="free" [joined]="joined" (freeChanged)="onFreeChange($event)"
+                                   (joinedChanged)="onJoinedChange($event)" [parentGroupLock]="false">
+    </app-group-and-subgroup-select>
+    <small>{{'EVENTS_ADMINISTRATION_CREATE_EVENT_GROUPS_DESCRIPTION' | translate}}</small>
+
+    <!-- Description -->
+    <div class="row" style="margin-bottom: 15px;">
+      <div class="col-12">
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              {{'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DESCRIPTION' | translate}}
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+
+          <mat-form-field appearance="outline" class="col-12">
+            <textarea matInput style="min-height: 15vh;" ngModel name="description"></textarea>
+          </mat-form-field>
+        </mat-expansion-panel>
+      </div>
+    </div>
+
+  </form>
+
+  <mat-progress-bar mode="indeterminate" *ngIf="sendingRequest"></mat-progress-bar>
+</div>
+<div mat-dialog-actions style="margin-top: 15px">
+  <button mat-button [mat-dialog-close]>{{'CLOSE' | translate}}</button>
+  <button mat-button (click)="form.ngSubmit.emit()" class="success-button"
+          [disabled]="!form.form.valid">{{'CREATE' | translate}}</button>
+</div>
+
+<ng-template #successfullyCreatedEvent>
+  <h2>{{'EVENTS_ADMINISTRATION_CREATE_EVENT_SUCCESSFULLY_CREATED' | translate}}</h2>
+</ng-template>
