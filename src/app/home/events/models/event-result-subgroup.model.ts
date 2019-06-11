@@ -43,8 +43,8 @@ export class EventResultSubgroup {
 
     for (let i = 0; i < this.resultUsers.length; i++) {
       for (let j = 0; j < data.length; j++) {
-        if (data[i].name === this.resultUsers[i].decision) {
-          data[i].value++;
+        if (data[j].name === this.resultUsers[i].decision) {
+          data[j].value++;
           break;
         }
       }
