@@ -10,6 +10,8 @@ export class Event {
   public description: string;
   public descriptionPreview = '';
 
+  public alreadyVotedFor = false;
+
   private decisions: string[];
   private resultGroups: EventResultGroup[] = [];
   private resultUsers: EventResultUser[] = [];

@@ -56,7 +56,7 @@ registerLocaleData(localeDe);
     FooterModule,
     AppRoutingModule,
     SimpleNotificationsModule.forRoot({
-      position: ['top', 'right'],
+      // position: ['top', 'right'],
       timeOut: 5000
     }),
   ],

@@ -1,0 +1,52 @@
+<mat-card class="mat-elevation-z3">
+  <mat-card-content>
+    <div class="row justify-content-between">
+      <div class="col-12 col-sm-12 col-md-8 col-lg-8 col-xl-8">
+        <h1>{{'EVENTS_VIEW' | translate}}</h1>
+      </div>
+      <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4" style="text-align: end">
+        <mat-slide-toggle color="primary" (change)="onShowAllEventsChange($event)" [(ngModel)]="showAllEvents">
+          {{'EVENTS_VIEW_SHOW_ALREADY_VOTED_EVENTS' | translate}}
+        </mat-slide-toggle>
+      </div>
+    </div>
+
+    <div class="row" *ngIf="!loading">
+      <div class="col-12 col-sm-12 col-md-6 col-lg-4" *ngFor="let event of eventsToShow">
+        <mat-card class="mat-elevation-z3">
+          <mat-card-header>
+            <mat-card-title>{{event.name}}</mat-card-title>
+            <mat-card-subtitle>{{event.startDate | date:'dd.MM.yyyy HH:mm'}} - {{event.endDate | date:'dd.MM.yyyy HH:mm'}}</mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content>
+            <p style="margin-left: 15px;">
+              {{event.description}}
+            </p>
+          </mat-card-content>
+          <mat-card-actions>
+            <button mat-flat-button color="primary" *ngIf="!event.alreadyVotedFor"
+                    (click)="onVote(event)">{{'EVENTS_VIEW_EVENT_CARD_BUTTON_DECIDE' | translate}}</button>
+            <button mat-flat-button color="accent" *ngIf="event.alreadyVotedFor"
+                    (click)="cancelVoting(event)">{{'EVENTS_VIEW_EVENT_CARD_BUTTON_CANCEL_VOTING' | translate}}</button>
+            <button mat-button (click)="onInfo(event)">
+              <mat-icon>info</mat-icon>
+              {{'EVENTS_VIEW_EVENT_CARD_BUTTON_INFO' | translate}}
+            </button>
+          </mat-card-actions>
+        </mat-card>
+      </div>
+      <div class="col-12" *ngIf="eventsToShow.length === 0" style="text-align: center">
+        {{'EVENTS_VIEW_EVENT_NO_NEW_VOTINGS' | translate}}
+      </div>
+    </div>
+    <div class="row" style="margin-bottom: 15px;" *ngIf="loading">
+      <div class="col-12">
+        <mat-progress-spinner mode="indeterminate" style="margin: auto"></mat-progress-spinner>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>
+
+<ng-template #successfullyRemovedDecision>
+  <h2>{{'EVENTS_VIEW_EVENT_SUCCESSFULLY_REMOVED_VOTING' | translate}}</h2>
+</ng-template>

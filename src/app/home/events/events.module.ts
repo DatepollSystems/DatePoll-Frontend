@@ -19,6 +19,8 @@ import {EventUpdateModalComponent} from './event-update-modal/event-update-modal
 import {EventInfoModalComponent} from './event-info-modal/event-info-modal.component';
 import {EventStandardDecisionsManagementModalComponent} from './event-standard-decisions-management-modal/event-standard-decisions-management-modal.component';
 import {EventDecisionsListComponent} from './event-decisions-list/event-decisions-list.component';
+import {EventsViewComponent} from './events-view/events-view.component';
+import {EventsVoteForDecisionModalComponent} from './events-view/events-vote-for-decision-modal/events-vote-for-decision-modal.component';
 
 @NgModule({
   declarations: [
@@ -27,13 +29,16 @@ import {EventDecisionsListComponent} from './event-decisions-list/event-decision
     EventUpdateModalComponent,
     EventInfoModalComponent,
     EventStandardDecisionsManagementModalComponent,
-    EventDecisionsListComponent
+    EventDecisionsListComponent,
+    EventsViewComponent,
+    EventsVoteForDecisionModalComponent
   ],
   entryComponents: [
     EventCreateModalComponent,
     EventUpdateModalComponent,
     EventInfoModalComponent,
-    EventStandardDecisionsManagementModalComponent
+    EventStandardDecisionsManagementModalComponent,
+    EventsVoteForDecisionModalComponent
   ],
   imports: [
     CommonModule,

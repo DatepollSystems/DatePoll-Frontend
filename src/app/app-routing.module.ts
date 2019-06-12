@@ -26,8 +26,7 @@ const appRoutes = [
       {
         path: 'management/performanceBadges',
         loadChildren:
-          () => import('./home/management/performance-badges-management/performance-badges-management.module').
-            then(m => m.PerformanceBadgesManagementModule)
+          () => import('./home/management/performance-badges-management/performance-badges-management.module').then(m => m.PerformanceBadgesManagementModule)
       },
       {
         path: 'management/datepoll',
