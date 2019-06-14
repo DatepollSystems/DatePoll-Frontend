@@ -37,7 +37,7 @@ export class EventsService {
   }
 
   public fetchEvents() {
-    this.httpService.loggedInV1GETRequest('/event/administration/event', 'fetchEvents').subscribe(
+    this.httpService.loggedInV1GETRequest('/avent/administration/avent', 'fetchEvents').subscribe(
       (data: any) => {
         console.log(data);
 
@@ -65,7 +65,7 @@ export class EventsService {
       'decisions': event.getDecisions()
     };
 
-    return this.httpService.loggedInV1POSTRequest('/event/administration/event', object, 'createEvent');
+    return this.httpService.loggedInV1POSTRequest('/avent/administration/avent', object, 'createEvent');
   }
 
   public updateEvent(event: Event) {
@@ -78,11 +78,11 @@ export class EventsService {
       'decisions': event.getDecisions()
     };
 
-    return this.httpService.loggedInV1PUTRequest('/event/administration/event/' + event.id, object, 'updateEvent');
+    return this.httpService.loggedInV1PUTRequest('/avent/administration/avent/' + event.id, object, 'updateEvent');
   }
 
   public deleteEvent(id: number) {
-    return this.httpService.loggedInV1DELETERequest('/event/administration/event/' + id, 'deleteEvent');
+    return this.httpService.loggedInV1DELETERequest('/avent/administration/avent/' + id, 'deleteEvent');
   }
 
 
@@ -92,7 +92,7 @@ export class EventsService {
       'group_id': groupId
     };
 
-    return this.httpService.loggedInV1POSTRequest('/event/administration/addGroupToEvent', dto, 'addGroupToEvent');
+    return this.httpService.loggedInV1POSTRequest('/avent/administration/addGroupToEvent', dto, 'addGroupToEvent');
   }
 
   public addSubgroupToEvent(eventId: number, subgroupId: number) {
@@ -101,7 +101,7 @@ export class EventsService {
       'subgroup_id': subgroupId
     };
 
-    return this.httpService.loggedInV1POSTRequest('/event/administration/addSubgroupToEvent', dto, 'addSubgroupToEvent');
+    return this.httpService.loggedInV1POSTRequest('/avent/administration/addSubgroupToEvent', dto, 'addSubgroupToEvent');
   }
 
   public removeGroupFromEvent(eventId: number, groupId: number) {
@@ -110,7 +110,7 @@ export class EventsService {
       'group_id': groupId
     };
 
-    return this.httpService.loggedInV1POSTRequest('/event/administration/removeGroupFromEvent', dto, 'removeGroupFromEvent');
+    return this.httpService.loggedInV1POSTRequest('/avent/administration/removeGroupFromEvent', dto, 'removeGroupFromEvent');
   }
 
   public removeSubgroupFromEvent(eventId: number, subgroupId: number) {
@@ -119,7 +119,7 @@ export class EventsService {
       'subgroup_id': subgroupId
     };
 
-    return this.httpService.loggedInV1POSTRequest('/event/administration/removeSubgroupFromEvent', dto, 'removeSubgroupFromEvent');
+    return this.httpService.loggedInV1POSTRequest('/avent/administration/removeSubgroupFromEvent', dto, 'removeSubgroupFromEvent');
   }
 
 
@@ -134,7 +134,7 @@ export class EventsService {
   }
 
   public fetchJoinedOfEvent(eventId: number) {
-    this.httpService.loggedInV1GETRequest('/event/administration/group/joined/' + eventId, 'fetchJoinedGroupsOfEvent').subscribe(
+    this.httpService.loggedInV1GETRequest('/avent/administration/group/joined/' + eventId, 'fetchJoinedGroupsOfEvent').subscribe(
       (data: any) => {
         console.log(data);
 
@@ -153,7 +153,7 @@ export class EventsService {
           groups.push(groupObject);
         }
 
-        this.httpService.loggedInV1GETRequest('/event/administration/subgroup/joined/' + eventId, 'fetchJoinedSubgroupsOfEvent').subscribe(
+        this.httpService.loggedInV1GETRequest('/avent/administration/subgroup/joined/' + eventId, 'fetchJoinedSubgroupsOfEvent').subscribe(
           (subgroupData: any) => {
             console.log(subgroupData);
 
@@ -193,7 +193,7 @@ export class EventsService {
   }
 
   public fetchFreeOfEvent(eventId: number) {
-    this.httpService.loggedInV1GETRequest('/event/administration/group/free/' + eventId, 'fetchFreeGroupsOfEvent').subscribe(
+    this.httpService.loggedInV1GETRequest('/avent/administration/group/free/' + eventId, 'fetchFreeGroupsOfEvent').subscribe(
       (data: any) => {
         console.log(data);
 
@@ -212,7 +212,7 @@ export class EventsService {
           groups.push(groupObject);
         }
 
-        this.httpService.loggedInV1GETRequest('/event/administration/subgroup/free/' + eventId, 'fetchFreeSubgroupsOfEvent').subscribe(
+        this.httpService.loggedInV1GETRequest('/avent/administration/subgroup/free/' + eventId, 'fetchFreeSubgroupsOfEvent').subscribe(
           (subgroupData: any) => {
             console.log(subgroupData);
 
@@ -247,7 +247,7 @@ export class EventsService {
   }
 
   private fetchEvent(id: number) {
-    this.httpService.loggedInV1GETRequest('/event/' + id, 'fetchSingleEvent').subscribe(
+    this.httpService.loggedInV1GETRequest('/avent/' + id, 'fetchSingleEvent').subscribe(
       (data: any) => {
         console.log(data);
         const response = data.event;

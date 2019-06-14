@@ -24,7 +24,7 @@ export class EventsUserService {
   }
 
   public fetchEvents() {
-    this.httpService.loggedInV1GETRequest('/event', 'fetchOpenEvents').subscribe(
+    this.httpService.loggedInV1GETRequest('/avent', 'fetchOpenEvents').subscribe(
       (data: any) => {
         console.log(data);
 
@@ -49,10 +49,10 @@ export class EventsUserService {
       'event_id': eventId,
       'decision': decision
     };
-    return this.httpService.loggedInV1POSTRequest('/event/vote', dto, 'voteForDecision');
+    return this.httpService.loggedInV1POSTRequest('/avent/vote', dto, 'voteForDecision');
   }
 
   public removeDecision(eventId) {
-    return this.httpService.loggedInV1DELETERequest('/event/vote/' + eventId, 'removeDecision');
+    return this.httpService.loggedInV1DELETERequest('/avent/vote/' + eventId, 'removeDecision');
   }
 }
