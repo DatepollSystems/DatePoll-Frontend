@@ -24,7 +24,7 @@ export class StandardDecisionsService {
   }
 
   public fetchStandardDecisions() {
-    this.httpService.loggedInV1GETRequest('/event/administration/standardDecision', 'fetchStandardDecisions').subscribe(
+    this.httpService.loggedInV1GETRequest('/avent/administration/standardDecision', 'fetchStandardDecisions').subscribe(
       (response: any) => {
         console.log(response);
 
@@ -46,10 +46,10 @@ export class StandardDecisionsService {
     const dto = {
       'decision': decision
     };
-    return this.httpService.loggedInV1POSTRequest('/event/administration/standardDecision', dto, 'addStandardDecision');
+    return this.httpService.loggedInV1POSTRequest('/avent/administration/standardDecision', dto, 'addStandardDecision');
   }
 
   public removeStandardDecision(id: number) {
-    return this.httpService.loggedInV1DELETERequest('/event/administration/standardDecision/' + id, 'removeStandardDecision');
+    return this.httpService.loggedInV1DELETERequest('/avent/administration/standardDecision/' + id, 'removeStandardDecision');
   }
 }
