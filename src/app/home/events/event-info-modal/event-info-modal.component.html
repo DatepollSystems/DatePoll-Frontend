@@ -140,6 +140,10 @@
           <mat-divider></mat-divider>
 
           <div *ngIf="resultGroup.id === -1">
+            <div *ngIf="resultGroup.getResultSubgroups().length === 0" style="margin-top: 25px;">
+              {{'EVENTS_ADMINISTRATION_INFO_EVENT_NO_SUBGROUPS' | translate}}
+            </div>
+
             <mat-expansion-panel *ngFor="let resultSubgroup of resultGroup.getResultSubgroups()"
                                  [expanded]="resultSubgroup.getResultUsers().length !== 0" style="margin-top: 25px;">
               <mat-expansion-panel-header>
