@@ -23,6 +23,7 @@ export class HomeComponent {
   public myUserService: MyUserService;
 
   cinemaMovieAdministration = Permissions.CINEMA_MOVIE_ADMINISTRATION;
+  eventAdministration = Permissions.EVENTS_ADMINISTRATION;
   managementAdministration = Permissions.MANAGEMENT_ADMINISTRATION;
   settingsAdministration = Permissions.SETTINGS_ADMINISTRATION;
 

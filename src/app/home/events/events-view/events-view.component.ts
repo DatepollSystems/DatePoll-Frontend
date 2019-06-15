@@ -78,7 +78,8 @@ export class EventsViewComponent implements OnDestroy {
     });
   }
 
-  cancelVoting(event: Event) {
+  cancelVoting(event: Event, button: any) {
+    button.disabled = true;
     this.eventsUserSerivce.removeDecision(event.id).subscribe(
       (response: any) => {
         console.log(response);

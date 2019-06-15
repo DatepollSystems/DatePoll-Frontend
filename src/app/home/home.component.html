@@ -14,12 +14,13 @@
       <mat-divider></mat-divider>
 
       <div *ngIf="showEvents">
-        <a mat-list-item routerLink="/home/events/open">
+        <a mat-list-item routerLink="/home/events/open" routerLinkActive="activated">
           <mat-icon>polls</mat-icon>
           {{'NAV_EVENTS_EVENTS' | translate}}
         </a>
 
-        <a mat-list-item routerLink="/home/events/administration">
+        <a mat-list-item routerLink="/home/events/administration" routerLinkActive="activated"
+           *ngIf="myUserService.hasPermission(eventAdministration)">
           <mat-icon>class</mat-icon>
           {{'NAV_EVENTS_ADMINISTRATION' | translate}}
         </a>

@@ -3,13 +3,8 @@
   <!-- Name -->
   <div class="row">
     <mat-form-field class="col-12">
-      <input matInput id="name" name="name" type="text"
-             ngModel #nameModel="ngModel" [(ngModel)]="name"
-             maxlength="190" required minlength="1"
+      <input matInput name="name" type="text" [(ngModel)]="name" readonly
              placeholder="{{'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_NAME' | translate}}">
-      <mat-error *ngIf="nameModel.invalid">
-        {{'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_NAME_INCORRECT' | translate}}
-      </mat-error>
     </mat-form-field>
   </div>
 
@@ -19,39 +14,23 @@
   </div>
   <div class="row">
     <mat-form-field class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 datepicker-field">
-      <input matInput [matDatepicker]="picker_startDate" required
-             name="datepicker-startDate" [(ngModel)]="startDate" id="datepicker-startDate"
+      <input matInput readonly name="datepicker-startDate" value="{{startDate | date:'dd.MM.yyyy'}}"
              placeholder="{{'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE' | translate}}">
-      <mat-datepicker-toggle matSuffix [for]="picker_startDate"></mat-datepicker-toggle>
-      <mat-datepicker #picker_startDate></mat-datepicker>
     </mat-form-field>
 
     <mat-form-field class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 datepicker-field-mobile">
-      <input matInput [matDatepicker]="picker_mobile_startDate" required
-             name="datepicker-startDate-mobile" [(ngModel)]="startDate" id="datepicker-startDate-mobile"
+      <input matInput readonly name="datepicker-startDate-mobile" value="{{startDate | date:'dd.MM.yyyy'}}"
              placeholder="{{'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE' | translate}}">
-      <mat-datepicker-toggle matSuffix [for]="picker_mobile_startDate"></mat-datepicker-toggle>
-      <mat-datepicker touchUi #picker_mobile_startDate></mat-datepicker>
     </mat-form-field>
 
     <mat-form-field class="col-6 col-sm-6 col-md-3 col-lg-3 col-xl-3">
-      <input matInput id="hours-startDate" name="startDateHours" type="number"
-             ngModel #startDateHoursModel="ngModel" [(ngModel)]="startDateHours"
-             min="0" max="24" required
+      <input matInput name="startDateHours" type="number" [(ngModel)]="startDateHours" readonly
              placeholder="{{'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_HOURS' | translate}}">
-      <mat-error *ngIf="startDateHoursModel.invalid">
-        {{'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_HOURS_INCORRECT' | translate}}
-      </mat-error>
     </mat-form-field>
 
     <mat-form-field class="col-6 col-sm-6 col-md-3 col-lg-3 col-xl-3">
-      <input matInput id="minutes-startDate" name="startDateMinutes" type="number"
-             ngModel #startDateMinutesModel="ngModel" [(ngModel)]="startDateMinutes"
-             min="0" max="60" required
+      <input matInput name="startDateMinutes" type="number" [(ngModel)]="startDateMinutes" readonly
              placeholder="{{'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_MINUTES' | translate}}">
-      <mat-error *ngIf="startDateMinutesModel.invalid">
-        {{'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_MINUTES_INCORRECT' | translate}}
-      </mat-error>
     </mat-form-field>
   </div>
 
@@ -61,39 +40,23 @@
   </div>
   <div class="row">
     <mat-form-field class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 datepicker-field">
-      <input matInput [matDatepicker]="picker_endDate" required
-             name="datepicker-endDate" [(ngModel)]="endDate" id="datepicker-endDate"
+      <input matInput name="datepicker-endDate" value="{{endDate | date:'dd.MM.yyyy'}}" readonly
              placeholder="{{'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE' | translate}}">
-      <mat-datepicker-toggle matSuffix [for]="picker_endDate"></mat-datepicker-toggle>
-      <mat-datepicker #picker_endDate></mat-datepicker>
     </mat-form-field>
 
     <mat-form-field class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 datepicker-field-mobile">
-      <input matInput [matDatepicker]="picker_mobile_endDate" required
-             name="datepicker-endDate-mobile" [(ngModel)]="endDate" id="datepicker-endDate-mobile"
-             placeholder="{{'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE' | translate}}">
-      <mat-datepicker-toggle matSuffix [for]="picker_mobile_endDate"></mat-datepicker-toggle>
-      <mat-datepicker touchUi #picker_mobile_endDate></mat-datepicker>
+      <input matInput readonly name="datepicker-endDate-mobile"
+             value="{{endDate | date:'dd.MM.yyyy'}}" placeholder="{{'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE' | translate}}">
     </mat-form-field>
 
     <mat-form-field class="col-6 col-sm-6 col-md-3 col-lg-3 col-xl-3">
-      <input matInput id="hours-endDate" name="endDateHours" type="number"
-             ngModel #endDateHoursModel="ngModel" [(ngModel)]="endDateHours"
-             min="0" max="24" required
+      <input matInput name="endDateHours" type="number" [(ngModel)]="endDateHours" readonly
              placeholder="{{'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_HOURS' | translate}}">
-      <mat-error *ngIf="endDateHoursModel.invalid">
-        {{'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_HOURS_INCORRECT' | translate}}
-      </mat-error>
     </mat-form-field>
 
     <mat-form-field class="col-6 col-sm-6 col-md-3 col-lg-3 col-xl-3">
-      <input matInput id="minutes-endDate" name="endDateMinutes" type="number"
-             ngModel #endDateMinutesModel="ngModel" [(ngModel)]="endDateMinutes"
-             min="0" max="60" required
+      <input matInput name="endDateMinutes" type="number" [(ngModel)]="endDateMinutes" readonly
              placeholder="{{'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_MINUTES' | translate}}">
-      <mat-error *ngIf="endDateMinutesModel.invalid">
-        {{'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_MINUTES' | translate}}
-      </mat-error>
     </mat-form-field>
   </div>
 
@@ -108,8 +71,7 @@
         </mat-expansion-panel-header>
 
         <mat-form-field appearance="outline" class="col-12">
-            <textarea matInput style="min-height: 15vh;" ngModel name="description"
-                      [(ngModel)]="description"></textarea>
+          <textarea matInput style="min-height: 15vh;" name="description" readonly [(ngModel)]="description"></textarea>
         </mat-form-field>
       </mat-expansion-panel>
     </div>

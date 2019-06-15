@@ -4,6 +4,7 @@ import {MAT_BOTTOM_SHEET_DATA, MatBottomSheetRef} from '@angular/material';
 import {Event} from '../../models/event.model';
 import {EventsUserService} from '../../events-user.service';
 import {NotificationsService, NotificationType} from 'angular2-notifications';
+import {HomepageService} from '../../../start/homepage.service';
 
 @Component({
   selector: 'app-events-vote-for-decision-modal',
@@ -19,7 +20,8 @@ export class EventsVoteForDecisionModalComponent {
   constructor(@Inject(MAT_BOTTOM_SHEET_DATA) public data: any,
               private bottomSheetRef: MatBottomSheetRef<EventsVoteForDecisionModalComponent>,
               private notificationsService: NotificationsService,
-              private eventsUserService: EventsUserService) {
+              private eventsUserService: EventsUserService,
+              private homepageService: HomepageService) {
     this.event = data.event;
     this.name = this.event.name;
   }
@@ -29,6 +31,7 @@ export class EventsVoteForDecisionModalComponent {
       (response: any) => {
         console.log(response);
         this.eventsUserService.fetchEvents();
+        this.homepageService.fetchData();
         this.notificationsService.html(this.successfullyVoted, NotificationType.Success, null, 'success');
       },
       (error) => console.log(error)

@@ -98,6 +98,8 @@
   "STARTPAGE_CINEMA_SERVICE": "Kinodienst",
   "STARTPAGE_EMERGENCY_CINEMA_SERVICE": "Notfall-Kinodienst",
 
+  "STARTPAGE_EVENTS": "Nächsten Events",
+
 
 
   "CALENDAR": "Kalender",
@@ -381,7 +383,7 @@
 
 
   "EVENTS_VIEW": "Events",
-  "EVENTS_VIEW_SHOW_ALREADY_VOTED_EVENTS": "Zeige alle Events",
+  "EVENTS_VIEW_SHOW_ALREADY_VOTED_EVENTS": "Zeige beantwortete Events",
   "EVENTS_VIEW_EVENT_CARD_BUTTON_DECIDE": "Antworten",
   "EVENTS_VIEW_EVENT_CARD_BUTTON_INFO": "Informationen",
   "EVENTS_VIEW_EVENT_CARD_BUTTON_CANCEL_VOTING": "Stimme entfernen",

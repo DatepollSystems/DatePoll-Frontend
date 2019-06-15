@@ -12,7 +12,7 @@ import {AppRoutingModule} from './app-routing.module';
 
 import {TranslationModule} from './translation/translation.module';
 import {FooterModule} from './footer/footer.module';
-
+import {CommonEventsComponentsModule} from './home/events/common-events-components.module';
 
 import {CookieService} from 'angular2-cookie/core';
 
@@ -54,6 +54,7 @@ registerLocaleData(localeDe);
     MaterialModule,
     TranslationModule,
     FooterModule,
+    CommonEventsComponentsModule,
     AppRoutingModule,
     SimpleNotificationsModule.forRoot({
       // position: ['top', 'right'],
