@@ -13,6 +13,8 @@
   "BACK": "Zurück",
   "ADD": "Hinzufügen",
   "SEARCH": "Suchen...",
+  "YES": "Ja",
+  "NO": "Nein",
 
 
 
@@ -252,6 +254,7 @@
   "MANAGEMENT_USERS_ACTIONS": "Aktionen",
   "MANAGEMENT_USERS_ACTIONS_EDIT_TOOLTIP": "Bearbeite dieses Mitglied",
   "MANAGEMENT_USERS_ACTIONS_DELETE_TOOLTIP": "Lösche dieses Mitglied",
+  "MANAGEMENT_USERS_REALLY_DELETE_USER": "Willst du den Benutzer wirklich löschen?",
   "MANAGEMENT_USERS_REFRESH": "Mitgliederliste aktualisieren",
   "MANAGEMENT_USERS_EXPORT_LOADING": "Die Mitgliederliste wird angefertig... Dies kann einige Sekunden dauern! Bitte schließe den Browser in dieser Zeit nicht.",
   "MANAGEMENT_USERS_EXPORT_FINISHED": "Die Mitgliederliste wurde erfolgreich exportiert!",

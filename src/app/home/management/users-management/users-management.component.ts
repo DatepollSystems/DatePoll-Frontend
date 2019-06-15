@@ -7,6 +7,8 @@ import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import {Subscription} from 'rxjs';
 
+import {NotificationsService, NotificationType} from 'angular2-notifications';
+
 import {UsersService} from './users.service';
 import {MyUserService} from '../../my-user.service';
 import {ExcelService} from '../../../services/excel.service';
@@ -15,7 +17,7 @@ import {User} from './user.model';
 import {Permissions} from '../../../permissions';
 import {UserCreateModalComponent} from './user-create-modal/user-create-modal.component';
 import {UserUpdateModalComponent} from './user-update-modal/user-update-modal.component';
-import {NotificationsService, NotificationType} from 'angular2-notifications';
+import {UserDeleteModalComponent} from './user-delete-modal/user-delete-modal.component';
 
 @Component({
   selector: 'app-users-management',
@@ -128,7 +130,9 @@ export class UsersManagementComponent implements OnInit, OnDestroy {
   }
 
   onDelete(userID: number) {
-    this.usersService.deleteUser(userID);
+    this.bottomSheet.open(UserDeleteModalComponent, {
+      data: { 'userID': userID },
+    });
   }
 
   refreshUsers() {

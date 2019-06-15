@@ -15,8 +15,6 @@ import {Permissions} from '../../../../permissions';
 import {PhoneNumber} from '../../../phoneNumber.model';
 import {User} from '../user.model';
 import {UserPerformanceBadge} from '../userPerformanceBadge.model';
-import {PerformanceBadge} from '../../performance-badges-management/performanceBadge.model';
-import {Instrument} from '../../performance-badges-management/instrument.model';
 
 @Component({
   selector: 'app-user-update-modal',
@@ -26,9 +24,6 @@ import {Instrument} from '../../performance-badges-management/instrument.model';
 export class UserUpdateModalComponent implements OnDestroy {
 
   @ViewChild('successfullyUpdatedUser', {static: true}) successfullyUpdatedUser: TemplateRef<any>;
-
-  displayedColumns: string[] = ['label', 'phonenumber', 'action'];
-  dataSource: MatTableDataSource<PhoneNumber>;
 
   sendingRequest = false;
 
@@ -52,7 +47,6 @@ export class UserUpdateModalComponent implements OnDestroy {
   activity: string;
   activated: boolean;
 
-  phoneNumberCount = 0;
   phoneNumbers: PhoneNumber[] = [];
 
   hasPermissionToChangePermission = false;
@@ -70,10 +64,6 @@ export class UserUpdateModalComponent implements OnDestroy {
   userPerformanceBadgesCopy: UserPerformanceBadge[];
   userPerformanceBadges: UserPerformanceBadge[];
   userPerformanceBadgesSubscription: Subscription;
-
-  selectedPerformanceBadge: PerformanceBadge;
-  selectedInstrument: Instrument;
-  performanceBadgeDate: Date = null;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -101,8 +91,6 @@ export class UserUpdateModalComponent implements OnDestroy {
     this.activated = this.user.activated;
     this.phoneNumbers = this.user.getPhoneNumbers();
     this.permissions = this.user.getPermissions();
-
-    this.dataSource = new MatTableDataSource(this.phoneNumbers);
 
     this.joined = this.usersService.getJoinedOfUser(this.user.id);
     this.joinedCopy = this.joined.slice();
@@ -178,89 +166,12 @@ export class UserUpdateModalComponent implements OnDestroy {
     this.emailAddresses = emailAddresses;
   }
 
-  addPhoneNumber(form: NgForm) {
-    this.phoneNumbers.push(new PhoneNumber(this.phoneNumberCount, form.value.label, form.value.phoneNumber));
-    this.phoneNumberCount++;
-    this.dataSource = new MatTableDataSource(this.phoneNumbers);
-    form.reset();
+  onPhoneNumbersChanged(phoneNumbers: PhoneNumber[]) {
+    this.phoneNumbers = phoneNumbers;
   }
 
-  removePhoneNumber(id: number) {
-    const localPhoneNumbers = [];
-    for (let i = 0; i < this.phoneNumbers.length; i++) {
-      if (this.phoneNumbers[i].id !== id) {
-        localPhoneNumbers.push(this.phoneNumbers[i]);
-      }
-    }
-
-    this.phoneNumbers = localPhoneNumbers;
-    this.dataSource = new MatTableDataSource(this.phoneNumbers);
-  }
-
-  addPermission(form: NgForm) {
-    const permission = form.controls.permission.value;
-    this.permissions.push(permission);
-    form.reset();
-  }
-
-  removePermission(permission: string) {
-    const permissions = [];
-    for (let i = 0; i < this.permissions.length; i++) {
-      if (!this.permissions[i].includes(permission)) {
-        permissions.push(this.permissions[i]);
-      }
-    }
-    this.permissions = permissions;
-  }
-
-  onPerformanceBadgeChanged(performanceBadge: PerformanceBadge) {
-    console.log('Selected performance badge: ' + performanceBadge.name);
-    this.selectedPerformanceBadge = performanceBadge;
-  }
-
-  onInstrumentChanged(instrument: Instrument) {
-    console.log('Selected instrument: ' + instrument.name);
-    this.selectedInstrument = instrument;
-  }
-
-  addPerformanceBadge(form: NgForm) {
-    if (this.selectedInstrument == null || this.selectedPerformanceBadge == null) {
-      return;
-    }
-
-    let grade = form.controls.performanceBadgeGrade.value;
-    let node = form.controls.performanceBadgeNote.value;
-    if (grade != null) {
-      if (grade.length === 0) {
-        grade = null;
-      }
-    }
-    if (node != null) {
-      if (node.length === 0) {
-        node = null;
-      }
-    }
-
-    this.userPerformanceBadges.push(new UserPerformanceBadge(this.userPerformanceBadgeCount, this.selectedPerformanceBadge.id,
-      this.selectedInstrument.id, this.selectedPerformanceBadge.name, this.selectedInstrument.name, this.performanceBadgeDate,
-      grade, node));
-
-    form.reset();
-    this.userPerformanceBadgeCount++;
-    this.performanceBadgeDate = null;
-    this.selectedInstrument = null;
-    this.selectedPerformanceBadge = null;
-  }
-
-  removePerformanceBadge(id: number) {
-    const localUserPerformanceBadges = [];
-    for (let i = 0; i < this.userPerformanceBadges.length; i++) {
-      if (this.userPerformanceBadges[i].id !== id) {
-        localUserPerformanceBadges.push(this.userPerformanceBadges[i]);
-      }
-    }
-
-    this.userPerformanceBadges = localUserPerformanceBadges;
+  onUserPerformanceBadgesChange(userPerformanceBadges: UserPerformanceBadge[]) {
+    this.userPerformanceBadges = userPerformanceBadges;
   }
 
   onFreeChange(free: any[]) {
@@ -269,6 +180,10 @@ export class UserUpdateModalComponent implements OnDestroy {
 
   onJoinedChange(joined: any[]) {
     this.joined = joined;
+  }
+
+  onPermissionsChange(permissions: string[]) {
+    this.permissions = permissions;
   }
 
   update(form: NgForm) {

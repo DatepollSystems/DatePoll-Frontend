@@ -1,5 +1,4 @@
 import {Component, OnDestroy, TemplateRef, ViewChild} from '@angular/core';
-import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 import {NgForm} from '@angular/forms';
 import {MatDialogRef} from '@angular/material/dialog';
 import {MatTableDataSource} from '@angular/material/table';
@@ -14,8 +13,6 @@ import {MyUserService} from '../../../my-user.service';
 
 import {PhoneNumber} from '../../../phoneNumber.model';
 import {Group} from '../../groups-management/group.model';
-import {PerformanceBadge} from '../../performance-badges-management/performanceBadge.model';
-import {Instrument} from '../../performance-badges-management/instrument.model';
 import {UserPerformanceBadge} from '../userPerformanceBadge.model';
 import {Permissions} from '../../../../permissions';
 
@@ -38,7 +35,6 @@ export class UserCreateModalComponent implements OnDestroy {
   emailAddresses: string[] = [];
   birthday: Date;
   join_date: Date;
-  phoneNumberCount = 0;
   phoneNumbers: PhoneNumber[] = [];
 
   groups: Group[] = [];
@@ -50,11 +46,7 @@ export class UserCreateModalComponent implements OnDestroy {
   hasPermissionToChangePermission = false;
   permissions: string[] = [];
 
-  userPerformanceBadgeCount = 0;
   userPerformanceBadges: UserPerformanceBadge[] = [];
-  selectedPerformanceBadge: PerformanceBadge;
-  selectedInstrument: Instrument;
-  performanceBadgeDate: Date = null;
 
   constructor(private usersService: UsersService,
               private myUserService: MyUserService,
@@ -143,89 +135,16 @@ export class UserCreateModalComponent implements OnDestroy {
     this.joined = joined;
   }
 
-  addPhoneNumber(form: NgForm) {
-    this.phoneNumbers.push(new PhoneNumber(this.phoneNumberCount, form.value.label, form.value.phoneNumber));
-    this.phoneNumberCount++;
-    this.dataSource = new MatTableDataSource(this.phoneNumbers);
-    form.reset();
+  onUserPerformanceBadgesChange(userPerformanceBadges: UserPerformanceBadge[]) {
+    this.userPerformanceBadges = userPerformanceBadges;
   }
 
-  removePhoneNumber(id: number) {
-    const localPhoneNumbers = [];
-    for (let i = 0; i < this.phoneNumbers.length; i++) {
-      if (this.phoneNumbers[i].id !== id) {
-        localPhoneNumbers.push(this.phoneNumbers[i]);
-      }
-    }
-
-    this.phoneNumbers = localPhoneNumbers;
-    this.dataSource = new MatTableDataSource(this.phoneNumbers);
+  onPhoneNumbersChanged(phoneNumbers: PhoneNumber[]) {
+    this.phoneNumbers = phoneNumbers;
   }
 
-  addPermission(form: NgForm) {
-    const permission = form.controls.permission.value;
-    this.permissions.push(permission);
-    form.reset();
-  }
-
-  removePermission(permission: string) {
-    const permissions = [];
-    for (let i = 0; i < this.permissions.length; i++) {
-      if (!this.permissions[i].includes(permission)) {
-        permissions.push(this.permissions[i]);
-      }
-    }
+  onPermissionsChange(permissions: string[]) {
     this.permissions = permissions;
-  }
-
-  onPerformanceBadgeChanged(performanceBadge: PerformanceBadge) {
-    console.log('Selected performance badge: ' + performanceBadge.name);
-    this.selectedPerformanceBadge = performanceBadge;
-  }
-
-  onInstrumentChanged(instrument: Instrument) {
-    console.log('Selected instrument: ' + instrument.name);
-    this.selectedInstrument = instrument;
-  }
-
-  addPerformanceBadge(form: NgForm) {
-    if (this.selectedInstrument == null || this.selectedPerformanceBadge == null) {
-      return;
-    }
-
-    let grade = form.controls.performanceBadgeGrade.value;
-    let node = form.controls.performanceBadgeNote.value;
-    if (grade != null) {
-      if (grade.length === 0) {
-        grade = null;
-      }
-    }
-    if (node != null) {
-      if (node.length === 0) {
-        node = null;
-      }
-    }
-
-    this.userPerformanceBadges.push(new UserPerformanceBadge(this.userPerformanceBadgeCount, this.selectedPerformanceBadge.id,
-      this.selectedInstrument.id, this.selectedPerformanceBadge.name, this.selectedInstrument.name, this.performanceBadgeDate,
-      grade, node));
-
-    this.userPerformanceBadgeCount++;
-    form.reset();
-    this.performanceBadgeDate = null;
-    this.selectedInstrument = null;
-    this.selectedPerformanceBadge = null;
-  }
-
-  removePerformanceBadge(id: number) {
-    const localUserPerformanceBadges = [];
-    for (let i = 0; i < this.userPerformanceBadges.length; i++) {
-      if (this.userPerformanceBadges[i].id !== id) {
-        localUserPerformanceBadges.push(this.userPerformanceBadges[i]);
-      }
-    }
-
-    this.userPerformanceBadges = localUserPerformanceBadges;
   }
 
   create(form: NgForm) {
