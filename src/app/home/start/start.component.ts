@@ -62,7 +62,7 @@ export class StartComponent implements OnInit, OnDestroy {
   }
 
   setBackgroundImage() {
-    if (this.birthdays.length === 0 && this.bookings.length === 0) {
+    if (this.birthdays.length === 0 && this.bookings.length === 0 && this.events.length === 0) {
       const currentDate = new Date();
 
       if (currentDate.getHours() >= 19 || currentDate.getHours() <= 7) {
