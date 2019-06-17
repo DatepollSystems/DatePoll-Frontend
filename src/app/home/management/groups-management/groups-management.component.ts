@@ -14,8 +14,8 @@ import {SubgroupUpdateModalComponent} from './subgroup-update-modal/subgroup-upd
 import {SubgroupUserListModalComponent} from './subgroup-user-list-modal/subgroup-user-list-modal.component';
 import {GroupUserListModalComponent} from './group-user-list-modal/group-user-list-modal.component';
 
-import {Group} from './group.model';
-import {Subgroup} from './subgroup.model';
+import {Group} from './models/group.model';
+import {Subgroup} from './models/subgroup.model';
 import {Permissions} from '../../../permissions';
 
 @Component({

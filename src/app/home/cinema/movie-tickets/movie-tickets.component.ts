@@ -4,7 +4,7 @@ import {Subscription} from 'rxjs';
 import {CinemaService} from '../cinema.service';
 import {SettingsService} from '../../../services/settings.service';
 
-import {Movie} from '../movie.model';
+import {Movie} from '../models/movie.model';
 
 
 @Component({

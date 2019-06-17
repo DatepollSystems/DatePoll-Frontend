@@ -1,7 +1,7 @@
 import {Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA, MatTableDataSource} from '@angular/material';
 
-import {Movie, MovieBookingUser} from '../../movie.model';
+import {Movie, MovieBookingUser} from '../../models/movie.model';
 
 @Component({
   selector: 'app-movie-info-modal',

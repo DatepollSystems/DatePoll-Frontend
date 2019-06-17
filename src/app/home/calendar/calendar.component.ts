@@ -3,7 +3,7 @@ import {isSameDay, isSameMonth} from 'date-fns';
 import {Subject, Subscription} from 'rxjs';
 import {CalendarEvent, CalendarEventTimesChangedEvent, CalendarView} from 'angular-calendar';
 import {CinemaService} from '../cinema/cinema.service';
-import {Movie} from '../cinema/movie.model';
+import {Movie} from '../cinema/models/movie.model';
 import {MyUserService} from '../my-user.service';
 import {Permissions} from '../../permissions';
 import {MovieEditModalComponent} from '../cinema/movie-administration/movie-edit-modal/movie-edit-modal.component';

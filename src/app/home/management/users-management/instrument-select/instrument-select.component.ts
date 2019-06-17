@@ -5,7 +5,7 @@ import {ReplaySubject, Subject, Subscription} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
 
 import {PerformanceBadgesService} from '../../performance-badges-management/performance-badges.service';
-import {Instrument} from '../../performance-badges-management/instrument.model';
+import {Instrument} from '../../performance-badges-management/models/instrument.model';
 
 @Component({
   selector: 'app-instrument-select',

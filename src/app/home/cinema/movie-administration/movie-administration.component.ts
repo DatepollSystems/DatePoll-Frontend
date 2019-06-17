@@ -9,8 +9,8 @@ import {Router} from '@angular/router';
 import {ReplaySubject, Subject, Subscription} from 'rxjs';
 import {take, takeUntil} from 'rxjs/operators';
 
-import {Movie} from '../movie.model';
-import {Year} from '../year.model';
+import {Movie} from '../models/movie.model';
+import {Year} from '../models/year.model';
 
 import {CinemaService} from '../cinema.service';
 import {MyUserService} from '../../my-user.service';

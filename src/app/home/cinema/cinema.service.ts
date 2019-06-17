@@ -4,8 +4,8 @@ import {Subject} from 'rxjs';
 import {AuthService} from '../../auth/auth.service';
 import {HttpService} from '../../services/http.service';
 import {HomepageService} from '../start/homepage.service';
-import {Movie, MovieBookingUser} from './movie.model';
-import {Year} from './year.model';
+import {Movie, MovieBookingUser} from './models/movie.model';
+import {Year} from './models/year.model';
 
 @Injectable({
   providedIn: 'root'

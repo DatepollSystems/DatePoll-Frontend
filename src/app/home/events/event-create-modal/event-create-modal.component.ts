@@ -5,7 +5,7 @@ import {Subscription} from 'rxjs';
 
 import {NotificationsService, NotificationType} from 'angular2-notifications';
 
-import {Group} from '../../management/groups-management/group.model';
+import {Group} from '../../management/groups-management/models/group.model';
 import {GroupsService} from '../../management/groups-management/groups.service';
 import {EventsService} from '../events.service';
 import {StandardDecisionsService} from '../standardDecisions.service';

@@ -12,7 +12,7 @@ import {PerformanceBadgesService} from '../../performance-badges-management/perf
 import {MyUserService} from '../../../my-user.service';
 
 import {PhoneNumber} from '../../../phoneNumber.model';
-import {Group} from '../../groups-management/group.model';
+import {Group} from '../../groups-management/models/group.model';
 import {UserPerformanceBadge} from '../userPerformanceBadge.model';
 import {Permissions} from '../../../../permissions';
 

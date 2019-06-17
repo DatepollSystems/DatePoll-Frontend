@@ -210,7 +210,7 @@
 
 
   "SETTINGS_SECURITY": "Sicherheit",
-  "SETTINGS_SECURITY_DESCRIPTION": "Legen Sie die Einstellungen für Ihr Passwort und für die Zwei-Faktor-Authentifizierung fest.",
+  "SETTINGS_SECURITY_DESCRIPTION": "Legen Sie die Einstellungen für Ihr Passwort und Ihren Kalender fest. Und verwalten Sie Ihre Sessions.",
   "SETTINGS_SECURITY_CHANGE_PASSWORD": "Password ändern",
   "SETTINGS_SECURITY_CHANGE_2FA": "Zwei-Faktor-Authentifizierung einstellen",
   "SETTINGS_SECURITY_CALENDAR": "Kalenderverwaltung",

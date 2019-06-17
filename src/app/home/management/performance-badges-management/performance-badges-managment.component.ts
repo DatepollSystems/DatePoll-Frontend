@@ -6,8 +6,8 @@ import {Subscription} from 'rxjs';
 import {PerformanceBadgesService} from './performance-badges.service';
 import {NotificationsService, NotificationType} from 'angular2-notifications';
 
-import {PerformanceBadge} from './performanceBadge.model';
-import {Instrument} from './instrument.model';
+import {PerformanceBadge} from './models/performanceBadge.model';
+import {Instrument} from './models/instrument.model';
 import {PerformanceBadgeUpdateModalComponent} from './performance-badge-update-modal/performance-badge-update-modal.component';
 import {InstrumentUpdateModalComponent} from './instrument-update-modal/instrument-update-modal.component';
 

@@ -4,7 +4,7 @@ import {NgForm} from '@angular/forms';
 
 import {PerformanceBadgesService} from '../performance-badges.service';
 import {NotificationsService, NotificationType} from 'angular2-notifications';
-import {Instrument} from '../instrument.model';
+import {Instrument} from '../models/instrument.model';
 
 @Component({
   selector: 'app-instrument-update-modal',

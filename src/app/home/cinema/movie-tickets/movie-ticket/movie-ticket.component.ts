@@ -8,7 +8,7 @@ import {MyUserService} from '../../../my-user.service';
 import {CinemaService} from '../../cinema.service';
 
 import {MovieBookTicketsModalComponent} from './movie-book-tickets-modal/movie-book-tickets-modal.component';
-import {Movie} from '../../movie.model';
+import {Movie} from '../../models/movie.model';
 
 @Component({
   selector: 'app-movie-ticket',

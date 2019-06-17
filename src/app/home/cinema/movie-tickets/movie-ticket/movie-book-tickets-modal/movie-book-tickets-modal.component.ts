@@ -5,7 +5,7 @@ import {HttpService} from '../../../../../services/http.service';
 import {MyUserService} from '../../../../my-user.service';
 import {CinemaService} from '../../../cinema.service';
 
-import {Movie} from '../../../movie.model';
+import {Movie} from '../../../models/movie.model';
 
 @Component({
   selector: 'app-movie-book-tickets-modal',

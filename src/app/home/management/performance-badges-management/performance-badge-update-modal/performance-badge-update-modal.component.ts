@@ -5,7 +5,7 @@ import {NgForm} from '@angular/forms';
 import {PerformanceBadgesService} from '../performance-badges.service';
 import {NotificationsService, NotificationType} from 'angular2-notifications';
 
-import {PerformanceBadge} from '../performanceBadge.model';
+import {PerformanceBadge} from '../models/performanceBadge.model';
 
 @Component({
   selector: 'app-performance-badge-update-modal',

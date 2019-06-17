@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
 import {HttpService} from '../../../services/http.service';
-import {Instrument} from './instrument.model';
+import {Instrument} from './models/instrument.model';
 import {Subject} from 'rxjs';
-import {PerformanceBadge} from './performanceBadge.model';
+import {PerformanceBadge} from './models/performanceBadge.model';
 import {UserPerformanceBadge} from '../users-management/userPerformanceBadge.model';
 
 @Injectable({

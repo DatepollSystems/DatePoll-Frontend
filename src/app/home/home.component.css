@@ -39,12 +39,6 @@ mat-sidenav {
   background-color: #BDBDBD !important;
 }
 
-.sidenav-end {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-}
-
 mat-icon {
   margin-right: 5px;
 }

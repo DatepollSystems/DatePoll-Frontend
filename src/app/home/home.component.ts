@@ -93,6 +93,13 @@ export class HomeComponent {
     });
   }
 
+  onPageChange() {
+    // Close navbar after click only if webbrowser is mobile
+    if (!((window.screen.width) > 992))  {
+      this.navBarOpened = false;
+    }
+  }
+
   resizeNav() {
     if (this.navBarOpened) {
       this.sidenav.close();

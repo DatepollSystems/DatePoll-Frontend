@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {PerformanceBadge} from '../../performance-badges-management/performanceBadge.model';
-import {Instrument} from '../../performance-badges-management/instrument.model';
+import {PerformanceBadge} from '../../performance-badges-management/models/performanceBadge.model';
+import {Instrument} from '../../performance-badges-management/models/instrument.model';
 import {NgForm} from '@angular/forms';
 import {UserPerformanceBadge} from '../userPerformanceBadge.model';
 
