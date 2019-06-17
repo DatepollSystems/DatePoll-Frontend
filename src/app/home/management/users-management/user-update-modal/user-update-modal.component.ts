@@ -98,9 +98,12 @@ export class UserUpdateModalComponent implements OnDestroy {
       this.joinedCopy = this.joined.slice();
 
       setTimeout(function () {
-        document.getElementById('joined-list').style.height = document.getElementById('free-list').clientHeight.toString() + 'px';
-        console.log('Free height:' + document.getElementById('free-list').clientHeight);
-        console.log('Joined height:' + document.getElementById('joined-list').clientHeight);
+        // Check if elements are not null because if the user close the modal before the timeout, there will be thrown an error
+        if (document.getElementById('joined-list') != null && document.getElementById('free-list') != null) {
+          document.getElementById('joined-list').style.height = document.getElementById('free-list').clientHeight.toString() + 'px';
+          console.log('Free height:' + document.getElementById('free-list').clientHeight);
+          console.log('Joined height:' + document.getElementById('joined-list').clientHeight);
+        }
       }, 1000);
     });
 
@@ -111,9 +114,12 @@ export class UserUpdateModalComponent implements OnDestroy {
       this.freeCopy = this.free.slice();
 
       setTimeout(function () {
-        document.getElementById('free-list').style.height = document.getElementById('joined-list').clientHeight.toString() + 'px';
-        console.log('Free height:' + document.getElementById('free-list').clientHeight);
-        console.log('Joined height:' + document.getElementById('joined-list').clientHeight);
+        // Check if elements are not null because if the user close the modal before the timeout, there will be thrown an error
+        if (document.getElementById('joined-list') != null && document.getElementById('free-list') != null) {
+          document.getElementById('free-list').style.height = document.getElementById('joined-list').clientHeight.toString() + 'px';
+          console.log('Free height:' + document.getElementById('free-list').clientHeight);
+          console.log('Joined height:' + document.getElementById('joined-list').clientHeight);
+        }
       }, 1000);
     });
 
