@@ -34,5 +34,4 @@ export class UserDeleteModalComponent {
   no() {
     this.bottomSheetRef.dismiss();
   }
-
 }

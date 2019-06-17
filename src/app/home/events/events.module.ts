@@ -20,6 +20,7 @@ import {EventUpdateModalComponent} from './event-update-modal/event-update-modal
 import {EventStandardDecisionsManagementModalComponent} from './event-standard-decisions-management-modal/event-standard-decisions-management-modal.component';
 import {EventDecisionsListComponent} from './event-decisions-list/event-decisions-list.component';
 import {EventsViewComponent} from './events-view/events-view.component';
+import {EventDeleteModalComponent} from './event-delete-modal/event-delete-modal.component';
 
 @NgModule({
   declarations: [
@@ -28,12 +29,14 @@ import {EventsViewComponent} from './events-view/events-view.component';
     EventUpdateModalComponent,
     EventStandardDecisionsManagementModalComponent,
     EventDecisionsListComponent,
-    EventsViewComponent
+    EventsViewComponent,
+    EventDeleteModalComponent
   ],
   entryComponents: [
     EventCreateModalComponent,
     EventUpdateModalComponent,
-    EventStandardDecisionsManagementModalComponent
+    EventStandardDecisionsManagementModalComponent,
+    EventDeleteModalComponent
   ],
   imports: [
     CommonModule,

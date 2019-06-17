@@ -1,16 +1,16 @@
 import {Component, OnDestroy, TemplateRef, ViewChild} from '@angular/core';
-import {MatDialog, MatPaginator, MatSlideToggleChange, MatSort, MatTableDataSource} from '@angular/material';
+import {MatBottomSheet, MatDialog, MatPaginator, MatSlideToggleChange, MatSort, MatTableDataSource} from '@angular/material';
 import {Event} from '../models/event.model';
 import {Subscription} from 'rxjs';
 import {EventsService} from '../events.service';
 import {MyUserService} from '../../my-user.service';
 import {Permissions} from '../../../permissions';
 import {Router} from '@angular/router';
-import {NotificationsService, NotificationType} from 'angular2-notifications';
 import {EventCreateModalComponent} from '../event-create-modal/event-create-modal.component';
 import {EventStandardDecisionsManagementModalComponent} from '../event-standard-decisions-management-modal/event-standard-decisions-management-modal.component';
 import {EventUpdateModalComponent} from '../event-update-modal/event-update-modal.component';
 import {EventInfoModalComponent} from '../event-info-modal/event-info-modal.component';
+import {EventDeleteModalComponent} from '../event-delete-modal/event-delete-modal.component';
 
 @Component({
   selector: 'app-events-administration',
@@ -41,7 +41,7 @@ export class EventsAdministrationComponent implements OnDestroy {
     private eventsService: EventsService,
     private router: Router,
     private dialog: MatDialog,
-    private notificationsService: NotificationsService,
+    private bottomSheet: MatBottomSheet,
     private myUserService: MyUserService) {
 
     this.permissionSubscription = myUserService.permissionsChange.subscribe((value) => {
@@ -140,14 +140,9 @@ export class EventsAdministrationComponent implements OnDestroy {
   }
 
   onDelete(id: number) {
-    this.eventsService.deleteEvent(id).subscribe(
-      (response: any) => {
-        console.log(response);
-        this.eventsService.fetchEvents();
-        this.notificationsService.html(this.successfullyDeletedEvent, NotificationType.Success, null, 'success');
-      },
-      (error) => console.log(error)
-    );
+    this.bottomSheet.open(EventDeleteModalComponent, {
+      'data': {'eventID': id}
+    });
   }
 
 }

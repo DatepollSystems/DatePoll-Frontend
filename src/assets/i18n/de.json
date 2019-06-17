@@ -414,7 +414,6 @@
   "EVENTS_ADMINISTRATION_TABLE_ACTION_TOOLTIP_INFO": "Zeige Informationen über dieses Event",
   "EVENTS_ADMINISTRATION_TABLE_ACTION_TOOLTIP_EDIT": "Bearbeite dieses Event",
   "EVENTS_ADMINISTRATION_TABLE_ACTION_TOOLTIP_DELETE": "Lösche dieses Event",
-  "EVENTS_ADMINISTRATION_EVENT_SUCCESSFULLY_DELETED": "Das Event wurde erfolgreich gelöscht!",
 
   "EVENTS_STANDARD_DECISIONS_MANAGEMENT": "Standard-Antworten-Verwaltung",
   "EVENTS_STANDARD_DECISIONS_MANAGEMENT_SUCCESSFULLY_ADDED": "Die Standard-Antwort wurde erfolgreich gespeichert!",
@@ -445,6 +444,9 @@
 
   "EVENTS_ADMINISTRATION_UPDATE_EVENT": "Bearbeite das Event ",
   "EVENTS_ADMINISTRATION_UPDATE_EVENT_SUCCESSFULLY_UPDATED": "Das Event wurde erfolgreich gespeichert!",
+
+  "EVENTS_ADMINISTRATION_DELETE_EVENT_TITLE": "Willst du dieses Event wirklich löschen?",
+  "EVENTS_ADMINISTRATION_DELETE_EVENT_SUCCESSFULLY_DELETED": "Das Event wurde erfolgreich gelöscht!",
 
   "EVENTS_ADMINISTRATION_INFO_EVENT": "Informationen über ",
   "EVENTS_ADMINISTRATION_INFO_EVENT_SINGLE_SUBGROUPS": "Einzelne Register",
