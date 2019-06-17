@@ -445,5 +445,8 @@
   "EVENTS_ADMINISTRATION_INFO_EVENT_REGISTER": "Register: ",
   "EVENTS_ADMINISTRATION_INFO_EVENT_CHART_FOR": "Diagramm für ",
   "EVENTS_ADMINISTRATION_INFO_EVENT_COMPLETE_CHART": "Digramm für alle",
-  "EVENTS_ADMINISTRATION_INFO_EVENT_NO_SUBGROUPS": "Es gibt keine einzelnen Gruppen für dieses Event."
+  "EVENTS_ADMINISTRATION_INFO_EVENT_NO_SUBGROUPS": "Es gibt keine einzelnen Gruppen für dieses Event.",
+  "EVENTS_ADMINISTRATION_INFO_EVENT_NOBODY_VOTED": "Es hat noch niemand eine Antwort für dieses Event abgegeben.",
+  "EVENTS_ADMINISTRATION_INFO_EVENT_NOBODY_VOTED_IN_GROUP": "Aus dieser Gruppe hat noch niemand eine Antwort abgeben.",
+  "EVENTS_ADMINISTRATION_INFO_EVENT_NOBODY_VOTED_IN_SUBGROUP": "Aus diesem Register hat noch niemand eine Antwort abgeben."
 }

@@ -295,10 +295,12 @@ export class EventsService {
             }
 
             resultSubgroup.setResultUsers(resultUsers);
+            resultSubgroup.getChartData();
             resultSubgroups.push(resultSubgroup);
           }
 
           resultGroup.setResultSubgroups(resultSubgroups);
+          resultGroup.getChartData();
           resultGroups.push(resultGroup);
         }
 

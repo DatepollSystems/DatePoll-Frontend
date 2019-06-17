@@ -17,6 +17,7 @@ export class Event {
   private resultUsers: EventResultUser[] = [];
 
   private chartData: any[] = null;
+  public chartIsEmpty = true;
 
   constructor(id: number, name: string, startDate: Date, endDate: Date, forEveryone: boolean, description: string, decisions: string[]) {
     this.id = id;
@@ -81,6 +82,7 @@ export class Event {
       for (let j = 0; j < data.length; j++) {
         if (data[j].name === this.resultUsers[i].decision) {
           data[j].value++;
+          this.chartIsEmpty = false;
           break;
         }
       }

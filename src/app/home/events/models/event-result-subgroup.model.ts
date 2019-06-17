@@ -8,6 +8,7 @@ export class EventResultSubgroup {
   private resultUsers: EventResultUser[] = [];
   public event: Event;
   private chartData: any[] = null;
+  public chartIsEmpty = true;
 
   constructor(id: number, name: string, parentGroupName: string) {
     this.id = id;
@@ -45,6 +46,7 @@ export class EventResultSubgroup {
       for (let j = 0; j < data.length; j++) {
         if (data[j].name === this.resultUsers[i].decision) {
           data[j].value++;
+          this.chartIsEmpty = false;
           break;
         }
       }

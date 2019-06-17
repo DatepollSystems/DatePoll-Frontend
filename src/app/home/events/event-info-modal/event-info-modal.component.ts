@@ -39,6 +39,7 @@ export class EventInfoModalComponent implements OnDestroy {
   public pieChartLegend = true;
   public pieChartLabels: Label[];
   public pieChartData: SingleDataSet;
+  public pieChartIsEmpty: boolean;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, private eventsService: EventsService) {
     this.sendingRequest = true;
@@ -71,6 +72,7 @@ export class EventInfoModalComponent implements OnDestroy {
     this.resultGroups = this.event.getResultGroups();
     this.pieChartLabels = this.event.getDecisions();
     this.pieChartData = [... this.event.getChartData()];
+    this.pieChartIsEmpty = this.event.chartIsEmpty;
     monkeyPatchChartJsTooltip();
     monkeyPatchChartJsLegend();
   }
