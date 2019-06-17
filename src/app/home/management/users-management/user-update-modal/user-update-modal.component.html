@@ -147,6 +147,44 @@
 
     <app-divider></app-divider>
 
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          {{'MANAGEMENT_USERS_UPDATE_USER_MODAL_PASSWORD_CHANGE' | translate}}
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <small><b>{{'MANAGEMENT_USERS_UPDATE_USER_MODAL_PASSWORD_CHANGE_DESCRIPTION' | translate}}</b></small>
+      <form (ngSubmit)="changePassword(changePasswordForm)" #changePasswordForm="ngForm">
+      <div class="row justify-content-between" style="margin-top: 15px;">
+        <mat-form-field class="col-12 col-md-4 col-lg-4">
+          <input matInput ngModel #passwordModel="ngModel"
+                 name="password" type="password"
+                 minlength="5" required
+                 placeholder="{{'SIGNIN_NEW_PASSWORD' | translate}}">
+        </mat-form-field>
+
+        <mat-form-field class="col-12 col-md-3 col-lg-4">
+          <input matInput ngModel #passwordRepeatModel="ngModel" [equalTo]="passwordModel"
+                 name="password_repeat" type="password"
+                 minlength="5" required
+                 placeholder="{{'SIGNIN_NEW_PASSWORD_REPEAT' | translate}}">
+
+          <mat-error *ngIf="passwordRepeatModel.errors?.equalTo" class="col-12">
+            {{'SIGNIN_PASSWORD_ARE_NOT_EQUAL' | translate}}
+          </mat-error>
+        </mat-form-field>
+
+        <div class="col-12 col-md-3 col-lg-2">
+          <button mat-flat-button class="success-button"
+                  [disabled]="!changePasswordForm.form.valid" style="width: 100%">
+            {{'MANAGEMENT_USERS_UPDATE_USER_MODAL_PASSWORD_CHANGE' | translate}}</button>
+        </div>
+      </div>
+      </form>
+    </mat-expansion-panel>
+
+    <app-divider></app-divider>
+
     <!-- Email addresses -->
     <mat-expansion-panel>
       <mat-expansion-panel-header>
@@ -161,15 +199,9 @@
     <app-divider></app-divider>
 
     <!-- Phone number -->
-    <mat-expansion-panel>
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          {{'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_PHONE_NUMBERS' | translate}}
-        </mat-panel-title>
-      </mat-expansion-panel-header>
-      <app-phone-numbers-list [phoneNumbers]="phoneNumbers"
-                                (phoneNumbersChanged)="onPhoneNumbersChanged($event)"></app-phone-numbers-list>
-    </mat-expansion-panel>
+    <app-phone-numbers-list [phoneNumbers]="phoneNumbers"
+                            (phoneNumbersChanged)="onPhoneNumbersChanged($event)"></app-phone-numbers-list>
+
 
     <app-divider></app-divider>
 
@@ -220,6 +252,9 @@
           [disabled]="!form.form.valid">{{'SAVE' | translate}}</button>
 </div>
 
+<ng-template #successfullyChangedPassword>
+  <h2>{{'MANAGEMENT_USERS_UPDATE_USER_MODAL_PASSWORD_CHANGE_SUCCESSFUL' | translate}}</h2>
+</ng-template>
 <ng-template #successfullyUpdatedUser>
   <h2>{{'MANAGEMENT_USERS_UPDATE_USER_MODAL_SUCCESSFULLY_UPDATED_USER' | translate}}</h2>
 </ng-template>

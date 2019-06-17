@@ -81,6 +81,13 @@ export class UsersService {
     return this.httpService.loggedInV1PUTRequest('/management/users/' + userID, user, 'updateUser');
   }
 
+  public changePasswordForUser(userID: number, password: string) {
+    const dto = {
+      'password': password
+    };
+    return this.httpService.loggedInV1PUTRequest('/management/users/changePassword/' + userID, dto, 'changePasswordFromUser');
+  }
+
 
   public getJoinedOfUser(userID: number): any[] {
     this.fetchJoinedOfUser(userID);

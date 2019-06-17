@@ -63,7 +63,7 @@ export class UserCreateModalComponent implements OnDestroy {
       this.remakeFreeAndJoinedList();
     });
 
-    this.hasPermissionToChangePermission = this.myUserService.hasPermission(Permissions.ROOT_ADMINISTRATION);
+    this.hasPermissionToChangePermission = this.myUserService.hasPermission(Permissions.PERMISSION_ADMINISTRATION);
 
     const users = this.usersService.getUsers();
     for (let i = 0; i < users.length; i++) {
@@ -120,6 +120,9 @@ export class UserCreateModalComponent implements OnDestroy {
         usernameModel.control.setErrors({'alreadyTaken': true});
         break;
       }
+    }
+    if (usernameModel.viewModel.length === 0) {
+      usernameModel.control.setErrors({'null': true});
     }
   }
 

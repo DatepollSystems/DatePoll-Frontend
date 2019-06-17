@@ -163,15 +163,9 @@
     <app-divider></app-divider>
 
     <!-- Phone number -->
-    <mat-expansion-panel>
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          {{'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_PHONE_NUMBERS' | translate}}
-        </mat-panel-title>
-      </mat-expansion-panel-header>
-      <app-phone-numbers-list [phoneNumbers]="phoneNumbers"
-                              (phoneNumbersChanged)="onPhoneNumbersChanged($event)"></app-phone-numbers-list>
-    </mat-expansion-panel>
+    <app-phone-numbers-list [phoneNumbers]="phoneNumbers"
+                            (phoneNumbersChanged)="onPhoneNumbersChanged($event)"></app-phone-numbers-list>
+
 
     <app-divider></app-divider>
 
@@ -196,8 +190,7 @@
         </mat-panel-title>
       </mat-expansion-panel-header>
       <app-permissions-list [permissions]="permissions"
-                            (permissionsChanged)="onPermissionsChange($event)">
-      </app-permissions-list>
+                            (permissionsChanged)="onPermissionsChange($event)"></app-permissions-list>
     </mat-expansion-panel>
 
     <app-divider *ngIf="hasPermissionToChangePermission"></app-divider>

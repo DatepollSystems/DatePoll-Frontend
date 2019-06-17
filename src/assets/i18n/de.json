@@ -314,7 +314,9 @@
 
   "MANAGEMENT_USERS_UPDATE_USER_MODAL_TITLE": "Bearbeite ",
   "MANAGEMENT_USERS_UPDATE_USER_MODAL_SUCCESSFULLY_UPDATED_USER": "Die Änderungen wurden erfolgreich übernommen!",
-
+  "MANAGEMENT_USERS_UPDATE_USER_MODAL_PASSWORD_CHANGE": "Passwort ändern",
+  "MANAGEMENT_USERS_UPDATE_USER_MODAL_PASSWORD_CHANGE_DESCRIPTION": "Das Passwort wird unabhängig von den restlichen Daten verändert! Nachdem ein Passwort eingegeben wurde und auf 'Passwort ändern' geklickt wurde gibt es kein zurück.",
+  "MANAGEMENT_USERS_UPDATE_USER_MODAL_PASSWORD_CHANGE_SUCCESSFUL": "Das Passwort wurde erfolgreich geändert!",
 
   "MANAGEMENT_GROUPS_SEARCH": "Suche nach einer Gruppe oder einem Register",
   "MANAGEMENT_GROUPS_SEARCH_NOTHING_FOUND": "Leider wurde nichts gefunden :(",

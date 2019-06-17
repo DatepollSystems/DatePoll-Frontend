@@ -1,7 +1,6 @@
 import {Component, Inject, OnDestroy, TemplateRef, ViewChild} from '@angular/core';
 import {NgForm} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import {MatTableDataSource} from '@angular/material/table';
 import {Subscription} from 'rxjs';
 
 import {NotificationsService, NotificationType} from 'angular2-notifications';
@@ -22,7 +21,7 @@ import {UserPerformanceBadge} from '../userPerformanceBadge.model';
   styleUrls: ['./user-update-modal.component.css']
 })
 export class UserUpdateModalComponent implements OnDestroy {
-
+  @ViewChild('successfullyChangedPassword', {static: true}) successfullyChangedPassword: TemplateRef<any>;
   @ViewChild('successfullyUpdatedUser', {static: true}) successfullyUpdatedUser: TemplateRef<any>;
 
   sendingRequest = false;
@@ -135,7 +134,7 @@ export class UserUpdateModalComponent implements OnDestroy {
       }
     });
 
-    this.hasPermissionToChangePermission = this.myUserService.hasPermission(Permissions.ROOT_ADMINISTRATION);
+    this.hasPermissionToChangePermission = this.myUserService.hasPermission(Permissions.PERMISSION_ADMINISTRATION);
 
     const users = this.usersService.getUsers();
     for (let i = 0; i < users.length; i++) {
@@ -149,6 +148,18 @@ export class UserUpdateModalComponent implements OnDestroy {
     this.userPerformanceBadgesSubscription.unsubscribe();
   }
 
+  changePassword(form: NgForm) {
+    const password = form.controls.password.value;
+    form.reset();
+    this.usersService.changePasswordForUser(this.user.id, password).subscribe(
+      (response: any) => {
+        console.log(response);
+        this.notificationsService.html(this.successfullyChangedPassword, NotificationType.Success, null, 'success');
+      },
+      (error) => console.log(error)
+    );
+  }
+
   onUsernameChange(usernameModel) {
     usernameModel.control.setErrors(null);
     for (let i = 0; i < this.usernames.length; i++) {
@@ -159,6 +170,9 @@ export class UserUpdateModalComponent implements OnDestroy {
           break;
         }
       }
+    }
+    if (usernameModel.viewModel.length === 0) {
+      usernameModel.control.setErrors({'null': true});
     }
   }
 
