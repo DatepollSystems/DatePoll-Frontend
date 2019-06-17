@@ -1,6 +1,7 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {DateAdapter} from '@angular/material';
 
 import {CustomFormsModule} from 'ng2-validation';
 import {NgxMatSelectSearchModule} from 'ngx-mat-select-search';
@@ -9,6 +10,7 @@ import {MaterialModule} from '../../material-module';
 import {TranslationModule} from '../../translation/translation.module';
 import {CommonComponentsModule} from '../../services/common-components.module';
 import {CinemaRoutingModule} from './cinema-routing.module';
+import {CustomDateAdapter} from '../../services/custom-date-adapter';
 
 import {MovieCreateModalComponent} from './movie-administration/movie-create-modal/movie-create-modal.component';
 import {MovieBookTicketsModalComponent} from './movie-tickets/movie-ticket/movie-book-tickets-modal/movie-book-tickets-modal.component';
@@ -26,7 +28,7 @@ import {MovieTicketComponent} from './movie-tickets/movie-ticket/movie-ticket.co
     MovieBookTicketsModalComponent,
     MovieCreateModalComponent
   ],
-  imports : [
+  imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
@@ -40,6 +42,10 @@ import {MovieTicketComponent} from './movie-tickets/movie-ticket/movie-ticket.co
   entryComponents: [
     MovieCreateModalComponent,
     MovieBookTicketsModalComponent
+  ],
+  providers: [
+    {provide: DateAdapter, useClass: CustomDateAdapter}
   ]
 })
-export class CinemaModule {}
+export class CinemaModule {
+}

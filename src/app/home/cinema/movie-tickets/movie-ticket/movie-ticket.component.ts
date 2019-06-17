@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {MatDialog} from '@angular/material';
+import {MatDialog} from '@angular/material/dialog';
 
 import {Subscription} from 'rxjs';
 
@@ -8,7 +8,7 @@ import {MyUserService} from '../../../my-user.service';
 import {CinemaService} from '../../cinema.service';
 
 import {MovieBookTicketsModalComponent} from './movie-book-tickets-modal/movie-book-tickets-modal.component';
-import {Movie} from '../../movie.model';
+import {Movie} from '../../models/movie.model';
 
 @Component({
   selector: 'app-movie-ticket',
@@ -19,7 +19,6 @@ export class MovieTicketComponent implements OnInit {
   @Input()
   movie: Movie;
 
-  moviesSubscription: Subscription;
   soldOut: boolean;
 
   myUserService: MyUserService;
@@ -33,10 +32,6 @@ export class MovieTicketComponent implements OnInit {
 
   ngOnInit(): void {
     this.soldOut = this.movie.bookedTickets >= 20;
-
-    this.moviesSubscription = this.cinemaService.moviesChange.subscribe((value) => {
-      this.movie = this.cinemaService.getMovieByID(value, this.movie.id);
-    });
   }
 
   bookTickets() {

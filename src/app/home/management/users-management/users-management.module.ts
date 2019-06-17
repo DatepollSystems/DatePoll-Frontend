@@ -15,6 +15,13 @@ import {UserUpdateModalComponent} from './user-update-modal/user-update-modal.co
 import {PerformanceBadgeSelectComponent} from './performance-badge-select/performance-badge-select.component';
 import {InstrumentSelectComponent} from './instrument-select/instrument-select.component';
 import {CommonComponentsModule} from '../../../services/common-components.module';
+import {AppDividerComponent} from './app-divider/app-divider.component';
+import {DateAdapter} from '@angular/material';
+import {CustomDateAdapter} from '../../../services/custom-date-adapter';
+import {PerformanceBadgesListComponent} from './performance-badges-list/performance-badges-list.component';
+import {PermissionsListComponent} from './permissions-list/permissions-list.component';
+import {PhoneNumbersListComponent} from './phone-numbers-list/phone-numbers-list.component';
+import {UserDeleteModalComponent} from './user-delete-modal/user-delete-modal.component';
 
 @NgModule({
   declarations: [
@@ -23,12 +30,18 @@ import {CommonComponentsModule} from '../../../services/common-components.module
     UserCreateModalComponent,
     UserUpdateModalComponent,
     PerformanceBadgeSelectComponent,
-    InstrumentSelectComponent
+    InstrumentSelectComponent,
+    AppDividerComponent,
+    PerformanceBadgesListComponent,
+    PermissionsListComponent,
+    PhoneNumbersListComponent,
+    UserDeleteModalComponent
   ],
   entryComponents: [
     UsersExportBottomSheetComponent,
     UserCreateModalComponent,
-    UserUpdateModalComponent
+    UserUpdateModalComponent,
+    UserDeleteModalComponent
   ],
   imports: [
     CommonModule,
@@ -40,6 +53,9 @@ import {CommonComponentsModule} from '../../../services/common-components.module
     NgxMatSelectSearchModule,
     UsersManagementRoutingModule,
     CommonComponentsModule
+  ],
+  providers: [
+    {provide: DateAdapter, useClass: CustomDateAdapter}
   ]
 })
 export class UsersManagementModule {

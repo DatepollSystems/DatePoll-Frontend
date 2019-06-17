@@ -1,0 +1,53 @@
+<h1 mat-dialog-title>{{'EVENTS_STANDARD_DECISIONS_MANAGEMENT' | translate}}</h1>
+<div mat-dialog-content>
+
+  <form (ngSubmit)="addStandardDecision(addStandardDecisionForm)" #addStandardDecisionForm="ngForm"
+        class="row">
+    <div class="col-12 col-sm-12 col-md-8 col-lg-8">
+      <mat-form-field>
+        <input matInput id="decision" name="decision" type="text"
+               ngModel #decisionModel="ngModel"
+               required maxlength="190" minlength="1"
+               placeholder="{{'EVENTS_STANDARD_DECISIONS_MANAGEMENT_ADD_STANDARD_DECISION' | translate}}">
+        <mat-error *ngIf="decisionModel.invalid">
+          {{'EVENTS_STANDARD_DECISIONS_MANAGEMENT_ADD_STANDARD_DECISION_INCORRECT' | translate}}
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="col-12 col-sm-12 col-md-4 col-lg-4">
+      <button mat-raised-button class="success-button" style="width: 100%; text-align: center"
+              type="submit" [disabled]="!addStandardDecisionForm.valid">
+        {{'ADD' | translate}}
+        <mat-icon aria-label="Submit button">library_add</mat-icon>
+      </button>
+    </div>
+  </form>
+
+  <div class="row">
+    <mat-list class="col-12">
+      <mat-list-item *ngFor="let standardDecision of standardDecisions">
+        <span matLine>{{ standardDecision.decision }}</span>
+        <button mat-icon-button
+                (click)="removeStandardDecision(standardDecision.id, removeStandardDecisionButton)"
+                #removeStandardDecisionButton matTooltipPosition="right"
+                matTooltip="{{'EVENTS_STANDARD_DECISIONS_MANAGEMENT_REMOVE_STANDARD_DECISION_BUTTON_TOOLTIP' | translate}}">
+          <mat-icon>delete_forever</mat-icon>
+        </button>
+        <mat-divider></mat-divider>
+      </mat-list-item>
+    </mat-list>
+  </div>
+
+  <mat-progress-bar mode="indeterminate" *ngIf="loadingStandardDecisions"></mat-progress-bar>
+</div>
+<div mat-dialog-actions style="margin-top: 15px">
+  <button mat-button [mat-dialog-close]>{{'CLOSE' | translate}}</button>
+</div>
+
+<ng-template #successfullyAddedStandardDecision>
+  <h2>{{'EVENTS_STANDARD_DECISIONS_MANAGEMENT_SUCCESSFULLY_ADDED' | translate}}</h2>
+</ng-template>
+
+<ng-template #successfullyRemovedStandardDecision>
+  <h2>{{'EVENTS_STANDARD_DECISIONS_MANAGEMENT_SUCCESSFULLY_REMOVED' | translate}}</h2>
+</ng-template>

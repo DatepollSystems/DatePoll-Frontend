@@ -12,4 +12,5 @@ const calendarRoutes: Routes = [
   ],
   exports: [RouterModule]
 })
-export class CalendarComponentRoutingModule {}
+export class CalendarComponentRoutingModule {
+}

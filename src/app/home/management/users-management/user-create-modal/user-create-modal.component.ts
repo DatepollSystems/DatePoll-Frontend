@@ -1,7 +1,7 @@
 import {Component, OnDestroy, TemplateRef, ViewChild} from '@angular/core';
-import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 import {NgForm} from '@angular/forms';
-import {MatDialogRef, MatTableDataSource} from '@angular/material';
+import {MatDialogRef} from '@angular/material/dialog';
+import {MatTableDataSource} from '@angular/material/table';
 import {Subscription} from 'rxjs';
 
 import {NotificationsService, NotificationType} from 'angular2-notifications';
@@ -12,9 +12,7 @@ import {PerformanceBadgesService} from '../../performance-badges-management/perf
 import {MyUserService} from '../../../my-user.service';
 
 import {PhoneNumber} from '../../../phoneNumber.model';
-import {Group} from '../../groups-management/group.model';
-import {PerformanceBadge} from '../../performance-badges-management/performanceBadge.model';
-import {Instrument} from '../../performance-badges-management/instrument.model';
+import {Group} from '../../groups-management/models/group.model';
 import {UserPerformanceBadge} from '../userPerformanceBadge.model';
 import {Permissions} from '../../../../permissions';
 
@@ -25,17 +23,18 @@ import {Permissions} from '../../../../permissions';
 })
 export class UserCreateModalComponent implements OnDestroy {
 
-  @ViewChild('successfullyCreatedUser') successfullyCreatedUser: TemplateRef<any>;
+  @ViewChild('successfullyCreatedUser', {static: true}) successfullyCreatedUser: TemplateRef<any>;
 
   displayedColumns: string[] = ['label', 'phonenumber', 'action'];
   dataSource: MatTableDataSource<PhoneNumber>;
 
   sendingRequest = false;
 
+  usernames: string[] = [];
+
   emailAddresses: string[] = [];
   birthday: Date;
   join_date: Date;
-  phoneNumberCount = 0;
   phoneNumbers: PhoneNumber[] = [];
 
   groups: Group[] = [];
@@ -47,11 +46,7 @@ export class UserCreateModalComponent implements OnDestroy {
   hasPermissionToChangePermission = false;
   permissions: string[] = [];
 
-  userPerformanceBadgeCount = 0;
   userPerformanceBadges: UserPerformanceBadge[] = [];
-  selectedPerformanceBadge: PerformanceBadge;
-  selectedInstrument: Instrument;
-  performanceBadgeDate: Date = null;
 
   constructor(private usersService: UsersService,
               private myUserService: MyUserService,
@@ -68,7 +63,12 @@ export class UserCreateModalComponent implements OnDestroy {
       this.remakeFreeAndJoinedList();
     });
 
-    this.hasPermissionToChangePermission = this.myUserService.hasPermission(Permissions.ROOT_ADMINISTRATION);
+    this.hasPermissionToChangePermission = this.myUserService.hasPermission(Permissions.PERMISSION_ADMINISTRATION);
+
+    const users = this.usersService.getUsers();
+    for (let i = 0; i < users.length; i++) {
+      this.usernames.push(users[i].username);
+    }
   }
 
   ngOnDestroy() {
@@ -106,99 +106,51 @@ export class UserCreateModalComponent implements OnDestroy {
     }
 
     setTimeout(function () {
-      document.getElementById('joined-list').style.height = document.getElementById('free-list').clientHeight.toString() + 'px';
-      console.log('Free height:' + document.getElementById('free-list').clientHeight);
-      console.log('Joined height:' + document.getElementById('joined-list').clientHeight);
+      // Check if elements are not null because if the user close the modal before the timeout, there will be thrown an error
+      if (document.getElementById('joined-list') != null && document.getElementById('free-list') != null) {
+        document.getElementById('joined-list').style.height = document.getElementById('free-list').clientHeight.toString() + 'px';
+        console.log('Free height:' + document.getElementById('free-list').clientHeight);
+        console.log('Joined height:' + document.getElementById('joined-list').clientHeight);
+      }
     }, 1000);
+  }
+
+  onUsernameChange(usernameModel) {
+    usernameModel.control.setErrors(null);
+    for (let i = 0; i < this.usernames.length; i++) {
+      if (this.usernames[i] === usernameModel.viewModel) {
+        console.log('in | ' + this.usernames[i] + ' | ' + usernameModel.viewModel);
+        usernameModel.control.setErrors({'alreadyTaken': true});
+        break;
+      }
+    }
+    if (usernameModel.viewModel.length === 0) {
+      usernameModel.control.setErrors({'null': true});
+    }
   }
 
   onEmailAddressChanged(emailAddresses: string[]) {
     this.emailAddresses = emailAddresses;
   }
 
-  addPhoneNumber(form: NgForm) {
-    this.phoneNumbers.push(new PhoneNumber(this.phoneNumberCount, form.value.label, form.value.phoneNumber));
-    this.phoneNumberCount++;
-    this.dataSource = new MatTableDataSource(this.phoneNumbers);
-    form.reset();
+  onFreeChange(free: any[]) {
+    this.free = free;
   }
 
-  removePhoneNumber(id: number) {
-    const localPhoneNumbers = [];
-    for (let i = 0; i < this.phoneNumbers.length; i++) {
-      if (this.phoneNumbers[i].id !== id) {
-        localPhoneNumbers.push(this.phoneNumbers[i]);
-      }
-    }
-
-    this.phoneNumbers = localPhoneNumbers;
-    this.dataSource = new MatTableDataSource(this.phoneNumbers);
+  onJoinedChange(joined: any[]) {
+    this.joined = joined;
   }
 
-  addPermission(form: NgForm) {
-    const permission = form.controls.permission.value;
-    this.permissions.push(permission);
-    form.reset();
+  onUserPerformanceBadgesChange(userPerformanceBadges: UserPerformanceBadge[]) {
+    this.userPerformanceBadges = userPerformanceBadges;
   }
 
-  removePermission(permission: string) {
-    const permissions = [];
-    for (let i = 0; i < this.permissions.length; i++) {
-      if (!this.permissions[i].includes(permission)) {
-        permissions.push(this.permissions[i]);
-      }
-    }
+  onPhoneNumbersChanged(phoneNumbers: PhoneNumber[]) {
+    this.phoneNumbers = phoneNumbers;
+  }
+
+  onPermissionsChange(permissions: string[]) {
     this.permissions = permissions;
-  }
-
-  onPerformanceBadgeChanged(performanceBadge: PerformanceBadge) {
-    console.log('Selected performance badge: ' + performanceBadge.name);
-    this.selectedPerformanceBadge = performanceBadge;
-  }
-
-  onInstrumentChanged(instrument: Instrument) {
-    console.log('Selected instrument: ' + instrument.name);
-    this.selectedInstrument = instrument;
-  }
-
-  addPerformanceBadge(form: NgForm) {
-    if (this.selectedInstrument == null || this.selectedPerformanceBadge == null) {
-      return;
-    }
-
-    let grade = form.controls.performanceBadgeGrade.value;
-    let node = form.controls.performanceBadgeNote.value;
-    if (grade != null) {
-      if (grade.length === 0) {
-        grade = null;
-      }
-    }
-    if (node != null) {
-      if (node.length === 0) {
-        node = null;
-      }
-    }
-
-    this.userPerformanceBadges.push(new UserPerformanceBadge(this.userPerformanceBadgeCount, this.selectedPerformanceBadge.id,
-      this.selectedInstrument.id, this.selectedPerformanceBadge.name, this.selectedInstrument.name, this.performanceBadgeDate,
-      grade, node));
-
-    this.userPerformanceBadgeCount++;
-    form.reset();
-    this.performanceBadgeDate = null;
-    this.selectedInstrument = null;
-    this.selectedPerformanceBadge = null;
-  }
-
-  removePerformanceBadge(id: number) {
-    const localUserPerformanceBadges = [];
-    for (let i = 0; i < this.userPerformanceBadges.length; i++) {
-      if (this.userPerformanceBadges[i].id !== id) {
-        localUserPerformanceBadges.push(this.userPerformanceBadges[i]);
-      }
-    }
-
-    this.userPerformanceBadges = localUserPerformanceBadges;
   }
 
   create(form: NgForm) {
@@ -370,89 +322,5 @@ export class UserCreateModalComponent implements OnDestroy {
         this.usersService.fetchUsers();
       }
     );
-  }
-
-  dropToJoined(event: CdkDragDrop<string[]>) {
-    if (event.previousContainer === event.container) {
-      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-    } else {
-      const group = event.previousContainer.data[event.previousIndex];
-
-      transferArrayItem(event.previousContainer.data, event.container.data, event.previousIndex, event.currentIndex);
-
-      console.log('Element to move: ');
-      console.log(group);
-
-      // @ts-ignore
-      const type = group.type;
-
-      if (type.includes('subgroup')) {
-        console.log('Element is a subgroup');
-
-        // @ts-ignore
-        const groupID = group.group_id;
-        for (let i = 0; i < this.free.length; i++) {
-          const freeType = this.free[i].type;
-          if (freeType.includes('parentgroup')) {
-            if (this.free[i].id === groupID) {
-              console.log('Detected the parent group which is not in joined!');
-              console.log('Parent group element: ');
-              const saveGroup = this.free[i];
-              console.log(saveGroup);
-              this.joined.push(saveGroup);
-              this.free.splice(i, 1);
-            }
-          }
-        }
-      }
-    }
-  }
-
-  dropToFree(event: CdkDragDrop<string[]>) {
-    if (event.previousContainer === event.container) {
-      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-    } else {
-      const group = event.previousContainer.data[event.previousIndex];
-
-      transferArrayItem(event.previousContainer.data, event.container.data, event.previousIndex, event.currentIndex);
-
-      console.log('Element to move: ');
-      console.log(group);
-
-      // @ts-ignore
-      const type = group.type;
-
-      if (type.includes('parentgroup')) {
-        console.log('Element is a parentgroup');
-
-        const toSplice = [];
-
-        // @ts-ignore
-        const groupID = group.id;
-        for (let i = 0; i < this.joined.length; i++) {
-          console.log('Is in joined: ' + this.joined[i].name);
-
-          const joinedType = this.joined[i].type;
-
-          if (joinedType.includes('subgroup')) {
-            console.log('Is subgroup: ' + this.joined[i].name);
-
-            if (this.joined[i].group_id === groupID) {
-              console.log('Detected subgroup which is not in free!');
-              console.log('Subgroup element: ');
-              const saveSubgroup = this.joined[i];
-              console.log(saveSubgroup);
-              this.free.push(saveSubgroup);
-            } else {
-              toSplice.push(this.joined[i]);
-            }
-          } else {
-            toSplice.push(this.joined[i]);
-          }
-        }
-
-        this.joined = toSplice;
-      }
-    }
   }
 }

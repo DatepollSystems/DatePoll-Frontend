@@ -1,13 +1,14 @@
-import {OnInit, ChangeDetectionStrategy, Component, OnDestroy, ChangeDetectorRef} from '@angular/core';
-import {addDays, addHours, endOfDay, endOfMonth, isSameDay, isSameMonth, startOfDay, subDays} from 'date-fns';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
+import {isSameDay, isSameMonth} from 'date-fns';
 import {Subject, Subscription} from 'rxjs';
-import {CalendarEvent, CalendarEventAction, CalendarEventTimesChangedEvent, CalendarView} from 'angular-calendar';
+import {CalendarEvent, CalendarEventTimesChangedEvent, CalendarView} from 'angular-calendar';
 import {CinemaService} from '../cinema/cinema.service';
-import {Movie} from '../cinema/movie.model';
+import {Movie} from '../cinema/models/movie.model';
 import {MyUserService} from '../my-user.service';
 import {Permissions} from '../../permissions';
 import {MovieEditModalComponent} from '../cinema/movie-administration/movie-edit-modal/movie-edit-modal.component';
-import {MatDialog} from '@angular/material';
+import {MatDialog} from '@angular/material/dialog';
+import {SettingsService} from '../../services/settings.service';
 
 const colors: any = {
   red: {
@@ -88,24 +89,30 @@ export class CalendarComponent implements OnInit, OnDestroy {
   private movies: Movie[];
   private moviesSubscription: Subscription;
 
-  constructor(private cinemaService: CinemaService,
-              private myUserService: MyUserService,
-              private cdr: ChangeDetectorRef,
-              private dialog: MatDialog) { }
+  constructor(
+    private settingsService: SettingsService,
+    private cinemaService: CinemaService,
+    private myUserService: MyUserService,
+    private cdr: ChangeDetectorRef,
+    private dialog: MatDialog) {
+  }
 
   ngOnInit() {
-    this.cinemaService.fetchYears();
-    this.movies = this.cinemaService.getNotShownMovies();
-    this.refreshCalendar();
-
-    this.moviesSubscription = this.cinemaService.notShownMoviesChange.subscribe((value) => {
-      this.movies = value;
+    if (this.settingsService.getShowCinema()) {
+      this.movies = this.cinemaService.getNotShownMovies();
       this.refreshCalendar();
-    });
+
+      this.moviesSubscription = this.cinemaService.notShownMoviesChange.subscribe((value) => {
+        this.movies = value;
+        this.refreshCalendar();
+      });
+    }
   }
 
   ngOnDestroy(): void {
-    this.moviesSubscription.unsubscribe();
+    if (this.moviesSubscription != null) {
+      this.moviesSubscription.unsubscribe();
+    }
   }
 
   refreshCalendar() {

@@ -3,8 +3,8 @@
     <mat-card class="mat-elevation-z3">
       <mat-card-content>
         <div class="row justify-content-between">
-          <div class="col"><h1>{{'NAV_MANAGEMENT_PERFORMANCE_BADGES' | translate}}</h1></div>
-          <div class="col" style="text-align: end">
+          <div class="col-12 col-sm-12 col-md-10"><h1>{{'NAV_MANAGEMENT_PERFORMANCE_BADGES' | translate}}</h1></div>
+          <div class="col-12 col-sm-12 col-md-2" style="text-align: end">
             <button mat-icon-button (click)="onRefresh()"
                     matTooltipPosition="right"
                     matTooltip="{{'MANAGEMENT_PERFORMANCE_BADGES_REFRESH' | translate}}">
@@ -17,7 +17,8 @@
             <mat-card class="mat-elevation-z3">
               <mat-card-title>{{'MANAGEMENT_PERFORMANCE_BADGES_TITLE_PERFORMANCE_BADGES' | translate}}</mat-card-title>
               <mat-card-content *ngIf="performanceBadges != null">
-                <form (ngSubmit)="addPerformanceBadge(addPerformanceBadgeForm)" #addPerformanceBadgeForm="ngForm" class="row">
+                <form (ngSubmit)="addPerformanceBadge(addPerformanceBadgeForm)" #addPerformanceBadgeForm="ngForm"
+                      class="row">
                   <div class="col-12 col-sm-12 col-md-8 col-lg-8">
                     <mat-form-field>
                       <input matInput id="performanceBadgeName" name="performanceBadgeName" type="text"

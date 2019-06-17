@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {CinemaService} from '../../cinema.service';
-import {Response} from '@angular/http';
+import {Converter} from '../../../../services/converter';
 
 @Component({
   selector: 'app-movie-create-modal',
@@ -52,23 +52,9 @@ export class MovieCreateModalComponent {
   }
 
   addMovie(yearID: number) {
-    const d = new Date(this.date);
-    let month = '' + (d.getMonth() + 1),
-      day = '' + d.getDate();
-    const year = d.getFullYear();
-
-    if (month.length < 2) {
-      month = '0' + month;
-    }
-    if (day.length < 2) {
-      day = '0' + day;
-    }
-
-    const dateformat = [year, month, day].join('-');
-
     const movieObject = {
       'name': this.name,
-      'date': dateformat,
+      'date': Converter.getDateFormatted(this.date),
       'trailerLink': this.trailerLink,
       'posterLink': this.imageLink,
       'bookedTickets': this.bookedTickets,

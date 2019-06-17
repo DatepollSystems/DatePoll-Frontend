@@ -45,4 +45,5 @@ import {PrivacyPolicyComponent} from '../info/privacy-policy/privacy-policy.comp
     ImprintComponent
   ]
 })
-export class FooterModule {}
+export class FooterModule {
+}

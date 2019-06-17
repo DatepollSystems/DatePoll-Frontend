@@ -1,0 +1,44 @@
+<div class="row" style="margin-bottom: 15px;">
+  <div class="col-12">
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          {{'EVENTS_ADMINISTRATION_CREATE_EVENT_DECISIONS' | translate}}
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+
+      <form (ngSubmit)="addDecision(addDecisionForm)" #addDecisionForm="ngForm" class="row">
+        <div class="col-12 col-sm-12 col-md-7 col-lg-7">
+          <mat-form-field>
+            <input matInput id="decision" name="decision" type="text"
+                   ngModel #decisionModel="ngModel"
+                   required maxlength="190" minlength="1"
+                   placeholder="{{'EVENTS_STANDARD_DECISIONS_MANAGEMENT_ADD_STANDARD_DECISION' | translate}}">
+            <mat-error *ngIf="decisionModel.invalid">
+              {{'EVENTS_STANDARD_DECISIONS_MANAGEMENT_ADD_STANDARD_DECISION_INCORRECT' | translate}}
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-12 col-sm-12 col-md-4 col-lg-4">
+          <button mat-raised-button class="success-button" style="width: 100%; text-align: center"
+                  type="submit" [disabled]="!addDecisionForm.valid">
+            {{'ADD' | translate}}
+            <mat-icon aria-label="Submit button">library_add</mat-icon>
+          </button>
+        </div>
+      </form>
+
+      <mat-list class="col-12">
+        <mat-list-item *ngFor="let decision of decisions">
+          <span matLine>{{ decision }}</span>
+          <button mat-icon-button
+                  (click)="removeDecision(decision)" matTooltipPosition="right"
+                  matTooltip="{{'EVENTS_STANDARD_DECISIONS_MANAGEMENT_REMOVE_STANDARD_DECISION_BUTTON_TOOLTIP' | translate}}">
+            <mat-icon>delete_forever</mat-icon>
+          </button>
+          <mat-divider></mat-divider>
+        </mat-list-item>
+      </mat-list>
+    </mat-expansion-panel>
+  </div>
+</div>

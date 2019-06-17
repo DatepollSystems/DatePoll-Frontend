@@ -1,11 +1,11 @@
 import {Component, Inject} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 
 import {HttpService} from '../../../../../services/http.service';
 import {MyUserService} from '../../../../my-user.service';
 import {CinemaService} from '../../../cinema.service';
 
-import {Movie} from '../../../movie.model';
+import {Movie} from '../../../models/movie.model';
 
 @Component({
   selector: 'app-movie-book-tickets-modal',

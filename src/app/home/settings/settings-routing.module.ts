@@ -12,4 +12,5 @@ const settingsRoutes: Routes = [
   ],
   exports: [RouterModule]
 })
-export class SettingsRoutingModule {}
+export class SettingsRoutingModule {
+}

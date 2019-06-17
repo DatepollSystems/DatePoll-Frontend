@@ -1,5 +1,5 @@
 import {Component, NgZone, ViewChild} from '@angular/core';
-import {MatSidenav} from '@angular/material';
+import {MatSidenav} from '@angular/material/sidenav';
 import {Subscription} from 'rxjs';
 
 import {MyUserService} from './my-user.service';
@@ -17,12 +17,13 @@ export class HomeComponent {
   navBarOpened = false;
   navBarMode = 'over';
 
-  @ViewChild('sidenav')
+  @ViewChild('sidenav', {static: true})
   private sidenav: MatSidenav;
 
   public myUserService: MyUserService;
 
   cinemaMovieAdministration = Permissions.CINEMA_MOVIE_ADMINISTRATION;
+  eventAdministration = Permissions.EVENTS_ADMINISTRATION;
   managementAdministration = Permissions.MANAGEMENT_ADMINISTRATION;
   settingsAdministration = Permissions.SETTINGS_ADMINISTRATION;
 
@@ -38,7 +39,8 @@ export class HomeComponent {
   private showCinemaSubscription: Subscription;
   showCinema = true;
 
-  showPoll = false;
+  private showEventsSubscription: Subscription;
+  showEvents = true;
 
   constructor(
     private ngZone: NgZone,
@@ -84,6 +86,18 @@ export class HomeComponent {
     this.showCinemaSubscription = settingsService.showCinemaChange.subscribe((value) => {
       this.showCinema = value;
     });
+
+    this.showEvents = settingsService.getShowEvents();
+    this.showEventsSubscription = settingsService.showEventsChange.subscribe((value) => {
+      this.showEvents = value;
+    });
+  }
+
+  onPageChange() {
+    // Close navbar after click only if webbrowser is mobile
+    if (!((window.screen.width) > 992))  {
+      this.navBarOpened = false;
+    }
   }
 
   resizeNav() {

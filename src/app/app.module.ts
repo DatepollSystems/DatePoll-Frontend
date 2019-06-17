@@ -12,7 +12,7 @@ import {AppRoutingModule} from './app-routing.module';
 
 import {TranslationModule} from './translation/translation.module';
 import {FooterModule} from './footer/footer.module';
-
+import {CommonEventsComponentsModule} from './home/events/common-events-components.module';
 
 import {CookieService} from 'angular2-cookie/core';
 
@@ -28,7 +28,8 @@ import {PerformanceBadgesService} from './home/management/performance-badges-man
 import {CinemaService} from './home/cinema/cinema.service';
 
 
-import {MAT_DATE_LOCALE, MAT_SNACK_BAR_DEFAULT_OPTIONS} from '@angular/material';
+import {MAT_DATE_LOCALE} from '@angular/material/core';
+import {MAT_SNACK_BAR_DEFAULT_OPTIONS} from '@angular/material/snack-bar';
 
 import {AppComponent} from './app.component';
 import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
@@ -53,9 +54,10 @@ registerLocaleData(localeDe);
     MaterialModule,
     TranslationModule,
     FooterModule,
+    CommonEventsComponentsModule,
     AppRoutingModule,
     SimpleNotificationsModule.forRoot({
-      position: ['top', 'right'],
+      // position: ['top', 'right'],
       timeOut: 5000
     }),
   ],
@@ -81,7 +83,7 @@ registerLocaleData(localeDe);
       useFactory: cookieServiceFactory
     },
     // Set the datetimepicker time format to day/month/year
-    {provide: MAT_DATE_LOCALE, useValue: 'en-GB'},
+    {provide: MAT_DATE_LOCALE, useValue: 'de-DE'},
     {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 2500}}
   ],
   bootstrap: [AppComponent]

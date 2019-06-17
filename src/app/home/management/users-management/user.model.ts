@@ -51,7 +51,11 @@ export class User {
       phoneNumber += this._phoneNumbers[i].phoneNumber + ', ';
     }
 
-    return phoneNumber;
+    if (phoneNumber !== '') {
+      return phoneNumber.slice(0, 10) + '...';
+    } else {
+      return phoneNumber;
+    }
   }
 
   public getPermissions(): string[] {
@@ -68,6 +72,10 @@ export class User {
       email += this._emailAddresses[i] + ', ';
     }
 
-    return email;
+    if (email !== '') {
+      return email.slice(0, 10) + '...';
+    } else {
+      return email;
+    }
   }
 }

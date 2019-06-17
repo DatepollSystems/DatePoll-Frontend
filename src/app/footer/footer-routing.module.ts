@@ -6,7 +6,8 @@ import {ImprintComponent} from '../info/imprint/imprint.component';
 import {PrivacyPolicyComponent} from '../info/privacy-policy/privacy-policy.component';
 
 const footerRoutes: Routes = [
-  { path: 'info', component: InfoComponent, children: [
+  {
+    path: 'info', component: InfoComponent, children: [
       {path: 'imprint', component: ImprintComponent},
       {path: 'privacypolicy', component: PrivacyPolicyComponent}
     ]
@@ -19,4 +20,5 @@ const footerRoutes: Routes = [
   ],
   exports: [RouterModule]
 })
-export class FooterRoutingModule {}
+export class FooterRoutingModule {
+}

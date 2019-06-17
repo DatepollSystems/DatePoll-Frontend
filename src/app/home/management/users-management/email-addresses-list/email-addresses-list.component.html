@@ -1,16 +1,12 @@
-<div class="row">
-  <h3 class="col-12">{{'MANAGEMENT_USERS_CREATE_USER_MODAL_LIST_EMAIL_ADDRESSES' | translate}}</h3>
-</div>
-
 <form (ngSubmit)="addEmailAddress(emailAddressForm)" #emailAddressForm="ngForm">
   <div class="row justify-content-around">
-    <div class="col-12 col-sm-12 col-md-8 col-lg-9">
+    <div class="col-12 col-sm-12 col-md-6 col-lg-7">
       <mat-form-field>
         <input matInput id="emailAddress" name="emailAddress" type="email"
                ngModel #emailAddressModel="ngModel"
                required maxlength="190" minlength="1" email
                placeholder="{{'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_EMAIL_ADDRESS' | translate}}">
-        <mat-error *ngIf="emailAddressModel.invalid">
+        <mat-error *ngIf="emailAddressModel.errors?.email">
           {{'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_EMAIL_ADDRESS_INCORRECT' | translate}}
         </mat-error>
       </mat-form-field>
@@ -49,3 +45,10 @@
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
 </div>
+
+<div class="row">
+  <p class="col-12" *ngIf="dataSource.data.length == 0">
+    {{'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_EMAIL_ADDRESS_NO_EMAIL_ADDRESSES' | translate}}
+  </p>
+</div>
+

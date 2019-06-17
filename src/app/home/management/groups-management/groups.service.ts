@@ -3,8 +3,8 @@ import {Subject} from 'rxjs';
 
 import {HttpService} from '../../../services/http.service';
 
-import {Group} from './group.model';
-import {Subgroup} from './subgroup.model';
+import {Group} from './models/group.model';
+import {Subgroup} from './models/subgroup.model';
 
 @Injectable({
   providedIn: 'root'

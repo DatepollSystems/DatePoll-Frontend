@@ -1,5 +1,5 @@
 import {Component, OnDestroy, TemplateRef, ViewChild} from '@angular/core';
-import {MatTableDataSource} from '@angular/material';
+import {MatTableDataSource} from '@angular/material/table';
 import {Session} from './session.model';
 import {Subscription} from 'rxjs';
 import {SessionsService} from './sessions.service';
@@ -12,7 +12,7 @@ import {NotificationsService, NotificationType} from 'angular2-notifications';
 })
 export class SessionsComponent implements OnDestroy {
 
-  @ViewChild('successfullyRemovedSession') successfullyRemovedSession: TemplateRef<any>;
+  @ViewChild('successfullyRemovedSession', {static: true}) successfullyRemovedSession: TemplateRef<any>;
 
   displayedColumns: string[] = ['information', 'lastUsed', 'action'];
   dataSource: MatTableDataSource<Session>;

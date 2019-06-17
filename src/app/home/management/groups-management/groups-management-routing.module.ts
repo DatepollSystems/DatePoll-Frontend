@@ -12,4 +12,5 @@ const groupsManagmentRoutes: Routes = [
   ],
   exports: [RouterModule]
 })
-export class GroupsManagementRoutingModule {}
+export class GroupsManagementRoutingModule {
+}

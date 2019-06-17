@@ -12,4 +12,5 @@ const performanceBadgesRoutes: Routes = [
   ],
   exports: [RouterModule]
 })
-export class PerformanceBadgesManagementRoutingModule {}
+export class PerformanceBadgesManagementRoutingModule {
+}

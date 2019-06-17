@@ -1,14 +1,13 @@
 import {Component, OnDestroy, TemplateRef, ViewChild} from '@angular/core';
 import {NgForm} from '@angular/forms';
-import {MatDialog} from '@angular/material';
+import {MatDialog} from '@angular/material/dialog';
 import {Subscription} from 'rxjs';
 
 import {PerformanceBadgesService} from './performance-badges.service';
 import {NotificationsService, NotificationType} from 'angular2-notifications';
 
-import {PerformanceBadge} from './performanceBadge.model';
-import {Instrument} from './instrument.model';
-import {UserUpdateModalComponent} from '../users-management/user-update-modal/user-update-modal.component';
+import {PerformanceBadge} from './models/performanceBadge.model';
+import {Instrument} from './models/instrument.model';
 import {PerformanceBadgeUpdateModalComponent} from './performance-badge-update-modal/performance-badge-update-modal.component';
 import {InstrumentUpdateModalComponent} from './instrument-update-modal/instrument-update-modal.component';
 
@@ -19,11 +18,11 @@ import {InstrumentUpdateModalComponent} from './instrument-update-modal/instrume
 })
 export class PerformanceBadgesManagmentComponent implements OnDestroy {
 
-  @ViewChild('successfullyAddedPerformanceBadge') successfullyAddedPerformanceBadge: TemplateRef<any>;
-  @ViewChild('successfullyRemovedPerformanceBadge') successfullyRemovedPerformanceBadge: TemplateRef<any>;
+  @ViewChild('successfullyAddedPerformanceBadge', {static: true}) successfullyAddedPerformanceBadge: TemplateRef<any>;
+  @ViewChild('successfullyRemovedPerformanceBadge', {static: true}) successfullyRemovedPerformanceBadge: TemplateRef<any>;
 
-  @ViewChild('successfullyAddedInstrument') successfullyAddedInstrument: TemplateRef<any>;
-  @ViewChild('successfullyRemovedInstrument') successfullyRemovedInstrument: TemplateRef<any>;
+  @ViewChild('successfullyAddedInstrument', {static: true}) successfullyAddedInstrument: TemplateRef<any>;
+  @ViewChild('successfullyRemovedInstrument', {static: true}) successfullyRemovedInstrument: TemplateRef<any>;
 
   performanceBadgesSubscription: Subscription;
   performanceBadges: PerformanceBadge[];

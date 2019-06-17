@@ -32,4 +32,5 @@ import {InstrumentUpdateModalComponent} from './instrument-update-modal/instrume
     PerformanceBadgesManagementRoutingModule
   ]
 })
-export class PerformanceBadgesManagementModule {}
+export class PerformanceBadgesManagementModule {
+}

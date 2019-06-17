@@ -1,0 +1,49 @@
+<div class="row">
+  <div class="col-12">
+    <small>
+      {{'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_PERMISSIONS_SMALL_0' | translate}}
+      <a href="https://gitlab.com/BuergerkorpsEggenburg/datepoll-backend-php/wikis/Permissions"
+         target="_blank"
+         rel="noopener">Link</a>{{'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_PERMISSIONS_SMALL_1' | translate}}
+    </small>
+  </div>
+</div>
+
+<form (ngSubmit)="addPermission(permissionsForm)" #permissionsForm="ngForm">
+  <div class="row justify-content-around">
+    <div class="col-12 col-sm-12 col-md-6 col-lg-7">
+      <mat-form-field>
+        <input matInput id="permission" name="permission" type="text"
+               ngModel #permissionModel="ngModel"
+               maxlength="190" required
+               placeholder="{{'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_PERMISSION' | translate}}">
+        <mat-error *ngIf="permissionModel.invalid">
+          {{'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_PERMISSION_INCORRECT' | translate}}
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="col-12 col-sm-12 col-md-4 col-lg-3">
+      <button mat-raised-button class="success-button" style="width: 100%" id="addPermission-button"
+              type="submit" [disabled]="!permissionsForm.valid">
+        {{'ADD' | translate}}
+        <mat-icon aria-label="Submit button">playlist_add</mat-icon>
+      </button>
+    </div>
+  </div>
+</form>
+
+<div class="row">
+  <mat-list class="col-12">
+    <mat-list-item *ngFor="let permission of permissions">
+      <span matLine>{{ permission }}</span>
+      <button mat-icon-button (click)="removePermission(permission)" matTooltipPosition="right"
+              matTooltip="{{'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_REMOVE_PERMISSION_TOOLTIP' | translate}}">
+        <mat-icon>delete_forever</mat-icon>
+      </button>
+    </mat-list-item>
+    <mat-list-item *ngIf="permissions.length == 0">
+      {{'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_NO_PERMISSIONS_AVAILABLE' | translate}}
+    </mat-list-item>
+  </mat-list>
+</div>

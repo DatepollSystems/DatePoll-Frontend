@@ -1,13 +1,16 @@
 import {AfterViewInit, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {FormControl} from '@angular/forms';
-import {MatDialog, MatSelect, MatSort, MatTableDataSource} from '@angular/material';
+import {MatDialog} from '@angular/material/dialog';
+import {MatSelect} from '@angular/material/select';
+import {MatSort} from '@angular/material/sort';
+import {MatTableDataSource} from '@angular/material/table';
 import {Router} from '@angular/router';
 
 import {ReplaySubject, Subject, Subscription} from 'rxjs';
 import {take, takeUntil} from 'rxjs/operators';
 
-import {Movie} from '../movie.model';
-import {Year} from '../year.model';
+import {Movie} from '../models/movie.model';
+import {Year} from '../models/year.model';
 
 import {CinemaService} from '../cinema.service';
 import {MyUserService} from '../../my-user.service';
@@ -15,6 +18,7 @@ import {SettingsService} from '../../../services/settings.service';
 import {MovieEditModalComponent} from './movie-edit-modal/movie-edit-modal.component';
 import {MovieCreateModalComponent} from './movie-create-modal/movie-create-modal.component';
 import {Permissions} from '../../../permissions';
+import {MovieInfoModalComponent} from './movie-info-modal/movie-info-modal.component';
 
 @Component({
   selector: 'app-movie-administration',
@@ -26,7 +30,7 @@ export class MovieAdministrationComponent implements OnInit, AfterViewInit, OnDe
   displayedColumns: string[] = ['name', 'date', 'trailer', 'poster', 'worker', 'emergencyWorker', 'bookedTickets', 'deleteMovie'];
   filterValue: string = null;
 
-  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
 
   /** control for the selected years */
   public yearCtrl: FormControl = new FormControl();
@@ -37,7 +41,7 @@ export class MovieAdministrationComponent implements OnInit, AfterViewInit, OnDe
   /** list of years filtered by search keyword */
   public filteredYears: ReplaySubject<Year[]> = new ReplaySubject<Year[]>(1);
 
-  @ViewChild('yearSelect') yearSelect: MatSelect;
+  @ViewChild('yearSelect', {static: true}) yearSelect: MatSelect;
 
   /** Subject that emits when the component has been destroyed. */
   protected _onDestroy = new Subject<void>();
@@ -220,10 +224,17 @@ export class MovieAdministrationComponent implements OnInit, AfterViewInit, OnDe
     });
   }
 
-  onEdit(id: number) {
+  onEdit(movie: Movie) {
     this.dialog.open(MovieEditModalComponent, {
       width: '80vh',
-      data: {movie: this.cinemaService.getMovieByID(this.movies, id)}
+      data: {movie: movie}
+    });
+  }
+
+  onInfo(movie: Movie) {
+    this.dialog.open(MovieInfoModalComponent, {
+      width: '80vh',
+      data: {movie: movie}
     });
   }
 

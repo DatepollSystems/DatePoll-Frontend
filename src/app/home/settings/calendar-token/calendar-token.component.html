@@ -6,7 +6,8 @@
         <mat-label>{{'SETTINGS_SECURITY_MDOAL_CALENDAR_INPUT_TITLE' | translate}}</mat-label>
         <input matInput readonly value="{{calendarToken}}">
         <button mat-icon-button matSuffix (click)="copyTokenToClipboard()"
-                matTooltip="{{'SETTINGS_SECURITY_MODAL_CALENDAR_COPY_TOKEN_TOOLTIP' | translate}}" matTooltipPosition="above">
+                matTooltip="{{'SETTINGS_SECURITY_MODAL_CALENDAR_COPY_TOKEN_TOOLTIP' | translate}}"
+                matTooltipPosition="above">
           <mat-icon>file_copy</mat-icon>
         </button>
       </mat-form-field>

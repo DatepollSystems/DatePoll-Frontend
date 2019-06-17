@@ -20,6 +20,14 @@
           {{'MANAGEMENT_DATEPOLL_CINEMA_SERVICE' | translate}}
         </mat-slide-toggle>
       </div>
+      <div class="col-12">
+        <mat-slide-toggle
+          color="primary"
+          (change)="eventsServiceChange($event)"
+          [(ngModel)]="eventsServiceEnabled">
+          {{'MANAGEMENT_DATEPOLL_EVENTS_SERVICE' | translate}}
+        </mat-slide-toggle>
+      </div>
     </div>
   </mat-card-content>
 </mat-card>

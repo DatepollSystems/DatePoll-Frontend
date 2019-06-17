@@ -1,7 +1,13 @@
 import {Component, OnDestroy, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
-import {MatBottomSheet, MatBottomSheetRef, MatDialog, MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
+import {MatBottomSheet, MatBottomSheetRef} from '@angular/material/bottom-sheet';
+import {MatDialog} from '@angular/material/dialog';
+import {MatPaginator} from '@angular/material/paginator';
+import {MatSort} from '@angular/material/sort';
+import {MatTableDataSource} from '@angular/material/table';
 import {Subscription} from 'rxjs';
+
+import {NotificationsService, NotificationType} from 'angular2-notifications';
 
 import {UsersService} from './users.service';
 import {MyUserService} from '../../my-user.service';
@@ -11,7 +17,7 @@ import {User} from './user.model';
 import {Permissions} from '../../../permissions';
 import {UserCreateModalComponent} from './user-create-modal/user-create-modal.component';
 import {UserUpdateModalComponent} from './user-update-modal/user-update-modal.component';
-import {NotificationsService, NotificationType} from 'angular2-notifications';
+import {UserDeleteModalComponent} from './user-delete-modal/user-delete-modal.component';
 
 @Component({
   selector: 'app-users-management',
@@ -19,15 +25,15 @@ import {NotificationsService, NotificationType} from 'angular2-notifications';
   styleUrls: ['./users-management.component.css']
 })
 export class UsersManagementComponent implements OnInit, OnDestroy {
-  @ViewChild('successfullyActivatedAllUsers') successfullyActivatedAllUsers: TemplateRef<any>;
+  @ViewChild('successfullyActivatedAllUsers', {static: true}) successfullyActivatedAllUsers: TemplateRef<any>;
   usersLoaded = true;
 
   displayedColumns: string[] = ['title', 'firstname', 'surname', 'emails', 'birthday', 'join_date', 'streetname', 'streetnumber',
     'zipcode', 'location', 'phoneNumbers', 'activity', 'username', 'actions'];
   filterValue: string = null;
 
-  @ViewChild(MatSort) sort: MatSort;
-  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
   private usersSubscription: Subscription;
   users: User[];
@@ -52,6 +58,7 @@ export class UsersManagementComponent implements OnInit, OnDestroy {
     this.usersLoaded = false;
 
     this.users = usersService.getUsers();
+    this.refreshTable();
 
     if (this.users.length > 0) {
       this.usersLoaded = true;
@@ -123,7 +130,9 @@ export class UsersManagementComponent implements OnInit, OnDestroy {
   }
 
   onDelete(userID: number) {
-    this.usersService.deleteUser(userID);
+    this.bottomSheet.open(UserDeleteModalComponent, {
+      data: { 'userID': userID },
+    });
   }
 
   refreshUsers() {
@@ -141,8 +150,8 @@ export class UsersManagementComponent implements OnInit, OnDestroy {
   styles: ['mat-icon { margin-right: 15px }']
 })
 export class UsersExportBottomSheetComponent {
-  @ViewChild('waitForExport') waitForExport: TemplateRef<any>;
-  @ViewChild('successfullyExported') successfullyExported: TemplateRef<any>;
+  @ViewChild('waitForExport', {static: true}) waitForExport: TemplateRef<any>;
+  @ViewChild('successfullyExported', {static: true}) successfullyExported: TemplateRef<any>;
 
   constructor(private bottomSheetRef: MatBottomSheetRef<UsersExportBottomSheetComponent>, private excelService: ExcelService,
               private usersService: UsersService, private notificationsService: NotificationsService) {

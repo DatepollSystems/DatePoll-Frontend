@@ -22,11 +22,14 @@
       <!-- Username -->
       <mat-form-field class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
         <input matInput id="username" name="username" type="text"
-               ngModel #usernameModel="ngModel" [(ngModel)]="username"
+               ngModel #usernameModel="ngModel" [(ngModel)]="username" (ngModelChange)="onUsernameChange(usernameModel)"
                maxlength="190" required minlength="1"
                placeholder="{{'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_USERNAME' | translate}}">
-        <mat-error *ngIf="usernameModel.invalid">
+        <mat-error *ngIf="usernameModel.invalid && !usernameModel.errors?.alreadyTaken">
           {{'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_USERNAME_INCORRECT' | translate}}
+        </mat-error>
+        <mat-error *ngIf="usernameModel.errors?.alreadyTaken">
+          {{'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_USERNAME_ALREADY_TAKEN' | translate}}
         </mat-error>
       </mat-form-field>
 
@@ -142,316 +145,92 @@
       </mat-form-field>
     </div>
 
-    <!-- Divider -->
-    <div class="row" style="margin-top: 15px; margin-bottom: 15px">
-      <div class="col-12">
-        <mat-divider></mat-divider>
+    <app-divider></app-divider>
+
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          {{'MANAGEMENT_USERS_UPDATE_USER_MODAL_PASSWORD_CHANGE' | translate}}
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <small><b>{{'MANAGEMENT_USERS_UPDATE_USER_MODAL_PASSWORD_CHANGE_DESCRIPTION' | translate}}</b></small>
+      <form (ngSubmit)="changePassword(changePasswordForm)" #changePasswordForm="ngForm">
+      <div class="row justify-content-between" style="margin-top: 15px;">
+        <mat-form-field class="col-12 col-md-4 col-lg-4">
+          <input matInput ngModel #passwordModel="ngModel"
+                 name="password" type="password"
+                 minlength="5" required
+                 placeholder="{{'SIGNIN_NEW_PASSWORD' | translate}}">
+        </mat-form-field>
+
+        <mat-form-field class="col-12 col-md-3 col-lg-4">
+          <input matInput ngModel #passwordRepeatModel="ngModel" [equalTo]="passwordModel"
+                 name="password_repeat" type="password"
+                 minlength="5" required
+                 placeholder="{{'SIGNIN_NEW_PASSWORD_REPEAT' | translate}}">
+
+          <mat-error *ngIf="passwordRepeatModel.errors?.equalTo" class="col-12">
+            {{'SIGNIN_PASSWORD_ARE_NOT_EQUAL' | translate}}
+          </mat-error>
+        </mat-form-field>
+
+        <div class="col-12 col-md-3 col-lg-2">
+          <button mat-flat-button class="success-button"
+                  [disabled]="!changePasswordForm.form.valid" style="width: 100%">
+            {{'MANAGEMENT_USERS_UPDATE_USER_MODAL_PASSWORD_CHANGE' | translate}}</button>
+        </div>
       </div>
-    </div>
+      </form>
+    </mat-expansion-panel>
+
+    <app-divider></app-divider>
 
     <!-- Email addresses -->
-    <app-email-addresses-list [emailAddressesInput]="emailAddresses"
-                              (emailAddressesChanged)="onEmailAddressChanged($event)"></app-email-addresses-list>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          {{'MANAGEMENT_USERS_CREATE_USER_MODAL_LIST_EMAIL_ADDRESSES' | translate}}
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <app-email-addresses-list [emailAddressesInput]="emailAddresses"
+                                (emailAddressesChanged)="onEmailAddressChanged($event)"></app-email-addresses-list>
+    </mat-expansion-panel>
 
-    <!-- Divider -->
-    <div class="row" style="margin-top: 15px; margin-bottom: 15px">
-      <div class="col-12">
-        <mat-divider></mat-divider>
-      </div>
-    </div>
+    <app-divider></app-divider>
 
     <!-- Phone number -->
-    <div>
-      <div class="row" style="margin-top: 15px;">
-        <div class="col-12">
-          <span style="font-size: 16px">{{'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_PHONE_NUMBERS' | translate}}</span>
-        </div>
-      </div>
+    <app-phone-numbers-list [phoneNumbers]="phoneNumbers"
+                            (phoneNumbersChanged)="onPhoneNumbersChanged($event)"></app-phone-numbers-list>
 
-      <form (ngSubmit)="addPhoneNumber(phoneNumberForm)" #phoneNumberForm="ngForm">
-        <div class="row justify-content-around" style="margin-top: 15px;">
-          <div class="col-12 col-sm-12 col-md-6 col-lg-3">
-            <mat-form-field>
-              <input matInput id="label" name="label" type="text"
-                     ngModel #labelModel="ngModel"
-                     required maxlength="190" minlength="1"
-                     placeholder="{{'SETTINGS_PERSONAL_DATA_MODAL_PHONE_NUMBER_LABEL' | translate}}">
-              <mat-error *ngIf="labelModel.invalid">
-                {{'SETTINGS_PERSONAL_DATA_MODAL_PHONE_NUMBER_LABEL_INVALID' | translate}}
-              </mat-error>
-            </mat-form-field>
-          </div>
 
-          <div class="col-12 col-sm-12 col-md-6 col-lg-5">
-            <mat-form-field>
-              <input matInput id="phoneNumber" name="phoneNumber" type="text"
-                     ngModel #phoneNumberModel="ngModel"
-                     required maxlength="190" minlength="1" phone="AT"
-                     placeholder="{{'SETTINGS_PERSONAL_DATA_MODAL_PHONE_NUMBER_PHONE_NUMBER' | translate}}">
-              <mat-error *ngIf="phoneNumberModel.invalid">
-                {{'SETTINGS_PERSONAL_DATA_MODAL_PHONE_NUMBER_PHONE_NUMBER_NOT_VALID' | translate}}
-              </mat-error>
-            </mat-form-field>
-          </div>
-
-          <div class="col-12 col-sm-12 col-md-12 col-lg-4">
-            <button mat-raised-button class="success-button" id="addPhoneNumber-button" style="width: 100%"
-                    type="submit" [disabled]="!phoneNumberForm.valid">
-              {{'SETTINGS_PERSONAL_DATA_MODAL_PHONE_NUMBER_ADD' | translate}}
-              <mat-icon aria-label="Submit button">library_add</mat-icon>
-            </button>
-          </div>
-        </div>
-      </form>
-
-      <div class="row">
-        <div class="col-12">
-          <table mat-table [dataSource]="dataSource" class="table-responsive">
-
-            <ng-container matColumnDef="label">
-              <th mat-header-cell
-                  *matHeaderCellDef> {{'SETTINGS_PERSONAL_DATA_MODAL_PHONE_NUMBER_LABEL' | translate}} </th>
-              <td mat-cell *matCellDef="let phoneNumber"> {{phoneNumber.label}} </td>
-            </ng-container>
-
-            <ng-container matColumnDef="phonenumber">
-              <th mat-header-cell
-                  *matHeaderCellDef> {{'SETTINGS_PERSONAL_DATA_MODAL_PHONE_NUMBER_PHONE_NUMBER' | translate}} </th>
-              <td mat-cell *matCellDef="let phoneNumber"> {{phoneNumber.phoneNumber}} </td>
-            </ng-container>
-
-            <ng-container matColumnDef="action">
-              <th mat-header-cell *matHeaderCellDef> {{'ACTION' | translate}} </th>
-              <td mat-cell *matCellDef="let phoneNumber">
-                <button mat-icon-button [matTooltipPosition]="'right'"
-                        matTooltip="{{'SETTINGS_PERSONAL_DATA_MODAL_PHONE_NUMBER_DELETE_TOOLTIP' | translate}}"
-                        (click)="removePhoneNumber(phoneNumber.id)">
-                  <mat-icon>delete_foreve</mat-icon>
-                </button>
-              </td>
-            </ng-container>
-
-            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-          </table>
-        </div>
-      </div>
-    </div>
-
-    <!-- Divider -->
-    <div class="row" style="margin-top: 15px; margin-bottom: 15px">
-      <div class="col-12">
-        <mat-divider></mat-divider>
-      </div>
-    </div>
+    <app-divider></app-divider>
 
     <!-- Group management -->
-    <div class="row">
-      <div class="col-12 col-md-6">
-        <h2>{{'MANAGEMENT_USERS_UPDATE_USER_MODAL_FREE_GROUPS' | translate}}</h2>
+    <app-group-and-subgroup-select [free]="free" [joined]="joined" (freeChanged)="onFreeChange($event)"
+                                   (joinedChanged)="onJoinedChange($event)"></app-group-and-subgroup-select>
 
-        <div
-          cdkDropList
-          #freeList="cdkDropList"
-          [cdkDropListData]="free"
-          [cdkDropListConnectedTo]="[joinedList]"
-          class="group-list" id="free-list"
-          (cdkDropListDropped)="dropToFree($event)">
-          <div class="group-box not-selectable" *ngFor="let item of free" cdkDrag [cdkDragDisabled]="sendingRequest">
-            <b *ngIf="item.type === 'parentgroup'">{{item.name}}</b>
-            <div *ngIf="item.type === 'subgroup'">
-              <b>[{{item.group_name}}]</b> {{item.name}}
-            </div>
-          </div>
-          <div class="group-box"
-               *ngIf="free.length === 0">{{'MANAGEMENT_USERS_UPDATE_USER_MODAL_NO_GROUPS' | translate}}</div>
-        </div>
-      </div>
-
-      <div class="col-12 col-md-6">
-        <h2>{{'MANAGEMENT_USERS_UPDATE_USER_MODAL_JOINED_GROUPS' | translate}}</h2>
-
-        <div
-          cdkDropList
-          #joinedList="cdkDropList"
-          [cdkDropListData]="joined"
-          [cdkDropListConnectedTo]="[freeList]"
-          class="group-list" id="joined-list"
-          (cdkDropListDropped)="dropToJoined($event)">
-          <div class="group-box not-selectable" *ngFor="let item of joined" cdkDrag [cdkDragDisabled]="sendingRequest">
-            <b *ngIf="item.type === 'parentgroup'">{{item.name}}</b>
-            <div *ngIf="item.type === 'subgroup'">
-              <b>[{{item.group_name}}]</b> {{item.name}}
-            </div>
-          </div>
-          <div class="group-box"
-               *ngIf="joined.length === 0">{{'MANAGEMENT_USERS_UPDATE_USER_MODAL_NO_GROUPS' | translate}}</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Divider -->
-    <div class="row" style="margin-top: 15px; margin-bottom: 15px">
-      <div class="col-12">
-        <mat-divider></mat-divider>
-      </div>
-    </div>
+    <app-divider></app-divider>
 
     <!-- Performance badges -->
-    <div>
-      <div class="row">
-        <div class="col-12">
-          <h3>{{'MANAGEMENT_USERS_CREATE_USER_MODAL_PERFORMANCE_BADGES_TITLE' | translate}}</h3>
-        </div>
-      </div>
-      <form class="row" #performanceBadgeForm="ngForm" (ngSubmit)="addPerformanceBadge(performanceBadgeForm)">
-        <div class="col-12 col-sm-12 col-md-6 col-lg-3">
-          <app-instrument-select (instrumentChanged)="onInstrumentChanged($event)"></app-instrument-select>
-        </div>
-        <div class="col-12 col-sm-12 col-md-6 col-lg-3">
-          <app-performance-badge-select
-            (performanceBadgeChanged)="onPerformanceBadgeChanged($event)"></app-performance-badge-select>
-        </div>
+    <app-performance-badges-list [userPerformanceBadges]="userPerformanceBadges"
+                                 (performanceBadgesChanged)="onUserPerformanceBadgesChange($event)">
+    </app-performance-badges-list>
 
-        <mat-form-field class="col-12 col-sm-12 col-md-6 col-lg-3 datepicker-field">
-          <input matInput [matDatepicker]="picker_performanceBadge"
-                 name="datepicker-performanceBadge" [(ngModel)]="performanceBadgeDate" id="datepicker-performanceBadge"
-                 placeholder="{{'MANAGEMENT_USERS_CREATE_USER_MODAL_PERFORMANCE_BADGES_DATE' | translate}}">
-          <mat-datepicker-toggle matSuffix [for]="picker_performanceBadge"></mat-datepicker-toggle>
-          <mat-datepicker #picker_performanceBadge></mat-datepicker>
-        </mat-form-field>
-
-        <mat-form-field class="col-12 col-sm-12 col-md-6 col-lg-3 datepicker-field-mobile">
-          <input matInput [matDatepicker]="picker_mobile_performanceBadge"
-                 name="datepicker-performanceBadge-mobile" [(ngModel)]="performanceBadgeDate"
-                 id="datepicker-performanceBadge-mobile"
-                 placeholder="{{'MANAGEMENT_USERS_CREATE_USER_MODAL_PERFORMANCE_BADGES_DATE' | translate}}">
-          <mat-datepicker-toggle matSuffix [for]="picker_mobile_performanceBadge"></mat-datepicker-toggle>
-          <mat-datepicker touchUi #picker_mobile_performanceBadge></mat-datepicker>
-        </mat-form-field>
-
-        <mat-form-field class="col-12 col-sm-12 col-md-6 col-lg-3">
-          <input matInput id="performanceBadge-grade" name="performanceBadgeGrade" type="text"
-                 ngModel #performanceBadgeGradeModel="ngModel"
-                 maxlength="190"
-                 placeholder="{{'MANAGEMENT_USERS_CREATE_USER_MODAL_PERFORMANCE_BADGES_GRADE' | translate}}">
-          <mat-error *ngIf="performanceBadgeGradeModel.invalid">
-            {{'MANAGEMENT_USERS_CREATE_USER_MODAL_PERFORMANCE_BADGES_GRADE_INCORRECT' | translate}}
-          </mat-error>
-        </mat-form-field>
-
-        <mat-form-field class="col-12 col-sm-12 col-md-6 col-lg-9">
-          <input matInput id="performanceBadge-note" name="performanceBadgeNote" type="text"
-                 ngModel #performanceBadgeNoteModel="ngModel"
-                 maxlength="190"
-                 placeholder="{{'MANAGEMENT_USERS_CREATE_USER_MODAL_PERFORMANCE_BADGES_NOTE' | translate}}">
-          <mat-error *ngIf="performanceBadgeNoteModel.invalid">
-            {{'MANAGEMENT_USERS_CREATE_USER_MODAL_PERFORMANCE_BADGES_NOTE_INCORRECT' | translate}}
-          </mat-error>
-        </mat-form-field>
-
-        <div class="col-12 col-sm-12 col-md-12 col-lg-3">
-          <button mat-raised-button class="success-button" style="width: 100%" id="addPerformanceBadge-button"
-                  type="submit"
-                  [disabled]="!performanceBadgeForm.valid || selectedInstrument == null || selectedPerformanceBadge == null">
-            {{'ADD' | translate}}
-            <mat-icon aria-label="Submit button">playlist_add</mat-icon>
-          </button>
-        </div>
-      </form>
-
-      <div class="row">
-        <mat-list class="col-12">
-          <mat-list-item *ngFor="let userPerformanceBadge of userPerformanceBadges">
-            <span matLine>{{ userPerformanceBadge.performanceBadgeName }}
-              {{'MANAGEMENT_USERS_CREATE_USER_MODAL_PERFORMANCE_BADGES_WITH' | translate}}
-              {{ userPerformanceBadge.instrumentName }}
-            </span>
-            <span matLine
-                  *ngIf="userPerformanceBadge.date != null">Datum: {{userPerformanceBadge.date | date:'dd.MM.yyyy'}}</span>
-            <span matLine *ngIf="userPerformanceBadge.grade != null">Erfolg: {{userPerformanceBadge.grade}}</span>
-            <span matLine *ngIf="userPerformanceBadge.note != null">Anmerkung: {{userPerformanceBadge.note}}</span>
-            <button mat-icon-button (click)="removePerformanceBadge(userPerformanceBadge.id)" matTooltipPosition="right"
-                    matTooltip="{{'MANAGEMENT_USERS_CREATE_USER_MODAL_PERFORMANCE_BADGES_REMOVE_TOOLTIP' | translate}}">
-              <mat-icon>delete_forever</mat-icon>
-            </button>
-          </mat-list-item>
-          <mat-list-item *ngIf="userPerformanceBadges.length == 0">
-            {{'MANAGEMENT_USERS_CREATE_USER_MODAL_PERFORMANCE_BADGES_NO_AVAILABLE' | translate}}
-          </mat-list-item>
-        </mat-list>
-      </div>
-    </div>
-
-    <!-- Divider -->
-    <div class="row" style="margin-top: 15px; margin-bottom: 15px">
-      <div class="col-12">
-        <mat-divider></mat-divider>
-      </div>
-    </div>
+    <app-divider></app-divider>
 
     <!-- Permissions -->
-    <div *ngIf="hasPermissionToChangePermission">
-      <div class="row">
-        <div class="col-12">
-          <span style="font-size: 16px">{{'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_PERMISSIONS' | translate}}</span>
-        </div>
-        <div class="col-12">
-          <small>
-            {{'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_PERMISSIONS_SMALL_0' | translate}}
-            <a href="https://gitlab.com/BuergerkorpsEggenburg/datepoll-backend-php/wikis/Permissions"
-               target="_blank"
-               rel="noopener">Link</a>{{'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_PERMISSIONS_SMALL_1' | translate}}
-          </small>
-        </div>
-      </div>
+    <mat-expansion-panel *ngIf="hasPermissionToChangePermission">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          {{'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_PERMISSIONS' | translate}}
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <app-permissions-list [permissions]="permissions"
+                            (permissionsChanged)="onPermissionsChange($event)">
+      </app-permissions-list>
+    </mat-expansion-panel>
 
-      <form (ngSubmit)="addPermission(permissionsForm)" #permissionsForm="ngForm">
-        <div class="row justify-content-around">
-          <div class="col-12 col-sm-12 col-md-8 col-lg-8">
-            <mat-form-field>
-              <input matInput id="permission" name="permission" type="text"
-                     ngModel #permissionModel="ngModel"
-                     maxlength="190" required
-                     placeholder="{{'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_PERMISSION' | translate}}">
-              <mat-error *ngIf="permissionModel.invalid">
-                {{'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_PERMISSION_INCORRECT' | translate}}
-              </mat-error>
-            </mat-form-field>
-          </div>
-
-          <div class="col-12 col-sm-12 col-md-4 col-lg-4">
-            <button mat-raised-button class="success-button" style="width: 100%" id="addPermission-button"
-                    type="submit" [disabled]="!permissionsForm.valid">
-              {{'ADD' | translate}}
-              <mat-icon aria-label="Submit button">playlist_add</mat-icon>
-            </button>
-          </div>
-        </div>
-      </form>
-
-      <div class="row">
-        <mat-list class="col-12">
-          <mat-list-item *ngFor="let permission of permissions">
-            <span matLine>{{ permission }}</span>
-            <button mat-icon-button (click)="removePermission(permission)" matTooltipPosition="right"
-                    matTooltip="{{'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_REMOVE_PERMISSION_TOOLTIP' | translate}}">
-              <mat-icon>delete_forever</mat-icon>
-            </button>
-          </mat-list-item>
-          <mat-list-item *ngIf="permissions.length == 0">
-            {{'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_NO_PERMISSIONS_AVAILABLE' | translate}}
-          </mat-list-item>
-        </mat-list>
-      </div>
-    </div>
-
-    <!-- Divider -->
-    <div class="row" style="margin-top: 15px; margin-bottom: 15px">
-      <div class="col-12">
-        <mat-divider></mat-divider>
-      </div>
-    </div>
+    <app-divider *ngIf="hasPermissionToChangePermission"></app-divider>
 
     <!-- Activity -->
     <div class="row">
@@ -473,6 +252,9 @@
           [disabled]="!form.form.valid">{{'SAVE' | translate}}</button>
 </div>
 
+<ng-template #successfullyChangedPassword>
+  <h2>{{'MANAGEMENT_USERS_UPDATE_USER_MODAL_PASSWORD_CHANGE_SUCCESSFUL' | translate}}</h2>
+</ng-template>
 <ng-template #successfullyUpdatedUser>
   <h2>{{'MANAGEMENT_USERS_UPDATE_USER_MODAL_SUCCESSFULLY_UPDATED_USER' | translate}}</h2>
 </ng-template>

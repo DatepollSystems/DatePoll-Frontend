@@ -1,8 +1,10 @@
 import {Component, Inject, OnDestroy, ViewChild} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialog, MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
+import {MAT_DIALOG_DATA, MatDialog} from '@angular/material/dialog';
+import {MatPaginator} from '@angular/material/paginator';
+import {MatSort} from '@angular/material/sort';
+import {MatTableDataSource} from '@angular/material/table';
 import {Subscription} from 'rxjs';
 import {GroupsService} from '../groups.service';
-import {GroupUserRoleUpdateModalComponent} from '../group-user-list-modal/group-user-role-update-modal/group-user-role-update-modal.component';
 import {SubgroupUserRoleUpdateModalComponent} from './subgroup-user-role-update-modal/subgroup-user-role-update-modal.component';
 
 @Component({
@@ -15,8 +17,8 @@ export class SubgroupUserListModalComponent implements OnDestroy {
   displayedColumns: string[] = ['role', 'firstname', 'surname', 'actions'];
   filterValue: string = null;
 
-  @ViewChild(MatSort) sort: MatSort;
-  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort, {static: false}) sort: MatSort;
+  @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
 
   private readonly subgroupID: number;
 

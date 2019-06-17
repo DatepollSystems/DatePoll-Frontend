@@ -1,11 +1,11 @@
 import {Component, Inject, TemplateRef, ViewChild} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {NgForm} from '@angular/forms';
 
 import {PerformanceBadgesService} from '../performance-badges.service';
 import {NotificationsService, NotificationType} from 'angular2-notifications';
 
-import {PerformanceBadge} from '../performanceBadge.model';
+import {PerformanceBadge} from '../models/performanceBadge.model';
 
 @Component({
   selector: 'app-performance-badge-update-modal',
@@ -14,7 +14,7 @@ import {PerformanceBadge} from '../performanceBadge.model';
 })
 export class PerformanceBadgeUpdateModalComponent {
 
-  @ViewChild('successfullyUpdatedPerformanceBadge') successfullyUpdatedPerformanceBadge: TemplateRef<any>;
+  @ViewChild('successfullyUpdatedPerformanceBadge', {static: true}) successfullyUpdatedPerformanceBadge: TemplateRef<any>;
 
   performanceBadge: PerformanceBadge;
   name: string;

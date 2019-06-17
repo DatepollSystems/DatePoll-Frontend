@@ -69,16 +69,18 @@ export class UsersService {
   }
 
   public deleteUser(userID: number) {
-    this.httpService.loggedInV1DELETERequest('/management/users/' + userID, 'deleteUser').subscribe(
-      (data: any) => {
-        console.log(data);
-        this.fetchUsers();
-      }
-    );
+    return this.httpService.loggedInV1DELETERequest('/management/users/' + userID, 'deleteUser');
   }
 
   public updateUser(userID: number, user: any) {
     return this.httpService.loggedInV1PUTRequest('/management/users/' + userID, user, 'updateUser');
+  }
+
+  public changePasswordForUser(userID: number, password: string) {
+    const dto = {
+      'password': password
+    };
+    return this.httpService.loggedInV1PUTRequest('/management/users/changePassword/' + userID, dto, 'changePasswordFromUser');
   }
 
 
@@ -87,7 +89,7 @@ export class UsersService {
     return this._joinedGroups.slice();
   }
 
-  public setJoinedOfUser(groups: any[]) {
+  private setJoinedOfUser(groups: any[]) {
     this._joinedGroups = groups;
     this.joinedGroupsChange.next(this._joinedGroups.slice());
   }

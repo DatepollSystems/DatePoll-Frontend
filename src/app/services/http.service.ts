@@ -48,7 +48,7 @@ export class HttpService {
 
   public getSettingRequest(url: string, functionUser: string = null) {
     if (functionUser != null) {
-      console.log('getSettingsRequest | ' + functionUser );
+      console.log('getSettingsRequest | ' + functionUser);
     }
     return this.http.get(this.apiUrl + '/settings' + url);
   }

@@ -4,7 +4,7 @@ import {PersonalDataComponent} from './personal-data/personal-data.component';
 import {PhoneNumberComponent} from './phone-number/phone-number.component';
 import {EmailAddressComponent} from './email-address/email-address.component';
 import {PasswordComponent} from './password/password.component';
-import {MatDialog} from '@angular/material';
+import {MatDialog} from '@angular/material/dialog';
 import {CalendarTokenComponent} from './calendar-token/calendar-token.component';
 import {SessionsComponent} from './sessions/sessions.component';
 

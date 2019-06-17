@@ -12,4 +12,5 @@ const datepollManagementRoutes: Routes = [
   ],
   exports: [RouterModule]
 })
-export class DatepollManagementRoutingModule {}
+export class DatepollManagementRoutingModule {
+}

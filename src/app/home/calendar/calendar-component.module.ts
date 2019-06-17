@@ -26,4 +26,5 @@ import {CalendarComponent} from './calendar.component';
     })
   ]
 })
-export class CalendarComponentModule {}
+export class CalendarComponentModule {
+}

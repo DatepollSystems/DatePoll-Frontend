@@ -12,4 +12,5 @@ const usersManagementRoutes: Routes = [
   ],
   exports: [RouterModule]
 })
-export class UsersManagementRoutingModule {}
+export class UsersManagementRoutingModule {
+}
