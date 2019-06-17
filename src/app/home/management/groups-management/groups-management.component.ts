@@ -1,6 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {MatDialog} from '@angular/material/dialog';
+import {MatBottomSheet} from '@angular/material';
 
 import {Subscription} from 'rxjs';
 
@@ -13,6 +14,8 @@ import {SubgroupCreateModalComponent} from './subgroup-create-modal/subgroup-cre
 import {SubgroupUpdateModalComponent} from './subgroup-update-modal/subgroup-update-modal.component';
 import {SubgroupUserListModalComponent} from './subgroup-user-list-modal/subgroup-user-list-modal.component';
 import {GroupUserListModalComponent} from './group-user-list-modal/group-user-list-modal.component';
+import {GroupDeleteModalComponent} from './group-delete-modal/group-delete-modal.component';
+import {SubgroupDeleteModalComponent} from './subgroup-delete-modal/subgroup-delete-modal.component';
 
 import {Group} from './models/group.model';
 import {Subgroup} from './models/subgroup.model';
@@ -37,6 +40,7 @@ export class GroupsManagementComponent implements OnInit, OnDestroy {
     private router: Router,
     private myUserService: MyUserService,
     private dialog: MatDialog,
+    private bottomSheet: MatBottomSheet,
     private groupsService: GroupsService) {
 
     this.permissionSubscription = myUserService.permissionsChange.subscribe((value) => {
@@ -111,16 +115,9 @@ export class GroupsManagementComponent implements OnInit, OnDestroy {
   }
 
   onDeleteGroup(groupID: number) {
-    this.groupsService.deleteGroup(groupID).subscribe(
-      (data: any) => {
-        console.log(data);
-        this.groupsService.fetchGroups();
-      },
-      (error) => {
-        console.log(error);
-        this.groupsService.fetchGroups();
-      }
-    );
+    this.bottomSheet.open(GroupDeleteModalComponent, {
+      data: { 'groupID': groupID },
+    });
   }
 
   onInfoGroup(groupID: number) {
@@ -145,16 +142,9 @@ export class GroupsManagementComponent implements OnInit, OnDestroy {
   }
 
   onDeleteSubgroup(subgroupID: number) {
-    this.groupsService.deleteSubgroup(subgroupID).subscribe(
-      (data: any) => {
-        console.log(data);
-        this.groupsService.fetchGroups();
-      },
-      (error) => {
-        console.log(error);
-        this.groupsService.fetchGroups();
-      }
-    );
+    this.bottomSheet.open(SubgroupDeleteModalComponent, {
+      data: { 'subgroupID': subgroupID },
+    });
   }
 
   onInfoSubgroup(subgroupID: number) {

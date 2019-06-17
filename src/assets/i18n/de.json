@@ -254,7 +254,6 @@
   "MANAGEMENT_USERS_ACTIONS": "Aktionen",
   "MANAGEMENT_USERS_ACTIONS_EDIT_TOOLTIP": "Bearbeite dieses Mitglied",
   "MANAGEMENT_USERS_ACTIONS_DELETE_TOOLTIP": "Lösche dieses Mitglied",
-  "MANAGEMENT_USERS_REALLY_DELETE_USER": "Willst du den Benutzer wirklich löschen?",
   "MANAGEMENT_USERS_REFRESH": "Mitgliederliste aktualisieren",
   "MANAGEMENT_USERS_EXPORT_LOADING": "Die Mitgliederliste wird angefertig... Dies kann einige Sekunden dauern! Bitte schließe den Browser in dieser Zeit nicht.",
   "MANAGEMENT_USERS_EXPORT_FINISHED": "Die Mitgliederliste wurde erfolgreich exportiert!",
@@ -318,6 +317,10 @@
   "MANAGEMENT_USERS_UPDATE_USER_MODAL_PASSWORD_CHANGE_DESCRIPTION": "Das Passwort wird unabhängig von den restlichen Daten verändert! Nachdem ein Passwort eingegeben wurde und auf 'Passwort ändern' geklickt wurde gibt es kein zurück.",
   "MANAGEMENT_USERS_UPDATE_USER_MODAL_PASSWORD_CHANGE_SUCCESSFUL": "Das Passwort wurde erfolgreich geändert!",
 
+  "MANAGEMENT_USERS_DELETE_USER_MODAL_TITLE": "Willst du den Benutzer wirklich löschen?",
+  "MANAGEMENT_USERS_DELETE_USER_MODAL_SUCCESSFUL": "Das Mitglied wurde erfolgreich gelöscht!",
+
+
   "MANAGEMENT_GROUPS_SEARCH": "Suche nach einer Gruppe oder einem Register",
   "MANAGEMENT_GROUPS_SEARCH_NOTHING_FOUND": "Leider wurde nichts gefunden :(",
   "MANAGEMENT_GROUPS_GROUP_DELETE_TOOLTIP": "Lösche diese Gruppe",
@@ -338,6 +341,9 @@
 
   "MANAGEMENT_GROUPS_UPDATE_GROUP_MODAL_TITLE": "Bearbeite die Gruppe ",
 
+  "MANAGEMENT_GROUPS_DELETE_GROUP_MODAL_TITLE": "Willst du diese Gruppe wirklich löschen?",
+  "MANAGEMENT_GROUPS_DELETE_GROUP_MODAL_SUCCESSFUL": "Die Gruppe wurde erfolgreich gelöscht!",
+
   "MANAGEMENT_GROUPS_CREATE_SUBGROUP_MODAL_TITLE": "Lege eine neues Register an",
   "MANAGEMENT_GROUPS_CREATE_SUBGROUP_MODAL_FORM_NAME": "Registername",
   "MANAGEMENT_GROUPS_CREATE_SUBGROUP_MODAL_FORM_NAME_INCORRECT": "Der Name darf weder leer sein, noch mehr als 190 Zeichen haben!",
@@ -345,6 +351,9 @@
   "MANAGEMENT_GROUPS_CREATE_SUBGROUP_MODAL_FORM_DESCRIPTION_INCORRECT": "Die Beschreibung darf nicht mehr als 190 Zeichen haben!",
 
   "MANAGEMENT_GROUPS_UPDATE_SUBGROUP_MODAL_TITLE": "Bearbeite das Register ",
+
+  "MANAGEMENT_GROUPS_DELETE_SUBGROUP_MODAL_TITLE": "Willst du dieses Register wirklich löschen?",
+  "MANAGEMENT_GROUPS_DELETE_SUBGROUP_MODAL_SUCCESSFUL": "Das Register wurde erfolgreich gelöscht!",
 
   "MANAGEMENT_GROUPS_INFO_GROUP_MODAL_TITLE": "Mitglieder - ",
   "MANAGEMENT_GROUPS_INFO_GROUP_MODAL_TABLE_HEADER_ROLE": "Rolle",

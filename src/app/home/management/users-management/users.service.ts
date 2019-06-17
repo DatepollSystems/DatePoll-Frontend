@@ -69,12 +69,7 @@ export class UsersService {
   }
 
   public deleteUser(userID: number) {
-    this.httpService.loggedInV1DELETERequest('/management/users/' + userID, 'deleteUser').subscribe(
-      (data: any) => {
-        console.log(data);
-        this.fetchUsers();
-      }
-    );
+    return this.httpService.loggedInV1DELETERequest('/management/users/' + userID, 'deleteUser');
   }
 
   public updateUser(userID: number, user: any) {

@@ -17,6 +17,8 @@ import {GroupUserListModalComponent} from './group-user-list-modal/group-user-li
 import {SubgroupUserListModalComponent} from './subgroup-user-list-modal/subgroup-user-list-modal.component';
 import {GroupUserRoleUpdateModalComponent} from './group-user-list-modal/group-user-role-update-modal/group-user-role-update-modal.component';
 import {SubgroupUserRoleUpdateModalComponent} from './subgroup-user-list-modal/subgroup-user-role-update-modal/subgroup-user-role-update-modal.component';
+import {GroupDeleteModalComponent} from './group-delete-modal/group-delete-modal.component';
+import {SubgroupDeleteModalComponent} from './subgroup-delete-modal/subgroup-delete-modal.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +31,8 @@ import {SubgroupUserRoleUpdateModalComponent} from './subgroup-user-list-modal/s
     SubgroupUserListModalComponent,
     GroupUserRoleUpdateModalComponent,
     SubgroupUserRoleUpdateModalComponent,
+    GroupDeleteModalComponent,
+    SubgroupDeleteModalComponent,
   ],
   entryComponents: [
     GroupCreateModalComponent,
@@ -39,6 +43,8 @@ import {SubgroupUserRoleUpdateModalComponent} from './subgroup-user-list-modal/s
     SubgroupUserListModalComponent,
     GroupUserRoleUpdateModalComponent,
     SubgroupUserRoleUpdateModalComponent,
+    GroupDeleteModalComponent,
+    SubgroupDeleteModalComponent
   ],
   imports: [
     CommonModule,
