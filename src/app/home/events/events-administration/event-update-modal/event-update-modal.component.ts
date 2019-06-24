@@ -1,9 +1,9 @@
 import {Component, Inject, OnDestroy, TemplateRef, ViewChild} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {NotificationsService, NotificationType} from 'angular2-notifications';
-import {EventsService} from '../events.service';
+import {EventsService} from '../../events.service';
 import {NgForm} from '@angular/forms';
-import {Event} from '../models/event.model';
+import {Event} from '../../models/event.model';
 import {Subscription} from 'rxjs';
 
 @Component({

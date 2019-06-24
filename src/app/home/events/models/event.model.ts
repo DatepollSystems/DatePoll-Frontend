@@ -1,5 +1,6 @@
 import {EventResultGroup} from './event-result-group.model';
 import {EventResultUser} from './event-result-user.model';
+import {EventAction} from 'calendar-utils';
 
 export class Event {
   public id: number;
@@ -34,7 +35,29 @@ export class Event {
       }
     }
     this.decisions = decisions;
+
+    this.title = this.name;
+    this.start = this.startDate;
+    this.end = this.endDate;
   }
+
+  // Calendar specific values
+  start: Date;
+  end: Date;
+  title: string;
+
+  public actions: EventAction[];
+
+  allDay = false;
+  color = {
+    primary: '#1e90ff',
+    secondary: '#D1E8FF'
+  };
+  draggable: false;
+
+  meta = null;
+  resizable: { beforeStart: false; afterEnd: false };
+  // ------------------------------------------------------
 
   public setResultGroups(groups: EventResultGroup[]) {
     this.resultGroups = groups;

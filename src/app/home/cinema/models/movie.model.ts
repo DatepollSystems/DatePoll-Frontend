@@ -41,6 +41,7 @@ export class Movie implements CalendarEvent {
     this.title = name;
   }
 
+  // Calendar specific values
   start: Date;
   title: string;
 

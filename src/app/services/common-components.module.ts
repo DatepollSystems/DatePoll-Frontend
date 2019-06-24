@@ -13,19 +13,22 @@ import {DoNotForgetToSaveComponent} from './shared-components/do-not-forget-to-s
 import {MovieEditModalComponent} from '../home/cinema/movie-administration/movie-edit-modal/movie-edit-modal.component';
 import {EmailAddressesListComponent} from '../home/management/users-management/email-addresses-list/email-addresses-list.component';
 import {MovieInfoModalComponent} from '../home/cinema/movie-administration/movie-info-modal/movie-info-modal.component';
-import { GroupAndSubgroupSelectComponent } from './shared-components/group-and-subgroup-select/group-and-subgroup-select.component';
+import {GroupAndSubgroupSelectComponent} from './shared-components/group-and-subgroup-select/group-and-subgroup-select.component';
+import {MovieDeleteModalComponent} from '../home/cinema/movie-administration/movie-delete-modal/movie-delete-modal.component';
 
 @NgModule({
   declarations: [
     DoNotForgetToSaveComponent,
     MovieEditModalComponent,
     MovieInfoModalComponent,
+    MovieDeleteModalComponent,
     EmailAddressesListComponent,
     GroupAndSubgroupSelectComponent
   ],
   entryComponents: [
     MovieEditModalComponent,
-    MovieInfoModalComponent
+    MovieInfoModalComponent,
+    MovieDeleteModalComponent
   ],
   imports: [
     CommonModule,
@@ -39,6 +42,7 @@ import { GroupAndSubgroupSelectComponent } from './shared-components/group-and-s
     DoNotForgetToSaveComponent,
     MovieEditModalComponent,
     MovieInfoModalComponent,
+    MovieDeleteModalComponent,
     EmailAddressesListComponent,
     GroupAndSubgroupSelectComponent
   ],

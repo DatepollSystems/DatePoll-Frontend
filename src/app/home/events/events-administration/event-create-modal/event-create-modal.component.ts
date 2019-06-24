@@ -5,12 +5,12 @@ import {Subscription} from 'rxjs';
 
 import {NotificationsService, NotificationType} from 'angular2-notifications';
 
-import {Group} from '../../management/groups-management/models/group.model';
-import {GroupsService} from '../../management/groups-management/groups.service';
-import {EventsService} from '../events.service';
-import {StandardDecisionsService} from '../standardDecisions.service';
+import {Group} from '../../../management/groups-management/models/group.model';
+import {GroupsService} from '../../../management/groups-management/groups.service';
+import {EventsService} from '../../events.service';
+import {StandardDecisionsService} from '../../standardDecisions.service';
 
-import {Event} from '../models/event.model';
+import {Event} from '../../models/event.model';
 
 @Component({
   selector: 'app-event-create-modal',

@@ -6,11 +6,11 @@ import {EventsService} from '../events.service';
 import {MyUserService} from '../../my-user.service';
 import {Permissions} from '../../../permissions';
 import {Router} from '@angular/router';
-import {EventCreateModalComponent} from '../event-create-modal/event-create-modal.component';
+import {EventCreateModalComponent} from './event-create-modal/event-create-modal.component';
 import {EventStandardDecisionsManagementModalComponent} from '../event-standard-decisions-management-modal/event-standard-decisions-management-modal.component';
-import {EventUpdateModalComponent} from '../event-update-modal/event-update-modal.component';
+import {EventUpdateModalComponent} from './event-update-modal/event-update-modal.component';
 import {EventInfoModalComponent} from '../event-info-modal/event-info-modal.component';
-import {EventDeleteModalComponent} from '../event-delete-modal/event-delete-modal.component';
+import {EventDeleteModalComponent} from './event-delete-modal/event-delete-modal.component';
 
 @Component({
   selector: 'app-events-administration',
