@@ -9,6 +9,15 @@ import {Permissions} from '../../permissions';
 import {MovieEditModalComponent} from '../cinema/movie-administration/movie-edit-modal/movie-edit-modal.component';
 import {MatDialog} from '@angular/material/dialog';
 import {SettingsService} from '../../services/settings.service';
+import {MovieInfoModalComponent} from '../cinema/movie-administration/movie-info-modal/movie-info-modal.component';
+import {Event} from '../events/models/event.model';
+import {EventsUserService} from '../events/events-user.service';
+import {EventUpdateModalComponent} from '../events/events-administration/event-update-modal/event-update-modal.component';
+import {EventDeleteModalComponent} from '../events/events-administration/event-delete-modal/event-delete-modal.component';
+import {MatBottomSheet} from '@angular/material';
+import {EventInfoModalComponent} from '../events/event-info-modal/event-info-modal.component';
+import {EventsService} from '../events/events.service';
+import {MovieDeleteModalComponent} from '../cinema/movie-administration/movie-delete-modal/movie-delete-modal.component';
 
 const colors: any = {
   red: {
@@ -89,12 +98,18 @@ export class CalendarComponent implements OnInit, OnDestroy {
   private movies: Movie[];
   private moviesSubscription: Subscription;
 
+  private avents: Event[];
+  private aventSubscription: Subscription;
+
   constructor(
     private settingsService: SettingsService,
     private cinemaService: CinemaService,
+    private eventsUserService: EventsUserService,
+    private eventsService: EventsService,
     private myUserService: MyUserService,
     private cdr: ChangeDetectorRef,
-    private dialog: MatDialog) {
+    private dialog: MatDialog,
+    private bottomSheet: MatBottomSheet) {
   }
 
   ngOnInit() {
@@ -107,11 +122,34 @@ export class CalendarComponent implements OnInit, OnDestroy {
         this.refreshCalendar();
       });
     }
+
+    if (this.settingsService.getShowEvents()) {
+      if (this.myUserService.hasPermission(Permissions.EVENTS_ADMINISTRATION)) {
+        this.avents = this.eventsService.getEvents();
+        this.refreshCalendar();
+
+        this.aventSubscription = this.eventsService.eventsChange.subscribe((value) => {
+          this.avents = value;
+          this.refreshCalendar();
+        });
+      } else {
+        this.avents = this.eventsUserService.getEvents();
+        this.refreshCalendar();
+
+        this.aventSubscription = this.eventsUserService.eventsChange.subscribe((value) => {
+          this.avents = value;
+          this.refreshCalendar();
+        });
+      }
+    }
   }
 
   ngOnDestroy(): void {
     if (this.moviesSubscription != null) {
       this.moviesSubscription.unsubscribe();
+    }
+    if (this.aventSubscription != null) {
+      this.aventSubscription.unsubscribe();
     }
   }
 
@@ -135,19 +173,43 @@ export class CalendarComponent implements OnInit, OnDestroy {
             {
               label: '[&#10060;]',
               onClick: ({event}: { event: CalendarEvent }): void => {
-                this.cinemaService.deleteMovie(this.movies[i].id).subscribe(
-                  (data: any) => {
-                    console.log(data);
-                    this.cinemaService.fetchMovies();
-                    this.cinemaService.fetchNotShownMovies();
-                  },
-                  (error) => console.log(error)
-                );
+                this.bottomSheet.open(MovieDeleteModalComponent, {
+                  'data': {'movieID': this.movies[i].id}
+                });
               }
             }
           ];
         }
         this.events.push(this.movies[i]);
+      }
+    }
+
+    if (this.avents != null) {
+      for (let i = 0; i < this.avents.length; i++) {
+        if (this.myUserService.hasPermission(Permissions.EVENTS_ADMINISTRATION)) {
+          this.avents[i].actions = [
+            {
+              label: '[&#9997;] ',
+              onClick: ({event}: { event: CalendarEvent }): void => {
+                this.dialog.open(EventUpdateModalComponent, {
+                  width: '80vh',
+                  'data': {
+                    'event': this.avents[i]
+                  }
+                });
+              }
+            },
+            {
+              label: '[&#10060;]',
+              onClick: ({event}: { event: CalendarEvent }): void => {
+                this.bottomSheet.open(EventDeleteModalComponent, {
+                  'data': {'eventID': this.avents[i].id}
+                });
+              }
+            }
+          ];
+        }
+        this.events.push(this.avents[i]);
       }
     }
 
@@ -186,7 +248,21 @@ export class CalendarComponent implements OnInit, OnDestroy {
     this.activeDayIsOpen = false;
   }
 
-  handleEvent(test: any, test1: any) {
-
+  handleEvent(object: any) {
+    if (object instanceof Movie) {
+      if (this.myUserService.hasPermission(Permissions.CINEMA_MOVIE_ADMINISTRATION)) {
+        this.dialog.open(MovieInfoModalComponent, {
+          width: '80vh',
+          data: {movie: object}
+        });
+      }
+    } else if (object instanceof Event) {
+      this.dialog.open(EventInfoModalComponent, {
+        width: '80vh',
+        'data': {
+          'event': object
+        }
+      });
+    }
   }
 }

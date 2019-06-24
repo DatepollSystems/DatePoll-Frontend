@@ -41,7 +41,7 @@
         [locale]="locale"
         [activeDayIsOpen]="activeDayIsOpen"
         (dayClicked)="dayClicked($event.day)"
-        (eventClicked)="handleEvent('Clicked', $event.event)"
+        (eventClicked)="handleEvent($event.event)"
         (eventTimesChanged)="eventTimesChanged($event)"
       >
       </mwl-calendar-month-view>
@@ -51,7 +51,7 @@
         [events]="events"
         [refresh]="refresh"
         [locale]="locale"
-        (eventClicked)="handleEvent('Clicked', $event.event)"
+        (eventClicked)="handleEvent($event.event)"
         (eventTimesChanged)="eventTimesChanged($event)"
       >
       </mwl-calendar-week-view>
@@ -61,7 +61,7 @@
         [events]="events"
         [locale]="locale"
         [refresh]="refresh"
-        (eventClicked)="handleEvent('Clicked', $event.event)"
+        (eventClicked)="handleEvent($event.event)"
         (eventTimesChanged)="eventTimesChanged($event)"
       >
       </mwl-calendar-day-view>
