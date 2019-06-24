@@ -1,7 +1,7 @@
 import {Component, Inject, TemplateRef, ViewChild} from '@angular/core';
 import {MAT_BOTTOM_SHEET_DATA, MatBottomSheetRef} from '@angular/material';
 import {NotificationsService, NotificationType} from 'angular2-notifications';
-import {EventsService} from '../events.service';
+import {EventsService} from '../../events.service';
 
 @Component({
   selector: 'app-event-delete-modal',
