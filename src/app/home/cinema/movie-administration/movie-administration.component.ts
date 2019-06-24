@@ -3,6 +3,7 @@ import {FormControl} from '@angular/forms';
 import {MatDialog} from '@angular/material/dialog';
 import {MatSelect} from '@angular/material/select';
 import {MatSort} from '@angular/material/sort';
+import {MatBottomSheet} from '@angular/material';
 import {MatTableDataSource} from '@angular/material/table';
 import {Router} from '@angular/router';
 
@@ -15,10 +16,11 @@ import {Year} from '../models/year.model';
 import {CinemaService} from '../cinema.service';
 import {MyUserService} from '../../my-user.service';
 import {SettingsService} from '../../../services/settings.service';
+import {Permissions} from '../../../permissions';
 import {MovieEditModalComponent} from './movie-edit-modal/movie-edit-modal.component';
 import {MovieCreateModalComponent} from './movie-create-modal/movie-create-modal.component';
-import {Permissions} from '../../../permissions';
 import {MovieInfoModalComponent} from './movie-info-modal/movie-info-modal.component';
+import {MovieDeleteModalComponent} from './movie-delete-modal/movie-delete-modal.component';
 
 @Component({
   selector: 'app-movie-administration',
@@ -64,7 +66,8 @@ export class MovieAdministrationComponent implements OnInit, AfterViewInit, OnDe
     private myUserService: MyUserService,
     private settingsService: SettingsService,
     private router: Router,
-    private dialog: MatDialog) {
+    private dialog: MatDialog,
+    private bottomSheet: MatBottomSheet) {
 
     this.permissionSubscription = myUserService.permissionsChange.subscribe((value) => {
       if (!this.myUserService.hasPermission(Permissions.CINEMA_MOVIE_ADMINISTRATION)) {
@@ -239,13 +242,9 @@ export class MovieAdministrationComponent implements OnInit, AfterViewInit, OnDe
   }
 
   deleteMovie(id: number) {
-    this.cinemaService.deleteMovie(id).subscribe(
-      (data: any) => {
-        console.log(data);
-        this.cinemaService.fetchMovies();
-      },
-      (error) => console.log(error)
-    );
+    this.bottomSheet.open(MovieDeleteModalComponent, {
+      'data': {'movieID': id}
+    });
   }
 
   refreshMovies() {

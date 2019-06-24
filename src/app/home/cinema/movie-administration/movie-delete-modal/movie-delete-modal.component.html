@@ -1,0 +1,13 @@
+<h2>{{'CINEMA_TICKETS_ADMINISTRATION_MOVIE_DELETE_MODAL_TITLE' | translate}}</h2>
+<mat-nav-list>
+  <a mat-list-item (click)="yes()">
+    <span mat-line>{{'YES' | translate}}</span>
+  </a>
+  <a mat-list-item (click)="no()">
+    <span mat-line>{{'NO' | translate}}</span>
+  </a>
+</mat-nav-list>
+
+<ng-template #successfullyDeletedMovie>
+  <h2>{{'CINEMA_TICKETS_ADMINISTRATION_MOVIE_DELETE_MODAL_SUCCESSFULLY_DELETED' | translate}}</h2>
+</ng-template>
