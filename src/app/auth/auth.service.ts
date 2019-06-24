@@ -1,10 +1,14 @@
 import {Injectable} from '@angular/core';
-import {Router} from '@angular/router';
-
-import {environment} from '../../environments/environment';
-import {CookieService} from 'angular2-cookie/core';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {Router} from '@angular/router';
+
+import {retry, catchError} from 'rxjs/operators';
+import {throwError} from 'rxjs';
+
+import {CookieService} from 'angular2-cookie/core';
+
+import {environment} from '../../environments/environment';
 import {Browser} from '../services/browser';
 
 @Injectable({
@@ -53,7 +57,17 @@ export class AuthService {
           '; Phone: ' + browser.mobile
       };
 
-      this.http.post(this.apiUrl + '/auth/IamLoggedIn', object, {headers: headers}).subscribe(
+      this.http.post(this.apiUrl + '/auth/IamLoggedIn', object, {headers: headers}).pipe(
+        retry(3), // retry a failed request up to 3 times
+        catchError((error) => {
+          console.log(error);
+          console.log('authService | sessionToken is not valid anymore!');
+          // Logged out or deleted session
+          this.logout(false);
+
+          return throwError('authService | Error on request IamLoggedIn');
+        })
+      ).subscribe(
         (data: any) => {
           console.log(data);
 
@@ -64,12 +78,6 @@ export class AuthService {
           if (!hadToken) {
             this.router.navigate(['/home']);
           }
-        },
-        (error) => {
-          console.log(error);
-          console.log('authService | sessionToken is not valid anymore!');
-          // Logged out or deleted session
-          this.logout(false);
         }
       );
     } else if (!this._hasSessionToken && this._token == null && this.cookieService.get('token') == null) {
