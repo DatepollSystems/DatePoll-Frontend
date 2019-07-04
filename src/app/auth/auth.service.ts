@@ -156,6 +156,7 @@ export class AuthService {
     this._sessionToken = null;
     console.log('authService | Logout successful');
     this.router.navigate(['/auth/signin']);
+    window.location.reload();
   }
 
   public getToken(functionUser: string = null): string {
@@ -179,7 +180,14 @@ export class AuthService {
       const refreshObject = {
         'token': this._token
       };
-      this.http.post(this.apiUrl + '/auth/refresh?token=' + this._token, refreshObject, {headers: headers}).subscribe(
+      this.http.post(this.apiUrl + '/auth/refresh?token=' + this._token, refreshObject, {headers: headers}).pipe(
+        retry(3), // retry a failed request up to 3 times
+        catchError((error) => {
+          console.log(error);
+
+          return throwError('authService | Could not refresh jwt token!');
+        })
+      ).subscribe(
         (data: any) => {
           console.log(data);
           this.setToken(data.token);
@@ -192,6 +200,7 @@ export class AuthService {
         (error) => {
           console.log(error);
           if (this._hasSessionToken) {
+            console.log('authService | Trying to refresh jwt token...');
             this.getJWTTokenBySessionToken();
           } else {
             // The most probable thing which happened is that the token is not longer valid
