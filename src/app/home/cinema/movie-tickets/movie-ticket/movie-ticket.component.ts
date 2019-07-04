@@ -1,8 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
 
-import {Subscription} from 'rxjs';
-
 import {HttpService} from '../../../../services/http.service';
 import {MyUserService} from '../../../my-user.service';
 import {CinemaService} from '../../cinema.service';
