@@ -50,7 +50,7 @@ export class Event {
 
   allDay = false;
   color = {
-    primary: '#1e90ff',
+    primary: '#43A047',
     secondary: '#D1E8FF'
   };
   draggable: false;
