@@ -10,8 +10,10 @@ export class SettingsService {
 
   public showCinemaChange: Subject<boolean> = new Subject<boolean>();
   public showEventsChange: Subject<boolean> = new Subject<boolean>();
+  public communityNameChange: Subject<string> = new Subject<string>();
   private _showCinema = true;
   private _showEvents = true;
+  private _communityName = 'DatePoll Web';
 
   constructor(private httpService: HttpService, private router: Router) {
   }
@@ -28,11 +30,6 @@ export class SettingsService {
     return this._showCinema;
   }
 
-  public setShowCinema(showCinema: boolean) {
-    this._showCinema = showCinema;
-    this.showCinemaChange.next(this._showCinema);
-  }
-
   public setAdminShowCinema(showCinema: boolean) {
     this.setShowCinema(showCinema);
 
@@ -40,7 +37,12 @@ export class SettingsService {
       'isEnabled': showCinema
     };
 
-    this.httpService.setSettingsRequest('/cinema', body, 'setCinemaFeatureEnabled');
+    this.httpService.setSettingsRequest('/cinema', body, 'setCinemaFeatureEnabled').subscribe(
+      (response: any) => {
+        console.log(response);
+      },
+      (error) => console.log(error)
+    );
   }
 
   public checkShowCinema() {
@@ -62,11 +64,6 @@ export class SettingsService {
     return this._showEvents;
   }
 
-  public setShowEvents(showEvents: boolean) {
-    this._showEvents = showEvents;
-    this.showEventsChange.next(this._showEvents);
-  }
-
   public setAdminShowEvents(showEvents: boolean) {
     this.setShowEvents(showEvents);
 
@@ -74,7 +71,12 @@ export class SettingsService {
       'isEnabled': showEvents
     };
 
-    this.httpService.setSettingsRequest('/events', body, 'setEventsFeatureEnabled');
+    this.httpService.setSettingsRequest('/events', body, 'setEventsFeatureEnabled').subscribe(
+      (response: any) => {
+        console.log(response);
+      },
+      (error) => console.log(error)
+    );
   }
 
   public checkShowEvents() {
@@ -82,5 +84,40 @@ export class SettingsService {
       this.router.navigate(['/home']);
       return;
     }
+  }
+
+  public getCommunityName() {
+    this.httpService.getSettingRequest('/name', 'settingsCommunityName').subscribe(
+      (response: any) => {
+        console.log(response);
+        this.setCommunityName(response.community_name);
+      },
+      (error) => console.log(error)
+    );
+    return this._communityName;
+  }
+
+  public setAdminCommunityName(communityName: string) {
+    this.setCommunityName(communityName);
+
+    const body = {
+      'community_name': '"' + communityName + '"'
+    };
+    return this.httpService.setSettingsRequest('/name', body, 'setCommunityName');
+  }
+
+  private setShowCinema(showCinema: boolean) {
+    this._showCinema = showCinema;
+    this.showCinemaChange.next(this._showCinema);
+  }
+
+  private setShowEvents(showEvents: boolean) {
+    this._showEvents = showEvents;
+    this.showEventsChange.next(this._showEvents);
+  }
+
+  private setCommunityName(communityName: string) {
+    this._communityName = communityName;
+    this.communityNameChange.next(this._communityName);
   }
 }

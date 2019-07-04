@@ -15,6 +15,7 @@
   "SEARCH": "Suchen...",
   "YES": "Ja",
   "NO": "Nein",
+  "SUCCESSFULLY": "Erfolgreich",
 
 
 
@@ -396,6 +397,10 @@
 
   "MANAGEMENT_DATEPOLL_CINEMA_SERVICE": "Kinoservice",
   "MANAGEMENT_DATEPOLL_EVENTS_SERVICE": "Events",
+
+  "MANAGEMENT_DATEPOLL_COMMUNITY_NAME": "Vereinsname",
+  "MANAGEMENT_DATEPOLL_COMMUNITY_NAME_NOT_VALID": "Der Vereinsname darf weder leer sein, noch mehr als 30 Zeichen haben!",
+  "MANAGEMENT_DATEPOLL_COMMUNITY_NAME_CHANGED_SUCCESSFULLY": "Der Vereinsname wurde erfolgreich geändert!",
 
 
 

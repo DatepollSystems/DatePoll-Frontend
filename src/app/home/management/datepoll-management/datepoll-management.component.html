@@ -9,7 +9,7 @@
         <h2>DatePoll-Feature Einstellungen</h2>
       </div>
     </div>
-    
+
     <div class="row">
       <div class="col-12">
         <h4>Hier kannst du grundlegende Funktionen von DatePoll Konfigurieren!</h4>
@@ -37,5 +37,23 @@
         </mat-slide-toggle>
       </div>
     </div>
+
+    <form #changeCommunityNameForm="ngForm" (ngSubmit)="changeCommunityName(changeCommunityNameForm)"
+          class="row" style="margin-top: 15px">
+      <mat-form-field class="col-12 col-sm-12 col-md-6">
+        <input #communityNameModel="ngModel" [(ngModel)]="communityName" id="communityName" matInput
+               maxlength="50" minlength="1" name="communityName"
+               ngModel placeholder="{{'MANAGEMENT_DATEPOLL_COMMUNITY_NAME' | translate}}" required
+               type="text">
+        <mat-error *ngIf="communityNameModel.invalid">
+          {{'MANAGEMENT_DATEPOLL_COMMUNITY_NAME_NOT_VALID' | translate}}
+        </mat-error>
+      </mat-form-field>
+
+      <div class="col-12 col-sm-12 col-md-3">
+        <button [disabled]="!changeCommunityNameForm.valid" class="success-button" mat-button
+                type="submit">{{'SAVE' | translate}}</button>
+      </div>
+    </form>
   </mat-card-content>
 </mat-card>

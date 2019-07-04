@@ -10,8 +10,11 @@ export class TranslateService {
   constructor(private http: HttpClient, private cookieService: CookieService) {
   }
 
-  use(lang: string): Promise<{}> {
+  public getTranslationFor(key: string) {
+    return this.data[key] || key;
+  }
 
+  use(lang: string): Promise<{}> {
     if (lang === 'DEFAULT') {
       if (this.cookieService.get('language') == null) {
         this.cookieService.put('language', 'de', {expires: 'Tue, 24-Jan-2050 12:12:12 GMT'});

@@ -1,22 +1,20 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {NgForm} from '@angular/forms';
 import {Router} from '@angular/router';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import {Subscription} from 'rxjs';
 
 import {AuthService} from '../auth.service';
-import {HttpClient} from '@angular/common/http';
-import {environment} from '../../../environments/environment';
+import {SettingsService} from '../../services/settings.service';
 
 @Component({
   selector: 'app-signin',
   templateUrl: './signin.component.html',
   styleUrls: ['./signin.component.css']
 })
-export class SigninComponent implements OnInit {
-  public static projectName = 'DatePoll - Web';
-  projectName = SigninComponent.projectName;
-
-  apiUrl = environment.apiUrl;
+export class SigninComponent implements OnInit, OnDestroy {
+  communityName: string;
+  communityNameSubscription: Subscription;
 
   state = 'login';
 
@@ -29,14 +27,14 @@ export class SigninComponent implements OnInit {
   private password: string;
   private stayLoggedIn = false;
 
-  constructor(private router: Router, private snackBar: MatSnackBar, private authService: AuthService, private http: HttpClient) {
-    this.http.get(this.apiUrl + '/settings/name').subscribe(
-      (response: any) => {
-        console.log(response);
-        SigninComponent.projectName = response.community_name;
-        this.projectName = SigninComponent.projectName;
-      }
-    );
+  constructor(private router: Router,
+              private snackBar: MatSnackBar,
+              private authService: AuthService,
+              private settingsService: SettingsService) {
+    this.communityName = this.settingsService.getCommunityName();
+    this.communityNameSubscription = this.settingsService.communityNameChange.subscribe((value) => {
+      this.communityName = value;
+    });
   }
 
   ngOnInit(): void {
@@ -46,6 +44,10 @@ export class SigninComponent implements OnInit {
     } else {
       console.log('signInComponent | isAuthenticated | Do not route user to /home ');
     }
+  }
+
+  ngOnDestroy(): void {
+    this.communityNameSubscription.unsubscribe();
   }
 
   protected onSignin(form: NgForm) {

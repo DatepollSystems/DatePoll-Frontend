@@ -70,11 +70,6 @@ export class HttpService {
 
     return this.http.post(this.apiUrl + '/settings/administration' + url + '?token=' + token, body, {headers: headers}).pipe(
       retry(3)
-    ).subscribe(
-      (response: any) => {
-        console.log(response);
-      },
-      (error) => console.log(error)
     );
   }
 

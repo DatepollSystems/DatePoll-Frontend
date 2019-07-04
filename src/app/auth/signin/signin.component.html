@@ -6,7 +6,7 @@
         <mat-card-title-group>
           <mat-card-title>
             <div class="projectName">
-              {{projectName}}
+              {{communityName}}
             </div>
           </mat-card-title>
 
@@ -68,7 +68,8 @@
                 </button>
               </div>
               <div class="col">
-                <a *ngIf="!showLoadingSpinnerDuringLogin" color="accent" mat-raised-button routerLink="/auth/forgotPassword"
+                <a *ngIf="!showLoadingSpinnerDuringLogin" color="accent" mat-raised-button
+                   routerLink="/auth/forgotPassword"
                    style="float: right">
                   Password vergessen?
                   <mat-icon>verified_user</mat-icon>
