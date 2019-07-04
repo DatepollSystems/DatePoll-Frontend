@@ -91,19 +91,24 @@ export class AuthService {
           {headers: headers}).subscribe(
           (data: any) => {
             console.log(data);
+            this._token = null;
+            this._sessionToken = null;
+            this.router.navigate(['/auth/signin']);
+            window.location.reload();
+            console.log('authService | Logout successful');
           },
           (error) => console.log(error)
         );
       }
 
       this.cookieService.removeAll();
+    } else {
+      this._token = null;
+      this._sessionToken = null;
+      this.router.navigate(['/auth/signin']);
+      console.log('authService | Logout successful');
+      window.location.reload();
     }
-
-    this._token = null;
-    this._sessionToken = null;
-    console.log('authService | Logout successful');
-    this.router.navigate(['/auth/signin']);
-    window.location.reload();
   }
 
   public getToken(functionUser: string = null): string {
