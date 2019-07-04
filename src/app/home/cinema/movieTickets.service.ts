@@ -33,7 +33,7 @@ export class MovieTicketsService {
 
         const movieOrdersToSave = [];
         for (let i = 0; i < movies.length; i++) {
-          const localMovieOrder = new MovieOrder(movies[i].movieID, movies[i].movieName, movies[i].amount);
+          const localMovieOrder = new MovieOrder(movies[i].movieID, movies[i].movieName, movies[i].date);
 
           const ticketOrdersToSave = [];
           for (let j = 0; j < movies[i].orders.length; j++) {
