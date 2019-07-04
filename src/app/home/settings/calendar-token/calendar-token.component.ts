@@ -19,16 +19,6 @@ export class CalendarTokenComponent {
     this.fetchCalendarToken();
   }
 
-  private fetchCalendarToken() {
-    this.httpService.loggedInV1GETRequest('/user/myself/token/calendar', 'fetchCalendarToken').subscribe(
-      (data: any) => {
-        console.log(data);
-        this.calendarToken = this.apiUrl + '/user/calendar/' + data.token;
-      },
-      (error) => console.log(error)
-    );
-  }
-
   public resetCalendarToken() {
     this.calendarToken = null;
     this.httpService.loggedInV1DELETERequest('/user/myself/token/calendar', 'resetCalendarToken').subscribe(
@@ -42,5 +32,15 @@ export class CalendarTokenComponent {
 
   public copyTokenToClipboard() {
     this.clipboardService.copyFromContent(this.calendarToken);
+  }
+
+  private fetchCalendarToken() {
+    this.httpService.loggedInV1GETRequest('/user/myself/token/calendar', 'fetchCalendarToken').subscribe(
+      (data: any) => {
+        console.log(data);
+        this.calendarToken = this.apiUrl + '/user/calendar/' + data.token;
+      },
+      (error) => console.log(error)
+    );
   }
 }

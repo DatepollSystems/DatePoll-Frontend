@@ -116,7 +116,7 @@ export class GroupsManagementComponent implements OnInit, OnDestroy {
 
   onDeleteGroup(groupID: number) {
     this.bottomSheet.open(GroupDeleteModalComponent, {
-      data: { 'groupID': groupID },
+      data: {'groupID': groupID},
     });
   }
 
@@ -143,7 +143,7 @@ export class GroupsManagementComponent implements OnInit, OnDestroy {
 
   onDeleteSubgroup(subgroupID: number) {
     this.bottomSheet.open(SubgroupDeleteModalComponent, {
-      data: { 'subgroupID': subgroupID },
+      data: {'subgroupID': subgroupID},
     });
   }
 

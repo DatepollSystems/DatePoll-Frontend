@@ -17,7 +17,8 @@ export class PhoneNumbersListComponent implements OnInit {
 
   @Output() phoneNumbersChanged = new EventEmitter();
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit(): void {
     this.dataSource = new MatTableDataSource(this.phoneNumbers);

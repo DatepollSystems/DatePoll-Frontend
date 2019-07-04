@@ -8,23 +8,31 @@
       <div class="col-12">
         <h2>DatePoll-Feature Einstellungen</h2>
       </div>
+    </div>
+    
+    <div class="row">
       <div class="col-12">
         <h4>Hier kannst du grundlegende Funktionen von DatePoll Konfigurieren!</h4>
       </div>
+    </div>
 
+    <div class="row">
       <div class="col-12">
         <mat-slide-toggle
-          color="primary"
           (change)="cinemaServiceChange($event)"
-          [(ngModel)]="cinemaServiceEnabled">
+          [(ngModel)]="cinemaServiceEnabled"
+          color="primary">
           {{'MANAGEMENT_DATEPOLL_CINEMA_SERVICE' | translate}}
         </mat-slide-toggle>
       </div>
+    </div>
+
+    <div class="row">
       <div class="col-12">
         <mat-slide-toggle
-          color="primary"
           (change)="eventsServiceChange($event)"
-          [(ngModel)]="eventsServiceEnabled">
+          [(ngModel)]="eventsServiceEnabled"
+          color="primary">
           {{'MANAGEMENT_DATEPOLL_EVENTS_SERVICE' | translate}}
         </mat-slide-toggle>
       </div>

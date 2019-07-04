@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpService} from '../../services/http.service';
 import {Subject} from 'rxjs';
 import {Event} from './models/event.model';
@@ -12,19 +12,17 @@ import {EventResultUser} from './models/event-result-user.model';
 })
 export class EventsService {
 
-  private _events: Event[] = [];
   public eventsChange: Subject<Event[]> = new Subject<Event[]>();
-
-  private _event: Event;
   public eventChange: Subject<Event> = new Subject<Event>();
-
-  private _joinedGroups: any[] = [];
   public joinedGroupsChange: Subject<any[]> = new Subject<any[]>();
-
-  private _freeGroups: any[] = [];
   public freeGroupsChange: Subject<any[]> = new Subject<any[]>();
+  private _events: Event[] = [];
+  private _event: Event;
+  private _joinedGroups: any[] = [];
+  private _freeGroups: any[] = [];
 
-  constructor(public httpService: HttpService) { }
+  constructor(public httpService: HttpService) {
+  }
 
   public getEvents(): Event[] {
     this.fetchEvents();
@@ -128,11 +126,6 @@ export class EventsService {
     return this._joinedGroups.slice();
   }
 
-  private setJoinedOfEvent(groups: any[]) {
-    this._joinedGroups = groups;
-    this.joinedGroupsChange.next(this._joinedGroups.slice());
-  }
-
   public fetchJoinedOfEvent(eventId: number) {
     this.httpService.loggedInV1GETRequest('/avent/administration/group/joined/' + eventId, 'fetchJoinedGroupsOfEvent').subscribe(
       (data: any) => {
@@ -181,15 +174,9 @@ export class EventsService {
     );
   }
 
-
   public getFreeOfEvent(eventId: number): any[] {
     this.fetchFreeOfEvent(eventId);
     return this._freeGroups.slice();
-  }
-
-  private setFreeOfEvent(groups: any[]) {
-    this._freeGroups = groups;
-    this.freeGroupsChange.next(this._freeGroups.slice());
   }
 
   public fetchFreeOfEvent(eventId: number) {
@@ -240,10 +227,24 @@ export class EventsService {
     );
   }
 
-
   public getEvent(id: number): Event {
     this.fetchEvent(id);
     return this._event;
+  }
+
+  public setEvent(event: Event) {
+    this._event = event;
+    this.eventChange.next(this._event);
+  }
+
+  private setJoinedOfEvent(groups: any[]) {
+    this._joinedGroups = groups;
+    this.joinedGroupsChange.next(this._joinedGroups.slice());
+  }
+
+  private setFreeOfEvent(groups: any[]) {
+    this._freeGroups = groups;
+    this.freeGroupsChange.next(this._freeGroups.slice());
   }
 
   private fetchEvent(id: number) {
@@ -309,10 +310,5 @@ export class EventsService {
       },
       (error) => console.log(error)
     );
-  }
-
-  public setEvent(event: Event) {
-    this._event = event;
-    this.eventChange.next(this._event);
   }
 }

@@ -74,7 +74,7 @@ export class EventsViewComponent implements OnDestroy {
 
   onVote(event: Event) {
     this.bottomSheet.open(EventsVoteForDecisionModalComponent, {
-      data: { 'event': event },
+      data: {'event': event},
     });
   }
 

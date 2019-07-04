@@ -11,9 +11,8 @@ import {NgForm} from '@angular/forms';
 export class SubgroupUserRoleUpdateModalComponent {
 
   public user: any;
-  private readonly subgroupID: number;
-
   public sendingRequest = false;
+  private readonly subgroupID: number;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any,
               private dialogRef: MatDialogRef<SubgroupUserRoleUpdateModalComponent>,

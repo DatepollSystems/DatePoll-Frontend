@@ -19,7 +19,8 @@ export class GroupAndSubgroupSelectComponent {
   @Output() joinedChanged = new EventEmitter();
   @Output() freeChanged = new EventEmitter();
 
-  constructor() { }
+  constructor() {
+  }
 
   dropToJoined(event: CdkDragDrop<string[]>) {
     if (event.previousContainer === event.container) {

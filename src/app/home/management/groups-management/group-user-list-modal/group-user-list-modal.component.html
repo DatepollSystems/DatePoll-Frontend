@@ -5,7 +5,7 @@
     <div class="row">
       <div class="col-12">
         <mat-form-field class="col-12">
-          <input matInput (keyup)="applyFilter($event.target.value)"
+          <input (keyup)="applyFilter($event.target.value)" matInput
                  placeholder="{{'MANAGEMENT_USERS_SEARCH' | translate}}">
         </mat-form-field>
       </div>
@@ -13,46 +13,46 @@
 
     <div class="row">
       <div class="col-12">
-        <table mat-table [dataSource]="dataSource" matSort class="table-responsive">
+        <table [dataSource]="dataSource" class="table-responsive" mat-table matSort>
           <!-- Role Column -->
           <ng-container matColumnDef="role">
-            <th mat-header-cell *matHeaderCellDef
+            <th *matHeaderCellDef mat-header-cell
                 mat-sort-header> {{'MANAGEMENT_GROUPS_INFO_GROUP_MODAL_TABLE_HEADER_ROLE' | translate}} </th>
-            <td mat-cell *matCellDef="let user"> {{user.role}} </td>
+            <td *matCellDef="let user" mat-cell> {{user.role}} </td>
           </ng-container>
 
           <!-- Firstname Column -->
           <ng-container matColumnDef="firstname">
-            <th mat-header-cell *matHeaderCellDef
+            <th *matHeaderCellDef mat-header-cell
                 mat-sort-header> {{'MANAGEMENT_USERS_FIRSTNAME' | translate}} </th>
-            <td mat-cell *matCellDef="let user"> {{user.firstname}} </td>
+            <td *matCellDef="let user" mat-cell> {{user.firstname}} </td>
           </ng-container>
 
           <!-- Surname Column -->
           <ng-container matColumnDef="surname">
-            <th mat-header-cell *matHeaderCellDef
+            <th *matHeaderCellDef mat-header-cell
                 mat-sort-header> {{'MANAGEMENT_USERS_SURNAME' | translate}} </th>
-            <td mat-cell *matCellDef="let user"> {{user.surname}} </td>
+            <td *matCellDef="let user" mat-cell> {{user.surname}} </td>
           </ng-container>
 
           <!-- Action movie Column -->
           <ng-container matColumnDef="actions">
-            <th mat-header-cell *matHeaderCellDef> {{'MANAGEMENT_USERS_ACTIONS' | translate}} </th>
-            <td mat-cell *matCellDef="let user">
-              <button mat-icon-button color="accent" (click)="onEditRole(user)"
+            <th *matHeaderCellDef mat-header-cell> {{'MANAGEMENT_USERS_ACTIONS' | translate}} </th>
+            <td *matCellDef="let user" mat-cell>
+              <button (click)="onEditRole(user)" color="accent" mat-icon-button
                       matTooltip="{{'MANAGEMENT_GROUPS_INFO_GROUP_MDOAL_TABLE_ACTION_EDIT' | translate}}">
                 <mat-icon>create</mat-icon>
               </button>
 
-              <button mat-icon-button color="warn" (click)="onRemoveUserFromGroup(user.id)"
+              <button (click)="onRemoveUserFromGroup(user.id)" color="warn" mat-icon-button
                       matTooltip="{{'MANAGEMENT_GROUPS_INFO_GROUP_MODAL_TABLE_ACTION_REMOVE' | translate}}">
                 <mat-icon>remove_circle</mat-icon>
               </button>
             </td>
           </ng-container>
 
-          <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          <tr *matHeaderRowDef="displayedColumns; sticky: true" mat-header-row></tr>
+          <tr *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
         </table>
         <mat-paginator [pageSizeOptions]="[10, 20, 50, 100]" showFirstLastButtons></mat-paginator>
       </div>
@@ -71,5 +71,5 @@
 
 </div>
 <div mat-dialog-actions style="margin-top: 15px">
-  <button mat-button [mat-dialog-close]>{{'CLOSE' | translate}}</button>
+  <button [mat-dialog-close] mat-button>{{'CLOSE' | translate}}</button>
 </div>

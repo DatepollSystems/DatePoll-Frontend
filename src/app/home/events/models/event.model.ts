@@ -12,13 +12,24 @@ export class Event {
   public descriptionPreview = '';
 
   public alreadyVotedFor = false;
-
+  public chartIsEmpty = true;
+  // Calendar specific values
+  start: Date;
+  end: Date;
+  title: string;
+  public actions: EventAction[];
+  allDay = false;
+  color = {
+    primary: '#43A047',
+    secondary: '#D1E8FF'
+  };
+  draggable: false;
+  meta = null;
+  resizable: { beforeStart: false; afterEnd: false };
   private decisions: string[];
   private resultGroups: EventResultGroup[] = [];
   private resultUsers: EventResultUser[] = [];
-
   private chartData: any[] = null;
-  public chartIsEmpty = true;
 
   constructor(id: number, name: string, startDate: Date, endDate: Date, forEveryone: boolean, description: string, decisions: string[]) {
     this.id = id;
@@ -41,22 +52,6 @@ export class Event {
     this.end = this.endDate;
   }
 
-  // Calendar specific values
-  start: Date;
-  end: Date;
-  title: string;
-
-  public actions: EventAction[];
-
-  allDay = false;
-  color = {
-    primary: '#43A047',
-    secondary: '#D1E8FF'
-  };
-  draggable: false;
-
-  meta = null;
-  resizable: { beforeStart: false; afterEnd: false };
   // ------------------------------------------------------
 
   public setResultGroups(groups: EventResultGroup[]) {
@@ -67,10 +62,6 @@ export class Event {
     return this.resultGroups.slice();
   }
 
-  private setDecisions(decisions: string[]) {
-    this.decisions = decisions;
-  }
-
   public getDecisions(): string[] {
     return this.decisions.slice();
   }
@@ -79,16 +70,20 @@ export class Event {
     this.resultUsers = users;
   }
 
-  private getResultUsers(): EventResultUser[] {
-    return this.resultUsers.slice();
-  }
-
   public getChartData(): any[] {
     if (this.chartData == null) {
       this.calculateChartData();
     }
 
     return this.chartData;
+  }
+
+  private setDecisions(decisions: string[]) {
+    this.decisions = decisions;
+  }
+
+  private getResultUsers(): EventResultUser[] {
+    return this.resultUsers.slice();
   }
 
   private calculateChartData() {

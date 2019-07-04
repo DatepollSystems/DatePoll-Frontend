@@ -1,5 +1,5 @@
 <mat-nav-list>
-  <a mat-list-item *ngFor="let decision of event.getDecisions()" (click)="voteFor(decision)">
+  <a (click)="voteFor(decision)" *ngFor="let decision of event.getDecisions()" mat-list-item>
     <span mat-line>{{decision}}</span>
   </a>
 </mat-nav-list>

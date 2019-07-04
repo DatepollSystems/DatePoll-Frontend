@@ -1,6 +1,6 @@
 <h1 mat-dialog-title>{{'MANAGEMENT_USERS_UPDATE_USER_MODAL_TITLE' | translate}} {{firstname}} {{surname}}</h1>
 <div mat-dialog-content>
-  <form (ngSubmit)="update(form)" #form="ngForm">
+  <form #form="ngForm" (ngSubmit)="update(form)">
     <div class="row">
       <div class="col-12">
         <app-do-not-forget-to-save></app-do-not-forget-to-save>
@@ -10,10 +10,10 @@
     <div class="row">
       <!-- Title -->
       <mat-form-field class="col-12 col-sm-12 col-md-3 col-lg-2 col-xl-2">
-        <input matInput id="title" name="title" type="text"
-               ngModel #titleModel="ngModel" [(ngModel)]="title"
-               maxlength="190"
-               placeholder="{{'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_TITLE' | translate}}">
+        <input #titleModel="ngModel" [(ngModel)]="title" id="title" matInput
+               maxlength="190" name="title" ngModel
+               placeholder="{{'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_TITLE' | translate}}"
+               type="text">
         <mat-error *ngIf="titleModel.invalid">
           {{'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_TITLE_INCORRECT' | translate}}
         </mat-error>
@@ -21,10 +21,10 @@
 
       <!-- Username -->
       <mat-form-field class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
-        <input matInput id="username" name="username" type="text"
-               ngModel #usernameModel="ngModel" [(ngModel)]="username" (ngModelChange)="onUsernameChange(usernameModel)"
-               maxlength="190" required minlength="1"
-               placeholder="{{'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_USERNAME' | translate}}">
+        <input #usernameModel="ngModel" (ngModelChange)="onUsernameChange(usernameModel)" [(ngModel)]="username" id="username"
+               matInput maxlength="190" minlength="1" name="username"
+               ngModel placeholder="{{'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_USERNAME' | translate}}" required
+               type="text">
         <mat-error *ngIf="usernameModel.invalid && !usernameModel.errors?.alreadyTaken">
           {{'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_USERNAME_INCORRECT' | translate}}
         </mat-error>
@@ -35,10 +35,10 @@
 
       <!-- Firstname -->
       <mat-form-field class="col-12 col-sm-12 col-md-4 col-lg-3 col-xl-3">
-        <input matInput id="firstname" name="firstname" type="text"
-               ngModel #firstnameModel="ngModel" [(ngModel)]="firstname"
-               maxlength="190" required minlength="1"
-               placeholder="{{'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_FIRSTNAME' | translate}}">
+        <input #firstnameModel="ngModel" [(ngModel)]="firstname" id="firstname" matInput
+               maxlength="190" minlength="1" name="firstname"
+               ngModel placeholder="{{'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_FIRSTNAME' | translate}}" required
+               type="text">
         <mat-error *ngIf="firstnameModel.invalid">
           {{'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_FIRSTNAME_INCORRECT' | translate}}
         </mat-error>
@@ -46,10 +46,10 @@
 
       <!-- Surname -->
       <mat-form-field class="col-12 col-sm-12 col-md-5 col-lg-3 col-xl-3">
-        <input matInput id="surname" name="surname" type="text"
-               ngModel #surnameModel="ngModel" [(ngModel)]="surname"
-               maxlength="190" required minlength="1"
-               placeholder="{{'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_SURNAME' | translate}}">
+        <input #surnameModel="ngModel" [(ngModel)]="surname" id="surname" matInput
+               maxlength="190" minlength="1" name="surname"
+               ngModel placeholder="{{'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_SURNAME' | translate}}" required
+               type="text">
         <mat-error *ngIf="surnameModel.invalid">
           {{'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_SURNAME_INCORRECT' | translate}}
         </mat-error>
@@ -57,44 +57,44 @@
 
       <!-- Birthday -->
       <mat-form-field class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 datepicker-field">
-        <input matInput [matDatepicker]="picker_birthday"
-               name="datepicker-birthday" [(ngModel)]="birthday" id="datepicker-birthday"
+        <input [(ngModel)]="birthday" [matDatepicker]="picker_birthday"
+               id="datepicker-birthday" matInput name="datepicker-birthday"
                placeholder="{{'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_BIRTHDAY' | translate}}">
-        <mat-datepicker-toggle matSuffix [for]="picker_birthday"></mat-datepicker-toggle>
+        <mat-datepicker-toggle [for]="picker_birthday" matSuffix></mat-datepicker-toggle>
         <mat-datepicker #picker_birthday></mat-datepicker>
       </mat-form-field>
 
       <mat-form-field class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 datepicker-field-mobile">
-        <input matInput [matDatepicker]="picker_mobile_birthday"
-               name="datepicker-birthday-mobile" [(ngModel)]="birthday" id="datepicker-birthday-mobile"
+        <input [(ngModel)]="birthday" [matDatepicker]="picker_mobile_birthday"
+               id="datepicker-birthday-mobile" matInput name="datepicker-birthday-mobile"
                placeholder="{{'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_BIRTHDAY' | translate}}">
-        <mat-datepicker-toggle matSuffix [for]="picker_mobile_birthday"></mat-datepicker-toggle>
-        <mat-datepicker touchUi #picker_mobile_birthday></mat-datepicker>
+        <mat-datepicker-toggle [for]="picker_mobile_birthday" matSuffix></mat-datepicker-toggle>
+        <mat-datepicker #picker_mobile_birthday touchUi></mat-datepicker>
       </mat-form-field>
 
       <!-- Join date -->
       <mat-form-field class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 datepicker-field">
-        <input matInput [matDatepicker]="picker_joindate"
-               name="datepicker-join_date" [(ngModel)]="join_date" id="datepicker-join_date"
+        <input [(ngModel)]="join_date" [matDatepicker]="picker_joindate"
+               id="datepicker-join_date" matInput name="datepicker-join_date"
                placeholder="{{'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_JOIN_DATE' | translate}}">
-        <mat-datepicker-toggle matSuffix [for]="picker_joindate"></mat-datepicker-toggle>
+        <mat-datepicker-toggle [for]="picker_joindate" matSuffix></mat-datepicker-toggle>
         <mat-datepicker #picker_joindate></mat-datepicker>
       </mat-form-field>
 
       <mat-form-field class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 datepicker-field-mobile">
-        <input matInput [matDatepicker]="picker_mobile_joindate"
-               name="datepicker-join_date-mobile" [(ngModel)]="join_date" id="datepicker-join_date-mobile"
+        <input [(ngModel)]="join_date" [matDatepicker]="picker_mobile_joindate"
+               id="datepicker-join_date-mobile" matInput name="datepicker-join_date-mobile"
                placeholder="{{'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_JOIN_DATE' | translate}}">
-        <mat-datepicker-toggle matSuffix [for]="picker_mobile_joindate"></mat-datepicker-toggle>
-        <mat-datepicker touchUi #picker_mobile_joindate></mat-datepicker>
+        <mat-datepicker-toggle [for]="picker_mobile_joindate" matSuffix></mat-datepicker-toggle>
+        <mat-datepicker #picker_mobile_joindate touchUi></mat-datepicker>
       </mat-form-field>
 
       <!-- Streetname -->
       <mat-form-field class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
-        <input matInput id="streetname" name="streetname" type="text"
-               ngModel #streetnameModel="ngModel" [(ngModel)]="streetname"
-               maxlength="190" required minlength="1"
-               placeholder="{{'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_STREETNAME' | translate}}">
+        <input #streetnameModel="ngModel" [(ngModel)]="streetname" id="streetname" matInput
+               maxlength="190" minlength="1" name="streetname"
+               ngModel placeholder="{{'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_STREETNAME' | translate}}" required
+               type="text">
         <mat-error *ngIf="streetnameModel.invalid">
           {{'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_STREETNAME_INCORRECT' | translate}}
         </mat-error>
@@ -102,10 +102,10 @@
 
       <!-- Streetnumber -->
       <mat-form-field class="col-12 col-sm-12 col-md-6 col-lg-2 col-xl-2">
-        <input matInput id="streetnumber" name="streetnumber" type="text"
-               ngModel #streetnumberModel="ngModel" [(ngModel)]="streetnumber"
-               maxlength="190" required minlength="1"
-               placeholder="{{'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_STREETNUMBER' | translate}}">
+        <input #streetnumberModel="ngModel" [(ngModel)]="streetnumber" id="streetnumber" matInput
+               maxlength="190" minlength="1" name="streetnumber"
+               ngModel placeholder="{{'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_STREETNUMBER' | translate}}" required
+               type="text">
         <mat-error *ngIf="streetnumberModel.invalid">
           {{'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_STREETNUMBER_INCORRECT' | translate}}
         </mat-error>
@@ -113,10 +113,10 @@
 
       <!-- Zipcode -->
       <mat-form-field class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4">
-        <input matInput id="zipcode" name="zipcode" type="number"
-               ngModel #zipcodeModel="ngModel" [(ngModel)]="zipcode"
-               min="1000" max="9999" number
-               placeholder="{{'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_ZIPCODE' | translate}}">
+        <input #zipcodeModel="ngModel" [(ngModel)]="zipcode" id="zipcode" matInput
+               max="9999" min="1000" name="zipcode"
+               ngModel number placeholder="{{'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_ZIPCODE' | translate}}"
+               type="number">
         <mat-error *ngIf="zipcodeModel.invalid">
           {{'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_ZIPCODE_INCORRECT' | translate}}
         </mat-error>
@@ -124,10 +124,10 @@
 
       <!-- Location -->
       <mat-form-field class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
-        <input matInput id="location" name="location" type="text"
-               ngModel #locationModel="ngModel" [(ngModel)]="location"
-               maxlength="190" required minlength="1"
-               placeholder="{{'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_LOCATION' | translate}}">
+        <input #locationModel="ngModel" [(ngModel)]="location" id="location" matInput
+               maxlength="190" minlength="1" name="location"
+               ngModel placeholder="{{'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_LOCATION' | translate}}" required
+               type="text">
         <mat-error *ngIf="locationModel.invalid">
           {{'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_LOCATION_INCORRECT' | translate}}
         </mat-error>
@@ -135,10 +135,10 @@
 
       <!-- Activity -->
       <mat-form-field class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
-        <input matInput id="activity" name="activity" type="text"
-               ngModel #activityModel="ngModel" [(ngModel)]="activity"
-               maxlength="190" required minlength="1"
-               placeholder="{{'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_ACTIVITY' | translate}}">
+        <input #activityModel="ngModel" [(ngModel)]="activity" id="activity" matInput
+               maxlength="190" minlength="1" name="activity"
+               ngModel placeholder="{{'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_ACTIVITY' | translate}}" required
+               type="text">
         <mat-error *ngIf="activityModel.invalid">
           {{'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_ACTIVITY_INCORRECT' | translate}}
         </mat-error>
@@ -154,32 +154,32 @@
         </mat-panel-title>
       </mat-expansion-panel-header>
       <small><b>{{'MANAGEMENT_USERS_UPDATE_USER_MODAL_PASSWORD_CHANGE_DESCRIPTION' | translate}}</b></small>
-      <form (ngSubmit)="changePassword(changePasswordForm)" #changePasswordForm="ngForm">
-      <div class="row justify-content-between" style="margin-top: 15px;">
-        <mat-form-field class="col-12 col-md-4 col-lg-4">
-          <input matInput ngModel #passwordModel="ngModel"
-                 name="password" type="password"
-                 minlength="5" required
-                 placeholder="{{'SIGNIN_NEW_PASSWORD' | translate}}">
-        </mat-form-field>
+      <form #changePasswordForm="ngForm" (ngSubmit)="changePassword(changePasswordForm)">
+        <div class="row justify-content-between" style="margin-top: 15px;">
+          <mat-form-field class="col-12 col-md-4 col-lg-4">
+            <input #passwordModel="ngModel" matInput minlength="5"
+                   name="password" ngModel
+                   placeholder="{{'SIGNIN_NEW_PASSWORD' | translate}}" required
+                   type="password">
+          </mat-form-field>
 
-        <mat-form-field class="col-12 col-md-3 col-lg-4">
-          <input matInput ngModel #passwordRepeatModel="ngModel" [equalTo]="passwordModel"
-                 name="password_repeat" type="password"
-                 minlength="5" required
-                 placeholder="{{'SIGNIN_NEW_PASSWORD_REPEAT' | translate}}">
+          <mat-form-field class="col-12 col-md-3 col-lg-4">
+            <input #passwordRepeatModel="ngModel" [equalTo]="passwordModel" matInput minlength="5"
+                   name="password_repeat" ngModel
+                   placeholder="{{'SIGNIN_NEW_PASSWORD_REPEAT' | translate}}" required
+                   type="password">
 
-          <mat-error *ngIf="passwordRepeatModel.errors?.equalTo" class="col-12">
-            {{'SIGNIN_PASSWORD_ARE_NOT_EQUAL' | translate}}
-          </mat-error>
-        </mat-form-field>
+            <mat-error *ngIf="passwordRepeatModel.errors?.equalTo" class="col-12">
+              {{'SIGNIN_PASSWORD_ARE_NOT_EQUAL' | translate}}
+            </mat-error>
+          </mat-form-field>
 
-        <div class="col-12 col-md-3 col-lg-2">
-          <button mat-flat-button class="success-button"
-                  [disabled]="!changePasswordForm.form.valid" style="width: 100%">
-            {{'MANAGEMENT_USERS_UPDATE_USER_MODAL_PASSWORD_CHANGE' | translate}}</button>
+          <div class="col-12 col-md-3 col-lg-2">
+            <button [disabled]="!changePasswordForm.form.valid" class="success-button"
+                    mat-flat-button style="width: 100%">
+              {{'MANAGEMENT_USERS_UPDATE_USER_MODAL_PASSWORD_CHANGE' | translate}}</button>
+          </div>
         </div>
-      </div>
       </form>
     </mat-expansion-panel>
 
@@ -192,28 +192,28 @@
           {{'MANAGEMENT_USERS_CREATE_USER_MODAL_LIST_EMAIL_ADDRESSES' | translate}}
         </mat-panel-title>
       </mat-expansion-panel-header>
-      <app-email-addresses-list [emailAddressesInput]="emailAddresses"
-                                (emailAddressesChanged)="onEmailAddressChanged($event)"></app-email-addresses-list>
+      <app-email-addresses-list (emailAddressesChanged)="onEmailAddressChanged($event)"
+                                [emailAddressesInput]="emailAddresses"></app-email-addresses-list>
     </mat-expansion-panel>
 
     <app-divider></app-divider>
 
     <!-- Phone number -->
-    <app-phone-numbers-list [phoneNumbers]="phoneNumbers"
-                            (phoneNumbersChanged)="onPhoneNumbersChanged($event)"></app-phone-numbers-list>
+    <app-phone-numbers-list (phoneNumbersChanged)="onPhoneNumbersChanged($event)"
+                            [phoneNumbers]="phoneNumbers"></app-phone-numbers-list>
 
 
     <app-divider></app-divider>
 
     <!-- Group management -->
-    <app-group-and-subgroup-select [free]="free" [joined]="joined" (freeChanged)="onFreeChange($event)"
-                                   (joinedChanged)="onJoinedChange($event)"></app-group-and-subgroup-select>
+    <app-group-and-subgroup-select (freeChanged)="onFreeChange($event)" (joinedChanged)="onJoinedChange($event)" [free]="free"
+                                   [joined]="joined"></app-group-and-subgroup-select>
 
     <app-divider></app-divider>
 
     <!-- Performance badges -->
-    <app-performance-badges-list [userPerformanceBadges]="userPerformanceBadges"
-                                 (performanceBadgesChanged)="onUserPerformanceBadgesChange($event)">
+    <app-performance-badges-list (performanceBadgesChanged)="onUserPerformanceBadgesChange($event)"
+                                 [userPerformanceBadges]="userPerformanceBadges">
     </app-performance-badges-list>
 
     <app-divider></app-divider>
@@ -225,8 +225,8 @@
           {{'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_PERMISSIONS' | translate}}
         </mat-panel-title>
       </mat-expansion-panel-header>
-      <app-permissions-list [permissions]="permissions"
-                            (permissionsChanged)="onPermissionsChange($event)">
+      <app-permissions-list (permissionsChanged)="onPermissionsChange($event)"
+                            [permissions]="permissions">
       </app-permissions-list>
     </mat-expansion-panel>
 
@@ -235,9 +235,9 @@
     <!-- Activity -->
     <div class="row">
       <div class="col-12">
-        <mat-checkbox id="activated" name="activated" ngModel color="accent" [(ngModel)]="activated"
-                      matTooltipPosition="right"
-                      matTooltip="{{'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_ACTIVATED_DESCRIPTION' | translate}}">
+        <mat-checkbox [(ngModel)]="activated" color="accent" id="activated" matTooltip="{{'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_ACTIVATED_DESCRIPTION' | translate}}" matTooltipPosition="right"
+                      name="activated"
+                      ngModel>
           {{'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_ACTIVATED' | translate}}
         </mat-checkbox>
       </div>
@@ -246,10 +246,10 @@
   </form>
 </div>
 <div mat-dialog-actions style="margin-top: 15px">
-  <mat-progress-bar mode="indeterminate" *ngIf="sendingRequest" style="margin-bottom: 10px;"></mat-progress-bar>
-  <button mat-button [mat-dialog-close]>{{'CLOSE' | translate}}</button>
-  <button mat-button (click)="form.ngSubmit.emit()" class="success-button"
-          [disabled]="!form.form.valid">{{'SAVE' | translate}}</button>
+  <mat-progress-bar *ngIf="sendingRequest" mode="indeterminate" style="margin-bottom: 10px;"></mat-progress-bar>
+  <button [mat-dialog-close] mat-button>{{'CLOSE' | translate}}</button>
+  <button (click)="form.ngSubmit.emit()" [disabled]="!form.form.valid" class="success-button"
+          mat-button>{{'SAVE' | translate}}</button>
 </div>
 
 <ng-template #successfullyChangedPassword>

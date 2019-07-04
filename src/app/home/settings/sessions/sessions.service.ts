@@ -8,8 +8,8 @@ import {Subject} from 'rxjs';
 })
 export class SessionsService {
 
-  private _sessions: Session[] = null;
   public sessionsChange: Subject<Session[]> = new Subject<Session[]>();
+  private _sessions: Session[] = null;
 
   constructor(private httpService: HttpService) {
   }
@@ -21,11 +21,6 @@ export class SessionsService {
       return null;
     }
     return this._sessions.slice();
-  }
-
-  private setSessions(sessions: Session[]) {
-    this._sessions = sessions;
-    this.sessionsChange.next(this._sessions.slice());
   }
 
   public fetchSessions() {
@@ -51,6 +46,11 @@ export class SessionsService {
 
   public removeSession(id: number) {
     return this.httpService.loggedInV1DELETERequest('/user/myself/session/' + id, 'removeSession');
+  }
+
+  private setSessions(sessions: Session[]) {
+    this._sessions = sessions;
+    this.sessionsChange.next(this._sessions.slice());
   }
 
 }

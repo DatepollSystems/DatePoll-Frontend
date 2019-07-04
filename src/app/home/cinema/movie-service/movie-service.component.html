@@ -13,7 +13,7 @@
 </div>
 
 <div *ngIf="movieOrders != null">
-  <mat-accordion [multi]="true" *ngIf="movieOrders.length != 0">
+  <mat-accordion *ngIf="movieOrders.length != 0" [multi]="true">
     <mat-expansion-panel *ngFor="let movieOrder of movieOrders" [expanded]="movieOrder.getTicketOrders().length != 0">
       <mat-expansion-panel-header>
         <mat-panel-title>{{movieOrder.movieName}}</mat-panel-title>
@@ -62,7 +62,7 @@
     </div>
     <div class="row">
       <div class="col-12" style="text-align: center">
-        <button routerLink="/home/cinema/tickets" mat-flat-button color="primary">
+        <button color="primary" mat-flat-button routerLink="/home/cinema/tickets">
           {{'CINEMA_TICKETS_SERVICE_NOT_APPLIED_FOR_SERVICE_APPLY_NOW' | translate}}
         </button>
       </div>

@@ -7,8 +7,8 @@ import {HttpService} from '../../services/http.service';
   providedIn: 'root'
 })
 export class MovieTicketsService {
-  private _movieOrders: MovieOrder[];
   public movieOrdersChange: Subject<MovieOrder[]> = new Subject<MovieOrder[]>();
+  private _movieOrders: MovieOrder[];
 
   constructor(private httpService: HttpService) {
   }

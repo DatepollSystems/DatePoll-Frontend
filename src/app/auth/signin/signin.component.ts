@@ -4,6 +4,8 @@ import {Router} from '@angular/router';
 import {MatSnackBar} from '@angular/material/snack-bar';
 
 import {AuthService} from '../auth.service';
+import {HttpClient} from '@angular/common/http';
+import {environment} from '../../../environments/environment';
 
 @Component({
   selector: 'app-signin',
@@ -11,8 +13,10 @@ import {AuthService} from '../auth.service';
   styleUrls: ['./signin.component.css']
 })
 export class SigninComponent implements OnInit {
-  public static projectName = 'priv. unif. Buergerkorps Eggenburg';
+  public static projectName = 'DatePoll - Web';
   projectName = SigninComponent.projectName;
+
+  apiUrl = environment.apiUrl;
 
   state = 'login';
 
@@ -25,7 +29,14 @@ export class SigninComponent implements OnInit {
   private password: string;
   private stayLoggedIn = false;
 
-  constructor(private router: Router, private snackBar: MatSnackBar, private authService: AuthService) {
+  constructor(private router: Router, private snackBar: MatSnackBar, private authService: AuthService, private http: HttpClient) {
+    this.http.get(this.apiUrl + '/settings/name').subscribe(
+      (response: any) => {
+        console.log(response);
+        SigninComponent.projectName = response.community_name;
+        this.projectName = SigninComponent.projectName;
+      }
+    );
   }
 
   ngOnInit(): void {

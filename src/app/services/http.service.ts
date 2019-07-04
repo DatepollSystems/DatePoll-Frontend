@@ -9,9 +9,10 @@ import {AuthService} from '../auth/auth.service';
   providedIn: 'root'
 })
 export class HttpService {
-   apiUrl = environment.apiUrl;
+  apiUrl = environment.apiUrl;
 
-  constructor(private authService: AuthService, private http: HttpClient) { }
+  constructor(private authService: AuthService, private http: HttpClient) {
+  }
 
   public loggedInV1GETRequest(url: string, functionUser: string = null) {
     this.log('GET', url, functionUser);

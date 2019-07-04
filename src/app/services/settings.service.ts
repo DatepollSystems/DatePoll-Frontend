@@ -8,14 +8,13 @@ import {Router} from '@angular/router';
 })
 export class SettingsService {
 
+  public showCinemaChange: Subject<boolean> = new Subject<boolean>();
+  public showEventsChange: Subject<boolean> = new Subject<boolean>();
+  private _showCinema = true;
+  private _showEvents = true;
+
   constructor(private httpService: HttpService, private router: Router) {
   }
-
-  public showCinemaChange: Subject<boolean> = new Subject<boolean>();
-  private _showCinema = true;
-
-  public showEventsChange: Subject<boolean> = new Subject<boolean>();
-  private _showEvents = true;
 
   public getShowCinema(): boolean {
     this.httpService.getSettingRequest('/cinema', 'settingsCinema').subscribe(

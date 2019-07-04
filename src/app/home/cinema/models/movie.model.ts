@@ -18,7 +18,19 @@ export class Movie implements CalendarEvent {
   public bookedTicketsForYourself: number;
 
   public movieYearID: number;
-
+  // Calendar specific values
+  start: Date;
+  title: string;
+  public actions: EventAction[];
+  allDay = false;
+  color = {
+    primary: '#1e90ff',
+    secondary: '#D1E8FF'
+  };
+  draggable: false;
+  end: null;
+  meta = null;
+  resizable: { beforeStart: false; afterEnd: false };
   private bookingUsers: MovieBookingUser[] = [];
 
   constructor(id: number, name: string, movieDate: Date, trailerLink: string, posterLink: string, workerID: number, workerName: string,
@@ -40,24 +52,6 @@ export class Movie implements CalendarEvent {
     this.start.setMinutes(30);
     this.title = name;
   }
-
-  // Calendar specific values
-  start: Date;
-  title: string;
-
-  public actions: EventAction[];
-
-  allDay = false;
-  color = {
-    primary: '#1e90ff',
-    secondary: '#D1E8FF'
-  };
-  draggable: false;
-
-  end: null;
-
-  meta = null;
-  resizable: { beforeStart: false; afterEnd: false };
 
   public setBookingsUsers(bookingUsers: MovieBookingUser[]) {
     this.bookingUsers = bookingUsers;

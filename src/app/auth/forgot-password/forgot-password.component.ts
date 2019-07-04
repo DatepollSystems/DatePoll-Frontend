@@ -12,20 +12,16 @@ import {SigninComponent} from '../signin/signin.component';
   styleUrls: ['./forgot-password.component.css']
 })
 export class ForgotPasswordComponent implements OnInit {
-  private apiUrl = environment.apiUrl + '/auth/forgotPassword/';
   projectName = SigninComponent.projectName;
-
   // States: SUBMIT_USERNAME | SUBMIT_CODE | SUBMIT_PASSWORD | FINISHED
   state = 'SUBMIT_USERNAME';
-
   username: string;
   verificationCode: number;
-
   sendingRequest = false;
-
   unknownUsernameAlert = false;
   verificationCodeIncorrect = false;
   verificationCodeRateLimitExceeded = false;
+  private apiUrl = environment.apiUrl + '/auth/forgotPassword/';
 
   constructor(private http: HttpClient, private router: Router) {
   }

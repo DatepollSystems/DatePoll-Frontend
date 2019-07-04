@@ -3,7 +3,7 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Router} from '@angular/router';
 
-import {retry, catchError} from 'rxjs/operators';
+import {catchError, retry} from 'rxjs/operators';
 import {throwError} from 'rxjs';
 
 import {CookieService} from 'angular2-cookie/core';
@@ -30,59 +30,6 @@ export class AuthService {
     private snackBar: MatSnackBar) {
 
     this.getJWTTokenBySessionToken();
-  }
-
-  private getJWTTokenBySessionToken() {
-    if (this.isCookieEnabled()) {
-      if (this.cookieService.get('sessionToken') == null) {
-        this._hasSessionToken = false;
-      } else {
-        this._hasSessionToken = true;
-        this._sessionToken = this.cookieService.get('sessionToken');
-      }
-    } else {
-      this._hasSessionToken = false;
-    }
-
-    if (this._hasSessionToken) {
-      console.log('authService | Using existing session token...');
-
-      const headers = new HttpHeaders().set('Content-Type', 'application/json');
-
-      const browser = Browser.getInfos();
-
-      const object = {
-        'sessionToken': this._sessionToken,
-        'sessionInformation': browser.name + ' - ' + browser.majorVersion + '; OS: ' + browser.os +
-          '; Phone: ' + browser.mobile
-      };
-
-      this.http.post(this.apiUrl + '/auth/IamLoggedIn', object, {headers: headers}).pipe(
-        retry(3), // retry a failed request up to 3 times
-        catchError((error) => {
-          console.log(error);
-          console.log('authService | sessionToken is not valid anymore!');
-          // Logged out or deleted session
-          this.logout(false);
-
-          return throwError('authService | Error on request IamLoggedIn');
-        })
-      ).subscribe(
-        (data: any) => {
-          console.log(data);
-
-          const hadToken = (this._token != null || this.cookieService.get('token'));
-
-          this.setToken(data.token);
-          console.log('authService | IamLoggedIn | Successful | JWT Token: ' + this._token);
-          if (!hadToken) {
-            this.router.navigate(['/home']);
-          }
-        }
-      );
-    } else if (!this._hasSessionToken && this._token == null && this.cookieService.get('token') == null) {
-      this.router.navigate(['/auth/signin']);
-    }
   }
 
   public signinUser(username: string, password: string, stayLoggedIn: boolean) {
@@ -256,6 +203,59 @@ export class AuthService {
     console.log('authService | isAuthenticated | Funtion User: ' + functionUser + ' | Result: ' + result);
 
     return result;
+  }
+
+  private getJWTTokenBySessionToken() {
+    if (this.isCookieEnabled()) {
+      if (this.cookieService.get('sessionToken') == null) {
+        this._hasSessionToken = false;
+      } else {
+        this._hasSessionToken = true;
+        this._sessionToken = this.cookieService.get('sessionToken');
+      }
+    } else {
+      this._hasSessionToken = false;
+    }
+
+    if (this._hasSessionToken) {
+      console.log('authService | Using existing session token...');
+
+      const headers = new HttpHeaders().set('Content-Type', 'application/json');
+
+      const browser = Browser.getInfos();
+
+      const object = {
+        'sessionToken': this._sessionToken,
+        'sessionInformation': browser.name + ' - ' + browser.majorVersion + '; OS: ' + browser.os +
+          '; Phone: ' + browser.mobile
+      };
+
+      this.http.post(this.apiUrl + '/auth/IamLoggedIn', object, {headers: headers}).pipe(
+        retry(3), // retry a failed request up to 3 times
+        catchError((error) => {
+          console.log(error);
+          console.log('authService | sessionToken is not valid anymore!');
+          // Logged out or deleted session
+          this.logout(false);
+
+          return throwError('authService | Error on request IamLoggedIn');
+        })
+      ).subscribe(
+        (data: any) => {
+          console.log(data);
+
+          const hadToken = (this._token != null || this.cookieService.get('token'));
+
+          this.setToken(data.token);
+          console.log('authService | IamLoggedIn | Successful | JWT Token: ' + this._token);
+          if (!hadToken) {
+            this.router.navigate(['/home']);
+          }
+        }
+      );
+    } else if (!this._hasSessionToken && this._token == null && this.cookieService.get('token') == null) {
+      this.router.navigate(['/auth/signin']);
+    }
   }
 
   private isCookieEnabled(): boolean {

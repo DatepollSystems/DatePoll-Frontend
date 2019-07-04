@@ -7,21 +7,21 @@
         </mat-panel-title>
       </mat-expansion-panel-header>
 
-      <form (ngSubmit)="addDecision(addDecisionForm)" #addDecisionForm="ngForm" class="row">
+      <form #addDecisionForm="ngForm" (ngSubmit)="addDecision(addDecisionForm)" class="row">
         <div class="col-12 col-sm-12 col-md-7 col-lg-7">
           <mat-form-field>
-            <input matInput id="decision" name="decision" type="text"
-                   ngModel #decisionModel="ngModel"
-                   required maxlength="190" minlength="1"
-                   placeholder="{{'EVENTS_STANDARD_DECISIONS_MANAGEMENT_ADD_STANDARD_DECISION' | translate}}">
+            <input #decisionModel="ngModel" id="decision" matInput maxlength="190"
+                   minlength="1" name="decision"
+                   ngModel placeholder="{{'EVENTS_STANDARD_DECISIONS_MANAGEMENT_ADD_STANDARD_DECISION' | translate}}" required
+                   type="text">
             <mat-error *ngIf="decisionModel.invalid">
               {{'EVENTS_STANDARD_DECISIONS_MANAGEMENT_ADD_STANDARD_DECISION_INCORRECT' | translate}}
             </mat-error>
           </mat-form-field>
         </div>
         <div class="col-12 col-sm-12 col-md-4 col-lg-4">
-          <button mat-raised-button class="success-button" style="width: 100%; text-align: center"
-                  type="submit" [disabled]="!addDecisionForm.valid">
+          <button [disabled]="!addDecisionForm.valid" class="success-button" mat-raised-button
+                  style="width: 100%; text-align: center" type="submit">
             {{'ADD' | translate}}
             <mat-icon aria-label="Submit button">library_add</mat-icon>
           </button>
@@ -31,9 +31,9 @@
       <mat-list class="col-12">
         <mat-list-item *ngFor="let decision of decisions">
           <span matLine>{{ decision }}</span>
-          <button mat-icon-button
-                  (click)="removeDecision(decision)" matTooltipPosition="right"
-                  matTooltip="{{'EVENTS_STANDARD_DECISIONS_MANAGEMENT_REMOVE_STANDARD_DECISION_BUTTON_TOOLTIP' | translate}}">
+          <button (click)="removeDecision(decision)"
+                  mat-icon-button matTooltip="{{'EVENTS_STANDARD_DECISIONS_MANAGEMENT_REMOVE_STANDARD_DECISION_BUTTON_TOOLTIP' | translate}}"
+                  matTooltipPosition="right">
             <mat-icon>delete_forever</mat-icon>
           </button>
           <mat-divider></mat-divider>

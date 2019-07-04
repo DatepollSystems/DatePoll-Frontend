@@ -44,22 +44,16 @@ export class MovieAdministrationComponent implements OnInit, AfterViewInit, OnDe
   public filteredYears: ReplaySubject<Year[]> = new ReplaySubject<Year[]>(1);
 
   @ViewChild('yearSelect', {static: true}) yearSelect: MatSelect;
-
+  dataSource: MatTableDataSource<Movie>;
+  moviesLoaded = true;
   /** Subject that emits when the component has been destroyed. */
   protected _onDestroy = new Subject<void>();
-
   private moviesSubscription: Subscription;
   private movies: Movie[];
-  dataSource: MatTableDataSource<Movie>;
-
   private yearsSubscription: Subscription;
   private years: Year[];
-
   private selectedYear: Year = null;
-
   private permissionSubscription: Subscription;
-
-  moviesLoaded = true;
 
   constructor(
     private cinemaService: CinemaService,
@@ -172,37 +166,6 @@ export class MovieAdministrationComponent implements OnInit, AfterViewInit, OnDe
     // }
   }
 
-  private setInitialValue() {
-    this.filteredYears
-      .pipe(take(1), takeUntil(this._onDestroy))
-      .subscribe(() => {
-        // setting the compareWith property to a comparison function
-        // triggers initializing the selection according to the initial value of
-        // the form control (i.e. _initializeSelection())
-        // this needs to be done after the filteredYears are loaded initially
-        // and after the mat-option elements are available
-        this.yearSelect.compareWith = (a: Year, b: Year) => a && b && a.id === b.id;
-      });
-  }
-
-  private filterYears() {
-    if (!this.years) {
-      return;
-    }
-    // get the search keyword
-    let search = this.yearFilterCtrl.value;
-    if (!search) {
-      this.filteredYears.next(this.years.slice());
-      return;
-    } else {
-      search = search.toLowerCase();
-    }
-    // filter the years
-    this.filteredYears.next(
-      this.years.filter(year => year.year.toString().toLowerCase().indexOf(search) > -1)
-    );
-  }
-
   yearSelectChange(value) {
     this.selectedYear = value;
 
@@ -254,5 +217,36 @@ export class MovieAdministrationComponent implements OnInit, AfterViewInit, OnDe
     this.refreshTable();
     this.cinemaService.fetchYears();
     this.cinemaService.fetchMovies();
+  }
+
+  private setInitialValue() {
+    this.filteredYears
+      .pipe(take(1), takeUntil(this._onDestroy))
+      .subscribe(() => {
+        // setting the compareWith property to a comparison function
+        // triggers initializing the selection according to the initial value of
+        // the form control (i.e. _initializeSelection())
+        // this needs to be done after the filteredYears are loaded initially
+        // and after the mat-option elements are available
+        this.yearSelect.compareWith = (a: Year, b: Year) => a && b && a.id === b.id;
+      });
+  }
+
+  private filterYears() {
+    if (!this.years) {
+      return;
+    }
+    // get the search keyword
+    let search = this.yearFilterCtrl.value;
+    if (!search) {
+      this.filteredYears.next(this.years.slice());
+      return;
+    } else {
+      search = search.toLowerCase();
+    }
+    // filter the years
+    this.filteredYears.next(
+      this.years.filter(year => year.year.toString().toLowerCase().indexOf(search) > -1)
+    );
   }
 }

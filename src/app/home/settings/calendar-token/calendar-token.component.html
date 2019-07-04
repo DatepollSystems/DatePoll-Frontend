@@ -1,11 +1,11 @@
 <h2 mat-dialog-title>{{'SETTINGS_SECURITY_CALENDAR' | translate}}</h2>
 <mat-dialog-content>
-  <div class="row justify-content-between" *ngIf="calendarToken != null">
+  <div *ngIf="calendarToken != null" class="row justify-content-between">
     <div class="col-12 col-sm-12 col-md-12 col-lg-9 align-self-center">
       <mat-form-field appearance="outline">
         <mat-label>{{'SETTINGS_SECURITY_MDOAL_CALENDAR_INPUT_TITLE' | translate}}</mat-label>
         <input matInput readonly value="{{calendarToken}}">
-        <button mat-icon-button matSuffix (click)="copyTokenToClipboard()"
+        <button (click)="copyTokenToClipboard()" mat-icon-button matSuffix
                 matTooltip="{{'SETTINGS_SECURITY_MODAL_CALENDAR_COPY_TOKEN_TOOLTIP' | translate}}"
                 matTooltipPosition="above">
           <mat-icon>file_copy</mat-icon>
@@ -14,11 +14,11 @@
     </div>
 
     <div class="col-12 col-sm-12 col-md-12 col-lg-3">
-      <button style="width: 100%; margin-bottom: 0; margin-top: 12px;" mat-flat-button color="warn"
-              (click)="resetCalendarToken()">{{'SETTINGS_SECURITY_MODAL_CALENDAR_RESET_TOKEN' | translate}}</button>
+      <button (click)="resetCalendarToken()" color="warn" mat-flat-button
+              style="width: 100%; margin-bottom: 0; margin-top: 12px;">{{'SETTINGS_SECURITY_MODAL_CALENDAR_RESET_TOKEN' | translate}}</button>
     </div>
   </div>
-  <div class="row" *ngIf="calendarToken == null">
+  <div *ngIf="calendarToken == null" class="row">
     <div class="col-12">
       <mat-progress-bar mode="indeterminate"></mat-progress-bar>
     </div>

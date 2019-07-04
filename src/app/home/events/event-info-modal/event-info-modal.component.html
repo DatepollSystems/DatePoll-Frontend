@@ -3,8 +3,8 @@
   <!-- Name -->
   <div class="row">
     <mat-form-field class="col-12">
-      <input matInput name="name" type="text" [(ngModel)]="name" readonly
-             placeholder="{{'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_NAME' | translate}}">
+      <input [(ngModel)]="name" matInput name="name" placeholder="{{'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_NAME' | translate}}" readonly
+             type="text">
     </mat-form-field>
   </div>
 
@@ -14,23 +14,23 @@
   </div>
   <div class="row">
     <mat-form-field class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 datepicker-field">
-      <input matInput readonly name="datepicker-startDate" value="{{startDate | date:'dd.MM.yyyy'}}"
-             placeholder="{{'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE' | translate}}">
+      <input matInput name="datepicker-startDate" placeholder="{{'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE' | translate}}" readonly
+             value="{{startDate | date:'dd.MM.yyyy'}}">
     </mat-form-field>
 
     <mat-form-field class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 datepicker-field-mobile">
-      <input matInput readonly name="datepicker-startDate-mobile" value="{{startDate | date:'dd.MM.yyyy'}}"
-             placeholder="{{'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE' | translate}}">
+      <input matInput name="datepicker-startDate-mobile" placeholder="{{'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE' | translate}}" readonly
+             value="{{startDate | date:'dd.MM.yyyy'}}">
     </mat-form-field>
 
     <mat-form-field class="col-6 col-sm-6 col-md-3 col-lg-3 col-xl-3">
-      <input matInput name="startDateHours" type="number" [(ngModel)]="startDateHours" readonly
-             placeholder="{{'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_HOURS' | translate}}">
+      <input [(ngModel)]="startDateHours" matInput name="startDateHours" placeholder="{{'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_HOURS' | translate}}" readonly
+             type="number">
     </mat-form-field>
 
     <mat-form-field class="col-6 col-sm-6 col-md-3 col-lg-3 col-xl-3">
-      <input matInput name="startDateMinutes" type="number" [(ngModel)]="startDateMinutes" readonly
-             placeholder="{{'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_MINUTES' | translate}}">
+      <input [(ngModel)]="startDateMinutes" matInput name="startDateMinutes" placeholder="{{'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_MINUTES' | translate}}" readonly
+             type="number">
     </mat-form-field>
   </div>
 
@@ -40,23 +40,24 @@
   </div>
   <div class="row">
     <mat-form-field class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 datepicker-field">
-      <input matInput name="datepicker-endDate" value="{{endDate | date:'dd.MM.yyyy'}}" readonly
-             placeholder="{{'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE' | translate}}">
+      <input matInput name="datepicker-endDate" placeholder="{{'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE' | translate}}" readonly
+             value="{{endDate | date:'dd.MM.yyyy'}}">
     </mat-form-field>
 
     <mat-form-field class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 datepicker-field-mobile">
-      <input matInput readonly name="datepicker-endDate-mobile"
-             value="{{endDate | date:'dd.MM.yyyy'}}" placeholder="{{'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE' | translate}}">
+      <input matInput name="datepicker-endDate-mobile" placeholder="{{'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE' | translate}}"
+             readonly
+             value="{{endDate | date:'dd.MM.yyyy'}}">
     </mat-form-field>
 
     <mat-form-field class="col-6 col-sm-6 col-md-3 col-lg-3 col-xl-3">
-      <input matInput name="endDateHours" type="number" [(ngModel)]="endDateHours" readonly
-             placeholder="{{'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_HOURS' | translate}}">
+      <input [(ngModel)]="endDateHours" matInput name="endDateHours" placeholder="{{'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_HOURS' | translate}}" readonly
+             type="number">
     </mat-form-field>
 
     <mat-form-field class="col-6 col-sm-6 col-md-3 col-lg-3 col-xl-3">
-      <input matInput name="endDateMinutes" type="number" [(ngModel)]="endDateMinutes" readonly
-             placeholder="{{'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_MINUTES' | translate}}">
+      <input [(ngModel)]="endDateMinutes" matInput name="endDateMinutes" placeholder="{{'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_MINUTES' | translate}}" readonly
+             type="number">
     </mat-form-field>
   </div>
 
@@ -71,7 +72,7 @@
         </mat-expansion-panel-header>
 
         <mat-form-field appearance="outline" class="col-12">
-          <textarea matInput style="min-height: 15vh;" name="description" readonly [(ngModel)]="description"></textarea>
+          <textarea [(ngModel)]="description" matInput name="description" readonly style="min-height: 15vh;"></textarea>
         </mat-form-field>
       </mat-expansion-panel>
     </div>
@@ -86,13 +87,13 @@
             {{'EVENTS_ADMINISTRATION_INFO_EVENT_COMPLETE_CHART' | translate}}
           </mat-panel-title>
         </mat-expansion-panel-header>
-        <canvas baseChart
-                *ngIf="!pieChartIsEmpty"
+        <canvas *ngIf="!pieChartIsEmpty"
+                [chartType]="pieChartType"
                 [data]="pieChartData"
                 [labels]="pieChartLabels"
-                [chartType]="pieChartType"
+                [legend]="pieChartLegend"
                 [options]="pieChartOptions"
-                [legend]="pieChartLegend">
+                baseChart>
         </canvas>
         <span *ngIf="pieChartIsEmpty">{{'EVENTS_ADMINISTRATION_INFO_EVENT_NOBODY_VOTED' | translate}}</span>
       </mat-expansion-panel>
@@ -112,15 +113,16 @@
                   {{'EVENTS_ADMINISTRATION_INFO_EVENT_CHART_FOR' | translate}} {{resultGroup.name}}
                 </mat-panel-title>
               </mat-expansion-panel-header>
-              <canvas baseChart
-                      *ngIf="!resultGroup.chartIsEmpty"
+              <canvas *ngIf="!resultGroup.chartIsEmpty"
+                      [chartType]="pieChartType"
                       [data]="resultGroup.getChartData()"
                       [labels]="pieChartLabels"
-                      [chartType]="pieChartType"
+                      [legend]="pieChartLegend"
                       [options]="pieChartOptions"
-                      [legend]="pieChartLegend">
+                      baseChart>
               </canvas>
-              <span *ngIf="resultGroup.chartIsEmpty">{{'EVENTS_ADMINISTRATION_INFO_EVENT_NOBODY_VOTED_IN_GROUP' | translate}}</span>
+              <span
+                *ngIf="resultGroup.chartIsEmpty">{{'EVENTS_ADMINISTRATION_INFO_EVENT_NOBODY_VOTED_IN_GROUP' | translate}}</span>
             </mat-expansion-panel>
 
             <mat-expansion-panel>
@@ -157,15 +159,16 @@
                     {{'EVENTS_ADMINISTRATION_INFO_EVENT_CHART_FOR' | translate}} {{resultSubgroup.name}}
                   </mat-panel-title>
                 </mat-expansion-panel-header>
-                <canvas baseChart
-                        *ngIf="!resultSubgroup.chartIsEmpty"
+                <canvas *ngIf="!resultSubgroup.chartIsEmpty"
+                        [chartType]="pieChartType"
                         [data]="resultSubgroup.getChartData()"
                         [labels]="pieChartLabels"
-                        [chartType]="pieChartType"
+                        [legend]="pieChartLegend"
                         [options]="pieChartOptions"
-                        [legend]="pieChartLegend">
+                        baseChart>
                 </canvas>
-                <span *ngIf="resultSubgroup.chartIsEmpty">{{'EVENTS_ADMINISTRATION_INFO_EVENT_NOBODY_VOTED_IN_SUBGROUP' | translate}}</span>
+                <span
+                  *ngIf="resultSubgroup.chartIsEmpty">{{'EVENTS_ADMINISTRATION_INFO_EVENT_NOBODY_VOTED_IN_SUBGROUP' | translate}}</span>
               </mat-expansion-panel>
 
               <mat-list>
@@ -201,15 +204,16 @@
                     {{'EVENTS_ADMINISTRATION_INFO_EVENT_CHART_FOR' | translate}} {{resultSubgroup.name}}
                   </mat-panel-title>
                 </mat-expansion-panel-header>
-                <canvas baseChart
-                        *ngIf="!resultSubgroup.chartIsEmpty"
+                <canvas *ngIf="!resultSubgroup.chartIsEmpty"
+                        [chartType]="pieChartType"
                         [data]="resultSubgroup.getChartData()"
                         [labels]="pieChartLabels"
-                        [chartType]="pieChartType"
+                        [legend]="pieChartLegend"
                         [options]="pieChartOptions"
-                        [legend]="pieChartLegend">
+                        baseChart>
                 </canvas>
-                <span *ngIf="resultSubgroup.chartIsEmpty">{{'EVENTS_ADMINISTRATION_INFO_EVENT_NOBODY_VOTED_IN_SUBGROUP' | translate}}</span>
+                <span
+                  *ngIf="resultSubgroup.chartIsEmpty">{{'EVENTS_ADMINISTRATION_INFO_EVENT_NOBODY_VOTED_IN_SUBGROUP' | translate}}</span>
               </mat-expansion-panel>
 
               <mat-list>
@@ -231,8 +235,8 @@
     </div>
   </div>
 
-  <mat-progress-bar mode="indeterminate" *ngIf="sendingRequest" style="margin-top: 15px;"></mat-progress-bar>
+  <mat-progress-bar *ngIf="sendingRequest" mode="indeterminate" style="margin-top: 15px;"></mat-progress-bar>
 </div>
 <div mat-dialog-actions style="margin-top: 15px">
-  <button mat-button [mat-dialog-close]>{{'CLOSE' | translate}}</button>
+  <button [mat-dialog-close] mat-button>{{'CLOSE' | translate}}</button>
 </div>

@@ -1,7 +1,7 @@
 <mat-form-field>
-  <mat-select [formControl]="instrumentCtrl"
-              placeholder="{{'MANAGEMENT_USERS_CREATE_USER_MODAL_PERFORMANCE_BADGES_INSTRUMENT' | translate}}"
-              (selectionChange)="instrumentSelectChange($event.value)" required>
+  <mat-select (selectionChange)="instrumentSelectChange($event.value)"
+              [formControl]="instrumentCtrl"
+              placeholder="{{'MANAGEMENT_USERS_CREATE_USER_MODAL_PERFORMANCE_BADGES_INSTRUMENT' | translate}}" required>
     <mat-option>
       <ngx-mat-select-search [formControl]="instrumentFilterCtrl"></ngx-mat-select-search>
     </mat-option>

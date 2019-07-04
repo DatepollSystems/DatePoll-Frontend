@@ -11,14 +11,12 @@ import {Year} from './models/year.model';
   providedIn: 'root'
 })
 export class CinemaService {
-  private _movies: Movie[];
   public moviesChange: Subject<Movie[]> = new Subject<Movie[]>();
-
-  private _notShownMovies: Movie[] = null;
   public notShownMoviesChange: Subject<Movie[]> = new Subject<Movie[]>();
-
-  private _years: Year[];
   public yearsChange: Subject<Year[]> = new Subject<Year[]>();
+  private _movies: Movie[];
+  private _notShownMovies: Movie[] = null;
+  private _years: Year[];
 
   constructor(private authService: AuthService, private httpService: HttpService, private homePageService: HomepageService) {
     this._movies = [];

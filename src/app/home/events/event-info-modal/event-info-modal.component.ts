@@ -5,8 +5,8 @@ import {Subscription} from 'rxjs';
 import {EventsService} from '../events.service';
 import {Event} from '../models/event.model';
 import {EventResultGroup} from '../models/event-result-group.model';
-import {ChartType, ChartOptions} from 'chart.js';
-import {Label, SingleDataSet, monkeyPatchChartJsTooltip, monkeyPatchChartJsLegend} from 'ng2-charts';
+import {ChartOptions, ChartType} from 'chart.js';
+import {Label, monkeyPatchChartJsLegend, monkeyPatchChartJsTooltip, SingleDataSet} from 'ng2-charts';
 
 @Component({
   selector: 'app-event-info-modal',
@@ -71,7 +71,7 @@ export class EventInfoModalComponent implements OnDestroy {
     this.endDateMinutes = this.endDate.getMinutes();
     this.resultGroups = this.event.getResultGroups();
     this.pieChartLabels = this.event.getDecisions();
-    this.pieChartData = [... this.event.getChartData()];
+    this.pieChartData = [...this.event.getChartData()];
     this.pieChartIsEmpty = this.event.chartIsEmpty;
     monkeyPatchChartJsTooltip();
     monkeyPatchChartJsLegend();

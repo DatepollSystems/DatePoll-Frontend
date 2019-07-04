@@ -10,34 +10,25 @@ import {PhoneNumber} from './phoneNumber.model';
   providedIn: 'root'
 })
 export class MyUserService {
-  private _ID: number;
-
-  private _title: string;
-
-  private _firstname: string;
   public firstnameChange: Subject<string> = new Subject<string>();
-
-  private _surname: string;
   public surnameChange: Subject<string> = new Subject<string>();
-
-  private _username: string;
   public usernameChange: Subject<string> = new Subject<string>();
-
+  public phoneNumberChange: Subject<PhoneNumber[]> = new Subject<PhoneNumber[]>();
+  public permissionsChange: Subject<string[]> = new Subject<string[]>();
+  private _ID: number;
+  private _title: string;
+  private _firstname: string;
+  private _surname: string;
+  private _username: string;
   private _emailAddresses: string[];
-
   private _streetname: string;
   private _streetnumber: string;
   private _zipcode: number;
   private _location: string;
-
   private _birthday: Date;
   private _joindate: Date;
-
   private _phoneNumbers = [];
-  public phoneNumberChange: Subject<PhoneNumber[]> = new Subject<PhoneNumber[]>();
-
   private _permissions: string[];
-  public permissionsChange: Subject<string[]> = new Subject<string[]>();
 
   constructor(private authService: AuthService, private httpService: HttpService) {
     this.fetchMyself();

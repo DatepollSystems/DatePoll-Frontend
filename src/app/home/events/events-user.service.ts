@@ -8,10 +8,11 @@ import {Event} from './models/event.model';
 })
 export class EventsUserService {
 
-  private _events: Event[] = [];
   public eventsChange: Subject<Event[]> = new Subject<Event[]>();
+  private _events: Event[] = [];
 
-  constructor(public httpService: HttpService) { }
+  constructor(public httpService: HttpService) {
+  }
 
   public getEvents(): Event[] {
     this.fetchEvents();

@@ -29,12 +29,10 @@ export class EventsAdministrationComponent implements OnDestroy {
 
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
-
-  private eventsSubscription: Subscription;
   events: Event[];
   eventsCopy: Event[];
   dataSource: MatTableDataSource<Event>;
-
+  private eventsSubscription: Subscription;
   private permissionSubscription: Subscription;
 
   constructor(

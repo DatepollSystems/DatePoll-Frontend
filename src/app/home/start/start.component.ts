@@ -116,7 +116,7 @@ export class StartComponent implements OnInit, OnDestroy {
 
   onEventVote(event: Event) {
     this.bottomSheet.open(EventsVoteForDecisionModalComponent, {
-      data: { 'event': event },
+      data: {'event': event},
     });
   }
 

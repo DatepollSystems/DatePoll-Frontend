@@ -2,33 +2,33 @@
 <mat-dialog-content>
   <app-do-not-forget-to-save></app-do-not-forget-to-save>
 
-  <form (ngSubmit)="saveData()" #form="ngForm">
+  <form #form="ngForm" (ngSubmit)="saveData()">
     <div class="row">
       <mat-form-field class="col-5 col-sm-5 col-md-4 col-lg-2">
-        <input matInput id="title" name="title" type="text"
-               [(ngModel)]="title" ngModel #titleModel="ngModel"
-               maxlength="190"
-               placeholder="{{'SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_TITLE' | translate}}">
+        <input #titleModel="ngModel" [(ngModel)]="title" id="title" matInput
+               maxlength="190" name="title" ngModel
+               placeholder="{{'SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_TITLE' | translate}}"
+               type="text">
         <mat-error *ngIf="titleModel.invalid">
           {{'SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_TITLE_NOT_VALID' | translate}}
         </mat-error>
       </mat-form-field>
 
       <mat-form-field class="col-7 col-sm-7 col-md-4 col-lg-5">
-        <input matInput id="firstname" name="firstname" type="text"
-               [(ngModel)]="firstname" ngModel #firstnameModel="ngModel"
-               required maxlength="190" minlength="1"
-               placeholder="{{'SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_FIRSTNAME' | translate}}">
+        <input #firstnameModel="ngModel" [(ngModel)]="firstname" id="firstname" matInput
+               maxlength="190" minlength="1" name="firstname"
+               ngModel placeholder="{{'SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_FIRSTNAME' | translate}}" required
+               type="text">
         <mat-error *ngIf="firstnameModel.invalid">
           {{'SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_FIRSTNAME_NOT_VALID' | translate}}
         </mat-error>
       </mat-form-field>
 
       <mat-form-field class="col-12 col-sm-12 col-md-4 col-lg-5">
-        <input matInput id="surname" name="surname" type="text"
-               [(ngModel)]="surname" ngModel #surnameModel="ngModel"
-               required maxlength="190" minlength="1"
-               placeholder="{{'SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_SURNAME' | translate}}">
+        <input #surnameModel="ngModel" [(ngModel)]="surname" id="surname" matInput
+               maxlength="190" minlength="1" name="surname"
+               ngModel placeholder="{{'SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_SURNAME' | translate}}" required
+               type="text">
         <mat-error *ngIf="surnameModel.invalid">
           {{'SETTINGng sS_PERSONAL_DATA_MODAL_PERSONAL_DATA_SURNAME_NOT_VALID' | translate}}
         </mat-error>
@@ -37,38 +37,38 @@
 
     <div class="row">
       <mat-form-field class="col-12 " id="datepicker-field">
-        <input matInput [matDatepicker]="picker"
-               id="datepicker" name="datepicker" [(ngModel)]="birthday"
-               required placeholder="{{'SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_BIRTHDAY' | translate}}">
-        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <input [(ngModel)]="birthday" [matDatepicker]="picker"
+               id="datepicker" matInput name="datepicker"
+               placeholder="{{'SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_BIRTHDAY' | translate}}" required>
+        <mat-datepicker-toggle [for]="picker" matSuffix></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
 
       <mat-form-field class="col-12" id="datepicker-field-mobile">
-        <input matInput [matDatepicker]="picker_mobile"
-               id="datepicker-mobile" name="datepicker-mobile" [(ngModel)]="birthday"
+        <input [(ngModel)]="birthday" [matDatepicker]="picker_mobile"
+               id="datepicker-mobile" matInput name="datepicker-mobile"
                placeholder="{{'SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_BIRTHDAY' | translate}}">
-        <mat-datepicker-toggle matSuffix [for]="picker_mobile"></mat-datepicker-toggle>
-        <mat-datepicker touchUi #picker_mobile></mat-datepicker>
+        <mat-datepicker-toggle [for]="picker_mobile" matSuffix></mat-datepicker-toggle>
+        <mat-datepicker #picker_mobile touchUi></mat-datepicker>
       </mat-form-field>
     </div>
 
     <div class="row">
       <mat-form-field class="col-8 col-sm-8 col-md-10 col-lg-10">
-        <input matInput id="streetname" name="streetname" type="text"
-               [(ngModel)]="streetname" ngModel #streetnameModel="ngModel"
-               required maxlength="190"
-               placeholder="{{'SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_STREETNAME' | translate}}">
+        <input #streetnameModel="ngModel" [(ngModel)]="streetname" id="streetname" matInput
+               maxlength="190" name="streetname" ngModel
+               placeholder="{{'SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_STREETNAME' | translate}}" required
+               type="text">
         <mat-error *ngIf="streetnameModel.invalid">
           {{'SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_STREETNAME_NOT_VALID' | translate}}
         </mat-error>
       </mat-form-field>
 
       <mat-form-field class="col-4 col-sm-4 col-md-2 col-lg-2">
-        <input matInput id="streetnumber" name="streetnumber" type="text"
-               [(ngModel)]="streetnumber" ngModel #streetnumberModel="ngModel"
-               required maxlength="190"
-               placeholder="{{'SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_STREETNUMBER' | translate}}">
+        <input #streetnumberModel="ngModel" [(ngModel)]="streetnumber" id="streetnumber" matInput
+               maxlength="190" name="streetnumber" ngModel
+               placeholder="{{'SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_STREETNUMBER' | translate}}" required
+               type="text">
         <mat-error *ngIf="streetnumberModel.invalid">
           {{'SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_STREETNUMBER_NOT_VALID' | translate}}
         </mat-error>
@@ -77,20 +77,20 @@
 
     <div class="row">
       <mat-form-field class="col-4 col-sm-4 col-md-3 col-lg-3">
-        <input matInput id="zipcode" name="zipcode" type="number"
-               [(ngModel)]="zipcode" ngModel #zipcodeModel="ngModel"
-               required [range]="[1000, 9999]" number
-               placeholder="{{'SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_ZIPCODE' | translate}}">
+        <input #zipcodeModel="ngModel" [(ngModel)]="zipcode" [range]="[1000, 9999]" id="zipcode"
+               matInput name="zipcode" ngModel
+               number placeholder="{{'SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_ZIPCODE' | translate}}" required
+               type="number">
         <mat-error *ngIf="zipcodeModel.invalid">
           {{'SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_ZIPCODE_NOT_VALID' | translate}}
         </mat-error>
       </mat-form-field>
 
       <mat-form-field class="col-8 col-sm-8 col-md-9 col-lg-9">
-        <input matInput id="location" name="location" type="text"
-               [(ngModel)]="location" ngModel #locationModel="ngModel"
-               required maxlength="190"
-               placeholder="{{'SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_LOCATION' | translate}}">
+        <input #locationModel="ngModel" [(ngModel)]="location" id="location" matInput
+               maxlength="190" name="location" ngModel
+               placeholder="{{'SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_LOCATION' | translate}}" required
+               type="text">
         <mat-error *ngIf="locationModel.invalid">
           {{'SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_LOCATION_NOT_VALID' | translate}}
         </mat-error>
@@ -100,7 +100,7 @@
 </mat-dialog-content>
 <mat-dialog-actions align="end">
   <button mat-button mat-dialog-close>{{'CLOSE' | translate}}</button>
-  <button mat-button mat-dialog-close (click)="form.ngSubmit.emit()" class="success-button"
-          [disabled]="!form.form.valid">{{'SAVE' | translate}}
+  <button (click)="form.ngSubmit.emit()" [disabled]="!form.form.valid" class="success-button" mat-button
+          mat-dialog-close>{{'SAVE' | translate}}
   </button>
 </mat-dialog-actions>

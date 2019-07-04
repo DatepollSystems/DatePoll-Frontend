@@ -19,15 +19,12 @@ export class GroupUserListModalComponent implements OnDestroy {
 
   @ViewChild(MatSort, {static: false}) sort: MatSort;
   @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
-
-  private readonly groupID: number;
-
   public group: any;
-  private groupSubscription: Subscription;
   dataSource: MatTableDataSource<any>;
   public groupName = '';
-
   public sendingRequest = false;
+  private readonly groupID: number;
+  private groupSubscription: Subscription;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any,
               private dialog: MatDialog,

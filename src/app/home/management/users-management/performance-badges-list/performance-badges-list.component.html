@@ -4,8 +4,8 @@
       {{'MANAGEMENT_USERS_CREATE_USER_MODAL_PERFORMANCE_BADGES_TITLE' | translate}}
     </mat-panel-title>
   </mat-expansion-panel-header>
-  <form class="row justify-content-around" #performanceBadgeForm="ngForm"
-        (ngSubmit)="addPerformanceBadge(performanceBadgeForm)">
+  <form #performanceBadgeForm="ngForm" (ngSubmit)="addPerformanceBadge(performanceBadgeForm)"
+        class="row justify-content-around">
     <div class="col-12 col-sm-12 col-md-5 col-lg-2">
       <app-instrument-select (instrumentChanged)="onInstrumentChanged($event)"></app-instrument-select>
     </div>
@@ -16,46 +16,46 @@
     </div>
 
     <mat-form-field class="col-12 col-sm-12 col-md-5 col-lg-2 datepicker-field">
-      <input matInput [matDatepicker]="picker_performanceBadge"
-             name="datepicker-performanceBadge" [(ngModel)]="performanceBadgeDate" id="datepicker-performanceBadge"
+      <input [(ngModel)]="performanceBadgeDate" [matDatepicker]="picker_performanceBadge"
+             id="datepicker-performanceBadge" matInput name="datepicker-performanceBadge"
              placeholder="{{'MANAGEMENT_USERS_CREATE_USER_MODAL_PERFORMANCE_BADGES_DATE' | translate}}">
-      <mat-datepicker-toggle matSuffix [for]="picker_performanceBadge"></mat-datepicker-toggle>
+      <mat-datepicker-toggle [for]="picker_performanceBadge" matSuffix></mat-datepicker-toggle>
       <mat-datepicker #picker_performanceBadge></mat-datepicker>
     </mat-form-field>
 
     <mat-form-field class="col-12 col-sm-12 col-md-5 col-lg-2 datepicker-field-mobile">
-      <input matInput [matDatepicker]="picker_mobile_performanceBadge"
-             name="datepicker-performanceBadge-mobile" [(ngModel)]="performanceBadgeDate"
-             id="datepicker-performanceBadge-mobile"
+      <input [(ngModel)]="performanceBadgeDate" [matDatepicker]="picker_mobile_performanceBadge"
+             id="datepicker-performanceBadge-mobile" matInput
+             name="datepicker-performanceBadge-mobile"
              placeholder="{{'MANAGEMENT_USERS_CREATE_USER_MODAL_PERFORMANCE_BADGES_DATE' | translate}}">
-      <mat-datepicker-toggle matSuffix [for]="picker_mobile_performanceBadge"></mat-datepicker-toggle>
-      <mat-datepicker touchUi #picker_mobile_performanceBadge></mat-datepicker>
+      <mat-datepicker-toggle [for]="picker_mobile_performanceBadge" matSuffix></mat-datepicker-toggle>
+      <mat-datepicker #picker_mobile_performanceBadge touchUi></mat-datepicker>
     </mat-form-field>
 
     <mat-form-field class="col-12 col-sm-12 col-md-5 col-lg-2">
-      <input matInput id="performanceBadge-grade" name="performanceBadgeGrade" type="text"
-             ngModel #performanceBadgeGradeModel="ngModel"
-             maxlength="190"
-             placeholder="{{'MANAGEMENT_USERS_CREATE_USER_MODAL_PERFORMANCE_BADGES_GRADE' | translate}}">
+      <input #performanceBadgeGradeModel="ngModel" id="performanceBadge-grade" matInput maxlength="190"
+             name="performanceBadgeGrade" ngModel
+             placeholder="{{'MANAGEMENT_USERS_CREATE_USER_MODAL_PERFORMANCE_BADGES_GRADE' | translate}}"
+             type="text">
       <mat-error *ngIf="performanceBadgeGradeModel.invalid">
         {{'MANAGEMENT_USERS_CREATE_USER_MODAL_PERFORMANCE_BADGES_GRADE_INCORRECT' | translate}}
       </mat-error>
     </mat-form-field>
 
     <mat-form-field class="col-12 col-sm-12 col-md-5 col-lg-7">
-      <input matInput id="performanceBadge-note" name="performanceBadgeNote" type="text"
-             ngModel #performanceBadgeNoteModel="ngModel"
-             maxlength="190"
-             placeholder="{{'MANAGEMENT_USERS_CREATE_USER_MODAL_PERFORMANCE_BADGES_NOTE' | translate}}">
+      <input #performanceBadgeNoteModel="ngModel" id="performanceBadge-note" matInput maxlength="190"
+             name="performanceBadgeNote" ngModel
+             placeholder="{{'MANAGEMENT_USERS_CREATE_USER_MODAL_PERFORMANCE_BADGES_NOTE' | translate}}"
+             type="text">
       <mat-error *ngIf="performanceBadgeNoteModel.invalid">
         {{'MANAGEMENT_USERS_CREATE_USER_MODAL_PERFORMANCE_BADGES_NOTE_INCORRECT' | translate}}
       </mat-error>
     </mat-form-field>
 
     <div class="col-12 col-sm-12 col-md-12 col-lg-3">
-      <button mat-raised-button class="success-button" style="width: 100%" id="addPerformanceBadge-button"
-              type="submit"
-              [disabled]="!performanceBadgeForm.valid || selectedInstrument == null || selectedPerformanceBadge == null">
+      <button [disabled]="!performanceBadgeForm.valid || selectedInstrument == null || selectedPerformanceBadge == null" class="success-button" id="addPerformanceBadge-button" mat-raised-button
+              style="width: 100%"
+              type="submit">
         {{'ADD' | translate}}
         <mat-icon aria-label="Submit button">playlist_add</mat-icon>
       </button>
@@ -69,12 +69,12 @@
               {{'MANAGEMENT_USERS_CREATE_USER_MODAL_PERFORMANCE_BADGES_WITH' | translate}}
               {{ userPerformanceBadge.instrumentName }}
             </span>
-        <span matLine
-              *ngIf="userPerformanceBadge.date != null">Datum: {{userPerformanceBadge.date | date:'dd.MM.yyyy'}}</span>
-        <span matLine *ngIf="userPerformanceBadge.grade != null">Erfolg: {{userPerformanceBadge.grade}}</span>
-        <span matLine *ngIf="userPerformanceBadge.note != null">Anmerkung: {{userPerformanceBadge.note}}</span>
-        <button mat-icon-button (click)="removePerformanceBadge(userPerformanceBadge.id)" matTooltipPosition="right"
-                matTooltip="{{'MANAGEMENT_USERS_CREATE_USER_MODAL_PERFORMANCE_BADGES_REMOVE_TOOLTIP' | translate}}">
+        <span *ngIf="userPerformanceBadge.date != null"
+              matLine>Datum: {{userPerformanceBadge.date | date:'dd.MM.yyyy'}}</span>
+        <span *ngIf="userPerformanceBadge.grade != null" matLine>Erfolg: {{userPerformanceBadge.grade}}</span>
+        <span *ngIf="userPerformanceBadge.note != null" matLine>Anmerkung: {{userPerformanceBadge.note}}</span>
+        <button (click)="removePerformanceBadge(userPerformanceBadge.id)" mat-icon-button matTooltip="{{'MANAGEMENT_USERS_CREATE_USER_MODAL_PERFORMANCE_BADGES_REMOVE_TOOLTIP' | translate}}"
+                matTooltipPosition="right">
           <mat-icon>delete_forever</mat-icon>
         </button>
       </mat-list-item>

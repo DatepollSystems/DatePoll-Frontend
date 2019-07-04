@@ -5,10 +5,10 @@ export class EventResultSubgroup {
   public id: number;
   public name: string;
   public parentGroupName: string;
-  private resultUsers: EventResultUser[] = [];
   public event: Event;
-  private chartData: any[] = null;
   public chartIsEmpty = true;
+  private resultUsers: EventResultUser[] = [];
+  private chartData: any[] = null;
 
   constructor(id: number, name: string, parentGroupName: string) {
     this.id = id;

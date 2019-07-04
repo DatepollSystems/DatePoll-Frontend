@@ -16,31 +16,23 @@ import {Permissions} from '../permissions';
 export class HomeComponent {
   navBarOpened = false;
   navBarMode = 'over';
-
-  @ViewChild('sidenav', {static: true})
-  private sidenav: MatSidenav;
-
   public myUserService: MyUserService;
-
   cinemaMovieAdministration = Permissions.CINEMA_MOVIE_ADMINISTRATION;
   eventAdministration = Permissions.EVENTS_ADMINISTRATION;
   managementAdministration = Permissions.MANAGEMENT_ADMINISTRATION;
   settingsAdministration = Permissions.SETTINGS_ADMINISTRATION;
-
-  private firstnameSubscription: Subscription;
   firstname: string = null;
-
-  private surnameSubscription: Subscription;
   surname: string = null;
-
-  private usernameSubscription: Subscription;
   username: string = null;
-
-  private showCinemaSubscription: Subscription;
   showCinema = true;
-
-  private showEventsSubscription: Subscription;
   showEvents = true;
+  @ViewChild('sidenav', {static: true})
+  private sidenav: MatSidenav;
+  private firstnameSubscription: Subscription;
+  private surnameSubscription: Subscription;
+  private usernameSubscription: Subscription;
+  private showCinemaSubscription: Subscription;
+  private showEventsSubscription: Subscription;
 
   constructor(
     private ngZone: NgZone,
@@ -95,7 +87,7 @@ export class HomeComponent {
 
   onPageChange() {
     // Close navbar after click only if webbrowser is mobile
-    if (!((window.screen.width) > 992))  {
+    if (!((window.screen.width) > 992)) {
       this.navBarOpened = false;
     }
   }

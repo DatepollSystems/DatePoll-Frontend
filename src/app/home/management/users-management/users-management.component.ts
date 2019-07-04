@@ -34,11 +34,9 @@ export class UsersManagementComponent implements OnInit, OnDestroy {
 
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
-
-  private usersSubscription: Subscription;
   users: User[];
   dataSource: MatTableDataSource<User>;
-
+  private usersSubscription: Subscription;
   private permissionSubscription: Subscription;
 
   constructor(
@@ -131,7 +129,7 @@ export class UsersManagementComponent implements OnInit, OnDestroy {
 
   onDelete(userID: number) {
     this.bottomSheet.open(UserDeleteModalComponent, {
-      data: { 'userID': userID },
+      data: {'userID': userID},
     });
   }
 

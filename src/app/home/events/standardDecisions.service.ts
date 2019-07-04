@@ -8,19 +8,15 @@ import {HttpService} from '../../services/http.service';
 })
 export class StandardDecisionsService {
 
-  private _standardDecisions: EventStandardDecision[] = [];
   public standardDecisionsChange: Subject<EventStandardDecision[]> = new Subject<EventStandardDecision[]>();
+  private _standardDecisions: EventStandardDecision[] = [];
 
-  constructor(private httpService: HttpService) { }
+  constructor(private httpService: HttpService) {
+  }
 
   public getStandardDecisions(): EventStandardDecision[] {
     this.fetchStandardDecisions();
     return this._standardDecisions.slice();
-  }
-
-  private setStandardDecisions(standardDecisions: EventStandardDecision[]) {
-    this._standardDecisions = standardDecisions;
-    this.standardDecisionsChange.next(this._standardDecisions.slice());
   }
 
   public fetchStandardDecisions() {
@@ -51,5 +47,10 @@ export class StandardDecisionsService {
 
   public removeStandardDecision(id: number) {
     return this.httpService.loggedInV1DELETERequest('/avent/administration/standardDecision/' + id, 'removeStandardDecision');
+  }
+
+  private setStandardDecisions(standardDecisions: EventStandardDecision[]) {
+    this._standardDecisions = standardDecisions;
+    this.standardDecisionsChange.next(this._standardDecisions.slice());
   }
 }

@@ -1,14 +1,14 @@
 <footer class="container-fluid">
-  <div id="footerContainer" class="row">
+  <div class="row" id="footerContainer">
     <div class="footer-heading col-md-3 offset-md-2 col-sm-8 offset-sm-2">DatePoll</div>
     <div class="col-md-3 offset-md-2 col-sm-8 offset-sm-2">
       <div class="footer-heading">Links</div>
       <ul>
-        <li><a href="https://buergerkorps-eggenburg.at" target="_blank" rel="noopener">Bürgerkorps Eggenburg</a></li>
+        <li><a href="https://buergerkorps-eggenburg.at" rel="noopener" target="_blank">Bürgerkorps Eggenburg</a></li>
         <!--        <li><a (click)="openFeedbackModal()">Feedback</a></li>-->
         <li><a (click)="openAboutModal()">{{'ABOUT' | translate}}</a></li>
         <li>
-          <mat-select placeholder="{{'LANGUAGE' | translate}}" (openedChange)="setLang()" [(value)]="selected">
+          <mat-select (openedChange)="setLang()" [(value)]="selected" placeholder="{{'LANGUAGE' | translate}}">
             <mat-option value="de">{{'LANGUAGE_GERMAN' | translate}}</mat-option>
             <mat-option value="en">{{'LANGUAGE_ENGLISH' | translate}}</mat-option>
           </mat-select>
@@ -17,19 +17,19 @@
     </div>
   </div>
 
-  <div id="footerBarContainer" class="row">
+  <div class="row" id="footerBarContainer">
     <div class="col-md-3 offset-md-2 col-sm-8 offset-sm-2" style="margin-bottom: 1.5vh">
       <div style="float: left;">Mady with&nbsp;</div>
       <div style="float: left; color: red">&hearts;&nbsp;</div>
       <div style="float: left;">
         by all
-        <a style="color: #2196f3" rel="noopener" target="_blank"
-           href="https://gitlab.com/groups/BuergerkorpsEggenburg/-/group_members">Contributors</a>
+        <a href="https://gitlab.com/groups/BuergerkorpsEggenburg/-/group_members" rel="noopener" style="color: #2196f3"
+           target="_blank">Contributors</a>
       </div>
     </div>
 
     <div class="col-md-3 offset-md-2 col-sm-8 offset-sm-2 text-right">
-      <a style="color: #2196f3" routerLink="/info/imprint">
+      <a routerLink="/info/imprint" style="color: #2196f3">
         {{'IMPRINT' | translate }} & {{'PRIVACY_POLICY' | translate }}</a>
     </div>
   </div>

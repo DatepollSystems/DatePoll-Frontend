@@ -13,21 +13,14 @@ import {Event} from '../events/models/event.model';
 })
 export class HomepageService {
 
-  private _birthdays: HomeBirthdayModel[] = [];
   public birthdaysChange: Subject<HomeBirthdayModel[]> = new Subject<HomeBirthdayModel[]>();
-
-  private _bookings: HomeBookingsModel[] = [];
   public bookingsChange: Subject<HomeBookingsModel[]> = new Subject<HomeBookingsModel[]>();
-
-  private _events: Event[] = [];
   public eventsChange: Subject<Event[]> = new Subject<Event[]>();
+  private _birthdays: HomeBirthdayModel[] = [];
+  private _bookings: HomeBookingsModel[] = [];
+  private _events: Event[] = [];
 
   constructor(private httpService: HttpService) {
-  }
-
-  private setBirthdays(birthdays: HomeBirthdayModel[]) {
-    this._birthdays = birthdays;
-    this.birthdaysChange.next(this._birthdays.slice());
   }
 
   public getBirthdays(): HomeBirthdayModel[] {
@@ -43,11 +36,6 @@ export class HomepageService {
   public getBookings(): HomeBookingsModel[] {
     this.fetchData();
     return this._bookings.slice();
-  }
-
-  private setEvents(events: Event[]) {
-    this._events = events;
-    this.eventsChange.next(this._events.slice());
   }
 
   public getEvents(): Event[] {
@@ -92,5 +80,15 @@ export class HomepageService {
       },
       (error) => console.log(error)
     );
+  }
+
+  private setBirthdays(birthdays: HomeBirthdayModel[]) {
+    this._birthdays = birthdays;
+    this.birthdaysChange.next(this._birthdays.slice());
+  }
+
+  private setEvents(events: Event[]) {
+    this._events = events;
+    this.eventsChange.next(this._events.slice());
   }
 }

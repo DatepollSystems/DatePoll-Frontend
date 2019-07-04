@@ -5,11 +5,11 @@ import {EventResultUser} from './event-result-user.model';
 export class EventResultGroup {
   public id: number;
   public name: string;
+  public event: Event;
+  public chartIsEmpty = true;
   private resultSubgroups: EventResultSubgroup[];
   private resultUsers: EventResultUser[];
-  public event: Event;
   private chartData: any[] = null;
-  public chartIsEmpty = true;
 
   constructor(id: number, name: string) {
     this.id = id;

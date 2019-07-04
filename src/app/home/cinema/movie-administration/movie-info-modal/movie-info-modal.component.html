@@ -2,45 +2,45 @@
 <div mat-dialog-content>
   <div class="row">
     <mat-form-field class="col-12 col-sm-12 col-md-10 col-lg-10">
-      <input matInput id="name" name="name" type="text"
-             [(ngModel)]="name" readonly
-             placeholder="{{'CINEMA_TICKETS_ADMINISTRATION_NAME' | translate}}">
+      <input [(ngModel)]="name" id="name" matInput name="name"
+             placeholder="{{'CINEMA_TICKETS_ADMINISTRATION_NAME' | translate}}" readonly
+             type="text">
     </mat-form-field>
 
     <mat-form-field class="col-12 col-sm-12 col-md-2 col-lg-2">
-      <input matInput id="bookedTickets" name="bookedTickets" type="number"
-             [(ngModel)]="bookedTickets" readonly
-             placeholder="{{'CINEMA_TICKETS_ADMINISTRATION_BOOKED_TICKETS' | translate}}">
+      <input [(ngModel)]="bookedTickets" id="bookedTickets" matInput name="bookedTickets"
+             placeholder="{{'CINEMA_TICKETS_ADMINISTRATION_BOOKED_TICKETS' | translate}}" readonly
+             type="number">
     </mat-form-field>
   </div>
 
   <div class="row">
     <mat-form-field class="col-12 " id="datepicker-field">
-      <input matInput readonly
-             id="datepicker" name="datepicker" [(ngModel)]="date"
-             placeholder="{{'CINEMA_TICKETS_ADMINISTRATION_DATE' | translate}}">
+      <input [(ngModel)]="date" id="datepicker"
+             matInput name="datepicker" placeholder="{{'CINEMA_TICKETS_ADMINISTRATION_DATE' | translate}}"
+             readonly>
     </mat-form-field>
 
     <mat-form-field class="col-12" id="datepicker-field-mobile">
-      <input matInput readonly
-             id="datepicker-mobile" name="datepicker-mobile" [(ngModel)]="date"
-             placeholder="{{'CINEMA_TICKETS_ADMINISTRATION_DATE' | translate}}">
+      <input [(ngModel)]="date" id="datepicker-mobile"
+             matInput name="datepicker-mobile" placeholder="{{'CINEMA_TICKETS_ADMINISTRATION_DATE' | translate}}"
+             readonly>
     </mat-form-field>
   </div>
 
   <div class="row">
     <mat-form-field class="col-12">
-      <input matInput id="trailerLink" name="trailerLink" type="text"
-             [(ngModel)]="trailerLink" readonly
-             placeholder="{{'CINEMA_TICKETS_ADMINISTRATION_TRAILER' | translate}}">
+      <input [(ngModel)]="trailerLink" id="trailerLink" matInput name="trailerLink"
+             placeholder="{{'CINEMA_TICKETS_ADMINISTRATION_TRAILER' | translate}}" readonly
+             type="text">
     </mat-form-field>
   </div>
 
   <div class="row">
     <mat-form-field class="col-12">
-      <input matInput id="imageLink" name="imageLink" type="text"
-             [(ngModel)]="imageLink" readonly
-             placeholder="{{'CINEMA_TICKETS_ADMINISTRATION_POSTER' | translate}}">
+      <input [(ngModel)]="imageLink" id="imageLink" matInput name="imageLink"
+             placeholder="{{'CINEMA_TICKETS_ADMINISTRATION_POSTER' | translate}}" readonly
+             type="text">
     </mat-form-field>
   </div>
 
@@ -51,39 +51,40 @@
       </mat-panel-title>
     </mat-expansion-panel-header>
 
-    <img class="col-12 col-sm-12 col-md-8 col-lg-4 offset-md-2 offset-lg-4" src="{{imageLink}}"
-         alt="Poster of the movie"/>
+    <img alt="Poster of the movie" class="col-12 col-sm-12 col-md-8 col-lg-4 offset-md-2 offset-lg-4"
+         src="{{imageLink}}"/>
   </mat-expansion-panel>
 
   <div class="row" style="margin-top: 15px;">
     <mat-form-field class="col-12">
-      <input matInput (keyup)="applyFilter($event.target.value)"
+      <input (keyup)="applyFilter($event.target.value)" matInput
              placeholder="{{'SEARCH' | translate}}"/>
     </mat-form-field>
   </div>
   <div class="row">
-    <table mat-table [dataSource]="dataSource" class="col-12">
+    <table [dataSource]="dataSource" class="col-12" mat-table>
 
       <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef> {{'CINEMA_TICKETS_ADMINISTRATION_MOVIE_INFO_MODAL_TABLE_NAME' | translate}} </th>
-        <td mat-cell *matCellDef="let booking"> {{booking.firstname + ' ' + booking.surname}} </td>
-        <td mat-footer-cell *matFooterCellDef> {{'CINEMA_TICKETS_BOOKED_TICKETS' | translate}} </td>
+        <th *matHeaderCellDef
+            mat-header-cell> {{'CINEMA_TICKETS_ADMINISTRATION_MOVIE_INFO_MODAL_TABLE_NAME' | translate}} </th>
+        <td *matCellDef="let booking" mat-cell> {{booking.firstname + ' ' + booking.surname}} </td>
+        <td *matFooterCellDef mat-footer-cell> {{'CINEMA_TICKETS_BOOKED_TICKETS' | translate}} </td>
       </ng-container>
 
       <ng-container matColumnDef="amount">
-        <th mat-header-cell
-            *matHeaderCellDef> {{'CINEMA_TICKETS_ADMINISTRATION_MOVIE_INFO_MODAL_TABLE_AMOUNT' | translate}} </th>
-        <td mat-cell *matCellDef="let booking"> {{booking.amount}} </td>
-        <td mat-footer-cell *matFooterCellDef> {{bookedTickets}} </td>
+        <th *matHeaderCellDef
+            mat-header-cell> {{'CINEMA_TICKETS_ADMINISTRATION_MOVIE_INFO_MODAL_TABLE_AMOUNT' | translate}} </th>
+        <td *matCellDef="let booking" mat-cell> {{booking.amount}} </td>
+        <td *matFooterCellDef mat-footer-cell> {{bookedTickets}} </td>
       </ng-container>
 
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-      <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
+      <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
+      <tr *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
+      <tr *matFooterRowDef="displayedColumns" mat-footer-row></tr>
     </table>
   </div>
 
 </div>
 <div mat-dialog-actions>
-  <button mat-button [mat-dialog-close]>{{'CLOSE' | translate}}</button>
+  <button [mat-dialog-close] mat-button>{{'CLOSE' | translate}}</button>
 </div>

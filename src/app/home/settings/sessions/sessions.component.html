@@ -4,37 +4,37 @@
     <div *ngIf="sessions.length > 0">
       <div class="row" style="margin-top: 15px;">
         <mat-form-field class="col-12">
-          <input matInput (keyup)="applyFilter($event.target.value)"
+          <input (keyup)="applyFilter($event.target.value)" matInput
                  placeholder="{{'SETTINGS_PERSONAL_DATA_MODAL_PHONE_NUMBER_SEARCH' | translate}}"/>
         </mat-form-field>
       </div>
 
       <div class="row">
-        <table mat-table [dataSource]="dataSource" class="table-responsive">
+        <table [dataSource]="dataSource" class="table-responsive" mat-table>
 
           <ng-container matColumnDef="information">
-            <th mat-header-cell *matHeaderCellDef> {{'SETTINGS_SECURITY_MODAL_SESSION_INFORMATION' | translate}} </th>
-            <td mat-cell *matCellDef="let session"> {{session.information}} </td>
+            <th *matHeaderCellDef mat-header-cell> {{'SETTINGS_SECURITY_MODAL_SESSION_INFORMATION' | translate}} </th>
+            <td *matCellDef="let session" mat-cell> {{session.information}} </td>
           </ng-container>
 
           <ng-container matColumnDef="lastUsed">
-            <th mat-header-cell *matHeaderCellDef> {{'SETTINGS_SECURITY_MODAL_SESSION_LAST_USED' | translate}} </th>
-            <td mat-cell *matCellDef="let session"> {{session.lastUsed | date:'dd.MM.yyyy H:mm:ss'}} </td>
+            <th *matHeaderCellDef mat-header-cell> {{'SETTINGS_SECURITY_MODAL_SESSION_LAST_USED' | translate}} </th>
+            <td *matCellDef="let session" mat-cell> {{session.lastUsed | date:'dd.MM.yyyy H:mm:ss'}} </td>
           </ng-container>
 
           <ng-container matColumnDef="action">
-            <th mat-header-cell *matHeaderCellDef> {{'ACTION' | translate}} </th>
-            <td mat-cell *matCellDef="let session">
-              <button mat-icon-button [matTooltipPosition]="'right'"
-                      matTooltip="{{'SETTINGS_SECURITY_MODAL_SESSION_REMOVE_TOOLTIP' | translate}}"
-                      (click)="removeSession(session.id)">
+            <th *matHeaderCellDef mat-header-cell> {{'ACTION' | translate}} </th>
+            <td *matCellDef="let session" mat-cell>
+              <button (click)="removeSession(session.id)" [matTooltipPosition]="'right'"
+                      mat-icon-button
+                      matTooltip="{{'SETTINGS_SECURITY_MODAL_SESSION_REMOVE_TOOLTIP' | translate}}">
                 <mat-icon>delete_foreve</mat-icon>
               </button>
             </td>
           </ng-container>
 
-          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
+          <tr *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
         </table>
       </div>
     </div>
