@@ -1,7 +1,7 @@
 import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
 import {ChartOptions, ChartType} from 'chart.js';
-import {Label, SingleDataSet, monkeyPatchChartJsTooltip, monkeyPatchChartJsLegend} from 'ng2-charts';
+import {Label, monkeyPatchChartJsLegend, monkeyPatchChartJsTooltip, SingleDataSet} from 'ng2-charts';
 
 import {EventResultGroup} from '../../models/event-result-group.model';
 

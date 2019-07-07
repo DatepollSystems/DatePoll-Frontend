@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {SingleDataSet, Label, monkeyPatchChartJsLegend, monkeyPatchChartJsTooltip} from 'ng2-charts';
-import {ChartType, ChartOptions} from 'chart.js';
+import {Label, monkeyPatchChartJsLegend, monkeyPatchChartJsTooltip, SingleDataSet} from 'ng2-charts';
+import {ChartOptions, ChartType} from 'chart.js';
 
 import {EventResultSubgroup} from '../../../models/event-result-subgroup.model';
 
@@ -22,11 +22,12 @@ export class SubgroupInfoCardComponent implements OnInit {
   public pieChartData: SingleDataSet;
   public pieChartIsEmpty: boolean;
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
     this.pieChartLabels = this.resultSubgroup.event.getDecisions();
-    this.pieChartData = [... this.resultSubgroup.getChartData()];
+    this.pieChartData = [...this.resultSubgroup.getChartData()];
     this.pieChartIsEmpty = this.resultSubgroup.chartIsEmpty;
     monkeyPatchChartJsTooltip();
     monkeyPatchChartJsLegend();
