@@ -24,13 +24,11 @@ export class EventInfoModalComponent implements OnDestroy {
   description: string;
 
   startDate: Date;
-  startDateHours: number;
-  startDateMinutes: number;
   endDate: Date;
-  endDateHours: number;
-  endDateMinutes: number;
 
   resultGroups: EventResultGroup[];
+  sortedResultGroups: EventResultGroup[];
+  searchValue = '';
 
   public pieChartOptions: ChartOptions = {
     responsive: true,
@@ -64,16 +62,30 @@ export class EventInfoModalComponent implements OnDestroy {
     this.name = this.event.name;
     this.description = this.event.description;
     this.startDate = this.event.startDate;
-    this.startDateHours = this.startDate.getHours();
-    this.startDateMinutes = this.startDate.getMinutes();
     this.endDate = this.event.endDate;
-    this.endDateHours = this.endDate.getHours();
-    this.endDateMinutes = this.endDate.getMinutes();
     this.resultGroups = this.event.getResultGroups();
+    this.sortedResultGroups = this.resultGroups.slice();
     this.pieChartLabels = this.event.getDecisions();
     this.pieChartData = [...this.event.getChartData()];
     this.pieChartIsEmpty = this.event.chartIsEmpty;
     monkeyPatchChartJsTooltip();
     monkeyPatchChartJsLegend();
+  }
+
+  applyFilter(filterValue: string) {
+    this.sortedResultGroups = [];
+
+    for (const resultGroup of this.resultGroups) {
+      if (resultGroup.name.toLowerCase().includes(filterValue.toLowerCase())) {
+        this.sortedResultGroups.push(resultGroup);
+      } else {
+        for (const resultSubgroup of resultGroup.getResultSubgroups()) {
+          if (resultSubgroup.name.toLowerCase().includes(filterValue.toLowerCase())) {
+            this.sortedResultGroups.push(resultGroup);
+            break;
+          }
+        }
+      }
+    }
   }
 }

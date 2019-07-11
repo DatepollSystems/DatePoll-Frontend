@@ -1,19 +1,24 @@
-import {Component, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, Input, OnChanges, OnInit, ViewChild} from '@angular/core';
 import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
 import {ChartOptions, ChartType} from 'chart.js';
 import {Label, monkeyPatchChartJsLegend, monkeyPatchChartJsTooltip, SingleDataSet} from 'ng2-charts';
 
 import {EventResultGroup} from '../../models/event-result-group.model';
+import {EventResultSubgroup} from '../../models/event-result-subgroup.model';
 
 @Component({
   selector: 'app-group-info-card',
   templateUrl: './group-info-card.component.html',
   styleUrls: ['./group-info-card.component.css']
 })
-export class GroupInfoCardComponent implements OnInit {
+export class GroupInfoCardComponent implements OnInit, OnChanges {
   @Input()
   resultGroup: EventResultGroup;
 
+  @Input()
+  searchValue = '';
+
+  // Chart
   public pieChartOptions: ChartOptions = {
     responsive: true,
   };
@@ -23,6 +28,7 @@ export class GroupInfoCardComponent implements OnInit {
   public pieChartData: SingleDataSet;
   public pieChartIsEmpty: boolean;
 
+  // Table with user data
   displayedColumns: string[] = ['firstname', 'surname', 'decision'];
   filterValue: string = null;
 
@@ -30,10 +36,16 @@ export class GroupInfoCardComponent implements OnInit {
   @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
   dataSource: MatTableDataSource<any>;
 
+  resultSubgroup: EventResultSubgroup[] = [];
+  sortedResultSubgroup: EventResultSubgroup[] = [];
+
   constructor() {
   }
 
   ngOnInit() {
+    this.resultSubgroup = this.resultGroup.getResultSubgroups();
+    this.sortedResultSubgroup = this.resultSubgroup.slice();
+
     this.pieChartLabels = this.resultGroup.event.getDecisions();
     this.pieChartData = this.resultGroup.getChartData();
     this.pieChartIsEmpty = this.resultGroup.chartIsEmpty;
@@ -57,6 +69,21 @@ export class GroupInfoCardComponent implements OnInit {
 
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
+    }
+  }
+
+  ngOnChanges(): void {
+    if (this.searchValue.length === 0 || this.resultGroup.name.toLowerCase().includes(this.searchValue.toLowerCase())) {
+      this.sortedResultSubgroup = this.resultSubgroup.slice();
+    } else {
+      this.sortedResultSubgroup = [];
+
+      for (const resultSubgroup of this.resultGroup.getResultSubgroups()) {
+        if (resultSubgroup.name.toLowerCase().includes(this.searchValue.toLowerCase())) {
+          this.sortedResultSubgroup.push(resultSubgroup);
+          break;
+        }
+      }
     }
   }
 
