@@ -87,4 +87,31 @@ export class GroupInfoCardComponent implements OnInit, OnChanges {
     }
   }
 
+  getVotesSummary() {
+    const objects = [];
+
+    for (const decision of this.resultGroup.event.getDecisions()) {
+      const object = {
+        'name': decision,
+        'count': 0
+      };
+      objects.push(object);
+    }
+
+    for (const resultUser of this.resultGroup.getResultUsers()) {
+      for (const object of objects) {
+        if (resultUser.decision === object.name) {
+          object.count += 1;
+          break;
+        }
+      }
+    }
+
+    let stringToReturn = '';
+    for (const object of objects) {
+      stringToReturn += object.name + ': ' + object.count + ' ';
+    }
+    return stringToReturn;
+  }
+
 }
