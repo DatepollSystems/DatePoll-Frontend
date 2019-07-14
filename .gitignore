@@ -40,3 +40,7 @@ testem.log
 Thumbs.db
 
 deploy\.sh
+
+keys\.json
+
+keys\.production\.json
