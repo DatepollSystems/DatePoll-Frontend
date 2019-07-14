@@ -87,22 +87,58 @@ export class StartComponent implements OnInit, OnDestroy {
 
   applyForWorker(movieID: number, element: any) {
     element.disabled = true;
-    this.cinemaService.applyForWorker(movieID);
+    this.cinemaService.applyForWorker(movieID).subscribe(
+      (response: any) => {
+        console.log(response);
+        this.homePageService.fetchData();
+      },
+      (error) => {
+        console.log(error);
+        this.homePageService.fetchData();
+      }
+    );
   }
 
   signOutForWorker(movieID: number, element: any) {
     element.disabled = true;
-    this.cinemaService.signOutForWorker(movieID);
+    this.cinemaService.signOutForWorker(movieID).subscribe(
+      (response: any) => {
+        console.log(response);
+        this.homePageService.fetchData();
+      },
+      (error) => {
+        console.log(error);
+        this.homePageService.fetchData();
+      }
+    );
   }
 
   applyForEmergencyWorker(movieID: number, element: any) {
     element.disabled = true;
-    this.cinemaService.applyForEmergencyWorker(movieID);
+    this.cinemaService.applyForEmergencyWorker(movieID).subscribe(
+      (response: any) => {
+        console.log(response);
+        this.homePageService.fetchData();
+      },
+      (error) => {
+        console.log(error);
+        this.homePageService.fetchData();
+      }
+    );
   }
 
   signOutForEmergencyWorker(movieID: number, element: any) {
     element.disabled = true;
-    this.cinemaService.signOutForEmergencyWorker(movieID);
+    this.cinemaService.signOutForEmergencyWorker(movieID).subscribe(
+      (response: any) => {
+        console.log(response);
+        this.homePageService.fetchData();
+      },
+      (error) => {
+        console.log(error);
+        this.homePageService.fetchData();
+      }
+    );
   }
 
   onEventInfo(event: Event) {

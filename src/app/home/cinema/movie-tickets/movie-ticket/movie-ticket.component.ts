@@ -44,7 +44,8 @@ export class MovieTicketComponent implements OnInit {
     this.httpService.loggedInV1DELETERequest('/cinema/booking/' + this.movie.id, 'cancelTickets').subscribe(
       (data: any) => {
         console.log(data);
-        this.cinemaService.fetchNotShownMovies();
+        this.movie.bookedTickets -= this.movie.bookedTicketsForYourself;
+        this.movie.bookedTicketsForYourself = 0;
       },
       (error) => {
         console.log(error);
@@ -55,21 +56,61 @@ export class MovieTicketComponent implements OnInit {
 
   applyForWorker(element) {
     element.disabled = true;
-    this.cinemaService.applyForWorker(this.movie.id);
+    this.cinemaService.applyForWorker(this.movie.id).subscribe(
+      (response: any) => {
+        console.log(response);
+        this.movie.workerName = this.myUserService.getFirstname() + ' ' + this.myUserService.getSurname();
+        this.movie.workerID = this.myUserService.getID();
+      },
+      (error) => {
+        console.log(error);
+        this.cinemaService.fetchNotShownMovies();
+      }
+    );
   }
 
   signOutForWorker(element) {
     element.disabled = true;
-    this.cinemaService.signOutForWorker(this.movie.id);
+    this.cinemaService.signOutForWorker(this.movie.id).subscribe(
+      (response: any) => {
+        console.log(response);
+        this.movie.workerName = null;
+        this.movie.workerID = -1;
+      },
+      (error) => {
+        console.log(error);
+        this.cinemaService.fetchNotShownMovies();
+      }
+    );
   }
 
   applyForEmergencyWorker(element) {
     element.disabled = true;
-    this.cinemaService.applyForEmergencyWorker(this.movie.id);
+    this.cinemaService.applyForEmergencyWorker(this.movie.id).subscribe(
+      (response: any) => {
+        console.log(response);
+        this.movie.emergencyWorkerName = this.myUserService.getFirstname() + ' ' + this.myUserService.getSurname();
+        this.movie.emergencyWorkerID = this.myUserService.getID();
+      },
+      (error) => {
+        console.log(error);
+        this.cinemaService.fetchNotShownMovies();
+      }
+    );
   }
 
   signOutForEmergencyWorker(element) {
     element.disabled = true;
-    this.cinemaService.signOutForEmergencyWorker(this.movie.id);
+    this.cinemaService.signOutForEmergencyWorker(this.movie.id).subscribe(
+      (response: any) => {
+        console.log(response);
+        this.movie.emergencyWorkerName = null;
+        this.movie.emergencyWorkerID = -1;
+      },
+      (error) => {
+        console.log(error);
+        this.cinemaService.fetchNotShownMovies();
+      }
+    );
   }
 }

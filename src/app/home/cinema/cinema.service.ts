@@ -18,7 +18,7 @@ export class CinemaService {
   private _notShownMovies: Movie[] = null;
   private _years: Year[];
 
-  constructor(private authService: AuthService, private httpService: HttpService, private homePageService: HomepageService) {
+  constructor(private authService: AuthService, private httpService: HttpService) {
     this._movies = [];
     this._years = [];
   }
@@ -166,62 +166,18 @@ export class CinemaService {
 
 
   public applyForWorker(movieID: number) {
-    this.httpService.loggedInV1POSTRequest('/cinema/worker/' + movieID, {}, 'applyForWorker').subscribe(
-      (data: any) => {
-        console.log(data);
-        this.fetchNotShownMovies();
-        this.homePageService.fetchData();
-      },
-      (error) => {
-        console.log(error);
-        this.fetchNotShownMovies();
-        this.homePageService.fetchData();
-      }
-    );
+    return this.httpService.loggedInV1POSTRequest('/cinema/worker/' + movieID, {}, 'applyForWorker');
   }
 
   public signOutForWorker(movieID: number) {
-    this.httpService.loggedInV1DELETERequest('/cinema/worker/' + movieID, 'signOutForWorker').subscribe(
-      (data: any) => {
-        console.log(data);
-        this.fetchNotShownMovies();
-        this.homePageService.fetchData();
-      },
-      (error) => {
-        console.log(error);
-        this.fetchNotShownMovies();
-        this.homePageService.fetchData();
-      }
-    );
+    return this.httpService.loggedInV1DELETERequest('/cinema/worker/' + movieID, 'signOutForWorker');
   }
 
   public applyForEmergencyWorker(movieID: number) {
-    this.httpService.loggedInV1POSTRequest('/cinema/emergencyWorker/' + movieID, {}, 'applyForEmergencyWorker').subscribe(
-      (data: any) => {
-        console.log(data);
-        this.fetchNotShownMovies();
-        this.homePageService.fetchData();
-      },
-      (error) => {
-        console.log(error);
-        this.fetchNotShownMovies();
-        this.homePageService.fetchData();
-      }
-    );
+    return this.httpService.loggedInV1POSTRequest('/cinema/emergencyWorker/' + movieID, {}, 'applyForEmergencyWorker');
   }
 
   public signOutForEmergencyWorker(movieID: number) {
-    this.httpService.loggedInV1DELETERequest('/cinema/emergencyWorker/' + movieID, 'signOutForEmergencyWorker').subscribe(
-      (data: any) => {
-        console.log(data);
-        this.fetchNotShownMovies();
-        this.homePageService.fetchData();
-      },
-      (error) => {
-        console.log(error);
-        this.fetchNotShownMovies();
-        this.homePageService.fetchData();
-      }
-    );
+    return this.httpService.loggedInV1DELETERequest('/cinema/emergencyWorker/' + movieID, 'signOutForEmergencyWorker');
   }
 }
