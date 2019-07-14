@@ -10,7 +10,7 @@ import {Movie} from '../../../models/movie.model';
 })
 export class MovieWeatherforecastModalComponent {
 
-  private movie: Movie;
+  movie: Movie;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any,
               public dialogRef: MatDialogRef<MovieWeatherforecastModalComponent>) {
