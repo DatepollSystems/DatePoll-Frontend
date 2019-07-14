@@ -130,6 +130,8 @@
   "CINEMA_TICKETS_BOOKED_TICKETS": "Gebuchte Karten:",
   "CINEMA_TICKETS_CANCEL_BOOKED_TICKETS_TOOLTIP": "Storniere alle gebuchten Karten",
   "CINEMA_TICKETS_CANCEL_CINEMA_SERVICE_TOOLTIP": "Abmelden",
+  "CINEMA_TICKETS_WEATHER_FORECAST": "Wettervorhersage",
+  "CINEMA_TICKETS_WEATHER_FORECAST_SHOW": "Anzeigen",
 
   "CINEMA_TICKETS_BOOKING_MODAL_HEADER": "Buche Tickets für ",
   "CINEMA_TICKETS_BOOKING_MODAL_WARNING": "Karten sind in erster Linie für Vereinsmitglieder. Sollten kurz vor Kinobeginn noch Karten frei sein, können diese jederzeit an Freunde oder Familienmitglieder weitergeben werden! ",
@@ -138,6 +140,11 @@
   "CINEMA_TICKETS_BOOKING_MODAL_NUMBER_OF_TICKETS_INVALID_2": " ein!",
   "CINEMA_TICKETS_BOOKING_MODAL_AVAILABLE_TICKETS": "Freie Karten: ",
   "CINEMA_TICKETS_BOOKING_MODAL_BOOK": "Reservieren",
+
+  "CINEMA_TICKETS_WEATHER_FORECAST_MODAL": "Wettervorhersagen für ",
+  "CINEMA_TICKETS_WEATHER_FORECAST_MODAL_BY": "Um",
+  "CINEMA_TICKETS_WEATHER_FORECAST_MODAL_CLOUDS": "Wolken:",
+  "CINEMA_TICKETS_WEATHER_FORECAST_MODAL_WIND_SPEED": "Windgeschwindigkeit:",
 
   "CINEMA_TICKETS_SERVICE_BOOKING": "Reservierungen",
   "CINEMA_TICKETS_SERVICE_USERNAME": "Name",

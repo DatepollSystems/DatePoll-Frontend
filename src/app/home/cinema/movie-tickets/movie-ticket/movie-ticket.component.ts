@@ -7,6 +7,7 @@ import {CinemaService} from '../../cinema.service';
 
 import {MovieBookTicketsModalComponent} from './movie-book-tickets-modal/movie-book-tickets-modal.component';
 import {Movie} from '../../models/movie.model';
+import {MovieWeatherforecastModalComponent} from './movie-weatherforecast-modal/movie-weatherforecast-modal.component';
 
 @Component({
   selector: 'app-movie-ticket',
@@ -52,6 +53,13 @@ export class MovieTicketComponent implements OnInit {
         this.cinemaService.fetchNotShownMovies();
       }
     );
+  }
+
+  openWeatherForecastModal() {
+    this.dialog.open(MovieWeatherforecastModalComponent, {
+      width: '80vh',
+      data: {movie: this.movie}
+    });
   }
 
   applyForWorker(element) {

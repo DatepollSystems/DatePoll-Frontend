@@ -1,0 +1,34 @@
+<h2 mat-dialog-title>{{'CINEMA_TICKETS_WEATHER_FORECAST_MODAL' | translate}} {{movie.name}}</h2>
+<mat-dialog-content>
+
+  <mat-expansion-panel *ngFor="let weather of movie.getWeatherForecasts()" style="margin-bottom: 15px;">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        {{'CINEMA_TICKETS_WEATHER_FORECAST_MODAL_BY' | translate}} {{weather.date | date:'HH:mm'}}: {{weather.weather}}
+        - {{weather.temperature}}° C
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <div class="row">
+      <div class="col">
+        {{'CINEMA_TICKETS_WEATHER_FORECAST_MODAL_CLOUDS' | translate}}
+      </div>
+      <div class="col">
+        {{weather.cloudy}}%
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        {{'CINEMA_TICKETS_WEATHER_FORECAST_MODAL_WIND_SPEED' | translate}}
+      </div>
+      <div class="col">
+        {{weather.windSpeed}}m/s
+      </div>
+    </div>
+  </mat-expansion-panel>
+
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>{{'CLOSE' | translate}}</button>
+</mat-dialog-actions>

@@ -15,7 +15,8 @@
       </div>
       <div class="col-7 col-sm-7 col-md-8 col-lg-10" style="text-align: right">
         {{movie.workerName}}
-        <button #signOutForWorkerButton (click)="signOutForWorker(signOutForWorkerButton)" *ngIf="movie.workerID == myUserService.getID()"
+        <button #signOutForWorkerButton (click)="signOutForWorker(signOutForWorkerButton)"
+                *ngIf="movie.workerID == myUserService.getID()"
                 mat-icon-button matTooltip="{{'CINEMA_TICKETS_CANCEL_CINEMA_SERVICE_TOOLTIP' | translate}}"
                 matTooltipPosition="right">
           <mat-icon aria-label="Cancel worker">cancel</mat-icon>
@@ -66,6 +67,16 @@
       <div class="col" style="text-align: right">
         <a href="{{movie.trailerLink}}" mat-stroked-button rel="noopener"
            target="_blank">{{'CINEMA_TICLETS_TRAILER_WATCH' | translate}}</a>
+      </div>
+    </div>
+
+    <div *ngIf="movie.getWeatherForecasts().length !== 0" class="row align-items-center justify-content-between">
+      <div class="col-auto">
+        {{'CINEMA_TICKETS_WEATHER_FORECAST' | translate}}
+      </div>
+      <div class="col" style="text-align: right">
+        <button (click)="openWeatherForecastModal()"
+                mat-stroked-button>{{'CINEMA_TICKETS_WEATHER_FORECAST_SHOW' | translate}}</button>
       </div>
     </div>
 
