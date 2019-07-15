@@ -20,6 +20,7 @@ export class CinemaService {
   private _movies: Movie[];
   private _notShownMovies: Movie[] = null;
   private _years: Year[];
+  public fetchedWeatherForecast = false;
 
   constructor(private authService: AuthService, private httpService: HttpService, private http: HttpClient) {
     this._movies = [];
@@ -129,48 +130,52 @@ export class CinemaService {
           movies.push(localMovie);
         }
         this.setNotShownMovies(movies);
-
-        this.http.get('https://api.openweathermap.org/data/2.5/forecast?units=metric&lang=de&id=' + this.city_id + '&APPID='
-          + this.openweahtermap_api_key).subscribe(
-          (response: any) => {
-            console.log(response);
-
-            for (const tempObject of response.list) {
-              const date = new Date(tempObject.dt_txt);
-
-              for (const movie of this._notShownMovies) {
-                const maxDate = new Date(movie.date.toDateString());
-                maxDate.setDate(maxDate.getDate() + 1);
-                maxDate.setHours(0);
-
-                const minDate = new Date(movie.date.toDateString());
-                minDate.setHours(18);
-
-                if (minDate.getTime() <= date.getTime() && maxDate.getTime() >= date.getTime()) {
-                  // console.log(movie.name + ': Date - ' + date + ' | MinDate - ' + minDate.getTime() + ' | MaxDate - '
-                  // + maxDate.getTime() + ' | Date: ' + date.getTime());
-
-                  const temperature = tempObject.main.temp;
-                  const weather = tempObject.weather[0].description;
-                  const cloudy = tempObject.clouds.all;
-                  const windSpeed = tempObject.wind.speed;
-                  const windDirection = tempObject.wind.deg;
-
-                  const weatherForecast = new WeatherForecast(temperature, weather, cloudy, windSpeed, windDirection, 0, date);
-
-                  const weatherForecasts = movie.getWeatherForecasts();
-                  weatherForecasts.push(weatherForecast);
-                  movie.setWeatherforecasts(weatherForecasts);
-                }
-              }
-            }
-          },
-          (error) => {
-            console.log(error);
-          }
-        );
       },
       (error) => console.log(error)
+    );
+  }
+
+  public fetchWeatherForecastForNotShownMovies() {
+    this.http.get('https://api.openweathermap.org/data/2.5/forecast?units=metric&lang=de&id=' + this.city_id + '&APPID='
+      + this.openweahtermap_api_key).subscribe(
+      (response: any) => {
+        console.log(response);
+
+        for (const tempObject of response.list) {
+          const date = new Date(tempObject.dt_txt);
+
+          for (const movie of this._notShownMovies) {
+            const maxDate = new Date(movie.date.toDateString());
+            maxDate.setDate(maxDate.getDate() + 1);
+            maxDate.setHours(0);
+
+            const minDate = new Date(movie.date.toDateString());
+            minDate.setHours(18);
+
+            if (minDate.getTime() <= date.getTime() && maxDate.getTime() >= date.getTime()) {
+              // console.log(movie.name + ': Date - ' + date + ' | MinDate - ' + minDate.getTime() + ' | MaxDate - '
+              // + maxDate.getTime() + ' | Date: ' + date.getTime());
+
+              const temperature = tempObject.main.temp;
+              const weather = tempObject.weather[0].description;
+              const cloudy = tempObject.clouds.all;
+              const windSpeed = tempObject.wind.speed;
+              const windDirection = tempObject.wind.deg;
+
+              const weatherForecast = new WeatherForecast(temperature, weather, cloudy, windSpeed, windDirection, 0, date);
+
+              const weatherForecasts = movie.getWeatherForecasts();
+              weatherForecasts.push(weatherForecast);
+              movie.setWeatherforecasts(weatherForecasts);
+            }
+          }
+        }
+
+        this.fetchedWeatherForecast = true;
+      },
+      (error) => {
+        console.log(error);
+      }
     );
   }
 

@@ -1,39 +1,56 @@
 <h2 mat-dialog-title>{{'CINEMA_TICKETS_WEATHER_FORECAST_MODAL' | translate}} {{movie.name}}</h2>
 <mat-dialog-content>
 
-  <mat-expansion-panel *ngFor="let weather of movie.getWeatherForecasts()" style="margin-bottom: 15px;">
-    <mat-expansion-panel-header>
-      <mat-panel-title>
-        {{'CINEMA_TICKETS_WEATHER_FORECAST_MODAL_BY' | translate}} {{weather.date | date:'HH:mm'}}: {{weather.weather}}
-        - {{weather.temperature}}° C
-      </mat-panel-title>
-    </mat-expansion-panel-header>
-
-    <div class="row">
-      <div class="col">
-        {{'CINEMA_TICKETS_WEATHER_FORECAST_MODAL_CLOUDS' | translate}}
-      </div>
-      <div class="col">
-        {{weather.cloudy}}%
+  <div *ngIf="!cinemaService.fetchedWeatherForecast">
+    <div class="row justify-content-center">
+      <div class="col-1">
+        <mat-spinner></mat-spinner>
       </div>
     </div>
+  </div>
 
-    <div class="row">
-      <div class="col">
-        {{'CINEMA_TICKETS_WEATHER_FORECAST_MODAL_WIND_SPEED' | translate}}
-      </div>
-      <div class="col">
-        {{weather.windSpeed}}m/s
+  <div *ngIf="cinemaService.fetchedWeatherForecast">
+    <div *ngIf="movie.getWeatherForecasts().length !== 0">
+      <mat-expansion-panel *ngFor="let weather of movie.getWeatherForecasts()" style="margin-bottom: 15px;">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            {{'CINEMA_TICKETS_WEATHER_FORECAST_MODAL_BY' | translate}} {{weather.date | date:'HH:mm'}}: {{weather.weather}}
+            - {{weather.temperature}}° C
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <div class="row">
+          <div class="col">
+            {{'CINEMA_TICKETS_WEATHER_FORECAST_MODAL_CLOUDS' | translate}}
+          </div>
+          <div class="col">
+            {{weather.cloudy}}%
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            {{'CINEMA_TICKETS_WEATHER_FORECAST_MODAL_WIND_SPEED' | translate}}
+          </div>
+          <div class="col">
+            {{weather.windSpeed}}m/s
+          </div>
+        </div>
+      </mat-expansion-panel>
+
+      <small>
+        {{'CINEMA_TICKETS_WEATHER_FORECAST_MODAL_PROVIDER_1' | translate}}
+        <a href="https://openweathermap.org" target="_blank" rel="noopener">OpenWeatherMap</a>
+        {{'CINEMA_TICKETS_WEATHER_FORECAST_MODAL_PROVIDER_2' | translate}}
+      </small>
+    </div>
+
+    <div class="row" *ngIf="movie.getWeatherForecasts().length === 0">
+      <div class="col-12">
+        {{'CINEMA_TICKETS_WEATHER_FORECAST_MODAL_NO_DATA' | translate}}
       </div>
     </div>
-  </mat-expansion-panel>
-
-  <small>
-    {{'CINEMA_TICKETS_WEATHER_FORECAST_MODAL_PROVIDER_1' | translate}}
-    <a href="https://openweathermap.org" target="_blank" rel="noopener">OpenWeatherMap</a>
-    {{'CINEMA_TICKETS_WEATHER_FORECAST_MODAL_PROVIDER_2' | translate}}
-  </small>
-
+  </div>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
   <button mat-button mat-dialog-close>{{'CLOSE' | translate}}</button>
