@@ -16,6 +16,8 @@ import {CommonEventsComponentsModule} from './home/events/common-events-componen
 
 import {CookieService} from 'angular2-cookie/core';
 
+import {NoSanitizePipe} from './no-sanitize.pipe';
+
 import {AuthService} from './auth/auth.service';
 import {AuthGuard} from './auth/auth-guard.service';
 import {TranslateService} from './translation/translate.service';
@@ -26,6 +28,9 @@ import {UsersService} from './home/management/users-management/users.service';
 import {GroupsService} from './home/management/groups-management/groups.service';
 import {PerformanceBadgesService} from './home/management/performance-badges-management/performance-badges.service';
 import {CinemaService} from './home/cinema/cinema.service';
+import {EventsService} from './home/events/events.service';
+import {EventsUserService} from './home/events/events-user.service';
+import {HomepageService} from './home/start/homepage.service';
 
 
 import {MAT_DATE_LOCALE} from '@angular/material/core';
@@ -35,7 +40,6 @@ import {AppComponent} from './app.component';
 import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
 import {HomeComponent} from './home/home.component';
 import {StartComponent} from './home/start/start.component';
-import {NoSanitizePipe} from './no-sanitize.pipe';
 
 registerLocaleData(localeDe);
 
@@ -72,6 +76,9 @@ registerLocaleData(localeDe);
     GroupsService,
     PerformanceBadgesService,
     CinemaService,
+    EventsService,
+    EventsUserService,
+    HomepageService,
     {
       provide: APP_INITIALIZER,
       useFactory: setupTranslateFactory,
