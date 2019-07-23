@@ -1,9 +1,12 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {retry} from 'rxjs/operators';
+import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
+import {retry, catchError} from 'rxjs/operators';
 
 import {environment} from '../../environments/environment';
 import {AuthService} from '../auth/auth.service';
+import {throwError} from 'rxjs';
+import {NotificationsService} from 'angular2-notifications';
+import {TranslateService} from '../translation/translate.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +14,10 @@ import {AuthService} from '../auth/auth.service';
 export class HttpService {
   apiUrl = environment.apiUrl;
 
-  constructor(private authService: AuthService, private http: HttpClient) {
+  constructor(private authService: AuthService,
+              private http: HttpClient,
+              private notificationsService: NotificationsService,
+              private translate: TranslateService) {
   }
 
   public loggedInV1GETRequest(url: string, functionUser: string = null) {
@@ -20,7 +26,17 @@ export class HttpService {
     const token = this.authService.getToken(functionUser);
 
     return this.http.get(this.apiUrl + '/v1' + url + '?token=' + token).pipe(
-      retry(3)
+      retry(3),
+      catchError((error: HttpErrorResponse) => {
+        if (error.error instanceof ErrorEvent) {
+          console.error('An error occurred:', error.error.message);
+        } else {
+          console.error(`Backend returned code ${error.status}, ` + `body was: ${error.error}`);
+        }
+        this.notificationsService.error(this.translate.getTranslationFor('ERROR'), this.translate.getTranslationFor('REQUEST_ERROR'));
+
+        return throwError('An unexpected error occured.');
+      })
     );
   }
 
@@ -31,7 +47,17 @@ export class HttpService {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
 
     return this.http.post(this.apiUrl + '/v1' + url + '?token=' + token, body, {headers: headers}).pipe(
-      retry(3)
+      retry(3),
+      catchError((error: HttpErrorResponse) => {
+        if (error.error instanceof ErrorEvent) {
+          console.error('An error occurred:', error.error.message);
+        } else {
+          console.error(`Backend returned code ${error.status}, ` + `body was: ${error.error}`);
+        }
+        this.notificationsService.error(this.translate.getTranslationFor('ERROR'), this.translate.getTranslationFor('REQUEST_ERROR'));
+
+        return throwError('An unexpected error occured.');
+      })
     );
   }
 
@@ -42,7 +68,17 @@ export class HttpService {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
 
     return this.http.put(this.apiUrl + '/v1' + url + '?token=' + token, body, {headers: headers}).pipe(
-      retry(3)
+      retry(3),
+      catchError((error: HttpErrorResponse) => {
+        if (error.error instanceof ErrorEvent) {
+          console.error('An error occurred:', error.error.message);
+        } else {
+          console.error(`Backend returned code ${error.status}, ` + `body was: ${error.error}`);
+        }
+        this.notificationsService.error(this.translate.getTranslationFor('ERROR'), this.translate.getTranslationFor('REQUEST_ERROR'));
+
+        return throwError('An unexpected error occured.');
+      })
     );
   }
 
@@ -51,7 +87,17 @@ export class HttpService {
 
     const token = this.authService.getToken(functionUser);
     return this.http.delete(this.apiUrl + '/v1' + url + '?token=' + token).pipe(
-      retry(3)
+      retry(3),
+      catchError((error: HttpErrorResponse) => {
+        if (error.error instanceof ErrorEvent) {
+          console.error('An error occurred:', error.error.message);
+        } else {
+          console.error(`Backend returned code ${error.status}, ` + `body was: ${error.error}`);
+        }
+        this.notificationsService.error(this.translate.getTranslationFor('ERROR'), this.translate.getTranslationFor('REQUEST_ERROR'));
+
+        return throwError('An unexpected error occured.');
+      })
     );
   }
 
