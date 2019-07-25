@@ -27,7 +27,8 @@
     <div class="row">
       <mat-form-field class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 datepicker-field">
         <input [(ngModel)]="startDate" [matDatepicker]="picker_startDate" id="datepicker-startDate"
-               matInput name="datepicker-startDate" placeholder="{{'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE' | translate}}"
+               matInput name="datepicker-startDate"
+               placeholder="{{'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE' | translate}}"
                required>
         <mat-datepicker-toggle [for]="picker_startDate" matSuffix></mat-datepicker-toggle>
         <mat-datepicker #picker_startDate></mat-datepicker>
@@ -35,7 +36,8 @@
 
       <mat-form-field class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 datepicker-field-mobile">
         <input [(ngModel)]="startDate" [matDatepicker]="picker_mobile_startDate" id="datepicker-startDate-mobile"
-               matInput name="datepicker-startDate-mobile" placeholder="{{'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE' | translate}}"
+               matInput name="datepicker-startDate-mobile"
+               placeholder="{{'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE' | translate}}"
                required>
         <mat-datepicker-toggle [for]="picker_mobile_startDate" matSuffix></mat-datepicker-toggle>
         <mat-datepicker #picker_mobile_startDate touchUi></mat-datepicker>
@@ -69,7 +71,8 @@
     <div class="row">
       <mat-form-field class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 datepicker-field">
         <input [(ngModel)]="endDate" [matDatepicker]="picker_endDate" id="datepicker-endDate"
-               matInput name="datepicker-endDate" placeholder="{{'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE' | translate}}"
+               matInput name="datepicker-endDate"
+               placeholder="{{'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE' | translate}}"
                required>
         <mat-datepicker-toggle [for]="picker_endDate" matSuffix></mat-datepicker-toggle>
         <mat-datepicker #picker_endDate></mat-datepicker>
@@ -77,7 +80,8 @@
 
       <mat-form-field class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 datepicker-field-mobile">
         <input [(ngModel)]="endDate" [matDatepicker]="picker_mobile_endDate" id="datepicker-endDate-mobile"
-               matInput name="datepicker-endDate-mobile" placeholder="{{'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE' | translate}}"
+               matInput name="datepicker-endDate-mobile"
+               placeholder="{{'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE' | translate}}"
                required>
         <mat-datepicker-toggle [for]="picker_mobile_endDate" matSuffix></mat-datepicker-toggle>
         <mat-datepicker #picker_mobile_endDate touchUi></mat-datepicker>
@@ -104,12 +108,25 @@
       </mat-form-field>
     </div>
 
+    <!-- Location -->
+    <div class="row">
+      <mat-form-field class="col-12">
+        <input #locationModel="ngModel" id="location" matInput maxlength="190" name="location" type="text"
+               [(ngModel)]="location" ngModel
+               placeholder="{{'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_LOCATION' | translate}}">
+        <mat-error *ngIf="locationModel.invalid">
+          {{'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_LOCATION_INCORRECT' | translate}}
+        </mat-error>
+      </mat-form-field>
+    </div>
+
     <!-- Decisions -->
     <app-event-decisions-list (decisionsChanged)="onDecisionsChange($event)"
                               [decisions]="decisions"></app-event-decisions-list>
 
     <!-- Group management -->
-    <app-group-and-subgroup-select (freeChanged)="onFreeChange($event)" (joinedChanged)="onJoinedChange($event)" [free]="free"
+    <app-group-and-subgroup-select (freeChanged)="onFreeChange($event)" (joinedChanged)="onJoinedChange($event)"
+                                   [free]="free"
                                    [joined]="joined" [parentGroupLock]="false">
     </app-group-and-subgroup-select>
     <small>{{'EVENTS_ADMINISTRATION_CREATE_EVENT_GROUPS_DESCRIPTION' | translate}}</small>

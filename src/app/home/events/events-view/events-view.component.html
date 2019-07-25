@@ -27,7 +27,8 @@
           <mat-card-actions>
             <button (click)="onVote(event)" *ngIf="!event.alreadyVotedFor" color="primary"
                     mat-flat-button>{{'EVENTS_VIEW_EVENT_CARD_BUTTON_DECIDE' | translate}}</button>
-            <button #cancelVotingButton (click)="cancelVoting(event, cancelVotingButton)" *ngIf="event.alreadyVotedFor" color="accent"
+            <button #cancelVotingButton (click)="cancelVoting(event, cancelVotingButton)" *ngIf="event.alreadyVotedFor"
+                    color="accent"
                     mat-flat-button>{{'EVENTS_VIEW_EVENT_CARD_BUTTON_CANCEL_VOTING' | translate}}</button>
             <button (click)="onInfo(event)" mat-button>
               <mat-icon>info</mat-icon>

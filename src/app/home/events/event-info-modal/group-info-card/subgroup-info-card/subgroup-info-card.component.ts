@@ -26,7 +26,7 @@ export class SubgroupInfoCardComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.pieChartLabels = this.resultSubgroup.event.getDecisions();
+    this.pieChartLabels = this.resultSubgroup.event.getDecisionsAsStrings();
     this.pieChartData = [...this.resultSubgroup.getChartData()];
     this.pieChartIsEmpty = this.resultSubgroup.chartIsEmpty;
     monkeyPatchChartJsTooltip();

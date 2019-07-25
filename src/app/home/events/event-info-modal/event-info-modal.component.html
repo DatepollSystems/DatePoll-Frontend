@@ -2,15 +2,24 @@
 <div mat-dialog-content>
   <!-- Date -->
   <div class="row" style="margin-bottom: 15px;">
-    <b class="col-12">{{'EVENTS_ADMINISTRATION_INFO_EVENT_DATE' | translate}} {{startDate | date:'dd.MM.yyyy HH:mm'}} - {{endDate | date:'dd.MM.yyyy HH:mm'}}</b>
+    <b class="col-12">{{'EVENTS_ADMINISTRATION_INFO_EVENT_DATE' | translate}} {{startDate | date:'dd.MM.yyyy HH:mm'}}
+      - {{endDate | date:'dd.MM.yyyy HH:mm'}}</b>
+  </div>
+
+  <!-- Location -->
+  <div class="row" *ngIf="location != null">
+    <mat-form-field class="col-12">
+      <input matInput name="location" type="text" [ngModel]="location" readonly
+             ngModel placeholder="{{'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_LOCATION' | translate}}">
+    </mat-form-field>
   </div>
 
   <!-- Description -->
   <div class="row">
     <div class="col-12">
       <mat-form-field appearance="outline">
-        <textarea [(ngModel)]="description" matInput name="description" readonly
-                  placeholder="{{'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DESCRIPTION' | translate}}"></textarea>
+        <textarea [(ngModel)]="description" matInput name="description" placeholder="{{'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DESCRIPTION' | translate}}"
+                  readonly></textarea>
       </mat-form-field>
     </div>
   </div>
@@ -37,15 +46,17 @@
 
       <div class="row" style="margin-top: 15px;">
         <mat-form-field class="col-12">
-          <input  matInput [(ngModel)]="searchValue" (ngModelChange)="applyFilter($event)"
+          <input (ngModelChange)="applyFilter($event)" [(ngModel)]="searchValue" matInput
                  placeholder="{{'MANAGEMENT_GROUPS_SEARCH' | translate}}">
-          <button mat-button *ngIf="searchValue" matSuffix mat-icon-button aria-label="Clear" (click)="searchValue=''; applyFilter('')">
+          <button (click)="searchValue=''; applyFilter('')" *ngIf="searchValue" aria-label="Clear" mat-button mat-icon-button
+                  matSuffix>
             <mat-icon>close</mat-icon>
           </button>
         </mat-form-field>
       </div>
 
-      <app-group-info-card *ngFor="let resultGroup of sortedResultGroups" [resultGroup]="resultGroup" [searchValue]="searchValue"></app-group-info-card>
+      <app-group-info-card *ngFor="let resultGroup of sortedResultGroups" [resultGroup]="resultGroup"
+                           [searchValue]="searchValue"></app-group-info-card>
     </div>
   </div>
 

@@ -7,19 +7,25 @@
         </mat-panel-title>
       </mat-expansion-panel-header>
 
-      <form #addDecisionForm="ngForm" (ngSubmit)="addDecision(addDecisionForm)" class="row">
-        <div class="col-12 col-sm-12 col-md-7 col-lg-7">
+      <form #addDecisionForm="ngForm" (ngSubmit)="addDecision(addDecisionForm)" class="row justify-content-between">
+        <div class="col-12 col-sm-12 col-md-4">
           <mat-form-field>
             <input #decisionModel="ngModel" id="decision" matInput maxlength="190"
                    minlength="1" name="decision"
-                   ngModel placeholder="{{'EVENTS_STANDARD_DECISIONS_MANAGEMENT_ADD_STANDARD_DECISION' | translate}}" required
+                   ngModel placeholder="{{'EVENTS_STANDARD_DECISIONS_MANAGEMENT_ADD_STANDARD_DECISION' | translate}}"
+                   required
                    type="text">
             <mat-error *ngIf="decisionModel.invalid">
               {{'EVENTS_STANDARD_DECISIONS_MANAGEMENT_ADD_STANDARD_DECISION_INCORRECT' | translate}}
             </mat-error>
           </mat-form-field>
         </div>
-        <div class="col-12 col-sm-12 col-md-4 col-lg-4">
+        <div class="col-12 col-sm-12 col-md-3" style="padding-top: 5px;">
+          <mat-slide-toggle (change)="showInCalendarChange($event)" [checked]="showInCalendar">
+            {{'EVENTS_STANDARD_DECISIONS_MANAGEMENT_ADD_STANDARD_DECISION_SHOW_IN_CALENDAR' | translate}}
+          </mat-slide-toggle>
+        </div>
+        <div class="col-12 col-sm-12 col-md-3">
           <button [disabled]="!addDecisionForm.valid" class="success-button" mat-raised-button
                   style="width: 100%; text-align: center" type="submit">
             {{'ADD' | translate}}
@@ -30,9 +36,12 @@
 
       <mat-list class="col-12">
         <mat-list-item *ngFor="let decision of decisions">
-          <span matLine>{{ decision }}</span>
+          <span matLine>{{ decision.decision }}</span>
+          <span matLine>{{'EVENTS_STANDARD_DECISIONS_MANAGEMENT_ADD_STANDARD_DECISION_SHOW_IN_CALENDAR' | translate}}
+            : {{decision.showInCalendar | boolean}}</span>
           <button (click)="removeDecision(decision)"
-                  mat-icon-button matTooltip="{{'EVENTS_STANDARD_DECISIONS_MANAGEMENT_REMOVE_STANDARD_DECISION_BUTTON_TOOLTIP' | translate}}"
+                  mat-icon-button
+                  matTooltip="{{'EVENTS_STANDARD_DECISIONS_MANAGEMENT_REMOVE_STANDARD_DECISION_BUTTON_TOOLTIP' | translate}}"
                   matTooltipPosition="right">
             <mat-icon>delete_forever</mat-icon>
           </button>

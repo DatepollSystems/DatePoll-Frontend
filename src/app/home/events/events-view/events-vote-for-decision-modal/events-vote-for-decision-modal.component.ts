@@ -1,10 +1,12 @@
 import {Component, Inject, TemplateRef, ViewChild} from '@angular/core';
 import {MAT_BOTTOM_SHEET_DATA, MatBottomSheetRef} from '@angular/material';
 
-import {Event} from '../../models/event.model';
-import {EventsUserService} from '../../events-user.service';
 import {NotificationsService, NotificationType} from 'angular2-notifications';
+
+import {EventsUserService} from '../../events-user.service';
 import {HomepageService} from '../../../start/homepage.service';
+import {Decision} from '../../models/decision.model';
+import {Event} from '../../models/event.model';
 
 @Component({
   selector: 'app-events-vote-for-decision-modal',
@@ -26,7 +28,7 @@ export class EventsVoteForDecisionModalComponent {
     this.name = this.event.name;
   }
 
-  voteFor(decision: string) {
+  voteFor(decision: Decision) {
     this.eventsUserService.voteForDecision(this.event.id, decision).subscribe(
       (response: any) => {
         console.log(response);

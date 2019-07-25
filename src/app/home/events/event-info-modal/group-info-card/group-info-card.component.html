@@ -49,7 +49,7 @@
                 <th *matHeaderCellDef mat-header-cell
                     mat-sort-header> {{'EVENTS_ADMINISTRATION_INFO_EVENT_FIRSTNAME' | translate}} </th>
                 <td *matCellDef="let resultUser" mat-cell> {{resultUser.firstname}} </td>
-                <td mat-footer-cell *matFooterCellDef><b>Total</b></td>
+                <td *matFooterCellDef mat-footer-cell><b>Total</b></td>
               </ng-container>
 
               <!-- Surname Column -->
@@ -57,7 +57,7 @@
                 <th *matHeaderCellDef mat-header-cell
                     mat-sort-header> {{'EVENTS_ADMINISTRATION_INFO_EVENT_SURNAME' | translate}} </th>
                 <td *matCellDef="let resultUser" mat-cell> {{resultUser.surname}} </td>
-                <td mat-footer-cell *matFooterCellDef> </td>
+                <td *matFooterCellDef mat-footer-cell></td>
               </ng-container>
 
               <!-- Decision Column -->
@@ -70,12 +70,12 @@
                   <span
                     *ngIf="resultUser.decision == null">{{'EVENTS_ADMINISTRATION_INFO_EVENT_UNKNOWN_VOTING' | translate}}</span>
                 </td>
-                <td mat-footer-cell *matFooterCellDef><b>{{getVotesSummary()}}</b></td>
+                <td *matFooterCellDef mat-footer-cell><b>{{getVotesSummary()}}</b></td>
               </ng-container>
 
               <tr *matHeaderRowDef="displayedColumns; sticky: true" mat-header-row></tr>
               <tr *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
-              <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
+              <tr *matFooterRowDef="displayedColumns" mat-footer-row></tr>
             </table>
             <mat-paginator [pageSizeOptions]="[10, 20, 50, 100]" showFirstLastButtons></mat-paginator>
           </div>

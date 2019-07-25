@@ -16,6 +16,8 @@
   "YES": "Ja",
   "NO": "Nein",
   "SUCCESSFULLY": "Erfolgreich",
+  "ERROR": "Fehler",
+  "REQUEST_ERROR": "Ein unbekannter Fehler ist aufgetreten. Versuche die Website neu zu laden.",
 
 
 
@@ -437,6 +439,7 @@
   "EVENTS_STANDARD_DECISIONS_MANAGEMENT_SUCCESSFULLY_ADDED": "Die Standard-Antwort wurde erfolgreich gespeichert!",
   "EVENTS_STANDARD_DECISIONS_MANAGEMENT_SUCCESSFULLY_REMOVED": "Die Standard-Antwort wurde erfolgreich entfernt!",
   "EVENTS_STANDARD_DECISIONS_MANAGEMENT_ADD_STANDARD_DECISION": "Antwortmöglichkeit",
+  "EVENTS_STANDARD_DECISIONS_MANAGEMENT_ADD_STANDARD_DECISION_SHOW_IN_CALENDAR": "Im Kalendar anzeigen",
   "EVENTS_STANDARD_DECISIONS_MANAGEMENT_ADD_STANDARD_DECISION_INCORRECT": "Die Antwortmöglichkeit darf weder leer sein, noch mehr als 190 Zeichen haben.",
   "EVENTS_STANDARD_DECISIONS_MANAGEMENT_REMOVE_STANDARD_DECISION_BUTTON_TOOLTIP": "Entferne diese Antwortmöglichkeit",
 
@@ -444,6 +447,8 @@
   "EVENTS_ADMINISTRATION_CREATE_EVENT_SUCCESSFULLY_CREATED": "Das Event wurde erfolgreich angelegt!",
   "EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_NAME": "Name",
   "EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_NAME_INCORRECT": "Der Name darf weder leer sein, noch mehr als 190 Zeichen haben!",
+  "EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_LOCATION": "Ort",
+  "EVENTS_ADMINISTRATION_CREATE_EVENT_FORM _LOCATION_INCORRECT": "Der Ort darf nicht mehr als 190 Zeichen haben.",
   "EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_START_DATE": "Start-Datum",
   "EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_END_DATE": "End-Datum",
   "EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE": "Datum",
