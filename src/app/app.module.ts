@@ -1,7 +1,7 @@
 import {APP_INITIALIZER, NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {registerLocaleData} from '@angular/common';
 import localeDe from '@angular/common/locales/de';
 
@@ -32,6 +32,7 @@ import {EventsService} from './home/events/events.service';
 import {EventsUserService} from './home/events/events-user.service';
 import {HomepageService} from './home/start/homepage.service';
 
+import {AuthInterceptor} from './auth/auth-interceptor';
 
 import {MAT_DATE_LOCALE} from '@angular/material/core';
 import {MAT_SNACK_BAR_DEFAULT_OPTIONS} from '@angular/material/snack-bar';
@@ -88,6 +89,11 @@ registerLocaleData(localeDe);
     {
       provide: CookieService,
       useFactory: cookieServiceFactory
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
     },
     // Set the datetimepicker time format to day/month/year
     {provide: MAT_DATE_LOCALE, useValue: 'de-DE'},

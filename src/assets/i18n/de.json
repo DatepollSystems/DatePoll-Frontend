@@ -52,7 +52,6 @@
   "SIGNIN_NOT_SIGNED_UP": "Kein Konto?",
   "SIGNIN_USERNAME": "Benutzername",
   "SIGNIN_PASSWORD": "Passwort",
-  "SIGNIN_STAY_LOGGED_IN": "Angemeldet bleiben",
   "SIGNIN_KEEP_YOUR_PASSWORD_SECRET": "Behalte dein Passwort geheim",
   "SIGNIN_USERNAME_OR_PASSWORD_INCORRECT": "Der Benutzername oder das Passwort sind inkorrekt!",
   "SIGNIN_ACCOUNT_NOT_ACTIVATED": "Dein Account ist derzeit deaktiviert! Probier es doch später wieder...",
