@@ -6,7 +6,7 @@ import {StartComponent} from './home/start/start.component';
 import {AuthGuard} from './auth/auth-guard.service';
 
 const appRoutes = [
-  {path: '', redirectTo: '/home', pathMatch: 'full'},
+  {path: '', redirectTo: '/auth/signin', pathMatch: 'full'},
   {path: 'auth', loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)},
   {
     path: 'home', component: HomeComponent, canActivate: [AuthGuard], children: [
@@ -26,7 +26,8 @@ const appRoutes = [
       {
         path: 'management/performanceBadges',
         loadChildren:
-          () => import('./home/management/performance-badges-management/performance-badges-management.module').then(m => m.PerformanceBadgesManagementModule)
+          () => import('./home/management/performance-badges-management/performance-badges-management.module')
+            .then(m => m.PerformanceBadgesManagementModule)
       },
       {
         path: 'management/datepoll',
