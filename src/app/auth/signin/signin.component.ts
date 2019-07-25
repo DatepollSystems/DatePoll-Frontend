@@ -25,7 +25,6 @@ export class SigninComponent implements OnInit, OnDestroy {
 
   private username: string;
   private password: string;
-  private stayLoggedIn = false;
 
   constructor(private router: Router,
               private snackBar: MatSnackBar,
@@ -56,9 +55,7 @@ export class SigninComponent implements OnInit, OnDestroy {
     this.username = form.value.username;
     this.password = form.value.password;
 
-    console.log('signInComponent | Stay logged in: ' + this.stayLoggedIn);
-
-    this.authService.signinUser(this.username, this.password, this.stayLoggedIn).subscribe(
+    this.authService.trySignin(this.username, this.password).subscribe(
       (data: any) => {
         console.log(data);
         if (data.msg != null) {
@@ -74,12 +71,8 @@ export class SigninComponent implements OnInit, OnDestroy {
           return;
         }
 
+        this.authService.signin(data.token, data.sessionToken);
         this.uiLogin();
-        if (data.sessionToken != null) {
-          this.authService.performLogin(data.token, data.sessionToken);
-        } else {
-          this.authService.performLogin(data.token);
-        }
       },
       (error) => {
         console.log(error);
@@ -96,8 +89,9 @@ export class SigninComponent implements OnInit, OnDestroy {
 
     this.authService.changePasswordAfterSignin(this.username, this.password, password).subscribe(
       (data: any) => {
+        console.log(data);
+        this.authService.signin(data.token, data.sessionToken);
         this.uiLogin();
-        this.authService.performLogin(data.token);
       }, (error) => console.log(error)
     );
   }
@@ -106,6 +100,7 @@ export class SigninComponent implements OnInit, OnDestroy {
     this.loginSuccess = true;
     this.loginFail = false;
     this.snackBar.open('Login erfolgreich');
+    this.router.navigate(['/home']);
   }
 
 }
