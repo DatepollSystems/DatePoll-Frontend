@@ -55,7 +55,7 @@ export class AuthService {
       'sessionToken': this.getSessionToken()
     };
 
-    this.http.post(this.apiUrl + '/v1/user/myself/session/logoutCurrentSession?token=' + this.getJWTToken(), object,
+    this.http.post(this.apiUrl + '/v1/user/myself/session/logoutCurrentSession', object,
       {headers: this.httpHeaders}).subscribe(
       (data: any) => {
         console.log(data);
@@ -63,12 +63,9 @@ export class AuthService {
         this.setSessionToken(null);
         this.setJWTToken(null);
         this.cookieService.removeAll();
-        this.router.navigate(['/auth/signin']);
         console.log('authService | Logout successful');
 
-        setTimeout(() => {
-          window.location.reload();
-        }, 500);
+        window.location.reload();
       },
       (error) => {
         console.log(error);
@@ -77,9 +74,7 @@ export class AuthService {
         this.setJWTToken(null);
         this.cookieService.removeAll();
 
-        setTimeout(() => {
-          window.location.reload();
-        }, 500);
+        window.location.reload();
       }
     );
   }
