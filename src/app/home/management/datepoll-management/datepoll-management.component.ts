@@ -24,6 +24,12 @@ export class DatepollManagementComponent implements OnInit, OnDestroy {
   communityName: string;
   communityNameSubscription: Subscription;
 
+  openWeatherMapKey: string;
+  openWeatherMapKeySubscription: Subscription;
+
+  openWeatherMapCinemaCityId: string;
+  openWeatherMapCinemaCityIdSubscription: Subscription;
+
   permissionSubscription: Subscription;
 
   constructor(private settingsService: SettingsService,
@@ -46,6 +52,16 @@ export class DatepollManagementComponent implements OnInit, OnDestroy {
       this.communityName = value;
     });
 
+    this.openWeatherMapKey = settingsService.getOpenWeatherMapKey();
+    this.openWeatherMapKeySubscription = settingsService.openWeatherMapKeyChange.subscribe((value) => {
+      this.openWeatherMapKey = value;
+    });
+
+    this.openWeatherMapCinemaCityId = settingsService.getOpenWeatherMapCinemaCityId();
+    this.openWeatherMapCinemaCityIdSubscription = settingsService.openWeatherMapCinemaCityIdChange.subscribe((value) => {
+      this.openWeatherMapCinemaCityId = value;
+    });
+
     this.permissionSubscription = myUserService.permissionsChange.subscribe((value) => {
       if (!this.myUserService.hasPermission(Permissions.SETTINGS_ADMINISTRATION)) {
         this.router.navigate(['/home']);
@@ -63,6 +79,8 @@ export class DatepollManagementComponent implements OnInit, OnDestroy {
     this.cinemaServiceEnabledChange.unsubscribe();
     this.eventsServiceEnabledChange.unsubscribe();
     this.communityNameSubscription.unsubscribe();
+    this.openWeatherMapKeySubscription.unsubscribe();
+    this.openWeatherMapCinemaCityIdSubscription.unsubscribe();
     this.permissionSubscription.unsubscribe();
   }
 
@@ -81,6 +99,30 @@ export class DatepollManagementComponent implements OnInit, OnDestroy {
         console.log(response);
         this.notificationsService.success(this.translate.getTranslationFor('SUCCESSFULLY'),
           this.translate.getTranslationFor('MANAGEMENT_DATEPOLL_COMMUNITY_NAME_CHANGED_SUCCESSFULLY'));
+      },
+      (error) => console.log(error)
+    );
+  }
+
+  changeOpenWeatherMapKey(form: NgForm) {
+    const openWeatherMapKey = form.controls.openWeatherMapKey.value;
+    this.settingsService.setAdminOpenWeatherMapKey(openWeatherMapKey).subscribe(
+      (response: any) => {
+        console.log(response);
+        this.notificationsService.success(this.translate.getTranslationFor('SUCCESSFULLY'),
+          this.translate.getTranslationFor('MANAGEMENT_DATEPOLL_OPENWEATHERMAP_KEY_CHANGED_SUCCESSFULLY'));
+      },
+      (error) => console.log(error)
+    );
+  }
+
+  changeOpenWeatherMapCinemaCityId(form: NgForm) {
+    const openWeatherMapCinemaCityId = form.controls.openWeatherMapCinemaCityId.value;
+    this.settingsService.setAdminOpenWeatherMapCinemaCityId(openWeatherMapCinemaCityId).subscribe(
+      (response: any) => {
+        console.log(response);
+        this.notificationsService.success(this.translate.getTranslationFor('SUCCESSFULLY'),
+          this.translate.getTranslationFor('MANAGEMENT_DATEPOLL_OPENWEATHERMAP_CINEMA_CITY_ID_CHANGED_SUCCESSFULLY'));
       },
       (error) => console.log(error)
     );

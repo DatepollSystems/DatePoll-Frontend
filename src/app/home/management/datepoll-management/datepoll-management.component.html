@@ -55,5 +55,41 @@
                 type="submit">{{'SAVE' | translate}}</button>
       </div>
     </form>
+
+    <form #changeOpenWeatherMapKeyForm="ngForm" (ngSubmit)="changeOpenWeatherMapKey(changeOpenWeatherMapKeyForm)"
+          class="row" style="margin-top: 15px">
+      <mat-form-field class="col-12 col-sm-12 col-md-6">
+        <input #openWeatherMapKeyModel="ngModel" [(ngModel)]="openWeatherMapKey" id="openWeatherMapKey" matInput
+               maxlength="50" name="openWeatherMapKey"
+               ngModel placeholder="{{'MANAGEMENT_DATEPOLL_OPENWEATHERMAP_KEY' | translate}}"
+               type="text">
+        <mat-error *ngIf="openWeatherMapKeyModel.invalid">
+          {{'MANAGEMENT_DATEPOLL_OPENWEATHERMAP_KEY_INVALID' | translate}}
+        </mat-error>
+      </mat-form-field>
+
+      <div class="col-12 col-sm-12 col-md-3">
+        <button [disabled]="!changeOpenWeatherMapKeyForm.valid" class="success-button" mat-button
+                type="submit">{{'SAVE' | translate}}</button>
+      </div>
+    </form>
+
+    <form #changeOpenWeatherMapCinemaCityIdForm="ngForm" (ngSubmit)="changeOpenWeatherMapCinemaCityId(changeOpenWeatherMapCinemaCityIdForm)"
+          class="row" style="margin-top: 15px">
+      <mat-form-field class="col-12 col-sm-12 col-md-6">
+        <input #openWeatherMapCinemaCityIdModel="ngModel" [(ngModel)]="openWeatherMapCinemaCityId"  matInput
+               maxlength="50" name="openWeatherMapCinemaCityId" id="openWeatherMapCinemaCityId"
+               ngModel placeholder="{{'MANAGEMENT_DATEPOLL_OPENWEATHERMAP_CINEMA_CITY_ID' | translate}}"
+               type="text">
+        <mat-error *ngIf="openWeatherMapCinemaCityIdModel.invalid">
+          {{'MANAGEMENT_DATEPOLL_OPENWEATHERMAP_CINEMA_CITY_ID_INVALID' | translate}}
+        </mat-error>
+      </mat-form-field>
+
+      <div class="col-12 col-sm-12 col-md-3">
+        <button [disabled]="!changeOpenWeatherMapCinemaCityIdForm.valid" class="success-button" mat-button
+                type="submit">{{'SAVE' | translate}}</button>
+      </div>
+    </form>
   </mat-card-content>
 </mat-card>

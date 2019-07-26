@@ -1,10 +1,10 @@
 import {Injectable} from '@angular/core';
-import {Subject} from 'rxjs';
+import {Subject, Subscription} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 
-import {environment} from '../../../environments/environment';
 import {AuthService} from '../../auth/auth.service';
 import {HttpService} from '../../services/http.service';
+import {SettingsService} from '../../services/settings.service';
 import {Movie, MovieBookingUser, WeatherForecast} from './models/movie.model';
 import {Year} from './models/year.model';
 
@@ -15,16 +15,30 @@ export class CinemaService {
   public moviesChange: Subject<Movie[]> = new Subject<Movie[]>();
   public notShownMoviesChange: Subject<Movie[]> = new Subject<Movie[]>();
   public yearsChange: Subject<Year[]> = new Subject<Year[]>();
-  private city_id = environment.cinema_weatherforecast_openweathermap_city_id;
-  private openweahtermap_api_key = environment.cinema_weatherforecast_openweathermap_api_key;
-  private _movies: Movie[];
+  private _movies: Movie[] = [];
   private _notShownMovies: Movie[] = null;
-  private _years: Year[];
+  private _years: Year[] = [];
+
+  private city_id = '';
+  private openWeatherMapCinemaCityIdSubscription: Subscription;
+  private openweahtermap_api_key = '';
+  private openWeatherMapKeySubscription: Subscription;
   public fetchedWeatherForecast = false;
 
-  constructor(private authService: AuthService, private httpService: HttpService, private http: HttpClient) {
-    this._movies = [];
-    this._years = [];
+  constructor(private authService: AuthService,
+              private httpService: HttpService,
+              private http: HttpClient,
+              private settingsService: SettingsService) {
+
+    this.openweahtermap_api_key = this.settingsService.getOpenWeatherMapKey();
+    this.openWeatherMapKeySubscription = this.settingsService.openWeatherMapKeyChange.subscribe((value) => {
+      this.openweahtermap_api_key = value;
+    });
+
+    this.city_id = this.settingsService.getOpenWeatherMapCinemaCityId();
+    this.openWeatherMapCinemaCityIdSubscription = this.settingsService.openWeatherMapCinemaCityIdChange.subscribe((value) => {
+      this.city_id = value;
+    });
   }
 
   public addMovie(movie: any) {
