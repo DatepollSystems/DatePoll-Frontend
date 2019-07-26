@@ -1,4 +1,4 @@
-import {Component, NgZone, ViewChild} from '@angular/core';
+import {Component, NgZone, OnDestroy, ViewChild} from '@angular/core';
 import {MatSidenav} from '@angular/material/sidenav';
 import {Subscription} from 'rxjs';
 
@@ -13,25 +13,35 @@ import {Permissions} from '../permissions';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent {
+export class HomeComponent implements OnDestroy {
+  private sidenav: MatSidenav;
+  @ViewChild('sidenav', {static: true})
   navBarOpened = false;
   navBarMode = 'over';
+
   public myUserService: MyUserService;
+
   cinemaMovieAdministration = Permissions.CINEMA_MOVIE_ADMINISTRATION;
   eventAdministration = Permissions.EVENTS_ADMINISTRATION;
   managementAdministration = Permissions.MANAGEMENT_ADMINISTRATION;
   settingsAdministration = Permissions.SETTINGS_ADMINISTRATION;
+
   firstname: string = null;
-  surname: string = null;
-  username: string = null;
-  showCinema = true;
-  showEvents = true;
-  @ViewChild('sidenav', {static: true})
-  private sidenav: MatSidenav;
   private firstnameSubscription: Subscription;
+
+  surname: string = null;
   private surnameSubscription: Subscription;
+
+  username: string = null;
   private usernameSubscription: Subscription;
+
+  communityName = 'DatePoll';
+  private communityNameSubscription: Subscription;
+
+  showCinema = true;
   private showCinemaSubscription: Subscription;
+
+  showEvents = true;
   private showEventsSubscription: Subscription;
 
   constructor(
@@ -74,6 +84,11 @@ export class HomeComponent {
       this.username = value;
     });
 
+    this.communityName = this.settingsService.getCommunityName();
+    this.communityNameSubscription = this.settingsService.communityNameChange.subscribe((value) => {
+      this.communityName = value;
+    });
+
     this.showCinema = settingsService.getShowCinema();
     this.showCinemaSubscription = settingsService.showCinemaChange.subscribe((value) => {
       this.showCinema = value;
@@ -90,6 +105,15 @@ export class HomeComponent {
     if (!((window.screen.width) > 992)) {
       this.navBarOpened = false;
     }
+  }
+
+  ngOnDestroy(): void {
+    this.firstnameSubscription.unsubscribe();
+    this.surnameSubscription.unsubscribe();
+    this.usernameSubscription.unsubscribe();
+    this.communityNameSubscription.unsubscribe();
+    this.showCinemaSubscription.unsubscribe();
+    this.showEventsSubscription.unsubscribe();
   }
 
   resizeNav() {
