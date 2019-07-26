@@ -20,7 +20,8 @@ export class AuthInterceptor implements HttpInterceptor {
       '/auth',
       '/settings/name',
       '/settings/cinema',
-      '/settings/events'
+      '/settings/events',
+      'https://api.openweathermap.org'
     ];
 
     let toIntercept = true;
