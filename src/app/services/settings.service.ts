@@ -11,9 +11,13 @@ export class SettingsService {
   public showCinemaChange: Subject<boolean> = new Subject<boolean>();
   public showEventsChange: Subject<boolean> = new Subject<boolean>();
   public communityNameChange: Subject<string> = new Subject<string>();
+  public openWeatherMapKeyChange: Subject<string> = new Subject<string>();
+  public openWeatherMapCinemaCityIdChange: Subject<string> = new Subject<string>();
   private _showCinema = true;
   private _showEvents = true;
   private _communityName = 'DatePoll Web';
+  private _openWeatherMapKey = '';
+  private _openWeatherMapCinemaCityId = '';
 
   constructor(private httpService: HttpService, private router: Router) {
   }
@@ -79,14 +83,7 @@ export class SettingsService {
     );
   }
 
-  public checkShowEvents() {
-    if (!this.getShowEvents()) {
-      this.router.navigate(['/home']);
-      return;
-    }
-  }
-
-  public getCommunityName() {
+  public getCommunityName(): string {
     this.httpService.getSettingRequest('/name', 'settingsCommunityName').subscribe(
       (response: any) => {
         console.log(response);
@@ -106,6 +103,46 @@ export class SettingsService {
     return this.httpService.setSettingsRequest('/name', body, 'setCommunityName');
   }
 
+  public getOpenWeatherMapKey(): string {
+    this.httpService.getSettingRequest('/openweathermap/key', 'settingsOpenWeatherMapKey').subscribe(
+      (response: any) => {
+        console.log(response);
+        this.setOpenWeatherMapKey(response.openweathermap_key);
+      },
+      (error) => console.log(error)
+    );
+    return this._openWeatherMapKey;
+  }
+
+  public setAdminOpenWeatherMapKey(key: string) {
+    this.setOpenWeatherMapKey(key);
+
+    const body = {
+      'openweathermap_key': '"' + key + '"'
+    };
+    return this.httpService.setSettingsRequest('/openweathermap/key', body, 'setOpenWeatherMapKey');
+  }
+
+  public getOpenWeatherMapCinemaCityId(): string {
+    this.httpService.getSettingRequest('/openweathermap/cinemaCityId', 'settingsOpenWeatherMapCinemaCityId').subscribe(
+      (response: any) => {
+        console.log(response);
+        this.setOpenWeatherMapCinemaCityId(response.openweathermap_cinema_city_id);
+      },
+      (error) => console.log(error)
+    );
+    return this._openWeatherMapCinemaCityId;
+  }
+
+  public setAdminOpenWeatherMapCinemaCityId(id: string) {
+    this.setOpenWeatherMapCinemaCityId(id);
+
+    const body = {
+      'openweathermap_cinema_city_id': '"' + id + '"'
+    };
+    return this.httpService.setSettingsRequest('/openweathermap/cinemaCityId', body, 'setOpenWeatherMapCinemaCityId');
+  }
+
   private setShowCinema(showCinema: boolean) {
     this._showCinema = showCinema;
     this.showCinemaChange.next(this._showCinema);
@@ -119,5 +156,15 @@ export class SettingsService {
   private setCommunityName(communityName: string) {
     this._communityName = communityName;
     this.communityNameChange.next(this._communityName);
+  }
+
+  private setOpenWeatherMapKey(key: string) {
+    this._openWeatherMapKey = key;
+    this.openWeatherMapKeyChange.next(this._openWeatherMapKey);
+  }
+
+  private setOpenWeatherMapCinemaCityId(id: string) {
+    this._openWeatherMapCinemaCityId = id;
+    this.openWeatherMapCinemaCityIdChange.next(this._openWeatherMapCinemaCityId);
   }
 }
