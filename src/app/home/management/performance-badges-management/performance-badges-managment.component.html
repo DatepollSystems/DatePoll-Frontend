@@ -41,18 +41,17 @@
 
                 <div class="row">
                   <mat-list class="col-12">
-                    <mat-list-item *ngFor="let performanceBadge of performanceBadges">
+                    <mat-list-item *ngFor="let performanceBadge of performanceBadges; trackBy: trackByFn">
                       <span matLine>{{ performanceBadge.name }}</span>
                       <button (click)="updatePerformanceBadge(performanceBadge)" mat-icon-button
                               matTooltip="{{'MANAGEMENT_PERFORMANCE_BADGES_UPDATE_PERFORMANCE_BADGE_TOOLTIP' | translate}}"
                               matTooltipPosition="above">
                         <mat-icon>create</mat-icon>
                       </button>
-                      <button #removePerformanceBadgeButton
-                              (click)="removePerformanceBadge(performanceBadge.id, removePerformanceBadgeButton)"
+                      <button (click)="removePerformanceBadge(performanceBadge.id)"
                               mat-icon-button matTooltip="{{'MANAGEMENT_PERFORMANCE_BADGES_REMOVE_PERFORMANCE_BADGE_TOOLTIP' | translate}}"
                               matTooltipPosition="above">
-                        <mat-icon>delete_forever</mat-icon>
+                        <mat-icon>delete</mat-icon>
                       </button>
                       <mat-divider></mat-divider>
                     </mat-list-item>
@@ -96,17 +95,17 @@
 
                 <div class="row">
                   <mat-list class="col-12">
-                    <mat-list-item *ngFor="let instrument of instruments">
+                    <mat-list-item *ngFor="let instrument of instruments; trackBy: trackByFn">
                       <span matLine>{{ instrument.name }}</span>
                       <button (click)="updateInstrument(instrument)" mat-icon-button
                               matTooltip="{{'MANAGEMENT_PERFORMANCE_BADGES_UPDATE_INSTRUMENT_TOOLTIP' | translate}}"
                               matTooltipPosition="above">
                         <mat-icon>create</mat-icon>
                       </button>
-                      <button #removeInstrumentButton (click)="removeInstrument(instrument.id, removeInstrumentButton)"
-                              mat-icon-button matTooltip="{{'MANAGEMENT_PERFORMANCE_BADGES_REMOVE_INSTRUMENT_TOOLTIP' | translate}}"
+                      <button (click)="removeInstrument(instrument.id)" mat-icon-button
+                              matTooltip="{{'MANAGEMENT_PERFORMANCE_BADGES_REMOVE_INSTRUMENT_TOOLTIP' | translate}}"
                               matTooltipPosition="above">
-                        <mat-icon>delete_forever</mat-icon>
+                        <mat-icon>delete</mat-icon>
                       </button>
                       <mat-divider></mat-divider>
                     </mat-list-item>
@@ -131,12 +130,6 @@
 <ng-template #successfullyAddedPerformanceBadge>
   <h2>{{'MANAGEMENT_PERFORMANCE_BADGES_ADD_PERFORMANCE_BADGE_SUCCESSFUL' | translate}}</h2>
 </ng-template>
-<ng-template #successfullyRemovedPerformanceBadge>
-  <h2>{{'MANAGEMENT_PERFORMANCE_BADGES_REMOVED_PERFORMANCE_BADGE_SUCCESSFUL' | translate}}</h2>
-</ng-template>
 <ng-template #successfullyAddedInstrument>
   <h2>{{'MANAGEMENT_PERFORMANCE_BADGES_ADD_INSTRUMENT_SUCCESSFUL' | translate}}</h2>
-</ng-template>
-<ng-template #successfullyRemovedInstrument>
-  <h2>{{'MANAGEMENT_PERFORMANCE_BADGES_REMOVED_INSTRUMENT_SUCCESSFUL' | translate}}</h2>
 </ng-template>
