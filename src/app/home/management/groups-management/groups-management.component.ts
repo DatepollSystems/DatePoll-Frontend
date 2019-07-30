@@ -154,4 +154,7 @@ export class GroupsManagementComponent implements OnInit, OnDestroy {
     });
   }
 
+  trackByFn(inde, item) {
+    return item.id;
+  }
 }

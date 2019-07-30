@@ -55,7 +55,7 @@
         </mat-form-field>
       </div>
 
-      <app-group-info-card *ngFor="let resultGroup of sortedResultGroups" [resultGroup]="resultGroup"
+      <app-group-info-card *ngFor="let resultGroup of sortedResultGroups; trackBy: trackByFn" [resultGroup]="resultGroup"
                            [searchValue]="searchValue"></app-group-info-card>
     </div>
   </div>

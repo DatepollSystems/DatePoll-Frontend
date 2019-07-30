@@ -39,6 +39,8 @@ export class GroupInfoCardComponent implements OnInit, OnChanges {
   resultSubgroup: EventResultSubgroup[] = [];
   sortedResultSubgroup: EventResultSubgroup[] = [];
 
+  voteSummary = null;
+
   constructor() {
   }
 
@@ -88,6 +90,13 @@ export class GroupInfoCardComponent implements OnInit, OnChanges {
   }
 
   getVotesSummary() {
+    if (this.voteSummary == null) {
+      this.calculateVoteSummary();
+    }
+    return this.voteSummary;
+  }
+
+  private calculateVoteSummary() {
     const objects = [];
 
     for (const decision of this.resultGroup.event.getDecisions()) {
@@ -112,7 +121,10 @@ export class GroupInfoCardComponent implements OnInit, OnChanges {
     for (const object of objects) {
       stringToReturn += object.name + ': ' + object.count + ' ';
     }
-    return stringToReturn;
+    this.voteSummary = stringToReturn;
   }
 
+  trackByFn(inde, item) {
+    return item.id;
+  }
 }

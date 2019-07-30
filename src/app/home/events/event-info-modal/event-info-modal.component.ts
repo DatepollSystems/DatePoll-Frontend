@@ -90,4 +90,8 @@ export class EventInfoModalComponent implements OnDestroy {
       }
     }
   }
+
+  trackByFn(inde, item) {
+    return item.id;
+  }
 }

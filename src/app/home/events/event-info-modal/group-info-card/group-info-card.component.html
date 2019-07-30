@@ -93,7 +93,7 @@
       <div *ngIf="resultGroup.getResultSubgroups().length !== 0" style="margin-top: 15px;">
         <h2 style="margin-bottom: 5px;">{{'EVENTS_ADMINISTRATION_INFO_EVENT_REGISTER' | translate}}</h2>
 
-        <app-subgroup-info-card *ngFor="let subgroup of sortedResultSubgroup"
+        <app-subgroup-info-card *ngFor="let subgroup of sortedResultSubgroup; trackBy: trackByFn"
                                 [resultSubgroup]="subgroup"></app-subgroup-info-card>
       </div>
     </div>
@@ -103,7 +103,7 @@
         {{'EVENTS_ADMINISTRATION_INFO_EVENT_NO_SUBGROUPS' | translate}}
       </div>
 
-      <app-subgroup-info-card *ngFor="let subgroup of sortedResultSubgroup"
+      <app-subgroup-info-card *ngFor="let subgroup of sortedResultSubgroup; trackBy: trackByFn"
                               [resultSubgroup]="subgroup"></app-subgroup-info-card>
     </div>
   </mat-card-content>
