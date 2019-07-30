@@ -23,12 +23,15 @@ export class DatepollManagementComponent implements OnInit, OnDestroy {
 
   communityName: string;
   communityNameSubscription: Subscription;
+  communityNameSaving = false;
 
   openWeatherMapKey: string;
   openWeatherMapKeySubscription: Subscription;
+  openWeatherMapKeySaving = false;
 
   openWeatherMapCinemaCityId: string;
   openWeatherMapCinemaCityIdSubscription: Subscription;
+  openWeatherMapCinemaCityIdSaving = false;
 
   permissionSubscription: Subscription;
 
@@ -93,10 +96,12 @@ export class DatepollManagementComponent implements OnInit, OnDestroy {
   }
 
   changeCommunityName(form: NgForm) {
+    this.communityNameSaving = true;
     const communityName = form.controls.communityName.value;
     this.settingsService.setAdminCommunityName(communityName).subscribe(
       (response: any) => {
         console.log(response);
+        this.communityNameSaving = false;
         this.notificationsService.success(this.translate.getTranslationFor('SUCCESSFULLY'),
           this.translate.getTranslationFor('MANAGEMENT_DATEPOLL_COMMUNITY_NAME_CHANGED_SUCCESSFULLY'));
       },
@@ -105,10 +110,12 @@ export class DatepollManagementComponent implements OnInit, OnDestroy {
   }
 
   changeOpenWeatherMapKey(form: NgForm) {
+    this.openWeatherMapKeySaving = true;
     const openWeatherMapKey = form.controls.openWeatherMapKey.value;
     this.settingsService.setAdminOpenWeatherMapKey(openWeatherMapKey).subscribe(
       (response: any) => {
         console.log(response);
+        this.openWeatherMapKeySaving = false;
         this.notificationsService.success(this.translate.getTranslationFor('SUCCESSFULLY'),
           this.translate.getTranslationFor('MANAGEMENT_DATEPOLL_OPENWEATHERMAP_KEY_CHANGED_SUCCESSFULLY'));
       },
@@ -117,10 +124,12 @@ export class DatepollManagementComponent implements OnInit, OnDestroy {
   }
 
   changeOpenWeatherMapCinemaCityId(form: NgForm) {
+    this.openWeatherMapCinemaCityIdSaving = true;
     const openWeatherMapCinemaCityId = form.controls.openWeatherMapCinemaCityId.value;
     this.settingsService.setAdminOpenWeatherMapCinemaCityId(openWeatherMapCinemaCityId).subscribe(
       (response: any) => {
         console.log(response);
+        this.openWeatherMapCinemaCityIdSaving = false;
         this.notificationsService.success(this.translate.getTranslationFor('SUCCESSFULLY'),
           this.translate.getTranslationFor('MANAGEMENT_DATEPOLL_OPENWEATHERMAP_CINEMA_CITY_ID_CHANGED_SUCCESSFULLY'));
       },
