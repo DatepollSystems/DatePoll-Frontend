@@ -24,7 +24,7 @@ export class EventsAdministrationComponent implements OnDestroy {
 
   showAllEvents: boolean;
 
-  displayedColumns: string[] = ['name', 'startDate', 'endDate', 'description', 'actions'];
+  displayedColumns: string[] = ['name', 'startDate', 'endDate', 'location', 'description', 'actions'];
   filterValue: string = null;
 
   @ViewChild(MatSort, {static: true}) sort: MatSort;

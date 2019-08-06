@@ -23,6 +23,7 @@ export class EventInfoModalComponent implements OnDestroy {
   name: string;
   description: string;
   location: string;
+  locationUri: string;
 
   startDate: Date;
   endDate: Date;
@@ -63,6 +64,7 @@ export class EventInfoModalComponent implements OnDestroy {
     this.name = this.event.name;
     this.description = this.event.description;
     this.location = this.event.location;
+    this.locationUri = this.event.locationUri;
     this.startDate = this.event.startDate;
     this.endDate = this.event.endDate;
     this.resultGroups = this.event.getResultGroups();

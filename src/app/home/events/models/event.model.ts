@@ -12,6 +12,8 @@ export class Event {
   public description: string;
   public descriptionPreview = '';
   public location: string;
+  public locationUri: string;
+  public locationPreview = '';
 
   public alreadyVotedFor = false;
   public chartIsEmpty = true;
@@ -42,6 +44,14 @@ export class Event {
     this.forEveryone = forEveryone;
     this.description = description;
     this.location = location;
+    if (location != null) {
+      if (location.length > 25) {
+        this.locationPreview = this.location.slice(0, 25) + '...';
+      } else {
+        this.locationPreview = this.location;
+      }
+      this.locationUri = encodeURI(this.location);
+    }
     if (description != null) {
       if (description.length > 45) {
         this.descriptionPreview = this.description.slice(0, 45) + '...';
