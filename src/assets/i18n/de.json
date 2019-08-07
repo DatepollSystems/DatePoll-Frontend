@@ -17,6 +17,7 @@
   "NO": "Nein",
   "SUCCESSFULLY": "Erfolgreich",
   "ERROR": "Fehler",
+  "WARNING": "Warnung",
   "REQUEST_ERROR": "Ein unbekannter Fehler ist aufgetreten. Versuche die Website neu zu laden.",
 
 
@@ -444,6 +445,7 @@
   "EVENTS_ADMINISTRATION_TABLE_LOCATION": "Standort",
   "EVENTS_ADMINISTRATION_TABLE_DESCRIPTION": "Beschreibung",
   "EVENTS_ADMINISTRATION_TABLE_ACTION_TOOLTIP_INFO": "Zeige Informationen über dieses Event",
+  "EVENTS_ADMINISTRATION_TABLE_ACTION_TOOLTIP_USER_MANAGEMENT": "Mitgliederverwaltung",
   "EVENTS_ADMINISTRATION_TABLE_ACTION_TOOLTIP_EDIT": "Bearbeite dieses Event",
   "EVENTS_ADMINISTRATION_TABLE_ACTION_TOOLTIP_DELETE": "Lösche dieses Event",
 
@@ -482,6 +484,13 @@
 
   "EVENTS_ADMINISTRATION_DELETE_EVENT_TITLE": "Willst du dieses Event wirklich löschen?",
   "EVENTS_ADMINISTRATION_DELETE_EVENT_SUCCESSFULLY_DELETED": "Das Event wurde erfolgreich gelöscht!",
+
+  "EVENTS_ADMINISTRATION_USER_MANAGEMENT_FOR_EVENT": "Benutzerverwaltung für ",
+  "EVENTS_ADMINISTRATION_USER_MANAGEMENT_FOR_EVENT_VOTE": "Abstimmen",
+  "EVENTS_ADMINISTRATION_USER_MANAGEMENT_FOR_EVENT_VOTE_SUCCESSFULLY": "Die Antwort wurde für die ausgewählten Benutzer gespeichert!",
+  "EVENTS_ADMINISTRATION_USER_MANAGEMENT_FOR_EVENT_VOTE_NO_ONE_SELECTED": "Bitte wähle einen oder mehrere Benutzer aus!",
+  "EVENTS_ADMINISTRATION_USER_MANAGEMENT_FOR_EVENT_REMOVE_VOTING": "Entfernt die Antworten der ausgewählten Benutzer",
+  "EVENTS_ADMINISTRATION_USER_MANAGEMENT_FOR_EVENT_REMOVE_VOTING_SUCCESSFULLY": "Die Antworten der ausgewählten Benutzer wurden entfernt!",
 
   "EVENTS_ADMINISTRATION_INFO_EVENT": "Informationen über ",
   "EVENTS_ADMINISTRATION_INFO_EVENT_SINGLE_SUBGROUPS": "Einzelne Register",

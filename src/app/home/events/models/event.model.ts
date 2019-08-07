@@ -30,7 +30,7 @@ export class Event {
   draggable: false;
   meta = null;
   resizable: { beforeStart: false; afterEnd: false };
-  private decisions: Decision[];
+  private decisions: Decision[] = [];
   private resultGroups: EventResultGroup[] = [];
   private resultUsers: EventResultUser[] = [];
   private chartData: any[] = null;
@@ -92,6 +92,10 @@ export class Event {
     this.resultUsers = users;
   }
 
+  public getResultUsers(): EventResultUser[] {
+    return this.resultUsers.slice();
+  }
+
   public getChartData(): any[] {
     if (this.chartData == null) {
       this.calculateChartData();
@@ -102,10 +106,6 @@ export class Event {
 
   private setDecisions(decisions: Decision[]) {
     this.decisions = decisions;
-  }
-
-  private getResultUsers(): EventResultUser[] {
-    return this.resultUsers.slice();
   }
 
   private calculateChartData() {

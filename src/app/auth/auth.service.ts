@@ -131,7 +131,7 @@ export class AuthService {
       return false;
     } else {
       if (this.getJWTToken() == null) {
-        console.log('authService | isAuthenticated | Funtion User: ' + functionUser + ' | INFO: JWT token is null. Refreshing...');
+        console.log('authService | isAuthenticated | Funtion User: ' + functionUser + ' | INFO: JWT token is null.');
       }
       console.log('authService | isAuthenticated | Funtion User: ' + functionUser + ' | INFO: isAuthenticated: true');
       return true;

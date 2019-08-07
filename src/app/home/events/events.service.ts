@@ -337,4 +337,32 @@ export class EventsService {
       (error) => console.log(error)
     );
   }
+
+
+  public voteForUsers(event: Event, decision: Decision, users: EventResultUser[]) {
+    const userIds = [];
+    for (const user of users) {
+      userIds.push(user.id);
+    }
+
+    const dto = {
+      'decision_id': decision.id,
+      'user_ids': userIds
+    };
+
+    return this.httpService.loggedInV1POSTRequest('/avent/administration/avent/' + event.id + '/voteForUsers', dto);
+  }
+
+  public cancelVotingForUsers(event: Event, users: EventResultUser[]) {
+    const userIds = [];
+    for (const user of users) {
+      userIds.push(user.id);
+    }
+
+    const dto = {
+      'user_ids': userIds
+    };
+
+    return this.httpService.loggedInV1POSTRequest('/avent/administration/avent/' + event.id + '/cancelVotingForUsers', dto);
+  }
 }

@@ -4,11 +4,14 @@ import {Subscription} from 'rxjs';
 
 import {NotificationsService, NotificationType} from 'angular2-notifications';
 
+import {EventsUserService} from '../events-user.service';
+import {HomepageService} from '../../start/homepage.service';
+import {TranslateService} from '../../../translation/translate.service';
+
 import {EventInfoModalComponent} from '../event-info-modal/event-info-modal.component';
 import {EventsVoteForDecisionModalComponent} from './events-vote-for-decision-modal/events-vote-for-decision-modal.component';
 
 import {Event} from '../models/event.model';
-import {EventsUserService} from '../events-user.service';
 
 @Component({
   selector: 'app-events-view',
@@ -26,6 +29,8 @@ export class EventsViewComponent implements OnDestroy {
 
   constructor(
     private eventsUserSerivce: EventsUserService,
+    private homepageService: HomepageService,
+    private translate: TranslateService,
     private notificationsService: NotificationsService,
     private bottomSheet: MatBottomSheet,
     private dialog: MatDialog) {
@@ -73,8 +78,24 @@ export class EventsViewComponent implements OnDestroy {
   }
 
   onVote(event: Event) {
-    this.bottomSheet.open(EventsVoteForDecisionModalComponent, {
+    const bottomSheetRef = this.bottomSheet.open(EventsVoteForDecisionModalComponent, {
       data: {'event': event},
+    });
+    bottomSheetRef.afterDismissed().subscribe((decision) => {
+      if (decision != null) {
+        this.eventsUserSerivce.voteForDecision(event.id, decision).subscribe(
+          (response: any) => {
+            console.log(response);
+            this.eventsUserSerivce.fetchEvents();
+            this.homepageService.fetchData();
+            this.notificationsService.success(this.translate.getTranslationFor('SUCCESSFULLY'),
+              this.translate.getTranslationFor('EVENTS_VIEW_EVENT_SUCCESSFULLY_VOTED'));
+          },
+          (error) => console.log(error)
+        );
+      } else {
+        console.log('events-view | Closed bottom sheet, voted for nohting');
+      }
     });
   }
 
