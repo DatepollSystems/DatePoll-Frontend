@@ -98,6 +98,11 @@ mat-card {
   background-color: #29B6F6;
 }
 
+.hidden {
+  display: none;
+  visibility: hidden;
+}
+
 /* Loading animation for buttons */
 @keyframes spinner {
   to {transform: rotate(360deg);}

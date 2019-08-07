@@ -22,6 +22,24 @@ export class GroupAndSubgroupSelectComponent {
   constructor() {
   }
 
+  applyFilter(filterValue: string) {
+    for (const group of this.joined) {
+      if (group.name.toLowerCase().includes(filterValue.toLowerCase())) {
+        group.visible = null;
+      } else {
+        group.visible = 'notNull';
+      }
+    }
+
+    for (const group of this.free) {
+      if (group.name.toLowerCase().includes(filterValue.toLowerCase())) {
+        group.visible = null;
+      } else {
+        group.visible = 'notNull';
+      }
+    }
+  }
+
   dropToJoined(event: CdkDragDrop<string[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);

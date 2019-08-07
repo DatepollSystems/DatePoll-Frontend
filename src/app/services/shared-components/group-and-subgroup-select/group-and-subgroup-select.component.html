@@ -7,6 +7,13 @@
         </mat-panel-title>
       </mat-expansion-panel-header>
 
+      <div class="row">
+        <mat-form-field class="col-12">
+          <input (keyup)="applyFilter($event.target.value)" matInput
+                 placeholder="{{'SEARCH' | translate}}">
+        </mat-form-field>
+      </div>
+
       <div class="row justify-content-between">
         <div class="col-10 col-md-5">
           <h2>{{'EVENTS_ADMINISTRATION_CREATE_EVENT_GROUPS_FREE' | translate}}</h2>
@@ -18,12 +25,15 @@
             [cdkDropListData]="free"
             cdkDropList class="group-list"
             id="free-list">
-            <div *ngFor="let item of free" [cdkDragDisabled]="sendingRequest" cdkDrag class="group-box not-selectable">
+
+            <div *ngFor="let item of free" [class.hidden]="item.visible != null" cdkDrag
+                 class="group-box not-selectable">
               <b *ngIf="item.type === 'parentgroup'">{{item.name}}</b>
               <div *ngIf="item.type === 'subgroup'">
                 <b>[{{item.group_name}}]</b> {{item.name}}
               </div>
             </div>
+
             <div *ngIf="free.length === 0"
                  class="group-box">{{'EVENTS_ADMINISTRATION_CREATE_EVENT_GROUPS_FREE_EMPTY' | translate}}</div>
           </div>
@@ -39,13 +49,15 @@
             [cdkDropListData]="joined"
             cdkDropList class="group-list"
             id="joined-list">
-            <div *ngFor="let item of joined" [cdkDragDisabled]="sendingRequest" cdkDrag
+            <div *ngFor="let item of joined" cdkDrag [class.hidden]="item.visible != null"
                  class="group-box not-selectable">
               <b *ngIf="item.type === 'parentgroup'">{{item.name}}</b>
               <div *ngIf="item.type === 'subgroup'">
                 <b>[{{item.group_name}}]</b> {{item.name}}
               </div>
+
             </div>
+
             <div *ngIf="joined.length === 0"
                  class="group-box">{{'EVENTS_ADMINISTRATION_CREATE_EVENT_GROUPS_JOINED_EMPTY' | translate}}</div>
           </div>
