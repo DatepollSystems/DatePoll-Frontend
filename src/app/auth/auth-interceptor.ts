@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
+import {HttpClient, HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpParams, HttpRequest} from '@angular/common/http';
 import {BehaviorSubject, Observable, throwError} from 'rxjs';
 import {catchError, filter, switchMap, take} from 'rxjs/operators';
 
@@ -44,12 +44,9 @@ export class AuthInterceptor implements HttpInterceptor {
         catchError(error => {
           if (error instanceof HttpErrorResponse && error.status === 401) {
             return this.handle401Error(req, next);
-
-          } else if (error.status === 418) {
-            this.authService.logout();
-            return throwError('authService | An error occured during jwt token refreshing... probably session token deleted!');
           } else {
-            return throwError(error);
+            this.authService.logout();
+            return throwError('authService | An error occured during jwt token refreshing... probably session token deleted!' + error);
           }
         })
       );
@@ -57,7 +54,14 @@ export class AuthInterceptor implements HttpInterceptor {
   }
 
   private addToken(req: HttpRequest<any>, token: string) {
-    return req.clone({url: req.url + '?token=' + token});
+    // Keeps the original request params. as a new HttpParams
+    let newParams = new HttpParams({fromString: req.params.toString()});
+
+    newParams = newParams.append('token', token);
+
+    return req.clone({
+      params: newParams
+    });
   }
 
   private handle401Error(request: HttpRequest<any>, next: HttpHandler) {
