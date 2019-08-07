@@ -1,7 +1,7 @@
 import {APP_INITIALIZER, NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {registerLocaleData} from '@angular/common';
 import localeDe from '@angular/common/locales/de';
 
@@ -16,6 +16,8 @@ import {CommonEventsComponentsModule} from './home/events/common-events-componen
 
 import {CookieService} from 'angular2-cookie/core';
 
+import {NoSanitizePipe} from './no-sanitize.pipe';
+
 import {AuthService} from './auth/auth.service';
 import {AuthGuard} from './auth/auth-guard.service';
 import {TranslateService} from './translation/translate.service';
@@ -26,7 +28,11 @@ import {UsersService} from './home/management/users-management/users.service';
 import {GroupsService} from './home/management/groups-management/groups.service';
 import {PerformanceBadgesService} from './home/management/performance-badges-management/performance-badges.service';
 import {CinemaService} from './home/cinema/cinema.service';
+import {EventsService} from './home/events/events.service';
+import {EventsUserService} from './home/events/events-user.service';
+import {HomepageService} from './home/start/homepage.service';
 
+import {AuthInterceptor} from './auth/auth-interceptor';
 
 import {MAT_DATE_LOCALE} from '@angular/material/core';
 import {MAT_SNACK_BAR_DEFAULT_OPTIONS} from '@angular/material/snack-bar';
@@ -35,7 +41,6 @@ import {AppComponent} from './app.component';
 import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
 import {HomeComponent} from './home/home.component';
 import {StartComponent} from './home/start/start.component';
-import {NoSanitizePipe} from './no-sanitize.pipe';
 
 registerLocaleData(localeDe);
 
@@ -72,6 +77,9 @@ registerLocaleData(localeDe);
     GroupsService,
     PerformanceBadgesService,
     CinemaService,
+    EventsService,
+    EventsUserService,
+    HomepageService,
     {
       provide: APP_INITIALIZER,
       useFactory: setupTranslateFactory,
@@ -81,6 +89,11 @@ registerLocaleData(localeDe);
     {
       provide: CookieService,
       useFactory: cookieServiceFactory
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
     },
     // Set the datetimepicker time format to day/month/year
     {provide: MAT_DATE_LOCALE, useValue: 'de-DE'},

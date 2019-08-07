@@ -1,56 +1,95 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {retry} from 'rxjs/operators';
+import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
+import {throwError} from 'rxjs';
+import {catchError} from 'rxjs/operators';
+
+import {NotificationsService} from 'angular2-notifications';
 
 import {environment} from '../../environments/environment';
 import {AuthService} from '../auth/auth.service';
+import {TranslateService} from '../translation/translate.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HttpService {
-   apiUrl = environment.apiUrl;
+  apiUrl = environment.apiUrl;
 
-  constructor(private authService: AuthService, private http: HttpClient) { }
+  constructor(private authService: AuthService,
+              private http: HttpClient,
+              private notificationsService: NotificationsService,
+              private translate: TranslateService) {
+  }
 
   public loggedInV1GETRequest(url: string, functionUser: string = null) {
     this.log('GET', url, functionUser);
 
-    const token = this.authService.getToken(functionUser);
+    return this.http.get(this.apiUrl + '/v1' + url).pipe(
+      catchError((error: HttpErrorResponse) => {
+        if (error.error instanceof ErrorEvent) {
+          console.error('An error occurred:', error.error.message);
+        } else {
+          console.error(`Backend returned code ${error.status}, ` + `body was: ${error.error}`);
+        }
+        this.notificationsService.error(this.translate.getTranslationFor('ERROR'), this.translate.getTranslationFor('REQUEST_ERROR'));
 
-    return this.http.get(this.apiUrl + '/v1' + url + '?token=' + token).pipe(
-      retry(3)
+        return throwError('An unexpected error occured.');
+      })
     );
   }
 
   public loggedInV1POSTRequest(url: string, body: any, functionUser: string = null) {
     this.log('POST', url, functionUser);
 
-    const token = this.authService.getToken(functionUser);
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
 
-    return this.http.post(this.apiUrl + '/v1' + url + '?token=' + token, body, {headers: headers}).pipe(
-      retry(3)
+    return this.http.post(this.apiUrl + '/v1' + url, body, {headers: headers}).pipe(
+      catchError((error: HttpErrorResponse) => {
+        if (error.error instanceof ErrorEvent) {
+          console.error('An error occurred:', error.error.message);
+        } else {
+          console.error(`Backend returned code ${error.status}, ` + `body was: ${error.error}`);
+        }
+        this.notificationsService.error(this.translate.getTranslationFor('ERROR'), this.translate.getTranslationFor('REQUEST_ERROR'));
+
+        return throwError('An unexpected error occured.');
+      })
     );
   }
 
   public loggedInV1PUTRequest(url: string, body: any, functionUser: string = null) {
     this.log('PUT', url, functionUser);
 
-    const token = this.authService.getToken(functionUser);
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
 
-    return this.http.put(this.apiUrl + '/v1' + url + '?token=' + token, body, {headers: headers}).pipe(
-      retry(3)
+    return this.http.put(this.apiUrl + '/v1' + url, body, {headers: headers}).pipe(
+      catchError((error: HttpErrorResponse) => {
+        if (error.error instanceof ErrorEvent) {
+          console.error('An error occurred:', error.error.message);
+        } else {
+          console.error(`Backend returned code ${error.status}, ` + `body was: ${error.error}`);
+        }
+        this.notificationsService.error(this.translate.getTranslationFor('ERROR'), this.translate.getTranslationFor('REQUEST_ERROR'));
+
+        return throwError('An unexpected error occured.');
+      })
     );
   }
 
   public loggedInV1DELETERequest(url: string, functionUser: string = null) {
     this.log('DELETE', url, functionUser);
 
-    const token = this.authService.getToken(functionUser);
-    return this.http.delete(this.apiUrl + '/v1' + url + '?token=' + token).pipe(
-      retry(3)
+    return this.http.delete(this.apiUrl + '/v1' + url).pipe(
+      catchError((error: HttpErrorResponse) => {
+        if (error.error instanceof ErrorEvent) {
+          console.error('An error occurred:', error.error.message);
+        } else {
+          console.error(`Backend returned code ${error.status}, ` + `body was: ${error.error}`);
+        }
+        this.notificationsService.error(this.translate.getTranslationFor('ERROR'), this.translate.getTranslationFor('REQUEST_ERROR'));
+
+        return throwError('An unexpected error occured.');
+      })
     );
   }
 
@@ -58,23 +97,17 @@ export class HttpService {
     if (functionUser != null) {
       console.log('getSettingsRequest | ' + functionUser);
     }
-    return this.http.get(this.apiUrl + '/settings' + url).pipe(
-      retry(3)
-    );
+    return this.http.get(this.apiUrl + '/settings' + url);
   }
 
   public setSettingsRequest(url: string, body: any, functionUser: string = null) {
-    const token = this.authService.getToken(functionUser);
+    if (functionUser != null) {
+      console.log('setSettingsRequest | ' + functionUser);
+    }
+
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
 
-    return this.http.post(this.apiUrl + '/settings/administration' + url + '?token=' + token, body, {headers: headers}).pipe(
-      retry(3)
-    ).subscribe(
-      (response: any) => {
-        console.log(response);
-      },
-      (error) => console.log(error)
-    );
+    return this.http.post(this.apiUrl + '/settings/administration' + url, body, {headers: headers});
   }
 
   private log(type: string, url: string, functionUser: string = null) {

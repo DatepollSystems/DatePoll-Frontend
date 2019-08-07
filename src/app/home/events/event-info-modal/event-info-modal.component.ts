@@ -5,8 +5,8 @@ import {Subscription} from 'rxjs';
 import {EventsService} from '../events.service';
 import {Event} from '../models/event.model';
 import {EventResultGroup} from '../models/event-result-group.model';
-import {ChartType, ChartOptions} from 'chart.js';
-import {Label, SingleDataSet, monkeyPatchChartJsTooltip, monkeyPatchChartJsLegend} from 'ng2-charts';
+import {ChartOptions, ChartType} from 'chart.js';
+import {Label, monkeyPatchChartJsLegend, monkeyPatchChartJsTooltip, SingleDataSet} from 'ng2-charts';
 
 @Component({
   selector: 'app-event-info-modal',
@@ -22,15 +22,15 @@ export class EventInfoModalComponent implements OnDestroy {
 
   name: string;
   description: string;
+  location: string;
+  locationUri: string;
 
   startDate: Date;
-  startDateHours: number;
-  startDateMinutes: number;
   endDate: Date;
-  endDateHours: number;
-  endDateMinutes: number;
 
   resultGroups: EventResultGroup[];
+  sortedResultGroups: EventResultGroup[];
+  searchValue = '';
 
   public pieChartOptions: ChartOptions = {
     responsive: true,
@@ -63,17 +63,37 @@ export class EventInfoModalComponent implements OnDestroy {
   refreshValues() {
     this.name = this.event.name;
     this.description = this.event.description;
+    this.location = this.event.location;
+    this.locationUri = this.event.locationUri;
     this.startDate = this.event.startDate;
-    this.startDateHours = this.startDate.getHours();
-    this.startDateMinutes = this.startDate.getMinutes();
     this.endDate = this.event.endDate;
-    this.endDateHours = this.endDate.getHours();
-    this.endDateMinutes = this.endDate.getMinutes();
     this.resultGroups = this.event.getResultGroups();
-    this.pieChartLabels = this.event.getDecisions();
-    this.pieChartData = [... this.event.getChartData()];
+    this.sortedResultGroups = this.resultGroups.slice();
+    this.pieChartLabels = this.event.getDecisionsAsStrings();
+    this.pieChartData = [...this.event.getChartData()];
     this.pieChartIsEmpty = this.event.chartIsEmpty;
     monkeyPatchChartJsTooltip();
     monkeyPatchChartJsLegend();
+  }
+
+  applyFilter(filterValue: string) {
+    this.sortedResultGroups = [];
+
+    for (const resultGroup of this.resultGroups) {
+      if (resultGroup.name.toLowerCase().includes(filterValue.toLowerCase())) {
+        this.sortedResultGroups.push(resultGroup);
+      } else {
+        for (const resultSubgroup of resultGroup.getResultSubgroups()) {
+          if (resultSubgroup.name.toLowerCase().includes(filterValue.toLowerCase())) {
+            this.sortedResultGroups.push(resultGroup);
+            break;
+          }
+        }
+      }
+    }
+  }
+
+  trackByFn(inde, item) {
+    return item.id;
   }
 }

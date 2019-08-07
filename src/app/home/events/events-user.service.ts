@@ -2,16 +2,18 @@ import {Injectable} from '@angular/core';
 import {Subject} from 'rxjs';
 import {HttpService} from '../../services/http.service';
 import {Event} from './models/event.model';
+import {Decision} from './models/decision.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EventsUserService {
 
-  private _events: Event[] = [];
   public eventsChange: Subject<Event[]> = new Subject<Event[]>();
+  private _events: Event[] = [];
 
-  constructor(public httpService: HttpService) { }
+  constructor(public httpService: HttpService) {
+  }
 
   public getEvents(): Event[] {
     this.fetchEvents();
@@ -32,8 +34,14 @@ export class EventsUserService {
         const fetchedEvents = data.events;
         for (let i = 0; i < fetchedEvents.length; i++) {
           const fetchedEvent = fetchedEvents[i];
+
+          const decisions = [];
+          for (const fetchedDecision of fetchedEvent.decisions) {
+            decisions.push(new Decision(fetchedDecision.id, fetchedDecision.decision));
+          }
+
           const event = new Event(fetchedEvent.id, fetchedEvent.name, new Date(fetchedEvent.startDate), new Date(fetchedEvent.endDate),
-            fetchedEvent.forEveryone, fetchedEvent.description, fetchedEvent.decisions);
+            fetchedEvent.forEveryone, fetchedEvent.description, fetchedEvent.location, decisions);
           event.alreadyVotedFor = fetchedEvent.alreadyVoted;
           events.push(event);
         }
@@ -44,10 +52,10 @@ export class EventsUserService {
     );
   }
 
-  public voteForDecision(eventId, decision) {
+  public voteForDecision(eventId: number, decision: Decision) {
     const dto = {
       'event_id': eventId,
-      'decision': decision
+      'decision_id': decision.id
     };
     return this.httpService.loggedInV1POSTRequest('/avent/vote', dto, 'voteForDecision');
   }

@@ -38,7 +38,8 @@ export class MovieBookTicketsModalComponent {
     this.httpService.loggedInV1POSTRequest('/cinema/booking', bookingObject, 'bookTickets').subscribe(
       (data: any) => {
         console.log(data);
-        this.cinemaService.fetchNotShownMovies();
+        this.movie.bookedTickets += this.ticketsToBook;
+        this.movie.bookedTicketsForYourself += this.ticketsToBook;
       },
       (error) => {
         console.log(error);

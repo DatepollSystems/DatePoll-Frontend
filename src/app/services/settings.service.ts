@@ -8,14 +8,19 @@ import {Router} from '@angular/router';
 })
 export class SettingsService {
 
+  public showCinemaChange: Subject<boolean> = new Subject<boolean>();
+  public showEventsChange: Subject<boolean> = new Subject<boolean>();
+  public communityNameChange: Subject<string> = new Subject<string>();
+  public openWeatherMapKeyChange: Subject<string> = new Subject<string>();
+  public openWeatherMapCinemaCityIdChange: Subject<string> = new Subject<string>();
+  private _showCinema = true;
+  private _showEvents = true;
+  private _communityName = 'DatePoll Web';
+  private _openWeatherMapKey = '';
+  private _openWeatherMapCinemaCityId = '';
+
   constructor(private httpService: HttpService, private router: Router) {
   }
-
-  public showCinemaChange: Subject<boolean> = new Subject<boolean>();
-  private _showCinema = true;
-
-  public showEventsChange: Subject<boolean> = new Subject<boolean>();
-  private _showEvents = true;
 
   public getShowCinema(): boolean {
     this.httpService.getSettingRequest('/cinema', 'settingsCinema').subscribe(
@@ -29,11 +34,6 @@ export class SettingsService {
     return this._showCinema;
   }
 
-  public setShowCinema(showCinema: boolean) {
-    this._showCinema = showCinema;
-    this.showCinemaChange.next(this._showCinema);
-  }
-
   public setAdminShowCinema(showCinema: boolean) {
     this.setShowCinema(showCinema);
 
@@ -41,7 +41,12 @@ export class SettingsService {
       'isEnabled': showCinema
     };
 
-    this.httpService.setSettingsRequest('/cinema', body, 'setCinemaFeatureEnabled');
+    this.httpService.setSettingsRequest('/cinema', body, 'setCinemaFeatureEnabled').subscribe(
+      (response: any) => {
+        console.log(response);
+      },
+      (error) => console.log(error)
+    );
   }
 
   public checkShowCinema() {
@@ -63,11 +68,6 @@ export class SettingsService {
     return this._showEvents;
   }
 
-  public setShowEvents(showEvents: boolean) {
-    this._showEvents = showEvents;
-    this.showEventsChange.next(this._showEvents);
-  }
-
   public setAdminShowEvents(showEvents: boolean) {
     this.setShowEvents(showEvents);
 
@@ -75,13 +75,96 @@ export class SettingsService {
       'isEnabled': showEvents
     };
 
-    this.httpService.setSettingsRequest('/events', body, 'setEventsFeatureEnabled');
+    this.httpService.setSettingsRequest('/events', body, 'setEventsFeatureEnabled').subscribe(
+      (response: any) => {
+        console.log(response);
+      },
+      (error) => console.log(error)
+    );
   }
 
-  public checkShowEvents() {
-    if (!this.getShowEvents()) {
-      this.router.navigate(['/home']);
-      return;
-    }
+  public getCommunityName(): string {
+    this.httpService.getSettingRequest('/name', 'settingsCommunityName').subscribe(
+      (response: any) => {
+        console.log(response);
+        this.setCommunityName(response.community_name);
+      },
+      (error) => console.log(error)
+    );
+    return this._communityName;
+  }
+
+  public setAdminCommunityName(communityName: string) {
+    this.setCommunityName(communityName);
+
+    const body = {
+      'community_name': '"' + communityName + '"'
+    };
+    return this.httpService.setSettingsRequest('/name', body, 'setCommunityName');
+  }
+
+  public getOpenWeatherMapKey(): string {
+    this.httpService.getSettingRequest('/openweathermap/key', 'settingsOpenWeatherMapKey').subscribe(
+      (response: any) => {
+        console.log(response);
+        this.setOpenWeatherMapKey(response.openweathermap_key);
+      },
+      (error) => console.log(error)
+    );
+    return this._openWeatherMapKey;
+  }
+
+  public setAdminOpenWeatherMapKey(key: string) {
+    this.setOpenWeatherMapKey(key);
+
+    const body = {
+      'openweathermap_key': '"' + key + '"'
+    };
+    return this.httpService.setSettingsRequest('/openweathermap/key', body, 'setOpenWeatherMapKey');
+  }
+
+  public getOpenWeatherMapCinemaCityId(): string {
+    this.httpService.getSettingRequest('/openweathermap/cinemaCityId', 'settingsOpenWeatherMapCinemaCityId').subscribe(
+      (response: any) => {
+        console.log(response);
+        this.setOpenWeatherMapCinemaCityId(response.openweathermap_cinema_city_id);
+      },
+      (error) => console.log(error)
+    );
+    return this._openWeatherMapCinemaCityId;
+  }
+
+  public setAdminOpenWeatherMapCinemaCityId(id: string) {
+    this.setOpenWeatherMapCinemaCityId(id);
+
+    const body = {
+      'openweathermap_cinema_city_id': '"' + id + '"'
+    };
+    return this.httpService.setSettingsRequest('/openweathermap/cinemaCityId', body, 'setOpenWeatherMapCinemaCityId');
+  }
+
+  private setShowCinema(showCinema: boolean) {
+    this._showCinema = showCinema;
+    this.showCinemaChange.next(this._showCinema);
+  }
+
+  private setShowEvents(showEvents: boolean) {
+    this._showEvents = showEvents;
+    this.showEventsChange.next(this._showEvents);
+  }
+
+  private setCommunityName(communityName: string) {
+    this._communityName = communityName;
+    this.communityNameChange.next(this._communityName);
+  }
+
+  private setOpenWeatherMapKey(key: string) {
+    this._openWeatherMapKey = key;
+    this.openWeatherMapKeyChange.next(this._openWeatherMapKey);
+  }
+
+  private setOpenWeatherMapCinemaCityId(id: string) {
+    this._openWeatherMapCinemaCityId = id;
+    this.openWeatherMapCinemaCityIdChange.next(this._openWeatherMapCinemaCityId);
   }
 }

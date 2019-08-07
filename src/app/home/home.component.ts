@@ -1,4 +1,4 @@
-import {Component, NgZone, ViewChild} from '@angular/core';
+import {Component, NgZone, OnDestroy, ViewChild} from '@angular/core';
 import {MatSidenav} from '@angular/material/sidenav';
 import {Subscription} from 'rxjs';
 
@@ -13,12 +13,11 @@ import {Permissions} from '../permissions';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent {
+export class HomeComponent implements OnDestroy {
+  private sidenav: MatSidenav;
+  @ViewChild('sidenav', {static: true})
   navBarOpened = false;
   navBarMode = 'over';
-
-  @ViewChild('sidenav', {static: true})
-  private sidenav: MatSidenav;
 
   public myUserService: MyUserService;
 
@@ -27,20 +26,23 @@ export class HomeComponent {
   managementAdministration = Permissions.MANAGEMENT_ADMINISTRATION;
   settingsAdministration = Permissions.SETTINGS_ADMINISTRATION;
 
-  private firstnameSubscription: Subscription;
   firstname: string = null;
+  private firstnameSubscription: Subscription;
 
-  private surnameSubscription: Subscription;
   surname: string = null;
+  private surnameSubscription: Subscription;
 
-  private usernameSubscription: Subscription;
   username: string = null;
+  private usernameSubscription: Subscription;
 
-  private showCinemaSubscription: Subscription;
+  communityName = 'DatePoll';
+  private communityNameSubscription: Subscription;
+
   showCinema = true;
+  private showCinemaSubscription: Subscription;
 
-  private showEventsSubscription: Subscription;
   showEvents = true;
+  private showEventsSubscription: Subscription;
 
   constructor(
     private ngZone: NgZone,
@@ -82,6 +84,11 @@ export class HomeComponent {
       this.username = value;
     });
 
+    this.communityName = this.settingsService.getCommunityName();
+    this.communityNameSubscription = this.settingsService.communityNameChange.subscribe((value) => {
+      this.communityName = value;
+    });
+
     this.showCinema = settingsService.getShowCinema();
     this.showCinemaSubscription = settingsService.showCinemaChange.subscribe((value) => {
       this.showCinema = value;
@@ -95,9 +102,18 @@ export class HomeComponent {
 
   onPageChange() {
     // Close navbar after click only if webbrowser is mobile
-    if (!((window.screen.width) > 992))  {
+    if (!((window.screen.width) > 992)) {
       this.navBarOpened = false;
     }
+  }
+
+  ngOnDestroy(): void {
+    this.firstnameSubscription.unsubscribe();
+    this.surnameSubscription.unsubscribe();
+    this.usernameSubscription.unsubscribe();
+    this.communityNameSubscription.unsubscribe();
+    this.showCinemaSubscription.unsubscribe();
+    this.showEventsSubscription.unsubscribe();
   }
 
   resizeNav() {

@@ -1,36 +1,40 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy} from '@angular/core';
 import {NgForm} from '@angular/forms';
 import {HttpClient} from '@angular/common/http';
 import {Router} from '@angular/router';
+import {Subscription} from 'rxjs';
 
 import {environment} from '../../../environments/environment';
-import {SigninComponent} from '../signin/signin.component';
+import {SettingsService} from '../../services/settings.service';
 
 @Component({
   selector: 'app-forgot-password',
   templateUrl: './forgot-password.component.html',
   styleUrls: ['./forgot-password.component.css']
 })
-export class ForgotPasswordComponent implements OnInit {
-  private apiUrl = environment.apiUrl + '/auth/forgotPassword/';
-  projectName = SigninComponent.projectName;
+export class ForgotPasswordComponent implements OnDestroy {
+  communityName: string;
+  communityNameSubscription: Subscription;
 
   // States: SUBMIT_USERNAME | SUBMIT_CODE | SUBMIT_PASSWORD | FINISHED
   state = 'SUBMIT_USERNAME';
-
   username: string;
   verificationCode: number;
-
   sendingRequest = false;
-
   unknownUsernameAlert = false;
   verificationCodeIncorrect = false;
   verificationCodeRateLimitExceeded = false;
+  private apiUrl = environment.apiUrl + '/auth/forgotPassword/';
 
-  constructor(private http: HttpClient, private router: Router) {
+  constructor(private http: HttpClient, private router: Router, private settingsService: SettingsService) {
+    this.communityName = this.settingsService.getCommunityName();
+    this.communityNameSubscription = this.settingsService.communityNameChange.subscribe((value) => {
+      this.communityName = value;
+    });
   }
 
-  ngOnInit() {
+  ngOnDestroy() {
+    this.communityNameSubscription.unsubscribe();
   }
 
   onSubmitForm(form: NgForm) {

@@ -22,15 +22,12 @@ export class InstrumentSelectComponent implements OnInit, OnDestroy {
 
   /** list of instruments filtered by search keyword */
   public filteredInstruments: ReplaySubject<Instrument[]> = new ReplaySubject<Instrument[]>(1);
-
-  /** Subject that emits when the component has been destroyed. */
-  protected _onDestroy = new Subject<void>();
-
   instruments: Instrument[];
   instrumentsSubscription: Subscription;
   selectedInstrument: Instrument;
-
   @Output() instrumentChanged = new EventEmitter();
+  /** Subject that emits when the component has been destroyed. */
+  protected _onDestroy = new Subject<void>();
 
   constructor(private performanceBadgesService: PerformanceBadgesService) {
     this.instruments = this.performanceBadgesService.getInstruments();
@@ -63,6 +60,11 @@ export class InstrumentSelectComponent implements OnInit, OnDestroy {
     this.instrumentsSubscription.unsubscribe();
   }
 
+  instrumentSelectChange(value) {
+    this.selectedInstrument = value;
+    this.instrumentChanged.emit(this.selectedInstrument);
+  }
+
   private filterInstruments() {
     if (!this.instruments) {
       return;
@@ -79,10 +81,5 @@ export class InstrumentSelectComponent implements OnInit, OnDestroy {
     this.filteredInstruments.next(
       this.instruments.filter(p => p.name.toString().toLowerCase().indexOf(search) > -1)
     );
-  }
-
-  instrumentSelectChange(value) {
-    this.selectedInstrument = value;
-    this.instrumentChanged.emit(this.selectedInstrument);
   }
 }

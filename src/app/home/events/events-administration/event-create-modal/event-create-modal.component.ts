@@ -11,6 +11,7 @@ import {EventsService} from '../../events.service';
 import {StandardDecisionsService} from '../../standardDecisions.service';
 
 import {Event} from '../../models/event.model';
+import {Decision} from '../../models/decision.model';
 
 @Component({
   selector: 'app-event-create-modal',
@@ -30,7 +31,7 @@ export class EventCreateModalComponent implements OnDestroy {
   joined: any[] = [];
   free: any[] = [];
 
-  decisions: string[] = [];
+  decisions: Decision[] = [];
   standardDecisionsSubscription: Subscription;
 
   constructor(private groupsService: GroupsService,
@@ -41,13 +42,17 @@ export class EventCreateModalComponent implements OnDestroy {
 
     const standardDecisions = this.standardDecisionsService.getStandardDecisions();
     for (let i = 0; i < standardDecisions.length; i++) {
-      this.decisions.push(standardDecisions[i].decision);
+      const decision = new Decision(Math.random(), standardDecisions[i].decision);
+      decision.showInCalendar = standardDecisions[i].showInCalendar;
+      this.decisions.push(decision);
     }
 
     this.standardDecisionsSubscription = standardDecisionsService.standardDecisionsChange.subscribe((value) => {
       this.decisions = [];
       for (let i = 0; i < value.length; i++) {
-        this.decisions.push(value[i].decision);
+        const decision = new Decision(Math.random(), value[i].decision);
+        decision.showInCalendar = value[i].showInCalendar;
+        this.decisions.push(decision);
       }
     });
 
@@ -104,7 +109,7 @@ export class EventCreateModalComponent implements OnDestroy {
     }, 1000);
   }
 
-  onDecisionsChange(decisions: string[]) {
+  onDecisionsChange(decisions: Decision[]) {
     this.decisions = decisions;
   }
 
@@ -125,6 +130,7 @@ export class EventCreateModalComponent implements OnDestroy {
     const endDateHours = form.controls.endDateHours.value;
     const endDateMinutes = form.controls.endDateMinutes.value;
     const description = form.controls.description.value;
+    const location = form.controls.location.value;
 
     this.startDate.setHours(startDateHours);
     this.startDate.setMinutes(startDateMinutes);
@@ -133,7 +139,7 @@ export class EventCreateModalComponent implements OnDestroy {
 
     const forEveryone = (this.joined.length === 0);
 
-    const event = new Event(0, name, this.startDate, this.endDate, forEveryone, description, this.decisions);
+    const event = new Event(0, name, this.startDate, this.endDate, forEveryone, description, location, this.decisions);
     console.log(event);
     this.dialogRef.close();
     this.eventsService.createEvent(event).subscribe(

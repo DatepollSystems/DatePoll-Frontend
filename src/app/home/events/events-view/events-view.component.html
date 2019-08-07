@@ -5,18 +5,23 @@
         <h1>{{'EVENTS_VIEW' | translate}}</h1>
       </div>
       <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4" style="text-align: end">
-        <mat-slide-toggle color="primary" (change)="onShowAllEventsChange($event)" [(ngModel)]="showAllEvents">
+        <mat-slide-toggle (change)="onShowAllEventsChange($event)" [(ngModel)]="showAllEvents" color="primary">
           {{'EVENTS_VIEW_SHOW_ALREADY_VOTED_EVENTS' | translate}}
         </mat-slide-toggle>
       </div>
     </div>
 
-    <div class="row" *ngIf="!loading">
-      <div class="col-12 col-sm-12 col-md-6 col-lg-4" *ngFor="let event of eventsToShow">
+    <div *ngIf="!loading" class="row">
+      <div *ngFor="let event of eventsToShow" class="col-12 col-sm-12 col-md-6 col-lg-4">
         <mat-card class="mat-elevation-z3">
           <mat-card-header>
             <mat-card-title>{{event.name}}</mat-card-title>
-            <mat-card-subtitle>{{event.startDate | date:'dd.MM.yyyy HH:mm'}} - {{event.endDate | date:'dd.MM.yyyy HH:mm'}}</mat-card-subtitle>
+            <mat-card-subtitle>{{event.startDate | date:'dd.MM.yyyy HH:mm'}}
+              - {{event.endDate | date:'dd.MM.yyyy HH:mm'}}</mat-card-subtitle>
+            <mat-card-subtitle>
+              <a target="_blank" rel="noopener"
+                 href="https://www.google.com/maps/search/?api=1&query={{event.locationUri}}">{{event.location}}</a>
+            </mat-card-subtitle>
           </mat-card-header>
           <mat-card-content>
             <p style="margin-left: 15px;">
@@ -24,22 +29,23 @@
             </p>
           </mat-card-content>
           <mat-card-actions>
-            <button mat-flat-button color="primary" *ngIf="!event.alreadyVotedFor"
-                    (click)="onVote(event)">{{'EVENTS_VIEW_EVENT_CARD_BUTTON_DECIDE' | translate}}</button>
-            <button mat-flat-button color="accent" *ngIf="event.alreadyVotedFor" #cancelVotingButton
-                    (click)="cancelVoting(event, cancelVotingButton)">{{'EVENTS_VIEW_EVENT_CARD_BUTTON_CANCEL_VOTING' | translate}}</button>
-            <button mat-button (click)="onInfo(event)">
+            <button (click)="onVote(event)" *ngIf="!event.alreadyVotedFor" color="primary"
+                    mat-flat-button>{{'EVENTS_VIEW_EVENT_CARD_BUTTON_DECIDE' | translate}}</button>
+            <button #cancelVotingButton (click)="cancelVoting(event, cancelVotingButton)" *ngIf="event.alreadyVotedFor"
+                    color="accent"
+                    mat-flat-button>{{'EVENTS_VIEW_EVENT_CARD_BUTTON_CANCEL_VOTING' | translate}}</button>
+            <button (click)="onInfo(event)" mat-button>
               <mat-icon>info</mat-icon>
               {{'EVENTS_VIEW_EVENT_CARD_BUTTON_INFO' | translate}}
             </button>
           </mat-card-actions>
         </mat-card>
       </div>
-      <div class="col-12" *ngIf="eventsToShow.length === 0" style="text-align: center">
+      <div *ngIf="eventsToShow.length === 0" class="col-12" style="text-align: center">
         {{'EVENTS_VIEW_EVENT_NO_NEW_VOTINGS' | translate}}
       </div>
     </div>
-    <div class="row" style="margin-bottom: 15px;" *ngIf="loading">
+    <div *ngIf="loading" class="row" style="margin-bottom: 15px;">
       <div class="col-12">
         <mat-progress-spinner mode="indeterminate" style="margin: auto"></mat-progress-spinner>
       </div>

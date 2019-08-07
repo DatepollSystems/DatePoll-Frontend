@@ -10,13 +10,13 @@
     </div>
   </div>
 
-  <form (ngSubmit)="bookTickets()" #form="ngForm" style="margin-top: 20px; margin-bottom: 20px;">
+  <form #form="ngForm" (ngSubmit)="bookTickets()" style="margin-top: 20px; margin-bottom: 20px;">
     <div class="row">
       <mat-form-field class="col-12">
-        <input matInput id="ticketsToBook" name="ticketsToBook" type="number"
-               [(ngModel)]="ticketsToBook" ngModel #ticketsToBookModel="ngModel"
-               [range]="[1, freeTickets]" number required
-               placeholder="{{'CINEMA_TICKETS_BOOKING_MODAL_NUMBER_OF_TICKETS' | translate}}">
+        <input #ticketsToBookModel="ngModel" [(ngModel)]="ticketsToBook" [range]="[1, freeTickets]" id="ticketsToBook"
+               matInput name="ticketsToBook" ngModel
+               number placeholder="{{'CINEMA_TICKETS_BOOKING_MODAL_NUMBER_OF_TICKETS' | translate}}" required
+               type="number">
         <mat-error *ngIf="ticketsToBookModel.invalid">
           {{'CINEMA_TICKETS_BOOKING_MODAL_NUMBER_OF_TICKETS_INVALID_1' | translate}} {{freeTickets}} {{'CINEMA_TICKETS_BOOKING_MODAL_NUMBER_OF_TICKETS_INVALID_2' | translate}}
         </mat-error>
@@ -33,8 +33,8 @@
 </mat-dialog-content>
 <mat-dialog-actions align="end">
   <button mat-button mat-dialog-close>{{'CLOSE' | translate}}</button>
-  <button mat-button [mat-dialog-close]="true" (click)="form.ngSubmit.emit()" class="success-button"
-          [disabled]="!form.form.valid">
+  <button (click)="form.ngSubmit.emit()" [disabled]="!form.form.valid" [mat-dialog-close]="true" class="success-button"
+          mat-button>
     {{'CINEMA_TICKETS_BOOKING_MODAL_BOOK' | translate}}
   </button>
 </mat-dialog-actions>

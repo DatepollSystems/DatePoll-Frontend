@@ -2,50 +2,50 @@
 <div mat-dialog-content>
   <app-do-not-forget-to-save></app-do-not-forget-to-save>
 
-  <form (ngSubmit)="save()" #form="ngForm">
+  <form #form="ngForm" (ngSubmit)="save()">
     <div class="row">
       <mat-form-field class="col-12 col-sm-12 col-md-10 col-lg-10">
-        <input matInput id="name" name="name" type="text"
-               [(ngModel)]="name" ngModel #nameModel="ngModel"
-               maxlength="190" required minlength="1"
-               placeholder="{{'CINEMA_TICKETS_ADMINISTRATION_NAME' | translate}}">
+        <input #nameModel="ngModel" [(ngModel)]="name" id="name" matInput
+               maxlength="190" minlength="1" name="name"
+               ngModel placeholder="{{'CINEMA_TICKETS_ADMINISTRATION_NAME' | translate}}" required
+               type="text">
         <mat-error *ngIf="nameModel.invalid">
           {{'CINEMA_TICKETS_ADMINISTRATION_MOVIE_EDIT_MODAL_NAME_INVALID' | translate}}
         </mat-error>
       </mat-form-field>
 
       <mat-form-field class="col-12 col-sm-12 col-md-2 col-lg-2">
-        <input matInput id="bookedTickets" name="bookedTickets" type="number"
-               [(ngModel)]="bookedTickets" ngModel
-               required number
-               placeholder="{{'CINEMA_TICKETS_ADMINISTRATION_BOOKED_TICKETS' | translate}}">
+        <input [(ngModel)]="bookedTickets" id="bookedTickets" matInput name="bookedTickets"
+               ngModel number
+               placeholder="{{'CINEMA_TICKETS_ADMINISTRATION_BOOKED_TICKETS' | translate}}" required
+               type="number">
       </mat-form-field>
     </div>
 
     <div class="row">
       <mat-form-field class="col-12 " id="datepicker-field">
-        <input matInput [matDatepicker]="picker"
-               id="datepicker" name="datepicker" [(ngModel)]="date"
+        <input [(ngModel)]="date" [matDatepicker]="picker"
+               id="datepicker" matInput name="datepicker"
                placeholder="{{'CINEMA_TICKETS_ADMINISTRATION_DATE' | translate}}">
-        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker-toggle [for]="picker" matSuffix></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
 
       <mat-form-field class="col-12" id="datepicker-field-mobile">
-        <input matInput [matDatepicker]="picker_mobile"
-               id="datepicker-mobile" name="datepicker-mobile" [(ngModel)]="date"
+        <input [(ngModel)]="date" [matDatepicker]="picker_mobile"
+               id="datepicker-mobile" matInput name="datepicker-mobile"
                placeholder="{{'CINEMA_TICKETS_ADMINISTRATION_DATE' | translate}}">
-        <mat-datepicker-toggle matSuffix [for]="picker_mobile"></mat-datepicker-toggle>
-        <mat-datepicker touchUi #picker_mobile></mat-datepicker>
+        <mat-datepicker-toggle [for]="picker_mobile" matSuffix></mat-datepicker-toggle>
+        <mat-datepicker #picker_mobile touchUi></mat-datepicker>
       </mat-form-field>
     </div>
 
     <div class="row">
       <mat-form-field class="col-12">
-        <input matInput id="trailerLink" name="trailerLink" type="text"
-               [(ngModel)]="trailerLink" ngModel #trailerLinkModel="ngModel"
-               maxlength="190" required minlength="6"
-               placeholder="{{'CINEMA_TICKETS_ADMINISTRATION_TRAILER' | translate}}">
+        <input #trailerLinkModel="ngModel" [(ngModel)]="trailerLink" id="trailerLink" matInput
+               maxlength="190" minlength="6" name="trailerLink"
+               ngModel placeholder="{{'CINEMA_TICKETS_ADMINISTRATION_TRAILER' | translate}}" required
+               type="text">
         <mat-error *ngIf="trailerLinkModel.invalid">
           {{'CINEMA_TICKETS_ADMINISTRATION_MOVIE_EDIT_MODAL_TRAILER_INVALID' | translate}}
         </mat-error>
@@ -54,10 +54,10 @@
 
     <div class="row">
       <mat-form-field class="col-12">
-        <input matInput id="imageLink" name="imageLink" type="text"
-               [(ngModel)]="imageLink" ngModel #imageLinkModel="ngModel"
-               maxlength="190" required minlength="6"
-               placeholder="{{'CINEMA_TICKETS_ADMINISTRATION_POSTER' | translate}}">
+        <input #imageLinkModel="ngModel" [(ngModel)]="imageLink" id="imageLink" matInput
+               maxlength="190" minlength="6" name="imageLink"
+               ngModel placeholder="{{'CINEMA_TICKETS_ADMINISTRATION_POSTER' | translate}}" required
+               type="text">
         <mat-error *ngIf="imageLinkModel.invalid">
           {{'CINEMA_TICKETS_ADMINISTRATION_MOVIE_EDIT_MODAL_POSTER_INVALID' | translate}}
         </mat-error>
@@ -65,13 +65,13 @@
     </div>
 
     <h2>{{'CINEMA_TICKETS_ADMINISTRATION_MOVIE_EDIT_MODAL_POSTER_PREVIEW' | translate}}</h2>
-    <img class="col-12 col-sm-12 col-md-8 col-lg-4 offset-md-2 offset-lg-4" src="{{imageLink}}"
-         alt="Poster of the movie"/>
+    <img alt="Poster of the movie" class="col-12 col-sm-12 col-md-8 col-lg-4 offset-md-2 offset-lg-4"
+         src="{{imageLink}}"/>
   </form>
 
 </div>
 <div mat-dialog-actions>
-  <button mat-button [mat-dialog-close]>{{'CLOSE' | translate}}</button>
-  <button mat-button mat-dialog-close (click)="form.ngSubmit.emit()" class="success-button"
-          [disabled]="!form.form.valid">{{'SAVE' | translate}}</button>
+  <button [mat-dialog-close] mat-button>{{'CLOSE' | translate}}</button>
+  <button (click)="form.ngSubmit.emit()" [disabled]="!form.form.valid" class="success-button" mat-button
+          mat-dialog-close>{{'SAVE' | translate}}</button>
 </div>

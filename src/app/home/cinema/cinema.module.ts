@@ -18,6 +18,7 @@ import {MovieTicketsComponent} from './movie-tickets/movie-tickets.component';
 import {MovieServiceComponent} from './movie-service/movie-service.component';
 import {MovieAdministrationComponent} from './movie-administration/movie-administration.component';
 import {MovieTicketComponent} from './movie-tickets/movie-ticket/movie-ticket.component';
+import {MovieWeatherforecastModalComponent} from './movie-tickets/movie-ticket/movie-weatherforecast-modal/movie-weatherforecast-modal.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import {MovieTicketComponent} from './movie-tickets/movie-ticket/movie-ticket.co
     MovieAdministrationComponent,
     MovieTicketComponent,
     MovieBookTicketsModalComponent,
-    MovieCreateModalComponent
+    MovieCreateModalComponent,
+    MovieWeatherforecastModalComponent
   ],
   imports: [
     CommonModule,
@@ -41,7 +43,8 @@ import {MovieTicketComponent} from './movie-tickets/movie-ticket/movie-ticket.co
   ],
   entryComponents: [
     MovieCreateModalComponent,
-    MovieBookTicketsModalComponent
+    MovieBookTicketsModalComponent,
+    MovieWeatherforecastModalComponent
   ],
   providers: [
     {provide: DateAdapter, useClass: CustomDateAdapter}

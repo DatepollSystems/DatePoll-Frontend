@@ -19,15 +19,12 @@ export class SubgroupUserListModalComponent implements OnDestroy {
 
   @ViewChild(MatSort, {static: false}) sort: MatSort;
   @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
-
-  private readonly subgroupID: number;
-
   public subgroup: any;
-  private subgroupSubscription: Subscription;
   dataSource: MatTableDataSource<any>;
   public subgroupName = '';
-
   public sendingRequest = false;
+  private readonly subgroupID: number;
+  private subgroupSubscription: Subscription;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any,
               private dialog: MatDialog,

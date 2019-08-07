@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpService} from '../../services/http.service';
 import {Subject} from 'rxjs';
 import {Event} from './models/event.model';
@@ -6,25 +6,24 @@ import {Converter} from '../../services/converter';
 import {EventResultGroup} from './models/event-result-group.model';
 import {EventResultSubgroup} from './models/event-result-subgroup.model';
 import {EventResultUser} from './models/event-result-user.model';
+import {Decision} from './models/decision.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EventsService {
 
-  private _events: Event[] = [];
   public eventsChange: Subject<Event[]> = new Subject<Event[]>();
-
-  private _event: Event;
   public eventChange: Subject<Event> = new Subject<Event>();
-
-  private _joinedGroups: any[] = [];
   public joinedGroupsChange: Subject<any[]> = new Subject<any[]>();
-
-  private _freeGroups: any[] = [];
   public freeGroupsChange: Subject<any[]> = new Subject<any[]>();
+  private _events: Event[] = [];
+  private _event: Event;
+  private _joinedGroups: any[] = [];
+  private _freeGroups: any[] = [];
 
-  constructor(public httpService: HttpService) { }
+  constructor(public httpService: HttpService) {
+  }
 
   public getEvents(): Event[] {
     this.fetchEvents();
@@ -45,8 +44,16 @@ export class EventsService {
         const fetchedEvents = data.events;
         for (let i = 0; i < fetchedEvents.length; i++) {
           const fetchedEvent = fetchedEvents[i];
+
+          const decisions = [];
+          for (const fetchedDecision of fetchedEvent.decisions) {
+            const decision = new Decision(fetchedDecision.id, fetchedDecision.decision);
+            decision.showInCalendar = fetchedDecision.showInCalendar;
+            decisions.push(decision);
+          }
+
           events.push(new Event(fetchedEvent.id, fetchedEvent.name, new Date(fetchedEvent.startDate), new Date(fetchedEvent.endDate),
-            fetchedEvent.forEveryone, fetchedEvent.description, fetchedEvent.decisions));
+            fetchedEvent.forEveryone, fetchedEvent.description, fetchedEvent.location, decisions));
         }
 
         this.setEvents(events);
@@ -56,13 +63,21 @@ export class EventsService {
   }
 
   public createEvent(event: Event) {
+    const decisions = [];
+    for (const decision of event.getDecisions()) {
+      decisions.push({
+        'decision': decision.decision,
+        'showInCalendar': decision.showInCalendar
+      });
+    }
     const object = {
       'name': event.name,
       'startDate': Converter.getDateFormattedWithHoursMinutesAndSeconds(event.startDate),
       'endDate': Converter.getDateFormattedWithHoursMinutesAndSeconds(event.endDate),
       'forEveryone': event.forEveryone,
       'description': event.description,
-      'decisions': event.getDecisions()
+      'location': event.location,
+      'decisions': decisions
     };
 
     return this.httpService.loggedInV1POSTRequest('/avent/administration/avent', object, 'createEvent');
@@ -75,6 +90,7 @@ export class EventsService {
       'endDate': Converter.getDateFormattedWithHoursMinutesAndSeconds(event.endDate),
       'forEveryone': event.forEveryone,
       'description': event.description,
+      'location': event.location,
       'decisions': event.getDecisions()
     };
 
@@ -128,11 +144,6 @@ export class EventsService {
     return this._joinedGroups.slice();
   }
 
-  private setJoinedOfEvent(groups: any[]) {
-    this._joinedGroups = groups;
-    this.joinedGroupsChange.next(this._joinedGroups.slice());
-  }
-
   public fetchJoinedOfEvent(eventId: number) {
     this.httpService.loggedInV1GETRequest('/avent/administration/group/joined/' + eventId, 'fetchJoinedGroupsOfEvent').subscribe(
       (data: any) => {
@@ -181,15 +192,9 @@ export class EventsService {
     );
   }
 
-
   public getFreeOfEvent(eventId: number): any[] {
     this.fetchFreeOfEvent(eventId);
     return this._freeGroups.slice();
-  }
-
-  private setFreeOfEvent(groups: any[]) {
-    this._freeGroups = groups;
-    this.freeGroupsChange.next(this._freeGroups.slice());
   }
 
   public fetchFreeOfEvent(eventId: number) {
@@ -240,10 +245,24 @@ export class EventsService {
     );
   }
 
-
   public getEvent(id: number): Event {
     this.fetchEvent(id);
     return this._event;
+  }
+
+  public setEvent(event: Event) {
+    this._event = event;
+    this.eventChange.next(this._event);
+  }
+
+  private setJoinedOfEvent(groups: any[]) {
+    this._joinedGroups = groups;
+    this.joinedGroupsChange.next(this._joinedGroups.slice());
+  }
+
+  private setFreeOfEvent(groups: any[]) {
+    this._freeGroups = groups;
+    this.freeGroupsChange.next(this._freeGroups.slice());
   }
 
   private fetchEvent(id: number) {
@@ -252,13 +271,21 @@ export class EventsService {
         console.log(data);
         const response = data.event;
 
+        const decisions = [];
+        for (const fetchedDecision of response.decisions) {
+          const decision = new Decision(fetchedDecision.id, fetchedDecision.decision);
+          decision.showInCalendar = fetchedDecision.showInCalendar;
+          decisions.push(decision);
+        }
+
         const event = new Event(response.id, response.name, new Date(response.startDate), new Date(response.endDate),
-          response.forEveryone, response.description, response.decisions);
+          response.forEveryone, response.description, response.location, decisions);
 
         let resultUsers = [];
         for (let i = 0; i < response.resultGroups.allUsers.length; i++) {
           const resultUser = response.resultGroups.allUsers[i];
-          resultUsers.push(new EventResultUser(resultUser.id, resultUser.firstname, resultUser.surname, resultUser.decision));
+          resultUsers.push(new EventResultUser(resultUser.id, resultUser.firstname, resultUser.surname, resultUser.decisionId,
+            resultUser.decision));
         }
         event.setResultUsers(resultUsers);
 
@@ -274,7 +301,7 @@ export class EventsService {
             const localResultUser = localResultGroup.users[j];
 
             resultUsers.push(new EventResultUser(localResultUser.id, localResultUser.firstname, localResultUser.surname,
-              localResultUser.decision));
+              localResultUser.decisionId, localResultUser.decision));
           }
           resultGroup.setResultUsers(resultUsers);
 
@@ -291,7 +318,7 @@ export class EventsService {
               const localResultUser = localResultSubgroup.users[x];
 
               resultUsers.push(new EventResultUser(localResultUser.id, localResultUser.firstname, localResultUser.surname,
-                localResultUser.decision));
+                localResultUser.decisionId, localResultUser.decision));
             }
 
             resultSubgroup.setResultUsers(resultUsers);
@@ -311,8 +338,31 @@ export class EventsService {
     );
   }
 
-  public setEvent(event: Event) {
-    this._event = event;
-    this.eventChange.next(this._event);
+
+  public voteForUsers(event: Event, decision: Decision, users: EventResultUser[]) {
+    const userIds = [];
+    for (const user of users) {
+      userIds.push(user.id);
+    }
+
+    const dto = {
+      'decision_id': decision.id,
+      'user_ids': userIds
+    };
+
+    return this.httpService.loggedInV1POSTRequest('/avent/administration/avent/' + event.id + '/voteForUsers', dto);
+  }
+
+  public cancelVotingForUsers(event: Event, users: EventResultUser[]) {
+    const userIds = [];
+    for (const user of users) {
+      userIds.push(user.id);
+    }
+
+    const dto = {
+      'user_ids': userIds
+    };
+
+    return this.httpService.loggedInV1POSTRequest('/avent/administration/avent/' + event.id + '/cancelVotingForUsers', dto);
   }
 }

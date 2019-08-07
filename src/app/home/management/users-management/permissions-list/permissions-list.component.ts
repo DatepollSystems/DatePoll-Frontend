@@ -12,7 +12,8 @@ export class PermissionsListComponent {
 
   @Output() permissionsChanged = new EventEmitter();
 
-  constructor() { }
+  constructor() {
+  }
 
   addPermission(form: NgForm) {
     const permission = form.controls.permission.value;

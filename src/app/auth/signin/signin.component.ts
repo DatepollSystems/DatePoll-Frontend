@@ -1,18 +1,20 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {NgForm} from '@angular/forms';
 import {Router} from '@angular/router';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import {Subscription} from 'rxjs';
 
 import {AuthService} from '../auth.service';
+import {SettingsService} from '../../services/settings.service';
 
 @Component({
   selector: 'app-signin',
   templateUrl: './signin.component.html',
   styleUrls: ['./signin.component.css']
 })
-export class SigninComponent implements OnInit {
-  public static projectName = 'priv. unif. Buergerkorps Eggenburg';
-  projectName = SigninComponent.projectName;
+export class SigninComponent implements OnInit, OnDestroy {
+  communityName: string;
+  communityNameSubscription: Subscription;
 
   state = 'login';
 
@@ -23,9 +25,15 @@ export class SigninComponent implements OnInit {
 
   private username: string;
   private password: string;
-  private stayLoggedIn = false;
 
-  constructor(private router: Router, private snackBar: MatSnackBar, private authService: AuthService) {
+  constructor(private router: Router,
+              private snackBar: MatSnackBar,
+              private authService: AuthService,
+              private settingsService: SettingsService) {
+    this.communityName = this.settingsService.getCommunityName();
+    this.communityNameSubscription = this.settingsService.communityNameChange.subscribe((value) => {
+      this.communityName = value;
+    });
   }
 
   ngOnInit(): void {
@@ -37,15 +45,17 @@ export class SigninComponent implements OnInit {
     }
   }
 
+  ngOnDestroy(): void {
+    this.communityNameSubscription.unsubscribe();
+  }
+
   protected onSignin(form: NgForm) {
     this.showLoadingSpinnerDuringLogin = true;
 
     this.username = form.value.username;
     this.password = form.value.password;
 
-    console.log('signInComponent | Stay logged in: ' + this.stayLoggedIn);
-
-    this.authService.signinUser(this.username, this.password, this.stayLoggedIn).subscribe(
+    this.authService.trySignin(this.username, this.password).subscribe(
       (data: any) => {
         console.log(data);
         if (data.msg != null) {
@@ -61,12 +71,8 @@ export class SigninComponent implements OnInit {
           return;
         }
 
+        this.authService.signin(data.token, data.sessionToken);
         this.uiLogin();
-        if (data.sessionToken != null) {
-          this.authService.performLogin(data.token, data.sessionToken);
-        } else {
-          this.authService.performLogin(data.token);
-        }
       },
       (error) => {
         console.log(error);
@@ -83,8 +89,9 @@ export class SigninComponent implements OnInit {
 
     this.authService.changePasswordAfterSignin(this.username, this.password, password).subscribe(
       (data: any) => {
+        console.log(data);
+        this.authService.signin(data.token, data.sessionToken);
         this.uiLogin();
-        this.authService.performLogin(data.token);
       }, (error) => console.log(error)
     );
   }
@@ -93,6 +100,7 @@ export class SigninComponent implements OnInit {
     this.loginSuccess = true;
     this.loginFail = false;
     this.snackBar.open('Login erfolgreich');
+    this.router.navigate(['/home']);
   }
 
 }

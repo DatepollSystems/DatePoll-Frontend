@@ -1,24 +1,24 @@
 <h1
   mat-dialog-title>{{'MANAGEMENT_GROUPS_INFO_GROUP_MODAL_ROLE_UPDATE_MODAL_TITLE' | translate}}{{user.firstname}} {{user.surname}}</h1>
 <div mat-dialog-content>
-  <form (ngSubmit)="onUpdate(form)" #form="ngForm">
+  <form #form="ngForm" (ngSubmit)="onUpdate(form)">
     <div class="row">
       <mat-form-field class="col-12">
         <!-- Role -->
-        <input matInput id="role" name="role" type="text"
-               ngModel #roleModel="ngModel" [(ngModel)]="user.role"
-               maxlength="190"
-               placeholder="{{'MANAGEMENT_GROUPS_INFO_GROUP_MODAL_ROLE_UPDATE_MODAL_ROLE' | translate}}">
+        <input #roleModel="ngModel" [(ngModel)]="user.role" id="role" matInput
+               maxlength="190" name="role" ngModel
+               placeholder="{{'MANAGEMENT_GROUPS_INFO_GROUP_MODAL_ROLE_UPDATE_MODAL_ROLE' | translate}}"
+               type="text">
         <mat-error *ngIf="roleModel.invalid">
           {{'MANAGEMENT_GROUPS_INFO_GROUP_MODAL_ROLE_UPDATE_MODAL_ROLE_INCORRECT' | translate}}
         </mat-error>
       </mat-form-field>
     </div>
   </form>
-  <mat-progress-bar mode="indeterminate" *ngIf="sendingRequest"></mat-progress-bar>
+  <mat-progress-bar *ngIf="sendingRequest" mode="indeterminate"></mat-progress-bar>
 </div>
 <div mat-dialog-actions style="margin-top: 15px">
-  <button mat-button [mat-dialog-close]>{{'CLOSE' | translate}}</button>
-  <button mat-button (click)="form.ngSubmit.emit()" class="success-button"
-          [disabled]="!form.form.valid">{{'SAVE' | translate}}</button>
+  <button [mat-dialog-close] mat-button>{{'CLOSE' | translate}}</button>
+  <button (click)="form.ngSubmit.emit()" [disabled]="!form.form.valid" class="success-button"
+          mat-button>{{'SAVE' | translate}}</button>
 </div>

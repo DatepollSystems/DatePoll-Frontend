@@ -10,14 +10,12 @@ import {Subgroup} from './models/subgroup.model';
   providedIn: 'root'
 })
 export class GroupsService {
-  private _groups: Group[] = [];
   public groupsChange: Subject<Group[]> = new Subject<Group[]>();
-
-  private _group: any = null;
   public groupChange: Subject<any> = new Subject<any>();
-
-  private _subgroup: any = null;
   public subgroupChange: Subject<any> = new Subject<any>();
+  private _groups: Group[] = [];
+  private _group: any = null;
+  private _subgroup: any = null;
 
   constructor(private httpService: HttpService) {
   }

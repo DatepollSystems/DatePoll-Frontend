@@ -11,6 +11,7 @@ import {EventStandardDecisionsManagementModalComponent} from '../event-standard-
 import {EventUpdateModalComponent} from './event-update-modal/event-update-modal.component';
 import {EventInfoModalComponent} from '../event-info-modal/event-info-modal.component';
 import {EventDeleteModalComponent} from './event-delete-modal/event-delete-modal.component';
+import {EventUserManagementModalComponent} from './event-user-management-modal/event-user-management-modal.component';
 
 @Component({
   selector: 'app-events-administration',
@@ -24,17 +25,15 @@ export class EventsAdministrationComponent implements OnDestroy {
 
   showAllEvents: boolean;
 
-  displayedColumns: string[] = ['name', 'startDate', 'endDate', 'description', 'actions'];
+  displayedColumns: string[] = ['name', 'startDate', 'endDate', 'location', 'description', 'actions'];
   filterValue: string = null;
 
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
-
-  private eventsSubscription: Subscription;
   events: Event[];
   eventsCopy: Event[];
   dataSource: MatTableDataSource<Event>;
-
+  private eventsSubscription: Subscription;
   private permissionSubscription: Subscription;
 
   constructor(
@@ -123,6 +122,15 @@ export class EventsAdministrationComponent implements OnDestroy {
 
   onInfo(event: Event) {
     this.dialog.open(EventInfoModalComponent, {
+      width: '80vh',
+      'data': {
+        'event': event
+      }
+    });
+  }
+
+  onUserManagement(event: Event) {
+    this.dialog.open(EventUserManagementModalComponent, {
       width: '80vh',
       'data': {
         'event': event

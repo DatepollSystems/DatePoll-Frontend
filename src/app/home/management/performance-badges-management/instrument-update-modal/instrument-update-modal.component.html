@@ -1,12 +1,12 @@
 <h1 mat-dialog-title>{{'MANAGEMENT_PERFORMANCE_BADGES_UPDATE_INSTRUMENT_MODAL_TITLE' | translate}} {{name}}</h1>
 <div mat-dialog-content>
-  <form class="row" #form="ngForm" (ngSubmit)="update(form)">
+  <form #form="ngForm" (ngSubmit)="update(form)" class="row">
     <div class="col-12">
       <mat-form-field>
-        <input matInput id="instrumentName" name="instrumentName" type="text"
-               ngModel #instrumentNameModel="ngModel" [(ngModel)]="name"
-               required maxlength="190" minlength="1"
-               placeholder="{{'MANAGEMENT_PERFORMANCE_BADGES_ADD_INSTRUMENT_NAME' | translate}}">
+        <input #instrumentNameModel="ngModel" [(ngModel)]="name" id="instrumentName" matInput
+               maxlength="190" minlength="1" name="instrumentName"
+               ngModel placeholder="{{'MANAGEMENT_PERFORMANCE_BADGES_ADD_INSTRUMENT_NAME' | translate}}" required
+               type="text">
         <mat-error *ngIf="instrumentNameModel.invalid">
           {{'MANAGEMENT_PERFORMANCE_BADGES_ADD_INSTRUMENT_NAME_INCORRECT' | translate}}
         </mat-error>
@@ -15,9 +15,9 @@
   </form>
 </div>
 <div mat-dialog-actions style="margin-top: 15px">
-  <button mat-button [mat-dialog-close]>{{'CLOSE' | translate}}</button>
-  <button mat-button (click)="form.ngSubmit.emit()" class="success-button"
-          [disabled]="!form.form.valid">{{'SAVE' | translate}}</button>
+  <button [mat-dialog-close] mat-button>{{'CLOSE' | translate}}</button>
+  <button (click)="form.ngSubmit.emit()" [disabled]="!form.form.valid" class="success-button"
+          mat-button>{{'SAVE' | translate}}</button>
 </div>
 
 <ng-template #successfullyUpdatedInstrument>

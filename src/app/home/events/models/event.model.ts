@@ -1,6 +1,7 @@
 import {EventResultGroup} from './event-result-group.model';
 import {EventResultUser} from './event-result-user.model';
 import {EventAction} from 'calendar-utils';
+import {Decision} from './decision.model';
 
 export class Event {
   public id: number;
@@ -10,23 +11,47 @@ export class Event {
   public forEveryone: boolean;
   public description: string;
   public descriptionPreview = '';
+  public location: string;
+  public locationUri: string;
+  public locationPreview = '';
 
   public alreadyVotedFor = false;
-
-  private decisions: string[];
+  public chartIsEmpty = true;
+  // Calendar specific values
+  start: Date;
+  end: Date;
+  title: string;
+  public actions: EventAction[];
+  allDay = false;
+  color = {
+    primary: '#43A047',
+    secondary: '#D1E8FF'
+  };
+  draggable: false;
+  meta = null;
+  resizable: { beforeStart: false; afterEnd: false };
+  private decisions: Decision[] = [];
   private resultGroups: EventResultGroup[] = [];
   private resultUsers: EventResultUser[] = [];
-
   private chartData: any[] = null;
-  public chartIsEmpty = true;
 
-  constructor(id: number, name: string, startDate: Date, endDate: Date, forEveryone: boolean, description: string, decisions: string[]) {
+  constructor(id: number, name: string, startDate: Date, endDate: Date, forEveryone: boolean, description: string, location: string,
+              decisions: Decision[]) {
     this.id = id;
     this.name = name;
     this.startDate = startDate;
     this.endDate = endDate;
     this.forEveryone = forEveryone;
     this.description = description;
+    this.location = location;
+    if (location != null) {
+      if (location.length > 25) {
+        this.locationPreview = this.location.slice(0, 25) + '...';
+      } else {
+        this.locationPreview = this.location;
+      }
+      this.locationUri = encodeURI(this.location);
+    }
     if (description != null) {
       if (description.length > 45) {
         this.descriptionPreview = this.description.slice(0, 45) + '...';
@@ -41,22 +66,6 @@ export class Event {
     this.end = this.endDate;
   }
 
-  // Calendar specific values
-  start: Date;
-  end: Date;
-  title: string;
-
-  public actions: EventAction[];
-
-  allDay = false;
-  color = {
-    primary: '#1e90ff',
-    secondary: '#D1E8FF'
-  };
-  draggable: false;
-
-  meta = null;
-  resizable: { beforeStart: false; afterEnd: false };
   // ------------------------------------------------------
 
   public setResultGroups(groups: EventResultGroup[]) {
@@ -67,19 +76,23 @@ export class Event {
     return this.resultGroups.slice();
   }
 
-  private setDecisions(decisions: string[]) {
-    this.decisions = decisions;
+  public getDecisions(): Decision[] {
+    return this.decisions.slice();
   }
 
-  public getDecisions(): string[] {
-    return this.decisions.slice();
+  public getDecisionsAsStrings(): string[] {
+    const decisions = [];
+    for (const decision of this.decisions) {
+      decisions.push(decision.decision);
+    }
+    return decisions;
   }
 
   public setResultUsers(users: EventResultUser[]) {
     this.resultUsers = users;
   }
 
-  private getResultUsers(): EventResultUser[] {
+  public getResultUsers(): EventResultUser[] {
     return this.resultUsers.slice();
   }
 
@@ -91,11 +104,15 @@ export class Event {
     return this.chartData;
   }
 
+  private setDecisions(decisions: Decision[]) {
+    this.decisions = decisions;
+  }
+
   private calculateChartData() {
     const data = [];
     for (let i = 0; i < this.getDecisions().length; i++) {
       const object = {
-        'name': this.getDecisions()[i],
+        'id': this.getDecisions()[i].id,
         'value': 0
       };
       data.push(object);
@@ -103,7 +120,7 @@ export class Event {
 
     for (let i = 0; i < this.resultUsers.length; i++) {
       for (let j = 0; j < data.length; j++) {
-        if (data[j].name === this.resultUsers[i].decision) {
+        if (data[j].id === this.resultUsers[i].decisionId) {
           data[j].value++;
           this.chartIsEmpty = false;
           break;

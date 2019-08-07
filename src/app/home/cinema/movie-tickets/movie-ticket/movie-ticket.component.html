@@ -7,55 +7,56 @@
       <mat-card-subtitle>{{movie.date | date:'dd.MM.yyyy'}}</mat-card-subtitle>
     </mat-card-title-group>
   </mat-card-header>
-  <img mat-card-image src="{{movie.posterLink}}" alt="Movie image">
+  <img alt="Movie image" mat-card-image src="{{movie.posterLink}}">
   <mat-card-content>
-    <div class="row align-items-center justify-content-between" *ngIf="movie.workerName != null">
+    <div *ngIf="movie.workerName != null" class="row align-items-center justify-content-between">
       <div class="col-5 col-sm-5 col-md-4 col-lg-2">
         {{'CINEMA_TICKETS_WORKER' | translate}}
       </div>
       <div class="col-7 col-sm-7 col-md-8 col-lg-10" style="text-align: right">
         {{movie.workerName}}
-        <button mat-icon-button (click)="signOutForWorker(signOutForWorkerButton)" #signOutForWorkerButton
-                *ngIf="movie.workerID == myUserService.getID()" matTooltipPosition="right"
-                matTooltip="{{'CINEMA_TICKETS_CANCEL_CINEMA_SERVICE_TOOLTIP' | translate}}">
+        <button #signOutForWorkerButton (click)="signOutForWorker(signOutForWorkerButton)"
+                *ngIf="movie.workerID == myUserService.getID()"
+                mat-icon-button matTooltip="{{'CINEMA_TICKETS_CANCEL_CINEMA_SERVICE_TOOLTIP' | translate}}"
+                matTooltipPosition="right">
           <mat-icon aria-label="Cancel worker">cancel</mat-icon>
         </button>
       </div>
     </div>
 
-    <div class="row align-items-center justify-content-between" *ngIf="movie.workerName == null">
+    <div *ngIf="movie.workerName == null" class="row align-items-center justify-content-between">
       <div class="col">
         {{'CINEMA_TICKETS_WORKER' | translate}}
       </div>
       <div class="col" style="text-align: right">
-        <button (click)="applyForWorker(applyForWorkerButton)" mat-stroked-button #applyForWorkerButton
-                color="primary">{{'CINEMA_TICKETS_APPLY' | translate}}</button>
+        <button #applyForWorkerButton (click)="applyForWorker(applyForWorkerButton)" color="primary"
+                mat-stroked-button>{{'CINEMA_TICKETS_APPLY' | translate}}</button>
       </div>
     </div>
 
-    <div class="row align-items-center justify-content-between" *ngIf="movie.emergencyWorkerName != null">
+    <div *ngIf="movie.emergencyWorkerName != null" class="row align-items-center justify-content-between">
       <div class="col-5 col-sm-5 col-md-4 col-lg-5">
         {{'CINEMA_TICKETS_EMERGENCY_WORKER' | translate}}
       </div>
       <div class="col-7 col-sm-7 col-md-8 col-lg-7" style="text-align: right">
         {{movie.emergencyWorkerName}}
-        <button mat-icon-button (click)="signOutForEmergencyWorker(signOutForEmergencyWorkerButton)"
-                #signOutForEmergencyWorkerButton
-                *ngIf="movie.emergencyWorkerID == myUserService.getID()" matTooltipPosition="right"
-                matTooltip="{{'CINEMA_TICKETS_CANCEL_CINEMA_SERVICE_TOOLTIP' | translate}}">
+        <button #signOutForEmergencyWorkerButton (click)="signOutForEmergencyWorker(signOutForEmergencyWorkerButton)"
+                *ngIf="movie.emergencyWorkerID == myUserService.getID()"
+                mat-icon-button matTooltip="{{'CINEMA_TICKETS_CANCEL_CINEMA_SERVICE_TOOLTIP' | translate}}"
+                matTooltipPosition="right">
           <mat-icon aria-label="Cancel worker">cancel</mat-icon>
         </button>
       </div>
     </div>
 
-    <div class="row align-items-center justify-content-between" *ngIf="movie.emergencyWorkerName == null">
+    <div *ngIf="movie.emergencyWorkerName == null" class="row align-items-center justify-content-between">
       <div class="col-auto">
         {{'CINEMA_TICKETS_EMERGENCY_WORKER' | translate}}
       </div>
       <div class="col" style="text-align: end">
-        <button (click)="applyForEmergencyWorker(applyForEmergencyWorkerButton)" mat-stroked-button
-                #applyForEmergencyWorkerButton
-                color="accent">{{'CINEMA_TICKETS_APPLY' | translate}}</button>
+        <button #applyForEmergencyWorkerButton (click)="applyForEmergencyWorker(applyForEmergencyWorkerButton)"
+                color="accent"
+                mat-stroked-button>{{'CINEMA_TICKETS_APPLY' | translate}}</button>
       </div>
     </div>
 
@@ -64,8 +65,18 @@
         {{'CINEMA_TICKETS_TRAILER' | translate}}
       </div>
       <div class="col" style="text-align: right">
-        <a mat-stroked-button href="{{movie.trailerLink}}" rel="noopener"
+        <a href="{{movie.trailerLink}}" mat-stroked-button rel="noopener"
            target="_blank">{{'CINEMA_TICLETS_TRAILER_WATCH' | translate}}</a>
+      </div>
+    </div>
+
+    <div class="row align-items-center justify-content-between">
+      <div class="col-auto">
+        {{'CINEMA_TICKETS_WEATHER_FORECAST' | translate}}
+      </div>
+      <div class="col" style="text-align: right">
+        <button (click)="openWeatherForecastModal()"
+                mat-stroked-button>{{'CINEMA_TICKETS_WEATHER_FORECAST_SHOW' | translate}}</button>
       </div>
     </div>
 
@@ -78,15 +89,15 @@
       </div>
     </div>
 
-    <div class="row align-items-center justify-content-between" *ngIf="movie.bookedTicketsForYourself != 0">
+    <div *ngIf="movie.bookedTicketsForYourself != 0" class="row align-items-center justify-content-between">
       <div class="col-auto">
         {{'CINEMA_TICKETS_BOOKED_TICKETS' | translate}}
       </div>
       <div class="col" style="text-align: right">
         {{movie.bookedTicketsForYourself}}
-        <button mat-icon-button (click)="cancelTickets(cancelTicketsButton)" #cancelTicketsButton
-                matTooltipPosition="right"
-                matTooltip="{{'CINEMA_TICKETS_CANCEL_BOOKED_TICKETS_TOOLTIP' | translate}}">
+        <button #cancelTicketsButton (click)="cancelTickets(cancelTicketsButton)" mat-icon-button
+                matTooltip="{{'CINEMA_TICKETS_CANCEL_BOOKED_TICKETS_TOOLTIP' | translate}}"
+                matTooltipPosition="right">
           <mat-icon aria-label="Cancel worker">cancel</mat-icon>
         </button>
       </div>
@@ -94,7 +105,7 @@
 
   </mat-card-content>
   <mat-card-actions>
-    <button mat-flat-button color="primary" (click)="bookTickets()"
-            [disabled]="soldOut">{{'CINEMA_TICKETS_BOOK_A_TICKET' | translate}}</button>
+    <button (click)="bookTickets()" [disabled]="soldOut" color="primary"
+            mat-flat-button>{{'CINEMA_TICKETS_BOOK_A_TICKET' | translate}}</button>
   </mat-card-actions>
 </mat-card>

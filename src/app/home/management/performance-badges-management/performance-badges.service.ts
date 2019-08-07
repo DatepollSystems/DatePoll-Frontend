@@ -10,14 +10,12 @@ import {UserPerformanceBadge} from '../users-management/userPerformanceBadge.mod
 })
 export class PerformanceBadgesService {
 
-  private performanceBadges: PerformanceBadge[];
   public performanceBadgesChange: Subject<PerformanceBadge[]> = new Subject<PerformanceBadge[]>();
-
-  private instruments: Instrument[];
   public instrumentsChange: Subject<Instrument[]> = new Subject<Instrument[]>();
-
-  private userPerformanceBadges: UserPerformanceBadge[] = [];
   public userPerformanceBadgesChange: Subject<UserPerformanceBadge[]> = new Subject<UserPerformanceBadge[]>();
+  private performanceBadges: PerformanceBadge[];
+  private instruments: Instrument[];
+  private userPerformanceBadges: UserPerformanceBadge[] = [];
 
   constructor(private httpService: HttpService) {
   }

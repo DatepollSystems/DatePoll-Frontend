@@ -20,7 +20,8 @@ export class PerformanceBadgesListComponent {
 
   @Output() performanceBadgesChanged = new EventEmitter();
 
-  constructor() { }
+  constructor() {
+  }
 
   onPerformanceBadgeChanged(performanceBadge: PerformanceBadge) {
     console.log('Selected performance badge: ' + performanceBadge.name);

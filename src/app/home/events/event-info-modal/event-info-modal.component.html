@@ -1,79 +1,29 @@
 <h1 mat-dialog-title>{{'EVENTS_ADMINISTRATION_INFO_EVENT' | translate}} {{name}}</h1>
 <div mat-dialog-content>
-  <!-- Name -->
-  <div class="row">
-    <mat-form-field class="col-12">
-      <input matInput name="name" type="text" [(ngModel)]="name" readonly
-             placeholder="{{'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_NAME' | translate}}">
-    </mat-form-field>
+  <!-- Date -->
+  <div class="row" style="margin-bottom: 15px;">
+    <b class="col-12">{{'EVENTS_ADMINISTRATION_INFO_EVENT_DATE' | translate}} {{startDate | date:'dd.MM.yyyy HH:mm'}}
+      - {{endDate | date:'dd.MM.yyyy HH:mm'}}</b>
   </div>
 
-  <!-- Start date -->
-  <div class="row" style="margin-top: 15px">
-    <h3 class="col-12">{{'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_START_DATE' | translate}}</h3>
-  </div>
-  <div class="row">
-    <mat-form-field class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 datepicker-field">
-      <input matInput readonly name="datepicker-startDate" value="{{startDate | date:'dd.MM.yyyy'}}"
-             placeholder="{{'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE' | translate}}">
-    </mat-form-field>
-
-    <mat-form-field class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 datepicker-field-mobile">
-      <input matInput readonly name="datepicker-startDate-mobile" value="{{startDate | date:'dd.MM.yyyy'}}"
-             placeholder="{{'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE' | translate}}">
-    </mat-form-field>
-
-    <mat-form-field class="col-6 col-sm-6 col-md-3 col-lg-3 col-xl-3">
-      <input matInput name="startDateHours" type="number" [(ngModel)]="startDateHours" readonly
-             placeholder="{{'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_HOURS' | translate}}">
-    </mat-form-field>
-
-    <mat-form-field class="col-6 col-sm-6 col-md-3 col-lg-3 col-xl-3">
-      <input matInput name="startDateMinutes" type="number" [(ngModel)]="startDateMinutes" readonly
-             placeholder="{{'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_MINUTES' | translate}}">
-    </mat-form-field>
-  </div>
-
-  <!-- End date -->
-  <div class="row">
-    <h3 class="col-12">{{'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_END_DATE' | translate}}</h3>
-  </div>
-  <div class="row">
-    <mat-form-field class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 datepicker-field">
-      <input matInput name="datepicker-endDate" value="{{endDate | date:'dd.MM.yyyy'}}" readonly
-             placeholder="{{'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE' | translate}}">
-    </mat-form-field>
-
-    <mat-form-field class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 datepicker-field-mobile">
-      <input matInput readonly name="datepicker-endDate-mobile"
-             value="{{endDate | date:'dd.MM.yyyy'}}" placeholder="{{'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE' | translate}}">
-    </mat-form-field>
-
-    <mat-form-field class="col-6 col-sm-6 col-md-3 col-lg-3 col-xl-3">
-      <input matInput name="endDateHours" type="number" [(ngModel)]="endDateHours" readonly
-             placeholder="{{'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_HOURS' | translate}}">
-    </mat-form-field>
-
-    <mat-form-field class="col-6 col-sm-6 col-md-3 col-lg-3 col-xl-3">
-      <input matInput name="endDateMinutes" type="number" [(ngModel)]="endDateMinutes" readonly
-             placeholder="{{'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_MINUTES' | translate}}">
-    </mat-form-field>
+  <!-- Location -->
+  <div *ngIf="location != null">
+    <div class="row" *ngIf="location.length > 0" style="margin-bottom: 15px;">
+      <b class="col-12">{{'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_LOCATION' | translate}}:
+        <a target="_blank" rel="noopener"
+           href="https://www.google.com/maps/search/?api=1&query={{locationUri}}">{{location}}</a></b>
+    </div>
   </div>
 
   <!-- Description -->
-  <div class="row" style="margin-bottom: 15px;">
-    <div class="col-12">
-      <mat-expansion-panel>
-        <mat-expansion-panel-header>
-          <mat-panel-title>
-            {{'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DESCRIPTION' | translate}}
-          </mat-panel-title>
-        </mat-expansion-panel-header>
-
-        <mat-form-field appearance="outline" class="col-12">
-          <textarea matInput style="min-height: 15vh;" name="description" readonly [(ngModel)]="description"></textarea>
+  <div *ngIf="description != null">
+    <div class="row" *ngIf="description.length > 0" style="margin-bottom: 15px;">
+      <div class="col-12">
+        <mat-form-field appearance="outline">
+          <textarea [(ngModel)]="description" matInput name="description" placeholder="{{'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DESCRIPTION' | translate}}"
+                    readonly></textarea>
         </mat-form-field>
-      </mat-expansion-panel>
+      </div>
     </div>
   </div>
 
@@ -86,153 +36,35 @@
             {{'EVENTS_ADMINISTRATION_INFO_EVENT_COMPLETE_CHART' | translate}}
           </mat-panel-title>
         </mat-expansion-panel-header>
-        <canvas baseChart
-                *ngIf="!pieChartIsEmpty"
+        <canvas *ngIf="!pieChartIsEmpty"
+                [chartType]="pieChartType"
                 [data]="pieChartData"
                 [labels]="pieChartLabels"
-                [chartType]="pieChartType"
+                [legend]="pieChartLegend"
                 [options]="pieChartOptions"
-                [legend]="pieChartLegend">
+                baseChart>
         </canvas>
         <span *ngIf="pieChartIsEmpty">{{'EVENTS_ADMINISTRATION_INFO_EVENT_NOBODY_VOTED' | translate}}</span>
       </mat-expansion-panel>
 
-      <mat-card *ngFor="let resultGroup of resultGroups" class="mat-elevation-z4">
-        <mat-card-content>
-          <h3 *ngIf="resultGroup.id !== -1">{{resultGroup.name}}</h3>
-          <h3 *ngIf="resultGroup.id == -1">{{'EVENTS_ADMINISTRATION_INFO_EVENT_SINGLE_SUBGROUPS' | translate}}</h3>
+      <div class="row" style="margin-top: 15px;">
+        <mat-form-field class="col-12">
+          <input (ngModelChange)="applyFilter($event)" [(ngModel)]="searchValue" matInput
+                 placeholder="{{'MANAGEMENT_GROUPS_SEARCH' | translate}}">
+          <button (click)="searchValue=''; applyFilter('')" *ngIf="searchValue" aria-label="Clear" mat-button mat-icon-button
+                  matSuffix>
+            <mat-icon>close</mat-icon>
+          </button>
+        </mat-form-field>
+      </div>
 
-          <mat-divider></mat-divider>
-
-          <div *ngIf="resultGroup.id !== -1">
-            <!-- Chart for the group -->
-            <mat-expansion-panel style="margin-top: 25px; margin-bottom: 15px;">
-              <mat-expansion-panel-header>
-                <mat-panel-title>
-                  {{'EVENTS_ADMINISTRATION_INFO_EVENT_CHART_FOR' | translate}} {{resultGroup.name}}
-                </mat-panel-title>
-              </mat-expansion-panel-header>
-              <canvas baseChart
-                      *ngIf="!resultGroup.chartIsEmpty"
-                      [data]="resultGroup.getChartData()"
-                      [labels]="pieChartLabels"
-                      [chartType]="pieChartType"
-                      [options]="pieChartOptions"
-                      [legend]="pieChartLegend">
-              </canvas>
-              <span *ngIf="resultGroup.chartIsEmpty">{{'EVENTS_ADMINISTRATION_INFO_EVENT_NOBODY_VOTED_IN_GROUP' | translate}}</span>
-            </mat-expansion-panel>
-
-            <mat-expansion-panel>
-              <mat-expansion-panel-header>
-                <mat-panel-title>
-                  {{'EVENTS_ADMINISTRATION_INFO_EVENT_MEMBERS_IN' | translate}} {{resultGroup.name}}
-                </mat-panel-title>
-              </mat-expansion-panel-header>
-
-              <mat-list>
-                <mat-list-item *ngFor="let resultUser of resultGroup.getResultUsers()">
-                  <span>{{resultUser.firstname}} {{resultUser.surname}}: <b
-                    *ngIf="resultUser.decision != null">{{resultUser.decision}}</b>
-                      <span
-                        *ngIf="resultUser.decision == null">{{'EVENTS_ADMINISTRATION_INFO_EVENT_UNKNOWN_VOTING' | translate}}</span></span>
-                </mat-list-item>
-              </mat-list>
-            </mat-expansion-panel>
-
-            <h4>{{'EVENTS_ADMINISTRATION_INFO_EVENT_REGISTER' | translate}}</h4>
-
-            <mat-expansion-panel *ngFor="let resultSubgroup of resultGroup.getResultSubgroups()"
-                                 [expanded]="resultSubgroup.getResultUsers().length !== 0" style="margin-bottom: 15px;">
-              <mat-expansion-panel-header>
-                <mat-panel-title>
-                  {{resultSubgroup.name}}
-                </mat-panel-title>
-              </mat-expansion-panel-header>
-
-              <!-- Chart for the subgroups -->
-              <mat-expansion-panel>
-                <mat-expansion-panel-header>
-                  <mat-panel-title>
-                    {{'EVENTS_ADMINISTRATION_INFO_EVENT_CHART_FOR' | translate}} {{resultSubgroup.name}}
-                  </mat-panel-title>
-                </mat-expansion-panel-header>
-                <canvas baseChart
-                        *ngIf="!resultSubgroup.chartIsEmpty"
-                        [data]="resultSubgroup.getChartData()"
-                        [labels]="pieChartLabels"
-                        [chartType]="pieChartType"
-                        [options]="pieChartOptions"
-                        [legend]="pieChartLegend">
-                </canvas>
-                <span *ngIf="resultSubgroup.chartIsEmpty">{{'EVENTS_ADMINISTRATION_INFO_EVENT_NOBODY_VOTED_IN_SUBGROUP' | translate}}</span>
-              </mat-expansion-panel>
-
-              <mat-list>
-                <mat-list-item *ngIf="resultSubgroup.getResultUsers().length === 0">
-                  {{'EVENTS_ADMINISTRATION_INFO_EVENT_NO_USERS' | translate}}
-                </mat-list-item>
-                <mat-list-item *ngFor="let resultUser of resultSubgroup.getResultUsers()">
-                    <span>{{resultUser.firstname}} {{resultUser.surname}}:
-                      <b *ngIf="resultUser.decision != null">{{resultUser.decision}}</b>
-                      <span
-                        *ngIf="resultUser.decision == null">{{'EVENTS_ADMINISTRATION_INFO_EVENT_UNKNOWN_VOTING' | translate}}</span></span>
-                </mat-list-item>
-              </mat-list>
-            </mat-expansion-panel>
-          </div>
-
-          <div *ngIf="resultGroup.id === -1">
-            <div *ngIf="resultGroup.getResultSubgroups().length === 0" style="margin-top: 25px;">
-              {{'EVENTS_ADMINISTRATION_INFO_EVENT_NO_SUBGROUPS' | translate}}
-            </div>
-
-            <mat-expansion-panel *ngFor="let resultSubgroup of resultGroup.getResultSubgroups()"
-                                 [expanded]="resultSubgroup.getResultUsers().length !== 0" style="margin-top: 25px;">
-              <mat-expansion-panel-header>
-                <mat-panel-title>
-                  [{{resultSubgroup.parentGroupName}}] {{resultSubgroup.name}}
-                </mat-panel-title>
-              </mat-expansion-panel-header>
-
-              <mat-expansion-panel>
-                <mat-expansion-panel-header>
-                  <mat-panel-title>
-                    {{'EVENTS_ADMINISTRATION_INFO_EVENT_CHART_FOR' | translate}} {{resultSubgroup.name}}
-                  </mat-panel-title>
-                </mat-expansion-panel-header>
-                <canvas baseChart
-                        *ngIf="!resultSubgroup.chartIsEmpty"
-                        [data]="resultSubgroup.getChartData()"
-                        [labels]="pieChartLabels"
-                        [chartType]="pieChartType"
-                        [options]="pieChartOptions"
-                        [legend]="pieChartLegend">
-                </canvas>
-                <span *ngIf="resultSubgroup.chartIsEmpty">{{'EVENTS_ADMINISTRATION_INFO_EVENT_NOBODY_VOTED_IN_SUBGROUP' | translate}}</span>
-              </mat-expansion-panel>
-
-              <mat-list>
-                <mat-list-item *ngIf="resultSubgroup.getResultUsers().length === 0">
-                  {{'EVENTS_ADMINISTRATION_INFO_EVENT_NO_USERS' | translate}}
-                </mat-list-item>
-
-                <mat-list-item *ngFor="let resultUser of resultSubgroup.getResultUsers()">
-                  <span>{{resultUser.firstname}} {{resultUser.surname}}: <b
-                    *ngIf="resultUser.decision != null">{{resultUser.decision}}</b>
-                      <span
-                        *ngIf="resultUser.decision == null">{{'EVENTS_ADMINISTRATION_INFO_EVENT_UNKNOWN_VOTING' | translate}}</span></span>
-                </mat-list-item>
-              </mat-list>
-            </mat-expansion-panel>
-          </div>
-        </mat-card-content>
-      </mat-card>
+      <app-group-info-card *ngFor="let resultGroup of sortedResultGroups; trackBy: trackByFn" [resultGroup]="resultGroup"
+                           [searchValue]="searchValue"></app-group-info-card>
     </div>
   </div>
 
-  <mat-progress-bar mode="indeterminate" *ngIf="sendingRequest" style="margin-top: 15px;"></mat-progress-bar>
+  <mat-progress-bar *ngIf="sendingRequest" mode="indeterminate" style="margin-top: 15px;"></mat-progress-bar>
 </div>
 <div mat-dialog-actions style="margin-top: 15px">
-  <button mat-button [mat-dialog-close]>{{'CLOSE' | translate}}</button>
+  <button [mat-dialog-close] mat-button>{{'CLOSE' | translate}}</button>
 </div>

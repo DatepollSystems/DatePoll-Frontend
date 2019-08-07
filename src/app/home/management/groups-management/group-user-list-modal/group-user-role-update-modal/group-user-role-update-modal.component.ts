@@ -12,9 +12,8 @@ import {GroupsService} from '../../groups.service';
 export class GroupUserRoleUpdateModalComponent {
 
   public user: any;
-  private readonly groupID: number;
-
   public sendingRequest = false;
+  private readonly groupID: number;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any,
               private dialogRef: MatDialogRef<GroupUserRoleUpdateModalComponent>,

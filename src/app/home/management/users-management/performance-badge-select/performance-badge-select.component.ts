@@ -22,15 +22,12 @@ export class PerformanceBadgeSelectComponent implements OnInit, OnDestroy {
 
   /** list of performanceBadges filtered by search keyword */
   public filteredPerformanceBadges: ReplaySubject<PerformanceBadge[]> = new ReplaySubject<PerformanceBadge[]>(1);
-
-  /** Subject that emits when the component has been destroyed. */
-  protected _onDestroy = new Subject<void>();
-
   performanceBadges: PerformanceBadge[];
   performanceBadgesSubscription: Subscription;
   selectedPerformanceBadge: PerformanceBadge;
-
   @Output() performanceBadgeChanged = new EventEmitter();
+  /** Subject that emits when the component has been destroyed. */
+  protected _onDestroy = new Subject<void>();
 
   constructor(private performanceBadgesService: PerformanceBadgesService) {
     this.performanceBadges = this.performanceBadgesService.getPerformanceBadges();
@@ -63,6 +60,11 @@ export class PerformanceBadgeSelectComponent implements OnInit, OnDestroy {
     this.performanceBadgesSubscription.unsubscribe();
   }
 
+  performanceBadgeSelectChange(value) {
+    this.selectedPerformanceBadge = value;
+    this.performanceBadgeChanged.emit(this.selectedPerformanceBadge);
+  }
+
   private filterPerformanceBadges() {
     if (!this.performanceBadges) {
       return;
@@ -79,10 +81,5 @@ export class PerformanceBadgeSelectComponent implements OnInit, OnDestroy {
     this.filteredPerformanceBadges.next(
       this.performanceBadges.filter(p => p.name.toString().toLowerCase().indexOf(search) > -1)
     );
-  }
-
-  performanceBadgeSelectChange(value) {
-    this.selectedPerformanceBadge = value;
-    this.performanceBadgeChanged.emit(this.selectedPerformanceBadge);
   }
 }

@@ -15,6 +15,10 @@
   "SEARCH": "Suchen...",
   "YES": "Ja",
   "NO": "Nein",
+  "SUCCESSFULLY": "Erfolgreich",
+  "ERROR": "Fehler",
+  "WARNING": "Warnung",
+  "REQUEST_ERROR": "Ein unbekannter Fehler ist aufgetreten. Versuche die Website neu zu laden.",
 
 
 
@@ -51,7 +55,6 @@
   "SIGNIN_NOT_SIGNED_UP": "Kein Konto?",
   "SIGNIN_USERNAME": "Benutzername",
   "SIGNIN_PASSWORD": "Passwort",
-  "SIGNIN_STAY_LOGGED_IN": "Angemeldet bleiben",
   "SIGNIN_KEEP_YOUR_PASSWORD_SECRET": "Behalte dein Passwort geheim",
   "SIGNIN_USERNAME_OR_PASSWORD_INCORRECT": "Der Benutzername oder das Passwort sind inkorrekt!",
   "SIGNIN_ACCOUNT_NOT_ACTIVATED": "Dein Account ist derzeit deaktiviert! Probier es doch später wieder...",
@@ -129,6 +132,8 @@
   "CINEMA_TICKETS_BOOKED_TICKETS": "Gebuchte Karten:",
   "CINEMA_TICKETS_CANCEL_BOOKED_TICKETS_TOOLTIP": "Storniere alle gebuchten Karten",
   "CINEMA_TICKETS_CANCEL_CINEMA_SERVICE_TOOLTIP": "Abmelden",
+  "CINEMA_TICKETS_WEATHER_FORECAST": "Wettervorhersage",
+  "CINEMA_TICKETS_WEATHER_FORECAST_SHOW": "Anzeigen",
 
   "CINEMA_TICKETS_BOOKING_MODAL_HEADER": "Buche Tickets für ",
   "CINEMA_TICKETS_BOOKING_MODAL_WARNING": "Karten sind in erster Linie für Vereinsmitglieder. Sollten kurz vor Kinobeginn noch Karten frei sein, können diese jederzeit an Freunde oder Familienmitglieder weitergeben werden! ",
@@ -137,6 +142,14 @@
   "CINEMA_TICKETS_BOOKING_MODAL_NUMBER_OF_TICKETS_INVALID_2": " ein!",
   "CINEMA_TICKETS_BOOKING_MODAL_AVAILABLE_TICKETS": "Freie Karten: ",
   "CINEMA_TICKETS_BOOKING_MODAL_BOOK": "Reservieren",
+
+  "CINEMA_TICKETS_WEATHER_FORECAST_MODAL": "Wettervorhersagen für ",
+  "CINEMA_TICKETS_WEATHER_FORECAST_MODAL_BY": "Um",
+  "CINEMA_TICKETS_WEATHER_FORECAST_MODAL_CLOUDS": "Wolken:",
+  "CINEMA_TICKETS_WEATHER_FORECAST_MODAL_WIND_SPEED": "Windgeschwindigkeit:",
+  "CINEMA_TICKETS_WEATHER_FORECAST_MODAL_PROVIDER_1": "*Alle Wetterdaten werden von ",
+  "CINEMA_TICKETS_WEATHER_FORECAST_MODAL_PROVIDER_2": " bezogen.",
+  "CINEMA_TICKETS_WEATHER_FORECAST_MODAL_NO_DATA": "Für diesen Film gibt es noch keine Wettervorhersagen!",
 
   "CINEMA_TICKETS_SERVICE_BOOKING": "Reservierungen",
   "CINEMA_TICKETS_SERVICE_USERNAME": "Name",
@@ -373,10 +386,6 @@
 
   "MANAGEMENT_PERFORMANCE_BADGES_TITLE_PERFORMANCE_BADGES": "Leistungsabzeichen",
   "MANAGEMENT_PERFORMANCE_BADGES_TITLE_INSTRUMENTS": "Instrumente",
-  "MANAGEMENT_PERFORMANCE_BADGES_REMOVE_PERFORMANCE_BADGE_TOOLTIP": "Entferne dieses Leistungsabzeichen",
-  "MANAGEMENT_PERFORMANCE_BADGES_REMOVED_PERFORMANCE_BADGE_SUCCESSFUL": "Das Leistungsabzeichen wurde erfolgreich entfernt!",
-  "MANAGEMENT_PERFORMANCE_BADGES_REMOVE_INSTRUMENT_TOOLTIP": "Entferne dieses Instrument",
-  "MANAGEMENT_PERFORMANCE_BADGES_REMOVED_INSTRUMENT_SUCCESSFUL": "Das Instrument wurde erfolgreich entfernt!",
   "MANAGEMENT_PERFORMANCE_BADGES_REFRESH": "Leistungsabzeichen und Instrumente aktualisieren",
 
   "MANAGEMENT_PERFORMANCE_BADGES_UPDATE_PERFORMANCE_BADGE_TOOLTIP": "Bearbeite dieses Leistungsabzeichen",
@@ -385,6 +394,14 @@
   "MANAGEMENT_PERFORMANCE_BADGES_UPDATE_INSTRUMENT_TOOLTIP": "Bearbeite dieses Instrument",
   "MANAGEMENT_PERFORMANCE_BADGES_UPDATE_INSTRUMENT_MODAL_TITLE": "Bearbeite das Instrument: ",
   "MANAGEMENT_PERFORMANCE_BADGES_UPDATE_INSTRUMENT_SUCCESSFUL": "Das Instrument wurde erfolgreich bearbeitet!",
+
+  "MANAGEMENT_PERFORMANCE_BADGES_REMOVE_PERFORMANCE_BADGE_TOOLTIP": "Entferne dieses Leistungsabzeichen",
+  "MANAGEMENT_PERFORMANCE_BADGES_REMOVED_PERFORMANCE_BADGE_SUCCESSFUL": "Das Leistungsabzeichen wurde erfolgreich entfernt!",
+  "MANAGEMENT_PERFORMANCE_BADGES_REMOVE_PERFORMANCE_BADGE_MODAL_TITLE": "Willst du dieses Leistungsabzeichen wirklich löschen?",
+
+  "MANAGEMENT_PERFORMANCE_BADGES_REMOVE_INSTRUMENT_TOOLTIP": "Entferne dieses Instrument",
+  "MANAGEMENT_PERFORMANCE_BADGES_REMOVED_INSTRUMENT_SUCCESSFUL": "Das Instrument wurde erfolgreich entfernt!",
+  "MANAGEMENT_PERFORMANCE_BADGES_REMOVE_INSTRUMENT_MODAL_TITLE": "Willst du dieses Instrument wirklich löschen?",
 
   "MANAGEMENT_PERFORMANCE_BADGES_ADD_PERFORMANCE_BADGE_NAME": "Leistungsabzeichenname",
   "MANAGEMENT_PERFORMANCE_BADGES_ADD_PERFORMANCE_BADGE_NAME_INCORRECT": "Der Name darf weder leer sein, noch mehr als 190 Zeichen haben!",
@@ -396,6 +413,18 @@
 
   "MANAGEMENT_DATEPOLL_CINEMA_SERVICE": "Kinoservice",
   "MANAGEMENT_DATEPOLL_EVENTS_SERVICE": "Events",
+
+  "MANAGEMENT_DATEPOLL_COMMUNITY_NAME": "Vereinsname",
+  "MANAGEMENT_DATEPOLL_COMMUNITY_NAME_NOT_VALID": "Der Vereinsname darf weder leer sein, noch mehr als 50 Zeichen haben!",
+  "MANAGEMENT_DATEPOLL_COMMUNITY_NAME_CHANGED_SUCCESSFULLY": "Der Vereinsname wurde erfolgreich geändert!",
+
+  "MANAGEMENT_DATEPOLL_OPENWEATHERMAP_KEY": "OpenWeatherMap API Key",
+  "MANAGEMENT_DATEPOLL_OPENWEATHERMAP_KEY_INVALID": "Der API Key darf nicht mehr als 50 Zeichen haben!",
+  "MANAGEMENT_DATEPOLL_OPENWEATHERMAP_KEY_CHANGED_SUCCESSFULLY": "Der OpenWeatherMap API Key wurde erfolgreich geändert!",
+
+  "MANAGEMENT_DATEPOLL_OPENWEATHERMAP_CINEMA_CITY_ID": "OpenWeatherMap Kino City Id",
+  "MANAGEMENT_DATEPOLL_OPENWEATHERMAP_CINEMA_CITY_ID_INVALID": "Die Kino City Id darf nicht mehr als 50 Zeichen haben!",
+  "MANAGEMENT_DATEPOLL_OPENWEATHERMAP_CINEMA_CITY_ID_CHANGED_SUCCESSFULLY": "Die Kino City Id wurde erfolgreich geändert!",
 
 
 
@@ -413,8 +442,10 @@
   "EVENTS_ADMINISTRATION_TABLE_NAME": "Name",
   "EVENTS_ADMINISTRATION_TABLE_START_DATE": "Start-Datum",
   "EVENTS_ADMINISTRATION_TABLE_END_DATE": "End-Datum",
+  "EVENTS_ADMINISTRATION_TABLE_LOCATION": "Standort",
   "EVENTS_ADMINISTRATION_TABLE_DESCRIPTION": "Beschreibung",
   "EVENTS_ADMINISTRATION_TABLE_ACTION_TOOLTIP_INFO": "Zeige Informationen über dieses Event",
+  "EVENTS_ADMINISTRATION_TABLE_ACTION_TOOLTIP_USER_MANAGEMENT": "Mitgliederverwaltung",
   "EVENTS_ADMINISTRATION_TABLE_ACTION_TOOLTIP_EDIT": "Bearbeite dieses Event",
   "EVENTS_ADMINISTRATION_TABLE_ACTION_TOOLTIP_DELETE": "Lösche dieses Event",
 
@@ -422,6 +453,7 @@
   "EVENTS_STANDARD_DECISIONS_MANAGEMENT_SUCCESSFULLY_ADDED": "Die Standard-Antwort wurde erfolgreich gespeichert!",
   "EVENTS_STANDARD_DECISIONS_MANAGEMENT_SUCCESSFULLY_REMOVED": "Die Standard-Antwort wurde erfolgreich entfernt!",
   "EVENTS_STANDARD_DECISIONS_MANAGEMENT_ADD_STANDARD_DECISION": "Antwortmöglichkeit",
+  "EVENTS_STANDARD_DECISIONS_MANAGEMENT_ADD_STANDARD_DECISION_SHOW_IN_CALENDAR": "Im Kalendar anzeigen",
   "EVENTS_STANDARD_DECISIONS_MANAGEMENT_ADD_STANDARD_DECISION_INCORRECT": "Die Antwortmöglichkeit darf weder leer sein, noch mehr als 190 Zeichen haben.",
   "EVENTS_STANDARD_DECISIONS_MANAGEMENT_REMOVE_STANDARD_DECISION_BUTTON_TOOLTIP": "Entferne diese Antwortmöglichkeit",
 
@@ -429,6 +461,8 @@
   "EVENTS_ADMINISTRATION_CREATE_EVENT_SUCCESSFULLY_CREATED": "Das Event wurde erfolgreich angelegt!",
   "EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_NAME": "Name",
   "EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_NAME_INCORRECT": "Der Name darf weder leer sein, noch mehr als 190 Zeichen haben!",
+  "EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_LOCATION": "Ort",
+  "EVENTS_ADMINISTRATION_CREATE_EVENT_FORM _LOCATION_INCORRECT": "Der Ort darf nicht mehr als 190 Zeichen haben.",
   "EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_START_DATE": "Start-Datum",
   "EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_END_DATE": "End-Datum",
   "EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE": "Datum",
@@ -451,16 +485,28 @@
   "EVENTS_ADMINISTRATION_DELETE_EVENT_TITLE": "Willst du dieses Event wirklich löschen?",
   "EVENTS_ADMINISTRATION_DELETE_EVENT_SUCCESSFULLY_DELETED": "Das Event wurde erfolgreich gelöscht!",
 
+  "EVENTS_ADMINISTRATION_USER_MANAGEMENT_FOR_EVENT": "Benutzerverwaltung für ",
+  "EVENTS_ADMINISTRATION_USER_MANAGEMENT_FOR_EVENT_VOTE": "Abstimmen",
+  "EVENTS_ADMINISTRATION_USER_MANAGEMENT_FOR_EVENT_VOTE_SUCCESSFULLY": "Die Antwort wurde für die ausgewählten Benutzer gespeichert!",
+  "EVENTS_ADMINISTRATION_USER_MANAGEMENT_FOR_EVENT_VOTE_NO_ONE_SELECTED": "Bitte wähle einen oder mehrere Benutzer aus!",
+  "EVENTS_ADMINISTRATION_USER_MANAGEMENT_FOR_EVENT_REMOVE_VOTING": "Entfernt die Antworten der ausgewählten Benutzer",
+  "EVENTS_ADMINISTRATION_USER_MANAGEMENT_FOR_EVENT_REMOVE_VOTING_SUCCESSFULLY": "Die Antworten der ausgewählten Benutzer wurden entfernt!",
+
   "EVENTS_ADMINISTRATION_INFO_EVENT": "Informationen über ",
   "EVENTS_ADMINISTRATION_INFO_EVENT_SINGLE_SUBGROUPS": "Einzelne Register",
-  "EVENTS_ADMINISTRATION_INFO_EVENT_NO_USERS": "In diesem Register sind keine Mitglieder",
+  "EVENTS_ADMINISTRATION_INFO_EVENT_GROUP_NO_USERS": "In dieser Gruppe sind keine Mitglieder",
+  "EVENTS_ADMINISTRATION_INFO_EVENT_SUBGROUP_NO_USERS": "In diesem Register sind keine Mitglieder",
   "EVENTS_ADMINISTRATION_INFO_EVENT_UNKNOWN_VOTING": "Unbekannt",
   "EVENTS_ADMINISTRATION_INFO_EVENT_MEMBERS_IN": "Alle Mitglieder in ",
   "EVENTS_ADMINISTRATION_INFO_EVENT_REGISTER": "Register: ",
   "EVENTS_ADMINISTRATION_INFO_EVENT_CHART_FOR": "Diagramm für ",
   "EVENTS_ADMINISTRATION_INFO_EVENT_COMPLETE_CHART": "Digramm für alle",
-  "EVENTS_ADMINISTRATION_INFO_EVENT_NO_SUBGROUPS": "Es gibt keine einzelnen Gruppen für dieses Event.",
+  "EVENTS_ADMINISTRATION_INFO_EVENT_NO_SUBGROUPS": "Es gibt keine einzelnen Register in dieser Gruppe.",
   "EVENTS_ADMINISTRATION_INFO_EVENT_NOBODY_VOTED": "Es hat noch niemand eine Antwort für dieses Event abgegeben.",
   "EVENTS_ADMINISTRATION_INFO_EVENT_NOBODY_VOTED_IN_GROUP": "Aus dieser Gruppe hat noch niemand eine Antwort abgeben.",
-  "EVENTS_ADMINISTRATION_INFO_EVENT_NOBODY_VOTED_IN_SUBGROUP": "Aus diesem Register hat noch niemand eine Antwort abgeben."
+  "EVENTS_ADMINISTRATION_INFO_EVENT_NOBODY_VOTED_IN_SUBGROUP": "Aus diesem Register hat noch niemand eine Antwort abgeben.",
+  "EVENTS_ADMINISTRATION_INFO_EVENT_FIRSTNAME": "Vorname",
+  "EVENTS_ADMINISTRATION_INFO_EVENT_SURNAME": "Nachname",
+  "EVENTS_ADMINISTRATION_INFO_EVENT_DECISION": "Antwort",
+  "EVENTS_ADMINISTRATION_INFO_EVENT_DATE": "Datum:"
 }

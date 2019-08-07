@@ -15,9 +15,9 @@
 <div *ngIf="movies != null">
   <div class="row" style="margin-bottom: 15px;">
     <app-movie-ticket
-      class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-3"
       *ngFor="let movie of movies"
-      [movie]="movie">
+      [movie]="movie"
+      class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-3">
     </app-movie-ticket>
   </div>
 

@@ -10,14 +10,12 @@ import {User} from './user.model';
 })
 export class UsersService {
 
-  private _users: User[];
   public usersChange: Subject<User[]> = new Subject<User[]>();
-
-  private _joinedGroups: any[];
   public joinedGroupsChange: Subject<any[]> = new Subject<any[]>();
-
-  private _freeGroups: any[];
   public freeGroupsChange: Subject<any[]> = new Subject<any[]>();
+  private _users: User[];
+  private _joinedGroups: any[];
+  private _freeGroups: any[];
 
   constructor(private httpService: HttpService) {
     this._users = [];
@@ -89,11 +87,6 @@ export class UsersService {
     return this._joinedGroups.slice();
   }
 
-  private setJoinedOfUser(groups: any[]) {
-    this._joinedGroups = groups;
-    this.joinedGroupsChange.next(this._joinedGroups.slice());
-  }
-
   public fetchJoinedOfUser(userID: number) {
     this.httpService.loggedInV1GETRequest('/management/groups/joined/' + userID, 'fetchJoinedGroupsOfUser').subscribe(
       (data: any) => {
@@ -141,7 +134,6 @@ export class UsersService {
       (error) => console.log(error)
     );
   }
-
 
   public getFreeOfUser(userID: number): any[] {
     this.fetchFreeOfUser(userID);
@@ -201,12 +193,16 @@ export class UsersService {
     );
   }
 
-
   public export() {
     return this.httpService.loggedInV1GETRequest('/management/export/users');
   }
 
   public activateAll() {
     return this.httpService.loggedInV1POSTRequest('/management/users/activate', {}, 'activateAll');
+  }
+
+  private setJoinedOfUser(groups: any[]) {
+    this._joinedGroups = groups;
+    this.joinedGroupsChange.next(this._joinedGroups.slice());
   }
 }

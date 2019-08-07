@@ -18,8 +18,23 @@ export class Movie implements CalendarEvent {
   public bookedTicketsForYourself: number;
 
   public movieYearID: number;
+  // Calendar specific values
+  start: Date;
+  title: string;
+  public actions: EventAction[];
+  allDay = false;
+  color = {
+    primary: '#1e90ff',
+    secondary: '#D1E8FF'
+  };
+  draggable: false;
+  end: null;
+  meta = null;
+  resizable: { beforeStart: false; afterEnd: false };
 
   private bookingUsers: MovieBookingUser[] = [];
+
+  private weatherForecasts: WeatherForecast[] = [];
 
   constructor(id: number, name: string, movieDate: Date, trailerLink: string, posterLink: string, workerID: number, workerName: string,
               emergencyWorkerID: number, emergencyWorkerName: string, bookedTickets: number, movieYearID: number) {
@@ -41,30 +56,20 @@ export class Movie implements CalendarEvent {
     this.title = name;
   }
 
-  // Calendar specific values
-  start: Date;
-  title: string;
-
-  public actions: EventAction[];
-
-  allDay = false;
-  color = {
-    primary: '#1e90ff',
-    secondary: '#D1E8FF'
-  };
-  draggable: false;
-
-  end: null;
-
-  meta = null;
-  resizable: { beforeStart: false; afterEnd: false };
-
   public setBookingsUsers(bookingUsers: MovieBookingUser[]) {
     this.bookingUsers = bookingUsers;
   }
 
   public getBookingUsers() {
     return this.bookingUsers.slice();
+  }
+
+  public setWeatherforecasts(weatherForecasts: WeatherForecast[]) {
+    this.weatherForecasts = weatherForecasts;
+  }
+
+  public getWeatherForecasts(): WeatherForecast[] {
+    return this.weatherForecasts;
   }
 }
 
@@ -77,5 +82,25 @@ export class MovieBookingUser {
     this.firstname = firstname;
     this.surname = surname;
     this.amount = amount;
+  }
+}
+
+export class WeatherForecast {
+  public readonly temperature: number;
+  public readonly weather: string;
+  public readonly cloudy: number;
+  public readonly windSpeed: number;
+  public readonly windDirection: number;
+  public readonly rain: number;
+  public readonly date: Date;
+
+  constructor(temperature: number, weather: string, cloudy: number, windSpeed: number, windDirection: number, rain: number, date: Date) {
+    this.temperature = temperature;
+    this.weather = weather;
+    this.cloudy = cloudy;
+    this.windSpeed = windSpeed;
+    this.windDirection = windDirection;
+    this.rain = rain;
+    this.date = date;
   }
 }

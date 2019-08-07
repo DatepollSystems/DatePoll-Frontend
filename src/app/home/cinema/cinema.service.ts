@@ -1,28 +1,44 @@
 import {Injectable} from '@angular/core';
-import {Subject} from 'rxjs';
+import {Subject, Subscription} from 'rxjs';
+import {HttpClient} from '@angular/common/http';
 
 import {AuthService} from '../../auth/auth.service';
 import {HttpService} from '../../services/http.service';
-import {HomepageService} from '../start/homepage.service';
-import {Movie, MovieBookingUser} from './models/movie.model';
+import {SettingsService} from '../../services/settings.service';
+import {Movie, MovieBookingUser, WeatherForecast} from './models/movie.model';
 import {Year} from './models/year.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CinemaService {
-  private _movies: Movie[];
   public moviesChange: Subject<Movie[]> = new Subject<Movie[]>();
-
-  private _notShownMovies: Movie[] = null;
   public notShownMoviesChange: Subject<Movie[]> = new Subject<Movie[]>();
-
-  private _years: Year[];
   public yearsChange: Subject<Year[]> = new Subject<Year[]>();
+  private _movies: Movie[] = [];
+  private _notShownMovies: Movie[] = null;
+  private _years: Year[] = [];
 
-  constructor(private authService: AuthService, private httpService: HttpService, private homePageService: HomepageService) {
-    this._movies = [];
-    this._years = [];
+  private city_id = '';
+  private openWeatherMapCinemaCityIdSubscription: Subscription;
+  private openweahtermap_api_key = '';
+  private openWeatherMapKeySubscription: Subscription;
+  public fetchedWeatherForecast = false;
+
+  constructor(private authService: AuthService,
+              private httpService: HttpService,
+              private http: HttpClient,
+              private settingsService: SettingsService) {
+
+    this.openweahtermap_api_key = this.settingsService.getOpenWeatherMapKey();
+    this.openWeatherMapKeySubscription = this.settingsService.openWeatherMapKeyChange.subscribe((value) => {
+      this.openweahtermap_api_key = value;
+    });
+
+    this.city_id = this.settingsService.getOpenWeatherMapCinemaCityId();
+    this.openWeatherMapCinemaCityIdSubscription = this.settingsService.openWeatherMapCinemaCityIdChange.subscribe((value) => {
+      this.city_id = value;
+    });
   }
 
   public addMovie(movie: any) {
@@ -133,6 +149,50 @@ export class CinemaService {
     );
   }
 
+  public fetchWeatherForecastForNotShownMovies() {
+    this.http.get('https://api.openweathermap.org/data/2.5/forecast?units=metric&lang=de&id=' + this.city_id + '&APPID='
+      + this.openweahtermap_api_key).subscribe(
+      (response: any) => {
+        console.log(response);
+
+        for (const tempObject of response.list) {
+          const date = new Date(tempObject.dt_txt);
+
+          for (const movie of this._notShownMovies) {
+            const maxDate = new Date(movie.date.toDateString());
+            maxDate.setDate(maxDate.getDate() + 1);
+            maxDate.setHours(0);
+
+            const minDate = new Date(movie.date.toDateString());
+            minDate.setHours(18);
+
+            if (minDate.getTime() <= date.getTime() && maxDate.getTime() >= date.getTime()) {
+              // console.log(movie.name + ': Date - ' + date + ' | MinDate - ' + minDate.getTime() + ' | MaxDate - '
+              // + maxDate.getTime() + ' | Date: ' + date.getTime());
+
+              const temperature = tempObject.main.temp;
+              const weather = tempObject.weather[0].description;
+              const cloudy = tempObject.clouds.all;
+              const windSpeed = tempObject.wind.speed;
+              const windDirection = tempObject.wind.deg;
+
+              const weatherForecast = new WeatherForecast(temperature, weather, cloudy, windSpeed, windDirection, 0, date);
+
+              const weatherForecasts = movie.getWeatherForecasts();
+              weatherForecasts.push(weatherForecast);
+              movie.setWeatherforecasts(weatherForecasts);
+            }
+          }
+        }
+
+        this.fetchedWeatherForecast = true;
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+
 
   public addYear(year: any) {
     return this.httpService.loggedInV1POSTRequest('/cinema/administration/year', year, 'addYear');
@@ -168,62 +228,18 @@ export class CinemaService {
 
 
   public applyForWorker(movieID: number) {
-    this.httpService.loggedInV1POSTRequest('/cinema/worker/' + movieID, {}, 'applyForWorker').subscribe(
-      (data: any) => {
-        console.log(data);
-        this.fetchNotShownMovies();
-        this.homePageService.fetchData();
-      },
-      (error) => {
-        console.log(error);
-        this.fetchNotShownMovies();
-        this.homePageService.fetchData();
-      }
-    );
+    return this.httpService.loggedInV1POSTRequest('/cinema/worker/' + movieID, {}, 'applyForWorker');
   }
 
   public signOutForWorker(movieID: number) {
-    this.httpService.loggedInV1DELETERequest('/cinema/worker/' + movieID, 'signOutForWorker').subscribe(
-      (data: any) => {
-        console.log(data);
-        this.fetchNotShownMovies();
-        this.homePageService.fetchData();
-      },
-      (error) => {
-        console.log(error);
-        this.fetchNotShownMovies();
-        this.homePageService.fetchData();
-      }
-    );
+    return this.httpService.loggedInV1DELETERequest('/cinema/worker/' + movieID, 'signOutForWorker');
   }
 
   public applyForEmergencyWorker(movieID: number) {
-    this.httpService.loggedInV1POSTRequest('/cinema/emergencyWorker/' + movieID, {}, 'applyForEmergencyWorker').subscribe(
-      (data: any) => {
-        console.log(data);
-        this.fetchNotShownMovies();
-        this.homePageService.fetchData();
-      },
-      (error) => {
-        console.log(error);
-        this.fetchNotShownMovies();
-        this.homePageService.fetchData();
-      }
-    );
+    return this.httpService.loggedInV1POSTRequest('/cinema/emergencyWorker/' + movieID, {}, 'applyForEmergencyWorker');
   }
 
   public signOutForEmergencyWorker(movieID: number) {
-    this.httpService.loggedInV1DELETERequest('/cinema/emergencyWorker/' + movieID, 'signOutForEmergencyWorker').subscribe(
-      (data: any) => {
-        console.log(data);
-        this.fetchNotShownMovies();
-        this.homePageService.fetchData();
-      },
-      (error) => {
-        console.log(error);
-        this.fetchNotShownMovies();
-        this.homePageService.fetchData();
-      }
-    );
+    return this.httpService.loggedInV1DELETERequest('/cinema/emergencyWorker/' + movieID, 'signOutForEmergencyWorker');
   }
 }

@@ -1,26 +1,26 @@
 <mat-sidenav-container>
-  <mat-sidenav #sidenav [mode]="navBarMode" [(opened)]="navBarOpened">
+  <mat-sidenav #sidenav [(opened)]="navBarOpened" [mode]="navBarMode">
     <h2 class="sidenav-head-text">Hallo {{firstname}},</h2>
     <h4 class="sidenav-head-text">{{username}}</h4>
 
     <mat-nav-list>
       <mat-divider></mat-divider>
-      <a mat-list-item routerLink="/home" (click)="onPageChange()">
+      <a (click)="onPageChange()" mat-list-item routerLink="/home">
         <mat-icon>home</mat-icon>
         Home</a>
-      <a mat-list-item routerLink="calendar" routerLinkActive="activated" (click)="onPageChange()">
+      <a (click)="onPageChange()" mat-list-item routerLink="calendar" routerLinkActive="activated">
         <mat-icon>calendar_today</mat-icon>
         {{'CALENDAR' | translate}}</a>
       <mat-divider></mat-divider>
 
       <div *ngIf="showEvents">
-        <a mat-list-item routerLink="/home/events/open" routerLinkActive="activated" (click)="onPageChange()">
+        <a (click)="onPageChange()" mat-list-item routerLink="/home/events/open" routerLinkActive="activated">
           <mat-icon>polls</mat-icon>
           {{'NAV_EVENTS_EVENTS' | translate}}
         </a>
 
-        <a mat-list-item routerLink="/home/events/administration" routerLinkActive="activated" (click)="onPageChange()"
-           *ngIf="myUserService.hasPermission(eventAdministration)">
+        <a (click)="onPageChange()" *ngIf="myUserService.hasPermission(eventAdministration)" mat-list-item routerLink="/home/events/administration"
+           routerLinkActive="activated">
           <mat-icon>class</mat-icon>
           {{'NAV_EVENTS_ADMINISTRATION' | translate}}
         </a>
@@ -28,43 +28,44 @@
       </div>
 
       <div *ngIf="showCinema">
-        <a mat-list-item routerLink="/home/cinema/tickets" routerLinkActive="activated" (click)="onPageChange()">
+        <a (click)="onPageChange()" mat-list-item routerLink="/home/cinema/tickets" routerLinkActive="activated">
           <mat-icon>movie</mat-icon>
           {{'NAV_CINEMA_TICKETS' | translate}}
         </a>
-        <a mat-list-item routerLink="/home/cinema/service" routerLinkActive="activated" (click)="onPageChange()">
+        <a (click)="onPageChange()" mat-list-item routerLink="/home/cinema/service" routerLinkActive="activated">
           <mat-icon>card_giftcard</mat-icon>
           {{'NAV_CINEMA_SERVICE' | translate}}
         </a>
-        <a mat-list-item routerLink="/home/cinema/administration" routerLinkActive="activated" (click)="onPageChange()"
-           *ngIf="myUserService.hasPermission(cinemaMovieAdministration)">
+        <a (click)="onPageChange()" *ngIf="myUserService.hasPermission(cinemaMovieAdministration)" mat-list-item routerLink="/home/cinema/administration"
+           routerLinkActive="activated">
           <mat-icon>local_movies</mat-icon>
           {{'NAV_CINEMA_ADMINISTRATION' | translate}}</a>
         <mat-divider></mat-divider>
       </div>
 
-      <a mat-list-item routerLink="settings/personal" routerLinkActive="activated" (click)="onPageChange()">
+      <a (click)="onPageChange()" mat-list-item routerLink="settings/personal" routerLinkActive="activated">
         <mat-icon>settings</mat-icon>
         {{ 'NAV_USER_SETTINGS' | translate }}
       </a>
 
       <mat-divider></mat-divider>
       <div *ngIf="myUserService.hasPermission(managementAdministration)">
-        <a mat-list-item routerLink="management/user" routerLinkActive="activated" (click)="onPageChange()">
+        <a (click)="onPageChange()" mat-list-item routerLink="management/user" routerLinkActive="activated">
           <mat-icon>contacts</mat-icon>
           {{'NAV_MANAGEMENT_USERS' | translate}}
         </a>
       </div>
 
       <div *ngIf="myUserService.hasPermission(managementAdministration)">
-        <a mat-list-item routerLink="management/group" routerLinkActive="activated" (click)="onPageChange()">
+        <a (click)="onPageChange()" mat-list-item routerLink="management/group" routerLinkActive="activated">
           <mat-icon>group</mat-icon>
           {{'NAV_MANAGEMENT_GROUPS' | translate}}
         </a>
       </div>
 
       <div *ngIf="myUserService.hasPermission(managementAdministration)">
-        <a mat-list-item routerLink="management/performanceBadges" routerLinkActive="activated" (click)="onPageChange()">
+        <a (click)="onPageChange()" mat-list-item routerLink="management/performanceBadges"
+           routerLinkActive="activated">
           <mat-icon>star_rate</mat-icon>
           {{'NAV_MANAGEMENT_PERFORMANCE_BADGES' | translate}}
         </a>
@@ -72,14 +73,14 @@
 
       <div *ngIf="myUserService.hasPermission(settingsAdministration)">
         <mat-divider></mat-divider>
-        <a mat-list-item routerLink="management/datepoll" routerLinkActive="activated" (click)="onPageChange()">
+        <a (click)="onPageChange()" mat-list-item routerLink="management/datepoll" routerLinkActive="activated">
           <mat-icon>settings_input_component</mat-icon>
           {{'NAV_MANAGEMENT_DATEPOLL' | translate}}
         </a>
       </div>
 
       <mat-divider></mat-divider>
-      <a mat-list-item (click)="logout()">
+      <a (click)="logout()" mat-list-item>
         <mat-icon>power_settings_new</mat-icon>
         Logout
       </a>
@@ -87,9 +88,9 @@
   </mat-sidenav>
 
   <mat-sidenav-content>
-    <mat-toolbar color="primary" class="z-depth-5">
-      <mat-icon class="toolbar-sidenav-toggler" (click)="sidenav.toggle()">menu</mat-icon>
-      <span routerLink="/home" class="toolbar-heading">DatePoll</span>
+    <mat-toolbar class="z-depth-5" color="primary">
+      <mat-icon (click)="sidenav.toggle()" class="toolbar-sidenav-toggler">menu</mat-icon>
+      <span class="toolbar-heading" routerLink="/home">{{communityName}}</span>
     </mat-toolbar>
 
     <div class="my-container" id="my-container">
