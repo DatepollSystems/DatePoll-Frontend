@@ -1,47 +1,17 @@
 <h1 mat-dialog-title>{{'CINEMA_TICKETS_ADMINISTRATION_MOVIE_INFO_MODAL_INFO' | translate}} {{name}}</h1>
 <div mat-dialog-content>
   <div class="row">
-    <mat-form-field class="col-12 col-sm-12 col-md-10 col-lg-10">
-      <input [(ngModel)]="name" id="name" matInput name="name"
-             placeholder="{{'CINEMA_TICKETS_ADMINISTRATION_NAME' | translate}}" readonly
-             type="text">
-    </mat-form-field>
-
-    <mat-form-field class="col-12 col-sm-12 col-md-2 col-lg-2">
-      <input [(ngModel)]="bookedTickets" id="bookedTickets" matInput name="bookedTickets"
-             placeholder="{{'CINEMA_TICKETS_ADMINISTRATION_BOOKED_TICKETS' | translate}}" readonly
-             type="number">
-    </mat-form-field>
+    <p class="col-12">
+      <b>{{'CINEMA_TICKETS_ADMINISTRATION_DATE' | translate}}:</b>
+      {{date | date:'dd.MM.yyyy'}}
+    </p>
   </div>
 
-  <div class="row">
-    <mat-form-field class="col-12 " id="datepicker-field">
-      <input [(ngModel)]="date" id="datepicker"
-             matInput name="datepicker" placeholder="{{'CINEMA_TICKETS_ADMINISTRATION_DATE' | translate}}"
-             readonly>
-    </mat-form-field>
-
-    <mat-form-field class="col-12" id="datepicker-field-mobile">
-      <input [(ngModel)]="date" id="datepicker-mobile"
-             matInput name="datepicker-mobile" placeholder="{{'CINEMA_TICKETS_ADMINISTRATION_DATE' | translate}}"
-             readonly>
-    </mat-form-field>
-  </div>
-
-  <div class="row">
-    <mat-form-field class="col-12">
-      <input [(ngModel)]="trailerLink" id="trailerLink" matInput name="trailerLink"
-             placeholder="{{'CINEMA_TICKETS_ADMINISTRATION_TRAILER' | translate}}" readonly
-             type="text">
-    </mat-form-field>
-  </div>
-
-  <div class="row">
-    <mat-form-field class="col-12">
-      <input [(ngModel)]="imageLink" id="imageLink" matInput name="imageLink"
-             placeholder="{{'CINEMA_TICKETS_ADMINISTRATION_POSTER' | translate}}" readonly
-             type="text">
-    </mat-form-field>
+  <div class="row" style="margin-bottom: 15px;">
+    <p class="col-12">
+      <b>{{'CINEMA_TICKETS_ADMINISTRATION_TRAILER' | translate}}: </b>
+      <a href="{{trailerLink}}" target="_blank" rel="noopener">{{trailerLink}}</a>
+    </p>
   </div>
 
   <mat-expansion-panel>

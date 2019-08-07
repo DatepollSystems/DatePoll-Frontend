@@ -39,6 +39,8 @@ export class GroupInfoCardComponent implements OnInit, OnChanges {
   resultSubgroup: EventResultSubgroup[] = [];
   sortedResultSubgroup: EventResultSubgroup[] = [];
 
+  voteSummary = null;
+
   constructor() {
   }
 
@@ -46,7 +48,7 @@ export class GroupInfoCardComponent implements OnInit, OnChanges {
     this.resultSubgroup = this.resultGroup.getResultSubgroups();
     this.sortedResultSubgroup = this.resultSubgroup.slice();
 
-    this.pieChartLabels = this.resultGroup.event.getDecisions();
+    this.pieChartLabels = this.resultGroup.event.getDecisionsAsStrings();
     this.pieChartData = this.resultGroup.getChartData();
     this.pieChartIsEmpty = this.resultGroup.chartIsEmpty;
     monkeyPatchChartJsTooltip();
@@ -88,11 +90,19 @@ export class GroupInfoCardComponent implements OnInit, OnChanges {
   }
 
   getVotesSummary() {
+    if (this.voteSummary == null) {
+      this.calculateVoteSummary();
+    }
+    return this.voteSummary;
+  }
+
+  private calculateVoteSummary() {
     const objects = [];
 
     for (const decision of this.resultGroup.event.getDecisions()) {
       const object = {
-        'name': decision,
+        'id': decision.id,
+        'name': decision.decision,
         'count': 0
       };
       objects.push(object);
@@ -100,7 +110,7 @@ export class GroupInfoCardComponent implements OnInit, OnChanges {
 
     for (const resultUser of this.resultGroup.getResultUsers()) {
       for (const object of objects) {
-        if (resultUser.decision === object.name) {
+        if (resultUser.decisionId === object.id) {
           object.count += 1;
           break;
         }
@@ -111,7 +121,10 @@ export class GroupInfoCardComponent implements OnInit, OnChanges {
     for (const object of objects) {
       stringToReturn += object.name + ': ' + object.count + ' ';
     }
-    return stringToReturn;
+    this.voteSummary = stringToReturn;
   }
 
+  trackByFn(inde, item) {
+    return item.id;
+  }
 }

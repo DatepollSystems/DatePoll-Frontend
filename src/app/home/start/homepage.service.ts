@@ -72,7 +72,7 @@ export class HomepageService {
         for (let i = 0; i < events.length; i++) {
           const fetchedEvent = events[i];
           const event = new Event(fetchedEvent.id, fetchedEvent.name, new Date(fetchedEvent.startDate), new Date(fetchedEvent.endDate),
-            fetchedEvent.forEveryone, fetchedEvent.description, fetchedEvent.decisions);
+            fetchedEvent.forEveryone, fetchedEvent.description, fetchedEvent.location, fetchedEvent.decisions);
           event.alreadyVotedFor = fetchedEvent.alreadyVoted;
           eventsToSave.push(event);
         }

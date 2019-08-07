@@ -22,6 +22,8 @@ export class EventInfoModalComponent implements OnDestroy {
 
   name: string;
   description: string;
+  location: string;
+  locationUri: string;
 
   startDate: Date;
   endDate: Date;
@@ -61,11 +63,13 @@ export class EventInfoModalComponent implements OnDestroy {
   refreshValues() {
     this.name = this.event.name;
     this.description = this.event.description;
+    this.location = this.event.location;
+    this.locationUri = this.event.locationUri;
     this.startDate = this.event.startDate;
     this.endDate = this.event.endDate;
     this.resultGroups = this.event.getResultGroups();
     this.sortedResultGroups = this.resultGroups.slice();
-    this.pieChartLabels = this.event.getDecisions();
+    this.pieChartLabels = this.event.getDecisionsAsStrings();
     this.pieChartData = [...this.event.getChartData()];
     this.pieChartIsEmpty = this.event.chartIsEmpty;
     monkeyPatchChartJsTooltip();
@@ -87,5 +91,9 @@ export class EventInfoModalComponent implements OnDestroy {
         }
       }
     }
+  }
+
+  trackByFn(inde, item) {
+    return item.id;
   }
 }

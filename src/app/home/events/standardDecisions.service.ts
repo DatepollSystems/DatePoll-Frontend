@@ -29,18 +29,21 @@ export class StandardDecisionsService {
         for (let i = 0; i < response.standardDecisions.length; i++) {
           const localStandardDecision = response.standardDecisions[i];
 
-          standardDecisions.push(new EventStandardDecision(localStandardDecision.id, localStandardDecision.decision));
+          standardDecisions.push(new EventStandardDecision(localStandardDecision.id, localStandardDecision.decision,
+            localStandardDecision.showInCalendar));
         }
 
+        console.log(standardDecisions);
         this.setStandardDecisions(standardDecisions);
       },
       (error) => console.log(error)
     );
   }
 
-  public addStandardDecision(decision: string) {
+  public addStandardDecision(decision: string, showInCalendar: boolean) {
     const dto = {
-      'decision': decision
+      'decision': decision,
+      'showInCalendar': showInCalendar
     };
     return this.httpService.loggedInV1POSTRequest('/avent/administration/standardDecision', dto, 'addStandardDecision');
   }

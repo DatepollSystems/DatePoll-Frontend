@@ -5,6 +5,7 @@ import {EventsService} from '../../events.service';
 import {NgForm} from '@angular/forms';
 import {Event} from '../../models/event.model';
 import {Subscription} from 'rxjs';
+import {Decision} from '../../models/decision.model';
 
 @Component({
   selector: 'app-event-update-modal',
@@ -19,7 +20,8 @@ export class EventUpdateModalComponent implements OnDestroy {
 
   name: string;
   description: string;
-  decisions: string[] = [];
+  location: string;
+  decisions: Decision[] = [];
 
   startDate: Date;
   startDateHours: number;
@@ -45,6 +47,7 @@ export class EventUpdateModalComponent implements OnDestroy {
     this.event = data.event;
     this.name = this.event.name;
     this.description = this.event.description;
+    this.location = this.event.location;
     this.decisions = this.event.getDecisions();
     this.startDate = this.event.startDate;
     this.startDateHours = this.startDate.getHours();
@@ -91,7 +94,7 @@ export class EventUpdateModalComponent implements OnDestroy {
     this.freeSubscription.unsubscribe();
   }
 
-  onDecisionsChange(decisions: string[]) {
+  onDecisionsChange(decisions: Decision[]) {
     this.decisions = decisions;
   }
 
@@ -112,6 +115,7 @@ export class EventUpdateModalComponent implements OnDestroy {
     const endDateHours = form.controls.endDateHours.value;
     const endDateMinutes = form.controls.endDateMinutes.value;
     const description = form.controls.description.value;
+    const location = form.controls.location.value;
 
     this.startDate.setHours(startDateHours);
     this.startDate.setMinutes(startDateMinutes);
@@ -120,7 +124,7 @@ export class EventUpdateModalComponent implements OnDestroy {
 
     const forEveryone = (this.joined.length === 0);
 
-    const event = new Event(this.event.id, name, this.startDate, this.endDate, forEveryone, description, this.decisions);
+    const event = new Event(this.event.id, name, this.startDate, this.endDate, forEveryone, description, location, this.decisions);
     console.log(event);
     this.dialogRef.close();
     this.eventsService.updateEvent(event).subscribe(

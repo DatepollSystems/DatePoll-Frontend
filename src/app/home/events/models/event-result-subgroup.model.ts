@@ -36,7 +36,7 @@ export class EventResultSubgroup {
     const data = [];
     for (let i = 0; i < this.event.getDecisions().length; i++) {
       const object = {
-        'name': this.event.getDecisions()[i],
+        'id': this.event.getDecisions()[i].id,
         'value': 0
       };
       data.push(object);
@@ -44,7 +44,7 @@ export class EventResultSubgroup {
 
     for (let i = 0; i < this.resultUsers.length; i++) {
       for (let j = 0; j < data.length; j++) {
-        if (data[j].name === this.resultUsers[i].decision) {
+        if (data[j].id === this.resultUsers[i].decisionId) {
           data[j].value++;
           this.chartIsEmpty = false;
           break;

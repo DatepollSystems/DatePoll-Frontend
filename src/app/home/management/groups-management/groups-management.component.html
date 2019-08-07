@@ -28,7 +28,7 @@
     </div>
 
     <div class="row">
-      <div *ngFor="let group of sortedGroups" class="col-12">
+      <div *ngFor="let group of sortedGroups; trackBy: trackByFn" class="col-12">
         <mat-card class="mat-elevation-z4">
           <mat-card-content>
             <div class="row">
@@ -66,7 +66,7 @@
               </div>
             </div>
             <div class="row">
-              <div *ngFor="let subgroup of group.getSubgroups()" class="col-12">
+              <div *ngFor="let subgroup of group.getSubgroups(); trackBy: trackByFn" class="col-12">
                 <mat-card class="mat-elevation-z3">
                   <mat-card-content>
                     <button (click)="onDeleteSubgroup(subgroup.id)" color="warn" mat-icon-button

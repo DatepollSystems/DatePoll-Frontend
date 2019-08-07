@@ -10,6 +10,10 @@ import {PerformanceBadge} from './models/performanceBadge.model';
 import {Instrument} from './models/instrument.model';
 import {PerformanceBadgeUpdateModalComponent} from './performance-badge-update-modal/performance-badge-update-modal.component';
 import {InstrumentUpdateModalComponent} from './instrument-update-modal/instrument-update-modal.component';
+import {SubgroupDeleteModalComponent} from '../groups-management/subgroup-delete-modal/subgroup-delete-modal.component';
+import {MatBottomSheet} from '@angular/material';
+import {PerformanceBadgeDeleteModalComponent} from './performance-badge-delete-modal/performance-badge-delete-modal.component';
+import {InstrumentDeleteModalComponent} from './instrument-delete-modal/instrument-delete-modal.component';
 
 @Component({
   selector: 'app-performance-badges-managment',
@@ -17,12 +21,9 @@ import {InstrumentUpdateModalComponent} from './instrument-update-modal/instrume
   styleUrls: ['./performance-badges-managment.component.css']
 })
 export class PerformanceBadgesManagmentComponent implements OnDestroy {
-
   @ViewChild('successfullyAddedPerformanceBadge', {static: true}) successfullyAddedPerformanceBadge: TemplateRef<any>;
-  @ViewChild('successfullyRemovedPerformanceBadge', {static: true}) successfullyRemovedPerformanceBadge: TemplateRef<any>;
 
   @ViewChild('successfullyAddedInstrument', {static: true}) successfullyAddedInstrument: TemplateRef<any>;
-  @ViewChild('successfullyRemovedInstrument', {static: true}) successfullyRemovedInstrument: TemplateRef<any>;
 
   performanceBadgesSubscription: Subscription;
   performanceBadges: PerformanceBadge[];
@@ -32,6 +33,7 @@ export class PerformanceBadgesManagmentComponent implements OnDestroy {
 
   constructor(private performanceBadgesService: PerformanceBadgesService,
               private notificationsService: NotificationsService,
+              private bottomSheet: MatBottomSheet,
               private dialog: MatDialog) {
     this.performanceBadges = this.performanceBadgesService.getPerformanceBadges();
     this.performanceBadgesSubscription = this.performanceBadgesService.performanceBadgesChange.subscribe((value) => {
@@ -77,16 +79,10 @@ export class PerformanceBadgesManagmentComponent implements OnDestroy {
     });
   }
 
-  removePerformanceBadge(id: number, button: any) {
-    button.disabled = true;
-    this.performanceBadgesService.removePerformanceBadge(id).subscribe(
-      (data: any) => {
-        console.log(data);
-        this.performanceBadgesService.fetchPerformanceBadges();
-        this.notificationsService.html(this.successfullyRemovedPerformanceBadge, NotificationType.Success, null, 'success');
-      },
-      (error) => console.log(error)
-    );
+  removePerformanceBadge(id: number) {
+    this.bottomSheet.open(PerformanceBadgeDeleteModalComponent, {
+      data: {'performanceBadgeId': id},
+    });
   }
 
 
@@ -111,16 +107,13 @@ export class PerformanceBadgesManagmentComponent implements OnDestroy {
     });
   }
 
-  removeInstrument(id: number, button: any) {
-    button.disabled = true;
-    this.performanceBadgesService.removeInstrument(id).subscribe(
-      (data: any) => {
-        console.log(data);
-        this.performanceBadgesService.fetchInstruments();
-        this.notificationsService.html(this.successfullyRemovedInstrument, NotificationType.Success, null, 'success');
-      },
-      (error) => console.log(error)
-    );
+  removeInstrument(id: number) {
+    this.bottomSheet.open(InstrumentDeleteModalComponent, {
+      data: {'instrumentId': id},
+    });
   }
 
+  trackByFn(inde, item) {
+    return item.id;
+  }
 }

@@ -67,6 +67,11 @@ mat-card {
   margin-bottom: 10px;
 }
 
+/* Fix ripple bug which expand the card*/
+.mat-card .last-child {
+  margin-bottom: 0;
+}
+
 /* Different mat-card styles */
 .success-mat-card {
   user-select: none;
@@ -83,11 +88,6 @@ mat-card {
   background-color: #29B6F6;
 }
 
-/* Fix ripple bug which expand the card*/
-.mat-card .last-child {
-  margin-bottom: 0;
-}
-
 /* Different button styles */
 .success-button {
   background-color: #4CAF50;
@@ -96,4 +96,30 @@ mat-card {
 
 .info-button {
   background-color: #29B6F6;
+}
+
+.hidden {
+  display: none;
+  visibility: hidden;
+}
+
+/* Loading animation for buttons */
+@keyframes spinner {
+  to {transform: rotate(360deg);}
+}
+
+.spinner:before {
+  content: '';
+  box-sizing: border-box;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  margin-top: -10px;
+  margin-left: -10px;
+  border-radius: 50%;
+  border: 2px solid #ffffff;
+  border-top-color: #000000;
+  animation: spinner .8s linear infinite;
 }

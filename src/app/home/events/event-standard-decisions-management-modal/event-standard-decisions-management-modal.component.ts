@@ -19,6 +19,8 @@ export class EventStandardDecisionsManagementModalComponent implements OnDestroy
   standardDecisions: EventStandardDecision[];
   standardDecisionsSubscription: Subscription;
 
+  showInCalendar: boolean = false;
+
   constructor(private standardDecisionsService: StandardDecisionsService, private notificationsService: NotificationsService) {
     this.standardDecisions = standardDecisionsService.getStandardDecisions();
 
@@ -36,10 +38,14 @@ export class EventStandardDecisionsManagementModalComponent implements OnDestroy
     this.standardDecisionsSubscription.unsubscribe();
   }
 
+  showInCalendarChange(e) {
+    this.showInCalendar = e.checked;
+  }
+
   addStandardDecision(form: NgForm) {
     const decision = form.controls.decision.value;
 
-    this.standardDecisionsService.addStandardDecision(decision).subscribe(
+    this.standardDecisionsService.addStandardDecision(decision, this.showInCalendar).subscribe(
       (response: any) => {
         console.log(response);
         this.standardDecisionsService.fetchStandardDecisions();
@@ -49,6 +55,7 @@ export class EventStandardDecisionsManagementModalComponent implements OnDestroy
     );
 
     form.reset();
+    this.showInCalendar = false;
   }
 
   removeStandardDecision(id: number, button: any) {

@@ -51,7 +51,8 @@
       </mat-form-field>
 
       <div class="col-12 col-sm-12 col-md-3">
-        <button [disabled]="!changeCommunityNameForm.valid" class="success-button" mat-button
+        <button class="success-button" mat-button [class.spinner]="communityNameSaving"
+                [disabled]="!changeCommunityNameForm.valid || communityNameSaving"
                 type="submit">{{'SAVE' | translate}}</button>
       </div>
     </form>
@@ -69,15 +70,17 @@
       </mat-form-field>
 
       <div class="col-12 col-sm-12 col-md-3">
-        <button [disabled]="!changeOpenWeatherMapKeyForm.valid" class="success-button" mat-button
+        <button class="success-button" mat-button [class.spinner]="openWeatherMapKeySaving"
+                [disabled]="!changeOpenWeatherMapKeyForm.valid || openWeatherMapKeySaving"
                 type="submit">{{'SAVE' | translate}}</button>
       </div>
     </form>
 
-    <form #changeOpenWeatherMapCinemaCityIdForm="ngForm" (ngSubmit)="changeOpenWeatherMapCinemaCityId(changeOpenWeatherMapCinemaCityIdForm)"
+    <form #changeOpenWeatherMapCinemaCityIdForm="ngForm"
+          (ngSubmit)="changeOpenWeatherMapCinemaCityId(changeOpenWeatherMapCinemaCityIdForm)"
           class="row" style="margin-top: 15px">
       <mat-form-field class="col-12 col-sm-12 col-md-6">
-        <input #openWeatherMapCinemaCityIdModel="ngModel" [(ngModel)]="openWeatherMapCinemaCityId"  matInput
+        <input #openWeatherMapCinemaCityIdModel="ngModel" [(ngModel)]="openWeatherMapCinemaCityId" matInput
                maxlength="50" name="openWeatherMapCinemaCityId" id="openWeatherMapCinemaCityId"
                ngModel placeholder="{{'MANAGEMENT_DATEPOLL_OPENWEATHERMAP_CINEMA_CITY_ID' | translate}}"
                type="text">
@@ -87,7 +90,8 @@
       </mat-form-field>
 
       <div class="col-12 col-sm-12 col-md-3">
-        <button [disabled]="!changeOpenWeatherMapCinemaCityIdForm.valid" class="success-button" mat-button
+        <button class="success-button" mat-button [class.spinner]="openWeatherMapCinemaCityIdSaving"
+                [disabled]="!changeOpenWeatherMapCinemaCityIdForm.valid || openWeatherMapCinemaCityIdSaving"
                 type="submit">{{'SAVE' | translate}}</button>
       </div>
     </form>

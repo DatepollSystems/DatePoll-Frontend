@@ -11,16 +11,22 @@ import {PerformanceBadgesManagementRoutingModule} from './performance-badges-man
 import {PerformanceBadgesManagmentComponent} from './performance-badges-managment.component';
 import {PerformanceBadgeUpdateModalComponent} from './performance-badge-update-modal/performance-badge-update-modal.component';
 import {InstrumentUpdateModalComponent} from './instrument-update-modal/instrument-update-modal.component';
+import {PerformanceBadgeDeleteModalComponent} from './performance-badge-delete-modal/performance-badge-delete-modal.component';
+import {InstrumentDeleteModalComponent} from './instrument-delete-modal/instrument-delete-modal.component';
 
 @NgModule({
   declarations: [
     PerformanceBadgesManagmentComponent,
     PerformanceBadgeUpdateModalComponent,
-    InstrumentUpdateModalComponent
+    InstrumentUpdateModalComponent,
+    PerformanceBadgeDeleteModalComponent,
+    InstrumentDeleteModalComponent
   ],
   entryComponents: [
     PerformanceBadgeUpdateModalComponent,
-    InstrumentUpdateModalComponent
+    InstrumentUpdateModalComponent,
+    PerformanceBadgeDeleteModalComponent,
+    InstrumentDeleteModalComponent
   ],
   imports: [
     CommonModule,

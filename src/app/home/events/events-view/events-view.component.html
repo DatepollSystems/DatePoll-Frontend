@@ -18,6 +18,10 @@
             <mat-card-title>{{event.name}}</mat-card-title>
             <mat-card-subtitle>{{event.startDate | date:'dd.MM.yyyy HH:mm'}}
               - {{event.endDate | date:'dd.MM.yyyy HH:mm'}}</mat-card-subtitle>
+            <mat-card-subtitle>
+              <a target="_blank" rel="noopener"
+                 href="https://www.google.com/maps/search/?api=1&query={{event.locationUri}}">{{event.location}}</a>
+            </mat-card-subtitle>
           </mat-card-header>
           <mat-card-content>
             <p style="margin-left: 15px;">
@@ -27,7 +31,8 @@
           <mat-card-actions>
             <button (click)="onVote(event)" *ngIf="!event.alreadyVotedFor" color="primary"
                     mat-flat-button>{{'EVENTS_VIEW_EVENT_CARD_BUTTON_DECIDE' | translate}}</button>
-            <button #cancelVotingButton (click)="cancelVoting(event, cancelVotingButton)" *ngIf="event.alreadyVotedFor" color="accent"
+            <button #cancelVotingButton (click)="cancelVoting(event, cancelVotingButton)" *ngIf="event.alreadyVotedFor"
+                    color="accent"
                     mat-flat-button>{{'EVENTS_VIEW_EVENT_CARD_BUTTON_CANCEL_VOTING' | translate}}</button>
             <button (click)="onInfo(event)" mat-button>
               <mat-icon>info</mat-icon>
