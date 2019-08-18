@@ -15,9 +15,11 @@ import {EmailAddressesListComponent} from '../home/management/users-management/e
 import {MovieInfoModalComponent} from '../home/cinema/movie-administration/movie-info-modal/movie-info-modal.component';
 import {GroupAndSubgroupSelectComponent} from './shared-components/group-and-subgroup-select/group-and-subgroup-select.component';
 import {MovieDeleteModalComponent} from '../home/cinema/movie-administration/movie-delete-modal/movie-delete-modal.component';
+import {AppDividerComponent} from './shared-components/app-divider/app-divider.component';
 
 @NgModule({
   declarations: [
+    AppDividerComponent,
     DoNotForgetToSaveComponent,
     MovieEditModalComponent,
     MovieInfoModalComponent,
@@ -39,6 +41,7 @@ import {MovieDeleteModalComponent} from '../home/cinema/movie-administration/mov
     CustomFormsModule,
   ],
   exports: [
+    AppDividerComponent,
     DoNotForgetToSaveComponent,
     MovieEditModalComponent,
     MovieInfoModalComponent,
