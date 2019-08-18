@@ -5,9 +5,12 @@
 
     <mat-divider></mat-divider>
 
-    <div *ngIf="resultGroup.id !== -1">
+    <div *ngIf="resultGroup.id !== -1" style="padding-top: 15px;">
       <!-- Chart for the group -->
-      <mat-expansion-panel style="margin-top: 25px; margin-bottom: 15px;">
+      <app-result-user-bar-chart [resultUsers]="resultGroup.getResultUsers()"
+                                 [decisions]="resultGroup.event.getDecisions()"></app-result-user-bar-chart>
+
+      <mat-expansion-panel style="margin-top: 15px;">
         <mat-expansion-panel-header>
           <mat-panel-title>
             {{'EVENTS_ADMINISTRATION_INFO_EVENT_CHART_FOR' | translate}} {{resultGroup.name}}
@@ -25,64 +28,15 @@
           *ngIf="pieChartIsEmpty">{{'EVENTS_ADMINISTRATION_INFO_EVENT_NOBODY_VOTED_IN_GROUP' | translate}}</span>
       </mat-expansion-panel>
 
-      <mat-expansion-panel>
+      <mat-expansion-panel style="margin-top: 15px;">
         <mat-expansion-panel-header>
           <mat-panel-title>
             {{'EVENTS_ADMINISTRATION_INFO_EVENT_MEMBERS_IN' | translate}} {{resultGroup.name}}
           </mat-panel-title>
         </mat-expansion-panel-header>
 
-        <div class="row">
-          <div class="col-12">
-            <mat-form-field class="col-12">
-              <input (keyup)="applyFilter($event.target.value)" matInput
-                     placeholder="{{'MANAGEMENT_USERS_SEARCH' | translate}}">
-            </mat-form-field>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col-12">
-            <table [dataSource]="dataSource" class="table-responsive" mat-table matSort>
-              <!-- Firstname Column -->
-              <ng-container matColumnDef="firstname">
-                <th *matHeaderCellDef mat-header-cell
-                    mat-sort-header> {{'EVENTS_ADMINISTRATION_INFO_EVENT_FIRSTNAME' | translate}} </th>
-                <td *matCellDef="let resultUser" mat-cell> {{resultUser.firstname}} </td>
-                <td *matFooterCellDef mat-footer-cell><b>Total</b></td>
-              </ng-container>
-
-              <!-- Surname Column -->
-              <ng-container matColumnDef="surname">
-                <th *matHeaderCellDef mat-header-cell
-                    mat-sort-header> {{'EVENTS_ADMINISTRATION_INFO_EVENT_SURNAME' | translate}} </th>
-                <td *matCellDef="let resultUser" mat-cell> {{resultUser.surname}} </td>
-                <td *matFooterCellDef mat-footer-cell></td>
-              </ng-container>
-
-              <!-- Decision Column -->
-              <ng-container matColumnDef="decision">
-                <th *matHeaderCellDef mat-header-cell
-                    mat-sort-header> {{'EVENTS_ADMINISTRATION_INFO_EVENT_DECISION' | translate}} </th>
-                <td *matCellDef="let resultUser" mat-cell>
-                  <b
-                    *ngIf="resultUser.decision != null">{{resultUser.decision}}</b>
-                  <span
-                    *ngIf="resultUser.decision == null">{{'EVENTS_ADMINISTRATION_INFO_EVENT_UNKNOWN_VOTING' | translate}}</span>
-                </td>
-                <td *matFooterCellDef mat-footer-cell><b>{{getVotesSummary()}}</b></td>
-              </ng-container>
-
-              <tr *matHeaderRowDef="displayedColumns; sticky: true" mat-header-row></tr>
-              <tr *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
-              <tr *matFooterRowDef="displayedColumns" mat-footer-row></tr>
-            </table>
-            <mat-paginator [pageSizeOptions]="[10, 20, 50, 100]" showFirstLastButtons></mat-paginator>
-          </div>
-        </div>
-
-        <span *ngIf="resultGroup.getResultUsers().length === 0">
-          {{'EVENTS_ADMINISTRATION_INFO_EVENT_GROUP_NO_USERS' | translate}}</span>
+        <app-result-user-table [resultUsers]="resultGroup.getResultUsers()"
+                               [decisions]="resultGroup.event.getDecisions()"></app-result-user-table>
 
       </mat-expansion-panel>
 

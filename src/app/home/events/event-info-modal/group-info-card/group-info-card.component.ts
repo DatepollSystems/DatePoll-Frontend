@@ -1,5 +1,4 @@
-import {Component, Input, OnChanges, OnInit, ViewChild} from '@angular/core';
-import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
+import {Component, Input, OnChanges, OnInit} from '@angular/core';
 import {ChartOptions, ChartType} from 'chart.js';
 import {Label, monkeyPatchChartJsLegend, monkeyPatchChartJsTooltip, SingleDataSet} from 'ng2-charts';
 
@@ -28,18 +27,8 @@ export class GroupInfoCardComponent implements OnInit, OnChanges {
   public pieChartData: SingleDataSet;
   public pieChartIsEmpty: boolean;
 
-  // Table with user data
-  displayedColumns: string[] = ['firstname', 'surname', 'decision'];
-  filterValue: string = null;
-
-  @ViewChild(MatSort, {static: false}) sort: MatSort;
-  @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
-  dataSource: MatTableDataSource<any>;
-
   resultSubgroup: EventResultSubgroup[] = [];
   sortedResultSubgroup: EventResultSubgroup[] = [];
-
-  voteSummary = null;
 
   constructor() {
   }
@@ -53,25 +42,6 @@ export class GroupInfoCardComponent implements OnInit, OnChanges {
     this.pieChartIsEmpty = this.resultGroup.chartIsEmpty;
     monkeyPatchChartJsTooltip();
     monkeyPatchChartJsLegend();
-
-    this.dataSource = new MatTableDataSource(this.resultGroup.getResultUsers());
-    setTimeout(() => {
-      if (this.dataSource != null) {
-        this.dataSource.sort = this.sort;
-      }
-    }, 1000);
-    this.dataSource.sort = this.sort;
-    this.dataSource.paginator = this.paginator;
-  }
-
-  applyFilter(filterValue: string) {
-    this.filterValue = filterValue;
-    this.dataSource.filter = this.filterValue.trim().toLowerCase();
-    this.dataSource.sort = this.sort;
-
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
   }
 
   ngOnChanges(): void {
@@ -87,41 +57,6 @@ export class GroupInfoCardComponent implements OnInit, OnChanges {
         }
       }
     }
-  }
-
-  getVotesSummary() {
-    if (this.voteSummary == null) {
-      this.calculateVoteSummary();
-    }
-    return this.voteSummary;
-  }
-
-  private calculateVoteSummary() {
-    const objects = [];
-
-    for (const decision of this.resultGroup.event.getDecisions()) {
-      const object = {
-        'id': decision.id,
-        'name': decision.decision,
-        'count': 0
-      };
-      objects.push(object);
-    }
-
-    for (const resultUser of this.resultGroup.getResultUsers()) {
-      for (const object of objects) {
-        if (resultUser.decisionId === object.id) {
-          object.count += 1;
-          break;
-        }
-      }
-    }
-
-    let stringToReturn = '';
-    for (const object of objects) {
-      stringToReturn += object.name + ': ' + object.count + ' ';
-    }
-    this.voteSummary = stringToReturn;
   }
 
   trackByFn(inde, item) {

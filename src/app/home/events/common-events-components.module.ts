@@ -16,10 +16,14 @@ import {EventsVoteForDecisionModalComponent} from './events-view/events-vote-for
 import {EventDecisionsListComponent} from './event-decisions-list/event-decisions-list.component';
 import {GroupInfoCardComponent} from './event-info-modal/group-info-card/group-info-card.component';
 import {SubgroupInfoCardComponent} from './event-info-modal/group-info-card/subgroup-info-card/subgroup-info-card.component';
+import {ResultUserTableComponent} from './event-info-modal/result-user-table/result-user-table.component';
+import {ResultUserBarChartComponent} from './event-info-modal/result-user-bar-chart/result-user-bar-chart.component';
 
 @NgModule({
   declarations: [
     EventInfoModalComponent,
+    ResultUserTableComponent,
+    ResultUserBarChartComponent,
     GroupInfoCardComponent,
     SubgroupInfoCardComponent,
     EventsVoteForDecisionModalComponent,
