@@ -21,11 +21,16 @@ export class ResultUserBarChartComponent {
 
   colors = [
     '#F44336',
-    '#1E88E5',
-    '#0097A7',
+    '#E91E63',
+    '#673AB7',
+    '#2196F3',
+    '#00BCD4',
     '#009688',
-    '#43A047',
-    '#E65100'
+    '#4CAF50',
+    '#CDDC39',
+    '#FFEB3B',
+    '#FF9800',
+    '#607D8B'
   ];
 
   constructor() {
