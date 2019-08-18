@@ -6,9 +6,7 @@
 
 .barElement {
   text-align: center;
-  padding-top: 10px;
-  padding-right: 5px;
-  padding-bottom: 10px;
-  color: white;
+  height: 30px;
+  color: black;
   float: left;
 }
