@@ -18,10 +18,14 @@ import {GroupInfoCardComponent} from './event-info-modal/group-info-card/group-i
 import {SubgroupInfoCardComponent} from './event-info-modal/group-info-card/subgroup-info-card/subgroup-info-card.component';
 import {ResultUserTableComponent} from './event-info-modal/result-user-table/result-user-table.component';
 import {ResultUserBarChartComponent} from './event-info-modal/result-user-bar-chart/result-user-bar-chart.component';
+import {EventUpdateModalComponent} from './events-administration/event-update-modal/event-update-modal.component';
+import {EventDeleteModalComponent} from './events-administration/event-delete-modal/event-delete-modal.component';
 
 @NgModule({
   declarations: [
     EventInfoModalComponent,
+    EventUpdateModalComponent,
+    EventDeleteModalComponent,
     ResultUserTableComponent,
     ResultUserBarChartComponent,
     GroupInfoCardComponent,
@@ -31,6 +35,8 @@ import {ResultUserBarChartComponent} from './event-info-modal/result-user-bar-ch
   ],
   entryComponents: [
     EventInfoModalComponent,
+    EventUpdateModalComponent,
+    EventDeleteModalComponent,
     EventsVoteForDecisionModalComponent,
   ],
   imports: [
@@ -48,6 +54,8 @@ import {ResultUserBarChartComponent} from './event-info-modal/result-user-bar-ch
   ],
   exports: [
     EventInfoModalComponent,
+    EventUpdateModalComponent,
+    EventDeleteModalComponent,
     EventsVoteForDecisionModalComponent,
     EventDecisionsListComponent
   ]

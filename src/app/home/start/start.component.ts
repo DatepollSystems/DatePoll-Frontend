@@ -4,7 +4,6 @@ import {MatBottomSheet, MatDialog} from '@angular/material';
 import {Subscription} from 'rxjs';
 
 import {HomepageService} from './homepage.service';
-import {CinemaService} from '../cinema/cinema.service';
 import {MyUserService} from '../my-user.service';
 import {EventsUserService} from '../events/events-user.service';
 
@@ -32,7 +31,6 @@ export class StartComponent implements OnInit, OnDestroy {
 
   constructor(
     private homePageService: HomepageService,
-    private cinemaService: CinemaService,
     public myUserService: MyUserService,
     private eventsUserSerivce: EventsUserService,
     private bottomSheet: MatBottomSheet,
@@ -83,62 +81,6 @@ export class StartComponent implements OnInit, OnDestroy {
     this.eventsSubscription.unsubscribe();
 
     document.getElementById('my-container').style.background = 'none';
-  }
-
-  applyForWorker(movieID: number, element: any) {
-    element.disabled = true;
-    this.cinemaService.applyForWorker(movieID).subscribe(
-      (response: any) => {
-        console.log(response);
-        this.homePageService.fetchData();
-      },
-      (error) => {
-        console.log(error);
-        this.homePageService.fetchData();
-      }
-    );
-  }
-
-  signOutForWorker(movieID: number, element: any) {
-    element.disabled = true;
-    this.cinemaService.signOutForWorker(movieID).subscribe(
-      (response: any) => {
-        console.log(response);
-        this.homePageService.fetchData();
-      },
-      (error) => {
-        console.log(error);
-        this.homePageService.fetchData();
-      }
-    );
-  }
-
-  applyForEmergencyWorker(movieID: number, element: any) {
-    element.disabled = true;
-    this.cinemaService.applyForEmergencyWorker(movieID).subscribe(
-      (response: any) => {
-        console.log(response);
-        this.homePageService.fetchData();
-      },
-      (error) => {
-        console.log(error);
-        this.homePageService.fetchData();
-      }
-    );
-  }
-
-  signOutForEmergencyWorker(movieID: number, element: any) {
-    element.disabled = true;
-    this.cinemaService.signOutForEmergencyWorker(movieID).subscribe(
-      (response: any) => {
-        console.log(response);
-        this.homePageService.fetchData();
-      },
-      (error) => {
-        console.log(error);
-        this.homePageService.fetchData();
-      }
-    );
   }
 
   onEventInfo(event: Event) {

@@ -14,8 +14,6 @@ import {CommonEventsComponentsModule} from './common-events-components.module';
 
 import {EventsAdministrationComponent} from './events-administration/events-administration.component';
 import {EventCreateModalComponent} from './events-administration/event-create-modal/event-create-modal.component';
-import {EventUpdateModalComponent} from './events-administration/event-update-modal/event-update-modal.component';
-import {EventDeleteModalComponent} from './events-administration/event-delete-modal/event-delete-modal.component';
 import {EventStandardDecisionsManagementModalComponent} from './event-standard-decisions-management-modal/event-standard-decisions-management-modal.component';
 import {EventsViewComponent} from './events-view/events-view.component';
 import {EventUserManagementModalComponent} from './events-administration/event-user-management-modal/event-user-management-modal.component';
@@ -24,16 +22,12 @@ import {EventUserManagementModalComponent} from './events-administration/event-u
   declarations: [
     EventsAdministrationComponent,
     EventCreateModalComponent,
-    EventUpdateModalComponent,
-    EventDeleteModalComponent,
     EventUserManagementModalComponent,
     EventStandardDecisionsManagementModalComponent,
     EventsViewComponent
   ],
   entryComponents: [
     EventCreateModalComponent,
-    EventUpdateModalComponent,
-    EventDeleteModalComponent,
     EventUserManagementModalComponent,
     EventStandardDecisionsManagementModalComponent
   ],

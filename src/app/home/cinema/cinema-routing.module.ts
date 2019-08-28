@@ -3,14 +3,14 @@ import {RouterModule, Routes} from '@angular/router';
 
 import {MovieTicketsComponent} from './movie-tickets/movie-tickets.component';
 import {MovieServiceComponent} from './movie-service/movie-service.component';
-import {MovieAdministrationComponent} from './movie-administration/movie-administration.component';
 
 const cinemaRoutes: Routes = [
   {
     path: '', children: [
       {path: 'tickets', component: MovieTicketsComponent},
       {path: 'service', component: MovieServiceComponent},
-      {path: 'administration', component: MovieAdministrationComponent},
+      {path: 'administration', loadChildren: () => import('./movie-administration/movie-administration.module').
+        then(m => m.MovieAdministrationModule)},
     ]
   }
 ];
