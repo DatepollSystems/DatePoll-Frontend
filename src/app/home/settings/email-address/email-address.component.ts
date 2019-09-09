@@ -25,9 +25,10 @@ export class EmailAddressComponent {
   }
 
   onSave() {
-    this._myUserService.setEmailAddresses(this.emailAddresses).subscribe(
+    this._myUserService.setEmailAddressesPerRequest(this.emailAddresses).subscribe(
       (response: any) => {
         console.log(response);
+        this._myUserService.setEmailAddresses(this.emailAddresses);
         this.notificationsService.html(this.successfullySavedEmailAddresses, NotificationType.Success, null, 'success');
       },
       (error) => console.log(error)
