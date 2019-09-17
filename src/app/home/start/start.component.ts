@@ -12,6 +12,8 @@ import {HomeBookingsModel} from './bookings.model';
 import {Event} from '../events/models/event.model';
 import {EventInfoModalComponent} from '../events/event-info-modal/event-info-modal.component';
 import {EventsVoteForDecisionModalComponent} from '../events/events-view/events-vote-for-decision-modal/events-vote-for-decision-modal.component';
+import {NotificationsService} from 'angular2-notifications';
+import {TranslateService} from '../../translation/translate.service';
 
 @Component({
   selector: 'app-start',
@@ -34,6 +36,8 @@ export class StartComponent implements OnInit, OnDestroy {
     public myUserService: MyUserService,
     private eventsUserSerivce: EventsUserService,
     private bottomSheet: MatBottomSheet,
+    private notificationsService: NotificationsService,
+    private translate: TranslateService,
     private dialog: MatDialog) {
 
     this.birthdays = homePageService.getBirthdays();
@@ -93,8 +97,25 @@ export class StartComponent implements OnInit, OnDestroy {
   }
 
   onEventVote(event: Event) {
-    this.bottomSheet.open(EventsVoteForDecisionModalComponent, {
+    const bottomSheetRef = this.bottomSheet.open(EventsVoteForDecisionModalComponent, {
       data: {'event': event},
+    });
+
+    bottomSheetRef.afterDismissed().subscribe((decision) => {
+      if (decision != null) {
+        this.eventsUserSerivce.voteForDecision(event.id, decision).subscribe(
+          (response: any) => {
+            console.log(response);
+            this.eventsUserSerivce.fetchEvents();
+            this.homePageService.fetchData();
+            this.notificationsService.success(this.translate.getTranslationFor('SUCCESSFULLY'),
+              this.translate.getTranslationFor('EVENTS_VIEW_EVENT_SUCCESSFULLY_VOTED'));
+          },
+          (error) => console.log(error)
+        );
+      } else {
+        console.log('events-view | Closed bottom sheet, voted for nohting');
+      }
     });
   }
 
