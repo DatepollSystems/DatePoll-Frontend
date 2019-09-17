@@ -14,13 +14,15 @@ import {MovieDeleteModalComponent} from './movie-delete-modal/movie-delete-modal
 import {MovieCreateModalComponent} from './movie-create-modal/movie-create-modal.component';
 import {CustomDateAdapter} from '../../../services/custom-date-adapter';
 import {CommonComponentsModule} from '../../../services/common-components.module';
+import {MovieBookingsTableComponent} from './movie-bookings-table/movie-bookings-table.component';
 
 @NgModule({
   declarations: [
     MovieCreateModalComponent,
     MovieEditModalComponent,
     MovieInfoModalComponent,
-    MovieDeleteModalComponent
+    MovieDeleteModalComponent,
+    MovieBookingsTableComponent
   ],
   imports: [
     CommonModule,

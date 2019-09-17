@@ -74,11 +74,13 @@ export class Movie implements CalendarEvent {
 }
 
 export class MovieBookingUser {
+  public readonly userID: number;
   public readonly firstname: string;
   public readonly surname: string;
   public readonly amount: number;
 
-  constructor(firstname: string, surname: string, amount: number) {
+  constructor(userID: number, firstname: string, surname: string, amount: number) {
+    this.userID = userID;
     this.firstname = firstname;
     this.surname = surname;
     this.amount = amount;

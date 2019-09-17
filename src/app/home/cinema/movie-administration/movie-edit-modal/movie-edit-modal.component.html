@@ -69,6 +69,9 @@
          src="{{imageLink}}"/>
   </form>
 
+  <app-divider></app-divider>
+
+  <app-movie-bookings-table [bookedTickets]="bookedTickets" [bookings]="bookings"></app-movie-bookings-table>
 </div>
 <div mat-dialog-actions>
   <button [mat-dialog-close] mat-button>{{'CLOSE' | translate}}</button>

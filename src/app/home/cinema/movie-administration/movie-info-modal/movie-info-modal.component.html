@@ -25,34 +25,7 @@
          src="{{imageLink}}"/>
   </mat-expansion-panel>
 
-  <div class="row" style="margin-top: 15px;">
-    <mat-form-field class="col-12">
-      <input (keyup)="applyFilter($event.target.value)" matInput
-             placeholder="{{'SEARCH' | translate}}"/>
-    </mat-form-field>
-  </div>
-  <div class="row">
-    <table [dataSource]="dataSource" class="col-12" mat-table>
-
-      <ng-container matColumnDef="name">
-        <th *matHeaderCellDef
-            mat-header-cell> {{'CINEMA_TICKETS_ADMINISTRATION_MOVIE_INFO_MODAL_TABLE_NAME' | translate}} </th>
-        <td *matCellDef="let booking" mat-cell> {{booking.firstname + ' ' + booking.surname}} </td>
-        <td *matFooterCellDef mat-footer-cell> {{'CINEMA_TICKETS_BOOKED_TICKETS' | translate}} </td>
-      </ng-container>
-
-      <ng-container matColumnDef="amount">
-        <th *matHeaderCellDef
-            mat-header-cell> {{'CINEMA_TICKETS_ADMINISTRATION_MOVIE_INFO_MODAL_TABLE_AMOUNT' | translate}} </th>
-        <td *matCellDef="let booking" mat-cell> {{booking.amount}} </td>
-        <td *matFooterCellDef mat-footer-cell> {{bookedTickets}} </td>
-      </ng-container>
-
-      <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
-      <tr *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
-      <tr *matFooterRowDef="displayedColumns" mat-footer-row></tr>
-    </table>
-  </div>
+  <app-movie-bookings-table [bookedTickets]="bookedTickets" [bookings]="bookings"></app-movie-bookings-table>
 
 </div>
 <div mat-dialog-actions>
