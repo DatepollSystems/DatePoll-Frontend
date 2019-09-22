@@ -13,6 +13,8 @@ import {MatTableDataSource} from '@angular/material/table';
   styleUrls: ['./movie-edit-modal.component.css']
 })
 export class MovieEditModalComponent implements OnDestroy {
+  loading = true;
+
   movie: Movie;
   movieSubscription: Subscription;
 
@@ -31,6 +33,7 @@ export class MovieEditModalComponent implements OnDestroy {
 
     this.cinemaService.getMovie(this.movie.id);
     this.movieSubscription = this.cinemaService.movieChange.subscribe((movie: Movie) => {
+      this.loading = false;
       this.movie = movie;
       this.refresh();
     });
@@ -48,7 +51,13 @@ export class MovieEditModalComponent implements OnDestroy {
     this.imageLink = this.movie.posterLink;
     this.bookedTickets = this.movie.bookedTickets;
 
-    this.bookings = new MatTableDataSource<MovieBookingUser>(this.movie.getBookingUsers());
+    const localBookings = [];
+    for (const booking of this.movie.getBookingUsers()) {
+      if (booking.amount > 0) {
+        localBookings.push(booking);
+      }
+    }
+    this.bookings = new MatTableDataSource<MovieBookingUser>(localBookings);
   }
 
   save() {

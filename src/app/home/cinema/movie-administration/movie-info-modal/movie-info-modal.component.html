@@ -25,7 +25,10 @@
          src="{{imageLink}}"/>
   </mat-expansion-panel>
 
-  <app-movie-bookings-table [bookedTickets]="bookedTickets" [bookings]="bookings"></app-movie-bookings-table>
+  <app-movie-bookings-table [bookedTickets]="bookedTickets" [bookings]="bookings" *ngIf="!loading"></app-movie-bookings-table>
+
+  <mat-progress-bar mode="indeterminate" *ngIf="loading" style="margin-top: 15px;"></mat-progress-bar>
+
 
 </div>
 <div mat-dialog-actions>

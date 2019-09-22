@@ -11,6 +11,8 @@ import {CinemaService} from '../../cinema.service';
   styleUrls: ['./movie-info-modal.component.css']
 })
 export class MovieInfoModalComponent implements OnDestroy {
+  loading = true;
+
   movie: Movie;
   movieSubscription: Subscription;
 
@@ -29,6 +31,7 @@ export class MovieInfoModalComponent implements OnDestroy {
 
     this.cinemaService.getMovie(this.movie.id);
     this.movieSubscription = this.cinemaService.movieChange.subscribe((movie: Movie) => {
+      this.loading = false;
       this.movie = movie;
       this.refresh();
     });
@@ -46,6 +49,12 @@ export class MovieInfoModalComponent implements OnDestroy {
     this.imageLink = this.movie.posterLink;
     this.bookedTickets = this.movie.bookedTickets;
 
-    this.bookings = new MatTableDataSource<MovieBookingUser>(this.movie.getBookingUsers());
+    const localBookings = [];
+    for (const booking of this.movie.getBookingUsers()) {
+      if (booking.amount > 0) {
+        localBookings.push(booking);
+      }
+    }
+    this.bookings = new MatTableDataSource<MovieBookingUser>(localBookings);
   }
 }

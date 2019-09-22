@@ -110,6 +110,11 @@
             <mat-icon>info</mat-icon>
           </button>
 
+          <button (click)="onBookings(movie)" mat-icon-button
+                  matTooltip="{{'CINEMA_TICKETS_ADMINISTRATION_BOOKINGS_MOVIE_BUTTON_TOOLTIP' | translate}}">
+            <mat-icon>group</mat-icon>
+          </button>
+
           <button (click)="onEdit(movie)" color="accent" mat-icon-button
                   matTooltip="{{'CINEMA_TICKETS_ADMINISTRATION_UPDATE_MOVIE_BUTTON_TOOLTIP' | translate}}">
             <mat-icon>create</mat-icon>

@@ -15,6 +15,7 @@ import {MovieCreateModalComponent} from './movie-create-modal/movie-create-modal
 import {CustomDateAdapter} from '../../../services/custom-date-adapter';
 import {CommonComponentsModule} from '../../../services/common-components.module';
 import {MovieBookingsTableComponent} from './movie-bookings-table/movie-bookings-table.component';
+import {MovieBookingsModalComponent} from './movie-bookings-modal/movie-bookings-modal.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import {MovieBookingsTableComponent} from './movie-bookings-table/movie-bookings
     MovieEditModalComponent,
     MovieInfoModalComponent,
     MovieDeleteModalComponent,
-    MovieBookingsTableComponent
+    MovieBookingsTableComponent,
+    MovieBookingsModalComponent,
   ],
   imports: [
     CommonModule,
@@ -37,7 +39,8 @@ import {MovieBookingsTableComponent} from './movie-bookings-table/movie-bookings
     MovieCreateModalComponent,
     MovieEditModalComponent,
     MovieInfoModalComponent,
-    MovieDeleteModalComponent
+    MovieDeleteModalComponent,
+    MovieBookingsModalComponent
   ],
   providers: [
     {provide: DateAdapter, useClass: CustomDateAdapter}
@@ -46,7 +49,8 @@ import {MovieBookingsTableComponent} from './movie-bookings-table/movie-bookings
     MovieCreateModalComponent,
     MovieEditModalComponent,
     MovieInfoModalComponent,
-    MovieDeleteModalComponent
+    MovieDeleteModalComponent,
+    MovieBookingsModalComponent
   ]
 })
 export class CommonMovieAdministrationComponentsModule {

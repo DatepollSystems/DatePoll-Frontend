@@ -145,6 +145,36 @@ export class CinemaService {
     );
   }
 
+  public bookForUsers(bookings: MovieBookingUser[], movieId: number) {
+    const bookingsDTO = [];
+    for (const booking of bookings) {
+      const bookingDTO = {
+        'user_id': booking.userID,
+        'amount': booking.amount
+      };
+      bookingsDTO.push(bookingDTO);
+    }
+    const dto = {
+      'bookings': bookingsDTO
+    };
+    console.log(dto);
+    return this.httpService.loggedInV1POSTRequest('/cinema/administration/movie/' + movieId + '/bookForUsers', dto,
+      'bookForUser');
+  }
+
+  public cancelBookingForUsers(bookings: MovieBookingUser[], movieId: number) {
+    const userIdsDTO = [];
+    for (const booking of bookings) {
+      userIdsDTO.push(booking.userID);
+    }
+    const dto = {
+      'user_ids': userIdsDTO
+    };
+
+    return this.httpService.loggedInV1POSTRequest('/cinema/administration/movie/' + movieId + '/cancelBookingForUsers', dto,
+      'removeBookingForUsers');
+  }
+
 
   public getNotShownMovies(): Movie[] {
     this.fetchNotShownMovies();
