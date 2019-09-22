@@ -69,6 +69,11 @@
          src="{{imageLink}}"/>
   </form>
 
+  <app-divider></app-divider>
+
+  <app-movie-bookings-table [bookedTickets]="bookedTickets" [bookings]="bookings" *ngIf="!loading"></app-movie-bookings-table>
+
+  <mat-progress-bar mode="indeterminate" *ngIf="loading" style="margin-top: 15px;"></mat-progress-bar>
 </div>
 <div mat-dialog-actions>
   <button [mat-dialog-close] mat-button>{{'CLOSE' | translate}}</button>

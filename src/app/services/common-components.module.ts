@@ -10,25 +10,16 @@ import {TranslationModule} from '../translation/translation.module';
 import {CustomDateAdapter} from './custom-date-adapter';
 
 import {DoNotForgetToSaveComponent} from './shared-components/do-not-forget-to-save/do-not-forget-to-save.component';
-import {MovieEditModalComponent} from '../home/cinema/movie-administration/movie-edit-modal/movie-edit-modal.component';
 import {EmailAddressesListComponent} from '../home/management/users-management/email-addresses-list/email-addresses-list.component';
-import {MovieInfoModalComponent} from '../home/cinema/movie-administration/movie-info-modal/movie-info-modal.component';
 import {GroupAndSubgroupSelectComponent} from './shared-components/group-and-subgroup-select/group-and-subgroup-select.component';
-import {MovieDeleteModalComponent} from '../home/cinema/movie-administration/movie-delete-modal/movie-delete-modal.component';
+import {AppDividerComponent} from './shared-components/app-divider/app-divider.component';
 
 @NgModule({
   declarations: [
+    AppDividerComponent,
     DoNotForgetToSaveComponent,
-    MovieEditModalComponent,
-    MovieInfoModalComponent,
-    MovieDeleteModalComponent,
     EmailAddressesListComponent,
     GroupAndSubgroupSelectComponent
-  ],
-  entryComponents: [
-    MovieEditModalComponent,
-    MovieInfoModalComponent,
-    MovieDeleteModalComponent
   ],
   imports: [
     CommonModule,
@@ -39,10 +30,8 @@ import {MovieDeleteModalComponent} from '../home/cinema/movie-administration/mov
     CustomFormsModule,
   ],
   exports: [
+    AppDividerComponent,
     DoNotForgetToSaveComponent,
-    MovieEditModalComponent,
-    MovieInfoModalComponent,
-    MovieDeleteModalComponent,
     EmailAddressesListComponent,
     GroupAndSubgroupSelectComponent
   ],

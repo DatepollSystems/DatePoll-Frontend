@@ -15,7 +15,7 @@
       </div>
       <div class="col-7 col-sm-7 col-md-8 col-lg-10" style="text-align: right">
         {{movie.workerName}}
-        <button #signOutForWorkerButton (click)="signOutForWorker(signOutForWorkerButton)"
+        <button (click)="signOutForWorker()" [class.spinner]="signingOutForWorker" [disabled]="signingOutForWorker"
                 *ngIf="movie.workerID == myUserService.getID()"
                 mat-icon-button matTooltip="{{'CINEMA_TICKETS_CANCEL_CINEMA_SERVICE_TOOLTIP' | translate}}"
                 matTooltipPosition="right">
@@ -29,7 +29,7 @@
         {{'CINEMA_TICKETS_WORKER' | translate}}
       </div>
       <div class="col" style="text-align: right">
-        <button #applyForWorkerButton (click)="applyForWorker(applyForWorkerButton)" color="primary"
+        <button (click)="applyForWorker()" [class.spinner]="applyingForWorker" [disabled]="applyingForWorker" color="primary"
                 mat-stroked-button>{{'CINEMA_TICKETS_APPLY' | translate}}</button>
       </div>
     </div>
@@ -40,7 +40,7 @@
       </div>
       <div class="col-7 col-sm-7 col-md-8 col-lg-7" style="text-align: right">
         {{movie.emergencyWorkerName}}
-        <button #signOutForEmergencyWorkerButton (click)="signOutForEmergencyWorker(signOutForEmergencyWorkerButton)"
+        <button (click)="signOutForEmergencyWorker()" [class.spinner]="signingOutForEmergencyWorker" [disabled]="signingOutForEmergencyWorker"
                 *ngIf="movie.emergencyWorkerID == myUserService.getID()"
                 mat-icon-button matTooltip="{{'CINEMA_TICKETS_CANCEL_CINEMA_SERVICE_TOOLTIP' | translate}}"
                 matTooltipPosition="right">
@@ -54,7 +54,7 @@
         {{'CINEMA_TICKETS_EMERGENCY_WORKER' | translate}}
       </div>
       <div class="col" style="text-align: end">
-        <button #applyForEmergencyWorkerButton (click)="applyForEmergencyWorker(applyForEmergencyWorkerButton)"
+        <button (click)="applyForEmergencyWorker()" [class.spinner]="applyingForEmergencyWorker" [disabled]="applyingForEmergencyWorker"
                 color="accent"
                 mat-stroked-button>{{'CINEMA_TICKETS_APPLY' | translate}}</button>
       </div>

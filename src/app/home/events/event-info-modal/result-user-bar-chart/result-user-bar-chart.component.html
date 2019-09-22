@@ -1,0 +1,18 @@
+<div class="row">
+  <div class="col-12">
+    <div class="barContainer">
+      <div class="barElement" *ngFor="let element of getResultBarElements()"
+           [ngStyle]="{ 'width': element.percentWidth + '%', 'background-color': element.color}"></div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-12">
+    <div class="barContainer">
+      <div class="barElement" *ngFor="let element of getResultBarElements()"
+           [ngStyle]="{ 'width': element.percentWidth + '%'}">
+        {{element.name}} - {{element.count}} <i>({{element.percent}}%)</i>
+      </div>
+    </div>
+  </div>
+</div>

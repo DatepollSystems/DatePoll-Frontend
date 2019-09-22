@@ -81,40 +81,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr *ngFor="let booking of bookings">
-              <td>{{booking.name}}</td>
-              <td>{{booking.date | date:'dd.MM.yyyy'}}</td>
-              <td>{{booking.bookedTickets}}</td>
-              <td *ngIf="booking.workerName != null">
-                {{booking.workerName}}
-                <button #signOutForWorkerButton (click)="signOutForWorker(booking.movieID, signOutForWorkerButton)"
-                        *ngIf="booking.workerID == myUserService.getID()"
-                        mat-icon-button matTooltip="{{'CINEMA_TICKETS_CANCEL_CINEMA_SERVICE_TOOLTIP' | translate}}"
-                        matTooltipPosition="right">
-                  <mat-icon aria-label="Cancel worker">cancel</mat-icon>
-                </button>
-              </td>
-              <td *ngIf="booking.workerName == null">
-                <button #applyForWorkerButton (click)="applyForWorker(booking.movieID, applyForWorkerButton)"
-                        mat-stroked-button>{{'CINEMA_TICKETS_APPLY' | translate}}</button>
-              </td>
-
-              <td *ngIf="booking.emergencyWorkerName != null">
-                {{booking.emergencyWorkerName}}
-                <button #signOutForEmergencyWorkerButton
-                        (click)="signOutForEmergencyWorker(booking.movieID, signOutForEmergencyWorkerButton)"
-                        *ngIf="booking.emergencyWorkerID == myUserService.getID()"
-                        mat-icon-button matTooltip="{{'CINEMA_TICKETS_CANCEL_CINEMA_SERVICE_TOOLTIP' | translate}}"
-                        matTooltipPosition="right">
-                  <mat-icon aria-label="Cancel worker">cancel</mat-icon>
-                </button>
-              </td>
-              <td *ngIf="booking.emergencyWorkerName == null">
-                <button #applyForEmergencyWorkerButton
-                        (click)="applyForEmergencyWorker(booking.movieID, applyForEmergencyWorkerButton)"
-                        mat-stroked-button>{{'CINEMA_TICKETS_APPLY' | translate}}</button>
-              </td>
-            </tr>
+              <tr app-table-bookings-row *ngFor="let booking of bookings" [booking]="booking" ></tr>
             </tbody>
           </table>
         </div>

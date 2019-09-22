@@ -191,9 +191,11 @@ export class MyUserService {
     return this._joindate;
   }
 
-  setEmailAddresses(emailAddresses: string[]) {
+  public setEmailAddresses(emailAddresses: string[]) {
     this._emailAddresses = emailAddresses;
+  }
 
+  public setEmailAddressesPerRequest(emailAddresses: string[]) {
     const request = {
       'emailAddresses': this._emailAddresses
     };

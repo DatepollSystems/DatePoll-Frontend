@@ -12,12 +12,17 @@ import {Year} from './models/year.model';
   providedIn: 'root'
 })
 export class CinemaService {
-  public moviesChange: Subject<Movie[]> = new Subject<Movie[]>();
-  public notShownMoviesChange: Subject<Movie[]> = new Subject<Movie[]>();
-  public yearsChange: Subject<Year[]> = new Subject<Year[]>();
   private _movies: Movie[] = [];
+  public moviesChange: Subject<Movie[]> = new Subject<Movie[]>();
+
   private _notShownMovies: Movie[] = null;
+  public notShownMoviesChange: Subject<Movie[]> = new Subject<Movie[]>();
+
   private _years: Year[] = [];
+  public yearsChange: Subject<Year[]> = new Subject<Year[]>();
+
+  private _movie: Movie;
+  public movieChange: Subject<Movie> = new Subject<Movie>();
 
   private city_id = '';
   private openWeatherMapCinemaCityIdSubscription: Subscription;
@@ -87,20 +92,87 @@ export class CinemaService {
           const localMovie = new Movie(movie.id, movie.name, date, movie.trailerLink, movie.posterLink, workerID, movie.workerName,
             emergencyWorkerID, movie.emergencyWorkerName, movie.bookedTickets, movie.movie_year_id);
 
-          const localBookings = [];
-          const bookings = movie.bookings;
-          for (let i = 0; i < bookings.length; i++) {
-            const booking = bookings[i];
-            const localMovieBookingUser = new MovieBookingUser(booking.firstname, booking.surname, booking.amount);
-            localBookings.push(localMovieBookingUser);
-          }
-          localMovie.setBookingsUsers(localBookings);
           movies.push(localMovie);
         }
         this.setMovies(movies);
       },
       (error) => console.log(error)
     );
+  }
+
+
+  public getMovie(movieID: number) {
+    this.fetchMovie(movieID);
+    return this._movie;
+  }
+
+  private setMovie(movie: Movie) {
+    this._movie = movie;
+    this.movieChange.next(this._movie);
+  }
+
+  private fetchMovie(movieID: number) {
+    this.httpService.loggedInV1GETRequest('/cinema/administration/movie/' + movieID, 'fetchMovie').subscribe(
+      (data: any) => {
+        console.log(data);
+
+        const movie = data.movie;
+
+        let workerID = -1;
+        let emergencyWorkerID = -1;
+
+        if (movie.workerID != null) {
+          workerID = movie.workerID;
+        }
+
+        if (movie.emergencyWorkerID != null) {
+          emergencyWorkerID = movie.emergencyWorkerID;
+        }
+
+        const date = new Date(movie.date);
+        const localMovie = new Movie(movie.id, movie.name, date, movie.trailerLink, movie.posterLink, workerID, movie.workerName,
+          emergencyWorkerID, movie.emergencyWorkerName, movie.bookedTickets, movie.movie_year_id);
+
+        const localBookings = [];
+
+        for (const booking of movie.bookings) {
+          localBookings.push(new MovieBookingUser(booking.user_id, booking.firstname, booking.surname, booking.amount));
+        }
+        localMovie.setBookingsUsers(localBookings);
+        this.setMovie(localMovie);
+      },
+      (error) => console.log(error)
+    );
+  }
+
+  public bookForUsers(bookings: MovieBookingUser[], movieId: number) {
+    const bookingsDTO = [];
+    for (const booking of bookings) {
+      const bookingDTO = {
+        'user_id': booking.userID,
+        'amount': booking.amount
+      };
+      bookingsDTO.push(bookingDTO);
+    }
+    const dto = {
+      'bookings': bookingsDTO
+    };
+    console.log(dto);
+    return this.httpService.loggedInV1POSTRequest('/cinema/administration/movie/' + movieId + '/bookForUsers', dto,
+      'bookForUser');
+  }
+
+  public cancelBookingForUsers(bookings: MovieBookingUser[], movieId: number) {
+    const userIdsDTO = [];
+    for (const booking of bookings) {
+      userIdsDTO.push(booking.userID);
+    }
+    const dto = {
+      'user_ids': userIdsDTO
+    };
+
+    return this.httpService.loggedInV1POSTRequest('/cinema/administration/movie/' + movieId + '/cancelBookingForUsers', dto,
+      'removeBookingForUsers');
   }
 
 

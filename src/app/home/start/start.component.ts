@@ -4,7 +4,6 @@ import {MatBottomSheet, MatDialog} from '@angular/material';
 import {Subscription} from 'rxjs';
 
 import {HomepageService} from './homepage.service';
-import {CinemaService} from '../cinema/cinema.service';
 import {MyUserService} from '../my-user.service';
 import {EventsUserService} from '../events/events-user.service';
 
@@ -13,6 +12,8 @@ import {HomeBookingsModel} from './bookings.model';
 import {Event} from '../events/models/event.model';
 import {EventInfoModalComponent} from '../events/event-info-modal/event-info-modal.component';
 import {EventsVoteForDecisionModalComponent} from '../events/events-view/events-vote-for-decision-modal/events-vote-for-decision-modal.component';
+import {NotificationsService} from 'angular2-notifications';
+import {TranslateService} from '../../translation/translate.service';
 
 @Component({
   selector: 'app-start',
@@ -32,10 +33,11 @@ export class StartComponent implements OnInit, OnDestroy {
 
   constructor(
     private homePageService: HomepageService,
-    private cinemaService: CinemaService,
     public myUserService: MyUserService,
     private eventsUserSerivce: EventsUserService,
     private bottomSheet: MatBottomSheet,
+    private notificationsService: NotificationsService,
+    private translate: TranslateService,
     private dialog: MatDialog) {
 
     this.birthdays = homePageService.getBirthdays();
@@ -85,62 +87,6 @@ export class StartComponent implements OnInit, OnDestroy {
     document.getElementById('my-container').style.background = 'none';
   }
 
-  applyForWorker(movieID: number, element: any) {
-    element.disabled = true;
-    this.cinemaService.applyForWorker(movieID).subscribe(
-      (response: any) => {
-        console.log(response);
-        this.homePageService.fetchData();
-      },
-      (error) => {
-        console.log(error);
-        this.homePageService.fetchData();
-      }
-    );
-  }
-
-  signOutForWorker(movieID: number, element: any) {
-    element.disabled = true;
-    this.cinemaService.signOutForWorker(movieID).subscribe(
-      (response: any) => {
-        console.log(response);
-        this.homePageService.fetchData();
-      },
-      (error) => {
-        console.log(error);
-        this.homePageService.fetchData();
-      }
-    );
-  }
-
-  applyForEmergencyWorker(movieID: number, element: any) {
-    element.disabled = true;
-    this.cinemaService.applyForEmergencyWorker(movieID).subscribe(
-      (response: any) => {
-        console.log(response);
-        this.homePageService.fetchData();
-      },
-      (error) => {
-        console.log(error);
-        this.homePageService.fetchData();
-      }
-    );
-  }
-
-  signOutForEmergencyWorker(movieID: number, element: any) {
-    element.disabled = true;
-    this.cinemaService.signOutForEmergencyWorker(movieID).subscribe(
-      (response: any) => {
-        console.log(response);
-        this.homePageService.fetchData();
-      },
-      (error) => {
-        console.log(error);
-        this.homePageService.fetchData();
-      }
-    );
-  }
-
   onEventInfo(event: Event) {
     this.dialog.open(EventInfoModalComponent, {
       width: '80vh',
@@ -151,8 +97,25 @@ export class StartComponent implements OnInit, OnDestroy {
   }
 
   onEventVote(event: Event) {
-    this.bottomSheet.open(EventsVoteForDecisionModalComponent, {
+    const bottomSheetRef = this.bottomSheet.open(EventsVoteForDecisionModalComponent, {
       data: {'event': event},
+    });
+
+    bottomSheetRef.afterDismissed().subscribe((decision) => {
+      if (decision != null) {
+        this.eventsUserSerivce.voteForDecision(event.id, decision).subscribe(
+          (response: any) => {
+            console.log(response);
+            this.eventsUserSerivce.fetchEvents();
+            this.homePageService.fetchData();
+            this.notificationsService.success(this.translate.getTranslationFor('SUCCESSFULLY'),
+              this.translate.getTranslationFor('EVENTS_VIEW_EVENT_SUCCESSFULLY_VOTED'));
+          },
+          (error) => console.log(error)
+        );
+      } else {
+        console.log('events-view | Closed bottom sheet, voted for nohting');
+      }
     });
   }
 

@@ -7,6 +7,7 @@ import {MaterialModule} from '../../material-module';
 import {TranslationModule} from '../../translation/translation.module';
 import {CommonComponentsModule} from '../../services/common-components.module';
 import {CommonEventsComponentsModule} from '../events/common-events-components.module';
+import {CommonMovieAdministrationComponentsModule} from '../cinema/movie-administration/common-movie-administration-components.module';
 import {CalendarComponentRoutingModule} from './calendar-component-routing.module';
 
 import {CalendarComponent} from './calendar.component';
@@ -21,6 +22,7 @@ import {CalendarComponent} from './calendar.component';
     TranslationModule,
     CommonComponentsModule,
     CommonEventsComponentsModule,
+    CommonMovieAdministrationComponentsModule,
     CalendarComponentRoutingModule,
     CalendarModule.forRoot({
       provide: DateAdapter,

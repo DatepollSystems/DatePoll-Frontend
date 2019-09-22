@@ -21,6 +21,7 @@ import {MovieEditModalComponent} from './movie-edit-modal/movie-edit-modal.compo
 import {MovieCreateModalComponent} from './movie-create-modal/movie-create-modal.component';
 import {MovieInfoModalComponent} from './movie-info-modal/movie-info-modal.component';
 import {MovieDeleteModalComponent} from './movie-delete-modal/movie-delete-modal.component';
+import {MovieBookingsModalComponent} from './movie-bookings-modal/movie-bookings-modal.component';
 
 @Component({
   selector: 'app-movie-administration',
@@ -84,12 +85,7 @@ export class MovieAdministrationComponent implements OnInit, AfterViewInit, OnDe
     });
 
     this.movies = this.cinemaService.getMovies();
-    if (this.selectedYear === null) {
-      this.dataSource = new MatTableDataSource(this.movies);
-      this.dataSource.sort = this.sort;
-    } else {
-      this.refreshTable();
-    }
+    this.refreshTable();
 
     if (this.movies.length > 0) {
       this.moviesLoaded = true;
@@ -99,13 +95,7 @@ export class MovieAdministrationComponent implements OnInit, AfterViewInit, OnDe
       this.moviesLoaded = true;
 
       this.movies = value;
-
-      if (this.selectedYear === null) {
-        this.dataSource = new MatTableDataSource(this.movies);
-        this.dataSource.sort = this.sort;
-      } else {
-        this.refreshTable();
-      }
+      this.refreshTable();
     });
   }
 
@@ -144,16 +134,25 @@ export class MovieAdministrationComponent implements OnInit, AfterViewInit, OnDe
   }
 
   refreshTable() {
-    const moviesToShow = [];
+    if (this.selectedYear == null) {
+      this.dataSource = new MatTableDataSource(this.movies);
+      this.dataSource.sort = this.sort;
+    } else {
+      const moviesToShow = [];
 
-    for (let i = 0; i < this.movies.length; i++) {
-      if (this.movies[i].movieYearID === this.selectedYear.id) {
-        moviesToShow.push(this.movies[i]);
+      if (this.selectedYear.id != null) {
+        for (let i = 0; i < this.movies.length; i++) {
+          if (this.movies[i].movieYearID === this.selectedYear.id) {
+            moviesToShow.push(this.movies[i]);
+          }
+        }
+        this.dataSource = new MatTableDataSource(moviesToShow);
+        this.dataSource.sort = this.sort;
+      } else {
+        this.dataSource = new MatTableDataSource(this.movies);
+        this.dataSource.sort = this.sort;
       }
     }
-
-    this.dataSource = new MatTableDataSource(moviesToShow);
-    this.dataSource.sort = this.sort;
   }
 
   applyFilter(filterValue: string) {
@@ -192,6 +191,13 @@ export class MovieAdministrationComponent implements OnInit, AfterViewInit, OnDe
 
   onEdit(movie: Movie) {
     this.dialog.open(MovieEditModalComponent, {
+      width: '80vh',
+      data: {movie: movie}
+    });
+  }
+
+  onBookings(movie: Movie) {
+    this.dialog.open(MovieBookingsModalComponent, {
       width: '80vh',
       data: {movie: movie}
     });

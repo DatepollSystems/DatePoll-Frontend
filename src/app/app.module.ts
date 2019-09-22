@@ -41,6 +41,7 @@ import {AppComponent} from './app.component';
 import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
 import {HomeComponent} from './home/home.component';
 import {StartComponent} from './home/start/start.component';
+import {TableBookingsRowComponent} from './home/start/table-bookings-row/table-bookings-row.component';
 
 registerLocaleData(localeDe);
 
@@ -50,7 +51,8 @@ registerLocaleData(localeDe);
     PageNotFoundComponent,
     HomeComponent,
     StartComponent,
-    NoSanitizePipe
+    NoSanitizePipe,
+    TableBookingsRowComponent
   ],
   imports: [
     BrowserModule,

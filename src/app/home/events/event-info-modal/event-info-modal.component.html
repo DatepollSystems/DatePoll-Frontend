@@ -17,7 +17,7 @@
 
   <!-- Description -->
   <div *ngIf="description != null">
-    <div class="row" *ngIf="description.length > 0" style="margin-bottom: 15px;">
+    <div class="row" *ngIf="description.length > 0">
       <div class="col-12">
         <mat-form-field appearance="outline">
           <textarea [(ngModel)]="description" matInput name="description" placeholder="{{'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DESCRIPTION' | translate}}"
@@ -28,9 +28,12 @@
   </div>
 
   <div class="row">
-    <div class="col-12">
+    <div class="col-12" style="padding-top: 15px;">
       <!-- Complete chart for all votes -->
-      <mat-expansion-panel>
+      <app-result-user-bar-chart [resultUsers]="event.getResultUsers()" *ngIf="event != null"
+                                 [decisions]="event.getDecisions()"></app-result-user-bar-chart>
+
+      <mat-expansion-panel style="margin-top: 15px;">
         <mat-expansion-panel-header>
           <mat-panel-title>
             {{'EVENTS_ADMINISTRATION_INFO_EVENT_COMPLETE_CHART' | translate}}
@@ -46,6 +49,20 @@
         </canvas>
         <span *ngIf="pieChartIsEmpty">{{'EVENTS_ADMINISTRATION_INFO_EVENT_NOBODY_VOTED' | translate}}</span>
       </mat-expansion-panel>
+
+      <mat-expansion-panel style="margin-top: 15px;">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            {{'EVENTS_ADMINISTRATION_INFO_EVENT_COMPLETE_USERS_TABLE' | translate}}
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <app-result-user-table [resultUsers]="event.getResultUsers()" *ngIf="event != null"
+                               [decisions]="event.getDecisions()"></app-result-user-table>
+
+      </mat-expansion-panel>
+
+      <app-divider></app-divider>
 
       <div class="row" style="margin-top: 15px;">
         <mat-form-field class="col-12">

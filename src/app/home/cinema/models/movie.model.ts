@@ -60,7 +60,7 @@ export class Movie implements CalendarEvent {
     this.bookingUsers = bookingUsers;
   }
 
-  public getBookingUsers() {
+  public getBookingUsers(): MovieBookingUser[] {
     return this.bookingUsers.slice();
   }
 
@@ -74,11 +74,13 @@ export class Movie implements CalendarEvent {
 }
 
 export class MovieBookingUser {
+  public readonly userID: number;
   public readonly firstname: string;
   public readonly surname: string;
-  public readonly amount: number;
+  public amount: number;
 
-  constructor(firstname: string, surname: string, amount: number) {
+  constructor(userID: number, firstname: string, surname: string, amount: number) {
+    this.userID = userID;
     this.firstname = firstname;
     this.surname = surname;
     this.amount = amount;

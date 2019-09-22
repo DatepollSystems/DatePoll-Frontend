@@ -6,7 +6,10 @@
   </mat-expansion-panel-header>
 
   <!-- Chart for the subgroups -->
-  <mat-expansion-panel>
+  <app-result-user-bar-chart [resultUsers]="resultSubgroup.getResultUsers()" [inAccordion]="true"
+                             [decisions]="resultSubgroup.event.getDecisions()"></app-result-user-bar-chart>
+
+  <mat-expansion-panel style="margin-bottom: 15px; margin-top: 15px;">
     <mat-expansion-panel-header>
       <mat-panel-title>
         {{'EVENTS_ADMINISTRATION_INFO_EVENT_CHART_FOR' | translate}} {{resultSubgroup.name}}
@@ -24,15 +27,6 @@
       *ngIf="pieChartIsEmpty">{{'EVENTS_ADMINISTRATION_INFO_EVENT_NOBODY_VOTED_IN_SUBGROUP' | translate}}</span>
   </mat-expansion-panel>
 
-  <mat-list>
-    <mat-list-item *ngIf="resultSubgroup.getResultUsers().length === 0">
-      {{'EVENTS_ADMINISTRATION_INFO_EVENT_SUBGROUP_NO_USERS' | translate}}
-    </mat-list-item>
-    <mat-list-item *ngFor="let resultUser of resultSubgroup.getResultUsers()">
-                    <span>{{resultUser.firstname}} {{resultUser.surname}}:
-                      <b *ngIf="resultUser.decision != null">{{resultUser.decision}}</b>
-                      <span
-                        *ngIf="resultUser.decision == null">{{'EVENTS_ADMINISTRATION_INFO_EVENT_UNKNOWN_VOTING' | translate}}</span></span>
-    </mat-list-item>
-  </mat-list>
+  <app-result-user-table [resultUsers]="resultSubgroup.getResultUsers()"
+                         [decisions]="resultSubgroup.event.getDecisions()"></app-result-user-table>
 </mat-expansion-panel>

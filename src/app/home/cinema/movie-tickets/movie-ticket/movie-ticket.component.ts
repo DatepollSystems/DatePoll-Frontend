@@ -20,6 +20,12 @@ export class MovieTicketComponent implements OnInit {
 
   soldOut: boolean;
 
+  applyingForWorker = false;
+  signingOutForWorker = false;
+
+  applyingForEmergencyWorker = false;
+  signingOutForEmergencyWorker = false;
+
   myUserService: MyUserService;
 
   constructor(private dialog: MatDialog,
@@ -62,11 +68,12 @@ export class MovieTicketComponent implements OnInit {
     });
   }
 
-  applyForWorker(element) {
-    element.disabled = true;
+  applyForWorker() {
+    this.applyingForWorker = true;
     this.cinemaService.applyForWorker(this.movie.id).subscribe(
       (response: any) => {
         console.log(response);
+        this.applyingForWorker = false;
         this.movie.workerName = this.myUserService.getFirstname() + ' ' + this.myUserService.getSurname();
         this.movie.workerID = this.myUserService.getID();
       },
@@ -77,11 +84,12 @@ export class MovieTicketComponent implements OnInit {
     );
   }
 
-  signOutForWorker(element) {
-    element.disabled = true;
+  signOutForWorker() {
+    this.signingOutForWorker = true;
     this.cinemaService.signOutForWorker(this.movie.id).subscribe(
       (response: any) => {
         console.log(response);
+        this.signingOutForWorker = false;
         this.movie.workerName = null;
         this.movie.workerID = -1;
       },
@@ -92,11 +100,12 @@ export class MovieTicketComponent implements OnInit {
     );
   }
 
-  applyForEmergencyWorker(element) {
-    element.disabled = true;
+  applyForEmergencyWorker() {
+    this.applyingForEmergencyWorker = true;
     this.cinemaService.applyForEmergencyWorker(this.movie.id).subscribe(
       (response: any) => {
         console.log(response);
+        this.applyingForEmergencyWorker = false;
         this.movie.emergencyWorkerName = this.myUserService.getFirstname() + ' ' + this.myUserService.getSurname();
         this.movie.emergencyWorkerID = this.myUserService.getID();
       },
@@ -107,10 +116,11 @@ export class MovieTicketComponent implements OnInit {
     );
   }
 
-  signOutForEmergencyWorker(element) {
-    element.disabled = true;
+  signOutForEmergencyWorker() {
+    this.signingOutForEmergencyWorker = true;
     this.cinemaService.signOutForEmergencyWorker(this.movie.id).subscribe(
       (response: any) => {
+        this.signingOutForEmergencyWorker = false;
         console.log(response);
         this.movie.emergencyWorkerName = null;
         this.movie.emergencyWorkerID = -1;
