@@ -14,7 +14,7 @@ import {Label, monkeyPatchChartJsLegend, monkeyPatchChartJsTooltip, SingleDataSe
   styleUrls: ['./event-info-modal.component.css']
 })
 export class EventInfoModalComponent implements OnDestroy {
-  sendingRequest = false;
+  sendingRequest = true;
 
   eventSubscription: Subscription;
   event: Event;
@@ -42,8 +42,6 @@ export class EventInfoModalComponent implements OnDestroy {
   public pieChartIsEmpty: boolean;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, private eventsService: EventsService) {
-    this.sendingRequest = true;
-
     this.event = data.event;
     const id = this.event.id;
     this.refreshValues();

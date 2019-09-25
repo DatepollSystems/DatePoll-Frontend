@@ -27,7 +27,9 @@
     </div>
   </div>
 
-  <div class="row">
+  <mat-progress-bar *ngIf="sendingRequest" mode="indeterminate" style="margin-top: 15px;"></mat-progress-bar>
+
+  <div class="row" *ngIf="!sendingRequest">
     <div class="col-12" style="padding-top: 15px;">
       <!-- Complete chart for all votes -->
       <app-result-user-bar-chart [resultUsers]="event.getResultUsers()" *ngIf="event != null"
@@ -79,8 +81,6 @@
                            [searchValue]="searchValue"></app-group-info-card>
     </div>
   </div>
-
-  <mat-progress-bar *ngIf="sendingRequest" mode="indeterminate" style="margin-top: 15px;"></mat-progress-bar>
 </div>
 <div mat-dialog-actions style="margin-top: 15px">
   <button [mat-dialog-close] mat-button>{{'CLOSE' | translate}}</button>
