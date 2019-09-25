@@ -42,7 +42,7 @@ export class UsersService {
         const users = [];
         for (const user of fetchedUsers) {
           const localPhoneNumbers = [];
-          const localPhoneNumbersData = user.phoneNumbers;
+          const localPhoneNumbersData = user.phone_numbers;
           for (let i = 0; i < localPhoneNumbersData.length; i++) {
             localPhoneNumbers.push(new PhoneNumber(localPhoneNumbersData[i].id, localPhoneNumbersData[i].label,
               localPhoneNumbersData[i].number));
@@ -51,7 +51,7 @@ export class UsersService {
           const birthday = new Date(user.birthday);
           const join_date = new Date(user.join_date);
 
-          const localUser = new User(user.id, user.username, user.emailAddresses, user.force_password_change, user.title,
+          const localUser = new User(user.id, user.username, user.email_addresses, user.force_password_change, user.title,
             user.firstname, user.surname, birthday, join_date, user.streetname, user.streetnumber, user.zipcode,
             user.location, user.activated, user.activity, localPhoneNumbers, user.permissions);
           users.push(localUser);
