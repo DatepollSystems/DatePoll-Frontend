@@ -48,12 +48,12 @@ export class EventsService {
           const decisions = [];
           for (const fetchedDecision of fetchedEvent.decisions) {
             const decision = new Decision(fetchedDecision.id, fetchedDecision.decision);
-            decision.showInCalendar = fetchedDecision.showInCalendar;
+            decision.showInCalendar = fetchedDecision.show_in_calendar;
             decisions.push(decision);
           }
 
-          events.push(new Event(fetchedEvent.id, fetchedEvent.name, new Date(fetchedEvent.startDate), new Date(fetchedEvent.endDate),
-            fetchedEvent.forEveryone, fetchedEvent.description, fetchedEvent.location, decisions));
+          events.push(new Event(fetchedEvent.id, fetchedEvent.name, new Date(fetchedEvent.start_date), new Date(fetchedEvent.end_date),
+            fetchedEvent.for_everyone, fetchedEvent.description, fetchedEvent.location, decisions));
         }
 
         this.setEvents(events);
@@ -274,12 +274,12 @@ export class EventsService {
         const decisions = [];
         for (const fetchedDecision of response.decisions) {
           const decision = new Decision(fetchedDecision.id, fetchedDecision.decision);
-          decision.showInCalendar = fetchedDecision.showInCalendar;
+          decision.showInCalendar = fetchedDecision.show_in_calendar;
           decisions.push(decision);
         }
 
-        const event = new Event(response.id, response.name, new Date(response.startDate), new Date(response.endDate),
-          response.forEveryone, response.description, response.location, decisions);
+        const event = new Event(response.id, response.name, new Date(response.start_date), new Date(response.end_date),
+          response.for_everyone, response.description, response.location, decisions);
 
         let resultUsers = [];
         for (let i = 0; i < response.resultGroups.allUsers.length; i++) {

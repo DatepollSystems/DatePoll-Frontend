@@ -71,7 +71,7 @@ export class SigninComponent implements OnInit, OnDestroy {
           return;
         }
 
-        this.authService.signin(data.token, data.sessionToken);
+        this.authService.signin(data.token, data.session_token);
         this.uiLogin();
       },
       (error) => {
@@ -90,7 +90,7 @@ export class SigninComponent implements OnInit, OnDestroy {
     this.authService.changePasswordAfterSignin(this.username, this.password, password).subscribe(
       (data: any) => {
         console.log(data);
-        this.authService.signin(data.token, data.sessionToken);
+        this.authService.signin(data.token, data.session_token);
         this.uiLogin();
       }, (error) => console.log(error)
     );

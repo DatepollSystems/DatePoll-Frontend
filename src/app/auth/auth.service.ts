@@ -38,8 +38,8 @@ export class AuthService {
     const signInObject = {
       'username': username,
       'password': password,
-      'stayLoggedIn': true,
-      'sessionInformation': browser.name + ' - ' + browser.majorVersion + '; OS: ' + browser.os + '; Phone: ' + browser.mobile
+      'stay_logged_in': true,
+      'session_information': browser.name + ' - ' + browser.majorVersion + '; OS: ' + browser.os + '; Phone: ' + browser.mobile
     };
 
     return this.http.post(this.apiUrl + '/auth/signin', signInObject, {headers: this.httpHeaders});
@@ -52,7 +52,7 @@ export class AuthService {
 
   public logout() {
     const object = {
-      'sessionToken': this.getSessionToken()
+      'session_token': this.getSessionToken()
     };
 
     this.http.post(this.apiUrl + '/v1/user/myself/session/logoutCurrentSession', object,
@@ -83,8 +83,8 @@ export class AuthService {
     const browser = Browser.getInfos();
 
     const object = {
-      'sessionToken': this.getSessionToken(),
-      'sessionInformation': browser.name + ' - ' + browser.majorVersion + '; OS: ' + browser.os +
+      'session_token': this.getSessionToken(),
+      'session_information': browser.name + ' - ' + browser.majorVersion + '; OS: ' + browser.os +
         '; Phone: ' + browser.mobile
     };
 
@@ -151,8 +151,8 @@ export class AuthService {
       'username': username,
       'old_password': oldPassword,
       'new_password': newPassword,
-      'stayLoggedIn': true,
-      'sessionInformation': browser.name + ' - ' + browser.majorVersion + '; OS: ' + browser.os + '; Phone: ' + browser.mobile
+      'stay_logged_in': true,
+      'session_information': browser.name + ' - ' + browser.majorVersion + '; OS: ' + browser.os + '; Phone: ' + browser.mobile
     };
 
     return this.http.post(this.apiUrl + '/auth/changePasswordAfterSignin', changePasswordAfterSigninObject, {headers: headers});

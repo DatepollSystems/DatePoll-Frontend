@@ -45,7 +45,7 @@ export class MyUserService {
         this.setFirstname(data.firstname);
         this.setSurname(data.surname);
         this.setUsername(data.username);
-        this.setEmailAddresses(data.emailAddresses);
+        this.setEmailAddresses(data.email_addresses);
         this.setStreetname(data.streetname);
         this.setStreetnumber(data.streetnumber);
         this.setZipcode(data.zipcode);
@@ -55,7 +55,7 @@ export class MyUserService {
         this.setPermissions(data.permissions);
 
         const localPhoneNumbers = [];
-        const localPhoneNumbersData = data.phoneNumbers;
+        const localPhoneNumbersData = data.phone_numbers;
         for (let i = 0; i < localPhoneNumbersData.length; i++) {
           localPhoneNumbers.push(
             new PhoneNumber(localPhoneNumbersData[i].id, localPhoneNumbersData[i].label, localPhoneNumbersData[i].number));
