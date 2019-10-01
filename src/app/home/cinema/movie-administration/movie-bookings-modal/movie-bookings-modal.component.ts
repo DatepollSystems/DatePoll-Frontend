@@ -1,14 +1,12 @@
 import {Component, Inject, OnDestroy} from '@angular/core';
 import {Movie, MovieBookingUser} from '../../models/movie.model';
-import { Subscription } from 'rxjs';
+import {Subscription} from 'rxjs';
 import {MatTableDataSource} from '@angular/material/table';
 import {MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {CinemaService} from '../../cinema.service';
 import {SelectionModel} from '@angular/cdk/collections';
-import {EventResultUser} from '../../../events/models/event-result-user.model';
 import {NotificationsService} from 'angular2-notifications';
 import {TranslateService} from '../../../../translation/translate.service';
-import {EventsVoteForDecisionModalComponent} from '../../../events/events-view/events-vote-for-decision-modal/events-vote-for-decision-modal.component';
 
 @Component({
   selector: 'app-movie-bookings-modal',
@@ -63,7 +61,10 @@ export class MovieBookingsModalComponent implements OnDestroy {
       return;
     }
 
-    const selected = this.selection.selected.slice();
+    const selected = [];
+    for (const booking of this.selection.selected) {
+      selected.push(new MovieBookingUser(booking.userID, booking.firstname, booking.surname, booking.amount));
+    }
     console.log('movieBookingsModal | Selected MovieBookingUser: ' + selected);
     if (this.selection.selected.length === 0) {
       this.notificationsService.warn(this.translate.getTranslationFor('WARNING'),
@@ -74,7 +75,6 @@ export class MovieBookingsModalComponent implements OnDestroy {
     for (const booking of selected) {
       booking.amount = this.ticketsToBook;
     }
-    this.ticketsToBook = 1;
 
     this.savingBooking = true;
     this.cinemaService.bookForUsers(selected, this.movie.id).subscribe(
@@ -82,10 +82,15 @@ export class MovieBookingsModalComponent implements OnDestroy {
         console.log(response);
 
         this.savingBooking = false;
+
+        for (const booking of this.selection.selected) {
+          booking.amount += this.ticketsToBook;
+        }
+        this.calculateBookedTickets();
+        this.ticketsToBook = 1;
         this.selection.clear();
-        this.loading = true;
-        this.cinemaService.getMovie(this.movie.id);
         this.cinemaService.fetchMovies();
+
         this.notificationsService.success(this.translate.getTranslationFor('SUCCESSFULLY'),
           this.translate.getTranslationFor('CINEMA_TICKETS_ADMINISTRATION_MOVIE_BOOKINGS_MANAGEMENT_MODAL_BOOK_SUCCESSFULLY'));
       },
@@ -99,7 +104,6 @@ export class MovieBookingsModalComponent implements OnDestroy {
   onBookForSingle(user: MovieBookingUser) {
     this.selection.select(user);
     this.onBook();
-    this.selection.clear();
   }
 
   onClear() {
@@ -110,14 +114,16 @@ export class MovieBookingsModalComponent implements OnDestroy {
       return;
     }
     this.savingClearBooking = true;
-    this.cinemaService.cancelBookingForUsers(this.selection.selected, this.movie.id).subscribe(
+    this.cinemaService.cancelBookingForUsers(this.selection.selected.slice(), this.movie.id).subscribe(
       (response: any) => {
         console.log(response);
 
         this.savingClearBooking = false;
+        for (const booking of this.selection.selected) {
+          booking.amount = 0;
+        }
+        this.calculateBookedTickets();
         this.selection.clear();
-        this.loading = true;
-        this.cinemaService.getMovie(this.movie.id);
         this.cinemaService.fetchMovies();
         this.notificationsService.success(this.translate.getTranslationFor('SUCCESSFULLY'),
           this.translate.getTranslationFor('CINEMA_TICKETS_ADMINISTRATION_MOVIE_BOOKINGS_MANAGEMENT_MODAL_REMOVE_BOOKING_SUCCESSFULLY'));
@@ -155,4 +161,10 @@ export class MovieBookingsModalComponent implements OnDestroy {
     return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.firstname + ' ' + row.surname}`;
   }
 
+  private calculateBookedTickets() {
+    this.bookedTickets = 0;
+    for (const booking of this.bookings.data) {
+      this.bookedTickets += booking.amount;
+    }
+  }
 }
