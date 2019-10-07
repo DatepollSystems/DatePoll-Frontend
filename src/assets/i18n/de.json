@@ -437,6 +437,12 @@
   "MANAGEMENT_DATEPOLL_OPENWEATHERMAP_CINEMA_CITY_ID_CHANGED_SUCCESSFULLY": "Die Kino City Id wurde erfolgreich geändert!",
 
 
+  "MANAGEMENT_DATEPOLL_LOGS": "Logs",
+  "MANAGEMENT_DATEPOLL_LOGS_REFRESH": "Log-Liste aktualisieren",
+  "MANAGEMENT_DATEPOLL_LOGS_LOG_TYPE": "Log-Level",
+  "MANAGEMENT_DATEPOLL_LOGS_NO_LOGS": "Es gibt keine Logs mit diesem Log-Level!",
+
+
 
   "EVENTS_VIEW": "Events",
   "EVENTS_VIEW_SHOW_ALREADY_VOTED_EVENTS": "Zeige beantwortete Events",

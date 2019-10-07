@@ -1,99 +1,125 @@
 <mat-card class="mat-elevation-z3">
   <mat-card-content>
-    <div class="row">
-      <div class="col-12"><h1>{{'NAV_MANAGEMENT_DATEPOLL' | translate}}</h1></div>
-    </div>
 
-    <div class="row">
-      <div class="col-12">
-        <h2>DatePoll-Feature Einstellungen</h2>
-      </div>
-    </div>
+    <mat-tab-group mat-stretch-tabs class="tabs">
+      <mat-tab label="Einstellungen">
 
-    <div class="row">
-      <div class="col-12">
-        <h4>Hier kannst du grundlegende Funktionen von DatePoll Konfigurieren!</h4>
-      </div>
-    </div>
+        <div class="col-12">
+          <div class="row">
+            <div class="col-12"><h1>{{'NAV_MANAGEMENT_DATEPOLL' | translate}}</h1></div>
+          </div>
 
-    <div class="row">
-      <div class="col-12">
-        <mat-slide-toggle
-          (change)="cinemaServiceChange($event)"
-          [(ngModel)]="cinemaServiceEnabled"
-          color="primary">
-          {{'MANAGEMENT_DATEPOLL_CINEMA_SERVICE' | translate}}
-        </mat-slide-toggle>
-      </div>
-    </div>
+          <div class="row">
+            <div class="col-12">
+              <h2>DatePoll-Feature Einstellungen</h2>
+            </div>
+          </div>
 
-    <div class="row">
-      <div class="col-12">
-        <mat-slide-toggle
-          (change)="eventsServiceChange($event)"
-          [(ngModel)]="eventsServiceEnabled"
-          color="primary">
-          {{'MANAGEMENT_DATEPOLL_EVENTS_SERVICE' | translate}}
-        </mat-slide-toggle>
-      </div>
-    </div>
+          <div class="row">
+            <div class="col-12">
+              <h4>Hier kannst du grundlegende Funktionen von DatePoll Konfigurieren!</h4>
+            </div>
+          </div>
 
-    <form #changeCommunityNameForm="ngForm" (ngSubmit)="changeCommunityName(changeCommunityNameForm)"
-          class="row" style="margin-top: 15px">
-      <mat-form-field class="col-12 col-sm-12 col-md-6">
-        <input #communityNameModel="ngModel" [(ngModel)]="communityName" id="communityName" matInput
-               maxlength="50" minlength="1" name="communityName"
-               ngModel placeholder="{{'MANAGEMENT_DATEPOLL_COMMUNITY_NAME' | translate}}" required
-               type="text">
-        <mat-error *ngIf="communityNameModel.invalid">
-          {{'MANAGEMENT_DATEPOLL_COMMUNITY_NAME_NOT_VALID' | translate}}
-        </mat-error>
-      </mat-form-field>
+          <div class="row">
+            <div class="col-12">
+              <mat-slide-toggle
+                (change)="cinemaServiceChange($event)"
+                [(ngModel)]="cinemaServiceEnabled"
+                color="primary">
+                {{'MANAGEMENT_DATEPOLL_CINEMA_SERVICE' | translate}}
+              </mat-slide-toggle>
+            </div>
+          </div>
 
-      <div class="col-12 col-sm-12 col-md-3">
-        <button class="success-button" mat-button [class.spinner]="communityNameSaving"
-                [disabled]="!changeCommunityNameForm.valid || communityNameSaving"
-                type="submit">{{'SAVE' | translate}}</button>
-      </div>
-    </form>
+          <div class="row">
+            <div class="col-12">
+              <mat-slide-toggle
+                (change)="eventsServiceChange($event)"
+                [(ngModel)]="eventsServiceEnabled"
+                color="primary">
+                {{'MANAGEMENT_DATEPOLL_EVENTS_SERVICE' | translate}}
+              </mat-slide-toggle>
+            </div>
+          </div>
 
-    <form #changeOpenWeatherMapKeyForm="ngForm" (ngSubmit)="changeOpenWeatherMapKey(changeOpenWeatherMapKeyForm)"
-          class="row" style="margin-top: 15px">
-      <mat-form-field class="col-12 col-sm-12 col-md-6">
-        <input #openWeatherMapKeyModel="ngModel" [(ngModel)]="openWeatherMapKey" id="openWeatherMapKey" matInput
-               maxlength="50" name="openWeatherMapKey"
-               ngModel placeholder="{{'MANAGEMENT_DATEPOLL_OPENWEATHERMAP_KEY' | translate}}"
-               type="text">
-        <mat-error *ngIf="openWeatherMapKeyModel.invalid">
-          {{'MANAGEMENT_DATEPOLL_OPENWEATHERMAP_KEY_INVALID' | translate}}
-        </mat-error>
-      </mat-form-field>
+          <div class="row">
+            <div class="col-12">
+              <h2>Vereins Einstellungen</h2>
+            </div>
+          </div>
 
-      <div class="col-12 col-sm-12 col-md-3">
-        <button class="success-button" mat-button [class.spinner]="openWeatherMapKeySaving"
-                [disabled]="!changeOpenWeatherMapKeyForm.valid || openWeatherMapKeySaving"
-                type="submit">{{'SAVE' | translate}}</button>
-      </div>
-    </form>
+          <form #changeCommunityNameForm="ngForm" (ngSubmit)="changeCommunityName(changeCommunityNameForm)"
+                class="row" style="margin-top: 15px">
+            <mat-form-field class="col-12 col-sm-12 col-md-6">
+              <input #communityNameModel="ngModel" [(ngModel)]="communityName" id="communityName" matInput
+                     maxlength="50" minlength="1" name="communityName"
+                     ngModel placeholder="{{'MANAGEMENT_DATEPOLL_COMMUNITY_NAME' | translate}}" required
+                     type="text">
+              <mat-error *ngIf="communityNameModel.invalid">
+                {{'MANAGEMENT_DATEPOLL_COMMUNITY_NAME_NOT_VALID' | translate}}
+              </mat-error>
+            </mat-form-field>
 
-    <form #changeOpenWeatherMapCinemaCityIdForm="ngForm"
-          (ngSubmit)="changeOpenWeatherMapCinemaCityId(changeOpenWeatherMapCinemaCityIdForm)"
-          class="row" style="margin-top: 15px">
-      <mat-form-field class="col-12 col-sm-12 col-md-6">
-        <input #openWeatherMapCinemaCityIdModel="ngModel" [(ngModel)]="openWeatherMapCinemaCityId" matInput
-               maxlength="50" name="openWeatherMapCinemaCityId" id="openWeatherMapCinemaCityId"
-               ngModel placeholder="{{'MANAGEMENT_DATEPOLL_OPENWEATHERMAP_CINEMA_CITY_ID' | translate}}"
-               type="text">
-        <mat-error *ngIf="openWeatherMapCinemaCityIdModel.invalid">
-          {{'MANAGEMENT_DATEPOLL_OPENWEATHERMAP_CINEMA_CITY_ID_INVALID' | translate}}
-        </mat-error>
-      </mat-form-field>
+            <div class="col-12 col-sm-12 col-md-3">
+              <button class="success-button" mat-button [class.spinner]="communityNameSaving"
+                      [disabled]="!changeCommunityNameForm.valid || communityNameSaving"
+                      type="submit">{{'SAVE' | translate}}</button>
+            </div>
+          </form>
 
-      <div class="col-12 col-sm-12 col-md-3">
-        <button class="success-button" mat-button [class.spinner]="openWeatherMapCinemaCityIdSaving"
-                [disabled]="!changeOpenWeatherMapCinemaCityIdForm.valid || openWeatherMapCinemaCityIdSaving"
-                type="submit">{{'SAVE' | translate}}</button>
-      </div>
-    </form>
+          <div class="row">
+            <div class="col-12">
+              <h2>OpenWeatherMap Einstellungen</h2>
+            </div>
+          </div>
+
+          <form #changeOpenWeatherMapKeyForm="ngForm" (ngSubmit)="changeOpenWeatherMapKey(changeOpenWeatherMapKeyForm)"
+                class="row" style="margin-top: 15px">
+            <mat-form-field class="col-12 col-sm-12 col-md-6">
+              <input #openWeatherMapKeyModel="ngModel" [(ngModel)]="openWeatherMapKey" id="openWeatherMapKey" matInput
+                     maxlength="50" name="openWeatherMapKey"
+                     ngModel placeholder="{{'MANAGEMENT_DATEPOLL_OPENWEATHERMAP_KEY' | translate}}"
+                     type="text">
+              <mat-error *ngIf="openWeatherMapKeyModel.invalid">
+                {{'MANAGEMENT_DATEPOLL_OPENWEATHERMAP_KEY_INVALID' | translate}}
+              </mat-error>
+            </mat-form-field>
+
+            <div class="col-12 col-sm-12 col-md-3">
+              <button class="success-button" mat-button [class.spinner]="openWeatherMapKeySaving"
+                      [disabled]="!changeOpenWeatherMapKeyForm.valid || openWeatherMapKeySaving"
+                      type="submit">{{'SAVE' | translate}}</button>
+            </div>
+          </form>
+
+          <form #changeOpenWeatherMapCinemaCityIdForm="ngForm"
+                (ngSubmit)="changeOpenWeatherMapCinemaCityId(changeOpenWeatherMapCinemaCityIdForm)"
+                class="row" style="margin-top: 15px">
+            <mat-form-field class="col-12 col-sm-12 col-md-6">
+              <input #openWeatherMapCinemaCityIdModel="ngModel" [(ngModel)]="openWeatherMapCinemaCityId" matInput
+                     maxlength="50" name="openWeatherMapCinemaCityId" id="openWeatherMapCinemaCityId"
+                     ngModel placeholder="{{'MANAGEMENT_DATEPOLL_OPENWEATHERMAP_CINEMA_CITY_ID' | translate}}"
+                     type="text">
+              <mat-error *ngIf="openWeatherMapCinemaCityIdModel.invalid">
+                {{'MANAGEMENT_DATEPOLL_OPENWEATHERMAP_CINEMA_CITY_ID_INVALID' | translate}}
+              </mat-error>
+            </mat-form-field>
+
+            <div class="col-12 col-sm-12 col-md-3">
+              <button class="success-button" mat-button [class.spinner]="openWeatherMapCinemaCityIdSaving"
+                      [disabled]="!changeOpenWeatherMapCinemaCityIdForm.valid || openWeatherMapCinemaCityIdSaving"
+                      type="submit">{{'SAVE' | translate}}</button>
+            </div>
+          </form>
+        </div>
+
+      </mat-tab>
+      <mat-tab label="{{'MANAGEMENT_DATEPOLL_LOGS' | translate}}">
+        <app-logs></app-logs>
+      </mat-tab>
+    </mat-tab-group>
+
+
   </mat-card-content>
 </mat-card>
