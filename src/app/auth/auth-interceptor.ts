@@ -45,7 +45,7 @@ export class AuthInterceptor implements HttpInterceptor {
           if (error instanceof HttpErrorResponse && error.status === 401) {
             return this.handle401Error(req, next);
           } else {
-            this.authService.logout();
+            // this.authService.logout();
             return throwError('authService | An error occured during jwt token refreshing... probably session token deleted!' + error);
           }
         })
