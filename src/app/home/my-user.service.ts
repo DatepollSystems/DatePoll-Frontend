@@ -197,7 +197,7 @@ export class MyUserService {
 
   public setEmailAddressesPerRequest(emailAddresses: string[]) {
     const request = {
-      'emailAddresses': this._emailAddresses
+      'email_addresses': this._emailAddresses
     };
     return this.httpService.loggedInV1POSTRequest('/user/myself/changeEmailAddresses', request, 'updateEmailAddresses');
   }
