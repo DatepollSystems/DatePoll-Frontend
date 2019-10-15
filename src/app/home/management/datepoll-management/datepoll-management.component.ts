@@ -33,6 +33,8 @@ export class DatepollManagementComponent implements OnInit, OnDestroy {
   openWeatherMapCinemaCityIdSubscription: Subscription;
   openWeatherMapCinemaCityIdSaving = false;
 
+  SETTINGS_ADMINISTRATION = Permissions.SETTINGS_ADMINISTRATION;
+  SYSTEM_LOGS_ADMINISTRATION = Permissions.SYSTEM_LOGS_ADMINISTRATION;
   permissionSubscription: Subscription;
 
   constructor(private settingsService: SettingsService,
@@ -66,14 +68,16 @@ export class DatepollManagementComponent implements OnInit, OnDestroy {
     });
 
     this.permissionSubscription = myUserService.permissionsChange.subscribe((value) => {
-      if (!this.myUserService.hasPermission(Permissions.SETTINGS_ADMINISTRATION)) {
+      if (!this.myUserService.hasPermission(Permissions.SETTINGS_ADMINISTRATION) &&
+        !this.myUserService.hasPermission(Permissions.SYSTEM_LOGS_ADMINISTRATION)) {
         this.router.navigate(['/home']);
       }
     });
   }
 
   ngOnInit() {
-    if (!this.myUserService.hasPermission(Permissions.SETTINGS_ADMINISTRATION)) {
+    if (!this.myUserService.hasPermission(Permissions.SETTINGS_ADMINISTRATION) &&
+      !this.myUserService.hasPermission(Permissions.SYSTEM_LOGS_ADMINISTRATION)) {
       this.router.navigate(['/home']);
     }
   }

@@ -25,6 +25,7 @@ export class HomeComponent implements OnDestroy {
   eventAdministration = Permissions.EVENTS_ADMINISTRATION;
   managementAdministration = Permissions.MANAGEMENT_ADMINISTRATION;
   settingsAdministration = Permissions.SETTINGS_ADMINISTRATION;
+  logsAdministration = Permissions.SYSTEM_LOGS_ADMINISTRATION;
 
   firstname: string = null;
   private firstnameSubscription: Subscription;

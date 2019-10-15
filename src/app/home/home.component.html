@@ -71,7 +71,7 @@
         </a>
       </div>
 
-      <div *ngIf="myUserService.hasPermission(settingsAdministration)">
+      <div *ngIf="myUserService.hasPermission(settingsAdministration) || myUserService.hasPermission(logsAdministration)">
         <mat-divider></mat-divider>
         <a (click)="onPageChange()" mat-list-item routerLink="management/datepoll" routerLinkActive="activated">
           <mat-icon>settings_input_component</mat-icon>

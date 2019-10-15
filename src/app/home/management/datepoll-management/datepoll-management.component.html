@@ -2,7 +2,7 @@
   <mat-card-content>
 
     <mat-tab-group mat-stretch-tabs class="tabs">
-      <mat-tab label="Einstellungen">
+      <mat-tab label="Einstellungen" *ngIf="this.myUserService.hasPermission(SETTINGS_ADMINISTRATION)">
 
         <div class="col-12">
           <div class="row">
@@ -11,13 +11,13 @@
 
           <div class="row">
             <div class="col-12">
-              <h2>DatePoll-Feature Einstellungen</h2>
+              <h2>{{'MANAGEMENT_DATEPOLL_FEATURE_SETTINGS' | translate}}</h2>
             </div>
           </div>
 
           <div class="row">
             <div class="col-12">
-              <h4>Hier kannst du grundlegende Funktionen von DatePoll Konfigurieren!</h4>
+              <h4>{{'MANAGEMENT_DATEPOLL_FEATURE_SETTINGS_SUBTITLE' | translate}}</h4>
             </div>
           </div>
 
@@ -115,7 +115,8 @@
         </div>
 
       </mat-tab>
-      <mat-tab label="{{'MANAGEMENT_DATEPOLL_LOGS' | translate}}">
+      <mat-tab label="{{'MANAGEMENT_DATEPOLL_LOGS' | translate}}"
+               *ngIf="this.myUserService.hasPermission(SYSTEM_LOGS_ADMINISTRATION)">
         <app-logs></app-logs>
       </mat-tab>
     </mat-tab-group>
