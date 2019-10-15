@@ -76,12 +76,12 @@ export class HomepageService {
 
           const decisions = [];
           for (const decision of fetchedEvent.decisions) {
-            decisions.push(new Decision(decision.id, decision.name));
+            decisions.push(new Decision(decision.id, decision.decision));
           }
 
           const event = new Event(fetchedEvent.id, fetchedEvent.name, new Date(fetchedEvent.start_date), new Date(fetchedEvent.end_date),
             fetchedEvent.for_everyone, fetchedEvent.description, fetchedEvent.location, decisions);
-          event.alreadyVotedFor = fetchedEvent.alreadyVoted;
+          event.alreadyVotedFor = fetchedEvent.already_voted;
           eventsToSave.push(event);
         }
         this.setEvents(eventsToSave);
