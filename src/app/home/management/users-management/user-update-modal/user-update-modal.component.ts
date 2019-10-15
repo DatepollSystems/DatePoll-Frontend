@@ -288,8 +288,8 @@ export class UserUpdateModalComponent implements OnDestroy {
       'location': location,
       'activated': activated,
       'activity': activity,
-      'emailAddresses': this.emailAddresses,
-      'phoneNumbers': phoneNumbersObject,
+      'email_addresses': this.emailAddresses,
+      'phone_numbers': phoneNumbersObject,
       'permissions': this.permissions
     };
     console.log(userObject);

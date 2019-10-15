@@ -87,7 +87,7 @@ export class MovieEditModalComponent implements OnDestroy {
         (error) => console.log(error)
       );
     } else {
-      console.log('updateMovie | Using existing yearID');
+      console.log('updateMovie | Using existing yearID: ' + yearID);
       this.updateMovie(yearID);
     }
   }
