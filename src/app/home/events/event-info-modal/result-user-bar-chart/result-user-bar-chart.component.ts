@@ -55,10 +55,12 @@ export class ResultUserBarChartComponent {
       objects.push(object);
     }
 
+    let votedUsersCount = 0;
     for (const resultUser of this.resultUsers) {
       for (const object of objects) {
         if (resultUser.decisionId === object.id) {
           object.count += 1;
+          votedUsersCount++;
           break;
         }
       }
@@ -73,14 +75,14 @@ export class ResultUserBarChartComponent {
 
     for (const object of objects) {
       if (object.count > 0) {
-        const percent = Math.round((object.count / this.resultUsers.length) * 100);
+        const percent = Math.round((object.count / votedUsersCount) * 100);
 
-        let percentWidth;
-        if (this.inAccordion) {
-          percentWidth = Math.round((object.count / this.resultUsers.length) * 90);
-        } else {
-          percentWidth = percent;
-        }
+        let percentWidth = Math.round((object.count / votedUsersCount) * 95);
+        // if (this.inAccordion) {
+        //   percentWidth =
+        // } else {
+        //   percentWidth = percent;
+        // }
 
         let color;
         if (colorPerDecision) {

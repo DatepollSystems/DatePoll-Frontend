@@ -1,6 +1,5 @@
 .barContainer {
   width: 100%;
-  background-color: #ddd;
   padding: 0;
 }
 
@@ -9,4 +8,8 @@
   height: 30px;
   color: black;
   float: left;
+}
+
+.row {
+  padding-left: 5%;
 }
