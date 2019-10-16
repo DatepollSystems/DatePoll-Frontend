@@ -1,13 +1,15 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {MatSlideToggleChange} from '@angular/material/slide-toggle';
-import {SettingsService} from '../../../services/settings.service';
-import {Subscription} from 'rxjs';
-import {MyUserService} from '../../my-user.service';
-import {Permissions} from '../../../permissions';
 import {Router} from '@angular/router';
 import {NgForm} from '@angular/forms';
+import {MatSlideToggleChange} from '@angular/material/slide-toggle';
+import {Subscription} from 'rxjs';
 import {NotificationsService} from 'angular2-notifications';
+
+import {SettingsService} from '../../../services/settings.service';
+import {MyUserService} from '../../my-user.service';
 import {TranslateService} from '../../../translation/translate.service';
+
+import {Permissions} from '../../../permissions';
 
 @Component({
   selector: 'app-datepoll-management',
@@ -24,6 +26,10 @@ export class DatepollManagementComponent implements OnInit, OnDestroy {
   communityName: string;
   communityNameSubscription: Subscription;
   communityNameSaving = false;
+
+  communityUrl: string;
+  communityUrlSubscription: Subscription;
+  communityUrlSaving = false;
 
   openWeatherMapKey: string;
   openWeatherMapKeySubscription: Subscription;
@@ -57,6 +63,11 @@ export class DatepollManagementComponent implements OnInit, OnDestroy {
       this.communityName = value;
     });
 
+    this.communityUrl = settingsService.getCommunityUrl();
+    this.communityUrlSubscription = settingsService.communityUrlChange.subscribe((value) => {
+      this.communityUrl = value;
+    });
+
     this.openWeatherMapKey = settingsService.getOpenWeatherMapKey();
     this.openWeatherMapKeySubscription = settingsService.openWeatherMapKeyChange.subscribe((value) => {
       this.openWeatherMapKey = value;
@@ -86,6 +97,7 @@ export class DatepollManagementComponent implements OnInit, OnDestroy {
     this.cinemaServiceEnabledChange.unsubscribe();
     this.eventsServiceEnabledChange.unsubscribe();
     this.communityNameSubscription.unsubscribe();
+    this.communityUrlSubscription.unsubscribe();
     this.openWeatherMapKeySubscription.unsubscribe();
     this.openWeatherMapCinemaCityIdSubscription.unsubscribe();
     this.permissionSubscription.unsubscribe();
@@ -108,6 +120,20 @@ export class DatepollManagementComponent implements OnInit, OnDestroy {
         this.communityNameSaving = false;
         this.notificationsService.success(this.translate.getTranslationFor('SUCCESSFULLY'),
           this.translate.getTranslationFor('MANAGEMENT_DATEPOLL_COMMUNITY_NAME_CHANGED_SUCCESSFULLY'));
+      },
+      (error) => console.log(error)
+    );
+  }
+
+  changeCommunityUrl(form: NgForm) {
+    this.communityUrlSaving = true;
+    const communityUrl = form.controls.communityUrl.value;
+    this.settingsService.setAdminCommunityUrl(communityUrl).subscribe(
+      (response: any) => {
+        console.log(response);
+        this.communityUrlSaving = false;
+        this.notificationsService.success(this.translate.getTranslationFor('SUCCESSFULLY'),
+          this.translate.getTranslationFor('MANAGEMENT_DATEPOLL_COMMUNITY_URL_CHANGED_SUCCESSFULLY'));
       },
       (error) => console.log(error)
     );

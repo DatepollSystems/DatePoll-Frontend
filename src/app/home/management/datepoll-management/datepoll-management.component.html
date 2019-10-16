@@ -68,6 +68,25 @@
             </div>
           </form>
 
+          <form #changeCommunityUrlForm="ngForm" (ngSubmit)="changeCommunityUrl(changeCommunityUrlForm)"
+                class="row" style="margin-top: 15px">
+            <mat-form-field class="col-12 col-sm-12 col-md-6">
+              <input #communityUrlModel="ngModel" [(ngModel)]="communityUrl" id="communityUrl" matInput
+                     maxlength="128" minlength="1" name="communityUrl"
+                     ngModel placeholder="{{'MANAGEMENT_DATEPOLL_COMMUNITY_URL' | translate}}" required
+                     type="text" url>
+              <mat-error *ngIf="communityUrlModel.invalid">
+                {{'MANAGEMENT_DATEPOLL_COMMUNITY_URL_NOT_VALID' | translate}}
+              </mat-error>
+            </mat-form-field>
+
+            <div class="col-12 col-sm-12 col-md-3">
+              <button class="success-button" mat-button [class.spinner]="communityUrlSaving"
+                      [disabled]="!changeCommunityUrlForm.valid || communityUrlSaving"
+                      type="submit">{{'SAVE' | translate}}</button>
+            </div>
+          </form>
+
           <div class="row">
             <div class="col-12">
               <h2>OpenWeatherMap Einstellungen</h2>
