@@ -430,6 +430,10 @@
   "MANAGEMENT_DATEPOLL_COMMUNITY_NAME_NOT_VALID": "Der Vereinsname darf weder leer sein, noch mehr als 50 Zeichen haben!",
   "MANAGEMENT_DATEPOLL_COMMUNITY_NAME_CHANGED_SUCCESSFULLY": "Der Vereinsname wurde erfolgreich geändert!",
 
+  "MANAGEMENT_DATEPOLL_COMMUNITY_URL": "Vereinswebsite URL",
+  "MANAGEMENT_DATEPOLL_COMMUNITY_URL_NOT_VALID": "Die URL der Vereinswebsite darf weder leer sein, noch mehr als 128 Zeichen haben!",
+  "MANAGEMENT_DATEPOLL_COMMUNITY_URL_CHANGED_SUCCESSFULLY": "Die URL zur Vereinswebsite wurde erfolgreich geändert!",
+
   "MANAGEMENT_DATEPOLL_OPENWEATHERMAP_KEY": "OpenWeatherMap API Key",
   "MANAGEMENT_DATEPOLL_OPENWEATHERMAP_KEY_INVALID": "Der API Key darf nicht mehr als 50 Zeichen haben!",
   "MANAGEMENT_DATEPOLL_OPENWEATHERMAP_KEY_CHANGED_SUCCESSFULLY": "Der OpenWeatherMap API Key wurde erfolgreich geändert!",
