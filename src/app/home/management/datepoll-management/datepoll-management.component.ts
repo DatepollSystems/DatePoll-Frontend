@@ -43,11 +43,15 @@ export class DatepollManagementComponent implements OnInit, OnDestroy {
   SYSTEM_LOGS_ADMINISTRATION = Permissions.SYSTEM_LOGS_ADMINISTRATION;
   permissionSubscription: Subscription;
 
+  myUserService: MyUserService;
+
   constructor(private settingsService: SettingsService,
-              private myUserService: MyUserService,
+              myUserService: MyUserService,
               private router: Router,
               private translate: TranslateService,
               private notificationsService: NotificationsService) {
+    this.myUserService = myUserService;
+
     this.cinemaServiceEnabled = settingsService.getShowCinema();
     this.cinemaServiceEnabledChange = settingsService.showCinemaChange.subscribe((value) => {
       this.cinemaServiceEnabled = value;
