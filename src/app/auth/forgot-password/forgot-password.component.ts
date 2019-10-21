@@ -69,8 +69,8 @@ export class ForgotPasswordComponent implements OnDestroy {
       },
       (error) => {
         console.log(error);
-        if (error.error.code != null) {
-          if (error.error.code.includes('unknown_username')) {
+        if (error.error.error_code != null) {
+          if (error.error.error_code.includes('unknown_username')) {
             this.unknownUsernameAlert = true;
           }
         }
@@ -100,10 +100,10 @@ export class ForgotPasswordComponent implements OnDestroy {
       },
       (error) => {
         console.log(error);
-        if (error.error.code != null) {
-          if (error.error.code.includes('code_incorrect')) {
+        if (error.error.error_code != null) {
+          if (error.error.error_code.includes('code_incorrect')) {
             this.verificationCodeIncorrect = true;
-          } else if (error.error.code.includes('rate_limit_exceeded')) {
+          } else if (error.error.error_code.includes('rate_limit_exceeded')) {
             this.verificationCodeRateLimitExceeded = true;
           }
         }

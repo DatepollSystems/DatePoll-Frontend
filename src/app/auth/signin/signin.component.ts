@@ -58,13 +58,13 @@ export class SigninComponent implements OnInit, OnDestroy {
     this.authService.trySignin(this.username, this.password).subscribe(
       (data: any) => {
         console.log(data);
-        if (data.msg != null) {
-          if (data.msg === 'notActivated') {
-            this.state = data.msg;
+        if (data.error_code != null) {
+          if (data.error_code === 'notActivated') {
+            this.state = data.error_code;
           }
 
-          if (data.msg === 'changePassword') {
-            this.state = data.msg;
+          if (data.error_code === 'changePassword') {
+            this.state = data.error_code;
           }
 
           this.showLoadingSpinnerDuringLogin = false;
