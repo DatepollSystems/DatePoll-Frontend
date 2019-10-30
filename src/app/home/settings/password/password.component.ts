@@ -32,10 +32,8 @@ export class PasswordComponent {
     this.httpService.loggedInV1POSTRequest('/user/myself/changePassword/checkOldPassword', body, 'checkOldPassword').subscribe(
       (data: any) => {
         console.log(data);
-        if (data.msg === 'password_correct') {
-          console.log('checkOldPasswort | Password is correct');
-          this.nextStep();
-        }
+        console.log('checkOldPasswort | Password is correct');
+        this.nextStep();
       },
       (error) => {
         console.log(error);
@@ -57,12 +55,8 @@ export class PasswordComponent {
     this.httpService.loggedInV1POSTRequest('/user/myself/changePassword/changePassword', body, 'changePassword').subscribe(
       (data: any) => {
         console.log(data);
-        if (data.msg === 'password_changed') {
-          console.log('changePassword | Changed successful');
-          this.nextStep();
-        } else {
-          console.log('changePassword | Unknown message');
-        }
+        console.log('changePassword | Changed successful');
+        this.nextStep();
       },
       (error) => {
         console.log(error);
