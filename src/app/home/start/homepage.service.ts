@@ -7,6 +7,7 @@ import {HttpService} from '../../services/http.service';
 import {HomeBirthdayModel} from './birthdays.model';
 import {HomeBookingsModel} from './bookings.model';
 import {Event} from '../events/models/event.model';
+import {Decision} from '../events/models/decision.model';
 
 @Injectable({
   providedIn: 'root'
@@ -52,8 +53,9 @@ export class HomepageService {
 
         const bookingsToSave = [];
         for (let i = 0; i < bookings.length; i++) {
-          bookingsToSave.push(new HomeBookingsModel(bookings[i].movieID, bookings[i].movieName, bookings[i].amount, bookings[i].movieDate,
-            bookings[i].workerID, bookings[i].workerName, bookings[i].emergencyWorkerID, bookings[i].emergencyWorkerName));
+          bookingsToSave.push(new HomeBookingsModel(bookings[i].movie_id, bookings[i].movie_name, bookings[i].amount,
+            bookings[i].movie_date, bookings[i].worker_id, bookings[i].worker_name, bookings[i].emergency_worker_id,
+            bookings[i].emergency_worker_name));
         }
 
         this.setBookings(bookingsToSave);
@@ -71,9 +73,15 @@ export class HomepageService {
         const eventsToSave = [];
         for (let i = 0; i < events.length; i++) {
           const fetchedEvent = events[i];
-          const event = new Event(fetchedEvent.id, fetchedEvent.name, new Date(fetchedEvent.startDate), new Date(fetchedEvent.endDate),
-            fetchedEvent.forEveryone, fetchedEvent.description, fetchedEvent.location, fetchedEvent.decisions);
-          event.alreadyVotedFor = fetchedEvent.alreadyVoted;
+
+          const decisions = [];
+          for (const decision of fetchedEvent.decisions) {
+            decisions.push(new Decision(decision.id, decision.decision));
+          }
+
+          const event = new Event(fetchedEvent.id, fetchedEvent.name, new Date(fetchedEvent.start_date), new Date(fetchedEvent.end_date),
+            fetchedEvent.for_everyone, fetchedEvent.description, fetchedEvent.location, decisions);
+          event.alreadyVotedFor = fetchedEvent.already_voted;
           eventsToSave.push(event);
         }
         this.setEvents(eventsToSave);

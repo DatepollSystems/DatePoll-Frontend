@@ -40,9 +40,9 @@ export class EventsUserService {
             decisions.push(new Decision(fetchedDecision.id, fetchedDecision.decision));
           }
 
-          const event = new Event(fetchedEvent.id, fetchedEvent.name, new Date(fetchedEvent.startDate), new Date(fetchedEvent.endDate),
-            fetchedEvent.forEveryone, fetchedEvent.description, fetchedEvent.location, decisions);
-          event.alreadyVotedFor = fetchedEvent.alreadyVoted;
+          const event = new Event(fetchedEvent.id, fetchedEvent.name, new Date(fetchedEvent.start_date), new Date(fetchedEvent.end_date),
+            fetchedEvent.for_everyone, fetchedEvent.description, fetchedEvent.location, decisions);
+          event.alreadyVotedFor = fetchedEvent.already_voted;
           events.push(event);
         }
 

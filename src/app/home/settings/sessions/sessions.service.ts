@@ -34,7 +34,7 @@ export class SessionsService {
         for (let i = 0; i < sessions.length; i++) {
           const session = sessions[i];
 
-          const sessionObject = new Session(session.id, session.information, session.lastUsed);
+          const sessionObject = new Session(session.id, session.information, session.last_used);
           sessionsObject.push(sessionObject);
         }
 

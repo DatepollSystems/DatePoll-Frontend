@@ -45,28 +45,24 @@
 
           <mat-card-actions>
             <div class="row justify-content-between">
-              <div class="col">
-                <button
-                  *ngIf="!showLoadingSpinnerDuringLogin"
-                  [disabled]="!f.valid"
-                  color="primary"
-                  mat-raised-button
-                  type="submit">
+              <div class="col-12 col-sm-12 col-md-12 col-lg-5 col-xl-4">
+                <button *ngIf="!showLoadingSpinnerDuringLogin" [disabled]="!f.valid"
+                        style="width: 100%; margin-bottom: 15px;" color="primary" mat-raised-button type="submit">
                   {{ 'SIGNIN' | translate }}
                   <mat-icon aria-label="Example icon-button with a heart icon">send</mat-icon>
                 </button>
               </div>
-              <div class="col">
+
+              <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-5">
                 <a *ngIf="!showLoadingSpinnerDuringLogin" color="accent" mat-raised-button
-                   routerLink="/auth/forgotPassword"
-                   style="float: right">
+                   style="float: right; width: 100%" routerLink="/auth/forgotPassword">
                   Password vergessen?
                   <mat-icon>verified_user</mat-icon>
                 </a>
               </div>
             </div>
 
-            <mat-progress-bar *ngIf="showLoadingSpinnerDuringLogin" class="col-12"
+            <mat-progress-bar *ngIf="showLoadingSpinnerDuringLogin" class="col-12" style="margin-bottom: 15px;"
                               mode="indeterminate"></mat-progress-bar>
           </mat-card-actions>
         </form>

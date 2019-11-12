@@ -11,11 +11,13 @@ export class SettingsService {
   public showCinemaChange: Subject<boolean> = new Subject<boolean>();
   public showEventsChange: Subject<boolean> = new Subject<boolean>();
   public communityNameChange: Subject<string> = new Subject<string>();
+  public communityUrlChange: Subject<string> = new Subject<string>();
   public openWeatherMapKeyChange: Subject<string> = new Subject<string>();
   public openWeatherMapCinemaCityIdChange: Subject<string> = new Subject<string>();
   private _showCinema = true;
   private _showEvents = true;
   private _communityName = 'DatePoll Web';
+  private _communityUrl = 'https://datepoll.dafnik.me';
   private _openWeatherMapKey = '';
   private _openWeatherMapCinemaCityId = '';
 
@@ -103,6 +105,26 @@ export class SettingsService {
     return this.httpService.setSettingsRequest('/name', body, 'setCommunityName');
   }
 
+  public getCommunityUrl(): string {
+    this.httpService.getSettingRequest('/url', 'settingsCommunityUrl').subscribe(
+      (response: any) => {
+        console.log(response);
+        this.setCommunityUrl(response.community_url);
+      },
+      (error) => console.log(error)
+    );
+    return this._communityUrl;
+  }
+
+  public setAdminCommunityUrl(communityUrl: string) {
+    this.setCommunityUrl(communityUrl);
+
+    const body = {
+      'community_url': '"' + communityUrl + '"'
+    };
+    return this.httpService.setSettingsRequest('/url', body, 'setCommunityUrl');
+  }
+
   public getOpenWeatherMapKey(): string {
     this.httpService.getSettingRequest('/openweathermap/key', 'settingsOpenWeatherMapKey').subscribe(
       (response: any) => {
@@ -156,6 +178,11 @@ export class SettingsService {
   private setCommunityName(communityName: string) {
     this._communityName = communityName;
     this.communityNameChange.next(this._communityName);
+  }
+
+  private setCommunityUrl(communityUrl: string) {
+    this._communityUrl = communityUrl;
+    this.communityUrlChange.next(this._communityUrl);
   }
 
   private setOpenWeatherMapKey(key: string) {

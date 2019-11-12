@@ -9,10 +9,12 @@ import {TranslationModule} from '../../../translation/translation.module';
 import {DatepollManagementRoutingModule} from './datepoll-management-routing.module';
 
 import {DatepollManagementComponent} from './datepoll-management.component';
+import {LogsComponent} from './logs/logs.component';
 
 @NgModule({
   declarations: [
-    DatepollManagementComponent
+    DatepollManagementComponent,
+    LogsComponent
   ],
   imports: [
     CommonModule,

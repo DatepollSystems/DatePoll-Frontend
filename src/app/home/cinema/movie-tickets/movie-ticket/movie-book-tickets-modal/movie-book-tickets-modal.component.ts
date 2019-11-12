@@ -32,7 +32,7 @@ export class MovieBookTicketsModalComponent {
   bookTickets() {
     const bookingObject = {
       'movie_id': this.movie.id,
-      'ticketAmount': this.ticketsToBook
+      'ticket_amount': this.ticketsToBook
     };
 
     this.httpService.loggedInV1POSTRequest('/cinema/booking', bookingObject, 'bookTickets').subscribe(

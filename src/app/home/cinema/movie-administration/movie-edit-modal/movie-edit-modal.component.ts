@@ -87,7 +87,7 @@ export class MovieEditModalComponent implements OnDestroy {
         (error) => console.log(error)
       );
     } else {
-      console.log('updateMovie | Using existing yearID');
+      console.log('updateMovie | Using existing yearID: ' + yearID);
       this.updateMovie(yearID);
     }
   }
@@ -96,9 +96,9 @@ export class MovieEditModalComponent implements OnDestroy {
     const movieObject = {
       'name': this.name,
       'date': Converter.getDateFormatted(this.date),
-      'trailerLink': this.trailerLink,
-      'posterLink': this.imageLink,
-      'bookedTickets': this.bookedTickets,
+      'trailer_link': this.trailerLink,
+      'poster_link': this.imageLink,
+      'booked_tickets': this.bookedTickets,
       'movie_year_id': yearID
     };
     console.log(movieObject);

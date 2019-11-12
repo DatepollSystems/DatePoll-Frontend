@@ -1,0 +1,42 @@
+<div class="row">
+  <div class="col-12"><h1>{{'MANAGEMENT_DATEPOLL_LOGS' | translate}}</h1></div>
+</div>
+
+<div class="row align-items-center justify-content-around">
+  <mat-form-field class="col-md-6 col-lg-8">
+    <input (keyup)="applyFilter($event.target.value)" matInput
+           placeholder="{{'MANAGEMENT_USERS_SEARCH' | translate}}">
+  </mat-form-field>
+
+  <div class="col-md-4 col-lg-2">
+    <mat-form-field>
+      <mat-label>{{'MANAGEMENT_DATEPOLL_LOGS_LOG_TYPE' | translate}}</mat-label>
+      <mat-select [(value)]="selectedLogType" (selectionChange)="selectedLogTypeChange($event)">
+        <mat-option *ngFor="let logType of logTypes" [value]="logType.value">
+          {{logType.viewValue}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div class="col-md-2 col-lg-2">
+    <button (click)="refreshLogsList()" mat-icon-button
+            matTooltip="{{'MANAGEMENT_DATEPOLL_LOGS_REFRESH' | translate}}"
+            matTooltipPosition="right">
+      <mat-icon>refresh</mat-icon>
+    </button>
+  </div>
+</div>
+
+<mat-divider></mat-divider>
+
+<div class="myContainer" style="margin-top: 15px;" *ngIf="!loading">
+  <div class="col-12 myCol" *ngFor="let log of logsCopy">
+    {{log.typeString}} : {{log.createdAt | date:'dd.MM.yyyy HH:mm:ss'}} : {{log.message}}
+  </div>
+  <div class="col-12 myCol" *ngIf="logsCopy.length === 0">
+    {{'MANAGEMENT_DATEPOLL_LOGS_NO_LOGS' | translate}}
+  </div>
+</div>
+
+<mat-progress-bar mode="indeterminate" *ngIf="loading"></mat-progress-bar>
+
