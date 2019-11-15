@@ -156,14 +156,14 @@
       <small><b>{{'MANAGEMENT_USERS_UPDATE_USER_MODAL_PASSWORD_CHANGE_DESCRIPTION' | translate}}</b></small>
       <form #changePasswordForm="ngForm" (ngSubmit)="changePassword(changePasswordForm)">
         <div class="row justify-content-between" style="margin-top: 15px;">
-          <mat-form-field class="col-12 col-md-4 col-lg-4">
+          <mat-form-field class="col-11 col-md-4 col-lg-4">
             <input #passwordModel="ngModel" matInput minlength="5"
                    name="password" ngModel
                    placeholder="{{'SIGNIN_NEW_PASSWORD' | translate}}" required
                    type="password">
           </mat-form-field>
 
-          <mat-form-field class="col-12 col-md-3 col-lg-4">
+          <mat-form-field class="col-11 col-md-3 col-lg-4">
             <input #passwordRepeatModel="ngModel" [equalTo]="passwordModel" matInput minlength="5"
                    name="password_repeat" ngModel
                    placeholder="{{'SIGNIN_NEW_PASSWORD_REPEAT' | translate}}" required
@@ -174,7 +174,7 @@
             </mat-error>
           </mat-form-field>
 
-          <div class="col-12 col-md-3 col-lg-2">
+          <div class="col-11 col-md-3 col-lg-2">
             <button [disabled]="!changePasswordForm.form.valid" class="success-button"
                     mat-flat-button style="width: 100%">
               {{'MANAGEMENT_USERS_UPDATE_USER_MODAL_PASSWORD_CHANGE' | translate}}</button>

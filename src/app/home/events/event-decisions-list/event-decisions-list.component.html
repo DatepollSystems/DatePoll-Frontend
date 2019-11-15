@@ -8,7 +8,7 @@
       </mat-expansion-panel-header>
 
       <form #addDecisionForm="ngForm" (ngSubmit)="addDecision(addDecisionForm)" class="row justify-content-between">
-        <div class="col-12 col-sm-12 col-md-4">
+        <div class="col-11 col-sm-11 col-md-4">
           <mat-form-field>
             <input #decisionModel="ngModel" id="decision" matInput maxlength="190"
                    minlength="1" name="decision"
@@ -20,12 +20,12 @@
             </mat-error>
           </mat-form-field>
         </div>
-        <div class="col-12 col-sm-12 col-md-3" style="padding-top: 5px;">
+        <div class="col-11 col-sm-11 col-md-3" style="margin-top: 15px;">
           <mat-slide-toggle (change)="showInCalendarChange($event)" [checked]="showInCalendar">
             {{'EVENTS_STANDARD_DECISIONS_MANAGEMENT_ADD_STANDARD_DECISION_SHOW_IN_CALENDAR' | translate}}
           </mat-slide-toggle>
         </div>
-        <div class="col-12 col-sm-12 col-md-3">
+        <div class="col-11 col-sm-11 col-md-3" style="margin-top: 10px;">
           <button [disabled]="!addDecisionForm.valid" class="success-button" mat-raised-button
                   style="width: 100%; text-align: center" type="submit">
             {{'ADD' | translate}}

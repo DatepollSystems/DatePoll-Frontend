@@ -1,19 +1,19 @@
 <h1 mat-dialog-title>{{'CINEMA_TICKETS_ADMINISTRATION_MOVIE_BOOKINGS_MANAGEMENT_MODAL_TITLE' | translate}} {{name}}</h1>
 <div mat-dialog-content>
 
-  <div class="row justify-content-around">
+  <div class="row">
     <mat-form-field class="col-12 col-sm-12 col-md-12 col-lg-5">
       <input (keyup)="applyFilter($event.target.value)" matInput
              placeholder="{{'SEARCH' | translate}}">
     </mat-form-field>
 
-    <div class="col-12 col-sm-12 col-md-6 col-lg-3">
+    <div class="col-5 col-sm-5 col-md-6 col-lg-3" style="margin-bottom: 10px;">
       <button mat-flat-button color="primary" style="width: 100%" (click)="onBook()"
               [class.spinner]="savingBooking" [disabled]="savingBooking">
         {{'CINEMA_TICKETS_ADMINISTRATION_MOVIE_BOOKINGS_MANAGEMENT_MODAL_BOOK' | translate}}</button>
     </div>
 
-    <div class="col-6 col-sm-6 col-md-3 col-lg-2">
+    <div class="col-4 col-sm-4 col-md-3 col-lg-2">
       <mat-form-field>
         <input #ticketsToBookModel="ngModel" [(ngModel)]="ticketsToBook" [range]="[1, 100]" id="ticketsToBook"
                matInput name="ticketsToBook" ngModel
@@ -25,7 +25,7 @@
       </mat-form-field>
     </div>
 
-    <div class="col-6 col-sm-6 col-md-3 col-lg-2">
+    <div class="col-2 col-sm-2 col-md-3 col-lg-2">
       <button mat-stroked-button aria-label="Remove votings for selected users" (click)="onClear()"
               [class.spinner]="savingClearBooking" [disabled]="savingClearBooking"
               matTooltip="{{'CINEMA_TICKETS_ADMINISTRATION_MOVIE_BOOKINGS_MANAGEMENT_MODAL_REMOVE_BOOKING' | translate}}">
@@ -33,8 +33,8 @@
       </button>
     </div>
   </div>
-  <div class="row" *ngIf="!loading">
-    <table [dataSource]="bookings" class="col-12" mat-table>
+  <div *ngIf="!loading">
+    <table [dataSource]="bookings" class="table-responsive" mat-table>
       <!-- Checkbox Column -->
       <ng-container matColumnDef="select">
         <th mat-header-cell *matHeaderCellDef>

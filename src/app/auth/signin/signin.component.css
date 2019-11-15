@@ -22,12 +22,16 @@
 }
 
 #signin-card {
-  padding-bottom: 0;
+  padding-bottom: 10px;
   padding-top: 0;
 }
 
+mat-card-content {
+  margin-bottom: 0;
+}
+
 mat-card-actions {
-  padding-bottom: 0;
+  padding: 0;
   margin-bottom: 0;
   margin-left: 1px;
 }
