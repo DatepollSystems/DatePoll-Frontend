@@ -33,17 +33,25 @@
 
             <div class="row">
               <mat-form-field class="col-12">
-                <input id="password" matInput
+                <input id="password" matInput #passwordModel="ngModel"
                        minlength="5" name="password" ngModel
                        placeholder="{{'SIGNIN_PASSWORD' | translate}}" required
                        type="password">
-                <mat-hint *ngIf="loginFail"><strong
-                  style="color: red">{{'SIGNIN_USERNAME_OR_PASSWORD_INCORRECT' | translate}}</strong></mat-hint>
+                <mat-error *ngIf="passwordModel.invalid">
+                  {{'SIGNIN_PASSWORD_REQUIREMENTS' | translate}}
+                </mat-error>
               </mat-form-field>
+            </div>
+            <div class="row" *ngIf="loginFail">
+              <div class="col-12">
+                <mat-hint>
+                  <strong style="color: red">{{'SIGNIN_USERNAME_OR_PASSWORD_INCORRECT' | translate}}</strong>
+                </mat-hint>
+              </div>
             </div>
           </mat-card-content>
 
-          <mat-card-actions>
+          <mat-card-actions style="margin-top: 10px;">
             <div class="row justify-content-between">
               <div class="col-12 col-sm-12 col-md-12 col-lg-5 col-xl-4">
                 <button *ngIf="!showLoadingSpinnerDuringLogin" [disabled]="!f.valid"

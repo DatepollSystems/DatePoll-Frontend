@@ -1,10 +1,10 @@
 <mat-card class="mat-elevation-z3">
   <mat-card-content>
     <div class="row justify-content-between">
-      <div class="col-12 col-sm-12 col-md-8 col-lg-8 col-xl-8">
+      <div class="col-4 col-sm-6 col-md-8 col-lg-8 col-xl-8">
         <h1>{{'EVENTS_VIEW' | translate}}</h1>
       </div>
-      <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4" style="text-align: end">
+      <div class="col-8 col-sm-6 col-md-4 col-lg-4 col-xl-4" style="text-align: end">
         <mat-slide-toggle (change)="onShowAllEventsChange($event)" [(ngModel)]="showAllEvents" color="primary">
           {{'EVENTS_VIEW_SHOW_ALREADY_VOTED_EVENTS' | translate}}
         </mat-slide-toggle>

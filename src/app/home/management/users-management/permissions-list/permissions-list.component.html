@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-12">
+  <div class="col-11 col-md-12">
     <small>
       {{'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_PERMISSIONS_SMALL_0' | translate}}
       <a href="https://datepoll.dafnik.me/permissions/"
@@ -11,7 +11,7 @@
 
 <form #permissionsForm="ngForm" (ngSubmit)="addPermission(permissionsForm)">
   <div class="row justify-content-around">
-    <div class="col-12 col-sm-12 col-md-6 col-lg-7">
+    <div class="col-11 col-sm-11 col-md-6 col-lg-7">
       <mat-form-field>
         <input #permissionModel="ngModel" id="permission" matInput maxlength="190"
                name="permission" ngModel
@@ -23,7 +23,7 @@
       </mat-form-field>
     </div>
 
-    <div class="col-12 col-sm-12 col-md-4 col-lg-3">
+    <div class="col-11 col-sm-11 col-md-4 col-lg-3">
       <button [disabled]="!permissionsForm.valid" class="success-button" id="addPermission-button" mat-raised-button
               style="width: 100%" type="submit">
         {{'ADD' | translate}}

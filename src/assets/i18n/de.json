@@ -55,7 +55,7 @@
   "SIGNIN_NOT_SIGNED_UP": "Kein Konto?",
   "SIGNIN_USERNAME": "Benutzername",
   "SIGNIN_PASSWORD": "Passwort",
-  "SIGNIN_KEEP_YOUR_PASSWORD_SECRET": "Behalte dein Passwort geheim",
+  "SIGNIN_PASSWORD_REQUIREMENTS": "Das Passwort muss aus mindestens 6 Zeichen bestehen!",
   "SIGNIN_USERNAME_OR_PASSWORD_INCORRECT": "Der Benutzername oder das Passwort sind inkorrekt!",
   "SIGNIN_ACCOUNT_NOT_ACTIVATED": "Dein Account ist derzeit deaktiviert! Probier es doch später wieder...",
   "SIGNIN_SUCCESSFUL": "Passwort korrekt! Sie werden in kürze weitergeleitet...",
@@ -135,7 +135,7 @@
   "CINEMA_TICKETS_WEATHER_FORECAST": "Wettervorhersage",
   "CINEMA_TICKETS_WEATHER_FORECAST_SHOW": "Anzeigen",
 
-  "CINEMA_TICKETS_BOOKING_MODAL_HEADER": "Buche Tickets für ",
+  "CINEMA_TICKETS_BOOKING_MODAL_HEADER": "Kartenreservierung für ",
   "CINEMA_TICKETS_BOOKING_MODAL_WARNING": "Karten sind in erster Linie für Vereinsmitglieder. Sollten kurz vor Kinobeginn noch Karten frei sein, können diese jederzeit an Freunde oder Familienmitglieder weitergeben werden! ",
   "CINEMA_TICKETS_BOOKING_MODAL_NUMBER_OF_TICKETS": "Kartenanzahl",
   "CINEMA_TICKETS_BOOKING_MODAL_NUMBER_OF_TICKETS_INVALID_1": "Gib bitte eine Zahl zwischen 1 und ",
@@ -154,7 +154,7 @@
   "CINEMA_TICKETS_SERVICE_BOOKING": "Reservierungen",
   "CINEMA_TICKETS_SERVICE_USERNAME": "Name",
   "CINEMA_TICKETS_SERVICE_TICKET_AMOUNT": "Kartenanzahl",
-  "CINEMA_TICKETS_SERVICE_NO_TICKETS_BOOKED": "Keine reservierten Karten",
+  "CINEMA_TICKETS_SERVICE_NO_TICKETS_BOOKED": "Keine Reservierungen",
   "CINEMA_TICKETS_SERVICE_NOT_APPLIED_FOR_SERVICE": "Du hast dich noch für keinen Kinodienst gemeldet",
   "CINEMA_TICKETS_SERVICE_NOT_APPLIED_FOR_SERVICE_APPLY_NOW": "Melde dich jetzt für den Kinodienst",
 
@@ -451,7 +451,7 @@
 
 
   "EVENTS_VIEW": "Events",
-  "EVENTS_VIEW_SHOW_ALREADY_VOTED_EVENTS": "Zeige beantwortete Events",
+  "EVENTS_VIEW_SHOW_ALREADY_VOTED_EVENTS": "Beantwortete Events",
   "EVENTS_VIEW_EVENT_CARD_BUTTON_DECIDE": "Antworten",
   "EVENTS_VIEW_EVENT_CARD_BUTTON_INFO": "Informationen",
   "EVENTS_VIEW_EVENT_CARD_BUTTON_CANCEL_VOTING": "Stimme entfernen",
@@ -475,7 +475,7 @@
   "EVENTS_STANDARD_DECISIONS_MANAGEMENT_SUCCESSFULLY_ADDED": "Die Standard-Antwort wurde erfolgreich gespeichert!",
   "EVENTS_STANDARD_DECISIONS_MANAGEMENT_SUCCESSFULLY_REMOVED": "Die Standard-Antwort wurde erfolgreich entfernt!",
   "EVENTS_STANDARD_DECISIONS_MANAGEMENT_ADD_STANDARD_DECISION": "Antwortmöglichkeit",
-  "EVENTS_STANDARD_DECISIONS_MANAGEMENT_ADD_STANDARD_DECISION_SHOW_IN_CALENDAR": "Im Kalendar anzeigen",
+  "EVENTS_STANDARD_DECISIONS_MANAGEMENT_ADD_STANDARD_DECISION_SHOW_IN_CALENDAR": "Kalenderanzeige",
   "EVENTS_STANDARD_DECISIONS_MANAGEMENT_ADD_STANDARD_DECISION_INCORRECT": "Die Antwortmöglichkeit darf weder leer sein, noch mehr als 190 Zeichen haben.",
   "EVENTS_STANDARD_DECISIONS_MANAGEMENT_REMOVE_STANDARD_DECISION_BUTTON_TOOLTIP": "Entferne diese Antwortmöglichkeit",
 
