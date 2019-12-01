@@ -98,7 +98,7 @@ registerLocaleData(localeDe);
       multi: true
     },
     // Set the datetimepicker time format to day/month/year
-    {provide: MAT_DATE_LOCALE, useValue: 'de-DE'},
+    {provide: MAT_DATE_LOCALE, useValue: 'de-AT'},
     {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 2500}}
   ],
   bootstrap: [AppComponent]
