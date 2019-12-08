@@ -294,32 +294,6 @@ export class UserUpdateModalComponent implements OnDestroy {
     };
     console.log(userObject);
 
-    form.controls.title.disable();
-    form.controls.username.disable();
-    form.controls.firstname.disable();
-    form.controls.surname.disable();
-    form.controls.streetname.disable();
-    form.controls.streetnumber.disable();
-    form.controls.zipcode.disable();
-    form.controls.location.disable();
-    form.controls.activity.disable();
-    form.controls.activated.disable();
-    document.getElementById('addEmail-button').setAttribute('disabled', 'disabled');
-    document.getElementById('datepicker-birthday').setAttribute('disabled', 'disabled');
-    document.getElementById('datepicker-birthday-mobile').setAttribute('disabled', 'disabled');
-    document.getElementById('datepicker-join_date').setAttribute('disabled', 'disabled');
-    document.getElementById('datepicker-join_date-mobile').setAttribute('disabled', 'disabled');
-    document.getElementById('addPhoneNumber-button').setAttribute('disabled', 'disabled');
-    document.getElementById('phoneNumber').setAttribute('disabled', 'disabled');
-    document.getElementById('label').setAttribute('disabled', 'disabled');
-    document.getElementById('addPermission-button').setAttribute('disabled', 'disabled');
-    document.getElementById('permission').setAttribute('disabled', 'disabled');
-    document.getElementById('addPerformanceBadge-button').setAttribute('disabled', 'disabled');
-    document.getElementById('datepicker-performanceBadge').setAttribute('disabled', 'disabled');
-    document.getElementById('datepicker-performanceBadge-mobile').setAttribute('disabled', 'disabled');
-    document.getElementById('performanceBadge-grade').setAttribute('disabled', 'disabled');
-    document.getElementById('performanceBadge-note').setAttribute('disabled', 'disabled');
-
     this.dialogRef.close();
 
     this.usersService.updateUser(this.user.id, userObject).subscribe(
