@@ -23,6 +23,10 @@ export class UsersService {
     this._freeGroups = [];
   }
 
+  public getUsersWithoutFetch(): User[] {
+    return this._users.slice();
+  }
+
   public getUsers(): User[] {
     this.fetchUsers();
     return this._users.slice();

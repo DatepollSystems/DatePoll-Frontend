@@ -10,6 +10,7 @@ import {UsersService} from '../users.service';
 import {GroupsService} from '../../groups-management/groups.service';
 import {PerformanceBadgesService} from '../../performance-badges-management/performance-badges.service';
 import {MyUserService} from '../../../my-user.service';
+import {Converter} from '../../../../services/converter';
 
 import {PhoneNumber} from '../../../phoneNumber.model';
 import {Group} from '../../groups-management/models/group.model';
@@ -65,7 +66,7 @@ export class UserCreateModalComponent implements OnDestroy {
 
     this.hasPermissionToChangePermission = this.myUserService.hasPermission(Permissions.PERMISSION_ADMINISTRATION);
 
-    const users = this.usersService.getUsers();
+    const users = this.usersService.getUsersWithoutFetch();
     for (let i = 0; i < users.length; i++) {
       this.usernames.push(users[i].username);
     }
@@ -171,33 +172,9 @@ export class UserCreateModalComponent implements OnDestroy {
       activated = false;
     }
 
-    let d = new Date(this.birthday);
-    let month = '' + (d.getMonth() + 1),
-      day = '' + d.getDate();
-    let year = d.getFullYear();
+    const birthdayformatted = Converter.getDateFormatted(this.birthday);
 
-    if (month.length < 2) {
-      month = '0' + month;
-    }
-    if (day.length < 2) {
-      day = '0' + day;
-    }
-
-    const birthdayformatted = [year, month, day].join('-');
-
-    d = new Date(this.join_date);
-    month = '' + (d.getMonth() + 1);
-    day = '' + d.getDate();
-    year = d.getFullYear();
-
-    if (month.length < 2) {
-      month = '0' + month;
-    }
-    if (day.length < 2) {
-      day = '0' + day;
-    }
-
-    const join_dateformatted = [year, month, day].join('-');
+    const join_dateformatted = Converter.getDateFormatted(this.join_date);
 
     console.log('create User | title: ' + title);
     console.log('create User | username: ' + username);
