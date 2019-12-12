@@ -1,5 +1,8 @@
 import {Component} from '@angular/core';
+import {NotificationsService} from 'angular2-notifications';
+
 import {CinemaService} from '../../cinema.service';
+import {TranslateService} from '../../../../translation/translate.service';
 import {Converter} from '../../../../services/converter';
 
 @Component({
@@ -8,7 +11,6 @@ import {Converter} from '../../../../services/converter';
   styleUrls: ['./movie-create-modal.component.css']
 })
 export class MovieCreateModalComponent {
-
   id: number;
   name: string;
   date: Date;
@@ -16,7 +18,9 @@ export class MovieCreateModalComponent {
   imageLink: string;
   bookedTickets: number;
 
-  constructor(private cinemaService: CinemaService) {
+  constructor(private cinemaService: CinemaService,
+              private notificationsService: NotificationsService,
+              private translate: TranslateService) {
   }
 
   create() {
@@ -65,6 +69,8 @@ export class MovieCreateModalComponent {
       (data: any) => {
         console.log(data);
         this.cinemaService.fetchMovies();
+        this.notificationsService.success(this.translate.getTranslationFor('SUCCESSFULLY'),
+          this.translate.getTranslationFor('CINEMA_TICKETS_ADMINISTRATION_MOVIE_CREATE_SUCCESSFULLY'));
       },
       (error) => console.log(error)
     );

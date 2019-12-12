@@ -1,8 +1,10 @@
 import {Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {NgForm} from '@angular/forms';
+import {NotificationsService} from 'angular2-notifications';
 
 import {GroupsService} from '../groups.service';
+import {TranslateService} from '../../../../translation/translate.service';
 
 @Component({
   selector: 'app-subgroup-update-modal',
@@ -10,16 +12,15 @@ import {GroupsService} from '../groups.service';
   styleUrls: ['./subgroup-update-modal.component.css']
 })
 export class SubgroupUpdateModalComponent {
-
-  sendingRequest = false;
-
   groupID: number;
   subgroupID: number;
   name: string;
   description: string;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any,
-              private groupsService: GroupsService, private dialogRef: MatDialogRef<SubgroupUpdateModalComponent>) {
+              private groupsService: GroupsService, private dialogRef: MatDialogRef<SubgroupUpdateModalComponent>,
+              private translate: TranslateService,
+              private notificationsService: NotificationsService) {
     this.groupID = data.groupID;
     this.subgroupID = data.subgroup.id;
     this.name = data.subgroup.name;
@@ -27,6 +28,8 @@ export class SubgroupUpdateModalComponent {
   }
 
   onUpdate(form: NgForm) {
+    this.dialogRef.close();
+
     const name = form.controls.name.value;
     const description = form.controls.description.value;
 
@@ -40,21 +43,16 @@ export class SubgroupUpdateModalComponent {
       'description': description,
       'group_id': this.groupID
     };
-
-    form.controls.name.disable();
-    form.controls.description.disable();
-
-    this.sendingRequest = true;
     this.groupsService.updateSubgroup(subgroup, this.subgroupID).subscribe(
       (data: any) => {
         console.log(data);
         this.groupsService.fetchGroups();
-        this.dialogRef.close();
+        this.notificationsService.success(this.translate.getTranslationFor('SUCCESSFULLY'),
+          this.translate.getTranslationFor('MANAGEMENT_GROUPS_UPDATE_SUBGROUP_SUCCESSFUL'));
       },
       (error) => {
         console.log(error);
         this.groupsService.fetchGroups();
-        this.dialogRef.close();
       }
     );
   }

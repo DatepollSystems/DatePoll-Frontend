@@ -1,11 +1,14 @@
 import {Component, Inject, OnDestroy} from '@angular/core';
 import {MAT_DIALOG_DATA} from '@angular/material/dialog';
+import {MatTableDataSource} from '@angular/material/table';
+import {NotificationsService} from 'angular2-notifications';
 import {Subscription} from 'rxjs';
 
 import {CinemaService} from '../../cinema.service';
-import {Movie, MovieBookingUser} from '../../models/movie.model';
 import {Converter} from '../../../../services/converter';
-import {MatTableDataSource} from '@angular/material/table';
+import {TranslateService} from '../../../../translation/translate.service';
+
+import {Movie, MovieBookingUser} from '../../models/movie.model';
 
 @Component({
   selector: 'app-movie-edit-modal',
@@ -27,7 +30,10 @@ export class MovieEditModalComponent implements OnDestroy {
 
   bookings: MatTableDataSource<MovieBookingUser>;
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any, private cinemaService: CinemaService) {
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any,
+              private cinemaService: CinemaService,
+              private notificationsService: NotificationsService,
+              private translate: TranslateService) {
     this.movie = data.movie;
     this.refresh();
 
@@ -107,6 +113,8 @@ export class MovieEditModalComponent implements OnDestroy {
         console.log(data);
         this.cinemaService.fetchMovies();
         this.cinemaService.fetchNotShownMovies();
+        this.notificationsService.success(this.translate.getTranslationFor('SUCCESSFULLY'),
+          this.translate.getTranslationFor('CINEMA_TICKETS_ADMINISTRATION_MOVIE_UPDATE_SUCCESSFULLY'));
       },
       (error) => console.log(error)
     );

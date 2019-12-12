@@ -29,8 +29,6 @@ export class UserCreateModalComponent implements OnDestroy {
   displayedColumns: string[] = ['label', 'phonenumber', 'action'];
   dataSource: MatTableDataSource<PhoneNumber>;
 
-  sendingRequest = false;
-
   usernames: string[] = [];
 
   emailAddresses: string[] = [];
@@ -155,7 +153,7 @@ export class UserCreateModalComponent implements OnDestroy {
   }
 
   create(form: NgForm) {
-    this.sendingRequest = true;
+    this.dialogRef.close();
 
     const title = form.controls.title.value;
     const username = form.controls.username.value;
@@ -217,8 +215,6 @@ export class UserCreateModalComponent implements OnDestroy {
       'permissions': this.permissions
     };
     console.log(userObject);
-
-    this.dialogRef.close();
 
     this.usersService.addUser(userObject).subscribe(
       (data: any) => {

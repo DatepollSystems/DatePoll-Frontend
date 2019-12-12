@@ -1,8 +1,10 @@
 import {Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {NgForm} from '@angular/forms';
+import {NotificationsService} from 'angular2-notifications';
 
 import {GroupsService} from '../groups.service';
+import {TranslateService} from '../../../../translation/translate.service';
 
 @Component({
   selector: 'app-group-update-modal',
@@ -15,10 +17,10 @@ export class GroupUpdateModalComponent {
   name: string;
   description: string;
 
-  sendingRequest = false;
-
   constructor(private groupsService: GroupsService,
               private dialogRef: MatDialogRef<GroupUpdateModalComponent>,
+              private translate: TranslateService,
+              private notificationsService: NotificationsService,
               @Inject(MAT_DIALOG_DATA) public data: any) {
     this.groupID = data.group.id;
     this.name = data.group.name;
@@ -26,6 +28,8 @@ export class GroupUpdateModalComponent {
   }
 
   onUpdate(form: NgForm) {
+    this.dialogRef.close();
+
     const name = form.controls.name.value;
     const description = form.controls.description.value;
 
@@ -37,20 +41,16 @@ export class GroupUpdateModalComponent {
       'description': description
     };
 
-    form.controls.name.disable();
-    form.controls.description.disable();
-
-    this.sendingRequest = true;
     this.groupsService.updateGroup(group, this.groupID).subscribe(
       (data: any) => {
         console.log(data);
         this.groupsService.fetchGroups();
-        this.dialogRef.close();
+        this.notificationsService.success(this.translate.getTranslationFor('SUCCESSFULLY'),
+          this.translate.getTranslationFor('MANAGEMENT_GROUPS_UPDATE_GROUP_SUCCESSFUL'));
       },
       (error) => {
         console.log(error);
         this.groupsService.fetchGroups();
-        this.dialogRef.close();
       }
     );
   }

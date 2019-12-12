@@ -25,8 +25,6 @@ export class UserUpdateModalComponent implements OnDestroy {
   @ViewChild('successfullyChangedPassword', {static: true}) successfullyChangedPassword: TemplateRef<any>;
   @ViewChild('successfullyUpdatedUser', {static: true}) successfullyUpdatedUser: TemplateRef<any>;
 
-  sendingRequest = false;
-
   usernames: string[] = [];
 
   user: User;
@@ -208,7 +206,7 @@ export class UserUpdateModalComponent implements OnDestroy {
   }
 
   update(form: NgForm) {
-    this.sendingRequest = true;
+    this.dialogRef.close();
 
     const title = form.controls.title.value;
     const username = form.controls.username.value;
@@ -270,8 +268,6 @@ export class UserUpdateModalComponent implements OnDestroy {
       'permissions': this.permissions
     };
     console.log(userObject);
-
-    this.dialogRef.close();
 
     this.usersService.updateUser(this.user.id, userObject).subscribe(
       (data: any) => {
