@@ -24,7 +24,7 @@
     "@angular/router": "^8.2.14",
     "@mdi/angular-material": "^4.7.95",
     "@ngx-gallery/core": "^4.0.3",
-    "angular-calendar": "^0.28.2",
+    "angular-calendar": "0.28.0",
     "angular2-cookie": "^1.2.6",
     "angular2-notifications": "^2.0.0",
     "bootstrap": "^4.4.1",
