@@ -3,12 +3,12 @@
 </div>
 
 <div class="row align-items-center justify-content-around">
-  <mat-form-field class="col-md-6 col-lg-8">
+  <mat-form-field class="col-6 col-md-6 col-lg-8">
     <input (keyup)="applyFilter($event.target.value)" matInput
            placeholder="{{'MANAGEMENT_USERS_SEARCH' | translate}}">
   </mat-form-field>
 
-  <div class="col-md-4 col-lg-2">
+  <div class="col-4 col-md-4 col-lg-2">
     <mat-form-field>
       <mat-label>{{'MANAGEMENT_DATEPOLL_LOGS_LOG_TYPE' | translate}}</mat-label>
       <mat-select [(value)]="selectedLogType" (selectionChange)="selectedLogTypeChange($event)">
@@ -18,7 +18,7 @@
       </mat-select>
     </mat-form-field>
   </div>
-  <div class="col-md-2 col-lg-2">
+  <div class="col-2 col-md-2 col-lg-2">
     <button (click)="refreshLogsList()" mat-icon-button
             matTooltip="{{'MANAGEMENT_DATEPOLL_LOGS_REFRESH' | translate}}"
             matTooltipPosition="right">
