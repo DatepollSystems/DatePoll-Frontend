@@ -16,6 +16,8 @@ export class Event {
   public locationPreview = '';
 
   public alreadyVotedFor = false;
+  public additionalInformation = null;
+
   public chartIsEmpty = true;
   // Calendar specific values
   start: Date;

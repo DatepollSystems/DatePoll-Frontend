@@ -461,9 +461,16 @@
   "EVENTS_VIEW_EVENT_CARD_BUTTON_DECIDE": "Antworten",
   "EVENTS_VIEW_EVENT_CARD_BUTTON_INFO": "Informationen",
   "EVENTS_VIEW_EVENT_CARD_BUTTON_CANCEL_VOTING": "Stimme entfernen",
+  "EVENTS_VIEW_EVENT_CARD_ADDITIONAL_INFORMATION": "Zusatz Information zur Antwort gegeben: ",
   "EVENTS_VIEW_EVENT_SUCCESSFULLY_VOTED": "Deine Entscheidung wurde erfolgreich gespeichert!",
   "EVENTS_VIEW_EVENT_SUCCESSFULLY_REMOVED_VOTING": "Deine Entscheidung wurde entfernt!",
   "EVENTS_VIEW_EVENT_NO_NEW_VOTINGS": "Du hast alle Entscheidungen getroffen und nichts mehr zu tun!",
+
+  "EVENTS_VIEW_EVENT_VOTE_FOR_ADDITIONAL_INFORMATION_ADD": "Zusatzinformation hinzufügen",
+  "EVENTS_VIEW_EVENT_VOTE_FOR_ADDITIONAL_INFORMATION_CHANGE": "Zusatzinformation bearbeiten",
+  "EVENTS_VIEW_EVENT_VOTE_FOR_ADDITIONAL_INFORMATION_MODAL_TITLE": "Zusatzinformationen",
+  "EVENTS_VIEW_EVENT_VOTE_FOR_ADDITIONAL_INFORMATION_MODAL_INFO": "Im nächsten Schritt kannst du dich für eine Antwort entscheiden!",
+  "EVENTS_VIEW_EVENT_VOTE_FOR_ADDITIONAL_INFORMATION_MODAL_FORM_PLACEHOLDER": "Zusatzinformationen",
 
   "EVENTS_ADMINISTRATION_MENU_REFRESH": "Eventliste aktualisieren",
   "EVENTS_ADMINISTRATION_MENU_SHOW_ALL_EVENTS": "Zeige vergangene Events an",

@@ -81,9 +81,11 @@ export class EventsViewComponent implements OnDestroy {
     const bottomSheetRef = this.bottomSheet.open(EventsVoteForDecisionModalComponent, {
       data: {'event': event},
     });
-    bottomSheetRef.afterDismissed().subscribe((decision) => {
-      if (decision != null) {
-        this.eventsUserSerivce.voteForDecision(event.id, decision).subscribe(
+    bottomSheetRef.afterDismissed().subscribe((dto) => {
+      if (dto.decision != null) {
+        const decision = dto.decision;
+
+        this.eventsUserSerivce.voteForDecision(event.id, decision, dto.additionalInformation).subscribe(
           (response: any) => {
             console.log(response);
             this.eventsUserSerivce.fetchEvents();
