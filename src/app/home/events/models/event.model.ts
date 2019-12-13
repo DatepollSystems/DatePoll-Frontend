@@ -34,6 +34,7 @@ export class Event {
   private resultGroups: EventResultGroup[] = [];
   private resultUsers: EventResultUser[] = [];
   private chartData: any[] = null;
+  public anonymous = false;
 
   constructor(id: number, name: string, startDate: Date, endDate: Date, forEveryone: boolean, description: string, location: string,
               decisions: Decision[]) {

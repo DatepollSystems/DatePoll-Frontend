@@ -28,7 +28,7 @@
           *ngIf="pieChartIsEmpty">{{'EVENTS_ADMINISTRATION_INFO_EVENT_NOBODY_VOTED_IN_GROUP' | translate}}</span>
       </mat-expansion-panel>
 
-      <mat-expansion-panel style="margin-top: 15px;">
+      <mat-expansion-panel style="margin-top: 15px;" *ngIf="!resultGroup?.event?.anonymous">
         <mat-expansion-panel-header>
           <mat-panel-title>
             {{'EVENTS_ADMINISTRATION_INFO_EVENT_MEMBERS_IN' | translate}} {{resultGroup.name}}
