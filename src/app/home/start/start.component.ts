@@ -101,9 +101,9 @@ export class StartComponent implements OnInit, OnDestroy {
       data: {'event': event},
     });
 
-    bottomSheetRef.afterDismissed().subscribe((decision) => {
-      if (decision != null) {
-        this.eventsUserSerivce.voteForDecision(event.id, decision).subscribe(
+    bottomSheetRef.afterDismissed().subscribe((dto) => {
+      if (dto != null) {
+        this.eventsUserSerivce.voteForDecision(event.id, dto.decision, dto.additionalInformation).subscribe(
           (response: any) => {
             console.log(response);
             this.eventsUserSerivce.fetchEvents();
