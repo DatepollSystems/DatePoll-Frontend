@@ -30,7 +30,7 @@ export class UsersManagementComponent implements OnInit, OnDestroy {
 
   displayedColumns: string[] = ['title', 'firstname', 'surname', 'emails', 'birthday', 'join_date', 'streetname', 'streetnumber',
     'zipcode', 'location', 'phoneNumbers', 'activity', 'username', 'actions'];
-  filterValue: string = null;
+  filterValue = '';
 
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
@@ -87,6 +87,8 @@ export class UsersManagementComponent implements OnInit, OnDestroy {
     this.dataSource = new MatTableDataSource(this.users);
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
+
+    this.applyFilter(this.filterValue);
   }
 
   applyFilter(filterValue: string) {

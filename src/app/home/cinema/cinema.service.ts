@@ -89,8 +89,8 @@ export class CinemaService {
           }
 
           const date = new Date(movie.date);
-          const localMovie = new Movie(movie.id, movie.name, date, movie.trailerLink, movie.posterLink, workerID, movie.worker_name,
-            emergencyWorkerID, movie.emergency_worker_name, movie.bookedTickets, movie.movie_year_id);
+          const localMovie = new Movie(movie.id, movie.name, date, movie.trailer_link, movie.poster_link, workerID, movie.worker_name,
+            emergencyWorkerID, movie.emergency_worker_name, movie.booked_tickets, movie.movie_year_id);
 
           movies.push(localMovie);
         }
@@ -130,8 +130,8 @@ export class CinemaService {
         }
 
         const date = new Date(movie.date);
-        const localMovie = new Movie(movie.id, movie.name, date, movie.trailerLink, movie.posterLink, workerID, movie.worker_name,
-          emergencyWorkerID, movie.emergency_worker_name, movie.bookedTickets, movie.movie_year_id);
+        const localMovie = new Movie(movie.id, movie.name, date, movie.trailer_link, movie.poster_link, workerID, movie.worker_name,
+          emergencyWorkerID, movie.emergency_worker_name, movie.booked_tickets, movie.movie_year_id);
 
         const localBookings = [];
 
@@ -210,8 +210,8 @@ export class CinemaService {
           }
 
           const date = new Date(movie.date);
-          const localMovie = new Movie(movie.id, movie.name, date, movie.trailerLink, movie.posterLink, workerID, movie.worker_name,
-            emergencyWorkerID, movie.emergency_worker_name, movie.bookedTickets, movie.movie_year_id);
+          const localMovie = new Movie(movie.id, movie.name, date, movie.trailer_link, movie.poster_link, workerID, movie.worker_name,
+            emergencyWorkerID, movie.emergency_worker_name, movie.booked_tickets, movie.movie_year_id);
           localMovie.bookedTicketsForYourself = movie.booked_tickets_for_yourself;
           movies.push(localMovie);
         }

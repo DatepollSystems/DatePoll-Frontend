@@ -52,7 +52,7 @@
         <span *ngIf="pieChartIsEmpty">{{'EVENTS_ADMINISTRATION_INFO_EVENT_NOBODY_VOTED' | translate}}</span>
       </mat-expansion-panel>
 
-      <mat-expansion-panel style="margin-top: 15px;">
+      <mat-expansion-panel style="margin-top: 15px;" *ngIf="!event?.anonymous">
         <mat-expansion-panel-header>
           <mat-panel-title>
             {{'EVENTS_ADMINISTRATION_INFO_EVENT_COMPLETE_USERS_TABLE' | translate}}

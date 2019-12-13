@@ -280,6 +280,7 @@ export class EventsService {
 
         const event = new Event(response.id, response.name, new Date(response.start_date), new Date(response.end_date),
           response.for_everyone, response.description, response.location, decisions);
+        event.anonymous = response.resultGroups.anonymous;
 
         let resultUsers = [];
         for (let i = 0; i < response.resultGroups.allUsers.length; i++) {

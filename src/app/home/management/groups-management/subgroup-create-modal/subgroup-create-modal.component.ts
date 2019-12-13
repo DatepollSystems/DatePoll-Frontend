@@ -1,8 +1,10 @@
 import {Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {NgForm} from '@angular/forms';
+import {NotificationsService} from 'angular2-notifications';
 
 import {GroupsService} from '../groups.service';
+import {TranslateService} from '../../../../translation/translate.service';
 
 @Component({
   selector: 'app-subgroup-create-modal',
@@ -10,18 +12,19 @@ import {GroupsService} from '../groups.service';
   styleUrls: ['./subgroup-create-modal.component.css']
 })
 export class SubgroupCreateModalComponent {
-
-  sendingRequest = false;
-
   groupID: number;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any,
               private groupsService: GroupsService,
-              private dialogRef: MatDialogRef<SubgroupCreateModalComponent>) {
+              private dialogRef: MatDialogRef<SubgroupCreateModalComponent>,
+              private translate: TranslateService,
+              private notificationsService: NotificationsService) {
     this.groupID = data.groupID;
   }
 
   onCreate(form: NgForm) {
+    this.dialogRef.close();
+
     const name = form.controls.name.value;
     const description = form.controls.description.value;
 
@@ -35,20 +38,16 @@ export class SubgroupCreateModalComponent {
       'group_id': this.groupID
     };
 
-    form.controls.name.disable();
-    form.controls.description.disable();
-
-    this.sendingRequest = true;
     this.groupsService.addSubgroup(subgroup).subscribe(
       (data: any) => {
         console.log(data);
         this.groupsService.fetchGroups();
-        this.dialogRef.close();
+        this.notificationsService.success(this.translate.getTranslationFor('SUCCESSFULLY'),
+          this.translate.getTranslationFor('MANAGEMENT_GROUPS_CREATE_SUBGROUP_SUCCESSFUL'));
       },
       (error) => {
         console.log(error);
         this.groupsService.fetchGroups();
-        this.dialogRef.close();
       }
     );
   }

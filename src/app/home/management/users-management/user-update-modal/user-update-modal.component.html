@@ -246,7 +246,6 @@
   </form>
 </div>
 <div mat-dialog-actions style="margin-top: 15px">
-  <mat-progress-bar *ngIf="sendingRequest" mode="indeterminate" style="margin-bottom: 10px;"></mat-progress-bar>
   <button [mat-dialog-close] mat-button>{{'CLOSE' | translate}}</button>
   <button (click)="form.ngSubmit.emit()" [disabled]="!form.form.valid" class="success-button"
           mat-button>{{'SAVE' | translate}}</button>

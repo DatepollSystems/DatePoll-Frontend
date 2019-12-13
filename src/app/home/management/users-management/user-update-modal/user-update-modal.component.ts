@@ -9,6 +9,7 @@ import {UsersService} from '../users.service';
 import {GroupsService} from '../../groups-management/groups.service';
 import {PerformanceBadgesService} from '../../performance-badges-management/performance-badges.service';
 import {MyUserService} from '../../../my-user.service';
+import {Converter} from '../../../../services/converter';
 
 import {Permissions} from '../../../../permissions';
 import {PhoneNumber} from '../../../phoneNumber.model';
@@ -23,8 +24,6 @@ import {UserPerformanceBadge} from '../userPerformanceBadge.model';
 export class UserUpdateModalComponent implements OnDestroy {
   @ViewChild('successfullyChangedPassword', {static: true}) successfullyChangedPassword: TemplateRef<any>;
   @ViewChild('successfullyUpdatedUser', {static: true}) successfullyUpdatedUser: TemplateRef<any>;
-
-  sendingRequest = false;
 
   usernames: string[] = [];
 
@@ -142,7 +141,7 @@ export class UserUpdateModalComponent implements OnDestroy {
 
     this.hasPermissionToChangePermission = this.myUserService.hasPermission(Permissions.PERMISSION_ADMINISTRATION);
 
-    const users = this.usersService.getUsers();
+    const users = this.usersService.getUsersWithoutFetch();
     for (let i = 0; i < users.length; i++) {
       this.usernames.push(users[i].username);
     }
@@ -207,7 +206,7 @@ export class UserUpdateModalComponent implements OnDestroy {
   }
 
   update(form: NgForm) {
-    this.sendingRequest = true;
+    this.dialogRef.close();
 
     const title = form.controls.title.value;
     const username = form.controls.username.value;
@@ -224,33 +223,9 @@ export class UserUpdateModalComponent implements OnDestroy {
       activated = false;
     }
 
-    let d = new Date(this.birthday);
-    let month = '' + (d.getMonth() + 1),
-      day = '' + d.getDate();
-    let year = d.getFullYear();
+    const birthdayformatted = Converter.getDateFormatted(this.birthday);
 
-    if (month.length < 2) {
-      month = '0' + month;
-    }
-    if (day.length < 2) {
-      day = '0' + day;
-    }
-
-    const birthdayformatted = [year, month, day].join('-');
-
-    d = new Date(this.join_date);
-    month = '' + (d.getMonth() + 1);
-    day = '' + d.getDate();
-    year = d.getFullYear();
-
-    if (month.length < 2) {
-      month = '0' + month;
-    }
-    if (day.length < 2) {
-      day = '0' + day;
-    }
-
-    const join_dateformatted = [year, month, day].join('-');
+    const join_dateformatted = Converter.getDateFormatted(this.join_date);
 
     console.log('update User | title: ' + title);
     console.log('update User | username: ' + username);
@@ -293,8 +268,6 @@ export class UserUpdateModalComponent implements OnDestroy {
       'permissions': this.permissions
     };
     console.log(userObject);
-
-    this.dialogRef.close();
 
     this.usersService.updateUser(this.user.id, userObject).subscribe(
       (data: any) => {

@@ -20,7 +20,6 @@ import {Decision} from '../../models/decision.model';
 })
 export class EventCreateModalComponent implements OnDestroy {
   @ViewChild('successfullyCreatedEvent', {static: true}) successfullyCreatedEvent: TemplateRef<any>;
-  sendingRequest = false;
 
   startDate: Date;
   endDate: Date;
@@ -122,7 +121,7 @@ export class EventCreateModalComponent implements OnDestroy {
   }
 
   create(form: NgForm) {
-    this.sendingRequest = true;
+    this.dialogRef.close();
 
     const name = form.controls.name.value;
     const startDateHours = form.controls.startDateHours.value;
@@ -141,7 +140,6 @@ export class EventCreateModalComponent implements OnDestroy {
 
     const event = new Event(0, name, this.startDate, this.endDate, forEveryone, description, location, this.decisions);
     console.log(event);
-    this.dialogRef.close();
     this.eventsService.createEvent(event).subscribe(
       (response: any) => {
         console.log(response);
