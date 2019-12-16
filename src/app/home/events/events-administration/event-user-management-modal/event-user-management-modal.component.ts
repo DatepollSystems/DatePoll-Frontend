@@ -80,7 +80,7 @@ export class EventUserManagementModalComponent implements OnDestroy {
       data: {'event': this.event},
     });
     bottomSheetRef.afterDismissed().subscribe((dto) => {
-      if (dto.decision != null) {
+      if (dto != null) {
         const decision = dto.decision;
 
         this.savingVoting = true;
