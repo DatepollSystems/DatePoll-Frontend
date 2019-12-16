@@ -30,7 +30,7 @@ export class SubgroupUserRoleUpdateModalComponent {
     this.groupsService.updateUserInSubgroup(this.user.id, this.subgroupID, role).subscribe(
       (data: any) => {
         console.log(data);
-        this.groupsService.fetchGroup(this.subgroupID);
+        this.groupsService.fetchSubgroup(this.subgroupID);
         this.dialogRef.close();
       },
       (error) => console.log(error)
