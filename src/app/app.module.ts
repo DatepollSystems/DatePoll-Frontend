@@ -42,6 +42,7 @@ import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
 import {HomeComponent} from './home/home.component';
 import {StartComponent} from './home/start/start.component';
 import {TableBookingsRowComponent} from './home/start/table-bookings-row/table-bookings-row.component';
+import {BrowserCompatibilityModalComponent} from './browser-compatibility-modal/browser-compatibility-modal.component';
 
 registerLocaleData(localeDe);
 
@@ -52,7 +53,8 @@ registerLocaleData(localeDe);
     HomeComponent,
     StartComponent,
     NoSanitizePipe,
-    TableBookingsRowComponent
+    TableBookingsRowComponent,
+    BrowserCompatibilityModalComponent
   ],
   imports: [
     BrowserModule,
@@ -67,6 +69,9 @@ registerLocaleData(localeDe);
       // position: ['top', 'right'],
       timeOut: 5000
     }),
+  ],
+  entryComponents: [
+    BrowserCompatibilityModalComponent
   ],
   providers: [
     AuthService,
