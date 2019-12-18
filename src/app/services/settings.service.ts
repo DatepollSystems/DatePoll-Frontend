@@ -14,12 +14,14 @@ export class SettingsService {
   public communityUrlChange: Subject<string> = new Subject<string>();
   public openWeatherMapKeyChange: Subject<string> = new Subject<string>();
   public openWeatherMapCinemaCityIdChange: Subject<string> = new Subject<string>();
+  public appUrlChange: Subject<string> = new Subject<string>();
   private _showCinema = true;
   private _showEvents = true;
   private _communityName = 'DatePoll Web';
   private _communityUrl = 'https://datepoll.dafnik.me';
   private _openWeatherMapKey = '';
   private _openWeatherMapCinemaCityId = '';
+  private _appUrl = '';
 
   constructor(private httpService: HttpService, private router: Router) {
   }
@@ -100,13 +102,13 @@ export class SettingsService {
     this.setCommunityName(communityName);
 
     const body = {
-      'community_name': '"' + communityName + '"'
+      'community_name': communityName
     };
     return this.httpService.setSettingsRequest('/name', body, 'setCommunityName');
   }
 
   public getCommunityUrl(): string {
-    this.httpService.getSettingRequest('/url', 'settingsCommunityUrl').subscribe(
+    this.httpService.getSettingRequest('/communityUrl', 'settingsCommunityUrl').subscribe(
       (response: any) => {
         console.log(response);
         this.setCommunityUrl(response.community_url);
@@ -120,9 +122,29 @@ export class SettingsService {
     this.setCommunityUrl(communityUrl);
 
     const body = {
-      'community_url': '"' + communityUrl + '"'
+      'community_url': communityUrl
     };
-    return this.httpService.setSettingsRequest('/url', body, 'setCommunityUrl');
+    return this.httpService.setSettingsRequest('/communityUrl', body, 'setCommunityUrl');
+  }
+
+  public getAppUrl(): string {
+    this.httpService.getSettingRequest('/url', 'settingsCommunityUrl').subscribe(
+      (response: any) => {
+        console.log(response);
+        this.setAppUrl(response.url);
+      },
+      (error) => console.log(error)
+    );
+    return this._appUrl;
+  }
+
+  public setAdminAppUrl(url: string) {
+    this.setAppUrl(url);
+
+    const body = {
+      'url': url
+    };
+    return this.httpService.setSettingsRequest('/url', body, 'setAppUrl');
   }
 
   public getOpenWeatherMapKey(): string {
@@ -140,7 +162,7 @@ export class SettingsService {
     this.setOpenWeatherMapKey(key);
 
     const body = {
-      'openweathermap_key': '"' + key + '"'
+      'openweathermap_key': key
     };
     return this.httpService.setSettingsRequest('/openweathermap/key', body, 'setOpenWeatherMapKey');
   }
@@ -160,7 +182,7 @@ export class SettingsService {
     this.setOpenWeatherMapCinemaCityId(id);
 
     const body = {
-      'openweathermap_cinema_city_id': '"' + id + '"'
+      'openweathermap_cinema_city_id': id
     };
     return this.httpService.setSettingsRequest('/openweathermap/cinemaCityId', body, 'setOpenWeatherMapCinemaCityId');
   }
@@ -183,6 +205,11 @@ export class SettingsService {
   private setCommunityUrl(communityUrl: string) {
     this._communityUrl = communityUrl;
     this.communityUrlChange.next(this._communityUrl);
+  }
+
+  private setAppUrl(url: string) {
+    this._appUrl = url;
+    this.appUrlChange.next(this._appUrl);
   }
 
   private setOpenWeatherMapKey(key: string) {
