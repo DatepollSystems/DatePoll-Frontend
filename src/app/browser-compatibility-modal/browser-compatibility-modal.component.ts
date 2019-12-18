@@ -9,9 +9,9 @@ import {TranslateService} from '../translation/translate.service';
 })
 export class BrowserCompatibilityModalComponent implements OnInit {
 
-  private currentYear: number;
+  public currentYear: number;
 
-  private content2: string;
+  public content2: string;
 
   constructor(private translate: TranslateService) { }
 

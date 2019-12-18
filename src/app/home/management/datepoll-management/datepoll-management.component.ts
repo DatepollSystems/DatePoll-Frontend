@@ -154,13 +154,13 @@ export class DatepollManagementComponent implements OnInit, OnDestroy {
   }
 
   autoDetectAppUrl() {
-    this.appUrl = window.location.host;
+    this.appUrl = 'https://' + window.location.host;
   }
 
   changeAppUrl(form: NgForm) {
     this.appUrlSaving = true;
     const appUrl = form.controls.appUrl.value;
-    this.settingsService.setAdminCommunityUrl(appUrl).subscribe(
+    this.settingsService.setAdminAppUrl(appUrl).subscribe(
       (response: any) => {
         console.log(response);
         this.appUrlSaving = false;
