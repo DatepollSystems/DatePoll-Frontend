@@ -8,9 +8,11 @@
       <a (click)="onPageChange()" mat-list-item routerLink="/home">
         <mat-icon>home</mat-icon>
         Home</a>
+
       <a (click)="onPageChange()" mat-list-item routerLink="calendar" routerLinkActive="activated">
-        <mat-icon>calendar_today</mat-icon>
+        <mat-icon>today</mat-icon>
         {{'CALENDAR' | translate}}</a>
+
       <mat-divider></mat-divider>
 
       <div *ngIf="showEvents">
