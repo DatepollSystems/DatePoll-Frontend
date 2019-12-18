@@ -1,7 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {NavigationEnd, Router} from '@angular/router';
-import {CookieService} from 'angular2-cookie/core';
 import {MatDialog} from '@angular/material/dialog';
+
+import {CookieService} from 'angular2-cookie/core';
+
+import {BrowserCompatibilityModalComponent} from './browser-compatibility-modal/browser-compatibility-modal.component';
 
 @Component({
   selector: 'app-root',
@@ -10,7 +13,10 @@ import {MatDialog} from '@angular/material/dialog';
 })
 export class AppComponent implements OnInit {
 
+  private dateIn80Years: Date = new Date();
+
   constructor(private router: Router, private cookieService: CookieService, private dialog: MatDialog) {
+    this.dateIn80Years.setFullYear(this.dateIn80Years.getFullYear() + 80);
   }
 
   ngOnInit() {
@@ -21,14 +27,22 @@ export class AppComponent implements OnInit {
       window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
     });
 
-    const ua = window.navigator.userAgent;
-    const msie = ua.indexOf('MSIE ');
+    if (this.cookieService.get('ie11c') == null) {
+      console.log('IE11C Cookie set: false');
+      const ua = window.navigator.userAgent;
+      const msie = ua.indexOf('MSIE ');
 
-    if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./)) {
-      console.log('test');
-      alert('It looks like your are using Internet Explorer! Internet Explorer is not supported! You can still access' +
-        ' the Website but there is no guarantee everything is working!');
+      if (msie > 0) {
+        this.dialog.open(BrowserCompatibilityModalComponent, {
+          width: '80vh'
+        });
+      }
+
+      this.cookieService.put('ie11c', 'set', {expires: this.dateIn80Years});
+    } else {
+      console.log('IE11C Cookie set: true');
     }
+
 
   }
 

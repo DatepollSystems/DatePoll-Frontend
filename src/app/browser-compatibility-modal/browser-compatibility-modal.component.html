@@ -1,1 +1,13 @@
-<p>browser-compatibility-modal works!</p>
+<h1 mat-dialog-title>{{'BROWSER_COMPATIBILITY_HEADER' | translate}}</h1>
+<div mat-dialog-content>
+  <mat-card class="info-mat-card">
+    {{'BROWSER_COMPATIBILITY_INFO_NEVER_COME_BACK' | translate}}
+  </mat-card>
+
+  {{'BROWSER_COMPATIBILITY_CONTENT_1' | translate}}{{currentYear}}.
+
+  <div [innerHTML]="content2 | noSanitize"></div>
+</div>
+<div mat-dialog-actions style="margin-top: 15px">
+  <button [mat-dialog-close] mat-button>{{'CLOSE' | translate}}</button>
+</div>
