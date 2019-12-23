@@ -43,6 +43,7 @@ export class EventsUserService {
           const event = new Event(fetchedEvent.id, fetchedEvent.name, new Date(fetchedEvent.start_date), new Date(fetchedEvent.end_date),
             fetchedEvent.for_everyone, fetchedEvent.description, fetchedEvent.location, decisions);
           event.alreadyVotedFor = fetchedEvent.already_voted;
+          event.additionalInformation = fetchedEvent.additional_information;
           events.push(event);
         }
 
@@ -52,10 +53,11 @@ export class EventsUserService {
     );
   }
 
-  public voteForDecision(eventId: number, decision: Decision) {
+  public voteForDecision(eventId: number, decision: Decision, additionalInformation = null) {
     const dto = {
       'event_id': eventId,
-      'decision_id': decision.id
+      'decision_id': decision.id,
+      'additional_information': additionalInformation
     };
     return this.httpService.loggedInV1POSTRequest('/avent/vote', dto, 'voteForDecision');
   }

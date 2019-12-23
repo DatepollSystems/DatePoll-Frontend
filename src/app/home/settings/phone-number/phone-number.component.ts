@@ -50,7 +50,7 @@ export class PhoneNumberComponent {
     this._myUserService.addPhoneNumber(phoneNumberObject).subscribe(
       (data: any) => {
         console.log(data);
-        const phoneNumber = new PhoneNumber(data.phone_number_id, form.value.label, form.value.phoneNumber);
+        const phoneNumber = new PhoneNumber(data.phone_number.id, form.value.label, form.value.phoneNumber);
         this.phoneNumbers.push(phoneNumber);
         this.dataSource = new MatTableDataSource(this.phoneNumbers);
         this._myUserService.setPhoneNumbers(this.phoneNumbers);

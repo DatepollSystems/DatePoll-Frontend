@@ -31,6 +31,10 @@ export class DatepollManagementComponent implements OnInit, OnDestroy {
   communityUrlSubscription: Subscription;
   communityUrlSaving = false;
 
+  appUrl: string;
+  appUrlSubscription: Subscription;
+  appUrlSaving = false;
+
   openWeatherMapKey: string;
   openWeatherMapKeySubscription: Subscription;
   openWeatherMapKeySaving = false;
@@ -72,6 +76,11 @@ export class DatepollManagementComponent implements OnInit, OnDestroy {
       this.communityUrl = value;
     });
 
+    this.appUrl = settingsService.getAppUrl();
+    this.appUrlSubscription = settingsService.appUrlChange.subscribe((value) => {
+      this.appUrl = value;
+    });
+
     this.openWeatherMapKey = settingsService.getOpenWeatherMapKey();
     this.openWeatherMapKeySubscription = settingsService.openWeatherMapKeyChange.subscribe((value) => {
       this.openWeatherMapKey = value;
@@ -102,6 +111,7 @@ export class DatepollManagementComponent implements OnInit, OnDestroy {
     this.eventsServiceEnabledChange.unsubscribe();
     this.communityNameSubscription.unsubscribe();
     this.communityUrlSubscription.unsubscribe();
+    this.appUrlSubscription.unsubscribe();
     this.openWeatherMapKeySubscription.unsubscribe();
     this.openWeatherMapCinemaCityIdSubscription.unsubscribe();
     this.permissionSubscription.unsubscribe();
@@ -138,6 +148,24 @@ export class DatepollManagementComponent implements OnInit, OnDestroy {
         this.communityUrlSaving = false;
         this.notificationsService.success(this.translate.getTranslationFor('SUCCESSFULLY'),
           this.translate.getTranslationFor('MANAGEMENT_DATEPOLL_COMMUNITY_URL_CHANGED_SUCCESSFULLY'));
+      },
+      (error) => console.log(error)
+    );
+  }
+
+  autoDetectAppUrl() {
+    this.appUrl = 'https://' + window.location.host;
+  }
+
+  changeAppUrl(form: NgForm) {
+    this.appUrlSaving = true;
+    const appUrl = form.controls.appUrl.value;
+    this.settingsService.setAdminAppUrl(appUrl).subscribe(
+      (response: any) => {
+        console.log(response);
+        this.appUrlSaving = false;
+        this.notificationsService.success(this.translate.getTranslationFor('SUCCESSFULLY'),
+          this.translate.getTranslationFor('MANAGEMENT_DATEPOLL_APP_URL_CHANGED_SUCCESSFULLY'));
       },
       (error) => console.log(error)
     );

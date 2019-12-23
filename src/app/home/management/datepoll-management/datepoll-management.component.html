@@ -43,6 +43,29 @@
             </div>
           </div>
 
+          <form #changeAppUrlForm="ngForm" (ngSubmit)="changeAppUrl(changeAppUrlForm)"
+                class="row" style="margin-top: 15px">
+            <mat-form-field class="col-8 col-sm-8 col-md-4">
+              <input #appUrlModel="ngModel" [(ngModel)]="appUrl" id="appUrl" matInput
+                     maxlength="128" minlength="1" name="appUrl"
+                     ngModel placeholder="{{'MANAGEMENT_DATEPOLL_APP_URL' | translate}}" required
+                     type="text">
+              <mat-error *ngIf="appUrlModel.invalid">
+                {{'MANAGEMENT_DATEPOLL_APP_URL_NOT_VALID' | translate}}
+              </mat-error>
+            </mat-form-field>
+
+            <div class="col-4 col-sm-4 col-md-2">
+              <button class="info-button" mat-button type="button" (click)="autoDetectAppUrl()">Autodetect</button>
+            </div>
+
+            <div class="col-12 col-sm-12 col-md-3">
+              <button class="success-button" mat-button [class.spinner]="appUrlSaving"
+                      [disabled]="!changeAppUrlForm.valid || appUrlSaving"
+                      type="submit">{{'SAVE' | translate}}</button>
+            </div>
+          </form>
+
           <div class="row">
             <div class="col-12">
               <h2>Vereins Einstellungen</h2>

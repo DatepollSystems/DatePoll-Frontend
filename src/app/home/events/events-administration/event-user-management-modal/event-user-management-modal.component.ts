@@ -79,10 +79,12 @@ export class EventUserManagementModalComponent implements OnDestroy {
     const bottomSheetRef = this.bottomSheet.open(EventsVoteForDecisionModalComponent, {
       data: {'event': this.event},
     });
-    bottomSheetRef.afterDismissed().subscribe((decision) => {
-      if (decision != null) {
+    bottomSheetRef.afterDismissed().subscribe((dto) => {
+      if (dto != null) {
+        const decision = dto.decision;
+
         this.savingVoting = true;
-        this.eventsService.voteForUsers(this.event, decision, selected).subscribe(
+        this.eventsService.voteForUsers(this.event, decision, dto.additionalInformation, selected).subscribe(
           (response: any) => {
             console.log(response);
 

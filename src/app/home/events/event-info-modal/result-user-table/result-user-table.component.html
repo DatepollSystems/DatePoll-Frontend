@@ -33,6 +33,7 @@
         <td *matCellDef="let resultUser" mat-cell>
           <b
             *ngIf="resultUser.decision != null">{{resultUser.decision}}</b>
+          <i *ngIf="resultUser.decision != null && resultUser?.additionalInformation?.length > 0">&nbsp;({{resultUser.additionalInformation}})</i>
           <span
             *ngIf="resultUser.decision == null">{{'EVENTS_ADMINISTRATION_INFO_EVENT_UNKNOWN_VOTING' | translate}}</span>
         </td>

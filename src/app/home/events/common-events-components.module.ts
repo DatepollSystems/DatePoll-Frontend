@@ -21,6 +21,7 @@ import {ResultUserTableComponent} from './event-info-modal/result-user-table/res
 import {ResultUserBarChartComponent} from './event-info-modal/result-user-bar-chart/result-user-bar-chart.component';
 import {EventUpdateModalComponent} from './events-administration/event-update-modal/event-update-modal.component';
 import {EventDeleteModalComponent} from './events-administration/event-delete-modal/event-delete-modal.component';
+import {EventsVoteForDecisionAdditionalInformationModalComponent} from './events-view/events-vote-for-decision-modal/events-vote-for-decision-additional-information-modal/events-vote-for-decision-additional-information-modal.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import {EventDeleteModalComponent} from './events-administration/event-delete-mo
     GroupInfoCardComponent,
     SubgroupInfoCardComponent,
     EventsVoteForDecisionModalComponent,
+    EventsVoteForDecisionAdditionalInformationModalComponent,
     EventDecisionsListComponent
   ],
   entryComponents: [
@@ -39,6 +41,7 @@ import {EventDeleteModalComponent} from './events-administration/event-delete-mo
     EventUpdateModalComponent,
     EventDeleteModalComponent,
     EventsVoteForDecisionModalComponent,
+    EventsVoteForDecisionAdditionalInformationModalComponent
   ],
   imports: [
     CommonModule,
@@ -59,6 +62,7 @@ import {EventDeleteModalComponent} from './events-administration/event-delete-mo
     EventUpdateModalComponent,
     EventDeleteModalComponent,
     EventsVoteForDecisionModalComponent,
+    EventsVoteForDecisionAdditionalInformationModalComponent,
     EventDecisionsListComponent
   ]
 })

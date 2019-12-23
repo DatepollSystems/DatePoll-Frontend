@@ -286,7 +286,7 @@ export class EventsService {
         for (let i = 0; i < response.resultGroups.allUsers.length; i++) {
           const resultUser = response.resultGroups.allUsers[i];
           resultUsers.push(new EventResultUser(resultUser.id, resultUser.firstname, resultUser.surname, resultUser.decisionId,
-            resultUser.decision));
+            resultUser.decision, resultUser.additional_information));
         }
         event.setResultUsers(resultUsers);
 
@@ -302,7 +302,7 @@ export class EventsService {
             const localResultUser = localResultGroup.users[j];
 
             resultUsers.push(new EventResultUser(localResultUser.id, localResultUser.firstname, localResultUser.surname,
-              localResultUser.decisionId, localResultUser.decision));
+              localResultUser.decisionId, localResultUser.decision, localResultUser.additional_information));
           }
           resultGroup.setResultUsers(resultUsers);
 
@@ -319,7 +319,7 @@ export class EventsService {
               const localResultUser = localResultSubgroup.users[x];
 
               resultUsers.push(new EventResultUser(localResultUser.id, localResultUser.firstname, localResultUser.surname,
-                localResultUser.decisionId, localResultUser.decision));
+                localResultUser.decisionId, localResultUser.decision, localResultUser.additional_information));
             }
 
             resultSubgroup.setResultUsers(resultUsers);
@@ -340,7 +340,7 @@ export class EventsService {
   }
 
 
-  public voteForUsers(event: Event, decision: Decision, users: EventResultUser[]) {
+  public voteForUsers(event: Event, decision: Decision, additionalInformation: string, users: EventResultUser[]) {
     const userIds = [];
     for (const user of users) {
       userIds.push(user.id);
@@ -348,7 +348,8 @@ export class EventsService {
 
     const dto = {
       'decision_id': decision.id,
-      'user_ids': userIds
+      'user_ids': userIds,
+      'additional_information': additionalInformation
     };
 
     return this.httpService.loggedInV1POSTRequest('/avent/administration/avent/' + event.id + '/voteForUsers', dto);

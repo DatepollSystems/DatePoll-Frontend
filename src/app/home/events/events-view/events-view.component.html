@@ -24,11 +24,14 @@
             </mat-card-subtitle>
           </mat-card-header>
           <mat-card-content>
-            <p style="margin-left: 15px;">
+            <p style="margin-left: 15px;" *ngIf="event?.description?.length > 0">
               {{event.description}}
             </p>
+            <p style="margin-left: 15px;"
+               *ngIf="event?.additionalInformation?.length > 0">{{'EVENTS_VIEW_EVENT_CARD_ADDITIONAL_INFORMATION' | translate}}
+              <i>{{event.additionalInformation}}</i></p>
           </mat-card-content>
-          <mat-card-actions>
+          <mat-card-actions style="padding-left: 24px;">
             <button (click)="onVote(event)" *ngIf="!event.alreadyVotedFor" color="primary"
                     mat-flat-button>{{'EVENTS_VIEW_EVENT_CARD_BUTTON_DECIDE' | translate}}</button>
             <button #cancelVotingButton (click)="cancelVoting(event, cancelVotingButton)" *ngIf="event.alreadyVotedFor"
