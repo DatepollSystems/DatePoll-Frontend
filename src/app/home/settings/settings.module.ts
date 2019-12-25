@@ -7,6 +7,7 @@ import {CustomFormsModule} from 'ng2-validation';
 import {MaterialModule} from '../../material-module';
 import {TranslationModule} from '../../translation/translation.module';
 import {CommonComponentsModule} from '../../services/common-components.module';
+import {SettingsRoutingModule} from './settings-routing.module';
 
 import {SettingsComponent} from './settings.component';
 import {PersonalDataComponent} from './personal-data/personal-data.component';
@@ -16,7 +17,7 @@ import {PasswordComponent} from './password/password.component';
 import {TwoFactorAuthenticationComponent} from './two-factor-authentication/two-factor-authentication.component';
 import {SessionsComponent} from './sessions/sessions.component';
 import {CalendarTokenComponent} from './calendar-token/calendar-token.component';
-import {SettingsRoutingModule} from './settings-routing.module';
+import {PrivacySettingsComponent} from './privacy-settings/privacy-settings.component';
 
 
 @NgModule({
@@ -29,6 +30,7 @@ import {SettingsRoutingModule} from './settings-routing.module';
     CalendarTokenComponent,
     TwoFactorAuthenticationComponent,
     SessionsComponent,
+    PrivacySettingsComponent,
   ],
   entryComponents: [
     PersonalDataComponent,
@@ -37,6 +39,7 @@ import {SettingsRoutingModule} from './settings-routing.module';
     PasswordComponent,
     CalendarTokenComponent,
     SessionsComponent,
+    PrivacySettingsComponent
   ],
   imports: [
     CommonModule,

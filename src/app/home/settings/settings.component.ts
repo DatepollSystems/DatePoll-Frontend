@@ -7,6 +7,7 @@ import {PasswordComponent} from './password/password.component';
 import {MatDialog} from '@angular/material/dialog';
 import {CalendarTokenComponent} from './calendar-token/calendar-token.component';
 import {SessionsComponent} from './sessions/sessions.component';
+import {PrivacySettingsComponent} from './privacy-settings/privacy-settings.component';
 
 @Component({
   selector: 'app-settings',
@@ -48,8 +49,14 @@ export class SettingsComponent {
     });
   }
 
-  onSessionManagmentModal() {
+  onSessionManagementModal() {
     this.dialog.open(SessionsComponent, {
+      width: '80vh'
+    });
+  }
+
+  onPrivacySettingsModal() {
+    this.dialog.open(PrivacySettingsComponent, {
       width: '80vh'
     });
   }
