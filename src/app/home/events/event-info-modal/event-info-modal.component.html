@@ -6,15 +6,6 @@
       - {{endDate | date:'dd.MM.yyyy HH:mm'}}</b>
   </div>
 
-  <!-- Location -->
-  <div *ngIf="location != null">
-    <div class="row" *ngIf="location.length > 0" style="margin-bottom: 15px;">
-      <b class="col-12">{{'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_LOCATION' | translate}}:
-        <a target="_blank" rel="noopener"
-           href="https://www.google.com/maps/search/?api=1&query={{locationUri}}">{{location}}</a></b>
-    </div>
-  </div>
-
   <!-- Description -->
   <div *ngIf="description != null">
     <div class="row" *ngIf="description.length > 0">
@@ -26,6 +17,8 @@
       </div>
     </div>
   </div>
+
+  <app-event-dates-list [dates]="dates"></app-event-dates-list>
 
   <mat-progress-bar *ngIf="sendingRequest" mode="indeterminate" style="margin-top: 15px;"></mat-progress-bar>
 

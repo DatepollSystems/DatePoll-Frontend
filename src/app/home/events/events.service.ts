@@ -1,12 +1,15 @@
 import {Injectable} from '@angular/core';
-import {HttpService} from '../../services/http.service';
 import {Subject} from 'rxjs';
-import {Event} from './models/event.model';
+
+import {HttpService} from '../../services/http.service';
 import {Converter} from '../../services/converter';
+
 import {EventResultGroup} from './models/event-result-group.model';
+import {Event} from './models/event.model';
 import {EventResultSubgroup} from './models/event-result-subgroup.model';
 import {EventResultUser} from './models/event-result-user.model';
 import {Decision} from './models/decision.model';
+import {EventDate} from './models/event-date.model';
 
 @Injectable({
   providedIn: 'root'
@@ -52,8 +55,15 @@ export class EventsService {
             decisions.push(decision);
           }
 
+          const dates = [];
+          for (const fetchedDate of fetchedEvent.dates) {
+            const date = new EventDate(fetchedDate.id, fetchedDate.location, fetchedDate.x, fetchedDate.y,
+              new Date(fetchedDate.date), fetchedDate.description);
+            dates.push(date);
+          }
+
           events.push(new Event(fetchedEvent.id, fetchedEvent.name, new Date(fetchedEvent.start_date), new Date(fetchedEvent.end_date),
-            fetchedEvent.for_everyone, fetchedEvent.description, fetchedEvent.location, decisions));
+            fetchedEvent.for_everyone, fetchedEvent.description, decisions, dates));
         }
 
         this.setEvents(events);
@@ -66,8 +76,20 @@ export class EventsService {
     const decisions = [];
     for (const decision of event.getDecisions()) {
       decisions.push({
+        'id': -1,
         'decision': decision.decision,
-        'showInCalendar': decision.showInCalendar
+        'show_in_calendar': decision.showInCalendar
+      });
+    }
+    const dates = [];
+    for (const date of event.getEventDates()) {
+      dates.push({
+        'id': -1,
+        'x': date.x,
+        'y': date.y,
+        'date': Converter.getDateFormattedWithHoursMinutesAndSeconds(date.date),
+        'location': date.location,
+        'description': date.description
       });
     }
     const object = {
@@ -76,22 +98,39 @@ export class EventsService {
       'endDate': Converter.getDateFormattedWithHoursMinutesAndSeconds(event.endDate),
       'forEveryone': event.forEveryone,
       'description': event.description,
-      'location': event.location,
-      'decisions': decisions
+      'decisions': decisions,
+      'dates': dates
     };
 
     return this.httpService.loggedInV1POSTRequest('/avent/administration/avent', object, 'createEvent');
   }
 
   public updateEvent(event: Event) {
+    const decisions = [];
+    for (const decision of event.getDecisions()) {
+      decisions.push({
+        'id': decision.id,
+        'decision': decision.decision,
+        'show_in_calendar': decision.showInCalendar
+      });
+    }
+    const dates = [];
+    for (const date of event.getEventDates()) {
+      dates.push({
+        'id': -1,
+        'x': date.x,
+        'y': date.y,
+        'date': Converter.getDateFormattedWithHoursMinutesAndSeconds(date.date),
+        'location': date.location,
+        'description': date.description
+      });
+    }
     const object = {
       'name': event.name,
-      'startDate': Converter.getDateFormattedWithHoursMinutesAndSeconds(event.startDate),
-      'endDate': Converter.getDateFormattedWithHoursMinutesAndSeconds(event.endDate),
       'forEveryone': event.forEveryone,
       'description': event.description,
-      'location': event.location,
-      'decisions': event.getDecisions()
+      'decisions': decisions,
+      'dates': dates
     };
 
     return this.httpService.loggedInV1PUTRequest('/avent/administration/avent/' + event.id, object, 'updateEvent');
@@ -278,8 +317,15 @@ export class EventsService {
           decisions.push(decision);
         }
 
+        const dates = [];
+        for (const fetchedDate of response.dates) {
+          const date = new EventDate(fetchedDate.id, fetchedDate.location, fetchedDate.x, fetchedDate.y,
+            new Date(fetchedDate.date), fetchedDate.description);
+          dates.push(date);
+        }
+
         const event = new Event(response.id, response.name, new Date(response.start_date), new Date(response.end_date),
-          response.for_everyone, response.description, response.location, decisions);
+          response.for_everyone, response.description, decisions, dates);
         event.anonymous = response.resultGroups.anonymous;
 
         let resultUsers = [];

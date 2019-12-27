@@ -2,6 +2,7 @@ import {EventResultGroup} from './event-result-group.model';
 import {EventResultUser} from './event-result-user.model';
 import {EventAction} from 'calendar-utils';
 import {Decision} from './decision.model';
+import {EventDate} from './event-date.model';
 
 export class Event {
   public id: number;
@@ -11,9 +12,6 @@ export class Event {
   public forEveryone: boolean;
   public description: string;
   public descriptionPreview = '';
-  public location: string;
-  public locationUri: string;
-  public locationPreview = '';
 
   public alreadyVotedFor = false;
   public additionalInformation = null;
@@ -38,23 +36,16 @@ export class Event {
   private chartData: any[] = null;
   public anonymous = false;
 
-  constructor(id: number, name: string, startDate: Date, endDate: Date, forEveryone: boolean, description: string, location: string,
-              decisions: Decision[]) {
+  private dates: EventDate[] = [];
+
+  constructor(id: number, name: string, startDate: Date, endDate: Date, forEveryone: boolean, description: string,
+              decisions: Decision[], dates: EventDate[]) {
     this.id = id;
     this.name = name;
     this.startDate = startDate;
     this.endDate = endDate;
     this.forEveryone = forEveryone;
     this.description = description;
-    this.location = location;
-    if (location != null) {
-      if (location.length > 25) {
-        this.locationPreview = this.location.slice(0, 25) + '...';
-      } else {
-        this.locationPreview = this.location;
-      }
-      this.locationUri = encodeURI(this.location);
-    }
     if (description != null) {
       if (description.length > 45) {
         this.descriptionPreview = this.description.slice(0, 45) + '...';
@@ -67,6 +58,8 @@ export class Event {
     this.title = this.name;
     this.start = this.startDate;
     this.end = this.endDate;
+
+    this.dates = dates;
   }
 
   // ------------------------------------------------------
@@ -81,6 +74,10 @@ export class Event {
 
   public getDecisions(): Decision[] {
     return this.decisions.slice();
+  }
+
+  public getEventDates(): EventDate[] {
+    return this.dates.slice();
   }
 
   public getDecisionsAsStrings(): string[] {

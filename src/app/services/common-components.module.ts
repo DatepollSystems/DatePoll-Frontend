@@ -14,13 +14,15 @@ import {DoNotForgetToSaveComponent} from './shared-components/do-not-forget-to-s
 import {EmailAddressesListComponent} from '../home/management/users-management/email-addresses-list/email-addresses-list.component';
 import {GroupAndSubgroupSelectComponent} from './shared-components/group-and-subgroup-select/group-and-subgroup-select.component';
 import {AppDividerComponent} from './shared-components/app-divider/app-divider.component';
+import {MapsComponentComponent} from './shared-components/maps-component/maps-component.component';
 
 @NgModule({
   declarations: [
     AppDividerComponent,
     DoNotForgetToSaveComponent,
     EmailAddressesListComponent,
-    GroupAndSubgroupSelectComponent
+    GroupAndSubgroupSelectComponent,
+    MapsComponentComponent
   ],
   imports: [
     CommonModule,
@@ -34,7 +36,8 @@ import {AppDividerComponent} from './shared-components/app-divider/app-divider.c
     AppDividerComponent,
     DoNotForgetToSaveComponent,
     EmailAddressesListComponent,
-    GroupAndSubgroupSelectComponent
+    GroupAndSubgroupSelectComponent,
+    MapsComponentComponent
   ],
   providers: [
     {provide: DateAdapter, useClass: CustomDateAdapter},

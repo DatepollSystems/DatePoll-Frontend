@@ -22,6 +22,8 @@ import {ResultUserBarChartComponent} from './event-info-modal/result-user-bar-ch
 import {EventUpdateModalComponent} from './events-administration/event-update-modal/event-update-modal.component';
 import {EventDeleteModalComponent} from './events-administration/event-delete-modal/event-delete-modal.component';
 import {EventsVoteForDecisionAdditionalInformationModalComponent} from './events-view/events-vote-for-decision-modal/events-vote-for-decision-additional-information-modal/events-vote-for-decision-additional-information-modal.component';
+import {EventDatesManagementComponent} from './events-administration/event-dates-management/event-dates-management.component';
+import {EventDatesListComponent} from './event-dates-list/event-dates-list.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,9 @@ import {EventsVoteForDecisionAdditionalInformationModalComponent} from './events
     SubgroupInfoCardComponent,
     EventsVoteForDecisionModalComponent,
     EventsVoteForDecisionAdditionalInformationModalComponent,
-    EventDecisionsListComponent
+    EventDecisionsListComponent,
+    EventDatesManagementComponent,
+    EventDatesListComponent
   ],
   entryComponents: [
     EventInfoModalComponent,
@@ -63,7 +67,9 @@ import {EventsVoteForDecisionAdditionalInformationModalComponent} from './events
     EventDeleteModalComponent,
     EventsVoteForDecisionModalComponent,
     EventsVoteForDecisionAdditionalInformationModalComponent,
-    EventDecisionsListComponent
+    EventDecisionsListComponent,
+    EventDatesManagementComponent,
+    EventDatesListComponent
   ]
 })
 export class CommonEventsComponentsModule {

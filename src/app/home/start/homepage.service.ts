@@ -8,6 +8,7 @@ import {HomeBirthdayModel} from './birthdays.model';
 import {HomeBookingsModel} from './bookings.model';
 import {Event} from '../events/models/event.model';
 import {Decision} from '../events/models/decision.model';
+import {EventDate} from '../events/models/event-date.model';
 
 @Injectable({
   providedIn: 'root'
@@ -79,8 +80,15 @@ export class HomepageService {
             decisions.push(new Decision(decision.id, decision.decision));
           }
 
+          const dates = [];
+          for (const fetchedDate of fetchedEvent.dates) {
+            const date = new EventDate(fetchedDate.id, fetchedDate.location, fetchedDate.x, fetchedDate.y,
+              new Date(fetchedDate.date), fetchedDate.description);
+            dates.push(date);
+          }
+
           const event = new Event(fetchedEvent.id, fetchedEvent.name, new Date(fetchedEvent.start_date), new Date(fetchedEvent.end_date),
-            fetchedEvent.for_everyone, fetchedEvent.description, fetchedEvent.location, decisions);
+            fetchedEvent.for_everyone, fetchedEvent.description, decisions, dates);
           event.alreadyVotedFor = fetchedEvent.already_voted;
           eventsToSave.push(event);
         }
