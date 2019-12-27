@@ -7,6 +7,7 @@ import {Event} from '../models/event.model';
 import {EventResultGroup} from '../models/event-result-group.model';
 import {ChartOptions, ChartType} from 'chart.js';
 import {Label, monkeyPatchChartJsLegend, monkeyPatchChartJsTooltip, SingleDataSet} from 'ng2-charts';
+import {EventDate} from '../models/event-date.model';
 
 @Component({
   selector: 'app-event-info-modal',
@@ -22,11 +23,10 @@ export class EventInfoModalComponent implements OnDestroy {
 
   name: string;
   description: string;
-  location: string;
-  locationUri: string;
 
   startDate: Date;
   endDate: Date;
+  dates: EventDate[] = [];
 
   resultGroups: EventResultGroup[];
   sortedResultGroups: EventResultGroup[];
@@ -61,10 +61,9 @@ export class EventInfoModalComponent implements OnDestroy {
   refreshValues() {
     this.name = this.event.name;
     this.description = this.event.description;
-    this.location = this.event.location;
-    this.locationUri = this.event.locationUri;
     this.startDate = this.event.startDate;
     this.endDate = this.event.endDate;
+    this.dates = this.event.getEventDates();
     this.resultGroups = this.event.getResultGroups();
     this.sortedResultGroups = this.resultGroups.slice();
     this.pieChartLabels = this.event.getDecisionsAsStrings();

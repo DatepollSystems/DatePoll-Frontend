@@ -1,0 +1,89 @@
+<div class="row" style="margin-bottom: 15px; margin-top: 15px;">
+  <div class="col-12">
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          {{'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE_TITLE' | translate}}
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+
+      <form #form="ngForm" (ngSubmit)="save(form)" style="margin-bottom: 15px;">
+        <div class="row">
+          <mat-form-field class="col-10 col-sm-12 col-md-4 col-lg-4 col-xl-4 datepicker-field">
+            <input [(ngModel)]="createNewEventDateDate" [matDatepicker]="picker_date" id="datepicker-date"
+                   matInput name="datepicker-date" required
+                   placeholder="{{'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE' | translate}}">
+            <mat-datepicker-toggle [for]="picker_date" matSuffix></mat-datepicker-toggle>
+            <mat-datepicker #picker_date></mat-datepicker>
+          </mat-form-field>
+
+          <mat-form-field class="col-11 col-sm-12 col-md-4 col-lg-4 col-xl-4 datepicker-field-mobile">
+            <input [(ngModel)]="createNewEventDateDate" [matDatepicker]="picker_mobile_date" id="datepicker-date-mobile"
+                   matInput name="datepicker-date-mobile" required
+                   placeholder="{{'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE' | translate}}">
+            <mat-datepicker-toggle [for]="picker_mobile_date" matSuffix></mat-datepicker-toggle>
+            <mat-datepicker #picker_mobile_date touchUi></mat-datepicker>
+          </mat-form-field>
+
+          <mat-form-field class="col-4 col-sm-5 col-md-3 col-lg-3 col-xl-3">
+            <input #dateHoursModel="ngModel" id="hours-date" matInput max="24"
+                   min="0" name="dateHours" ngModel required
+                   placeholder="{{'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_HOURS' | translate}}" type="number">
+            <mat-error *ngIf="dateHoursModel.invalid">
+              {{'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_HOURS_INCORRECT' | translate}}
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="col-4 col-sm-5 col-md-3 col-lg-3 col-xl-3">
+            <input #dateMinutesModel="ngModel" id="minutes-date" matInput max="60"
+                   min="0" name="dateMinutes" required
+                   ngModel placeholder="{{'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_MINUTES' | translate}}"
+                   type="number">
+            <mat-error *ngIf="dateMinutesModel.invalid">
+              {{'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_MINUTES_INCORRECT' | translate}}
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="row">
+          <mat-form-field class="col-10 col-sm-10 col-md-4 col-lg-4 col-xl-6">
+            <input #locationModel="ngModel" id="location" matInput maxlength="190" name="location" type="text"
+                   ngModel placeholder="{{'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_LOCATION' | translate}}">
+            <mat-error *ngIf="locationModel.invalid">
+              {{'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_LOCATION_INCORRECT' | translate}}
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="col-4 col-sm-4 col-md-2 col-lg-2 col-xl-2">
+            <input #xModel="ngModel" id="x" matInput [(ngModel)]="x"
+                   min="0" name="x" ngModel
+                   placeholder="X" type="number">
+            <mat-error *ngIf="xModel.invalid">
+              xxx
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="col-4 col-sm-4 col-md-2 col-lg-2 col-xl-2">
+            <input #yModel="ngModel" id="y" matInput [(ngModel)]="y"
+                   min="0" name="y" ngModel
+                   placeholder="Y" type="number">
+            <mat-error *ngIf="yModel.invalid">
+              yyy
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <app-maps-component [x]="48.645333" [y]="15.817110" [edible]="true"
+                            (coordinatesChanged)="onCoordinatesChange($event)"></app-maps-component>
+
+        <div class="row">
+          <button mat-button type="button" class="success-button col-12" (click)="form.ngSubmit.emit()"
+                  [disabled]="!form.form.valid">{{'ADD' | translate}}</button>
+        </div>
+      </form>
+
+      <app-event-dates-list [dates]="dates" [adminView]="true"
+                            (datesChanged)="onDatesChange($event)"></app-event-dates-list>
+    </mat-expansion-panel>
+  </div>
+</div>

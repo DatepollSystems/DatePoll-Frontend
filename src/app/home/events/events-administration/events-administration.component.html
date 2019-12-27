@@ -62,13 +62,6 @@
         <td *matCellDef="let event" mat-cell> {{event.endDate | date:'dd.MM.yyyy HH:mm'}} </td>
       </ng-container>
 
-      <!-- Location Column -->
-      <ng-container matColumnDef="location">
-        <th *matHeaderCellDef mat-header-cell
-            mat-sort-header> {{'EVENTS_ADMINISTRATION_TABLE_LOCATION' | translate}} </th>
-        <td *matCellDef="let event" mat-cell> {{event.locationPreview}} </td>
-      </ng-container>
-
       <!-- Description Column -->
       <ng-container matColumnDef="description">
         <th *matHeaderCellDef mat-header-cell
