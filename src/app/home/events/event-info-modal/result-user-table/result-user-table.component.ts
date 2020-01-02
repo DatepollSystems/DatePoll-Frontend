@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, Input, ViewChild} from '@angular/core';
 import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
 
 import {EventResultUser} from '../../models/event-result-user.model';
@@ -9,7 +9,7 @@ import {Decision} from '../../models/decision.model';
   templateUrl: './result-user-table.component.html',
   styleUrls: ['./result-user-table.component.css']
 })
-export class ResultUserTableComponent implements OnInit {
+export class ResultUserTableComponent implements AfterViewInit {
   @Input()
   decisions: Decision[];
 
@@ -27,17 +27,18 @@ export class ResultUserTableComponent implements OnInit {
   voteSummary = null;
 
   constructor() {
+    this.refreshTable();
   }
 
-  ngOnInit() {
+  ngAfterViewInit() {
+    this.refreshTable();
+  }
+
+  refreshTable() {
     this.dataSource = new MatTableDataSource(this.resultUsers);
-    setTimeout(() => {
-      if (this.dataSource != null) {
-        this.dataSource.sort = this.sort;
-      }
-    }, 1000);
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
+
   }
 
   applyFilter(filterValue: string) {
