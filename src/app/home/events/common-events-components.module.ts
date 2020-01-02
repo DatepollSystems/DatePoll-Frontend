@@ -24,6 +24,7 @@ import {EventDeleteModalComponent} from './events-administration/event-delete-mo
 import {EventsVoteForDecisionAdditionalInformationModalComponent} from './events-view/events-vote-for-decision-modal/events-vote-for-decision-additional-information-modal/events-vote-for-decision-additional-information-modal.component';
 import {EventDatesManagementComponent} from './events-administration/event-dates-management/event-dates-management.component';
 import {EventDatesListComponent} from './event-dates-list/event-dates-list.component';
+import {EventUserManagementComponent} from './events-administration/event-user-management-modal/event-user-management/event-user-management.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import {EventDatesListComponent} from './event-dates-list/event-dates-list.compo
     EventsVoteForDecisionAdditionalInformationModalComponent,
     EventDecisionsListComponent,
     EventDatesManagementComponent,
-    EventDatesListComponent
+    EventDatesListComponent,
+    EventUserManagementComponent
   ],
   entryComponents: [
     EventInfoModalComponent,
@@ -69,7 +71,8 @@ import {EventDatesListComponent} from './event-dates-list/event-dates-list.compo
     EventsVoteForDecisionAdditionalInformationModalComponent,
     EventDecisionsListComponent,
     EventDatesManagementComponent,
-    EventDatesListComponent
+    EventDatesListComponent,
+    EventUserManagementComponent
   ]
 })
 export class CommonEventsComponentsModule {

@@ -28,7 +28,15 @@
   </mat-expansion-panel>
 
   <app-result-user-table [resultUsers]="resultSubgroup.getResultUsers()"
-                         [decisions]="resultSubgroup.event.getDecisions()"></app-result-user-table>
+                         [decisions]="resultSubgroup.event.getDecisions()"
+                         *ngIf="resultSubgroup != null && !this.myUserService.hasPermission(ROOT_PERMISSION)
+                               && !this.myUserService.hasPermission(EVENTS_ADMINISTRATION_PERMISSION)">
+  </app-result-user-table>
+
+  <app-event-user-management *ngIf="resultSubgroup != null && (this.myUserService.hasPermission(ROOT_PERMISSION) ||
+                                    this.myUserService.hasPermission(EVENTS_ADMINISTRATION_PERMISSION))"
+                             [resultUsers]="resultSubgroup.getResultUsers()"
+                             [event]="resultSubgroup.event"></app-event-user-management>
 </mat-expansion-panel>
 
 <mat-card *ngIf="resultSubgroup?.event?.anonymous">
@@ -38,7 +46,8 @@
       {{'EVENTS_ADMINISTRATION_INFO_EVENT_NOBODY_VOTED_IN_SUBGROUP' | translate}}</mat-card-subtitle>
   </mat-card-header>
   <mat-card-content>
-    <app-result-user-bar-chart [resultUsers]="resultSubgroup.getResultUsers()" *ngIf="resultSubgroup.getResultUsers().length > 0"
+    <app-result-user-bar-chart [resultUsers]="resultSubgroup.getResultUsers()"
+                               *ngIf="resultSubgroup.getResultUsers().length > 0"
                                [decisions]="resultSubgroup.event.getDecisions()"></app-result-user-bar-chart>
 
     <mat-expansion-panel style="margin-bottom: 15px; margin-top: 15px;" *ngIf="!pieChartIsEmpty">

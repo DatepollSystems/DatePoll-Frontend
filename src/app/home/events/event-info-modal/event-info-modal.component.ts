@@ -1,13 +1,19 @@
-import {Component, Inject, OnDestroy} from '@angular/core';
+import {Component, Inject, OnDestroy, ViewChild} from '@angular/core';
 import {MAT_DIALOG_DATA} from '@angular/material';
 import {Subscription} from 'rxjs';
 
-import {EventsService} from '../events.service';
-import {Event} from '../models/event.model';
-import {EventResultGroup} from '../models/event-result-group.model';
 import {ChartOptions, ChartType} from 'chart.js';
 import {Label, monkeyPatchChartJsLegend, monkeyPatchChartJsTooltip, SingleDataSet} from 'ng2-charts';
+
+import {EventsService} from '../events.service';
+import {Permissions} from '../../../permissions';
+import {MyUserService} from '../../my-user.service';
+
+import {Event} from '../models/event.model';
+import {EventResultGroup} from '../models/event-result-group.model';
 import {EventDate} from '../models/event-date.model';
+import {EventUserManagementComponent} from '../events-administration/event-user-management-modal/event-user-management/event-user-management.component';
+import {ResultUserBarChartComponent} from './result-user-bar-chart/result-user-bar-chart.component';
 
 @Component({
   selector: 'app-event-info-modal',
@@ -32,6 +38,10 @@ export class EventInfoModalComponent implements OnDestroy {
   sortedResultGroups: EventResultGroup[];
   searchValue = '';
 
+  public myUserService: MyUserService;
+  public EVENTS_ADMINISTRATION_PERMISSION = Permissions.EVENTS_ADMINISTRATION;
+  public ROOT_PERMISSION = Permissions.ROOT_ADMINISTRATION;
+
   public pieChartOptions: ChartOptions = {
     responsive: true,
   };
@@ -41,7 +51,9 @@ export class EventInfoModalComponent implements OnDestroy {
   public pieChartData: SingleDataSet;
   public pieChartIsEmpty: boolean;
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any, private eventsService: EventsService) {
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any, private eventsService: EventsService, myUserService: MyUserService) {
+    this.myUserService = myUserService;
+
     this.event = data.event;
     const id = this.event.id;
     this.refreshValues();
