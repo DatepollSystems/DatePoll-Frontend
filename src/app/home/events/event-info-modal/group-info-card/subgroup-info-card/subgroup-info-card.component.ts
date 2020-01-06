@@ -2,6 +2,9 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Label, monkeyPatchChartJsLegend, monkeyPatchChartJsTooltip, SingleDataSet} from 'ng2-charts';
 import {ChartOptions, ChartType} from 'chart.js';
 
+import {MyUserService} from '../../../../my-user.service';
+import {Permissions} from '../../../../../permissions';
+
 import {EventResultSubgroup} from '../../../models/event-result-subgroup.model';
 
 @Component({
@@ -22,7 +25,12 @@ export class SubgroupInfoCardComponent implements OnInit {
   public pieChartData: SingleDataSet;
   public pieChartIsEmpty: boolean;
 
-  constructor() {
+  public myUserService: MyUserService;
+  public EVENTS_ADMINISTRATION_PERMISSION = Permissions.EVENTS_ADMINISTRATION;
+  public ROOT_PERMISSION = Permissions.ROOT_ADMINISTRATION;
+
+  constructor(myUserService: MyUserService) {
+    this.myUserService = myUserService;
   }
 
   ngOnInit() {
@@ -32,5 +40,4 @@ export class SubgroupInfoCardComponent implements OnInit {
     monkeyPatchChartJsTooltip();
     monkeyPatchChartJsLegend();
   }
-
 }

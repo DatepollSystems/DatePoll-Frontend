@@ -4,6 +4,7 @@ import {Instrument} from './models/instrument.model';
 import {Subject} from 'rxjs';
 import {PerformanceBadge} from './models/performanceBadge.model';
 import {UserPerformanceBadge} from '../users-management/userPerformanceBadge.model';
+import {Converter} from '../../../services/converter';
 
 @Injectable({
   providedIn: 'root'
@@ -126,24 +127,11 @@ export class PerformanceBadgesService {
 
 
   public addUserHasPerformanceBadgeWithInstrument(userId: number, userPerformanceBadge: UserPerformanceBadge) {
-    const d = new Date(userPerformanceBadge.date);
-    let month = '' + (d.getMonth() + 1),
-      day = '' + d.getDate();
-    const year = d.getFullYear();
-
-    if (month.length < 2) {
-      month = '0' + month;
-    }
-    if (day.length < 2) {
-      day = '0' + day;
-    }
-    const dateFormatted = [year, month, day].join('-');
-
     const dto = {
       'user_id': userId,
       'instrument_id': userPerformanceBadge.instrumentId,
       'performanceBadge_id': userPerformanceBadge.performanceBadgeId,
-      'date': dateFormatted,
+      'date': Converter.getDateFormatted(userPerformanceBadge.date),
       'grade': userPerformanceBadge.grade,
       'note': userPerformanceBadge.note
     };
