@@ -1,7 +1,7 @@
-import {AfterViewInit, Component, EventEmitter, Input, Output} from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, Input, Output } from '@angular/core';
 import * as L from 'leaflet';
-import {icon, Marker} from 'leaflet';
-import {HttpClient} from '@angular/common/http';
+import { icon, Marker } from 'leaflet';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-maps-component',
@@ -16,7 +16,7 @@ export class MapsComponentComponent implements AfterViewInit {
   @Input()
   public y: number;
 
-  private searchFilter: string;
+  public searchFilter: string;
 
   @Input()
   public showMarker = false;
@@ -26,7 +26,7 @@ export class MapsComponentComponent implements AfterViewInit {
   @Output()
   public coordinatesChanged = new EventEmitter();
 
-  private randomMapId = 0;
+  public randomMapId = 0;
 
   constructor(private http: HttpClient) {
     this.randomMapId = Math.random();
@@ -45,7 +45,7 @@ export class MapsComponentComponent implements AfterViewInit {
         console.log(response);
         this.map.panTo(new L.LatLng(response.latt, response.longt));
       },
-      (error) => console.log(error)
+      error => console.log(error)
     );
   }
 
@@ -69,15 +69,14 @@ export class MapsComponentComponent implements AfterViewInit {
         this.drawMarker();
 
         const coordinates = {
-          'x': this.x,
-          'y': this.y
+          x: this.x,
+          y: this.y
         };
         this.coordinatesChanged.emit(coordinates);
 
         console.log(event.latlng.lat + ' ' + event.latlng.lng);
       });
     }
-
   }
 
   drawMarker() {
@@ -101,5 +100,4 @@ export class MapsComponentComponent implements AfterViewInit {
 
     this.marker = L.marker([this.x, this.y]).addTo(this.map);
   }
-
 }
