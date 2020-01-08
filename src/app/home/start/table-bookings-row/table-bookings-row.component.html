@@ -1,32 +1,52 @@
-<td>{{booking.name}}</td>
-<td>{{booking.date | date:'dd.MM.yyyy'}}</td>
-<td>{{booking.bookedTickets}}</td>
+<td>{{ booking.name }}</td>
+<td>{{ booking.date | date: 'EE, dd.MM.yyyy' }}</td>
+<td>{{ booking.bookedTickets }}</td>
 <td *ngIf="booking.workerName != null">
-  {{booking.workerName}}
-  <button (click)="signOutForWorker()" *ngIf="booking.workerID == myUserService.getID()"
-          [class.spinner]="sendingSignOutForWorkerRequest" [disabled]="sendingSignOutForWorkerRequest"
-          mat-icon-button matTooltip="{{'CINEMA_TICKETS_CANCEL_CINEMA_SERVICE_TOOLTIP' | translate}}"
-          matTooltipPosition="right">
+  {{ booking.workerName }}
+  <button
+    (click)="signOutForWorker()"
+    *ngIf="booking.workerID == myUserService.getID()"
+    [class.spinner]="sendingSignOutForWorkerRequest"
+    [disabled]="sendingSignOutForWorkerRequest"
+    mat-icon-button
+    matTooltip="{{ 'CINEMA_TICKETS_CANCEL_CINEMA_SERVICE_TOOLTIP' | translate }}"
+    matTooltipPosition="right"
+  >
     <mat-icon aria-label="Cancel worker">cancel</mat-icon>
   </button>
 </td>
 <td *ngIf="booking.workerName == null">
-  <button (click)="applyForWorker()"
-          [class.spinner]="sendingApplyForWorkerRequest" [disabled]="sendingApplyForWorkerRequest"
-          mat-stroked-button>{{'CINEMA_TICKETS_APPLY' | translate}}</button>
+  <button
+    (click)="applyForWorker()"
+    [class.spinner]="sendingApplyForWorkerRequest"
+    [disabled]="sendingApplyForWorkerRequest"
+    mat-stroked-button
+  >
+    {{ 'CINEMA_TICKETS_APPLY' | translate }}
+  </button>
 </td>
 
 <td *ngIf="booking.emergencyWorkerName != null">
-  {{booking.emergencyWorkerName}}
-  <button (click)="signOutForEmergencyWorker()" *ngIf="booking.emergencyWorkerID == myUserService.getID()"
-          [class.spinner]="sendingSignOutForEmergencyWorkerRequest" [disabled]="sendingSignOutForEmergencyWorkerRequest"
-          mat-icon-button matTooltip="{{'CINEMA_TICKETS_CANCEL_CINEMA_SERVICE_TOOLTIP' | translate}}"
-          matTooltipPosition="right">
+  {{ booking.emergencyWorkerName }}
+  <button
+    (click)="signOutForEmergencyWorker()"
+    *ngIf="booking.emergencyWorkerID == myUserService.getID()"
+    [class.spinner]="sendingSignOutForEmergencyWorkerRequest"
+    [disabled]="sendingSignOutForEmergencyWorkerRequest"
+    mat-icon-button
+    matTooltip="{{ 'CINEMA_TICKETS_CANCEL_CINEMA_SERVICE_TOOLTIP' | translate }}"
+    matTooltipPosition="right"
+  >
     <mat-icon aria-label="Cancel worker">cancel</mat-icon>
   </button>
 </td>
 <td *ngIf="booking.emergencyWorkerName == null">
-  <button (click)="applyForEmergencyWorker()"
-          [class.spinner]="sendingApplyForEmergencyWorkerRequest" [disabled]="sendingApplyForEmergencyWorkerRequest"
-          mat-stroked-button>{{'CINEMA_TICKETS_APPLY' | translate}}</button>
+  <button
+    (click)="applyForEmergencyWorker()"
+    [class.spinner]="sendingApplyForEmergencyWorkerRequest"
+    [disabled]="sendingApplyForEmergencyWorkerRequest"
+    mat-stroked-button
+  >
+    {{ 'CINEMA_TICKETS_APPLY' | translate }}
+  </button>
 </td>

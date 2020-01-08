@@ -2,37 +2,39 @@
   <div *ngIf="events.length != 0" class="col-12 col-lg-12">
     <mat-card class="mat-elevation-z4">
       <mat-card-content>
-        <mat-card-title>{{'STARTPAGE_EVENTS' | translate}}</mat-card-title>
+        <mat-card-title>{{ 'STARTPAGE_EVENTS' | translate }}</mat-card-title>
 
         <div class="table-responsive">
           <table>
             <thead>
-            <tr>
-              <th>Name</th>
-              <th>Datum</th>
-              <th>Informationen</th>
-              <th>Abstimmen</th>
-            </tr>
+              <tr>
+                <th>Name</th>
+                <th>Datum</th>
+                <th>Informationen</th>
+                <th>Abstimmen</th>
+              </tr>
             </thead>
             <tbody>
-            <tr *ngFor="let event of events">
-              <td>{{event.name}}</td>
-              <td>{{event.startDate | date: 'dd.MM.yyyy HH:mm'}}</td>
-              <td>
-                <button (click)="onEventInfo(event)" mat-button>
-                  <mat-icon>info</mat-icon>
-                  {{'EVENTS_VIEW_EVENT_CARD_BUTTON_INFO' | translate}}
-                </button>
-              </td>
-              <td *ngIf="!event.alreadyVotedFor">
-                <button (click)="onEventVote(event)" color="primary"
-                        mat-flat-button>{{'EVENTS_VIEW_EVENT_CARD_BUTTON_DECIDE' | translate}}</button>
-              </td>
-              <td *ngIf="event.alreadyVotedFor">
-                <button #cancelVotingButton (click)="cancelEventVoting(event, cancelVotingButton)" color="accent"
-                        mat-flat-button>{{'EVENTS_VIEW_EVENT_CARD_BUTTON_CANCEL_VOTING' | translate}}</button>
-              </td>
-            </tr>
+              <tr *ngFor="let event of events">
+                <td>{{ event.name }}</td>
+                <td>{{ event.startDate | date: 'EE, dd.MM.yyyy HH:mm' }}</td>
+                <td>
+                  <button (click)="onEventInfo(event)" mat-button>
+                    <mat-icon>info</mat-icon>
+                    {{ 'EVENTS_VIEW_EVENT_CARD_BUTTON_INFO' | translate }}
+                  </button>
+                </td>
+                <td *ngIf="!event.alreadyVotedFor">
+                  <button (click)="onEventVote(event)" color="primary" mat-flat-button>
+                    {{ 'EVENTS_VIEW_EVENT_CARD_BUTTON_DECIDE' | translate }}
+                  </button>
+                </td>
+                <td *ngIf="event.alreadyVotedFor">
+                  <button #cancelVotingButton (click)="cancelEventVoting(event, cancelVotingButton)" color="accent" mat-flat-button>
+                    {{ 'EVENTS_VIEW_EVENT_CARD_BUTTON_CANCEL_VOTING' | translate }}
+                  </button>
+                </td>
+              </tr>
             </tbody>
           </table>
         </div>
@@ -43,21 +45,24 @@
   <div *ngIf="birthdays.length != 0" class="col-12 col-lg-4">
     <mat-card class="mat-elevation-z4">
       <mat-card-content>
-        <mat-card-title>{{'STARTPAGE_BIRTHDAY' | translate}}</mat-card-title>
+        <mat-card-title>{{ 'STARTPAGE_BIRTHDAY' | translate }}</mat-card-title>
 
         <div class="table-responsive">
           <table>
             <thead>
-            <tr>
-              <th>{{'STARTPAGE_BIRTHDAY_NAME' | translate}}</th>
-              <th>{{'STARTPAGE_BIRTHDAY_DATE' | translate}}</th>
-            </tr>
+              <tr>
+                <th>{{ 'STARTPAGE_BIRTHDAY_NAME' | translate }}</th>
+                <th>{{ 'STARTPAGE_BIRTHDAY_DATE' | translate }}</th>
+              </tr>
             </thead>
             <tbody>
-            <tr *ngFor="let birthday of birthdays">
-              <td>{{birthday.name}}</td>
-              <td>{{birthday.date | date:'dd.MM.yyyy'}} (<i>{{birthday.age}}</i>)</td>
-            </tr>
+              <tr *ngFor="let birthday of birthdays">
+                <td>{{ birthday.name }}</td>
+                <td>
+                  {{ birthday.date | date: 'EE, dd.MM.yyyy' }} (<i>{{ birthday.age }}</i
+                  >)
+                </td>
+              </tr>
             </tbody>
           </table>
         </div>
@@ -67,21 +72,21 @@
   <div *ngIf="bookings.length != 0" class="col-12 col-lg-8">
     <mat-card class="mat-elevation-z4">
       <mat-card-content>
-        <mat-card-title>{{'STARTPAGE_BOOKINGS' | translate}}</mat-card-title>
+        <mat-card-title>{{ 'STARTPAGE_BOOKINGS' | translate }}</mat-card-title>
 
         <div class="table-responsive">
           <table>
             <thead>
-            <tr>
-              <th>{{'STARTPAGE_MOVIE_NAME' | translate}}</th>
-              <th>{{'STARTPAGE_MOVIE_DATE' | translate}}</th>
-              <th>{{'STARTPAGE_BOOKED_TICKETS' | translate}}</th>
-              <th>{{'STARTPAGE_CINEMA_SERVICE' | translate}}</th>
-              <th>{{'STARTPAGE_EMERGENCY_CINEMA_SERVICE' | translate}}</th>
-            </tr>
+              <tr>
+                <th>{{ 'STARTPAGE_MOVIE_NAME' | translate }}</th>
+                <th>{{ 'STARTPAGE_MOVIE_DATE' | translate }}</th>
+                <th>{{ 'STARTPAGE_BOOKED_TICKETS' | translate }}</th>
+                <th>{{ 'STARTPAGE_CINEMA_SERVICE' | translate }}</th>
+                <th>{{ 'STARTPAGE_EMERGENCY_CINEMA_SERVICE' | translate }}</th>
+              </tr>
             </thead>
             <tbody>
-            <tr app-table-bookings-row *ngFor="let booking of bookings" [booking]="booking"></tr>
+              <tr app-table-bookings-row *ngFor="let booking of bookings" [booking]="booking"></tr>
             </tbody>
           </table>
         </div>
@@ -89,4 +94,3 @@
     </mat-card>
   </div>
 </div>
-

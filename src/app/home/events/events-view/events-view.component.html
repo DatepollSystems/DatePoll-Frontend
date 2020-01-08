@@ -2,11 +2,11 @@
   <mat-card-content>
     <div class="row justify-content-between">
       <div class="col-4 col-sm-6 col-md-8 col-lg-8 col-xl-8">
-        <h1>{{'EVENTS_VIEW' | translate}}</h1>
+        <h1>{{ 'EVENTS_VIEW' | translate }}</h1>
       </div>
       <div class="col-8 col-sm-6 col-md-4 col-lg-4 col-xl-4" style="text-align: end">
         <mat-slide-toggle (change)="onShowAllEventsChange($event)" [(ngModel)]="showAllEvents" color="primary">
-          {{'EVENTS_VIEW_SHOW_ALREADY_VOTED_EVENTS' | translate}}
+          {{ 'EVENTS_VIEW_SHOW_ALREADY_VOTED_EVENTS' | translate }}
         </mat-slide-toggle>
       </div>
     </div>
@@ -15,37 +15,46 @@
       <div *ngFor="let event of eventsToShow" class="col-12 col-sm-12 col-md-6 col-lg-4">
         <mat-card class="mat-elevation-z3">
           <mat-card-header>
-            <mat-card-title>{{event.name}}</mat-card-title>
-            <mat-card-subtitle>{{event.startDate | date:'dd.MM.yyyy HH:mm'}}
-              - {{event.endDate | date:'dd.MM.yyyy HH:mm'}}</mat-card-subtitle>
+            <mat-card-title>{{ event.name }}</mat-card-title>
+            <mat-card-subtitle
+              >{{ event.startDate | date: 'EE, dd.MM.yyyy HH:mm' }} - {{ event.endDate | date: 'EE, dd.MM.yyyy HH:mm' }}</mat-card-subtitle
+            >
             <mat-card-subtitle>
-              <a target="_blank" rel="noopener"
-                 href="https://www.google.com/maps/search/?api=1&query={{event.locationUri}}">{{event.location}}</a>
+              <a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query={{ event.locationUri }}">{{
+                event.location
+              }}</a>
             </mat-card-subtitle>
           </mat-card-header>
           <mat-card-content>
             <p style="margin-left: 15px;" *ngIf="event?.description?.length > 0">
-              {{event.description}}
+              {{ event.description }}
             </p>
-            <p style="margin-left: 15px;"
-               *ngIf="event?.additionalInformation?.length > 0">{{'EVENTS_VIEW_EVENT_CARD_ADDITIONAL_INFORMATION' | translate}}
-              <i>{{event.additionalInformation}}</i></p>
+            <p style="margin-left: 15px;" *ngIf="event?.additionalInformation?.length > 0">
+              {{ 'EVENTS_VIEW_EVENT_CARD_ADDITIONAL_INFORMATION' | translate }} <i>{{ event.additionalInformation }}</i>
+            </p>
           </mat-card-content>
           <mat-card-actions style="padding-left: 24px;">
-            <button (click)="onVote(event)" *ngIf="!event.alreadyVotedFor" color="primary"
-                    mat-flat-button>{{'EVENTS_VIEW_EVENT_CARD_BUTTON_DECIDE' | translate}}</button>
-            <button #cancelVotingButton (click)="cancelVoting(event, cancelVotingButton)" *ngIf="event.alreadyVotedFor"
-                    color="accent"
-                    mat-flat-button>{{'EVENTS_VIEW_EVENT_CARD_BUTTON_CANCEL_VOTING' | translate}}</button>
+            <button (click)="onVote(event)" *ngIf="!event.alreadyVotedFor" color="primary" mat-flat-button>
+              {{ 'EVENTS_VIEW_EVENT_CARD_BUTTON_DECIDE' | translate }}
+            </button>
+            <button
+              #cancelVotingButton
+              (click)="cancelVoting(event, cancelVotingButton)"
+              *ngIf="event.alreadyVotedFor"
+              color="accent"
+              mat-flat-button
+            >
+              {{ 'EVENTS_VIEW_EVENT_CARD_BUTTON_CANCEL_VOTING' | translate }}
+            </button>
             <button (click)="onInfo(event)" mat-button>
               <mat-icon>info</mat-icon>
-              {{'EVENTS_VIEW_EVENT_CARD_BUTTON_INFO' | translate}}
+              {{ 'EVENTS_VIEW_EVENT_CARD_BUTTON_INFO' | translate }}
             </button>
           </mat-card-actions>
         </mat-card>
       </div>
       <div *ngIf="eventsToShow.length === 0" class="col-12" style="text-align: center">
-        {{'EVENTS_VIEW_EVENT_NO_NEW_VOTINGS' | translate}}
+        {{ 'EVENTS_VIEW_EVENT_NO_NEW_VOTINGS' | translate }}
       </div>
     </div>
     <div *ngIf="loading" class="row" style="margin-bottom: 15px;">
@@ -57,5 +66,5 @@
 </mat-card>
 
 <ng-template #successfullyRemovedDecision>
-  <h2>{{'EVENTS_VIEW_EVENT_SUCCESSFULLY_REMOVED_VOTING' | translate}}</h2>
+  <h2>{{ 'EVENTS_VIEW_EVENT_SUCCESSFULLY_REMOVED_VOTING' | translate }}</h2>
 </ng-template>
