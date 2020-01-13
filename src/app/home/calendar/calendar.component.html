@@ -1,17 +1,22 @@
 <mat-card class="mat-elevation-z3">
   <mat-card-content>
-    <div class="row"></div>
+    <div class="row">
+      <div class="col-12" style="text-align: center">
+        {{ viewDate | date: 'EE, dd.MM.yyyy' }}
+      </div>
+    </div>
 
     <div class="row justify-content-around">
       <div class="col" style="text-align: center">
-        <button (viewDateChange)="closeOpenMonthViewDay()" [(viewDate)]="viewDate" [view]="view" mat-flat-button
-                mwlCalendarPreviousView>{{'CALENDAR_PREVIOUS' | translate}}</button>
+        <button (viewDateChange)="closeOpenMonthViewDay()" [(viewDate)]="viewDate" [view]="view" mat-flat-button mwlCalendarPreviousView>
+          {{ 'CALENDAR_PREVIOUS' | translate }}
+        </button>
 
-        <button [(viewDate)]="viewDate" color="primary" mat-flat-button
-                mwlCalendarToday>{{'CALENDAR_TODAY' | translate}}</button>
+        <button [(viewDate)]="viewDate" color="primary" mat-flat-button mwlCalendarToday>{{ 'CALENDAR_TODAY' | translate }}</button>
 
-        <button (viewDateChange)="closeOpenMonthViewDay()" [(viewDate)]="viewDate" [view]="view" mat-flat-button
-                mwlCalendarNextView>{{'CALENDAR_NEXT' | translate}}</button>
+        <button (viewDateChange)="closeOpenMonthViewDay()" [(viewDate)]="viewDate" [view]="view" mat-flat-button mwlCalendarNextView>
+          {{ 'CALENDAR_NEXT' | translate }}
+        </button>
       </div>
 
       <!--      <div class="col" style="text-align: center">-->
@@ -19,18 +24,18 @@
       <!--      </div>-->
       <div class="col" style="text-align: center">
         <button (click)="setView(CalendarView.Month)" [class.active]="view === CalendarView.Month" mat-stroked-button>
-          {{'CALENDAR_MONTH' | translate}}
+          {{ 'CALENDAR_MONTH' | translate }}
         </button>
         <button (click)="setView(CalendarView.Week)" [class.active]="view === CalendarView.Week" mat-stroked-button>
-          {{'CALENDAR_WEEK' | translate}}
+          {{ 'CALENDAR_WEEK' | translate }}
         </button>
         <button (click)="setView(CalendarView.Day)" [class.active]="view === CalendarView.Day" mat-stroked-button>
-          {{'CALENDAR_DAY' | translate}}
+          {{ 'CALENDAR_DAY' | translate }}
         </button>
       </div>
     </div>
 
-    <br/>
+    <br />
 
     <div [ngSwitch]="view">
       <mwl-calendar-month-view
@@ -66,6 +71,5 @@
       >
       </mwl-calendar-day-view>
     </div>
-
   </mat-card-content>
 </mat-card>
