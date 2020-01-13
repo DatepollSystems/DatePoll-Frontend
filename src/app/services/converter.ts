@@ -46,4 +46,9 @@ export class Converter {
 
     return [year, month, day].join('-');
   }
+
+  public static getIOSDate(value: any): Date {
+    // https://github.com/angular/angular/issues/12334
+    return value ? new Date(value.replace(/\s/g, 'T')) : undefined;
+  }
 }

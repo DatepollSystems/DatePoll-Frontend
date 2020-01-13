@@ -1,14 +1,15 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 
-import { Subject } from 'rxjs';
+import {Subject} from 'rxjs';
 
-import { HttpService } from '../../services/http.service';
+import {Converter} from '../../services/converter';
+import {HttpService} from '../../services/http.service';
 
-import { HomeBirthdayModel } from './birthdays.model';
-import { HomeBookingsModel } from './bookings.model';
-import { Event } from '../events/models/event.model';
-import { Decision } from '../events/models/decision.model';
-import { EventDate } from '../events/models/event-date.model';
+import {Decision} from '../events/models/decision.model';
+import {EventDate} from '../events/models/event-date.model';
+import {Event} from '../events/models/event.model';
+import {HomeBirthdayModel} from './birthdays.model';
+import {HomeBookingsModel} from './bookings.model';
 
 @Injectable({
   providedIn: 'root'
@@ -94,7 +95,7 @@ export class HomepageService {
               fetchedDate.location,
               fetchedDate.x,
               fetchedDate.y,
-              new Date(fetchedDate.date),
+              Converter.getIOSDate(fetchedDate.date),
               fetchedDate.description
             );
             dates.push(date);
@@ -103,8 +104,8 @@ export class HomepageService {
           const event = new Event(
             fetchedEvent.id,
             fetchedEvent.name,
-            new Date(fetchedEvent.start_date),
-            new Date(fetchedEvent.end_date),
+            Converter.getIOSDate(fetchedEvent.start_date),
+            Converter.getIOSDate(fetchedEvent.end_date),
             fetchedEvent.for_everyone,
             fetchedEvent.description,
             decisions,
