@@ -58,11 +58,12 @@ export class MyUserService {
         const localPhoneNumbersData = data.phone_numbers;
         for (let i = 0; i < localPhoneNumbersData.length; i++) {
           localPhoneNumbers.push(
-            new PhoneNumber(localPhoneNumbersData[i].id, localPhoneNumbersData[i].label, localPhoneNumbersData[i].number));
+            new PhoneNumber(localPhoneNumbersData[i].id, localPhoneNumbersData[i].label, localPhoneNumbersData[i].number)
+          );
         }
         this.setPhoneNumbers(localPhoneNumbers);
       },
-      (error) => console.log(error)
+      error => console.log(error)
     );
   }
 
@@ -82,21 +83,21 @@ export class MyUserService {
     const dateformat = [year, month, day].join('-');
 
     const userObject = {
-      'title': this.getTitle(),
-      'firstname': this.getFirstname(),
-      'surname': this.getSurname(),
-      'streetname': this.getStreetname(),
-      'streetnumber': this.getStreetnumber(),
-      'zipcode': this.getZipcode(),
-      'location': this.getLocation(),
-      'birthday': dateformat
+      title: this.getTitle(),
+      firstname: this.getFirstname(),
+      surname: this.getSurname(),
+      streetname: this.getStreetname(),
+      streetnumber: this.getStreetnumber(),
+      zipcode: this.getZipcode(),
+      location: this.getLocation(),
+      birthday: dateformat
     };
 
     this.httpService.loggedInV1PUTRequest('/user/myself', userObject, 'updateMyself').subscribe(
       (data: any) => {
         console.log(data);
       },
-      (error) => console.log(error)
+      error => console.log(error)
     );
   }
 
@@ -197,7 +198,7 @@ export class MyUserService {
 
   public setEmailAddressesPerRequest(emailAddresses: string[]) {
     const request = {
-      'email_addresses': this._emailAddresses
+      email_addresses: this._emailAddresses
     };
     return this.httpService.loggedInV1POSTRequest('/user/myself/changeEmailAddresses', request, 'updateEmailAddresses');
   }
@@ -237,7 +238,7 @@ export class MyUserService {
 
   hasPermission(permission: string) {
     if (this.getPermissions() === null) {
-      return true;
+      return false;
     }
 
     for (let i = 0; i < this.getPermissions().length; i++) {
