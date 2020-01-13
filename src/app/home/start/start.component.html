@@ -8,10 +8,11 @@
           <table>
             <thead>
               <tr>
-                <th>Name</th>
-                <th>Datum</th>
-                <th>Informationen</th>
-                <th>Abstimmen</th>
+                <th>{{ 'EVENTS_ADMINISTRATION_TABLE_NAME' | translate }}</th>
+                <th>{{ 'EVENTS_ADMINISTRATION_TABLE_START_DATE' | translate }}</th>
+                <th>{{ 'EVENTS_VIEW_EVENT_CARD_BUTTON_INFO' | translate }}</th>
+                <th>{{ 'STARTPAGE_EVENTS_USER_DECISION' | translate }}</th>
+                <th>{{ 'EVENTS_VIEW_EVENT_CARD_BUTTON_DECIDE' | translate }}</th>
               </tr>
             </thead>
             <tbody>
@@ -23,6 +24,12 @@
                     <mat-icon>info</mat-icon>
                     {{ 'EVENTS_VIEW_EVENT_CARD_BUTTON_INFO' | translate }}
                   </button>
+                </td>
+                <td *ngIf="event.userDecision == null">
+                  {{ 'EVENTS_ADMINISTRATION_INFO_EVENT_UNKNOWN_VOTING' | translate }}
+                </td>
+                <td *ngIf="event.userDecision != null">
+                  {{ event.userDecision }}
                 </td>
                 <td *ngIf="!event.alreadyVotedFor">
                   <button (click)="onEventVote(event)" color="primary" mat-flat-button>
@@ -58,10 +65,7 @@
             <tbody>
               <tr *ngFor="let birthday of birthdays">
                 <td>{{ birthday.name }}</td>
-                <td>
-                  {{ birthday.date | date: 'EE, dd.MM.yyyy' }} (<i>{{ birthday.age }}</i
-                  >)
-                </td>
+                <td>{{ birthday.date | date: 'EE, dd.MM.yyyy' }} ({{ birthday.age }})</td>
               </tr>
             </tbody>
           </table>

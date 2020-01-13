@@ -1,20 +1,19 @@
-import {Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
 
-import {Subject} from 'rxjs';
+import { Subject } from 'rxjs';
 
-import {HttpService} from '../../services/http.service';
+import { HttpService } from '../../services/http.service';
 
-import {HomeBirthdayModel} from './birthdays.model';
-import {HomeBookingsModel} from './bookings.model';
-import {Event} from '../events/models/event.model';
-import {Decision} from '../events/models/decision.model';
-import {EventDate} from '../events/models/event-date.model';
+import { HomeBirthdayModel } from './birthdays.model';
+import { HomeBookingsModel } from './bookings.model';
+import { Event } from '../events/models/event.model';
+import { Decision } from '../events/models/decision.model';
+import { EventDate } from '../events/models/event-date.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HomepageService {
-
   public birthdaysChange: Subject<HomeBirthdayModel[]> = new Subject<HomeBirthdayModel[]>();
   public bookingsChange: Subject<HomeBookingsModel[]> = new Subject<HomeBookingsModel[]>();
   public eventsChange: Subject<Event[]> = new Subject<Event[]>();
@@ -22,8 +21,7 @@ export class HomepageService {
   private _bookings: HomeBookingsModel[] = [];
   private _events: Event[] = [];
 
-  constructor(private httpService: HttpService) {
-  }
+  constructor(private httpService: HttpService) {}
 
   public getBirthdays(): HomeBirthdayModel[] {
     this.fetchData();
@@ -54,9 +52,18 @@ export class HomepageService {
 
         const bookingsToSave = [];
         for (let i = 0; i < bookings.length; i++) {
-          bookingsToSave.push(new HomeBookingsModel(bookings[i].movie_id, bookings[i].movie_name, bookings[i].amount,
-            bookings[i].movie_date, bookings[i].worker_id, bookings[i].worker_name, bookings[i].emergency_worker_id,
-            bookings[i].emergency_worker_name));
+          bookingsToSave.push(
+            new HomeBookingsModel(
+              bookings[i].movie_id,
+              bookings[i].movie_name,
+              bookings[i].amount,
+              bookings[i].movie_date,
+              bookings[i].worker_id,
+              bookings[i].worker_name,
+              bookings[i].emergency_worker_id,
+              bookings[i].emergency_worker_name
+            )
+          );
         }
 
         this.setBookings(bookingsToSave);
@@ -82,19 +89,34 @@ export class HomepageService {
 
           const dates = [];
           for (const fetchedDate of fetchedEvent.dates) {
-            const date = new EventDate(fetchedDate.id, fetchedDate.location, fetchedDate.x, fetchedDate.y,
-              new Date(fetchedDate.date), fetchedDate.description);
+            const date = new EventDate(
+              fetchedDate.id,
+              fetchedDate.location,
+              fetchedDate.x,
+              fetchedDate.y,
+              new Date(fetchedDate.date),
+              fetchedDate.description
+            );
             dates.push(date);
           }
 
-          const event = new Event(fetchedEvent.id, fetchedEvent.name, new Date(fetchedEvent.start_date), new Date(fetchedEvent.end_date),
-            fetchedEvent.for_everyone, fetchedEvent.description, decisions, dates);
+          const event = new Event(
+            fetchedEvent.id,
+            fetchedEvent.name,
+            new Date(fetchedEvent.start_date),
+            new Date(fetchedEvent.end_date),
+            fetchedEvent.for_everyone,
+            fetchedEvent.description,
+            decisions,
+            dates
+          );
           event.alreadyVotedFor = fetchedEvent.already_voted;
+          event.userDecision = fetchedEvent.user_decision;
           eventsToSave.push(event);
         }
         this.setEvents(eventsToSave);
       },
-      (error) => console.log(error)
+      error => console.log(error)
     );
   }
 

@@ -1,8 +1,8 @@
-import {EventResultGroup} from './event-result-group.model';
-import {EventResultUser} from './event-result-user.model';
-import {EventAction} from 'calendar-utils';
-import {Decision} from './decision.model';
-import {EventDate} from './event-date.model';
+import { EventResultGroup } from './event-result-group.model';
+import { EventResultUser } from './event-result-user.model';
+import { EventAction } from 'calendar-utils';
+import { Decision } from './decision.model';
+import { EventDate } from './event-date.model';
 
 export class Event {
   public id: number;
@@ -15,6 +15,7 @@ export class Event {
 
   public alreadyVotedFor = false;
   public additionalInformation = null;
+  public userDecision = null;
 
   public chartIsEmpty = true;
   // Calendar specific values
@@ -38,8 +39,16 @@ export class Event {
 
   private dates: EventDate[] = [];
 
-  constructor(id: number, name: string, startDate: Date, endDate: Date, forEveryone: boolean, description: string,
-              decisions: Decision[], dates: EventDate[]) {
+  constructor(
+    id: number,
+    name: string,
+    startDate: Date,
+    endDate: Date,
+    forEveryone: boolean,
+    description: string,
+    decisions: Decision[],
+    dates: EventDate[]
+  ) {
     this.id = id;
     this.name = name;
     this.startDate = startDate;
@@ -112,8 +121,8 @@ export class Event {
     const data = [];
     for (let i = 0; i < this.getDecisions().length; i++) {
       const object = {
-        'id': this.getDecisions()[i].id,
-        'value': 0
+        id: this.getDecisions()[i].id,
+        value: 0
       };
       data.push(object);
     }
