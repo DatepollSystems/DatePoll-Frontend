@@ -20,7 +20,7 @@ export class EventDatesManagementComponent {
 
   createNewEventDateDate = new Date();
 
-  constructor() { }
+  constructor() {}
 
   onDatesChange(dates: EventDate[]) {
     this.dates = dates;
@@ -36,10 +36,10 @@ export class EventDatesManagementComponent {
     let x = form.controls.x.value;
     let y = form.controls.y.value;
     if (x == null || x === 0) {
-      x = -99;
+      x = -199;
     }
     if (y == null || y === 0) {
-      y = -99;
+      y = -199;
     }
     const description = '';
     this.createNewEventDateDate.setHours(form.controls.dateHours.value);
@@ -53,5 +53,4 @@ export class EventDatesManagementComponent {
     // Recreate date to not override first date while creating a new date object
     this.createNewEventDateDate = new Date();
   }
-
 }

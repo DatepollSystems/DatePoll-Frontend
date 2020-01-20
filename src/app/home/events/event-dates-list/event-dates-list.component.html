@@ -10,18 +10,18 @@
       <mat-panel-title>
         {{ date.date | date: 'EE, dd.MM.yyyy HH:mm' }}
       </mat-panel-title>
-      <mat-panel-description *ngIf="date.location?.length > 0 && date?.x !== -99 && date?.y !== -99">
+      <mat-panel-description *ngIf="date.location?.length > 0 && date?.x !== -199 && date?.y !== -199">
         <a target="_blank" rel="noopener" href="https://www.google.com/maps/place/{{ date.x }}+{{ date.y }}">
           {{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE_LIST_OPEN_LOCATION_1' | translate }}{{ date.location
           }}{{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE_LIST_OPEN_LOCATION_2' | translate }}
         </a>
       </mat-panel-description>
-      <mat-panel-description *ngIf="date.location?.length == 0 && date?.x !== -99 && date?.y !== -99">
+      <mat-panel-description *ngIf="date.location?.length == 0 && date?.x !== -199 && date?.y !== -199">
         <a target="_blank" rel="noopener" href="https://www.google.com/maps/place/{{ date.x }}+{{ date.y }}">
           {{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE_LIST_OPEN_LOCATION_3' | translate }}
         </a>
       </mat-panel-description>
-      <mat-panel-description *ngIf="date.location?.length > 0 && date?.x === -99 && date?.y === -99">
+      <mat-panel-description *ngIf="date.location?.length > 0 && date?.x === -199 && date?.y === -199">
         <a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query={{ date.location }}">
           {{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE_LIST_OPEN_LOCATION_4' | translate }}{{ date.location
           }}{{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE_LIST_OPEN_LOCATION_5' | translate }}
@@ -41,13 +41,13 @@
       </div>
     </mat-expansion-panel-header>
 
-    <p *ngIf="date.location?.length == 0 && date.x == -99 && date.y == -99">
+    <p *ngIf="date.location?.length == 0 && date.x == -199 && date.y == -199">
       {{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE_LIST_NO_LOCATION' | translate }}
     </p>
 
-    <app-maps-component [x]="date.x" [y]="date.y" [showMarker]="true" *ngIf="date?.x !== -99 && date?.y !== -99"></app-maps-component>
+    <app-maps-component [x]="date.x" [y]="date.y" [showMarker]="true" *ngIf="date?.x !== -199 && date?.y !== -199"></app-maps-component>
 
-    <p *ngIf="date?.x === -99 && date?.y === -99">
+    <p *ngIf="date?.x === -199 && date?.y === -199">
       {{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE_LIST_NO_COORDINATES' | translate }}
     </p>
   </mat-expansion-panel>
