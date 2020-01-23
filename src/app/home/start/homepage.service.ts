@@ -10,6 +10,7 @@ import {EventDate} from '../events/models/event-date.model';
 import {Event} from '../events/models/event.model';
 import {HomeBirthdayModel} from './birthdays.model';
 import {HomeBookingsModel} from './bookings.model';
+import {TranslateService} from '../../translation/translate.service';
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +23,7 @@ export class HomepageService {
   private _bookings: HomeBookingsModel[] = [];
   private _events: Event[] = [];
 
-  constructor(private httpService: HttpService) {}
+  constructor(private httpService: HttpService, private translate: TranslateService) {}
 
   public getBirthdays(): HomeBirthdayModel[] {
     this.fetchData();
@@ -73,7 +74,13 @@ export class HomepageService {
 
         const birthdaysToSave = [];
         for (let i = 0; i < birthdays.length; i++) {
-          birthdaysToSave.push(new HomeBirthdayModel(birthdays[i].name, birthdays[i].date));
+          birthdaysToSave.push(
+            new HomeBirthdayModel(
+              birthdays[i].name,
+              new Date(birthdays[i].date),
+              this.translate.getTranslationFor('CALENDAR_USERS_BIRTHDAY')
+            )
+          );
         }
 
         this.setBirthdays(birthdaysToSave);

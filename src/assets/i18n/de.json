@@ -104,6 +104,14 @@
 
   "CALENDAR": "Kalender",
 
+  "CALENDAR_SETTINGS_SHOW_MOVIES": "Filme anzeigen",
+  "CALENDAR_SETTINGS_SHOW_EVENTS": "Events anzeigen",
+  "CALENDAR_SETTINGS_SHOW_BIRTHDAYS": "Geburtstage anzeigen",
+
+  "CALENDAR_USERS_BIRTHDAY": "'s Geburtstag",
+
+  "CALENDAR_AGENDA": "Agenda",
+
   "CALENDAR_PREVIOUS": "Zurück",
   "CALENDAR_TODAY": "Heute",
   "CALENDAR_NEXT": "Weiter",
