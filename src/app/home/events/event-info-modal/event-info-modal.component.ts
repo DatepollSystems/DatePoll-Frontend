@@ -12,8 +12,6 @@ import {MyUserService} from '../../my-user.service';
 import {Event} from '../models/event.model';
 import {EventResultGroup} from '../models/event-result-group.model';
 import {EventDate} from '../models/event-date.model';
-import {EventUserManagementComponent} from '../events-administration/event-user-management-modal/event-user-management/event-user-management.component';
-import {ResultUserBarChartComponent} from './result-user-bar-chart/result-user-bar-chart.component';
 
 @Component({
   selector: 'app-event-info-modal',
@@ -43,7 +41,7 @@ export class EventInfoModalComponent implements OnDestroy {
   public ROOT_PERMISSION = Permissions.ROOT_ADMINISTRATION;
 
   public pieChartOptions: ChartOptions = {
-    responsive: true,
+    responsive: true
   };
   public pieChartType: ChartType = 'pie';
   public pieChartLegend = true;
@@ -59,7 +57,7 @@ export class EventInfoModalComponent implements OnDestroy {
     this.refreshValues();
 
     this.event = this.eventsService.getEvent(id);
-    this.eventSubscription = this.eventsService.eventChange.subscribe((value) => {
+    this.eventSubscription = this.eventsService.eventChange.subscribe(value => {
       this.event = value;
       this.refreshValues();
       this.sendingRequest = false;

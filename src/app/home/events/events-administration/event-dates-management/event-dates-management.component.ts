@@ -1,7 +1,10 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Component, EventEmitter, Input, Output, ViewChild} from '@angular/core';
 import {NgForm} from '@angular/forms';
 
+import {MapsComponentComponent} from '../../../../services/shared-components/maps-component/maps-component.component';
+
 import {EventDate} from '../../models/event-date.model';
+import {EventStandardLocation} from '../../models/event-standard-location.model';
 
 @Component({
   selector: 'app-event-dates-management',
@@ -17,10 +20,30 @@ export class EventDatesManagementComponent {
 
   public x = 0;
   public y = 0;
+  public location = null;
+
+  @ViewChild(MapsComponentComponent, {static: true}) mapsComponent: MapsComponentComponent;
 
   createNewEventDateDate = new Date();
 
+  selectedStandardLocation: EventStandardLocation;
+
   constructor() {}
+
+  onStandardLocationChanged(standardLocation: EventStandardLocation) {
+    console.log('Selected standard location: ' + standardLocation.name);
+    this.selectedStandardLocation = standardLocation;
+  }
+
+  applyStandardLocation() {
+    if (this.selectedStandardLocation == null) {
+      return;
+    }
+    this.x = this.selectedStandardLocation.x;
+    this.y = this.selectedStandardLocation.y;
+    this.location = this.selectedStandardLocation.location;
+    this.mapsComponent.drawMarker(this.x, this.y);
+  }
 
   onDatesChange(dates: EventDate[]) {
     this.dates = dates;
@@ -50,6 +73,8 @@ export class EventDatesManagementComponent {
     console.log('Added event date');
     console.log(date);
 
+    form.reset();
+    this.mapsComponent.removeMarker();
     // Recreate date to not override first date while creating a new date object
     this.createNewEventDateDate = new Date();
   }

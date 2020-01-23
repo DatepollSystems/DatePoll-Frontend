@@ -1,7 +1,7 @@
 import {Component, OnDestroy, TemplateRef, ViewChild} from '@angular/core';
-import {EventStandardDecision} from '../models/standardDecision.model';
+import {EventStandardDecision} from '../../models/standardDecision.model';
 import {Subscription} from 'rxjs';
-import {StandardDecisionsService} from '../standardDecisions.service';
+import {StandardDecisionsService} from '../../standardDecisions.service';
 import {NgForm} from '@angular/forms';
 import {NotificationsService, NotificationType} from 'angular2-notifications';
 
@@ -28,7 +28,7 @@ export class EventStandardDecisionsManagementModalComponent implements OnDestroy
       this.loadingStandardDecisions = true;
     }
 
-    this.standardDecisionsSubscription = standardDecisionsService.standardDecisionsChange.subscribe((value) => {
+    this.standardDecisionsSubscription = standardDecisionsService.standardDecisionsChange.subscribe(value => {
       this.standardDecisions = value;
       this.loadingStandardDecisions = false;
     });
@@ -51,7 +51,7 @@ export class EventStandardDecisionsManagementModalComponent implements OnDestroy
         this.standardDecisionsService.fetchStandardDecisions();
         this.notificationsService.html(this.successfullyAddedStandardDecision, NotificationType.Success, null, 'success');
       },
-      (error) => console.log(error)
+      error => console.log(error)
     );
 
     form.reset();
@@ -67,7 +67,7 @@ export class EventStandardDecisionsManagementModalComponent implements OnDestroy
         this.standardDecisionsService.fetchStandardDecisions();
         this.notificationsService.html(this.successfullyRemovedStandardDecision, NotificationType.Success, null, 'success');
       },
-      (error) => console.log(error)
+      error => console.log(error)
     );
   }
 }

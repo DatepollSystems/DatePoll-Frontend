@@ -1,7 +1,7 @@
-import { AfterViewInit, Component, EventEmitter, Input, Output } from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {AfterViewInit, Component, EventEmitter, Input, Output} from '@angular/core';
 import * as L from 'leaflet';
-import { icon, Marker } from 'leaflet';
-import { HttpClient } from '@angular/common/http';
+import {icon, Marker} from 'leaflet';
 
 @Component({
   selector: 'app-maps-component',
@@ -35,7 +35,7 @@ export class MapsComponentComponent implements AfterViewInit {
   ngAfterViewInit(): void {
     this.initMap(this.x, this.y);
     if (this.showMarker) {
-      this.drawMarker();
+      this.drawMarker(this.x, this.y);
     }
   }
 
@@ -66,7 +66,7 @@ export class MapsComponentComponent implements AfterViewInit {
       this.map.on('click', (event: any) => {
         this.x = event.latlng.lat;
         this.y = event.latlng.lng;
-        this.drawMarker();
+        this.drawMarker(this.x, this.y);
 
         const coordinates = {
           x: this.x,
@@ -79,10 +79,8 @@ export class MapsComponentComponent implements AfterViewInit {
     }
   }
 
-  drawMarker() {
-    if (this.marker != null) {
-      this.marker.removeFrom(this.map);
-    }
+  drawMarker(x: number, y: number) {
+    this.removeMarker();
 
     const iconRetinaUrl = 'assets/marker-icon-2x.png';
     const iconUrl = 'assets/marker-icon.png';
@@ -98,6 +96,12 @@ export class MapsComponentComponent implements AfterViewInit {
       shadowSize: [41, 41]
     });
 
-    this.marker = L.marker([this.x, this.y]).addTo(this.map);
+    this.marker = L.marker([x, y]).addTo(this.map);
+  }
+
+  removeMarker() {
+    if (this.marker != null) {
+      this.marker.removeFrom(this.map);
+    }
   }
 }

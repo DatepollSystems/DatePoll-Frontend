@@ -131,7 +131,7 @@ export class EventsService {
     const dates = [];
     for (const date of event.getEventDates()) {
       dates.push({
-        id: -1,
+        id: date.id,
         x: date.x,
         y: date.y,
         date: Converter.getDateFormattedWithHoursMinutesAndSeconds(date.date),

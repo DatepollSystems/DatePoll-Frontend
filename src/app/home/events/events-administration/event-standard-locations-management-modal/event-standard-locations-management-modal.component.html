@@ -1,0 +1,156 @@
+<h1 mat-dialog-title>{{ 'EVENTS_STANDARD_DECISIONS_MANAGEMENT' | translate }}</h1>
+<div mat-dialog-content style="padding-bottom: 15px;">
+  <form #form="ngForm" (ngSubmit)="save(form)" style="margin-bottom: 15px;">
+    <div class="row justify-content-around" style="margin-bottom: 25px;">
+      <mat-form-field class="col-12 col-sm-12 col-md-4 col-lg-2 col-xl-2">
+        <input
+          #nameModel="ngModel"
+          id="name"
+          matInput
+          maxlength="190"
+          name="name"
+          type="text"
+          required
+          minlength="1"
+          ngModel
+          placeholder="{{ 'EVENTS_STANDARD_LOCATIONS_MANAGEMENT_NAME' | translate }}"
+        />
+        <mat-error *ngIf="nameModel.invalid">
+          {{ 'EVENTS_STANDARD_LOCATIONS_MANAGEMENT_NAME_INCORRECT' | translate }}
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
+        <input
+          #locationModel="ngModel"
+          id="location"
+          matInput
+          maxlength="190"
+          name="location"
+          type="text"
+          ngModel
+          placeholder="{{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_LOCATION' | translate }}"
+        />
+        <mat-error *ngIf="locationModel.invalid">
+          {{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_LOCATION_INCORRECT' | translate }}
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="col-6 col-sm-6 col-md-2 col-lg-2 col-xl-2">
+        <input
+          #xModel="ngModel"
+          id="x"
+          matInput
+          [(ngModel)]="x"
+          min="-90"
+          max="90"
+          name="x"
+          ngModel
+          placeholder="{{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_X' | translate }}"
+          type="number"
+        />
+        <mat-error *ngIf="xModel.invalid">
+          {{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_X_INCORRECT' | translate }}
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="col-6 col-sm-6 col-md-2 col-lg-2 col-xl-2">
+        <input
+          #yModel="ngModel"
+          id="y"
+          matInput
+          [(ngModel)]="y"
+          min="-180"
+          max="180"
+          name="y"
+          ngModel
+          placeholder="{{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_Y' | translate }}"
+          type="number"
+        />
+        <mat-error *ngIf="yModel.invalid">
+          {{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_Y_INCORRECT' | translate }}
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <app-maps-component
+      [x]="48.645333"
+      [y]="15.81711"
+      [edible]="true"
+      (coordinatesChanged)="onCoordinatesChange($event)"
+    ></app-maps-component>
+
+    <div class="row justify-content-around">
+      <button mat-button type="button" class="success-button col-11" (click)="form.ngSubmit.emit()" [disabled]="!form.form.valid">
+        {{ 'ADD' | translate }}
+      </button>
+    </div>
+  </form>
+
+  <mat-accordion>
+    <mat-expansion-panel *ngFor="let standardLocation of standardLocations" hideToggle>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          {{ standardLocation.name }}
+        </mat-panel-title>
+        <mat-panel-description
+          *ngIf="standardLocation.location?.length > 0 && standardLocation?.x !== -199 && standardLocation?.y !== -199"
+        >
+          <a target="_blank" rel="noopener" href="https://www.google.com/maps/place/{{ standardLocation.x }}+{{ standardLocation.y }}">
+            {{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE_LIST_OPEN_LOCATION_1' | translate }}{{ standardLocation.location
+            }}{{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE_LIST_OPEN_LOCATION_2' | translate }}
+          </a>
+        </mat-panel-description>
+        <mat-panel-description
+          *ngIf="
+            (standardLocation.location == null || standardLocation.location?.length == 0) &&
+            standardLocation?.x !== -199 &&
+            standardLocation?.y !== -199
+          "
+        >
+          <a target="_blank" rel="noopener" href="https://www.google.com/maps/place/{{ standardLocation.x }}+{{ standardLocation.y }}">
+            {{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE_LIST_OPEN_LOCATION_3' | translate }}
+          </a>
+        </mat-panel-description>
+        <mat-panel-description
+          *ngIf="standardLocation.location?.length > 0 && standardLocation?.x === -199 && standardLocation?.y === -199"
+        >
+          <a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query={{ standardLocation.location }}">
+            {{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE_LIST_OPEN_LOCATION_4' | translate }}{{ standardLocation.location
+            }}{{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE_LIST_OPEN_LOCATION_5' | translate }}
+          </a>
+        </mat-panel-description>
+
+        <div class="mat-expansion-indicator" style="padding-right: 5px">
+          <b
+            ><a
+              (click)="deleteStandardLocation(standardLocation)"
+              style="margin-right: 25px;"
+              matTooltip="{{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE_LIST_DELETE' | translate }}"
+            >
+              {{ 'DELETE' | translate }}</a
+            ></b
+          >
+        </div>
+      </mat-expansion-panel-header>
+
+      <p *ngIf="standardLocation.location?.length == 0 && standardLocation.x == -199 && standardLocation.y == -199">
+        {{ 'EVENTS_STANDARD_LOCATIONS_MANAGEMENT_NO_LOCATION' | translate }}
+      </p>
+
+      <app-maps-component
+        [x]="standardLocation.x"
+        [y]="standardLocation.y"
+        [showMarker]="true"
+        *ngIf="standardLocation?.x !== -199 && standardLocation?.y !== -199"
+      ></app-maps-component>
+
+      <p *ngIf="standardLocation?.x === -199 && standardLocation?.y === -199">
+        {{ 'EVENTS_STANDARD_LOCATIONS_MANAGEMENT_NO_COORDINATES' | translate }}
+      </p>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>
+<div mat-dialog-actions style="margin-top: 15px">
+  <button [mat-dialog-close] mat-button>{{ 'CLOSE' | translate }}</button>
+</div>

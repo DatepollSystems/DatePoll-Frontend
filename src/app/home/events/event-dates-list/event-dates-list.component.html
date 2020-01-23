@@ -16,7 +16,7 @@
           }}{{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE_LIST_OPEN_LOCATION_2' | translate }}
         </a>
       </mat-panel-description>
-      <mat-panel-description *ngIf="date.location?.length == 0 && date?.x !== -199 && date?.y !== -199">
+      <mat-panel-description *ngIf="(date.location == null || date.location?.length == 0) && date?.x !== -199 && date?.y !== -199">
         <a target="_blank" rel="noopener" href="https://www.google.com/maps/place/{{ date.x }}+{{ date.y }}">
           {{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE_LIST_OPEN_LOCATION_3' | translate }}
         </a>

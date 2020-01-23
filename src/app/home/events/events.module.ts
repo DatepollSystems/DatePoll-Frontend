@@ -15,9 +15,10 @@ import {CustomDateAdapter, MY_DATE_FORMATS} from '../../services/custom-date-ada
 import {CommonEventsComponentsModule} from './common-events-components.module';
 import {EventsAdministrationComponent} from './events-administration/events-administration.component';
 import {EventCreateModalComponent} from './events-administration/event-create-modal/event-create-modal.component';
-import {EventStandardDecisionsManagementModalComponent} from './event-standard-decisions-management-modal/event-standard-decisions-management-modal.component';
+import {EventStandardDecisionsManagementModalComponent} from './events-administration/event-standard-decisions-management-modal/event-standard-decisions-management-modal.component';
 import {EventsViewComponent} from './events-view/events-view.component';
 import {EventUserManagementModalComponent} from './events-administration/event-user-management-modal/event-user-management-modal.component';
+import {EventStandardLocationsManagementModalComponent} from './events-administration/event-standard-locations-management-modal/event-standard-locations-management-modal.component';
 
 @NgModule({
   declarations: [
@@ -25,12 +26,14 @@ import {EventUserManagementModalComponent} from './events-administration/event-u
     EventCreateModalComponent,
     EventUserManagementModalComponent,
     EventStandardDecisionsManagementModalComponent,
+    EventStandardLocationsManagementModalComponent,
     EventsViewComponent
   ],
   entryComponents: [
     EventCreateModalComponent,
     EventUserManagementModalComponent,
-    EventStandardDecisionsManagementModalComponent
+    EventStandardDecisionsManagementModalComponent,
+    EventStandardLocationsManagementModalComponent
   ],
   imports: [
     CommonModule,
@@ -45,8 +48,7 @@ import {EventUserManagementModalComponent} from './events-administration/event-u
   ],
   providers: [
     {provide: DateAdapter, useClass: CustomDateAdapter},
-    {provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS},
+    {provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS}
   ]
 })
-export class EventsModule {
-}
+export class EventsModule {}
