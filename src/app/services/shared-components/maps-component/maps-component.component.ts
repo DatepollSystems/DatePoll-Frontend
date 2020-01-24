@@ -39,6 +39,15 @@ export class MapsComponentComponent implements AfterViewInit {
     }
   }
 
+  clearSelection() {
+    this.removeMarker();
+    const coordinates = {
+      x: 0,
+      y: 0
+    };
+    this.coordinatesChanged.emit(coordinates);
+  }
+
   search() {
     this.http.get('https://geocode.xyz/' + this.searchFilter + '?json=1').subscribe(
       (response: any) => {
