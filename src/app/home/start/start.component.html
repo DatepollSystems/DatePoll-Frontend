@@ -52,7 +52,19 @@
   <div *ngIf="birthdays.length != 0" class="col-12 col-lg-4">
     <mat-card class="mat-elevation-z4">
       <mat-card-content>
-        <mat-card-title>{{ 'STARTPAGE_BIRTHDAY' | translate }}</mat-card-title>
+        <mat-card-title>
+          {{ 'STARTPAGE_BIRTHDAY' | translate }}
+          <button
+            mat-icon-button
+            matTooltip="{{ 'STARTPAGE_BIRTHDAY_INFO' | translate }}"
+            style="text-align: right; float: right; margin-top: -10px;"
+            matTooltipPosition="right"
+            routerLink="settings/settings"
+            aria-label="Button that brings you to a page where you can deactivate your account for showing up when you have birhtday."
+          >
+            <mat-icon>info</mat-icon>
+          </button>
+        </mat-card-title>
 
         <div class="table-responsive">
           <table>

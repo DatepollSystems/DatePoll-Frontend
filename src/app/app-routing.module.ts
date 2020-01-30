@@ -9,30 +9,33 @@ const appRoutes = [
   {path: '', redirectTo: '/auth/signin', pathMatch: 'full'},
   {path: 'auth', loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)},
   {
-    path: 'home', component: HomeComponent, canActivate: [AuthGuard], children: [
+    path: 'home',
+    component: HomeComponent,
+    canActivate: [AuthGuard],
+    children: [
       {path: '', pathMatch: 'full', component: StartComponent},
       {path: 'cinema', loadChildren: () => import('./home/cinema/cinema.module').then(m => m.CinemaModule)},
       {path: 'events', loadChildren: () => import('./home/events/events.module').then(m => m.EventsModule)},
       {path: 'calendar', loadChildren: () => import('./home/calendar/calendar-component.module').then(m => m.CalendarComponentModule)},
-      {path: 'settings/personal', loadChildren: () => import('./home/settings/settings.module').then(m => m.SettingsModule)},
+      {path: 'settings', loadChildren: () => import('./home/settings/settings.module').then(m => m.SettingsModule)},
       {
-        path: 'management/user', loadChildren:
-          () => import('./home/management/users-management/users-management.module').then(m => m.UsersManagementModule)
+        path: 'management/user',
+        loadChildren: () => import('./home/management/users-management/users-management.module').then(m => m.UsersManagementModule)
       },
       {
-        path: 'management/group', loadChildren:
-          () => import('./home/management/groups-management/groups-management.module').then(m => m.GroupsManagementModule)
+        path: 'management/group',
+        loadChildren: () => import('./home/management/groups-management/groups-management.module').then(m => m.GroupsManagementModule)
       },
       {
         path: 'management/performanceBadges',
-        loadChildren:
-          () => import('./home/management/performance-badges-management/performance-badges-management.module')
-            .then(m => m.PerformanceBadgesManagementModule)
+        loadChildren: () =>
+          import('./home/management/performance-badges-management/performance-badges-management.module').then(
+            m => m.PerformanceBadgesManagementModule
+          )
       },
       {
         path: 'management/datepoll',
-        loadChildren:
-          () => import('./home/management/datepoll-management/datepoll-management.module').then(m => m.DatepollManagementModule)
+        loadChildren: () => import('./home/management/datepoll-management/datepoll-management.module').then(m => m.DatepollManagementModule)
       }
     ]
   },
@@ -44,6 +47,4 @@ const appRoutes = [
   imports: [RouterModule.forRoot(appRoutes, {preloadingStrategy: PreloadAllModules})],
   exports: [RouterModule]
 })
-
-export class AppRoutingModule {
-}
+export class AppRoutingModule {}

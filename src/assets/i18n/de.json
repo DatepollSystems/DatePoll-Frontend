@@ -89,6 +89,7 @@
   "BROWSER_COMPATIBILITY_CONTENT_2": "<br>Ich versuche mein bestes alle unterschiedlichen Browser als auch Endgeräte zu unterstützen. Der Internet Explorer ist jedoch ein Mysterium.\n  <a href=\"https://www.derstandard.at/story/2000097801064/microsoft-bittet-nutzer-internet-explorer-nicht-mehr-zu-verwenden\" target=\"_blank\" rel=\"noopener\">\n    Selbst <b>Microsoft</b> bittet seine eigenen Nutzer Internet Explorer hinter sich zu lassen.\n  </a>\n  <br><br>Aber wenn genörgelt wird, müssen auch Alternativen angeboten werden:\n  <ul>\n    <li><i>(Empfehlung) </i><a href=\"https://firefox.com/\" rel=\"noopener\" target=\"_blank\">Firefox Browser</a></li>\n    <li><a href=\"https://www.google.com/chrome/\" rel=\"noopener\" target=\"_blank\">Google Chrome</a></li>\n  </ul>",
 
   "STARTPAGE_BIRTHDAY": "Geburtstage des Monat",
+  "STARTPAGE_BIRTHDAY_INFO": "Hier kannst du es deaktivieren dass dein Name bei den Geburtstagen aufscheint.",
   "STARTPAGE_BIRTHDAY_NAME": "Name",
   "STARTPAGE_BIRTHDAY_DATE": "Geburtsdatum",
 
