@@ -2,8 +2,8 @@ import {Component, Input, OnChanges, OnInit} from '@angular/core';
 import {ChartOptions, ChartType} from 'chart.js';
 import {Label, monkeyPatchChartJsLegend, monkeyPatchChartJsTooltip, SingleDataSet} from 'ng2-charts';
 
-import {MyUserService} from '../../../my-user.service';
 import {Permissions} from '../../../../permissions';
+import {MyUserService} from '../../../my-user.service';
 
 import {EventResultGroup} from '../../models/event-result-group.model';
 import {EventResultSubgroup} from '../../models/event-result-subgroup.model';
@@ -22,7 +22,7 @@ export class GroupInfoCardComponent implements OnInit, OnChanges {
 
   // Chart
   public pieChartOptions: ChartOptions = {
-    responsive: true,
+    responsive: true
   };
   public pieChartType: ChartType = 'pie';
   public pieChartLegend = true;
