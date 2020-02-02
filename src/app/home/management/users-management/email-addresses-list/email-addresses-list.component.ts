@@ -8,7 +8,6 @@ import {MatTableDataSource} from '@angular/material/table';
   styleUrls: ['./email-addresses-list.component.css']
 })
 export class EmailAddressesListComponent implements OnInit {
-
   displayedColumns: string[] = ['emailAddress', 'action'];
   dataSource: MatTableDataSource<string>;
 
@@ -17,8 +16,7 @@ export class EmailAddressesListComponent implements OnInit {
   @Input() emailAddressesInput: string[];
   @Output() emailAddressesChanged = new EventEmitter();
 
-  constructor() {
-  }
+  constructor() {}
 
   ngOnInit() {
     if (this.emailAddressesInput != null) {
@@ -29,6 +27,13 @@ export class EmailAddressesListComponent implements OnInit {
 
   addEmailAddress(form: NgForm) {
     const emailAddress = form.controls.emailAddress.value;
+
+    for (const existingEmailAddress of this.emailAddresses) {
+      if (existingEmailAddress.toLocaleLowerCase() === emailAddress.toString().toLocaleLowerCase()) {
+        return;
+      }
+    }
+
     this.emailAddresses.push(emailAddress);
     this.dataSource = new MatTableDataSource(this.emailAddresses);
 
@@ -38,14 +43,13 @@ export class EmailAddressesListComponent implements OnInit {
 
   removeEmailAddress(emailAddress: string) {
     const localEmailAddresses = [];
-    for (let i = 0; i < this.emailAddresses.length; i++) {
-      if (!this.emailAddresses[i].includes(emailAddress)) {
-        localEmailAddresses.push(this.emailAddresses[i]);
+    for (const existingEmailAddress of this.emailAddresses) {
+      if (!existingEmailAddress.includes(emailAddress)) {
+        localEmailAddresses.push(existingEmailAddress);
       }
     }
     this.emailAddresses = localEmailAddresses;
     this.dataSource = new MatTableDataSource(this.emailAddresses);
     this.emailAddressesChanged.emit(this.emailAddresses);
   }
-
 }
