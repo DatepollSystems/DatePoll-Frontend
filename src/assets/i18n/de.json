@@ -236,6 +236,8 @@
   "SETTINGS_PERSONAL_DATA_MODAL_PHONE_NUMBER_ADD": "Nummer hinzufügen",
   "SETTINGS_PERSONAL_DATA_MODAL_PHONE_NUMBER_NOT_VALID": "Bitte gib eine Bezeichnung und eine Telefonnummer an!",
 
+  "SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_NOTIFY_TITLE": "Email-Benachrichtigungen",
+  "SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_NOTIFY_ME_ON_NEW_EVENT": "Benachrichtige mich per Email wenn eines neues Event hinzugefügt wurde.",
   "SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_SAVED_SUCCESSFUL": "Deine Email-Adressen wurden erfolgreich gespeichert!",
 
   "SETTINGS_SECURITY": "Sicherheit",

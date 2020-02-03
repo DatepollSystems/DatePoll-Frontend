@@ -21,6 +21,9 @@ export class UserSettingsService {
   public showBirthdaysInCalendarChange: Subject<boolean> = new Subject<boolean>();
   private _showBirthdaysInCalendar = true;
 
+  public notifyMeOnNewEventViaEmailChange: Subject<boolean> = new Subject<boolean>();
+  private _notifyMeOnNewEventViaEmail = false;
+
   constructor(private httpService: HttpService, private notificationsService: NotificationsService, private translate: TranslateService) {}
 
   public setShowBirthday(showBirthday: boolean, saveInCloud = false) {
@@ -110,6 +113,29 @@ export class UserSettingsService {
       (response: any) => {
         console.log(response);
         this.setShowBirthdaysInCalendar(response.setting_value);
+      },
+      error => console.log(error)
+    );
+  }
+
+  public setNotifyMeOnNewEventViaEmail(notifyMeOnNewEventViaEmail: boolean, saveInCloud = false) {
+    this._notifyMeOnNewEventViaEmail = notifyMeOnNewEventViaEmail;
+    this.notifyMeOnNewEventViaEmailChange.next(this._notifyMeOnNewEventViaEmail);
+    if (saveInCloud) {
+      this.setSettingsRequest('notifyMeOfNewEvents', this._notifyMeOnNewEventViaEmail);
+    }
+  }
+
+  public getNotifyMeOnNewEventViaEmail(): boolean {
+    this.fetchNotifyMeOnNewEventViaEmail();
+    return this._notifyMeOnNewEventViaEmail;
+  }
+
+  private fetchNotifyMeOnNewEventViaEmail() {
+    this.httpService.loggedInV1GETRequest('/user/myself/settings/notifyMeOfNewEvents').subscribe(
+      (response: any) => {
+        console.log(response);
+        this.setNotifyMeOnNewEventViaEmail(response.setting_value);
       },
       error => console.log(error)
     );

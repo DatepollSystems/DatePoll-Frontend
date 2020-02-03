@@ -15,12 +15,13 @@ export class MyUserService {
   public usernameChange: Subject<string> = new Subject<string>();
   public phoneNumberChange: Subject<PhoneNumber[]> = new Subject<PhoneNumber[]>();
   public permissionsChange: Subject<string[]> = new Subject<string[]>();
+  public emailAddressesChange: Subject<string[]> = new Subject<string[]>();
   private _ID: number;
   private _title: string;
   private _firstname: string;
   private _surname: string;
   private _username: string;
-  private _emailAddresses: string[];
+  private _emailAddresses: string[] = [];
   private _streetname: string;
   private _streetnumber: string;
   private _zipcode: number;
@@ -194,6 +195,7 @@ export class MyUserService {
 
   public setEmailAddresses(emailAddresses: string[]) {
     this._emailAddresses = emailAddresses;
+    this.emailAddressesChange.next(this._emailAddresses.slice());
   }
 
   public setEmailAddressesPerRequest(emailAddresses: string[]) {

@@ -1,4 +1,4 @@
-<h2 mat-dialog-title>{{'SETTINGS_PERSONAL_DATA_PERSONAL_EMAIL_ADDRESSES_CHANGE' | translate}}</h2>
+<h2 mat-dialog-title>{{ 'SETTINGS_PERSONAL_DATA_PERSONAL_EMAIL_ADDRESSES_CHANGE' | translate }}</h2>
 <mat-dialog-content>
   <div class="row">
     <div class="col-12">
@@ -6,14 +6,33 @@
     </div>
   </div>
 
-  <app-email-addresses-list (emailAddressesChanged)="onEmailAddressesChange($event)"
-                            [emailAddressesInput]="emailAddresses"></app-email-addresses-list>
+  <app-email-addresses-list
+    (emailAddressesChanged)="onEmailAddressesChange($event)"
+    #emailList
+    [emailAddresses]="emailAddresses"
+  ></app-email-addresses-list>
+
+  <app-divider></app-divider>
+
+  <div class="row">
+    <div class="col-12">
+      <h2>{{ 'SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_NOTIFY_TITLE' | translate }}</h2>
+    </div>
+    <div class="col-2 col-md-1">
+      <mat-slide-toggle
+        (change)="notifyMeOnNewEventChange($event)"
+        [(ngModel)]="notifyViaEmailOnNewEvent"
+        color="primary"
+      ></mat-slide-toggle>
+    </div>
+    <p class="col-10 col-md-10">{{ 'SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_NOTIFY_ME_ON_NEW_EVENT' | translate }}</p>
+  </div>
 </mat-dialog-content>
 <mat-dialog-actions>
-  <button mat-button mat-dialog-close>{{'CLOSE' | translate}}</button>
-  <button (click)="onSave()" class="success-button" mat-button mat-dialog-close>{{'SAVE' | translate}}</button>
+  <button mat-button mat-dialog-close>{{ 'CLOSE' | translate }}</button>
+  <button (click)="onSave()" class="success-button" mat-button mat-dialog-close>{{ 'SAVE' | translate }}</button>
 </mat-dialog-actions>
 
 <ng-template #successfullySavedEmailAddresses>
-  <h2>{{'SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_SAVED_SUCCESSFUL' | translate}}</h2>
+  <h2>{{ 'SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_SAVED_SUCCESSFUL' | translate }}</h2>
 </ng-template>

@@ -24,8 +24,11 @@ export class SettingsComponent {
         console.log('Model to open: ' + modalParam);
 
         switch (modalParam) {
-          case 'settings':
+          case 'privacySettings':
             this.onPrivacySettingsModal();
+            break;
+          case 'emailSettings':
+            this.openEmailAddressModal();
             break;
           default:
             console.log('Unknown modalParam');

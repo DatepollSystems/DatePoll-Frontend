@@ -11,18 +11,18 @@ export class EmailAddressesListComponent implements OnInit {
   displayedColumns: string[] = ['emailAddress', 'action'];
   dataSource: MatTableDataSource<string>;
 
-  emailAddresses: string[] = [];
-
-  @Input() emailAddressesInput: string[];
+  @Input() emailAddresses: string[];
   @Output() emailAddressesChanged = new EventEmitter();
 
   constructor() {}
 
   ngOnInit() {
-    if (this.emailAddressesInput != null) {
-      this.emailAddresses = this.emailAddressesInput;
-      this.dataSource = new MatTableDataSource(this.emailAddresses);
-    }
+    this.setEmailAddressesInTable(this.emailAddresses);
+  }
+
+  public setEmailAddressesInTable(emailAddresses: string[]) {
+    this.emailAddresses = emailAddresses.slice();
+    this.dataSource = new MatTableDataSource(this.emailAddresses);
   }
 
   addEmailAddress(form: NgForm) {
@@ -35,7 +35,7 @@ export class EmailAddressesListComponent implements OnInit {
     }
 
     this.emailAddresses.push(emailAddress);
-    this.dataSource = new MatTableDataSource(this.emailAddresses);
+    this.setEmailAddressesInTable(this.emailAddresses);
 
     form.reset();
     this.emailAddressesChanged.emit(this.emailAddresses);
