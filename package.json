@@ -33,6 +33,7 @@
     "angular-calendar": "0.28.0",
     "angular2-cookie": "^1.2.6",
     "angular2-notifications": "^2.0.0",
+    "angularx-qrcode": "^2.1.0",
     "bootstrap": "^4.4.1",
     "chart.js": "^2.9.3",
     "core-js": "^3.6.4",
