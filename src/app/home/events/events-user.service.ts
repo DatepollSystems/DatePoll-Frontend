@@ -67,6 +67,7 @@ export class EventsUserService {
           );
           event.alreadyVotedFor = fetchedEvent.already_voted;
           event.additionalInformation = fetchedEvent.additional_information;
+          event.userDecision = fetchedEvent.user_decision;
           events.push(event);
         }
 

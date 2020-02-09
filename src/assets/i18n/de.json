@@ -101,7 +101,6 @@
   "STARTPAGE_EMERGENCY_CINEMA_SERVICE": "Notfall-Kinodienst",
 
   "STARTPAGE_EVENTS": "Nächsten Events",
-  "STARTPAGE_EVENTS_USER_DECISION": "Abgestimmt für",
 
   "CALENDAR": "Kalender",
 
@@ -468,6 +467,7 @@
   "EVENTS_VIEW_EVENT_SUCCESSFULLY_VOTED": "Deine Entscheidung wurde erfolgreich gespeichert!",
   "EVENTS_VIEW_EVENT_SUCCESSFULLY_REMOVED_VOTING": "Deine Entscheidung wurde entfernt!",
   "EVENTS_VIEW_EVENT_NO_NEW_VOTINGS": "Du hast alle Entscheidungen getroffen und nichts mehr zu tun!",
+  "EVENTS_VIEW_EVENT_CARD_VOTED_FOR": "Abgestimmt für",
 
   "EVENTS_VIEW_EVENT_VOTE_FOR_ADDITIONAL_INFORMATION_ADD": "Zusatzinformation hinzufügen",
   "EVENTS_VIEW_EVENT_VOTE_FOR_ADDITIONAL_INFORMATION_CHANGE": "Zusatzinformation bearbeiten",

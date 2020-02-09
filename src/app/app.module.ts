@@ -1,36 +1,36 @@
+import {registerLocaleData} from '@angular/common';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import localeDe from '@angular/common/locales/de';
 import {APP_INITIALIZER, NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
-import {registerLocaleData} from '@angular/common';
-import localeDe from '@angular/common/locales/de';
 
-import {MaterialModule} from './material-module';
 import {SimpleNotificationsModule} from 'angular2-notifications';
+import {MaterialModule} from './material-module';
 
 import {AppRoutingModule} from './app-routing.module';
 
-import {TranslationModule} from './translation/translation.module';
 import {FooterModule} from './footer/footer.module';
 import {CommonEventsComponentsModule} from './home/events/common-events-components.module';
+import {TranslationModule} from './translation/translation.module';
 
 import {CookieService} from 'angular2-cookie/core';
 
 import {NoSanitizePipe} from './no-sanitize.pipe';
 
-import {AuthService} from './auth/auth.service';
 import {AuthGuard} from './auth/auth-guard.service';
-import {TranslateService} from './translation/translate.service';
-import {HttpService} from './services/http.service';
-import {ExcelService} from './services/excel.service';
-import {SessionsService} from './home/settings/sessions/sessions.service';
-import {UsersService} from './home/management/users-management/users.service';
+import {AuthService} from './auth/auth.service';
+import {CinemaService} from './home/cinema/cinema.service';
+import {EventsUserService} from './home/events/events-user.service';
+import {EventsService} from './home/events/events.service';
 import {GroupsService} from './home/management/groups-management/groups.service';
 import {PerformanceBadgesService} from './home/management/performance-badges-management/performance-badges.service';
-import {CinemaService} from './home/cinema/cinema.service';
-import {EventsService} from './home/events/events.service';
-import {EventsUserService} from './home/events/events-user.service';
+import {UsersService} from './home/management/users-management/users.service';
+import {SessionsService} from './home/settings/sessions/sessions.service';
 import {HomepageService} from './home/start/homepage.service';
+import {ExcelService} from './services/excel.service';
+import {HttpService} from './services/http.service';
+import {TranslateService} from './translation/translate.service';
 
 import {AuthInterceptor} from './auth/auth-interceptor';
 
@@ -38,11 +38,11 @@ import {MAT_DATE_LOCALE} from '@angular/material/core';
 import {MAT_SNACK_BAR_DEFAULT_OPTIONS} from '@angular/material/snack-bar';
 
 import {AppComponent} from './app.component';
-import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
+import {BrowserCompatibilityModalComponent} from './browser-compatibility-modal/browser-compatibility-modal.component';
 import {HomeComponent} from './home/home.component';
 import {StartComponent} from './home/start/start.component';
 import {TableBookingsRowComponent} from './home/start/table-bookings-row/table-bookings-row.component';
-import {BrowserCompatibilityModalComponent} from './browser-compatibility-modal/browser-compatibility-modal.component';
+import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
 
 registerLocaleData(localeDe);
 
@@ -68,11 +68,9 @@ registerLocaleData(localeDe);
     SimpleNotificationsModule.forRoot({
       // position: ['top', 'right'],
       timeOut: 5000
-    }),
+    })
   ],
-  entryComponents: [
-    BrowserCompatibilityModalComponent
-  ],
+  entryComponents: [BrowserCompatibilityModalComponent],
   providers: [
     AuthService,
     AuthGuard,
@@ -108,12 +106,9 @@ registerLocaleData(localeDe);
   ],
   bootstrap: [AppComponent]
 })
+export class AppModule {}
 
-export class AppModule {
-}
-
-export function setupTranslateFactory(
-  service: TranslateService): Function {
+export function setupTranslateFactory(service: TranslateService): Function {
   return () => service.use('DEFAULT');
 }
 

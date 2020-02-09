@@ -25,8 +25,10 @@ import {EventStandardLocationsSelectComponent} from './events-administration/eve
 import {EventDeleteModalComponent} from './events-administration/event-delete-modal/event-delete-modal.component';
 import {EventUpdateModalComponent} from './events-administration/event-update-modal/event-update-modal.component';
 import {EventUserManagementComponent} from './events-administration/event-user-management-modal/event-user-management/event-user-management.component';
+import {EventCardComponent} from './events-view/event-card/event-card.component';
 import {EventsVoteForDecisionAdditionalInformationModalComponent} from './events-view/events-vote-for-decision-modal/events-vote-for-decision-additional-information-modal/events-vote-for-decision-additional-information-modal.component';
 import {EventsVoteForDecisionModalComponent} from './events-view/events-vote-for-decision-modal/events-vote-for-decision-modal.component';
+import {EventsViewComponent} from './events-view/events-view.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +45,8 @@ import {EventsVoteForDecisionModalComponent} from './events-view/events-vote-for
     EventDatesManagementComponent,
     EventDatesListComponent,
     EventUserManagementComponent,
-    EventStandardLocationsSelectComponent
+    EventStandardLocationsSelectComponent,
+    EventCardComponent
   ],
   entryComponents: [
     EventInfoModalComponent,
@@ -76,7 +79,8 @@ import {EventsVoteForDecisionModalComponent} from './events-view/events-vote-for
     EventDecisionsListComponent,
     EventDatesManagementComponent,
     EventDatesListComponent,
-    EventUserManagementComponent
+    EventUserManagementComponent,
+    EventCardComponent
   ]
 })
 export class CommonEventsComponentsModule {}
