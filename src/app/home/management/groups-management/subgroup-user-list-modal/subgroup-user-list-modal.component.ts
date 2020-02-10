@@ -13,12 +13,11 @@ import {SubgroupUserRoleUpdateModalComponent} from './subgroup-user-role-update-
   styleUrls: ['./subgroup-user-list-modal.component.css']
 })
 export class SubgroupUserListModalComponent implements OnDestroy {
-
   displayedColumns: string[] = ['role', 'firstname', 'surname', 'actions'];
   filterValue: string = null;
 
-  @ViewChild(MatSort, {static: false}) sort: MatSort;
-  @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
   public subgroup: any;
   dataSource: MatTableDataSource<any>;
   public subgroupName = '';
@@ -26,14 +25,11 @@ export class SubgroupUserListModalComponent implements OnDestroy {
   private readonly subgroupID: number;
   private subgroupSubscription: Subscription;
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any,
-              private dialog: MatDialog,
-              private groupsService: GroupsService) {
-
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any, private dialog: MatDialog, private groupsService: GroupsService) {
     this.subgroupID = data.subgroupID;
     this.subgroup = this.groupsService.getSubgroup(this.subgroupID);
     this.refreshTable();
-    this.subgroupSubscription = this.groupsService.subgroupChange.subscribe((value) => {
+    this.subgroupSubscription = this.groupsService.subgroupChange.subscribe(value => {
       this.subgroup = value;
       this.refreshTable();
     });
@@ -79,8 +75,7 @@ export class SubgroupUserListModalComponent implements OnDestroy {
         this.groupsService.fetchSubgroup(this.subgroupID);
         this.sendingRequest = false;
       },
-      (error) => console.log(error)
+      error => console.log(error)
     );
   }
-
 }

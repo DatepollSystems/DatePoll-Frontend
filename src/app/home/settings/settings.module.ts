@@ -2,8 +2,6 @@ import {CommonModule} from '@angular/common';
 import {NgModule} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
-import {CustomFormsModule} from 'ng2-validation';
-
 import {MaterialModule} from '../../material-module';
 import {CommonComponentsModule} from '../../services/common-components.module';
 import {TranslationModule} from '../../translation/translation.module';
@@ -31,20 +29,10 @@ import {TwoFactorAuthenticationComponent} from './two-factor-authentication/two-
     SessionsComponent,
     PrivacySettingsComponent
   ],
-  entryComponents: [
-    PersonalDataComponent,
-    PhoneNumberComponent,
-    EmailAddressComponent,
-    PasswordComponent,
-    CalendarTokenComponent,
-    SessionsComponent,
-    PrivacySettingsComponent
-  ],
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    CustomFormsModule,
     MaterialModule,
     TranslationModule,
     CommonComponentsModule,

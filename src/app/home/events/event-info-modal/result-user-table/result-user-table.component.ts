@@ -20,8 +20,8 @@ export class ResultUserTableComponent implements AfterViewInit {
   displayedColumns: string[] = ['firstname', 'surname', 'decision'];
   filterValue: string = null;
 
-  @ViewChild(MatSort, {static: false}) sort: MatSort;
-  @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
   dataSource: MatTableDataSource<any>;
 
   voteSummary = null;
@@ -38,7 +38,6 @@ export class ResultUserTableComponent implements AfterViewInit {
     this.dataSource = new MatTableDataSource(this.resultUsers);
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
-
   }
 
   applyFilter(filterValue: string) {
@@ -63,9 +62,9 @@ export class ResultUserTableComponent implements AfterViewInit {
 
     for (const decision of this.decisions) {
       const object = {
-        'id': decision.id,
-        'name': decision.decision,
-        'count': 0
+        id: decision.id,
+        name: decision.decision,
+        count: 0
       };
       objects.push(object);
     }

@@ -4,8 +4,6 @@ import {FormsModule} from '@angular/forms';
 import {DateAdapter} from '@angular/material';
 import {MAT_DATE_FORMATS} from '@angular/material/core';
 
-import {CustomFormsModule} from 'ng2-validation';
-
 import {MaterialModule} from '../../material-module';
 import {TranslationModule} from '../../translation/translation.module';
 import {CommonComponentsModule} from '../../services/common-components.module';
@@ -26,23 +24,11 @@ import {MovieWeatherforecastModalComponent} from './movie-tickets/movie-ticket/m
     MovieBookTicketsModalComponent,
     MovieWeatherforecastModalComponent
   ],
-  imports: [
-    CommonModule,
-    FormsModule,
-    CustomFormsModule,
-    MaterialModule,
-    TranslationModule,
-    CommonComponentsModule,
-    CinemaRoutingModule
-  ],
-  entryComponents: [
-    MovieBookTicketsModalComponent,
-    MovieWeatherforecastModalComponent
-  ],
+  imports: [CommonModule, FormsModule, MaterialModule, TranslationModule, CommonComponentsModule, CinemaRoutingModule],
+  entryComponents: [MovieBookTicketsModalComponent, MovieWeatherforecastModalComponent],
   providers: [
     {provide: DateAdapter, useClass: CustomDateAdapter},
-    {provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS},
+    {provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS}
   ]
 })
-export class CinemaModule {
-}
+export class CinemaModule {}

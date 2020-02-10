@@ -30,10 +30,14 @@ export class MovieBookingsModalComponent implements OnDestroy {
   savingClearBooking = false;
   ticketsToBook = 1;
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any,
-              private cinemaService: CinemaService,
-              private notificationsService: NotificationsService,
-              private translate: TranslateService) {
+  filterValue = '';
+
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private cinemaService: CinemaService,
+    private notificationsService: NotificationsService,
+    private translate: TranslateService
+  ) {
     this.movie = data.movie;
     this.refresh();
 
@@ -54,6 +58,7 @@ export class MovieBookingsModalComponent implements OnDestroy {
     this.bookedTickets = this.movie.bookedTickets;
 
     this.bookings = new MatTableDataSource<MovieBookingUser>(this.movie.getBookingUsers());
+    this.applyFilter(this.filterValue);
   }
 
   onBook() {
@@ -67,8 +72,10 @@ export class MovieBookingsModalComponent implements OnDestroy {
     }
     console.log('movieBookingsModal | Selected MovieBookingUser: ' + selected);
     if (this.selection.selected.length === 0) {
-      this.notificationsService.warn(this.translate.getTranslationFor('WARNING'),
-        this.translate.getTranslationFor('CINEMA_TICKETS_ADMINISTRATION_MOVIE_BOOKINGS_MANAGEMENT_MODAL_BOOK_NO_ONE_SELECTED'));
+      this.notificationsService.warn(
+        this.translate.getTranslationFor('WARNING'),
+        this.translate.getTranslationFor('CINEMA_TICKETS_ADMINISTRATION_MOVIE_BOOKINGS_MANAGEMENT_MODAL_BOOK_NO_ONE_SELECTED')
+      );
       return;
     }
 
@@ -91,10 +98,12 @@ export class MovieBookingsModalComponent implements OnDestroy {
         this.selection.clear();
         this.cinemaService.fetchMovies();
 
-        this.notificationsService.success(this.translate.getTranslationFor('SUCCESSFULLY'),
-          this.translate.getTranslationFor('CINEMA_TICKETS_ADMINISTRATION_MOVIE_BOOKINGS_MANAGEMENT_MODAL_BOOK_SUCCESSFULLY'));
+        this.notificationsService.success(
+          this.translate.getTranslationFor('SUCCESSFULLY'),
+          this.translate.getTranslationFor('CINEMA_TICKETS_ADMINISTRATION_MOVIE_BOOKINGS_MANAGEMENT_MODAL_BOOK_SUCCESSFULLY')
+        );
       },
-      (error) => {
+      error => {
         console.log(error);
         this.cinemaService.getMovie(this.movie.id);
       }
@@ -109,8 +118,10 @@ export class MovieBookingsModalComponent implements OnDestroy {
   onClear() {
     console.log('movieBookingsModal | Selected MovieBookingUser: ' + this.selection.selected);
     if (this.selection.selected.length === 0) {
-      this.notificationsService.warn(this.translate.getTranslationFor('WARNING'),
-        this.translate.getTranslationFor('CINEMA_TICKETS_ADMINISTRATION_MOVIE_BOOKINGS_MANAGEMENT_MODAL_BOOK_NO_ONE_SELECTED'));
+      this.notificationsService.warn(
+        this.translate.getTranslationFor('WARNING'),
+        this.translate.getTranslationFor('CINEMA_TICKETS_ADMINISTRATION_MOVIE_BOOKINGS_MANAGEMENT_MODAL_BOOK_NO_ONE_SELECTED')
+      );
       return;
     }
     this.savingClearBooking = true;
@@ -125,10 +136,12 @@ export class MovieBookingsModalComponent implements OnDestroy {
         this.calculateBookedTickets();
         this.selection.clear();
         this.cinemaService.fetchMovies();
-        this.notificationsService.success(this.translate.getTranslationFor('SUCCESSFULLY'),
-          this.translate.getTranslationFor('CINEMA_TICKETS_ADMINISTRATION_MOVIE_BOOKINGS_MANAGEMENT_MODAL_REMOVE_BOOKING_SUCCESSFULLY'));
+        this.notificationsService.success(
+          this.translate.getTranslationFor('SUCCESSFULLY'),
+          this.translate.getTranslationFor('CINEMA_TICKETS_ADMINISTRATION_MOVIE_BOOKINGS_MANAGEMENT_MODAL_REMOVE_BOOKING_SUCCESSFULLY')
+        );
       },
-      (error) => {
+      error => {
         console.log(error);
         this.cinemaService.getMovie(this.movie.id);
       }
@@ -137,6 +150,7 @@ export class MovieBookingsModalComponent implements OnDestroy {
 
   applyFilter(filterValue: string) {
     this.bookings.filter = filterValue.trim().toLowerCase();
+    this.filterValue = this.bookings.filter.slice();
   }
 
   /** Whether the number of selected elements matches the total number of rows. */
@@ -148,9 +162,7 @@ export class MovieBookingsModalComponent implements OnDestroy {
 
   /** Selects all rows if they are not all selected; otherwise clear selection. */
   masterToggle() {
-    this.isAllSelected() ?
-      this.selection.clear() :
-      this.bookings.data.forEach(row => this.selection.select(row));
+    this.isAllSelected() ? this.selection.clear() : this.bookings.data.forEach(row => this.selection.select(row));
   }
 
   /** The label for the checkbox on the passed row */

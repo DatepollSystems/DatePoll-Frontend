@@ -26,12 +26,14 @@ export class SigninComponent implements OnInit, OnDestroy {
   private username: string;
   private password: string;
 
-  constructor(private router: Router,
-              private snackBar: MatSnackBar,
-              private authService: AuthService,
-              private settingsService: SettingsService) {
+  constructor(
+    private router: Router,
+    private snackBar: MatSnackBar,
+    private authService: AuthService,
+    private settingsService: SettingsService
+  ) {
     this.communityName = this.settingsService.getCommunityName();
-    this.communityNameSubscription = this.settingsService.communityNameChange.subscribe((value) => {
+    this.communityNameSubscription = this.settingsService.communityNameChange.subscribe(value => {
       this.communityName = value;
     });
   }
@@ -74,7 +76,7 @@ export class SigninComponent implements OnInit, OnDestroy {
         this.authService.signin(data.token, data.session_token);
         this.uiLogin();
       },
-      (error) => {
+      error => {
         console.log(error);
         this.showLoadingSpinnerDuringLogin = false;
 
@@ -85,6 +87,7 @@ export class SigninComponent implements OnInit, OnDestroy {
   }
 
   protected onChangePasswordAfterSignin(form: NgForm) {
+    // TODO: Check equals
     const password = form.value.password;
 
     this.authService.changePasswordAfterSignin(this.username, this.password, password).subscribe(
@@ -92,7 +95,8 @@ export class SigninComponent implements OnInit, OnDestroy {
         console.log(data);
         this.authService.signin(data.token, data.session_token);
         this.uiLogin();
-      }, (error) => console.log(error)
+      },
+      error => console.log(error)
     );
   }
 
@@ -102,5 +106,4 @@ export class SigninComponent implements OnInit, OnDestroy {
     this.snackBar.open('Login erfolgreich');
     this.router.navigate(['/home']);
   }
-
 }

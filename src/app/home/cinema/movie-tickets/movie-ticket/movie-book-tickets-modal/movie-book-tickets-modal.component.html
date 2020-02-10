@@ -1,11 +1,9 @@
-<h2 mat-dialog-title>{{'CINEMA_TICKETS_BOOKING_MODAL_HEADER' | translate}} {{movie.name}}</h2>
+<h2 mat-dialog-title>{{ 'CINEMA_TICKETS_BOOKING_MODAL_HEADER' | translate }} {{ movie.name }}</h2>
 <mat-dialog-content>
   <div class="row">
     <div class="col-12">
       <mat-card class="info-mat-card" matRipple>
-        <mat-card-content class="last-child">
-          <b>Info! </b>{{'CINEMA_TICKETS_BOOKING_MODAL_WARNING' | translate}}
-        </mat-card-content>
+        <mat-card-content class="last-child"> <b>Info! </b>{{ 'CINEMA_TICKETS_BOOKING_MODAL_WARNING' | translate }} </mat-card-content>
       </mat-card>
     </div>
   </div>
@@ -13,12 +11,23 @@
   <form #form="ngForm" (ngSubmit)="bookTickets()" style="margin-top: 20px; margin-bottom: 20px;">
     <div class="row">
       <mat-form-field class="col-12">
-        <input #ticketsToBookModel="ngModel" [(ngModel)]="ticketsToBook" [range]="[1, freeTickets]" id="ticketsToBook"
-               matInput name="ticketsToBook" ngModel
-               number placeholder="{{'CINEMA_TICKETS_BOOKING_MODAL_NUMBER_OF_TICKETS' | translate}}" required
-               type="number">
+        <input
+          #ticketsToBookModel="ngModel"
+          [(ngModel)]="ticketsToBook"
+          min="1"
+          [max]="freeTickets"
+          id="ticketsToBook"
+          matInput
+          name="ticketsToBook"
+          ngModel
+          number
+          placeholder="{{ 'CINEMA_TICKETS_BOOKING_MODAL_NUMBER_OF_TICKETS' | translate }}"
+          required
+          type="number"
+        />
         <mat-error *ngIf="ticketsToBookModel.invalid">
-          {{'CINEMA_TICKETS_BOOKING_MODAL_NUMBER_OF_TICKETS_INVALID_1' | translate}} {{freeTickets}} {{'CINEMA_TICKETS_BOOKING_MODAL_NUMBER_OF_TICKETS_INVALID_2' | translate}}
+          {{ 'CINEMA_TICKETS_BOOKING_MODAL_NUMBER_OF_TICKETS_INVALID_1' | translate }} {{ freeTickets }}
+          {{ 'CINEMA_TICKETS_BOOKING_MODAL_NUMBER_OF_TICKETS_INVALID_2' | translate }}
         </mat-error>
       </mat-form-field>
     </div>
@@ -26,15 +35,13 @@
 
   <div class="row">
     <div class="col-12">
-      <b>{{'CINEMA_TICKETS_BOOKING_MODAL_AVAILABLE_TICKETS' | translate}} {{freeTickets}}</b>
+      <b>{{ 'CINEMA_TICKETS_BOOKING_MODAL_AVAILABLE_TICKETS' | translate }} {{ freeTickets }}</b>
     </div>
   </div>
-
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-  <button mat-button mat-dialog-close>{{'CLOSE' | translate}}</button>
-  <button (click)="form.ngSubmit.emit()" [disabled]="!form.form.valid" [mat-dialog-close]="true" class="success-button"
-          mat-button>
-    {{'CINEMA_TICKETS_BOOKING_MODAL_BOOK' | translate}}
+  <button mat-button mat-dialog-close>{{ 'CLOSE' | translate }}</button>
+  <button (click)="form.ngSubmit.emit()" [disabled]="!form.form.valid" [mat-dialog-close]="true" class="success-button" mat-button>
+    {{ 'CINEMA_TICKETS_BOOKING_MODAL_BOOK' | translate }}
   </button>
 </mat-dialog-actions>

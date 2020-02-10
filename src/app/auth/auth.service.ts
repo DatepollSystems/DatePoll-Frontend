@@ -1,9 +1,9 @@
-import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {Injectable} from '@angular/core';
 import {Router} from '@angular/router';
 import {tap} from 'rxjs/operators';
 
-import {CookieService} from 'angular2-cookie/core';
+import {CookieService} from 'ngx-cookie-service';
 
 import {environment} from '../../environments/environment';
 import {Browser} from '../services/browser';
@@ -22,11 +22,7 @@ export class AuthService {
 
   httpHeaders = new HttpHeaders().set('Content-Type', 'application/json');
 
-  constructor(
-    private router: Router,
-    private cookieService: CookieService,
-    private http: HttpClient) {
-
+  constructor(private router: Router, private cookieService: CookieService, private http: HttpClient) {
     this.jwtTokenExpires = new Date();
     this.jwtTokenExpires.setMinutes(this.jwtTokenExpires.getMinutes() + 50);
 
@@ -36,10 +32,10 @@ export class AuthService {
   public trySignin(username: string, password: string) {
     const browser = Browser.getInfos();
     const signInObject = {
-      'username': username,
-      'password': password,
-      'stay_logged_in': true,
-      'session_information': browser.name + ' - ' + browser.majorVersion + '; OS: ' + browser.os + '; Phone: ' + browser.mobile
+      username: username,
+      password: password,
+      stay_logged_in: true,
+      session_information: browser.name + ' - ' + browser.majorVersion + '; OS: ' + browser.os + '; Phone: ' + browser.mobile
     };
 
     return this.http.post(this.apiUrl + '/auth/signin', signInObject, {headers: this.httpHeaders});
@@ -52,27 +48,26 @@ export class AuthService {
 
   public logout() {
     const object = {
-      'session_token': this.getSessionToken()
+      session_token: this.getSessionToken()
     };
 
-    this.http.post(this.apiUrl + '/v1/user/myself/session/logoutCurrentSession', object,
-      {headers: this.httpHeaders}).subscribe(
+    this.http.post(this.apiUrl + '/v1/user/myself/session/logoutCurrentSession', object, {headers: this.httpHeaders}).subscribe(
       (data: any) => {
         console.log(data);
 
         this.setSessionToken(null);
         this.setJWTToken(null);
-        this.cookieService.removeAll();
+        this.cookieService.deleteAll();
         console.log('authService | Logout successful');
 
         window.location.reload();
       },
-      (error) => {
+      error => {
         console.log(error);
 
         this.setSessionToken(null);
         this.setJWTToken(null);
-        this.cookieService.removeAll();
+        this.cookieService.deleteAll();
 
         window.location.reload();
       }
@@ -83,9 +78,8 @@ export class AuthService {
     const browser = Browser.getInfos();
 
     const object = {
-      'session_token': this.getSessionToken(),
-      'session_information': browser.name + ' - ' + browser.majorVersion + '; OS: ' + browser.os +
-        '; Phone: ' + browser.mobile
+      session_token: this.getSessionToken(),
+      session_information: browser.name + ' - ' + browser.majorVersion + '; OS: ' + browser.os + '; Phone: ' + browser.mobile
     };
 
     return this.http.post(this.apiUrl + '/auth/IamLoggedIn', object, {headers: this.httpHeaders}).pipe(
@@ -97,7 +91,7 @@ export class AuthService {
 
   setJWTToken(jwtToken: string) {
     if (this.isCookieEnabled()) {
-      this.cookieService.put('token', jwtToken, {expires: this.dateIn80Years});
+      this.cookieService.set('token', jwtToken, this.dateIn80Years);
     }
     this.jwtToken = jwtToken;
     this.jwtTokenExpires = new Date();
@@ -115,22 +109,23 @@ export class AuthService {
     if (this.isCookieEnabled() && this.sessionToken == null) {
       this.sessionToken = this.cookieService.get('sessionToken');
     }
+    console.log('sessionToken:' + this.sessionToken + '|');
     return this.sessionToken;
   }
 
   private setSessionToken(sessionToken: string) {
     if (this.isCookieEnabled()) {
-      this.cookieService.put('sessionToken', sessionToken, {expires: this.dateIn80Years});
+      this.cookieService.set('sessionToken', sessionToken, this.dateIn80Years);
     }
     this.sessionToken = sessionToken;
   }
 
   public isAuthenticated(functionUser: string = 'Unknown'): boolean {
-    if (this.getSessionToken() == null) {
+    if (this.getSessionToken()?.length < 1) {
       console.log('authService | isAuthenticated | Funtion User: ' + functionUser + ' | ERROR: Session token is null');
       return false;
     } else {
-      if (this.getJWTToken() == null) {
+      if (this.getJWTToken()?.length < 1) {
         console.log('authService | isAuthenticated | Funtion User: ' + functionUser + ' | INFO: JWT token is null.');
       }
       console.log('authService | isAuthenticated | Funtion User: ' + functionUser + ' | INFO: isAuthenticated: true');
@@ -148,22 +143,22 @@ export class AuthService {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
 
     const changePasswordAfterSigninObject = {
-      'username': username,
-      'old_password': oldPassword,
-      'new_password': newPassword,
-      'stay_logged_in': true,
-      'session_information': browser.name + ' - ' + browser.majorVersion + '; OS: ' + browser.os + '; Phone: ' + browser.mobile
+      username: username,
+      old_password: oldPassword,
+      new_password: newPassword,
+      stay_logged_in: true,
+      session_information: browser.name + ' - ' + browser.majorVersion + '; OS: ' + browser.os + '; Phone: ' + browser.mobile
     };
 
-    return this.http.post(this.apiUrl + '/auth/changePasswordAfterSignin', changePasswordAfterSigninObject, {headers: headers});
+    return this.http.post(this.apiUrl + '/auth/changePasswordAfterSignin', changePasswordAfterSigninObject, {headers});
   }
 
   private isCookieEnabled(): boolean {
-    let cookieEnabled = (navigator.cookieEnabled);
+    let cookieEnabled = navigator.cookieEnabled;
 
     if (typeof navigator.cookieEnabled === 'undefined' && !cookieEnabled) {
       document.cookie = 'testcookie';
-      cookieEnabled = (document.cookie.indexOf('testcookie') !== -1);
+      cookieEnabled = document.cookie.indexOf('testcookie') !== -1;
     }
 
     return cookieEnabled;

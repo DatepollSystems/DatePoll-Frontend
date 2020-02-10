@@ -4,8 +4,6 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {DateAdapter} from '@angular/material';
 import {MAT_DATE_FORMATS} from '@angular/material/core';
 
-import {CustomFormsModule} from 'ng2-validation';
-
 import {MaterialModule} from '../material-module';
 import {TranslationModule} from '../translation/translation.module';
 
@@ -25,7 +23,7 @@ import {MapsComponentComponent} from './shared-components/maps-component/maps-co
     GroupAndSubgroupSelectComponent,
     MapsComponentComponent
   ],
-  imports: [CommonModule, MaterialModule, TranslationModule, FormsModule, ReactiveFormsModule, CustomFormsModule],
+  imports: [CommonModule, MaterialModule, TranslationModule, FormsModule, ReactiveFormsModule],
   exports: [
     AppDividerComponent,
     DoNotForgetToSaveComponent,

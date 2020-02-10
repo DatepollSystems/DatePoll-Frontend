@@ -18,7 +18,6 @@ import {Subscription} from 'rxjs';
   styleUrls: ['./event-user-management.component.css']
 })
 export class EventUserManagementComponent implements OnInit, AfterViewInit, OnDestroy {
-
   @Input()
   event: Event;
 
@@ -32,8 +31,8 @@ export class EventUserManagementComponent implements OnInit, AfterViewInit, OnDe
   displayedColumns: string[] = ['select', 'firstname', 'surname', 'decision'];
   filterValue: string = null;
 
-  @ViewChild(MatSort, {static: false}) sort: MatSort;
-  @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
   dataSource: MatTableDataSource<EventResultUser>;
   selection = new SelectionModel<EventResultUser>(true, []);
 
@@ -45,9 +44,9 @@ export class EventUserManagementComponent implements OnInit, AfterViewInit, OnDe
     private eventsService: EventsService,
     private notificationsService: NotificationsService,
     private translate: TranslateService,
-    private bottomSheet: MatBottomSheet) {
-
-    this.eventSubscription = this.eventsService.eventChange.subscribe((value) => {
+    private bottomSheet: MatBottomSheet
+  ) {
+    this.eventSubscription = this.eventsService.eventChange.subscribe(value => {
       setTimeout(() => {
         this.refreshValues();
       }, 1000);
@@ -77,15 +76,17 @@ export class EventUserManagementComponent implements OnInit, AfterViewInit, OnDe
     const selected = this.selection.selected.slice();
     console.log('eventUserManagement | Selected EventResultUsers: ' + selected);
     if (this.selection.selected.length === 0) {
-      this.notificationsService.warn(this.translate.getTranslationFor('WARNING'),
-        this.translate.getTranslationFor('EVENTS_ADMINISTRATION_USER_MANAGEMENT_FOR_EVENT_VOTE_NO_ONE_SELECTED'));
+      this.notificationsService.warn(
+        this.translate.getTranslationFor('WARNING'),
+        this.translate.getTranslationFor('EVENTS_ADMINISTRATION_USER_MANAGEMENT_FOR_EVENT_VOTE_NO_ONE_SELECTED')
+      );
       return;
     }
 
     const bottomSheetRef = this.bottomSheet.open(EventsVoteForDecisionModalComponent, {
-      data: {'event': this.event},
+      data: {event: this.event}
     });
-    bottomSheetRef.afterDismissed().subscribe((dto) => {
+    bottomSheetRef.afterDismissed().subscribe(dto => {
       if (dto != null) {
         const decision = dto.decision;
 
@@ -97,10 +98,12 @@ export class EventUserManagementComponent implements OnInit, AfterViewInit, OnDe
             this.savingVoting = false;
             this.selection.clear();
             this.eventsService.getEvent(this.event.id);
-            this.notificationsService.success(this.translate.getTranslationFor('SUCCESSFULLY'),
-              this.translate.getTranslationFor('EVENTS_ADMINISTRATION_USER_MANAGEMENT_FOR_EVENT_VOTE_SUCCESSFULLY'));
+            this.notificationsService.success(
+              this.translate.getTranslationFor('SUCCESSFULLY'),
+              this.translate.getTranslationFor('EVENTS_ADMINISTRATION_USER_MANAGEMENT_FOR_EVENT_VOTE_SUCCESSFULLY')
+            );
           },
-          (error) => {
+          error => {
             console.log(error);
             this.eventsService.getEvent(this.event.id);
           }
@@ -120,8 +123,10 @@ export class EventUserManagementComponent implements OnInit, AfterViewInit, OnDe
   onClear() {
     console.log('eventUserManagement | Selected EventResultUsers: ' + this.selection.selected);
     if (this.selection.selected.length === 0) {
-      this.notificationsService.warn(this.translate.getTranslationFor('WARNING'),
-        this.translate.getTranslationFor('EVENTS_ADMINISTRATION_USER_MANAGEMENT_FOR_EVENT_VOTE_NO_ONE_SELECTED'));
+      this.notificationsService.warn(
+        this.translate.getTranslationFor('WARNING'),
+        this.translate.getTranslationFor('EVENTS_ADMINISTRATION_USER_MANAGEMENT_FOR_EVENT_VOTE_NO_ONE_SELECTED')
+      );
       return;
     }
     this.savingClearVoting = true;
@@ -132,10 +137,12 @@ export class EventUserManagementComponent implements OnInit, AfterViewInit, OnDe
         this.savingClearVoting = false;
         this.selection.clear();
         this.eventsService.getEvent(this.event.id);
-        this.notificationsService.success(this.translate.getTranslationFor('SUCCESSFULLY'),
-          this.translate.getTranslationFor('EVENTS_ADMINISTRATION_USER_MANAGEMENT_FOR_EVENT_REMOVE_VOTING_SUCCESSFULLY'));
+        this.notificationsService.success(
+          this.translate.getTranslationFor('SUCCESSFULLY'),
+          this.translate.getTranslationFor('EVENTS_ADMINISTRATION_USER_MANAGEMENT_FOR_EVENT_REMOVE_VOTING_SUCCESSFULLY')
+        );
       },
-      (error) => {
+      error => {
         console.log(error);
         this.eventsService.getEvent(this.event.id);
       }
@@ -161,9 +168,7 @@ export class EventUserManagementComponent implements OnInit, AfterViewInit, OnDe
 
   /** Selects all rows if they are not all selected; otherwise clear selection. */
   masterToggle() {
-    this.isAllSelected() ?
-      this.selection.clear() :
-      this.dataSource.data.forEach(row => this.selection.select(row));
+    this.isAllSelected() ? this.selection.clear() : this.dataSource.data.forEach(row => this.selection.select(row));
   }
 
   /** The label for the checkbox on the passed row */
@@ -186,9 +191,9 @@ export class EventUserManagementComponent implements OnInit, AfterViewInit, OnDe
 
     for (const decision of this.event.getDecisions()) {
       const object = {
-        'id': decision.id,
-        'name': decision.decision,
-        'count': 0
+        id: decision.id,
+        name: decision.decision,
+        count: 0
       };
       objects.push(object);
     }
@@ -208,5 +213,4 @@ export class EventUserManagementComponent implements OnInit, AfterViewInit, OnDe
     }
     this.voteSummary = stringToReturn;
   }
-
 }
