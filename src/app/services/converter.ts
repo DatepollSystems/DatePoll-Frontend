@@ -47,8 +47,22 @@ export class Converter {
     return [year, month, day].join('-');
   }
 
-  public static getIOSDate(value: any): Date {
-    // https://github.com/angular/angular/issues/12334
-    return value ? new Date(value.replace(/\s/g, 'T')) : undefined;
+  public static getIOSDate(value: string): Date {
+    const date = new Date(value);
+
+    let month = '' + (date.getMonth() + 1);
+    let day = '' + date.getDate();
+
+    if (month.length < 2) {
+      month = '0' + month;
+    }
+    if (day.length < 2) {
+      day = '0' + day;
+    }
+
+    const toReturnDate = new Date(
+      date.getFullYear() + '-' + month + '-' + day + ' ' + date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds()
+    );
+    return toReturnDate;
   }
 }
