@@ -6,6 +6,7 @@ import {AuthService} from '../auth/auth.service';
 import {Permissions} from '../permissions';
 import {SettingsService} from '../services/settings.service';
 import {MyUserService} from './my-user.service';
+import {IsMobileService} from '../services/is-mobile.service';
 
 @Component({
   selector: 'app-home',
@@ -44,30 +45,31 @@ export class HomeComponent implements OnDestroy {
   showEvents = true;
   private showEventsSubscription: Subscription;
 
+  isMobileSubscription: Subscription;
+
   constructor(
     private ngZone: NgZone,
     myUserService: MyUserService,
     private authService: AuthService,
-    private settingsService: SettingsService
+    private settingsService: SettingsService,
+    private isMobileService: IsMobileService
   ) {
     this.myUserService = myUserService;
 
-    if (window.screen.width > 992) {
+    if (!this.isMobileService.getIsMobile()) {
       this.navBarOpened = true;
       this.navBarMode = 'side';
     }
 
-    window.onresize = () => {
-      this.ngZone.run(() => {
-        if (window.screen.width > 992) {
-          this.navBarOpened = true;
-          this.navBarMode = 'side';
-        } else {
-          this.navBarOpened = false;
-          this.navBarMode = 'over';
-        }
-      });
-    };
+    this.isMobileSubscription = this.isMobileService.isMobileChange.subscribe(isMobile => {
+      if (isMobile) {
+        this.navBarOpened = false;
+        this.navBarMode = 'over';
+      } else {
+        this.navBarOpened = true;
+        this.navBarMode = 'side';
+      }
+    });
 
     this.firstname = this.myUserService.getFirstname();
     this.firstnameSubscription = myUserService.firstnameChange.subscribe(value => {
@@ -114,15 +116,7 @@ export class HomeComponent implements OnDestroy {
     this.communityNameSubscription.unsubscribe();
     this.showCinemaSubscription.unsubscribe();
     this.showEventsSubscription.unsubscribe();
-  }
-
-  resizeNav() {
-    if (this.navBarOpened) {
-      this.sidenav.close();
-      setTimeout(() => {
-        this.sidenav.open();
-      }, 250);
-    }
+    this.isMobileSubscription.unsubscribe();
   }
 
   logout() {
