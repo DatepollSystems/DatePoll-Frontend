@@ -100,14 +100,22 @@ export class AuthService {
 
   public getJWTToken(): string {
     if (this.isCookieEnabled() && this.jwtToken == null) {
-      this.jwtToken = this.cookieService.get('token');
+      if (this.cookieService.check('token')) {
+        this.jwtToken = this.cookieService.get('token');
+      } else {
+        this.jwtToken = null;
+      }
     }
     return this.jwtToken;
   }
 
   getSessionToken(): string {
     if (this.isCookieEnabled() && this.sessionToken == null) {
-      this.sessionToken = this.cookieService.get('sessionToken');
+      if (this.cookieService.check('sessionToken')) {
+        this.sessionToken = this.cookieService.get('sessionToken');
+      } else {
+        this.sessionToken = null;
+      }
     }
     console.log('sessionToken:' + this.sessionToken + '|');
     return this.sessionToken;
@@ -121,11 +129,11 @@ export class AuthService {
   }
 
   public isAuthenticated(functionUser: string = 'Unknown'): boolean {
-    if (this.getSessionToken()?.length < 1) {
+    if (this.getSessionToken() == null) {
       console.log('authService | isAuthenticated | Funtion User: ' + functionUser + ' | ERROR: Session token is null');
       return false;
     } else {
-      if (this.getJWTToken()?.length < 1) {
+      if (this.getJWTToken() == null) {
         console.log('authService | isAuthenticated | Funtion User: ' + functionUser + ' | INFO: JWT token is null.');
       }
       console.log('authService | isAuthenticated | Funtion User: ' + functionUser + ' | INFO: isAuthenticated: true');

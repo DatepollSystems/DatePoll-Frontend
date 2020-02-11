@@ -15,7 +15,7 @@ export class TranslateService {
 
   use(lang: string): Promise<{}> {
     if (lang === 'DEFAULT') {
-      if (this.cookieService.get('language')?.length < 1) {
+      if (!this.cookieService.check('language')) {
         this.cookieService.set('language', 'de', new Date('Tue, 24-Jan-2050 12:12:12 GMT'));
         lang = 'de';
         console.log('No language cookie found! Using de as default');

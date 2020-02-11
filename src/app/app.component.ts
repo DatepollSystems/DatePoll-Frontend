@@ -26,7 +26,7 @@ export class AppComponent implements OnInit {
       window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
     });
 
-    if (this.cookieService.get('ie11c') == null) {
+    if (!this.cookieService.check('ie11c')) {
       console.log('IE11C Cookie set: false');
       const ua = window.navigator.userAgent;
       const msie = ua.indexOf('MSIE ');

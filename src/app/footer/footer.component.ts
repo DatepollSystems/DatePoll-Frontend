@@ -34,7 +34,7 @@ export class FooterComponent implements OnDestroy {
     private dialog: MatDialog
   ) {
     this.selected = this.cookieService.get('language');
-    if (this.selected?.length < 1) {
+    if (!this.cookieService.check('language')) {
       this.selected = 'de';
     }
 
