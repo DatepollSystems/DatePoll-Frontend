@@ -4,13 +4,11 @@ import {SettingsComponent} from './settings.component';
 
 const settingsRoutes: Routes = [
   {path: '', component: SettingsComponent},
+  {path: ':modal', component: SettingsComponent}
 ];
 
 @NgModule({
-  imports: [
-    RouterModule.forChild(settingsRoutes)
-  ],
+  imports: [RouterModule.forChild(settingsRoutes)],
   exports: [RouterModule]
 })
-export class SettingsRoutingModule {
-}
+export class SettingsRoutingModule {}

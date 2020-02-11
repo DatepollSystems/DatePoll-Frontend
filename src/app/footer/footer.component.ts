@@ -1,14 +1,15 @@
 import {Component, OnDestroy} from '@angular/core';
-import {CookieService} from 'angular2-cookie/core';
 import {MatDialog} from '@angular/material/dialog';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {Subscription} from 'rxjs';
 
-import {TranslateService} from '../translation/translate.service';
-import {SettingsService} from '../services/settings.service';
+import {CookieService} from 'ngx-cookie-service';
 
-import {FeedbackModalComponent} from './modals/feedback-modal/feedback-modal.component';
+import {SettingsService} from '../services/settings.service';
+import {TranslateService} from '../translation/translate.service';
+
 import {AboutModalComponent} from './modals/about-modal/about-modal.component';
+import {FeedbackModalComponent} from './modals/feedback-modal/feedback-modal.component';
 
 @Component({
   selector: 'app-footer',
@@ -25,23 +26,25 @@ export class FooterComponent implements OnDestroy {
   closed = true;
   selected: string;
 
-  constructor(private translate: TranslateService,
-              private cookieService: CookieService,
-              private settingsService: SettingsService,
-              private snackBar: MatSnackBar,
-              private dialog: MatDialog) {
+  constructor(
+    private translate: TranslateService,
+    private cookieService: CookieService,
+    private settingsService: SettingsService,
+    private snackBar: MatSnackBar,
+    private dialog: MatDialog
+  ) {
     this.selected = this.cookieService.get('language');
-    if (this.selected === null) {
+    if (!this.cookieService.check('language')) {
       this.selected = 'de';
     }
 
     this.communityName = this.settingsService.getCommunityName();
-    this.communityNameSubscription = this.settingsService.communityNameChange.subscribe((value) => {
+    this.communityNameSubscription = this.settingsService.communityNameChange.subscribe(value => {
       this.communityName = value;
     });
 
     this.communityUrl = this.settingsService.getCommunityUrl();
-    this.communityUrlSubscription = this.settingsService.communityUrlChange.subscribe((value) => {
+    this.communityUrlSubscription = this.settingsService.communityUrlChange.subscribe(value => {
       this.communityUrl = value;
     });
   }
@@ -72,14 +75,13 @@ export class FooterComponent implements OnDestroy {
 
   openFeedbackModal() {
     this.dialog.open(FeedbackModalComponent, {
-      width: '90%',
+      width: '90%'
     });
   }
 
   openAboutModal() {
     this.dialog.open(AboutModalComponent, {
-      width: '45vh',
+      width: '45vh'
     });
   }
-
 }

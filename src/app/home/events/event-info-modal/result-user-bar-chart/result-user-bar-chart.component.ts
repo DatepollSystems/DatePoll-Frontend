@@ -1,13 +1,15 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, OnDestroy} from '@angular/core';
 import {Decision} from '../../models/decision.model';
 import {EventResultUser} from '../../models/event-result-user.model';
+import {EventsService} from '../../events.service';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-result-user-bar-chart',
   templateUrl: './result-user-bar-chart.component.html',
   styleUrls: ['./result-user-bar-chart.component.css']
 })
-export class ResultUserBarChartComponent {
+export class ResultUserBarChartComponent implements OnDestroy {
   @Input()
   decisions: Decision[];
 
@@ -20,20 +22,31 @@ export class ResultUserBarChartComponent {
   resultBarElements: any[] = null;
 
   colors = [
-    '#F44336',
-    '#E91E63',
-    '#673AB7',
     '#2196F3',
+    '#FF9800',
+    '#FFEB3B',
     '#00BCD4',
+    '#F44336',
     '#009688',
     '#4CAF50',
+    '#673AB7',
     '#CDDC39',
-    '#FFEB3B',
-    '#FF9800',
-    '#607D8B'
+    '#607D8B',
+    '#E91E63'
   ];
 
-  constructor() {
+  private eventSubscription: Subscription;
+
+  constructor(private eventsService: EventsService) {
+    this.eventSubscription = this.eventsService.eventChange.subscribe((value) => {
+      setTimeout(() => {
+        this.calculateResultBarElements();
+      }, 1000);
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.eventSubscription.unsubscribe();
   }
 
   getResultBarElements(): any[] {
@@ -66,49 +79,21 @@ export class ResultUserBarChartComponent {
       }
     }
 
-    let colorPerDecision = true;
-    if (objects.length > this.colors.length) {
-      colorPerDecision = false;
-    }
-
     const resultBarElements = [];
 
+    let counter = 0;
     for (const object of objects) {
       if (object.count > 0) {
         const percent = Math.round((object.count / votedUsersCount) * 100);
 
-        let percentWidth = Math.round((object.count / votedUsersCount) * 95);
-        // if (this.inAccordion) {
-        //   percentWidth =
-        // } else {
-        //   percentWidth = percent;
-        // }
+        const percentWidth = Math.round((object.count / votedUsersCount) * 95);
 
-        let color;
-        if (colorPerDecision) {
-          let n = 0;
-
-          while (n < 50) {
-            color = this.colors[Math.floor(Math.random() * Math.floor(this.colors.length))];
-
-            let colorAlreadyUsed = false;
-            for (const element of resultBarElements) {
-              if (element.color === color) {
-                colorAlreadyUsed = true;
-                break;
-              }
-            }
-
-            if (!colorAlreadyUsed) {
-              break;
-            }
-
-            n++;
-          }
-
-        } else {
-          color = this.colors[Math.floor(Math.random() * Math.floor(this.colors.length))];
+        if (counter >= 9) {
+          counter = 0;
         }
+
+        const color = this.colors[counter];
+        counter++;
 
         resultBarElements.push({
           'name': object.name,

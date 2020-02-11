@@ -1,15 +1,11 @@
 import {Component, OnDestroy, TemplateRef, ViewChild} from '@angular/core';
-import {MatBottomSheet, MatDialog, MatSlideToggleChange} from '@angular/material';
+import {MatDialog, MatSlideToggleChange} from '@angular/material';
+import {ActivatedRoute} from '@angular/router';
 import {Subscription} from 'rxjs';
 
-import {NotificationsService, NotificationType} from 'angular2-notifications';
-
 import {EventsUserService} from '../events-user.service';
-import {HomepageService} from '../../start/homepage.service';
-import {TranslateService} from '../../../translation/translate.service';
 
 import {EventInfoModalComponent} from '../event-info-modal/event-info-modal.component';
-import {EventsVoteForDecisionModalComponent} from './events-vote-for-decision-modal/events-vote-for-decision-modal.component';
 
 import {Event} from '../models/event.model';
 
@@ -27,23 +23,35 @@ export class EventsViewComponent implements OnDestroy {
   events: Event[];
   eventsSubscription: Subscription;
 
-  constructor(
-    private eventsUserSerivce: EventsUserService,
-    private homepageService: HomepageService,
-    private translate: TranslateService,
-    private notificationsService: NotificationsService,
-    private bottomSheet: MatBottomSheet,
-    private dialog: MatDialog) {
-
+  constructor(private eventsUserSerivce: EventsUserService, private dialog: MatDialog, private route: ActivatedRoute) {
     this.events = this.eventsUserSerivce.getEvents();
     this.refreshView();
     if (this.events.length > 0) {
       this.loading = false;
     }
-    this.eventsSubscription = this.eventsUserSerivce.eventsChange.subscribe((value) => {
+    this.eventsSubscription = this.eventsUserSerivce.eventsChange.subscribe(value => {
       this.events = value;
       this.loading = false;
       this.refreshView();
+    });
+
+    this.route.paramMap.subscribe(params => {
+      const id = params.get('id');
+
+      if (id != null) {
+        console.log('Event to open: ' + id);
+
+        const event = new Event(Number(id), 'Loading', new Date(), new Date(), false, 'Loading', [], []);
+
+        this.dialog.open(EventInfoModalComponent, {
+          width: '80vh',
+          data: {
+            event: event
+          }
+        });
+      } else {
+        console.log('No event to open');
+      }
     });
   }
 
@@ -66,51 +74,5 @@ export class EventsViewComponent implements OnDestroy {
 
   onShowAllEventsChange(event: MatSlideToggleChange) {
     this.refreshView();
-  }
-
-  onInfo(event: Event) {
-    this.dialog.open(EventInfoModalComponent, {
-      width: '80vh',
-      'data': {
-        'event': event
-      }
-    });
-  }
-
-  onVote(event: Event) {
-    const bottomSheetRef = this.bottomSheet.open(EventsVoteForDecisionModalComponent, {
-      data: {'event': event},
-    });
-    bottomSheetRef.afterDismissed().subscribe((dto) => {
-      if (dto != null) {
-        const decision = dto.decision;
-
-        this.eventsUserSerivce.voteForDecision(event.id, decision, dto.additionalInformation).subscribe(
-          (response: any) => {
-            console.log(response);
-            this.eventsUserSerivce.fetchEvents();
-            this.homepageService.fetchData();
-            this.notificationsService.success(this.translate.getTranslationFor('SUCCESSFULLY'),
-              this.translate.getTranslationFor('EVENTS_VIEW_EVENT_SUCCESSFULLY_VOTED'));
-          },
-          (error) => console.log(error)
-        );
-      } else {
-        console.log('events-view | Closed bottom sheet, voted for nohting');
-      }
-    });
-  }
-
-  cancelVoting(event: Event, button: any) {
-    button.disabled = true;
-    this.eventsUserSerivce.removeDecision(event.id).subscribe(
-      (response: any) => {
-        console.log(response);
-        this.eventsUserSerivce.fetchEvents();
-        this.refreshView();
-        this.notificationsService.html(this.successfullyRemovedDecision, NotificationType.Success, null, 'success');
-      },
-      (error) => console.log(error)
-    );
   }
 }

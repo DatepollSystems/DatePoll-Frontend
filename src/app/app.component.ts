@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {NavigationEnd, Router} from '@angular/router';
 import {MatDialog} from '@angular/material/dialog';
+import {NavigationEnd, Router} from '@angular/router';
 
-import {CookieService} from 'angular2-cookie/core';
+import {CookieService} from 'ngx-cookie-service';
 
 import {BrowserCompatibilityModalComponent} from './browser-compatibility-modal/browser-compatibility-modal.component';
 
@@ -12,7 +12,6 @@ import {BrowserCompatibilityModalComponent} from './browser-compatibility-modal/
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-
   private dateIn80Years: Date = new Date();
 
   constructor(private router: Router, private cookieService: CookieService, private dialog: MatDialog) {
@@ -20,14 +19,14 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.router.events.subscribe((evt) => {
+    this.router.events.subscribe(evt => {
       if (!(evt instanceof NavigationEnd)) {
         return;
       }
       window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
     });
 
-    if (this.cookieService.get('ie11c') == null) {
+    if (!this.cookieService.check('ie11c')) {
       console.log('IE11C Cookie set: false');
       const ua = window.navigator.userAgent;
       const msie = ua.indexOf('MSIE ');
@@ -38,12 +37,9 @@ export class AppComponent implements OnInit {
         });
       }
 
-      this.cookieService.put('ie11c', 'set', {expires: this.dateIn80Years});
+      this.cookieService.set('ie11c', 'set', this.dateIn80Years);
     } else {
       console.log('IE11C Cookie set: true');
     }
-
-
   }
-
 }

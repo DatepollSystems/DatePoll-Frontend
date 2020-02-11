@@ -46,4 +46,9 @@ export class Converter {
 
     return [year, month, day].join('-');
   }
+
+  public static getIOSDate(value: string): Date {
+    const temp = value.toString().replace(' ', 'T');
+    return new Date(temp);
+  }
 }

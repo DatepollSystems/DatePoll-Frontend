@@ -12,6 +12,8 @@ import {StandardDecisionsService} from '../../standardDecisions.service';
 
 import {Event} from '../../models/event.model';
 import {Decision} from '../../models/decision.model';
+import {EventDate} from '../../models/event-date.model';
+import {TranslateService} from '../../../../translation/translate.service';
 
 @Component({
   selector: 'app-event-create-modal',
@@ -33,10 +35,13 @@ export class EventCreateModalComponent implements OnDestroy {
   decisions: Decision[] = [];
   standardDecisionsSubscription: Subscription;
 
+  dates: EventDate[] = [];
+
   constructor(private groupsService: GroupsService,
               private dialogRef: MatDialogRef<EventCreateModalComponent>,
               private notificationsService: NotificationsService,
               private standardDecisionsService: StandardDecisionsService,
+              private translate: TranslateService,
               private eventsService: EventsService) {
 
     const standardDecisions = this.standardDecisionsService.getStandardDecisions();
@@ -120,25 +125,24 @@ export class EventCreateModalComponent implements OnDestroy {
     this.joined = joined;
   }
 
+  onEventDatesChange(eventDates: EventDate[]) {
+    this.dates = eventDates;
+  }
+
   create(form: NgForm) {
+    if (this.dates.length === 0) {
+      this.notificationsService.info('', this.translate.getTranslationFor('EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE_LIST_REQUIRED'));
+      return;
+    }
+
     this.dialogRef.close();
 
     const name = form.controls.name.value;
-    const startDateHours = form.controls.startDateHours.value;
-    const startDateMinutes = form.controls.startDateMinutes.value;
-    const endDateHours = form.controls.endDateHours.value;
-    const endDateMinutes = form.controls.endDateMinutes.value;
     const description = form.controls.description.value;
-    const location = form.controls.location.value;
-
-    this.startDate.setHours(startDateHours);
-    this.startDate.setMinutes(startDateMinutes);
-    this.endDate.setHours(endDateHours);
-    this.endDate.setMinutes(endDateMinutes);
 
     const forEveryone = (this.joined.length === 0);
 
-    const event = new Event(0, name, this.startDate, this.endDate, forEveryone, description, location, this.decisions);
+    const event = new Event(0, name, new Date(), new Date(), forEveryone, description, this.decisions, this.dates);
     console.log(event);
     this.eventsService.createEvent(event).subscribe(
       (response: any) => {

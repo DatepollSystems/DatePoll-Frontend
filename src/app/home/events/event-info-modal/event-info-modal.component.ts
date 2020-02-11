@@ -1,12 +1,17 @@
-import {Component, Inject, OnDestroy} from '@angular/core';
+import {Component, Inject, OnDestroy, ViewChild} from '@angular/core';
 import {MAT_DIALOG_DATA} from '@angular/material';
 import {Subscription} from 'rxjs';
 
-import {EventsService} from '../events.service';
-import {Event} from '../models/event.model';
-import {EventResultGroup} from '../models/event-result-group.model';
 import {ChartOptions, ChartType} from 'chart.js';
 import {Label, monkeyPatchChartJsLegend, monkeyPatchChartJsTooltip, SingleDataSet} from 'ng2-charts';
+
+import {EventsService} from '../events.service';
+import {Permissions} from '../../../permissions';
+import {MyUserService} from '../../my-user.service';
+
+import {Event} from '../models/event.model';
+import {EventResultGroup} from '../models/event-result-group.model';
+import {EventDate} from '../models/event-date.model';
 
 @Component({
   selector: 'app-event-info-modal',
@@ -22,18 +27,21 @@ export class EventInfoModalComponent implements OnDestroy {
 
   name: string;
   description: string;
-  location: string;
-  locationUri: string;
 
   startDate: Date;
   endDate: Date;
+  dates: EventDate[] = [];
 
   resultGroups: EventResultGroup[];
   sortedResultGroups: EventResultGroup[];
   searchValue = '';
 
+  public myUserService: MyUserService;
+  public EVENTS_ADMINISTRATION_PERMISSION = Permissions.EVENTS_ADMINISTRATION;
+  public ROOT_PERMISSION = Permissions.ROOT_ADMINISTRATION;
+
   public pieChartOptions: ChartOptions = {
-    responsive: true,
+    responsive: true
   };
   public pieChartType: ChartType = 'pie';
   public pieChartLegend = true;
@@ -41,13 +49,15 @@ export class EventInfoModalComponent implements OnDestroy {
   public pieChartData: SingleDataSet;
   public pieChartIsEmpty: boolean;
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any, private eventsService: EventsService) {
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any, private eventsService: EventsService, myUserService: MyUserService) {
+    this.myUserService = myUserService;
+
     this.event = data.event;
     const id = this.event.id;
     this.refreshValues();
 
     this.event = this.eventsService.getEvent(id);
-    this.eventSubscription = this.eventsService.eventChange.subscribe((value) => {
+    this.eventSubscription = this.eventsService.eventChange.subscribe(value => {
       this.event = value;
       this.refreshValues();
       this.sendingRequest = false;
@@ -61,10 +71,9 @@ export class EventInfoModalComponent implements OnDestroy {
   refreshValues() {
     this.name = this.event.name;
     this.description = this.event.description;
-    this.location = this.event.location;
-    this.locationUri = this.event.locationUri;
     this.startDate = this.event.startDate;
     this.endDate = this.event.endDate;
+    this.dates = this.event.getEventDates();
     this.resultGroups = this.event.getResultGroups();
     this.sortedResultGroups = this.resultGroups.slice();
     this.pieChartLabels = this.event.getDecisionsAsStrings();

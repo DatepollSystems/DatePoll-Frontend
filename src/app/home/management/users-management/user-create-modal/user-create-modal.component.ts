@@ -237,7 +237,13 @@ export class UserCreateModalComponent implements OnDestroy {
                 },
                 (error) => console.log(error)
               );
-            } else {
+            }
+          }
+
+          for (let i = 0; i < this.joined.length; i++) {
+            const group = this.joined[i];
+
+            if (group.type.includes('subgroup')) {
               this.groupsService.addUserToSubgroup(userID, group.id).subscribe(
                 (sdata: any) => {
                   console.log(sdata);

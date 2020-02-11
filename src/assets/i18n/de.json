@@ -19,8 +19,7 @@
   "ERROR": "Fehler",
   "WARNING": "Warnung",
   "REQUEST_ERROR": "Ein unbekannter Fehler ist aufgetreten. Versuche die Website neu zu laden.",
-
-
+  "DELETE": "Löschen",
 
   "LANGUAGE": "Sprache",
   "LANGUAGE_GERMAN": "Deutsch",
@@ -43,13 +42,9 @@
   "SEND_BROWSER_DATA": "Browserdaten mitsenden",
   "SEND_BROWSER_DATA_TOOLTIP": "Bei Aktivierung werden Screensize, Browsertyp, Browserversion, Is Mobile, Operating system und ob Cookies eingeschaltet sind mit gesendet.",
 
-
-
   "404_TITLE": "Was du auch immer gesucht hast, wir haben es leider nicht gefunden.",
   "404_SUBTITLE": "Du kannst entweder zurück gehen oder dir weiterhin dieses tolle Bild einer Katze anschauen!",
   "404_GO_BACK": "Zurück",
-
-
 
   "SIGNIN": "Anmelden",
   "SIGNIN_NOT_SIGNED_UP": "Kein Konto?",
@@ -73,8 +68,6 @@
   "FORGOT_PASSWORD_RATE_LIMIT_EXCEEDED": "Du hast zu oft versucht den Code einzugeben. Bitte lade die Seite neu!",
   "FORGOT_PASSWORD_SUCCESSFUL": "Dein Passwort wurde erfolgreich geändert! Du wirst in 5 Sekunden weitergeleitet.",
 
-
-
   "NAV_USER_SETTINGS": "Persönliche Einstellungen",
 
   "NAV_EVENTS_EVENTS": "Events",
@@ -90,16 +83,13 @@
   "NAV_MANAGEMENT_PERFORMANCE_BADGES": "Leistungsabzeichenverwaltung",
   "NAV_MANAGEMENT_DATEPOLL": "DatePoll-Verwaltung",
 
-
-
   "BROWSER_COMPATIBILITY_HEADER": "Herst Hawara! Dein Internet Browser wird nicht mehr unterstützt und ist veraltet!",
   "BROWSER_COMPATIBILITY_INFO_NEVER_COME_BACK": "Das Warnungsfenster wirst du nach dem Schließen, nicht nochmal sehen. ",
   "BROWSER_COMPATIBILITY_CONTENT_1": "Dein Internet Browser bekommt seit 2016 keine Updates mehr... es ist mittlerweile ",
   "BROWSER_COMPATIBILITY_CONTENT_2": "<br>Ich versuche mein bestes alle unterschiedlichen Browser als auch Endgeräte zu unterstützen. Der Internet Explorer ist jedoch ein Mysterium.\n  <a href=\"https://www.derstandard.at/story/2000097801064/microsoft-bittet-nutzer-internet-explorer-nicht-mehr-zu-verwenden\" target=\"_blank\" rel=\"noopener\">\n    Selbst <b>Microsoft</b> bittet seine eigenen Nutzer Internet Explorer hinter sich zu lassen.\n  </a>\n  <br><br>Aber wenn genörgelt wird, müssen auch Alternativen angeboten werden:\n  <ul>\n    <li><i>(Empfehlung) </i><a href=\"https://firefox.com/\" rel=\"noopener\" target=\"_blank\">Firefox Browser</a></li>\n    <li><a href=\"https://www.google.com/chrome/\" rel=\"noopener\" target=\"_blank\">Google Chrome</a></li>\n  </ul>",
 
-
-
   "STARTPAGE_BIRTHDAY": "Geburtstage des Monat",
+  "STARTPAGE_BIRTHDAY_INFO": "Hier kannst du es deaktivieren dass dein Name bei den Geburtstagen aufscheint.",
   "STARTPAGE_BIRTHDAY_NAME": "Name",
   "STARTPAGE_BIRTHDAY_DATE": "Geburtsdatum",
 
@@ -112,9 +102,15 @@
 
   "STARTPAGE_EVENTS": "Nächsten Events",
 
-
-
   "CALENDAR": "Kalender",
+
+  "CALENDAR_SETTINGS_SHOW_MOVIES": "Filme anzeigen",
+  "CALENDAR_SETTINGS_SHOW_EVENTS": "Events anzeigen",
+  "CALENDAR_SETTINGS_SHOW_BIRTHDAYS": "Geburtstage anzeigen",
+
+  "CALENDAR_USERS_BIRTHDAY": "'s Geburtstag",
+
+  "CALENDAR_AGENDA": "Agenda",
 
   "CALENDAR_PREVIOUS": "Zurück",
   "CALENDAR_TODAY": "Heute",
@@ -124,7 +120,7 @@
   "CALENDAR_WEEK": "Woche",
   "CALENDAR_DAY": "Tag",
 
-
+  "MAPS_CLEAR_SELECTION": "Auswahl entfernen",
 
   "CINEMA_TICKETS_BOOK_A_TICKET": "Karten reservieren",
   "CINEMA_TICKETS_DATE": "Datum:",
@@ -208,8 +204,6 @@
   "CINEMA_TICKETS_ADMINISTRATION_MOVIE_BOOKINGS_MANAGEMENT_MODAL_TICKETS_TO_BOOK": "Kartenanzahl",
   "CINEMA_TICKETS_ADMINISTRATION_MOVIE_BOOKINGS_MANAGEMENT_MODAL_TICKETS_TO_BOOK_INVALID": "Min. 1 Karte",
 
-
-
   "SETTINGS_PERSONAL_DATA": "Persönliche Daten",
   "SETTINGS_PERSONAL_DATA_DESCRIPTION": "Bearbeiten Sie Ihre Persönlichen Daten.",
   "SETTINGS_PERSONAL_DATA_PERSONAL_DATA_CHANGE": "Persönliche Daten ändern",
@@ -241,8 +235,9 @@
   "SETTINGS_PERSONAL_DATA_MODAL_PHONE_NUMBER_ADD": "Nummer hinzufügen",
   "SETTINGS_PERSONAL_DATA_MODAL_PHONE_NUMBER_NOT_VALID": "Bitte gib eine Bezeichnung und eine Telefonnummer an!",
 
+  "SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_NOTIFY_TITLE": "Email-Benachrichtigungen",
+  "SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_NOTIFY_ME_ON_NEW_EVENT": "Benachrichtige mich per Email wenn eines neues Event hinzugefügt wurde.",
   "SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_SAVED_SUCCESSFUL": "Deine Email-Adressen wurden erfolgreich gespeichert!",
-
 
   "SETTINGS_SECURITY": "Sicherheit",
   "SETTINGS_SECURITY_DESCRIPTION": "Legen Sie die Einstellungen für Ihr Passwort und Ihren Kalender fest. Und verwalten Sie Ihre Sessions.",
@@ -250,6 +245,7 @@
   "SETTINGS_SECURITY_CHANGE_2FA": "Zwei-Faktor-Authentifizierung einstellen",
   "SETTINGS_SECURITY_CALENDAR": "Kalenderverwaltung",
   "SETTINGS_SECURITY_SESSIONS": "Sessionverwaltung",
+  "SETTINGS_SECURITY_SETTINGS": "Privatsphäre-Einstellungen",
 
   "SETTINGS_SECURITY_MODAL_CHANGE_PASSWORD_TITLE_START": "Geben Sie Ihr altes Passwort ein",
   "SETTINGS_SECURITY_MODAL_CHANGE_PASSWORD_OLD_PASSWORD_INCORRECT": "Ihr eingegebenes Password ist inkorrekt!",
@@ -270,7 +266,9 @@
   "SETTINGS_SECURITY_MODAL_SESSION_INFORMATION": "Informationen",
   "SETTINGS_SECURITY_MODAL_SESSION_LAST_USED": "Zuletzt benutzt",
 
-
+  "SETTINGS_SECURITY_MODAL_SETTINGS_TITLE": "Privatsphäre-Einstellungen",
+  "SETTINGS_SECURITY_MODAL_SETTINGS_SAVE_SUCCESS": "Deine Einstellungen wurden erfolgreich gespeichert!",
+  "SETTINGS_SECURITY_MODAL_SETTINGS_SHOW_BIRTHDAY": "Zeige deinen Geburtstag für jedes Vereinsmitglied auf der Startseite an",
 
   "MANAGEMENT_USERS_SEARCH": "Suche...",
   "MANAGEMENT_USERS_TITLE": "Titel",
@@ -354,7 +352,6 @@
   "MANAGEMENT_USERS_DELETE_USER_MODAL_TITLE": "Willst du den Benutzer wirklich löschen?",
   "MANAGEMENT_USERS_DELETE_USER_MODAL_SUCCESSFUL": "Das Mitglied wurde erfolgreich gelöscht!",
 
-
   "MANAGEMENT_GROUPS_SEARCH": "Suche nach einer Gruppe oder einem Register",
   "MANAGEMENT_GROUPS_SEARCH_NOTHING_FOUND": "Leider wurde nichts gefunden :(",
   "MANAGEMENT_GROUPS_GROUP_DELETE_TOOLTIP": "Lösche diese Gruppe",
@@ -405,7 +402,6 @@
   "MANAGEMENT_GROUPS_INFO_SUBGROUP_MODAL_TABLE_ACTION_REMOVE": "Entferne dieses Mitglied aus der Gruppe",
   "MANAGEMENT_GROUPS_INFO_SUBGROUP_MDOAL_TABLE_ACTION_EDIT": "Bearbeite die Rolle des Mitglieds in der Gruppe",
 
-
   "MANAGEMENT_PERFORMANCE_BADGES_TITLE_PERFORMANCE_BADGES": "Leistungsabzeichen",
   "MANAGEMENT_PERFORMANCE_BADGES_TITLE_INSTRUMENTS": "Instrumente",
   "MANAGEMENT_PERFORMANCE_BADGES_REFRESH": "Leistungsabzeichen und Instrumente aktualisieren",
@@ -432,7 +428,6 @@
   "MANAGEMENT_PERFORMANCE_BADGES_ADD_INSTRUMENT_NAME_INCORRECT": "Der Name darf weder leer sein, noch mehr als 190 Zeichen haben!",
   "MANAGEMENT_PERFORMANCE_BADGES_ADD_INSTRUMENT_SUCCESSFUL": "Das Instrument wurde erfolgreich hinzugefügt!",
 
-
   "MANAGEMENT_DATEPOLL_FEATURE_SETTINGS": "DatePoll-Feature Einstellungen",
   "MANAGEMENT_DATEPOLL_FEATURE_SETTINGS_SUBTITLE": "Hier kannst du grundlegende Funktionen von DatePoll Konfigurieren!",
   "MANAGEMENT_DATEPOLL_CINEMA_SERVICE": "Kinoservice",
@@ -458,13 +453,10 @@
   "MANAGEMENT_DATEPOLL_OPENWEATHERMAP_CINEMA_CITY_ID_INVALID": "Die Kino City Id darf nicht mehr als 50 Zeichen haben!",
   "MANAGEMENT_DATEPOLL_OPENWEATHERMAP_CINEMA_CITY_ID_CHANGED_SUCCESSFULLY": "Die Kino City Id wurde erfolgreich geändert!",
 
-
   "MANAGEMENT_DATEPOLL_LOGS": "Logs",
   "MANAGEMENT_DATEPOLL_LOGS_REFRESH": "Log-Liste aktualisieren",
   "MANAGEMENT_DATEPOLL_LOGS_LOG_TYPE": "Log-Level",
   "MANAGEMENT_DATEPOLL_LOGS_NO_LOGS": "Es gibt keine Logs mit diesem Log-Level!",
-
-
 
   "EVENTS_VIEW": "Events",
   "EVENTS_VIEW_SHOW_ALREADY_VOTED_EVENTS": "Beantwortete Events",
@@ -475,6 +467,7 @@
   "EVENTS_VIEW_EVENT_SUCCESSFULLY_VOTED": "Deine Entscheidung wurde erfolgreich gespeichert!",
   "EVENTS_VIEW_EVENT_SUCCESSFULLY_REMOVED_VOTING": "Deine Entscheidung wurde entfernt!",
   "EVENTS_VIEW_EVENT_NO_NEW_VOTINGS": "Du hast alle Entscheidungen getroffen und nichts mehr zu tun!",
+  "EVENTS_VIEW_EVENT_CARD_VOTED_FOR": "Abgestimmt für",
 
   "EVENTS_VIEW_EVENT_VOTE_FOR_ADDITIONAL_INFORMATION_ADD": "Zusatzinformation hinzufügen",
   "EVENTS_VIEW_EVENT_VOTE_FOR_ADDITIONAL_INFORMATION_CHANGE": "Zusatzinformation bearbeiten",
@@ -502,19 +495,44 @@
   "EVENTS_STANDARD_DECISIONS_MANAGEMENT_ADD_STANDARD_DECISION_INCORRECT": "Die Antwortmöglichkeit darf weder leer sein, noch mehr als 190 Zeichen haben.",
   "EVENTS_STANDARD_DECISIONS_MANAGEMENT_REMOVE_STANDARD_DECISION_BUTTON_TOOLTIP": "Entferne diese Antwortmöglichkeit",
 
+  "EVENTS_STANDARD_LOCATIONS_MANAGEMENT": "Standard-Locations-Verwaltung",
+  "EVENTS_STANDARD_LOCATIONS_MANAGEMENT_NAME": "Name",
+  "EVENTS_STANDARD_LOCATIONS_MANAGEMENT_NAME_INCORRECT": "Der Name darf weder leer sein, noch mehr als 190 Zeichen haben.",
+  "EVENTS_STANDARD_LOCATIONS_MANAGEMENT_SUCCESSFULLY_ADDED": "Die Standard-Location wurde erfolgreich hinzugefügt.",
+  "EVENTS_STANDARD_LOCATIONS_MANAGEMENT_SUCCESSFULLY_REMOVED": "Die Standard-Location wurde erfolgreich entfernt.",
+  "EVENTS_STANDARD_LOCATIONS_MANAGEMENT_NO_LOCATION": "Diese Standard-Location hat keinen verknüpften Standort!",
+  "EVENTS_STANDARD_LOCATIONS_MANAGEMENT_NO_COORDINATES": "Diese Standard-Location hat keine hinterlegten Coordinaten.",
+
   "EVENTS_ADMINISTRATION_CREATE_EVENT": "Lege ein neues Event an",
   "EVENTS_ADMINISTRATION_CREATE_EVENT_SUCCESSFULLY_CREATED": "Das Event wurde erfolgreich angelegt!",
   "EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_NAME": "Name",
   "EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_NAME_INCORRECT": "Der Name darf weder leer sein, noch mehr als 190 Zeichen haben!",
-  "EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_LOCATION": "Ort",
-  "EVENTS_ADMINISTRATION_CREATE_EVENT_FORM _LOCATION_INCORRECT": "Der Ort darf nicht mehr als 190 Zeichen haben.",
-  "EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_START_DATE": "Start-Datum",
-  "EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_END_DATE": "End-Datum",
+
+  "EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE_TITLE": "Zeiten & Treffpunkte",
+  "EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_STANDARD_LOCATION": "Location Vorlagen",
+  "EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_APPLY_STANDARD_LOCATION": "Vorlage übernehmen",
   "EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE": "Datum",
   "EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_HOURS": "Stunden",
   "EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_HOURS_INCORRECT": "0 - 24 Uhr",
   "EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_MINUTES": "Minuten",
   "EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_MINUTES_INCORRECT": "0 - 60 Minuten",
+  "EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_LOCATION": "Treffpunkt",
+  "EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_LOCATION_INCORRECT": "Der Treffpunkt darf nicht mehr als 190 Zeichen haben.",
+  "EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_X": "X",
+  "EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_X_INCORRECT": "Bitte gib einen Wert zwischen -90 und +90 ein.",
+  "EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_Y": "Y",
+  "EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_Y_INCORRECT": "Bitte gib einen Wert zwischen -180 und +180 ein.",
+  "EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE_LIST_OPEN_LOCATION_1": "Öffne ",
+  "EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE_LIST_OPEN_LOCATION_2": " in Google Maps",
+  "EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE_LIST_OPEN_LOCATION_3": "Standort in Google Maps öffnen",
+  "EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE_LIST_OPEN_LOCATION_4": "Nach \"",
+  "EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE_LIST_OPEN_LOCATION_5": "\" in Google Maps suchen",
+  "EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE_LIST_NO_LOCATION": "Dieser Zeitpunkt hat keine verknüpften Standort!",
+  "EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE_LIST_NO_DATES": "Für dieses Event gibt es keine Zeiten!",
+  "EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE_LIST_NO_COORDINATES": "Für diesen Zeitpunkt wurden keine Coordinaten hinterlegt!",
+  "EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE_LIST_REQUIRED": "Bitte trage mindestens einen Zeitpunkt ein.",
+  "EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE_LIST_DELETE": "Lösche diesen Treffpunkt",
+
   "EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DESCRIPTION": "Beschreibung",
   "EVENTS_ADMINISTRATION_CREATE_EVENT_GROUPS": "Gruppeneinteilung",
   "EVENTS_ADMINISTRATION_CREATE_EVENT_GROUPS_DESCRIPTION": "Sollte keine Gruppe ausgewäht werden gilt das Event für alle Mitglieder",

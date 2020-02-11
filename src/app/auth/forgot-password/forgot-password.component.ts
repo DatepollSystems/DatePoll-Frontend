@@ -1,11 +1,13 @@
+import {HttpClient} from '@angular/common/http';
 import {Component, OnDestroy} from '@angular/core';
 import {NgForm} from '@angular/forms';
-import {HttpClient} from '@angular/common/http';
 import {Router} from '@angular/router';
 import {Subscription} from 'rxjs';
 
+import {NotificationsService} from 'angular2-notifications';
 import {environment} from '../../../environments/environment';
 import {SettingsService} from '../../services/settings.service';
+import {TranslateService} from '../../translation/translate.service';
 
 @Component({
   selector: 'app-forgot-password',
@@ -26,9 +28,15 @@ export class ForgotPasswordComponent implements OnDestroy {
   verificationCodeRateLimitExceeded = false;
   private apiUrl = environment.apiUrl + '/auth/forgotPassword/';
 
-  constructor(private http: HttpClient, private router: Router, private settingsService: SettingsService) {
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private settingsService: SettingsService,
+    private notificationsService: NotificationsService,
+    private translate: TranslateService
+  ) {
     this.communityName = this.settingsService.getCommunityName();
-    this.communityNameSubscription = this.settingsService.communityNameChange.subscribe((value) => {
+    this.communityNameSubscription = this.settingsService.communityNameChange.subscribe(value => {
       this.communityName = value;
     });
   }
@@ -55,7 +63,7 @@ export class ForgotPasswordComponent implements OnDestroy {
     const username = form.controls.username.value;
 
     const dto = {
-      'username': username
+      username: username
     };
 
     this.sendingRequest = true;
@@ -67,7 +75,7 @@ export class ForgotPasswordComponent implements OnDestroy {
 
         this.sendingRequest = false;
       },
-      (error) => {
+      error => {
         console.log(error);
         if (error.error.error_code != null) {
           if (error.error.error_code.includes('unknown_username')) {
@@ -86,8 +94,8 @@ export class ForgotPasswordComponent implements OnDestroy {
     const code = form.controls.emailVerificationCode.value;
 
     const dto = {
-      'username': this.username,
-      'code': code
+      username: this.username,
+      code: code
     };
 
     this.sendingRequest = true;
@@ -98,7 +106,7 @@ export class ForgotPasswordComponent implements OnDestroy {
         this.state = 'SUBMIT_PASSWORD';
         this.sendingRequest = false;
       },
-      (error) => {
+      error => {
         console.log(error);
         if (error.error.error_code != null) {
           if (error.error.error_code.includes('code_incorrect')) {
@@ -114,11 +122,20 @@ export class ForgotPasswordComponent implements OnDestroy {
 
   onResetPassword(form: NgForm) {
     const password = form.controls.password.value;
+    const passwordRepeat = form.controls.password_repeat.value;
+
+    if (password !== passwordRepeat) {
+      this.notificationsService.info(
+        null,
+        this.translate.getTranslationFor('SETTINGS_SECURITY_MODAL_CHANGE_PASSWORD_NEW_PASSWORDS_ARE_NOT_EQUAL')
+      );
+      return;
+    }
 
     const dto = {
-      'username': this.username,
-      'code': this.verificationCode,
-      'new_password': password
+      username: this.username,
+      code: this.verificationCode,
+      new_password: password
     };
 
     this.sendingRequest = true;
@@ -131,11 +148,10 @@ export class ForgotPasswordComponent implements OnDestroy {
           this.router.navigate(['/auth/signin']);
         }, 5000);
       },
-      (error) => {
+      error => {
         console.log(error);
         this.sendingRequest = false;
       }
     );
   }
-
 }

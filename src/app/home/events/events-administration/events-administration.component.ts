@@ -1,16 +1,20 @@
 import {Component, OnDestroy, TemplateRef, ViewChild} from '@angular/core';
 import {MatBottomSheet, MatDialog, MatPaginator, MatSlideToggleChange, MatSort, MatTableDataSource} from '@angular/material';
-import {Event} from '../models/event.model';
-import {Subscription} from 'rxjs';
-import {EventsService} from '../events.service';
-import {MyUserService} from '../../my-user.service';
-import {Permissions} from '../../../permissions';
 import {Router} from '@angular/router';
-import {EventCreateModalComponent} from './event-create-modal/event-create-modal.component';
-import {EventStandardDecisionsManagementModalComponent} from '../event-standard-decisions-management-modal/event-standard-decisions-management-modal.component';
-import {EventUpdateModalComponent} from './event-update-modal/event-update-modal.component';
+import {Subscription} from 'rxjs';
+
+import {MyUserService} from '../../my-user.service';
+import {EventsService} from '../events.service';
+
+import {Permissions} from '../../../permissions';
+import {Event} from '../models/event.model';
+
 import {EventInfoModalComponent} from '../event-info-modal/event-info-modal.component';
+import {EventCreateModalComponent} from './event-create-modal/event-create-modal.component';
 import {EventDeleteModalComponent} from './event-delete-modal/event-delete-modal.component';
+import {EventStandardDecisionsManagementModalComponent} from './event-standard-decisions-management-modal/event-standard-decisions-management-modal.component';
+import {EventStandardLocationsManagementModalComponent} from './event-standard-locations-management-modal/event-standard-locations-management-modal.component';
+import {EventUpdateModalComponent} from './event-update-modal/event-update-modal.component';
 import {EventUserManagementModalComponent} from './event-user-management-modal/event-user-management-modal.component';
 
 @Component({
@@ -25,7 +29,7 @@ export class EventsAdministrationComponent implements OnDestroy {
 
   showAllEvents: boolean;
 
-  displayedColumns: string[] = ['name', 'startDate', 'endDate', 'location', 'description', 'actions'];
+  displayedColumns: string[] = ['name', 'startDate', 'endDate', 'description', 'actions'];
   filterValue: string = null;
 
   @ViewChild(MatSort, {static: true}) sort: MatSort;
@@ -41,9 +45,9 @@ export class EventsAdministrationComponent implements OnDestroy {
     private router: Router,
     private dialog: MatDialog,
     private bottomSheet: MatBottomSheet,
-    private myUserService: MyUserService) {
-
-    this.permissionSubscription = myUserService.permissionsChange.subscribe((value) => {
+    private myUserService: MyUserService
+  ) {
+    this.permissionSubscription = myUserService.permissionsChange.subscribe(value => {
       if (!this.myUserService.hasPermission(Permissions.EVENTS_ADMINISTRATION)) {
         this.router.navigate(['/home']);
       }
@@ -57,7 +61,7 @@ export class EventsAdministrationComponent implements OnDestroy {
       this.eventsLoaded = true;
     }
 
-    this.eventsSubscription = this.eventsService.eventsChange.subscribe((value) => {
+    this.eventsSubscription = this.eventsService.eventsChange.subscribe(value => {
       this.events = value;
       this.eventsLoaded = true;
       this.refreshTable();
@@ -93,6 +97,12 @@ export class EventsAdministrationComponent implements OnDestroy {
     });
   }
 
+  onShowStandardLocationManagementModal() {
+    this.dialog.open(EventStandardLocationsManagementModalComponent, {
+      width: '80vh'
+    });
+  }
+
   onShowAllEventsChange(ob: MatSlideToggleChange) {
     this.refreshTable();
   }
@@ -123,8 +133,8 @@ export class EventsAdministrationComponent implements OnDestroy {
   onInfo(event: Event) {
     this.dialog.open(EventInfoModalComponent, {
       width: '80vh',
-      'data': {
-        'event': event
+      data: {
+        event: event
       }
     });
   }
@@ -132,8 +142,8 @@ export class EventsAdministrationComponent implements OnDestroy {
   onUserManagement(event: Event) {
     this.dialog.open(EventUserManagementModalComponent, {
       width: '80vh',
-      'data': {
-        'event': event
+      data: {
+        event: event
       }
     });
   }
@@ -141,16 +151,15 @@ export class EventsAdministrationComponent implements OnDestroy {
   onEdit(event: Event) {
     this.dialog.open(EventUpdateModalComponent, {
       width: '80vh',
-      'data': {
-        'event': event
+      data: {
+        event: event
       }
     });
   }
 
   onDelete(id: number) {
     this.bottomSheet.open(EventDeleteModalComponent, {
-      'data': {'eventID': id}
+      data: {eventID: id}
     });
   }
-
 }

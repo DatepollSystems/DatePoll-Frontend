@@ -1,0 +1,80 @@
+<div class="row justify-content-around">
+  <mat-form-field class="col-10 col-sm-10 col-md-6 col-lg-6">
+    <input (keyup)="applyFilter($event.target.value)" matInput
+           placeholder="{{'MANAGEMENT_USERS_SEARCH' | translate}}">
+  </mat-form-field>
+
+  <div class="col-6 col-sm-7 col-md-2 col-lg-2">
+    <button mat-flat-button color="primary" style="width: 100%" (click)="onVote()"
+            [class.spinner]="savingVoting" [disabled]="savingVoting">
+      {{'EVENTS_ADMINISTRATION_USER_MANAGEMENT_FOR_EVENT_VOTE' | translate}}</button>
+  </div>
+
+  <div class="col-3 col-sm-3 col-md-2 col-lg-2">
+    <button mat-stroked-button aria-label="Remove votings for selected users" (click)="onClear()"
+            [class.spinner]="savingClearVoting" [disabled]="savingClearVoting"
+            matTooltip="{{'EVENTS_ADMINISTRATION_USER_MANAGEMENT_FOR_EVENT_REMOVE_VOTING' | translate}}">
+      <mat-icon>delete</mat-icon>
+    </button>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-12">
+    <table [dataSource]="dataSource" class="table-responsive" mat-table matSort>
+      <!-- Checkbox Column -->
+      <ng-container matColumnDef="select">
+        <th mat-header-cell *matHeaderCellDef>
+          <mat-checkbox (change)="$event ? masterToggle() : null"
+                        [checked]="selection.hasValue() && isAllSelected()"
+                        [indeterminate]="selection.hasValue() && !isAllSelected()"
+                        [aria-label]="checkboxLabel()">
+          </mat-checkbox>
+        </th>
+        <td mat-cell *matCellDef="let row" (click)="$event.stopPropagation()">
+          <mat-checkbox (click)="$event.stopPropagation()"
+                        (change)="$event ? selection.toggle(row) : null"
+                        [checked]="selection.isSelected(row)"
+                        [aria-label]="checkboxLabel(row)">
+          </mat-checkbox>
+        </td>
+        <td *matFooterCellDef mat-footer-cell><b>Total</b></td>
+      </ng-container>
+
+      <!-- Firstname Column -->
+      <ng-container matColumnDef="firstname">
+        <th *matHeaderCellDef mat-header-cell
+            mat-sort-header> {{'EVENTS_ADMINISTRATION_INFO_EVENT_FIRSTNAME' | translate}} </th>
+        <td *matCellDef="let resultUser" mat-cell> {{resultUser.firstname}} </td>
+        <td *matFooterCellDef mat-footer-cell></td>
+      </ng-container>
+
+      <!-- Surname Column -->
+      <ng-container matColumnDef="surname">
+        <th *matHeaderCellDef mat-header-cell
+            mat-sort-header> {{'EVENTS_ADMINISTRATION_INFO_EVENT_SURNAME' | translate}} </th>
+        <td *matCellDef="let resultUser" mat-cell> {{resultUser.surname}} </td>
+        <td *matFooterCellDef mat-footer-cell></td>
+      </ng-container>
+
+      <!-- Decision Column -->
+      <ng-container matColumnDef="decision">
+        <th *matHeaderCellDef mat-header-cell
+            mat-sort-header> {{'EVENTS_ADMINISTRATION_INFO_EVENT_DECISION' | translate}} </th>
+        <td *matCellDef="let resultUser" mat-cell>
+          <b
+            *ngIf="resultUser.decision != null">{{resultUser.decision}}</b>
+          <i *ngIf="resultUser.decision != null && resultUser?.additionalInformation?.length > 0">&nbsp;({{resultUser.additionalInformation}})</i>
+          <span
+            *ngIf="resultUser.decision == null">{{'EVENTS_ADMINISTRATION_INFO_EVENT_UNKNOWN_VOTING' | translate}}</span>
+        </td>
+        <td *matFooterCellDef mat-footer-cell><b>{{getVotesSummary()}}</b></td>
+      </ng-container>
+
+      <tr *matHeaderRowDef="displayedColumns; sticky: true" mat-header-row></tr>
+      <tr (click)="onVoteForSingle(row)" *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
+      <tr *matFooterRowDef="displayedColumns" mat-footer-row></tr>
+    </table>
+    <mat-paginator [pageSizeOptions]="[10, 20, 50, 100]" showFirstLastButtons></mat-paginator>
+  </div>
+</div>

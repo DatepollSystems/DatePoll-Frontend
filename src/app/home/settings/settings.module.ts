@@ -1,23 +1,21 @@
-import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
+import {NgModule} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
-import {CustomFormsModule} from 'ng2-validation';
-
 import {MaterialModule} from '../../material-module';
-import {TranslationModule} from '../../translation/translation.module';
 import {CommonComponentsModule} from '../../services/common-components.module';
-
-import {SettingsComponent} from './settings.component';
-import {PersonalDataComponent} from './personal-data/personal-data.component';
-import {PhoneNumberComponent} from './phone-number/phone-number.component';
-import {EmailAddressComponent} from './email-address/email-address.component';
-import {PasswordComponent} from './password/password.component';
-import {TwoFactorAuthenticationComponent} from './two-factor-authentication/two-factor-authentication.component';
-import {SessionsComponent} from './sessions/sessions.component';
-import {CalendarTokenComponent} from './calendar-token/calendar-token.component';
+import {TranslationModule} from '../../translation/translation.module';
 import {SettingsRoutingModule} from './settings-routing.module';
 
+import {CalendarTokenComponent} from './calendar-token/calendar-token.component';
+import {EmailAddressComponent} from './email-address/email-address.component';
+import {PasswordComponent} from './password/password.component';
+import {PersonalDataComponent} from './personal-data/personal-data.component';
+import {PhoneNumberComponent} from './phone-number/phone-number.component';
+import {PrivacySettingsComponent} from './privacy-settings/privacy-settings.component';
+import {SessionsComponent} from './sessions/sessions.component';
+import {SettingsComponent} from './settings.component';
+import {TwoFactorAuthenticationComponent} from './two-factor-authentication/two-factor-authentication.component';
 
 @NgModule({
   declarations: [
@@ -29,28 +27,17 @@ import {SettingsRoutingModule} from './settings-routing.module';
     CalendarTokenComponent,
     TwoFactorAuthenticationComponent,
     SessionsComponent,
-  ],
-  entryComponents: [
-    PersonalDataComponent,
-    PhoneNumberComponent,
-    EmailAddressComponent,
-    PasswordComponent,
-    CalendarTokenComponent,
-    SessionsComponent,
+    PrivacySettingsComponent
   ],
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    CustomFormsModule,
     MaterialModule,
     TranslationModule,
     CommonComponentsModule,
     SettingsRoutingModule
   ],
-  exports: [
-    SettingsComponent
-  ]
+  exports: [SettingsComponent]
 })
-export class SettingsModule {
-}
+export class SettingsModule {}

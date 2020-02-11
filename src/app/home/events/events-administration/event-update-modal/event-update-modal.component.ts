@@ -1,11 +1,15 @@
 import {Component, Inject, OnDestroy, TemplateRef, ViewChild} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
-import {NotificationsService, NotificationType} from 'angular2-notifications';
-import {EventsService} from '../../events.service';
 import {NgForm} from '@angular/forms';
-import {Event} from '../../models/event.model';
 import {Subscription} from 'rxjs';
+
+import {NotificationsService, NotificationType} from 'angular2-notifications';
+
+import {EventsService} from '../../events.service';
+
+import {Event} from '../../models/event.model';
 import {Decision} from '../../models/decision.model';
+import {EventDate} from '../../models/event-date.model';
 
 @Component({
   selector: 'app-event-update-modal',
@@ -21,13 +25,10 @@ export class EventUpdateModalComponent implements OnDestroy {
   description: string;
   location: string;
   decisions: Decision[] = [];
+  dates: EventDate[] = [];
 
   startDate: Date;
-  startDateHours: number;
-  startDateMinutes: number;
   endDate: Date;
-  endDateHours: number;
-  endDateMinutes: number;
 
   joinedCopy: any[] = [];
   joined: any[] = [];
@@ -46,14 +47,10 @@ export class EventUpdateModalComponent implements OnDestroy {
     this.event = data.event;
     this.name = this.event.name;
     this.description = this.event.description;
-    this.location = this.event.location;
     this.decisions = this.event.getDecisions();
-    this.startDate = this.event.startDate;
-    this.startDateHours = this.startDate.getHours();
-    this.startDateMinutes = this.startDate.getMinutes();
-    this.endDate = this.event.endDate;
-    this.endDateHours = this.endDate.getHours();
-    this.endDateMinutes = this.endDate.getMinutes();
+    this.startDate = new Date();
+    this.endDate = new Date();
+    this.dates = this.event.getEventDates();
 
     this.joined = this.eventsService.getJoinedOfEvent(this.event.id);
     this.joinedCopy = this.joined.slice();
@@ -105,25 +102,23 @@ export class EventUpdateModalComponent implements OnDestroy {
     this.joined = joined;
   }
 
+  onEventDatesChange(eventDates: EventDate[]) {
+    this.dates = eventDates;
+  }
+
   update(form: NgForm) {
+    if (this.dates.length === 0) {
+      return;
+    }
+
     this.dialogRef.close();
 
     const name = form.controls.name.value;
-    const startDateHours = form.controls.startDateHours.value;
-    const startDateMinutes = form.controls.startDateMinutes.value;
-    const endDateHours = form.controls.endDateHours.value;
-    const endDateMinutes = form.controls.endDateMinutes.value;
     const description = form.controls.description.value;
-    const location = form.controls.location.value;
-
-    this.startDate.setHours(startDateHours);
-    this.startDate.setMinutes(startDateMinutes);
-    this.endDate.setHours(endDateHours);
-    this.endDate.setMinutes(endDateMinutes);
 
     const forEveryone = (this.joined.length === 0);
 
-    const event = new Event(this.event.id, name, this.startDate, this.endDate, forEveryone, description, location, this.decisions);
+    const event = new Event(this.event.id, name, this.startDate, this.endDate, forEveryone, description, this.decisions, this.dates);
     console.log(event);
     this.eventsService.updateEvent(event).subscribe(
       (response: any) => {

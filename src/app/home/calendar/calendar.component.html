@@ -1,36 +1,70 @@
 <mat-card class="mat-elevation-z3">
   <mat-card-content>
-    <div class="row"></div>
+    <div class="row justify-content-between">
+      <div class="col-10 col-sm-10 col-md-8 col-lg-4 col-xl-4">
+        {{ viewDate | date: 'EE, dd.MM.yyyy' }}
+      </div>
+      <div class="col-2 col-sm-2 col-md-4 col-lg-4 col-xl-4" style="text-align: end">
+        <button [matMenuTriggerFor]="menu" mat-icon-button>
+          <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button (click)="this.refreshEntries()" mat-menu-item>
+            <mat-icon>refresh</mat-icon>
+            <span>{{ 'EVENTS_ADMINISTRATION_MENU_REFRESH' | translate }}</span>
+          </button>
+          <div mat-menu-item *ngIf="settingsService.getShowCinema()">
+            <mat-slide-toggle (change)="onShowMoviesChange($event)" [(ngModel)]="showMovies" color="primary">
+              {{ 'CALENDAR_SETTINGS_SHOW_MOVIES' | translate }}
+            </mat-slide-toggle>
+          </div>
+          <div mat-menu-item *ngIf="settingsService.getShowEvents()">
+            <mat-slide-toggle (change)="onShowEventsChange($event)" [(ngModel)]="showEvents" color="primary">
+              {{ 'CALENDAR_SETTINGS_SHOW_EVENTS' | translate }}
+            </mat-slide-toggle>
+          </div>
+          <div mat-menu-item>
+            <mat-slide-toggle (change)="onShowBirthdaysChange($event)" [(ngModel)]="showBirthdays" color="primary">
+              {{ 'CALENDAR_SETTINGS_SHOW_BIRTHDAYS' | translate }}
+            </mat-slide-toggle>
+          </div>
+        </mat-menu>
+      </div>
+    </div>
 
     <div class="row justify-content-around">
       <div class="col" style="text-align: center">
-        <button (viewDateChange)="closeOpenMonthViewDay()" [(viewDate)]="viewDate" [view]="view" mat-flat-button
-                mwlCalendarPreviousView>{{'CALENDAR_PREVIOUS' | translate}}</button>
+        <button (viewDateChange)="closeOpenMonthViewDay()" [(viewDate)]="viewDate" [view]="view" mat-flat-button mwlCalendarPreviousView>
+          {{ 'CALENDAR_PREVIOUS' | translate }}
+        </button>
 
-        <button [(viewDate)]="viewDate" color="primary" mat-flat-button
-                mwlCalendarToday>{{'CALENDAR_TODAY' | translate}}</button>
+        <button [(viewDate)]="viewDate" color="primary" mat-flat-button mwlCalendarToday>{{ 'CALENDAR_TODAY' | translate }}</button>
 
-        <button (viewDateChange)="closeOpenMonthViewDay()" [(viewDate)]="viewDate" [view]="view" mat-flat-button
-                mwlCalendarNextView>{{'CALENDAR_NEXT' | translate}}</button>
+        <button (viewDateChange)="closeOpenMonthViewDay()" [(viewDate)]="viewDate" [view]="view" mat-flat-button mwlCalendarNextView>
+          {{ 'CALENDAR_NEXT' | translate }}
+        </button>
       </div>
 
       <!--      <div class="col" style="text-align: center">-->
       <!--        <h3>{{ viewDate | calendarDate:(view + 'ViewTitle'):'de' }}</h3>-->
       <!--      </div>-->
       <div class="col" style="text-align: center">
+        <button mat-stroked-button routerLink="agenda">
+          {{ 'CALENDAR_AGENDA' | translate }}
+        </button>
         <button (click)="setView(CalendarView.Month)" [class.active]="view === CalendarView.Month" mat-stroked-button>
-          {{'CALENDAR_MONTH' | translate}}
+          {{ 'CALENDAR_MONTH' | translate }}
         </button>
         <button (click)="setView(CalendarView.Week)" [class.active]="view === CalendarView.Week" mat-stroked-button>
-          {{'CALENDAR_WEEK' | translate}}
+          {{ 'CALENDAR_WEEK' | translate }}
         </button>
         <button (click)="setView(CalendarView.Day)" [class.active]="view === CalendarView.Day" mat-stroked-button>
-          {{'CALENDAR_DAY' | translate}}
+          {{ 'CALENDAR_DAY' | translate }}
         </button>
       </div>
     </div>
 
-    <br/>
+    <br />
 
     <div [ngSwitch]="view">
       <mwl-calendar-month-view
@@ -66,6 +100,5 @@
       >
       </mwl-calendar-day-view>
     </div>
-
   </mat-card-content>
 </mat-card>

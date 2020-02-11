@@ -15,12 +15,13 @@ export class MyUserService {
   public usernameChange: Subject<string> = new Subject<string>();
   public phoneNumberChange: Subject<PhoneNumber[]> = new Subject<PhoneNumber[]>();
   public permissionsChange: Subject<string[]> = new Subject<string[]>();
+  public emailAddressesChange: Subject<string[]> = new Subject<string[]>();
   private _ID: number;
   private _title: string;
   private _firstname: string;
   private _surname: string;
   private _username: string;
-  private _emailAddresses: string[];
+  private _emailAddresses: string[] = [];
   private _streetname: string;
   private _streetnumber: string;
   private _zipcode: number;
@@ -58,11 +59,12 @@ export class MyUserService {
         const localPhoneNumbersData = data.phone_numbers;
         for (let i = 0; i < localPhoneNumbersData.length; i++) {
           localPhoneNumbers.push(
-            new PhoneNumber(localPhoneNumbersData[i].id, localPhoneNumbersData[i].label, localPhoneNumbersData[i].number));
+            new PhoneNumber(localPhoneNumbersData[i].id, localPhoneNumbersData[i].label, localPhoneNumbersData[i].number)
+          );
         }
         this.setPhoneNumbers(localPhoneNumbers);
       },
-      (error) => console.log(error)
+      error => console.log(error)
     );
   }
 
@@ -82,21 +84,21 @@ export class MyUserService {
     const dateformat = [year, month, day].join('-');
 
     const userObject = {
-      'title': this.getTitle(),
-      'firstname': this.getFirstname(),
-      'surname': this.getSurname(),
-      'streetname': this.getStreetname(),
-      'streetnumber': this.getStreetnumber(),
-      'zipcode': this.getZipcode(),
-      'location': this.getLocation(),
-      'birthday': dateformat
+      title: this.getTitle(),
+      firstname: this.getFirstname(),
+      surname: this.getSurname(),
+      streetname: this.getStreetname(),
+      streetnumber: this.getStreetnumber(),
+      zipcode: this.getZipcode(),
+      location: this.getLocation(),
+      birthday: dateformat
     };
 
     this.httpService.loggedInV1PUTRequest('/user/myself', userObject, 'updateMyself').subscribe(
       (data: any) => {
         console.log(data);
       },
-      (error) => console.log(error)
+      error => console.log(error)
     );
   }
 
@@ -193,11 +195,12 @@ export class MyUserService {
 
   public setEmailAddresses(emailAddresses: string[]) {
     this._emailAddresses = emailAddresses;
+    this.emailAddressesChange.next(this._emailAddresses.slice());
   }
 
   public setEmailAddressesPerRequest(emailAddresses: string[]) {
     const request = {
-      'email_addresses': this._emailAddresses
+      email_addresses: this._emailAddresses
     };
     return this.httpService.loggedInV1POSTRequest('/user/myself/changeEmailAddresses', request, 'updateEmailAddresses');
   }
@@ -237,7 +240,7 @@ export class MyUserService {
 
   hasPermission(permission: string) {
     if (this.getPermissions() === null) {
-      return true;
+      return false;
     }
 
     for (let i = 0; i < this.getPermissions().length; i++) {
