@@ -5,7 +5,6 @@ import {DateAdapter} from '@angular/material';
 import {MAT_DATE_FORMATS} from '@angular/material/core';
 
 import {ChartsModule} from 'ng2-charts';
-import {CustomFormsModule} from 'ng2-validation';
 
 import {NgxMatSelectSearchModule} from 'ngx-mat-select-search';
 import {MaterialModule} from '../../material-module';
@@ -28,7 +27,6 @@ import {EventUserManagementComponent} from './events-administration/event-user-m
 import {EventCardComponent} from './events-view/event-card/event-card.component';
 import {EventsVoteForDecisionAdditionalInformationModalComponent} from './events-view/events-vote-for-decision-modal/events-vote-for-decision-additional-information-modal/events-vote-for-decision-additional-information-modal.component';
 import {EventsVoteForDecisionModalComponent} from './events-view/events-vote-for-decision-modal/events-vote-for-decision-modal.component';
-import {EventsViewComponent} from './events-view/events-view.component';
 
 @NgModule({
   declarations: [
@@ -59,7 +57,6 @@ import {EventsViewComponent} from './events-view/events-view.component';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    CustomFormsModule,
     MaterialModule,
     TranslationModule,
     ChartsModule,

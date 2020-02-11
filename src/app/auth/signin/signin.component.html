@@ -1,51 +1,62 @@
 <div id="signin-container">
   <div class="container">
     <div class="row">
-      <mat-card class="col-10 col-sm-10 col-md-8 col-lg-6 offset-1 offset-sm-1 offset-md-2 offset-lg-3"
-                id="signin-card">
+      <mat-card class="col-10 col-sm-10 col-md-8 col-lg-6 offset-1 offset-sm-1 offset-md-2 offset-lg-3" id="signin-card">
         <mat-card-title-group>
           <mat-card-title>
             <div class="projectName">
-              {{communityName}}
+              {{ communityName }}
             </div>
           </mat-card-title>
 
-          <mat-card-title>
-            DatePoll | {{ 'SIGNIN' | translate }}
-          </mat-card-title>
+          <mat-card-title> DatePoll | {{ 'SIGNIN' | translate }} </mat-card-title>
         </mat-card-title-group>
 
         <form #f="ngForm" (ngSubmit)="onSignin(f)" *ngIf="state === 'login'">
           <mat-card-content>
             <mat-card *ngIf="loginSuccess" class="error-mat-card row" matRipple>
-              <mat-card-content class="last-child">{{'SIGNIN_SUCCESSFUL' | translate}}</mat-card-content>
+              <mat-card-content class="last-child">{{ 'SIGNIN_SUCCESSFUL' | translate }}</mat-card-content>
             </mat-card>
 
             <div class="row">
               <mat-form-field class="col-12">
-                <input id="username" matInput
-                       maxlength="190" minlength="3" name="username"
-                       ngModel placeholder="{{'SIGNIN_USERNAME' | translate}}" required
-                       type="text">
+                <input
+                  id="username"
+                  matInput
+                  maxlength="190"
+                  minlength="3"
+                  name="username"
+                  ngModel
+                  placeholder="{{ 'SIGNIN_USERNAME' | translate }}"
+                  required
+                  type="text"
+                />
                 <mat-icon matSuffix>account_circle</mat-icon>
               </mat-form-field>
             </div>
 
             <div class="row">
               <mat-form-field class="col-12">
-                <input id="password" matInput #passwordModel="ngModel"
-                       minlength="5" name="password" ngModel
-                       placeholder="{{'SIGNIN_PASSWORD' | translate}}" required
-                       type="password">
+                <input
+                  id="password"
+                  matInput
+                  #passwordModel="ngModel"
+                  minlength="5"
+                  name="password"
+                  ngModel
+                  placeholder="{{ 'SIGNIN_PASSWORD' | translate }}"
+                  required
+                  type="password"
+                />
                 <mat-error *ngIf="passwordModel.invalid">
-                  {{'SIGNIN_PASSWORD_REQUIREMENTS' | translate}}
+                  {{ 'SIGNIN_PASSWORD_REQUIREMENTS' | translate }}
                 </mat-error>
               </mat-form-field>
             </div>
             <div class="row" *ngIf="loginFail">
               <div class="col-12">
                 <mat-hint>
-                  <strong style="color: red">{{'SIGNIN_USERNAME_OR_PASSWORD_INCORRECT' | translate}}</strong>
+                  <strong style="color: red">{{ 'SIGNIN_USERNAME_OR_PASSWORD_INCORRECT' | translate }}</strong>
                 </mat-hint>
               </div>
             </div>
@@ -54,66 +65,87 @@
           <mat-card-actions style="margin-top: 10px;">
             <div class="row justify-content-between">
               <div class="col-12 col-sm-12 col-md-12 col-lg-5 col-xl-4">
-                <button *ngIf="!showLoadingSpinnerDuringLogin" [disabled]="!f.valid"
-                        style="width: 100%; margin-bottom: 15px;" color="primary" mat-raised-button type="submit">
+                <button
+                  *ngIf="!showLoadingSpinnerDuringLogin"
+                  [disabled]="!f.valid"
+                  style="width: 100%; margin-bottom: 15px;"
+                  color="primary"
+                  mat-raised-button
+                  type="submit"
+                >
                   {{ 'SIGNIN' | translate }}
                   <mat-icon aria-label="Example icon-button with a heart icon">send</mat-icon>
                 </button>
               </div>
 
               <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-5">
-                <a *ngIf="!showLoadingSpinnerDuringLogin" color="accent" mat-raised-button
-                   style="float: right; width: 100%" routerLink="/auth/forgotPassword">
+                <a
+                  *ngIf="!showLoadingSpinnerDuringLogin"
+                  color="accent"
+                  mat-raised-button
+                  style="float: right; width: 100%"
+                  routerLink="/auth/forgotPassword"
+                >
                   Password vergessen?
                   <mat-icon>verified_user</mat-icon>
                 </a>
               </div>
             </div>
 
-            <mat-progress-bar *ngIf="showLoadingSpinnerDuringLogin" class="col-12" style="margin-bottom: 15px;"
-                              mode="indeterminate"></mat-progress-bar>
+            <mat-progress-bar
+              *ngIf="showLoadingSpinnerDuringLogin"
+              class="col-12"
+              style="margin-bottom: 15px;"
+              mode="indeterminate"
+            ></mat-progress-bar>
           </mat-card-actions>
         </form>
 
         <!-- Change password after sign in-->
         <form #f="ngForm" (ngSubmit)="onChangePasswordAfterSignin(f)" *ngIf="state === 'changePassword'">
-
           <mat-card class="success-mat-card" matRipple>
             <mat-card-content class="last-child">
-              {{'SIGNIN_YOU_NEED_TO_CHANGE_PASSWORD' | translate}}
+              {{ 'SIGNIN_YOU_NEED_TO_CHANGE_PASSWORD' | translate }}
             </mat-card-content>
           </mat-card>
-
 
           <mat-card-content>
             <div class="row">
               <mat-form-field class="col-12">
-                <input #passwordModel="ngModel" matInput minlength="5"
-                       name="password" ngModel
-                       placeholder="{{'SIGNIN_NEW_PASSWORD' | translate}}" required
-                       type="password">
+                <input
+                  #passwordModel="ngModel"
+                  matInput
+                  minlength="5"
+                  name="password"
+                  ngModel
+                  placeholder="{{ 'SIGNIN_NEW_PASSWORD' | translate }}"
+                  required
+                  type="password"
+                />
               </mat-form-field>
             </div>
 
             <div class="row">
               <mat-form-field class="col-12">
-                <input #passwordRepeatModel="ngModel" [equalTo]="passwordModel" matInput minlength="5"
-                       name="password_repeat" ngModel
-                       placeholder="{{'SIGNIN_NEW_PASSWORD_REPEAT' | translate}}" required
-                       type="password">
+                <input
+                  #passwordRepeatModel="ngModel"
+                  matInput
+                  minlength="5"
+                  name="password_repeat"
+                  ngModel
+                  placeholder="{{ 'SIGNIN_NEW_PASSWORD_REPEAT' | translate }}"
+                  required
+                  type="password"
+                />
               </mat-form-field>
               <mat-error *ngIf="passwordRepeatModel.errors?.equalTo" class="col-12">
-                {{'SIGNIN_PASSWORD_ARE_NOT_EQUAL' | translate}}
+                {{ 'SIGNIN_PASSWORD_ARE_NOT_EQUAL' | translate }}
               </mat-error>
             </div>
           </mat-card-content>
 
           <mat-card-actions>
-            <button
-              [disabled]="!f.valid"
-              color="primary"
-              mat-raised-button
-              type="submit">
+            <button [disabled]="!f.valid" color="primary" mat-raised-button type="submit">
               {{ 'SIGNIN_AND_CHANGE_PASSWORD' | translate }}
               <mat-icon aria-label="Submit icon">send</mat-icon>
             </button>
@@ -123,19 +155,16 @@
         <div *ngIf="state === 'notActivated'">
           <mat-card class="error-mat-card" matRipple>
             <mat-card-content class="last-child">
-              <h3>{{'SIGNIN_ACCOUNT_NOT_ACTIVATED' | translate}}</h3>
+              <h3>{{ 'SIGNIN_ACCOUNT_NOT_ACTIVATED' | translate }}</h3>
             </mat-card-content>
           </mat-card>
 
           <mat-card-actions>
-            <button
-              (click)="state = 'login'"
-              color="primary" mat-flat-button>
+            <button (click)="state = 'login'" color="primary" mat-flat-button>
               {{ 'NEXT' | translate }}
             </button>
           </mat-card-actions>
         </div>
-
       </mat-card>
     </div>
   </div>

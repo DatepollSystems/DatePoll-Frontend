@@ -13,12 +13,11 @@ import {GroupUserRoleUpdateModalComponent} from './group-user-role-update-modal/
   styleUrls: ['./group-user-list-modal.component.css']
 })
 export class GroupUserListModalComponent implements OnDestroy {
-
   displayedColumns: string[] = ['role', 'firstname', 'surname', 'actions'];
   filterValue: string = null;
 
-  @ViewChild(MatSort, {static: false}) sort: MatSort;
-  @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
   public group: any;
   dataSource: MatTableDataSource<any>;
   public groupName = '';
@@ -26,14 +25,11 @@ export class GroupUserListModalComponent implements OnDestroy {
   private readonly groupID: number;
   private groupSubscription: Subscription;
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any,
-              private dialog: MatDialog,
-              private groupsService: GroupsService) {
-
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any, private dialog: MatDialog, private groupsService: GroupsService) {
     this.groupID = data.groupID;
     this.group = this.groupsService.getGroup(this.groupID);
     this.refreshTable();
-    this.groupSubscription = this.groupsService.groupChange.subscribe((value) => {
+    this.groupSubscription = this.groupsService.groupChange.subscribe(value => {
       this.group = value;
       this.refreshTable();
     });
@@ -79,8 +75,7 @@ export class GroupUserListModalComponent implements OnDestroy {
         this.groupsService.fetchGroup(this.groupID);
         this.sendingRequest = false;
       },
-      (error) => console.log(error)
+      error => console.log(error)
     );
   }
-
 }

@@ -1,5 +1,7 @@
 import {Component, ViewChild} from '@angular/core';
 import {HttpService} from '../../../services/http.service';
+import {NotificationsService} from 'angular2-notifications';
+import {TranslateService} from '../../../translation/translate.service';
 
 @Component({
   selector: 'app-password',
@@ -7,7 +9,6 @@ import {HttpService} from '../../../services/http.service';
   styleUrls: ['./password.component.css']
 })
 export class PasswordComponent {
-
   @ViewChild('stepper', {static: true}) stepper;
 
   showCheckingOldPasswordSpinner = false;
@@ -18,15 +19,14 @@ export class PasswordComponent {
   newPasswordRepeat = '';
   showChangingPasswordSpinner = false;
 
-  constructor(private httpService: HttpService) {
-  }
+  constructor(private httpService: HttpService, private notificationsService: NotificationsService, private translate: TranslateService) {}
 
   checkOldPassword() {
     this.showOldPasswordIncorrectCard = false;
     this.showCheckingOldPasswordSpinner = true;
 
     const body = {
-      'password': this.oldPassword
+      password: this.oldPassword
     };
 
     this.httpService.loggedInV1POSTRequest('/user/myself/changePassword/checkOldPassword', body, 'checkOldPassword').subscribe(
@@ -35,7 +35,7 @@ export class PasswordComponent {
         console.log('checkOldPasswort | Password is correct');
         this.nextStep();
       },
-      (error) => {
+      error => {
         console.log(error);
         console.log('checkOldPasswort | Password is incorrect');
         this.showOldPasswordIncorrectCard = true;
@@ -45,11 +45,19 @@ export class PasswordComponent {
   }
 
   changePassword() {
+    if (this.newPassword !== this.newPasswordRepeat) {
+      this.notificationsService.info(
+        null,
+        this.translate.getTranslationFor('SETTINGS_SECURITY_MODAL_CHANGE_PASSWORD_NEW_PASSWORDS_ARE_NOT_EQUAL')
+      );
+      return;
+    }
+
     this.showChangingPasswordSpinner = true;
 
     const body = {
-      'old_password': this.oldPassword,
-      'new_password': this.newPassword
+      old_password: this.oldPassword,
+      new_password: this.newPassword
     };
 
     this.httpService.loggedInV1POSTRequest('/user/myself/changePassword/changePassword', body, 'changePassword').subscribe(
@@ -58,7 +66,7 @@ export class PasswordComponent {
         console.log('changePassword | Changed successful');
         this.nextStep();
       },
-      (error) => {
+      error => {
         console.log(error);
         console.log('changePassword | Password is incorrect');
       }
@@ -70,5 +78,4 @@ export class PasswordComponent {
   nextStep() {
     this.stepper.selectedIndex++;
   }
-
 }
