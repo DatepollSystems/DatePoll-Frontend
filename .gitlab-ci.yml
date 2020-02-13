@@ -19,7 +19,9 @@ deploy:
     - cd dist/
     - ls
     - zip -r DatePoll-Frontend-dev.zip ./DatePoll-Frontend
-    - eval $(ssh-agent -s)
-    - ssh-add <(echo “$SSH_PRIVATE_KEY”)
+    - echo "“$SSH_PRIVATE_KEY”" | tr -d '\r' > ~/.ssh/id_rsa
+    - chmod 600 ~/.ssh/id_rsa
+    - eval "$(ssh-agent -s)"
+    - ssh-add ~/.ssh/id_rsa
     - echo -e “Host *\n\tStrictHostKeyChecking no\n\n” > ~/.ssh/config
     - scp -P $SSH_PORT ./DatePoll-Frontend-dev.zip $SSH_USERNAME@$SSH_HOST:/var/www/share/DatePoll-Frontend-Releases/
