@@ -19,8 +19,8 @@ deploy:
     - cd dist/
     - ls
     - zip -r DatePoll-Frontend-dev.zip ./DatePoll-Frontend
-    - mkdir ~/-ssh
-    - touch ~/-ssh/id_rsa
+    - mkdir ~/.ssh
+    - touch ~/.ssh/id_rsa
     - echo "“$SSH_PRIVATE_KEY”" | tr -d '\r' > ~/.ssh/id_rsa
     - chmod 600 ~/.ssh/id_rsa
     - eval "$(ssh-agent -s)"
