@@ -1,0 +1,26 @@
+image: trion/ng-cli-karma
+
+cache:
+  paths:
+    - node_modules/
+
+before_script:
+  - apt-get update -qq && apt-get install -y -qq zip
+
+deploy:
+  stage: deploy
+  environment: Staging
+  only:
+    - development
+  script:
+    - rm ./package-lock.json
+    - npm install
+    - ./node_modules/@angular/cli/bin/ng build --progress false --prod
+    - cd dist/
+    - ls
+    - zip ./DatePoll-Frontend
+    - mv DatePoll-Frontend.zip DatePoll-Frontend-dev.zip
+    - eval $(ssh-agent -s)
+    - ssh-add <(echo “$SSH_PRIVATE_KEY”)
+    - echo -e “Host *\n\tStrictHostKeyChecking no\n\n” > ~/.ssh/config
+    - scp -P $SSH_PORT ./DatePoll-Frontend-dev.zip $SSH_USERNAME@$SSH_HOST:/var/www/share/DatePoll-Frontend-Releases/
