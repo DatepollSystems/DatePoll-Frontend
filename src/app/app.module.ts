@@ -30,6 +30,7 @@ import {SessionsService} from './home/settings/sessions/sessions.service';
 import {HomepageService} from './home/start/homepage.service';
 import {ExcelService} from './services/excel.service';
 import {HttpService} from './services/http.service';
+import {IsMobileService} from './services/is-mobile.service';
 import {TranslateService} from './translation/translate.service';
 
 import {AuthInterceptor} from './auth/auth-interceptor';
@@ -86,6 +87,7 @@ registerLocaleData(localeDe);
     EventsUserService,
     HomepageService,
     CookieService,
+    IsMobileService,
     {
       provide: APP_INITIALIZER,
       useFactory: setupTranslateFactory,
