@@ -15,6 +15,7 @@ import {Permissions} from '../../../../permissions';
 import {PhoneNumber} from '../../../phoneNumber.model';
 import {User} from '../user.model';
 import {UserPerformanceBadge} from '../userPerformanceBadge.model';
+import {TranslateService} from '../../../../translation/translate.service';
 
 @Component({
   selector: 'app-user-update-modal',
@@ -70,8 +71,9 @@ export class UserUpdateModalComponent implements OnDestroy {
     private groupsService: GroupsService,
     private usersService: UsersService,
     private performanceBadgesService: PerformanceBadgesService,
-    private notificationsService: NotificationsService) {
-
+    private translate: TranslateService,
+    private notificationsService: NotificationsService
+  ) {
     this.user = data.user;
     this.title = this.user.title;
     this.username = this.user.username;
@@ -92,11 +94,11 @@ export class UserUpdateModalComponent implements OnDestroy {
 
     this.joined = this.usersService.getJoinedOfUser(this.user.id);
     this.joinedCopy = this.joined.slice();
-    this.joinedSubscription = this.usersService.joinedGroupsChange.subscribe((value) => {
+    this.joinedSubscription = this.usersService.joinedGroupsChange.subscribe(value => {
       this.joined = value;
       this.joinedCopy = this.joined.slice();
 
-      setTimeout(function () {
+      setTimeout(function() {
         // Check if elements are not null because if the user close the modal before the timeout, there will be thrown an error
         if (document.getElementById('joined-list') != null && document.getElementById('free-list') != null) {
           document.getElementById('joined-list').style.height = document.getElementById('free-list').clientHeight.toString() + 'px';
@@ -108,11 +110,11 @@ export class UserUpdateModalComponent implements OnDestroy {
 
     this.free = this.usersService.getFreeOfUser(this.user.id);
     this.freeCopy = this.free.slice();
-    this.freeSubscription = this.usersService.freeGroupsChange.subscribe((value) => {
+    this.freeSubscription = this.usersService.freeGroupsChange.subscribe(value => {
       this.free = value;
       this.freeCopy = this.free.slice();
 
-      setTimeout(function () {
+      setTimeout(function() {
         // Check if elements are not null because if the user close the modal before the timeout, there will be thrown an error
         if (document.getElementById('joined-list') != null && document.getElementById('free-list') != null) {
           document.getElementById('free-list').style.height = document.getElementById('joined-list').clientHeight.toString() + 'px';
@@ -129,7 +131,7 @@ export class UserUpdateModalComponent implements OnDestroy {
         this.userPerformanceBadgeCount = this.userPerformanceBadges[i].id + 1;
       }
     }
-    this.userPerformanceBadgesSubscription = this.performanceBadgesService.userPerformanceBadgesChange.subscribe((value) => {
+    this.userPerformanceBadgesSubscription = this.performanceBadgesService.userPerformanceBadgesChange.subscribe(value => {
       this.userPerformanceBadges = value;
       this.userPerformanceBadgesCopy = this.userPerformanceBadges.slice();
       for (let i = 0; i < this.userPerformanceBadges.length; i++) {
@@ -155,13 +157,20 @@ export class UserUpdateModalComponent implements OnDestroy {
 
   changePassword(form: NgForm) {
     const password = form.controls.password.value;
+    const passwordRepeat = form.controls.password_repeat.value;
+
+    if (password !== passwordRepeat) {
+      this.notificationsService.info(null, this.translate.getTranslationFor('SIGNIN_PASSWORD_ARE_NOT_EQUAL'));
+      return;
+    }
+
     form.reset();
     this.usersService.changePasswordForUser(this.user.id, password).subscribe(
       (response: any) => {
         console.log(response);
         this.notificationsService.html(this.successfullyChangedPassword, NotificationType.Success, null, 'success');
       },
-      (error) => console.log(error)
+      error => console.log(error)
     );
   }
 
@@ -171,13 +180,13 @@ export class UserUpdateModalComponent implements OnDestroy {
       if (this.usernames[i] === usernameModel.viewModel) {
         if (usernameModel.viewModel !== this.usernameCopy) {
           console.log('in | ' + this.usernames[i] + ' | ' + usernameModel.viewModel);
-          usernameModel.control.setErrors({'alreadyTaken': true});
+          usernameModel.control.setErrors({alreadyTaken: true});
           break;
         }
       }
     }
     if (usernameModel.viewModel.length === 0) {
-      usernameModel.control.setErrors({'null': true});
+      usernameModel.control.setErrors({null: true});
     }
   }
 
@@ -244,28 +253,28 @@ export class UserUpdateModalComponent implements OnDestroy {
 
     for (let i = 0; i < this.phoneNumbers.length; i++) {
       const phoneNumberObject = {
-        'label': this.phoneNumbers[i].label,
-        'number': this.phoneNumbers[i].phoneNumber
+        label: this.phoneNumbers[i].label,
+        number: this.phoneNumbers[i].phoneNumber
       };
       phoneNumbersObject.push(phoneNumberObject);
     }
 
     const userObject = {
-      'title': title,
-      'username': username,
-      'firstname': firstname,
-      'surname': surname,
-      'birthday': birthdayformatted,
-      'join_date': join_dateformatted,
-      'streetname': streetname,
-      'streetnumber': streetnumber,
-      'zipcode': zipcode,
-      'location': location,
-      'activated': activated,
-      'activity': activity,
-      'email_addresses': this.emailAddresses,
-      'phone_numbers': phoneNumbersObject,
-      'permissions': this.permissions
+      title: title,
+      username: username,
+      firstname: firstname,
+      surname: surname,
+      birthday: birthdayformatted,
+      join_date: join_dateformatted,
+      streetname: streetname,
+      streetnumber: streetnumber,
+      zipcode: zipcode,
+      location: location,
+      activated: activated,
+      activity: activity,
+      email_addresses: this.emailAddresses,
+      phone_numbers: phoneNumbersObject,
+      permissions: this.permissions
     };
     console.log(userObject);
 
@@ -276,7 +285,7 @@ export class UserUpdateModalComponent implements OnDestroy {
         this.usersService.fetchUsers();
         this.notificationsService.html(this.successfullyUpdatedUser, NotificationType.Success, null, 'success');
       },
-      (error) => {
+      error => {
         console.log(error);
         this.usersService.fetchUsers();
       }
@@ -292,18 +301,20 @@ export class UserUpdateModalComponent implements OnDestroy {
         const userPerformanceBadgeCopy = this.userPerformanceBadgesCopy[j];
         if (userPerformanceBadge.id === userPerformanceBadgeCopy.id) {
           toUpdate = false;
-          console.log('performanceBadges | toAdd | false | ' + userPerformanceBadge.performanceBadgeName + ' | '
-            + userPerformanceBadge.instrumentName);
+          console.log(
+            'performanceBadges | toAdd | false | ' + userPerformanceBadge.performanceBadgeName + ' | ' + userPerformanceBadge.instrumentName
+          );
           break;
         }
       }
 
       if (toUpdate) {
-        console.log('performanceBadges | toAdd | true | ' + userPerformanceBadge.performanceBadgeName + ' | '
-          + userPerformanceBadge.instrumentName);
+        console.log(
+          'performanceBadges | toAdd | true | ' + userPerformanceBadge.performanceBadgeName + ' | ' + userPerformanceBadge.instrumentName
+        );
         this.performanceBadgesService.addUserHasPerformanceBadgeWithInstrument(this.user.id, userPerformanceBadge).subscribe(
           (data: any) => console.log(data),
-          (error) => console.log(error)
+          error => console.log(error)
         );
       }
     }
@@ -317,18 +328,26 @@ export class UserUpdateModalComponent implements OnDestroy {
         const userPerformanceBadge = this.userPerformanceBadges[j];
         if (userPerformanceBadgeCopy.id === userPerformanceBadge.id) {
           toDelete = false;
-          console.log('performanceBadges | toDelete | false | ' + userPerformanceBadge.performanceBadgeName + ' | '
-            + userPerformanceBadge.instrumentName);
+          console.log(
+            'performanceBadges | toDelete | false | ' +
+              userPerformanceBadge.performanceBadgeName +
+              ' | ' +
+              userPerformanceBadge.instrumentName
+          );
           break;
         }
       }
 
       if (toDelete) {
-        console.log('performanceBadges | toDelete | true | ' + userPerformanceBadgeCopy.performanceBadgeName + ' | '
-          + userPerformanceBadgeCopy.instrumentName);
+        console.log(
+          'performanceBadges | toDelete | true | ' +
+            userPerformanceBadgeCopy.performanceBadgeName +
+            ' | ' +
+            userPerformanceBadgeCopy.instrumentName
+        );
         this.performanceBadgesService.removeUserHasPerformanceBadgeWithInstrument(userPerformanceBadgeCopy.id).subscribe(
           (data: any) => console.log(data),
-          (error) => console.log(error)
+          error => console.log(error)
         );
       }
     }
@@ -357,14 +376,14 @@ export class UserUpdateModalComponent implements OnDestroy {
             (data: any) => {
               console.log(data);
             },
-            (error) => console.log(error)
+            error => console.log(error)
           );
         } else {
           this.groupsService.addUserToSubgroup(this.user.id, group.id).subscribe(
             (data: any) => {
               console.log(data);
             },
-            (error) => console.log(error)
+            error => console.log(error)
           );
         }
       }
@@ -393,14 +412,14 @@ export class UserUpdateModalComponent implements OnDestroy {
             (data: any) => {
               console.log(data);
             },
-            (error) => console.log(error)
+            error => console.log(error)
           );
         } else {
           this.groupsService.removeUserFromSubgroup(this.user.id, group.id).subscribe(
             (data: any) => {
               console.log(data);
             },
-            (error) => console.log(error)
+            error => console.log(error)
           );
         }
       }
