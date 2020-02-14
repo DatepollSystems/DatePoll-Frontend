@@ -1,8 +1,9 @@
 import {Component, Input, OnDestroy} from '@angular/core';
+import {Subscription} from 'rxjs';
+
+import {EventsService} from '../../events.service';
 import {Decision} from '../../models/decision.model';
 import {EventResultUser} from '../../models/event-result-user.model';
-import {EventsService} from '../../events.service';
-import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-result-user-bar-chart',
@@ -20,6 +21,8 @@ export class ResultUserBarChartComponent implements OnDestroy {
   inAccordion = false;
 
   resultBarElements: any[] = null;
+
+  public minOneVoting = false;
 
   colors = ['#2196F3', '#FF9800', '#FFEB3B', '#00BCD4', '#F44336', '#009688', '#4CAF50', '#673AB7', '#CDDC39', '#607D8B', '#E91E63'];
 
@@ -62,6 +65,7 @@ export class ResultUserBarChartComponent implements OnDestroy {
         if (resultUser.decisionId === object.id) {
           object.count += 1;
           votedUsersCount++;
+          this.minOneVoting = true;
           break;
         }
       }
@@ -88,10 +92,10 @@ export class ResultUserBarChartComponent implements OnDestroy {
 
       resultBarElements.push({
         name: object.name,
-        percent: percent,
-        percentWidth: percentWidth,
+        percent,
+        percentWidth,
         count: object.count,
-        color: color
+        color
       });
     }
     this.resultBarElements = resultBarElements;
