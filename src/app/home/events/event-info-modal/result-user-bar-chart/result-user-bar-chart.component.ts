@@ -21,24 +21,12 @@ export class ResultUserBarChartComponent implements OnDestroy {
 
   resultBarElements: any[] = null;
 
-  colors = [
-    '#2196F3',
-    '#FF9800',
-    '#FFEB3B',
-    '#00BCD4',
-    '#F44336',
-    '#009688',
-    '#4CAF50',
-    '#673AB7',
-    '#CDDC39',
-    '#607D8B',
-    '#E91E63'
-  ];
+  colors = ['#2196F3', '#FF9800', '#FFEB3B', '#00BCD4', '#F44336', '#009688', '#4CAF50', '#673AB7', '#CDDC39', '#607D8B', '#E91E63'];
 
   private eventSubscription: Subscription;
 
   constructor(private eventsService: EventsService) {
-    this.eventSubscription = this.eventsService.eventChange.subscribe((value) => {
+    this.eventSubscription = this.eventsService.eventChange.subscribe(value => {
       setTimeout(() => {
         this.calculateResultBarElements();
       }, 1000);
@@ -61,9 +49,9 @@ export class ResultUserBarChartComponent implements OnDestroy {
 
     for (const decision of this.decisions) {
       const object = {
-        'id': decision.id,
-        'name': decision.decision,
-        'count': 0
+        id: decision.id,
+        name: decision.decision,
+        count: 0
       };
       objects.push(object);
     }
@@ -83,28 +71,29 @@ export class ResultUserBarChartComponent implements OnDestroy {
 
     let counter = 0;
     for (const object of objects) {
-      if (object.count > 0) {
-        const percent = Math.round((object.count / votedUsersCount) * 100);
+      let percent = Math.round((object.count / votedUsersCount) * 100);
 
-        const percentWidth = Math.round((object.count / votedUsersCount) * 95);
+      const percentWidth = Math.round((object.count / votedUsersCount) * 95);
 
-        if (counter >= 9) {
-          counter = 0;
-        }
-
-        const color = this.colors[counter];
-        counter++;
-
-        resultBarElements.push({
-          'name': object.name,
-          'percent': percent,
-          'percentWidth': percentWidth,
-          'count': object.count,
-          'color': color
-        });
+      if (counter >= 9) {
+        counter = 0;
       }
+
+      const color = this.colors[counter];
+      counter++;
+
+      if (percent.toString().includes('NaN')) {
+        percent = 0;
+      }
+
+      resultBarElements.push({
+        name: object.name,
+        percent: percent,
+        percentWidth: percentWidth,
+        count: object.count,
+        color: color
+      });
     }
     this.resultBarElements = resultBarElements;
   }
-
 }
