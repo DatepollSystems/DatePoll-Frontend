@@ -27,7 +27,9 @@ export class TranslateService {
       console.log('Language changed to ' + lang);
     }
 
-    this.cookieService.set('language', lang, new Date('Tue, 24-Jan-2050 12:12:12 GMT'));
+    if (!this.cookieService.check('language')) {
+      this.cookieService.set('language', lang, new Date('Tue, 24-Jan-2050 12:12:12 GMT'));
+    }
 
     return new Promise<{}>((resolve, reject) => {
       const langPath = `assets/i18n/${lang || 'de'}.json`;

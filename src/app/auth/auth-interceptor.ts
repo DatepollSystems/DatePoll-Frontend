@@ -1,5 +1,5 @@
-import {Injectable} from '@angular/core';
 import {HttpClient, HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpParams, HttpRequest} from '@angular/common/http';
+import {Injectable} from '@angular/core';
 import {BehaviorSubject, Observable, throwError} from 'rxjs';
 import {catchError, filter, switchMap, take} from 'rxjs/operators';
 
@@ -7,9 +7,7 @@ import {AuthService} from './auth.service';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
-
-  constructor(private http: HttpClient, private authService: AuthService) {
-  }
+  constructor(private http: HttpClient, private authService: AuthService) {}
 
   private isRefreshing = false;
   private refreshTokenSubject: BehaviorSubject<any> = new BehaviorSubject<any>(null);
@@ -36,7 +34,6 @@ export class AuthInterceptor implements HttpInterceptor {
     if (!toIntercept) {
       return next.handle(req);
     } else if (toIntercept) {
-
       if (this.authService.isJWTTokenValid()) {
         req = this.addToken(req, this.authService.getJWTToken());
       }
@@ -66,6 +63,16 @@ export class AuthInterceptor implements HttpInterceptor {
   }
 
   private handle401Error(request: HttpRequest<any>, next: HttpHandler) {
+    /* When a session token was cancelled and this users decides to logout he gets an error and can't logout. This checks the url,
+     * clear the cookies and reloads the site. If the Angular app now checks isAuthenticated in the auth guard the
+     * app will route to signin.
+     */
+    if (request.url.includes('/logoutCurrentSession')) {
+      this.authService.clearCookies();
+
+      window.location.reload();
+    }
+
     if (!this.isRefreshing) {
       this.isRefreshing = true;
       this.refreshTokenSubject.next(null);
@@ -79,7 +86,6 @@ export class AuthInterceptor implements HttpInterceptor {
           return next.handle(this.addToken(request, data.token));
         })
       );
-
     } else {
       return this.refreshTokenSubject.pipe(
         filter(token => token != null),
