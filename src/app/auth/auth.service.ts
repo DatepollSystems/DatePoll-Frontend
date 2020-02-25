@@ -88,7 +88,7 @@ export class AuthService {
 
   public setJWTToken(jwtToken: string) {
     if (this.isCookieEnabled()) {
-      this.cookieService.set('token', jwtToken, this.dateIn80Years);
+      this.cookieService.set('token', jwtToken, this.dateIn80Years, '/home');
     }
     this.jwtToken = jwtToken;
     this.jwtTokenExpires = new Date();
@@ -120,7 +120,7 @@ export class AuthService {
 
   public setSessionToken(sessionToken: string) {
     if (this.isCookieEnabled()) {
-      this.cookieService.set('sessionToken', sessionToken, this.dateIn80Years);
+      this.cookieService.set('sessionToken', sessionToken, this.dateIn80Years, '/home');
     }
     this.sessionToken = sessionToken;
   }

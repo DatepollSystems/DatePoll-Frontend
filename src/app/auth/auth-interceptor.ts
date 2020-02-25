@@ -43,7 +43,6 @@ export class AuthInterceptor implements HttpInterceptor {
           if (error instanceof HttpErrorResponse && error.status === 401) {
             return this.handle401Error(req, next);
           } else {
-            // this.authService.logout();
             return throwError('authService | An error occured during jwt token refreshing... probably session token deleted!' + error);
           }
         })
@@ -84,6 +83,12 @@ export class AuthInterceptor implements HttpInterceptor {
           this.isRefreshing = false;
           this.refreshTokenSubject.next(data.token);
           return next.handle(this.addToken(request, data.token));
+        }),
+        catchError(error => {
+          this.authService.clearCookies();
+          window.location.reload();
+
+          return next.handle(this.addToken(request, 'null'));
         })
       );
     } else {
