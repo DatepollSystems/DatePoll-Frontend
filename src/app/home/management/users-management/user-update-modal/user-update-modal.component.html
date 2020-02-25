@@ -262,20 +262,23 @@
             <input
               #passwordModel="ngModel"
               matInput
-              minlength="5"
+              minlength="6"
               name="password"
               ngModel
               placeholder="{{ 'SIGNIN_NEW_PASSWORD' | translate }}"
               required
               type="password"
             />
+            <mat-error *ngIf="passwordModel.invalid">
+              {{ 'SIGNIN_PASSWORD_REQUIREMENTS' | translate }}
+            </mat-error>
           </mat-form-field>
 
           <mat-form-field class="col-11 col-md-3 col-lg-4">
             <input
               #passwordRepeatModel="ngModel"
               matInput
-              minlength="5"
+              minlength="6"
               name="password_repeat"
               ngModel
               placeholder="{{ 'SIGNIN_NEW_PASSWORD_REPEAT' | translate }}"
