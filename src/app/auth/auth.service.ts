@@ -96,7 +96,6 @@ export class AuthService {
   }
 
   public getJWTToken(): string {
-    console.log(this.cookieService.get('token'));
     if (this.isCookieEnabled() && this.jwtToken == null) {
       if (this.cookieService.check('token') && this.cookieService.get('token') !== 'null') {
         this.jwtToken = this.cookieService.get('token');

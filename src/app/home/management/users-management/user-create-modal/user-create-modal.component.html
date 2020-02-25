@@ -89,12 +89,13 @@
       </mat-form-field>
 
       <!-- Birthday -->
-      <mat-form-field class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 datepicker-field">
+      <mat-form-field class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
         <input
           [(ngModel)]="birthday"
           [matDatepicker]="picker_birthday"
           id="datepicker-birthday"
           matInput
+          required
           name="datepicker-birthday"
           placeholder="{{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_BIRTHDAY' | translate }}"
         />
@@ -102,44 +103,19 @@
         <mat-datepicker #picker_birthday></mat-datepicker>
       </mat-form-field>
 
-      <mat-form-field class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 datepicker-field-mobile">
-        <input
-          [(ngModel)]="birthday"
-          [matDatepicker]="picker_mobile_birthday"
-          id="datepicker-birthday-mobile"
-          matInput
-          name="datepicker-birthday-mobile"
-          placeholder="{{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_BIRTHDAY' | translate }}"
-        />
-        <mat-datepicker-toggle [for]="picker_mobile_birthday" matSuffix></mat-datepicker-toggle>
-        <mat-datepicker #picker_mobile_birthday touchUi></mat-datepicker>
-      </mat-form-field>
-
       <!-- Join date -->
-      <mat-form-field class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 datepicker-field">
+      <mat-form-field class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
         <input
           [(ngModel)]="join_date"
           [matDatepicker]="picker_joindate"
           id="datepicker-join_date"
           matInput
+          required
           name="datepicker-join_date"
           placeholder="{{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_JOIN_DATE' | translate }}"
         />
         <mat-datepicker-toggle [for]="picker_joindate" matSuffix></mat-datepicker-toggle>
         <mat-datepicker #picker_joindate></mat-datepicker>
-      </mat-form-field>
-
-      <mat-form-field class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 datepicker-field-mobile">
-        <input
-          [(ngModel)]="join_date"
-          [matDatepicker]="picker_mobile_joindate"
-          id="datepicker-join_date-mobile"
-          matInput
-          name="datepicker-join_date-mobile"
-          placeholder="{{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_JOIN_DATE' | translate }}"
-        />
-        <mat-datepicker-toggle [for]="picker_mobile_joindate" matSuffix></mat-datepicker-toggle>
-        <mat-datepicker #picker_mobile_joindate touchUi></mat-datepicker>
       </mat-form-field>
 
       <!-- Streetname -->

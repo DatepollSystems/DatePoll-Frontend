@@ -61,7 +61,7 @@
     </div>
 
     <div class="row">
-      <mat-form-field class="col-12 " id="datepicker-field">
+      <mat-form-field class="col-12 ">
         <input
           [(ngModel)]="birthday"
           [matDatepicker]="picker"
@@ -73,19 +73,6 @@
         />
         <mat-datepicker-toggle [for]="picker" matSuffix></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
-      </mat-form-field>
-
-      <mat-form-field class="col-12" id="datepicker-field-mobile">
-        <input
-          [(ngModel)]="birthday"
-          [matDatepicker]="picker_mobile"
-          id="datepicker-mobile"
-          matInput
-          name="datepicker-mobile"
-          placeholder="{{ 'SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_BIRTHDAY' | translate }}"
-        />
-        <mat-datepicker-toggle [for]="picker_mobile" matSuffix></mat-datepicker-toggle>
-        <mat-datepicker #picker_mobile touchUi></mat-datepicker>
       </mat-form-field>
     </div>
 
