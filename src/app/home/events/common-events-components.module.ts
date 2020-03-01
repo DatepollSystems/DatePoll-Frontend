@@ -4,8 +4,6 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {DateAdapter} from '@angular/material';
 import {MAT_DATE_FORMATS} from '@angular/material/core';
 
-import {ChartsModule} from 'ng2-charts';
-
 import {NgxMatSelectSearchModule} from 'ngx-mat-select-search';
 import {MaterialModule} from '../../material-module';
 import {CommonComponentsModule} from '../../services/common-components.module';
@@ -59,7 +57,6 @@ import {EventsVoteForDecisionModalComponent} from './events-view/events-vote-for
     ReactiveFormsModule,
     MaterialModule,
     TranslationModule,
-    ChartsModule,
     NgxMatSelectSearchModule,
     CommonComponentsModule
   ],
