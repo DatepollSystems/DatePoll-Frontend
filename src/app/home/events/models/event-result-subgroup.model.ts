@@ -6,9 +6,7 @@ export class EventResultSubgroup {
   public name: string;
   public parentGroupName: string;
   public event: Event;
-  public chartIsEmpty = true;
   private resultUsers: EventResultUser[] = [];
-  private chartData: any[] = null;
 
   constructor(id: number, name: string, parentGroupName: string) {
     this.id = id;
@@ -22,40 +20,5 @@ export class EventResultSubgroup {
 
   public getResultUsers(): EventResultUser[] {
     return this.resultUsers.slice();
-  }
-
-  public getChartData(): any[] {
-    if (this.chartData == null) {
-      this.calculateChartData();
-    }
-
-    return this.chartData;
-  }
-
-  private calculateChartData() {
-    const data = [];
-    for (let i = 0; i < this.event.getDecisions().length; i++) {
-      const object = {
-        'id': this.event.getDecisions()[i].id,
-        'value': 0
-      };
-      data.push(object);
-    }
-
-    for (let i = 0; i < this.resultUsers.length; i++) {
-      for (let j = 0; j < data.length; j++) {
-        if (data[j].id === this.resultUsers[i].decisionId) {
-          data[j].value++;
-          this.chartIsEmpty = false;
-          break;
-        }
-      }
-    }
-    const toReturn = [];
-
-    for (let i = 0; i < data.length; i++) {
-      toReturn.push(data[i].value);
-    }
-    this.chartData = toReturn;
   }
 }

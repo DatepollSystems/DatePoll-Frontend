@@ -2,16 +2,13 @@ import {Component, Inject, OnDestroy, ViewChild} from '@angular/core';
 import {MAT_DIALOG_DATA} from '@angular/material';
 import {Subscription} from 'rxjs';
 
-import {ChartOptions, ChartType} from 'chart.js';
-import {Label, monkeyPatchChartJsLegend, monkeyPatchChartJsTooltip, SingleDataSet} from 'ng2-charts';
-
-import {EventsService} from '../events.service';
 import {Permissions} from '../../../permissions';
 import {MyUserService} from '../../my-user.service';
+import {EventsService} from '../events.service';
 
-import {Event} from '../models/event.model';
-import {EventResultGroup} from '../models/event-result-group.model';
 import {EventDate} from '../models/event-date.model';
+import {EventResultGroup} from '../models/event-result-group.model';
+import {Event} from '../models/event.model';
 
 @Component({
   selector: 'app-event-info-modal',
@@ -40,15 +37,6 @@ export class EventInfoModalComponent implements OnDestroy {
   public EVENTS_ADMINISTRATION_PERMISSION = Permissions.EVENTS_ADMINISTRATION;
   public ROOT_PERMISSION = Permissions.ROOT_ADMINISTRATION;
 
-  public pieChartOptions: ChartOptions = {
-    responsive: true
-  };
-  public pieChartType: ChartType = 'pie';
-  public pieChartLegend = true;
-  public pieChartLabels: Label[];
-  public pieChartData: SingleDataSet;
-  public pieChartIsEmpty: boolean;
-
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, private eventsService: EventsService, myUserService: MyUserService) {
     this.myUserService = myUserService;
 
@@ -76,11 +64,6 @@ export class EventInfoModalComponent implements OnDestroy {
     this.dates = this.event.getEventDates();
     this.resultGroups = this.event.getResultGroups();
     this.sortedResultGroups = this.resultGroups.slice();
-    this.pieChartLabels = this.event.getDecisionsAsStrings();
-    this.pieChartData = [...this.event.getChartData()];
-    this.pieChartIsEmpty = this.event.chartIsEmpty;
-    monkeyPatchChartJsTooltip();
-    monkeyPatchChartJsLegend();
   }
 
   applyFilter(filterValue: string) {
