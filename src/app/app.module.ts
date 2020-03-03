@@ -14,8 +14,6 @@ import {FooterModule} from './footer/footer.module';
 import {CommonEventsComponentsModule} from './home/events/common-events-components.module';
 import {TranslationModule} from './translation/translation.module';
 
-import {CookieService} from 'ngx-cookie-service';
-
 import {NoSanitizePipe} from './no-sanitize.pipe';
 
 import {AuthGuard} from './auth/auth-guard.service';
@@ -86,7 +84,6 @@ registerLocaleData(localeDe);
     EventsService,
     EventsUserService,
     HomepageService,
-    CookieService,
     IsMobileService,
     {
       provide: APP_INITIALIZER,

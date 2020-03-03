@@ -42,7 +42,6 @@
     "ng-animate": "^0.3.4",
     "ngx-clipboard": "^12.3.0",
     "ngx-color": "^5.0.1",
-    "ngx-cookie-service": "^2.3.0",
     "ngx-mat-select-search": "^1.8.0",
     "rxjs": "6.5.3",
     "tslib": "^1.10.0",

@@ -1,13 +1,11 @@
 import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 
-import {CookieService} from 'ngx-cookie-service';
-
 @Injectable()
 export class TranslateService {
   data: any = {};
 
-  constructor(private http: HttpClient, private cookieService: CookieService) {}
+  constructor(private http: HttpClient) {}
 
   public getTranslationFor(key: string) {
     return this.data[key] || key;
@@ -15,20 +13,20 @@ export class TranslateService {
 
   use(lang: string): Promise<{}> {
     if (lang === 'DEFAULT') {
-      if (!this.cookieService.check('language')) {
-        this.cookieService.set('language', 'de', new Date('Tue, 24-Jan-2050 12:12:12 GMT'));
+      if (localStorage.getItem('language') == null) {
+        localStorage.setItem('language', 'de');
         lang = 'de';
         console.log('No language cookie found! Using de as default');
       } else {
-        lang = this.cookieService.get('language');
+        lang = localStorage.getItem('language');
         console.log('Language cookie found! Using ' + lang);
       }
     } else {
       console.log('Language changed to ' + lang);
     }
 
-    if (!this.cookieService.check('language')) {
-      this.cookieService.set('language', lang, new Date('Tue, 24-Jan-2050 12:12:12 GMT'));
+    if (localStorage.getItem('language') == null) {
+      localStorage.setItem('language', lang);
     }
 
     return new Promise<{}>((resolve, reject) => {

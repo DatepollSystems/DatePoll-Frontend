@@ -2,8 +2,6 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {tap} from 'rxjs/operators';
 
-import {CookieService} from 'ngx-cookie-service';
-
 import {environment} from '../../environments/environment';
 import {Browser} from '../services/browser';
 
@@ -17,15 +15,11 @@ export class AuthService {
   private jwtToken: string;
   jwtTokenExpires: Date;
 
-  private dateIn80Years: Date = new Date();
-
   httpHeaders = new HttpHeaders().set('Content-Type', 'application/json');
 
-  constructor(private cookieService: CookieService, private http: HttpClient) {
+  constructor(private http: HttpClient) {
     this.jwtTokenExpires = new Date();
     this.jwtTokenExpires.setMinutes(this.jwtTokenExpires.getMinutes() + 50);
-
-    this.dateIn80Years.setFullYear(this.dateIn80Years.getFullYear() + 80);
   }
 
   public trySignin(username: string, password: string) {
@@ -68,7 +62,7 @@ export class AuthService {
   public clearCookies() {
     this.setSessionToken(null);
     this.setJWTToken(null);
-    this.cookieService.deleteAll('/');
+    localStorage.clear();
   }
 
   public refreshJWTToken() {
@@ -87,40 +81,28 @@ export class AuthService {
   }
 
   public setJWTToken(jwtToken: string) {
-    if (this.isCookieEnabled()) {
-      this.cookieService.set('token', jwtToken, this.dateIn80Years, '/home');
-    }
+    localStorage.setItem('token', jwtToken);
     this.jwtToken = jwtToken;
     this.jwtTokenExpires = new Date();
     this.jwtTokenExpires.setMinutes(this.jwtTokenExpires.getMinutes() + 50);
   }
 
   public getJWTToken(): string {
-    if (this.isCookieEnabled() && this.jwtToken == null) {
-      if (this.cookieService.check('token') && this.cookieService.get('token') !== 'null') {
-        this.jwtToken = this.cookieService.get('token');
-      } else {
-        this.jwtToken = null;
-      }
+    if (this.jwtToken == null) {
+      this.jwtToken = localStorage.getItem('token');
     }
     return this.jwtToken;
   }
 
   getSessionToken(): string {
-    if (this.isCookieEnabled() && this.sessionToken == null) {
-      if (this.cookieService.check('sessionToken') && this.cookieService.get('token') !== 'null') {
-        this.sessionToken = this.cookieService.get('sessionToken');
-      } else {
-        this.sessionToken = null;
-      }
+    if (this.sessionToken == null) {
+      this.sessionToken = localStorage.getItem('sessionToken');
     }
     return this.sessionToken;
   }
 
   public setSessionToken(sessionToken: string) {
-    if (this.isCookieEnabled()) {
-      this.cookieService.set('sessionToken', sessionToken, this.dateIn80Years, '/home');
-    }
+    localStorage.setItem('sessionToken', sessionToken);
     this.sessionToken = sessionToken;
   }
 
@@ -159,16 +141,5 @@ export class AuthService {
     };
 
     return this.http.post(this.apiUrl + '/auth/changePasswordAfterSignin', changePasswordAfterSigninObject, {headers});
-  }
-
-  private isCookieEnabled(): boolean {
-    let cookieEnabled = navigator.cookieEnabled;
-
-    if (typeof navigator.cookieEnabled === 'undefined' && !cookieEnabled) {
-      document.cookie = 'testcookie';
-      cookieEnabled = document.cookie.indexOf('testcookie') !== -1;
-    }
-
-    return cookieEnabled;
   }
 }
