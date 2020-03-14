@@ -1,7 +1,11 @@
 <h1 mat-dialog-title>{{ 'EVENTS_STANDARD_DECISIONS_MANAGEMENT' | translate }}</h1>
 <div mat-dialog-content>
   <form #addStandardDecisionForm="ngForm" (ngSubmit)="addStandardDecision(addStandardDecisionForm)" class="row justify-content-around">
-    <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4">
+    <div class="col-12 col-sm-12 col-md-2 col-lg-2">
+      <app-color-picker (colorChange)="changeColor($event)"></app-color-picker>
+    </div>
+
+    <div class="col-12 col-sm-12 col-md-4 col-lg-4">
       <mat-form-field>
         <input
           #decisionModel="ngModel"
@@ -20,12 +24,12 @@
         </mat-error>
       </mat-form-field>
     </div>
-    <div class="col-6 col-sm-6 col-md-6 col-lg-3 col-xl-3" style="margin-top: 15px;">
+    <div class="col-6 col-sm-6 col-md-3 col-lg-3" style="margin-top: 15px;">
       <mat-slide-toggle (change)="showInCalendarChange($event)" [checked]="showInCalendar">
         {{ 'EVENTS_STANDARD_DECISIONS_MANAGEMENT_ADD_STANDARD_DECISION_SHOW_IN_CALENDAR' | translate }}
       </mat-slide-toggle>
     </div>
-    <div class="col-6 col-sm-6 col-md-3 col-lg-3 col-xl-3" style="margin-top: 15px;">
+    <div class="col-6 col-sm-6 col-md-3 col-lg-3" style="margin-top: 15px;">
       <button
         [disabled]="!addStandardDecisionForm.valid"
         class="success-button"
@@ -42,6 +46,7 @@
   <div class="row">
     <mat-list class="col-12">
       <mat-list-item *ngFor="let standardDecision of standardDecisions">
+        <div matListAvatar [style.background-color]="standardDecision.color"></div>
         <span matLine>{{ standardDecision.decision }}</span>
         <span matLine
           >{{ 'EVENTS_STANDARD_DECISIONS_MANAGEMENT_ADD_STANDARD_DECISION_SHOW_IN_CALENDAR' | translate }} :
@@ -67,10 +72,6 @@
   <button [mat-dialog-close] mat-button>{{ 'CLOSE' | translate }}</button>
 </div>
 
-<ng-template #successfullyAddedStandardDecision>
-  <h2>{{ 'EVENTS_STANDARD_DECISIONS_MANAGEMENT_SUCCESSFULLY_ADDED' | translate }}</h2>
-</ng-template>
-
 <ng-template #successfullyRemovedStandardDecision>
-  <h2>{{ 'EVENTS_STANDARD_DECISIONS_MANAGEMENT_SUCCESSFULLY_REMOVED' | translate }}</h2>
+  <h2>{{ '' | translate }}</h2>
 </ng-template>

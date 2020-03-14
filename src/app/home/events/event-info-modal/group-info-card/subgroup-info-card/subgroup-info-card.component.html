@@ -35,9 +35,7 @@
 <mat-card *ngIf="resultSubgroup?.event?.anonymous">
   <mat-card-header>
     <mat-card-title style="font-size: 17px">{{ resultSubgroup.name }}</mat-card-title>
-    <mat-card-subtitle *ngIf="resultSubgroup.getResultUsers().length === 0">
-      {{ 'EVENTS_ADMINISTRATION_INFO_EVENT_NOBODY_VOTED_IN_SUBGROUP' | translate }}</mat-card-subtitle
-    >
+    <mat-card-subtitle *ngIf="resultSubgroup.getResultUsers().length === 0"> {{ 'NO_DATA' | translate }}</mat-card-subtitle>
   </mat-card-header>
   <mat-card-content>
     <app-result-user-bar-chart

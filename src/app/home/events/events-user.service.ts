@@ -34,12 +34,10 @@ export class EventsUserService {
 
         const events = [];
         const fetchedEvents = data.events;
-        for (let i = 0; i < fetchedEvents.length; i++) {
-          const fetchedEvent = fetchedEvents[i];
-
+        for (const fetchedEvent of fetchedEvents) {
           const decisions = [];
           for (const fetchedDecision of fetchedEvent.decisions) {
-            decisions.push(new Decision(fetchedDecision.id, fetchedDecision.decision));
+            decisions.push(new Decision(fetchedDecision.id, fetchedDecision.decision, fetchedDecision.color));
           }
 
           const dates = [];
@@ -66,8 +64,11 @@ export class EventsUserService {
             dates
           );
           event.alreadyVotedFor = fetchedEvent.already_voted;
-          event.additionalInformation = fetchedEvent.additional_information;
-          event.userDecision = fetchedEvent.user_decision;
+          if (event.alreadyVotedFor) {
+            event.userDecision = fetchedEvent.user_decision.decision;
+            event.additionalInformation = fetchedEvent.user_decision.additional_information;
+            event.decisionColor = fetchedEvent.user_decision.color;
+          }
           events.push(event);
         }
 

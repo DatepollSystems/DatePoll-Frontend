@@ -43,12 +43,10 @@ export class EventsService {
 
         const events = [];
         const fetchedEvents = data.events;
-        for (let i = 0; i < fetchedEvents.length; i++) {
-          const fetchedEvent = fetchedEvents[i];
-
+        for (const fetchedEvent of fetchedEvents) {
           const decisions = [];
           for (const fetchedDecision of fetchedEvent.decisions) {
-            const decision = new Decision(fetchedDecision.id, fetchedDecision.decision);
+            const decision = new Decision(fetchedDecision.id, fetchedDecision.decision, fetchedDecision.color);
             decision.showInCalendar = fetchedDecision.show_in_calendar;
             decisions.push(decision);
           }
@@ -92,7 +90,8 @@ export class EventsService {
       decisions.push({
         id: -1,
         decision: decision.decision,
-        show_in_calendar: decision.showInCalendar
+        show_in_calendar: decision.showInCalendar,
+        color: decision.color
       });
     }
     const dates = [];
@@ -112,8 +111,8 @@ export class EventsService {
       endDate: Converter.getDateFormattedWithHoursMinutesAndSeconds(event.endDate),
       forEveryone: event.forEveryone,
       description: event.description,
-      decisions: decisions,
-      dates: dates
+      decisions,
+      dates
     };
 
     return this.httpService.loggedInV1POSTRequest('/avent/administration/avent', object, 'createEvent');
@@ -125,7 +124,8 @@ export class EventsService {
       decisions.push({
         id: decision.id,
         decision: decision.decision,
-        show_in_calendar: decision.showInCalendar
+        show_in_calendar: decision.showInCalendar,
+        color: decision.color
       });
     }
     const dates = [];
@@ -143,8 +143,8 @@ export class EventsService {
       name: event.name,
       forEveryone: event.forEveryone,
       description: event.description,
-      decisions: decisions,
-      dates: dates
+      decisions,
+      dates
     };
 
     return this.httpService.loggedInV1PUTRequest('/avent/administration/avent/' + event.id, object, 'updateEvent');
@@ -324,7 +324,7 @@ export class EventsService {
 
         const decisions = [];
         for (const fetchedDecision of response.decisions) {
-          const decision = new Decision(fetchedDecision.id, fetchedDecision.decision);
+          const decision = new Decision(fetchedDecision.id, fetchedDecision.decision, fetchedDecision.color);
           decision.showInCalendar = fetchedDecision.show_in_calendar;
           decisions.push(decision);
         }
@@ -422,7 +422,6 @@ export class EventsService {
             }
 
             resultSubgroup.setResultUsers(resultUsers);
-            resultSubgroup.getChartData();
             resultSubgroups.push(resultSubgroup);
           }
 

@@ -5,28 +5,12 @@
 
 .barElement {
   text-align: center;
-  height: 30px;
+  height: 20px;
   color: black;
   float: left;
+  padding-bottom: 2px;
 }
 
 .row {
   padding-left: 5%;
-}
-
-.index {
-  margin-bottom: 5px;
-}
-
-.index-text {
-  float: left;
-  padding-top: 3px;
-}
-
-.index-colorblock {
-  width: 24px;
-  height: 24px;
-  float: left;
-  margin-right: 5px;
-  margin-left: 5px;
 }

@@ -1,8 +1,8 @@
-import { EventResultGroup } from './event-result-group.model';
-import { EventResultUser } from './event-result-user.model';
-import { EventAction } from 'calendar-utils';
-import { Decision } from './decision.model';
-import { EventDate } from './event-date.model';
+import {EventAction} from 'calendar-utils';
+import {Decision} from './decision.model';
+import {EventDate} from './event-date.model';
+import {EventResultGroup} from './event-result-group.model';
+import {EventResultUser} from './event-result-user.model';
 
 export class Event {
   public id: number;
@@ -16,6 +16,7 @@ export class Event {
   public alreadyVotedFor = false;
   public additionalInformation = null;
   public userDecision = null;
+  public decisionColor: string;
 
   public chartIsEmpty = true;
   // Calendar specific values
@@ -30,11 +31,10 @@ export class Event {
   };
   draggable: false;
   meta = null;
-  resizable: { beforeStart: false; afterEnd: false };
+  resizable: {beforeStart: false; afterEnd: false};
   private decisions: Decision[] = [];
   private resultGroups: EventResultGroup[] = [];
   private resultUsers: EventResultUser[] = [];
-  private chartData: any[] = null;
   public anonymous = false;
 
   private dates: EventDate[] = [];
@@ -105,42 +105,7 @@ export class Event {
     return this.resultUsers.slice();
   }
 
-  public getChartData(): any[] {
-    if (this.chartData == null) {
-      this.calculateChartData();
-    }
-
-    return this.chartData;
-  }
-
   private setDecisions(decisions: Decision[]) {
     this.decisions = decisions;
-  }
-
-  private calculateChartData() {
-    const data = [];
-    for (let i = 0; i < this.getDecisions().length; i++) {
-      const object = {
-        id: this.getDecisions()[i].id,
-        value: 0
-      };
-      data.push(object);
-    }
-
-    for (let i = 0; i < this.resultUsers.length; i++) {
-      for (let j = 0; j < data.length; j++) {
-        if (data[j].id === this.resultUsers[i].decisionId) {
-          data[j].value++;
-          this.chartIsEmpty = false;
-          break;
-        }
-      }
-    }
-    const toReturn = [];
-
-    for (let i = 0; i < data.length; i++) {
-      toReturn.push(data[i].value);
-    }
-    this.chartData = toReturn;
   }
 }
