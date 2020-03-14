@@ -7,12 +7,10 @@ import {HttpService} from '../../services/http.service';
   providedIn: 'root'
 })
 export class StandardDecisionsService {
-
   public standardDecisionsChange: Subject<EventStandardDecision[]> = new Subject<EventStandardDecision[]>();
   private _standardDecisions: EventStandardDecision[] = [];
 
-  constructor(private httpService: HttpService) {
-  }
+  constructor(private httpService: HttpService) {}
 
   public getStandardDecisions(): EventStandardDecision[] {
     this.fetchStandardDecisions();
@@ -29,21 +27,28 @@ export class StandardDecisionsService {
         for (let i = 0; i < response.standardDecisions.length; i++) {
           const localStandardDecision = response.standardDecisions[i];
 
-          standardDecisions.push(new EventStandardDecision(localStandardDecision.id, localStandardDecision.decision,
-            localStandardDecision.showInCalendar));
+          standardDecisions.push(
+            new EventStandardDecision(
+              localStandardDecision.id,
+              localStandardDecision.decision,
+              localStandardDecision.showInCalendar,
+              localStandardDecision.color
+            )
+          );
         }
 
         console.log(standardDecisions);
         this.setStandardDecisions(standardDecisions);
       },
-      (error) => console.log(error)
+      error => console.log(error)
     );
   }
 
-  public addStandardDecision(decision: string, showInCalendar: boolean) {
+  public addStandardDecision(decision: string, showInCalendar: boolean, color: string) {
     const dto = {
-      'decision': decision,
-      'showInCalendar': showInCalendar
+      decision: decision,
+      show_in_calendar: showInCalendar,
+      color: color
     };
     return this.httpService.loggedInV1POSTRequest('/avent/administration/standardDecision', dto, 'addStandardDecision');
   }

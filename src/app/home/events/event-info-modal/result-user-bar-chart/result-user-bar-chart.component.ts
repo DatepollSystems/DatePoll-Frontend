@@ -17,14 +17,7 @@ export class ResultUserBarChartComponent implements OnDestroy {
   @Input()
   resultUsers: EventResultUser[];
 
-  @Input()
-  inAccordion = false;
-
   resultBarElements: any[] = null;
-
-  public minOneVoting = false;
-
-  colors = ['#2196F3', '#FF9800', '#FFEB3B', '#00BCD4', '#F44336', '#009688', '#4CAF50', '#673AB7', '#CDDC39', '#607D8B', '#E91E63'];
 
   private eventSubscription: Subscription;
 
@@ -49,11 +42,13 @@ export class ResultUserBarChartComponent implements OnDestroy {
 
   calculateResultBarElements() {
     const objects = [];
+    let check = false;
 
     for (const decision of this.decisions) {
       const object = {
         id: decision.id,
         name: decision.decision,
+        color: decision.color,
         count: 0
       };
       objects.push(object);
@@ -65,7 +60,7 @@ export class ResultUserBarChartComponent implements OnDestroy {
         if (resultUser.decisionId === object.id) {
           object.count += 1;
           votedUsersCount++;
-          this.minOneVoting = true;
+          check = true;
           break;
         }
       }
@@ -73,18 +68,10 @@ export class ResultUserBarChartComponent implements OnDestroy {
 
     const resultBarElements = [];
 
-    let counter = 0;
     for (const object of objects) {
       let percent = Math.round((object.count / votedUsersCount) * 100);
 
       const percentWidth = Math.round((object.count / votedUsersCount) * 95);
-
-      if (counter >= 9) {
-        counter = 0;
-      }
-
-      const color = this.colors[counter];
-      counter++;
 
       if (percent.toString().includes('NaN')) {
         percent = 0;
@@ -95,9 +82,12 @@ export class ResultUserBarChartComponent implements OnDestroy {
         percent,
         percentWidth,
         count: object.count,
-        color
+        color: object.color
       });
     }
-    this.resultBarElements = resultBarElements;
+
+    if (check) {
+      this.resultBarElements = resultBarElements;
+    }
   }
 }

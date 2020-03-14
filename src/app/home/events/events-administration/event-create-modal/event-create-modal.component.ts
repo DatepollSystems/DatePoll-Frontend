@@ -5,15 +5,15 @@ import {Subscription} from 'rxjs';
 
 import {NotificationsService, NotificationType} from 'angular2-notifications';
 
-import {Group} from '../../../management/groups-management/models/group.model';
+import {TranslateService} from '../../../../translation/translate.service';
 import {GroupsService} from '../../../management/groups-management/groups.service';
+import {Group} from '../../../management/groups-management/models/group.model';
 import {EventsService} from '../../events.service';
 import {StandardDecisionsService} from '../../standardDecisions.service';
 
-import {Event} from '../../models/event.model';
 import {Decision} from '../../models/decision.model';
 import {EventDate} from '../../models/event-date.model';
-import {TranslateService} from '../../../../translation/translate.service';
+import {Event} from '../../models/event.model';
 
 @Component({
   selector: 'app-event-create-modal',
@@ -37,32 +37,37 @@ export class EventCreateModalComponent implements OnDestroy {
 
   dates: EventDate[] = [];
 
-  constructor(private groupsService: GroupsService,
-              private dialogRef: MatDialogRef<EventCreateModalComponent>,
-              private notificationsService: NotificationsService,
-              private standardDecisionsService: StandardDecisionsService,
-              private translate: TranslateService,
-              private eventsService: EventsService) {
-
+  constructor(
+    private groupsService: GroupsService,
+    private dialogRef: MatDialogRef<EventCreateModalComponent>,
+    private notificationsService: NotificationsService,
+    private standardDecisionsService: StandardDecisionsService,
+    private translate: TranslateService,
+    private eventsService: EventsService
+  ) {
     const standardDecisions = this.standardDecisionsService.getStandardDecisions();
-    for (let i = 0; i < standardDecisions.length; i++) {
-      const decision = new Decision(Math.random(), standardDecisions[i].decision);
-      decision.showInCalendar = standardDecisions[i].showInCalendar;
+    let i = -1;
+    for (const standardDecision of standardDecisions) {
+      const decision = new Decision(i, standardDecision.decision, standardDecision.color);
+      decision.showInCalendar = standardDecision.showInCalendar;
       this.decisions.push(decision);
+      i--;
     }
 
-    this.standardDecisionsSubscription = standardDecisionsService.standardDecisionsChange.subscribe((value) => {
+    this.standardDecisionsSubscription = standardDecisionsService.standardDecisionsChange.subscribe(value => {
       this.decisions = [];
-      for (let i = 0; i < value.length; i++) {
-        const decision = new Decision(Math.random(), value[i].decision);
-        decision.showInCalendar = value[i].showInCalendar;
+      let y = -1;
+      for (const decisionO of value) {
+        const decision = new Decision(y, decisionO.decision, decisionO.color);
+        decision.showInCalendar = decisionO.showInCalendar;
         this.decisions.push(decision);
+        y--;
       }
     });
 
     this.groups = this.groupsService.getGroups();
     this.remakeFreeAndJoinedList();
-    this.groupsSubscription = this.groupsService.groupsChange.subscribe((value) => {
+    this.groupsSubscription = this.groupsService.groupsChange.subscribe(value => {
       this.groups = value;
       this.remakeFreeAndJoinedList();
     });
@@ -81,9 +86,9 @@ export class EventCreateModalComponent implements OnDestroy {
       const group = this.groups[i];
 
       const groupObject = {
-        'id': group.id,
-        'name': group.name,
-        'type': 'parentgroup'
+        id: group.id,
+        name: group.name,
+        type: 'parentgroup'
       };
 
       this.free.push(groupObject);
@@ -92,18 +97,18 @@ export class EventCreateModalComponent implements OnDestroy {
         const subgroup = group.getSubgroups()[j];
 
         const subgroupObject = {
-          'id': subgroup.id,
-          'name': subgroup.name,
-          'type': 'subgroup',
-          'group_id': group.id,
-          'group_name': group.name
+          id: subgroup.id,
+          name: subgroup.name,
+          type: 'subgroup',
+          group_id: group.id,
+          group_name: group.name
         };
 
         this.free.push(subgroupObject);
       }
     }
 
-    setTimeout(function () {
+    setTimeout(function() {
       // Check if elements are not null because if the user close the modal before the timeout, there will be thrown an error
       if (document.getElementById('joined-list') != null && document.getElementById('free-list') != null) {
         document.getElementById('joined-list').style.height = document.getElementById('free-list').clientHeight.toString() + 'px';
@@ -140,7 +145,7 @@ export class EventCreateModalComponent implements OnDestroy {
     const name = form.controls.name.value;
     const description = form.controls.description.value;
 
-    const forEveryone = (this.joined.length === 0);
+    const forEveryone = this.joined.length === 0;
 
     const event = new Event(0, name, new Date(), new Date(), forEveryone, description, this.decisions, this.dates);
     console.log(event);
@@ -163,20 +168,20 @@ export class EventCreateModalComponent implements OnDestroy {
                 (sdata: any) => {
                   console.log(sdata);
                 },
-                (error) => console.log(error)
+                error => console.log(error)
               );
             } else {
               this.eventsService.addSubgroupToEvent(id, group.id).subscribe(
                 (sdata: any) => {
                   console.log(sdata);
                 },
-                (error) => console.log(error)
+                error => console.log(error)
               );
             }
           }
         }
       },
-      (error) => console.log(error)
+      error => console.log(error)
     );
   }
 }

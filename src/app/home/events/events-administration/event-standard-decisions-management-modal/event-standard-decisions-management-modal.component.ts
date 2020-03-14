@@ -1,9 +1,13 @@
-import {Component, OnDestroy, TemplateRef, ViewChild} from '@angular/core';
-import {EventStandardDecision} from '../../models/standardDecision.model';
-import {Subscription} from 'rxjs';
-import {StandardDecisionsService} from '../../standardDecisions.service';
+import {Component, OnDestroy} from '@angular/core';
 import {NgForm} from '@angular/forms';
+import {Subscription} from 'rxjs';
+
 import {NotificationsService, NotificationType} from 'angular2-notifications';
+
+import {TranslateService} from '../../../../translation/translate.service';
+import {StandardDecisionsService} from '../../standardDecisions.service';
+
+import {EventStandardDecision} from '../../models/standardDecision.model';
 
 @Component({
   selector: 'app-event-standard-decisions-management-modal',
@@ -11,17 +15,19 @@ import {NotificationsService, NotificationType} from 'angular2-notifications';
   styleUrls: ['./event-standard-decisions-management-modal.component.css']
 })
 export class EventStandardDecisionsManagementModalComponent implements OnDestroy {
-  @ViewChild('successfullyAddedStandardDecision', {static: true}) successfullyAddedStandardDecision: TemplateRef<any>;
-  @ViewChild('successfullyRemovedStandardDecision', {static: true}) successfullyRemovedStandardDecision: TemplateRef<any>;
-
   loadingStandardDecisions = true;
 
   standardDecisions: EventStandardDecision[];
   standardDecisionsSubscription: Subscription;
 
-  showInCalendar: boolean = false;
+  showInCalendar = false;
+  color: string;
 
-  constructor(private standardDecisionsService: StandardDecisionsService, private notificationsService: NotificationsService) {
+  constructor(
+    private standardDecisionsService: StandardDecisionsService,
+    private notificationsService: NotificationsService,
+    private translate: TranslateService
+  ) {
     this.standardDecisions = standardDecisionsService.getStandardDecisions();
 
     if (this.standardDecisions.length < 1) {
@@ -38,18 +44,33 @@ export class EventStandardDecisionsManagementModalComponent implements OnDestroy
     this.standardDecisionsSubscription.unsubscribe();
   }
 
+  changeColor(color: string) {
+    this.color = color;
+  }
+
   showInCalendarChange(e) {
     this.showInCalendar = e.checked;
   }
 
   addStandardDecision(form: NgForm) {
+    if (this.color == null) {
+      this.notificationsService.warn(
+        this.translate.getTranslationFor('WARNING'),
+        this.translate.getTranslationFor('EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_COLOR_REQUIRED')
+      );
+      return;
+    }
+
     const decision = form.controls.decision.value;
 
-    this.standardDecisionsService.addStandardDecision(decision, this.showInCalendar).subscribe(
+    this.standardDecisionsService.addStandardDecision(decision, this.showInCalendar, this.color).subscribe(
       (response: any) => {
         console.log(response);
         this.standardDecisionsService.fetchStandardDecisions();
-        this.notificationsService.html(this.successfullyAddedStandardDecision, NotificationType.Success, null, 'success');
+        this.notificationsService.success(
+          this.translate.getTranslationFor('SUCCESSFULLY'),
+          this.translate.getTranslationFor('EVENTS_STANDARD_DECISIONS_MANAGEMENT_SUCCESSFULLY_ADDED')
+        );
       },
       error => console.log(error)
     );
@@ -65,7 +86,10 @@ export class EventStandardDecisionsManagementModalComponent implements OnDestroy
       (response: any) => {
         console.log(response);
         this.standardDecisionsService.fetchStandardDecisions();
-        this.notificationsService.html(this.successfullyRemovedStandardDecision, NotificationType.Success, null, 'success');
+        this.notificationsService.success(
+          this.translate.getTranslationFor('SUCCESSFULLY'),
+          this.translate.getTranslationFor('EVENTS_STANDARD_DECISIONS_MANAGEMENT_SUCCESSFULLY_REMOVED')
+        );
       },
       error => console.log(error)
     );

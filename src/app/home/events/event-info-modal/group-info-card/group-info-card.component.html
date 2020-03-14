@@ -12,6 +12,16 @@
         [decisions]="resultGroup.event.getDecisions()"
       ></app-result-user-bar-chart>
 
+      <p
+        *ngIf="
+          resultGroup.getResultUsers().length == 0 &&
+          !this.myUserService.hasPermission(ROOT_PERMISSION) &&
+          !this.myUserService.hasPermission(EVENTS_ADMINISTRATION_PERMISSION)
+        "
+      >
+        {{ 'NO_DATA' | translate }}
+      </p>
+
       <mat-expansion-panel style="margin-top: 15px;" *ngIf="!resultGroup?.event?.anonymous && resultGroup.id !== -1">
         <mat-expansion-panel-header>
           <mat-panel-title> {{ 'EVENTS_ADMINISTRATION_INFO_EVENT_MEMBERS_IN' | translate }} {{ resultGroup.name }} </mat-panel-title>
@@ -38,11 +48,14 @@
         ></app-event-user-management>
       </mat-expansion-panel>
 
-      <div *ngIf="resultGroup.getResultSubgroups().length === 0" style="margin-top: 25px;">
-        {{ 'EVENTS_ADMINISTRATION_INFO_EVENT_NO_SUBGROUPS' | translate }}
-      </div>
-
-      <div *ngIf="resultGroup.getResultSubgroups().length !== 0" style="margin-top: 15px;">
+      <div
+        *ngIf="
+          resultGroup.getResultSubgroups().length !== 0 &&
+          (resultGroup.getResultUsers().length > 0 ||
+            this.myUserService.hasPermission(ROOT_PERMISSION) || this.myUserService.hasPermission(EVENTS_ADMINISTRATION_PERMISSION))
+        "
+        style="margin-top: 15px;"
+      >
         <h2 style="margin-bottom: 5px;" *ngIf="resultGroup.id !== -1">{{ 'EVENTS_ADMINISTRATION_INFO_EVENT_REGISTER' | translate }}</h2>
 
         <app-subgroup-info-card
