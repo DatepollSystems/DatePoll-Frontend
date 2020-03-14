@@ -59,6 +59,8 @@
   "SIGNIN_AND_CHANGE_PASSWORD": "Passwort ändern und anmelden",
   "SIGNIN_YOU_NEED_TO_CHANGE_PASSWORD": "Bitte ändere das Passwort nach der ersten Anmeldung!",
   "SIGNIN_PASSWORD_ARE_NOT_EQUAL": "Die Passwörter stimmen nicht überein",
+  "SIGNIN_GET_THE_APP": "Lade die dazugehörige App runter (Coming soon...)",
+  "SIGNIN_SCAN_ME": "Scan mich mit der DatePoll-App (Coming soon...)",
 
   "FORGOT_PASSWORD": "Setzte dein Passwort zurück",
   "FORGOT_PASSWORD_UNKOWN_USERNAME": "Für diesen Benutzernamen gibt es keinen DatePoll-Account",

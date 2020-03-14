@@ -74,7 +74,7 @@
                   type="submit"
                 >
                   {{ 'SIGNIN' | translate }}
-                  <mat-icon aria-label="Example icon-button with a heart icon">send</mat-icon>
+                  <mat-icon aria-label="Send icon">send</mat-icon>
                 </button>
               </div>
 
@@ -165,6 +165,42 @@
             </button>
           </mat-card-actions>
         </div>
+
+        <mat-expansion-panel style="margin-top: 15px;" class="mat-elevation-z3" [disabled]="true">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              {{ 'SIGNIN_GET_THE_APP' | translate }}
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+
+          <div class="row">
+            <div class="col">
+              <a href="https://f-droid.org" target="_blank" rel="noopener">
+                <img src="./../../../assets/signGetOnFDroid.png" alt="Get the DatePoll-App on F-Droid.org" style="width: 15vh;" />
+              </a>
+            </div>
+          </div>
+        </mat-expansion-panel>
+
+        <mat-expansion-panel style="margin-top: 15px;" [disabled]="true">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              {{ 'SIGNIN_SCAN_ME' | translate }}
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+
+          <div class="row">
+            <qrcode
+              [qrdata]="appUrl"
+              [margin]="1"
+              [width]="256"
+              [errorCorrectionLevel]="'M'"
+              [elementType]="'img'"
+              [allowEmptyString]="true"
+              style="margin: 0 auto;"
+            ></qrcode>
+          </div>
+        </mat-expansion-panel>
       </mat-card>
     </div>
   </div>

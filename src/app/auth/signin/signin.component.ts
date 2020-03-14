@@ -1,11 +1,11 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {NgForm} from '@angular/forms';
-import {Router} from '@angular/router';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import {Router} from '@angular/router';
 import {Subscription} from 'rxjs';
 
-import {AuthService} from '../auth.service';
 import {SettingsService} from '../../services/settings.service';
+import {AuthService} from '../auth.service';
 
 @Component({
   selector: 'app-signin',
@@ -15,6 +15,9 @@ import {SettingsService} from '../../services/settings.service';
 export class SigninComponent implements OnInit, OnDestroy {
   communityName: string;
   communityNameSubscription: Subscription;
+
+  appUrl: string;
+  appUrlSubscription: Subscription;
 
   state = 'login';
 
@@ -35,6 +38,11 @@ export class SigninComponent implements OnInit, OnDestroy {
     this.communityName = this.settingsService.getCommunityName();
     this.communityNameSubscription = this.settingsService.communityNameChange.subscribe(value => {
       this.communityName = value;
+    });
+
+    this.appUrl = this.settingsService.getAppUrl();
+    this.appUrlSubscription = this.settingsService.appUrlChange.subscribe(value => {
+      this.appUrl = value;
     });
   }
 
