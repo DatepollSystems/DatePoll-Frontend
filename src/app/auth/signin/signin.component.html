@@ -182,7 +182,7 @@
           </div>
         </mat-expansion-panel>
 
-        <mat-expansion-panel style="margin-top: 15px;" [disabled]="true">
+        <mat-expansion-panel style="margin-top: 15px;">
           <mat-expansion-panel-header>
             <mat-panel-title>
               {{ 'SIGNIN_SCAN_ME' | translate }}
@@ -191,6 +191,7 @@
 
           <div class="row">
             <qrcode
+              *ngIf="appUrl != null"
               [qrdata]="appUrl"
               [margin]="1"
               [width]="256"
@@ -199,6 +200,7 @@
               [allowEmptyString]="true"
               style="margin: 0 auto;"
             ></qrcode>
+            <p *ngIf="appUrl == null">{{ 'REQUEST_ERROR' | translate }}</p>
           </div>
         </mat-expansion-panel>
       </mat-card>

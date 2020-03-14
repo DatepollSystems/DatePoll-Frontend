@@ -6,6 +6,7 @@ import {Subscription} from 'rxjs';
 
 import {SettingsService} from '../../services/settings.service';
 import {AuthService} from '../auth.service';
+import {IsMobileService} from '../../services/is-mobile.service';
 
 @Component({
   selector: 'app-signin',
@@ -16,7 +17,7 @@ export class SigninComponent implements OnInit, OnDestroy {
   communityName: string;
   communityNameSubscription: Subscription;
 
-  appUrl: string;
+  appUrl: any = null;
   appUrlSubscription: Subscription;
 
   state = 'login';
@@ -40,9 +41,17 @@ export class SigninComponent implements OnInit, OnDestroy {
       this.communityName = value;
     });
 
-    this.appUrl = this.settingsService.getAppUrl();
+    let object = {
+      type: 'loginV1',
+      url: this.settingsService.getAppUrl()
+    };
+    this.appUrl = JSON.stringify(object);
     this.appUrlSubscription = this.settingsService.appUrlChange.subscribe(value => {
-      this.appUrl = value;
+      object = {
+        type: 'loginV1',
+        url: value
+      };
+      this.appUrl = JSON.stringify(object);
     });
   }
 
@@ -57,6 +66,7 @@ export class SigninComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.communityNameSubscription.unsubscribe();
+    this.appUrlSubscription.unsubscribe();
   }
 
   protected onSignin(form: NgForm) {
