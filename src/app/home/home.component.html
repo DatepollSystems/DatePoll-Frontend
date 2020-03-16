@@ -94,9 +94,15 @@
       </div>
 
       <mat-divider></mat-divider>
+      <a (click)="changeTheme()" mat-list-item>
+        <mat-icon>brightness_medium</mat-icon>
+        {{ 'NAV_CHANGE_THEME' | translate }}
+      </a>
+
+      <mat-divider></mat-divider>
       <a (click)="logout()" mat-list-item>
         <mat-icon>power_settings_new</mat-icon>
-        Logout
+        {{ 'NAV_LOGOUT' | translate }}
       </a>
     </mat-nav-list>
   </mat-sidenav>

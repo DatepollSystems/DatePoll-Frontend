@@ -4,9 +4,9 @@ import {Subscription} from 'rxjs';
 
 import {AuthService} from '../auth/auth.service';
 import {Permissions} from '../permissions';
+import {IsMobileService} from '../services/is-mobile.service';
 import {SettingsService} from '../services/settings.service';
 import {MyUserService} from './my-user.service';
-import {IsMobileService} from '../services/is-mobile.service';
 
 @Component({
   selector: 'app-home',
@@ -55,6 +55,8 @@ export class HomeComponent implements OnDestroy {
     private isMobileService: IsMobileService
   ) {
     this.myUserService = myUserService;
+
+    this.setTheme();
 
     if (!this.isMobileService.getIsMobile()) {
       this.navBarOpened = true;
@@ -121,5 +123,28 @@ export class HomeComponent implements OnDestroy {
 
   logout() {
     this.authService.logout();
+  }
+
+  changeTheme() {
+    if (localStorage.getItem('theme') == null) {
+      localStorage.setItem('theme', 'light');
+    }
+
+    const theme = localStorage.getItem('theme');
+    if (theme === 'light') {
+      localStorage.setItem('theme', 'dark');
+    } else {
+      localStorage.setItem('theme', 'light');
+    }
+    this.setTheme();
+  }
+
+  setTheme() {
+    const theme = localStorage.getItem('theme');
+    if (theme === 'light') {
+      document.getElementById('body').classList.remove('dark-theme');
+    } else {
+      document.getElementById('body').classList.add('dark-theme');
+    }
   }
 }

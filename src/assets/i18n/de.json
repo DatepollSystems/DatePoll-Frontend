@@ -87,6 +87,9 @@
   "NAV_MANAGEMENT_PERFORMANCE_BADGES": "Leistungsabzeichenverwaltung",
   "NAV_MANAGEMENT_DATEPOLL": "DatePoll-Verwaltung",
 
+  "NAV_CHANGE_THEME": "Theme ändern",
+  "NAV_LOGOUT": "Abmelden",
+
   "BROWSER_COMPATIBILITY_HEADER": "Herst Hawara! Dein Internet Browser ist veraltet und wird nicht mehr unterstützt!",
   "BROWSER_COMPATIBILITY_INFO_NEVER_COME_BACK": "Das Warnungsfenster wirst du nach dem Schließen nicht nocheinmal sehen. ",
   "BROWSER_COMPATIBILITY_CONTENT_1": "Dein Internet Browser bekommt seit 2016 keine Updates mehr... es ist mittlerweile ",
