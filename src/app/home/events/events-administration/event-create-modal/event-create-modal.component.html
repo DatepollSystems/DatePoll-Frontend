@@ -1,4 +1,4 @@
-<h1 mat-dialog-title>{{'EVENTS_ADMINISTRATION_CREATE_EVENT' | translate}}</h1>
+<h1 mat-dialog-title>{{ 'EVENTS_ADMINISTRATION_CREATE_EVENT' | translate }}</h1>
 <div mat-dialog-content>
   <form #form="ngForm" (ngSubmit)="create(form)">
     <div class="row">
@@ -10,28 +10,40 @@
     <!-- Name -->
     <div class="row">
       <mat-form-field class="col-12">
-        <input #nameModel="ngModel" id="name" matInput maxlength="190"
-               minlength="1" name="name"
-               ngModel placeholder="{{'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_NAME' | translate}}" required
-               type="text">
+        <input
+          #nameModel="ngModel"
+          id="name"
+          matInput
+          maxlength="190"
+          minlength="1"
+          name="name"
+          ngModel
+          placeholder="{{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_NAME' | translate }}"
+          required
+          type="text"
+        />
         <mat-error *ngIf="nameModel.invalid">
-          {{'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_NAME_INCORRECT' | translate}}
+          {{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_NAME_INCORRECT' | translate }}
         </mat-error>
       </mat-form-field>
     </div>
 
+    <!-- Dates -->
     <app-event-dates-management [dates]="dates" (datesChange)="onEventDatesChange($event)"></app-event-dates-management>
 
     <!-- Decisions -->
-    <app-event-decisions-list (decisionsChanged)="onDecisionsChange($event)"
-                              [decisions]="decisions"></app-event-decisions-list>
+    <app-event-decisions-list (decisionsChanged)="onDecisionsChange($event)" [decisions]="decisions"></app-event-decisions-list>
 
     <!-- Group management -->
-    <app-group-and-subgroup-select (freeChanged)="onFreeChange($event)" (joinedChanged)="onJoinedChange($event)"
-                                   [free]="free"
-                                   [joined]="joined" [parentGroupLock]="false">
+    <app-group-and-subgroup-select
+      (freeChanged)="onFreeChange($event)"
+      (joinedChanged)="onJoinedChange($event)"
+      [free]="free"
+      [joined]="joined"
+      [parentGroupLock]="false"
+    >
     </app-group-and-subgroup-select>
-    <small>{{'EVENTS_ADMINISTRATION_CREATE_EVENT_GROUPS_DESCRIPTION' | translate}}</small>
+    <small>{{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_GROUPS_DESCRIPTION' | translate }}</small>
 
     <!-- Description -->
     <div class="row" style="margin-bottom: 15px;">
@@ -39,7 +51,7 @@
         <mat-expansion-panel>
           <mat-expansion-panel-header>
             <mat-panel-title>
-              {{'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DESCRIPTION' | translate}}
+              {{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DESCRIPTION' | translate }}
             </mat-panel-title>
           </mat-expansion-panel-header>
 
@@ -52,11 +64,10 @@
   </form>
 </div>
 <div mat-dialog-actions style="margin-top: 15px">
-  <button [mat-dialog-close] mat-button>{{'CLOSE' | translate}}</button>
-  <button (click)="form.ngSubmit.emit()" [disabled]="!form.form.valid" class="success-button"
-          mat-button>{{'CREATE' | translate}}</button>
+  <button [mat-dialog-close] mat-button>{{ 'CLOSE' | translate }}</button>
+  <button (click)="form.ngSubmit.emit()" [disabled]="!form.form.valid" class="success-button" mat-button>{{ 'CREATE' | translate }}</button>
 </div>
 
 <ng-template #successfullyCreatedEvent>
-  <h2>{{'EVENTS_ADMINISTRATION_CREATE_EVENT_SUCCESSFULLY_CREATED' | translate}}</h2>
+  <h2>{{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_SUCCESSFULLY_CREATED' | translate }}</h2>
 </ng-template>

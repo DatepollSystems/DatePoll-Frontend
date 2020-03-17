@@ -1,27 +1,27 @@
 import {AfterViewInit, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {FormControl} from '@angular/forms';
+import {MatBottomSheet} from '@angular/material';
 import {MatDialog} from '@angular/material/dialog';
 import {MatSelect} from '@angular/material/select';
 import {MatSort} from '@angular/material/sort';
-import {MatBottomSheet} from '@angular/material';
 import {MatTableDataSource} from '@angular/material/table';
 import {Router} from '@angular/router';
 
 import {ReplaySubject, Subject, Subscription} from 'rxjs';
 import {take, takeUntil} from 'rxjs/operators';
 
+import {SettingsService} from '../../../services/settings.service';
+import {MyUserService} from '../../my-user.service';
+import {CinemaService} from '../cinema.service';
+
 import {Movie} from '../models/movie.model';
 import {Year} from '../models/year.model';
 
-import {CinemaService} from '../cinema.service';
-import {MyUserService} from '../../my-user.service';
-import {SettingsService} from '../../../services/settings.service';
-import {Permissions} from '../../../permissions';
-import {MovieEditModalComponent} from './movie-edit-modal/movie-edit-modal.component';
-import {MovieCreateModalComponent} from './movie-create-modal/movie-create-modal.component';
-import {MovieInfoModalComponent} from './movie-info-modal/movie-info-modal.component';
-import {MovieDeleteModalComponent} from './movie-delete-modal/movie-delete-modal.component';
 import {MovieBookingsModalComponent} from './movie-bookings-modal/movie-bookings-modal.component';
+import {MovieCreateModalComponent} from './movie-create-modal/movie-create-modal.component';
+import {MovieDeleteModalComponent} from './movie-delete-modal/movie-delete-modal.component';
+import {MovieEditModalComponent} from './movie-edit-modal/movie-edit-modal.component';
+import {MovieInfoModalComponent} from './movie-info-modal/movie-info-modal.component';
 
 @Component({
   selector: 'app-movie-administration',
@@ -54,7 +54,6 @@ export class MovieAdministrationComponent implements OnInit, AfterViewInit, OnDe
   private yearsSubscription: Subscription;
   private years: Year[];
   private selectedYear: Year = null;
-  private permissionSubscription: Subscription;
 
   constructor(
     private cinemaService: CinemaService,
@@ -62,19 +61,13 @@ export class MovieAdministrationComponent implements OnInit, AfterViewInit, OnDe
     private settingsService: SettingsService,
     private router: Router,
     private dialog: MatDialog,
-    private bottomSheet: MatBottomSheet) {
-
-    this.permissionSubscription = myUserService.permissionsChange.subscribe((value) => {
-      if (!this.myUserService.hasPermission(Permissions.CINEMA_MOVIE_ADMINISTRATION)) {
-        this.router.navigate(['/home']);
-      }
-    });
-
+    private bottomSheet: MatBottomSheet
+  ) {
     this.moviesLoaded = false;
 
     this.years = this.cinemaService.getYears();
     this.selectedYear = this.years[this.years.length - 1];
-    this.yearsSubscription = cinemaService.yearsChange.subscribe((value) => {
+    this.yearsSubscription = cinemaService.yearsChange.subscribe(value => {
       this.years = value;
       this.filteredYears.next(this.years.slice());
       this.yearCtrl.setValue(this.years[this.years.length - 1]);
@@ -91,7 +84,7 @@ export class MovieAdministrationComponent implements OnInit, AfterViewInit, OnDe
       this.moviesLoaded = true;
     }
 
-    this.moviesSubscription = cinemaService.moviesChange.subscribe((value) => {
+    this.moviesSubscription = cinemaService.moviesChange.subscribe(value => {
       this.moviesLoaded = true;
 
       this.movies = value;
@@ -102,9 +95,6 @@ export class MovieAdministrationComponent implements OnInit, AfterViewInit, OnDe
   ngOnInit() {
     this.settingsService.checkShowCinema();
 
-    if (!this.myUserService.hasPermission(Permissions.CINEMA_MOVIE_ADMINISTRATION)) {
-      this.router.navigate(['/home']);
-    }
     // this.dataSource.paginator = this.paginator;
 
     // set initial selection
@@ -114,11 +104,9 @@ export class MovieAdministrationComponent implements OnInit, AfterViewInit, OnDe
     this.filteredYears.next(this.years.slice());
 
     // listen for search field value changes
-    this.yearFilterCtrl.valueChanges
-      .pipe(takeUntil(this._onDestroy))
-      .subscribe(() => {
-        this.filterYears();
-      });
+    this.yearFilterCtrl.valueChanges.pipe(takeUntil(this._onDestroy)).subscribe(() => {
+      this.filterYears();
+    });
   }
 
   ngAfterViewInit() {
@@ -128,7 +116,6 @@ export class MovieAdministrationComponent implements OnInit, AfterViewInit, OnDe
   ngOnDestroy() {
     this.moviesSubscription.unsubscribe();
     this.yearsSubscription.unsubscribe();
-    this.permissionSubscription.unsubscribe();
     this._onDestroy.next();
     this._onDestroy.complete();
   }
@@ -192,27 +179,27 @@ export class MovieAdministrationComponent implements OnInit, AfterViewInit, OnDe
   onEdit(movie: Movie) {
     this.dialog.open(MovieEditModalComponent, {
       width: '80vh',
-      data: {movie: movie}
+      data: {movie}
     });
   }
 
   onBookings(movie: Movie) {
     this.dialog.open(MovieBookingsModalComponent, {
       width: '80vh',
-      data: {movie: movie}
+      data: {movie}
     });
   }
 
   onInfo(movie: Movie) {
     this.dialog.open(MovieInfoModalComponent, {
       width: '80vh',
-      data: {movie: movie}
+      data: {movie}
     });
   }
 
   deleteMovie(id: number) {
     this.bottomSheet.open(MovieDeleteModalComponent, {
-      'data': {'movieID': id}
+      data: {movieID: id}
     });
   }
 
@@ -226,16 +213,14 @@ export class MovieAdministrationComponent implements OnInit, AfterViewInit, OnDe
   }
 
   private setInitialValue() {
-    this.filteredYears
-      .pipe(take(1), takeUntil(this._onDestroy))
-      .subscribe(() => {
-        // setting the compareWith property to a comparison function
-        // triggers initializing the selection according to the initial value of
-        // the form control (i.e. _initializeSelection())
-        // this needs to be done after the filteredYears are loaded initially
-        // and after the mat-option elements are available
-        this.yearSelect.compareWith = (a: Year, b: Year) => a && b && a.id === b.id;
-      });
+    this.filteredYears.pipe(take(1), takeUntil(this._onDestroy)).subscribe(() => {
+      // setting the compareWith property to a comparison function
+      // triggers initializing the selection according to the initial value of
+      // the form control (i.e. _initializeSelection())
+      // this needs to be done after the filteredYears are loaded initially
+      // and after the mat-option elements are available
+      this.yearSelect.compareWith = (a: Year, b: Year) => a && b && a.id === b.id;
+    });
   }
 
   private filterYears() {
@@ -252,7 +237,13 @@ export class MovieAdministrationComponent implements OnInit, AfterViewInit, OnDe
     }
     // filter the years
     this.filteredYears.next(
-      this.years.filter(year => year.year.toString().toLowerCase().indexOf(search) > -1)
+      this.years.filter(
+        year =>
+          year.year
+            .toString()
+            .toLowerCase()
+            .indexOf(search) > -1
+      )
     );
   }
 }

@@ -1,6 +1,4 @@
 import {Component, Input, OnChanges, OnInit} from '@angular/core';
-import {ChartOptions, ChartType} from 'chart.js';
-import {Label, monkeyPatchChartJsLegend, monkeyPatchChartJsTooltip, SingleDataSet} from 'ng2-charts';
 
 import {Permissions} from '../../../../permissions';
 import {MyUserService} from '../../../my-user.service';
@@ -20,16 +18,6 @@ export class GroupInfoCardComponent implements OnInit, OnChanges {
   @Input()
   searchValue = '';
 
-  // Chart
-  public pieChartOptions: ChartOptions = {
-    responsive: true
-  };
-  public pieChartType: ChartType = 'pie';
-  public pieChartLegend = true;
-  public pieChartLabels: Label[];
-  public pieChartData: SingleDataSet;
-  public pieChartIsEmpty: boolean;
-
   resultSubgroup: EventResultSubgroup[] = [];
   sortedResultSubgroup: EventResultSubgroup[] = [];
 
@@ -44,12 +32,6 @@ export class GroupInfoCardComponent implements OnInit, OnChanges {
   ngOnInit() {
     this.resultSubgroup = this.resultGroup.getResultSubgroups();
     this.sortedResultSubgroup = this.resultSubgroup.slice();
-
-    this.pieChartLabels = this.resultGroup.event.getDecisionsAsStrings();
-    this.pieChartData = this.resultGroup.getChartData();
-    this.pieChartIsEmpty = this.resultGroup.chartIsEmpty;
-    monkeyPatchChartJsTooltip();
-    monkeyPatchChartJsLegend();
   }
 
   ngOnChanges(): void {

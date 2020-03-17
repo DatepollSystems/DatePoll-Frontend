@@ -25,7 +25,7 @@
       [class.spinner]="cancellingVoting"
       (click)="cancelVoting()"
       *ngIf="event.alreadyVotedFor"
-      color="accent"
+      [style.background-color]="event.decisionColor"
       mat-flat-button
     >
       {{ 'EVENTS_VIEW_EVENT_CARD_BUTTON_CANCEL_VOTING' | translate }}

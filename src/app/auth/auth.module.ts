@@ -2,6 +2,7 @@ import {CommonModule} from '@angular/common';
 import {NgModule} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
+import {QRCodeModule} from 'angularx-qrcode';
 import {FooterModule} from '../footer/footer.module';
 import {MaterialModule} from '../material-module';
 import {CommonComponentsModule} from '../services/common-components.module';
@@ -21,6 +22,7 @@ import {SigninComponent} from './signin/signin.component';
     TranslationModule,
     CommonComponentsModule,
     FooterModule,
+    QRCodeModule,
     AuthRoutingModule
   ]
 })

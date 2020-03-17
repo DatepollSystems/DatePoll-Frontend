@@ -1,51 +1,44 @@
-<h1 mat-dialog-title>{{'ABOUT' | translate}}</h1>
+<h1 mat-dialog-title>{{ 'ABOUT' | translate }}</h1>
 <mat-dialog-content>
   <mat-tab-group mat-align-tabs="center">
-    <mat-tab label="{{'ABOUT_GENERAL' | translate}}">
+    <mat-tab label="{{ 'ABOUT_GENERAL' | translate }}">
       <div class="col-12 entry">
-        <h3>{{'ABOUT_DESCRIPTION' | translate}}</h3>
+        <h3>{{ 'ABOUT_DESCRIPTION' | translate }}</h3>
       </div>
       <mat-divider></mat-divider>
       <div class="col-12 entry">
         <h3>Maintainer: <a href="https://dafnik.me" rel="noopener" target="_blank">Dominik Dafert</a></h3>
       </div>
     </mat-tab>
-    <mat-tab label="{{'ABOUT_TECHNICAL' | translate}}">
+    <mat-tab label="{{ 'ABOUT_TECHNICAL' | translate }}">
       <div class="col-12 entry">
-        <h3>{{'ABOUT_FRONTEND_VERSION' | translate}}{{frontendVersion}}</h3>
+        <h3>{{ 'ABOUT_FRONTEND_VERSION' | translate }}{{ frontendVersion }}</h3>
       </div>
       <mat-divider></mat-divider>
       <div class="col-12 entry">
-        <h3>{{'ABOUT_BACKEND_VERSION' | translate}}{{backendVersion}}</h3>
+        <h3>{{ 'ABOUT_BACKEND_VERSION' | translate }}{{ backendVersion }}</h3>
       </div>
       <mat-divider></mat-divider>
       <div class="col-12 entry">
-        <h3>{{'ABOUT_NEEDED_BACKEND_VERSION' | translate}}{{requiredBackendVersion}}</h3>
+        <h3>{{ 'ABOUT_NEEDED_BACKEND_VERSION' | translate }}{{ requiredBackendVersion }}</h3>
       </div>
       <mat-divider></mat-divider>
       <div class="col-12 entry">
-        <h3><a href="https://datepoll.dafnik.me" rel="noopener"
-               target="_blank">DatePoll Documentation</a></h3>
+        <h3><a href="https://datepoll.dafnik.me" rel="noopener" target="_blank">DatePoll Documentation</a></h3>
       </div>
       <mat-divider></mat-divider>
       <div class="col-12 entry">
-        <h3><a href="https://gitlab.com/BuergerkorpsEggenburg/datepoll-frontend/" rel="noopener"
-               target="_blank">Frontend Source Code</a></h3>
+        <h3><a href="https://gitlab.com/DatePoll/datepoll-frontend/" rel="noopener" target="_blank">Frontend Source Code</a></h3>
       </div>
       <div class="col-12 entry">
-        <h3><a href="https://gitlab.com/BuergerkorpsEggenburg/datepoll-android/" rel="noopener"
-               target="_blank">Android App Source Code</a></h3>
+        <h3><a href="https://gitlab.com/DatePoll/datepoll-android/" rel="noopener" target="_blank">Android App Source Code</a></h3>
       </div>
       <div class="col-12 entry">
-        <h3><a href="https://gitlab.com/BuergerkorpsEggenburg/datepoll-backend-php/" rel="noopener"
-               target="_blank">Backend Source Code</a></h3>
+        <h3><a href="https://gitlab.com/DatePoll/datepoll-backend-php/" rel="noopener" target="_blank">Backend Source Code</a></h3>
       </div>
-
     </mat-tab>
   </mat-tab-group>
-
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-  <button mat-button mat-dialog-close>{{'CLOSE' | translate}}</button>
+  <button mat-button mat-dialog-close>{{ 'CLOSE' | translate }}</button>
 </mat-dialog-actions>
-

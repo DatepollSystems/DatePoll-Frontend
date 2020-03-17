@@ -1,5 +1,5 @@
 <div class="row">
-  <div *ngIf="isMobile" class="col-12 col-sm-12 col-md-6 col-lg-4">
+  <div *ngIf="events.length != 0 && isMobile" class="col-12 col-sm-12 col-md-6 col-lg-4">
     <app-event-card *ngFor="let event of events" [event]="event"></app-event-card>
   </div>
 
@@ -15,25 +15,18 @@
                 <th>{{ 'EVENTS_ADMINISTRATION_TABLE_NAME' | translate }}</th>
                 <th>{{ 'EVENTS_ADMINISTRATION_TABLE_START_DATE' | translate }}</th>
                 <th>{{ 'EVENTS_VIEW_EVENT_CARD_BUTTON_INFO' | translate }}</th>
-                <th>{{ 'EVENTS_VIEW_EVENT_CARD_VOTED_FOR' | translate }}</th>
                 <th>{{ 'EVENTS_VIEW_EVENT_CARD_BUTTON_DECIDE' | translate }}</th>
               </tr>
             </thead>
             <tbody>
               <tr *ngFor="let event of events">
-                <td>{{ event.name }}</td>
+                <td [style.background-color]="event.decisionColor">{{ event.name }}</td>
                 <td>{{ event.startDate | date: 'EE, dd.MM.yyyy HH:mm' }}</td>
                 <td>
                   <button (click)="onEventInfo(event)" mat-button>
                     <mat-icon>info</mat-icon>
                     {{ 'EVENTS_VIEW_EVENT_CARD_BUTTON_INFO' | translate }}
                   </button>
-                </td>
-                <td *ngIf="event.userDecision == null">
-                  {{ 'EVENTS_ADMINISTRATION_INFO_EVENT_UNKNOWN_VOTING' | translate }}
-                </td>
-                <td *ngIf="event.userDecision != null">
-                  {{ event.userDecision }}
                 </td>
                 <td *ngIf="!event.alreadyVotedFor">
                   <button (click)="onEventVote(event)" color="primary" mat-flat-button>

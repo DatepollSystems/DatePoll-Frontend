@@ -1,23 +1,23 @@
 import {Component, OnDestroy, OnInit, TemplateRef, ViewChild} from '@angular/core';
-import {Router} from '@angular/router';
 import {MatBottomSheet, MatBottomSheetRef} from '@angular/material/bottom-sheet';
 import {MatDialog} from '@angular/material/dialog';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
+import {Router} from '@angular/router';
 import {Subscription} from 'rxjs';
 
 import {NotificationsService, NotificationType} from 'angular2-notifications';
 
-import {UsersService} from './users.service';
-import {MyUserService} from '../../my-user.service';
 import {ExcelService} from '../../../services/excel.service';
+import {MyUserService} from '../../my-user.service';
+import {UsersService} from './users.service';
 
 import {User} from './user.model';
-import {Permissions} from '../../../permissions';
+
 import {UserCreateModalComponent} from './user-create-modal/user-create-modal.component';
-import {UserUpdateModalComponent} from './user-update-modal/user-update-modal.component';
 import {UserDeleteModalComponent} from './user-delete-modal/user-delete-modal.component';
+import {UserUpdateModalComponent} from './user-update-modal/user-update-modal.component';
 
 @Component({
   selector: 'app-users-management',
@@ -28,8 +28,22 @@ export class UsersManagementComponent implements OnInit, OnDestroy {
   @ViewChild('successfullyActivatedAllUsers', {static: true}) successfullyActivatedAllUsers: TemplateRef<any>;
   usersLoaded = true;
 
-  displayedColumns: string[] = ['title', 'firstname', 'surname', 'emails', 'birthday', 'join_date', 'streetname', 'streetnumber',
-    'zipcode', 'location', 'phoneNumbers', 'activity', 'username', 'actions'];
+  displayedColumns: string[] = [
+    'title',
+    'firstname',
+    'surname',
+    'emails',
+    'birthday',
+    'join_date',
+    'streetname',
+    'streetnumber',
+    'zipcode',
+    'location',
+    'phoneNumbers',
+    'activity',
+    'username',
+    'actions'
+  ];
   filterValue = '';
 
   @ViewChild(MatSort, {static: true}) sort: MatSort;
@@ -37,7 +51,6 @@ export class UsersManagementComponent implements OnInit, OnDestroy {
   users: User[];
   dataSource: MatTableDataSource<User>;
   private usersSubscription: Subscription;
-  private permissionSubscription: Subscription;
 
   constructor(
     private router: Router,
@@ -45,14 +58,8 @@ export class UsersManagementComponent implements OnInit, OnDestroy {
     private dialog: MatDialog,
     private myUserService: MyUserService,
     private notificationsService: NotificationsService,
-    private usersService: UsersService) {
-
-    this.permissionSubscription = myUserService.permissionsChange.subscribe((value) => {
-      if (!this.myUserService.hasPermission(Permissions.MANAGEMENT_ADMINISTRATION)) {
-        this.router.navigate(['/home']);
-      }
-    });
-
+    private usersService: UsersService
+  ) {
     this.usersLoaded = false;
 
     this.users = usersService.getUsers();
@@ -62,7 +69,7 @@ export class UsersManagementComponent implements OnInit, OnDestroy {
       this.usersLoaded = true;
     }
 
-    this.usersSubscription = usersService.usersChange.subscribe((value) => {
+    this.usersSubscription = usersService.usersChange.subscribe(value => {
       this.usersLoaded = true;
 
       this.users = value;
@@ -71,16 +78,11 @@ export class UsersManagementComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    if (!this.myUserService.hasPermission(Permissions.MANAGEMENT_ADMINISTRATION)) {
-      this.router.navigate(['/home']);
-    }
-
     this.refreshTable();
   }
 
   ngOnDestroy() {
     this.usersSubscription.unsubscribe();
-    this.permissionSubscription.unsubscribe();
   }
 
   refreshTable() {
@@ -112,7 +114,7 @@ export class UsersManagementComponent implements OnInit, OnDestroy {
         this.usersService.fetchUsers();
         this.notificationsService.html(this.successfullyActivatedAllUsers, NotificationType.Success, null, 'success');
       },
-      (error) => console.log(error)
+      error => console.log(error)
     );
   }
 
@@ -125,13 +127,13 @@ export class UsersManagementComponent implements OnInit, OnDestroy {
   onEdit(user: User) {
     this.dialog.open(UserUpdateModalComponent, {
       width: '80vh',
-      data: {user: user}
+      data: {user}
     });
   }
 
   onDelete(userID: number) {
     this.bottomSheet.open(UserDeleteModalComponent, {
-      data: {'userID': userID},
+      data: {userID: userID}
     });
   }
 
@@ -141,7 +143,6 @@ export class UsersManagementComponent implements OnInit, OnDestroy {
     this.refreshTable();
     this.usersService.fetchUsers();
   }
-
 }
 
 @Component({
@@ -153,9 +154,12 @@ export class UsersExportBottomSheetComponent {
   @ViewChild('waitForExport', {static: true}) waitForExport: TemplateRef<any>;
   @ViewChild('successfullyExported', {static: true}) successfullyExported: TemplateRef<any>;
 
-  constructor(private bottomSheetRef: MatBottomSheetRef<UsersExportBottomSheetComponent>, private excelService: ExcelService,
-              private usersService: UsersService, private notificationsService: NotificationsService) {
-  }
+  constructor(
+    private bottomSheetRef: MatBottomSheetRef<UsersExportBottomSheetComponent>,
+    private excelService: ExcelService,
+    private usersService: UsersService,
+    private notificationsService: NotificationsService
+  ) {}
 
   exportExcelSheet() {
     this.notificationsService.html(this.waitForExport, NotificationType.Info, null, 'info');
@@ -169,7 +173,7 @@ export class UsersExportBottomSheetComponent {
 
         this.notificationsService.html(this.successfullyExported, NotificationType.Success, null, 'success');
       },
-      (error) => console.log(error)
+      error => console.log(error)
     );
   }
 }

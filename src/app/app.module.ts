@@ -14,8 +14,6 @@ import {FooterModule} from './footer/footer.module';
 import {CommonEventsComponentsModule} from './home/events/common-events-components.module';
 import {TranslationModule} from './translation/translation.module';
 
-import {CookieService} from 'ngx-cookie-service';
-
 import {NoSanitizePipe} from './no-sanitize.pipe';
 
 import {AuthGuard} from './auth/auth-guard.service';
@@ -30,6 +28,7 @@ import {SessionsService} from './home/settings/sessions/sessions.service';
 import {HomepageService} from './home/start/homepage.service';
 import {ExcelService} from './services/excel.service';
 import {HttpService} from './services/http.service';
+import {IsMobileService} from './services/is-mobile.service';
 import {TranslateService} from './translation/translate.service';
 
 import {AuthInterceptor} from './auth/auth-interceptor';
@@ -85,7 +84,7 @@ registerLocaleData(localeDe);
     EventsService,
     EventsUserService,
     HomepageService,
-    CookieService,
+    IsMobileService,
     {
       provide: APP_INITIALIZER,
       useFactory: setupTranslateFactory,

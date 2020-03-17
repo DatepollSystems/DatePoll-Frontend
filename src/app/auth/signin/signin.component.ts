@@ -1,11 +1,12 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {NgForm} from '@angular/forms';
-import {Router} from '@angular/router';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import {Router} from '@angular/router';
 import {Subscription} from 'rxjs';
 
-import {AuthService} from '../auth.service';
 import {SettingsService} from '../../services/settings.service';
+import {AuthService} from '../auth.service';
+import {IsMobileService} from '../../services/is-mobile.service';
 
 @Component({
   selector: 'app-signin',
@@ -15,6 +16,9 @@ import {SettingsService} from '../../services/settings.service';
 export class SigninComponent implements OnInit, OnDestroy {
   communityName: string;
   communityNameSubscription: Subscription;
+
+  appUrl: any = null;
+  appUrlSubscription: Subscription;
 
   state = 'login';
 
@@ -36,6 +40,19 @@ export class SigninComponent implements OnInit, OnDestroy {
     this.communityNameSubscription = this.settingsService.communityNameChange.subscribe(value => {
       this.communityName = value;
     });
+
+    let object = {
+      type: 'loginV1',
+      url: this.settingsService.getAppUrl()
+    };
+    this.appUrl = JSON.stringify(object);
+    this.appUrlSubscription = this.settingsService.appUrlChange.subscribe(value => {
+      object = {
+        type: 'loginV1',
+        url: value
+      };
+      this.appUrl = JSON.stringify(object);
+    });
   }
 
   ngOnInit(): void {
@@ -49,6 +66,7 @@ export class SigninComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.communityNameSubscription.unsubscribe();
+    this.appUrlSubscription.unsubscribe();
   }
 
   protected onSignin(form: NgForm) {

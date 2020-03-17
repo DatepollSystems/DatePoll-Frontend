@@ -1,9 +1,6 @@
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Injectable} from '@angular/core';
-import {Router} from '@angular/router';
 import {tap} from 'rxjs/operators';
-
-import {CookieService} from 'ngx-cookie-service';
 
 import {environment} from '../../environments/environment';
 import {Browser} from '../services/browser';
@@ -18,22 +15,18 @@ export class AuthService {
   private jwtToken: string;
   jwtTokenExpires: Date;
 
-  private dateIn80Years: Date = new Date();
-
   httpHeaders = new HttpHeaders().set('Content-Type', 'application/json');
 
-  constructor(private router: Router, private cookieService: CookieService, private http: HttpClient) {
+  constructor(private http: HttpClient) {
     this.jwtTokenExpires = new Date();
     this.jwtTokenExpires.setMinutes(this.jwtTokenExpires.getMinutes() + 50);
-
-    this.dateIn80Years.setFullYear(this.dateIn80Years.getFullYear() + 80);
   }
 
   public trySignin(username: string, password: string) {
     const browser = Browser.getInfos();
     const signInObject = {
-      username: username,
-      password: password,
+      username,
+      password,
       stay_logged_in: true,
       session_information: browser.name + ' - ' + browser.majorVersion + '; OS: ' + browser.os + '; Phone: ' + browser.mobile
     };
@@ -55,23 +48,21 @@ export class AuthService {
       (data: any) => {
         console.log(data);
 
-        this.setSessionToken(null);
-        this.setJWTToken(null);
-        this.cookieService.deleteAll();
+        this.clearCookies();
         console.log('authService | Logout successful');
 
         window.location.reload();
       },
       error => {
         console.log(error);
-
-        this.setSessionToken(null);
-        this.setJWTToken(null);
-        this.cookieService.deleteAll();
-
-        window.location.reload();
       }
     );
+  }
+
+  public clearCookies() {
+    this.setSessionToken(null);
+    this.setJWTToken(null);
+    localStorage.clear();
   }
 
   public refreshJWTToken() {
@@ -89,42 +80,29 @@ export class AuthService {
     );
   }
 
-  setJWTToken(jwtToken: string) {
-    if (this.isCookieEnabled()) {
-      this.cookieService.set('token', jwtToken, this.dateIn80Years);
-    }
+  public setJWTToken(jwtToken: string) {
+    localStorage.setItem('token', jwtToken);
     this.jwtToken = jwtToken;
     this.jwtTokenExpires = new Date();
     this.jwtTokenExpires.setMinutes(this.jwtTokenExpires.getMinutes() + 50);
   }
 
   public getJWTToken(): string {
-    if (this.isCookieEnabled() && this.jwtToken == null) {
-      if (this.cookieService.check('token')) {
-        this.jwtToken = this.cookieService.get('token');
-      } else {
-        this.jwtToken = null;
-      }
+    if (this.jwtToken == null) {
+      this.jwtToken = localStorage.getItem('token');
     }
     return this.jwtToken;
   }
 
   getSessionToken(): string {
-    if (this.isCookieEnabled() && this.sessionToken == null) {
-      if (this.cookieService.check('sessionToken')) {
-        this.sessionToken = this.cookieService.get('sessionToken');
-      } else {
-        this.sessionToken = null;
-      }
+    if (this.sessionToken == null) {
+      this.sessionToken = localStorage.getItem('sessionToken');
     }
-    console.log('sessionToken:' + this.sessionToken + '|');
     return this.sessionToken;
   }
 
-  private setSessionToken(sessionToken: string) {
-    if (this.isCookieEnabled()) {
-      this.cookieService.set('sessionToken', sessionToken, this.dateIn80Years);
-    }
+  public setSessionToken(sessionToken: string) {
+    localStorage.setItem('sessionToken', sessionToken);
     this.sessionToken = sessionToken;
   }
 
@@ -142,6 +120,10 @@ export class AuthService {
   }
 
   public isJWTTokenValid() {
+    if (this.getJWTToken() == null) {
+      return false;
+    }
+
     const currentDate = new Date();
     return currentDate.getTime() < this.jwtTokenExpires.getTime();
   }
@@ -151,7 +133,7 @@ export class AuthService {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
 
     const changePasswordAfterSigninObject = {
-      username: username,
+      username,
       old_password: oldPassword,
       new_password: newPassword,
       stay_logged_in: true,
@@ -159,16 +141,5 @@ export class AuthService {
     };
 
     return this.http.post(this.apiUrl + '/auth/changePasswordAfterSignin', changePasswordAfterSigninObject, {headers});
-  }
-
-  private isCookieEnabled(): boolean {
-    let cookieEnabled = navigator.cookieEnabled;
-
-    if (typeof navigator.cookieEnabled === 'undefined' && !cookieEnabled) {
-      document.cookie = 'testcookie';
-      cookieEnabled = document.cookie.indexOf('testcookie') !== -1;
-    }
-
-    return cookieEnabled;
   }
 }

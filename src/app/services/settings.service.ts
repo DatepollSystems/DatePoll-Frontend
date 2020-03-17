@@ -7,7 +7,6 @@ import {Router} from '@angular/router';
   providedIn: 'root'
 })
 export class SettingsService {
-
   public showCinemaChange: Subject<boolean> = new Subject<boolean>();
   public showEventsChange: Subject<boolean> = new Subject<boolean>();
   public communityNameChange: Subject<string> = new Subject<string>();
@@ -21,10 +20,9 @@ export class SettingsService {
   private _communityUrl = 'https://datepoll.dafnik.me';
   private _openWeatherMapKey = '';
   private _openWeatherMapCinemaCityId = '';
-  private _appUrl = '';
+  private _appUrl = null;
 
-  constructor(private httpService: HttpService, private router: Router) {
-  }
+  constructor(private httpService: HttpService, private router: Router) {}
 
   public getShowCinema(): boolean {
     this.httpService.getSettingRequest('/cinema', 'settingsCinema').subscribe(
@@ -32,7 +30,7 @@ export class SettingsService {
         console.log(response);
         this.setShowCinema(response.enabled);
       },
-      (error) => console.log(error)
+      error => console.log(error)
     );
 
     return this._showCinema;
@@ -42,14 +40,14 @@ export class SettingsService {
     this.setShowCinema(showCinema);
 
     const body = {
-      'isEnabled': showCinema
+      isEnabled: showCinema
     };
 
     this.httpService.setSettingsRequest('/cinema', body, 'setCinemaFeatureEnabled').subscribe(
       (response: any) => {
         console.log(response);
       },
-      (error) => console.log(error)
+      error => console.log(error)
     );
   }
 
@@ -66,7 +64,7 @@ export class SettingsService {
         console.log(response);
         this.setShowEvents(response.enabled);
       },
-      (error) => console.log(error)
+      error => console.log(error)
     );
 
     return this._showEvents;
@@ -76,14 +74,14 @@ export class SettingsService {
     this.setShowEvents(showEvents);
 
     const body = {
-      'isEnabled': showEvents
+      isEnabled: showEvents
     };
 
     this.httpService.setSettingsRequest('/events', body, 'setEventsFeatureEnabled').subscribe(
       (response: any) => {
         console.log(response);
       },
-      (error) => console.log(error)
+      error => console.log(error)
     );
   }
 
@@ -93,7 +91,7 @@ export class SettingsService {
         console.log(response);
         this.setCommunityName(response.community_name);
       },
-      (error) => console.log(error)
+      error => console.log(error)
     );
     return this._communityName;
   }
@@ -102,7 +100,7 @@ export class SettingsService {
     this.setCommunityName(communityName);
 
     const body = {
-      'community_name': communityName
+      community_name: communityName
     };
     return this.httpService.setSettingsRequest('/name', body, 'setCommunityName');
   }
@@ -113,7 +111,7 @@ export class SettingsService {
         console.log(response);
         this.setCommunityUrl(response.community_url);
       },
-      (error) => console.log(error)
+      error => console.log(error)
     );
     return this._communityUrl;
   }
@@ -122,7 +120,7 @@ export class SettingsService {
     this.setCommunityUrl(communityUrl);
 
     const body = {
-      'community_url': communityUrl
+      community_url: communityUrl
     };
     return this.httpService.setSettingsRequest('/communityUrl', body, 'setCommunityUrl');
   }
@@ -133,7 +131,7 @@ export class SettingsService {
         console.log(response);
         this.setAppUrl(response.url);
       },
-      (error) => console.log(error)
+      error => console.log(error)
     );
     return this._appUrl;
   }
@@ -142,7 +140,7 @@ export class SettingsService {
     this.setAppUrl(url);
 
     const body = {
-      'url': url
+      url: url
     };
     return this.httpService.setSettingsRequest('/url', body, 'setAppUrl');
   }
@@ -153,7 +151,7 @@ export class SettingsService {
         console.log(response);
         this.setOpenWeatherMapKey(response.openweathermap_key);
       },
-      (error) => console.log(error)
+      error => console.log(error)
     );
     return this._openWeatherMapKey;
   }
@@ -162,7 +160,7 @@ export class SettingsService {
     this.setOpenWeatherMapKey(key);
 
     const body = {
-      'openweathermap_key': key
+      openweathermap_key: key
     };
     return this.httpService.setSettingsRequest('/openweathermap/key', body, 'setOpenWeatherMapKey');
   }
@@ -173,7 +171,7 @@ export class SettingsService {
         console.log(response);
         this.setOpenWeatherMapCinemaCityId(response.openweathermap_cinema_city_id);
       },
-      (error) => console.log(error)
+      error => console.log(error)
     );
     return this._openWeatherMapCinemaCityId;
   }
@@ -182,7 +180,7 @@ export class SettingsService {
     this.setOpenWeatherMapCinemaCityId(id);
 
     const body = {
-      'openweathermap_cinema_city_id': id
+      openweathermap_cinema_city_id: id
     };
     return this.httpService.setSettingsRequest('/openweathermap/cinemaCityId', body, 'setOpenWeatherMapCinemaCityId');
   }

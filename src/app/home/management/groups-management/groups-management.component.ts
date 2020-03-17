@@ -1,32 +1,31 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Router} from '@angular/router';
-import {MatDialog} from '@angular/material/dialog';
+import {Component, OnDestroy} from '@angular/core';
 import {MatBottomSheet} from '@angular/material';
+import {MatDialog} from '@angular/material/dialog';
+import {Router} from '@angular/router';
 
 import {Subscription} from 'rxjs';
 
-import {GroupsService} from './groups.service';
 import {MyUserService} from '../../my-user.service';
+import {GroupsService} from './groups.service';
 
 import {GroupCreateModalComponent} from './group-create-modal/group-create-modal.component';
+import {GroupDeleteModalComponent} from './group-delete-modal/group-delete-modal.component';
 import {GroupUpdateModalComponent} from './group-update-modal/group-update-modal.component';
+import {GroupUserListModalComponent} from './group-user-list-modal/group-user-list-modal.component';
 import {SubgroupCreateModalComponent} from './subgroup-create-modal/subgroup-create-modal.component';
+import {SubgroupDeleteModalComponent} from './subgroup-delete-modal/subgroup-delete-modal.component';
 import {SubgroupUpdateModalComponent} from './subgroup-update-modal/subgroup-update-modal.component';
 import {SubgroupUserListModalComponent} from './subgroup-user-list-modal/subgroup-user-list-modal.component';
-import {GroupUserListModalComponent} from './group-user-list-modal/group-user-list-modal.component';
-import {GroupDeleteModalComponent} from './group-delete-modal/group-delete-modal.component';
-import {SubgroupDeleteModalComponent} from './subgroup-delete-modal/subgroup-delete-modal.component';
 
 import {Group} from './models/group.model';
 import {Subgroup} from './models/subgroup.model';
-import {Permissions} from '../../../permissions';
 
 @Component({
   selector: 'app-groups-management',
   templateUrl: './groups-management.component.html',
   styleUrls: ['./groups-management.component.css']
 })
-export class GroupsManagementComponent implements OnInit, OnDestroy {
+export class GroupsManagementComponent implements OnDestroy {
   groupsLoaded = true;
 
   groups: Group[];
@@ -34,21 +33,13 @@ export class GroupsManagementComponent implements OnInit, OnDestroy {
 
   sortedGroups: Group[];
 
-  private permissionSubscription: Subscription;
-
   constructor(
     private router: Router,
     private myUserService: MyUserService,
     private dialog: MatDialog,
     private bottomSheet: MatBottomSheet,
-    private groupsService: GroupsService) {
-
-    this.permissionSubscription = myUserService.permissionsChange.subscribe((value) => {
-      if (!this.myUserService.hasPermission(Permissions.MANAGEMENT_ADMINISTRATION)) {
-        this.router.navigate(['/home']);
-      }
-    });
-
+    private groupsService: GroupsService
+  ) {
     this.groupsLoaded = false;
 
     this.groups = this.groupsService.getGroups();
@@ -58,7 +49,7 @@ export class GroupsManagementComponent implements OnInit, OnDestroy {
       this.groupsLoaded = true;
     }
 
-    this.groupsSubscription = this.groupsService.groupsChange.subscribe((value) => {
+    this.groupsSubscription = this.groupsService.groupsChange.subscribe(value => {
       this.groupsLoaded = true;
 
       this.groups = value;
@@ -66,14 +57,7 @@ export class GroupsManagementComponent implements OnInit, OnDestroy {
     });
   }
 
-  ngOnInit() {
-    if (!this.myUserService.hasPermission(Permissions.MANAGEMENT_ADMINISTRATION)) {
-      this.router.navigate(['/home']);
-    }
-  }
-
   ngOnDestroy() {
-    this.permissionSubscription.unsubscribe();
     this.groupsSubscription.unsubscribe();
   }
 
@@ -85,7 +69,12 @@ export class GroupsManagementComponent implements OnInit, OnDestroy {
         this.sortedGroups.push(this.groups[i]);
       } else {
         for (let j = 0; j < this.groups[i].getSubgroups().length; j++) {
-          if (this.groups[i].getSubgroups()[j].name.toLowerCase().includes(filterValue.toLowerCase())) {
+          if (
+            this.groups[i]
+              .getSubgroups()
+              [j].name.toLowerCase()
+              .includes(filterValue.toLowerCase())
+          ) {
             this.sortedGroups.push(this.groups[i]);
             break;
           }
@@ -110,47 +99,47 @@ export class GroupsManagementComponent implements OnInit, OnDestroy {
   onUpdateGroup(group: Group) {
     this.dialog.open(GroupUpdateModalComponent, {
       width: '80vh',
-      data: {group: group}
+      data: {group}
     });
   }
 
   onDeleteGroup(groupID: number) {
     this.bottomSheet.open(GroupDeleteModalComponent, {
-      data: {'groupID': groupID},
+      data: {groupID: groupID}
     });
   }
 
   onInfoGroup(groupID: number) {
     this.dialog.open(GroupUserListModalComponent, {
       width: '80vh',
-      data: {groupID: groupID}
+      data: {groupID}
     });
   }
 
   onCreateSubgroup(groupID: number) {
     this.dialog.open(SubgroupCreateModalComponent, {
       width: '80vh',
-      data: {groupID: groupID}
+      data: {groupID}
     });
   }
 
   onUpdateSubgroup(groupID: number, subgroup: Subgroup) {
     this.dialog.open(SubgroupUpdateModalComponent, {
       width: '80vh',
-      data: {groupID: groupID, subgroup: subgroup}
+      data: {groupID, subgroup}
     });
   }
 
   onDeleteSubgroup(subgroupID: number) {
     this.bottomSheet.open(SubgroupDeleteModalComponent, {
-      data: {'subgroupID': subgroupID},
+      data: {subgroupID: subgroupID}
     });
   }
 
   onInfoSubgroup(subgroupID: number) {
     this.dialog.open(SubgroupUserListModalComponent, {
       width: '80vh',
-      data: {subgroupID: subgroupID}
+      data: {subgroupID}
     });
   }
 

@@ -22,7 +22,7 @@
         </div>
 
         <div class="row justify-content-around">
-          <mat-form-field class="col-10 col-sm-10 col-md-4 col-lg-4 col-xl-4 datepicker-field">
+          <mat-form-field class="col-10 col-sm-10 col-md-4 col-lg-4 col-xl-4">
             <input
               [(ngModel)]="createNewEventDateDate"
               [matDatepicker]="picker_date"
@@ -34,20 +34,6 @@
             />
             <mat-datepicker-toggle [for]="picker_date" matSuffix></mat-datepicker-toggle>
             <mat-datepicker #picker_date></mat-datepicker>
-          </mat-form-field>
-
-          <mat-form-field class="col-10 col-sm-10 col-md-4 col-lg-4 col-xl-4 datepicker-field-mobile">
-            <input
-              [(ngModel)]="createNewEventDateDate"
-              [matDatepicker]="picker_mobile_date"
-              id="datepicker-date-mobile"
-              matInput
-              name="datepicker-date-mobile"
-              required
-              placeholder="{{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE' | translate }}"
-            />
-            <mat-datepicker-toggle [for]="picker_mobile_date" matSuffix></mat-datepicker-toggle>
-            <mat-datepicker #picker_mobile_date touchUi></mat-datepicker>
           </mat-form-field>
 
           <mat-form-field class="col-4 col-sm-5 col-md-3 col-lg-3 col-xl-3">

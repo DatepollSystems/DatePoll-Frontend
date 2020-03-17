@@ -3,8 +3,6 @@ import {MatDialog} from '@angular/material/dialog';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {Subscription} from 'rxjs';
 
-import {CookieService} from 'ngx-cookie-service';
-
 import {SettingsService} from '../services/settings.service';
 import {TranslateService} from '../translation/translate.service';
 
@@ -28,13 +26,12 @@ export class FooterComponent implements OnDestroy {
 
   constructor(
     private translate: TranslateService,
-    private cookieService: CookieService,
     private settingsService: SettingsService,
     private snackBar: MatSnackBar,
     private dialog: MatDialog
   ) {
-    this.selected = this.cookieService.get('language');
-    if (!this.cookieService.check('language')) {
+    this.selected = localStorage.getItem('language');
+    if (this.selected == null) {
       this.selected = 'de';
     }
 
@@ -61,7 +58,7 @@ export class FooterComponent implements OnDestroy {
     }
     this.closed = true;
 
-    const oldLanguage = this.cookieService.get('language');
+    const oldLanguage = localStorage.getItem('language');
     this.translate.use(this.selected);
 
     const snackBarRef = this.snackBar.open('Sprache geändert zu ' + this.selected, 'Undo');

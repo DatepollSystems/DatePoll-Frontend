@@ -10,6 +10,7 @@ import {CustomDateAdapter, MY_DATE_FORMATS} from '../../services/custom-date-ada
 import {TranslationModule} from '../../translation/translation.module';
 import {EventsRoutingModule} from './events-routing.module';
 
+import {ColorPickerComponentModule} from '../../services/shared-components/color-picker/color-picker-component.module';
 import {CommonEventsComponentsModule} from './common-events-components.module';
 import {EventCreateModalComponent} from './events-administration/event-create-modal/event-create-modal.component';
 import {EventStandardDecisionsManagementModalComponent} from './events-administration/event-standard-decisions-management-modal/event-standard-decisions-management-modal.component';
@@ -35,6 +36,7 @@ import {EventsViewComponent} from './events-view/events-view.component';
     TranslationModule,
     CommonComponentsModule,
     CommonEventsComponentsModule,
+    ColorPickerComponentModule,
     EventsRoutingModule
   ],
   providers: [

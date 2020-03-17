@@ -3,10 +3,8 @@ import {MatBottomSheet, MatDialog, MatPaginator, MatSlideToggleChange, MatSort, 
 import {Router} from '@angular/router';
 import {Subscription} from 'rxjs';
 
-import {MyUserService} from '../../my-user.service';
 import {EventsService} from '../events.service';
 
-import {Permissions} from '../../../permissions';
 import {Event} from '../models/event.model';
 
 import {EventInfoModalComponent} from '../event-info-modal/event-info-modal.component';
@@ -38,21 +36,13 @@ export class EventsAdministrationComponent implements OnDestroy {
   eventsCopy: Event[];
   dataSource: MatTableDataSource<Event>;
   private eventsSubscription: Subscription;
-  private permissionSubscription: Subscription;
 
   constructor(
     private eventsService: EventsService,
     private router: Router,
     private dialog: MatDialog,
-    private bottomSheet: MatBottomSheet,
-    private myUserService: MyUserService
+    private bottomSheet: MatBottomSheet
   ) {
-    this.permissionSubscription = myUserService.permissionsChange.subscribe(value => {
-      if (!this.myUserService.hasPermission(Permissions.EVENTS_ADMINISTRATION)) {
-        this.router.navigate(['/home']);
-      }
-    });
-
     this.eventsLoaded = false;
     this.events = eventsService.getEvents();
     this.refreshTable();
@@ -70,7 +60,6 @@ export class EventsAdministrationComponent implements OnDestroy {
 
   ngOnDestroy() {
     this.eventsSubscription.unsubscribe();
-    this.permissionSubscription.unsubscribe();
   }
 
   refreshTable() {

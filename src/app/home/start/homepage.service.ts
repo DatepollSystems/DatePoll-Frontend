@@ -5,12 +5,12 @@ import {Subject} from 'rxjs';
 import {Converter} from '../../services/converter';
 import {HttpService} from '../../services/http.service';
 
+import {TranslateService} from '../../translation/translate.service';
 import {Decision} from '../events/models/decision.model';
 import {EventDate} from '../events/models/event-date.model';
 import {Event} from '../events/models/event.model';
 import {HomeBirthdayModel} from './birthdays.model';
 import {HomeBookingsModel} from './bookings.model';
-import {TranslateService} from '../../translation/translate.service';
 
 @Injectable({
   providedIn: 'root'
@@ -92,7 +92,7 @@ export class HomepageService {
 
           const decisions = [];
           for (const decision of fetchedEvent.decisions) {
-            decisions.push(new Decision(decision.id, decision.decision));
+            decisions.push(new Decision(decision.id, decision.decision, decision.color));
           }
 
           const dates = [];
@@ -119,7 +119,10 @@ export class HomepageService {
             dates
           );
           event.alreadyVotedFor = fetchedEvent.already_voted;
-          event.userDecision = fetchedEvent.user_decision;
+          if (event.alreadyVotedFor) {
+            event.userDecision = fetchedEvent.user_decision.decision;
+            event.decisionColor = fetchedEvent.user_decision.color;
+          }
           eventsToSave.push(event);
         }
         this.setEvents(eventsToSave);
