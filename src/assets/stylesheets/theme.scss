@@ -10,7 +10,7 @@
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
 $light-app-primary: mat-palette($mat-blue-gray);
-$light-app-accent: mat-palette($mat-deep-purple, A200, A100, A400);
+$light-app-accent: mat-palette($mat-light-green, A200, A100, A400);
 
 // The warn palette is optional (defaults to red).
 $light-app-warn: mat-palette($mat-red);
@@ -25,7 +25,7 @@ $light-app-theme: mat-light-theme($light-app-primary, $light-app-accent, $light-
 
 // Define an alternate dark theme.
 $dark-primary: mat-palette($mat-blue-grey);
-$dark-accent: mat-palette($mat-amber, A200, A100, A400);
+$dark-accent: mat-palette($mat-light-green, A200, A100, A400);
 $dark-warn: mat-palette($mat-deep-orange);
 $dark-theme: mat-dark-theme($dark-primary, $dark-accent, $dark-warn);
 
