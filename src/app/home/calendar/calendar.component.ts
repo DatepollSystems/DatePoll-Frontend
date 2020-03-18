@@ -10,7 +10,7 @@ import {isSameDay, isSameMonth} from 'date-fns';
 import {MovieDeleteModalComponent} from '../cinema/movie-administration/movie-delete-modal/movie-delete-modal.component';
 import {MovieEditModalComponent} from '../cinema/movie-administration/movie-edit-modal/movie-edit-modal.component';
 import {MovieInfoModalComponent} from '../cinema/movie-administration/movie-info-modal/movie-info-modal.component';
-import {EventInfoModalComponent} from '../events/event-info-modal/event-info-modal.component';
+import {EventInfoModalComponent} from '../events/event-info/event-info-modal/event-info-modal.component';
 import {EventDeleteModalComponent} from '../events/events-administration/event-delete-modal/event-delete-modal.component';
 import {EventUpdateModalComponent} from '../events/events-administration/event-update-modal/event-update-modal.component';
 

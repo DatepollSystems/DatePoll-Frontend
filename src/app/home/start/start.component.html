@@ -65,12 +65,11 @@
 </div>
 
 <div fxShow [fxHide.xs]="true">
-  <div class="row">
-    <div *ngIf="events.length != 0" class="col-12 col-lg-12">
+  <div fxLayout="row">
+    <div *ngIf="events.length != 0" fxFlex>
       <mat-card class="mat-elevation-z4">
         <mat-card-content>
           <mat-card-title>{{ 'STARTPAGE_EVENTS' | translate }}</mat-card-title>
-
           <div class="table-responsive">
             <table>
               <thead>
@@ -112,22 +111,24 @@
         </mat-card-content>
       </mat-card>
     </div>
-
-    <div *ngIf="birthdays.length != 0" class="col-12 col-lg-4">
+  </div>
+  <div fxLayout="row" fxLayoutGap="0.5%" fxLayoutAlign="left">
+    <div *ngIf="birthdays.length != 0" fxFlex.md="40%" fxFlex.lg="35%">
       <mat-card class="mat-elevation-z4">
         <mat-card-content>
-          <mat-card-title>
-            {{ 'STARTPAGE_BIRTHDAY' | translate }}
-            <button
-              mat-icon-button
-              matTooltip="{{ 'STARTPAGE_BIRTHDAY_INFO' | translate }}"
-              style="text-align: right; float: right; margin-top: -10px;"
-              matTooltipPosition="right"
-              routerLink="settings/privacySettings"
-              aria-label="Button that brings you to a page where you can deactivate your account for showing up when you have birhtday."
-            >
-              <mat-icon>info</mat-icon>
-            </button>
+          <mat-card-title fxLayout="row" fxLayoutAlign="end">
+            <div fxFlex.md="70%" fxFlex.lg="80%" fxFlexAlign="center">{{ 'STARTPAGE_BIRTHDAY' | translate }}</div>
+            <div fxFlex.md="30%" fxFlex.lg="20%">
+              <button
+                mat-icon-button
+                matTooltip="{{ 'STARTPAGE_BIRTHDAY_INFO' | translate }}"
+                matTooltipPosition="right"
+                routerLink="settings/privacySettings"
+                aria-label="Button that brings you to a page where you can deactivate your account for showing up when you have birhtday."
+              >
+                <mat-icon>info</mat-icon>
+              </button>
+            </div>
           </mat-card-title>
 
           <div class="table-responsive">
@@ -149,7 +150,7 @@
         </mat-card-content>
       </mat-card>
     </div>
-    <div *ngIf="bookings.length != 0" class="col-12 col-lg-8">
+    <div *ngIf="bookings.length != 0" fxFlex.md="60%" fxFlex.lg="75%">
       <mat-card class="mat-elevation-z4">
         <mat-card-content>
           <mat-card-title>{{ 'STARTPAGE_BOOKINGS' | translate }}</mat-card-title>

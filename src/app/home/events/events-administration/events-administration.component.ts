@@ -7,7 +7,7 @@ import {EventsService} from '../events.service';
 
 import {Event} from '../models/event.model';
 
-import {EventInfoModalComponent} from '../event-info-modal/event-info-modal.component';
+import {EventInfoModalComponent} from '../event-info/event-info-modal/event-info-modal.component';
 import {EventCreateModalComponent} from './event-create-modal/event-create-modal.component';
 import {EventDeleteModalComponent} from './event-delete-modal/event-delete-modal.component';
 import {EventStandardDecisionsManagementModalComponent} from './event-standard-decisions-management-modal/event-standard-decisions-management-modal.component';
@@ -123,7 +123,7 @@ export class EventsAdministrationComponent implements OnDestroy {
     this.dialog.open(EventInfoModalComponent, {
       width: '80vh',
       data: {
-        event: event
+        event
       }
     });
   }
@@ -132,7 +132,7 @@ export class EventsAdministrationComponent implements OnDestroy {
     this.dialog.open(EventUserManagementModalComponent, {
       width: '80vh',
       data: {
-        event: event
+        event
       }
     });
   }
@@ -141,7 +141,7 @@ export class EventsAdministrationComponent implements OnDestroy {
     this.dialog.open(EventUpdateModalComponent, {
       width: '80vh',
       data: {
-        event: event
+        event
       }
     });
   }

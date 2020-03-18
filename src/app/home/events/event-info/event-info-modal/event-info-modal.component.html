@@ -1,0 +1,7 @@
+<h1 mat-dialog-title>{{ 'EVENTS_ADMINISTRATION_INFO_EVENT' | translate }} {{ event.name }}</h1>
+<div mat-dialog-content>
+  <app-event-info [eventId]="event.id"></app-event-info>
+</div>
+<div mat-dialog-actions style="margin-top: 15px">
+  <button [mat-dialog-close] mat-button>{{ 'CLOSE' | translate }}</button>
+</div>

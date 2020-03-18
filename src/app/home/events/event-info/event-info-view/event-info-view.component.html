@@ -1,0 +1,2 @@
+<h1>{{ 'EVENTS_ADMINISTRATION_INFO_EVENT' | translate }} {{ event.name }}</h1>
+<app-event-info [eventId]="event.id" (eventLoaded)="eventLoaded($event)"></app-event-info>

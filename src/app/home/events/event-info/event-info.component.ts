@@ -1,5 +1,4 @@
-import {Component, Inject, OnDestroy, ViewChild} from '@angular/core';
-import {MAT_DIALOG_DATA} from '@angular/material';
+import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {Subscription} from 'rxjs';
 
 import {Permissions} from '../../../permissions';
@@ -11,16 +10,20 @@ import {EventResultGroup} from '../models/event-result-group.model';
 import {Event} from '../models/event.model';
 
 @Component({
-  selector: 'app-event-info-modal',
-  templateUrl: './event-info-modal.component.html',
-  styleUrls: ['./event-info-modal.component.css']
+  selector: 'app-event-info',
+  templateUrl: './event-info.component.html',
+  styleUrls: ['./event-info.component.css']
 })
-export class EventInfoModalComponent implements OnDestroy {
+export class EventInfoComponent implements OnInit, OnDestroy {
   sendingRequest = true;
 
   eventSubscription: Subscription;
   event: Event;
-  id: number;
+  @Input()
+  eventId = null;
+
+  @Output()
+  eventLoaded = new EventEmitter<Event>();
 
   name: string;
   description: string;
@@ -37,19 +40,21 @@ export class EventInfoModalComponent implements OnDestroy {
   public EVENTS_ADMINISTRATION_PERMISSION = Permissions.EVENTS_ADMINISTRATION;
   public ROOT_PERMISSION = Permissions.ROOT_ADMINISTRATION;
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any, private eventsService: EventsService, myUserService: MyUserService) {
+  constructor(private eventsService: EventsService, myUserService: MyUserService) {
     this.myUserService = myUserService;
+  }
 
-    this.event = data.event;
-    const id = this.event.id;
-    this.refreshValues();
+  ngOnInit(): void {
+    if (this.eventId != null) {
+      this.event = this.eventsService.getEvent(this.eventId);
+      this.eventSubscription = this.eventsService.eventChange.subscribe(value => {
+        this.event = value;
+        this.refreshValues();
+        this.sendingRequest = false;
 
-    this.event = this.eventsService.getEvent(id);
-    this.eventSubscription = this.eventsService.eventChange.subscribe(value => {
-      this.event = value;
-      this.refreshValues();
-      this.sendingRequest = false;
-    });
+        this.eventLoaded.emit(this.event);
+      });
+    }
   }
 
   ngOnDestroy() {

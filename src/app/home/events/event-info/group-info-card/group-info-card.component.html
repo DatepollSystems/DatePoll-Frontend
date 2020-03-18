@@ -52,7 +52,8 @@
         *ngIf="
           resultGroup.getResultSubgroups().length !== 0 &&
           (resultGroup.getResultUsers().length > 0 ||
-            this.myUserService.hasPermission(ROOT_PERMISSION) || this.myUserService.hasPermission(EVENTS_ADMINISTRATION_PERMISSION))
+            this.myUserService.hasPermission(ROOT_PERMISSION) ||
+            this.myUserService.hasPermission(EVENTS_ADMINISTRATION_PERMISSION))
         "
         style="margin-top: 15px;"
       >

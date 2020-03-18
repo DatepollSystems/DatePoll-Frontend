@@ -15,8 +15,9 @@ import {HomeBirthdayModel} from './birthdays.model';
 import {HomeBookingsModel} from './bookings.model';
 
 import {IsMobileService} from '../../services/is-mobile.service';
-import {EventInfoModalComponent} from '../events/event-info-modal/event-info-modal.component';
+import {EventInfoModalComponent} from '../events/event-info/event-info-modal/event-info-modal.component';
 import {EventsVoteForDecisionModalComponent} from '../events/events-view/events-vote-for-decision-modal/events-vote-for-decision-modal.component';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-start',
@@ -33,6 +34,9 @@ export class StartComponent implements OnInit, OnDestroy {
   events: Event[];
   eventsSubscription: Subscription;
 
+  isMobile = true;
+  isMobileSubscription: Subscription;
+
   constructor(
     private homePageService: HomepageService,
     public myUserService: MyUserService,
@@ -40,6 +44,8 @@ export class StartComponent implements OnInit, OnDestroy {
     private bottomSheet: MatBottomSheet,
     private notificationsService: NotificationsService,
     private translate: TranslateService,
+    private isMobileService: IsMobileService,
+    private router: Router,
     private dialog: MatDialog
   ) {
     this.birthdays = homePageService.getBirthdays();
@@ -58,6 +64,11 @@ export class StartComponent implements OnInit, OnDestroy {
     this.eventsSubscription = homePageService.eventsChange.subscribe(value => {
       this.events = value.slice(0, 10);
       this.setBackgroundImage();
+    });
+
+    this.isMobile = this.isMobileService.getIsMobile();
+    this.isMobileSubscription = this.isMobileService.isMobileChange.subscribe(value => {
+      this.isMobile = value;
     });
   }
 
@@ -85,6 +96,7 @@ export class StartComponent implements OnInit, OnDestroy {
     this.bookingsSubscription.unsubscribe();
     this.birthdaysSubscription.unsubscribe();
     this.eventsSubscription.unsubscribe();
+    this.isMobileSubscription.unsubscribe();
 
     document.getElementById('my-container').style.background = 'none';
   }
@@ -98,12 +110,16 @@ export class StartComponent implements OnInit, OnDestroy {
   }
 
   onEventInfo(event: Event) {
-    this.dialog.open(EventInfoModalComponent, {
-      width: '80vh',
-      data: {
-        event
-      }
-    });
+    if (this.isMobile) {
+      this.router.navigate(['/home/events/' + event.id]);
+    } else {
+      this.dialog.open(EventInfoModalComponent, {
+        width: '80vh',
+        data: {
+          event
+        }
+      });
+    }
   }
 
   onEventVote(event: Event) {
