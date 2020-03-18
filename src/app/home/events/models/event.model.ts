@@ -108,4 +108,17 @@ export class Event {
   private setDecisions(decisions: Decision[]) {
     this.decisions = decisions;
   }
+
+  public getUntil(): string {
+    const current = new Date();
+
+    const days = Math.round((this.startDate.getTime() - current.getTime()) / (1000 * 60 * 60 * 24));
+
+    if (days === 0) {
+      const hours = Math.round(Math.abs(this.startDate.getTime() - current.getTime()) / (60 * 60 * 1000));
+      return hours + 'h';
+    } else {
+      return days + 'd';
+    }
+  }
 }

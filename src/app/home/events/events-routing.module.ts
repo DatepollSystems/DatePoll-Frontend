@@ -8,7 +8,7 @@ const eventRoutes: Routes = [
     path: '',
     children: [
       {path: 'administration', component: EventsAdministrationComponent},
-      {path: '', component: EventsViewComponent},
+      {path: 'start', component: EventsViewComponent},
       {path: ':id', component: EventsViewComponent}
     ]
   }

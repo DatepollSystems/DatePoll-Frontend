@@ -121,6 +121,7 @@ export class HomepageService {
           event.alreadyVotedFor = fetchedEvent.already_voted;
           if (event.alreadyVotedFor) {
             event.userDecision = fetchedEvent.user_decision.decision;
+            event.additionalInformation = fetchedEvent.user_decision.additional_information;
             event.decisionColor = fetchedEvent.user_decision.color;
           }
           eventsToSave.push(event);

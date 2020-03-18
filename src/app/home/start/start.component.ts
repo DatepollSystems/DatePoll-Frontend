@@ -33,9 +33,6 @@ export class StartComponent implements OnInit, OnDestroy {
   events: Event[];
   eventsSubscription: Subscription;
 
-  isMobile = false;
-  isMobileSubscription: Subscription;
-
   constructor(
     private homePageService: HomepageService,
     public myUserService: MyUserService,
@@ -43,7 +40,6 @@ export class StartComponent implements OnInit, OnDestroy {
     private bottomSheet: MatBottomSheet,
     private notificationsService: NotificationsService,
     private translate: TranslateService,
-    private isMobileService: IsMobileService,
     private dialog: MatDialog
   ) {
     this.birthdays = homePageService.getBirthdays();
@@ -62,11 +58,6 @@ export class StartComponent implements OnInit, OnDestroy {
     this.eventsSubscription = homePageService.eventsChange.subscribe(value => {
       this.events = value.slice(0, 10);
       this.setBackgroundImage();
-    });
-
-    this.isMobile = this.isMobileService.getIsMobile();
-    this.isMobileSubscription = this.isMobileService.isMobileChange.subscribe(value => {
-      this.isMobile = value;
     });
   }
 
@@ -94,23 +85,30 @@ export class StartComponent implements OnInit, OnDestroy {
     this.bookingsSubscription.unsubscribe();
     this.birthdaysSubscription.unsubscribe();
     this.eventsSubscription.unsubscribe();
-    this.isMobileSubscription.unsubscribe();
 
     document.getElementById('my-container').style.background = 'none';
+  }
+
+  onEventListItemClick(event: Event) {
+    if (!event.alreadyVotedFor) {
+      this.onEventVote(event);
+    } else {
+      this.cancelEventVoting(event, null);
+    }
   }
 
   onEventInfo(event: Event) {
     this.dialog.open(EventInfoModalComponent, {
       width: '80vh',
       data: {
-        event: event
+        event
       }
     });
   }
 
   onEventVote(event: Event) {
     const bottomSheetRef = this.bottomSheet.open(EventsVoteForDecisionModalComponent, {
-      data: {event: event}
+      data: {event}
     });
 
     bottomSheetRef.afterDismissed().subscribe(dto => {
@@ -134,13 +132,18 @@ export class StartComponent implements OnInit, OnDestroy {
   }
 
   cancelEventVoting(event, button: any) {
-    button.disabled = true;
+    if (button) {
+      button.disabled = true;
+    }
     this.eventsUserSerivce.removeDecision(event.id).subscribe(
       (response: any) => {
         console.log(response);
         this.homePageService.fetchData();
         this.setBackgroundImage();
-        // this.notificationsService.html(this.successfullyRemovedDecision, NotificationType.Success, null, 'success');
+        this.notificationsService.success(
+          this.translate.getTranslationFor('SUCCESSFULLY'),
+          this.translate.getTranslationFor('EVENTS_VIEW_EVENT_SUCCESSFULLY_REMOVED_VOTING')
+        );
       },
       error => console.log(error)
     );
