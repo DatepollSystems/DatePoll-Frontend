@@ -3,21 +3,27 @@
     <mat-list>
       <div mat-subheader *ngIf="birthdays.length != 0" class="sub-header">{{ 'STARTPAGE_EVENTS' | translate }}</div>
       <mat-list-item *ngFor="let event of events">
-        <div mat-list-icon class="circle" [style.background-color]="event.decisionColor" *ngIf="event.alreadyVotedFor"></div>
-        <mat-icon mat-list-icon *ngIf="!event.alreadyVotedFor">live_help</mat-icon>
-        <div mat-line (click)="onEventListItemClick(event)">
+        <div
+          mat-list-icon
+          class="circle"
+          [style.background-color]="event.decisionColor"
+          *ngIf="event.alreadyVotedFor"
+          (click)="cancelEventVoting(event, null)"
+        ></div>
+        <mat-icon mat-list-icon *ngIf="!event.alreadyVotedFor" (click)="onEventVote(event)">live_help</mat-icon>
+        <div mat-line (click)="onEventInfo(event)">
           <b>{{ event.name }}</b>
         </div>
-        <div mat-line (click)="onEventListItemClick(event)" *ngIf="event.startDate.getDay() === event.endDate.getDay()">
+        <div mat-line (click)="onEventInfo(event)" *ngIf="event.startDate.getDay() === event.endDate.getDay()">
           {{ event.startDate | date: 'EE, dd.MM HH:mm' }} - {{ event.endDate | date: 'HH:mm' }}
           <span class="until-left">({{ event.getUntil() }})</span>
         </div>
-        <div mat-line (click)="onEventListItemClick(event)" *ngIf="event.startDate.getDay() !== event.endDate.getDay()">
+        <div mat-line (click)="onEventInfo(event)" *ngIf="event.startDate.getDay() !== event.endDate.getDay()">
           {{ event.startDate | date: 'EE, dd.MM HH:mm' }} - {{ event.endDate | date: 'dd.MM HH:mm' }}
           <span class="until-left">({{ event.getUntil() }})</span>
         </div>
         <button mat-icon-button (click)="onEventInfo(event)">
-          <mat-icon>info</mat-icon>
+          <mat-icon>keyboard_arrow_right</mat-icon>
         </button>
       </mat-list-item>
 
