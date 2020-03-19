@@ -1,4 +1,4 @@
-import {Component, NgZone, OnDestroy, ViewChild} from '@angular/core';
+import {Component, NgZone, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {MatSidenav} from '@angular/material/sidenav';
 import {Subscription} from 'rxjs';
 
@@ -13,7 +13,7 @@ import {MyUserService} from './my-user.service';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnDestroy {
+export class HomeComponent implements OnInit, OnDestroy {
   private sidenav: MatSidenav;
   @ViewChild('sidenav', {static: true})
   navBarOpened = false;
@@ -56,23 +56,6 @@ export class HomeComponent implements OnDestroy {
   ) {
     this.myUserService = myUserService;
 
-    this.setTheme();
-
-    if (!this.isMobileService.getIsMobile()) {
-      this.navBarOpened = true;
-      this.navBarMode = 'side';
-    }
-
-    this.isMobileSubscription = this.isMobileService.isMobileChange.subscribe(isMobile => {
-      if (isMobile) {
-        this.navBarOpened = false;
-        this.navBarMode = 'over';
-      } else {
-        this.navBarOpened = true;
-        this.navBarMode = 'side';
-      }
-    });
-
     this.firstname = this.myUserService.getFirstname();
     this.firstnameSubscription = myUserService.firstnameChange.subscribe(value => {
       this.firstname = value;
@@ -109,6 +92,28 @@ export class HomeComponent implements OnDestroy {
     if (!(window.screen.width > 992)) {
       this.navBarOpened = false;
     }
+  }
+
+  ngOnInit() {
+    this.setTheme();
+
+    if (!this.isMobileService.getIsMobile()) {
+      this.navBarOpened = true;
+      this.navBarMode = 'side';
+    } else {
+      this.navBarOpened = false;
+      this.navBarMode = 'over';
+    }
+
+    this.isMobileSubscription = this.isMobileService.isMobileChange.subscribe(isMobile => {
+      if (isMobile) {
+        this.navBarOpened = false;
+        this.navBarMode = 'over';
+      } else {
+        this.navBarOpened = true;
+        this.navBarMode = 'side';
+      }
+    });
   }
 
   ngOnDestroy(): void {
