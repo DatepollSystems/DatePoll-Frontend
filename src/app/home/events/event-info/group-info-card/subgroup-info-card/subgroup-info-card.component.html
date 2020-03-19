@@ -4,32 +4,33 @@
       {{ resultSubgroup.name }}
     </mat-panel-title>
   </mat-expansion-panel-header>
+  <div fxLayout="column" fxLayoutGap="2%">
+    <!-- Chart for the subgroups -->
+    <app-result-user-bar-chart
+      [resultUsers]="resultSubgroup.getResultUsers()"
+      [decisions]="resultSubgroup.event.getDecisions()"
+    ></app-result-user-bar-chart>
 
-  <!-- Chart for the subgroups -->
-  <app-result-user-bar-chart
-    [resultUsers]="resultSubgroup.getResultUsers()"
-    [decisions]="resultSubgroup.event.getDecisions()"
-  ></app-result-user-bar-chart>
+    <app-result-user-table
+      [resultUsers]="resultSubgroup.getResultUsers()"
+      [decisions]="resultSubgroup.event.getDecisions()"
+      *ngIf="
+        resultSubgroup != null &&
+        !this.myUserService.hasPermission(ROOT_PERMISSION) &&
+        !this.myUserService.hasPermission(EVENTS_ADMINISTRATION_PERMISSION)
+      "
+    >
+    </app-result-user-table>
 
-  <app-result-user-table
-    [resultUsers]="resultSubgroup.getResultUsers()"
-    [decisions]="resultSubgroup.event.getDecisions()"
-    *ngIf="
-      resultSubgroup != null &&
-      !this.myUserService.hasPermission(ROOT_PERMISSION) &&
-      !this.myUserService.hasPermission(EVENTS_ADMINISTRATION_PERMISSION)
-    "
-  >
-  </app-result-user-table>
-
-  <app-event-user-management
-    *ngIf="
-      resultSubgroup != null &&
-      (this.myUserService.hasPermission(ROOT_PERMISSION) || this.myUserService.hasPermission(EVENTS_ADMINISTRATION_PERMISSION))
-    "
-    [resultUsers]="resultSubgroup.getResultUsers()"
-    [event]="resultSubgroup.event"
-  ></app-event-user-management>
+    <app-event-user-management
+      *ngIf="
+        resultSubgroup != null &&
+        (this.myUserService.hasPermission(ROOT_PERMISSION) || this.myUserService.hasPermission(EVENTS_ADMINISTRATION_PERMISSION))
+      "
+      [resultUsers]="resultSubgroup.getResultUsers()"
+      [event]="resultSubgroup.event"
+    ></app-event-user-management>
+  </div>
 </mat-expansion-panel>
 
 <mat-card *ngIf="resultSubgroup?.event?.anonymous">

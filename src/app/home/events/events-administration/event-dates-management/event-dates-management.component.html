@@ -1,5 +1,5 @@
-<div class="row" style="margin-bottom: 15px; margin-top: 15px;">
-  <div class="col-12">
+<div fxLayout="row" style="margin-bottom: 15px; margin-top: 15px;">
+  <div fxFlex>
     <mat-expansion-panel>
       <mat-expansion-panel-header>
         <mat-panel-title>
@@ -8,21 +8,22 @@
       </mat-expansion-panel-header>
 
       <form #form="ngForm" (ngSubmit)="save(form)" style="margin-bottom: 15px;">
-        <div class="row justify-content-around">
-          <div class="col-10 col-sm-10 col-md-7">
-            <app-event-standard-locations-select
-              (standardLocationChanged)="onStandardLocationChanged($event)"
-            ></app-event-standard-locations-select>
-          </div>
-          <div class="col-10 col-sm-10 col-md-3">
-            <button mat-stroked-button type="button" (click)="applyStandardLocation()">
+        <div fxLayout="row wrap" fxLayoutGap="2%" fxLayoutAlign="center">
+          <app-event-standard-locations-select
+            fxFlex="69%"
+            fxFlex.xs="98%"
+            (standardLocationChanged)="onStandardLocationChanged($event)"
+          ></app-event-standard-locations-select>
+
+          <div fxFlex="29%" fxFlex.xs="98%">
+            <button mat-stroked-button type="button" (click)="applyStandardLocation()" style="width: 100%">
               {{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_APPLY_STANDARD_LOCATION' | translate }}
             </button>
           </div>
         </div>
 
-        <div class="row justify-content-around">
-          <mat-form-field class="col-10 col-sm-10 col-md-4 col-lg-4 col-xl-4">
+        <div fxLayout="row wrap" fxLayoutGap="2%" style="margin-top: 15px;" fxLayoutAlign="start">
+          <mat-form-field fxFlex.xs="98%" fxFlex="24%">
             <input
               [(ngModel)]="createNewEventDateDate"
               [matDatepicker]="picker_date"
@@ -36,7 +37,7 @@
             <mat-datepicker #picker_date></mat-datepicker>
           </mat-form-field>
 
-          <mat-form-field class="col-4 col-sm-5 col-md-3 col-lg-3 col-xl-3">
+          <mat-form-field fxFlex.xs="45%" fxFlex="10%">
             <input
               #dateHoursModel="ngModel"
               id="hours-date"
@@ -54,7 +55,7 @@
             </mat-error>
           </mat-form-field>
 
-          <mat-form-field class="col-4 col-sm-5 col-md-3 col-lg-3 col-xl-3">
+          <mat-form-field fxFlex.xs="45%" fxFlex="10%">
             <input
               #dateMinutesModel="ngModel"
               id="minutes-date"
@@ -71,27 +72,8 @@
               {{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_MINUTES_INCORRECT' | translate }}
             </mat-error>
           </mat-form-field>
-        </div>
 
-        <div class="row justify-content-around">
-          <mat-form-field class="col-10 col-sm-10 col-md-4 col-lg-4 col-xl-6">
-            <input
-              #locationModel="ngModel"
-              id="location"
-              matInput
-              maxlength="190"
-              name="location"
-              type="text"
-              ngModel
-              placeholder="{{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_LOCATION' | translate }}"
-              [(ngModel)]="location"
-            />
-            <mat-error *ngIf="locationModel.invalid">
-              {{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_LOCATION_INCORRECT' | translate }}
-            </mat-error>
-          </mat-form-field>
-
-          <mat-form-field class="col-4 col-sm-4 col-md-2 col-lg-2 col-xl-2">
+          <mat-form-field fxFlex.xs="45%" fxFlex="20%">
             <input
               #xModel="ngModel"
               id="x"
@@ -109,7 +91,7 @@
             </mat-error>
           </mat-form-field>
 
-          <mat-form-field class="col-4 col-sm-4 col-md-2 col-lg-2 col-xl-2">
+          <mat-form-field fxFlex.xs="45%" fxFlex="20%">
             <input
               #yModel="ngModel"
               id="y"
@@ -126,6 +108,36 @@
               {{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_Y_INCORRECT' | translate }}
             </mat-error>
           </mat-form-field>
+
+          <mat-form-field fxFlex.xs="98%" fxFlex="70%">
+            <input
+              #locationModel="ngModel"
+              id="location"
+              matInput
+              maxlength="190"
+              name="location"
+              type="text"
+              ngModel
+              placeholder="{{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_LOCATION' | translate }}"
+              [(ngModel)]="location"
+            />
+            <mat-error *ngIf="locationModel.invalid">
+              {{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_LOCATION_INCORRECT' | translate }}
+            </mat-error>
+          </mat-form-field>
+
+          <div fxFlex.xs="98%" fxFlex="20%">
+            <button
+              mat-flat-button
+              type="button"
+              color="accent"
+              style="width: 100%"
+              (click)="form.ngSubmit.emit()"
+              [disabled]="!form.form.valid"
+            >
+              {{ 'ADD' | translate }}
+            </button>
+          </div>
         </div>
 
         <app-maps-component
@@ -134,12 +146,6 @@
           [edible]="true"
           (coordinatesChanged)="onCoordinatesChange($event)"
         ></app-maps-component>
-
-        <div class="row">
-          <button mat-button type="button" class="success-button col-12" (click)="form.ngSubmit.emit()" [disabled]="!form.form.valid">
-            {{ 'ADD' | translate }}
-          </button>
-        </div>
       </form>
 
       <app-event-dates-list [dates]="dates" [adminView]="true" (datesChanged)="onDatesChange($event)"></app-event-dates-list>

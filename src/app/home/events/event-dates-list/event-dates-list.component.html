@@ -1,9 +1,5 @@
-<div class="row">
-  <h2 class="col-12">{{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE_TITLE' | translate }}:</h2>
-</div>
-<div class="row" *ngIf="dates.length === 0">
-  <h4 class="col-12">{{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE_LIST_NO_DATES' | translate }}</h4>
-</div>
+<h2>{{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE_TITLE' | translate }}:</h2>
+
 <mat-accordion>
   <mat-expansion-panel *ngFor="let date of dates" hideToggle>
     <mat-expansion-panel-header>
@@ -40,24 +36,27 @@
           }}{{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE_LIST_OPEN_LOCATION_5' | translate }}
         </a>
       </mat-panel-description>
-
-      <div class="mat-expansion-indicator" style="padding-right: 5px">
-        <b *ngIf="adminView"
-          ><a
-            (click)="deleteDate(date)"
-            style="margin-right: 25px;"
-            matTooltip="{{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE_LIST_DELETE' | translate }}"
-          >
-            {{ 'DELETE' | translate }}</a
-          ></b
-        >
-      </div>
     </mat-expansion-panel-header>
 
-    <div *ngIf="isMobile">
+    <div fxLayout="row" fxLayoutAlign="end" style="margin-bottom: 10px" *ngIf="adminView">
+      <div fxLayout="20%" fxLayout.xs="100%">
+        <a
+          mat-stroked-button
+          color="warn"
+          (click)="deleteDate(date)"
+          matTooltip="{{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE_LIST_DELETE' | translate }}"
+        >
+          {{ 'DELETE' | translate }}</a
+        >
+      </div>
+    </div>
+
+    <div *ngIf="isMobile" fxLayout="column" fxLayoutAlign="center">
       <a
+        mat-flat-button
         target="_blank"
         rel="noopener"
+        color="accent"
         href="https://www.google.com/maps/place/{{ date.x }}+{{ date.y }}"
         *ngIf="date.location?.length > 0 && date?.x !== -199 && date?.y !== -199"
       >
@@ -66,8 +65,10 @@
       </a>
 
       <a
+        mat-flat-button
         target="_blank"
         rel="noopener"
+        color="accent"
         href="https://www.google.com/maps/place/{{ date.x }}+{{ date.y }}"
         *ngIf="(date.location == null || date.location?.length == 0) && date?.x !== -199 && date?.y !== -199"
       >
@@ -75,8 +76,10 @@
       </a>
 
       <a
+        mat-flat-button
         target="_blank"
         rel="noopener"
+        color="accent"
         href="https://www.google.com/maps/search/?api=1&query={{ date.location }}"
         *ngIf="date.location?.length > 0 && date?.x === -199 && date?.y === -199"
       >

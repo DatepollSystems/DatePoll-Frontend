@@ -71,7 +71,7 @@ export class ResultUserBarChartComponent implements OnDestroy {
     for (const object of objects) {
       let percent = Math.round((object.count / votedUsersCount) * 100);
 
-      const percentWidth = Math.round((object.count / votedUsersCount) * 95);
+      const percentWidth = Math.round((object.count / votedUsersCount) * 100);
 
       if (percent.toString().includes('NaN')) {
         percent = 0;

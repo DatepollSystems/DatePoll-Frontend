@@ -1,21 +1,21 @@
-<div class="row justify-content-around">
-  <mat-form-field class="col-11 col-sm-11 col-md-7 col-lg-5 col-xl-5">
+<div fxLayout="row wrap" fxLayout.xs="column" fxLayoutGap="2%" fxLayoutAlign="start" style="margin-top: 10px;">
+  <mat-form-field fxFlex="50%">
     <input matInput [(ngModel)]="searchFilter" name="search" placeholder="{{ 'SEARCH' | translate }}" />
   </mat-form-field>
-  <div class="col-11 col-sm-11 col-md-2 col-lg-1 col-xl-1">
-    <button mat-button (click)="search()" type="button" class="info-button" style="width: 100%">Suchen</button>
+  <div fxFlex="15%">
+    <button mat-flat-button (click)="search()" type="button" color="accent" style="width: 100%">{{ 'SEARCH' | translate }}</button>
   </div>
-  <div class="col-11 col-sm-11 col-md-1 col-lg-2 col-xl-2" *ngIf="edible">
+
+  <div fxFlex="20%" fxFlex.xs="100%" *ngIf="edible">
     <button mat-stroked-button (click)="clearSelection()" type="button" style="width: 100%">
       {{ 'MAPS_CLEAR_SELECTION' | translate }}
       <mat-icon>clear</mat-icon>
     </button>
   </div>
-  <div class="col-11" style="height: 500px;">
-    <div class="map-container">
-      <div class="map-frame">
-        <div id="{{ randomMapId }}" class="map"></div>
-      </div>
+
+  <div fxFlex="100%" style="height: 400px;">
+    <div class="map-frame">
+      <div id="{{ randomMapId }}" class="map"></div>
     </div>
   </div>
 </div>
