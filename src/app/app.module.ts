@@ -2,7 +2,6 @@ import {registerLocaleData} from '@angular/common';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import localeDe from '@angular/common/locales/de';
 import {APP_INITIALIZER, NgModule} from '@angular/core';
-import {FlexLayoutModule} from '@angular/flex-layout';
 import {BrowserModule} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
@@ -60,7 +59,6 @@ registerLocaleData(localeDe);
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    FlexLayoutModule,
     MaterialModule,
     TranslationModule,
     FooterModule,
