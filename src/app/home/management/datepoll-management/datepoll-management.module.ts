@@ -3,6 +3,7 @@ import {NgModule} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import {MaterialModule} from '../../../material-module';
+import {QuestionDialogComponentModule} from '../../../services/shared-components/question-dialog/question-dialog-component.module';
 import {TranslationModule} from '../../../translation/translation.module';
 import {DatepollManagementRoutingModule} from './datepoll-management-routing.module';
 
@@ -11,6 +12,14 @@ import {LogsComponent} from './logs/logs.component';
 
 @NgModule({
   declarations: [DatepollManagementComponent, LogsComponent],
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, MaterialModule, TranslationModule, DatepollManagementRoutingModule]
+  imports: [
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MaterialModule,
+    TranslationModule,
+    QuestionDialogComponentModule,
+    DatepollManagementRoutingModule
+  ]
 })
 export class DatepollManagementModule {}

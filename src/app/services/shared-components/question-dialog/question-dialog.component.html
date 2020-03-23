@@ -1,0 +1,6 @@
+<h2>{{ question }}</h2>
+<mat-nav-list>
+  <a *ngFor="let answer of answers" (click)="answerQuestion(answer.value)" mat-list-item>
+    <span mat-line>{{ answer.answer }}</span>
+  </a>
+</mat-nav-list>

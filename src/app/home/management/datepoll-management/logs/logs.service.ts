@@ -7,12 +7,10 @@ import {Log, LogType} from './log.model';
   providedIn: 'root'
 })
 export class LogsService {
-
   private logs: Log[] = [];
   public logsChange: Subject<Log[]> = new Subject<Log[]>();
 
-  constructor(private httpService: HttpService) {
-  }
+  constructor(private httpService: HttpService) {}
 
   public getLogs(): Log[] {
     this.fetchLogs();
@@ -31,7 +29,6 @@ export class LogsService {
 
         const logs = [];
         for (const log of response.logs) {
-
           let logType;
           switch (log.type) {
             case 'INFO':
@@ -52,7 +49,17 @@ export class LogsService {
 
         this.setLogs(logs);
       },
-      (error) => console.log(error)
+      error => console.log(error)
+    );
+  }
+
+  public deleteLogs() {
+    this.httpService.loggedInV1DELETERequest('/system/logs/all', 'deleteAllLogs').subscribe(
+      (response: any) => {
+        console.log(response);
+        this.fetchLogs();
+      },
+      error => console.log(error)
     );
   }
 }

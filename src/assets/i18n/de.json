@@ -462,6 +462,8 @@
 
   "MANAGEMENT_DATEPOLL_LOGS": "Logs",
   "MANAGEMENT_DATEPOLL_LOGS_REFRESH": "Log-Liste aktualisieren",
+  "MANAGEMENT_DATEPOLL_LOGS_DELETE": "Lösche alle Logs",
+  "MANAGEMENT_DATEPOLL_LOGS_DELETE_CONFIRM": "Willst du wirklich alle Logs löschen?",
   "MANAGEMENT_DATEPOLL_LOGS_LOG_TYPE": "Log-Level",
   "MANAGEMENT_DATEPOLL_LOGS_NO_LOGS": "Es gibt keine Logs mit diesem Log-Level!",
 
