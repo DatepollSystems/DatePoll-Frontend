@@ -37,6 +37,8 @@ export class StartComponent implements OnInit, OnDestroy {
   isMobile = true;
   isMobileSubscription: Subscription;
 
+  eventVotingChangeLoading = false;
+
   constructor(
     private homePageService: HomepageService,
     public myUserService: MyUserService,
@@ -64,6 +66,7 @@ export class StartComponent implements OnInit, OnDestroy {
     this.eventsSubscription = homePageService.eventsChange.subscribe(value => {
       this.events = value.slice(0, 10);
       this.setBackgroundImage();
+      this.eventVotingChangeLoading = false;
     });
 
     this.isMobile = this.isMobileService.getIsMobile();
@@ -99,14 +102,6 @@ export class StartComponent implements OnInit, OnDestroy {
     this.isMobileSubscription.unsubscribe();
 
     document.getElementById('my-container').style.background = 'none';
-  }
-
-  onEventListItemClick(event: Event) {
-    if (!event.alreadyVotedFor) {
-      this.onEventVote(event);
-    } else {
-      this.cancelEventVoting(event, null);
-    }
   }
 
   onEventInfo(event: Event) {
@@ -148,6 +143,10 @@ export class StartComponent implements OnInit, OnDestroy {
   }
 
   cancelEventVoting(event, button: any) {
+    if (this.eventVotingChangeLoading && this.isMobile) {
+      return;
+    }
+    this.eventVotingChangeLoading = true;
     if (button) {
       button.disabled = true;
     }
@@ -161,7 +160,10 @@ export class StartComponent implements OnInit, OnDestroy {
           this.translate.getTranslationFor('EVENTS_VIEW_EVENT_SUCCESSFULLY_REMOVED_VOTING')
         );
       },
-      error => console.log(error)
+      error => {
+        console.log(error);
+        this.eventVotingChangeLoading = false;
+      }
     );
   }
 }
