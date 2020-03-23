@@ -10,7 +10,9 @@
           *ngIf="event.alreadyVotedFor"
           (click)="cancelEventVoting(event, null)"
         ></div>
-        <mat-icon mat-list-icon *ngIf="!event.alreadyVotedFor" (click)="onEventVote(event)">live_help</mat-icon>
+        <mat-icon mat-list-icon matRipple matRippleRadius="80" *ngIf="!event.alreadyVotedFor" (click)="onEventVote(event)"
+          >live_help</mat-icon
+        >
         <div mat-line (click)="onEventInfo(event)">
           <span *ngIf="event.alreadyVotedFor">{{ event.name }}</span
           ><b *ngIf="!event.alreadyVotedFor">{{ event.name }}</b>
@@ -22,6 +24,9 @@
         <div mat-line (click)="onEventInfo(event)" *ngIf="event.startDate.getDay() !== event.endDate.getDay()">
           {{ event.startDate | date: 'EE, dd.MM HH:mm' }} - {{ event.endDate | date: 'dd.MM HH:mm' }}
           <span class="until-left">({{ event.getUntil() }})</span>
+        </div>
+        <div mat-line (click)="onEventInfo(event)" *ngIf="event.description?.length > 0">
+          {{ event.descriptionPreview }}
         </div>
         <button mat-icon-button (click)="onEventInfo(event)">
           <mat-icon>keyboard_arrow_right</mat-icon>
