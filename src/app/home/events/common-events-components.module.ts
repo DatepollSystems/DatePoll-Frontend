@@ -3,6 +3,7 @@ import {NgModule} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {DateAdapter} from '@angular/material';
 import {MAT_DATE_FORMATS} from '@angular/material/core';
+import {RouterModule} from '@angular/router';
 
 import {NgxMatSelectSearchModule} from 'ngx-mat-select-search';
 import {MaterialModule} from '../../material-module';
@@ -58,6 +59,7 @@ import {EventsVoteForDecisionModalComponent} from './events-view/events-vote-for
   ],
   imports: [
     CommonModule,
+    RouterModule,
     FormsModule,
     ReactiveFormsModule,
     MaterialModule,
