@@ -131,10 +131,6 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   changeTheme() {
-    if (localStorage.getItem('theme') == null) {
-      localStorage.setItem('theme', 'light');
-    }
-
     const theme = localStorage.getItem('theme');
     if (theme === 'light') {
       localStorage.setItem('theme', 'dark');
@@ -145,6 +141,10 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   setTheme() {
+    if (localStorage.getItem('theme') == null) {
+      localStorage.setItem('theme', 'light');
+    }
+
     const theme = localStorage.getItem('theme');
     if (theme === 'light') {
       document.getElementById('body').classList.remove('dark-theme');
