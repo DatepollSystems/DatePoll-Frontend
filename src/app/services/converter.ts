@@ -49,7 +49,12 @@ export class Converter {
 
   public static getIOSDate(value: string): Date {
     let temp = value.toString().replace(' ', 'T');
-    temp += '.000+02:00';
+    const ua = navigator.userAgent.toLowerCase();
+    if (ua.indexOf('safari') !== -1) {
+      if (ua.indexOf('chrome') < -1) {
+        temp += '.000+02:00';
+      }
+    }
     return new Date(temp);
   }
 }
