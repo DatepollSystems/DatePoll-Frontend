@@ -49,7 +49,7 @@ export class Converter {
 
   public static getIOSDate(value: string): Date {
     let temp = value.toString().replace(' ', 'T');
-    temp += '.000+01:00';
+    temp += '.000+02:00';
     return new Date(temp);
   }
 }
