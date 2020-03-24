@@ -1,4 +1,4 @@
-<button mat-flat-button id="color-picker-button" class="popup" (click)="changeColorPickerVisibility()" type="button">
+<button mat-stroked-button id="color-picker-button" class="popup" (click)="changeColorPickerVisibility()" type="button">
   {{ 'COLOR_PICKER' | translate }}
 </button>
-<color-github *ngIf="showColorPicker" [class.floating]="!isMobile" (onChangeComplete)="changeComplete($event)"> </color-github>
+<color-github *ngIf="showColorPicker" (onChangeComplete)="changeComplete($event)"></color-github>
