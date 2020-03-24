@@ -26,13 +26,23 @@
       </mat-panel-title>
     </mat-expansion-panel-header>
 
+    <div
+      fxLayout="row"
+      fxLayoutAlign="end"
+      *ngIf="this.myUserService.hasPermission(ROOT_PERMISSION) || this.myUserService.hasPermission(EVENTS_ADMINISTRATION_PERMISSION)"
+    >
+      <mat-slide-toggle (change)="changeAdminMode($event)" labelPosition="before">
+        {{ 'EVENTS_ADMINISTRATION_INFO_EVENT_SHOW_ADMINISTRATION_MODE' | translate }}
+      </mat-slide-toggle>
+    </div>
+
     <app-result-user-table
       [resultUsers]="event.getResultUsers()"
       [decisions]="event.getDecisions()"
       *ngIf="
         event != null &&
-        !this.myUserService.hasPermission(ROOT_PERMISSION) &&
-        !this.myUserService.hasPermission(EVENTS_ADMINISTRATION_PERMISSION)
+        (!showAdminModeInResultUserTable ||
+          (!this.myUserService.hasPermission(ROOT_PERMISSION) && !this.myUserService.hasPermission(EVENTS_ADMINISTRATION_PERMISSION)))
       "
     >
     </app-result-user-table>
@@ -40,6 +50,7 @@
     <app-event-user-management
       *ngIf="
         event != null &&
+        showAdminModeInResultUserTable &&
         (this.myUserService.hasPermission(ROOT_PERMISSION) || this.myUserService.hasPermission(EVENTS_ADMINISTRATION_PERMISSION))
       "
       [resultUsers]="event.getResultUsers()"

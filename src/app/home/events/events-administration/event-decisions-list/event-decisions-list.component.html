@@ -1,12 +1,11 @@
-<h1 mat-dialog-title>{{ 'EVENTS_STANDARD_DECISIONS_MANAGEMENT' | translate }}</h1>
-<div mat-dialog-content>
-  <form
-    #addStandardDecisionForm="ngForm"
-    (ngSubmit)="addStandardDecision(addStandardDecisionForm)"
-    fxLayout="row wrap"
-    fxLayoutGap="2%"
-    fxLayoutAlign="start"
-  >
+<mat-expansion-panel style="margin-bottom: 15px;">
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      {{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_DECISIONS' | translate }}
+    </mat-panel-title>
+  </mat-expansion-panel-header>
+
+  <form #addDecisionForm="ngForm" (ngSubmit)="addDecision(addDecisionForm)" fxLayout="row wrap" fxLayoutGap="2%" fxLayoutAlign="start">
     <div fxFlex="15%" fxFlex.lt-lg="45%" fxFlex.xs="98%">
       <app-color-picker (colorChange)="changeColor($event)"></app-color-picker>
     </div>
@@ -36,30 +35,25 @@
     </div>
 
     <div fxFlex="15%" fxFlex.lt-lg="45%" fxFlex.xs="98%">
-      <button
-        [disabled]="!addStandardDecisionForm.valid"
-        color="accent"
-        mat-raised-button
-        style="text-align: center; width: 100%"
-        type="submit"
-      >
+      <button [disabled]="!addDecisionForm.valid" color="accent" mat-raised-button style="width: 100%; text-align: center" type="submit">
         {{ 'ADD' | translate }}
         <mat-icon aria-label="Submit button">library_add</mat-icon>
       </button>
     </div>
   </form>
 
+  <app-divider></app-divider>
+
   <mat-list>
-    <mat-list-item *ngFor="let standardDecision of standardDecisions">
-      <div matListAvatar [style.background-color]="standardDecision.color"></div>
-      <span matLine>{{ standardDecision.decision }}</span>
+    <mat-list-item *ngFor="let decision of decisions">
+      <div matListAvatar [style.background-color]="decision.color"></div>
+      <span matLine>{{ decision.decision }}</span>
       <span matLine
         >{{ 'EVENTS_STANDARD_DECISIONS_MANAGEMENT_ADD_STANDARD_DECISION_SHOW_IN_CALENDAR' | translate }} :
-        {{ standardDecision.showInCalendar | boolean }}</span
+        {{ decision.showInCalendar | boolean }}</span
       >
       <button
-        #removeStandardDecisionButton
-        (click)="removeStandardDecision(standardDecision.id, removeStandardDecisionButton)"
+        (click)="removeDecision(decision)"
         mat-icon-button
         matTooltip="{{ 'EVENTS_STANDARD_DECISIONS_MANAGEMENT_REMOVE_STANDARD_DECISION_BUTTON_TOOLTIP' | translate }}"
         matTooltipPosition="right"
@@ -69,9 +63,4 @@
       <mat-divider></mat-divider>
     </mat-list-item>
   </mat-list>
-
-  <mat-progress-bar *ngIf="loadingStandardDecisions" mode="indeterminate"></mat-progress-bar>
-</div>
-<div mat-dialog-actions style="margin-top: 15px">
-  <button [mat-dialog-close] mat-button>{{ 'CLOSE' | translate }}</button>
-</div>
+</mat-expansion-panel>

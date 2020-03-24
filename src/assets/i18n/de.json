@@ -22,6 +22,7 @@
   "DELETE": "Löschen",
   "COLOR_PICKER": "Colorpicker",
   "NO_DATA": "Keine Daten",
+  "INFORMATION": "Information!",
 
   "LANGUAGE": "Sprache",
   "LANGUAGE_GERMAN": "Deutsch",
@@ -544,7 +545,7 @@
 
   "EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DESCRIPTION": "Beschreibung",
   "EVENTS_ADMINISTRATION_CREATE_EVENT_GROUPS": "Gruppeneinteilung",
-  "EVENTS_ADMINISTRATION_CREATE_EVENT_GROUPS_DESCRIPTION": "Sollte keine Gruppe ausgewäht werden gilt das Event für alle Mitglieder",
+  "EVENTS_ADMINISTRATION_CREATE_EVENT_GROUPS_DESCRIPTION": "Sollte keine Gruppe ausgewäht werden gilt das Event für alle Mitglieder!",
   "EVENTS_ADMINISTRATION_CREATE_EVENT_GROUPS_FREE": "Alle Gruppen und Register",
   "EVENTS_ADMINISTRATION_CREATE_EVENT_GROUPS_FREE_EMPTY": "Es wurden alle Gruppen und Register ausgewählt.",
   "EVENTS_ADMINISTRATION_CREATE_EVENT_GROUPS_JOINED": "Ausgewählte Gruppen und Register",
@@ -554,7 +555,7 @@
   "EVENTS_ADMINISTRATION_UPDATE_EVENT": "Bearbeite das Event ",
   "EVENTS_ADMINISTRATION_UPDATE_EVENT_SUCCESSFULLY_UPDATED": "Das Event wurde erfolgreich gespeichert!",
 
-  "EVENTS_ADMINISTRATION_DELETE_EVENT_TITLE": "Willst du dieses Event wirklich löschen?",
+  "EVENTS_ADMINISTRATION_DELETE_EVENT_QUESTION": "Willst du dieses Event wirklich löschen?",
   "EVENTS_ADMINISTRATION_DELETE_EVENT_SUCCESSFULLY_DELETED": "Das Event wurde erfolgreich gelöscht!",
 
   "EVENTS_ADMINISTRATION_USER_MANAGEMENT_FOR_EVENT": "Benutzerverwaltung für ",
@@ -572,5 +573,6 @@
   "EVENTS_ADMINISTRATION_INFO_EVENT_COMPLETE_USERS_TABLE": "Alle Mitglieder",
   "EVENTS_ADMINISTRATION_INFO_EVENT_FIRSTNAME": "Vorname",
   "EVENTS_ADMINISTRATION_INFO_EVENT_SURNAME": "Nachname",
-  "EVENTS_ADMINISTRATION_INFO_EVENT_DECISION": "Antwort"
+  "EVENTS_ADMINISTRATION_INFO_EVENT_DECISION": "Antwort",
+  "EVENTS_ADMINISTRATION_INFO_EVENT_SHOW_ADMINISTRATION_MODE": "Administrations-Modus"
 }

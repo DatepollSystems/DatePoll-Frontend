@@ -1,4 +1,5 @@
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
+import {MatSlideToggleChange} from '@angular/material/slide-toggle';
 import {Subscription} from 'rxjs';
 
 import {Permissions} from '../../../permissions';
@@ -35,6 +36,8 @@ export class EventInfoComponent implements OnInit, OnDestroy {
   resultGroups: EventResultGroup[];
   sortedResultGroups: EventResultGroup[];
   searchValue = '';
+
+  showAdminModeInResultUserTable = false;
 
   public myUserService: MyUserService;
   public EVENTS_ADMINISTRATION_PERMISSION = Permissions.EVENTS_ADMINISTRATION;
@@ -90,5 +93,9 @@ export class EventInfoComponent implements OnInit, OnDestroy {
 
   trackByFn(inde, item) {
     return item.id;
+  }
+
+  changeAdminMode(ob: MatSlideToggleChange) {
+    this.showAdminModeInResultUserTable = ob.checked;
   }
 }

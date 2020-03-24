@@ -11,13 +11,23 @@
       [decisions]="resultSubgroup.event.getDecisions()"
     ></app-result-user-bar-chart>
 
+    <div
+      fxLayout="row"
+      fxLayoutAlign="end"
+      *ngIf="this.myUserService.hasPermission(ROOT_PERMISSION) || this.myUserService.hasPermission(EVENTS_ADMINISTRATION_PERMISSION)"
+    >
+      <mat-slide-toggle (change)="changeAdminMode($event)" labelPosition="before">
+        {{ 'EVENTS_ADMINISTRATION_INFO_EVENT_SHOW_ADMINISTRATION_MODE' | translate }}
+      </mat-slide-toggle>
+    </div>
+
     <app-result-user-table
       [resultUsers]="resultSubgroup.getResultUsers()"
       [decisions]="resultSubgroup.event.getDecisions()"
       *ngIf="
         resultSubgroup != null &&
-        !this.myUserService.hasPermission(ROOT_PERMISSION) &&
-        !this.myUserService.hasPermission(EVENTS_ADMINISTRATION_PERMISSION)
+        (!showAdminModeInResultUserTable ||
+          (!this.myUserService.hasPermission(ROOT_PERMISSION) && !this.myUserService.hasPermission(EVENTS_ADMINISTRATION_PERMISSION)))
       "
     >
     </app-result-user-table>
@@ -25,6 +35,7 @@
     <app-event-user-management
       *ngIf="
         resultSubgroup != null &&
+        showAdminModeInResultUserTable &&
         (this.myUserService.hasPermission(ROOT_PERMISSION) || this.myUserService.hasPermission(EVENTS_ADMINISTRATION_PERMISSION))
       "
       [resultUsers]="resultSubgroup.getResultUsers()"

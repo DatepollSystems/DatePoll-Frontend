@@ -1,4 +1,5 @@
 import {Component, Input, OnChanges, OnInit} from '@angular/core';
+import {MatSlideToggleChange} from '@angular/material/slide-toggle';
 
 import {Permissions} from '../../../../permissions';
 import {MyUserService} from '../../../my-user.service';
@@ -24,6 +25,8 @@ export class GroupInfoCardComponent implements OnInit, OnChanges {
   public myUserService: MyUserService;
   public EVENTS_ADMINISTRATION_PERMISSION = Permissions.EVENTS_ADMINISTRATION;
   public ROOT_PERMISSION = Permissions.ROOT_ADMINISTRATION;
+
+  showAdminModeInResultUserTable = false;
 
   constructor(myUserService: MyUserService) {
     this.myUserService = myUserService;
@@ -51,5 +54,9 @@ export class GroupInfoCardComponent implements OnInit, OnChanges {
 
   trackByFn(inde, item) {
     return item.id;
+  }
+
+  changeAdminMode(ob: MatSlideToggleChange) {
+    this.showAdminModeInResultUserTable = ob.checked;
   }
 }

@@ -27,13 +27,23 @@
           <mat-panel-title> {{ 'EVENTS_ADMINISTRATION_INFO_EVENT_MEMBERS_IN' | translate }} {{ resultGroup.name }} </mat-panel-title>
         </mat-expansion-panel-header>
 
+        <div
+          fxLayout="row"
+          fxLayoutAlign="end"
+          *ngIf="this.myUserService.hasPermission(ROOT_PERMISSION) || this.myUserService.hasPermission(EVENTS_ADMINISTRATION_PERMISSION)"
+        >
+          <mat-slide-toggle (change)="changeAdminMode($event)" labelPosition="before">
+            {{ 'EVENTS_ADMINISTRATION_INFO_EVENT_SHOW_ADMINISTRATION_MODE' | translate }}
+          </mat-slide-toggle>
+        </div>
+
         <app-result-user-table
           [resultUsers]="resultGroup.getResultUsers()"
           [decisions]="resultGroup.event.getDecisions()"
           *ngIf="
             resultGroup != null &&
-            !this.myUserService.hasPermission(ROOT_PERMISSION) &&
-            !this.myUserService.hasPermission(EVENTS_ADMINISTRATION_PERMISSION)
+            (!showAdminModeInResultUserTable ||
+              (!this.myUserService.hasPermission(ROOT_PERMISSION) && !this.myUserService.hasPermission(EVENTS_ADMINISTRATION_PERMISSION)))
           "
         >
         </app-result-user-table>
@@ -41,6 +51,7 @@
         <app-event-user-management
           *ngIf="
             resultGroup != null &&
+            showAdminModeInResultUserTable &&
             (this.myUserService.hasPermission(ROOT_PERMISSION) || this.myUserService.hasPermission(EVENTS_ADMINISTRATION_PERMISSION))
           "
           [resultUsers]="resultGroup.getResultUsers()"

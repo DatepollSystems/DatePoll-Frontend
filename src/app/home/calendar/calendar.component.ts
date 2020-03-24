@@ -11,7 +11,6 @@ import {MovieDeleteModalComponent} from '../cinema/movie-administration/movie-de
 import {MovieEditModalComponent} from '../cinema/movie-administration/movie-edit-modal/movie-edit-modal.component';
 import {MovieInfoModalComponent} from '../cinema/movie-administration/movie-info-modal/movie-info-modal.component';
 import {EventInfoModalComponent} from '../events/event-info/event-info-modal/event-info-modal.component';
-import {EventDeleteModalComponent} from '../events/events-administration/event-delete-modal/event-delete-modal.component';
 import {EventUpdateModalComponent} from '../events/events-administration/event-update-modal/event-update-modal.component';
 
 import {Permissions} from '../../permissions';
@@ -203,9 +202,7 @@ export class CalendarComponent implements OnInit, OnDestroy {
               {
                 label: '[&#10060;]',
                 onClick: ({event}: {event: CalendarEvent}): void => {
-                  this.bottomSheet.open(EventDeleteModalComponent, {
-                    data: {eventID: this.avents[i].id}
-                  });
+                  // TODO: Calendar event delete click
                 }
               }
             ];

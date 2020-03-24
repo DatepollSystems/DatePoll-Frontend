@@ -3,8 +3,8 @@ import {NgForm} from '@angular/forms';
 
 import {NotificationsService} from 'angular2-notifications';
 
-import {TranslateService} from '../../../translation/translate.service';
-import {Decision} from '../models/decision.model';
+import {TranslateService} from '../../../../translation/translate.service';
+import {Decision} from '../../models/decision.model';
 
 @Component({
   selector: 'app-event-decisions-list',
@@ -23,7 +23,7 @@ export class EventDecisionsListComponent implements OnInit {
   constructor(private notificationsService: NotificationsService, private translate: TranslateService) {}
 
   ngOnInit(): void {
-    this.i = this.decisions.length - 2 * this.decisions.length - 1;
+    this.i = Math.random();
   }
 
   showInCalendarChange(e) {

@@ -1,9 +1,9 @@
-import {Component, OnDestroy, TemplateRef, ViewChild} from '@angular/core';
+import {Component, OnDestroy} from '@angular/core';
 import {NgForm} from '@angular/forms';
 import {MatDialogRef} from '@angular/material';
 import {Subscription} from 'rxjs';
 
-import {NotificationsService, NotificationType} from 'angular2-notifications';
+import {NotificationsService} from 'angular2-notifications';
 
 import {TranslateService} from '../../../../translation/translate.service';
 import {GroupsService} from '../../../management/groups-management/groups.service';
@@ -21,8 +21,6 @@ import {Event} from '../../models/event.model';
   styleUrls: ['./event-create-modal.component.css']
 })
 export class EventCreateModalComponent implements OnDestroy {
-  @ViewChild('successfullyCreatedEvent', {static: true}) successfullyCreatedEvent: TemplateRef<any>;
-
   startDate: Date;
   endDate: Date;
 
@@ -108,7 +106,7 @@ export class EventCreateModalComponent implements OnDestroy {
       }
     }
 
-    setTimeout(function() {
+    setTimeout(() => {
       // Check if elements are not null because if the user close the modal before the timeout, there will be thrown an error
       if (document.getElementById('joined-list') != null && document.getElementById('free-list') != null) {
         document.getElementById('joined-list').style.height = document.getElementById('free-list').clientHeight.toString() + 'px';
@@ -153,7 +151,10 @@ export class EventCreateModalComponent implements OnDestroy {
       (response: any) => {
         console.log(response);
         this.eventsService.fetchEvents();
-        this.notificationsService.html(this.successfullyCreatedEvent, NotificationType.Success, null, 'success');
+        this.notificationsService.success(
+          this.translate.getTranslationFor('SUCCESSFULLY'),
+          this.translate.getTranslationFor('EVENTS_ADMINISTRATION_CREATE_EVENT_SUCCESSFULLY_CREATED')
+        );
 
         const id = response.event.id;
 

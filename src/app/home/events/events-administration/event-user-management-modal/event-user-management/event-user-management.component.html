@@ -1,15 +1,15 @@
-<div fxLayout="row" fxLayout.xs="column" fxLayoutGap="2%">
-  <mat-form-field fxFlex="70%" fxFlex.md="55%" fxFlex.xs="100%">
+<div fxLayout="row wrap" fxLayoutGap="2%" fxLayoutAlign="start">
+  <mat-form-field fxFlex="65%" fxFlex.lt-md="50%" fxFlex.xs="100%">
     <input (keyup)="applyFilter($event.target.value)" matInput placeholder="{{ 'MANAGEMENT_USERS_SEARCH' | translate }}" />
   </mat-form-field>
 
-  <div fxFlex="20%" fxFlex.md="35%" fxFlex.xs="100%">
+  <div fxFlex="15%" fxFlex.lt-md="30%" fxFlex.xs="65%">
     <button mat-flat-button color="primary" style="width: 100%" (click)="onVote()" [class.spinner]="savingVoting" [disabled]="savingVoting">
       {{ 'EVENTS_ADMINISTRATION_USER_MANAGEMENT_FOR_EVENT_VOTE' | translate }}
     </button>
   </div>
 
-  <div fxFlex="10%" fxFlex.md="20%" fxFlex.xs="100%">
+  <div fxFlex="10%" fxFlex.lt-md="15%" fxFlex.xs="30%">
     <button
       mat-stroked-button
       aria-label="Remove votings for selected users"

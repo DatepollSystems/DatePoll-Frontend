@@ -1,15 +1,16 @@
-import {Component, Inject, OnDestroy, TemplateRef, ViewChild} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
+import {Component, Inject, OnDestroy} from '@angular/core';
 import {NgForm} from '@angular/forms';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {Subscription} from 'rxjs';
 
-import {NotificationsService, NotificationType} from 'angular2-notifications';
+import {NotificationsService} from 'angular2-notifications';
 
+import {TranslateService} from '../../../../translation/translate.service';
 import {EventsService} from '../../events.service';
 
-import {Event} from '../../models/event.model';
 import {Decision} from '../../models/decision.model';
 import {EventDate} from '../../models/event-date.model';
+import {Event} from '../../models/event.model';
 
 @Component({
   selector: 'app-event-update-modal',
@@ -17,8 +18,6 @@ import {EventDate} from '../../models/event-date.model';
   styleUrls: ['./event-update-modal.component.css']
 })
 export class EventUpdateModalComponent implements OnDestroy {
-  @ViewChild('successfullyUpdatedEvent', {static: true}) successfullyUpdatedEvent: TemplateRef<any>;
-
   event: Event;
 
   name: string;
@@ -42,8 +41,9 @@ export class EventUpdateModalComponent implements OnDestroy {
     @Inject(MAT_DIALOG_DATA) public data: any,
     private dialogRef: MatDialogRef<EventUpdateModalComponent>,
     private notificationsService: NotificationsService,
-    private eventsService: EventsService) {
-
+    private translate: TranslateService,
+    private eventsService: EventsService
+  ) {
     this.event = data.event;
     this.name = this.event.name;
     this.description = this.event.description;
@@ -54,11 +54,11 @@ export class EventUpdateModalComponent implements OnDestroy {
 
     this.joined = this.eventsService.getJoinedOfEvent(this.event.id);
     this.joinedCopy = this.joined.slice();
-    this.joinedSubscription = this.eventsService.joinedGroupsChange.subscribe((value) => {
+    this.joinedSubscription = this.eventsService.joinedGroupsChange.subscribe(value => {
       this.joined = value;
       this.joinedCopy = this.joined.slice();
 
-      setTimeout(function () {
+      setTimeout(() => {
         // Check if elements are not null because if the user close the modal before the timeout, there will be thrown an error
         if (document.getElementById('joined-list') != null && document.getElementById('free-list') != null) {
           document.getElementById('joined-list').style.height = document.getElementById('free-list').clientHeight.toString() + 'px';
@@ -70,11 +70,11 @@ export class EventUpdateModalComponent implements OnDestroy {
 
     this.free = this.eventsService.getFreeOfEvent(this.event.id);
     this.freeCopy = this.free.slice();
-    this.freeSubscription = this.eventsService.freeGroupsChange.subscribe((value) => {
+    this.freeSubscription = this.eventsService.freeGroupsChange.subscribe(value => {
       this.free = value;
       this.freeCopy = this.free.slice();
 
-      setTimeout(function () {
+      setTimeout(() => {
         // Check if elements are not null because if the user close the modal before the timeout, there will be thrown an error
         if (document.getElementById('joined-list') != null && document.getElementById('free-list') != null) {
           document.getElementById('free-list').style.height = document.getElementById('joined-list').clientHeight.toString() + 'px';
@@ -116,7 +116,7 @@ export class EventUpdateModalComponent implements OnDestroy {
     const name = form.controls.name.value;
     const description = form.controls.description.value;
 
-    const forEveryone = (this.joined.length === 0);
+    const forEveryone = this.joined.length === 0;
 
     const event = new Event(this.event.id, name, this.startDate, this.endDate, forEveryone, description, this.decisions, this.dates);
     console.log(event);
@@ -124,12 +124,15 @@ export class EventUpdateModalComponent implements OnDestroy {
       (response: any) => {
         console.log(response);
         this.eventsService.fetchEvents();
-        this.notificationsService.html(this.successfullyUpdatedEvent, NotificationType.Success, null, 'success');
+        this.notificationsService.success(
+          this.translate.getTranslationFor('SUCCESSFULLY'),
+          this.translate.getTranslationFor('EVENTS_ADMINISTRATION_UPDATE_EVENT_SUCCESSFULLY_UPDATED')
+        );
       },
-      (error) => console.log(error)
+      error => console.log(error)
     );
 
-    /** Groups and subgroups **/
+    // Groups and subgroups
     for (let i = 0; i < this.joined.length; i++) {
       const group = this.joined[i];
 
@@ -153,14 +156,14 @@ export class EventUpdateModalComponent implements OnDestroy {
             (data: any) => {
               console.log(data);
             },
-            (error) => console.log(error)
+            error => console.log(error)
           );
         } else {
           this.eventsService.addSubgroupToEvent(this.event.id, group.id).subscribe(
             (data: any) => {
               console.log(data);
             },
-            (error) => console.log(error)
+            error => console.log(error)
           );
         }
       }
@@ -189,14 +192,14 @@ export class EventUpdateModalComponent implements OnDestroy {
             (data: any) => {
               console.log(data);
             },
-            (error) => console.log(error)
+            error => console.log(error)
           );
         } else {
           this.eventsService.removeSubgroupFromEvent(this.event.id, group.id).subscribe(
             (data: any) => {
               console.log(data);
             },
-            (error) => console.log(error)
+            error => console.log(error)
           );
         }
       }
