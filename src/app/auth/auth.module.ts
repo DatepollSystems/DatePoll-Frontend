@@ -11,9 +11,10 @@ import {AuthRoutingModule} from './auth-routing.module';
 
 import {ForgotPasswordComponent} from './forgot-password/forgot-password.component';
 import {SigninComponent} from './signin/signin.component';
+import {MobileAppBottomSheetComponent} from './signin/mobile-app-bottom-sheet/mobile-app-bottom-sheet.component';
 
 @NgModule({
-  declarations: [SigninComponent, ForgotPasswordComponent],
+  declarations: [SigninComponent, ForgotPasswordComponent, MobileAppBottomSheetComponent],
   imports: [
     CommonModule,
     FormsModule,

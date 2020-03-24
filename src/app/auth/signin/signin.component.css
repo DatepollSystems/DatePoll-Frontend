@@ -1,19 +1,14 @@
-@font-face {
-  font-family: signFont;
-  src: url('../../../assets/fonts/signFont.TTF');
-}
-
 #signin-container {
-  background: url("../../../assets/signBackground.svg") no-repeat;
+  background: url('../../../assets/signBackground.svg') no-repeat;
   background-size: cover;
   height: 100%;
-  width: 100%;
+  min-width: 100%;
   padding-top: 15vh;
 }
 
 .projectName {
-  font-family: signFont, monospace;
-  font-size: 2vh;
+  font-family: monospace;
+  line-height: 1.1;
   border-left-style: solid;
   border-color: #26a69a;
   padding-left: 1vh;
