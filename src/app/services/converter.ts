@@ -1,3 +1,5 @@
+import {Browser} from './browser';
+
 export class Converter {
   public static getDateFormattedWithHoursMinutesAndSeconds(date: Date): string {
     const d = new Date(date);
@@ -49,11 +51,8 @@ export class Converter {
 
   public static getIOSDate(value: string): Date {
     let temp = value.toString().replace(' ', 'T');
-    const ua = navigator.userAgent.toLowerCase();
-    if (ua.indexOf('safari') !== -1) {
-      if (ua.indexOf('chrome') < -1) {
-        temp += '.000+02:00';
-      }
+    if (Browser.getInfos().name.includes('Safari')) {
+      temp += '.000+02:00';
     }
     return new Date(temp);
   }
