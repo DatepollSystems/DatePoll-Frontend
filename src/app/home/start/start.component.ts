@@ -1,5 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {MatBottomSheet, MatDialog} from '@angular/material';
+import {Router} from '@angular/router';
 
 import {Subscription} from 'rxjs';
 
@@ -17,7 +18,6 @@ import {HomeBookingsModel} from './bookings.model';
 import {IsMobileService} from '../../services/is-mobile.service';
 import {EventInfoModalComponent} from '../events/event-info/event-info-modal/event-info-modal.component';
 import {EventsVoteForDecisionModalComponent} from '../events/events-view/events-vote-for-decision-modal/events-vote-for-decision-modal.component';
-import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-start',
@@ -102,6 +102,14 @@ export class StartComponent implements OnInit, OnDestroy {
     this.isMobileSubscription.unsubscribe();
 
     document.getElementById('my-container').style.background = 'none';
+  }
+
+  onEventItemClick(event: Event) {
+    if (event.alreadyVotedFor) {
+      this.cancelEventVoting(event, null);
+    } else {
+      this.onEventVote(event);
+    }
   }
 
   onEventInfo(event: Event) {

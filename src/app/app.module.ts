@@ -6,12 +6,9 @@ import {BrowserModule} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 import {SimpleNotificationsModule} from 'angular2-notifications';
-import {MaterialModule} from './material-module';
 
 import {AppRoutingModule} from './app-routing.module';
-
-import {FooterModule} from './footer/footer.module';
-import {CommonEventsComponentsModule} from './home/events/common-events-components.module';
+import {MaterialModule} from './material-module';
 import {TranslationModule} from './translation/translation.module';
 
 import {NoSanitizePipe} from './no-sanitize.pipe';
@@ -38,35 +35,21 @@ import {MAT_SNACK_BAR_DEFAULT_OPTIONS} from '@angular/material/snack-bar';
 
 import {AppComponent} from './app.component';
 import {BrowserCompatibilityModalComponent} from './browser-compatibility-modal/browser-compatibility-modal.component';
-import {HomeComponent} from './home/home.component';
-import {StartComponent} from './home/start/start.component';
-import {TableBookingsRowComponent} from './home/start/table-bookings-row/table-bookings-row.component';
 import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
 
 registerLocaleData(localeDe);
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    PageNotFoundComponent,
-    HomeComponent,
-    StartComponent,
-    NoSanitizePipe,
-    TableBookingsRowComponent,
-    BrowserCompatibilityModalComponent
-  ],
+  declarations: [AppComponent, PageNotFoundComponent, NoSanitizePipe, BrowserCompatibilityModalComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
     MaterialModule,
     TranslationModule,
-    FooterModule,
-    CommonEventsComponentsModule,
     AppRoutingModule,
     SimpleNotificationsModule.forRoot({
-      // position: ['top', 'right'],
-      timeOut: 5000
+      timeOut: 2000
     })
   ],
   entryComponents: [BrowserCompatibilityModalComponent],

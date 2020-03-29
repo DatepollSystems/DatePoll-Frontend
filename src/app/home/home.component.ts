@@ -1,5 +1,4 @@
-import {Component, NgZone, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {MatSidenav} from '@angular/material/sidenav';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {Subscription} from 'rxjs';
 
 import {AuthService} from '../auth/auth.service';
@@ -14,7 +13,6 @@ import {MyUserService} from './my-user.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit, OnDestroy {
-  private sidenav: MatSidenav;
   @ViewChild('sidenav', {static: true})
   navBarOpened = false;
   navBarMode = 'over';
@@ -48,7 +46,6 @@ export class HomeComponent implements OnInit, OnDestroy {
   isMobileSubscription: Subscription;
 
   constructor(
-    private ngZone: NgZone,
     myUserService: MyUserService,
     private authService: AuthService,
     private settingsService: SettingsService,
