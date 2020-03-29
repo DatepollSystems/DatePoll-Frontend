@@ -1,12 +1,14 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 
+import {AuthGuard} from '../auth/auth-guard.service';
 import {HomeComponent} from './home.component';
 
 const homeRoutes: Routes = [
   {
     path: '',
     component: HomeComponent,
+    canActivate: [AuthGuard],
     children: [
       {path: '', pathMatch: 'full', loadChildren: () => import('./start/start.module').then(m => m.StartModule), data: {preload: true}},
       {path: 'cinema', loadChildren: () => import('./cinema/cinema.module').then(m => m.CinemaModule), data: {preload: true}},
