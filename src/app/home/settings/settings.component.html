@@ -1,77 +1,36 @@
-<div class="row justify-content-around">
-  <div class="col-12 col-sm-12 col-md-6 col-lg-5">
-    <mat-card class="mat-elevation-z3" style="margin-bottom: 15px;">
-      <mat-card-title>
-        <mat-icon style="color: #2196F3" svgIcon="account-card-details"></mat-icon>
-        {{ 'SETTINGS_PERSONAL_DATA' | translate }}
-      </mat-card-title>
+<div fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="space-around" fxLayoutGap.lt-md="5%">
+  <mat-card class="mat-elevation-z3" fxFlex="45%" fxFlexAlign="stretch">
+    <mat-card-title>
+      <mat-icon>account_circle</mat-icon>
+      {{ 'SETTINGS_PERSONAL_DATA' | translate }}
+    </mat-card-title>
 
-      <mat-card-content class="mat-typography">
-        <div class="row">
-          <div class="col-12">{{ 'SETTINGS_PERSONAL_DATA_DESCRIPTION' | translate }}</div>
-        </div>
+    <mat-card-content fxLayout="column" fxLayoutGap="2%">
+      <h4>{{ 'SETTINGS_PERSONAL_DATA_DESCRIPTION' | translate }}</h4>
 
-        <br />
+      <button mat-stroked-button (click)="openPersonalDataModal()">{{ 'SETTINGS_PERSONAL_DATA_PERSONAL_DATA_CHANGE' | translate }}</button>
 
-        <div class="row">
-          <div class="col-12">
-            <a (click)="openPersonalDataModal()">{{ 'SETTINGS_PERSONAL_DATA_PERSONAL_DATA_CHANGE' | translate }}</a>
-          </div>
-        </div>
+      <button mat-stroked-button (click)="openPhoneNumberModal()">{{ 'SETTINGS_PERSONAL_DATA_PERSONAL_NUMBER_CHANGE' | translate }}</button>
 
-        <div class="row">
-          <div class="col-12">
-            <a (click)="openPhoneNumberModal()">{{ 'SETTINGS_PERSONAL_DATA_PERSONAL_NUMBER_CHANGE' | translate }}</a>
-          </div>
-        </div>
+      <button mat-stroked-button (click)="openEmailAddressModal()">
+        {{ 'SETTINGS_PERSONAL_DATA_PERSONAL_EMAIL_ADDRESSES_CHANGE' | translate }}
+      </button>
+    </mat-card-content>
+  </mat-card>
 
-        <div class="row">
-          <div class="col-12">
-            <a (click)="openEmailAddressModal()">{{ 'SETTINGS_PERSONAL_DATA_PERSONAL_EMAIL_ADDRESSES_CHANGE' | translate }}</a>
-          </div>
-        </div>
-      </mat-card-content>
-    </mat-card>
-  </div>
+  <mat-card class="mat-elevation-z3" fxFlex="45%">
+    <mat-card-title>
+      <mat-icon>security</mat-icon>
+      {{ 'SETTINGS_SECURITY' | translate }}
+    </mat-card-title>
 
-  <div class="col-12 col-sm-12 col-md-6 col-lg-5">
-    <mat-card class="mat-elevation-z3">
-      <mat-card-title>
-        <mat-icon style="color: #2196F3" svgIcon="security-lock"></mat-icon>
-        {{ 'SETTINGS_SECURITY' | translate }}
-      </mat-card-title>
+    <mat-card-content fxLayout="column" fxLayoutGap="2%">
+      <h4>{{ 'SETTINGS_SECURITY_DESCRIPTION' | translate }}</h4>
 
-      <mat-card-content>
-        <div class="row">
-          <div class="col-12">{{ 'SETTINGS_SECURITY_DESCRIPTION' | translate }}</div>
-        </div>
-
-        <br />
-
-        <div class="row">
-          <div class="col-12">
-            <a (click)="openPasswordModal()">{{ 'SETTINGS_SECURITY_CHANGE_PASSWORD' | translate }}</a>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col-12">
-            <a (click)="openCalendarTokenModal()">{{ 'SETTINGS_SECURITY_CALENDAR' | translate }}</a>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col-12">
-            <a (click)="onSessionManagementModal()">{{ 'SETTINGS_SECURITY_SESSIONS' | translate }}</a>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col-12">
-            <a (click)="onPrivacySettingsModal()">{{ 'SETTINGS_SECURITY_SETTINGS' | translate }}</a>
-          </div>
-        </div>
-      </mat-card-content>
-    </mat-card>
-  </div>
+      <button mat-stroked-button (click)="openPasswordModal()">{{ 'SETTINGS_SECURITY_CHANGE_PASSWORD' | translate }}</button>
+      <button mat-stroked-button (click)="openCalendarTokenModal()">{{ 'SETTINGS_SECURITY_CALENDAR' | translate }}</button>
+      <button mat-stroked-button (click)="onSessionManagementModal()">{{ 'SETTINGS_SECURITY_SESSIONS' | translate }}</button>
+      <button mat-stroked-button (click)="onPrivacySettingsModal()">{{ 'SETTINGS_SECURITY_SETTINGS' | translate }}</button>
+    </mat-card-content>
+  </mat-card>
 </div>
