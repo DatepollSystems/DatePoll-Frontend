@@ -1,10 +1,12 @@
 import {CommonModule} from '@angular/common';
 import {NgModule} from '@angular/core';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {FormsModule} from '@angular/forms';
 
 import {MaterialModule} from '../../../material-module';
 import {TranslationModule} from '../../../translation/translation.module';
 import {PerformanceBadgesManagementRoutingModule} from './performance-badges-management-routing.module';
+
+import {PerformanceBadgesService} from './performance-badges.service';
 
 import {InstrumentDeleteModalComponent} from './instrument-delete-modal/instrument-delete-modal.component';
 import {InstrumentUpdateModalComponent} from './instrument-update-modal/instrument-update-modal.component';
@@ -20,6 +22,7 @@ import {PerformanceBadgesManagmentComponent} from './performance-badges-managmen
     PerformanceBadgeDeleteModalComponent,
     InstrumentDeleteModalComponent
   ],
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, MaterialModule, TranslationModule, PerformanceBadgesManagementRoutingModule]
+  providers: [PerformanceBadgesService],
+  imports: [CommonModule, FormsModule, MaterialModule, TranslationModule, PerformanceBadgesManagementRoutingModule]
 })
 export class PerformanceBadgesManagementModule {}

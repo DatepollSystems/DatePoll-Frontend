@@ -8,8 +8,6 @@ import {adapterFactory} from 'angular-calendar/date-adapters/date-fns';
 import {MaterialModule} from '../../material-module';
 import {CommonComponentsModule} from '../../services/common-components.module';
 import {TranslationModule} from '../../translation/translation.module';
-import {CommonMovieAdministrationComponentsModule} from '../cinema/movie-administration/common-movie-administration-components.module';
-import {CommonEventsComponentsModule} from '../events/common-events-components.module';
 import {CalendarComponentRoutingModule} from './calendar-component-routing.module';
 import {CalendarAgendaComponent} from './calendar-agenda/calendar-agenda.component';
 import {CalendarComponent} from './calendar.component';
@@ -22,8 +20,6 @@ import {CalendarComponent} from './calendar.component';
     TranslationModule,
     FormsModule,
     CommonComponentsModule,
-    CommonEventsComponentsModule,
-    CommonMovieAdministrationComponentsModule,
     CalendarComponentRoutingModule,
     CalendarModule.forRoot({
       provide: DateAdapter,

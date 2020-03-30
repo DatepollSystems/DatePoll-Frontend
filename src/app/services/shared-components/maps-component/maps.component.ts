@@ -5,8 +5,8 @@ import {icon, Marker} from 'leaflet';
 
 @Component({
   selector: 'app-maps-component',
-  templateUrl: './maps-component.component.html',
-  styleUrls: ['./maps-component.component.css']
+  templateUrl: './maps.component.html',
+  styleUrls: ['./maps.component.css']
 })
 export class MapsComponentComponent implements AfterViewInit {
   private map;

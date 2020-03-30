@@ -1,10 +1,12 @@
 import {CommonModule} from '@angular/common';
 import {NgModule} from '@angular/core';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {FormsModule} from '@angular/forms';
 
 import {MaterialModule} from '../../../material-module';
 import {TranslationModule} from '../../../translation/translation.module';
 import {GroupsManagementRoutingModule} from './groups-management-routing.module';
+
+import {GroupsService} from './groups.service';
 
 import {GroupCreateModalComponent} from './group-create-modal/group-create-modal.component';
 import {GroupDeleteModalComponent} from './group-delete-modal/group-delete-modal.component';
@@ -32,6 +34,7 @@ import {SubgroupUserRoleUpdateModalComponent} from './subgroup-user-list-modal/s
     GroupDeleteModalComponent,
     SubgroupDeleteModalComponent
   ],
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, MaterialModule, TranslationModule, GroupsManagementRoutingModule]
+  providers: [GroupsService],
+  imports: [CommonModule, FormsModule, MaterialModule, TranslationModule, GroupsManagementRoutingModule]
 })
 export class GroupsManagementModule {}

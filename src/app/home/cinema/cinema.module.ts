@@ -10,6 +10,8 @@ import {CustomDateAdapter, MY_DATE_FORMATS} from '../../services/custom-date-ada
 import {TranslationModule} from '../../translation/translation.module';
 import {CinemaRoutingModule} from './cinema-routing.module';
 
+import {CinemaService} from './cinema.service';
+
 import {MovieServiceComponent} from './movie-service/movie-service.component';
 import {MovieBookTicketsModalComponent} from './movie-tickets/movie-ticket/movie-book-tickets-modal/movie-book-tickets-modal.component';
 import {MovieTicketComponent} from './movie-tickets/movie-ticket/movie-ticket.component';
@@ -25,10 +27,6 @@ import {MovieTicketsComponent} from './movie-tickets/movie-tickets.component';
     MovieWeatherforecastModalComponent
   ],
   imports: [CommonModule, FormsModule, MaterialModule, TranslationModule, CommonComponentsModule, CinemaRoutingModule],
-  entryComponents: [MovieBookTicketsModalComponent, MovieWeatherforecastModalComponent],
-  providers: [
-    {provide: DateAdapter, useClass: CustomDateAdapter},
-    {provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS}
-  ]
+  providers: [CinemaService, {provide: DateAdapter, useClass: CustomDateAdapter}, {provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS}]
 })
 export class CinemaModule {}

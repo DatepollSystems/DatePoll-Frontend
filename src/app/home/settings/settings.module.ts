@@ -7,6 +7,8 @@ import {CommonComponentsModule} from '../../services/common-components.module';
 import {TranslationModule} from '../../translation/translation.module';
 import {SettingsRoutingModule} from './settings-routing.module';
 
+import {SessionsService} from './sessions/sessions.service';
+
 import {CalendarTokenComponent} from './calendar-token/calendar-token.component';
 import {EmailAddressComponent} from './email-address/email-address.component';
 import {PasswordComponent} from './password/password.component';
@@ -38,6 +40,7 @@ import {TwoFactorAuthenticationComponent} from './two-factor-authentication/two-
     CommonComponentsModule,
     SettingsRoutingModule
   ],
+  providers: [SessionsService],
   exports: [SettingsComponent]
 })
 export class SettingsModule {}
