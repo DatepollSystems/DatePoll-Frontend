@@ -18,6 +18,7 @@ import {HomeBookingsModel} from './bookings.model';
 import {IsMobileService} from '../../services/is-mobile.service';
 import {EventInfoModalComponent} from '../events/event-info/event-info-modal/event-info-modal.component';
 import {EventsVoteForDecisionModalComponent} from '../events/events-view/events-vote-for-decision-modal/events-vote-for-decision-modal.component';
+import {QuestionDialogComponent} from '../../services/shared-components/question-dialog/question-dialog.component';
 
 @Component({
   selector: 'app-start',
@@ -151,27 +152,52 @@ export class StartComponent implements OnInit, OnDestroy {
   }
 
   cancelEventVoting(event, button: any) {
-    if (this.eventVotingChangeLoading && this.isMobile) {
-      return;
-    }
-    this.eventVotingChangeLoading = true;
-    if (button) {
-      button.disabled = true;
-    }
-    this.eventsUserSerivce.removeDecision(event.id).subscribe(
-      (response: any) => {
-        console.log(response);
-        this.homePageService.fetchData();
-        this.setBackgroundImage();
-        this.notificationsService.success(
-          this.translate.getTranslationFor('SUCCESSFULLY'),
-          this.translate.getTranslationFor('EVENTS_VIEW_EVENT_SUCCESSFULLY_REMOVED_VOTING')
-        );
+    const answers = [
+      {
+        answer: this.translate.getTranslationFor('YES'),
+        value: 'yes'
       },
-      error => {
-        console.log(error);
-        this.eventVotingChangeLoading = false;
+      {
+        answer: this.translate.getTranslationFor('NO'),
+        value: 'no'
       }
-    );
+    ];
+    const question = this.translate.getTranslationFor('EVENTS_CANCEL_VOTING');
+
+    const bottomSheetRef = this.bottomSheet.open(QuestionDialogComponent, {
+      data: {
+        answers,
+        question
+      }
+    });
+
+    bottomSheetRef.afterDismissed().subscribe((value: string) => {
+      if (value != null) {
+        if (value.includes('yes')) {
+          if (this.eventVotingChangeLoading && this.isMobile) {
+            return;
+          }
+          this.eventVotingChangeLoading = true;
+          if (button) {
+            button.disabled = true;
+          }
+          this.eventsUserSerivce.removeDecision(event.id).subscribe(
+            (response: any) => {
+              console.log(response);
+              this.homePageService.fetchData();
+              this.setBackgroundImage();
+              this.notificationsService.success(
+                this.translate.getTranslationFor('SUCCESSFULLY'),
+                this.translate.getTranslationFor('EVENTS_VIEW_EVENT_SUCCESSFULLY_REMOVED_VOTING')
+              );
+            },
+            error => {
+              console.log(error);
+              this.eventVotingChangeLoading = false;
+            }
+          );
+        }
+      }
+    });
   }
 }

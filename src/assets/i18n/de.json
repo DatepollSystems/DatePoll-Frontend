@@ -329,8 +329,8 @@
   "MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_LOCATION_INCORRECT": "Der Ortsname darf weder leer sein, noch mehr als 190 Zeichen haben!",
   "MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_ACTIVITY": "Aktivität",
   "MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_ACTIVITY_INCORRECT": "Die Aktivität darf weder leer sein, noch mehr als 190 Zeichen haben!",
-  "MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_ACTIVATED": "Account aktivieren",
-  "MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_ACTIVATED_DESCRIPTION": "Wenn \"Account aktivieren\" angehakt ist, wird direkt nach der Erstellung des Benutzers eine Einladungsemail versendet.",
+  "MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_ACTIVATED": "Account aktiviert",
+  "MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_ACTIVATED_DESCRIPTION": "Wenn \"Account aktiviert\" angehakt ist, wird direkt nach der Erstellung / Bearbeitung des Benutzers eine Einladungsemail versendet.",
   "MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_PHONE_NUMBERS": "Telefonnummern",
   "MANAGEMENT_USERS_CREATE_USER_MODAL_NO_JOINED_GROUPS": "Das Mitglied ist noch keiner Gruppe oder keinem Register zugeteilt",
   "MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_PERMISSIONS": "Berechtigungen",
@@ -479,12 +479,13 @@
   "EVENTS_VIEW_EVENT_SUCCESSFULLY_REMOVED_VOTING": "Deine Antwort wurde entfernt!",
   "EVENTS_VIEW_EVENT_NO_NEW_VOTINGS": "Alles erledigt!",
   "EVENTS_VIEW_EVENT_CARD_VOTED_FOR": "Abgestimmt für",
-
   "EVENTS_VIEW_EVENT_VOTE_FOR_ADDITIONAL_INFORMATION_ADD": "Zusatzinformation hinzufügen",
   "EVENTS_VIEW_EVENT_VOTE_FOR_ADDITIONAL_INFORMATION_CHANGE": "Zusatzinformation bearbeiten",
   "EVENTS_VIEW_EVENT_VOTE_FOR_ADDITIONAL_INFORMATION_MODAL_TITLE": "Zusatzinformationen",
   "EVENTS_VIEW_EVENT_VOTE_FOR_ADDITIONAL_INFORMATION_MODAL_INFO": "Im nächsten Schritt kannst du dich für eine Antwort entscheiden!",
   "EVENTS_VIEW_EVENT_VOTE_FOR_ADDITIONAL_INFORMATION_MODAL_FORM_PLACEHOLDER": "Zusatzinformationen",
+
+  "EVENTS_CANCEL_VOTING": "Willst du deine Stimme wirklich entfernen?",
 
   "EVENTS_ADMINISTRATION_MENU_REFRESH": "Eventliste aktualisieren",
   "EVENTS_ADMINISTRATION_MENU_SHOW_ALL_EVENTS": "Zeige vergangene Events an",
@@ -498,27 +499,10 @@
   "EVENTS_ADMINISTRATION_TABLE_ACTION_TOOLTIP_EDIT": "Bearbeite dieses Event",
   "EVENTS_ADMINISTRATION_TABLE_ACTION_TOOLTIP_DELETE": "Lösche dieses Event",
 
-  "EVENTS_STANDARD_DECISIONS_MANAGEMENT": "Standard-Antworten-Verwaltung",
-  "EVENTS_STANDARD_DECISIONS_MANAGEMENT_SUCCESSFULLY_ADDED": "Die Standard-Antwort wurde erfolgreich gespeichert!",
-  "EVENTS_STANDARD_DECISIONS_MANAGEMENT_SUCCESSFULLY_REMOVED": "Die Standard-Antwort wurde erfolgreich entfernt!",
-  "EVENTS_STANDARD_DECISIONS_MANAGEMENT_ADD_STANDARD_DECISION": "Antwortmöglichkeit",
-  "EVENTS_STANDARD_DECISIONS_MANAGEMENT_ADD_STANDARD_DECISION_SHOW_IN_CALENDAR": "Kalenderanzeige",
-  "EVENTS_STANDARD_DECISIONS_MANAGEMENT_ADD_STANDARD_DECISION_INCORRECT": "Die Antwortmöglichkeit darf weder leer sein, noch mehr als 190 Zeichen haben.",
-  "EVENTS_STANDARD_DECISIONS_MANAGEMENT_REMOVE_STANDARD_DECISION_BUTTON_TOOLTIP": "Entferne diese Antwortmöglichkeit",
-
-  "EVENTS_STANDARD_LOCATIONS_MANAGEMENT": "Standard-Locations-Verwaltung",
-  "EVENTS_STANDARD_LOCATIONS_MANAGEMENT_NAME": "Name",
-  "EVENTS_STANDARD_LOCATIONS_MANAGEMENT_NAME_INCORRECT": "Der Name darf weder leer sein, noch mehr als 190 Zeichen haben.",
-  "EVENTS_STANDARD_LOCATIONS_MANAGEMENT_SUCCESSFULLY_ADDED": "Die Standard-Location wurde erfolgreich hinzugefügt.",
-  "EVENTS_STANDARD_LOCATIONS_MANAGEMENT_SUCCESSFULLY_REMOVED": "Die Standard-Location wurde erfolgreich entfernt.",
-  "EVENTS_STANDARD_LOCATIONS_MANAGEMENT_NO_LOCATION": "Diese Standard-Location hat keinen verknüpften Standort!",
-  "EVENTS_STANDARD_LOCATIONS_MANAGEMENT_NO_COORDINATES": "Diese Standard-Location hat keine hinterlegten Coordinaten.",
-
   "EVENTS_ADMINISTRATION_CREATE_EVENT": "Lege ein neues Event an",
   "EVENTS_ADMINISTRATION_CREATE_EVENT_SUCCESSFULLY_CREATED": "Das Event wurde erfolgreich angelegt!",
   "EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_NAME": "Name",
   "EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_NAME_INCORRECT": "Der Name darf weder leer sein, noch mehr als 190 Zeichen haben!",
-
   "EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE_TITLE": "Zeiten & Treffpunkte",
   "EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_STANDARD_LOCATION": "Location Vorlagen",
   "EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_APPLY_STANDARD_LOCATION": "Vorlage übernehmen",
@@ -542,7 +526,6 @@
   "EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE_LIST_REQUIRED": "Bitte trage mindestens einen Zeitpunkt ein.",
   "EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE_LIST_DELETE": "Lösche diesen Treffpunkt",
   "EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_COLOR_REQUIRED": "Bitte wählen Sie eine Farbe aus!",
-
   "EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DESCRIPTION": "Beschreibung",
   "EVENTS_ADMINISTRATION_CREATE_EVENT_GROUPS": "Gruppeneinteilung",
   "EVENTS_ADMINISTRATION_CREATE_EVENT_GROUPS_DESCRIPTION": "Sollte keine Gruppe ausgewäht werden gilt das Event für alle Mitglieder!",
@@ -551,7 +534,6 @@
   "EVENTS_ADMINISTRATION_CREATE_EVENT_GROUPS_JOINED": "Ausgewählte Gruppen und Register",
   "EVENTS_ADMINISTRATION_CREATE_EVENT_GROUPS_JOINED_EMPTY": "Wähle eine Gruppe oder ein Register.",
   "EVENTS_ADMINISTRATION_CREATE_EVENT_DECISIONS": "Antwortmöglichkeiten",
-
   "EVENTS_ADMINISTRATION_UPDATE_EVENT": "Bearbeite das Event ",
   "EVENTS_ADMINISTRATION_UPDATE_EVENT_SUCCESSFULLY_UPDATED": "Das Event wurde erfolgreich gespeichert!",
 
@@ -574,5 +556,21 @@
   "EVENTS_ADMINISTRATION_INFO_EVENT_FIRSTNAME": "Vorname",
   "EVENTS_ADMINISTRATION_INFO_EVENT_SURNAME": "Nachname",
   "EVENTS_ADMINISTRATION_INFO_EVENT_DECISION": "Antwort",
-  "EVENTS_ADMINISTRATION_INFO_EVENT_SHOW_ADMINISTRATION_MODE": "Administrations-Modus"
+  "EVENTS_ADMINISTRATION_INFO_EVENT_SHOW_ADMINISTRATION_MODE": "Administrations-Modus",
+
+  "EVENTS_STANDARD_DECISIONS_MANAGEMENT": "Standard-Antworten-Verwaltung",
+  "EVENTS_STANDARD_DECISIONS_MANAGEMENT_SUCCESSFULLY_ADDED": "Die Standard-Antwort wurde erfolgreich gespeichert!",
+  "EVENTS_STANDARD_DECISIONS_MANAGEMENT_SUCCESSFULLY_REMOVED": "Die Standard-Antwort wurde erfolgreich entfernt!",
+  "EVENTS_STANDARD_DECISIONS_MANAGEMENT_ADD_STANDARD_DECISION": "Antwortmöglichkeit",
+  "EVENTS_STANDARD_DECISIONS_MANAGEMENT_ADD_STANDARD_DECISION_SHOW_IN_CALENDAR": "Kalenderanzeige",
+  "EVENTS_STANDARD_DECISIONS_MANAGEMENT_ADD_STANDARD_DECISION_INCORRECT": "Die Antwortmöglichkeit darf weder leer sein, noch mehr als 190 Zeichen haben.",
+  "EVENTS_STANDARD_DECISIONS_MANAGEMENT_REMOVE_STANDARD_DECISION_BUTTON_TOOLTIP": "Entferne diese Antwortmöglichkeit",
+
+  "EVENTS_STANDARD_LOCATIONS_MANAGEMENT": "Standard-Locations-Verwaltung",
+  "EVENTS_STANDARD_LOCATIONS_MANAGEMENT_NAME": "Name",
+  "EVENTS_STANDARD_LOCATIONS_MANAGEMENT_NAME_INCORRECT": "Der Name darf weder leer sein, noch mehr als 190 Zeichen haben.",
+  "EVENTS_STANDARD_LOCATIONS_MANAGEMENT_SUCCESSFULLY_ADDED": "Die Standard-Location wurde erfolgreich hinzugefügt.",
+  "EVENTS_STANDARD_LOCATIONS_MANAGEMENT_SUCCESSFULLY_REMOVED": "Die Standard-Location wurde erfolgreich entfernt.",
+  "EVENTS_STANDARD_LOCATIONS_MANAGEMENT_NO_LOCATION": "Diese Standard-Location hat keinen verknüpften Standort!",
+  "EVENTS_STANDARD_LOCATIONS_MANAGEMENT_NO_COORDINATES": "Diese Standard-Location hat keine hinterlegten Coordinaten."
 }
