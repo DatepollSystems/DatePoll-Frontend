@@ -3,7 +3,7 @@ import {Injectable} from '@angular/core';
 import {tap} from 'rxjs/operators';
 
 import {environment} from '../../environments/environment';
-import {Browser} from '../services/browser';
+import {Browser} from '../utils/browser';
 
 @Injectable({
   providedIn: 'root'

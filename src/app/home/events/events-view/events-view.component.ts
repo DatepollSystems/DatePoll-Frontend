@@ -4,7 +4,7 @@ import {Subscription} from 'rxjs';
 
 import {EventsUserService} from '../events-user.service';
 
-import {IsMobileService} from '../../../services/is-mobile.service';
+import {IsMobileService} from '../../../utils/is-mobile.service';
 import {Event} from '../models/event.model';
 
 @Component({

@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, Output, ViewChild} from '@angular/core';
 import {NgForm} from '@angular/forms';
 
-import {MapsComponentComponent} from '../../../../services/shared-components/maps-component/maps.component';
+import {MapsComponentComponent} from '../../../../utils/shared-components/maps-component/maps.component';
 
 import {EventDate} from '../../models/event-date.model';
 import {EventStandardLocation} from '../../models/event-standard-location.model';

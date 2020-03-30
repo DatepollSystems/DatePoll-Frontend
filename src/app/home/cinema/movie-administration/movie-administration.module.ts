@@ -6,19 +6,17 @@ import {MAT_DATE_FORMATS} from '@angular/material/core';
 
 import {NgxMatSelectSearchModule} from 'ngx-mat-select-search';
 
-import {CustomDateAdapter, MY_DATE_FORMATS} from '../../../services/custom-date-adapter';
+import {CustomDateAdapter, MY_DATE_FORMATS} from '../../../utils/custom-date-adapter';
 import {MaterialModule} from '../../../material-module';
 import {TranslationModule} from '../../../translation/translation.module';
 import {MovieAdministrationRoutingModule} from './movie-administration-routing.module';
-import {CommonComponentsModule} from '../../../services/common-components.module';
+import {CommonComponentsModule} from '../../../utils/common-components.module';
 
 import {CommonMovieAdministrationComponentsModule} from './common-movie-administration-components.module';
 import {MovieAdministrationComponent} from './movie-administration.component';
 
 @NgModule({
-  declarations: [
-    MovieAdministrationComponent
-  ],
+  declarations: [MovieAdministrationComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -32,8 +30,7 @@ import {MovieAdministrationComponent} from './movie-administration.component';
   ],
   providers: [
     {provide: DateAdapter, useClass: CustomDateAdapter},
-    {provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS},
+    {provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS}
   ]
 })
-export class MovieAdministrationModule {
-}
+export class MovieAdministrationModule {}

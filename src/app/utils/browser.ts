@@ -1,13 +1,12 @@
 export class Browser {
-
   public static getInfos(): any {
     const unknown = '-';
 
     // screen
     let screenSize = '';
     if (screen.width) {
-      const width = (screen.width) ? screen.width : '';
-      const height = (screen.height) ? screen.height : '';
+      const width = screen.width ? screen.width : '';
+      const height = screen.height ? screen.height : '';
       screenSize += '' + width + ' x ' + height;
     }
 
@@ -31,28 +30,35 @@ export class Browser {
     if ((verOffset = nAgt.indexOf('OPR')) !== -1) {
       browser = 'Opera';
       version = nAgt.substring(verOffset + 4);
-    } else if ((verOffset = nAgt.indexOf('Edge')) !== -1) { // Edge
+    } else if ((verOffset = nAgt.indexOf('Edge')) !== -1) {
+      // Edge
       browser = 'Microsoft Edge';
       version = nAgt.substring(verOffset + 5);
-    } else if ((verOffset = nAgt.indexOf('MSIE')) !== -1) { // MSIE
+    } else if ((verOffset = nAgt.indexOf('MSIE')) !== -1) {
+      // MSIE
       browser = 'Microsoft Internet Explorer';
       version = nAgt.substring(verOffset + 5);
-    } else if ((verOffset = nAgt.indexOf('Chrome')) !== -1) { // Chrome
+    } else if ((verOffset = nAgt.indexOf('Chrome')) !== -1) {
+      // Chrome
       browser = 'Chrome';
       version = nAgt.substring(verOffset + 7);
-    } else if ((verOffset = nAgt.indexOf('Safari')) !== -1) { // Safari
+    } else if ((verOffset = nAgt.indexOf('Safari')) !== -1) {
+      // Safari
       browser = 'Safari';
       version = nAgt.substring(verOffset + 7);
       if ((verOffset = nAgt.indexOf('Version')) !== -1) {
         version = nAgt.substring(verOffset + 8);
       }
-    } else if ((verOffset = nAgt.indexOf('Firefox')) !== -1) { // Firefox
+    } else if ((verOffset = nAgt.indexOf('Firefox')) !== -1) {
+      // Firefox
       browser = 'Firefox';
       version = nAgt.substring(verOffset + 8);
-    } else if (nAgt.indexOf('Trident/') !== -1) { // MSIE 11
+    } else if (nAgt.indexOf('Trident/') !== -1) {
+      // MSIE 11
       browser = 'Microsoft Internet Explorer';
       version = nAgt.substring(nAgt.indexOf('rv:') + 3);
-    } else if ((nameOffset = nAgt.lastIndexOf(' ') + 1) < (verOffset = nAgt.lastIndexOf('/'))) { // Other browsers
+    } else if ((nameOffset = nAgt.lastIndexOf(' ') + 1) < (verOffset = nAgt.lastIndexOf('/'))) {
+      // Other browsers
       browser = nAgt.substring(nameOffset, verOffset);
       version = nAgt.substring(verOffset + 1);
       if (browser.toLowerCase() === browser.toUpperCase()) {
@@ -80,11 +86,11 @@ export class Browser {
     const mobile = /Mobile|mini|Fennec|Android|iP(ad|od|hone)/.test(nVer);
 
     // cookie
-    let cookieEnabled = (navigator.cookieEnabled);
+    let cookieEnabled = navigator.cookieEnabled;
 
     if (typeof navigator.cookieEnabled === 'undefined' && !cookieEnabled) {
       document.cookie = 'testcookie';
-      cookieEnabled = (document.cookie.indexOf('testcookie') !== -1);
+      cookieEnabled = document.cookie.indexOf('testcookie') !== -1;
     }
 
     // system
@@ -126,13 +132,13 @@ export class Browser {
     }
 
     return {
-      'screensize': screenSize,
-      'name': browser,
-      'version': version,
-      'majorVersion': majorVersion,
-      'mobile': mobile,
-      'os': os,
-      'cookies': cookieEnabled
+      screensize: screenSize,
+      name: browser,
+      version: version,
+      majorVersion: majorVersion,
+      mobile: mobile,
+      os: os,
+      cookies: cookieEnabled
     };
   }
 }

@@ -14,7 +14,7 @@ import {EventInfoModalComponent} from '../events/event-info/event-info-modal/eve
 import {EventUpdateModalComponent} from '../events/events-administration/event-update-modal/event-update-modal.component';
 
 import {Permissions} from '../../permissions';
-import {SettingsService} from '../../services/settings.service';
+import {SettingsService} from '../../utils/settings.service';
 import {CinemaService} from '../cinema/cinema.service';
 import {EventsUserService} from '../events/events-user.service';
 import {EventsService} from '../events/events.service';

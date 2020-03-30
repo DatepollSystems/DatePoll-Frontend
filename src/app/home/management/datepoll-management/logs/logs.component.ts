@@ -1,7 +1,7 @@
 import {Component, OnDestroy} from '@angular/core';
 import {MatBottomSheet} from '@angular/material/bottom-sheet';
 import {Subscription} from 'rxjs';
-import {QuestionDialogComponent} from '../../../../services/shared-components/question-dialog/question-dialog.component';
+import {QuestionDialogComponent} from '../../../../utils/shared-components/question-dialog/question-dialog.component';
 import {TranslateService} from '../../../../translation/translate.service';
 import {Log, LogType} from './log.model';
 import {LogsService} from './logs.service';

@@ -15,10 +15,10 @@ import {Event} from '../events/models/event.model';
 import {HomeBirthdayModel} from './birthdays.model';
 import {HomeBookingsModel} from './bookings.model';
 
-import {IsMobileService} from '../../services/is-mobile.service';
+import {IsMobileService} from '../../utils/is-mobile.service';
 import {EventInfoModalComponent} from '../events/event-info/event-info-modal/event-info-modal.component';
 import {EventsVoteForDecisionModalComponent} from '../events/events-view/events-vote-for-decision-modal/events-vote-for-decision-modal.component';
-import {QuestionDialogComponent} from '../../services/shared-components/question-dialog/question-dialog.component';
+import {QuestionDialogComponent} from '../../utils/shared-components/question-dialog/question-dialog.component';
 
 @Component({
   selector: 'app-start',

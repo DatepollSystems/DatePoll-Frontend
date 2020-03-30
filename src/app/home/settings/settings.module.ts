@@ -3,7 +3,7 @@ import {NgModule} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import {MaterialModule} from '../../material-module';
-import {CommonComponentsModule} from '../../services/common-components.module';
+import {CommonComponentsModule} from '../../utils/common-components.module';
 import {TranslationModule} from '../../translation/translation.module';
 import {SettingsRoutingModule} from './settings-routing.module';
 

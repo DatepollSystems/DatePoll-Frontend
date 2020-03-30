@@ -3,8 +3,8 @@ import {Subject, Subscription} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 
 import {AuthService} from '../../auth/auth.service';
-import {HttpService} from '../../services/http.service';
-import {SettingsService} from '../../services/settings.service';
+import {HttpService} from '../../utils/http.service';
+import {SettingsService} from '../../utils/settings.service';
 import {Movie, MovieBookingUser, WeatherForecast} from './models/movie.model';
 import {Year} from './models/year.model';
 
@@ -30,18 +30,19 @@ export class CinemaService {
   private openWeatherMapKeySubscription: Subscription;
   public fetchedWeatherForecast = false;
 
-  constructor(private authService: AuthService,
-              private httpService: HttpService,
-              private http: HttpClient,
-              private settingsService: SettingsService) {
-
+  constructor(
+    private authService: AuthService,
+    private httpService: HttpService,
+    private http: HttpClient,
+    private settingsService: SettingsService
+  ) {
     this.openweahtermap_api_key = this.settingsService.getOpenWeatherMapKey();
-    this.openWeatherMapKeySubscription = this.settingsService.openWeatherMapKeyChange.subscribe((value) => {
+    this.openWeatherMapKeySubscription = this.settingsService.openWeatherMapKeyChange.subscribe(value => {
       this.openweahtermap_api_key = value;
     });
 
     this.city_id = this.settingsService.getOpenWeatherMapCinemaCityId();
-    this.openWeatherMapCinemaCityIdSubscription = this.settingsService.openWeatherMapCinemaCityIdChange.subscribe((value) => {
+    this.openWeatherMapCinemaCityIdSubscription = this.settingsService.openWeatherMapCinemaCityIdChange.subscribe(value => {
       this.city_id = value;
     });
   }
@@ -89,17 +90,27 @@ export class CinemaService {
           }
 
           const date = new Date(movie.date);
-          const localMovie = new Movie(movie.id, movie.name, date, movie.trailer_link, movie.poster_link, workerID, movie.worker_name,
-            emergencyWorkerID, movie.emergency_worker_name, movie.booked_tickets, movie.movie_year_id);
+          const localMovie = new Movie(
+            movie.id,
+            movie.name,
+            date,
+            movie.trailer_link,
+            movie.poster_link,
+            workerID,
+            movie.worker_name,
+            emergencyWorkerID,
+            movie.emergency_worker_name,
+            movie.booked_tickets,
+            movie.movie_year_id
+          );
 
           movies.push(localMovie);
         }
         this.setMovies(movies);
       },
-      (error) => console.log(error)
+      error => console.log(error)
     );
   }
-
 
   public getMovie(movieID: number) {
     this.fetchMovie(movieID);
@@ -130,8 +141,19 @@ export class CinemaService {
         }
 
         const date = new Date(movie.date);
-        const localMovie = new Movie(movie.id, movie.name, date, movie.trailer_link, movie.poster_link, workerID, movie.worker_name,
-          emergencyWorkerID, movie.emergency_worker_name, movie.booked_tickets, movie.movie_year_id);
+        const localMovie = new Movie(
+          movie.id,
+          movie.name,
+          date,
+          movie.trailer_link,
+          movie.poster_link,
+          workerID,
+          movie.worker_name,
+          emergencyWorkerID,
+          movie.emergency_worker_name,
+          movie.booked_tickets,
+          movie.movie_year_id
+        );
 
         const localBookings = [];
 
@@ -141,7 +163,7 @@ export class CinemaService {
         localMovie.setBookingsUsers(localBookings);
         this.setMovie(localMovie);
       },
-      (error) => console.log(error)
+      error => console.log(error)
     );
   }
 
@@ -149,17 +171,16 @@ export class CinemaService {
     const bookingsDTO = [];
     for (const booking of bookings) {
       const bookingDTO = {
-        'user_id': booking.userID,
-        'ticket_amount': booking.amount
+        user_id: booking.userID,
+        ticket_amount: booking.amount
       };
       bookingsDTO.push(bookingDTO);
     }
     const dto = {
-      'bookings': bookingsDTO
+      bookings: bookingsDTO
     };
     console.log(dto);
-    return this.httpService.loggedInV1POSTRequest('/cinema/administration/movie/' + movieId + '/bookForUsers', dto,
-      'bookForUser');
+    return this.httpService.loggedInV1POSTRequest('/cinema/administration/movie/' + movieId + '/bookForUsers', dto, 'bookForUser');
   }
 
   public cancelBookingForUsers(bookings: MovieBookingUser[], movieId: number) {
@@ -168,13 +189,15 @@ export class CinemaService {
       userIdsDTO.push(booking.userID);
     }
     const dto = {
-      'user_ids': userIdsDTO
+      user_ids: userIdsDTO
     };
 
-    return this.httpService.loggedInV1POSTRequest('/cinema/administration/movie/' + movieId + '/cancelBookingForUsers', dto,
-      'removeBookingForUsers');
+    return this.httpService.loggedInV1POSTRequest(
+      '/cinema/administration/movie/' + movieId + '/cancelBookingForUsers',
+      dto,
+      'removeBookingForUsers'
+    );
   }
-
 
   public getNotShownMovies(): Movie[] {
     this.fetchNotShownMovies();
@@ -210,61 +233,74 @@ export class CinemaService {
           }
 
           const date = new Date(movie.date);
-          const localMovie = new Movie(movie.id, movie.name, date, movie.trailer_link, movie.poster_link, workerID, movie.worker_name,
-            emergencyWorkerID, movie.emergency_worker_name, movie.booked_tickets, movie.movie_year_id);
+          const localMovie = new Movie(
+            movie.id,
+            movie.name,
+            date,
+            movie.trailer_link,
+            movie.poster_link,
+            workerID,
+            movie.worker_name,
+            emergencyWorkerID,
+            movie.emergency_worker_name,
+            movie.booked_tickets,
+            movie.movie_year_id
+          );
           localMovie.bookedTicketsForYourself = movie.booked_tickets_for_yourself;
           movies.push(localMovie);
         }
         this.setNotShownMovies(movies);
       },
-      (error) => console.log(error)
+      error => console.log(error)
     );
   }
 
   public fetchWeatherForecastForNotShownMovies() {
-    this.http.get('https://api.openweathermap.org/data/2.5/forecast?units=metric&lang=de&id=' + this.city_id + '&APPID='
-      + this.openweahtermap_api_key).subscribe(
-      (response: any) => {
-        console.log(response);
+    this.http
+      .get(
+        'https://api.openweathermap.org/data/2.5/forecast?units=metric&lang=de&id=' + this.city_id + '&APPID=' + this.openweahtermap_api_key
+      )
+      .subscribe(
+        (response: any) => {
+          console.log(response);
 
-        for (const tempObject of response.list) {
-          const date = new Date(tempObject.dt_txt);
+          for (const tempObject of response.list) {
+            const date = new Date(tempObject.dt_txt);
 
-          for (const movie of this._notShownMovies) {
-            const maxDate = new Date(movie.date.toDateString());
-            maxDate.setDate(maxDate.getDate() + 1);
-            maxDate.setHours(0);
+            for (const movie of this._notShownMovies) {
+              const maxDate = new Date(movie.date.toDateString());
+              maxDate.setDate(maxDate.getDate() + 1);
+              maxDate.setHours(0);
 
-            const minDate = new Date(movie.date.toDateString());
-            minDate.setHours(18);
+              const minDate = new Date(movie.date.toDateString());
+              minDate.setHours(18);
 
-            if (minDate.getTime() <= date.getTime() && maxDate.getTime() >= date.getTime()) {
-              // console.log(movie.name + ': Date - ' + date + ' | MinDate - ' + minDate.getTime() + ' | MaxDate - '
-              // + maxDate.getTime() + ' | Date: ' + date.getTime());
+              if (minDate.getTime() <= date.getTime() && maxDate.getTime() >= date.getTime()) {
+                // console.log(movie.name + ': Date - ' + date + ' | MinDate - ' + minDate.getTime() + ' | MaxDate - '
+                // + maxDate.getTime() + ' | Date: ' + date.getTime());
 
-              const temperature = tempObject.main.temp;
-              const weather = tempObject.weather[0].description;
-              const cloudy = tempObject.clouds.all;
-              const windSpeed = tempObject.wind.speed;
-              const windDirection = tempObject.wind.deg;
+                const temperature = tempObject.main.temp;
+                const weather = tempObject.weather[0].description;
+                const cloudy = tempObject.clouds.all;
+                const windSpeed = tempObject.wind.speed;
+                const windDirection = tempObject.wind.deg;
 
-              const weatherForecast = new WeatherForecast(temperature, weather, cloudy, windSpeed, windDirection, 0, date);
+                const weatherForecast = new WeatherForecast(temperature, weather, cloudy, windSpeed, windDirection, 0, date);
 
-              const weatherForecasts = movie.getWeatherForecasts();
-              weatherForecasts.push(weatherForecast);
-              movie.setWeatherforecasts(weatherForecasts);
+                const weatherForecasts = movie.getWeatherForecasts();
+                weatherForecasts.push(weatherForecast);
+                movie.setWeatherforecasts(weatherForecasts);
+              }
             }
           }
+
+          this.fetchedWeatherForecast = true;
+        },
+        error => {
+          console.log(error);
         }
-
-        this.fetchedWeatherForecast = true;
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
+      );
   }
-
 
   public addYear(year: any) {
     return this.httpService.loggedInV1POSTRequest('/cinema/administration/year', year, 'addYear');
@@ -294,10 +330,9 @@ export class CinemaService {
         }
         this.setYears(years);
       },
-      (error) => console.log(error)
+      error => console.log(error)
     );
   }
-
 
   public applyForWorker(movieID: number) {
     return this.httpService.loggedInV1POSTRequest('/cinema/worker/' + movieID, {}, 'applyForWorker');

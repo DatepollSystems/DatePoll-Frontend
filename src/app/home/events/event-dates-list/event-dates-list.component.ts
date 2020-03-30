@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnDestroy, Output} from '@angular/core';
 import {Subscription} from 'rxjs';
 
-import {IsMobileService} from '../../../services/is-mobile.service';
+import {IsMobileService} from '../../../utils/is-mobile.service';
 
 import {EventDate} from '../models/event-date.model';
 

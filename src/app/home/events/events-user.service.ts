@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
 import {Subject} from 'rxjs';
 
-import {Converter} from '../../services/converter';
-import {HttpService} from '../../services/http.service';
+import {Converter} from '../../utils/converter';
+import {HttpService} from '../../utils/http.service';
 
 import {Decision} from './models/decision.model';
 import {EventDate} from './models/event-date.model';

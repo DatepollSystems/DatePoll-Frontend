@@ -6,7 +6,5 @@ import {Component} from '@angular/core';
   styleUrls: ['./do-not-forget-to-save.component.css']
 })
 export class DoNotForgetToSaveComponent {
-
-  constructor() {
-  }
+  constructor() {}
 }

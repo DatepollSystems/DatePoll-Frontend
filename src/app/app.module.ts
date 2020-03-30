@@ -15,8 +15,8 @@ import {NoSanitizePipe} from './no-sanitize.pipe';
 
 import {AuthGuard} from './auth/auth-guard.service';
 import {AuthService} from './auth/auth.service';
-import {HttpService} from './services/http.service';
-import {IsMobileService} from './services/is-mobile.service';
+import {HttpService} from './utils/http.service';
+import {IsMobileService} from './utils/is-mobile.service';
 import {TranslateService} from './translation/translate.service';
 
 import {AuthInterceptor} from './auth/auth-interceptor';

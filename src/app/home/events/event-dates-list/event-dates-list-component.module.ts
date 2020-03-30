@@ -4,8 +4,8 @@ import {DateAdapter} from '@angular/material';
 import {MAT_DATE_FORMATS} from '@angular/material/core';
 
 import {MaterialModule} from '../../../material-module';
-import {CustomDateAdapter, MY_DATE_FORMATS} from '../../../services/custom-date-adapter';
-import {MapsModule} from '../../../services/shared-components/maps-component/maps.module';
+import {CustomDateAdapter, MY_DATE_FORMATS} from '../../../utils/custom-date-adapter';
+import {MapsModule} from '../../../utils/shared-components/maps-component/maps.module';
 import {TranslationModule} from '../../../translation/translation.module';
 
 import {EventDatesListComponent} from './event-dates-list.component';

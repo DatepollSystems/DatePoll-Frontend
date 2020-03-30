@@ -5,7 +5,7 @@ import {Router} from '@angular/router';
 import {NotificationsService} from 'angular2-notifications';
 import {Subscription} from 'rxjs';
 
-import {SettingsService} from '../../../services/settings.service';
+import {SettingsService} from '../../../utils/settings.service';
 import {TranslateService} from '../../../translation/translate.service';
 import {MyUserService} from '../../my-user.service';
 

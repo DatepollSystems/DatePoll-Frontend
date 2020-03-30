@@ -7,12 +7,12 @@ import {MAT_DATE_FORMATS} from '@angular/material/core';
 import {NgxMatSelectSearchModule} from 'ngx-mat-select-search';
 
 import {MaterialModule} from '../../../material-module';
-import {CommonComponentsModule} from '../../../services/common-components.module';
-import {CustomDateAdapter, MY_DATE_FORMATS} from '../../../services/custom-date-adapter';
+import {CommonComponentsModule} from '../../../utils/common-components.module';
+import {CustomDateAdapter, MY_DATE_FORMATS} from '../../../utils/custom-date-adapter';
 import {TranslationModule} from '../../../translation/translation.module';
 import {UsersManagementRoutingModule} from './users-management-routing.module';
 
-import {ExcelService} from '../../../services/excel.service';
+import {ExcelService} from '../../../utils/excel.service';
 
 import {InstrumentSelectComponent} from './instrument-select/instrument-select.component';
 import {PerformanceBadgeSelectComponent} from './performance-badge-select/performance-badge-select.component';

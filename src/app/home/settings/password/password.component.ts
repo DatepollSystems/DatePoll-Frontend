@@ -1,5 +1,5 @@
 import {Component, ViewChild} from '@angular/core';
-import {HttpService} from '../../../services/http.service';
+import {HttpService} from '../../../utils/http.service';
 import {NotificationsService} from 'angular2-notifications';
 import {TranslateService} from '../../../translation/translate.service';
 

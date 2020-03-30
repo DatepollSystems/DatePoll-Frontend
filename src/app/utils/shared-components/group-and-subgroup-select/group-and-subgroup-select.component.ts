@@ -7,7 +7,6 @@ import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag
   styleUrls: ['./group-and-subgroup-select.component.css']
 })
 export class GroupAndSubgroupSelectComponent {
-
   @Input()
   joined: any[] = [];
   @Input()
@@ -19,8 +18,7 @@ export class GroupAndSubgroupSelectComponent {
   @Output() joinedChanged = new EventEmitter();
   @Output() freeChanged = new EventEmitter();
 
-  constructor() {
-  }
+  constructor() {}
 
   applyFilter(filterValue: string) {
     for (const group of this.joined) {

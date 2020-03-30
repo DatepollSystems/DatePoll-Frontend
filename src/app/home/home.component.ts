@@ -3,8 +3,8 @@ import {Subscription} from 'rxjs';
 
 import {AuthService} from '../auth/auth.service';
 import {Permissions} from '../permissions';
-import {IsMobileService} from '../services/is-mobile.service';
-import {SettingsService} from '../services/settings.service';
+import {IsMobileService} from '../utils/is-mobile.service';
+import {SettingsService} from '../utils/settings.service';
 import {MyUserService} from './my-user.service';
 
 @Component({

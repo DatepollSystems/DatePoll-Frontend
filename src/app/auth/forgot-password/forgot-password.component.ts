@@ -6,7 +6,7 @@ import {Subscription} from 'rxjs';
 
 import {NotificationsService} from 'angular2-notifications';
 import {environment} from '../../../environments/environment';
-import {SettingsService} from '../../services/settings.service';
+import {SettingsService} from '../../utils/settings.service';
 import {TranslateService} from '../../translation/translate.service';
 
 @Component({

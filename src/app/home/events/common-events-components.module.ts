@@ -8,11 +8,11 @@ import {RouterModule} from '@angular/router';
 import {NgxMatSelectSearchModule} from 'ngx-mat-select-search';
 
 import {MaterialModule} from '../../material-module';
-import {CommonComponentsModule} from '../../services/common-components.module';
-import {CustomDateAdapter, MY_DATE_FORMATS} from '../../services/custom-date-adapter';
-import {ColorPickerComponentModule} from '../../services/shared-components/color-picker/color-picker-component.module';
-import {MapsModule} from '../../services/shared-components/maps-component/maps.module';
-import {QuestionDialogComponentModule} from '../../services/shared-components/question-dialog/question-dialog-component.module';
+import {CommonComponentsModule} from '../../utils/common-components.module';
+import {CustomDateAdapter, MY_DATE_FORMATS} from '../../utils/custom-date-adapter';
+import {ColorPickerComponentModule} from '../../utils/shared-components/color-picker/color-picker-component.module';
+import {MapsModule} from '../../utils/shared-components/maps-component/maps.module';
+import {QuestionDialogComponentModule} from '../../utils/shared-components/question-dialog/question-dialog-component.module';
 import {TranslationModule} from '../../translation/translation.module';
 import {EventDatesListComponentModule} from './event-dates-list/event-dates-list-component.module';
 

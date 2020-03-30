@@ -3,7 +3,7 @@ import {NgModule} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import {MaterialModule} from '../../../material-module';
-import {QuestionDialogComponentModule} from '../../../services/shared-components/question-dialog/question-dialog-component.module';
+import {QuestionDialogComponentModule} from '../../../utils/shared-components/question-dialog/question-dialog-component.module';
 import {TranslationModule} from '../../../translation/translation.module';
 import {DatepollManagementRoutingModule} from './datepoll-management-routing.module';
 

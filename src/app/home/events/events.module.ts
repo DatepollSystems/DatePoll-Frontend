@@ -5,16 +5,16 @@ import {DateAdapter} from '@angular/material';
 import {MAT_DATE_FORMATS} from '@angular/material/core';
 
 import {MaterialModule} from '../../material-module';
-import {CommonComponentsModule} from '../../services/common-components.module';
-import {CustomDateAdapter, MY_DATE_FORMATS} from '../../services/custom-date-adapter';
-import {MapsModule} from '../../services/shared-components/maps-component/maps.module';
+import {CommonComponentsModule} from '../../utils/common-components.module';
+import {CustomDateAdapter, MY_DATE_FORMATS} from '../../utils/custom-date-adapter';
+import {MapsModule} from '../../utils/shared-components/maps-component/maps.module';
 import {TranslationModule} from '../../translation/translation.module';
 import {EventInfoModule} from './event-info/event-info.module';
 import {EventsRoutingModule} from './events-routing.module';
 
 import {EventsService} from './events.service';
 
-import {ColorPickerComponentModule} from '../../services/shared-components/color-picker/color-picker-component.module';
+import {ColorPickerComponentModule} from '../../utils/shared-components/color-picker/color-picker-component.module';
 import {CommonEventsComponentsModule} from './common-events-components.module';
 import {EventCreateModalComponent} from './events-administration/event-create-modal/event-create-modal.component';
 import {EventStandardDecisionsManagementModalComponent} from './events-administration/event-standard-decisions-management-modal/event-standard-decisions-management-modal.component';

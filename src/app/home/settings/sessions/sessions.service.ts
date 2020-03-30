@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpService} from '../../../services/http.service';
+import {HttpService} from '../../../utils/http.service';
 import {Session} from './session.model';
 import {Subject} from 'rxjs';
 
@@ -7,12 +7,10 @@ import {Subject} from 'rxjs';
   providedIn: 'root'
 })
 export class SessionsService {
-
   public sessionsChange: Subject<Session[]> = new Subject<Session[]>();
   private _sessions: Session[] = null;
 
-  constructor(private httpService: HttpService) {
-  }
+  constructor(private httpService: HttpService) {}
 
   public getSessions(): Session[] {
     this.fetchSessions();
@@ -40,7 +38,7 @@ export class SessionsService {
 
         this.setSessions(sessionsObject);
       },
-      (error) => console.log(error)
+      error => console.log(error)
     );
   }
 
@@ -52,5 +50,4 @@ export class SessionsService {
     this._sessions = sessions;
     this.sessionsChange.next(this._sessions.slice());
   }
-
 }

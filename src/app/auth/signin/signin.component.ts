@@ -5,7 +5,7 @@ import {MatBottomSheet} from '@angular/material/bottom-sheet';
 import {Router} from '@angular/router';
 import {Subscription} from 'rxjs';
 
-import {SettingsService} from '../../services/settings.service';
+import {SettingsService} from '../../utils/settings.service';
 import {AuthService} from '../auth.service';
 import {MobileAppBottomSheetComponent} from './mobile-app-bottom-sheet/mobile-app-bottom-sheet.component';
 

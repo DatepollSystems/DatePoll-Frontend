@@ -2,7 +2,7 @@ import {Component, OnDestroy} from '@angular/core';
 import {MatBottomSheetRef} from '@angular/material/bottom-sheet';
 import {Subscription} from 'rxjs';
 
-import {SettingsService} from '../../../services/settings.service';
+import {SettingsService} from '../../../utils/settings.service';
 
 @Component({
   selector: 'app-mobile-app-bottom-sheet',

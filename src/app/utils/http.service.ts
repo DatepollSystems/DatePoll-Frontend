@@ -15,11 +15,12 @@ import {TranslateService} from '../translation/translate.service';
 export class HttpService {
   apiUrl = environment.apiUrl;
 
-  constructor(private authService: AuthService,
-              private http: HttpClient,
-              private notificationsService: NotificationsService,
-              private translate: TranslateService) {
-  }
+  constructor(
+    private authService: AuthService,
+    private http: HttpClient,
+    private notificationsService: NotificationsService,
+    private translate: TranslateService
+  ) {}
 
   public loggedInV1GETRequest(url: string, functionUser: string = null) {
     this.log('GET', url, functionUser);
