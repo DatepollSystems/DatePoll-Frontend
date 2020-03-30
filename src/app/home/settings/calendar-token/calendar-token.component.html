@@ -1,32 +1,26 @@
 <h2 mat-dialog-title>{{ 'SETTINGS_SECURITY_CALENDAR' | translate }}</h2>
 <mat-dialog-content>
-  <div *ngIf="calendarToken != null" class="row justify-content-between">
-    <div class="col-12 col-sm-12 col-md-12 col-lg-9 align-self-center">
-      <mat-form-field appearance="outline">
-        <mat-label>{{ 'SETTINGS_SECURITY_MDOAL_CALENDAR_INPUT_TITLE' | translate }}</mat-label>
-        <input matInput readonly value="{{ calendarToken }}" #calendarTokenElement />
-        <button
-          (click)="copyTokenToClipboard(calendarTokenElement)"
-          mat-icon-button
-          matSuffix
-          matTooltip="{{ 'SETTINGS_SECURITY_MODAL_CALENDAR_COPY_TOKEN_TOOLTIP' | translate }}"
-          matTooltipPosition="above"
-        >
-          <mat-icon matSuffix svgIcon="content-copy"></mat-icon>
-        </button>
-      </mat-form-field>
+  <div *ngIf="calendarToken != null" fxLayout="row wrap" fxLayout.lt-md="column" fxLayoutAlign="center" fxLayoutGap="2%">
+    <mat-form-field appearance="outline" fxFlex="96%">
+      <mat-label>{{ 'SETTINGS_SECURITY_MDOAL_CALENDAR_INPUT_TITLE' | translate }}</mat-label>
+      <input matInput readonly value="{{ calendarToken }}" #calendarTokenElement />
+    </mat-form-field>
+
+    <div fxFlex="47%">
+      <button (click)="copyTokenToClipboard(calendarTokenElement)" mat-flat-button color="accent" style="width: 100%">
+        {{ 'SETTINGS_SECURITY_MODAL_CALENDAR_COPY_TOKEN_TOOLTIP' | translate }}
+        <mat-icon matSuffix svgIcon="content-copy"></mat-icon>
+      </button>
     </div>
 
-    <div class="col-12 col-sm-12 col-md-12 col-lg-3">
-      <button (click)="resetCalendarToken()" color="warn" mat-flat-button style="width: 100%; margin-bottom: 0; margin-top: 12px;">
+    <div fxFlex="47%">
+      <button (click)="resetCalendarToken()" color="warn" mat-flat-button style="width: 100%;">
         {{ 'SETTINGS_SECURITY_MODAL_CALENDAR_RESET_TOKEN' | translate }}
       </button>
     </div>
   </div>
-  <div *ngIf="calendarToken == null" class="row">
-    <div class="col-12">
-      <mat-progress-bar mode="indeterminate"></mat-progress-bar>
-    </div>
+  <div *ngIf="calendarToken == null">
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
   </div>
 </mat-dialog-content>
 <mat-dialog-actions>
