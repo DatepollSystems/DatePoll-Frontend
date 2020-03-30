@@ -11,10 +11,10 @@ const homeRoutes: Routes = [
     canActivate: [AuthGuard],
     children: [
       {path: '', pathMatch: 'full', loadChildren: () => import('./start/start.module').then(m => m.StartModule), data: {preload: true}},
-      {path: 'cinema', loadChildren: () => import('./cinema/cinema.module').then(m => m.CinemaModule), data: {preload: true}},
+      {path: 'cinema', loadChildren: () => import('./cinema/cinema.module').then(m => m.CinemaModule)},
       {path: 'events', loadChildren: () => import('./events/events.module').then(m => m.EventsModule)},
       {path: 'calendar', loadChildren: () => import('./calendar/calendar-component.module').then(m => m.CalendarComponentModule)},
-      {path: 'settings', loadChildren: () => import('./settings/settings.module').then(m => m.SettingsModule), data: {preload: true}},
+      {path: 'settings', loadChildren: () => import('./settings/settings.module').then(m => m.SettingsModule)},
       {
         path: 'management/user',
         loadChildren: () => import('./management/users-management/users-management.module').then(m => m.UsersManagementModule)

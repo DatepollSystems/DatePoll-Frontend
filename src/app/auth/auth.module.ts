@@ -5,7 +5,6 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {QRCodeModule} from 'angularx-qrcode';
 import {FooterModule} from '../footer/footer.module';
 import {MaterialModule} from '../material-module';
-import {CommonComponentsModule} from '../services/common-components.module';
 import {TranslationModule} from '../translation/translation.module';
 import {AuthRoutingModule} from './auth-routing.module';
 
@@ -21,7 +20,6 @@ import {MobileAppBottomSheetComponent} from './signin/mobile-app-bottom-sheet/mo
     ReactiveFormsModule,
     MaterialModule,
     TranslationModule,
-    CommonComponentsModule,
     FooterModule,
     QRCodeModule,
     AuthRoutingModule
