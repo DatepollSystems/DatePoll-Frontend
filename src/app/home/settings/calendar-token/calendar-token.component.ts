@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 
-import {HttpService} from '../../../utils/http.service';
 import {environment} from '../../../../environments/environment';
+import {HttpService} from '../../../utils/http.service';
 
 @Component({
   selector: 'app-calendar-token',
@@ -13,7 +13,7 @@ export class CalendarTokenComponent {
 
   calendarToken: string = null;
 
-  constructor(private httpService: HttpService, private clipboard: Clipboard) {
+  constructor(private httpService: HttpService) {
     this.fetchCalendarToken();
   }
 
@@ -28,8 +28,10 @@ export class CalendarTokenComponent {
     );
   }
 
-  public copyTokenToClipboard() {
-    this.clipboard.writeText(this.calendarToken);
+  public copyTokenToClipboard(element) {
+    element.select();
+    document.execCommand('copy');
+    element.setSelectionRange(0, 0);
   }
 
   private fetchCalendarToken() {

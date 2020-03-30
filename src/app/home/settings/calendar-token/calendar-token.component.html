@@ -1,21 +1,26 @@
-<h2 mat-dialog-title>{{'SETTINGS_SECURITY_CALENDAR' | translate}}</h2>
+<h2 mat-dialog-title>{{ 'SETTINGS_SECURITY_CALENDAR' | translate }}</h2>
 <mat-dialog-content>
   <div *ngIf="calendarToken != null" class="row justify-content-between">
     <div class="col-12 col-sm-12 col-md-12 col-lg-9 align-self-center">
       <mat-form-field appearance="outline">
-        <mat-label>{{'SETTINGS_SECURITY_MDOAL_CALENDAR_INPUT_TITLE' | translate}}</mat-label>
-        <input matInput readonly value="{{calendarToken}}">
-        <button (click)="copyTokenToClipboard()" mat-icon-button matSuffix
-                matTooltip="{{'SETTINGS_SECURITY_MODAL_CALENDAR_COPY_TOKEN_TOOLTIP' | translate}}"
-                matTooltipPosition="above">
+        <mat-label>{{ 'SETTINGS_SECURITY_MDOAL_CALENDAR_INPUT_TITLE' | translate }}</mat-label>
+        <input matInput readonly value="{{ calendarToken }}" #calendarTokenElement />
+        <button
+          (click)="copyTokenToClipboard(calendarTokenElement)"
+          mat-icon-button
+          matSuffix
+          matTooltip="{{ 'SETTINGS_SECURITY_MODAL_CALENDAR_COPY_TOKEN_TOOLTIP' | translate }}"
+          matTooltipPosition="above"
+        >
           <mat-icon matSuffix svgIcon="content-copy"></mat-icon>
         </button>
       </mat-form-field>
     </div>
 
     <div class="col-12 col-sm-12 col-md-12 col-lg-3">
-      <button (click)="resetCalendarToken()" color="warn" mat-flat-button
-              style="width: 100%; margin-bottom: 0; margin-top: 12px;">{{'SETTINGS_SECURITY_MODAL_CALENDAR_RESET_TOKEN' | translate}}</button>
+      <button (click)="resetCalendarToken()" color="warn" mat-flat-button style="width: 100%; margin-bottom: 0; margin-top: 12px;">
+        {{ 'SETTINGS_SECURITY_MODAL_CALENDAR_RESET_TOKEN' | translate }}
+      </button>
     </div>
   </div>
   <div *ngIf="calendarToken == null" class="row">
@@ -25,5 +30,5 @@
   </div>
 </mat-dialog-content>
 <mat-dialog-actions>
-  <button mat-button mat-dialog-close>{{'CLOSE' | translate}}</button>
+  <button mat-button mat-dialog-close>{{ 'CLOSE' | translate }}</button>
 </mat-dialog-actions>
