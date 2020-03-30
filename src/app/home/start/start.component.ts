@@ -40,6 +40,8 @@ export class StartComponent implements OnInit, OnDestroy {
 
   eventVotingChangeLoading = false;
 
+  openEventsCount = 0;
+
   constructor(
     private homePageService: HomepageService,
     public myUserService: MyUserService,
@@ -66,6 +68,12 @@ export class StartComponent implements OnInit, OnDestroy {
     this.events = homePageService.getEvents().slice(0, 10);
     this.eventsSubscription = homePageService.eventsChange.subscribe(value => {
       this.events = value.slice(0, 10);
+      this.openEventsCount = 0;
+      for (const event of this.events) {
+        if (!event.alreadyVotedFor) {
+          this.openEventsCount++;
+        }
+      }
       this.setBackgroundImage();
       this.eventVotingChangeLoading = false;
     });
@@ -136,7 +144,6 @@ export class StartComponent implements OnInit, OnDestroy {
         this.eventsUserSerivce.voteForDecision(event.id, dto.decision, dto.additionalInformation).subscribe(
           (response: any) => {
             console.log(response);
-            this.eventsUserSerivce.fetchEvents();
             this.homePageService.fetchData();
             this.notificationsService.success(
               this.translate.getTranslationFor('SUCCESSFULLY'),
