@@ -1,7 +1,8 @@
 import {Component, ViewChild} from '@angular/core';
-import {HttpService} from '../../../utils/http.service';
-import {NotificationsService} from 'angular2-notifications';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+
 import {TranslateService} from '../../../translation/translate.service';
+import {HttpService} from '../../../utils/http.service';
 
 @Component({
   selector: 'app-password',
@@ -15,11 +16,19 @@ export class PasswordComponent {
   showOldPasswordIncorrectCard = false;
   oldPassword = '';
 
-  newPassword = '';
-  newPasswordRepeat = '';
   showChangingPasswordSpinner = false;
 
-  constructor(private httpService: HttpService, private notificationsService: NotificationsService, private translate: TranslateService) {}
+  passwordChangeForm = this.fb.group({
+    passwords: this.fb.group(
+      {
+        password: ['', [Validators.required, Validators.min(6)]],
+        repeat: ['', [Validators.required, Validators.min(6)]]
+      },
+      {validator: this.checkPasswords}
+    )
+  });
+
+  constructor(private httpService: HttpService, private translate: TranslateService, private fb: FormBuilder) {}
 
   checkOldPassword() {
     this.showOldPasswordIncorrectCard = false;
@@ -44,20 +53,23 @@ export class PasswordComponent {
     );
   }
 
-  changePassword() {
-    if (this.newPassword !== this.newPasswordRepeat) {
-      this.notificationsService.info(
-        null,
-        this.translate.getTranslationFor('SETTINGS_SECURITY_MODAL_CHANGE_PASSWORD_NEW_PASSWORDS_ARE_NOT_EQUAL')
-      );
-      return;
+  checkPasswords(group: FormGroup) {
+    // here we have the 'passwords' group
+    const pass = group.get('password').value;
+    if (pass?.length < 6) {
+      return {wrongLength: true};
     }
+    const confirmPass = group.get('repeat').value;
 
+    return pass === confirmPass ? null : {notSame: true};
+  }
+
+  changePassword(form: FormGroup) {
     this.showChangingPasswordSpinner = true;
 
     const body = {
       old_password: this.oldPassword,
-      new_password: this.newPassword
+      new_password: form.controls.passwords.get('password').value
     };
 
     this.httpService.loggedInV1POSTRequest('/user/myself/changePassword/changePassword', body, 'changePassword').subscribe(
