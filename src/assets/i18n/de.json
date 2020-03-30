@@ -251,7 +251,6 @@
   "SETTINGS_SECURITY": "Sicherheit",
   "SETTINGS_SECURITY_DESCRIPTION": "Lege die Einstellungen für dein Passwort und deinen Kalender fest. Außerdem kannst du deine Sessions und Privatsphäre-Einstellungen verwalten.",
   "SETTINGS_SECURITY_CHANGE_PASSWORD": "Password ändern",
-  "SETTINGS_SECURITY_CHANGE_2FA": "Zwei-Faktor-Authentifizierung einstellen",
   "SETTINGS_SECURITY_CALENDAR": "Kalenderverwaltung",
   "SETTINGS_SECURITY_SESSIONS": "Sessionverwaltung",
   "SETTINGS_SECURITY_SETTINGS": "Privatsphäre-Einstellungen",

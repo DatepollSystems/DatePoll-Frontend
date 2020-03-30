@@ -81,8 +81,4 @@ export class SettingsComponent {
       width: '80vh'
     });
   }
-
-  openTwoFactorAuthenticationModal() {
-    // this.modalService.open(TwoFactorAuthenticationComponent);
-  }
 }

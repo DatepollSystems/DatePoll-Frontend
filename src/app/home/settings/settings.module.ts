@@ -17,7 +17,6 @@ import {PhoneNumberComponent} from './phone-number/phone-number.component';
 import {PrivacySettingsComponent} from './privacy-settings/privacy-settings.component';
 import {SessionsComponent} from './sessions/sessions.component';
 import {SettingsComponent} from './settings.component';
-import {TwoFactorAuthenticationComponent} from './two-factor-authentication/two-factor-authentication.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +26,6 @@ import {TwoFactorAuthenticationComponent} from './two-factor-authentication/two-
     EmailAddressComponent,
     PasswordComponent,
     CalendarTokenComponent,
-    TwoFactorAuthenticationComponent,
     SessionsComponent,
     PrivacySettingsComponent
   ],
