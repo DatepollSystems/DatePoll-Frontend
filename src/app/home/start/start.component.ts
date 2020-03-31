@@ -123,7 +123,7 @@ export class StartComponent implements OnInit, OnDestroy {
 
   onEventInfo(event: Event) {
     if (this.isMobile) {
-      this.router.navigate(['/home/events/' + event.id]);
+      this.router.navigateByUrl('/home/events/' + event.id, {state: event});
     } else {
       this.dialog.open(EventInfoModalComponent, {
         width: '80vh',

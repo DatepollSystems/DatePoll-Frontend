@@ -4,31 +4,25 @@
       <div mat-subheader *ngIf="events.length != 0" class="sub-header">
         <span [matBadge]="openEventsCount.toString()" matBadgeOverlap="false">{{ 'STARTPAGE_EVENTS' | translate }}</span>
       </div>
-      <mat-list-item *ngFor="let event of events" class="not-selectable" matRipple matRippleRadius="100">
-        <div
-          mat-list-icon
-          class="circle"
-          [style.background-color]="event.decisionColor"
-          *ngIf="event.alreadyVotedFor"
-          (click)="onEventItemClick(event)"
-        ></div>
-        <mat-icon mat-list-icon *ngIf="!event.alreadyVotedFor" (click)="onEventItemClick(event)">live_help</mat-icon>
-        <div mat-line (click)="onEventItemClick(event)">
+      <mat-list-item *ngFor="let event of events" class="not-selectable" matRipple matRippleRadius="100" (click)="onEventItemClick(event)">
+        <div mat-list-icon class="circle" [style.background-color]="event.decisionColor" *ngIf="event.alreadyVotedFor"></div>
+        <mat-icon mat-list-icon *ngIf="!event.alreadyVotedFor">live_help</mat-icon>
+        <div mat-line>
           <span *ngIf="event.alreadyVotedFor">{{ event.name }}</span
           ><b *ngIf="!event.alreadyVotedFor">{{ event.name }}</b>
         </div>
-        <div mat-line (click)="onEventItemClick(event)" *ngIf="event.startDate.getDay() === event.endDate.getDay()">
+        <div mat-line *ngIf="event.startDate.getDay() === event.endDate.getDay()">
           {{ event.startDate | date: 'EE, dd.MM HH:mm' }} - {{ event.endDate | date: 'HH:mm' }}
           <span class="until-left">({{ event.getUntil() }})</span>
         </div>
-        <div mat-line (click)="onEventItemClick(event)" *ngIf="event.startDate.getDay() !== event.endDate.getDay()">
+        <div mat-line *ngIf="event.startDate.getDay() !== event.endDate.getDay()">
           {{ event.startDate | date: 'EE, dd.MM HH:mm' }} - {{ event.endDate | date: 'dd.MM HH:mm' }}
           <span class="until-left">({{ event.getUntil() }})</span>
         </div>
-        <div mat-line (click)="onEventItemClick(event)" *ngIf="event.description?.length > 0">
+        <div mat-line *ngIf="event.description?.length > 0">
           {{ event.descriptionPreview }}
         </div>
-        <button mat-mini-fab (click)="onEventInfo(event)" color="accent">
+        <button mat-flat-button (click)="onEventInfo(event); $event.stopPropagation()" color="accent">
           <mat-icon>arrow_forward</mat-icon>
         </button>
       </mat-list-item>
