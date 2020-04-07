@@ -23,7 +23,7 @@ export class EventDecisionsListComponent implements OnInit {
   constructor(private notificationsService: NotificationsService, private translate: TranslateService) {}
 
   ngOnInit(): void {
-    this.i = Math.random();
+    this.i = -1;
   }
 
   showInCalendarChange(e) {
@@ -49,6 +49,7 @@ export class EventDecisionsListComponent implements OnInit {
     form.reset();
     this.showInCalendar = false;
     console.log(this.i);
+    this.i--;
     this.decisionsChanged.emit(this.decisions.slice());
   }
 
