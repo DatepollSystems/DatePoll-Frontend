@@ -15,9 +15,9 @@ import {NoSanitizePipe} from './no-sanitize.pipe';
 
 import {AuthGuard} from './auth/auth-guard.service';
 import {AuthService} from './auth/auth.service';
+import {TranslateService} from './translation/translate.service';
 import {HttpService} from './utils/http.service';
 import {IsMobileService} from './utils/is-mobile.service';
-import {TranslateService} from './translation/translate.service';
 
 import {AuthInterceptor} from './auth/auth-interceptor';
 
@@ -27,6 +27,7 @@ import {MAT_SNACK_BAR_DEFAULT_OPTIONS} from '@angular/material/snack-bar';
 import {AppComponent} from './app.component';
 import {BrowserCompatibilityModalComponent} from './browser-compatibility-modal/browser-compatibility-modal.component';
 import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
+import {SettingsService} from './utils/settings.service';
 
 registerLocaleData(localeDe);
 
@@ -49,6 +50,7 @@ registerLocaleData(localeDe);
     TranslateService,
     HttpService,
     IsMobileService,
+    SettingsService,
     {
       provide: APP_INITIALIZER,
       useFactory: setupTranslateFactory,
@@ -64,6 +66,7 @@ registerLocaleData(localeDe);
     {provide: MAT_DATE_LOCALE, useValue: 'de-AT'},
     {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 2500}}
   ],
+  exports: [NoSanitizePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

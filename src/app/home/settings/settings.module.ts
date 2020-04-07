@@ -3,8 +3,8 @@ import {NgModule} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import {MaterialModule} from '../../material-module';
-import {CommonComponentsModule} from '../../utils/common-components.module';
 import {TranslationModule} from '../../translation/translation.module';
+import {CommonComponentsModule} from '../../utils/common-components.module';
 import {SettingsRoutingModule} from './settings-routing.module';
 
 import {SessionsService} from './sessions/sessions.service';

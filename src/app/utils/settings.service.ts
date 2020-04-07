@@ -1,7 +1,11 @@
+import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
-import {HttpService} from './http.service';
-import {Subject} from 'rxjs';
 import {Router} from '@angular/router';
+import {Subject} from 'rxjs';
+
+import {HttpService} from './http.service';
+
+import {ServerInfoModel} from './server-info.model';
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +26,23 @@ export class SettingsService {
   private _openWeatherMapCinemaCityId = '';
   private _appUrl = null;
 
-  constructor(private httpService: HttpService, private router: Router) {}
+  public serverInfoChange: Subject<ServerInfoModel> = new Subject<ServerInfoModel>();
+  private _serverInfo = new ServerInfoModel();
+
+  constructor(private httpService: HttpService, private router: Router, private http: HttpClient) {}
+
+  public getServerInfo(): ServerInfoModel {
+    this.fetchServerInfo();
+    return this._serverInfo;
+  }
+
+  private fetchServerInfo(): void {
+    this.http.get<ServerInfoModel>(this.httpService.apiUrl + '/').subscribe((data: ServerInfoModel) => {
+      console.log(data);
+      this._serverInfo = data;
+      this.serverInfoChange.next(this._serverInfo);
+    });
+  }
 
   public getShowCinema(): boolean {
     this.httpService.getSettingRequest('/cinema', 'settingsCinema').subscribe(
@@ -140,7 +160,7 @@ export class SettingsService {
     this.setAppUrl(url);
 
     const body = {
-      url: url
+      url
     };
     return this.httpService.setSettingsRequest('/url', body, 'setAppUrl');
   }

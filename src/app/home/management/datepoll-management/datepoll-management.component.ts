@@ -5,11 +5,12 @@ import {Router} from '@angular/router';
 import {NotificationsService} from 'angular2-notifications';
 import {Subscription} from 'rxjs';
 
-import {SettingsService} from '../../../utils/settings.service';
 import {TranslateService} from '../../../translation/translate.service';
+import {SettingsService} from '../../../utils/settings.service';
 import {MyUserService} from '../../my-user.service';
 
 import {Permissions} from '../../../permissions';
+import {ServerInfoModel} from '../../../utils/server-info.model';
 
 @Component({
   selector: 'app-datepoll-management',
@@ -17,23 +18,12 @@ import {Permissions} from '../../../permissions';
   styleUrls: ['./datepoll-management.component.css']
 })
 export class DatepollManagementComponent implements OnDestroy {
-  cinemaServiceEnabled = true;
-  cinemaServiceEnabledChange: Subscription;
-
-  eventsServiceEnabled = true;
-  eventsServiceEnabledChange: Subscription;
-
-  communityName: string;
-  communityNameSubscription: Subscription;
   communityNameSaving = false;
-
-  communityUrl: string;
-  communityUrlSubscription: Subscription;
   communityUrlSaving = false;
-
-  appUrl: string;
-  appUrlSubscription: Subscription;
   appUrlSaving = false;
+
+  serverInfo: ServerInfoModel;
+  serverInfoSubscription: Subscription;
 
   openWeatherMapKey: string;
   openWeatherMapKeySubscription: Subscription;
@@ -57,29 +47,9 @@ export class DatepollManagementComponent implements OnDestroy {
   ) {
     this.myUserService = myUserService;
 
-    this.cinemaServiceEnabled = settingsService.getShowCinema();
-    this.cinemaServiceEnabledChange = settingsService.showCinemaChange.subscribe(value => {
-      this.cinemaServiceEnabled = value;
-    });
-
-    this.eventsServiceEnabled = settingsService.getShowEvents();
-    this.eventsServiceEnabledChange = settingsService.showEventsChange.subscribe(value => {
-      this.eventsServiceEnabled = value;
-    });
-
-    this.communityName = settingsService.getCommunityName();
-    this.communityNameSubscription = settingsService.communityNameChange.subscribe(value => {
-      this.communityName = value;
-    });
-
-    this.communityUrl = settingsService.getCommunityUrl();
-    this.communityUrlSubscription = settingsService.communityUrlChange.subscribe(value => {
-      this.communityUrl = value;
-    });
-
-    this.appUrl = settingsService.getAppUrl();
-    this.appUrlSubscription = settingsService.appUrlChange.subscribe(value => {
-      this.appUrl = value;
+    this.serverInfo = this.settingsService.getServerInfo();
+    this.serverInfoSubscription = this.settingsService.serverInfoChange.subscribe(value => {
+      this.serverInfo = value;
     });
 
     this.openWeatherMapKey = settingsService.getOpenWeatherMapKey();
@@ -94,11 +64,7 @@ export class DatepollManagementComponent implements OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.cinemaServiceEnabledChange.unsubscribe();
-    this.eventsServiceEnabledChange.unsubscribe();
-    this.communityNameSubscription.unsubscribe();
-    this.communityUrlSubscription.unsubscribe();
-    this.appUrlSubscription.unsubscribe();
+    this.serverInfoSubscription.unsubscribe();
     this.openWeatherMapKeySubscription.unsubscribe();
     this.openWeatherMapCinemaCityIdSubscription.unsubscribe();
   }
@@ -144,7 +110,7 @@ export class DatepollManagementComponent implements OnDestroy {
   }
 
   autoDetectAppUrl() {
-    this.appUrl = 'https://' + window.location.host;
+    this.serverInfo.application_url = 'https://' + window.location.host;
   }
 
   changeAppUrl(form: NgForm) {

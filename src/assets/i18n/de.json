@@ -23,6 +23,8 @@
   "COLOR_PICKER": "Colorpicker",
   "NO_DATA": "Keine Daten",
   "INFORMATION": "Information!",
+  "SHOW_MORE": "Mehr anzeigen...",
+  "SHOW_LESS": "Weniger anzeigen...",
 
   "LANGUAGE": "Sprache",
   "LANGUAGE_GERMAN": "Deutsch",
@@ -36,6 +38,7 @@
   "ABOUT_BACKEND_VERSION": "Version des Backends: ",
   "ABOUT_NEEDED_BACKEND_VERSION": "Benötigte Backend Version (Zahl): ",
   "ABOUT_LICENSE": "Lizenz",
+  "ABOUT_PAGE_TROUBLE_LOGGING_IN": "Probleme beim anmelden?",
 
   "IMPRINT": "Impressum",
   "PRIVACY_POLICY": "Datenschutzerklärung",

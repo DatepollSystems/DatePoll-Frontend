@@ -50,6 +50,22 @@ export class SigninComponent implements OnInit, OnDestroy {
     this.communityNameSubscription = this.settingsService.communityNameChange.subscribe(value => {
       this.communityName = value;
     });
+
+    const state = window.history.state;
+    if (state?.routingReason) {
+      switch (state.routingReason) {
+        case 'forward':
+          this.state = state.state;
+          this.username = state.username;
+          this.password = state.password;
+          break;
+        case 'loginFailed':
+          this.loginFail = true;
+          this.username = state.username;
+          this.password = state.password;
+          break;
+      }
+    }
   }
 
   ngOnInit(): void {
@@ -90,11 +106,7 @@ export class SigninComponent implements OnInit, OnDestroy {
       (data: any) => {
         console.log(data);
         if (data.error_code != null) {
-          if (data.error_code === 'notActivated') {
-            this.state = data.error_code;
-          }
-
-          if (data.error_code === 'changePassword') {
+          if (data.error_code === 'notActivated' || data.error_code === 'changePassword') {
             this.state = data.error_code;
           }
 
