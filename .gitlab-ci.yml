@@ -24,4 +24,4 @@ deploy:
     - mkdir -p ~/.ssh
     - chmod 700 ~/.ssh
     - echo -e “Host *\n\tStrictHostKeyChecking no\n\n” > ~/.ssh/config
-    - scp -P $SSH_PORT -o StrictHostKeyChecking=no ./DatePoll-Frontend-dev.zip $SSH_USERNAME@$SSH_HOST:/var/www/share/DatePoll-Frontend-Releases/
+    - scp -P $SSH_PORT -o StrictHostKeyChecking=no ./DatePoll-Frontend-dev.zip $SSH_USERNAME@$SSH_HOST:/var/www/share/DatePoll-Frontend-Releases/ > /dev/null

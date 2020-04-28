@@ -10,7 +10,7 @@ import {UsersService} from '../users.service';
 import {GroupsService} from '../../groups-management/groups.service';
 import {PerformanceBadgesService} from '../../performance-badges-management/performance-badges.service';
 import {MyUserService} from '../../../my-user.service';
-import {Converter} from '../../../../services/converter';
+import {Converter} from '../../../../utils/converter';
 
 import {PhoneNumber} from '../../../phoneNumber.model';
 import {Group} from '../../groups-management/models/group.model';
@@ -23,7 +23,6 @@ import {Permissions} from '../../../../permissions';
   styleUrls: ['./user-create-modal.component.css']
 })
 export class UserCreateModalComponent implements OnDestroy {
-
   @ViewChild('successfullyCreatedUser', {static: true}) successfullyCreatedUser: TemplateRef<any>;
 
   displayedColumns: string[] = ['label', 'phonenumber', 'action'];
@@ -47,17 +46,19 @@ export class UserCreateModalComponent implements OnDestroy {
 
   userPerformanceBadges: UserPerformanceBadge[] = [];
 
-  constructor(private usersService: UsersService,
-              private myUserService: MyUserService,
-              private dialogRef: MatDialogRef<UserCreateModalComponent>,
-              private groupsService: GroupsService,
-              private notificationsService: NotificationsService,
-              private performanceBadgesService: PerformanceBadgesService) {
+  constructor(
+    private usersService: UsersService,
+    private myUserService: MyUserService,
+    private dialogRef: MatDialogRef<UserCreateModalComponent>,
+    private groupsService: GroupsService,
+    private notificationsService: NotificationsService,
+    private performanceBadgesService: PerformanceBadgesService
+  ) {
     this.dataSource = new MatTableDataSource(this.phoneNumbers);
 
     this.groups = this.groupsService.getGroups();
     this.remakeFreeAndJoinedList();
-    this.groupsSubscription = this.groupsService.groupsChange.subscribe((value) => {
+    this.groupsSubscription = this.groupsService.groupsChange.subscribe(value => {
       this.groups = value;
       this.remakeFreeAndJoinedList();
     });
@@ -82,9 +83,9 @@ export class UserCreateModalComponent implements OnDestroy {
       const group = this.groups[i];
 
       const groupObject = {
-        'id': group.id,
-        'name': group.name,
-        'type': 'parentgroup'
+        id: group.id,
+        name: group.name,
+        type: 'parentgroup'
       };
 
       this.free.push(groupObject);
@@ -93,18 +94,18 @@ export class UserCreateModalComponent implements OnDestroy {
         const subgroup = group.getSubgroups()[j];
 
         const subgroupObject = {
-          'id': subgroup.id,
-          'name': subgroup.name,
-          'type': 'subgroup',
-          'group_id': group.id,
-          'group_name': group.name
+          id: subgroup.id,
+          name: subgroup.name,
+          type: 'subgroup',
+          group_id: group.id,
+          group_name: group.name
         };
 
         this.free.push(subgroupObject);
       }
     }
 
-    setTimeout(function () {
+    setTimeout(function() {
       // Check if elements are not null because if the user close the modal before the timeout, there will be thrown an error
       if (document.getElementById('joined-list') != null && document.getElementById('free-list') != null) {
         document.getElementById('joined-list').style.height = document.getElementById('free-list').clientHeight.toString() + 'px';
@@ -119,12 +120,12 @@ export class UserCreateModalComponent implements OnDestroy {
     for (let i = 0; i < this.usernames.length; i++) {
       if (this.usernames[i] === usernameModel.viewModel) {
         console.log('in | ' + this.usernames[i] + ' | ' + usernameModel.viewModel);
-        usernameModel.control.setErrors({'alreadyTaken': true});
+        usernameModel.control.setErrors({alreadyTaken: true});
         break;
       }
     }
     if (usernameModel.viewModel.length === 0) {
-      usernameModel.control.setErrors({'null': true});
+      usernameModel.control.setErrors({null: true});
     }
   }
 
@@ -191,28 +192,28 @@ export class UserCreateModalComponent implements OnDestroy {
 
     for (let i = 0; i < this.phoneNumbers.length; i++) {
       const phoneNumberObject = {
-        'label': this.phoneNumbers[i].label,
-        'number': this.phoneNumbers[i].phoneNumber
+        label: this.phoneNumbers[i].label,
+        number: this.phoneNumbers[i].phoneNumber
       };
       phoneNumbersObject.push(phoneNumberObject);
     }
 
     const userObject = {
-      'title': title,
-      'username': username,
-      'firstname': firstname,
-      'surname': surname,
-      'birthday': birthdayformatted,
-      'join_date': join_dateformatted,
-      'streetname': streetname,
-      'streetnumber': streetnumber,
-      'zipcode': zipcode,
-      'location': location,
-      'activated': activated,
-      'activity': activity,
-      'email_addresses': this.emailAddresses,
-      'phone_numbers': phoneNumbersObject,
-      'permissions': this.permissions
+      title: title,
+      username: username,
+      firstname: firstname,
+      surname: surname,
+      birthday: birthdayformatted,
+      join_date: join_dateformatted,
+      streetname: streetname,
+      streetnumber: streetnumber,
+      zipcode: zipcode,
+      location: location,
+      activated: activated,
+      activity: activity,
+      email_addresses: this.emailAddresses,
+      phone_numbers: phoneNumbersObject,
+      permissions: this.permissions
     };
     console.log(userObject);
 
@@ -235,7 +236,7 @@ export class UserCreateModalComponent implements OnDestroy {
                 (sdata: any) => {
                   console.log(sdata);
                 },
-                (error) => console.log(error)
+                error => console.log(error)
               );
             }
           }
@@ -248,7 +249,7 @@ export class UserCreateModalComponent implements OnDestroy {
                 (sdata: any) => {
                   console.log(sdata);
                 },
-                (error) => console.log(error)
+                error => console.log(error)
               );
             }
           }
@@ -262,7 +263,7 @@ export class UserCreateModalComponent implements OnDestroy {
               (sdata: any) => {
                 console.log(sdata);
               },
-              (error) => console.log(error)
+              error => console.log(error)
             );
           }
         }
@@ -270,7 +271,7 @@ export class UserCreateModalComponent implements OnDestroy {
         this.usersService.fetchUsers();
         this.notificationsService.html(this.successfullyCreatedUser, NotificationType.Success, null, 'success');
       },
-      (error) => {
+      error => {
         console.log(error);
         this.usersService.fetchUsers();
       }

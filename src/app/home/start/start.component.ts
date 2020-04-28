@@ -1,5 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {MatBottomSheet, MatDialog} from '@angular/material';
+import {Router} from '@angular/router';
 
 import {Subscription} from 'rxjs';
 
@@ -14,9 +15,10 @@ import {Event} from '../events/models/event.model';
 import {HomeBirthdayModel} from './birthdays.model';
 import {HomeBookingsModel} from './bookings.model';
 
-import {IsMobileService} from '../../services/is-mobile.service';
-import {EventInfoModalComponent} from '../events/event-info-modal/event-info-modal.component';
+import {IsMobileService} from '../../utils/is-mobile.service';
+import {EventInfoModalComponent} from '../events/event-info/event-info-modal/event-info-modal.component';
 import {EventsVoteForDecisionModalComponent} from '../events/events-view/events-vote-for-decision-modal/events-vote-for-decision-modal.component';
+import {QuestionDialogComponent} from '../../utils/shared-components/question-dialog/question-dialog.component';
 
 @Component({
   selector: 'app-start',
@@ -33,8 +35,12 @@ export class StartComponent implements OnInit, OnDestroy {
   events: Event[];
   eventsSubscription: Subscription;
 
-  isMobile = false;
+  isMobile = true;
   isMobileSubscription: Subscription;
+
+  eventVotingChangeLoading = false;
+
+  openEventsCount = 0;
 
   constructor(
     private homePageService: HomepageService,
@@ -44,6 +50,7 @@ export class StartComponent implements OnInit, OnDestroy {
     private notificationsService: NotificationsService,
     private translate: TranslateService,
     private isMobileService: IsMobileService,
+    private router: Router,
     private dialog: MatDialog
   ) {
     this.birthdays = homePageService.getBirthdays();
@@ -61,7 +68,14 @@ export class StartComponent implements OnInit, OnDestroy {
     this.events = homePageService.getEvents().slice(0, 10);
     this.eventsSubscription = homePageService.eventsChange.subscribe(value => {
       this.events = value.slice(0, 10);
+      this.openEventsCount = 0;
+      for (const event of this.events) {
+        if (!event.alreadyVotedFor) {
+          this.openEventsCount++;
+        }
+      }
       this.setBackgroundImage();
+      this.eventVotingChangeLoading = false;
     });
 
     this.isMobile = this.isMobileService.getIsMobile();
@@ -99,18 +113,30 @@ export class StartComponent implements OnInit, OnDestroy {
     document.getElementById('my-container').style.background = 'none';
   }
 
+  onEventItemClick(event: Event) {
+    if (event.alreadyVotedFor) {
+      this.cancelEventVoting(event, null);
+    } else {
+      this.onEventVote(event);
+    }
+  }
+
   onEventInfo(event: Event) {
-    this.dialog.open(EventInfoModalComponent, {
-      width: '80vh',
-      data: {
-        event: event
-      }
-    });
+    if (this.isMobile) {
+      this.router.navigateByUrl('/home/events/' + event.id, {state: event});
+    } else {
+      this.dialog.open(EventInfoModalComponent, {
+        width: '80vh',
+        data: {
+          event
+        }
+      });
+    }
   }
 
   onEventVote(event: Event) {
     const bottomSheetRef = this.bottomSheet.open(EventsVoteForDecisionModalComponent, {
-      data: {event: event}
+      data: {event}
     });
 
     bottomSheetRef.afterDismissed().subscribe(dto => {
@@ -118,7 +144,6 @@ export class StartComponent implements OnInit, OnDestroy {
         this.eventsUserSerivce.voteForDecision(event.id, dto.decision, dto.additionalInformation).subscribe(
           (response: any) => {
             console.log(response);
-            this.eventsUserSerivce.fetchEvents();
             this.homePageService.fetchData();
             this.notificationsService.success(
               this.translate.getTranslationFor('SUCCESSFULLY'),
@@ -134,15 +159,52 @@ export class StartComponent implements OnInit, OnDestroy {
   }
 
   cancelEventVoting(event, button: any) {
-    button.disabled = true;
-    this.eventsUserSerivce.removeDecision(event.id).subscribe(
-      (response: any) => {
-        console.log(response);
-        this.homePageService.fetchData();
-        this.setBackgroundImage();
-        // this.notificationsService.html(this.successfullyRemovedDecision, NotificationType.Success, null, 'success');
+    const answers = [
+      {
+        answer: this.translate.getTranslationFor('YES'),
+        value: 'yes'
       },
-      error => console.log(error)
-    );
+      {
+        answer: this.translate.getTranslationFor('NO'),
+        value: 'no'
+      }
+    ];
+    const question = this.translate.getTranslationFor('EVENTS_CANCEL_VOTING');
+
+    const bottomSheetRef = this.bottomSheet.open(QuestionDialogComponent, {
+      data: {
+        answers,
+        question
+      }
+    });
+
+    bottomSheetRef.afterDismissed().subscribe((value: string) => {
+      if (value != null) {
+        if (value.includes('yes')) {
+          if (this.eventVotingChangeLoading && this.isMobile) {
+            return;
+          }
+          this.eventVotingChangeLoading = true;
+          if (button) {
+            button.disabled = true;
+          }
+          this.eventsUserSerivce.removeDecision(event.id).subscribe(
+            (response: any) => {
+              console.log(response);
+              this.homePageService.fetchData();
+              this.setBackgroundImage();
+              this.notificationsService.success(
+                this.translate.getTranslationFor('SUCCESSFULLY'),
+                this.translate.getTranslationFor('EVENTS_VIEW_EVENT_SUCCESSFULLY_REMOVED_VOTING')
+              );
+            },
+            error => {
+              console.log(error);
+              this.eventVotingChangeLoading = false;
+            }
+          );
+        }
+      }
+    });
   }
 }

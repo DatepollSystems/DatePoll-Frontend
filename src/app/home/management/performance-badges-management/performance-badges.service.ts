@@ -1,16 +1,15 @@
 import {Injectable} from '@angular/core';
-import {HttpService} from '../../../services/http.service';
+import {HttpService} from '../../../utils/http.service';
 import {Instrument} from './models/instrument.model';
 import {Subject} from 'rxjs';
 import {PerformanceBadge} from './models/performanceBadge.model';
 import {UserPerformanceBadge} from '../users-management/userPerformanceBadge.model';
-import {Converter} from '../../../services/converter';
+import {Converter} from '../../../utils/converter';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PerformanceBadgesService {
-
   public performanceBadgesChange: Subject<PerformanceBadge[]> = new Subject<PerformanceBadge[]>();
   public instrumentsChange: Subject<Instrument[]> = new Subject<Instrument[]>();
   public userPerformanceBadgesChange: Subject<UserPerformanceBadge[]> = new Subject<UserPerformanceBadge[]>();
@@ -18,8 +17,7 @@ export class PerformanceBadgesService {
   private instruments: Instrument[];
   private userPerformanceBadges: UserPerformanceBadge[] = [];
 
-  constructor(private httpService: HttpService) {
-  }
+  constructor(private httpService: HttpService) {}
 
   public setPerformanceBadges(performanceBadges: PerformanceBadge[]) {
     this.performanceBadges = performanceBadges;
@@ -50,13 +48,13 @@ export class PerformanceBadgesService {
 
         this.setPerformanceBadges(performanceBadgesToSave);
       },
-      (error) => console.log(error)
+      error => console.log(error)
     );
   }
 
   public addPerformanceBadge(name: string) {
     const dto = {
-      'name': name
+      name: name
     };
 
     return this.httpService.loggedInV1POSTRequest('/management/performanceBadges', dto, 'addPerformanceBadge');
@@ -64,7 +62,7 @@ export class PerformanceBadgesService {
 
   public updatePerformanceBadge(id: number, name: string) {
     const dto = {
-      'name': name
+      name: name
     };
     return this.httpService.loggedInV1PUTRequest('/management/performanceBadges/' + id, dto, 'updatePerformanceBadge');
   }
@@ -72,7 +70,6 @@ export class PerformanceBadgesService {
   public removePerformanceBadge(id: number) {
     return this.httpService.loggedInV1DELETERequest('/management/performanceBadges/' + id, 'removePerformanceBadge');
   }
-
 
   public setInstruments(instruments: Instrument[]) {
     this.instruments = instruments;
@@ -102,13 +99,13 @@ export class PerformanceBadgesService {
 
         this.setInstruments(instrumentsToSave);
       },
-      (error) => console.log(error)
+      error => console.log(error)
     );
   }
 
   public addInstrument(name: string) {
     const dto = {
-      'name': name
+      name: name
     };
 
     return this.httpService.loggedInV1POSTRequest('/management/instruments', dto, 'addInstrument');
@@ -116,7 +113,7 @@ export class PerformanceBadgesService {
 
   public updateInstrument(id: number, name: string) {
     const dto = {
-      'name': name
+      name: name
     };
     return this.httpService.loggedInV1PUTRequest('/management/instruments/' + id, dto, 'updateInstrument');
   }
@@ -125,24 +122,28 @@ export class PerformanceBadgesService {
     return this.httpService.loggedInV1DELETERequest('/management/instruments/' + id, 'removeInstrument');
   }
 
-
   public addUserHasPerformanceBadgeWithInstrument(userId: number, userPerformanceBadge: UserPerformanceBadge) {
     const dto = {
-      'user_id': userId,
-      'instrument_id': userPerformanceBadge.instrumentId,
-      'performanceBadge_id': userPerformanceBadge.performanceBadgeId,
-      'date': Converter.getDateFormatted(userPerformanceBadge.date),
-      'grade': userPerformanceBadge.grade,
-      'note': userPerformanceBadge.note
+      user_id: userId,
+      instrument_id: userPerformanceBadge.instrumentId,
+      performanceBadge_id: userPerformanceBadge.performanceBadgeId,
+      date: Converter.getDateFormatted(userPerformanceBadge.date),
+      grade: userPerformanceBadge.grade,
+      note: userPerformanceBadge.note
     };
 
-    return this.httpService.loggedInV1POSTRequest('/management/performanceBadgeWithInstrument', dto,
-      'addUserHasPerformanceBadgeWithInstrument');
+    return this.httpService.loggedInV1POSTRequest(
+      '/management/performanceBadgeWithInstrument',
+      dto,
+      'addUserHasPerformanceBadgeWithInstrument'
+    );
   }
 
   public removeUserHasPerformanceBadgeWithInstrument(userPerformanceBadgeId: number) {
-    return this.httpService.loggedInV1DELETERequest('/management/performanceBadgeWithInstrument/' + userPerformanceBadgeId,
-      'removeUserHasPerformanceBadgeWithInstrument');
+    return this.httpService.loggedInV1DELETERequest(
+      '/management/performanceBadgeWithInstrument/' + userPerformanceBadgeId,
+      'removeUserHasPerformanceBadgeWithInstrument'
+    );
   }
 
   public getUserPerformanceBadges(userId: number): UserPerformanceBadge[] {
@@ -159,14 +160,23 @@ export class PerformanceBadgesService {
         const userPerformanceBadges = data.performanceBadges;
         for (let i = 0; i < userPerformanceBadges.length; i++) {
           const userPerformanceBadge = userPerformanceBadges[i];
-          userPerformanceBadgesToSave.push(new UserPerformanceBadge(userPerformanceBadge.id, userPerformanceBadge.performanceBadge_id,
-            userPerformanceBadge.instrument_id, userPerformanceBadge.performanceBadge_name, userPerformanceBadge.instrument_name,
-            userPerformanceBadge.date, userPerformanceBadge.grade, userPerformanceBadge.note));
+          userPerformanceBadgesToSave.push(
+            new UserPerformanceBadge(
+              userPerformanceBadge.id,
+              userPerformanceBadge.performanceBadge_id,
+              userPerformanceBadge.instrument_id,
+              userPerformanceBadge.performanceBadge_name,
+              userPerformanceBadge.instrument_name,
+              userPerformanceBadge.date,
+              userPerformanceBadge.grade,
+              userPerformanceBadge.note
+            )
+          );
         }
 
         this.setUserPerformanceBadges(userPerformanceBadgesToSave);
       },
-      (error) => console.log(error)
+      error => console.log(error)
     );
   }
 

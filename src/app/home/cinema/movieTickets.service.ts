@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Subject} from 'rxjs';
 
-import {HttpService} from '../../services/http.service';
+import {HttpService} from '../../utils/http.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,8 +10,7 @@ export class MovieTicketsService {
   public movieOrdersChange: Subject<MovieOrder[]> = new Subject<MovieOrder[]>();
   private _movieOrders: MovieOrder[];
 
-  constructor(private httpService: HttpService) {
-  }
+  constructor(private httpService: HttpService) {}
 
   public setMovieOrders(movieOrders: MovieOrder[]) {
     this._movieOrders = movieOrders;
@@ -37,8 +36,9 @@ export class MovieTicketsService {
 
           const ticketOrdersToSave = [];
           for (let j = 0; j < movies[i].orders.length; j++) {
-            ticketOrdersToSave.push(new TicketOrder(movies[i].orders[j].user_id, movies[i].orders[j].user_name,
-              movies[i].orders[j].amount));
+            ticketOrdersToSave.push(
+              new TicketOrder(movies[i].orders[j].user_id, movies[i].orders[j].user_name, movies[i].orders[j].amount)
+            );
           }
           localMovieOrder.setTicketOrders(ticketOrdersToSave);
           movieOrdersToSave.push(localMovieOrder);
@@ -46,7 +46,7 @@ export class MovieTicketsService {
 
         this.setMovieOrders(movieOrdersToSave);
       },
-      (error1) => console.log(error1)
+      error1 => console.log(error1)
     );
   }
 }

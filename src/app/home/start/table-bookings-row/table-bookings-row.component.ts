@@ -1,9 +1,10 @@
 import {Component, Input} from '@angular/core';
+
 import {CinemaService} from '../../cinema/cinema.service';
+import {MyUserService} from '../../my-user.service';
 import {HomepageService} from '../homepage.service';
 
 import {HomeBookingsModel} from '../bookings.model';
-import {MyUserService} from '../../my-user.service';
 
 @Component({
   // tslint:disable-next-line:component-selector
@@ -12,7 +13,6 @@ import {MyUserService} from '../../my-user.service';
   styleUrls: ['./table-bookings-row.component.css', './../start.component.css']
 })
 export class TableBookingsRowComponent {
-
   @Input()
   booking: HomeBookingsModel;
 
@@ -21,7 +21,7 @@ export class TableBookingsRowComponent {
   sendingApplyForEmergencyWorkerRequest = false;
   sendingSignOutForEmergencyWorkerRequest = false;
 
-  constructor(private cinemaService: CinemaService, private homePageService: HomepageService, private myUserService: MyUserService) { }
+  constructor(private cinemaService: CinemaService, private homePageService: HomepageService, private myUserService: MyUserService) {}
 
   applyForWorker() {
     this.sendingApplyForWorkerRequest = true;
@@ -32,7 +32,7 @@ export class TableBookingsRowComponent {
         this.booking.workerID = this.myUserService.getID();
         this.sendingApplyForWorkerRequest = false;
       },
-      (error) => {
+      error => {
         console.log(error);
         this.homePageService.fetchData();
       }
@@ -48,7 +48,7 @@ export class TableBookingsRowComponent {
         this.booking.workerID = -1;
         this.sendingSignOutForWorkerRequest = false;
       },
-      (error) => {
+      error => {
         console.log(error);
         this.homePageService.fetchData();
       }
@@ -64,7 +64,7 @@ export class TableBookingsRowComponent {
         this.booking.emergencyWorkerID = this.myUserService.getID();
         this.sendingApplyForEmergencyWorkerRequest = false;
       },
-      (error) => {
+      error => {
         console.log(error);
         this.homePageService.fetchData();
       }
@@ -80,11 +80,10 @@ export class TableBookingsRowComponent {
         this.booking.emergencyWorkerID = -1;
         this.sendingSignOutForEmergencyWorkerRequest = false;
       },
-      (error) => {
+      error => {
         console.log(error);
         this.homePageService.fetchData();
       }
     );
   }
-
 }

@@ -18,7 +18,7 @@
       <mat-divider></mat-divider>
 
       <div *ngIf="showEvents">
-        <a (click)="onPageChange()" mat-list-item routerLink="/home/events" routerLinkActive="activated">
+        <a (click)="onPageChange()" mat-list-item routerLink="/home/events/start" routerLinkActive="activated">
           <mat-icon>polls</mat-icon>
           {{ 'NAV_EVENTS_EVENTS' | translate }}
         </a>
@@ -108,7 +108,7 @@
   </mat-sidenav>
 
   <mat-sidenav-content>
-    <mat-toolbar class="z-depth-5" color="primary">
+    <mat-toolbar class="mat-elevation-z5" color="primary">
       <mat-icon (click)="sidenav.toggle()" class="toolbar-sidenav-toggler">menu</mat-icon>
       <span class="toolbar-heading" routerLink="/home">{{ communityName }}</span>
     </mat-toolbar>

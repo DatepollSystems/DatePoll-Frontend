@@ -1,68 +1,76 @@
 <mat-card class="mat-elevation-z3">
   <mat-card-content>
-
     <mat-tab-group mat-stretch-tabs class="tabs">
       <mat-tab label="Einstellungen" *ngIf="this.myUserService.hasPermission(SETTINGS_ADMINISTRATION)">
-
         <div class="col-12">
           <div class="row">
-            <div class="col-12"><h1>{{'NAV_MANAGEMENT_DATEPOLL' | translate}}</h1></div>
-          </div>
-
-          <div class="row">
             <div class="col-12">
-              <h2>{{'MANAGEMENT_DATEPOLL_FEATURE_SETTINGS' | translate}}</h2>
+              <h1>{{ 'NAV_MANAGEMENT_DATEPOLL' | translate }}</h1>
             </div>
           </div>
 
           <div class="row">
             <div class="col-12">
-              <h4>{{'MANAGEMENT_DATEPOLL_FEATURE_SETTINGS_SUBTITLE' | translate}}</h4>
+              <h2>{{ 'MANAGEMENT_DATEPOLL_FEATURE_SETTINGS' | translate }}</h2>
             </div>
           </div>
 
           <div class="row">
             <div class="col-12">
-              <mat-slide-toggle
-                (change)="cinemaServiceChange($event)"
-                [(ngModel)]="cinemaServiceEnabled"
-                color="primary">
-                {{'MANAGEMENT_DATEPOLL_CINEMA_SERVICE' | translate}}
+              <h4>{{ 'MANAGEMENT_DATEPOLL_FEATURE_SETTINGS_SUBTITLE' | translate }}</h4>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-12">
+              <mat-slide-toggle (change)="cinemaServiceChange($event)" [(ngModel)]="cinemaServiceEnabled" color="primary">
+                {{ 'MANAGEMENT_DATEPOLL_CINEMA_SERVICE' | translate }}
               </mat-slide-toggle>
             </div>
           </div>
 
           <div class="row">
             <div class="col-12">
-              <mat-slide-toggle
-                (change)="eventsServiceChange($event)"
-                [(ngModel)]="eventsServiceEnabled"
-                color="primary">
-                {{'MANAGEMENT_DATEPOLL_EVENTS_SERVICE' | translate}}
+              <mat-slide-toggle (change)="eventsServiceChange($event)" [(ngModel)]="eventsServiceEnabled" color="primary">
+                {{ 'MANAGEMENT_DATEPOLL_EVENTS_SERVICE' | translate }}
               </mat-slide-toggle>
             </div>
           </div>
 
-          <form #changeAppUrlForm="ngForm" (ngSubmit)="changeAppUrl(changeAppUrlForm)"
-                class="row" style="margin-top: 15px">
+          <form #changeAppUrlForm="ngForm" (ngSubmit)="changeAppUrl(changeAppUrlForm)" class="row" style="margin-top: 15px">
             <mat-form-field class="col-8 col-sm-8 col-md-4">
-              <input #appUrlModel="ngModel" [(ngModel)]="appUrl" id="appUrl" matInput
-                     maxlength="128" minlength="1" name="appUrl"
-                     ngModel placeholder="{{'MANAGEMENT_DATEPOLL_APP_URL' | translate}}" required
-                     type="text">
+              <input
+                #appUrlModel="ngModel"
+                [(ngModel)]="appUrl"
+                id="appUrl"
+                matInput
+                maxlength="128"
+                minlength="1"
+                name="appUrl"
+                ngModel
+                placeholder="{{ 'MANAGEMENT_DATEPOLL_APP_URL' | translate }}"
+                required
+                type="text"
+              />
               <mat-error *ngIf="appUrlModel.invalid">
-                {{'MANAGEMENT_DATEPOLL_APP_URL_NOT_VALID' | translate}}
+                {{ 'MANAGEMENT_DATEPOLL_APP_URL_NOT_VALID' | translate }}
               </mat-error>
             </mat-form-field>
 
             <div class="col-4 col-sm-4 col-md-2">
-              <button class="info-button" mat-button type="button" (click)="autoDetectAppUrl()">Autodetect</button>
+              <button mat-raised-button color="primary" type="button" (click)="autoDetectAppUrl()">Autodetect</button>
             </div>
 
             <div class="col-12 col-sm-12 col-md-3">
-              <button class="success-button" mat-button [class.spinner]="appUrlSaving"
-                      [disabled]="!changeAppUrlForm.valid || appUrlSaving"
-                      type="submit">{{'SAVE' | translate}}</button>
+              <button
+                color="accent"
+                mat-flat-button
+                [class.spinner]="appUrlSaving"
+                [disabled]="!changeAppUrlForm.valid || appUrlSaving"
+                type="submit"
+              >
+                {{ 'SAVE' | translate }}
+              </button>
             </div>
           </form>
 
@@ -72,41 +80,80 @@
             </div>
           </div>
 
-          <form #changeCommunityNameForm="ngForm" (ngSubmit)="changeCommunityName(changeCommunityNameForm)"
-                class="row" style="margin-top: 15px">
+          <form
+            #changeCommunityNameForm="ngForm"
+            (ngSubmit)="changeCommunityName(changeCommunityNameForm)"
+            class="row"
+            style="margin-top: 15px"
+          >
             <mat-form-field class="col-12 col-sm-12 col-md-6">
-              <input #communityNameModel="ngModel" [(ngModel)]="communityName" id="communityName" matInput
-                     maxlength="50" minlength="1" name="communityName"
-                     ngModel placeholder="{{'MANAGEMENT_DATEPOLL_COMMUNITY_NAME' | translate}}" required
-                     type="text">
+              <input
+                #communityNameModel="ngModel"
+                [(ngModel)]="communityName"
+                id="communityName"
+                matInput
+                maxlength="50"
+                minlength="1"
+                name="communityName"
+                ngModel
+                placeholder="{{ 'MANAGEMENT_DATEPOLL_COMMUNITY_NAME' | translate }}"
+                required
+                type="text"
+              />
               <mat-error *ngIf="communityNameModel.invalid">
-                {{'MANAGEMENT_DATEPOLL_COMMUNITY_NAME_NOT_VALID' | translate}}
+                {{ 'MANAGEMENT_DATEPOLL_COMMUNITY_NAME_NOT_VALID' | translate }}
               </mat-error>
             </mat-form-field>
 
             <div class="col-12 col-sm-12 col-md-3">
-              <button class="success-button" mat-button [class.spinner]="communityNameSaving"
-                      [disabled]="!changeCommunityNameForm.valid || communityNameSaving"
-                      type="submit">{{'SAVE' | translate}}</button>
+              <button
+                color="accent"
+                mat-flat-button
+                [class.spinner]="communityNameSaving"
+                [disabled]="!changeCommunityNameForm.valid || communityNameSaving"
+                type="submit"
+              >
+                {{ 'SAVE' | translate }}
+              </button>
             </div>
           </form>
 
-          <form #changeCommunityUrlForm="ngForm" (ngSubmit)="changeCommunityUrl(changeCommunityUrlForm)"
-                class="row" style="margin-top: 15px">
+          <form
+            #changeCommunityUrlForm="ngForm"
+            (ngSubmit)="changeCommunityUrl(changeCommunityUrlForm)"
+            class="row"
+            style="margin-top: 15px"
+          >
             <mat-form-field class="col-12 col-sm-12 col-md-6">
-              <input #communityUrlModel="ngModel" [(ngModel)]="communityUrl" id="communityUrl" matInput
-                     maxlength="128" minlength="1" name="communityUrl"
-                     ngModel placeholder="{{'MANAGEMENT_DATEPOLL_COMMUNITY_URL' | translate}}" required
-                     type="text" url>
+              <input
+                #communityUrlModel="ngModel"
+                [(ngModel)]="communityUrl"
+                id="communityUrl"
+                matInput
+                maxlength="128"
+                minlength="1"
+                name="communityUrl"
+                ngModel
+                placeholder="{{ 'MANAGEMENT_DATEPOLL_COMMUNITY_URL' | translate }}"
+                required
+                type="text"
+                url
+              />
               <mat-error *ngIf="communityUrlModel.invalid">
-                {{'MANAGEMENT_DATEPOLL_COMMUNITY_URL_NOT_VALID' | translate}}
+                {{ 'MANAGEMENT_DATEPOLL_COMMUNITY_URL_NOT_VALID' | translate }}
               </mat-error>
             </mat-form-field>
 
             <div class="col-12 col-sm-12 col-md-3">
-              <button class="success-button" mat-button [class.spinner]="communityUrlSaving"
-                      [disabled]="!changeCommunityUrlForm.valid || communityUrlSaving"
-                      type="submit">{{'SAVE' | translate}}</button>
+              <button
+                color="accent"
+                mat-flat-button
+                [class.spinner]="communityUrlSaving"
+                [disabled]="!changeCommunityUrlForm.valid || communityUrlSaving"
+                type="submit"
+              >
+                {{ 'SAVE' | translate }}
+              </button>
             </div>
           </form>
 
@@ -116,53 +163,82 @@
             </div>
           </div>
 
-          <form #changeOpenWeatherMapKeyForm="ngForm" (ngSubmit)="changeOpenWeatherMapKey(changeOpenWeatherMapKeyForm)"
-                class="row" style="margin-top: 15px">
+          <form
+            #changeOpenWeatherMapKeyForm="ngForm"
+            (ngSubmit)="changeOpenWeatherMapKey(changeOpenWeatherMapKeyForm)"
+            class="row"
+            style="margin-top: 15px"
+          >
             <mat-form-field class="col-12 col-sm-12 col-md-6">
-              <input #openWeatherMapKeyModel="ngModel" [(ngModel)]="openWeatherMapKey" id="openWeatherMapKey" matInput
-                     maxlength="50" name="openWeatherMapKey"
-                     ngModel placeholder="{{'MANAGEMENT_DATEPOLL_OPENWEATHERMAP_KEY' | translate}}"
-                     type="text">
+              <input
+                #openWeatherMapKeyModel="ngModel"
+                [(ngModel)]="openWeatherMapKey"
+                id="openWeatherMapKey"
+                matInput
+                maxlength="50"
+                name="openWeatherMapKey"
+                ngModel
+                placeholder="{{ 'MANAGEMENT_DATEPOLL_OPENWEATHERMAP_KEY' | translate }}"
+                type="text"
+              />
               <mat-error *ngIf="openWeatherMapKeyModel.invalid">
-                {{'MANAGEMENT_DATEPOLL_OPENWEATHERMAP_KEY_INVALID' | translate}}
+                {{ 'MANAGEMENT_DATEPOLL_OPENWEATHERMAP_KEY_INVALID' | translate }}
               </mat-error>
             </mat-form-field>
 
             <div class="col-12 col-sm-12 col-md-3">
-              <button class="success-button" mat-button [class.spinner]="openWeatherMapKeySaving"
-                      [disabled]="!changeOpenWeatherMapKeyForm.valid || openWeatherMapKeySaving"
-                      type="submit">{{'SAVE' | translate}}</button>
+              <button
+                color="accent"
+                mat-flat-button
+                [class.spinner]="openWeatherMapKeySaving"
+                [disabled]="!changeOpenWeatherMapKeyForm.valid || openWeatherMapKeySaving"
+                type="submit"
+              >
+                {{ 'SAVE' | translate }}
+              </button>
             </div>
           </form>
 
-          <form #changeOpenWeatherMapCinemaCityIdForm="ngForm"
-                (ngSubmit)="changeOpenWeatherMapCinemaCityId(changeOpenWeatherMapCinemaCityIdForm)"
-                class="row" style="margin-top: 15px">
+          <form
+            #changeOpenWeatherMapCinemaCityIdForm="ngForm"
+            (ngSubmit)="changeOpenWeatherMapCinemaCityId(changeOpenWeatherMapCinemaCityIdForm)"
+            class="row"
+            style="margin-top: 15px"
+          >
             <mat-form-field class="col-12 col-sm-12 col-md-6">
-              <input #openWeatherMapCinemaCityIdModel="ngModel" [(ngModel)]="openWeatherMapCinemaCityId" matInput
-                     maxlength="50" name="openWeatherMapCinemaCityId" id="openWeatherMapCinemaCityId"
-                     ngModel placeholder="{{'MANAGEMENT_DATEPOLL_OPENWEATHERMAP_CINEMA_CITY_ID' | translate}}"
-                     type="text">
+              <input
+                #openWeatherMapCinemaCityIdModel="ngModel"
+                [(ngModel)]="openWeatherMapCinemaCityId"
+                matInput
+                maxlength="50"
+                name="openWeatherMapCinemaCityId"
+                id="openWeatherMapCinemaCityId"
+                ngModel
+                placeholder="{{ 'MANAGEMENT_DATEPOLL_OPENWEATHERMAP_CINEMA_CITY_ID' | translate }}"
+                type="text"
+              />
               <mat-error *ngIf="openWeatherMapCinemaCityIdModel.invalid">
-                {{'MANAGEMENT_DATEPOLL_OPENWEATHERMAP_CINEMA_CITY_ID_INVALID' | translate}}
+                {{ 'MANAGEMENT_DATEPOLL_OPENWEATHERMAP_CINEMA_CITY_ID_INVALID' | translate }}
               </mat-error>
             </mat-form-field>
 
             <div class="col-12 col-sm-12 col-md-3">
-              <button class="success-button" mat-button [class.spinner]="openWeatherMapCinemaCityIdSaving"
-                      [disabled]="!changeOpenWeatherMapCinemaCityIdForm.valid || openWeatherMapCinemaCityIdSaving"
-                      type="submit">{{'SAVE' | translate}}</button>
+              <button
+                color="accent"
+                mat-flat-button
+                [class.spinner]="openWeatherMapCinemaCityIdSaving"
+                [disabled]="!changeOpenWeatherMapCinemaCityIdForm.valid || openWeatherMapCinemaCityIdSaving"
+                type="submit"
+              >
+                {{ 'SAVE' | translate }}
+              </button>
             </div>
           </form>
         </div>
-
       </mat-tab>
-      <mat-tab label="{{'MANAGEMENT_DATEPOLL_LOGS' | translate}}"
-               *ngIf="this.myUserService.hasPermission(SYSTEM_LOGS_ADMINISTRATION)">
+      <mat-tab label="{{ 'MANAGEMENT_DATEPOLL_LOGS' | translate }}" *ngIf="this.myUserService.hasPermission(SYSTEM_LOGS_ADMINISTRATION)">
         <app-logs></app-logs>
       </mat-tab>
     </mat-tab-group>
-
-
   </mat-card-content>
 </mat-card>

@@ -2,8 +2,8 @@ import {Injectable} from '@angular/core';
 
 import {Subject} from 'rxjs';
 
-import {Converter} from '../../services/converter';
-import {HttpService} from '../../services/http.service';
+import {Converter} from '../../utils/converter';
+import {HttpService} from '../../utils/http.service';
 
 import {TranslateService} from '../../translation/translate.service';
 import {Decision} from '../events/models/decision.model';
@@ -121,6 +121,7 @@ export class HomepageService {
           event.alreadyVotedFor = fetchedEvent.already_voted;
           if (event.alreadyVotedFor) {
             event.userDecision = fetchedEvent.user_decision.decision;
+            event.additionalInformation = fetchedEvent.user_decision.additional_information;
             event.decisionColor = fetchedEvent.user_decision.color;
           }
           eventsToSave.push(event);

@@ -2,7 +2,7 @@ import {Component, OnDestroy} from '@angular/core';
 import {NgForm} from '@angular/forms';
 import {Subscription} from 'rxjs';
 
-import {NotificationsService, NotificationType} from 'angular2-notifications';
+import {NotificationsService} from 'angular2-notifications';
 
 import {TranslateService} from '../../../../translation/translate.service';
 import {StandardDecisionsService} from '../../standardDecisions.service';

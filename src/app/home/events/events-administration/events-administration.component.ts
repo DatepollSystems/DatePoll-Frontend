@@ -1,15 +1,17 @@
 import {Component, OnDestroy, TemplateRef, ViewChild} from '@angular/core';
 import {MatBottomSheet, MatDialog, MatPaginator, MatSlideToggleChange, MatSort, MatTableDataSource} from '@angular/material';
-import {Router} from '@angular/router';
 import {Subscription} from 'rxjs';
 
+import {NotificationsService, NotificationType} from 'angular2-notifications';
+
+import {TranslateService} from '../../../translation/translate.service';
 import {EventsService} from '../events.service';
 
 import {Event} from '../models/event.model';
 
-import {EventInfoModalComponent} from '../event-info-modal/event-info-modal.component';
+import {QuestionDialogComponent} from '../../../utils/shared-components/question-dialog/question-dialog.component';
+import {EventInfoModalComponent} from '../event-info/event-info-modal/event-info-modal.component';
 import {EventCreateModalComponent} from './event-create-modal/event-create-modal.component';
-import {EventDeleteModalComponent} from './event-delete-modal/event-delete-modal.component';
 import {EventStandardDecisionsManagementModalComponent} from './event-standard-decisions-management-modal/event-standard-decisions-management-modal.component';
 import {EventStandardLocationsManagementModalComponent} from './event-standard-locations-management-modal/event-standard-locations-management-modal.component';
 import {EventUpdateModalComponent} from './event-update-modal/event-update-modal.component';
@@ -39,8 +41,9 @@ export class EventsAdministrationComponent implements OnDestroy {
 
   constructor(
     private eventsService: EventsService,
-    private router: Router,
+    private translate: TranslateService,
     private dialog: MatDialog,
+    private notificationsService: NotificationsService,
     private bottomSheet: MatBottomSheet
   ) {
     this.eventsLoaded = false;
@@ -123,7 +126,7 @@ export class EventsAdministrationComponent implements OnDestroy {
     this.dialog.open(EventInfoModalComponent, {
       width: '80vh',
       data: {
-        event: event
+        event
       }
     });
   }
@@ -132,7 +135,7 @@ export class EventsAdministrationComponent implements OnDestroy {
     this.dialog.open(EventUserManagementModalComponent, {
       width: '80vh',
       data: {
-        event: event
+        event
       }
     });
   }
@@ -141,14 +144,47 @@ export class EventsAdministrationComponent implements OnDestroy {
     this.dialog.open(EventUpdateModalComponent, {
       width: '80vh',
       data: {
-        event: event
+        event
       }
     });
   }
 
   onDelete(id: number) {
-    this.bottomSheet.open(EventDeleteModalComponent, {
-      data: {eventID: id}
+    const answers = [
+      {
+        answer: this.translate.getTranslationFor('YES'),
+        value: 'yes'
+      },
+      {
+        answer: this.translate.getTranslationFor('NO'),
+        value: 'no'
+      }
+    ];
+    const question = this.translate.getTranslationFor('EVENTS_ADMINISTRATION_DELETE_EVENT_QUESTION');
+
+    const bottomSheetRef = this.bottomSheet.open(QuestionDialogComponent, {
+      data: {
+        answers,
+        question
+      }
+    });
+
+    bottomSheetRef.afterDismissed().subscribe((value: string) => {
+      if (value != null) {
+        if (value.includes('yes')) {
+          this.eventsService.deleteEvent(id).subscribe(
+            (response: any) => {
+              console.log(response);
+              this.eventsService.fetchEvents();
+              this.notificationsService.success(
+                this.translate.getTranslationFor('SUCCESSFULLY'),
+                this.translate.getTranslationFor('EVENTS_ADMINISTRATION_DELETE_EVENT_SUCCESSFULLY_DELETED')
+              );
+            },
+            error => console.log(error)
+          );
+        }
+      }
     });
   }
 }

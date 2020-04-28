@@ -13,3 +13,19 @@ td {
 .table-responsive {
   overflow-x: auto;
 }
+
+.sub-header {
+  margin-bottom: 0;
+}
+
+.until-left {
+  color: gray;
+}
+
+.circle {
+  display: block;
+  border-radius: 50%;
+  height: 40px;
+  width: 40px;
+  margin: 0;
+}

@@ -1,8 +1,7 @@
 import {Component} from '@angular/core';
-import {ClipboardService} from 'ngx-clipboard';
 
-import {HttpService} from '../../../services/http.service';
 import {environment} from '../../../../environments/environment';
+import {HttpService} from '../../../utils/http.service';
 
 @Component({
   selector: 'app-calendar-token',
@@ -10,12 +9,11 @@ import {environment} from '../../../../environments/environment';
   styleUrls: ['./calendar-token.component.css']
 })
 export class CalendarTokenComponent {
-
   apiUrl = environment.apiUrl;
 
   calendarToken: string = null;
 
-  constructor(private httpService: HttpService, private clipboardService: ClipboardService) {
+  constructor(private httpService: HttpService) {
     this.fetchCalendarToken();
   }
 
@@ -26,12 +24,14 @@ export class CalendarTokenComponent {
         console.log(data);
         this.fetchCalendarToken();
       },
-      (error) => console.log(error)
+      error => console.log(error)
     );
   }
 
-  public copyTokenToClipboard() {
-    this.clipboardService.copyFromContent(this.calendarToken);
+  public copyTokenToClipboard(element) {
+    element.select();
+    document.execCommand('copy');
+    element.setSelectionRange(0, 0);
   }
 
   private fetchCalendarToken() {
@@ -40,7 +40,7 @@ export class CalendarTokenComponent {
         console.log(data);
         this.calendarToken = this.apiUrl + '/user/calendar/' + data.token;
       },
-      (error) => console.log(error)
+      error => console.log(error)
     );
   }
 }

@@ -9,7 +9,7 @@ import {UsersService} from '../users.service';
 import {GroupsService} from '../../groups-management/groups.service';
 import {PerformanceBadgesService} from '../../performance-badges-management/performance-badges.service';
 import {MyUserService} from '../../../my-user.service';
-import {Converter} from '../../../../services/converter';
+import {Converter} from '../../../../utils/converter';
 
 import {Permissions} from '../../../../permissions';
 import {PhoneNumber} from '../../../phoneNumber.model';

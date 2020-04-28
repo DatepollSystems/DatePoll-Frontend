@@ -1,7 +1,10 @@
 import {Component, OnDestroy} from '@angular/core';
+import {MatBottomSheet} from '@angular/material/bottom-sheet';
 import {Subscription} from 'rxjs';
-import {LogsService} from './logs.service';
+import {QuestionDialogComponent} from '../../../../utils/shared-components/question-dialog/question-dialog.component';
+import {TranslateService} from '../../../../translation/translate.service';
 import {Log, LogType} from './log.model';
+import {LogsService} from './logs.service';
 
 @Component({
   selector: 'app-logs',
@@ -22,11 +25,11 @@ export class LogsComponent implements OnDestroy {
 
   loading = true;
 
-  constructor(private logsService: LogsService) {
+  constructor(private logsService: LogsService, private bottomSheet: MatBottomSheet, private translate: TranslateService) {
     this.logs = this.logsService.getLogs();
     this.logsCopy = this.logs.slice();
     this.redoLogsList();
-    this.logsSubscription = this.logsService.logsChange.subscribe((value) => {
+    this.logsSubscription = this.logsService.logsChange.subscribe(value => {
       this.logs = value;
       this.logsCopy = this.logs.slice();
       this.redoLogsList();
@@ -41,6 +44,35 @@ export class LogsComponent implements OnDestroy {
   refreshLogsList() {
     this.loading = true;
     this.logsService.getLogs();
+  }
+
+  deleteLogList() {
+    const answers = [
+      {
+        answer: this.translate.getTranslationFor('YES'),
+        value: 'yes'
+      },
+      {
+        answer: this.translate.getTranslationFor('NO'),
+        value: 'no'
+      }
+    ];
+    const question = this.translate.getTranslationFor('MANAGEMENT_DATEPOLL_LOGS_DELETE_CONFIRM');
+
+    const bottomSheetRef = this.bottomSheet.open(QuestionDialogComponent, {
+      data: {
+        answers,
+        question
+      }
+    });
+
+    bottomSheetRef.afterDismissed().subscribe((value: string) => {
+      if (value != null) {
+        if (value.includes('yes')) {
+          this.logsService.deleteLogs();
+        }
+      }
+    });
   }
 
   applyFilter(filterValue: string) {

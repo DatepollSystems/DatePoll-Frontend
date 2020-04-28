@@ -1,0 +1,6 @@
+.popup {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  width: 100%;
+}

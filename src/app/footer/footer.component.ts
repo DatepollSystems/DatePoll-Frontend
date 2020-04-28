@@ -3,7 +3,7 @@ import {MatDialog} from '@angular/material/dialog';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {Subscription} from 'rxjs';
 
-import {SettingsService} from '../services/settings.service';
+import {SettingsService} from '../utils/settings.service';
 import {TranslateService} from '../translation/translate.service';
 
 import {AboutModalComponent} from './modals/about-modal/about-modal.component';
@@ -21,7 +21,6 @@ export class FooterComponent implements OnDestroy {
   communityUrl = 'https://datepoll.dafnik.me';
   private communityUrlSubscription: Subscription;
 
-  closed = true;
   selected: string;
 
   constructor(
@@ -51,15 +50,9 @@ export class FooterComponent implements OnDestroy {
     this.communityUrlSubscription.unsubscribe();
   }
 
-  setLang() {
-    if (this.closed) {
-      this.closed = false;
-      return;
-    }
-    this.closed = true;
-
+  setLang(event: any) {
     const oldLanguage = localStorage.getItem('language');
-    this.translate.use(this.selected);
+    this.translate.use(event.value);
 
     const snackBarRef = this.snackBar.open('Sprache geändert zu ' + this.selected, 'Undo');
     snackBarRef.onAction().subscribe(() => {

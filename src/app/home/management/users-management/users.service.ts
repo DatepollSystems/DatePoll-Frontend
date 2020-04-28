@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Subject} from 'rxjs';
 
-import {HttpService} from '../../../services/http.service';
+import {HttpService} from '../../../utils/http.service';
 import {PhoneNumber} from '../../phoneNumber.model';
 import {User} from './user.model';
 
@@ -9,7 +9,6 @@ import {User} from './user.model';
   providedIn: 'root'
 })
 export class UsersService {
-
   public usersChange: Subject<User[]> = new Subject<User[]>();
   public joinedGroupsChange: Subject<any[]> = new Subject<any[]>();
   public freeGroupsChange: Subject<any[]> = new Subject<any[]>();
@@ -48,21 +47,38 @@ export class UsersService {
           const localPhoneNumbers = [];
           const localPhoneNumbersData = user.phone_numbers;
           for (let i = 0; i < localPhoneNumbersData.length; i++) {
-            localPhoneNumbers.push(new PhoneNumber(localPhoneNumbersData[i].id, localPhoneNumbersData[i].label,
-              localPhoneNumbersData[i].number));
+            localPhoneNumbers.push(
+              new PhoneNumber(localPhoneNumbersData[i].id, localPhoneNumbersData[i].label, localPhoneNumbersData[i].number)
+            );
           }
 
           const birthday = new Date(user.birthday);
           const join_date = new Date(user.join_date);
 
-          const localUser = new User(user.id, user.username, user.email_addresses, user.force_password_change, user.title,
-            user.firstname, user.surname, birthday, join_date, user.streetname, user.streetnumber, user.zipcode,
-            user.location, user.activated, user.activity, localPhoneNumbers, user.permissions);
+          const localUser = new User(
+            user.id,
+            user.username,
+            user.email_addresses,
+            user.force_password_change,
+            user.title,
+            user.firstname,
+            user.surname,
+            birthday,
+            join_date,
+            user.streetname,
+            user.streetnumber,
+            user.zipcode,
+            user.location,
+            user.activated,
+            user.activity,
+            localPhoneNumbers,
+            user.permissions
+          );
           users.push(localUser);
         }
         this.setUsers(users);
       },
-      (error) => console.log(error)
+      error => console.log(error)
     );
   }
 
@@ -80,11 +96,10 @@ export class UsersService {
 
   public changePasswordForUser(userID: number, password: string) {
     const dto = {
-      'password': password
+      password: password
     };
     return this.httpService.loggedInV1PUTRequest('/management/users/changePassword/' + userID, dto, 'changePasswordFromUser');
   }
-
 
   public getJoinedOfUser(userID: number): any[] {
     this.fetchJoinedOfUser(userID);
@@ -103,9 +118,9 @@ export class UsersService {
           const groupDTO = groupsDTO[i];
 
           const groupObject = {
-            'id': groupDTO.id,
-            'name': groupDTO.name,
-            'type': 'parentgroup'
+            id: groupDTO.id,
+            name: groupDTO.name,
+            type: 'parentgroup'
           };
 
           groups.push(groupObject);
@@ -120,11 +135,11 @@ export class UsersService {
               const subgroupDTO = subgroupsDTO[i];
 
               const subgroupObject = {
-                'id': subgroupDTO.id,
-                'name': subgroupDTO.name,
-                'type': 'subgroup',
-                'group_id': subgroupDTO.group_id,
-                'group_name': subgroupDTO.group_name
+                id: subgroupDTO.id,
+                name: subgroupDTO.name,
+                type: 'subgroup',
+                group_id: subgroupDTO.group_id,
+                group_name: subgroupDTO.group_name
               };
 
               groups.push(subgroupObject);
@@ -132,10 +147,10 @@ export class UsersService {
 
             this.setJoinedOfUser(groups);
           },
-          (error) => console.log(error)
+          error => console.log(error)
         );
       },
-      (error) => console.log(error)
+      error => console.log(error)
     );
   }
 
@@ -161,9 +176,9 @@ export class UsersService {
           const groupDTO = groupsDTO[i];
 
           const groupObject = {
-            'id': groupDTO.id,
-            'name': groupDTO.name,
-            'type': 'parentgroup'
+            id: groupDTO.id,
+            name: groupDTO.name,
+            type: 'parentgroup'
           };
 
           groups.push(groupObject);
@@ -178,11 +193,11 @@ export class UsersService {
               const subgroupDTO = subgroupsDTO[i];
 
               const subgroupObject = {
-                'id': subgroupDTO.id,
-                'name': subgroupDTO.name,
-                'type': 'subgroup',
-                'group_id': subgroupDTO.group_id,
-                'group_name': subgroupDTO.group_name
+                id: subgroupDTO.id,
+                name: subgroupDTO.name,
+                type: 'subgroup',
+                group_id: subgroupDTO.group_id,
+                group_name: subgroupDTO.group_name
               };
 
               groups.push(subgroupObject);
@@ -190,10 +205,10 @@ export class UsersService {
 
             this.setFreeOfUser(groups);
           },
-          (error) => console.log(error)
+          error => console.log(error)
         );
       },
-      (error) => console.log(error)
+      error => console.log(error)
     );
   }
 

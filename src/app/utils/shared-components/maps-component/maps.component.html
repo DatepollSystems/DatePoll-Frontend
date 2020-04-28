@@ -1,0 +1,21 @@
+<div fxLayout="row wrap" fxLayout.xs="column" fxLayoutGap="2%" fxLayoutAlign="start" style="margin-top: 10px;">
+  <mat-form-field fxFlex="50%">
+    <input matInput [(ngModel)]="searchFilter" name="search" placeholder="{{ 'SEARCH' | translate }}" />
+  </mat-form-field>
+  <div fxFlex="15%">
+    <button mat-flat-button (click)="search()" type="button" color="accent" style="width: 100%">{{ 'SEARCH' | translate }}</button>
+  </div>
+
+  <div fxFlex="30%" fxFlex.xs="100%" *ngIf="edible">
+    <button mat-stroked-button (click)="clearSelection()" type="button" style="width: 100%">
+      {{ 'MAPS_CLEAR_SELECTION' | translate }}
+      <mat-icon>clear</mat-icon>
+    </button>
+  </div>
+
+  <div fxFlex="100%" style="height: 400px;">
+    <div class="map-frame">
+      <div id="{{ randomMapId }}" class="map"></div>
+    </div>
+  </div>
+</div>

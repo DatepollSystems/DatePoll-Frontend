@@ -1,16 +1,19 @@
-import {AfterViewInit, Component, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {EventResultUser} from '../../../models/event-result-user.model';
 import {SelectionModel} from '@angular/cdk/collections';
-import {MatTableDataSource} from '@angular/material/table';
+import {AfterViewInit, Component, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {MatBottomSheet} from '@angular/material/bottom-sheet';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
-import {EventsVoteForDecisionModalComponent} from '../../../events-view/events-vote-for-decision-modal/events-vote-for-decision-modal.component';
-import {NotificationsService} from 'angular2-notifications';
-import {TranslateService} from '../../../../../translation/translate.service';
-import {MatBottomSheet} from '@angular/material/bottom-sheet';
-import {EventsService} from '../../../events.service';
-import {Event} from '../../../models/event.model';
+import {MatTableDataSource} from '@angular/material/table';
 import {Subscription} from 'rxjs';
+
+import {NotificationsService} from 'angular2-notifications';
+
+import {EventsVoteForDecisionModalComponent} from '../../../events-view/events-vote-for-decision-modal/events-vote-for-decision-modal.component';
+
+import {TranslateService} from '../../../../../translation/translate.service';
+import {EventsService} from '../../../events.service';
+import {EventResultUser} from '../../../models/event-result-user.model';
+import {Event} from '../../../models/event.model';
 
 @Component({
   selector: 'app-event-user-management',
@@ -35,8 +38,6 @@ export class EventUserManagementComponent implements OnInit, AfterViewInit, OnDe
   @ViewChild(MatPaginator) paginator: MatPaginator;
   dataSource: MatTableDataSource<EventResultUser>;
   selection = new SelectionModel<EventResultUser>(true, []);
-
-  voteSummary: string = null;
 
   eventSubscription: Subscription;
 
@@ -177,40 +178,5 @@ export class EventUserManagementComponent implements OnInit, AfterViewInit, OnDe
       return `${this.isAllSelected() ? 'select' : 'deselect'} all`;
     }
     return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.id + 1}`;
-  }
-
-  getVotesSummary() {
-    if (this.voteSummary == null) {
-      this.calculateVoteSummary();
-    }
-    return this.voteSummary;
-  }
-
-  private calculateVoteSummary() {
-    const objects = [];
-
-    for (const decision of this.event.getDecisions()) {
-      const object = {
-        id: decision.id,
-        name: decision.decision,
-        count: 0
-      };
-      objects.push(object);
-    }
-
-    for (const resultUser of this.resultUsers) {
-      for (const object of objects) {
-        if (resultUser.decisionId === object.id) {
-          object.count += 1;
-          break;
-        }
-      }
-    }
-
-    let stringToReturn = '';
-    for (const object of objects) {
-      stringToReturn += object.name + ': ' + object.count + ' ';
-    }
-    this.voteSummary = stringToReturn;
   }
 }

@@ -1,11 +1,10 @@
-import {Component, NgZone, OnDestroy, ViewChild} from '@angular/core';
-import {MatSidenav} from '@angular/material/sidenav';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {Subscription} from 'rxjs';
 
 import {AuthService} from '../auth/auth.service';
 import {Permissions} from '../permissions';
-import {IsMobileService} from '../services/is-mobile.service';
-import {SettingsService} from '../services/settings.service';
+import {IsMobileService} from '../utils/is-mobile.service';
+import {SettingsService} from '../utils/settings.service';
 import {MyUserService} from './my-user.service';
 
 @Component({
@@ -13,8 +12,7 @@ import {MyUserService} from './my-user.service';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnDestroy {
-  private sidenav: MatSidenav;
+export class HomeComponent implements OnInit, OnDestroy {
   @ViewChild('sidenav', {static: true})
   navBarOpened = false;
   navBarMode = 'over';
@@ -48,30 +46,12 @@ export class HomeComponent implements OnDestroy {
   isMobileSubscription: Subscription;
 
   constructor(
-    private ngZone: NgZone,
     myUserService: MyUserService,
     private authService: AuthService,
     private settingsService: SettingsService,
     private isMobileService: IsMobileService
   ) {
     this.myUserService = myUserService;
-
-    this.setTheme();
-
-    if (!this.isMobileService.getIsMobile()) {
-      this.navBarOpened = true;
-      this.navBarMode = 'side';
-    }
-
-    this.isMobileSubscription = this.isMobileService.isMobileChange.subscribe(isMobile => {
-      if (isMobile) {
-        this.navBarOpened = false;
-        this.navBarMode = 'over';
-      } else {
-        this.navBarOpened = true;
-        this.navBarMode = 'side';
-      }
-    });
 
     this.firstname = this.myUserService.getFirstname();
     this.firstnameSubscription = myUserService.firstnameChange.subscribe(value => {
@@ -111,6 +91,28 @@ export class HomeComponent implements OnDestroy {
     }
   }
 
+  ngOnInit() {
+    this.setTheme();
+
+    if (!this.isMobileService.getIsMobile()) {
+      this.navBarOpened = true;
+      this.navBarMode = 'side';
+    } else {
+      this.navBarOpened = false;
+      this.navBarMode = 'over';
+    }
+
+    this.isMobileSubscription = this.isMobileService.isMobileChange.subscribe(isMobile => {
+      if (isMobile) {
+        this.navBarOpened = false;
+        this.navBarMode = 'over';
+      } else {
+        this.navBarOpened = true;
+        this.navBarMode = 'side';
+      }
+    });
+  }
+
   ngOnDestroy(): void {
     this.firstnameSubscription.unsubscribe();
     this.surnameSubscription.unsubscribe();
@@ -126,10 +128,6 @@ export class HomeComponent implements OnDestroy {
   }
 
   changeTheme() {
-    if (localStorage.getItem('theme') == null) {
-      localStorage.setItem('theme', 'light');
-    }
-
     const theme = localStorage.getItem('theme');
     if (theme === 'light') {
       localStorage.setItem('theme', 'dark');
@@ -140,6 +138,10 @@ export class HomeComponent implements OnDestroy {
   }
 
   setTheme() {
+    if (localStorage.getItem('theme') == null) {
+      localStorage.setItem('theme', 'light');
+    }
+
     const theme = localStorage.getItem('theme');
     if (theme === 'light') {
       document.getElementById('body').classList.remove('dark-theme');

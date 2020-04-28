@@ -10,7 +10,7 @@ import {EventsUserService} from '../../events-user.service';
 
 import {Event} from '../../models/event.model';
 
-import {EventInfoModalComponent} from '../../event-info-modal/event-info-modal.component';
+import {EventInfoModalComponent} from '../../event-info/event-info-modal/event-info-modal.component';
 import {EventsVoteForDecisionModalComponent} from '../events-vote-for-decision-modal/events-vote-for-decision-modal.component';
 
 @Component({

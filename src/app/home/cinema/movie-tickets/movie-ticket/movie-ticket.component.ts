@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
 
-import {HttpService} from '../../../../services/http.service';
+import {HttpService} from '../../../../utils/http.service';
 import {MyUserService} from '../../../my-user.service';
 import {CinemaService} from '../../cinema.service';
 
@@ -28,10 +28,12 @@ export class MovieTicketComponent implements OnInit {
 
   myUserService: MyUserService;
 
-  constructor(private dialog: MatDialog,
-              private cinemaService: CinemaService,
-              myUserService: MyUserService,
-              private httpService: HttpService) {
+  constructor(
+    private dialog: MatDialog,
+    private cinemaService: CinemaService,
+    myUserService: MyUserService,
+    private httpService: HttpService
+  ) {
     this.myUserService = myUserService;
   }
 
@@ -42,7 +44,7 @@ export class MovieTicketComponent implements OnInit {
   bookTickets() {
     this.dialog.open(MovieBookTicketsModalComponent, {
       width: '60vh',
-      data: {movie: this.movie},
+      data: {movie: this.movie}
     });
   }
 
@@ -54,7 +56,7 @@ export class MovieTicketComponent implements OnInit {
         this.movie.bookedTickets -= this.movie.bookedTicketsForYourself;
         this.movie.bookedTicketsForYourself = 0;
       },
-      (error) => {
+      error => {
         console.log(error);
         this.cinemaService.fetchNotShownMovies();
       }
@@ -77,7 +79,7 @@ export class MovieTicketComponent implements OnInit {
         this.movie.workerName = this.myUserService.getFirstname() + ' ' + this.myUserService.getSurname();
         this.movie.workerID = this.myUserService.getID();
       },
-      (error) => {
+      error => {
         console.log(error);
         this.cinemaService.fetchNotShownMovies();
       }
@@ -93,7 +95,7 @@ export class MovieTicketComponent implements OnInit {
         this.movie.workerName = null;
         this.movie.workerID = -1;
       },
-      (error) => {
+      error => {
         console.log(error);
         this.cinemaService.fetchNotShownMovies();
       }
@@ -109,7 +111,7 @@ export class MovieTicketComponent implements OnInit {
         this.movie.emergencyWorkerName = this.myUserService.getFirstname() + ' ' + this.myUserService.getSurname();
         this.movie.emergencyWorkerID = this.myUserService.getID();
       },
-      (error) => {
+      error => {
         console.log(error);
         this.cinemaService.fetchNotShownMovies();
       }
@@ -125,7 +127,7 @@ export class MovieTicketComponent implements OnInit {
         this.movie.emergencyWorkerName = null;
         this.movie.emergencyWorkerID = -1;
       },
-      (error) => {
+      error => {
         console.log(error);
         this.cinemaService.fetchNotShownMovies();
       }

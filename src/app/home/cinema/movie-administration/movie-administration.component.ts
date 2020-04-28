@@ -10,7 +10,7 @@ import {Router} from '@angular/router';
 import {ReplaySubject, Subject, Subscription} from 'rxjs';
 import {take, takeUntil} from 'rxjs/operators';
 
-import {SettingsService} from '../../../services/settings.service';
+import {SettingsService} from '../../../utils/settings.service';
 import {MyUserService} from '../../my-user.service';
 import {CinemaService} from '../cinema.service';
 

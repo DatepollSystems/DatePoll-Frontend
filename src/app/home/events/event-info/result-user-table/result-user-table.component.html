@@ -1,0 +1,37 @@
+<div fxLayout="row" fxLayoutAlign="center">
+  <mat-form-field fxFlex="">
+    <input (keyup)="applyFilter($event.target.value)" matInput placeholder="{{ 'MANAGEMENT_USERS_SEARCH' | translate }}" />
+  </mat-form-field>
+</div>
+
+<div fxLayout="row" fxLayoutAlign="center">
+  <table [dataSource]="dataSource" class="table-responsive" mat-table matSort fxFlex>
+    <!-- Firstname Column -->
+    <ng-container matColumnDef="firstname">
+      <th *matHeaderCellDef mat-header-cell mat-sort-header>{{ 'EVENTS_ADMINISTRATION_INFO_EVENT_FIRSTNAME' | translate }}</th>
+      <td *matCellDef="let resultUser" mat-cell>{{ resultUser.firstname }}</td>
+    </ng-container>
+
+    <!-- Surname Column -->
+    <ng-container matColumnDef="surname">
+      <th *matHeaderCellDef mat-header-cell mat-sort-header>{{ 'EVENTS_ADMINISTRATION_INFO_EVENT_SURNAME' | translate }}</th>
+      <td *matCellDef="let resultUser" mat-cell>{{ resultUser.surname }}</td>
+    </ng-container>
+
+    <!-- Decision Column -->
+    <ng-container matColumnDef="decision">
+      <th *matHeaderCellDef mat-header-cell mat-sort-header>{{ 'EVENTS_ADMINISTRATION_INFO_EVENT_DECISION' | translate }}</th>
+      <td *matCellDef="let resultUser" mat-cell>
+        <b *ngIf="resultUser.decision != null">{{ resultUser.decision }}</b>
+        <i *ngIf="resultUser.decision != null && resultUser?.additionalInformation?.length > 0"
+          >&nbsp;({{ resultUser.additionalInformation }})</i
+        >
+        <span *ngIf="resultUser.decision == null">{{ 'EVENTS_ADMINISTRATION_INFO_EVENT_UNKNOWN_VOTING' | translate }}</span>
+      </td>
+    </ng-container>
+
+    <tr *matHeaderRowDef="displayedColumns; sticky: true" mat-header-row></tr>
+    <tr *matRowDef="let row; columns: displayedColumns" mat-row></tr>
+  </table>
+</div>
+<mat-paginator [pageSizeOptions]="[50, 100, 150, 200]" showFirstLastButtons></mat-paginator>

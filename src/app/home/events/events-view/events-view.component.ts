@@ -1,12 +1,10 @@
 import {Component, OnDestroy, TemplateRef, ViewChild} from '@angular/core';
 import {MatDialog, MatSlideToggleChange} from '@angular/material';
-import {ActivatedRoute} from '@angular/router';
 import {Subscription} from 'rxjs';
 
 import {EventsUserService} from '../events-user.service';
 
-import {EventInfoModalComponent} from '../event-info-modal/event-info-modal.component';
-
+import {IsMobileService} from '../../../utils/is-mobile.service';
 import {Event} from '../models/event.model';
 
 @Component({
@@ -23,7 +21,10 @@ export class EventsViewComponent implements OnDestroy {
   events: Event[];
   eventsSubscription: Subscription;
 
-  constructor(private eventsUserSerivce: EventsUserService, private dialog: MatDialog, private route: ActivatedRoute) {
+  isMobile = true;
+  isMobileSubscription: Subscription;
+
+  constructor(private eventsUserSerivce: EventsUserService, private dialog: MatDialog, private isMobileService: IsMobileService) {
     this.events = this.eventsUserSerivce.getEvents();
     this.refreshView();
     if (this.events.length > 0) {
@@ -35,23 +36,9 @@ export class EventsViewComponent implements OnDestroy {
       this.refreshView();
     });
 
-    this.route.paramMap.subscribe(params => {
-      const id = params.get('id');
-
-      if (id != null) {
-        console.log('Event to open: ' + id);
-
-        const event = new Event(Number(id), 'Loading', new Date(), new Date(), false, 'Loading', [], []);
-
-        this.dialog.open(EventInfoModalComponent, {
-          width: '80vh',
-          data: {
-            event: event
-          }
-        });
-      } else {
-        console.log('No event to open');
-      }
+    this.isMobile = this.isMobileService.getIsMobile();
+    this.isMobileSubscription = this.isMobileService.isMobileChange.subscribe(value => {
+      this.isMobile = value;
     });
   }
 

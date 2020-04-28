@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 
 import {Subject} from 'rxjs';
-import {HttpService} from '../../../services/http.service';
+import {HttpService} from '../../../utils/http.service';
 import {NotificationsService} from 'angular2-notifications';
 import {TranslateService} from '../../../translation/translate.service';
 

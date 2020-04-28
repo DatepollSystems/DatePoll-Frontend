@@ -1,10 +1,10 @@
 <h2 mat-dialog-title>{{ 'SETTINGS_SECURITY_MODAL_SETTINGS_TITLE' | translate }}</h2>
-<mat-dialog-content style="min-height: 50px">
-  <div class="row">
-    <div class="col-2 col-md-1">
+<mat-dialog-content>
+  <div fxLayout="row" fxLayoutGap="5%" fxLayoutGap.lt-md="2%">
+    <div fxFlex="5%" fxFlex.lt-md="15%">
       <mat-slide-toggle (change)="showBirthdayChange($event)" [(ngModel)]="showBirthday" color="primary"> </mat-slide-toggle>
     </div>
-    <p class="col-10 col-md-10">{{ 'SETTINGS_SECURITY_MODAL_SETTINGS_SHOW_BIRTHDAY' | translate }}</p>
+    <p fxFlex="85%" fxFlex.lt-md="70%">{{ 'SETTINGS_SECURITY_MODAL_SETTINGS_SHOW_BIRTHDAY' | translate }}</p>
   </div>
 </mat-dialog-content>
 <mat-dialog-actions>

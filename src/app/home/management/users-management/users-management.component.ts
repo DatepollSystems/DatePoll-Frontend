@@ -9,7 +9,7 @@ import {Subscription} from 'rxjs';
 
 import {NotificationsService, NotificationType} from 'angular2-notifications';
 
-import {ExcelService} from '../../../services/excel.service';
+import {ExcelService} from '../../../utils/excel.service';
 import {MyUserService} from '../../my-user.service';
 import {UsersService} from './users.service';
 

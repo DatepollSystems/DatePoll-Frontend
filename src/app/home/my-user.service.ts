@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {Subject} from 'rxjs';
 
 import {AuthService} from '../auth/auth.service';
-import {HttpService} from '../services/http.service';
+import {HttpService} from '../utils/http.service';
 import {Permissions} from '../permissions';
 import {PhoneNumber} from './phoneNumber.model';
 

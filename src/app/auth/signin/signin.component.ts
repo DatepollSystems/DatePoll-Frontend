@@ -1,12 +1,13 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {NgForm} from '@angular/forms';
+import {FormBuilder, FormGroup, NgForm, Validators} from '@angular/forms';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import {MatBottomSheet} from '@angular/material/bottom-sheet';
 import {Router} from '@angular/router';
 import {Subscription} from 'rxjs';
 
-import {SettingsService} from '../../services/settings.service';
+import {SettingsService} from '../../utils/settings.service';
 import {AuthService} from '../auth.service';
-import {IsMobileService} from '../../services/is-mobile.service';
+import {MobileAppBottomSheetComponent} from './mobile-app-bottom-sheet/mobile-app-bottom-sheet.component';
 
 @Component({
   selector: 'app-signin',
@@ -16,9 +17,6 @@ import {IsMobileService} from '../../services/is-mobile.service';
 export class SigninComponent implements OnInit, OnDestroy {
   communityName: string;
   communityNameSubscription: Subscription;
-
-  appUrl: any = null;
-  appUrlSubscription: Subscription;
 
   state = 'login';
 
@@ -30,28 +28,27 @@ export class SigninComponent implements OnInit, OnDestroy {
   private username: string;
   private password: string;
 
+  changePasswordAfterSigninForm = this.fb.group({
+    passwords: this.fb.group(
+      {
+        password: ['', [Validators.required, Validators.min(6)]],
+        repeat: ['', [Validators.required, Validators.min(6)]]
+      },
+      {validator: this.checkPasswords}
+    )
+  });
+
   constructor(
     private router: Router,
     private snackBar: MatSnackBar,
     private authService: AuthService,
-    private settingsService: SettingsService
+    private bottomSheet: MatBottomSheet,
+    private settingsService: SettingsService,
+    private fb: FormBuilder
   ) {
     this.communityName = this.settingsService.getCommunityName();
     this.communityNameSubscription = this.settingsService.communityNameChange.subscribe(value => {
       this.communityName = value;
-    });
-
-    let object = {
-      type: 'loginV1',
-      url: this.settingsService.getAppUrl()
-    };
-    this.appUrl = JSON.stringify(object);
-    this.appUrlSubscription = this.settingsService.appUrlChange.subscribe(value => {
-      object = {
-        type: 'loginV1',
-        url: value
-      };
-      this.appUrl = JSON.stringify(object);
     });
   }
 
@@ -66,7 +63,21 @@ export class SigninComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.communityNameSubscription.unsubscribe();
-    this.appUrlSubscription.unsubscribe();
+  }
+
+  checkPasswords(group: FormGroup) {
+    // here we have the 'passwords' group
+    const pass = group.get('password').value;
+    if (pass?.length < 6) {
+      return {wrongLength: true};
+    }
+    const confirmPass = group.get('repeat').value;
+
+    return pass === confirmPass ? null : {notSame: true};
+  }
+
+  openMobileAppBottomSheet() {
+    this.bottomSheet.open(MobileAppBottomSheetComponent);
   }
 
   protected onSignin(form: NgForm) {
@@ -104,9 +115,8 @@ export class SigninComponent implements OnInit, OnDestroy {
     );
   }
 
-  protected onChangePasswordAfterSignin(form: NgForm) {
-    // TODO: Check equals
-    const password = form.value.password;
+  protected onChangePasswordAfterSignin(form: FormGroup) {
+    const password = form.controls.passwords.get('password').value;
 
     this.authService.changePasswordAfterSignin(this.username, this.password, password).subscribe(
       (data: any) => {

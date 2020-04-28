@@ -3,7 +3,7 @@ import {NotificationsService} from 'angular2-notifications';
 
 import {CinemaService} from '../../cinema.service';
 import {TranslateService} from '../../../../translation/translate.service';
-import {Converter} from '../../../../services/converter';
+import {Converter} from '../../../../utils/converter';
 
 @Component({
   selector: 'app-movie-create-modal',
@@ -18,10 +18,11 @@ export class MovieCreateModalComponent {
   imageLink: string;
   bookedTickets: number;
 
-  constructor(private cinemaService: CinemaService,
-              private notificationsService: NotificationsService,
-              private translate: TranslateService) {
-  }
+  constructor(
+    private cinemaService: CinemaService,
+    private notificationsService: NotificationsService,
+    private translate: TranslateService
+  ) {}
 
   create() {
     const year = this.date.getFullYear();
@@ -38,7 +39,7 @@ export class MovieCreateModalComponent {
 
     if (yearID === null) {
       console.log('createMovie | no yearID found!');
-      const yearObject = {'year': year};
+      const yearObject = {year: year};
       this.cinemaService.addYear(yearObject).subscribe(
         (data: any) => {
           console.log(data);
@@ -47,7 +48,7 @@ export class MovieCreateModalComponent {
           this.cinemaService.fetchYears();
           this.addMovie(yearID);
         },
-        (error) => console.log(error)
+        error => console.log(error)
       );
     } else {
       console.log('createMovie | Using existing yearID');
@@ -57,22 +58,24 @@ export class MovieCreateModalComponent {
 
   addMovie(yearID: number) {
     const movieObject = {
-      'name': this.name,
-      'date': Converter.getDateFormatted(this.date),
-      'trailer_link': this.trailerLink,
-      'poster_link': this.imageLink,
-      'booked_tickets': this.bookedTickets,
-      'movie_year_id': yearID
+      name: this.name,
+      date: Converter.getDateFormatted(this.date),
+      trailer_link: this.trailerLink,
+      poster_link: this.imageLink,
+      booked_tickets: this.bookedTickets,
+      movie_year_id: yearID
     };
     console.log(movieObject);
     this.cinemaService.addMovie(movieObject).subscribe(
       (data: any) => {
         console.log(data);
         this.cinemaService.fetchMovies();
-        this.notificationsService.success(this.translate.getTranslationFor('SUCCESSFULLY'),
-          this.translate.getTranslationFor('CINEMA_TICKETS_ADMINISTRATION_MOVIE_CREATE_SUCCESSFULLY'));
+        this.notificationsService.success(
+          this.translate.getTranslationFor('SUCCESSFULLY'),
+          this.translate.getTranslationFor('CINEMA_TICKETS_ADMINISTRATION_MOVIE_CREATE_SUCCESSFULLY')
+        );
       },
-      (error) => console.log(error)
+      error => console.log(error)
     );
   }
 }

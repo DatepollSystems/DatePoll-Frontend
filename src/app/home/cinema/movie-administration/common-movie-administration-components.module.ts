@@ -6,8 +6,8 @@ import {MAT_DATE_FORMATS} from '@angular/material/core';
 
 import {MaterialModule} from '../../../material-module';
 
-import {CommonComponentsModule} from '../../../services/common-components.module';
-import {CustomDateAdapter, MY_DATE_FORMATS} from '../../../services/custom-date-adapter';
+import {CommonComponentsModule} from '../../../utils/common-components.module';
+import {CustomDateAdapter, MY_DATE_FORMATS} from '../../../utils/custom-date-adapter';
 import {TranslationModule} from '../../../translation/translation.module';
 import {MovieBookingsModalComponent} from './movie-bookings-modal/movie-bookings-modal.component';
 import {MovieBookingsTableComponent} from './movie-bookings-table/movie-bookings-table.component';

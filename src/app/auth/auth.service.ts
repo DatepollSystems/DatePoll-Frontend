@@ -3,7 +3,7 @@ import {Injectable} from '@angular/core';
 import {tap} from 'rxjs/operators';
 
 import {environment} from '../../environments/environment';
-import {Browser} from '../services/browser';
+import {Browser} from '../utils/browser';
 
 @Injectable({
   providedIn: 'root'
@@ -47,8 +47,6 @@ export class AuthService {
     this.http.post(this.apiUrl + '/v1/user/myself/session/logoutCurrentSession', object, {headers: this.httpHeaders}).subscribe(
       (data: any) => {
         console.log(data);
-
-        this.clearCookies();
         console.log('authService | Logout successful');
 
         window.location.reload();
@@ -57,6 +55,8 @@ export class AuthService {
         console.log(error);
       }
     );
+
+    this.clearCookies();
   }
 
   public clearCookies() {
