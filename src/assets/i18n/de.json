@@ -452,6 +452,15 @@
   "MANAGEMENT_DATEPOLL_COMMUNITY_URL_NOT_VALID": "Die URL der Vereinswebsite darf weder leer sein, noch mehr als 128 Zeichen haben!",
   "MANAGEMENT_DATEPOLL_COMMUNITY_URL_CHANGED_SUCCESSFULLY": "Die URL zur Vereinswebsite wurde erfolgreich geändert!",
 
+  "MANAGEMENT_DATEPOLL_COMMUNITY_DESCRIPTION": "Vereinsbeschreibung",
+  "MANAGEMENT_DATEPOLL_COMMUNITY_DESCRIPTION_CHANGED_SUCCESSFULLY": "Die Vereinsbeschreibung wurde erfolgreich gespeichert!",
+
+  "MANAGEMENT_DATEPOLL_IMPRINT": "Impressum",
+  "MANAGEMENT_DATEPOLL_IMPRINT_CHANGED_SUCCESSFULLY": "Das Impressum wurde erfolgreich gespeichert!",
+
+  "MANAGEMENT_DATEPOLL_PRIVACY_POLICY": "Datenschutzerklärung",
+  "MANAGEMENT_DATEPOLL_PRIVACY_POLICY_CHANGED_SUCCESSFULLY": "Die Datenschutzerklärung wurde erfolgreich gespeichert!",
+
   "MANAGEMENT_DATEPOLL_APP_URL": "DatePoll App URL",
   "MANAGEMENT_DATEPOLL_APP_URL_NOT_VALID": "Die Url der App darf weder leer sein, noch mehr als 128 Zeichen haben!",
   "MANAGEMENT_DATEPOLL_APP_URL_CHANGED_SUCCESSFULLY": "Die Url App zur Vereinswebsite wurde erfolgreich geändert!",

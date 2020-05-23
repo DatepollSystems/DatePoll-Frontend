@@ -138,6 +138,108 @@
             </div>
           </form>
 
+          <form
+            #changeCommunityDescriptionForm="ngForm"
+            (ngSubmit)="changeCommunityDescription(changeCommunityDescriptionForm)"
+            fxLayout="row wrap"
+            fxLayoutGap="2%"
+            fxLayout.xs="column"
+          >
+            <mat-form-field fxFlex="60%">
+              <textarea
+                [(ngModel)]="serverInfo.community_description"
+                id="communityDescription"
+                matInput
+                minlength="1"
+                name="communityDescription"
+                ngModel
+                placeholder="{{ 'MANAGEMENT_DATEPOLL_COMMUNITY_DESCRIPTION' | translate }}"
+                required
+              ></textarea>
+            </mat-form-field>
+
+            <div fxFlex.xs="100%">
+              <button
+                style="width: 100%"
+                color="accent"
+                mat-flat-button
+                [class.spinner]="communityDescriptionSaving"
+                [disabled]="!changeCommunityDescriptionForm.valid || communityDescriptionSaving"
+                type="submit"
+              >
+                {{ 'SAVE' | translate }}
+              </button>
+            </div>
+          </form>
+
+          <form
+            #changeImprintForm="ngForm"
+            (ngSubmit)="changeImprint(changeImprintForm)"
+            fxLayout="row wrap"
+            fxLayoutGap="2%"
+            fxLayout.xs="column"
+          >
+            <mat-form-field fxFlex="60%">
+              <textarea
+                [(ngModel)]="serverInfo.community_imprint"
+                id="imprint"
+                matInput
+                minlength="1"
+                name="imprint"
+                ngModel
+                placeholder="{{ 'MANAGEMENT_DATEPOLL_IMPRINT' | translate }}"
+                required
+              ></textarea>
+            </mat-form-field>
+
+            <div fxFlex.xs="100%">
+              <button
+                style="width: 100%"
+                color="accent"
+                mat-flat-button
+                [class.spinner]="imprintSaving"
+                [disabled]="!changeImprintForm.valid || imprintSaving"
+                type="submit"
+              >
+                {{ 'SAVE' | translate }}
+              </button>
+            </div>
+          </form>
+
+          <form
+            #changePrivacyPolicyForm="ngForm"
+            (ngSubmit)="changePrivacyPolicy(changePrivacyPolicyForm)"
+            fxLayout="row wrap"
+            fxLayoutGap="2%"
+            fxLayout.xs="column"
+          >
+            <mat-form-field fxFlex="60%">
+              <textarea
+                [(ngModel)]="serverInfo.community_privacy_policy"
+                id="privacyPolicy"
+                matInput
+                minlength="1"
+                name="privacyPolicy"
+                ngModel
+                placeholder="{{ 'MANAGEMENT_DATEPOLL_PRIVACY_POLICY' | translate }}"
+                required
+              ></textarea>
+            </mat-form-field>
+
+            <div fxFlex.xs="100%">
+              <button
+                style="width: 100%"
+                color="accent"
+                mat-flat-button
+                [class.spinner]="privacyPolicySaving"
+                [disabled]="!changePrivacyPolicyForm.valid || privacyPolicySaving"
+                type="submit"
+              >
+                {{ 'SAVE' | translate }}
+              </button>
+            </div>
+          </form>
+
           <h2>OpenWeatherMap Einstellungen</h2>
 
           <form

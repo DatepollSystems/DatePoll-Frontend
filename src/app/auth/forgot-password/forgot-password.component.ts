@@ -1,12 +1,11 @@
 import {HttpClient} from '@angular/common/http';
-import {Component, OnDestroy} from '@angular/core';
+import {Component} from '@angular/core';
 import {NgForm} from '@angular/forms';
 import {Router} from '@angular/router';
-import {Subscription} from 'rxjs';
 
 import {NotificationsService} from 'angular2-notifications';
+
 import {environment} from '../../../environments/environment';
-import {SettingsService} from '../../utils/settings.service';
 import {TranslateService} from '../../translation/translate.service';
 
 @Component({
@@ -14,10 +13,7 @@ import {TranslateService} from '../../translation/translate.service';
   templateUrl: './forgot-password.component.html',
   styleUrls: ['./forgot-password.component.css']
 })
-export class ForgotPasswordComponent implements OnDestroy {
-  communityName: string;
-  communityNameSubscription: Subscription;
-
+export class ForgotPasswordComponent {
   // States: SUBMIT_USERNAME | SUBMIT_CODE | SUBMIT_PASSWORD | FINISHED
   state = 'SUBMIT_USERNAME';
   username: string;
@@ -31,19 +27,9 @@ export class ForgotPasswordComponent implements OnDestroy {
   constructor(
     private http: HttpClient,
     private router: Router,
-    private settingsService: SettingsService,
     private notificationsService: NotificationsService,
     private translate: TranslateService
-  ) {
-    this.communityName = this.settingsService.getCommunityName();
-    this.communityNameSubscription = this.settingsService.communityNameChange.subscribe(value => {
-      this.communityName = value;
-    });
-  }
-
-  ngOnDestroy() {
-    this.communityNameSubscription.unsubscribe();
-  }
+  ) {}
 
   onSubmitForm(form: NgForm) {
     if (this.state.includes('SUBMIT_USERNAME')) {
@@ -63,7 +49,7 @@ export class ForgotPasswordComponent implements OnDestroy {
     const username = form.controls.username.value;
 
     const dto = {
-      username: username
+      username
     };
 
     this.sendingRequest = true;
@@ -95,7 +81,7 @@ export class ForgotPasswordComponent implements OnDestroy {
 
     const dto = {
       username: this.username,
-      code: code
+      code
     };
 
     this.sendingRequest = true;

@@ -6,7 +6,7 @@ import {AppCustomPreloader} from './custom.preloader';
 import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
 
 const appRoutes = [
-  {path: '', redirectTo: '/auth/signin', pathMatch: 'full'},
+  {path: '', redirectTo: '/about', pathMatch: 'full'},
   {path: '', loadChildren: () => import('./about/about.module').then(m => m.AboutModule)},
   {path: 'auth', loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)},
   {path: 'home', loadChildren: () => import('./home/home.module').then(m => m.HomeModule)},

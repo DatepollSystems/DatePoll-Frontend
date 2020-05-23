@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnDestroy} from '@angular/core';
 import {NgForm} from '@angular/forms';
 import {MatSlideToggleChange} from '@angular/material/slide-toggle';
 import {Router} from '@angular/router';
@@ -20,7 +20,10 @@ import {ServerInfoModel} from '../../../utils/server-info.model';
 export class DatepollManagementComponent implements OnDestroy {
   communityNameSaving = false;
   communityUrlSaving = false;
+  communityDescriptionSaving = false;
   appUrlSaving = false;
+  imprintSaving = false;
+  privacyPolicySaving = false;
 
   serverInfo: ServerInfoModel;
   serverInfoSubscription: Subscription;
@@ -103,6 +106,53 @@ export class DatepollManagementComponent implements OnDestroy {
         this.notificationsService.success(
           this.translate.getTranslationFor('SUCCESSFULLY'),
           this.translate.getTranslationFor('MANAGEMENT_DATEPOLL_COMMUNITY_URL_CHANGED_SUCCESSFULLY')
+        );
+      },
+      error => console.log(error)
+    );
+  }
+
+  changeCommunityDescription(form: NgForm) {
+    this.communityDescriptionSaving = true;
+    this.settingsService.setAdminCommunityDescription(form.controls.communityDescription.value).subscribe(
+      (response: any) => {
+        console.log(response);
+        this.communityDescriptionSaving = false;
+        this.notificationsService.success(
+          this.translate.getTranslationFor('SUCCESSFULLY'),
+          this.translate.getTranslationFor('MANAGEMENT_DATEPOLL_COMMUNITY_DESCRIPTION_CHANGED_SUCCESSFULLY')
+        );
+      },
+      error => console.log(error)
+    );
+  }
+
+  changeImprint(form: NgForm) {
+    this.imprintSaving = true;
+    const imprint = form.controls.imprint.value;
+    this.settingsService.setAdminCommunityImprint(imprint).subscribe(
+      (response: any) => {
+        console.log(response);
+        this.imprintSaving = false;
+        this.notificationsService.success(
+          this.translate.getTranslationFor('SUCCESSFULLY'),
+          this.translate.getTranslationFor('MANAGEMENT_DATEPOLL_IMPRINT_CHANGED_SUCCESSFULLY')
+        );
+      },
+      error => console.log(error)
+    );
+  }
+
+  changePrivacyPolicy(form: NgForm) {
+    this.privacyPolicySaving = true;
+    const privacyPolicy = form.controls.privacyPolicy.value;
+    this.settingsService.setAdminCommunityPrivacyPolicy(privacyPolicy).subscribe(
+      (response: any) => {
+        console.log(response);
+        this.privacyPolicySaving = false;
+        this.notificationsService.success(
+          this.translate.getTranslationFor('SUCCESSFULLY'),
+          this.translate.getTranslationFor('MANAGEMENT_DATEPOLL_PRIVACY_POLICY_CHANGED_SUCCESSFULLY')
         );
       },
       error => console.log(error)

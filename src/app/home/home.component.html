@@ -17,7 +17,7 @@
 
       <mat-divider></mat-divider>
 
-      <div *ngIf="showEvents">
+      <div *ngIf="serverInfo?.events_enabled">
         <a (click)="onPageChange()" mat-list-item routerLink="/home/events/start" routerLinkActive="activated">
           <mat-icon>polls</mat-icon>
           {{ 'NAV_EVENTS_EVENTS' | translate }}
@@ -36,7 +36,7 @@
         <mat-divider></mat-divider>
       </div>
 
-      <div *ngIf="showCinema">
+      <div *ngIf="serverInfo.cinema_enabled">
         <a (click)="onPageChange()" mat-list-item routerLink="/home/cinema/tickets" routerLinkActive="activated">
           <mat-icon>movie</mat-icon>
           {{ 'NAV_CINEMA_TICKETS' | translate }}
@@ -110,7 +110,7 @@
   <mat-sidenav-content>
     <mat-toolbar class="z-depth-5" color="primary">
       <mat-icon (click)="sidenav.toggle()" class="toolbar-sidenav-toggler">menu</mat-icon>
-      <span class="toolbar-heading" routerLink="/home">{{ communityName }}</span>
+      <span class="toolbar-heading" routerLink="/home">{{ serverInfo.community_name }}</span>
     </mat-toolbar>
 
     <div class="my-container" id="my-container">

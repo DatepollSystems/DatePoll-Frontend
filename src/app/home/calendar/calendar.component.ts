@@ -99,7 +99,7 @@ export class CalendarComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    if (this.settingsService.getShowCinema()) {
+    if (this.settingsService.getServerInfo()?.cinema_enabled) {
       this.movies = this.cinemaService.getNotShownMovies();
 
       this.moviesSubscription = this.cinemaService.notShownMoviesChange.subscribe(value => {
@@ -108,7 +108,7 @@ export class CalendarComponent implements OnInit, OnDestroy {
       });
     }
 
-    if (this.settingsService.getShowEvents()) {
+    if (this.settingsService.getServerInfo()?.events_enabled) {
       if (this.myUserService.hasPermission(Permissions.EVENTS_ADMINISTRATION)) {
         this.avents = this.eventsService.getEvents();
 

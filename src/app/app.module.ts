@@ -28,6 +28,7 @@ import {AppComponent} from './app.component';
 import {BrowserCompatibilityModalComponent} from './browser-compatibility-modal/browser-compatibility-modal.component';
 import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
 import {SettingsService} from './utils/settings.service';
+import {IsAuthenticatedGuardService} from './auth/is-authenticated-guard.service';
 
 registerLocaleData(localeDe);
 
@@ -47,6 +48,7 @@ registerLocaleData(localeDe);
   providers: [
     AuthService,
     AuthGuard,
+    IsAuthenticatedGuardService,
     TranslateService,
     HttpService,
     IsMobileService,

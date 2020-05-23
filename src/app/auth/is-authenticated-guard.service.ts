@@ -3,15 +3,15 @@ import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot} from '
 import {AuthService} from './auth.service';
 
 @Injectable()
-export class AuthGuard implements CanActivate {
+export class IsAuthenticatedGuardService implements CanActivate {
   constructor(private authService: AuthService, private router: Router) {}
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    if (this.authService.isAuthenticated('authGuard')) {
-      return true;
-    } else {
-      this.router.navigate(['/about']);
+    if (this.authService.isAuthenticated('isAuthenticatedGuard')) {
+      this.router.navigate(['/home']);
       return false;
+    } else {
+      return true;
     }
   }
 }

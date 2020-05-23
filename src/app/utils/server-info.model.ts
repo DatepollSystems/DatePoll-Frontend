@@ -20,6 +20,7 @@ export class ServerInfoModel {
   public cinema_enabled = true;
   public movies_count = 1;
   public movies_tickets_count = 1;
+  public movies_workers_count = 1;
 
   public users_count = 1;
   public user_email_addresses_count = 1;

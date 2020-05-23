@@ -3,11 +3,13 @@ import {MatDialog} from '@angular/material/dialog';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {Subscription} from 'rxjs';
 
-import {SettingsService} from '../utils/settings.service';
 import {TranslateService} from '../translation/translate.service';
+import {SettingsService} from '../utils/settings.service';
 
 import {AboutModalComponent} from './modals/about-modal/about-modal.component';
 import {FeedbackModalComponent} from './modals/feedback-modal/feedback-modal.component';
+
+import {ServerInfoModel} from '../utils/server-info.model';
 
 @Component({
   selector: 'app-footer',
@@ -15,11 +17,8 @@ import {FeedbackModalComponent} from './modals/feedback-modal/feedback-modal.com
   styleUrls: ['./footer.component.css']
 })
 export class FooterComponent implements OnDestroy {
-  communityName = 'DatePoll';
-  private communityNameSubscription: Subscription;
-
-  communityUrl = 'https://datepoll.dafnik.me';
-  private communityUrlSubscription: Subscription;
+  serverInfo: ServerInfoModel;
+  private serverInfoSubscription: Subscription;
 
   selected: string;
 
@@ -34,20 +33,14 @@ export class FooterComponent implements OnDestroy {
       this.selected = 'de';
     }
 
-    this.communityName = this.settingsService.getCommunityName();
-    this.communityNameSubscription = this.settingsService.communityNameChange.subscribe(value => {
-      this.communityName = value;
-    });
-
-    this.communityUrl = this.settingsService.getCommunityUrl();
-    this.communityUrlSubscription = this.settingsService.communityUrlChange.subscribe(value => {
-      this.communityUrl = value;
+    this.serverInfo = this.settingsService.getServerInfo();
+    this.serverInfoSubscription = this.settingsService.serverInfoChange.subscribe(value => {
+      this.serverInfo = value;
     });
   }
 
   ngOnDestroy(): void {
-    this.communityNameSubscription.unsubscribe();
-    this.communityUrlSubscription.unsubscribe();
+    this.serverInfoSubscription.unsubscribe();
   }
 
   setLang(event: any) {

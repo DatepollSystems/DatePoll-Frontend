@@ -13,18 +13,12 @@ import {ServerInfoModel} from './server-info.model';
 export class SettingsService {
   public showCinemaChange: Subject<boolean> = new Subject<boolean>();
   public showEventsChange: Subject<boolean> = new Subject<boolean>();
-  public communityNameChange: Subject<string> = new Subject<string>();
-  public communityUrlChange: Subject<string> = new Subject<string>();
   public openWeatherMapKeyChange: Subject<string> = new Subject<string>();
   public openWeatherMapCinemaCityIdChange: Subject<string> = new Subject<string>();
-  public appUrlChange: Subject<string> = new Subject<string>();
   private _showCinema = true;
   private _showEvents = true;
-  private _communityName = 'DatePoll Web';
-  private _communityUrl = 'https://datepoll.dafnik.me';
   private _openWeatherMapKey = '';
   private _openWeatherMapCinemaCityId = '';
-  private _appUrl = null;
 
   public serverInfoChange: Subject<ServerInfoModel> = new Subject<ServerInfoModel>();
   private _serverInfo = new ServerInfoModel();
@@ -44,18 +38,6 @@ export class SettingsService {
     });
   }
 
-  public getShowCinema(): boolean {
-    this.httpService.getSettingRequest('/cinema', 'settingsCinema').subscribe(
-      (response: any) => {
-        console.log(response);
-        this.setShowCinema(response.enabled);
-      },
-      error => console.log(error)
-    );
-
-    return this._showCinema;
-  }
-
   public setAdminShowCinema(showCinema: boolean) {
     this.setShowCinema(showCinema);
 
@@ -72,22 +54,10 @@ export class SettingsService {
   }
 
   public checkShowCinema() {
-    if (!this.getShowCinema()) {
+    if (!this._serverInfo?.cinema_enabled) {
       this.router.navigate(['/home']);
       return;
     }
-  }
-
-  public getShowEvents(): boolean {
-    this.httpService.getSettingRequest('/events', 'settingsEvents').subscribe(
-      (response: any) => {
-        console.log(response);
-        this.setShowEvents(response.enabled);
-      },
-      error => console.log(error)
-    );
-
-    return this._showEvents;
   }
 
   public setAdminShowEvents(showEvents: boolean) {
@@ -105,17 +75,6 @@ export class SettingsService {
     );
   }
 
-  public getCommunityName(): string {
-    this.httpService.getSettingRequest('/name', 'settingsCommunityName').subscribe(
-      (response: any) => {
-        console.log(response);
-        this.setCommunityName(response.community_name);
-      },
-      error => console.log(error)
-    );
-    return this._communityName;
-  }
-
   public setAdminCommunityName(communityName: string) {
     this.setCommunityName(communityName);
 
@@ -123,17 +82,6 @@ export class SettingsService {
       community_name: communityName
     };
     return this.httpService.setSettingsRequest('/name', body, 'setCommunityName');
-  }
-
-  public getCommunityUrl(): string {
-    this.httpService.getSettingRequest('/communityUrl', 'settingsCommunityUrl').subscribe(
-      (response: any) => {
-        console.log(response);
-        this.setCommunityUrl(response.community_url);
-      },
-      error => console.log(error)
-    );
-    return this._communityUrl;
   }
 
   public setAdminCommunityUrl(communityUrl: string) {
@@ -145,15 +93,32 @@ export class SettingsService {
     return this.httpService.setSettingsRequest('/communityUrl', body, 'setCommunityUrl');
   }
 
-  public getAppUrl(): string {
-    this.httpService.getSettingRequest('/url', 'settingsCommunityUrl').subscribe(
-      (response: any) => {
-        console.log(response);
-        this.setAppUrl(response.url);
-      },
-      error => console.log(error)
-    );
-    return this._appUrl;
+  public setAdminCommunityDescription(communityDescription: string) {
+    this._serverInfo.community_description = communityDescription;
+    this.updateLocalServerInfo();
+
+    const body = {community_description: communityDescription};
+    return this.httpService.setSettingsRequest('/description', body, 'setDescription');
+  }
+
+  public setAdminCommunityImprint(imprint: string) {
+    this._serverInfo.community_imprint = imprint;
+    this.updateLocalServerInfo();
+
+    const body = {
+      community_imprint: imprint
+    };
+    return this.httpService.setSettingsRequest('/imprint', body, 'setImprint');
+  }
+
+  public setAdminCommunityPrivacyPolicy(privacyPolicy: string) {
+    this._serverInfo.community_privacy_policy = privacyPolicy;
+    this.updateLocalServerInfo();
+
+    const body = {
+      community_privacy_policy: privacyPolicy
+    };
+    return this.httpService.setSettingsRequest('/privacyPolicy', body, 'setPrivacyPolicy');
   }
 
   public setAdminAppUrl(url: string) {
@@ -206,28 +171,28 @@ export class SettingsService {
   }
 
   private setShowCinema(showCinema: boolean) {
-    this._showCinema = showCinema;
-    this.showCinemaChange.next(this._showCinema);
+    this._serverInfo.cinema_enabled = showCinema;
+    this.updateLocalServerInfo();
   }
 
   private setShowEvents(showEvents: boolean) {
-    this._showEvents = showEvents;
-    this.showEventsChange.next(this._showEvents);
+    this._serverInfo.events_enabled = showEvents;
+    this.updateLocalServerInfo();
   }
 
   private setCommunityName(communityName: string) {
-    this._communityName = communityName;
-    this.communityNameChange.next(this._communityName);
+    this._serverInfo.community_name = communityName;
+    this.updateLocalServerInfo();
   }
 
   private setCommunityUrl(communityUrl: string) {
-    this._communityUrl = communityUrl;
-    this.communityUrlChange.next(this._communityUrl);
+    this._serverInfo.community_url = communityUrl;
+    this.updateLocalServerInfo();
   }
 
   private setAppUrl(url: string) {
-    this._appUrl = url;
-    this.appUrlChange.next(this._appUrl);
+    this._serverInfo.application_url = url;
+    this.updateLocalServerInfo();
   }
 
   private setOpenWeatherMapKey(key: string) {
@@ -238,5 +203,9 @@ export class SettingsService {
   private setOpenWeatherMapCinemaCityId(id: string) {
     this._openWeatherMapCinemaCityId = id;
     this.openWeatherMapCinemaCityIdChange.next(this._openWeatherMapCinemaCityId);
+  }
+
+  private updateLocalServerInfo() {
+    this.serverInfoChange.next(this._serverInfo);
   }
 }

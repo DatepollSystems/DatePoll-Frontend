@@ -85,12 +85,14 @@
           <h2>
             > <a href="{{ serverInfo.community_url }}" target="_blank" rel="noopener">{{ serverInfo.community_name }}</a>
           </h2>
-          <p *ngIf="getDescriptionPreview(serverInfo.community_description) == null || showMoreCommunityDescription">
-            {{ serverInfo.community_description }}
-          </p>
-          <p *ngIf="getDescriptionPreview(serverInfo.community_description) != null">
-            {{ getDescriptionPreview(serverInfo.community_description) }}
-          </p>
+          <p
+            *ngIf="getDescriptionPreview(serverInfo.community_description) == null || showMoreCommunityDescription"
+            [innerHTML]="getSanitizedDescription(serverInfo.community_description)"
+          ></p>
+          <p
+            *ngIf="getDescriptionPreview(serverInfo.community_description) != null"
+            [innerHTML]="getDescriptionPreview(serverInfo.community_description)"
+          ></p>
           <button
             mat-stroked-button
             color="warn"
@@ -109,26 +111,55 @@
           </button>
         </mat-card>
         <mat-card class="mat-elevation-z3">
-          <h2>DatePoll instance stats</h2>
-          <ul>
-            <li>Registrierte Benutzer: {{ serverInfo.users_count }}</li>
+          <div class="level is-mobile" style="margin-bottom: 5px;">
+            <div class="level-item">
+              <div>
+                <h3>Benutzer</h3>
+                <h1>{{ serverInfo.users_count }}</h1>
+              </div>
+            </div>
+            <div class="level-item">
+              <div>
+                <h3>Events</h3>
+                <h1>{{ serverInfo.events_count }}</h1>
+              </div>
+            </div>
+            <div class="level-item">
+              <div>
+                <h3>Filme</h3>
+                <h1>{{ serverInfo.movies_count }}</h1>
+              </div>
+            </div>
+          </div>
+
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                More stats
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+
             <ul>
               <li>Email-Adressen: {{ serverInfo.user_email_addresses_count }}</li>
               <li>Telefonnummern: {{ serverInfo.user_phone_numbers_count }}</li>
             </ul>
-            <li>Events: {{ serverInfo.events_count }}</li>
+
             <ul>
               <li>Event Votes (insgesamt): {{ serverInfo.event_votes_count }}</li>
               <li>Event Entscheidungsmöglichkeiten: {{ serverInfo.event_decisions_count }}</li>
               <li>Event Treffpunkte: {{ serverInfo.event_dates_count }}</li>
             </ul>
-            <li>Filme: {{ serverInfo.movies_count }}</li>
+
             <ul>
               <li>Gebuchte Tickets: {{ serverInfo.movies_tickets_count }}</li>
+              <li>Kino arbeiter: {{ serverInfo.movies_workers_count }}</li>
             </ul>
-            <li>Vergebene Leistungsabzeichen: {{ serverInfo.performance_badges_count }}</li>
-            <li>Interaktionen mit DatePoll: {{ serverInfo.logged_interactions_count }}</li>
-          </ul>
+
+            <ul>
+              <li>Vergebene Leistungsabzeichen: {{ serverInfo.performance_badges_count }}</li>
+              <li>Interaktionen mit DatePoll: {{ serverInfo.logged_interactions_count }}</li>
+            </ul>
+          </mat-expansion-panel>
         </mat-card>
       </div>
     </div>

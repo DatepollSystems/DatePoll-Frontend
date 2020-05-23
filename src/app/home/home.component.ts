@@ -7,6 +7,8 @@ import {IsMobileService} from '../utils/is-mobile.service';
 import {SettingsService} from '../utils/settings.service';
 import {MyUserService} from './my-user.service';
 
+import {ServerInfoModel} from '../utils/server-info.model';
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -34,14 +36,8 @@ export class HomeComponent implements OnInit, OnDestroy {
   username: string = null;
   private usernameSubscription: Subscription;
 
-  communityName = 'DatePoll';
-  private communityNameSubscription: Subscription;
-
-  showCinema = true;
-  private showCinemaSubscription: Subscription;
-
-  showEvents = true;
-  private showEventsSubscription: Subscription;
+  serverInfo: ServerInfoModel;
+  private serverInfoSubscription: Subscription;
 
   isMobileSubscription: Subscription;
 
@@ -68,19 +64,9 @@ export class HomeComponent implements OnInit, OnDestroy {
       this.username = value;
     });
 
-    this.communityName = this.settingsService.getCommunityName();
-    this.communityNameSubscription = this.settingsService.communityNameChange.subscribe(value => {
-      this.communityName = value;
-    });
-
-    this.showCinema = settingsService.getShowCinema();
-    this.showCinemaSubscription = settingsService.showCinemaChange.subscribe(value => {
-      this.showCinema = value;
-    });
-
-    this.showEvents = settingsService.getShowEvents();
-    this.showEventsSubscription = settingsService.showEventsChange.subscribe(value => {
-      this.showEvents = value;
+    this.serverInfo = this.settingsService.getServerInfo();
+    this.serverInfoSubscription = this.settingsService.serverInfoChange.subscribe(value => {
+      this.serverInfo = value;
     });
   }
 
@@ -117,9 +103,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.firstnameSubscription.unsubscribe();
     this.surnameSubscription.unsubscribe();
     this.usernameSubscription.unsubscribe();
-    this.communityNameSubscription.unsubscribe();
-    this.showCinemaSubscription.unsubscribe();
-    this.showEventsSubscription.unsubscribe();
+    this.serverInfoSubscription.unsubscribe();
     this.isMobileSubscription.unsubscribe();
   }
 
