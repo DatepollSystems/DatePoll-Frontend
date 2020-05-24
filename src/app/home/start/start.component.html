@@ -1,7 +1,7 @@
 <div fxShow [fxHide.gt-sm]="true">
   <mat-card class="mat-elevation-z4">
     <mat-list>
-      <div mat-subheader *ngIf="events.length != 0" class="sub-header">
+      <div mat-subheader *ngIf="events.length != 0" class="sub-header" style="padding-top: 1px;">
         <span [matBadge]="openEventsCount.toString()" matBadgeOverlap="false">{{ 'STARTPAGE_EVENTS' | translate }}</span>
       </div>
       <mat-list-item *ngFor="let event of events" class="not-selectable" matRipple matRippleRadius="100" (click)="onEventItemClick(event)">
@@ -75,7 +75,7 @@
     <div *ngIf="events.length != 0" fxFlex>
       <mat-card class="mat-elevation-z4">
         <mat-card-content>
-          <mat-card-title>
+          <mat-card-title style="padding-top: 5px;">
             <span [matBadge]="openEventsCount.toString()" matBadgeOverlap="false">{{ 'STARTPAGE_EVENTS' | translate }}</span>
           </mat-card-title>
           <div class="table-responsive">
