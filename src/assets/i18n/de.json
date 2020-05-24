@@ -32,6 +32,7 @@
   "ABOUT_GENERAL": "Allgemeines",
   "ABOUT_TECHNICAL": "Technisches",
   "ABOUT_DESCRIPTION": "DatePoll ist eine Vereinsmanagement Applikation mit dem Schwerpunkt auf Schützen und Musik.",
+  "ABOUT_VISIT_DATEPOLL": "Besuch die Projekt-Website",
   "ABOUT_FRONTEND_VERSION": "Version der Webapplication: ",
   "ABOUT_BACKEND_VERSION": "Version des Backends: ",
   "ABOUT_NEEDED_BACKEND_VERSION": "Benötigte Backend Version (Zahl): ",
