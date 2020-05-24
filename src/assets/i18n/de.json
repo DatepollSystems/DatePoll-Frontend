@@ -23,6 +23,8 @@
   "COLOR_PICKER": "Colorpicker",
   "NO_DATA": "Keine Daten",
   "INFORMATION": "Information!",
+  "SHOW_MORE": "Mehr anzeigen...",
+  "SHOW_LESS": "Weniger anzeigen...",
 
   "LANGUAGE": "Sprache",
   "LANGUAGE_GERMAN": "Deutsch",
@@ -37,6 +39,21 @@
   "ABOUT_BACKEND_VERSION": "Version des Backends: ",
   "ABOUT_NEEDED_BACKEND_VERSION": "Benötigte Backend Version (Zahl): ",
   "ABOUT_LICENSE": "Lizenz",
+
+  "ABOUT_PAGE_STATS_USER": "Benutzer",
+  "ABOUT_PAGE_STATS_EVENTS": "Events",
+  "ABOUT_PAGE_STATS_MOVIES": "Filme",
+  "ABOUT_PAGE_STATS_MORE": "Mehr Statistiken",
+  "ABOUT_PAGE_STATS_EMAIL_ADDRESSES": "Hinterlegte Email-Adressen:",
+  "ABOUT_PAGE_STATS_PHONE_NUMBERS": "Hinterlegte Telefonnummern:",
+  "ABOUT_PAGE_STATS_EVENT_VOTES": "Abgegebene Stimmen für Events:",
+  "ABOUT_PAGE_STATS_EVENT_DECISIONS": "Event Entscheidungsmöglichkeiten:",
+  "ABOUT_PAGE_STATS_EVENT_DATES": "Event Zeit- & Treffpunkte",
+  "ABOUT_PAGE_STATS_MOVIES_TICKETS": "Verbuchte Kinotickets:",
+  "ABOUT_PAGE_STATS_MOVIES_WORKERS": "Kinodienste geleistet:",
+  "ABOUT_PAGE_STATS_PERFORMANCE_BADGES": "Vergebene Leistungsabzeichen:",
+  "ABOUT_PAGE_STATS_DATEPOLL_INSTANCE_INTERACTIONS": "Interaktionen mit DatePoll:",
+  "ABOUT_PAGE_TROUBLE_LOGGING_IN": "Probleme beim anmelden?",
 
   "IMPRINT": "Impressum",
   "PRIVACY_POLICY": "Datenschutzerklärung",
@@ -449,6 +466,15 @@
   "MANAGEMENT_DATEPOLL_COMMUNITY_URL": "Vereinswebsite URL",
   "MANAGEMENT_DATEPOLL_COMMUNITY_URL_NOT_VALID": "Die URL der Vereinswebsite darf weder leer sein, noch mehr als 128 Zeichen haben!",
   "MANAGEMENT_DATEPOLL_COMMUNITY_URL_CHANGED_SUCCESSFULLY": "Die URL zur Vereinswebsite wurde erfolgreich geändert!",
+
+  "MANAGEMENT_DATEPOLL_COMMUNITY_DESCRIPTION": "Vereinsbeschreibung",
+  "MANAGEMENT_DATEPOLL_COMMUNITY_DESCRIPTION_CHANGED_SUCCESSFULLY": "Die Vereinsbeschreibung wurde erfolgreich gespeichert!",
+
+  "MANAGEMENT_DATEPOLL_IMPRINT": "Impressum",
+  "MANAGEMENT_DATEPOLL_IMPRINT_CHANGED_SUCCESSFULLY": "Das Impressum wurde erfolgreich gespeichert!",
+
+  "MANAGEMENT_DATEPOLL_PRIVACY_POLICY": "Datenschutzerklärung",
+  "MANAGEMENT_DATEPOLL_PRIVACY_POLICY_CHANGED_SUCCESSFULLY": "Die Datenschutzerklärung wurde erfolgreich gespeichert!",
 
   "MANAGEMENT_DATEPOLL_APP_URL": "DatePoll App URL",
   "MANAGEMENT_DATEPOLL_APP_URL_NOT_VALID": "Die Url der App darf weder leer sein, noch mehr als 128 Zeichen haben!",

@@ -1,6 +1,5 @@
 #signin-container {
-  background: url('../../../assets/signBackground.svg') no-repeat;
-  background-size: cover;
+  background-color: #212121;
   height: 90%;
   min-width: 100%;
   padding-top: 15vh;
@@ -17,7 +16,7 @@
 }
 
 #signin-card {
-  padding-bottom: 10px;
+  padding-bottom: 15px;
   padding-top: 0;
 }
 
@@ -28,5 +27,4 @@ mat-card-content {
 mat-card-actions {
   padding: 0;
   margin-bottom: 0;
-  margin-left: 1px;
 }

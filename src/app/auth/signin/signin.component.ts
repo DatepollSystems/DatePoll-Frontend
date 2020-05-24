@@ -1,26 +1,28 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnDestroy} from '@angular/core';
 import {FormBuilder, FormGroup, NgForm, Validators} from '@angular/forms';
-import {MatSnackBar} from '@angular/material/snack-bar';
 import {MatBottomSheet} from '@angular/material/bottom-sheet';
+import {MatSnackBar} from '@angular/material/snack-bar';
 import {Router} from '@angular/router';
 import {Subscription} from 'rxjs';
 
 import {SettingsService} from '../../utils/settings.service';
 import {AuthService} from '../auth.service';
+
 import {MobileAppBottomSheetComponent} from './mobile-app-bottom-sheet/mobile-app-bottom-sheet.component';
+
+import {ServerInfoModel} from '../../utils/server-info.model';
 
 @Component({
   selector: 'app-signin',
   templateUrl: './signin.component.html',
   styleUrls: ['./signin.component.css']
 })
-export class SigninComponent implements OnInit, OnDestroy {
-  communityName: string;
-  communityNameSubscription: Subscription;
+export class SigninComponent implements OnDestroy {
+  serverInfo: ServerInfoModel;
+  serverInfoSubscription: Subscription;
 
   state = 'login';
 
-  loginSuccess = false;
   loginFail = false;
 
   showLoadingSpinnerDuringLogin = false;
@@ -46,23 +48,30 @@ export class SigninComponent implements OnInit, OnDestroy {
     private settingsService: SettingsService,
     private fb: FormBuilder
   ) {
-    this.communityName = this.settingsService.getCommunityName();
-    this.communityNameSubscription = this.settingsService.communityNameChange.subscribe(value => {
-      this.communityName = value;
+    this.serverInfo = this.settingsService.getServerInfo();
+    this.serverInfoSubscription = this.settingsService.serverInfoChange.subscribe(value => {
+      this.serverInfo = value;
     });
-  }
 
-  ngOnInit(): void {
-    if (this.authService.isAuthenticated('signInComponent')) {
-      console.log('signInComponent | isAuthenticated | Routing user to /home');
-      this.router.navigate(['/home']);
-    } else {
-      console.log('signInComponent | isAuthenticated | Do not route user to /home ');
+    const state = window.history.state;
+    if (state?.routingReason) {
+      switch (state.routingReason) {
+        case 'forward':
+          this.state = state.state;
+          this.username = state.username;
+          this.password = state.password;
+          break;
+        case 'loginFailed':
+          this.loginFail = true;
+          this.username = state.username;
+          this.password = state.password;
+          break;
+      }
     }
   }
 
   ngOnDestroy(): void {
-    this.communityNameSubscription.unsubscribe();
+    this.serverInfoSubscription.unsubscribe();
   }
 
   checkPasswords(group: FormGroup) {
@@ -90,11 +99,7 @@ export class SigninComponent implements OnInit, OnDestroy {
       (data: any) => {
         console.log(data);
         if (data.error_code != null) {
-          if (data.error_code === 'notActivated') {
-            this.state = data.error_code;
-          }
-
-          if (data.error_code === 'changePassword') {
+          if (data.error_code === 'notActivated' || data.error_code === 'changePassword') {
             this.state = data.error_code;
           }
 
@@ -110,7 +115,6 @@ export class SigninComponent implements OnInit, OnDestroy {
         this.showLoadingSpinnerDuringLogin = false;
 
         this.loginFail = true;
-        this.loginSuccess = false;
       }
     );
   }
@@ -129,7 +133,6 @@ export class SigninComponent implements OnInit, OnDestroy {
   }
 
   private uiLogin() {
-    this.loginSuccess = true;
     this.loginFail = false;
     this.snackBar.open('Login erfolgreich');
     this.router.navigate(['/home']);

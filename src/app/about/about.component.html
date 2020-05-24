@@ -1,0 +1,166 @@
+<div class="about-container dark-theme">
+  <div fxLayout="column" fxLayoutAlign="space-between center">
+    <div fxFlex>
+      <div fxLayout="row" fxLayoutGap="2%">
+        <img src="./../../assets/datepollIcon.svg" style="height: 110px;" />
+        <h1 style="color: white; padding-top: 10%;">DatePoll ({{ serverInfo.version }})</h1>
+      </div>
+    </div>
+  </div>
+  <div
+    fxLayout="row"
+    fxLayoutGap="2%"
+    fxLayoutAlign="center start"
+    fxLayout.xs="column"
+    fxLayoutAlign.xs="center stretch"
+    style="margin-top: 15px; padding-left: 10px; padding-right: 10px;"
+  >
+    <div fxFlex="40%" fxFlex.xs="90%">
+      <div fxLayout="column" fxLayoutGap="2%">
+        <mat-card class="mat-elevation-z3">
+          <form #f="ngForm" (ngSubmit)="onSignin(f)" fxLayout="column" style="padding-left: 10px; padding-right: 10px;">
+            <mat-form-field>
+              <input
+                id="username"
+                matInput
+                maxlength="190"
+                minlength="3"
+                name="username"
+                ngModel
+                placeholder="{{ 'SIGNIN_USERNAME' | translate }}"
+                required
+                type="text"
+              />
+              <mat-icon matSuffix>account_circle</mat-icon>
+            </mat-form-field>
+
+            <mat-form-field style="margin-bottom: 10px;">
+              <input
+                id="password"
+                matInput
+                #passwordModel="ngModel"
+                minlength="6"
+                name="password"
+                ngModel
+                placeholder="{{ 'SIGNIN_PASSWORD' | translate }}"
+                required
+                type="password"
+              />
+              <mat-error *ngIf="passwordModel.invalid">
+                {{ 'SIGNIN_PASSWORD_REQUIREMENTS' | translate }}
+              </mat-error>
+            </mat-form-field>
+
+            <button [disabled]="!f.valid" color="accent" mat-raised-button>
+              {{ 'SIGNIN' | translate }}
+              <mat-icon aria-label="Send icon">send</mat-icon>
+            </button>
+
+            <div style="text-align: center; margin-top: 5px;">
+              <a routerLink="/auth/signin">{{ 'ABOUT_PAGE_TROUBLE_LOGGING_IN' | translate }}</a>
+            </div>
+          </form>
+        </mat-card>
+
+        <mat-card class="mat-elevation-z3">
+          <button (click)="openMobileAppBottomSheet()" mat-stroked-button style="width: 100%;">
+            {{ 'SIGNIN_APP_INFO' | translate }}
+          </button>
+        </mat-card>
+
+        <mat-card class="mat-elevation-z3" fxLayout="column" fxLayoutGap="3%">
+          <button routerLink="/info/imprint" mat-stroked-button style="width: 100%;">
+            {{ 'IMPRINT' | translate }}
+          </button>
+          <button routerLink="/info/privacypolicy" mat-stroked-button style="width: 100%;">
+            {{ 'PRIVACY_POLICY' | translate }}
+          </button>
+        </mat-card>
+      </div>
+    </div>
+
+    <div fxFlex="40%" fxFlex.xs="90%">
+      <div fxLayout="column" fxLayoutGap="2%">
+        <mat-card class="mat-elevation-z3">
+          <h2>
+            > <a href="{{ serverInfo.community_url }}" target="_blank" rel="noopener">{{ serverInfo.community_name }}</a>
+          </h2>
+          <p
+            *ngIf="getDescriptionPreview(serverInfo.community_description) == null || showMoreCommunityDescription"
+            [innerHTML]="getSanitizedDescription(serverInfo.community_description)"
+          ></p>
+          <p
+            *ngIf="getDescriptionPreview(serverInfo.community_description) != null"
+            [innerHTML]="getDescriptionPreview(serverInfo.community_description)"
+          ></p>
+          <button
+            mat-stroked-button
+            color="warn"
+            (click)="showMoreCommunityDescription = true"
+            *ngIf="!showMoreCommunityDescription && getDescriptionPreview(serverInfo.community_description) != null"
+          >
+            {{ 'SHOW_MORE' | translate }}
+          </button>
+          <button
+            mat-stroked-button
+            color="accent"
+            (click)="showMoreCommunityDescription = false"
+            *ngIf="showMoreCommunityDescription && getDescriptionPreview(serverInfo.community_description) != null"
+          >
+            {{ 'SHOW_LESS' | translate }}
+          </button>
+        </mat-card>
+        <mat-card class="mat-elevation-z3">
+          <div class="level is-mobile" style="margin-bottom: 5px;">
+            <div class="level-item">
+              <div>
+                <h3>{{ 'ABOUT_PAGE_STATS_USER' | translate }}</h3>
+                <h1>{{ instanceUsersString }}</h1>
+              </div>
+            </div>
+            <div class="level-item">
+              <div>
+                <h3>{{ 'ABOUT_PAGE_STATS_EVENTS' | translate }}</h3>
+                <h1>{{ instanceEventsString }}</h1>
+              </div>
+            </div>
+            <div class="level-item">
+              <div>
+                <h3>{{ 'ABOUT_PAGE_STATS_MOVIES' | translate }}</h3>
+                <h1>{{ instanceMoviesString }}</h1>
+              </div>
+            </div>
+          </div>
+
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>{{ 'ABOUT_PAGE_STATS_MORE' | translate }}</mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <ul>
+              <li>{{ 'ABOUT_PAGE_STATS_EMAIL_ADDRESSES' | translate }} {{ serverInfo.user_email_addresses_count }}</li>
+              <li>{{ 'ABOUT_PAGE_STATS_PHONE_NUMBERS' | translate }} {{ serverInfo.user_phone_numbers_count }}</li>
+            </ul>
+
+            <ul>
+              <li>{{ 'ABOUT_PAGE_STATS_EVENT_VOTES' | translate }} {{ serverInfo.event_votes_count }}</li>
+              <li>{{ 'ABOUT_PAGE_STATS_EVENT_DECISIONS' | translate }} {{ serverInfo.event_decisions_count }}</li>
+              <li>{{ 'ABOUT_PAGE_STATS_EVENT_DATES' | translate }} {{ serverInfo.event_dates_count }}</li>
+            </ul>
+
+            <ul>
+              <li>{{ 'ABOUT_PAGE_STATS_MOVIES_TICKETS' | translate }} {{ serverInfo.movies_tickets_count }}</li>
+              <li>{{ 'ABOUT_PAGE_STATS_MOVIES_WORKERS' | translate }} {{ serverInfo.movies_workers_count }}</li>
+            </ul>
+
+            <ul>
+              <li>{{ 'ABOUT_PAGE_STATS_PERFORMANCE_BADGES' | translate }} {{ serverInfo.performance_badges_count }}</li>
+              <li>{{ 'ABOUT_PAGE_STATS_DATEPOLL_INSTANCE_INTERACTIONS' | translate }} {{ serverInfo.logged_interactions_count }}</li>
+            </ul>
+          </mat-expansion-panel>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>
