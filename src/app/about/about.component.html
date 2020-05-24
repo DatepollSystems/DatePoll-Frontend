@@ -114,19 +114,19 @@
           <div class="level is-mobile" style="margin-bottom: 5px;">
             <div class="level-item">
               <div>
-                <h3>Benutzer</h3>
+                <h3>{{ 'ABOUT_PAGE_STATS_USER' | translate }}</h3>
                 <h1>{{ instanceUsersString }}</h1>
               </div>
             </div>
             <div class="level-item">
               <div>
-                <h3>Events</h3>
+                <h3>{{ 'ABOUT_PAGE_STATS_EVENTS' | translate }}</h3>
                 <h1>{{ instanceEventsString }}</h1>
               </div>
             </div>
             <div class="level-item">
               <div>
-                <h3>Filme</h3>
+                <h3>{{ 'ABOUT_PAGE_STATS_MOVIES' | translate }}</h3>
                 <h1>{{ instanceMoviesString }}</h1>
               </div>
             </div>
@@ -134,30 +134,28 @@
 
           <mat-expansion-panel>
             <mat-expansion-panel-header>
-              <mat-panel-title>
-                More stats
-              </mat-panel-title>
+              <mat-panel-title>{{ 'ABOUT_PAGE_STATS_MORE' | translate }}</mat-panel-title>
             </mat-expansion-panel-header>
 
             <ul>
-              <li>Email-Adressen: {{ serverInfo.user_email_addresses_count }}</li>
-              <li>Telefonnummern: {{ serverInfo.user_phone_numbers_count }}</li>
+              <li>{{ 'ABOUT_PAGE_STATS_EMAIL_ADDRESSES' | translate }} {{ serverInfo.user_email_addresses_count }}</li>
+              <li>{{ 'ABOUT_PAGE_STATS_PHONE_NUMBERS' | translate }} {{ serverInfo.user_phone_numbers_count }}</li>
             </ul>
 
             <ul>
-              <li>Event Votes (insgesamt): {{ serverInfo.event_votes_count }}</li>
-              <li>Event Entscheidungsmöglichkeiten: {{ serverInfo.event_decisions_count }}</li>
-              <li>Event Treffpunkte: {{ serverInfo.event_dates_count }}</li>
+              <li>{{ 'ABOUT_PAGE_STATS_EVENT_VOTES' | translate }} {{ serverInfo.event_votes_count }}</li>
+              <li>{{ 'ABOUT_PAGE_STATS_EVENT_DECISIONS' | translate }} {{ serverInfo.event_decisions_count }}</li>
+              <li>{{ 'ABOUT_PAGE_STATS_EVENT_DATES' | translate }} {{ serverInfo.event_dates_count }}</li>
             </ul>
 
             <ul>
-              <li>Gebuchte Tickets: {{ serverInfo.movies_tickets_count }}</li>
-              <li>Kino arbeiter: {{ serverInfo.movies_workers_count }}</li>
+              <li>{{ 'ABOUT_PAGE_STATS_MOVIES_TICKETS' | translate }} {{ serverInfo.movies_tickets_count }}</li>
+              <li>{{ 'ABOUT_PAGE_STATS_MOVIES_WORKERS' | translate }} {{ serverInfo.movies_workers_count }}</li>
             </ul>
 
             <ul>
-              <li>Vergebene Leistungsabzeichen: {{ serverInfo.performance_badges_count }}</li>
-              <li>Interaktionen mit DatePoll: {{ serverInfo.logged_interactions_count }}</li>
+              <li>{{ 'ABOUT_PAGE_STATS_PERFORMANCE_BADGES' | translate }} {{ serverInfo.performance_badges_count }}</li>
+              <li>{{ 'ABOUT_PAGE_STATS_DATEPOLL_INSTANCE_INTERACTIONS' | translate }} {{ serverInfo.logged_interactions_count }}</li>
             </ul>
           </mat-expansion-panel>
         </mat-card>
