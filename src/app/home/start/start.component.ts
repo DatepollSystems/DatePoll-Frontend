@@ -25,7 +25,7 @@ import {QuestionDialogComponent} from '../../utils/shared-components/question-di
   templateUrl: './start.component.html',
   styleUrls: ['./start.component.css']
 })
-export class StartComponent implements OnInit, OnDestroy {
+export class StartComponent implements OnDestroy {
   birthdays: HomeBirthdayModel[];
   birthdaysSubscription: Subscription;
 
@@ -56,13 +56,11 @@ export class StartComponent implements OnInit, OnDestroy {
     this.birthdays = homePageService.getBirthdays();
     this.birthdaysSubscription = homePageService.birthdaysChange.subscribe(value => {
       this.birthdays = value;
-      this.setBackgroundImage();
     });
 
     this.bookings = homePageService.getBookings();
     this.bookingsSubscription = homePageService.bookingsChange.subscribe(value => {
       this.bookings = value;
-      this.setBackgroundImage();
     });
 
     this.events = homePageService.getEvents().slice(0, 10);
@@ -74,7 +72,6 @@ export class StartComponent implements OnInit, OnDestroy {
           this.openEventsCount++;
         }
       }
-      this.setBackgroundImage();
       this.eventVotingChangeLoading = false;
     });
 
@@ -84,33 +81,11 @@ export class StartComponent implements OnInit, OnDestroy {
     });
   }
 
-  ngOnInit() {
-    this.setBackgroundImage();
-  }
-
-  setBackgroundImage() {
-    if (this.birthdays.length === 0 && this.bookings.length === 0 && this.events.length === 0) {
-      const currentDate = new Date();
-
-      if (currentDate.getHours() >= 19 || currentDate.getHours() <= 7) {
-        document.getElementById('my-container').style.backgroundImage = 'url(/assets/startpage-background-night.jpg)';
-      } else {
-        document.getElementById('my-container').style.backgroundImage = 'url(/assets/startpage-background-day.jpg)';
-      }
-
-      document.getElementById('my-container').style.backgroundSize = 'cover';
-    } else {
-      document.getElementById('my-container').style.background = 'none';
-    }
-  }
-
   ngOnDestroy() {
     this.bookingsSubscription.unsubscribe();
     this.birthdaysSubscription.unsubscribe();
     this.eventsSubscription.unsubscribe();
     this.isMobileSubscription.unsubscribe();
-
-    document.getElementById('my-container').style.background = 'none';
   }
 
   onEventItemClick(event: Event) {
@@ -192,7 +167,6 @@ export class StartComponent implements OnInit, OnDestroy {
             (response: any) => {
               console.log(response);
               this.homePageService.fetchData();
-              this.setBackgroundImage();
               this.notificationsService.success(
                 this.translate.getTranslationFor('SUCCESSFULLY'),
                 this.translate.getTranslationFor('EVENTS_VIEW_EVENT_SUCCESSFULLY_REMOVED_VOTING')
