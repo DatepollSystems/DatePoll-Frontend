@@ -21,6 +21,10 @@ export class AboutComponent implements OnDestroy {
   serverInfo: ServerInfoModel;
   serverInfoSubscription: Subscription;
 
+  instanceUsersString = '0';
+  instanceEventsString = '0';
+  instanceMoviesString = '0';
+
   showMoreCommunityDescription = false;
 
   constructor(
@@ -31,8 +35,12 @@ export class AboutComponent implements OnDestroy {
     private sanitizer: DomSanitizer
   ) {
     this.serverInfo = this.settingsService.getServerInfo();
+    // noinspection JSIgnoredPromiseFromCall
+    this.count();
     this.serverInfoSubscription = this.settingsService.serverInfoChange.subscribe(value => {
       this.serverInfo = value;
+      // noinspection JSIgnoredPromiseFromCall
+      this.count();
     });
   }
 
@@ -84,4 +92,56 @@ export class AboutComponent implements OnDestroy {
 
     return this.sanitizer.bypassSecurityTrustHtml(community_description.substring(0, 512).slice() + '...');
   }
+
+  async count() {
+    // noinspection ES6MissingAwait
+    this.showInstanceUsers(this.validateFactor(this.serverInfo.users_count), this.serverInfo.users_count);
+    // noinspection ES6MissingAwait
+    this.showInstanceEvents(this.validateFactor(this.serverInfo.events_count), this.serverInfo.events_count);
+    // noinspection ES6MissingAwait
+    this.showInstanceMovies(this.validateFactor(this.serverInfo.movies_count), this.serverInfo.movies_count);
+  }
+
+  validateFactor(max: number): number {
+    if (max > 4000) {
+      return 24;
+    } else if (max > 1000) {
+      return 19;
+    } else if (max > 500) {
+      return 6;
+    } else {
+      return 1;
+    }
+  }
+
+  async showInstanceUsers(factor: number, max: number) {
+    this.instanceUsersString = '0';
+    for (let i = 0; i < max; ) {
+      i += factor;
+      await sleep(1);
+      this.instanceUsersString = i.toString();
+    }
+  }
+
+  async showInstanceEvents(factor: number, max: number) {
+    this.instanceEventsString = '0';
+    for (let i = 0; i < max; ) {
+      i += factor;
+      await sleep(1);
+      this.instanceEventsString = i.toString();
+    }
+  }
+
+  async showInstanceMovies(factor: number, max: number) {
+    this.instanceMoviesString = '0';
+    for (let i = 0; i < max; ) {
+      i += factor;
+      await sleep(1);
+      this.instanceMoviesString = i.toString();
+    }
+  }
+}
+
+async function sleep(msec) {
+  return new Promise(resolve => setTimeout(resolve, msec * 2));
 }
