@@ -9,7 +9,6 @@
     <div fxFlex="47%">
       <button (click)="copyTokenToClipboard(calendarTokenElement)" mat-flat-button color="accent" style="width: 100%">
         {{ 'SETTINGS_SECURITY_MODAL_CALENDAR_COPY_TOKEN_TOOLTIP' | translate }}
-        <mat-icon matSuffix svgIcon="content-copy"></mat-icon>
       </button>
     </div>
 
@@ -23,6 +22,6 @@
     <mat-progress-bar mode="indeterminate"></mat-progress-bar>
   </div>
 </mat-dialog-content>
-<mat-dialog-actions>
+<mat-dialog-actions fxLayout="row" fxLayoutAlign="end">
   <button mat-button mat-dialog-close>{{ 'CLOSE' | translate }}</button>
 </mat-dialog-actions>

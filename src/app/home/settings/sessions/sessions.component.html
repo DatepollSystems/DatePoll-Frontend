@@ -1,40 +1,45 @@
-<h2 mat-dialog-title>{{'SETTINGS_SECURITY_SESSIONS' | translate}}</h2>
+<h2 mat-dialog-title>{{ 'SETTINGS_SECURITY_SESSIONS' | translate }}</h2>
 <mat-dialog-content>
   <div *ngIf="sessions != null">
     <div *ngIf="sessions.length > 0">
       <div class="row" style="margin-top: 15px;">
         <mat-form-field class="col-12">
-          <input (keyup)="applyFilter($event.target.value)" matInput
-                 placeholder="{{'SETTINGS_PERSONAL_DATA_MODAL_PHONE_NUMBER_SEARCH' | translate}}"/>
+          <input
+            (keyup)="applyFilter($event.target.value)"
+            matInput
+            placeholder="{{ 'SETTINGS_PERSONAL_DATA_MODAL_PHONE_NUMBER_SEARCH' | translate }}"
+          />
         </mat-form-field>
       </div>
 
       <div class="row">
         <table [dataSource]="dataSource" class="table-responsive" mat-table>
-
           <ng-container matColumnDef="information">
-            <th *matHeaderCellDef mat-header-cell> {{'SETTINGS_SECURITY_MODAL_SESSION_INFORMATION' | translate}} </th>
-            <td *matCellDef="let session" mat-cell> {{session.information}} </td>
+            <th *matHeaderCellDef mat-header-cell>{{ 'SETTINGS_SECURITY_MODAL_SESSION_INFORMATION' | translate }}</th>
+            <td *matCellDef="let session" mat-cell>{{ session.information }}</td>
           </ng-container>
 
           <ng-container matColumnDef="lastUsed">
-            <th *matHeaderCellDef mat-header-cell> {{'SETTINGS_SECURITY_MODAL_SESSION_LAST_USED' | translate}} </th>
-            <td *matCellDef="let session" mat-cell> {{session.lastUsed | date:'dd.MM.yyyy H:mm:ss'}} </td>
+            <th *matHeaderCellDef mat-header-cell>{{ 'SETTINGS_SECURITY_MODAL_SESSION_LAST_USED' | translate }}</th>
+            <td *matCellDef="let session" mat-cell>{{ session.lastUsed | date: 'dd.MM.yyyy H:mm:ss' }}</td>
           </ng-container>
 
           <ng-container matColumnDef="action">
-            <th *matHeaderCellDef mat-header-cell> {{'ACTION' | translate}} </th>
+            <th *matHeaderCellDef mat-header-cell>{{ 'ACTION' | translate }}</th>
             <td *matCellDef="let session" mat-cell>
-              <button (click)="removeSession(session.id)" [matTooltipPosition]="'right'"
-                      mat-icon-button
-                      matTooltip="{{'SETTINGS_SECURITY_MODAL_SESSION_REMOVE_TOOLTIP' | translate}}">
+              <button
+                (click)="removeSession(session.id)"
+                [matTooltipPosition]="'right'"
+                mat-icon-button
+                matTooltip="{{ 'SETTINGS_SECURITY_MODAL_SESSION_REMOVE_TOOLTIP' | translate }}"
+              >
                 <mat-icon>delete_foreve</mat-icon>
               </button>
             </td>
           </ng-container>
 
           <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
-          <tr *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
+          <tr *matRowDef="let row; columns: displayedColumns" mat-row></tr>
         </table>
       </div>
     </div>
@@ -43,7 +48,7 @@
         <div class="col-12">
           <mat-card class="info-mat-card" matRipple>
             <mat-card-content class="last-child">
-              {{'SETTINGS_SECURITY_MODAL_SESSION_NO_SESSIONS_AVAILABLE' | translate}}
+              {{ 'SETTINGS_SECURITY_MODAL_SESSION_NO_SESSIONS_AVAILABLE' | translate }}
             </mat-card-content>
           </mat-card>
         </div>
@@ -54,13 +59,11 @@
   <div *ngIf="sessions == null">
     <mat-progress-bar mode="indeterminate"></mat-progress-bar>
   </div>
-
 </mat-dialog-content>
-<mat-dialog-actions>
-  <button mat-button mat-dialog-close>{{'CLOSE' | translate}}</button>
+<mat-dialog-actions fxLayout="row" fxLayoutAlign="end">
+  <button mat-button mat-dialog-close>{{ 'CLOSE' | translate }}</button>
 </mat-dialog-actions>
 
 <ng-template #successfullyRemovedSession>
-  <h2>{{'SETTINGS_SECURITY_MODAL_SESSION_REMOVED_SUCCESSFUL' | translate}}</h2>
+  <h2>{{ 'SETTINGS_SECURITY_MODAL_SESSION_REMOVED_SUCCESSFUL' | translate }}</h2>
 </ng-template>
-
