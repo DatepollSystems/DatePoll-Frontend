@@ -5,6 +5,7 @@ import {AuthService} from '../auth/auth.service';
 import {HttpService} from '../utils/http.service';
 import {Permissions} from '../permissions';
 import {PhoneNumber} from './phoneNumber.model';
+import {Converter} from '../utils/converter';
 
 @Injectable({
   providedIn: 'root'
@@ -69,20 +70,6 @@ export class MyUserService {
   }
 
   updateMyself() {
-    const d = new Date(this.getBirthday());
-    let month = '' + (d.getMonth() + 1),
-      day = '' + d.getDate();
-    const year = d.getFullYear();
-
-    if (month.length < 2) {
-      month = '0' + month;
-    }
-    if (day.length < 2) {
-      day = '0' + day;
-    }
-
-    const dateformat = [year, month, day].join('-');
-
     const userObject = {
       title: this.getTitle(),
       firstname: this.getFirstname(),
@@ -91,15 +78,10 @@ export class MyUserService {
       streetnumber: this.getStreetnumber(),
       zipcode: this.getZipcode(),
       location: this.getLocation(),
-      birthday: dateformat
+      birthday: Converter.getDateFormatted(this.getBirthday())
     };
 
-    this.httpService.loggedInV1PUTRequest('/user/myself', userObject, 'updateMyself').subscribe(
-      (data: any) => {
-        console.log(data);
-      },
-      error => console.log(error)
-    );
+    return this.httpService.loggedInV1PUTRequest('/user/myself', userObject, 'updateMyself');
   }
 
   setID(ID: number) {
@@ -200,7 +182,7 @@ export class MyUserService {
 
   public setEmailAddressesPerRequest(emailAddresses: string[]) {
     const request = {
-      email_addresses: this._emailAddresses
+      email_addresses: emailAddresses
     };
     return this.httpService.loggedInV1POSTRequest('/user/myself/changeEmailAddresses', request, 'updateEmailAddresses');
   }
