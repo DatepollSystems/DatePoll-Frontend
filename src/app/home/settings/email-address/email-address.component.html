@@ -28,11 +28,7 @@
     <p class="col-10 col-md-10">{{ 'SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_NOTIFY_ME_ON_NEW_EVENT' | translate }}</p>
   </div>
 </mat-dialog-content>
-<mat-dialog-actions>
+<mat-dialog-actions fxLayout="row" fxLayoutAlign="end">
   <button mat-button mat-dialog-close>{{ 'CLOSE' | translate }}</button>
-  <button (click)="onSave()" class="success-button" mat-button mat-dialog-close>{{ 'SAVE' | translate }}</button>
+  <button (click)="onSave()" color="primary" mat-flat-button>{{ 'SAVE' | translate }}</button>
 </mat-dialog-actions>
-
-<ng-template #successfullySavedEmailAddresses>
-  <h2>{{ 'SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_SAVED_SUCCESSFUL' | translate }}</h2>
-</ng-template>

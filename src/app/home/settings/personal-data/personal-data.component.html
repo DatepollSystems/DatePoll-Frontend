@@ -146,9 +146,9 @@
     </mat-form-field>
   </form>
 </mat-dialog-content>
-<mat-dialog-actions align="end">
+<mat-dialog-actions fxLayout="row" fxLayoutAlign="end">
   <button mat-button mat-dialog-close>{{ 'CLOSE' | translate }}</button>
-  <button (click)="form.ngSubmit.emit()" [disabled]="!form.form.valid" color="accent" mat-flat-button mat-dialog-close>
+  <button (click)="form.ngSubmit.emit()" [disabled]="!form.form.valid" color="primary" mat-flat-button mat-dialog-close>
     {{ 'SAVE' | translate }}
   </button>
 </mat-dialog-actions>

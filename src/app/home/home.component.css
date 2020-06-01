@@ -1,5 +1,5 @@
 .my-container {
-  margin-top: 6vh;
+  margin-top: 50px;
   padding: 15px;
   min-height: 80vh;
 }
@@ -32,11 +32,11 @@ mat-sidenav {
 }
 
 .activated {
-  background-color: #BDBDBD !important;
+  background-color: #bdbdbd !important;
 }
 
 .activated:hover {
-  background-color: #BDBDBD !important;
+  background-color: #bdbdbd !important;
 }
 
 mat-icon {

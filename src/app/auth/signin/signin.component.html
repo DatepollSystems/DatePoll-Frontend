@@ -3,7 +3,7 @@
     <mat-card fxFlex="45%" fxFlex.lt-md="80%" fxFlex.xs="90%" id="signin-card">
       <mat-card-title-group>
         <mat-card-title>
-          <p class="projectName">{{ communityName }}</p>
+          <p class="projectName">{{ serverInfo.community_name }}</p>
         </mat-card-title>
 
         <mat-card-title> DatePoll | {{ 'SIGNIN' | translate }} </mat-card-title>
@@ -11,10 +11,6 @@
 
       <form #f="ngForm" (ngSubmit)="onSignin(f)" *ngIf="state === 'login'">
         <mat-card-content>
-          <mat-card *ngIf="loginSuccess" class="error-mat-card row" matRipple>
-            <mat-card-content class="last-child">{{ 'SIGNIN_SUCCESSFUL' | translate }}</mat-card-content>
-          </mat-card>
-
           <div fxLayout="column">
             <mat-form-field>
               <input
@@ -98,7 +94,7 @@
         *ngIf="state === 'changePassword'"
         [formGroup]="changePasswordAfterSigninForm"
       >
-        <mat-card style="background-color: #b2ff59" class="not-selectable">
+        <mat-card style="background-color: #b2ff59; color: black;" class="not-selectable">
           <mat-card-content class="last-child">
             {{ 'SIGNIN_YOU_NEED_TO_CHANGE_PASSWORD' | translate }}
           </mat-card-content>

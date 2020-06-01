@@ -23,6 +23,8 @@
   "COLOR_PICKER": "Colorpicker",
   "NO_DATA": "Keine Daten",
   "INFORMATION": "Information!",
+  "SHOW_MORE": "Mehr anzeigen...",
+  "SHOW_LESS": "Weniger anzeigen...",
 
   "LANGUAGE": "Sprache",
   "LANGUAGE_GERMAN": "Deutsch",
@@ -32,10 +34,26 @@
   "ABOUT_GENERAL": "Allgemeines",
   "ABOUT_TECHNICAL": "Technisches",
   "ABOUT_DESCRIPTION": "DatePoll ist eine Vereinsmanagement Applikation mit dem Schwerpunkt auf Schützen und Musik.",
+  "ABOUT_VISIT_DATEPOLL": "Besuch die Projekt-Website",
   "ABOUT_FRONTEND_VERSION": "Version der Webapplication: ",
   "ABOUT_BACKEND_VERSION": "Version des Backends: ",
   "ABOUT_NEEDED_BACKEND_VERSION": "Benötigte Backend Version (Zahl): ",
   "ABOUT_LICENSE": "Lizenz",
+
+  "ABOUT_PAGE_STATS_USER": "Benutzer",
+  "ABOUT_PAGE_STATS_EVENTS": "Events",
+  "ABOUT_PAGE_STATS_MOVIES": "Filme",
+  "ABOUT_PAGE_STATS_MORE": "Mehr Statistiken",
+  "ABOUT_PAGE_STATS_EMAIL_ADDRESSES": "Hinterlegte Email-Adressen:",
+  "ABOUT_PAGE_STATS_PHONE_NUMBERS": "Hinterlegte Telefonnummern:",
+  "ABOUT_PAGE_STATS_EVENT_VOTES": "Abgegebene Stimmen für Events:",
+  "ABOUT_PAGE_STATS_EVENT_DECISIONS": "Event Entscheidungsmöglichkeiten:",
+  "ABOUT_PAGE_STATS_EVENT_DATES": "Event Zeit- & Treffpunkte",
+  "ABOUT_PAGE_STATS_MOVIES_TICKETS": "Verbuchte Kinotickets:",
+  "ABOUT_PAGE_STATS_MOVIES_WORKERS": "Kinodienste geleistet:",
+  "ABOUT_PAGE_STATS_PERFORMANCE_BADGES": "Vergebene Leistungsabzeichen:",
+  "ABOUT_PAGE_STATS_DATEPOLL_INSTANCE_INTERACTIONS": "Interaktionen mit DatePoll:",
+  "ABOUT_PAGE_TROUBLE_LOGGING_IN": "Probleme beim anmelden?",
 
   "IMPRINT": "Impressum",
   "PRIVACY_POLICY": "Datenschutzerklärung",
@@ -72,7 +90,7 @@
   "FORGOT_PASSWORD_CODE_INVALID": "Der Verifizierungscode muss eine 6-stellige Zahl sein.",
   "FORGOT_PASSWORD_CODE_INCORRECT": "Der eingegebene Verifizierungscode ist nicht korrekt!",
   "FORGOT_PASSWORD_RATE_LIMIT_EXCEEDED": "Du hast zu oft versucht den Code einzugeben. Bitte lade die Seite neu!",
-  "FORGOT_PASSWORD_SUCCESSFUL": "Dein Passwort wurde erfolgreich geändert! Du wirst in 5 Sekunden weitergeleitet.",
+  "FORGOT_PASSWORD_SUCCESSFUL": "Dein Passwort wurde geändert! Du wirst in 5 Sekunden weitergeleitet.",
 
   "NAV_USER_SETTINGS": "Persönliche Einstellungen",
 
@@ -188,21 +206,21 @@
   "CINEMA_TICKETS_ADMINISTRATION_YEAR_SELECT_PLACEHOLDER": "Jahr",
 
   "CINEMA_TICKETS_ADMINISTRATION_MOVIE_CREATE_MODAL_CREATE": "Lege einen neuen Film an",
-  "CINEMA_TICKETS_ADMINISTRATION_MOVIE_CREATE_SUCCESSFULLY": "Der Film wurde erfolgreich angelegt.",
+  "CINEMA_TICKETS_ADMINISTRATION_MOVIE_CREATE_SUCCESSFULLY": "Der Film wurde angelegt.",
 
   "CINEMA_TICKETS_ADMINISTRATION_MOVIE_EDIT_MODAL_EDIT": "Bearbeite ",
   "CINEMA_TICKETS_ADMINISTRATION_MOVIE_EDIT_MODAL_NAME_INVALID": "Der Name darf weder leer sein, noch mehr als 128 Zeichen haben!",
   "CINEMA_TICKETS_ADMINISTRATION_MOVIE_EDIT_MODAL_TRAILER_INVALID": "Der Trailerlink darf weder leer sein, noch mehr als 512 Zeichen haben!",
   "CINEMA_TICKETS_ADMINISTRATION_MOVIE_EDIT_MODAL_POSTER_INVALID": "Der Posterlink darf weder leer sein, noch mehr als 512 Zeichen haben!",
   "CINEMA_TICKETS_ADMINISTRATION_MOVIE_EDIT_MODAL_POSTER_PREVIEW": "Poster Vorschau",
-  "CINEMA_TICKETS_ADMINISTRATION_MOVIE_UPDATE_SUCCESSFULLY": "Der Film wurde erfolgreich bearbeitet.",
+  "CINEMA_TICKETS_ADMINISTRATION_MOVIE_UPDATE_SUCCESSFULLY": "Der Film wurde bearbeitet.",
 
   "CINEMA_TICKETS_ADMINISTRATION_MOVIE_INFO_MODAL_INFO": "Informationen über den Film ",
   "CINEMA_TICKETS_ADMINISTRATION_MOVIE_INFO_MODAL_TABLE_NAME": "Name",
   "CINEMA_TICKETS_ADMINISTRATION_MOVIE_INFO_MODAL_TABLE_AMOUNT": "Kartenanzahl",
 
   "CINEMA_TICKETS_ADMINISTRATION_MOVIE_DELETE_MODAL_TITLE": "Willst du diesen Film wirklich löschen?",
-  "CINEMA_TICKETS_ADMINISTRATION_MOVIE_DELETE_MODAL_SUCCESSFULLY_DELETED": "Der Film wurde erfolgreich gelöscht!",
+  "CINEMA_TICKETS_ADMINISTRATION_MOVIE_DELETE_MODAL_SUCCESSFULLY_DELETED": "Der Film wurde gelöscht!",
 
   "CINEMA_TICKETS_ADMINISTRATION_MOVIE_BOOKINGS_MANAGEMENT_MODAL_TITLE": "Kartenreservierungen für den Film ",
   "CINEMA_TICKETS_ADMINISTRATION_MOVIE_BOOKINGS_MANAGEMENT_MODAL_BOOK": "Reservieren",
@@ -234,6 +252,7 @@
   "SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_ZIPCODE_NOT_VALID": "Die Postleitzahl muss eine vierstellige Zahl sein!",
   "SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_LOCATION": "Ort",
   "SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_LOCATION_NOT_VALID": "Der Ort darf nicht mehr als 190 Zeichen haben!",
+  "SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_SAVED_SUCCESSFULLY": "Deine persönlichen Daten wurden übernommen!",
 
   "SETTINGS_PERSONAL_DATA_MODAL_PHONE_NUMBER_SEARCH": "Suchen...",
   "SETTINGS_PERSONAL_DATA_MODAL_PHONE_NUMBER_LABEL": "Bezeichnung",
@@ -246,7 +265,8 @@
 
   "SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_NOTIFY_TITLE": "Email-Benachrichtigungen",
   "SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_NOTIFY_ME_ON_NEW_EVENT": "Benachrichtige mich per Email über neue Events.",
-  "SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_SAVED_SUCCESSFUL": "Deine Email-Adressen wurden erfolgreich gespeichert!",
+  "SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_SAVED_SUCCESSFULLY": "Deine Email-Adressen wurden übernommen!",
+  "SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_MINIMUM_ONE_EMAIL_ADDRESS": "Es muss mindestens eine Email-Adresse hinterlegt sein!",
 
   "SETTINGS_SECURITY": "Sicherheit",
   "SETTINGS_SECURITY_DESCRIPTION": "Lege die Einstellungen für dein Passwort und deinen Kalender fest. Außerdem kannst du deine Sessions und Privatsphäre-Einstellungen verwalten.",
@@ -262,20 +282,20 @@
   "SETTINGS_SECURITY_MODAL_CHANGE_PASSWORD_NEW_PASSWORD_REPEAT": "Neues Passwort erneut eingeben",
   "SETTINGS_SECURITY_MODAL_CHANGE_PASSWORD_NEW_PASSWORDS_ARE_NOT_EQUAL": "Die Passwörter stimmen nicht über ein",
   "SETTINGS_SECURITY_MODAL_CHANGE_PASSWORD_OLD_PASSWORD": "Altes Passwort",
-  "SETTINGS_SECURITY_MODAL_CHANGE_PASSWORD_FINISHED": "Dein Passwort wurde erfolgreich geändert!",
+  "SETTINGS_SECURITY_MODAL_CHANGE_PASSWORD_FINISHED": "Dein Passwort wurde geändert!",
 
   "SETTINGS_SECURITY_MDOAL_CALENDAR_INPUT_TITLE": "Persönlicher Kalender",
   "SETTINGS_SECURITY_MODAL_CALENDAR_COPY_TOKEN_TOOLTIP": "In die Zwischenablage kopieren",
   "SETTINGS_SECURITY_MODAL_CALENDAR_RESET_TOKEN": "Zurücksetzen",
 
   "SETTINGS_SECURITY_MODAL_SESSION_REMOVE_TOOLTIP": "Beende die Session",
-  "SETTINGS_SECURITY_MODAL_SESSION_REMOVED_SUCCESSFUL": "Die Session wurde erfolgreich abgemeldet!",
+  "SETTINGS_SECURITY_MODAL_SESSION_REMOVED_SUCCESSFUL": "Die Session wurde abgemeldet!",
   "SETTINGS_SECURITY_MODAL_SESSION_NO_SESSIONS_AVAILABLE": "Es sind keine Sessions mit DatePoll verbunden!",
   "SETTINGS_SECURITY_MODAL_SESSION_INFORMATION": "Informationen",
   "SETTINGS_SECURITY_MODAL_SESSION_LAST_USED": "Zuletzt benutzt",
 
   "SETTINGS_SECURITY_MODAL_SETTINGS_TITLE": "Privatsphäre-Einstellungen",
-  "SETTINGS_SECURITY_MODAL_SETTINGS_SAVE_SUCCESS": "Deine Einstellungen wurden erfolgreich gespeichert!",
+  "SETTINGS_SECURITY_MODAL_SETTINGS_SAVE_SUCCESS": "Deine Einstellungen wurden gespeichert!",
   "SETTINGS_SECURITY_MODAL_SETTINGS_SHOW_BIRTHDAY": "Zeige deinen Geburtstag für jedes Vereinsmitglied auf der Startseite an",
 
   "MANAGEMENT_USERS_SEARCH": "Suche...",
@@ -297,9 +317,9 @@
   "MANAGEMENT_USERS_ACTIONS_DELETE_TOOLTIP": "Lösche dieses Mitglied",
   "MANAGEMENT_USERS_REFRESH": "Mitgliederliste aktualisieren",
   "MANAGEMENT_USERS_EXPORT_LOADING": "Die Mitgliederliste wird erstellt... Dies kann einige Sekunden dauern! Bitte schließe den Browser in dieser Zeit nicht.",
-  "MANAGEMENT_USERS_EXPORT_FINISHED": "Die Mitgliederliste wurde erfolgreich exportiert!",
+  "MANAGEMENT_USERS_EXPORT_FINISHED": "Die Mitgliederliste wurde exportiert!",
   "MANAGEMENT_USERS_ACTIVATE_ALL": "Alle Mitglieder aktivieren",
-  "MANAGEMENT_USERS_ACTIVATE_ALL_FINISHED": "Alle nicht aktivierten Mitglieder wurden erfolgreich aktiviert!",
+  "MANAGEMENT_USERS_ACTIVATE_ALL_FINISHED": "Alle nicht aktivierten Mitglieder wurden aktiviert!",
 
   "MANAGEMENT_USERS_CREATE_USER_MODAL_TITLE": "Lege ein neues Mitglied an",
   "MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_TITLE": "Titel",
@@ -338,7 +358,7 @@
   "MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_REMOVE_PERMISSION_TOOLTIP": "Entferne diese Berechtigung",
   "MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_PERMISSION": "Berechtigung",
   "MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_NO_PERMISSIONS_AVAILABLE": "Dieses Mitglied besitzt noch keine Berechtigungen",
-  "MANAGEMENT_USERS_CREATE_USER_MODAL_SUCCESSFULLY_CREATED_USER": "Das Mitglied wurde erfolgreich angelegt!",
+  "MANAGEMENT_USERS_CREATE_USER_MODAL_SUCCESSFULLY_CREATED_USER": "Das Mitglied wurde angelegt!",
   "MANAGEMENT_USERS_CREATE_USER_MODAL_PERFORMANCE_BADGES_TITLE": "Leistungsabzeichen",
   "MANAGEMENT_USERS_CREATE_USER_MODAL_PERFORMANCE_BADGES_REMOVE_TOOLTIP": "Entferne dieses Leistungsabzeichen",
   "MANAGEMENT_USERS_CREATE_USER_MODAL_PERFORMANCE_BADGES_NO_AVAILABLE": "Dieses Mitglied hat noch keine Leistungsabzeichen",
@@ -352,13 +372,13 @@
   "MANAGEMENT_USERS_CREATE_USER_MODAL_PERFORMANCE_BADGES_NOTE_INCORRECT": "Die Anmerkung darf nicht mehr als 190 Zeichen haben!",
 
   "MANAGEMENT_USERS_UPDATE_USER_MODAL_TITLE": "Bearbeite ",
-  "MANAGEMENT_USERS_UPDATE_USER_MODAL_SUCCESSFULLY_UPDATED_USER": "Die Änderungen wurden erfolgreich übernommen!",
+  "MANAGEMENT_USERS_UPDATE_USER_MODAL_SUCCESSFULLY_UPDATED_USER": "Die Änderungen wurden übernommen!",
   "MANAGEMENT_USERS_UPDATE_USER_MODAL_PASSWORD_CHANGE": "Passwort ändern",
   "MANAGEMENT_USERS_UPDATE_USER_MODAL_PASSWORD_CHANGE_DESCRIPTION": "Das Passwort wird unabhängig von den restlichen Daten verändert! Nachdem ein Passwort eingegeben wurde und auf \"Passwort ändern\" geklickt wurde, gibt es kein zurück.",
-  "MANAGEMENT_USERS_UPDATE_USER_MODAL_PASSWORD_CHANGE_SUCCESSFUL": "Das Passwort wurde erfolgreich geändert!",
+  "MANAGEMENT_USERS_UPDATE_USER_MODAL_PASSWORD_CHANGE_SUCCESSFUL": "Das Passwort wurde geändert!",
 
   "MANAGEMENT_USERS_DELETE_USER_MODAL_TITLE": "Willst du den Benutzer wirklich löschen?",
-  "MANAGEMENT_USERS_DELETE_USER_MODAL_SUCCESSFUL": "Das Mitglied wurde erfolgreich gelöscht!",
+  "MANAGEMENT_USERS_DELETE_USER_MODAL_SUCCESSFUL": "Das Mitglied wurde gelöscht!",
 
   "MANAGEMENT_GROUPS_SEARCH": "Suche nach einer Gruppe oder einem Register",
   "MANAGEMENT_GROUPS_SEARCH_NOTHING_FOUND": "Leider wurde nichts gefunden :(",
@@ -377,26 +397,26 @@
   "MANAGEMENT_GROUPS_CREATE_GROUP_MODAL_FORM_NAME_INCORRECT": "Der Name darf weder leer sein, noch mehr als 190 Zeichen haben!",
   "MANAGEMENT_GROUPS_CREATE_GROUP_MODAL_FORM_DESCRIPTION": "Beschreibung",
   "MANAGEMENT_GROUPS_CREATE_GROUP_MODAL_FORM_DESCRIPTION_INCORRECT": "Die Beschreibung darf nicht mehr als 190 Zeichen haben!",
-  "MANAGEMENT_GROUPS_CREATE_GROUP_SUCCESSFUL": "Die Gruppe wurde erfolgreich erstellt.",
+  "MANAGEMENT_GROUPS_CREATE_GROUP_SUCCESSFUL": "Die Gruppe wurde erstellt.",
 
   "MANAGEMENT_GROUPS_UPDATE_GROUP_MODAL_TITLE": "Bearbeite die Gruppe ",
-  "MANAGEMENT_GROUPS_UPDATE_GROUP_SUCCESSFUL": "Die Gruppe wurde erfolgreich bearbeitet.",
+  "MANAGEMENT_GROUPS_UPDATE_GROUP_SUCCESSFUL": "Die Gruppe wurde bearbeitet.",
 
   "MANAGEMENT_GROUPS_DELETE_GROUP_MODAL_TITLE": "Willst du diese Gruppe wirklich löschen?",
-  "MANAGEMENT_GROUPS_DELETE_GROUP_MODAL_SUCCESSFUL": "Die Gruppe wurde erfolgreich gelöscht!",
+  "MANAGEMENT_GROUPS_DELETE_GROUP_MODAL_SUCCESSFUL": "Die Gruppe wurde gelöscht!",
 
   "MANAGEMENT_GROUPS_CREATE_SUBGROUP_MODAL_TITLE": "Lege eine neues Register an",
   "MANAGEMENT_GROUPS_CREATE_SUBGROUP_MODAL_FORM_NAME": "Registername",
   "MANAGEMENT_GROUPS_CREATE_SUBGROUP_MODAL_FORM_NAME_INCORRECT": "Der Name darf weder leer sein, noch mehr als 190 Zeichen haben!",
   "MANAGEMENT_GROUPS_CREATE_SUBGROUP_MODAL_FORM_DESCRIPTION": "Beschreibung",
   "MANAGEMENT_GROUPS_CREATE_SUBGROUP_MODAL_FORM_DESCRIPTION_INCORRECT": "Die Beschreibung darf nicht mehr als 190 Zeichen haben!",
-  "MANAGEMENT_GROUPS_CREATE_SUBGROUP_SUCCESSFUL": "Das Register wurde erfolgreich erstellt.",
+  "MANAGEMENT_GROUPS_CREATE_SUBGROUP_SUCCESSFUL": "Das Register wurde erstellt.",
 
   "MANAGEMENT_GROUPS_UPDATE_SUBGROUP_MODAL_TITLE": "Bearbeite das Register ",
-  "MANAGEMENT_GROUPS_UPDATE_SUBGROUP_SUCCESSFUL": "Das Register wurde erfolgreich bearbeitet.",
+  "MANAGEMENT_GROUPS_UPDATE_SUBGROUP_SUCCESSFUL": "Das Register wurde bearbeitet.",
 
   "MANAGEMENT_GROUPS_DELETE_SUBGROUP_MODAL_TITLE": "Willst du dieses Register wirklich löschen?",
-  "MANAGEMENT_GROUPS_DELETE_SUBGROUP_MODAL_SUCCESSFUL": "Das Register wurde erfolgreich gelöscht!",
+  "MANAGEMENT_GROUPS_DELETE_SUBGROUP_MODAL_SUCCESSFUL": "Das Register wurde gelöscht!",
 
   "MANAGEMENT_GROUPS_INFO_GROUP_MODAL_TITLE": "Mitglieder - ",
   "MANAGEMENT_GROUPS_INFO_GROUP_MODAL_TABLE_HEADER_ROLE": "Rolle",
@@ -416,25 +436,25 @@
 
   "MANAGEMENT_PERFORMANCE_BADGES_UPDATE_PERFORMANCE_BADGE_TOOLTIP": "Bearbeite dieses Leistungsabzeichen",
   "MANAGEMENT_PERFORMANCE_BADGES_UPDATE_PERFORMANCE_BADGE_MODAL_TITLE": "Bearbeite das Leistungsabzeichen: ",
-  "MANAGEMENT_PERFORMANCE_BADGES_UPDATE_PERFORMANCE_BADGE_SUCCESSFUL": "Das Leistungsabzeichen wurde erfolgreich bearbeitet!",
+  "MANAGEMENT_PERFORMANCE_BADGES_UPDATE_PERFORMANCE_BADGE_SUCCESSFUL": "Das Leistungsabzeichen wurde bearbeitet!",
   "MANAGEMENT_PERFORMANCE_BADGES_UPDATE_INSTRUMENT_TOOLTIP": "Bearbeite dieses Instrument",
   "MANAGEMENT_PERFORMANCE_BADGES_UPDATE_INSTRUMENT_MODAL_TITLE": "Bearbeite das Instrument: ",
-  "MANAGEMENT_PERFORMANCE_BADGES_UPDATE_INSTRUMENT_SUCCESSFUL": "Das Instrument wurde erfolgreich bearbeitet!",
+  "MANAGEMENT_PERFORMANCE_BADGES_UPDATE_INSTRUMENT_SUCCESSFUL": "Das Instrument wurde bearbeitet!",
 
   "MANAGEMENT_PERFORMANCE_BADGES_REMOVE_PERFORMANCE_BADGE_TOOLTIP": "Entferne dieses Leistungsabzeichen",
-  "MANAGEMENT_PERFORMANCE_BADGES_REMOVED_PERFORMANCE_BADGE_SUCCESSFUL": "Das Leistungsabzeichen wurde erfolgreich entfernt!",
+  "MANAGEMENT_PERFORMANCE_BADGES_REMOVED_PERFORMANCE_BADGE_SUCCESSFUL": "Das Leistungsabzeichen wurde entfernt!",
   "MANAGEMENT_PERFORMANCE_BADGES_REMOVE_PERFORMANCE_BADGE_MODAL_TITLE": "Willst du dieses Leistungsabzeichen wirklich löschen?",
 
   "MANAGEMENT_PERFORMANCE_BADGES_REMOVE_INSTRUMENT_TOOLTIP": "Entferne dieses Instrument",
-  "MANAGEMENT_PERFORMANCE_BADGES_REMOVED_INSTRUMENT_SUCCESSFUL": "Das Instrument wurde erfolgreich entfernt!",
+  "MANAGEMENT_PERFORMANCE_BADGES_REMOVED_INSTRUMENT_SUCCESSFUL": "Das Instrument wurde entfernt!",
   "MANAGEMENT_PERFORMANCE_BADGES_REMOVE_INSTRUMENT_MODAL_TITLE": "Willst du dieses Instrument wirklich löschen?",
 
   "MANAGEMENT_PERFORMANCE_BADGES_ADD_PERFORMANCE_BADGE_NAME": "Leistungsabzeichenname",
   "MANAGEMENT_PERFORMANCE_BADGES_ADD_PERFORMANCE_BADGE_NAME_INCORRECT": "Der Name darf weder leer sein, noch mehr als 190 Zeichen haben!",
-  "MANAGEMENT_PERFORMANCE_BADGES_ADD_PERFORMANCE_BADGE_SUCCESSFUL": "Das Leistungabzeichen wurde erfolgreich hinzugefügt!",
+  "MANAGEMENT_PERFORMANCE_BADGES_ADD_PERFORMANCE_BADGE_SUCCESSFUL": "Das Leistungabzeichen wurde hinzugefügt!",
   "MANAGEMENT_PERFORMANCE_BADGES_ADD_INSTRUMENT_NAME": "Instrumentenname",
   "MANAGEMENT_PERFORMANCE_BADGES_ADD_INSTRUMENT_NAME_INCORRECT": "Der Name darf weder leer sein, noch mehr als 190 Zeichen haben!",
-  "MANAGEMENT_PERFORMANCE_BADGES_ADD_INSTRUMENT_SUCCESSFUL": "Das Instrument wurde erfolgreich hinzugefügt!",
+  "MANAGEMENT_PERFORMANCE_BADGES_ADD_INSTRUMENT_SUCCESSFUL": "Das Instrument wurde hinzugefügt!",
 
   "MANAGEMENT_DATEPOLL_FEATURE_SETTINGS": "DatePoll-Feature Einstellungen",
   "MANAGEMENT_DATEPOLL_FEATURE_SETTINGS_SUBTITLE": "Hier kannst du grundlegende Funktionen von DatePoll Konfigurieren!",
@@ -443,23 +463,32 @@
 
   "MANAGEMENT_DATEPOLL_COMMUNITY_NAME": "Vereinsname",
   "MANAGEMENT_DATEPOLL_COMMUNITY_NAME_NOT_VALID": "Der Vereinsname darf weder leer sein, noch mehr als 50 Zeichen haben!",
-  "MANAGEMENT_DATEPOLL_COMMUNITY_NAME_CHANGED_SUCCESSFULLY": "Der Vereinsname wurde erfolgreich geändert!",
+  "MANAGEMENT_DATEPOLL_COMMUNITY_NAME_CHANGED_SUCCESSFULLY": "Der Vereinsname wurde geändert!",
 
   "MANAGEMENT_DATEPOLL_COMMUNITY_URL": "Vereinswebsite URL",
   "MANAGEMENT_DATEPOLL_COMMUNITY_URL_NOT_VALID": "Die URL der Vereinswebsite darf weder leer sein, noch mehr als 128 Zeichen haben!",
-  "MANAGEMENT_DATEPOLL_COMMUNITY_URL_CHANGED_SUCCESSFULLY": "Die URL zur Vereinswebsite wurde erfolgreich geändert!",
+  "MANAGEMENT_DATEPOLL_COMMUNITY_URL_CHANGED_SUCCESSFULLY": "Die URL zur Vereinswebsite wurde geändert!",
+
+  "MANAGEMENT_DATEPOLL_COMMUNITY_DESCRIPTION": "Vereinsbeschreibung",
+  "MANAGEMENT_DATEPOLL_COMMUNITY_DESCRIPTION_CHANGED_SUCCESSFULLY": "Die Vereinsbeschreibung wurde gespeichert!",
+
+  "MANAGEMENT_DATEPOLL_IMPRINT": "Impressum",
+  "MANAGEMENT_DATEPOLL_IMPRINT_CHANGED_SUCCESSFULLY": "Das Impressum wurde gespeichert!",
+
+  "MANAGEMENT_DATEPOLL_PRIVACY_POLICY": "Datenschutzerklärung",
+  "MANAGEMENT_DATEPOLL_PRIVACY_POLICY_CHANGED_SUCCESSFULLY": "Die Datenschutzerklärung wurde gespeichert!",
 
   "MANAGEMENT_DATEPOLL_APP_URL": "DatePoll App URL",
   "MANAGEMENT_DATEPOLL_APP_URL_NOT_VALID": "Die Url der App darf weder leer sein, noch mehr als 128 Zeichen haben!",
-  "MANAGEMENT_DATEPOLL_APP_URL_CHANGED_SUCCESSFULLY": "Die Url App zur Vereinswebsite wurde erfolgreich geändert!",
+  "MANAGEMENT_DATEPOLL_APP_URL_CHANGED_SUCCESSFULLY": "Die Url App zur Vereinswebsite wurde geändert!",
 
   "MANAGEMENT_DATEPOLL_OPENWEATHERMAP_KEY": "OpenWeatherMap API Key",
   "MANAGEMENT_DATEPOLL_OPENWEATHERMAP_KEY_INVALID": "Der API Key darf nicht mehr als 50 Zeichen haben!",
-  "MANAGEMENT_DATEPOLL_OPENWEATHERMAP_KEY_CHANGED_SUCCESSFULLY": "Der OpenWeatherMap API Key wurde erfolgreich geändert!",
+  "MANAGEMENT_DATEPOLL_OPENWEATHERMAP_KEY_CHANGED_SUCCESSFULLY": "Der OpenWeatherMap API Key wurde geändert!",
 
   "MANAGEMENT_DATEPOLL_OPENWEATHERMAP_CINEMA_CITY_ID": "OpenWeatherMap Kino City Id",
   "MANAGEMENT_DATEPOLL_OPENWEATHERMAP_CINEMA_CITY_ID_INVALID": "Die Kino City Id darf nicht mehr als 50 Zeichen haben!",
-  "MANAGEMENT_DATEPOLL_OPENWEATHERMAP_CINEMA_CITY_ID_CHANGED_SUCCESSFULLY": "Die Kino City Id wurde erfolgreich geändert!",
+  "MANAGEMENT_DATEPOLL_OPENWEATHERMAP_CINEMA_CITY_ID_CHANGED_SUCCESSFULLY": "Die Kino City Id wurde geändert!",
 
   "MANAGEMENT_DATEPOLL_LOGS": "Logs",
   "MANAGEMENT_DATEPOLL_LOGS_REFRESH": "Log-Liste aktualisieren",
@@ -474,7 +503,7 @@
   "EVENTS_VIEW_EVENT_CARD_BUTTON_INFO": "Informationen",
   "EVENTS_VIEW_EVENT_CARD_BUTTON_CANCEL_VOTING": "Stimme entfernen",
   "EVENTS_VIEW_EVENT_CARD_ADDITIONAL_INFORMATION": "Zusatzinformation: ",
-  "EVENTS_VIEW_EVENT_SUCCESSFULLY_VOTED": "Deine Antwort wurde erfolgreich gespeichert!",
+  "EVENTS_VIEW_EVENT_SUCCESSFULLY_VOTED": "Deine Antwort wurde gespeichert!",
   "EVENTS_VIEW_EVENT_SUCCESSFULLY_REMOVED_VOTING": "Deine Antwort wurde entfernt!",
   "EVENTS_VIEW_EVENT_NO_NEW_VOTINGS": "Alles erledigt!",
   "EVENTS_VIEW_EVENT_CARD_VOTED_FOR": "Abgestimmt für",
@@ -499,7 +528,7 @@
   "EVENTS_ADMINISTRATION_TABLE_ACTION_TOOLTIP_DELETE": "Lösche dieses Event",
 
   "EVENTS_ADMINISTRATION_CREATE_EVENT": "Lege ein neues Event an",
-  "EVENTS_ADMINISTRATION_CREATE_EVENT_SUCCESSFULLY_CREATED": "Das Event wurde erfolgreich angelegt!",
+  "EVENTS_ADMINISTRATION_CREATE_EVENT_SUCCESSFULLY_CREATED": "Das Event wurde angelegt!",
   "EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_NAME": "Name",
   "EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_NAME_INCORRECT": "Der Name darf weder leer sein, noch mehr als 190 Zeichen haben!",
   "EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE_TITLE": "Zeiten & Treffpunkte",
@@ -534,10 +563,10 @@
   "EVENTS_ADMINISTRATION_CREATE_EVENT_GROUPS_JOINED_EMPTY": "Wähle eine Gruppe oder ein Register.",
   "EVENTS_ADMINISTRATION_CREATE_EVENT_DECISIONS": "Antwortmöglichkeiten",
   "EVENTS_ADMINISTRATION_UPDATE_EVENT": "Bearbeite das Event ",
-  "EVENTS_ADMINISTRATION_UPDATE_EVENT_SUCCESSFULLY_UPDATED": "Das Event wurde erfolgreich gespeichert!",
+  "EVENTS_ADMINISTRATION_UPDATE_EVENT_SUCCESSFULLY_UPDATED": "Das Event wurde gespeichert!",
 
   "EVENTS_ADMINISTRATION_DELETE_EVENT_QUESTION": "Willst du dieses Event wirklich löschen?",
-  "EVENTS_ADMINISTRATION_DELETE_EVENT_SUCCESSFULLY_DELETED": "Das Event wurde erfolgreich gelöscht!",
+  "EVENTS_ADMINISTRATION_DELETE_EVENT_SUCCESSFULLY_DELETED": "Das Event wurde gelöscht!",
 
   "EVENTS_ADMINISTRATION_USER_MANAGEMENT_FOR_EVENT": "Benutzerverwaltung für ",
   "EVENTS_ADMINISTRATION_USER_MANAGEMENT_FOR_EVENT_VOTE": "Abstimmen",
@@ -558,8 +587,8 @@
   "EVENTS_ADMINISTRATION_INFO_EVENT_SHOW_ADMINISTRATION_MODE": "Administrations-Modus",
 
   "EVENTS_STANDARD_DECISIONS_MANAGEMENT": "Standard-Antworten-Verwaltung",
-  "EVENTS_STANDARD_DECISIONS_MANAGEMENT_SUCCESSFULLY_ADDED": "Die Standard-Antwort wurde erfolgreich gespeichert!",
-  "EVENTS_STANDARD_DECISIONS_MANAGEMENT_SUCCESSFULLY_REMOVED": "Die Standard-Antwort wurde erfolgreich entfernt!",
+  "EVENTS_STANDARD_DECISIONS_MANAGEMENT_SUCCESSFULLY_ADDED": "Die Standard-Antwort wurde gespeichert!",
+  "EVENTS_STANDARD_DECISIONS_MANAGEMENT_SUCCESSFULLY_REMOVED": "Die Standard-Antwort wurde entfernt!",
   "EVENTS_STANDARD_DECISIONS_MANAGEMENT_ADD_STANDARD_DECISION": "Antwortmöglichkeit",
   "EVENTS_STANDARD_DECISIONS_MANAGEMENT_ADD_STANDARD_DECISION_SHOW_IN_CALENDAR": "Kalenderanzeige",
   "EVENTS_STANDARD_DECISIONS_MANAGEMENT_ADD_STANDARD_DECISION_INCORRECT": "Die Antwortmöglichkeit darf weder leer sein, noch mehr als 190 Zeichen haben.",
@@ -568,8 +597,8 @@
   "EVENTS_STANDARD_LOCATIONS_MANAGEMENT": "Standard-Locations-Verwaltung",
   "EVENTS_STANDARD_LOCATIONS_MANAGEMENT_NAME": "Name",
   "EVENTS_STANDARD_LOCATIONS_MANAGEMENT_NAME_INCORRECT": "Der Name darf weder leer sein, noch mehr als 190 Zeichen haben.",
-  "EVENTS_STANDARD_LOCATIONS_MANAGEMENT_SUCCESSFULLY_ADDED": "Die Standard-Location wurde erfolgreich hinzugefügt.",
-  "EVENTS_STANDARD_LOCATIONS_MANAGEMENT_SUCCESSFULLY_REMOVED": "Die Standard-Location wurde erfolgreich entfernt.",
+  "EVENTS_STANDARD_LOCATIONS_MANAGEMENT_SUCCESSFULLY_ADDED": "Die Standard-Location wurde hinzugefügt.",
+  "EVENTS_STANDARD_LOCATIONS_MANAGEMENT_SUCCESSFULLY_REMOVED": "Die Standard-Location wurde entfernt.",
   "EVENTS_STANDARD_LOCATIONS_MANAGEMENT_NO_LOCATION": "Diese Standard-Location hat keinen verknüpften Standort!",
   "EVENTS_STANDARD_LOCATIONS_MANAGEMENT_NO_COORDINATES": "Diese Standard-Location hat keine hinterlegten Coordinaten."
 }

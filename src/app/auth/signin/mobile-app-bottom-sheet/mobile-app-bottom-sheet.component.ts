@@ -11,25 +11,25 @@ import {SettingsService} from '../../../utils/settings.service';
 })
 export class MobileAppBottomSheetComponent implements OnDestroy {
   appUrl: any = null;
-  appUrlSubscription: Subscription;
+  serverInfoSubscription: Subscription;
 
   constructor(private settingsService: SettingsService, private _bottomSheetRef: MatBottomSheetRef<MobileAppBottomSheetComponent>) {
     let object = {
       type: 'loginV1',
-      url: this.settingsService.getAppUrl()
+      url: this.settingsService.getServerInfo()?.application_url
     };
     this.appUrl = JSON.stringify(object);
-    this.appUrlSubscription = this.settingsService.appUrlChange.subscribe(value => {
+    this.serverInfoSubscription = this.settingsService.serverInfoChange.subscribe(value => {
       object = {
         type: 'loginV1',
-        url: value
+        url: value?.application_url
       };
       this.appUrl = JSON.stringify(object);
     });
   }
 
   ngOnDestroy(): void {
-    this.appUrlSubscription.unsubscribe();
+    this.serverInfoSubscription.unsubscribe();
   }
 
   close() {

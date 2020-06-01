@@ -1,5 +1,7 @@
 import {Component} from '@angular/core';
 import {MyUserService} from '../../my-user.service';
+import {TranslateService} from '../../../translation/translate.service';
+import {NotificationsService} from 'angular2-notifications';
 
 @Component({
   selector: 'app-personaldata',
@@ -18,7 +20,11 @@ export class PersonalDataComponent {
   zipcode: number;
   location: string;
 
-  constructor(private myUserService: MyUserService) {
+  constructor(
+    private myUserService: MyUserService,
+    private notificationsService: NotificationsService,
+    private translate: TranslateService
+  ) {
     this.title = this.myUserService.getTitle();
     this.firstname = this.myUserService.getFirstname();
     this.surname = this.myUserService.getSurname();
@@ -52,7 +58,15 @@ export class PersonalDataComponent {
     this.myUserService.setLocation(this.location);
 
     console.log('personalData | Saving...');
-    this.myUserService.updateMyself();
-    console.log('personalData | Saved');
+    this.myUserService.updateMyself().subscribe(
+      (data: any) => {
+        console.log(data);
+        this.notificationsService.success(
+          this.translate.getTranslationFor('SUCCESSFULLY'),
+          this.translate.getTranslationFor('SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_SAVED_SUCCESSFULLY')
+        );
+      },
+      error => console.log(error)
+    );
   }
 }

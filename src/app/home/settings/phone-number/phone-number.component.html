@@ -1,36 +1,51 @@
-<h2 mat-dialog-title>{{'SETTINGS_PERSONAL_DATA_PERSONAL_NUMBER_CHANGE' | translate}}</h2>
+<h2 mat-dialog-title>{{ 'SETTINGS_PERSONAL_DATA_PERSONAL_NUMBER_CHANGE' | translate }}</h2>
 <mat-dialog-content>
   <form #f="ngForm" (ngSubmit)="addPhoneNumber(f)">
     <div class="row justify-content-around" style="margin-top: 15px;">
       <div class="col-12 col-sm-12 col-md-6 col-lg-3">
         <mat-form-field>
-          <input #labelModel="ngModel" id="label" matInput maxlength="190"
-                 minlength="1" name="label"
-                 ngModel placeholder="{{'SETTINGS_PERSONAL_DATA_MODAL_PHONE_NUMBER_LABEL' | translate}}" required
-                 type="text">
+          <input
+            #labelModel="ngModel"
+            id="label"
+            matInput
+            maxlength="190"
+            minlength="1"
+            name="label"
+            ngModel
+            placeholder="{{ 'SETTINGS_PERSONAL_DATA_MODAL_PHONE_NUMBER_LABEL' | translate }}"
+            required
+            type="text"
+          />
           <mat-error *ngIf="labelModel.invalid">
-            {{'SETTINGS_PERSONAL_DATA_MODAL_PHONE_NUMBER_LABEL_INVALID' | translate}}
+            {{ 'SETTINGS_PERSONAL_DATA_MODAL_PHONE_NUMBER_LABEL_INVALID' | translate }}
           </mat-error>
         </mat-form-field>
       </div>
 
       <div class="col-12 col-sm-12 col-md-6 col-lg-5">
         <mat-form-field>
-          <input #phoneNumber="ngModel" id="phoneNumber" matInput maxlength="190"
-                 minlength="1" name="phoneNumber"
-                 ngModel phone="AT"
-                 placeholder="{{'SETTINGS_PERSONAL_DATA_MODAL_PHONE_NUMBER_PHONE_NUMBER' | translate}}" required
-                 type="text">
+          <input
+            #phoneNumber="ngModel"
+            id="phoneNumber"
+            matInput
+            maxlength="190"
+            minlength="1"
+            name="phoneNumber"
+            ngModel
+            phone="AT"
+            placeholder="{{ 'SETTINGS_PERSONAL_DATA_MODAL_PHONE_NUMBER_PHONE_NUMBER' | translate }}"
+            required
+            type="text"
+          />
           <mat-error *ngIf="phoneNumber.invalid">
-            {{'SETTINGS_PERSONAL_DATA_MODAL_PHONE_NUMBER_PHONE_NUMBER_NOT_VALID' | translate}}
+            {{ 'SETTINGS_PERSONAL_DATA_MODAL_PHONE_NUMBER_PHONE_NUMBER_NOT_VALID' | translate }}
           </mat-error>
         </mat-form-field>
       </div>
 
       <div class="col-12 col-sm-12 col-md-12 col-lg-4">
-        <button [disabled]="!f.valid" class="success-button" mat-raised-button style="width: 100%; text-align: center"
-                type="submit">
-          {{'SETTINGS_PERSONAL_DATA_MODAL_PHONE_NUMBER_ADD' | translate}}
+        <button [disabled]="!f.valid" class="success-button" mat-raised-button style="width: 100%; text-align: center" type="submit">
+          {{ 'SETTINGS_PERSONAL_DATA_MODAL_PHONE_NUMBER_ADD' | translate }}
           <mat-icon aria-label="Submit button">library_add</mat-icon>
         </button>
       </div>
@@ -39,39 +54,43 @@
 
   <div class="row" style="margin-top: 15px;">
     <mat-form-field class="col-12">
-      <input (keyup)="applyFilter($event.target.value)" matInput
-             placeholder="{{'SETTINGS_PERSONAL_DATA_MODAL_PHONE_NUMBER_SEARCH' | translate}}"/>
+      <input
+        (keyup)="applyFilter($event.target.value)"
+        matInput
+        placeholder="{{ 'SETTINGS_PERSONAL_DATA_MODAL_PHONE_NUMBER_SEARCH' | translate }}"
+      />
     </mat-form-field>
   </div>
 
   <table [dataSource]="dataSource" class="table-responsive" mat-table>
     <ng-container matColumnDef="label">
-      <th *matHeaderCellDef mat-header-cell> {{'SETTINGS_PERSONAL_DATA_MODAL_PHONE_NUMBER_LABEL' | translate}} </th>
-      <td *matCellDef="let phoneNumber" mat-cell> {{phoneNumber.label}} </td>
+      <th *matHeaderCellDef mat-header-cell>{{ 'SETTINGS_PERSONAL_DATA_MODAL_PHONE_NUMBER_LABEL' | translate }}</th>
+      <td *matCellDef="let phoneNumber" mat-cell>{{ phoneNumber.label }}</td>
     </ng-container>
 
     <ng-container matColumnDef="phonenumber">
-      <th *matHeaderCellDef
-          mat-header-cell> {{'SETTINGS_PERSONAL_DATA_MODAL_PHONE_NUMBER_PHONE_NUMBER' | translate}} </th>
-      <td *matCellDef="let phoneNumber" mat-cell> {{phoneNumber.phoneNumber}} </td>
+      <th *matHeaderCellDef mat-header-cell>{{ 'SETTINGS_PERSONAL_DATA_MODAL_PHONE_NUMBER_PHONE_NUMBER' | translate }}</th>
+      <td *matCellDef="let phoneNumber" mat-cell>{{ phoneNumber.phoneNumber }}</td>
     </ng-container>
 
     <ng-container matColumnDef="action">
-      <th *matHeaderCellDef mat-header-cell> {{'ACTION' | translate}} </th>
+      <th *matHeaderCellDef mat-header-cell>{{ 'ACTION' | translate }}</th>
       <td *matCellDef="let phoneNumber" mat-cell>
-        <button (click)="removePhoneNumber(phoneNumber.id)" [matTooltipPosition]="'right'"
-                mat-icon-button
-                matTooltip="{{'SETTINGS_PERSONAL_DATA_MODAL_PHONE_NUMBER_DELETE_TOOLTIP' | translate}}">
+        <button
+          (click)="removePhoneNumber(phoneNumber.id)"
+          [matTooltipPosition]="'right'"
+          mat-icon-button
+          matTooltip="{{ 'SETTINGS_PERSONAL_DATA_MODAL_PHONE_NUMBER_DELETE_TOOLTIP' | translate }}"
+        >
           <mat-icon>delete_foreve</mat-icon>
         </button>
       </td>
     </ng-container>
 
     <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
-    <tr *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
+    <tr *matRowDef="let row; columns: displayedColumns" mat-row></tr>
   </table>
-
 </mat-dialog-content>
-<mat-dialog-actions align="end">
-  <button mat-button mat-dialog-close>{{'CLOSE' | translate}}</button>
+<mat-dialog-actions fxLayout="row" fxLayoutAlign="end">
+  <button mat-button mat-dialog-close>{{ 'CLOSE' | translate }}</button>
 </mat-dialog-actions>
