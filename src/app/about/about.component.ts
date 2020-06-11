@@ -55,19 +55,23 @@ export class AboutComponent implements OnDestroy {
     this.authService.trySignin(username, password).subscribe(
       (data: any) => {
         console.log(data);
-        if (data.error_code != null) {
-          if (data.error_code === 'notActivated' || data.error_code === 'changePassword') {
-            this.router.navigateByUrl('/auth/signin', {state: {routingReason: 'forward', state: data.error_code, username, password}});
-          }
-
-          return;
-        }
 
         this.authService.signin(data.token, data.session_token);
         this.uiLogin();
       },
       error => {
         console.log(error);
+
+        if (error.error.error_code != null) {
+          if (error.error.error_code === 'not_activated' || error.error.error_code === 'change_password') {
+            this.router.navigateByUrl('/auth/signin', {
+              state: {routingReason: 'forward', state: error.error.error_code, username, password}
+            });
+
+            return;
+          }
+        }
+
         this.router.navigateByUrl('/auth/signin', {state: {routingReason: 'loginFailed', username, password}});
       }
     );

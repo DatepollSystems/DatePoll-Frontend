@@ -91,7 +91,7 @@
       <!-- Change password after sign in-->
       <form
         (ngSubmit)="onChangePasswordAfterSignin(changePasswordAfterSigninForm)"
-        *ngIf="state === 'changePassword'"
+        *ngIf="state === 'change_password'"
         [formGroup]="changePasswordAfterSigninForm"
       >
         <mat-card style="background-color: #b2ff59; color: black;" class="not-selectable">
@@ -138,18 +138,16 @@
         </mat-card-actions>
       </form>
 
-      <div *ngIf="state === 'notActivated'">
+      <div *ngIf="state === 'not_activated'">
         <mat-card style="background-color: #b2ff59" class="not-selectable" matRipple>
           <mat-card-content class="last-child">
-            <h3>{{ 'SIGNIN_ACCOUNT_NOT_ACTIVATED' | translate }}</h3>
+            <h3 style="color: black">{{ 'SIGNIN_ACCOUNT_NOT_ACTIVATED' | translate }}</h3>
           </mat-card-content>
         </mat-card>
 
-        <mat-card-actions>
-          <button (click)="state = 'login'" color="primary" mat-flat-button>
-            {{ 'NEXT' | translate }}
-          </button>
-        </mat-card-actions>
+        <button (click)="state = 'login'" color="primary" mat-flat-button style="width: 100%">
+          {{ 'BACK' | translate }}
+        </button>
       </div>
 
       <button (click)="openMobileAppBottomSheet()" mat-stroked-button style="width: 100%; margin-top: 10px;">

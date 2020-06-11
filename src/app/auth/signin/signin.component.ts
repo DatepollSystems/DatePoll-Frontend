@@ -98,21 +98,20 @@ export class SigninComponent implements OnDestroy {
     this.authService.trySignin(this.username, this.password).subscribe(
       (data: any) => {
         console.log(data);
-        if (data.error_code != null) {
-          if (data.error_code === 'notActivated' || data.error_code === 'changePassword') {
-            this.state = data.error_code;
-          }
-
-          this.showLoadingSpinnerDuringLogin = false;
-          return;
-        }
 
         this.authService.signin(data.token, data.session_token);
         this.uiLogin();
       },
       error => {
         console.log(error);
-        this.showLoadingSpinnerDuringLogin = false;
+        if (error.error.error_code != null) {
+          if (error.error.error_code === 'not_activated' || error.error.error_code === 'change_password') {
+            this.state = error.error.error_code;
+          }
+
+          this.showLoadingSpinnerDuringLogin = false;
+          return;
+        }
 
         this.loginFail = true;
       }
