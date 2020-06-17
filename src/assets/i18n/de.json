@@ -164,6 +164,7 @@
   "CINEMA_TICKETS_CANCEL_CINEMA_SERVICE_TOOLTIP": "Abmelden",
   "CINEMA_TICKETS_WEATHER_FORECAST": "Wettervorhersage",
   "CINEMA_TICKETS_WEATHER_FORECAST_SHOW": "Anzeigen",
+  "CINEMA_TICKETS_SEARCH_NOTHING_FOUND": "Keine Surchergebnisse gefunden",
 
   "CINEMA_TICKETS_BOOKING_MODAL_HEADER": "Kartenreservierung für ",
   "CINEMA_TICKETS_BOOKING_MODAL_WARNING": "Karten sind in erster Linie für Vereinsmitglieder. Sollten kurz vor Kinobeginn noch Karten frei sein, können diese an Freunde oder Familienmitglieder weitergeben werden! ",
