@@ -90,7 +90,7 @@
             [innerHTML]="getSanitizedDescription(serverInfo.community_description)"
           ></p>
           <p
-            *ngIf="getDescriptionPreview(serverInfo.community_description) != null"
+            *ngIf="getDescriptionPreview(serverInfo.community_description) != null && !showMoreCommunityDescription"
             [innerHTML]="getDescriptionPreview(serverInfo.community_description)"
           ></p>
           <button
