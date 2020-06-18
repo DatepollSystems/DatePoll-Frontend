@@ -72,8 +72,6 @@ export class MyUserService {
   updateMyself() {
     const userObject = {
       title: this.getTitle(),
-      firstname: this.getFirstname(),
-      surname: this.getSurname(),
       streetname: this.getStreetname(),
       streetnumber: this.getStreetnumber(),
       zipcode: this.getZipcode(),

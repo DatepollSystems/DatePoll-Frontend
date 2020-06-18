@@ -2,8 +2,8 @@
 <mat-dialog-content>
   <app-do-not-forget-to-save></app-do-not-forget-to-save>
 
-  <form #form="ngForm" (ngSubmit)="saveData()" fxLayout="row wrap" fxLayout.xs="column" fxLayoutGap="2%" fxLayoutAlign="start">
-    <mat-form-field fxFlex="10%" fxFlex.lt-lg="10%">
+  <form #form="ngForm" (ngSubmit)="saveData()" fxLayout="column" fxLayoutGap="2%" fxLayoutAlign="start">
+    <mat-form-field>
       <input
         #titleModel="ngModel"
         [(ngModel)]="title"
@@ -20,45 +20,7 @@
       </mat-error>
     </mat-form-field>
 
-    <mat-form-field fxFlex="30%" fxFlex.lt-lg="40%">
-      <input
-        #firstnameModel="ngModel"
-        [(ngModel)]="firstname"
-        id="firstname"
-        matInput
-        maxlength="190"
-        minlength="1"
-        name="firstname"
-        ngModel
-        placeholder="{{ 'SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_FIRSTNAME' | translate }}"
-        required
-        type="text"
-      />
-      <mat-error *ngIf="firstnameModel.invalid">
-        {{ 'SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_FIRSTNAME_NOT_VALID' | translate }}
-      </mat-error>
-    </mat-form-field>
-
-    <mat-form-field fxFlex="30%" fxFlex.lt-lg="40%">
-      <input
-        #surnameModel="ngModel"
-        [(ngModel)]="surname"
-        id="surname"
-        matInput
-        maxlength="190"
-        minlength="1"
-        name="surname"
-        ngModel
-        placeholder="{{ 'SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_SURNAME' | translate }}"
-        required
-        type="text"
-      />
-      <mat-error *ngIf="surnameModel.invalid">
-        {{ 'SETTINGng sS_PERSONAL_DATA_MODAL_PERSONAL_DATA_SURNAME_NOT_VALID' | translate }}
-      </mat-error>
-    </mat-form-field>
-
-    <mat-form-field fxFlex="20%" fxFlex.lt-lg="45%">
+    <mat-form-field>
       <input
         [(ngModel)]="birthday"
         [matDatepicker]="picker"
@@ -72,7 +34,7 @@
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
 
-    <mat-form-field fxFlex="30%" fxFlex.lt-lg="45%">
+    <mat-form-field>
       <input
         #streetnameModel="ngModel"
         [(ngModel)]="streetname"
@@ -90,7 +52,7 @@
       </mat-error>
     </mat-form-field>
 
-    <mat-form-field fxFlex="15%" fxFlex.lt-lg="20%">
+    <mat-form-field>
       <input
         #streetnumberModel="ngModel"
         [(ngModel)]="streetnumber"
@@ -108,7 +70,7 @@
       </mat-error>
     </mat-form-field>
 
-    <mat-form-field fxFlex="15%" fxFlex.lt-lg="20%">
+    <mat-form-field>
       <input
         #zipcodeModel="ngModel"
         [(ngModel)]="zipcode"
@@ -127,7 +89,7 @@
       </mat-error>
     </mat-form-field>
 
-    <mat-form-field fxFlex="30%" fxFlex.lt-lg="50%">
+    <mat-form-field>
       <input
         #locationModel="ngModel"
         [(ngModel)]="location"

@@ -41,9 +41,7 @@ export class SettingsComponent {
   }
 
   openPersonalDataModal() {
-    this.dialog.open(PersonalDataComponent, {
-      width: '80vh'
-    });
+    this.dialog.open(PersonalDataComponent);
   }
 
   openPhoneNumberModal() {
