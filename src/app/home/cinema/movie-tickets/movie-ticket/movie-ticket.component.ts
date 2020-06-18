@@ -53,8 +53,17 @@ export class MovieTicketComponent implements OnInit {
     this.httpService.loggedInV1DELETERequest('/cinema/booking/' + this.movie.id, 'cancelTickets').subscribe(
       (data: any) => {
         console.log(data);
+
+        let check = false;
+        if (this.movie.bookedTickets === 20) {
+          check = true;
+        }
         this.movie.bookedTickets -= this.movie.bookedTicketsForYourself;
         this.movie.bookedTicketsForYourself = 0;
+
+        if (check) {
+          this.cinemaService.fetchNotShownMovies();
+        }
       },
       error => {
         console.log(error);

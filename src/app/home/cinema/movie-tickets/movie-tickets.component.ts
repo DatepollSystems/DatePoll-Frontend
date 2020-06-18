@@ -53,4 +53,8 @@ export class MovieTicketsComponent implements OnInit, OnDestroy {
       }
     }
   }
+
+  trackByFn(inde, item) {
+    return item.id;
+  }
 }

@@ -40,7 +40,7 @@
 
   <div fxLayout="row">
     <app-movie-ticket
-      *ngFor="let movie of moviesCopy"
+      *ngFor="let movie of moviesCopy; trackBy: trackByFn"
       [movie]="movie"
       fxFlex="100%"
       fxFlex.lt-md="100%"
