@@ -13,6 +13,7 @@ const homeRoutes: Routes = [
       {path: '', pathMatch: 'full', loadChildren: () => import('./start/start.module').then(m => m.StartModule), data: {preload: true}},
       {path: 'cinema', loadChildren: () => import('./cinema/cinema.module').then(m => m.CinemaModule)},
       {path: 'events', loadChildren: () => import('./events/events.module').then(m => m.EventsModule)},
+      {path: 'broadcasts', loadChildren: () => import('./broadcasts/broadcasts.module').then(m => m.BroadcastsModule)},
       {path: 'calendar', loadChildren: () => import('./calendar/calendar-component.module').then(m => m.CalendarComponentModule)},
       {path: 'settings', loadChildren: () => import('./settings/settings.module').then(m => m.SettingsModule)},
       {

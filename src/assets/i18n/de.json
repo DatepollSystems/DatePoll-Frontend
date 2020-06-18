@@ -102,6 +102,8 @@
   "NAV_CINEMA_SERVICE": "Kinodienst",
   "NAV_CINEMA_ADMINISTRATION": "Filmverwaltung",
 
+  "NAV_BROADCASTS_ADMINISTRATION": "Mitteilungsverwatlung",
+
   "NAV_MANAGEMENT_USERS": "Mitgliederverwaltung",
   "NAV_MANAGEMENT_GROUPS": "Gruppenverwaltung",
   "NAV_MANAGEMENT_PERFORMANCE_BADGES": "Leistungsabzeichenverwaltung",
@@ -232,6 +234,23 @@
   "CINEMA_TICKETS_ADMINISTRATION_MOVIE_BOOKINGS_MANAGEMENT_MODAL_TICKETS_TO_BOOK": "Kartenanzahl",
   "CINEMA_TICKETS_ADMINISTRATION_MOVIE_BOOKINGS_MANAGEMENT_MODAL_TICKETS_TO_BOOK_INVALID": "Min. 1 Karte",
 
+  "BROADCASTS_ADMINISTRATION_REFRESH_LIST": "Mitteilungen aktualisieren",
+  "BROADCASTS_ADMINISTRATION_SEARCH_LIST": "Suche nach Namen, Daten oder Inhalten...",
+  "BROADCASTS_ADMINISTRATION_SUBJECT": "Betreff",
+  "BROADCASTS_ADMINISTRATION_DATE": "Sendedatum",
+  "BROADCASTS_ADMINISTRATION_WRITER": "Verfasser",
+  "BROADCASTS_ADMINISTRATION_BODY": "Inhalt",
+
+  "BROADCASTS_ADMINISTRATION_CREATE_TITLE": "Mitteilung erstellen",
+  "BROADCASTS_ADMINISTRATION_CREATE_SAVE_DRAFT": "Entwurf speichern",
+  "BROADCASTS_ADMINISTRATION_CREATE_CONFIRM_QUESTION": "Bestätige diese Email zu versenden",
+  "BROADCASTS_ADMINISTRATION_CREATE_ALL_MEMBERS": "Alle Mitglieder",
+  "BROADCASTS_ADMINISTRATION_CREATE_NOTIFICATION_SUBJECT_LENGTH": "Der Betreff muss aus mindestens 4 Zeichen bestehen!",
+  "BROADCASTS_ADMINISTRATION_CREATE_NOTIFICATION_NO_GROUPS_AND_NOT_ALL_MEMBERS": "Sende die Email an alle oder wähle eine Gruppe / Register aus",
+  "BROADCASTS_ADMINISTRATION_CREATE_NOTIFICATION_BODY_LENGTH": "Bitte schreibe eine etwas längere Email!",
+  "BROADCASTS_ADMINISTRATION_CREATE_NOTIFICATION_SENDING_LENGTH": "Das senden kann einige Sekunden dauern! Außerdem kann sich die Aussendung an alle Mitglieder je nach Empfängerlistenlänge eine Minuten dauern.",
+  "BROADCASTS_ADMINISTRATION_CREATE_NOTIFICATION_SUCCESSFUL": "Die Email wird nun verteilt.",
+
   "SETTINGS_PERSONAL_DATA": "Persönliche Daten",
   "SETTINGS_PERSONAL_DATA_DESCRIPTION": "Bearbeiten Sie Ihre Persönlichen Daten.",
   "SETTINGS_PERSONAL_DATA_PERSONAL_DATA_CHANGE": "Persönliche Daten ändern",
@@ -240,10 +259,6 @@
 
   "SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_TITLE": "Titel",
   "SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_TITLE_NOT_VALID": "Der Titel darf nicht mehr als 190 Zeichen haben!",
-  "SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_FIRSTNAME": "Vorname",
-  "SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_FIRSTNAME_NOT_VALID": "Der Vorname darf weder leer sein noch mehr als 190 Zeichen haben!",
-  "SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_SURNAME": "Nachname",
-  "SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_SURNAME_NOT_VALID": "Der Nachname darf weder leer sein noch mehr als 190 Zeichen haben!",
   "SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_BIRTHDAY": "Geburtsdatum",
   "SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_STREETNAME": "Straßenname",
   "SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_STREETNAME_NOT_VALID": "Der Straßenname darf nicht mehr als 190 Zeichen haben!",
@@ -497,6 +512,8 @@
   "MANAGEMENT_DATEPOLL_LOGS_DELETE_CONFIRM": "Willst du wirklich alle Logs löschen?",
   "MANAGEMENT_DATEPOLL_LOGS_LOG_TYPE": "Log-Level",
   "MANAGEMENT_DATEPOLL_LOGS_NO_LOGS": "Es gibt keine Logs mit diesem Log-Level!",
+
+  "MANAGEMENT_BADGES_TITLE": "Abzeichenverwaltung",
 
   "EVENTS_VIEW": "Events",
   "EVENTS_VIEW_SHOW_ALREADY_VOTED_EVENTS": "Beantwortete Events",

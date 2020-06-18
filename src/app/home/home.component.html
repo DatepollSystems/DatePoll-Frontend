@@ -58,6 +58,15 @@
         <mat-divider></mat-divider>
       </div>
 
+      <div *ngIf="serverInfo.broadcasts_enabled">
+        <a (click)="onPageChange()" mat-list-item routerLink="/home/broadcasts/administration" routerLinkActive="activated">
+          <mat-icon>email</mat-icon>
+          {{'NAV_BROADCASTS_ADMINISTRATION' | translate}}
+        </a>
+
+        <mat-divider></mat-divider>
+      </div>
+
       <a (click)="onPageChange()" mat-list-item routerLink="settings" routerLinkActive="activated">
         <mat-icon>settings</mat-icon>
         {{ 'NAV_USER_SETTINGS' | translate }}

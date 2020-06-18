@@ -1,0 +1,75 @@
+<mat-card class="mat-elevation-z3">
+  <mat-card-content>
+    <div fxLayout="row" fxLayoutAlign="space-between center">
+      <h1 class="not-selectable">{{ 'NAV_BROADCASTS_ADMINISTRATION' | translate }}</h1>
+      <button
+        mat-icon-button
+        (click)="refresh()"
+        matTooltip="{{ 'BROADCASTS_ADMINISTRATION_REFRESH_LIST' | translate }}"
+        matTooltipPosition="left"
+      >
+        <mat-icon>refresh</mat-icon>
+      </button>
+    </div>
+
+    <div fxLayout="row" fxLayoutGap="5%" style="margin-bottom: 15px;">
+      <button color="accent" mat-fab routerLink="create">
+        <mat-icon>add</mat-icon>
+      </button>
+      <mat-form-field>
+        <input
+          (keyup)="applyFilter($event.target.value)"
+          matInput
+          placeholder="{{ 'BROADCASTS_ADMINISTRATION_SEARCH_LIST' | translate }}"
+        />
+      </mat-form-field>
+    </div>
+
+    <table [dataSource]="dataSource" class="table-responsive" mat-table matSort>
+      <!-- Subject Column -->
+      <ng-container matColumnDef="subject">
+        <th *matHeaderCellDef mat-header-cell mat-sort-header>{{ 'BROADCASTS_ADMINISTRATION_SUBJECT' | translate }}</th>
+        <td *matCellDef="let broadcast" mat-cell>{{ broadcast.subject }}</td>
+      </ng-container>
+
+      <!-- Date Column -->
+      <ng-container matColumnDef="date">
+        <th *matHeaderCellDef mat-header-cell mat-sort-header>{{ 'BROADCASTS_ADMINISTRATION_DATE' | translate }}</th>
+        <td *matCellDef="let broadcast" mat-cell>{{ broadcast.sent | date: 'dd.MM.yyyy' }}</td>
+      </ng-container>
+
+      <!-- Writer Column -->
+      <ng-container matColumnDef="writer">
+        <th *matHeaderCellDef mat-header-cell>{{ 'BROADCASTS_ADMINISTRATION_WRITER' | translate }}</th>
+        <td *matCellDef="let broadcast" mat-cell>{{ broadcast.writerName }}</td>
+      </ng-container>
+
+      <!-- Body Column -->
+      <ng-container matColumnDef="body">
+        <th *matHeaderCellDef mat-header-cell>{{ 'BROADCASTS_ADMINISTRATION_BODY' | translate }}</th>
+        <td *matCellDef="let broadcast" mat-cell>{{ broadcast.bodyPreview }}</td>
+      </ng-container>
+
+      <!-- Action movie Column -->
+      <ng-container matColumnDef="action">
+        <th *matHeaderCellDef mat-header-cell>{{ 'CINEMA_TICKETS_ADMINISTRATION_ACTION' | translate }}</th>
+        <td (click)="$event.stopPropagation()" *matCellDef="let movie" mat-cell>
+          <button mat-icon-button matTooltip="{{ 'CINEMA_TICKETS_ADMINISTRATION_INFO_MOVIE_BUTTON_TOOLTIP' | translate }}">
+            <mat-icon>info</mat-icon>
+          </button>
+
+          <button color="warn" mat-icon-button matTooltip="{{ 'CINEMA_TICKETS_ADMINISTRATION_DELETE_MOVIE_BUTTON_TOOLTIP' | translate }}">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+      <!--      (click)="onInfo(row)" -->
+      <tr *matHeaderRowDef="displayedColumns; sticky: true" mat-header-row></tr>
+      <tr *matRowDef="let row; columns: displayedColumns" mat-row></tr>
+    </table>
+
+    <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
+
+    <mat-paginator [pageSizeOptions]="[10, 20, 50, 100]" showFirstLastButtons></mat-paginator>
+  </mat-card-content>
+</mat-card>
