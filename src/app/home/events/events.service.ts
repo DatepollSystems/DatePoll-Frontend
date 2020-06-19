@@ -10,6 +10,7 @@ import {EventResultGroup} from './models/event-result-group.model';
 import {EventResultSubgroup} from './models/event-result-subgroup.model';
 import {EventResultUser} from './models/event-result-user.model';
 import {Event} from './models/event.model';
+import {GroupAndSubgroupModel, GroupType} from '../../utils/models/groupAndSubgroup.model';
 
 @Injectable({
   providedIn: 'root'
@@ -17,12 +18,12 @@ import {Event} from './models/event.model';
 export class EventsService {
   public eventsChange: Subject<Event[]> = new Subject<Event[]>();
   public eventChange: Subject<Event> = new Subject<Event>();
-  public joinedGroupsChange: Subject<any[]> = new Subject<any[]>();
-  public freeGroupsChange: Subject<any[]> = new Subject<any[]>();
+  public joinedGroupsChange: Subject<GroupAndSubgroupModel[]> = new Subject<GroupAndSubgroupModel[]>();
+  public freeGroupsChange: Subject<GroupAndSubgroupModel[]> = new Subject<GroupAndSubgroupModel[]>();
   private _events: Event[] = [];
   private _event: Event;
-  private _joinedGroups: any[] = [];
-  private _freeGroups: any[] = [];
+  private _joinedGroups: GroupAndSubgroupModel[] = [];
+  private _freeGroups: GroupAndSubgroupModel[] = [];
 
   constructor(public httpService: HttpService) {}
 
@@ -190,7 +191,7 @@ export class EventsService {
     return this.httpService.loggedInV1POSTRequest('/avent/administration/removeSubgroupFromEvent', dto, 'removeSubgroupFromEvent');
   }
 
-  public getJoinedOfEvent(eventId: number): any[] {
+  public getJoinedOfEvent(eventId: number): GroupAndSubgroupModel[] {
     this.fetchJoinedOfEvent(eventId);
     return this._joinedGroups.slice();
   }
@@ -201,37 +202,20 @@ export class EventsService {
         console.log(data);
 
         const groups = [];
-
-        const groupsDTO = data.groups;
-        for (let i = 0; i < groupsDTO.length; i++) {
-          const groupDTO = groupsDTO[i];
-
-          const groupObject = {
-            id: groupDTO.id,
-            name: groupDTO.name,
-            type: 'parentgroup'
-          };
-
-          groups.push(groupObject);
+        for (const groupDTO of data.groups) {
+          const group = new GroupAndSubgroupModel(groupDTO.id, groupDTO.name, GroupType.PARENTGROUP);
+          groups.push(group);
         }
 
         this.httpService.loggedInV1GETRequest('/avent/administration/subgroup/joined/' + eventId, 'fetchJoinedSubgroupsOfEvent').subscribe(
           (subgroupData: any) => {
             console.log(subgroupData);
 
-            const subgroupsDTO = subgroupData.subgroups;
-            for (let i = 0; i < subgroupsDTO.length; i++) {
-              const subgroupDTO = subgroupsDTO[i];
-
-              const subgroupObject = {
-                id: subgroupDTO.id,
-                name: subgroupDTO.name,
-                type: 'subgroup',
-                group_id: subgroupDTO.group_id,
-                group_name: subgroupDTO.group_name
-              };
-
-              groups.push(subgroupObject);
+            for (const subgroupDTO of subgroupData.subgroups) {
+              const subgroup = new GroupAndSubgroupModel(subgroupDTO.id, subgroupDTO.name, GroupType.SUBGROUP);
+              subgroup.groupId = subgroupDTO.group_id;
+              subgroup.groupName = subgroupDTO.group_name;
+              groups.push(subgroup);
             }
 
             this.setJoinedOfEvent(groups);
@@ -243,7 +227,7 @@ export class EventsService {
     );
   }
 
-  public getFreeOfEvent(eventId: number): any[] {
+  public getFreeOfEvent(eventId: number): GroupAndSubgroupModel[] {
     this.fetchFreeOfEvent(eventId);
     return this._freeGroups.slice();
   }
@@ -254,37 +238,20 @@ export class EventsService {
         console.log(data);
 
         const groups = [];
-
-        const groupsDTO = data.groups;
-        for (let i = 0; i < groupsDTO.length; i++) {
-          const groupDTO = groupsDTO[i];
-
-          const groupObject = {
-            id: groupDTO.id,
-            name: groupDTO.name,
-            type: 'parentgroup'
-          };
-
-          groups.push(groupObject);
+        for (const groupDTO of data.groups) {
+          const group = new GroupAndSubgroupModel(groupDTO.id, groupDTO.name, GroupType.PARENTGROUP);
+          groups.push(group);
         }
 
         this.httpService.loggedInV1GETRequest('/avent/administration/subgroup/free/' + eventId, 'fetchFreeSubgroupsOfEvent').subscribe(
           (subgroupData: any) => {
             console.log(subgroupData);
 
-            const subgroupsDTO = subgroupData.subgroups;
-            for (let i = 0; i < subgroupsDTO.length; i++) {
-              const subgroupDTO = subgroupsDTO[i];
-
-              const subgroupObject = {
-                id: subgroupDTO.id,
-                name: subgroupDTO.name,
-                type: 'subgroup',
-                group_id: subgroupDTO.group_id,
-                group_name: subgroupDTO.group_name
-              };
-
-              groups.push(subgroupObject);
+            for (const subgroupDTO of subgroupData.subgroups) {
+              const subgroup = new GroupAndSubgroupModel(subgroupDTO.id, subgroupDTO.name, GroupType.SUBGROUP);
+              subgroup.groupId = subgroupDTO.group_id;
+              subgroup.groupName = subgroupDTO.group_name;
+              groups.push(subgroup);
             }
 
             this.setFreeOfEvent(groups);
@@ -306,12 +273,12 @@ export class EventsService {
     this.eventChange.next(this._event);
   }
 
-  private setJoinedOfEvent(groups: any[]) {
+  private setJoinedOfEvent(groups: GroupAndSubgroupModel[]) {
     this._joinedGroups = groups;
     this.joinedGroupsChange.next(this._joinedGroups.slice());
   }
 
-  private setFreeOfEvent(groups: any[]) {
+  private setFreeOfEvent(groups: GroupAndSubgroupModel[]) {
     this._freeGroups = groups;
     this.freeGroupsChange.next(this._freeGroups.slice());
   }

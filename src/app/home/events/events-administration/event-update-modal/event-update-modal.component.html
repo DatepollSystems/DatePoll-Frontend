@@ -1,10 +1,10 @@
 <h1 mat-dialog-title>{{ 'EVENTS_ADMINISTRATION_UPDATE_EVENT' | translate }} {{ name }}</h1>
 <div mat-dialog-content style="padding-bottom: 15px;">
-  <form #form="ngForm" (ngSubmit)="update(form)" fxLayout="row wrap" fxLayoutGap="2%" fxLayoutAlign="start">
+  <form #form="ngForm" (ngSubmit)="update(form)" fxLayout="column" fxLayoutGap="2%" fxLayoutAlign="start">
     <app-do-not-forget-to-save fxFlex="98%"></app-do-not-forget-to-save>
 
     <!-- Name -->
-    <mat-form-field fxFlex="98%">
+    <mat-form-field>
       <input
         #nameModel="ngModel"
         [(ngModel)]="name"
@@ -23,32 +23,26 @@
       </mat-error>
     </mat-form-field>
 
-    <app-event-dates-management fxFlex="98%" [dates]="dates" (datesChange)="onEventDatesChange($event)"></app-event-dates-management>
+    <app-event-dates-management [dates]="dates" (datesChange)="onEventDatesChange($event)"></app-event-dates-management>
 
     <!-- Decisions -->
-    <app-event-decisions-list
-      fxFlex="98%"
-      (decisionsChanged)="onDecisionsChange($event)"
-      [decisions]="decisions"
-    ></app-event-decisions-list>
+    <app-event-decisions-list (decisionsChanged)="onDecisionsChange($event)" [decisions]="decisions"></app-event-decisions-list>
 
     <!-- Group management -->
-    <app-group-and-subgroup-select
-      fxFlex="98%"
-      (freeChanged)="onFreeChange($event)"
-      (joinedChanged)="onJoinedChange($event)"
-      [free]="free"
-      [joined]="joined"
-      [parentGroupLock]="false"
+    <app-group-and-subgroup-type-input-select
+      (allGroupsAndSubgroupsChange)="onFreeChange($event)"
+      (groupsAndSubgroupsChange)="onJoinedChange($event)"
+      [allGroupsAndSubgroups]="free"
+      [selectedGroupsAndSubgroups]="joined"
     >
-    </app-group-and-subgroup-select>
+    </app-group-and-subgroup-type-input-select>
 
-    <mat-card matRipple style="background-color: #b2ff59" class="not-selectable" fxFlex="98%">
+    <mat-card matRipple style="background-color: #b2ff59" class="not-selectable">
       <b>{{ 'INFORMATION' | translate }}</b> {{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_GROUPS_DESCRIPTION' | translate }}
     </mat-card>
 
     <!-- Description -->
-    <mat-expansion-panel fxFlex="98%">
+    <mat-expansion-panel>
       <mat-expansion-panel-header>
         <mat-panel-title>
           {{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DESCRIPTION' | translate }}
