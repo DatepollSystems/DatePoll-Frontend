@@ -6,7 +6,7 @@ import {MatChipInputEvent} from '@angular/material/chips';
 
 import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
-import {GroupAndSubgroupModel} from '../../models/groupAndSubgroup.model';
+import {GroupAndSubgroupModel, GroupType} from '../../models/groupAndSubgroup.model';
 
 @Component({
   selector: 'app-group-and-subgroup-type-input-select',
@@ -26,10 +26,16 @@ export class GroupAndSubgroupTypeInputSelectComponent implements OnInit, OnChang
 
   @Input()
   allGroupsAndSubgroups: GroupAndSubgroupModel[];
+  @Input()
   selectedGroupsAndSubgroups: GroupAndSubgroupModel[] = [];
+
+  @Input()
+  parentGroupLocked = false;
 
   @Output()
   groupsAndSubgroupsChange = new EventEmitter<GroupAndSubgroupModel[]>();
+  @Output()
+  allGroupsAndSubgroupsChange = new EventEmitter<GroupAndSubgroupModel[]>();
 
   constructor() {}
 
@@ -87,26 +93,59 @@ export class GroupAndSubgroupTypeInputSelectComponent implements OnInit, OnChang
   }
 
   addToSelectedGroups(group: GroupAndSubgroupModel) {
+    if (this.parentGroupLocked && group.type === GroupType.SUBGROUP) {
+      for (const parentGroup of this.allGroupsAndSubgroups) {
+        if (parentGroup.type === GroupType.PARENTGROUP && parentGroup.id === group.groupId) {
+          this.selectedGroupsAndSubgroups.push(parentGroup);
+
+          const indexParentGroup = this.allGroupsAndSubgroups.indexOf(parentGroup);
+
+          if (indexParentGroup >= 0) {
+            this.allGroupsAndSubgroups.splice(indexParentGroup, 1);
+          }
+          break;
+        }
+      }
+    }
+
     this.selectedGroupsAndSubgroups.push(group);
-    this.groupsAndSubgroupsChange.emit(this.selectedGroupsAndSubgroups.slice());
 
     const index = this.allGroupsAndSubgroups.indexOf(group);
 
     if (index >= 0) {
       this.allGroupsAndSubgroups.splice(index, 1);
-      this.update();
     }
+
+    this.update();
+    this.allGroupsAndSubgroupsChange.emit(this.allGroupsAndSubgroups.slice());
+    this.groupsAndSubgroupsChange.emit(this.selectedGroupsAndSubgroups.slice());
   }
 
   removeFromSelectedGroups(group: GroupAndSubgroupModel) {
-    const index = this.selectedGroupsAndSubgroups.indexOf(group);
-
-    if (index >= 0) {
-      this.selectedGroupsAndSubgroups.splice(index, 1);
-      this.allGroupsAndSubgroups.push(group);
-      this.update();
-      this.groupsAndSubgroupsChange.emit(this.selectedGroupsAndSubgroups.slice());
+    const toDelete = [];
+    if (this.parentGroupLocked && group.type === GroupType.PARENTGROUP) {
+      for (const subgroup of this.selectedGroupsAndSubgroups) {
+        console.log(subgroup.name);
+        if (subgroup.type === GroupType.SUBGROUP && group.id === subgroup.groupId) {
+          this.allGroupsAndSubgroups.push(subgroup);
+          toDelete.push(subgroup);
+        }
+      }
     }
+    toDelete.push(group);
+
+    for (const toDeleteO of toDelete) {
+      const index = this.selectedGroupsAndSubgroups.indexOf(toDeleteO);
+
+      if (index >= 0) {
+        this.selectedGroupsAndSubgroups.splice(index, 1);
+        this.allGroupsAndSubgroups.push(toDeleteO);
+      }
+    }
+
+    this.update();
+    this.allGroupsAndSubgroupsChange.emit(this.allGroupsAndSubgroups.slice());
+    this.groupsAndSubgroupsChange.emit(this.selectedGroupsAndSubgroups.slice());
   }
 
   getGroupByName(value: string) {

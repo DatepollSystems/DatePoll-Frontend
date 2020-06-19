@@ -237,12 +237,14 @@
     <app-divider></app-divider>
 
     <!-- Group management -->
-    <app-group-and-subgroup-select
-      (freeChanged)="onFreeChange($event)"
-      (joinedChanged)="onJoinedChange($event)"
-      [free]="free"
-      [joined]="joined"
-    ></app-group-and-subgroup-select>
+    <app-group-and-subgroup-type-input-select
+      (allGroupsAndSubgroupsChange)="onFreeChange($event)"
+      (groupsAndSubgroupsChange)="onJoinedChange($event)"
+      [allGroupsAndSubgroups]="free"
+      [selectedGroupsAndSubgroups]="joined"
+      [parentGroupLocked]="true"
+    >
+    </app-group-and-subgroup-type-input-select>
 
     <app-divider></app-divider>
 

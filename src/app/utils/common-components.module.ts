@@ -12,12 +12,11 @@ import {CustomDateAdapter, MY_DATE_FORMATS} from './custom-date-adapter';
 import {EmailAddressesListComponent} from '../home/management/users-management/email-addresses-list/email-addresses-list.component';
 import {AppDividerComponent} from './shared-components/app-divider/app-divider.component';
 import {DoNotForgetToSaveComponent} from './shared-components/do-not-forget-to-save/do-not-forget-to-save.component';
-import {GroupAndSubgroupSelectComponent} from './shared-components/group-and-subgroup-select/group-and-subgroup-select.component';
 
 @NgModule({
-  declarations: [AppDividerComponent, DoNotForgetToSaveComponent, EmailAddressesListComponent, GroupAndSubgroupSelectComponent],
+  declarations: [AppDividerComponent, DoNotForgetToSaveComponent, EmailAddressesListComponent],
   imports: [CommonModule, MaterialModule, TranslationModule, FormsModule],
-  exports: [AppDividerComponent, DoNotForgetToSaveComponent, EmailAddressesListComponent, GroupAndSubgroupSelectComponent],
+  exports: [AppDividerComponent, DoNotForgetToSaveComponent, EmailAddressesListComponent],
   providers: [
     {provide: DateAdapter, useClass: CustomDateAdapter},
     {provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS}
