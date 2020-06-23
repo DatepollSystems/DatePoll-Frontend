@@ -1,135 +1,203 @@
-<div class="row">
-  <div class="col-12">
-    <mat-card class="mat-elevation-z3">
-      <mat-card-content>
-        <div class="row justify-content-between">
-          <div class="col-12 col-sm-12 col-md-10"><h1>{{'NAV_MANAGEMENT_PERFORMANCE_BADGES' | translate}}</h1></div>
-          <div class="col-12 col-sm-12 col-md-2" style="text-align: end">
-            <button (click)="onRefresh()" mat-icon-button
-                    matTooltip="{{'MANAGEMENT_PERFORMANCE_BADGES_REFRESH' | translate}}"
-                    matTooltipPosition="right">
-              <mat-icon>refresh</mat-icon>
-            </button>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
-            <mat-card class="mat-elevation-z3">
-              <mat-card-title>{{'MANAGEMENT_PERFORMANCE_BADGES_TITLE_PERFORMANCE_BADGES' | translate}}</mat-card-title>
-              <mat-card-content *ngIf="performanceBadges != null">
-                <form #addPerformanceBadgeForm="ngForm" (ngSubmit)="addPerformanceBadge(addPerformanceBadgeForm)"
-                      class="row">
-                  <div class="col-12 col-sm-12 col-md-8 col-lg-8">
-                    <mat-form-field>
-                      <input #performanceBadgeNameModel="ngModel" id="performanceBadgeName" matInput maxlength="190"
-                             minlength="1" name="performanceBadgeName"
-                             ngModel placeholder="{{'MANAGEMENT_PERFORMANCE_BADGES_ADD_PERFORMANCE_BADGE_NAME' | translate}}" required
-                             type="text">
-                      <mat-error *ngIf="performanceBadgeNameModel.invalid">
-                        {{'MANAGEMENT_PERFORMANCE_BADGES_ADD_PERFORMANCE_BADGE_NAME_INCORRECT' | translate}}
-                      </mat-error>
-                    </mat-form-field>
-                  </div>
-                  <div class="col-12 col-sm-12 col-md-4 col-lg-4">
-                    <button [disabled]="!addPerformanceBadgeForm.valid" class="success-button" mat-raised-button
-                            style="width: 100%; text-align: center" type="submit">
-                      {{'ADD' | translate}}
-                      <mat-icon aria-label="Submit button">library_add</mat-icon>
-                    </button>
-                  </div>
-                </form>
+<mat-card class="mat-elevation-z3">
+  <mat-card-content>
+    <div fxLayout="row" fxLayoutAlign="end center">
+      <button
+        (click)="onRefresh()"
+        mat-icon-button
+        matTooltip="{{ 'MANAGEMENT_PERFORMANCE_BADGES_REFRESH' | translate }}"
+        matTooltipPosition="right"
+      >
+        <mat-icon>refresh</mat-icon>
+      </button>
+    </div>
+    <div fxLayout.gt-md="row break" fxLayout="column" fxLayoutAlign="space-between" fxLayoutGap="2%">
+      <mat-card class="mat-elevation-z3" fxFlex="48%">
+        <mat-card-title>{{ 'MANAGEMENT_PERFORMANCE_BADGES_TITLE_PERFORMANCE_BADGES' | translate }}</mat-card-title>
+        <mat-card-content *ngIf="performanceBadges != null">
+          <form
+            #addPerformanceBadgeForm="ngForm"
+            (ngSubmit)="addPerformanceBadge(addPerformanceBadgeForm)"
+            fxLayout.gt-xs="row"
+            fxLayout="column"
+          >
+            <mat-form-field>
+              <input
+                #performanceBadgeNameModel="ngModel"
+                id="performanceBadgeName"
+                matInput
+                maxlength="190"
+                minlength="1"
+                name="performanceBadgeName"
+                ngModel
+                placeholder="{{ 'MANAGEMENT_PERFORMANCE_BADGES_ADD_PERFORMANCE_BADGE_NAME' | translate }}"
+                required
+                type="text"
+              />
+              <mat-error *ngIf="performanceBadgeNameModel.invalid">
+                {{ 'MANAGEMENT_PERFORMANCE_BADGES_ADD_PERFORMANCE_BADGE_NAME_INCORRECT' | translate }}
+              </mat-error>
+            </mat-form-field>
+            <div>
+              <button [disabled]="!addPerformanceBadgeForm.valid" mat-flat-button style="width: 100%;" type="submit" color="accent">
+                {{ 'ADD' | translate }}
+                <mat-icon aria-label="Submit button">library_add</mat-icon>
+              </button>
+            </div>
+          </form>
 
-                <div class="row">
-                  <mat-list class="col-12">
-                    <mat-list-item *ngFor="let performanceBadge of performanceBadges; trackBy: trackByFn">
-                      <span matLine>{{ performanceBadge.name }}</span>
-                      <button (click)="updatePerformanceBadge(performanceBadge)" mat-icon-button
-                              matTooltip="{{'MANAGEMENT_PERFORMANCE_BADGES_UPDATE_PERFORMANCE_BADGE_TOOLTIP' | translate}}"
-                              matTooltipPosition="above">
-                        <mat-icon>create</mat-icon>
-                      </button>
-                      <button (click)="removePerformanceBadge(performanceBadge.id)"
-                              mat-icon-button matTooltip="{{'MANAGEMENT_PERFORMANCE_BADGES_REMOVE_PERFORMANCE_BADGE_TOOLTIP' | translate}}"
-                              matTooltipPosition="above">
-                        <mat-icon>delete</mat-icon>
-                      </button>
-                      <mat-divider></mat-divider>
-                    </mat-list-item>
-                  </mat-list>
-                </div>
-              </mat-card-content>
-              <mat-card-content *ngIf="performanceBadges == null">
-                <div class="row align-items-center justify-content-center">
-                  <div class="col-2">
-                    <mat-spinner></mat-spinner>
-                  </div>
-                </div>
-              </mat-card-content>
-            </mat-card>
-          </div>
+          <mat-list>
+            <mat-list-item *ngFor="let performanceBadge of performanceBadges; trackBy: trackByFn">
+              <span matLine>{{ performanceBadge.name }}</span>
+              <button
+                (click)="updatePerformanceBadge(performanceBadge)"
+                mat-icon-button
+                matTooltip="{{ 'MANAGEMENT_PERFORMANCE_BADGES_UPDATE_PERFORMANCE_BADGE_TOOLTIP' | translate }}"
+                matTooltipPosition="above"
+              >
+                <mat-icon>create</mat-icon>
+              </button>
+              <button
+                (click)="removePerformanceBadge(performanceBadge.id)"
+                mat-icon-button
+                matTooltip="{{ 'MANAGEMENT_PERFORMANCE_BADGES_REMOVE_PERFORMANCE_BADGE_TOOLTIP' | translate }}"
+                matTooltipPosition="above"
+              >
+                <mat-icon>delete</mat-icon>
+              </button>
+              <mat-divider></mat-divider>
+            </mat-list-item>
+          </mat-list>
+        </mat-card-content>
+        <mat-card-content *ngIf="performanceBadges == null" fxLayout="row" fxLayoutAlign="center center">
+          <mat-spinner></mat-spinner>
+        </mat-card-content>
+      </mat-card>
 
-          <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
-            <mat-card class="mat-elevation-z3">
-              <mat-card-title>{{'MANAGEMENT_PERFORMANCE_BADGES_TITLE_INSTRUMENTS' | translate}}</mat-card-title>
-              <mat-card-content *ngIf="instruments != null">
-                <form #addInstrumentForm="ngForm" (ngSubmit)="addInstrument(addInstrumentForm)" class="row">
-                  <div class="col-12 col-sm-12 col-md-8 col-lg-8">
-                    <mat-form-field>
-                      <input #instrumentNameModel="ngModel" id="instrumentName" matInput maxlength="190"
-                             minlength="1" name="instrumentName"
-                             ngModel placeholder="{{'MANAGEMENT_PERFORMANCE_BADGES_ADD_INSTRUMENT_NAME' | translate}}" required
-                             type="text">
-                      <mat-error *ngIf="instrumentNameModel.invalid">
-                        {{'MANAGEMENT_PERFORMANCE_BADGES_ADD_INSTRUMENT_NAME_INCORRECT' | translate}}
-                      </mat-error>
-                    </mat-form-field>
-                  </div>
-                  <div class="col-12 col-sm-12 col-md-4 col-lg-4">
-                    <button [disabled]="!addInstrumentForm.valid" class="success-button" mat-raised-button
-                            style="width: 100%; text-align: center" type="submit">
-                      {{'ADD' | translate}}
-                      <mat-icon aria-label="Submit button">library_add</mat-icon>
-                    </button>
-                  </div>
-                </form>
+      <mat-card class="mat-elevation-z3" fxFlex="48%">
+        <mat-card-title>{{ 'MANAGEMENT_PERFORMANCE_BADGES_TITLE_INSTRUMENTS' | translate }}</mat-card-title>
+        <mat-card-content *ngIf="instruments != null">
+          <form #addInstrumentForm="ngForm" (ngSubmit)="addInstrument(addInstrumentForm)" fxLayout.gt-xs="row" fxLayout="column">
+            <mat-form-field>
+              <input
+                #instrumentNameModel="ngModel"
+                id="instrumentName"
+                matInput
+                maxlength="190"
+                minlength="1"
+                name="instrumentName"
+                ngModel
+                placeholder="{{ 'MANAGEMENT_PERFORMANCE_BADGES_ADD_INSTRUMENT_NAME' | translate }}"
+                required
+                type="text"
+              />
+              <mat-error *ngIf="instrumentNameModel.invalid">
+                {{ 'MANAGEMENT_PERFORMANCE_BADGES_ADD_INSTRUMENT_NAME_INCORRECT' | translate }}
+              </mat-error>
+            </mat-form-field>
+            <div>
+              <button [disabled]="!addInstrumentForm.valid" mat-flat-button style="width: 100%;" type="submit" color="accent">
+                {{ 'ADD' | translate }}
+                <mat-icon aria-label="Submit button">library_add</mat-icon>
+              </button>
+            </div>
+          </form>
 
-                <div class="row">
-                  <mat-list class="col-12">
-                    <mat-list-item *ngFor="let instrument of instruments; trackBy: trackByFn">
-                      <span matLine>{{ instrument.name }}</span>
-                      <button (click)="updateInstrument(instrument)" mat-icon-button
-                              matTooltip="{{'MANAGEMENT_PERFORMANCE_BADGES_UPDATE_INSTRUMENT_TOOLTIP' | translate}}"
-                              matTooltipPosition="above">
-                        <mat-icon>create</mat-icon>
-                      </button>
-                      <button (click)="removeInstrument(instrument.id)" mat-icon-button
-                              matTooltip="{{'MANAGEMENT_PERFORMANCE_BADGES_REMOVE_INSTRUMENT_TOOLTIP' | translate}}"
-                              matTooltipPosition="above">
-                        <mat-icon>delete</mat-icon>
-                      </button>
-                      <mat-divider></mat-divider>
-                    </mat-list-item>
-                  </mat-list>
-                </div>
-              </mat-card-content>
-              <mat-card-content *ngIf="instruments == null">
-                <div class="row align-items-center justify-content-center">
-                  <div class="col-2">
-                    <mat-spinner></mat-spinner>
-                  </div>
-                </div>
-              </mat-card-content>
-            </mat-card>
-          </div>
-        </div>
-      </mat-card-content>
-    </mat-card>
-  </div>
-</div>
+          <mat-list>
+            <mat-list-item *ngFor="let instrument of instruments; trackBy: trackByFn">
+              <span matLine>{{ instrument.name }}</span>
+              <button
+                (click)="updateInstrument(instrument)"
+                mat-icon-button
+                matTooltip="{{ 'MANAGEMENT_PERFORMANCE_BADGES_UPDATE_INSTRUMENT_TOOLTIP' | translate }}"
+                matTooltipPosition="above"
+              >
+                <mat-icon>create</mat-icon>
+              </button>
+              <button
+                (click)="removeInstrument(instrument.id)"
+                mat-icon-button
+                matTooltip="{{ 'MANAGEMENT_PERFORMANCE_BADGES_REMOVE_INSTRUMENT_TOOLTIP' | translate }}"
+                matTooltipPosition="above"
+              >
+                <mat-icon>delete</mat-icon>
+              </button>
+              <mat-divider></mat-divider>
+            </mat-list-item>
+          </mat-list>
+        </mat-card-content>
+        <mat-card-content *ngIf="instruments == null" fxLayout="row" fxLayoutAlign="center center">
+          <mat-spinner></mat-spinner>
+        </mat-card-content>
+      </mat-card>
 
-<ng-template #successfullyAddedPerformanceBadge>
-  <h2>{{'MANAGEMENT_PERFORMANCE_BADGES_ADD_PERFORMANCE_BADGE_SUCCESSFUL' | translate}}</h2>
-</ng-template>
-<ng-template #successfullyAddedInstrument>
-  <h2>{{'MANAGEMENT_PERFORMANCE_BADGES_ADD_INSTRUMENT_SUCCESSFUL' | translate}}</h2>
-</ng-template>
+      <mat-card class="mat-elevation-z3" fxFlex="48%">
+        <mat-card-title>{{ 'MANAGEMENT_PERFORMANCE_BADGES_BADGE_TITLE' | translate }}</mat-card-title>
+        <mat-card-content *ngIf="badges != null">
+          <form #addBadgeForm="ngForm" (ngSubmit)="addBadge(addBadgeForm)" fxLayout.gt-xs="row" fxLayout="column">
+            <mat-form-field>
+              <input
+                #badgeDescriptionModel="ngModel"
+                id="badgeDescription"
+                matInput
+                maxlength="190"
+                minlength="1"
+                name="badgeDescription"
+                ngModel
+                placeholder="{{ 'MANAGEMENT_PERFORMANCE_BADGES_BADGE_ADD_DESCRIPTION' | translate }}"
+                required
+                type="text"
+              />
+              <mat-error *ngIf="badgeDescriptionModel.invalid">
+                {{ 'MANAGEMENT_PERFORMANCE_BADGES_BADGE_ADD_DESCRIPTION_INCORRECT' | translate }}
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field fxFlex.gt-md="30%">
+              <input
+                #badgeAfterYearsModel="ngModel"
+                id="badgeAfterYears"
+                matInput
+                typeof="number"
+                name="badgeAfterYears"
+                ngModel
+                placeholder="{{ 'MANAGEMENT_PERFORMANCE_BADGES_BADGE_ADD_AFTER_YEARS' | translate }}"
+                required
+              />
+              <mat-error *ngIf="badgeAfterYearsModel.invalid">
+                {{ 'MANAGEMENT_PERFORMANCE_BADGES_BADGE_ADD_AFTER_YEARS_INCORRECT' | translate }}
+              </mat-error>
+            </mat-form-field>
+
+            <div>
+              <button [disabled]="!addBadgeForm.valid" mat-flat-button style="width: 100%;" type="submit" color="accent">
+                {{ 'ADD' | translate }}
+                <mat-icon aria-label="Submit button">library_add</mat-icon>
+              </button>
+            </div>
+          </form>
+
+          <mat-list>
+            <mat-list-item *ngFor="let badge of badges; trackBy: trackByFn">
+              <span matLine
+                >{{ badge.description }} | {{ 'MANAGEMENT_PERFORMANCE_BADGES_BADGE_LIST_AFTER' | translate }} {{ badge.afterYears }}
+                {{ 'MANAGEMENT_PERFORMANCE_BADGES_BADGE_LIST_YEARS' | translate }}</span
+              >
+              <button
+                (click)="removeBadge(badge.id)"
+                mat-icon-button
+                matTooltip="{{ 'MANAGEMENT_PERFORMANCE_BADGES_REMOVE_INSTRUMENT_TOOLTIP' | translate }}"
+                matTooltipPosition="above"
+              >
+                <mat-icon>delete</mat-icon>
+              </button>
+              <mat-divider></mat-divider>
+            </mat-list-item>
+          </mat-list>
+        </mat-card-content>
+        <mat-card-content *ngIf="badges == null" fxLayout="row" fxLayoutAlign="center center">
+          <mat-spinner></mat-spinner>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </mat-card-content>
+</mat-card>
