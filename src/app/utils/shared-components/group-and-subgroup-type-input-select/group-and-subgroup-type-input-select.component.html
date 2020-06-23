@@ -1,0 +1,34 @@
+<mat-form-field class="my-form-field">
+  <mat-chip-list #chipList [disabled]="disabled">
+    <mat-chip
+      *ngFor="let group of selectedGroupsAndSubgroups"
+      [selectable]="true"
+      [removable]="true"
+      (removed)="remove(group)"
+      [disabled]="disabled"
+    >
+      <span *ngIf="group.type === 0">{{ group.name }}</span>
+      <span *ngIf="group.type === 1"
+        ><b>[{{ group.groupName }}]</b> {{ group.name }}</span
+      >
+      <mat-icon matChipRemove>cancel</mat-icon>
+    </mat-chip>
+    <input
+      placeholder="{{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_GROUPS_JOINED' | translate }}"
+      #groupInput
+      [formControl]="groupCtrl"
+      [matAutocomplete]="auto"
+      [matChipInputFor]="chipList"
+      [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+      (matChipInputTokenEnd)="add($event)"
+    />
+  </mat-chip-list>
+  <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+    <mat-option *ngFor="let group of filteredGroups | async" [value]="group">
+      <span *ngIf="group.type === 0">{{ group.name }}</span>
+      <span *ngIf="group.type === 1"
+        ><b>[{{ group.groupName }}]</b> {{ group.name }}</span
+      >
+    </mat-option>
+  </mat-autocomplete>
+</mat-form-field>

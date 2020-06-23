@@ -8,6 +8,7 @@ import {NotificationsService} from 'angular2-notifications';
 import {TranslateService} from '../../../../translation/translate.service';
 import {EventsService} from '../../events.service';
 
+import {GroupAndSubgroupModel, GroupType} from '../../../../utils/models/groupAndSubgroup.model';
 import {Decision} from '../../models/decision.model';
 import {EventDate} from '../../models/event-date.model';
 import {Event} from '../../models/event.model';
@@ -29,12 +30,12 @@ export class EventUpdateModalComponent implements OnDestroy {
   startDate: Date;
   endDate: Date;
 
-  joinedCopy: any[] = [];
-  joined: any[] = [];
+  joinedCopy: GroupAndSubgroupModel[] = [];
+  joined: GroupAndSubgroupModel[] = [];
   joinedSubscription: Subscription;
 
-  freeCopy: any[] = [];
-  free: any[] = [];
+  freeCopy: GroupAndSubgroupModel[] = [];
+  free: GroupAndSubgroupModel[] = [];
   freeSubscription: Subscription;
 
   constructor(
@@ -57,15 +58,6 @@ export class EventUpdateModalComponent implements OnDestroy {
     this.joinedSubscription = this.eventsService.joinedGroupsChange.subscribe(value => {
       this.joined = value;
       this.joinedCopy = this.joined.slice();
-
-      setTimeout(() => {
-        // Check if elements are not null because if the user close the modal before the timeout, there will be thrown an error
-        if (document.getElementById('joined-list') != null && document.getElementById('free-list') != null) {
-          document.getElementById('joined-list').style.height = document.getElementById('free-list').clientHeight.toString() + 'px';
-          console.log('Free height:' + document.getElementById('free-list').clientHeight);
-          console.log('Joined height:' + document.getElementById('joined-list').clientHeight);
-        }
-      }, 1000);
     });
 
     this.free = this.eventsService.getFreeOfEvent(this.event.id);
@@ -73,15 +65,6 @@ export class EventUpdateModalComponent implements OnDestroy {
     this.freeSubscription = this.eventsService.freeGroupsChange.subscribe(value => {
       this.free = value;
       this.freeCopy = this.free.slice();
-
-      setTimeout(() => {
-        // Check if elements are not null because if the user close the modal before the timeout, there will be thrown an error
-        if (document.getElementById('joined-list') != null && document.getElementById('free-list') != null) {
-          document.getElementById('free-list').style.height = document.getElementById('joined-list').clientHeight.toString() + 'px';
-          console.log('Free height:' + document.getElementById('free-list').clientHeight);
-          console.log('Joined height:' + document.getElementById('joined-list').clientHeight);
-        }
-      }, 1000);
     });
   }
 
@@ -133,16 +116,14 @@ export class EventUpdateModalComponent implements OnDestroy {
     );
 
     // Groups and subgroups
-    for (let i = 0; i < this.joined.length; i++) {
-      const group = this.joined[i];
-
+    for (const group of this.joined) {
       let toUpdate = true;
 
-      for (let j = 0; j < this.joinedCopy.length; j++) {
-        if (group.type.includes(this.joinedCopy[j].type)) {
-          if (group.id === this.joinedCopy[j].id) {
+      for (const joinedCopy of this.joinedCopy) {
+        if (group.type === joinedCopy.type) {
+          if (group.id === joinedCopy.id) {
             toUpdate = false;
-            console.log('toUpdate | joined | false | ' + group.name + ' | ' + this.joinedCopy[j].name);
+            console.log('toUpdate | joined | false | ' + group.name + ' | ' + joinedCopy.name);
             break;
           }
         }
@@ -151,7 +132,7 @@ export class EventUpdateModalComponent implements OnDestroy {
       if (toUpdate) {
         console.log('toUpdate | joined | true | ' + group.name);
 
-        if (group.type.includes('parentgroup')) {
+        if (group.type === GroupType.PARENTGROUP) {
           this.eventsService.addGroupToEvent(this.event.id, group.id).subscribe(
             (data: any) => {
               console.log(data);
@@ -169,16 +150,14 @@ export class EventUpdateModalComponent implements OnDestroy {
       }
     }
 
-    for (let i = 0; i < this.free.length; i++) {
-      const group = this.free[i];
-
+    for (const group of this.free) {
       let toUpdate = true;
 
-      for (let j = 0; j < this.freeCopy.length; j++) {
-        if (group.type.includes(this.freeCopy[j].type)) {
-          if (group.id === this.freeCopy[j].id) {
+      for (const freeCopy of this.freeCopy) {
+        if (group.type === freeCopy.type) {
+          if (group.id === freeCopy.id) {
             toUpdate = false;
-            console.log('toUpdate | free | false | ' + group.name + ' | ' + this.freeCopy[j].name);
+            console.log('toUpdate | free | false | ' + group.name + ' | ' + freeCopy.name);
             break;
           }
         }
@@ -187,7 +166,7 @@ export class EventUpdateModalComponent implements OnDestroy {
       if (toUpdate) {
         console.log('toUpdate | free | true | ' + group.name);
 
-        if (group.type.includes('parentgroup')) {
+        if (group.type === GroupType.PARENTGROUP) {
           this.eventsService.removeGroupFromEvent(this.event.id, group.id).subscribe(
             (data: any) => {
               console.log(data);

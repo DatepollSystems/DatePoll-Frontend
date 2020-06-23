@@ -133,7 +133,7 @@ export class UsersManagementComponent implements OnInit, OnDestroy {
 
   onDelete(userID: number) {
     this.bottomSheet.open(UserDeleteModalComponent, {
-      data: {userID: userID}
+      data: {userID}
     });
   }
 

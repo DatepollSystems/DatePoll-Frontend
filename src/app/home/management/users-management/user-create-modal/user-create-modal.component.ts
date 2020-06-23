@@ -6,16 +6,19 @@ import {Subscription} from 'rxjs';
 
 import {NotificationsService, NotificationType} from 'angular2-notifications';
 
-import {UsersService} from '../users.service';
-import {GroupsService} from '../../groups-management/groups.service';
-import {PerformanceBadgesService} from '../../performance-badges-management/performance-badges.service';
-import {MyUserService} from '../../../my-user.service';
 import {Converter} from '../../../../utils/converter';
+import {MyUserService} from '../../../my-user.service';
+import {GroupsService} from '../../groups-management/groups.service';
+import {BadgesService} from '../../performance-badges-management/badges.service';
+import {PerformanceBadgesService} from '../../performance-badges-management/performance-badges.service';
+import {UsersService} from '../users.service';
 
-import {PhoneNumber} from '../../../phoneNumber.model';
-import {Group} from '../../groups-management/models/group.model';
-import {UserPerformanceBadge} from '../userPerformanceBadge.model';
 import {Permissions} from '../../../../permissions';
+import {GroupAndSubgroupModel, GroupType} from '../../../../utils/models/groupAndSubgroup.model';
+import {PhoneNumber} from '../../../phoneNumber.model';
+import {UserBadge} from '../badges-list/userBadge.model';
+import {User} from '../user.model';
+import {UserPerformanceBadge} from '../userPerformanceBadge.model';
 
 @Component({
   selector: 'app-user-create-modal',
@@ -35,32 +38,34 @@ export class UserCreateModalComponent implements OnDestroy {
   join_date: Date;
   phoneNumbers: PhoneNumber[] = [];
 
-  groups: Group[] = [];
   groupsSubscription: Subscription;
 
-  joined: any[] = [];
-  free: any[] = [];
+  joined: GroupAndSubgroupModel[] = [];
+  free: GroupAndSubgroupModel[] = [];
 
   hasPermissionToChangePermission = false;
   permissions: string[] = [];
 
   userPerformanceBadges: UserPerformanceBadge[] = [];
 
+  userBadges: UserBadge[] = [];
+
   constructor(
     private usersService: UsersService,
     private myUserService: MyUserService,
     private dialogRef: MatDialogRef<UserCreateModalComponent>,
     private groupsService: GroupsService,
+    private badgesService: BadgesService,
     private notificationsService: NotificationsService,
     private performanceBadgesService: PerformanceBadgesService
   ) {
     this.dataSource = new MatTableDataSource(this.phoneNumbers);
 
-    this.groups = this.groupsService.getGroups();
-    this.remakeFreeAndJoinedList();
-    this.groupsSubscription = this.groupsService.groupsChange.subscribe(value => {
-      this.groups = value;
-      this.remakeFreeAndJoinedList();
+    this.free = this.groupsService.getGroupsAndSubgroups();
+    this.joined = [];
+    this.groupsSubscription = this.groupsService.groupsAndSubgroupsChange.subscribe(value => {
+      this.free = value;
+      this.joined = [];
     });
 
     this.hasPermissionToChangePermission = this.myUserService.hasPermission(Permissions.PERMISSION_ADMINISTRATION);
@@ -73,46 +78,6 @@ export class UserCreateModalComponent implements OnDestroy {
 
   ngOnDestroy() {
     this.groupsSubscription.unsubscribe();
-  }
-
-  remakeFreeAndJoinedList() {
-    this.free = [];
-    this.joined = [];
-
-    for (let i = 0; i < this.groups.length; i++) {
-      const group = this.groups[i];
-
-      const groupObject = {
-        id: group.id,
-        name: group.name,
-        type: 'parentgroup'
-      };
-
-      this.free.push(groupObject);
-
-      for (let j = 0; j < group.getSubgroups().length; j++) {
-        const subgroup = group.getSubgroups()[j];
-
-        const subgroupObject = {
-          id: subgroup.id,
-          name: subgroup.name,
-          type: 'subgroup',
-          group_id: group.id,
-          group_name: group.name
-        };
-
-        this.free.push(subgroupObject);
-      }
-    }
-
-    setTimeout(function() {
-      // Check if elements are not null because if the user close the modal before the timeout, there will be thrown an error
-      if (document.getElementById('joined-list') != null && document.getElementById('free-list') != null) {
-        document.getElementById('joined-list').style.height = document.getElementById('free-list').clientHeight.toString() + 'px';
-        console.log('Free height:' + document.getElementById('free-list').clientHeight);
-        console.log('Joined height:' + document.getElementById('joined-list').clientHeight);
-      }
-    }, 1000);
   }
 
   onUsernameChange(usernameModel) {
@@ -143,6 +108,10 @@ export class UserCreateModalComponent implements OnDestroy {
 
   onUserPerformanceBadgesChange(userPerformanceBadges: UserPerformanceBadge[]) {
     this.userPerformanceBadges = userPerformanceBadges;
+  }
+
+  onUserBadgesChange(badges: UserBadge[]) {
+    this.userBadges = badges;
   }
 
   onPhoneNumbersChanged(phoneNumbers: PhoneNumber[]) {
@@ -199,18 +168,18 @@ export class UserCreateModalComponent implements OnDestroy {
     }
 
     const userObject = {
-      title: title,
-      username: username,
-      firstname: firstname,
-      surname: surname,
+      title,
+      username,
+      firstname,
+      surname,
       birthday: birthdayformatted,
       join_date: join_dateformatted,
-      streetname: streetname,
-      streetnumber: streetnumber,
-      zipcode: zipcode,
-      location: location,
-      activated: activated,
-      activity: activity,
+      streetname,
+      streetnumber,
+      zipcode,
+      location,
+      activated,
+      activity,
       email_addresses: this.emailAddresses,
       phone_numbers: phoneNumbersObject,
       permissions: this.permissions
@@ -228,23 +197,15 @@ export class UserCreateModalComponent implements OnDestroy {
         if (this.joined.length > 0) {
           console.log('create User | Adding user to groups and subgroups');
 
-          for (let i = 0; i < this.joined.length; i++) {
-            const group = this.joined[i];
-
-            if (group.type.includes('parentgroup')) {
+          for (const group of this.joined) {
+            if (group.type === GroupType.PARENTGROUP) {
               this.groupsService.addUserToGroup(userID, group.id).subscribe(
                 (sdata: any) => {
                   console.log(sdata);
                 },
                 error => console.log(error)
               );
-            }
-          }
-
-          for (let i = 0; i < this.joined.length; i++) {
-            const group = this.joined[i];
-
-            if (group.type.includes('subgroup')) {
+            } else if (group.type === GroupType.SUBGROUP) {
               this.groupsService.addUserToSubgroup(userID, group.id).subscribe(
                 (sdata: any) => {
                   console.log(sdata);
@@ -258,11 +219,20 @@ export class UserCreateModalComponent implements OnDestroy {
         if (this.userPerformanceBadges.length > 0) {
           console.log('create User | Adding performance badges');
 
-          for (let i = 0; i < this.userPerformanceBadges.length; i++) {
-            this.performanceBadgesService.addUserHasPerformanceBadgeWithInstrument(userID, this.userPerformanceBadges[i]).subscribe(
-              (sdata: any) => {
-                console.log(sdata);
-              },
+          for (const userPerformanceBadge of this.userPerformanceBadges) {
+            this.performanceBadgesService.addUserHasPerformanceBadgeWithInstrument(userID, userPerformanceBadge).subscribe(
+              (sdata: any) => console.log(sdata),
+              error => console.log(error)
+            );
+          }
+        }
+
+        if (this.userBadges.length > 0) {
+          console.log('create User | Adding badges');
+
+          for (const badge of this.userBadges) {
+            this.badgesService.addBadgeToUser(badge.description, badge.getDate, badge.reason, userID).subscribe(
+              (sdata: any) => console.log(sdata),
               error => console.log(error)
             );
           }

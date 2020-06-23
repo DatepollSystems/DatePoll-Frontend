@@ -1,10 +1,12 @@
 import {Injectable} from '@angular/core';
-import {HttpService} from '../../../utils/http.service';
-import {Instrument} from './models/instrument.model';
 import {Subject} from 'rxjs';
-import {PerformanceBadge} from './models/performanceBadge.model';
-import {UserPerformanceBadge} from '../users-management/userPerformanceBadge.model';
+
 import {Converter} from '../../../utils/converter';
+import {HttpService} from '../../../utils/http.service';
+
+import {UserPerformanceBadge} from '../users-management/userPerformanceBadge.model';
+import {Instrument} from './models/instrument.model';
+import {PerformanceBadge} from './models/performanceBadge.model';
 
 @Injectable({
   providedIn: 'root'
@@ -41,9 +43,8 @@ export class PerformanceBadgesService {
 
         const performanceBadgesToSave = [];
 
-        const performanceBadges = data.performanceBadges;
-        for (let i = 0; i < performanceBadges.length; i++) {
-          performanceBadgesToSave.push(new PerformanceBadge(performanceBadges[i].id, performanceBadges[i].name));
+        for (const performanceBadge of data.performanceBadges) {
+          performanceBadgesToSave.push(new PerformanceBadge(performanceBadge.id, performanceBadge.name));
         }
 
         this.setPerformanceBadges(performanceBadgesToSave);
@@ -54,7 +55,7 @@ export class PerformanceBadgesService {
 
   public addPerformanceBadge(name: string) {
     const dto = {
-      name: name
+      name
     };
 
     return this.httpService.loggedInV1POSTRequest('/management/performanceBadges', dto, 'addPerformanceBadge');
@@ -62,7 +63,7 @@ export class PerformanceBadgesService {
 
   public updatePerformanceBadge(id: number, name: string) {
     const dto = {
-      name: name
+      name
     };
     return this.httpService.loggedInV1PUTRequest('/management/performanceBadges/' + id, dto, 'updatePerformanceBadge');
   }
@@ -92,9 +93,8 @@ export class PerformanceBadgesService {
 
         const instrumentsToSave = [];
 
-        const instruments = data.instruments;
-        for (let i = 0; i < instruments.length; i++) {
-          instrumentsToSave.push(new Instrument(instruments[i].id, instruments[i].name));
+        for (const instrument of data.instruments) {
+          instrumentsToSave.push(new Instrument(instrument.id, instrument.name));
         }
 
         this.setInstruments(instrumentsToSave);
@@ -105,7 +105,7 @@ export class PerformanceBadgesService {
 
   public addInstrument(name: string) {
     const dto = {
-      name: name
+      name
     };
 
     return this.httpService.loggedInV1POSTRequest('/management/instruments', dto, 'addInstrument');
@@ -113,7 +113,7 @@ export class PerformanceBadgesService {
 
   public updateInstrument(id: number, name: string) {
     const dto = {
-      name: name
+      name
     };
     return this.httpService.loggedInV1PUTRequest('/management/instruments/' + id, dto, 'updateInstrument');
   }
@@ -157,9 +157,7 @@ export class PerformanceBadgesService {
         console.log(data);
 
         const userPerformanceBadgesToSave = [];
-        const userPerformanceBadges = data.performanceBadges;
-        for (let i = 0; i < userPerformanceBadges.length; i++) {
-          const userPerformanceBadge = userPerformanceBadges[i];
+        for (const userPerformanceBadge of data.performanceBadges) {
           userPerformanceBadgesToSave.push(
             new UserPerformanceBadge(
               userPerformanceBadge.id,

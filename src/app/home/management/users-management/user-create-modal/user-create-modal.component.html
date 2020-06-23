@@ -237,12 +237,14 @@
     <app-divider></app-divider>
 
     <!-- Group management -->
-    <app-group-and-subgroup-select
-      (freeChanged)="onFreeChange($event)"
-      (joinedChanged)="onJoinedChange($event)"
-      [free]="free"
-      [joined]="joined"
-    ></app-group-and-subgroup-select>
+    <app-group-and-subgroup-type-input-select
+      (allGroupsAndSubgroupsChange)="onFreeChange($event)"
+      (groupsAndSubgroupsChange)="onJoinedChange($event)"
+      [allGroupsAndSubgroups]="free"
+      [selectedGroupsAndSubgroups]="joined"
+      [parentGroupLocked]="true"
+    >
+    </app-group-and-subgroup-type-input-select>
 
     <app-divider></app-divider>
 
@@ -252,6 +254,11 @@
       [userPerformanceBadges]="userPerformanceBadges"
     >
     </app-performance-badges-list>
+
+    <app-divider></app-divider>
+
+    <!-- Badges -->
+    <app-badges-list [joinDate]="join_date" [userBadges]="userBadges" (userBadgesChange)="onUserBadgesChange($event)"> </app-badges-list>
 
     <app-divider></app-divider>
 

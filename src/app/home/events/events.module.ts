@@ -5,10 +5,11 @@ import {DateAdapter} from '@angular/material';
 import {MAT_DATE_FORMATS} from '@angular/material/core';
 
 import {MaterialModule} from '../../material-module';
+import {TranslationModule} from '../../translation/translation.module';
 import {CommonComponentsModule} from '../../utils/common-components.module';
 import {CustomDateAdapter, MY_DATE_FORMATS} from '../../utils/custom-date-adapter';
+import {GroupAndSubgroupTypeInputSelectModule} from '../../utils/shared-components/group-and-subgroup-type-input-select/group-and-subgroup-type-input-select.module';
 import {MapsModule} from '../../utils/shared-components/maps-component/maps.module';
-import {TranslationModule} from '../../translation/translation.module';
 import {EventInfoModule} from './event-info/event-info.module';
 import {EventsRoutingModule} from './events-routing.module';
 
@@ -43,7 +44,8 @@ import {EventsViewComponent} from './events-view/events-view.component';
     ColorPickerComponentModule,
     MapsModule,
     EventInfoModule,
-    EventsRoutingModule
+    EventsRoutingModule,
+    GroupAndSubgroupTypeInputSelectModule
   ],
   providers: [EventsService, {provide: DateAdapter, useClass: CustomDateAdapter}, {provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS}]
 })

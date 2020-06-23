@@ -5,17 +5,20 @@ import {Subscription} from 'rxjs';
 
 import {NotificationsService, NotificationType} from 'angular2-notifications';
 
-import {UsersService} from '../users.service';
-import {GroupsService} from '../../groups-management/groups.service';
-import {PerformanceBadgesService} from '../../performance-badges-management/performance-badges.service';
-import {MyUserService} from '../../../my-user.service';
+import {TranslateService} from '../../../../translation/translate.service';
 import {Converter} from '../../../../utils/converter';
+import {MyUserService} from '../../../my-user.service';
+import {GroupsService} from '../../groups-management/groups.service';
+import {BadgesService} from '../../performance-badges-management/badges.service';
+import {PerformanceBadgesService} from '../../performance-badges-management/performance-badges.service';
+import {UsersService} from '../users.service';
 
 import {Permissions} from '../../../../permissions';
+import {GroupAndSubgroupModel, GroupType} from '../../../../utils/models/groupAndSubgroup.model';
 import {PhoneNumber} from '../../../phoneNumber.model';
+import {UserBadge} from '../badges-list/userBadge.model';
 import {User} from '../user.model';
 import {UserPerformanceBadge} from '../userPerformanceBadge.model';
-import {TranslateService} from '../../../../translation/translate.service';
 
 @Component({
   selector: 'app-user-update-modal',
@@ -51,18 +54,22 @@ export class UserUpdateModalComponent implements OnDestroy {
   hasPermissionToChangePermission = false;
   permissions: string[] = [];
 
-  joinedCopy: any[] = [];
-  joined: any[] = [];
+  joinedCopy: GroupAndSubgroupModel[] = [];
+  joined: GroupAndSubgroupModel[] = [];
   joinedSubscription: Subscription;
 
-  freeCopy: any[] = [];
-  free: any[] = [];
+  freeCopy: GroupAndSubgroupModel[] = [];
+  free: GroupAndSubgroupModel[] = [];
   freeSubscription: Subscription;
 
   userPerformanceBadgeCount = 0;
   userPerformanceBadgesCopy: UserPerformanceBadge[];
   userPerformanceBadges: UserPerformanceBadge[];
   userPerformanceBadgesSubscription: Subscription;
+
+  userBadges: UserBadge[];
+  userBadgesCopy: UserBadge[];
+  userBadgesSubscription: Subscription;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -71,6 +78,7 @@ export class UserUpdateModalComponent implements OnDestroy {
     private groupsService: GroupsService,
     private usersService: UsersService,
     private performanceBadgesService: PerformanceBadgesService,
+    private badgesService: BadgesService,
     private translate: TranslateService,
     private notificationsService: NotificationsService
   ) {
@@ -97,15 +105,6 @@ export class UserUpdateModalComponent implements OnDestroy {
     this.joinedSubscription = this.usersService.joinedGroupsChange.subscribe(value => {
       this.joined = value;
       this.joinedCopy = this.joined.slice();
-
-      setTimeout(function() {
-        // Check if elements are not null because if the user close the modal before the timeout, there will be thrown an error
-        if (document.getElementById('joined-list') != null && document.getElementById('free-list') != null) {
-          document.getElementById('joined-list').style.height = document.getElementById('free-list').clientHeight.toString() + 'px';
-          console.log('Free height:' + document.getElementById('free-list').clientHeight);
-          console.log('Joined height:' + document.getElementById('joined-list').clientHeight);
-        }
-      }, 1000);
     });
 
     this.free = this.usersService.getFreeOfUser(this.user.id);
@@ -113,15 +112,6 @@ export class UserUpdateModalComponent implements OnDestroy {
     this.freeSubscription = this.usersService.freeGroupsChange.subscribe(value => {
       this.free = value;
       this.freeCopy = this.free.slice();
-
-      setTimeout(function() {
-        // Check if elements are not null because if the user close the modal before the timeout, there will be thrown an error
-        if (document.getElementById('joined-list') != null && document.getElementById('free-list') != null) {
-          document.getElementById('free-list').style.height = document.getElementById('joined-list').clientHeight.toString() + 'px';
-          console.log('Free height:' + document.getElementById('free-list').clientHeight);
-          console.log('Joined height:' + document.getElementById('joined-list').clientHeight);
-        }
-      }, 1000);
     });
 
     this.userPerformanceBadges = this.performanceBadgesService.getUserPerformanceBadges(this.user.id);
@@ -144,9 +134,16 @@ export class UserUpdateModalComponent implements OnDestroy {
     this.hasPermissionToChangePermission = this.myUserService.hasPermission(Permissions.PERMISSION_ADMINISTRATION);
 
     const users = this.usersService.getUsersWithoutFetch();
-    for (let i = 0; i < users.length; i++) {
-      this.usernames.push(users[i].username);
+    for (const user of users) {
+      this.usernames.push(user.username);
     }
+
+    this.userBadges = this.badgesService.getUserBadges(this.user.id);
+    this.userBadgesCopy = this.userBadges.slice();
+    this.userBadgesSubscription = this.badgesService.userBadgesChange.subscribe(value => {
+      this.userBadges = value;
+      this.userBadgesCopy = this.userBadges.slice();
+    });
   }
 
   ngOnDestroy() {
@@ -214,6 +211,10 @@ export class UserUpdateModalComponent implements OnDestroy {
     this.permissions = permissions;
   }
 
+  onUserBadgesChange(badges: UserBadge[]) {
+    this.userBadges = badges;
+  }
+
   update(form: NgForm) {
     this.dialogRef.close();
 
@@ -251,27 +252,27 @@ export class UserUpdateModalComponent implements OnDestroy {
 
     const phoneNumbersObject = [];
 
-    for (let i = 0; i < this.phoneNumbers.length; i++) {
+    for (const phoneNumber of this.phoneNumbers) {
       const phoneNumberObject = {
-        label: this.phoneNumbers[i].label,
-        number: this.phoneNumbers[i].phoneNumber
+        label: phoneNumber.label,
+        number: phoneNumber.phoneNumber
       };
       phoneNumbersObject.push(phoneNumberObject);
     }
 
     const userObject = {
-      title: title,
-      username: username,
-      firstname: firstname,
-      surname: surname,
+      title,
+      username,
+      firstname,
+      surname,
       birthday: birthdayformatted,
       join_date: join_dateformatted,
-      streetname: streetname,
-      streetnumber: streetnumber,
-      zipcode: zipcode,
-      location: location,
-      activated: activated,
-      activity: activity,
+      streetname,
+      streetnumber,
+      zipcode,
+      location,
+      activated,
+      activity,
       email_addresses: this.emailAddresses,
       phone_numbers: phoneNumbersObject,
       permissions: this.permissions
@@ -291,7 +292,7 @@ export class UserUpdateModalComponent implements OnDestroy {
       }
     );
 
-    /** Performance badges **/
+    /* Performance badges **/
     for (let i = 0; i < this.userPerformanceBadges.length; i++) {
       const userPerformanceBadge = this.userPerformanceBadges[i];
 
@@ -352,17 +353,58 @@ export class UserUpdateModalComponent implements OnDestroy {
       }
     }
 
-    /** Groups and subgroups **/
-    for (let i = 0; i < this.joined.length; i++) {
-      const group = this.joined[i];
-
+    /* Badges **/
+    for (const badge of this.userBadges) {
       let toUpdate = true;
 
-      for (let j = 0; j < this.joinedCopy.length; j++) {
-        if (group.type.includes(this.joinedCopy[j].type)) {
-          if (group.id === this.joinedCopy[j].id) {
+      for (const badgeCopy of this.userBadgesCopy) {
+        if (badge.id === badgeCopy.id) {
+          toUpdate = false;
+          console.log('badge | toAdd | false | ' + badge.description + ' | ' + badge.getDate + ' | ' + badge.reason);
+          break;
+        }
+      }
+
+      if (toUpdate) {
+        console.log('badge | toAdd | true | ' + badge.description + ' | ' + badge.getDate + ' | ' + badge.reason);
+        this.badgesService.addBadgeToUser(badge.description, badge.getDate, badge.reason, this.user.id).subscribe(
+          (data: any) => console.log(data),
+          error => console.log(error)
+        );
+      }
+    }
+
+    for (const badgeCopy of this.userBadgesCopy) {
+      let toDelete = true;
+
+      for (const badge of this.userBadges) {
+        if (badgeCopy.id === badge.id) {
+          toDelete = false;
+          console.log('performanceBadges | toDelete | false | ' + badge.description + ' | ' + badge.getDate + ' | ' + badge.reason);
+          break;
+        }
+      }
+
+      if (toDelete) {
+        console.log(
+          'performanceBadges | toDelete | true | ' + badgeCopy.description + ' | ' + badgeCopy.getDate + ' | ' + badgeCopy.reason
+        );
+        this.badgesService.removeBadgeFromUser(badgeCopy.id).subscribe(
+          (data: any) => console.log(data),
+          error => console.log(error)
+        );
+      }
+    }
+
+    /* Groups and subgroups **/
+    for (const group of this.joined) {
+      let toUpdate = true;
+
+      for (const joinedCopy of this.joinedCopy) {
+        if (group.type === joinedCopy.type) {
+          if (group.id === joinedCopy.id) {
             toUpdate = false;
-            console.log('toUpdate | joined | false | ' + group.name + ' | ' + this.joinedCopy[j].name);
+            console.log('toUpdate | joined | false | ' + group.name + ' | ' + joinedCopy.name);
             break;
           }
         }
@@ -371,7 +413,7 @@ export class UserUpdateModalComponent implements OnDestroy {
       if (toUpdate) {
         console.log('toUpdate | joined | true | ' + group.name);
 
-        if (group.type.includes('parentgroup')) {
+        if (group.type === GroupType.PARENTGROUP) {
           this.groupsService.addUserToGroup(this.user.id, group.id).subscribe(
             (data: any) => {
               console.log(data);
@@ -389,16 +431,14 @@ export class UserUpdateModalComponent implements OnDestroy {
       }
     }
 
-    for (let i = 0; i < this.free.length; i++) {
-      const group = this.free[i];
-
+    for (const group of this.free) {
       let toUpdate = true;
 
-      for (let j = 0; j < this.freeCopy.length; j++) {
-        if (group.type.includes(this.freeCopy[j].type)) {
-          if (group.id === this.freeCopy[j].id) {
+      for (const freeCopy of this.freeCopy) {
+        if (group.type === freeCopy.type) {
+          if (group.id === freeCopy.id) {
             toUpdate = false;
-            console.log('toUpdate | free | false | ' + group.name + ' | ' + this.freeCopy[j].name);
+            console.log('toUpdate | free | false | ' + group.name + ' | ' + freeCopy.name);
             break;
           }
         }
@@ -407,7 +447,7 @@ export class UserUpdateModalComponent implements OnDestroy {
       if (toUpdate) {
         console.log('toUpdate | free | true | ' + group.name);
 
-        if (group.type.includes('parentgroup')) {
+        if (group.type === GroupType.PARENTGROUP) {
           this.groupsService.removeUserFromGroup(this.user.id, group.id).subscribe(
             (data: any) => {
               console.log(data);

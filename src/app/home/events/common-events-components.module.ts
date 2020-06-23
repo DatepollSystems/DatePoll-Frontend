@@ -8,12 +8,13 @@ import {RouterModule} from '@angular/router';
 import {NgxMatSelectSearchModule} from 'ngx-mat-select-search';
 
 import {MaterialModule} from '../../material-module';
+import {TranslationModule} from '../../translation/translation.module';
 import {CommonComponentsModule} from '../../utils/common-components.module';
 import {CustomDateAdapter, MY_DATE_FORMATS} from '../../utils/custom-date-adapter';
 import {ColorPickerComponentModule} from '../../utils/shared-components/color-picker/color-picker-component.module';
+import {GroupAndSubgroupTypeInputSelectModule} from '../../utils/shared-components/group-and-subgroup-type-input-select/group-and-subgroup-type-input-select.module';
 import {MapsModule} from '../../utils/shared-components/maps-component/maps.module';
 import {QuestionDialogComponentModule} from '../../utils/shared-components/question-dialog/question-dialog-component.module';
-import {TranslationModule} from '../../translation/translation.module';
 import {EventDatesListComponentModule} from './event-dates-list/event-dates-list-component.module';
 
 import {EventsUserService} from './events-user.service';
@@ -44,7 +45,8 @@ import {EventCardComponent} from './events-view/event-card/event-card.component'
     ColorPickerComponentModule,
     EventDatesListComponentModule,
     MapsModule,
-    CommonComponentsModule
+    CommonComponentsModule,
+    GroupAndSubgroupTypeInputSelectModule
   ],
   providers: [
     EventsUserService,

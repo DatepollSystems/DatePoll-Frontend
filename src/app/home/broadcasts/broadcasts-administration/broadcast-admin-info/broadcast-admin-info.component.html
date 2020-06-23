@@ -1,0 +1,75 @@
+<mat-card class="mat-elevation-z3">
+  <mat-card-content fxLayout="column" fxLayoutGap.xs="3%" fxLayoutGap="1%">
+    <div fxLayout="row" fxLayoutAlign="space-between center">
+      <h1 class="not-selectable">
+        {{ 'BROADCASTS_ADMINISTRATION_ADMIN_INFO_TITLE' | translate }} <span *ngIf="broadcast?.subject">{{ broadcast.subject }}</span>
+      </h1>
+    </div>
+    <div fxLayout="row break" fxLayoutGap="2%" fxLayoutAlign="space-between center">
+      <button mat-stroked-button routerLink="/home/broadcasts/administration" fxFlex.xs="25%">
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="center center" *ngIf="!loaded">
+      <mat-spinner></mat-spinner>
+    </div>
+    <div *ngIf="loaded">
+      <h3 matLine>{{ 'BROADCASTS_ADMINISTRATION_ADMIN_INFO_SUBJECT' | translate }} {{ broadcast.subject }}</h3>
+      <h3 matLine>{{ 'BROADCASTS_ADMINISTRATION_ADMIN_INFO_SENT_ON' | translate }} {{ broadcast.sent | date: 'EE, dd.MM.yyyy HH:mm' }}</h3>
+      <h3 matLine>{{ 'BROADCASTS_ADMINISTRATION_ADMIN_INFO_AUTHOR' | translate }} {{ broadcast.writerName }}</h3>
+      <h3 matLine *ngIf="broadcast.forEveryone">
+        {{ 'BROADCASTS_ADMINISTRATION_ADMIN_INFO_RECIPENT' | translate }}
+        {{ 'BROADCASTS_ADMINISTRATION_ADMIN_INFO_RECIPENT_ALL' | translate }}
+      </h3>
+      <h3 matLine *ngIf="!broadcast.forEveryone">
+        {{ 'BROADCASTS_ADMINISTRATION_ADMIN_INFO_RECIPENT' | translate }}
+        <span *ngFor="let group of broadcast.groups"
+          ><b>{{ group.name }}</b
+          >,
+        </span>
+        <span *ngFor="let subgroup of broadcast.subgroups"
+          ><b>{{ subgroup.group_name }}</b> {{ subgroup.name }},
+        </span>
+      </h3>
+
+      <mat-tab-group mat-align-tabs="start">
+        <mat-tab label="{{ 'BROADCASTS_ADMINISTRATION_ADMIN_INFO_SEND_RECIEPT' | translate }}">
+          <mat-form-field>
+            <input (keyup)="applyFilter($event.target.value)" matInput placeholder="{{ 'SEARCH' | translate }}" />
+          </mat-form-field>
+          <table [dataSource]="dataSource" class="table-responsive" mat-table matSort>
+            <!-- Name Column -->
+            <ng-container matColumnDef="userName">
+              <th *matHeaderCellDef mat-header-cell mat-sort-header>{{ 'BROADCASTS_ADMINISTRATION_ADMIN_INFO_NAME' | translate }}</th>
+              <td *matCellDef="let userInfo" mat-cell>{{ userInfo.userName }}</td>
+            </ng-container>
+
+            <!-- Date Column -->
+            <ng-container matColumnDef="sent">
+              <th *matHeaderCellDef mat-header-cell>{{ 'BROADCASTS_ADMINISTRATION_ADMIN_INFO_SENT' | translate }}</th>
+              <td *matCellDef="let userInfo" mat-cell>{{ userInfo.sent | boolean }}</td>
+            </ng-container>
+
+            <!-- Date Column -->
+            <ng-container matColumnDef="queuedAt">
+              <th *matHeaderCellDef mat-header-cell mat-sort-header>{{ 'BROADCASTS_ADMINISTRATION_ADMIN_INFO_QUEUED_AT' | translate }}</th>
+              <td *matCellDef="let userInfo" mat-cell>{{ userInfo.queuedAt | date: 'dd.MM.yyyy HH:mm:ss' }}</td>
+            </ng-container>
+
+            <!-- Date Column -->
+            <ng-container matColumnDef="sentAt">
+              <th *matHeaderCellDef mat-header-cell mat-sort-header>{{ 'BROADCASTS_ADMINISTRATION_ADMIN_INFO_SENT_AT' | translate }}</th>
+              <td *matCellDef="let userInfo" mat-cell>{{ userInfo.sentAt | date: 'dd.MM.yyyy HH:mm:ss' }}</td>
+            </ng-container>
+
+            <tr *matHeaderRowDef="displayedColumns; sticky: true" mat-header-row></tr>
+            <tr *matRowDef="let row; columns: displayedColumns" mat-row></tr>
+          </table>
+        </mat-tab>
+        <mat-tab label="{{ 'EDITOR_PREVIEW' | translate }}">
+          <div class="border" [innerHTML]="getSanitizedContent(broadcast.bodyHTML)"></div>
+        </mat-tab>
+      </mat-tab-group>
+    </div>
+  </mat-card-content>
+</mat-card>

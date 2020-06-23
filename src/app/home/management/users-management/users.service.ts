@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {Subject} from 'rxjs';
 
 import {HttpService} from '../../../utils/http.service';
+import {GroupAndSubgroupModel, GroupType} from '../../../utils/models/groupAndSubgroup.model';
 import {PhoneNumber} from '../../phoneNumber.model';
 import {User} from './user.model';
 
@@ -13,8 +14,8 @@ export class UsersService {
   public joinedGroupsChange: Subject<any[]> = new Subject<any[]>();
   public freeGroupsChange: Subject<any[]> = new Subject<any[]>();
   private _users: User[];
-  private _joinedGroups: any[];
-  private _freeGroups: any[];
+  private _joinedGroups: GroupAndSubgroupModel[];
+  private _freeGroups: GroupAndSubgroupModel[];
 
   constructor(private httpService: HttpService) {
     this._users = [];
@@ -96,12 +97,12 @@ export class UsersService {
 
   public changePasswordForUser(userID: number, password: string) {
     const dto = {
-      password: password
+      password
     };
     return this.httpService.loggedInV1PUTRequest('/management/users/changePassword/' + userID, dto, 'changePasswordFromUser');
   }
 
-  public getJoinedOfUser(userID: number): any[] {
+  public getJoinedOfUser(userID: number): GroupAndSubgroupModel[] {
     this.fetchJoinedOfUser(userID);
     return this._joinedGroups.slice();
   }
@@ -112,37 +113,20 @@ export class UsersService {
         console.log(data);
 
         const groups = [];
-
-        const groupsDTO = data.groups;
-        for (let i = 0; i < groupsDTO.length; i++) {
-          const groupDTO = groupsDTO[i];
-
-          const groupObject = {
-            id: groupDTO.id,
-            name: groupDTO.name,
-            type: 'parentgroup'
-          };
-
-          groups.push(groupObject);
+        for (const groupDTO of data.groups) {
+          const group = new GroupAndSubgroupModel(groupDTO.id, groupDTO.name, GroupType.PARENTGROUP);
+          groups.push(group);
         }
 
         this.httpService.loggedInV1GETRequest('/management/subgroups/joined/' + userID, 'fetchJoinedSubgroupsOfUser').subscribe(
           (subgroupData: any) => {
             console.log(subgroupData);
 
-            const subgroupsDTO = subgroupData.subgroups;
-            for (let i = 0; i < subgroupsDTO.length; i++) {
-              const subgroupDTO = subgroupsDTO[i];
-
-              const subgroupObject = {
-                id: subgroupDTO.id,
-                name: subgroupDTO.name,
-                type: 'subgroup',
-                group_id: subgroupDTO.group_id,
-                group_name: subgroupDTO.group_name
-              };
-
-              groups.push(subgroupObject);
+            for (const subgroupDTO of subgroupData.subgroups) {
+              const subgroup = new GroupAndSubgroupModel(subgroupDTO.id, subgroupDTO.name, GroupType.SUBGROUP);
+              subgroup.groupId = subgroupDTO.group_id;
+              subgroup.groupName = subgroupDTO.group_name;
+              groups.push(subgroup);
             }
 
             this.setJoinedOfUser(groups);
@@ -154,12 +138,12 @@ export class UsersService {
     );
   }
 
-  public getFreeOfUser(userID: number): any[] {
+  public getFreeOfUser(userID: number): GroupAndSubgroupModel[] {
     this.fetchFreeOfUser(userID);
     return this._freeGroups.slice();
   }
 
-  public setFreeOfUser(groups: any[]) {
+  public setFreeOfUser(groups: GroupAndSubgroupModel[]) {
     this._freeGroups = groups;
     this.freeGroupsChange.next(this._freeGroups.slice());
   }
@@ -170,37 +154,20 @@ export class UsersService {
         console.log(data);
 
         const groups = [];
-
-        const groupsDTO = data.groups;
-        for (let i = 0; i < groupsDTO.length; i++) {
-          const groupDTO = groupsDTO[i];
-
-          const groupObject = {
-            id: groupDTO.id,
-            name: groupDTO.name,
-            type: 'parentgroup'
-          };
-
-          groups.push(groupObject);
+        for (const groupDTO of data.groups) {
+          const group = new GroupAndSubgroupModel(groupDTO.id, groupDTO.name, GroupType.PARENTGROUP);
+          groups.push(group);
         }
 
         this.httpService.loggedInV1GETRequest('/management/subgroups/free/' + userID, 'fetchFreeSubgroupsOfUser').subscribe(
           (subgroupData: any) => {
             console.log(subgroupData);
 
-            const subgroupsDTO = subgroupData.subgroups;
-            for (let i = 0; i < subgroupsDTO.length; i++) {
-              const subgroupDTO = subgroupsDTO[i];
-
-              const subgroupObject = {
-                id: subgroupDTO.id,
-                name: subgroupDTO.name,
-                type: 'subgroup',
-                group_id: subgroupDTO.group_id,
-                group_name: subgroupDTO.group_name
-              };
-
-              groups.push(subgroupObject);
+            for (const subgroupDTO of subgroupData.subgroups) {
+              const subgroup = new GroupAndSubgroupModel(subgroupDTO.id, subgroupDTO.name, GroupType.SUBGROUP);
+              subgroup.groupId = subgroupDTO.group_id;
+              subgroup.groupName = subgroupDTO.group_name;
+              groups.push(subgroup);
             }
 
             this.setFreeOfUser(groups);
@@ -220,7 +187,7 @@ export class UsersService {
     return this.httpService.loggedInV1POSTRequest('/management/users/activate', {}, 'activateAll');
   }
 
-  private setJoinedOfUser(groups: any[]) {
+  private setJoinedOfUser(groups: GroupAndSubgroupModel[]) {
     this._joinedGroups = groups;
     this.joinedGroupsChange.next(this._joinedGroups.slice());
   }

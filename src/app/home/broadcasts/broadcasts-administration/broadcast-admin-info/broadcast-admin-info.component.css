@@ -1,0 +1,8 @@
+.border {
+  border-color: gray;
+  border-style: dashed;
+  padding: 10px;
+  min-height: 50vh;
+  max-width: 100%;
+  word-break: break-all;
+}
