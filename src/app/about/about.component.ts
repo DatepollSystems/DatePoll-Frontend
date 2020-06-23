@@ -24,6 +24,7 @@ export class AboutComponent implements OnDestroy {
   instanceUsersString = '0';
   instanceEventsString = '0';
   instanceMoviesString = '0';
+  instanceBroadcasts = '0';
 
   showMoreCommunityDescription = false;
 
@@ -104,6 +105,8 @@ export class AboutComponent implements OnDestroy {
     this.showInstanceEvents(this.validateFactor(this.serverInfo.events_count), this.serverInfo.events_count);
     // noinspection ES6MissingAwait
     this.showInstanceMovies(this.validateFactor(this.serverInfo.movies_count), this.serverInfo.movies_count);
+    // noinspection ES6MissingAwait
+    this.showInstanceBroadcasts(this.validateFactor(this.serverInfo.broadcasts_count), this.serverInfo.broadcasts_count);
   }
 
   validateFactor(max: number): number {
@@ -142,6 +145,15 @@ export class AboutComponent implements OnDestroy {
       i += factor;
       await sleep(1);
       this.instanceMoviesString = i.toString();
+    }
+  }
+
+  async showInstanceBroadcasts(factor: number, max: number) {
+    this.instanceBroadcasts = '0';
+    for (let i = 0; i < max; ) {
+      i += factor;
+      await sleep(1);
+      this.instanceBroadcasts = i.toString();
     }
   }
 }
