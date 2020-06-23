@@ -12,6 +12,8 @@ export class Broadcast {
   public groups: any[];
   public subgroups: any[];
 
+  public userInfos: UserBroadcastInfo[];
+
   constructor(id: number, subject: string, sent: Date, body: string, writerName: string) {
     this.id = id;
     this.subject = subject;
@@ -23,5 +25,21 @@ export class Broadcast {
       this.bodyPreview = this.body;
     }
     this.writerName = writerName;
+  }
+}
+
+// tslint:disable-next-line:max-classes-per-file
+export class UserBroadcastInfo {
+  public userName: string;
+  public sent: boolean;
+
+  public queuedAt: Date;
+  public sentAt: Date;
+
+  constructor(userName: string, sent: boolean, queuedAt: Date, sentAt: Date) {
+    this.userName = userName;
+    this.sent = sent;
+    this.queuedAt = queuedAt;
+    this.sentAt = sentAt;
   }
 }

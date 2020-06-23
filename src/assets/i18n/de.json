@@ -69,6 +69,9 @@
   "404_SUBTITLE": "Du kannst entweder zurück gehen oder dir weiterhin dieses tolle Bild einer Katze anschauen!",
   "404_GO_BACK": "Zurück",
 
+  "EDITOR_PREVIEW": "Vorschau",
+  "EDITOR_NO_PREVIEW": "Keine Vorschau verfügbar",
+
   "SIGNIN": "Anmelden",
   "SIGNIN_NOT_SIGNED_UP": "Kein Konto?",
   "SIGNIN_USERNAME": "Benutzername",
@@ -242,6 +245,7 @@
   "BROADCASTS_ADMINISTRATION_DATE": "Sendedatum",
   "BROADCASTS_ADMINISTRATION_WRITER": "Verfasser",
   "BROADCASTS_ADMINISTRATION_BODY": "Inhalt",
+  "BROADCASTS_ADMINISTRATION_INFO_TOOLTIP": "Zeige Informationen an",
 
   "BROADCASTS_ADMINISTRATION_CREATE_TITLE": "Mitteilung erstellen",
   "BROADCASTS_ADMINISTRATION_CREATE_SAVE_DRAFT": "Entwurf speichern",
@@ -252,6 +256,18 @@
   "BROADCASTS_ADMINISTRATION_CREATE_NOTIFICATION_BODY_LENGTH": "Bitte schreibe eine etwas längere Email!",
   "BROADCASTS_ADMINISTRATION_CREATE_NOTIFICATION_SENDING_LENGTH": "Das senden kann einige Sekunden dauern! Außerdem kann sich die Aussendung an alle Mitglieder je nach Empfängerlistenlänge eine Minuten dauern.",
   "BROADCASTS_ADMINISTRATION_CREATE_NOTIFICATION_SUCCESSFUL": "Die Email wird nun verteilt.",
+
+  "BROADCASTS_ADMINISTRATION_ADMIN_INFO_TITLE": "Informationen über",
+  "BROADCASTS_ADMINISTRATION_ADMIN_INFO_SUBJECT": "Betreff:",
+  "BROADCASTS_ADMINISTRATION_ADMIN_INFO_SENT_ON": "Gesendet am",
+  "BROADCASTS_ADMINISTRATION_ADMIN_INFO_AUTHOR": "Author:",
+  "BROADCASTS_ADMINISTRATION_ADMIN_INFO_RECIPENT": "Empfänger:",
+  "BROADCASTS_ADMINISTRATION_ADMIN_INFO_RECIPENT_ALL": "Alle",
+  "BROADCASTS_ADMINISTRATION_ADMIN_INFO_SEND_RECIEPT": "Sendestatus",
+  "BROADCASTS_ADMINISTRATION_ADMIN_INFO_NAME": "Name",
+  "BROADCASTS_ADMINISTRATION_ADMIN_INFO_SENT": "Versendet",
+  "BROADCASTS_ADMINISTRATION_ADMIN_INFO_QUEUED_AT": "In Auftrag gegeben am",
+  "BROADCASTS_ADMINISTRATION_ADMIN_INFO_SENT_AT": "Versendet am",
 
   "SETTINGS_PERSONAL_DATA": "Persönliche Daten",
   "SETTINGS_PERSONAL_DATA_DESCRIPTION": "Bearbeiten Sie Ihre Persönlichen Daten.",

@@ -15,11 +15,12 @@ import {GroupAndSubgroupTypeInputSelectModule} from '../../../utils/shared-compo
 import {QuestionDialogComponentModule} from '../../../utils/shared-components/question-dialog/question-dialog-component.module';
 import {BroadcastsAdministrationRoutingModule} from './broadcasts-administration-routing.module';
 
+import {BroadcastAdminInfoComponent} from './broadcast-admin-info/broadcast-admin-info.component';
 import {BroadcastsAdministrationComponent} from './broadcasts-administration.component';
 import {CreateBroadcastComponent} from './create-broadcast/create-broadcast.component';
 
 @NgModule({
-  declarations: [BroadcastsAdministrationComponent, CreateBroadcastComponent],
+  declarations: [BroadcastsAdministrationComponent, CreateBroadcastComponent, BroadcastAdminInfoComponent],
   imports: [
     CommonModule,
     MaterialModule,

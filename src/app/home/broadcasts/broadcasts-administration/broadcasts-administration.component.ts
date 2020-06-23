@@ -8,6 +8,7 @@ import {Subscription} from 'rxjs';
 import {BroadcastsAdministrationService} from './broadcasts-administration.service';
 
 import {Broadcast} from '../models/broadcast.model';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-broadcasts-administration',
@@ -26,7 +27,7 @@ export class BroadcastsAdministrationComponent implements OnDestroy {
 
   loading = true;
 
-  constructor(private broadcastsService: BroadcastsAdministrationService) {
+  constructor(private broadcastsService: BroadcastsAdministrationService, private router: Router) {
     this.broadcasts = this.broadcastsService.getBroadcasts();
     if (this.broadcasts.length !== 0) {
       this.loading = false;
@@ -60,5 +61,9 @@ export class BroadcastsAdministrationComponent implements OnDestroy {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+
+  openBroadcastAdminInfo(broadcast: Broadcast) {
+    this.router.navigateByUrl('/home/broadcasts/administration/' + broadcast.id, {state: broadcast});
   }
 }

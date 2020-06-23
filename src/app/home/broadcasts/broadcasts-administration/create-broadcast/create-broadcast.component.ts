@@ -137,7 +137,7 @@ export class CreateBroadcastComponent implements OnDestroy {
             subject: this.subject,
             bodyHTML: this.bodyHTML,
             body: this.body,
-            forEveryone: this.allMembers,
+            for_everyone: this.allMembers,
             groups,
             subgroups
           };

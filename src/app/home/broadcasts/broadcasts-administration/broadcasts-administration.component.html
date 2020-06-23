@@ -53,8 +53,12 @@
       <!-- Action movie Column -->
       <ng-container matColumnDef="action">
         <th *matHeaderCellDef mat-header-cell>{{ 'CINEMA_TICKETS_ADMINISTRATION_ACTION' | translate }}</th>
-        <td (click)="$event.stopPropagation()" *matCellDef="let movie" mat-cell>
-          <button mat-icon-button matTooltip="{{ 'CINEMA_TICKETS_ADMINISTRATION_INFO_MOVIE_BUTTON_TOOLTIP' | translate }}">
+        <td (click)="$event.stopPropagation()" *matCellDef="let broadcast" mat-cell>
+          <button
+            mat-icon-button
+            (click)="openBroadcastAdminInfo(broadcast)"
+            matTooltip="{{ 'BROADCASTS_ADMINISTRATION_INFO_TOOLTIP' | translate }}"
+          >
             <mat-icon>info</mat-icon>
           </button>
 
@@ -65,7 +69,7 @@
       </ng-container>
       <!--      (click)="onInfo(row)" -->
       <tr *matHeaderRowDef="displayedColumns; sticky: true" mat-header-row></tr>
-      <tr *matRowDef="let row; columns: displayedColumns" mat-row></tr>
+      <tr (click)="openBroadcastAdminInfo(row)" *matRowDef="let row; columns: displayedColumns" mat-row></tr>
     </table>
 
     <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
