@@ -34,10 +34,6 @@ const homeRoutes: Routes = [
       {
         path: 'management/datepoll',
         loadChildren: () => import('./management/datepoll-management/datepoll-management.module').then(m => m.DatepollManagementModule)
-      },
-      {
-        path: 'management/badges',
-        loadChildren: () => import('./management/badges-management/badges-management.module').then(m => m.BadgesManagementModule)
       }
     ]
   }

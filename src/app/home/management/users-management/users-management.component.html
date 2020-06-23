@@ -13,6 +13,15 @@
             <mat-icon>refresh</mat-icon>
             <span>{{ 'MANAGEMENT_USERS_REFRESH' | translate }}</span>
           </button>
+          <mat-divider></mat-divider>
+
+          <button mat-menu-item [matMenuTriggerFor]="actionsMenu">{{ 'ACTION' | translate }}</button>
+          <mat-divider></mat-divider>
+
+          <button mat-menu-item [matMenuTriggerFor]="managementMenu">{{ 'MANAGEMENT' | translate }}</button>
+        </mat-menu>
+
+        <mat-menu #actionsMenu="matMenu">
           <button (click)="openExportUsersBottomSheet()" mat-menu-item>
             <mat-icon>cloud_download</mat-icon>
             <span>Export</span>
@@ -21,6 +30,9 @@
             <mat-icon>contact_mail</mat-icon>
             <span>{{ 'MANAGEMENT_USERS_ACTIVATE_ALL' | translate }}</span>
           </button>
+        </mat-menu>
+
+        <mat-menu #managementMenu="matMenu">
           <button routerLink="/home/management/group" mat-menu-item>
             <mat-icon>group</mat-icon>
             <span>{{ 'NAV_MANAGEMENT_GROUPS' | translate }}</span>
@@ -28,10 +40,6 @@
           <button routerLink="/home/management/performanceBadges" mat-menu-item>
             <mat-icon>star_rate</mat-icon>
             <span>{{ 'NAV_MANAGEMENT_PERFORMANCE_BADGES' | translate }}</span>
-          </button>
-          <button routerLink="/home/management/badges" mat-menu-item>
-            <mat-icon>stars</mat-icon>
-            <span>{{ 'MANAGEMENT_BADGES_TITLE' | translate }}</span>
           </button>
         </mat-menu>
       </div>
