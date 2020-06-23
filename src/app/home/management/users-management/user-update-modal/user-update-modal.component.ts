@@ -9,12 +9,14 @@ import {TranslateService} from '../../../../translation/translate.service';
 import {Converter} from '../../../../utils/converter';
 import {MyUserService} from '../../../my-user.service';
 import {GroupsService} from '../../groups-management/groups.service';
+import {BadgesService} from '../../performance-badges-management/badges.service';
 import {PerformanceBadgesService} from '../../performance-badges-management/performance-badges.service';
 import {UsersService} from '../users.service';
 
 import {Permissions} from '../../../../permissions';
 import {GroupAndSubgroupModel, GroupType} from '../../../../utils/models/groupAndSubgroup.model';
 import {PhoneNumber} from '../../../phoneNumber.model';
+import {UserBadge} from '../badges-list/userBadge.model';
 import {User} from '../user.model';
 import {UserPerformanceBadge} from '../userPerformanceBadge.model';
 
@@ -65,6 +67,10 @@ export class UserUpdateModalComponent implements OnDestroy {
   userPerformanceBadges: UserPerformanceBadge[];
   userPerformanceBadgesSubscription: Subscription;
 
+  userBadges: UserBadge[];
+  userBadgesCopy: UserBadge[];
+  userBadgesSubscription: Subscription;
+
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     private dialogRef: MatDialogRef<UserUpdateModalComponent>,
@@ -72,6 +78,7 @@ export class UserUpdateModalComponent implements OnDestroy {
     private groupsService: GroupsService,
     private usersService: UsersService,
     private performanceBadgesService: PerformanceBadgesService,
+    private badgesService: BadgesService,
     private translate: TranslateService,
     private notificationsService: NotificationsService
   ) {
@@ -130,6 +137,13 @@ export class UserUpdateModalComponent implements OnDestroy {
     for (const user of users) {
       this.usernames.push(user.username);
     }
+
+    this.userBadges = this.badgesService.getUserBadges(this.user.id);
+    this.userBadgesCopy = this.userBadges.slice();
+    this.userBadgesSubscription = this.badgesService.userBadgesChange.subscribe(value => {
+      this.userBadges = value;
+      this.userBadgesCopy = this.userBadges.slice();
+    });
   }
 
   ngOnDestroy() {
@@ -195,6 +209,10 @@ export class UserUpdateModalComponent implements OnDestroy {
 
   onPermissionsChange(permissions: string[]) {
     this.permissions = permissions;
+  }
+
+  onUserBadgesChange(badges: UserBadge[]) {
+    this.userBadges = badges;
   }
 
   update(form: NgForm) {
@@ -329,6 +347,49 @@ export class UserUpdateModalComponent implements OnDestroy {
             userPerformanceBadgeCopy.instrumentName
         );
         this.performanceBadgesService.removeUserHasPerformanceBadgeWithInstrument(userPerformanceBadgeCopy.id).subscribe(
+          (data: any) => console.log(data),
+          error => console.log(error)
+        );
+      }
+    }
+
+    /* Badges **/
+    for (const badge of this.userBadges) {
+      let toUpdate = true;
+
+      for (const badgeCopy of this.userBadgesCopy) {
+        if (badge.id === badgeCopy.id) {
+          toUpdate = false;
+          console.log('badge | toAdd | false | ' + badge.description + ' | ' + badge.getDate + ' | ' + badge.reason);
+          break;
+        }
+      }
+
+      if (toUpdate) {
+        console.log('badge | toAdd | true | ' + badge.description + ' | ' + badge.getDate + ' | ' + badge.reason);
+        this.badgesService.addBadgeToUser(badge.description, badge.getDate, badge.reason, this.user.id).subscribe(
+          (data: any) => console.log(data),
+          error => console.log(error)
+        );
+      }
+    }
+
+    for (const badgeCopy of this.userBadgesCopy) {
+      let toDelete = true;
+
+      for (const badge of this.userBadges) {
+        if (badgeCopy.id === badge.id) {
+          toDelete = false;
+          console.log('performanceBadges | toDelete | false | ' + badge.description + ' | ' + badge.getDate + ' | ' + badge.reason);
+          break;
+        }
+      }
+
+      if (toDelete) {
+        console.log(
+          'performanceBadges | toDelete | true | ' + badgeCopy.description + ' | ' + badgeCopy.getDate + ' | ' + badgeCopy.reason
+        );
+        this.badgesService.removeBadgeFromUser(badgeCopy.id).subscribe(
           (data: any) => console.log(data),
           error => console.log(error)
         );

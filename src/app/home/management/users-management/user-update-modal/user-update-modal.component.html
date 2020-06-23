@@ -315,6 +315,11 @@
 
     <app-divider></app-divider>
 
+    <!-- Badges -->
+    <app-badges-list [joinDate]="join_date" [userBadges]="userBadges" (userBadgesChange)="onUserBadgesChange($event)"> </app-badges-list>
+
+    <app-divider></app-divider>
+
     <!-- Permissions -->
     <mat-expansion-panel *ngIf="hasPermissionToChangePermission">
       <mat-expansion-panel-header>
@@ -322,7 +327,7 @@
           {{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_PERMISSIONS' | translate }}
         </mat-panel-title>
       </mat-expansion-panel-header>
-      <app-permissions-list (permissionsChanged)="onPermissionsChange($event)" [permissions]="permissions"> </app-permissions-list>
+      <app-permissions-list (permissionsChanged)="onPermissionsChange($event)" [permissions]="permissions"></app-permissions-list>
     </mat-expansion-panel>
 
     <app-divider *ngIf="hasPermissionToChangePermission"></app-divider>

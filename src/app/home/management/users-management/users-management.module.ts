@@ -25,6 +25,7 @@ import {UserDeleteModalComponent} from './user-delete-modal/user-delete-modal.co
 import {UserUpdateModalComponent} from './user-update-modal/user-update-modal.component';
 import {UsersExportBottomSheetComponent, UsersManagementComponent} from './users-management.component';
 import {UsersService} from './users.service';
+import {BadgesListComponent} from './badges-list/badges-list.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import {UsersService} from './users.service';
     PerformanceBadgesListComponent,
     PermissionsListComponent,
     PhoneNumbersListComponent,
-    UserDeleteModalComponent
+    UserDeleteModalComponent,
+    BadgesListComponent
   ],
   imports: [
     CommonModule,

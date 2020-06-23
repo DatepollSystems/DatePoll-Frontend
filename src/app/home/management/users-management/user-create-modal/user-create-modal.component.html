@@ -257,6 +257,11 @@
 
     <app-divider></app-divider>
 
+    <!-- Badges -->
+    <app-badges-list [joinDate]="join_date" [userBadges]="userBadges" (userBadgesChange)="onUserBadgesChange($event)"> </app-badges-list>
+
+    <app-divider></app-divider>
+
     <!-- Permissions -->
     <mat-expansion-panel *ngIf="hasPermissionToChangePermission">
       <mat-expansion-panel-header>

@@ -9,13 +9,15 @@ import {NotificationsService, NotificationType} from 'angular2-notifications';
 import {Converter} from '../../../../utils/converter';
 import {MyUserService} from '../../../my-user.service';
 import {GroupsService} from '../../groups-management/groups.service';
+import {BadgesService} from '../../performance-badges-management/badges.service';
 import {PerformanceBadgesService} from '../../performance-badges-management/performance-badges.service';
 import {UsersService} from '../users.service';
 
 import {Permissions} from '../../../../permissions';
 import {GroupAndSubgroupModel, GroupType} from '../../../../utils/models/groupAndSubgroup.model';
 import {PhoneNumber} from '../../../phoneNumber.model';
-import {Group} from '../../groups-management/models/group.model';
+import {UserBadge} from '../badges-list/userBadge.model';
+import {User} from '../user.model';
 import {UserPerformanceBadge} from '../userPerformanceBadge.model';
 
 @Component({
@@ -46,11 +48,14 @@ export class UserCreateModalComponent implements OnDestroy {
 
   userPerformanceBadges: UserPerformanceBadge[] = [];
 
+  userBadges: UserBadge[] = [];
+
   constructor(
     private usersService: UsersService,
     private myUserService: MyUserService,
     private dialogRef: MatDialogRef<UserCreateModalComponent>,
     private groupsService: GroupsService,
+    private badgesService: BadgesService,
     private notificationsService: NotificationsService,
     private performanceBadgesService: PerformanceBadgesService
   ) {
@@ -103,6 +108,10 @@ export class UserCreateModalComponent implements OnDestroy {
 
   onUserPerformanceBadgesChange(userPerformanceBadges: UserPerformanceBadge[]) {
     this.userPerformanceBadges = userPerformanceBadges;
+  }
+
+  onUserBadgesChange(badges: UserBadge[]) {
+    this.userBadges = badges;
   }
 
   onPhoneNumbersChanged(phoneNumbers: PhoneNumber[]) {
@@ -212,9 +221,18 @@ export class UserCreateModalComponent implements OnDestroy {
 
           for (const userPerformanceBadge of this.userPerformanceBadges) {
             this.performanceBadgesService.addUserHasPerformanceBadgeWithInstrument(userID, userPerformanceBadge).subscribe(
-              (sdata: any) => {
-                console.log(sdata);
-              },
+              (sdata: any) => console.log(sdata),
+              error => console.log(error)
+            );
+          }
+        }
+
+        if (this.userBadges.length > 0) {
+          console.log('create User | Adding badges');
+
+          for (const badge of this.userBadges) {
+            this.badgesService.addBadgeToUser(badge.description, badge.getDate, badge.reason, userID).subscribe(
+              (sdata: any) => console.log(sdata),
               error => console.log(error)
             );
           }
