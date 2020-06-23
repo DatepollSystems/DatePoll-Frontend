@@ -257,6 +257,10 @@
   "BROADCASTS_ADMINISTRATION_CREATE_NOTIFICATION_SENDING_LENGTH": "Das senden kann einige Sekunden dauern! Außerdem kann sich die Aussendung an alle Mitglieder je nach Empfängerlistenlänge eine Minuten dauern.",
   "BROADCASTS_ADMINISTRATION_CREATE_NOTIFICATION_SUCCESSFUL": "Die Email wird nun verteilt.",
 
+  "BROADCASTS_ADMINISTRATION_DELETE_TOOLTIP": "Mitteilung löschen",
+  "BROADCASTS_ADMINISTRATION_DELETE_CONFIRMATION_QUESTION": "Willst du diese Mitteilung wirklich löschen?",
+  "BROADCASTS_ADMINISTRATION_DELETE_SUCCESSFULLY": "Die Mitteilung wurde gelöscht!",
+
   "BROADCASTS_ADMINISTRATION_ADMIN_INFO_TITLE": "Informationen über",
   "BROADCASTS_ADMINISTRATION_ADMIN_INFO_SUBJECT": "Betreff:",
   "BROADCASTS_ADMINISTRATION_ADMIN_INFO_SENT_ON": "Gesendet am",

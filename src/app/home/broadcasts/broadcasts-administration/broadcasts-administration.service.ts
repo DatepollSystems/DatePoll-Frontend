@@ -101,4 +101,8 @@ export class BroadcastsAdministrationService {
     this.broadcast = broadcast;
     this.broadcastChange.next(this.broadcast);
   }
+
+  public deleteBroadcast(id: number) {
+    return this.httpService.loggedInV1DELETERequest('/broadcast/administration/broadcast/' + id, 'deleteBroadcast');
+  }
 }

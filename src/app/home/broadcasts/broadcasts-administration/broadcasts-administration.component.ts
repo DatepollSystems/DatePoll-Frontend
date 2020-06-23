@@ -1,4 +1,7 @@
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, OnDestroy, ViewChild} from '@angular/core';
+import {Router} from '@angular/router';
+
+import {MatBottomSheet} from '@angular/material/bottom-sheet';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
@@ -6,9 +9,11 @@ import {MatTableDataSource} from '@angular/material/table';
 import {Subscription} from 'rxjs';
 
 import {BroadcastsAdministrationService} from './broadcasts-administration.service';
+import {TranslateService} from '../../../translation/translate.service';
 
+import {QuestionDialogComponent} from '../../../utils/shared-components/question-dialog/question-dialog.component';
 import {Broadcast} from '../models/broadcast.model';
-import {Router} from '@angular/router';
+import {NotificationsService} from 'angular2-notifications';
 
 @Component({
   selector: 'app-broadcasts-administration',
@@ -27,7 +32,13 @@ export class BroadcastsAdministrationComponent implements OnDestroy {
 
   loading = true;
 
-  constructor(private broadcastsService: BroadcastsAdministrationService, private router: Router) {
+  constructor(
+    private broadcastsService: BroadcastsAdministrationService,
+    private router: Router,
+    private bottomSheet: MatBottomSheet,
+    private notificationsService: NotificationsService,
+    private translate: TranslateService
+  ) {
     this.broadcasts = this.broadcastsService.getBroadcasts();
     if (this.broadcasts.length !== 0) {
       this.loading = false;
@@ -65,5 +76,44 @@ export class BroadcastsAdministrationComponent implements OnDestroy {
 
   openBroadcastAdminInfo(broadcast: Broadcast) {
     this.router.navigateByUrl('/home/broadcasts/administration/' + broadcast.id, {state: broadcast});
+  }
+
+  removeBroadcast(id: number) {
+    const answers = [
+      {
+        answer: this.translate.getTranslationFor('YES'),
+        value: 'yes'
+      },
+      {
+        answer: this.translate.getTranslationFor('NO'),
+        value: 'no'
+      }
+    ];
+    const question = this.translate.getTranslationFor('BROADCASTS_ADMINISTRATION_DELETE_CONFIRMATION_QUESTION');
+
+    const bottomSheetRef = this.bottomSheet.open(QuestionDialogComponent, {
+      data: {
+        answers,
+        question
+      }
+    });
+
+    bottomSheetRef.afterDismissed().subscribe((value: string) => {
+      if (value != null) {
+        if (value.includes('yes')) {
+          this.broadcastsService.deleteBroadcast(id).subscribe(
+            (response: any) => {
+              console.log(response);
+              this.broadcastsService.fetchBroadcasts();
+              this.notificationsService.success(
+                this.translate.getTranslationFor('SUCCESSFULLY'),
+                this.translate.getTranslationFor('BROADCASTS_ADMINISTRATION_DELETE_SUCCESSFULLY')
+              );
+            },
+            error => console.log(error)
+          );
+        }
+      }
+    });
   }
 }

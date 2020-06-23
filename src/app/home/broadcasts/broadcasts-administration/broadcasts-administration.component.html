@@ -62,7 +62,12 @@
             <mat-icon>info</mat-icon>
           </button>
 
-          <button color="warn" mat-icon-button matTooltip="{{ 'CINEMA_TICKETS_ADMINISTRATION_DELETE_MOVIE_BUTTON_TOOLTIP' | translate }}">
+          <button
+            color="warn"
+            mat-icon-button
+            (click)="removeBroadcast(broadcast.id)"
+            matTooltip="{{ 'BROADCASTS_ADMINISTRATION_DELETE_TOOLTIP' | translate }}"
+          >
             <mat-icon>delete</mat-icon>
           </button>
         </td>
