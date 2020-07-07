@@ -1,36 +1,58 @@
 <div *ngIf="movies == null" style="margin-top: 25%">
-  <div class="row" style="margin-bottom: 15px;">
-    <div class="col-12">
-      <mat-progress-spinner mode="indeterminate" style="margin: auto"></mat-progress-spinner>
-    </div>
-  </div>
+  <div fxLayout="column" fxLayoutAlign="center">
+    <mat-progress-spinner mode="indeterminate" style="margin: auto auto 10px;"></mat-progress-spinner>
 
-  <div class="row">
-    <div class="col-12" style="text-align: center;">
-      <h2>{{'LOADING' | translate}}</h2>
+    <h2 style="text-align: center">{{ 'LOADING' | translate }}</h2>
+  </div>
+</div>
+
+<div *ngIf="movies?.length > 0" fxLayout="column" [fxHide.xs]="true">
+  <mat-form-field>
+    <mat-label>{{ 'SEARCH' | translate }}</mat-label>
+    <input matInput [(ngModel)]="searchFilter" (input)="searchFilterUpdate($event)" />
+  </mat-form-field>
+
+  <div fxLayout="row" fxLayoutGap="2%" fxLayoutAlign="start start">
+    <app-movie-ticket *ngFor="let movie of moviesCopy" [movie]="movie" fxFlex="100%" fxFlex.lt-md="100%" fxFlex.md="50%" fxFlex.gt-md="20%">
+    </app-movie-ticket>
+  </div>
+</div>
+
+<div *ngIf="movies?.length > 0" [fxHide.gt-sm]="true">
+  <mat-card fxLayout="row break" fxLayoutAlign="left">
+    <mat-form-field fxFlex class="last-child">
+      <mat-label>{{ 'SEARCH' | translate }}</mat-label>
+      <input matInput [(ngModel)]="searchFilter" (input)="searchFilterUpdate($event)" />
+    </mat-form-field>
+
+    <!--    <section fxFlex="20%">-->
+    <!--      <mat-slide-toggle [checked]="true" (toggleChange)="toggle()"><mat-icon>view_headline</mat-icon></mat-slide-toggle>-->
+    <!--    </section>-->
+  </mat-card>
+
+  <div fxLayout="column">
+    <app-movie-ticket *ngFor="let movie of moviesCopy; trackBy: trackByFn" [movie]="movie"> </app-movie-ticket>
+  </div>
+</div>
+
+<div *ngIf="moviesCopy?.length != movies?.length" style="margin-top: 25%">
+  <div fxLayout="column" fxLayoutGap="3%" style="margin-bottom: 15px;">
+    <div style="text-align: center;">
+      <mat-icon>remove_circle_outline</mat-icon>
+    </div>
+    <div style="text-align: center; font-size: 2.5vh;">
+      {{ 'CINEMA_TICKETS_SEARCH_NOTHING_FOUND' | translate }}
     </div>
   </div>
 </div>
 
-<div *ngIf="movies != null">
-  <div class="row" style="margin-bottom: 15px;">
-    <app-movie-ticket
-      *ngFor="let movie of movies"
-      [movie]="movie"
-      class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-3">
-    </app-movie-ticket>
-  </div>
-
-  <div *ngIf="movies.length == 0" style="margin-top: 25%">
-    <div class="row" style="margin-bottom: 15px;">
-      <div class="col-12" style="text-align: center;">
-        <mat-icon>remove_circle_outline</mat-icon>
-      </div>
+<div *ngIf="movies?.length == 0" style="margin-top: 25%">
+  <div fxLayout="column" fxLayoutGap="3%" style="margin-bottom: 15px;">
+    <div style="text-align: center;">
+      <mat-icon>remove_circle_outline</mat-icon>
     </div>
-    <div class="row">
-      <div class="col-12" style="text-align: center; font-size: 2.5vh;">
-        {{'CINEMA_TICKETS_NO_MOVIES_AVAILABLE' | translate}}
-      </div>
+    <div style="text-align: center; font-size: 2.5vh;">
+      {{ 'CINEMA_TICKETS_NO_MOVIES_AVAILABLE' | translate }}
     </div>
   </div>
 </div>

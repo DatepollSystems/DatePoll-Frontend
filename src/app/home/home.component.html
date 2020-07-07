@@ -58,6 +58,15 @@
         <mat-divider></mat-divider>
       </div>
 
+      <div *ngIf="serverInfo.broadcasts_enabled && myUserService.hasPermission(broadcastAdministration)">
+        <a (click)="onPageChange()" mat-list-item routerLink="/home/broadcasts/administration" routerLinkActive="activated">
+          <mat-icon>email</mat-icon>
+          <b>[{{ 'BETA' | translate }}]</b>&nbsp;{{ 'NAV_BROADCASTS_ADMINISTRATION' | translate }}
+        </a>
+
+        <mat-divider></mat-divider>
+      </div>
+
       <a (click)="onPageChange()" mat-list-item routerLink="settings" routerLinkActive="activated">
         <mat-icon>settings</mat-icon>
         {{ 'NAV_USER_SETTINGS' | translate }}
@@ -68,20 +77,6 @@
         <a (click)="onPageChange()" mat-list-item routerLink="management/user" routerLinkActive="activated">
           <mat-icon>contacts</mat-icon>
           {{ 'NAV_MANAGEMENT_USERS' | translate }}
-        </a>
-      </div>
-
-      <div *ngIf="myUserService.hasPermission(managementAdministration)">
-        <a (click)="onPageChange()" mat-list-item routerLink="management/group" routerLinkActive="activated">
-          <mat-icon>group</mat-icon>
-          {{ 'NAV_MANAGEMENT_GROUPS' | translate }}
-        </a>
-      </div>
-
-      <div *ngIf="myUserService.hasPermission(managementAdministration)">
-        <a (click)="onPageChange()" mat-list-item routerLink="management/performanceBadges" routerLinkActive="activated">
-          <mat-icon>star_rate</mat-icon>
-          {{ 'NAV_MANAGEMENT_PERFORMANCE_BADGES' | translate }}
         </a>
       </div>
 

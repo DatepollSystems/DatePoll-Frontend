@@ -14,14 +14,7 @@ export class AuthInterceptor implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     // Don't intercept this requests
-    const paths = [
-      '/auth',
-      '/settings/name',
-      '/settings/cinema',
-      '/settings/events',
-      'https://api.openweathermap.org',
-      'https://geocode.xyz'
-    ];
+    const paths = ['/auth', 'https://api.openweathermap.org', 'https://geocode.xyz'];
 
     let toIntercept = true;
     for (const path of paths) {

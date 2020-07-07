@@ -24,6 +24,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   cinemaMovieAdministration = Permissions.CINEMA_MOVIE_ADMINISTRATION;
   eventAdministration = Permissions.EVENTS_ADMINISTRATION;
   managementAdministration = Permissions.MANAGEMENT_ADMINISTRATION;
+  broadcastAdministration = Permissions.BROADCASTS_ADMINISTRATION;
   settingsAdministration = Permissions.SETTINGS_ADMINISTRATION;
   logsAdministration = Permissions.SYSTEM_LOGS_ADMINISTRATION;
 

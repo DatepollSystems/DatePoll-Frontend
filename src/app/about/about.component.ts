@@ -24,6 +24,7 @@ export class AboutComponent implements OnDestroy {
   instanceUsersString = '0';
   instanceEventsString = '0';
   instanceMoviesString = '0';
+  instanceBroadcasts = '0';
 
   showMoreCommunityDescription = false;
 
@@ -55,19 +56,23 @@ export class AboutComponent implements OnDestroy {
     this.authService.trySignin(username, password).subscribe(
       (data: any) => {
         console.log(data);
-        if (data.error_code != null) {
-          if (data.error_code === 'notActivated' || data.error_code === 'changePassword') {
-            this.router.navigateByUrl('/auth/signin', {state: {routingReason: 'forward', state: data.error_code, username, password}});
-          }
-
-          return;
-        }
 
         this.authService.signin(data.token, data.session_token);
         this.uiLogin();
       },
       error => {
         console.log(error);
+
+        if (error.error.error_code != null) {
+          if (error.error.error_code === 'not_activated' || error.error.error_code === 'change_password') {
+            this.router.navigateByUrl('/auth/signin', {
+              state: {routingReason: 'forward', state: error.error.error_code, username, password}
+            });
+
+            return;
+          }
+        }
+
         this.router.navigateByUrl('/auth/signin', {state: {routingReason: 'loginFailed', username, password}});
       }
     );
@@ -100,6 +105,8 @@ export class AboutComponent implements OnDestroy {
     this.showInstanceEvents(this.validateFactor(this.serverInfo.events_count), this.serverInfo.events_count);
     // noinspection ES6MissingAwait
     this.showInstanceMovies(this.validateFactor(this.serverInfo.movies_count), this.serverInfo.movies_count);
+    // noinspection ES6MissingAwait
+    this.showInstanceBroadcasts(this.validateFactor(this.serverInfo.broadcasts_count), this.serverInfo.broadcasts_count);
   }
 
   validateFactor(max: number): number {
@@ -138,6 +145,15 @@ export class AboutComponent implements OnDestroy {
       i += factor;
       await sleep(1);
       this.instanceMoviesString = i.toString();
+    }
+  }
+
+  async showInstanceBroadcasts(factor: number, max: number) {
+    this.instanceBroadcasts = '0';
+    for (let i = 0; i < max; ) {
+      i += factor;
+      await sleep(1);
+      this.instanceBroadcasts = i.toString();
     }
   }
 }

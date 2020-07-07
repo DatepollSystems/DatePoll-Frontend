@@ -10,8 +10,6 @@ import {NotificationsService} from 'angular2-notifications';
 })
 export class PersonalDataComponent {
   title: string;
-  firstname: string;
-  surname: string;
 
   birthday: Date;
 
@@ -26,8 +24,6 @@ export class PersonalDataComponent {
     private translate: TranslateService
   ) {
     this.title = this.myUserService.getTitle();
-    this.firstname = this.myUserService.getFirstname();
-    this.surname = this.myUserService.getSurname();
 
     this.birthday = this.myUserService.getBirthday();
 
@@ -40,8 +36,6 @@ export class PersonalDataComponent {
   saveData() {
     console.log('personalData | Update user');
     console.log('personalData | Title: ' + this.title);
-    console.log('personalData | Firstname: ' + this.firstname);
-    console.log('personalData | Surname: ' + this.surname);
     console.log('personalData | Birthday: ' + this.birthday);
     console.log('personalData | Streetname: ' + this.streetname);
     console.log('personalData | Streetnumber: ' + this.streetnumber);
@@ -49,8 +43,6 @@ export class PersonalDataComponent {
     console.log('personalData | Location: ' + this.location);
 
     this.myUserService.setTitle(this.title);
-    this.myUserService.setFirstname(this.firstname);
-    this.myUserService.setSurname(this.surname);
     this.myUserService.setBirthday(this.birthday);
     this.myUserService.setStreetname(this.streetname);
     this.myUserService.setStreetnumber(this.streetnumber);

@@ -7,10 +7,10 @@ import {NotificationsService} from 'angular2-notifications';
 
 import {TranslateService} from '../../../../translation/translate.service';
 import {GroupsService} from '../../../management/groups-management/groups.service';
-import {Group} from '../../../management/groups-management/models/group.model';
 import {EventsService} from '../../events.service';
 import {StandardDecisionsService} from '../../standardDecisions.service';
 
+import {GroupAndSubgroupModel, GroupType} from '../../../../utils/models/groupAndSubgroup.model';
 import {Decision} from '../../models/decision.model';
 import {EventDate} from '../../models/event-date.model';
 import {Event} from '../../models/event.model';
@@ -24,11 +24,10 @@ export class EventCreateModalComponent implements OnDestroy {
   startDate: Date;
   endDate: Date;
 
-  groups: Group[] = [];
   groupsSubscription: Subscription;
 
-  joined: any[] = [];
-  free: any[] = [];
+  joined: GroupAndSubgroupModel[] = [];
+  free: GroupAndSubgroupModel[] = [];
 
   decisions: Decision[] = [];
   standardDecisionsSubscription: Subscription;
@@ -63,57 +62,17 @@ export class EventCreateModalComponent implements OnDestroy {
       }
     });
 
-    this.groups = this.groupsService.getGroups();
-    this.remakeFreeAndJoinedList();
-    this.groupsSubscription = this.groupsService.groupsChange.subscribe(value => {
-      this.groups = value;
-      this.remakeFreeAndJoinedList();
+    this.free = this.groupsService.getGroupsAndSubgroups();
+    this.joined = [];
+    this.groupsSubscription = this.groupsService.groupsAndSubgroupsChange.subscribe(value => {
+      this.free = value;
+      this.joined = [];
     });
   }
 
   public ngOnDestroy(): void {
     this.standardDecisionsSubscription.unsubscribe();
     this.groupsSubscription.unsubscribe();
-  }
-
-  remakeFreeAndJoinedList() {
-    this.free = [];
-    this.joined = [];
-
-    for (let i = 0; i < this.groups.length; i++) {
-      const group = this.groups[i];
-
-      const groupObject = {
-        id: group.id,
-        name: group.name,
-        type: 'parentgroup'
-      };
-
-      this.free.push(groupObject);
-
-      for (let j = 0; j < group.getSubgroups().length; j++) {
-        const subgroup = group.getSubgroups()[j];
-
-        const subgroupObject = {
-          id: subgroup.id,
-          name: subgroup.name,
-          type: 'subgroup',
-          group_id: group.id,
-          group_name: group.name
-        };
-
-        this.free.push(subgroupObject);
-      }
-    }
-
-    setTimeout(() => {
-      // Check if elements are not null because if the user close the modal before the timeout, there will be thrown an error
-      if (document.getElementById('joined-list') != null && document.getElementById('free-list') != null) {
-        document.getElementById('joined-list').style.height = document.getElementById('free-list').clientHeight.toString() + 'px';
-        console.log('Free height:' + document.getElementById('free-list').clientHeight);
-        console.log('Joined height:' + document.getElementById('joined-list').clientHeight);
-      }
-    }, 1000);
   }
 
   onDecisionsChange(decisions: Decision[]) {
@@ -161,10 +120,8 @@ export class EventCreateModalComponent implements OnDestroy {
         if (this.joined.length > 0) {
           console.log('create Event | Adding groups and subgroups to event');
 
-          for (let i = 0; i < this.joined.length; i++) {
-            const group = this.joined[i];
-
-            if (group.type.includes('parentgroup')) {
+          for (const group of this.joined) {
+            if (group.type === GroupType.PARENTGROUP) {
               this.eventsService.addGroupToEvent(id, group.id).subscribe(
                 (sdata: any) => {
                   console.log(sdata);

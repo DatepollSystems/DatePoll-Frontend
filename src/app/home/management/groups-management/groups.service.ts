@@ -3,6 +3,7 @@ import {Subject} from 'rxjs';
 
 import {HttpService} from '../../../utils/http.service';
 
+import {GroupAndSubgroupModel, GroupType} from '../../../utils/models/groupAndSubgroup.model';
 import {Group} from './models/group.model';
 import {Subgroup} from './models/subgroup.model';
 
@@ -11,9 +12,11 @@ import {Subgroup} from './models/subgroup.model';
 })
 export class GroupsService {
   public groupsChange: Subject<Group[]> = new Subject<Group[]>();
+  public groupsAndSubgroupsChange = new Subject<GroupAndSubgroupModel[]>();
   public groupChange: Subject<any> = new Subject<any>();
   public subgroupChange: Subject<any> = new Subject<any>();
   private _groups: Group[] = [];
+  private _groupsAndSubgroups: GroupAndSubgroupModel[] = [];
   private _group: any = null;
   private _subgroup: any = null;
 
@@ -29,25 +32,40 @@ export class GroupsService {
     return this._groups.slice();
   }
 
+  public setGroupsAndSubgroups(groups: GroupAndSubgroupModel[]) {
+    this._groupsAndSubgroups = groups;
+    this.groupsAndSubgroupsChange.next(this._groupsAndSubgroups.slice());
+  }
+
+  public getGroupsAndSubgroups(): GroupAndSubgroupModel[] {
+    this.fetchGroups();
+    return this._groupsAndSubgroups.slice();
+  }
+
   public fetchGroups() {
     this.httpService.loggedInV1GETRequest('/management/groups', 'fetchGroups').subscribe(
       (data: any) => {
         console.log(data);
         const groupsToStore = [];
+        const groupsAndSubgroupsToStore = [];
 
-        const groupsData = data.groups;
-        for (let i = 0; i < groupsData.length; i++) {
+        for (const groupsData of data.groups) {
           const subgroupsToStore = [];
-          for (let j = 0; j < groupsData[i].subgroups.length; j++) {
-            subgroupsToStore.push(
-              new Subgroup(groupsData[i].subgroups[j].id, groupsData[i].subgroups[j].name, groupsData[i].subgroups[j].description)
-            );
+          for (const subgroupsData of groupsData.subgroups) {
+            subgroupsToStore.push(new Subgroup(subgroupsData.id, subgroupsData.name, subgroupsData.description));
+
+            const subgroup = new GroupAndSubgroupModel(subgroupsData.id, subgroupsData.name, GroupType.SUBGROUP);
+            subgroup.groupId = groupsData.id;
+            subgroup.groupName = groupsData.name;
+            groupsAndSubgroupsToStore.push(subgroup);
           }
 
-          groupsToStore.push(new Group(groupsData[i].id, groupsData[i].name, groupsData[i].description, subgroupsToStore));
+          groupsToStore.push(new Group(groupsData.id, groupsData.name, groupsData.description, subgroupsToStore));
+          groupsAndSubgroupsToStore.push(new GroupAndSubgroupModel(groupsData.id, groupsData.name, GroupType.PARENTGROUP));
         }
 
         this.setGroups(groupsToStore);
+        this.setGroupsAndSubgroups(groupsAndSubgroupsToStore);
       },
       error => console.log(error)
     );
@@ -69,7 +87,7 @@ export class GroupsService {
     const dto = {
       user_id: userID,
       group_id: groupID,
-      role: role
+      role
     };
 
     return this.httpService.loggedInV1POSTRequest('/management/groups/addUser', dto, 'addUserToGroup');
@@ -88,7 +106,7 @@ export class GroupsService {
     const dto = {
       user_id: userID,
       group_id: groupID,
-      role: role
+      role
     };
 
     return this.httpService.loggedInV1POSTRequest('/management/groups/updateUser', dto, 'updateUserInGroup');
@@ -110,7 +128,7 @@ export class GroupsService {
     const dto = {
       user_id: userID,
       subgroup_id: subgroupID,
-      role: role
+      role
     };
 
     return this.httpService.loggedInV1POSTRequest('/management/subgroups/addUser', dto, 'addUserToSubgroup');
@@ -129,7 +147,7 @@ export class GroupsService {
     const dto = {
       user_id: userID,
       subgroup_id: subgroupID,
-      role: role
+      role
     };
 
     return this.httpService.loggedInV1POSTRequest('/management/subgroups/updateUser', dto, 'updateUserInSubgroup');

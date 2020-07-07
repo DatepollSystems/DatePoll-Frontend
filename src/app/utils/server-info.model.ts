@@ -11,6 +11,10 @@ export class ServerInfoModel {
 
   public logged_interactions_count = 1;
 
+  public broadcasts_enabled = true;
+  public broadcasts_count = 1;
+  public broadcasts_sent_count = 1;
+
   public events_enabled = true;
   public events_count = 1;
   public event_votes_count = 1;

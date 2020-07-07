@@ -80,6 +80,10 @@ export class DatepollManagementComponent implements OnDestroy {
     this.settingsService.setAdminShowEvents(ob.checked);
   }
 
+  broadcastServiceChange(ob: MatSlideToggleChange) {
+    this.settingsService.setAdminShowBroadcasts(ob.checked);
+  }
+
   changeCommunityName(form: NgForm) {
     this.communityNameSaving = true;
     const communityName = form.controls.communityName.value;

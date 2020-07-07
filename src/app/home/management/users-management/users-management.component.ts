@@ -9,15 +9,17 @@ import {Subscription} from 'rxjs';
 
 import {NotificationsService, NotificationType} from 'angular2-notifications';
 
+import {TranslateService} from '../../../translation/translate.service';
 import {ExcelService} from '../../../utils/excel.service';
 import {MyUserService} from '../../my-user.service';
 import {UsersService} from './users.service';
 
-import {User} from './user.model';
-
+import {QuestionDialogComponent} from '../../../utils/shared-components/question-dialog/question-dialog.component';
 import {UserCreateModalComponent} from './user-create-modal/user-create-modal.component';
 import {UserDeleteModalComponent} from './user-delete-modal/user-delete-modal.component';
 import {UserUpdateModalComponent} from './user-update-modal/user-update-modal.component';
+
+import {User} from './user.model';
 
 @Component({
   selector: 'app-users-management',
@@ -25,7 +27,6 @@ import {UserUpdateModalComponent} from './user-update-modal/user-update-modal.co
   styleUrls: ['./users-management.component.css']
 })
 export class UsersManagementComponent implements OnInit, OnDestroy {
-  @ViewChild('successfullyActivatedAllUsers', {static: true}) successfullyActivatedAllUsers: TemplateRef<any>;
   usersLoaded = true;
 
   displayedColumns: string[] = [
@@ -53,6 +54,7 @@ export class UsersManagementComponent implements OnInit, OnDestroy {
   private usersSubscription: Subscription;
 
   constructor(
+    private translate: TranslateService,
     private router: Router,
     private bottomSheet: MatBottomSheet,
     private dialog: MatDialog,
@@ -108,14 +110,42 @@ export class UsersManagementComponent implements OnInit, OnDestroy {
   }
 
   onActivateAll() {
-    this.usersService.activateAll().subscribe(
-      (data: any) => {
-        console.log(data);
-        this.usersService.fetchUsers();
-        this.notificationsService.html(this.successfullyActivatedAllUsers, NotificationType.Success, null, 'success');
+    const answers = [
+      {
+        answer: this.translate.getTranslationFor('YES'),
+        value: 'yes'
       },
-      error => console.log(error)
-    );
+      {
+        answer: this.translate.getTranslationFor('NO'),
+        value: 'no'
+      }
+    ];
+    const question = this.translate.getTranslationFor('MANAGEMENT_USERS_ACTIVATE_ALL_QUESTION_DIALOG');
+
+    const bottomSheetRef = this.bottomSheet.open(QuestionDialogComponent, {
+      data: {
+        answers,
+        question
+      }
+    });
+
+    bottomSheetRef.afterDismissed().subscribe((value: string) => {
+      if (value != null) {
+        if (value.includes('yes')) {
+          this.usersService.activateAll().subscribe(
+            (data: any) => {
+              console.log(data);
+              this.usersService.fetchUsers();
+              this.notificationsService.success(
+                this.translate.getTranslationFor('SUCCESSFULLY'),
+                this.translate.getTranslationFor('MANAGEMENT_USERS_ACTIVATE_ALL_FINISHED')
+              );
+            },
+            error => console.log(error)
+          );
+        }
+      }
+    });
   }
 
   onCreate() {
@@ -133,7 +163,7 @@ export class UsersManagementComponent implements OnInit, OnDestroy {
 
   onDelete(userID: number) {
     this.bottomSheet.open(UserDeleteModalComponent, {
-      data: {userID: userID}
+      data: {userID}
     });
   }
 

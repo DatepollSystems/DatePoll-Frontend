@@ -41,6 +41,9 @@ export class MovieBookTicketsModalComponent {
         console.log(data);
         this.movie.bookedTickets += this.ticketsToBook;
         this.movie.bookedTicketsForYourself += this.ticketsToBook;
+        if (this.movie.bookedTickets === 20) {
+          this.cinemaService.fetchNotShownMovies();
+        }
       },
       error => {
         console.log(error);

@@ -25,6 +25,9 @@
   "INFORMATION": "Information!",
   "SHOW_MORE": "Mehr anzeigen...",
   "SHOW_LESS": "Weniger anzeigen...",
+  "MANAGEMENT": "Verwaltung",
+  "DATE": "Datum",
+  "BETA": "Beta",
 
   "LANGUAGE": "Sprache",
   "LANGUAGE_GERMAN": "Deutsch",
@@ -49,6 +52,8 @@
   "ABOUT_PAGE_STATS_EVENT_VOTES": "Abgegebene Stimmen für Events:",
   "ABOUT_PAGE_STATS_EVENT_DECISIONS": "Event Entscheidungsmöglichkeiten:",
   "ABOUT_PAGE_STATS_EVENT_DATES": "Event Zeit- & Treffpunkte",
+  "ABOUT_PAGE_STATS_BROADCASTS": "Mitteilungen",
+  "ABOUT_PAGE_STATS_BROADCASTS_SENT": "Verschickte Mitteilungen:",
   "ABOUT_PAGE_STATS_MOVIES_TICKETS": "Verbuchte Kinotickets:",
   "ABOUT_PAGE_STATS_MOVIES_WORKERS": "Kinodienste geleistet:",
   "ABOUT_PAGE_STATS_PERFORMANCE_BADGES": "Vergebene Leistungsabzeichen:",
@@ -66,6 +71,9 @@
   "404_TITLE": "Was du auch immer gesucht hast, wir haben es leider nicht gefunden.",
   "404_SUBTITLE": "Du kannst entweder zurück gehen oder dir weiterhin dieses tolle Bild einer Katze anschauen!",
   "404_GO_BACK": "Zurück",
+
+  "EDITOR_PREVIEW": "Vorschau",
+  "EDITOR_NO_PREVIEW": "Keine Vorschau verfügbar",
 
   "SIGNIN": "Anmelden",
   "SIGNIN_NOT_SIGNED_UP": "Kein Konto?",
@@ -101,6 +109,8 @@
   "NAV_CINEMA_TICKETS": "Filmkarten",
   "NAV_CINEMA_SERVICE": "Kinodienst",
   "NAV_CINEMA_ADMINISTRATION": "Filmverwaltung",
+
+  "NAV_BROADCASTS_ADMINISTRATION": "Mitteilungsverwatlung",
 
   "NAV_MANAGEMENT_USERS": "Mitgliederverwaltung",
   "NAV_MANAGEMENT_GROUPS": "Gruppenverwaltung",
@@ -164,6 +174,7 @@
   "CINEMA_TICKETS_CANCEL_CINEMA_SERVICE_TOOLTIP": "Abmelden",
   "CINEMA_TICKETS_WEATHER_FORECAST": "Wettervorhersage",
   "CINEMA_TICKETS_WEATHER_FORECAST_SHOW": "Anzeigen",
+  "CINEMA_TICKETS_SEARCH_NOTHING_FOUND": "Keine Surchergebnisse gefunden",
 
   "CINEMA_TICKETS_BOOKING_MODAL_HEADER": "Kartenreservierung für ",
   "CINEMA_TICKETS_BOOKING_MODAL_WARNING": "Karten sind in erster Linie für Vereinsmitglieder. Sollten kurz vor Kinobeginn noch Karten frei sein, können diese an Freunde oder Familienmitglieder weitergeben werden! ",
@@ -231,6 +242,40 @@
   "CINEMA_TICKETS_ADMINISTRATION_MOVIE_BOOKINGS_MANAGEMENT_MODAL_TICKETS_TO_BOOK": "Kartenanzahl",
   "CINEMA_TICKETS_ADMINISTRATION_MOVIE_BOOKINGS_MANAGEMENT_MODAL_TICKETS_TO_BOOK_INVALID": "Min. 1 Karte",
 
+  "BROADCASTS_ADMINISTRATION_REFRESH_LIST": "Mitteilungen aktualisieren",
+  "BROADCASTS_ADMINISTRATION_SEARCH_LIST": "Suche nach Namen, Daten oder Inhalten...",
+  "BROADCASTS_ADMINISTRATION_SUBJECT": "Betreff",
+  "BROADCASTS_ADMINISTRATION_DATE": "Sendedatum",
+  "BROADCASTS_ADMINISTRATION_WRITER": "Verfasser",
+  "BROADCASTS_ADMINISTRATION_BODY": "Inhalt",
+  "BROADCASTS_ADMINISTRATION_INFO_TOOLTIP": "Zeige Informationen an",
+
+  "BROADCASTS_ADMINISTRATION_CREATE_TITLE": "Mitteilung erstellen",
+  "BROADCASTS_ADMINISTRATION_CREATE_SAVE_DRAFT": "Entwurf speichern",
+  "BROADCASTS_ADMINISTRATION_CREATE_CONFIRM_QUESTION": "Bestätige diese Email zu versenden",
+  "BROADCASTS_ADMINISTRATION_CREATE_ALL_MEMBERS": "Alle Mitglieder",
+  "BROADCASTS_ADMINISTRATION_CREATE_NOTIFICATION_SUBJECT_LENGTH": "Der Betreff muss aus mindestens 4 Zeichen bestehen!",
+  "BROADCASTS_ADMINISTRATION_CREATE_NOTIFICATION_NO_GROUPS_AND_NOT_ALL_MEMBERS": "Sende die Email an alle oder wähle eine Gruppe / Register aus",
+  "BROADCASTS_ADMINISTRATION_CREATE_NOTIFICATION_BODY_LENGTH": "Bitte schreibe eine etwas längere Email!",
+  "BROADCASTS_ADMINISTRATION_CREATE_NOTIFICATION_SENDING_LENGTH": "Das senden kann einige Sekunden dauern! Außerdem kann sich die Aussendung an alle Mitglieder je nach Empfängerlistenlänge eine Minuten dauern.",
+  "BROADCASTS_ADMINISTRATION_CREATE_NOTIFICATION_SUCCESSFUL": "Die Email wird nun verteilt.",
+
+  "BROADCASTS_ADMINISTRATION_DELETE_TOOLTIP": "Mitteilung löschen",
+  "BROADCASTS_ADMINISTRATION_DELETE_CONFIRMATION_QUESTION": "Willst du diese Mitteilung wirklich löschen?",
+  "BROADCASTS_ADMINISTRATION_DELETE_SUCCESSFULLY": "Die Mitteilung wurde gelöscht!",
+
+  "BROADCASTS_ADMINISTRATION_ADMIN_INFO_TITLE": "Informationen über",
+  "BROADCASTS_ADMINISTRATION_ADMIN_INFO_SUBJECT": "Betreff:",
+  "BROADCASTS_ADMINISTRATION_ADMIN_INFO_SENT_ON": "Gesendet am",
+  "BROADCASTS_ADMINISTRATION_ADMIN_INFO_AUTHOR": "Author:",
+  "BROADCASTS_ADMINISTRATION_ADMIN_INFO_RECIPENT": "Empfänger:",
+  "BROADCASTS_ADMINISTRATION_ADMIN_INFO_RECIPENT_ALL": "Alle",
+  "BROADCASTS_ADMINISTRATION_ADMIN_INFO_SEND_RECIEPT": "Sendestatus",
+  "BROADCASTS_ADMINISTRATION_ADMIN_INFO_NAME": "Name",
+  "BROADCASTS_ADMINISTRATION_ADMIN_INFO_SENT": "Versendet",
+  "BROADCASTS_ADMINISTRATION_ADMIN_INFO_QUEUED_AT": "In Auftrag gegeben am",
+  "BROADCASTS_ADMINISTRATION_ADMIN_INFO_SENT_AT": "Versendet am",
+
   "SETTINGS_PERSONAL_DATA": "Persönliche Daten",
   "SETTINGS_PERSONAL_DATA_DESCRIPTION": "Bearbeiten Sie Ihre Persönlichen Daten.",
   "SETTINGS_PERSONAL_DATA_PERSONAL_DATA_CHANGE": "Persönliche Daten ändern",
@@ -239,10 +284,6 @@
 
   "SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_TITLE": "Titel",
   "SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_TITLE_NOT_VALID": "Der Titel darf nicht mehr als 190 Zeichen haben!",
-  "SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_FIRSTNAME": "Vorname",
-  "SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_FIRSTNAME_NOT_VALID": "Der Vorname darf weder leer sein noch mehr als 190 Zeichen haben!",
-  "SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_SURNAME": "Nachname",
-  "SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_SURNAME_NOT_VALID": "Der Nachname darf weder leer sein noch mehr als 190 Zeichen haben!",
   "SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_BIRTHDAY": "Geburtsdatum",
   "SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_STREETNAME": "Straßenname",
   "SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_STREETNAME_NOT_VALID": "Der Straßenname darf nicht mehr als 190 Zeichen haben!",
@@ -319,6 +360,7 @@
   "MANAGEMENT_USERS_EXPORT_LOADING": "Die Mitgliederliste wird erstellt... Dies kann einige Sekunden dauern! Bitte schließe den Browser in dieser Zeit nicht.",
   "MANAGEMENT_USERS_EXPORT_FINISHED": "Die Mitgliederliste wurde exportiert!",
   "MANAGEMENT_USERS_ACTIVATE_ALL": "Alle Mitglieder aktivieren",
+  "MANAGEMENT_USERS_ACTIVATE_ALL_QUESTION_DIALOG": "Willst du wirklich alle Mitglieder aktivieren?",
   "MANAGEMENT_USERS_ACTIVATE_ALL_FINISHED": "Alle nicht aktivierten Mitglieder wurden aktiviert!",
 
   "MANAGEMENT_USERS_CREATE_USER_MODAL_TITLE": "Lege ein neues Mitglied an",
@@ -370,6 +412,12 @@
   "MANAGEMENT_USERS_CREATE_USER_MODAL_PERFORMANCE_BADGES_GRADE_INCORRECT": "Der Erfolg darf nicht mehr als 190 Zeichen haben!",
   "MANAGEMENT_USERS_CREATE_USER_MODAL_PERFORMANCE_BADGES_NOTE": "Anmerkung",
   "MANAGEMENT_USERS_CREATE_USER_MODAL_PERFORMANCE_BADGES_NOTE_INCORRECT": "Die Anmerkung darf nicht mehr als 190 Zeichen haben!",
+  "MANAGEMENT_USERS_CREATE_USER_MODAL_BADGES_TITLE": "Abzeichen",
+  "MANAGEMENT_USERS_CREATE_USER_MODAL_BADGES_REMAINING_YEARS": "Verbleibende Jahre",
+  "MANAGEMENT_USERS_CREATE_USER_MODAL_BADGES_POSSIBLE": "Mögliche Abzeichen",
+  "MANAGEMENT_USERS_CREATE_USER_MODAL_BADGES_GOT": "Bekommene Abzeichen",
+  "MANAGEMENT_USERS_CREATE_USER_MODAL_REMOVE_BADGE": "Entferne das Abzeichen",
+  "MANAGEMENT_USERS_CREATE_USER_MODAL_BADGES_EXTRA_REASON": "Grund für außerordentliche Abzeichen",
 
   "MANAGEMENT_USERS_UPDATE_USER_MODAL_TITLE": "Bearbeite ",
   "MANAGEMENT_USERS_UPDATE_USER_MODAL_SUCCESSFULLY_UPDATED_USER": "Die Änderungen wurden übernommen!",
@@ -443,11 +491,11 @@
 
   "MANAGEMENT_PERFORMANCE_BADGES_REMOVE_PERFORMANCE_BADGE_TOOLTIP": "Entferne dieses Leistungsabzeichen",
   "MANAGEMENT_PERFORMANCE_BADGES_REMOVED_PERFORMANCE_BADGE_SUCCESSFUL": "Das Leistungsabzeichen wurde entfernt!",
-  "MANAGEMENT_PERFORMANCE_BADGES_REMOVE_PERFORMANCE_BADGE_MODAL_TITLE": "Willst du dieses Leistungsabzeichen wirklich löschen?",
+  "MANAGEMENT_PERFORMANCE_BADGES_REMOVE_PERFORMANCE_BADGE_CONTROL_QUESTION": "Willst du dieses Leistungsabzeichen wirklich löschen?",
 
   "MANAGEMENT_PERFORMANCE_BADGES_REMOVE_INSTRUMENT_TOOLTIP": "Entferne dieses Instrument",
   "MANAGEMENT_PERFORMANCE_BADGES_REMOVED_INSTRUMENT_SUCCESSFUL": "Das Instrument wurde entfernt!",
-  "MANAGEMENT_PERFORMANCE_BADGES_REMOVE_INSTRUMENT_MODAL_TITLE": "Willst du dieses Instrument wirklich löschen?",
+  "MANAGEMENT_PERFORMANCE_BADGES_REMOVE_INSTRUMENT_CONTROL_QUESTION": "Willst du dieses Instrument wirklich löschen?",
 
   "MANAGEMENT_PERFORMANCE_BADGES_ADD_PERFORMANCE_BADGE_NAME": "Leistungsabzeichenname",
   "MANAGEMENT_PERFORMANCE_BADGES_ADD_PERFORMANCE_BADGE_NAME_INCORRECT": "Der Name darf weder leer sein, noch mehr als 190 Zeichen haben!",
@@ -456,10 +504,22 @@
   "MANAGEMENT_PERFORMANCE_BADGES_ADD_INSTRUMENT_NAME_INCORRECT": "Der Name darf weder leer sein, noch mehr als 190 Zeichen haben!",
   "MANAGEMENT_PERFORMANCE_BADGES_ADD_INSTRUMENT_SUCCESSFUL": "Das Instrument wurde hinzugefügt!",
 
+  "MANAGEMENT_PERFORMANCE_BADGES_BADGE_TITLE": "Abzeichen",
+  "MANAGEMENT_PERFORMANCE_BADGES_BADGE_LIST_AFTER": "nach",
+  "MANAGEMENT_PERFORMANCE_BADGES_BADGE_LIST_YEARS": "Jahren",
+  "MANAGEMENT_PERFORMANCE_BADGES_BADGE_ADD_DESCRIPTION": "Beschreibung",
+  "MANAGEMENT_PERFORMANCE_BADGES_BADGE_ADD_DESCRIPTION_INCORRECT": "Die Beschreibung darf weder leer sein, noch mehr als 190 Zeichen haben!",
+  "MANAGEMENT_PERFORMANCE_BADGES_BADGE_ADD_AFTER_YEARS": "Nach wie viel Jahre",
+  "MANAGEMENT_PERFORMANCE_BADGES_BADGE_ADD_AFTER_YEARS_INCORRECT": "Die Zahl darf nicht leer sein!",
+  "MANAGEMENT_PERFORMANCE_BADGES_BADGE_ADD_SUCCESSFULLY": "Das Abzeichen wurde hinzugefügt!",
+  "MANAGEMENT_PERFORMANCE_BADGES_BADGE_REMOVE_CONTROL_QUESTION": "Willst du dieses Abzeichen wirklich löschen?",
+  "MANAGEMENT_PERFORMANCE_BADGES_BADGE_REMOVE_SUCCESSFULLY": "Das Abzeichen wurde entfernt!",
+
   "MANAGEMENT_DATEPOLL_FEATURE_SETTINGS": "DatePoll-Feature Einstellungen",
   "MANAGEMENT_DATEPOLL_FEATURE_SETTINGS_SUBTITLE": "Hier kannst du grundlegende Funktionen von DatePoll Konfigurieren!",
   "MANAGEMENT_DATEPOLL_CINEMA_SERVICE": "Kinoservice",
   "MANAGEMENT_DATEPOLL_EVENTS_SERVICE": "Events",
+  "MANAGEMENT_DATEPOLL_BROADCAST_SERVICE": "Mitteilungen",
 
   "MANAGEMENT_DATEPOLL_COMMUNITY_NAME": "Vereinsname",
   "MANAGEMENT_DATEPOLL_COMMUNITY_NAME_NOT_VALID": "Der Vereinsname darf weder leer sein, noch mehr als 50 Zeichen haben!",
@@ -496,6 +556,8 @@
   "MANAGEMENT_DATEPOLL_LOGS_DELETE_CONFIRM": "Willst du wirklich alle Logs löschen?",
   "MANAGEMENT_DATEPOLL_LOGS_LOG_TYPE": "Log-Level",
   "MANAGEMENT_DATEPOLL_LOGS_NO_LOGS": "Es gibt keine Logs mit diesem Log-Level!",
+
+  "MANAGEMENT_BADGES_TITLE": "Abzeichenverwaltung",
 
   "EVENTS_VIEW": "Events",
   "EVENTS_VIEW_SHOW_ALREADY_VOTED_EVENTS": "Beantwortete Events",

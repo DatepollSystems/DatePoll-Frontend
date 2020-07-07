@@ -90,7 +90,7 @@
             [innerHTML]="getSanitizedDescription(serverInfo.community_description)"
           ></p>
           <p
-            *ngIf="getDescriptionPreview(serverInfo.community_description) != null"
+            *ngIf="getDescriptionPreview(serverInfo.community_description) != null && !showMoreCommunityDescription"
             [innerHTML]="getDescriptionPreview(serverInfo.community_description)"
           ></p>
           <button
@@ -130,6 +130,12 @@
                 <h1>{{ instanceMoviesString }}</h1>
               </div>
             </div>
+            <div class="level-item">
+              <div>
+                <h3>{{ 'ABOUT_PAGE_STATS_BROADCASTS' | translate }}</h3>
+                <h1>{{ instanceBroadcasts }}</h1>
+              </div>
+            </div>
           </div>
 
           <mat-expansion-panel>
@@ -151,6 +157,10 @@
             <ul>
               <li>{{ 'ABOUT_PAGE_STATS_MOVIES_TICKETS' | translate }} {{ serverInfo.movies_tickets_count }}</li>
               <li>{{ 'ABOUT_PAGE_STATS_MOVIES_WORKERS' | translate }} {{ serverInfo.movies_workers_count }}</li>
+            </ul>
+
+            <ul>
+              <li>{{ 'ABOUT_PAGE_STATS_BROADCASTS_SENT' | translate }} {{ serverInfo.broadcasts_sent_count }}</li>
             </ul>
 
             <ul>

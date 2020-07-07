@@ -6,6 +6,7 @@ export class Permissions {
       this.CINEMA_MOVIE_ADMINISTRATION,
       this.EVENTS_ADMINISTRATION,
       this.EVENTS_VIEW_DETAILS,
+      this.BROADCASTS_ADMINISTRATION,
       this.FILES_ADMINISTRATION,
       this.MANAGEMENT_ADMINISTRATION,
       this.SETTINGS_ADMINISTRATION,
@@ -23,6 +24,8 @@ export class Permissions {
   public static EVENTS_VIEW_DETAILS = 'events.details';
 
   public static FILES_ADMINISTRATION = 'files.*';
+
+  public static BROADCASTS_ADMINISTRATION = 'broadcasts.*';
 
   public static MANAGEMENT_ADMINISTRATION = 'management.*';
 

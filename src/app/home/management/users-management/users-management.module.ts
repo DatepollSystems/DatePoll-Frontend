@@ -7,9 +7,10 @@ import {MAT_DATE_FORMATS} from '@angular/material/core';
 import {NgxMatSelectSearchModule} from 'ngx-mat-select-search';
 
 import {MaterialModule} from '../../../material-module';
+import {TranslationModule} from '../../../translation/translation.module';
 import {CommonComponentsModule} from '../../../utils/common-components.module';
 import {CustomDateAdapter, MY_DATE_FORMATS} from '../../../utils/custom-date-adapter';
-import {TranslationModule} from '../../../translation/translation.module';
+import {GroupAndSubgroupTypeInputSelectModule} from '../../../utils/shared-components/group-and-subgroup-type-input-select/group-and-subgroup-type-input-select.module';
 import {UsersManagementRoutingModule} from './users-management-routing.module';
 
 import {ExcelService} from '../../../utils/excel.service';
@@ -24,6 +25,7 @@ import {UserDeleteModalComponent} from './user-delete-modal/user-delete-modal.co
 import {UserUpdateModalComponent} from './user-update-modal/user-update-modal.component';
 import {UsersExportBottomSheetComponent, UsersManagementComponent} from './users-management.component';
 import {UsersService} from './users.service';
+import {BadgesListComponent} from './badges-list/badges-list.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +38,8 @@ import {UsersService} from './users.service';
     PerformanceBadgesListComponent,
     PermissionsListComponent,
     PhoneNumbersListComponent,
-    UserDeleteModalComponent
+    UserDeleteModalComponent,
+    BadgesListComponent
   ],
   imports: [
     CommonModule,
@@ -46,7 +49,8 @@ import {UsersService} from './users.service';
     TranslationModule,
     NgxMatSelectSearchModule,
     UsersManagementRoutingModule,
-    CommonComponentsModule
+    CommonComponentsModule,
+    GroupAndSubgroupTypeInputSelectModule
   ],
   providers: [
     UsersService,
