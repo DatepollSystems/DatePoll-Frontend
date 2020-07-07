@@ -105,10 +105,7 @@ export class HttpService {
     if (functionUser != null) {
       console.log('setSettingsRequest | ' + functionUser);
     }
-
-    const headers = new HttpHeaders().set('Content-Type', 'application/json');
-
-    return this.http.post(this.apiUrl + '/settings/administration' + url, body, {headers: headers});
+    return this.loggedInV1POSTRequest('/system/settings' + url, body);
   }
 
   private log(type: string, url: string, functionUser: string = null) {
