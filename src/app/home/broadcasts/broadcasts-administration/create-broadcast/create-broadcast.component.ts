@@ -65,6 +65,33 @@ export class CreateBroadcastComponent implements OnDestroy {
   }
 
   send() {
+    if (this.subject.length < 1 || this.subject.length > 190) {
+      console.log('Subject size wrong! - ' + this.subject.length);
+      this.notificationService.alert(
+        this.translate.getTranslationFor('WARNING'),
+        this.translate.getTranslationFor('BROADCASTS_ADMINISTRATION_CREATE_NOTIFICATION_SUBJECT_LENGTH')
+      );
+      return;
+    }
+
+    if (this.selectedGroupsAndSubgroups.length === 0 && !this.allMembers) {
+      console.log('Groups length 0! - ' + this.selectedGroupsAndSubgroups.length + ' And allMembers - ' + this.allMembers);
+      this.notificationService.alert(
+        this.translate.getTranslationFor('WARNING'),
+        this.translate.getTranslationFor('BROADCASTS_ADMINISTRATION_CREATE_NOTIFICATION_NO_GROUPS_AND_NOT_ALL_MEMBERS')
+      );
+      return;
+    }
+
+    if (this.body.length < 10) {
+      console.log('Mail body length < 10');
+      this.notificationService.alert(
+        this.translate.getTranslationFor('WARNING'),
+        this.translate.getTranslationFor('BROADCASTS_ADMINISTRATION_CREATE_NOTIFICATION_BODY_LENGTH')
+      );
+      return;
+    }
+
     const answers = [
       {
         answer: this.translate.getTranslationFor('YES'),
@@ -87,33 +114,6 @@ export class CreateBroadcastComponent implements OnDestroy {
     bottomSheetRef.afterDismissed().subscribe((value: string) => {
       if (value != null) {
         if (value.includes('yes')) {
-          if (this.subject.length < 1 || this.subject.length > 190) {
-            console.log('Subject size wrong! - ' + this.subject.length);
-            this.notificationService.alert(
-              this.translate.getTranslationFor('WARNING'),
-              this.translate.getTranslationFor('BROADCASTS_ADMINISTRATION_CREATE_NOTIFICATION_SUBJECT_LENGTH')
-            );
-            return;
-          }
-
-          if (this.selectedGroupsAndSubgroups.length === 0 && !this.allMembers) {
-            console.log('Groups length 0! - ' + this.selectedGroupsAndSubgroups.length + ' And allMembers - ' + this.allMembers);
-            this.notificationService.alert(
-              this.translate.getTranslationFor('WARNING'),
-              this.translate.getTranslationFor('BROADCASTS_ADMINISTRATION_CREATE_NOTIFICATION_NO_GROUPS_AND_NOT_ALL_MEMBERS')
-            );
-            return;
-          }
-
-          if (this.body.length < 10) {
-            console.log('Mail body length < 10');
-            this.notificationService.alert(
-              this.translate.getTranslationFor('WARNING'),
-              this.translate.getTranslationFor('BROADCASTS_ADMINISTRATION_CREATE_NOTIFICATION_BODY_LENGTH')
-            );
-            return;
-          }
-
           const groups = [];
           const subgroups = [];
           if (!this.allMembers) {
