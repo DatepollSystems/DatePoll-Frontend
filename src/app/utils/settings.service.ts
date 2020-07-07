@@ -75,6 +75,21 @@ export class SettingsService {
     );
   }
 
+  public setAdminShowBroadcasts(showBroadcasts: boolean) {
+    this.setShowBroadcasts(showBroadcasts);
+
+    const body = {
+      isEnabled: showBroadcasts
+    };
+
+    this.httpService.setSettingsRequest('/broadcast', body, 'setBroadcastFeatureEnabled').subscribe(
+      (response: any) => {
+        console.log(response);
+      },
+      error => console.log(error)
+    );
+  }
+
   public setAdminCommunityName(communityName: string) {
     this.setCommunityName(communityName);
 
@@ -177,6 +192,11 @@ export class SettingsService {
 
   private setShowEvents(showEvents: boolean) {
     this._serverInfo.events_enabled = showEvents;
+    this.updateLocalServerInfo();
+  }
+
+  private setShowBroadcasts(showBroadcasts: boolean) {
+    this._serverInfo.broadcasts_enabled = showBroadcasts;
     this.updateLocalServerInfo();
   }
 

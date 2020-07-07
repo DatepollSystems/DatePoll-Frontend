@@ -27,6 +27,7 @@
   "SHOW_LESS": "Weniger anzeigen...",
   "MANAGEMENT": "Verwaltung",
   "DATE": "Datum",
+  "BETA": "Beta",
 
   "LANGUAGE": "Sprache",
   "LANGUAGE_GERMAN": "Deutsch",
@@ -518,6 +519,7 @@
   "MANAGEMENT_DATEPOLL_FEATURE_SETTINGS_SUBTITLE": "Hier kannst du grundlegende Funktionen von DatePoll Konfigurieren!",
   "MANAGEMENT_DATEPOLL_CINEMA_SERVICE": "Kinoservice",
   "MANAGEMENT_DATEPOLL_EVENTS_SERVICE": "Events",
+  "MANAGEMENT_DATEPOLL_BROADCAST_SERVICE": "Mitteilungen",
 
   "MANAGEMENT_DATEPOLL_COMMUNITY_NAME": "Vereinsname",
   "MANAGEMENT_DATEPOLL_COMMUNITY_NAME_NOT_VALID": "Der Vereinsname darf weder leer sein, noch mehr als 50 Zeichen haben!",
