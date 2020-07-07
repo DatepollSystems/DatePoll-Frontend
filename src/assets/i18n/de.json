@@ -359,6 +359,7 @@
   "MANAGEMENT_USERS_EXPORT_LOADING": "Die Mitgliederliste wird erstellt... Dies kann einige Sekunden dauern! Bitte schließe den Browser in dieser Zeit nicht.",
   "MANAGEMENT_USERS_EXPORT_FINISHED": "Die Mitgliederliste wurde exportiert!",
   "MANAGEMENT_USERS_ACTIVATE_ALL": "Alle Mitglieder aktivieren",
+  "MANAGEMENT_USERS_ACTIVATE_ALL_QUESTION_DIALOG": "Willst du wirklich alle Mitglieder aktivieren?",
   "MANAGEMENT_USERS_ACTIVATE_ALL_FINISHED": "Alle nicht aktivierten Mitglieder wurden aktiviert!",
 
   "MANAGEMENT_USERS_CREATE_USER_MODAL_TITLE": "Lege ein neues Mitglied an",
