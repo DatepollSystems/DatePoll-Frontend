@@ -3,7 +3,7 @@
   <div class="row">
     <div class="col-12">
       <mat-card class="info-mat-card" matRipple>
-        <mat-card-content class="last-child"> <b>Info! </b>{{ 'CINEMA_TICKETS_BOOKING_MODAL_WARNING' | translate }} </mat-card-content>
+        <mat-card-content class="last-child"><b>Info! </b>{{ 'CINEMA_TICKETS_BOOKING_MODAL_WARNING' | translate }} </mat-card-content>
       </mat-card>
     </div>
   </div>
@@ -15,12 +15,10 @@
           #ticketsToBookModel="ngModel"
           [(ngModel)]="ticketsToBook"
           min="1"
-          [max]="freeTickets"
           id="ticketsToBook"
           matInput
           name="ticketsToBook"
           ngModel
-          number
           placeholder="{{ 'CINEMA_TICKETS_BOOKING_MODAL_NUMBER_OF_TICKETS' | translate }}"
           required
           type="number"
@@ -41,7 +39,7 @@
 </mat-dialog-content>
 <mat-dialog-actions align="end">
   <button mat-button mat-dialog-close>{{ 'CLOSE' | translate }}</button>
-  <button (click)="form.ngSubmit.emit()" [disabled]="!form.form.valid" [mat-dialog-close]="true" class="success-button" mat-button>
+  <button (click)="form.ngSubmit.emit()" [disabled]="this.ticketsToBook > this.freeTickets" color="accent" mat-flat-button type="button">
     {{ 'CINEMA_TICKETS_BOOKING_MODAL_BOOK' | translate }}
   </button>
 </mat-dialog-actions>

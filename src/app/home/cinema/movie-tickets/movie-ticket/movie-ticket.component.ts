@@ -55,11 +55,12 @@ export class MovieTicketComponent implements OnInit {
         console.log(data);
 
         let check = false;
-        if (this.movie.bookedTickets === 20) {
+        if (this.movie.bookedTickets === 20 || this.movie.bookedTickets === 0) {
           check = true;
         }
         this.movie.bookedTickets -= this.movie.bookedTicketsForYourself;
         this.movie.bookedTicketsForYourself = 0;
+        this.soldOut = this.movie.bookedTickets >= 20;
 
         if (check) {
           this.cinemaService.fetchNotShownMovies();
