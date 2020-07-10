@@ -1,0 +1,12 @@
+<mat-nav-list>
+  <div *ngFor="let draft of drafts" mat-list-item>
+    <span mat-line
+      >> {{ draft.subject }} {{ 'BROADCASTS_ADMINISTRATION_CREATE_LOAD_DRAFT_BY' | translate }} {{ draft.writerName }} |
+      {{ draft.body.slice(0, 18) }}</span
+    >
+    <div mat-line fxLayout="row">
+      <button mat-flat-button fxFlex="50%" color="accent" (click)="loadDraft(draft)">{{ 'LOAD' | translate }}</button>
+      <button mat-stroked-button fxFlex="50%" color="warn" (click)="deleteDraft(draft)">{{ 'DELETE' | translate }}</button>
+    </div>
+  </div>
+</mat-nav-list>

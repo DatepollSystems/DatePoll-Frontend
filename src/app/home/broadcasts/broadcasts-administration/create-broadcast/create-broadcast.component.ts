@@ -1,6 +1,6 @@
 import {Component, OnDestroy} from '@angular/core';
 import {MatBottomSheet} from '@angular/material/bottom-sheet';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {Subscription} from 'rxjs';
 
 import {NotificationsService} from 'angular2-notifications';
@@ -8,10 +8,13 @@ import {NotificationsService} from 'angular2-notifications';
 import {TranslateService} from '../../../../translation/translate.service';
 import {GroupsService} from '../../../management/groups-management/groups.service';
 import {BroadcastsAdministrationService} from '../broadcasts-administration.service';
+import {BroadcastsDraftsService} from '../broadcasts-drafts.service';
 
 import {QuestionDialogComponent} from '../../../../utils/shared-components/question-dialog/question-dialog.component';
+import {LoadDraftDialogComponent} from './load-draft-dialog/load-draft-dialog-component';
 
 import {GroupAndSubgroupModel} from '../../../../utils/models/groupAndSubgroup.model';
+import {BroadcastDraft} from '../../models/broadcast-draft.model';
 
 @Component({
   selector: 'app-create-broadcast',
@@ -29,11 +32,17 @@ export class CreateBroadcastComponent implements OnDestroy {
   body = '';
   bodyHTML = '';
 
+  draftId = -1;
+  draft: BroadcastDraft;
+  draftSubscription: Subscription;
+
   constructor(
     private broadcastsService: BroadcastsAdministrationService,
+    private draftsService: BroadcastsDraftsService,
     private groupsService: GroupsService,
     private bottomSheet: MatBottomSheet,
     private router: Router,
+    private route: ActivatedRoute,
     private notificationService: NotificationsService,
     private translate: TranslateService
   ) {
@@ -41,10 +50,39 @@ export class CreateBroadcastComponent implements OnDestroy {
     this.groupsSubscription = this.groupsService.groupsAndSubgroupsChange.subscribe(value => {
       this.groupsAndSubgroups = value;
     });
+
+    this.route.paramMap.subscribe(params => {
+      const id = params.get('id');
+
+      if (id != null) {
+        this.draftId = Number(id);
+        this.draft = this.draftsService.getDraft(this.draftId);
+        this.remake();
+        console.log('Draft to load: ' + id);
+
+        this.draftSubscription = this.draftsService.draftChange.subscribe(value => {
+          this.draft = value;
+          this.remake();
+        });
+      } else {
+        console.log('No draft to load');
+      }
+    });
+  }
+
+  remake() {
+    if (this.draft) {
+      this.subject = this.draft.subject;
+      this.body = this.draft.body;
+      this.bodyHTML = this.draft.bodyHTML;
+    }
   }
 
   ngOnDestroy(): void {
     this.groupsSubscription.unsubscribe();
+    if (this.draftSubscription) {
+      this.draftSubscription.unsubscribe();
+    }
   }
 
   bodyChanged(body: string) {
@@ -62,6 +100,54 @@ export class CreateBroadcastComponent implements OnDestroy {
   groupsAndSubgroupChanged(groupsAndSubgroups: GroupAndSubgroupModel[]) {
     this.selectedGroupsAndSubgroups = groupsAndSubgroups;
     console.log(this.selectedGroupsAndSubgroups);
+  }
+
+  loadDraft() {
+    this.bottomSheet.open(LoadDraftDialogComponent);
+  }
+
+  saveDraft() {
+    if (this.subject.length < 1 || this.subject.length > 190) {
+      console.log('Subject size wrong! - ' + this.subject.length);
+      this.notificationService.alert(
+        this.translate.getTranslationFor('WARNING'),
+        this.translate.getTranslationFor('BROADCASTS_ADMINISTRATION_CREATE_NOTIFICATION_SUBJECT_LENGTH')
+      );
+      return;
+    }
+
+    const draft = new BroadcastDraft(-1, this.subject, this.body, null);
+    draft.bodyHTML = this.bodyHTML;
+    this.draftsService.setDraft(draft);
+
+    if (this.draftId < 0) {
+      this.draftsService.create(draft).subscribe(
+        (response: any) => {
+          console.log(response);
+          this.notificationService.success(
+            this.translate.getTranslationFor('SUCCESSFULLY'),
+            this.translate.getTranslationFor('BROADCASTS_ADMINISTRATION_CREATE_NOTIFICATION_DRAFT_SUCCESSFUL_SAVED')
+          );
+          this.router.navigate(['/home/broadcasts/administration/draft/' + response.draft.id]);
+        },
+        error => {
+          console.log(error);
+        }
+      );
+    } else {
+      this.draftsService.update(draft, this.draftId).subscribe(
+        (response: any) => {
+          console.log(response);
+          this.notificationService.success(
+            this.translate.getTranslationFor('SUCCESSFULLY'),
+            this.translate.getTranslationFor('BROADCASTS_ADMINISTRATION_CREATE_NOTIFICATION_DRAFT_SUCCESSFUL_SAVED')
+          );
+        },
+        error => {
+          console.log(error);
+        }
+      );
+    }
   }
 
   send() {
@@ -156,6 +242,22 @@ export class CreateBroadcastComponent implements OnDestroy {
                 this.translate.getTranslationFor('BROADCASTS_ADMINISTRATION_CREATE_NOTIFICATION_SUCCESSFUL'),
                 {timeOut: 8000}
               );
+              // Delete draft of email if broadcast was successful created
+              if (this.draftId > -1) {
+                this.draftsService.delete(this.draftId).subscribe(
+                  (deleteResponse: any) => {
+                    console.log(deleteResponse);
+                    this.notificationService.success(
+                      this.translate.getTranslationFor('SUCCESSFULLY'),
+                      this.translate.getTranslationFor('BROADCASTS_ADMINISTRATION_CREATE_NOTIFICATION_DRAFT_SUCCESSFUL_DELETED')
+                    );
+                    this.draftsService.fetchDrafts();
+                  },
+                  error => {
+                    console.log(error);
+                  }
+                );
+              }
               this.router.navigate(['/home/broadcasts/administration']);
             },
             error => console.log(error)

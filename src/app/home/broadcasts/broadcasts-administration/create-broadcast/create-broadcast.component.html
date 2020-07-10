@@ -1,7 +1,10 @@
 <mat-card class="mat-elevation-z3">
   <mat-card-content fxLayout="column" fxLayoutGap.xs="3%" fxLayoutGap="1%">
     <div fxLayout="row" fxLayoutAlign="space-between center">
-      <h1 class="not-selectable">{{ 'BROADCASTS_ADMINISTRATION_CREATE_TITLE' | translate }}</h1>
+      <h1 class="not-selectable">
+        {{ 'BROADCASTS_ADMINISTRATION_CREATE_TITLE' | translate }}
+        <span *ngIf="draft">{{ 'BROADCASTS_ADMINISTRATION_CREATE_TITLE_DRAFT' | translate }} {{ draft.subject }}</span>
+      </h1>
       <button color="accent" mat-fab (click)="send()">
         <mat-icon>send</mat-icon>
       </button>
@@ -12,9 +15,17 @@
         <mat-icon>arrow_back</mat-icon>
       </button>
 
-      <button mat-stroked-button fxFlex.gt-md="20%" fxFlex.gt-xs="50%" fxFlex.xs="70%" disabled>
-        <mat-icon>save</mat-icon> {{ 'BROADCASTS_ADMINISTRATION_CREATE_SAVE_DRAFT' | translate }}
-      </button>
+      <div fxFlex.gt-md="20%" fxFlex.gt-xs="50%" fxFlex.xs="70%">
+        <button mat-stroked-button (click)="loadDraft()">
+          <mat-icon>cloud_download</mat-icon>
+          {{ 'BROADCASTS_ADMINISTRATION_CREATE_LOAD_DRAFT' | translate }}
+        </button>
+
+        <button mat-stroked-button (click)="saveDraft()">
+          <mat-icon>save</mat-icon>
+          {{ 'BROADCASTS_ADMINISTRATION_CREATE_SAVE_DRAFT' | translate }}
+        </button>
+      </div>
 
       <div fxFlex.gt-md="70%" fxFlex.lt-lg="100%" fxLayout="row" fxLayoutAlign="end">
         <app-group-and-subgroup-type-input-select
@@ -33,6 +44,11 @@
       <input matInput type="text" min="1" max="119" minlength="1" maxlength="119" required [(ngModel)]="subject" />
     </mat-form-field>
 
-    <app-editor (bodyChanged)="bodyChanged($event)" (bodyHTMLChanged)="bodyHTMLChanged($event)"></app-editor>
+    <app-editor
+      (bodyChanged)="bodyChanged($event)"
+      (bodyHTMLChanged)="bodyHTMLChanged($event)"
+      [body]="draft?.body"
+      [bodyHTML]="draft?.bodyHTML"
+    ></app-editor>
   </mat-card-content>
 </mat-card>
