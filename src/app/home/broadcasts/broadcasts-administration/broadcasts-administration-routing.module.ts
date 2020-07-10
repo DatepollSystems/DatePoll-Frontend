@@ -8,6 +8,7 @@ import {CreateBroadcastComponent} from './create-broadcast/create-broadcast.comp
 const broadcastsAdministrationRoutes: Routes = [
   {path: '', component: BroadcastsAdministrationComponent},
   {path: 'create', component: CreateBroadcastComponent},
+  {path: 'draft/:id', component: CreateBroadcastComponent},
   {path: ':id', component: BroadcastAdminInfoComponent}
 ];
 

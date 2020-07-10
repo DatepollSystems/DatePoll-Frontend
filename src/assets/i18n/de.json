@@ -9,6 +9,7 @@
   "OPEN": "Öffnen",
   "DO_NOT_FORGET_TO_SAVE": "Vergiss nicht zu speichern!",
   "LOADING": "Laden...",
+  "LOAD": "Laden",
   "PUT": "Anlegen",
   "BACK": "Zurück",
   "ADD": "Hinzufügen",
@@ -127,6 +128,7 @@
 
   "STARTPAGE_BIRTHDAY": "Geburtstage des Monat",
   "STARTPAGE_BIRTHDAY_INFO": "Hier kannst du es deaktivieren dass dein Name bei den Geburtstagen aufscheint.",
+  "STARTPAGE_BIRTHDAY_MORE": "Zeige alle Geburtstage an",
   "STARTPAGE_BIRTHDAY_NAME": "Name",
   "STARTPAGE_BIRTHDAY_DATE": "Geburtsdatum",
 
@@ -251,7 +253,10 @@
   "BROADCASTS_ADMINISTRATION_INFO_TOOLTIP": "Zeige Informationen an",
 
   "BROADCASTS_ADMINISTRATION_CREATE_TITLE": "Mitteilung erstellen",
-  "BROADCASTS_ADMINISTRATION_CREATE_SAVE_DRAFT": "Entwurf speichern",
+  "BROADCASTS_ADMINISTRATION_CREATE_TITLE_DRAFT": " - Entwurf",
+  "BROADCASTS_ADMINISTRATION_CREATE_LOAD_DRAFT": "Öffnen",
+  "BROADCASTS_ADMINISTRATION_CREATE_LOAD_DRAFT_BY": "von",
+  "BROADCASTS_ADMINISTRATION_CREATE_SAVE_DRAFT": "Speichern",
   "BROADCASTS_ADMINISTRATION_CREATE_CONFIRM_QUESTION": "Bestätige diese Email zu versenden",
   "BROADCASTS_ADMINISTRATION_CREATE_ALL_MEMBERS": "Alle Mitglieder",
   "BROADCASTS_ADMINISTRATION_CREATE_NOTIFICATION_SUBJECT_LENGTH": "Der Betreff muss aus mindestens 4 Zeichen bestehen!",
@@ -259,6 +264,8 @@
   "BROADCASTS_ADMINISTRATION_CREATE_NOTIFICATION_BODY_LENGTH": "Bitte schreibe eine etwas längere Email!",
   "BROADCASTS_ADMINISTRATION_CREATE_NOTIFICATION_SENDING_LENGTH": "Das senden kann einige Sekunden dauern! Außerdem kann sich die Aussendung an alle Mitglieder je nach Empfängerlistenlänge eine Minuten dauern.",
   "BROADCASTS_ADMINISTRATION_CREATE_NOTIFICATION_SUCCESSFUL": "Die Email wird nun verteilt.",
+  "BROADCASTS_ADMINISTRATION_CREATE_NOTIFICATION_DRAFT_SUCCESSFUL_SAVED": "Entwurf gespeichert!",
+  "BROADCASTS_ADMINISTRATION_CREATE_NOTIFICATION_DRAFT_SUCCESSFUL_DELETED": "Entwurf gelöscht!",
 
   "BROADCASTS_ADMINISTRATION_DELETE_TOOLTIP": "Mitteilung löschen",
   "BROADCASTS_ADMINISTRATION_DELETE_CONFIRMATION_QUESTION": "Willst du diese Mitteilung wirklich löschen?",

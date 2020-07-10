@@ -98,7 +98,7 @@ export class HttpService {
     if (functionUser != null) {
       console.log('getSettingsRequest | ' + functionUser);
     }
-    return this.http.get(this.apiUrl + '/settings' + url);
+    return this.loggedInV1GETRequest('/settings' + url);
   }
 
   public setSettingsRequest(url: string, body: any, functionUser: string = null) {

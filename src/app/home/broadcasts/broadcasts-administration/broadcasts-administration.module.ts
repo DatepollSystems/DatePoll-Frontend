@@ -18,9 +18,10 @@ import {BroadcastsAdministrationRoutingModule} from './broadcasts-administration
 import {BroadcastAdminInfoComponent} from './broadcast-admin-info/broadcast-admin-info.component';
 import {BroadcastsAdministrationComponent} from './broadcasts-administration.component';
 import {CreateBroadcastComponent} from './create-broadcast/create-broadcast.component';
+import {LoadDraftDialogComponent} from './create-broadcast/load-draft-dialog/load-draft-dialog-component';
 
 @NgModule({
-  declarations: [BroadcastsAdministrationComponent, CreateBroadcastComponent, BroadcastAdminInfoComponent],
+  declarations: [BroadcastsAdministrationComponent, CreateBroadcastComponent, BroadcastAdminInfoComponent, LoadDraftDialogComponent],
   imports: [
     CommonModule,
     MaterialModule,

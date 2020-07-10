@@ -33,7 +33,7 @@
         </button>
       </mat-list-item>
 
-      <mat-divider></mat-divider>
+      <mat-divider *ngIf="events.length != 0"></mat-divider>
 
       <div mat-subheader *ngIf="bookings.length != 0" class="sub-header">{{ 'STARTPAGE_BOOKINGS' | translate }}</div>
       <mat-list-item *ngFor="let booking of bookings">
@@ -52,10 +52,30 @@
         </div>
       </mat-list-item>
 
-      <mat-divider></mat-divider>
+      <mat-divider *ngIf="bookings.length != 0"></mat-divider>
 
       <div mat-subheader *ngIf="birthdays.length != 0" class="sub-header">
         {{ 'STARTPAGE_BIRTHDAY' | translate }}
+        <button
+          *ngIf="howMuchBirthdaysToShow === 7"
+          mat-icon-button
+          matTooltip="{{ 'STARTPAGE_BIRTHDAY_MORE' | translate }}"
+          matTooltipPosition="above"
+          (click)="onBirthdaysExpand()"
+          aria-label="Button to show all birthdays"
+        >
+          <mat-icon>expand_more</mat-icon>
+        </button>
+        <button
+          *ngIf="howMuchBirthdaysToShow === birthdays.length"
+          mat-icon-button
+          matTooltip="{{ 'STARTPAGE_BIRTHDAY_MORE' | translate }}"
+          matTooltipPosition="above"
+          (click)="onBirthdaysExpand()"
+          aria-label="Button to show all birthdays"
+        >
+          <mat-icon>expand_less</mat-icon>
+        </button>
         <button
           mat-icon-button
           matTooltip="{{ 'STARTPAGE_BIRTHDAY_INFO' | translate }}"
@@ -66,9 +86,9 @@
           <mat-icon>info</mat-icon>
         </button>
       </div>
-      <mat-list-item *ngFor="let birthday of birthdays">
+      <mat-list-item *ngFor="let birthday of birthdays.slice(0, howMuchBirthdaysToShow)">
         <div mat-line>
-          <b>{{ birthday.name }}</b>
+          {{ birthday.name }}
         </div>
         <div mat-line>{{ birthday.date | date: 'EE, dd.MM.yyyy' }} ({{ birthday.age }})</div>
       </mat-list-item>
@@ -132,7 +152,27 @@
         <mat-card-content>
           <mat-card-title fxLayout="row" fxLayoutAlign="end">
             <div fxFlex.md="70%" fxFlex.lg="80%" fxFlexAlign="center">{{ 'STARTPAGE_BIRTHDAY' | translate }}</div>
-            <div fxFlex.md="30%" fxFlex.lg="20%">
+            <div fxFlex.md="30%" fxFlex.lg="20%" fxLayout="row">
+              <button
+                *ngIf="howMuchBirthdaysToShow === 7"
+                mat-icon-button
+                matTooltip="{{ 'STARTPAGE_BIRTHDAY_MORE' | translate }}"
+                matTooltipPosition="above"
+                (click)="onBirthdaysExpand()"
+                aria-label="Button to show all birthdays"
+              >
+                <mat-icon>expand_more</mat-icon>
+              </button>
+              <button
+                *ngIf="howMuchBirthdaysToShow === birthdays.length"
+                mat-icon-button
+                matTooltip="{{ 'STARTPAGE_BIRTHDAY_MORE' | translate }}"
+                matTooltipPosition="above"
+                (click)="onBirthdaysExpand()"
+                aria-label="Button to show all birthdays"
+              >
+                <mat-icon>expand_less</mat-icon>
+              </button>
               <button
                 mat-icon-button
                 matTooltip="{{ 'STARTPAGE_BIRTHDAY_INFO' | translate }}"
@@ -154,7 +194,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let birthday of birthdays">
+                <tr *ngFor="let birthday of birthdays.slice(0, howMuchBirthdaysToShow)">
                   <td>{{ birthday.name }}</td>
                   <td>{{ birthday.date | date: 'EE, dd.MM.yyyy' }} ({{ birthday.age }})</td>
                 </tr>

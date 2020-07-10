@@ -12,8 +12,15 @@
     <input matInput [(ngModel)]="searchFilter" (input)="searchFilterUpdate($event)" />
   </mat-form-field>
 
-  <div fxLayout="row" fxLayoutGap="2%" fxLayoutAlign="start start">
-    <app-movie-ticket *ngFor="let movie of moviesCopy" [movie]="movie" fxFlex="100%" fxFlex.lt-md="100%" fxFlex.md="50%" fxFlex.gt-md="20%">
+  <div fxLayout="row break" fxLayoutGap="2%" fxLayoutAlign="space-between start">
+    <app-movie-ticket
+      *ngFor="let movie of moviesCopy"
+      [movie]="movie"
+      fxFlex.gt-xs="48%"
+      fxFlex.md="48%"
+      fxFlex.gt-md="22%"
+      fxFlex.lg="30%"
+    >
     </app-movie-ticket>
   </div>
 </div>

@@ -1,21 +1,24 @@
-import {Component, EventEmitter, Output} from '@angular/core';
-
+import {Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, ViewChild} from '@angular/core';
 import {DomSanitizer} from '@angular/platform-browser';
-import {EditorChangeContent, EditorChangeSelection} from 'ngx-quill';
+import {EditorChangeContent, EditorChangeSelection, QuillEditorComponent} from 'ngx-quill';
 
 @Component({
   selector: 'app-editor',
   templateUrl: './editor.component.html',
   styleUrls: ['./editor.component.css']
 })
-export class EditorComponent {
+export class EditorComponent implements OnChanges {
   modules = {};
 
+  @Input()
   bodyHTML: string;
+  @Input()
   body: string;
 
   @Output() bodyHTMLChanged = new EventEmitter<string>();
   @Output() bodyChanged = new EventEmitter<string>();
+
+  @ViewChild(QuillEditorComponent, {static: true}) quill: QuillEditorComponent;
 
   constructor(private sanitizer: DomSanitizer) {
     this.modules = {
@@ -31,6 +34,12 @@ export class EditorComponent {
         ['link'] // link and image, video
       ]
     };
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (this.body && this.bodyHTML) {
+      this.quill.content = this.bodyHTML;
+    }
   }
 
   getSanitizedContent(content: string) {
