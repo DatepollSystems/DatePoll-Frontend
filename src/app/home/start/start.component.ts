@@ -28,6 +28,7 @@ import {QuestionDialogComponent} from '../../utils/shared-components/question-di
 export class StartComponent implements OnDestroy {
   birthdays: HomeBirthdayModel[];
   birthdaysSubscription: Subscription;
+  howMuchBirthdaysToShow = 7;
 
   bookings: HomeBookingsModel[];
   bookingsSubscription: Subscription;
@@ -86,6 +87,14 @@ export class StartComponent implements OnDestroy {
     this.birthdaysSubscription.unsubscribe();
     this.eventsSubscription.unsubscribe();
     this.isMobileSubscription.unsubscribe();
+  }
+
+  onBirthdaysExpand() {
+    if (this.howMuchBirthdaysToShow === 7) {
+      this.howMuchBirthdaysToShow = this.birthdays.length;
+    } else {
+      this.howMuchBirthdaysToShow = 7;
+    }
   }
 
   onEventItemClick(event: Event) {
