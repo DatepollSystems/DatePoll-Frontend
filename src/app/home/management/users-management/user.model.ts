@@ -15,7 +15,7 @@ export class User {
   public location: string;
   public activated: boolean;
   public activity: string;
-  public memberNumber: number;
+  public memberNumber: string;
   public internalComment: string;
   public informationDenied: boolean;
   public bvMember: boolean;
@@ -39,7 +39,7 @@ export class User {
     location: string,
     activated: boolean,
     activity: string,
-    memberNumber: number,
+    memberNumber: string,
     internalComent: string,
     informationDenied: boolean,
     bvMember: boolean,

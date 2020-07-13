@@ -224,8 +224,10 @@
         matInput
         name="memberNumber"
         ngModel
+        maxlength="190"
+        minlength="1"
         placeholder="{{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_MEMBER_NUMBER' | translate }}"
-        type="number"
+        type="text"
       />
       <mat-error *ngIf="memberNumberModel.invalid">
         {{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_MEMBER_NUMBER_INCORRECT' | translate }}
