@@ -1,11 +1,11 @@
-import {Component, OnDestroy, TemplateRef, ViewChild} from '@angular/core';
+import {Component, OnDestroy} from '@angular/core';
 import {NgForm} from '@angular/forms';
 import {MatDialogRef} from '@angular/material/dialog';
-import {MatTableDataSource} from '@angular/material/table';
 import {Subscription} from 'rxjs';
 
-import {NotificationsService, NotificationType} from 'angular2-notifications';
+import {NotificationsService} from 'angular2-notifications';
 
+import {TranslateService} from '../../../../translation/translate.service';
 import {Converter} from '../../../../utils/converter';
 import {MyUserService} from '../../../my-user.service';
 import {GroupsService} from '../../groups-management/groups.service';
@@ -17,7 +17,6 @@ import {Permissions} from '../../../../permissions';
 import {GroupAndSubgroupModel, GroupType} from '../../../../utils/models/groupAndSubgroup.model';
 import {PhoneNumber} from '../../../phoneNumber.model';
 import {UserBadge} from '../badges-list/userBadge.model';
-import {User} from '../user.model';
 import {UserPerformanceBadge} from '../userPerformanceBadge.model';
 
 @Component({
@@ -26,11 +25,6 @@ import {UserPerformanceBadge} from '../userPerformanceBadge.model';
   styleUrls: ['./user-create-modal.component.css']
 })
 export class UserCreateModalComponent implements OnDestroy {
-  @ViewChild('successfullyCreatedUser', {static: true}) successfullyCreatedUser: TemplateRef<any>;
-
-  displayedColumns: string[] = ['label', 'phonenumber', 'action'];
-  dataSource: MatTableDataSource<PhoneNumber>;
-
   usernames: string[] = [];
 
   emailAddresses: string[] = [];
@@ -39,7 +33,6 @@ export class UserCreateModalComponent implements OnDestroy {
   phoneNumbers: PhoneNumber[] = [];
 
   groupsSubscription: Subscription;
-
   joined: GroupAndSubgroupModel[] = [];
   free: GroupAndSubgroupModel[] = [];
 
@@ -47,7 +40,6 @@ export class UserCreateModalComponent implements OnDestroy {
   permissions: string[] = [];
 
   userPerformanceBadges: UserPerformanceBadge[] = [];
-
   userBadges: UserBadge[] = [];
 
   constructor(
@@ -57,10 +49,9 @@ export class UserCreateModalComponent implements OnDestroy {
     private groupsService: GroupsService,
     private badgesService: BadgesService,
     private notificationsService: NotificationsService,
+    private translate: TranslateService,
     private performanceBadgesService: PerformanceBadgesService
   ) {
-    this.dataSource = new MatTableDataSource(this.phoneNumbers);
-
     this.free = this.groupsService.getGroupsAndSubgroups();
     this.joined = [];
     this.groupsSubscription = this.groupsService.groupsAndSubgroupsChange.subscribe(value => {
@@ -71,8 +62,8 @@ export class UserCreateModalComponent implements OnDestroy {
     this.hasPermissionToChangePermission = this.myUserService.hasPermission(Permissions.PERMISSION_ADMINISTRATION);
 
     const users = this.usersService.getUsersWithoutFetch();
-    for (let i = 0; i < users.length; i++) {
-      this.usernames.push(users[i].username);
+    for (const user of users) {
+      this.usernames.push(user.username);
     }
   }
 
@@ -82,9 +73,9 @@ export class UserCreateModalComponent implements OnDestroy {
 
   onUsernameChange(usernameModel) {
     usernameModel.control.setErrors(null);
-    for (let i = 0; i < this.usernames.length; i++) {
-      if (this.usernames[i] === usernameModel.viewModel) {
-        console.log('in | ' + this.usernames[i] + ' | ' + usernameModel.viewModel);
+    for (const username of this.usernames) {
+      if (username === usernameModel.viewModel) {
+        console.log('in | ' + username + ' | ' + usernameModel.viewModel);
         usernameModel.control.setErrors({alreadyTaken: true});
         break;
       }
@@ -134,35 +125,33 @@ export class UserCreateModalComponent implements OnDestroy {
     const zipcode = form.controls.zipcode.value;
     const location = form.controls.location.value;
     const activity = form.controls.activity.value;
+    let memberNumber = form.controls.memberNumber.value;
+    const internalComment = form.controls.internalComment.value;
     let activated = form.controls.activated.value;
+    let informationDenied = form.controls.informationDenied.value;
+    let bvMember = form.controls.bvMember.value;
 
     if (activated.toString().length === 0) {
       activated = false;
     }
+    if (informationDenied.toString().length === 0) {
+      informationDenied = false;
+    }
+    if (bvMember.toString().length === 0) {
+      bvMember = false;
+    }
+    if (Number.isNaN(memberNumber) || memberNumber?.length === 0) {
+      memberNumber = null;
+    }
 
     const birthdayformatted = Converter.getDateFormatted(this.birthday);
-
     const join_dateformatted = Converter.getDateFormatted(this.join_date);
 
-    console.log('create User | title: ' + title);
-    console.log('create User | username: ' + username);
-    console.log('create User | firstname: ' + firstname);
-    console.log('create User | surname: ' + surname);
-    console.log('create User | birthday: ' + birthdayformatted);
-    console.log('create User | join_date: ' + join_dateformatted);
-    console.log('create User | streetname: ' + streetname);
-    console.log('create User | streetnumber: ' + streetnumber);
-    console.log('create User | zipcode: ' + zipcode);
-    console.log('create User | location: ' + location);
-    console.log('create User | activity: ' + activity);
-    console.log('create User | activated: ' + activated);
-
     const phoneNumbersObject = [];
-
-    for (let i = 0; i < this.phoneNumbers.length; i++) {
+    for (const phoneNumber of this.phoneNumbers) {
       const phoneNumberObject = {
-        label: this.phoneNumbers[i].label,
-        number: this.phoneNumbers[i].phoneNumber
+        label: phoneNumber.label,
+        number: phoneNumber.phoneNumber
       };
       phoneNumbersObject.push(phoneNumberObject);
     }
@@ -180,6 +169,10 @@ export class UserCreateModalComponent implements OnDestroy {
       location,
       activated,
       activity,
+      bv_member: bvMember,
+      information_denied: informationDenied,
+      member_number: memberNumber,
+      internal_comment: internalComment,
       email_addresses: this.emailAddresses,
       phone_numbers: phoneNumbersObject,
       permissions: this.permissions
@@ -237,9 +230,13 @@ export class UserCreateModalComponent implements OnDestroy {
             );
           }
         }
-
-        this.usersService.fetchUsers();
-        this.notificationsService.html(this.successfullyCreatedUser, NotificationType.Success, null, 'success');
+        const users = this.usersService.getUsersWithoutFetch();
+        users.push(this.usersService.fetchUserCreateLocalUser(data.user));
+        this.usersService.setUsers(users);
+        this.notificationsService.success(
+          this.translate.getTranslationFor('SUCCESSFULLY'),
+          this.translate.getTranslationFor('MANAGEMENT_USERS_CREATE_USER_MODAL_SUCCESSFULLY_CREATED_USER')
+        );
       },
       error => {
         console.log(error);

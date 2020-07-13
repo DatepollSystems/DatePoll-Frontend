@@ -45,42 +45,49 @@ export class UsersService {
 
         const users = [];
         for (const user of fetchedUsers) {
-          const localPhoneNumbers = [];
-          const localPhoneNumbersData = user.phone_numbers;
-          for (let i = 0; i < localPhoneNumbersData.length; i++) {
-            localPhoneNumbers.push(
-              new PhoneNumber(localPhoneNumbersData[i].id, localPhoneNumbersData[i].label, localPhoneNumbersData[i].number)
-            );
-          }
-
-          const birthday = new Date(user.birthday);
-          const join_date = new Date(user.join_date);
-
-          const localUser = new User(
-            user.id,
-            user.username,
-            user.email_addresses,
-            user.force_password_change,
-            user.title,
-            user.firstname,
-            user.surname,
-            birthday,
-            join_date,
-            user.streetname,
-            user.streetnumber,
-            user.zipcode,
-            user.location,
-            user.activated,
-            user.activity,
-            localPhoneNumbers,
-            user.permissions
-          );
+          const localUser = this.fetchUserCreateLocalUser(user);
           users.push(localUser);
         }
         this.setUsers(users);
       },
       error => console.log(error)
     );
+  }
+
+  public fetchUserCreateLocalUser(user: any) {
+    const localPhoneNumbers = [];
+    for (const localPhoneNumberData of user.phone_numbers) {
+      localPhoneNumbers.push(new PhoneNumber(localPhoneNumberData.id, localPhoneNumberData.label, localPhoneNumberData.number));
+    }
+
+    const birthday = new Date(user.birthday);
+    const join_date = new Date(user.join_date);
+
+    const localUser = new User(
+      user.id,
+      user.username,
+      user.email_addresses,
+      user.force_password_change,
+      user.title,
+      user.firstname,
+      user.surname,
+      birthday,
+      join_date,
+      user.streetname,
+      user.streetnumber,
+      user.zipcode,
+      user.location,
+      user.activated,
+      user.activity,
+      user.member_number,
+      user.internal_comment,
+      user.information_denied,
+      user.bv_member,
+      localPhoneNumbers,
+      user.permissions
+    );
+
+    return localUser;
   }
 
   public addUser(user: any) {

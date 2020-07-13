@@ -15,13 +15,37 @@ export class User {
   public location: string;
   public activated: boolean;
   public activity: string;
+  public memberNumber: number;
+  public internalComment: string;
+  public informationDenied: boolean;
+  public bvMember: boolean;
   private _phoneNumbers: PhoneNumber[] = [];
   private _permissions: string[] = [];
   private readonly _emailAddresses: string[] = [];
 
-  constructor(id: number, username: string, emailAddresses: string[], force_password_change: boolean, title: string,
-              firstname: string, surname: string, birthday: Date, join_date: Date, streetname: string, streetnumber: string,
-              zipcode: number, location: string, activated: boolean, activity: string, phoneNumbers: PhoneNumber[], permissions: string[]) {
+  constructor(
+    id: number,
+    username: string,
+    emailAddresses: string[],
+    force_password_change: boolean,
+    title: string,
+    firstname: string,
+    surname: string,
+    birthday: Date,
+    join_date: Date,
+    streetname: string,
+    streetnumber: string,
+    zipcode: number,
+    location: string,
+    activated: boolean,
+    activity: string,
+    memberNumber: number,
+    internalComent: string,
+    informationDenied: boolean,
+    bvMember: boolean,
+    phoneNumbers: PhoneNumber[],
+    permissions: string[]
+  ) {
     this.id = id;
     this.username = username;
     this._emailAddresses = emailAddresses;
@@ -37,6 +61,10 @@ export class User {
     this.location = location;
     this.activated = activated;
     this.activity = activity;
+    this.memberNumber = memberNumber;
+    this.internalComment = internalComent;
+    this.informationDenied = informationDenied;
+    this.bvMember = bvMember;
     this._phoneNumbers = phoneNumbers;
     this._permissions = permissions;
   }

@@ -104,13 +104,12 @@ export class SigninComponent implements OnDestroy {
       },
       error => {
         console.log(error);
+        this.showLoadingSpinnerDuringLogin = false;
         if (error.error.error_code != null) {
           if (error.error.error_code === 'not_activated' || error.error.error_code === 'change_password') {
             this.state = error.error.error_code;
+            return;
           }
-
-          this.showLoadingSpinnerDuringLogin = false;
-          return;
         }
 
         this.loginFail = true;

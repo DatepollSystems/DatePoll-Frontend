@@ -7,21 +7,22 @@
     </mat-expansion-panel-header>
 
     <form #form="ngForm" (ngSubmit)="save(form)" style="margin-bottom: 15px;">
-      <div fxLayout="row wrap" fxLayoutGap="2%" fxLayoutAlign="center">
+      <div fxLayout="row wrap" fxLayoutGap="2%" fxLayoutAlign="space-between">
         <app-event-standard-locations-select
           fxFlex="69%"
+          fxFlex.lt-md="48%"
           fxFlex.xs="98%"
           (standardLocationChanged)="onStandardLocationChanged($event)"
         ></app-event-standard-locations-select>
 
-        <div fxFlex="29%" fxFlex.xs="98%">
+        <div fxFlex="29%" fxFlex.xs="98%" fxFlex.lt-md="48%">
           <button mat-stroked-button type="button" (click)="applyStandardLocation()" style="width: 100%">
             {{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_APPLY_STANDARD_LOCATION' | translate }}
           </button>
         </div>
       </div>
 
-      <div fxLayout="row wrap" fxLayoutGap="2%" style="margin-top: 15px;" fxLayoutAlign="center">
+      <div fxLayout="row wrap" fxLayoutGap="2%" style="margin-top: 15px;" fxLayoutAlign="space-between">
         <mat-form-field fxFlex.xs="98%" fxFlex="24%">
           <input
             [(ngModel)]="createNewEventDateDate"
@@ -108,7 +109,7 @@
           </mat-error>
         </mat-form-field>
 
-        <mat-form-field fxFlex.xs="98%" fxFlex="70%">
+        <mat-form-field fxFlex.xs="98%" fxFlex="65%">
           <input
             #locationModel="ngModel"
             id="location"
@@ -125,11 +126,11 @@
           </mat-error>
         </mat-form-field>
 
-        <div fxFlex.xs="98%" fxFlex="20%">
+        <div fxFlex.xs="98%" fxFlex="25%">
           <button
             mat-flat-button
             type="button"
-            color="accent"
+            color="primary"
             style="width: 100%"
             (click)="form.ngSubmit.emit()"
             [disabled]="!form.form.valid"
