@@ -401,7 +401,7 @@
   "MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_ACTIVITY_INCORRECT": "Die Aktivität darf weder leer sein, noch mehr als 190 Zeichen haben!",
   "MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_BV_MEMBER": "Blasmusikverbandsmitglied",
   "MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_MEMBER_NUMBER": "Mitgliedsnummer",
-  "MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_MEMBER_NUMBER_INCORRECT": "Es muss eine Nummer sein!",
+  "MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_MEMBER_NUMBER_INCORRECT": "Die Mitgliedernummer darf weder leer sein, noch mehr als 190 Zeichen haben!",
   "MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_ACTIVATED": "Account aktiviert",
   "MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_INFORMATION_DENIED": "Informationsfluss gesperrt",
   "MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_INFORMATION_DENIED_DESCRIPTION": "Wenn \"Informationsfluss gesperrt\" angehakt ist, wird der jeweilige Benutzer nicht über neue Events oder Mitteilungen informiert.",
