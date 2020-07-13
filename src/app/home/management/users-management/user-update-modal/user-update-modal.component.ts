@@ -1,9 +1,9 @@
-import {Component, Inject, OnDestroy, TemplateRef, ViewChild} from '@angular/core';
+import {Component, Inject, OnDestroy} from '@angular/core';
 import {NgForm} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {Subscription} from 'rxjs';
 
-import {NotificationsService, NotificationType} from 'angular2-notifications';
+import {NotificationsService} from 'angular2-notifications';
 
 import {TranslateService} from '../../../../translation/translate.service';
 import {Converter} from '../../../../utils/converter';
@@ -26,9 +26,6 @@ import {UserPerformanceBadge} from '../userPerformanceBadge.model';
   styleUrls: ['./user-update-modal.component.css']
 })
 export class UserUpdateModalComponent implements OnDestroy {
-  @ViewChild('successfullyChangedPassword', {static: true}) successfullyChangedPassword: TemplateRef<any>;
-  @ViewChild('successfullyUpdatedUser', {static: true}) successfullyUpdatedUser: TemplateRef<any>;
-
   usernames: string[] = [];
 
   user: User;
@@ -47,7 +44,11 @@ export class UserUpdateModalComponent implements OnDestroy {
   zipcode: number;
   location: string;
   activity: string;
+  bvMember: boolean;
+  memberNumber: number;
   activated: boolean;
+  internalComment: string;
+  informationDenied: boolean;
 
   phoneNumbers: PhoneNumber[] = [];
 
@@ -96,7 +97,11 @@ export class UserUpdateModalComponent implements OnDestroy {
     this.zipcode = this.user.zipcode;
     this.location = this.user.location;
     this.activity = this.user.activity;
+    this.memberNumber = this.user.memberNumber;
     this.activated = this.user.activated;
+    this.bvMember = this.user.bvMember;
+    this.internalComment = this.user.internalComment;
+    this.informationDenied = this.user.informationDenied;
     this.phoneNumbers = this.user.getPhoneNumbers();
     this.permissions = this.user.getPermissions();
 
@@ -116,17 +121,17 @@ export class UserUpdateModalComponent implements OnDestroy {
 
     this.userPerformanceBadges = this.performanceBadgesService.getUserPerformanceBadges(this.user.id);
     this.userPerformanceBadgesCopy = this.userPerformanceBadges.slice();
-    for (let i = 0; i < this.userPerformanceBadges.length; i++) {
-      if (this.userPerformanceBadgeCount <= this.userPerformanceBadges[i].id) {
-        this.userPerformanceBadgeCount = this.userPerformanceBadges[i].id + 1;
+    for (const performanceBadge of this.userPerformanceBadges) {
+      if (this.userPerformanceBadgeCount <= performanceBadge.id) {
+        this.userPerformanceBadgeCount = performanceBadge.id + 1;
       }
     }
     this.userPerformanceBadgesSubscription = this.performanceBadgesService.userPerformanceBadgesChange.subscribe(value => {
       this.userPerformanceBadges = value;
       this.userPerformanceBadgesCopy = this.userPerformanceBadges.slice();
-      for (let i = 0; i < this.userPerformanceBadges.length; i++) {
-        if (this.userPerformanceBadgeCount <= this.userPerformanceBadges[i].id) {
-          this.userPerformanceBadgeCount = this.userPerformanceBadges[i].id + 1;
+      for (const performanceBadge of this.userPerformanceBadges) {
+        if (this.userPerformanceBadgeCount <= performanceBadge.id) {
+          this.userPerformanceBadgeCount = performanceBadge.id + 1;
         }
       }
     });
@@ -165,7 +170,10 @@ export class UserUpdateModalComponent implements OnDestroy {
     this.usersService.changePasswordForUser(this.user.id, password).subscribe(
       (response: any) => {
         console.log(response);
-        this.notificationsService.html(this.successfullyChangedPassword, NotificationType.Success, null, 'success');
+        this.notificationsService.success(
+          this.translate.getTranslationFor('SUCCESSFULLY'),
+          this.translate.getTranslationFor('MANAGEMENT_USERS_UPDATE_USER_MODAL_PASSWORD_CHANGE_SUCCESSFUL')
+        );
       },
       error => console.log(error)
     );
@@ -173,10 +181,10 @@ export class UserUpdateModalComponent implements OnDestroy {
 
   onUsernameChange(usernameModel) {
     usernameModel.control.setErrors(null);
-    for (let i = 0; i < this.usernames.length; i++) {
-      if (this.usernames[i] === usernameModel.viewModel) {
+    for (const username of this.usernames) {
+      if (username === usernameModel.viewModel) {
         if (usernameModel.viewModel !== this.usernameCopy) {
-          console.log('in | ' + this.usernames[i] + ' | ' + usernameModel.viewModel);
+          console.log('in | ' + username + ' | ' + usernameModel.viewModel);
           usernameModel.control.setErrors({alreadyTaken: true});
           break;
         }
@@ -227,31 +235,29 @@ export class UserUpdateModalComponent implements OnDestroy {
     const zipcode = form.controls.zipcode.value;
     const location = form.controls.location.value;
     const activity = form.controls.activity.value;
+    const internalComment = form.controls.internalComment.value;
+    let memberNumber = form.controls.memberNumber.value;
     let activated = form.controls.activated.value;
+    let informationDenied = form.controls.informationDenied.value;
+    let bvMember = form.controls.bvMember.value;
 
     if (activated.toString().length === 0) {
       activated = false;
     }
+    if (informationDenied.toString().length === 0) {
+      informationDenied = false;
+    }
+    if (bvMember.toString().length === 0) {
+      bvMember = false;
+    }
+    if (Number.isNaN(memberNumber) || memberNumber?.length === 0) {
+      memberNumber = null;
+    }
 
     const birthdayformatted = Converter.getDateFormatted(this.birthday);
-
     const join_dateformatted = Converter.getDateFormatted(this.join_date);
 
-    console.log('update User | title: ' + title);
-    console.log('update User | username: ' + username);
-    console.log('update User | firstname: ' + firstname);
-    console.log('update User | surname: ' + surname);
-    console.log('update User | birthday: ' + birthdayformatted);
-    console.log('update User | join_date: ' + join_dateformatted);
-    console.log('update User | streetname: ' + streetname);
-    console.log('update User | streetnumber: ' + streetnumber);
-    console.log('update User | zipcode: ' + zipcode);
-    console.log('update User | location: ' + location);
-    console.log('update User | activity: ' + activity);
-    console.log('update User | activated: ' + activated);
-
     const phoneNumbersObject = [];
-
     for (const phoneNumber of this.phoneNumbers) {
       const phoneNumberObject = {
         label: phoneNumber.label,
@@ -273,6 +279,10 @@ export class UserUpdateModalComponent implements OnDestroy {
       location,
       activated,
       activity,
+      bv_member: bvMember,
+      information_denied: informationDenied,
+      member_number: memberNumber,
+      internal_comment: internalComment,
       email_addresses: this.emailAddresses,
       phone_numbers: phoneNumbersObject,
       permissions: this.permissions
@@ -283,8 +293,21 @@ export class UserUpdateModalComponent implements OnDestroy {
       (data: any) => {
         console.log(data);
 
-        this.usersService.fetchUsers();
-        this.notificationsService.html(this.successfullyUpdatedUser, NotificationType.Success, null, 'success');
+        const users = this.usersService.getUsersWithoutFetch();
+
+        const index = users.indexOf(this.user);
+        if (index > -1) {
+          users.splice(index, 1);
+        }
+        this.user = this.usersService.fetchUserCreateLocalUser(data.user);
+        users.splice(index, 0, this.user);
+
+        this.usersService.setUsers(users);
+
+        this.notificationsService.success(
+          this.translate.getTranslationFor('SUCCESSFULLY'),
+          this.translate.getTranslationFor('MANAGEMENT_USERS_UPDATE_USER_MODAL_SUCCESSFULLY_UPDATED_USER')
+        );
       },
       error => {
         console.log(error);
@@ -293,13 +316,10 @@ export class UserUpdateModalComponent implements OnDestroy {
     );
 
     /* Performance badges **/
-    for (let i = 0; i < this.userPerformanceBadges.length; i++) {
-      const userPerformanceBadge = this.userPerformanceBadges[i];
-
+    for (const userPerformanceBadge of this.userPerformanceBadges) {
       let toUpdate = true;
 
-      for (let j = 0; j < this.userPerformanceBadgesCopy.length; j++) {
-        const userPerformanceBadgeCopy = this.userPerformanceBadgesCopy[j];
+      for (const userPerformanceBadgeCopy of this.userPerformanceBadgesCopy) {
         if (userPerformanceBadge.id === userPerformanceBadgeCopy.id) {
           toUpdate = false;
           console.log(
@@ -320,13 +340,10 @@ export class UserUpdateModalComponent implements OnDestroy {
       }
     }
 
-    for (let i = 0; i < this.userPerformanceBadgesCopy.length; i++) {
-      const userPerformanceBadgeCopy = this.userPerformanceBadgesCopy[i];
-
+    for (const userPerformanceBadgeCopy of this.userPerformanceBadgesCopy) {
       let toDelete = true;
 
-      for (let j = 0; j < this.userPerformanceBadges.length; j++) {
-        const userPerformanceBadge = this.userPerformanceBadges[j];
+      for (const userPerformanceBadge of this.userPerformanceBadges) {
         if (userPerformanceBadgeCopy.id === userPerformanceBadge.id) {
           toDelete = false;
           console.log(

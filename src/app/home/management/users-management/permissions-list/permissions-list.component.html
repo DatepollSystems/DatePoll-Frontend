@@ -1,10 +1,9 @@
 <div class="row">
   <div class="col-11 col-md-12">
     <small>
-      {{'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_PERMISSIONS_SMALL_0' | translate}}
-      <a href="https://datepoll.dafnik.me/permissions/"
-         rel="noopener"
-         target="_blank">Link</a>{{'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_PERMISSIONS_SMALL_1' | translate}}
+      {{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_PERMISSIONS_SMALL_0' | translate }}
+      <a href="https://datepoll.dafnik.me/permissions/" rel="noopener" target="_blank">Link</a
+      >{{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_PERMISSIONS_SMALL_1' | translate }}
     </small>
   </div>
 </div>
@@ -13,26 +12,34 @@
   <div class="row justify-content-around">
     <div class="col-11 col-sm-11 col-md-6 col-lg-7">
       <mat-form-field>
-        <mat-select #permissionSelect
-                    (selectionChange)="permissionSelectChange($event.value)"
-                    [formControl]="permissionCtrl"
-                    placeholder="{{'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_PERMISSION' | translate}}" required>
+        <mat-select
+          #permissionSelect
+          (selectionChange)="permissionSelectChange($event.value)"
+          [formControl]="permissionCtrl"
+          placeholder="{{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_PERMISSION' | translate }}"
+          required
+        >
           <mat-option>
             <ngx-mat-select-search [formControl]="permissionFilterCtrl"></ngx-mat-select-search>
           </mat-option>
 
           <mat-option *ngFor="let permission of filteredPermissions | async" [value]="permission">
-            {{permission}}
+            {{ permission }}
           </mat-option>
         </mat-select>
       </mat-form-field>
-
     </div>
 
     <div class="col-11 col-sm-11 col-md-4 col-lg-3">
-      <button [disabled]="!permissionsForm.valid" class="success-button" id="addPermission-button" mat-raised-button
-              style="width: 100%" type="submit">
-        {{'ADD' | translate}}
+      <button
+        [disabled]="!permissionsForm.valid"
+        color="primary"
+        id="addPermission-button"
+        mat-raised-button
+        style="width: 100%"
+        type="submit"
+      >
+        {{ 'ADD' | translate }}
         <mat-icon aria-label="Submit button">playlist_add</mat-icon>
       </button>
     </div>
@@ -43,13 +50,17 @@
   <mat-list class="col-12">
     <mat-list-item *ngFor="let permission of permissions">
       <span matLine>{{ permission }}</span>
-      <button (click)="removePermission(permission)" mat-icon-button matTooltip="{{'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_REMOVE_PERMISSION_TOOLTIP' | translate}}"
-              matTooltipPosition="right">
+      <button
+        (click)="removePermission(permission)"
+        mat-icon-button
+        matTooltip="{{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_REMOVE_PERMISSION_TOOLTIP' | translate }}"
+        matTooltipPosition="right"
+      >
         <mat-icon>delete_forever</mat-icon>
       </button>
     </mat-list-item>
     <mat-list-item *ngIf="permissions.length == 0">
-      {{'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_NO_PERMISSIONS_AVAILABLE' | translate}}
+      {{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_NO_PERMISSIONS_AVAILABLE' | translate }}
     </mat-list-item>
   </mat-list>
 </div>

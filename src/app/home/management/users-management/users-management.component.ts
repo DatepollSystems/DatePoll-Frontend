@@ -30,6 +30,7 @@ export class UsersManagementComponent implements OnInit, OnDestroy {
   usersLoaded = true;
 
   displayedColumns: string[] = [
+    'memberNumber',
     'title',
     'firstname',
     'surname',
@@ -43,6 +44,7 @@ export class UsersManagementComponent implements OnInit, OnDestroy {
     'phoneNumbers',
     'activity',
     'username',
+    'bvMember',
     'actions'
   ];
   filterValue = '';
