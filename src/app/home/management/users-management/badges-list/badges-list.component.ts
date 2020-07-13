@@ -55,7 +55,7 @@ export class BadgesListComponent implements OnChanges, OnDestroy {
     for (const badge of this.badges) {
       let disabled = false;
       for (const userBadge of this.userBadges) {
-        if (userBadge.description.includes(badge.description)) {
+        if (!userBadge.description.localeCompare(badge.description)) {
           disabled = true;
           badge.disabled = true;
           break;
@@ -82,8 +82,9 @@ export class BadgesListComponent implements OnChanges, OnDestroy {
 
     this.userBadges.push(new UserBadge(Math.random(), description, this.extraBadgeDate, reason));
     this.userBadgesChange.emit(this.userBadges.slice());
+    this.remakeList();
     form.reset();
-    this.extraBadgeEnabled = false;
+    this.extraBadgeDate = new Date();
   }
 
   removeUserBadge(badge: UserBadge) {
