@@ -393,7 +393,6 @@ export class EventsService {
           }
 
           resultGroup.setResultSubgroups(resultSubgroups);
-          resultGroup.getChartData();
           resultGroups.push(resultGroup);
         }
 

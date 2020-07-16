@@ -29,6 +29,7 @@
   "MANAGEMENT": "Verwaltung",
   "DATE": "Datum",
   "BETA": "Beta",
+  "EXPORT": "Exportieren",
 
   "LANGUAGE": "Sprache",
   "LANGUAGE_GERMAN": "Deutsch",
@@ -594,6 +595,9 @@
   "EVENTS_VIEW_EVENT_VOTE_FOR_ADDITIONAL_INFORMATION_MODAL_TITLE": "Zusatzinformationen",
   "EVENTS_VIEW_EVENT_VOTE_FOR_ADDITIONAL_INFORMATION_MODAL_INFO": "Im nächsten Schritt kannst du dich für eine Antwort entscheiden!",
   "EVENTS_VIEW_EVENT_VOTE_FOR_ADDITIONAL_INFORMATION_MODAL_FORM_PLACEHOLDER": "Zusatzinformationen",
+  "EVENTS_VIEW_EVENT_EXPORT_ALL_FILE_NAME": "abstimmungsergebnis_alle_mitglieder",
+  "EVENTS_VIEW_EVENT_EXPORT_GROUP_FILE_NAME": "abstimmungsergebnis_gruppe_",
+  "EVENTS_VIEW_EVENT_EXPORT_SUBGROUP_FILE_NAME": "abstimmungsergebnis_register_",
 
   "EVENTS_CANCEL_VOTING": "Willst du deine Stimme wirklich entfernen?",
 

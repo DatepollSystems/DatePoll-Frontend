@@ -89,14 +89,6 @@ export class Event {
     return this.dates.slice();
   }
 
-  public getDecisionsAsStrings(): string[] {
-    const decisions = [];
-    for (const decision of this.decisions) {
-      decisions.push(decision.decision);
-    }
-    return decisions;
-  }
-
   public setResultUsers(users: EventResultUser[]) {
     this.resultUsers = users;
   }
@@ -105,8 +97,19 @@ export class Event {
     return this.resultUsers.slice();
   }
 
-  private setDecisions(decisions: Decision[]) {
-    this.decisions = decisions;
+  public getExportResultUser(): any[] {
+    const r = [];
+
+    for (const user of this.resultUsers) {
+      r.push({
+        Vorname: user.firstname,
+        Nachname: user.surname,
+        Entscheidung: user.decision,
+        Zusatz_Information: user.additionalInformation
+      });
+    }
+
+    return r;
   }
 
   public getUntil(): string {
