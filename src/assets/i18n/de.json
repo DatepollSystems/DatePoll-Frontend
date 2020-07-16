@@ -371,6 +371,8 @@
   "MANAGEMENT_USERS_ACTIVATE_ALL": "Alle Mitglieder aktivieren",
   "MANAGEMENT_USERS_ACTIVATE_ALL_QUESTION_DIALOG": "Willst du wirklich alle Mitglieder aktivieren?",
   "MANAGEMENT_USERS_ACTIVATE_ALL_FINISHED": "Alle nicht aktivierten Mitglieder wurden aktiviert!",
+  "MANAGEMENT_USERS_MANAGE_COLUMNS": "Spalten bearbeiten",
+  "MANAGEMENT_USERS_MANAGE_COLUMNS_TOOLTIP": "Sortierreihenfole ändern",
 
   "MANAGEMENT_USERS_CREATE_USER_MODAL_TITLE": "Lege ein neues Mitglied an",
   "MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_TITLE": "Titel",

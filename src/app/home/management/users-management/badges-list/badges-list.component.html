@@ -20,8 +20,8 @@
             >| {{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_BADGES_REMAINING_YEARS' | translate }} : {{ badge.remainingYears }}</span
           ></span
         >
-        <button mat-flat-button color="accent" type="button" [disabled]="badge.disabled" (click)="addBadgeToUser(badge)">
-          {{ 'ADD' | translate }}
+        <button mat-icon-button mat-flat-button color="accent" type="button" [disabled]="badge.disabled" (click)="addBadgeToUser(badge)">
+          <mat-icon>playlist_add</mat-icon>
         </button>
       </mat-list-item>
     </mat-list>
@@ -37,12 +37,12 @@
   <form
     #addExtraBadgeForm="ngForm"
     (ngSubmit)="addExtraBadge(addExtraBadgeForm)"
-    fxLayout.gt-xs="row"
+    fxLayout.gt-xs="row wrap"
     fxLayout="column"
     *ngIf="extraBadgeEnabled"
     style="margin-top: 15px;"
   >
-    <mat-form-field>
+    <mat-form-field fxFlex.lt-lg="50%" fxFlex="25%">
       <input
         #badgeDescriptionModel="ngModel"
         id="badgeDescription"
@@ -60,7 +60,7 @@
       </mat-error>
     </mat-form-field>
 
-    <mat-form-field>
+    <mat-form-field fxFlex.lt-lg="50%" fxFlex="25%">
       <input
         id="badgeReason"
         matInput
@@ -72,7 +72,7 @@
       />
     </mat-form-field>
 
-    <mat-form-field fxFlex.gt-md="30%">
+    <mat-form-field fxFlex.lt-lg="50%" fxFlex="25%">
       <input
         [(ngModel)]="extraBadgeDate"
         [matDatepicker]="picker_birthday"
@@ -86,7 +86,7 @@
       <mat-datepicker #picker_birthday></mat-datepicker>
     </mat-form-field>
 
-    <div>
+    <div fxFlex.lt-lg="50%" fxFlex="25%">
       <button [disabled]="!addExtraBadgeForm.valid" mat-flat-button style="width: 100%;" type="submit" color="accent">
         {{ 'ADD' | translate }}
         <mat-icon aria-label="Submit button">library_add</mat-icon>

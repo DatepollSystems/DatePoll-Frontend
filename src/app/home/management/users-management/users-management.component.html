@@ -58,94 +58,100 @@
       </div>
     </div>
 
-    <table [dataSource]="dataSource" class="table-responsive" mat-table matSort>
+    <mat-multi-sort-table-settings [tableData]="table" sortToolTip="{{ 'MANAGEMENT_USERS_MANAGE_COLUMNS_TOOLTIP' | translate }}">
+      <button mat-stroked-button>
+        {{ 'MANAGEMENT_USERS_MANAGE_COLUMNS' | translate }} &nbsp;
+        <mat-icon>menu</mat-icon>
+      </button>
+    </mat-multi-sort-table-settings>
+    <table [dataSource]="table.dataSource" matMultiSort (matSortChange)="table.onSortEvent()" class="table-responsive" mat-table>
       <!-- Member number Column -->
       <ng-container matColumnDef="memberNumber">
-        <th *matHeaderCellDef mat-header-cell mat-sort-header>{{ 'MANAGEMENT_USERS_MEMBER_NUMBER' | translate }}</th>
+        <th *matHeaderCellDef mat-header-cell mat-multi-sort-header="memberNumber">{{ 'MANAGEMENT_USERS_MEMBER_NUMBER' | translate }}</th>
         <td *matCellDef="let user" mat-cell>{{ user.memberNumber }}</td>
       </ng-container>
 
       <!-- Title Column -->
       <ng-container matColumnDef="title">
-        <th *matHeaderCellDef mat-header-cell mat-sort-header>{{ 'MANAGEMENT_USERS_TITLE' | translate }}</th>
+        <th *matHeaderCellDef mat-header-cell mat-multi-sort-header="title">{{ 'MANAGEMENT_USERS_TITLE' | translate }}</th>
         <td *matCellDef="let user" mat-cell>{{ user.title }}</td>
       </ng-container>
 
       <!-- Firstname Column -->
       <ng-container matColumnDef="firstname">
-        <th *matHeaderCellDef mat-header-cell mat-sort-header>{{ 'MANAGEMENT_USERS_FIRSTNAME' | translate }}</th>
+        <th *matHeaderCellDef mat-header-cell mat-multi-sort-header="firstname">{{ 'MANAGEMENT_USERS_FIRSTNAME' | translate }}</th>
         <td *matCellDef="let user" mat-cell>{{ user.firstname }}</td>
       </ng-container>
 
       <!-- Surname Column -->
       <ng-container matColumnDef="surname">
-        <th *matHeaderCellDef mat-header-cell mat-sort-header>{{ 'MANAGEMENT_USERS_SURNAME' | translate }}</th>
+        <th *matHeaderCellDef mat-header-cell mat-multi-sort-header="surname">{{ 'MANAGEMENT_USERS_SURNAME' | translate }}</th>
         <td *matCellDef="let user" mat-cell>{{ user.surname }}</td>
       </ng-container>
 
       <!-- Emails Column -->
       <ng-container matColumnDef="emails">
-        <th *matHeaderCellDef mat-header-cell mat-sort-header>{{ 'MANAGEMENT_USERS_EMAIL_ADDRESSES' | translate }}</th>
+        <th *matHeaderCellDef mat-header-cell mat-multi-sort-header="emails">{{ 'MANAGEMENT_USERS_EMAIL_ADDRESSES' | translate }}</th>
         <td *matCellDef="let user" mat-cell>{{ user.getEmailAddressesAsString() }}</td>
       </ng-container>
 
       <!-- Birthday Column -->
       <ng-container matColumnDef="birthday">
-        <th *matHeaderCellDef mat-header-cell mat-sort-header>{{ 'MANAGEMENT_USERS_BIRTHDAY' | translate }}</th>
+        <th *matHeaderCellDef mat-header-cell mat-multi-sort-header="birthday">{{ 'MANAGEMENT_USERS_BIRTHDAY' | translate }}</th>
         <td *matCellDef="let user" mat-cell>{{ user.birthday | date: 'dd.MM.yyyy' }}</td>
       </ng-container>
 
       <!-- Join date Column -->
       <ng-container matColumnDef="join_date">
-        <th *matHeaderCellDef mat-header-cell mat-sort-header>{{ 'MANAGEMENT_USERS_JOIN_DATE' | translate }}</th>
+        <th *matHeaderCellDef mat-header-cell mat-multi-sort-header="join_date">{{ 'MANAGEMENT_USERS_JOIN_DATE' | translate }}</th>
         <td *matCellDef="let user" mat-cell>{{ user.join_date | date: 'dd.MM.yyyy' }}</td>
       </ng-container>
 
       <!-- Streetname Column -->
       <ng-container matColumnDef="streetname">
-        <th *matHeaderCellDef mat-header-cell mat-sort-header>{{ 'MANAGEMENT_USERS_STREETNAME' | translate }}</th>
+        <th *matHeaderCellDef mat-header-cell mat-multi-sort-header="streetname">{{ 'MANAGEMENT_USERS_STREETNAME' | translate }}</th>
         <td *matCellDef="let user" mat-cell>{{ user.streetname }}</td>
       </ng-container>
 
       <!-- Streetnumber Column -->
       <ng-container matColumnDef="streetnumber">
-        <th *matHeaderCellDef mat-header-cell mat-sort-header>{{ 'MANAGEMENT_USERS_STREETNUMBER' | translate }}</th>
+        <th *matHeaderCellDef mat-header-cell mat-multi-sort-header="streetnumber">{{ 'MANAGEMENT_USERS_STREETNUMBER' | translate }}</th>
         <td *matCellDef="let user" mat-cell>{{ user.streetnumber }}</td>
       </ng-container>
 
       <!-- Zipcode Column -->
       <ng-container matColumnDef="zipcode">
-        <th *matHeaderCellDef mat-header-cell mat-sort-header>{{ 'MANAGEMENT_USERS_ZIPCODE' | translate }}</th>
+        <th *matHeaderCellDef mat-header-cell mat-multi-sort-header="zipcode">{{ 'MANAGEMENT_USERS_ZIPCODE' | translate }}</th>
         <td *matCellDef="let user" mat-cell>{{ user.zipcode }}</td>
       </ng-container>
 
       <!-- Location Column -->
       <ng-container matColumnDef="location">
-        <th *matHeaderCellDef mat-header-cell mat-sort-header>{{ 'MANAGEMENT_USERS_LOCATION' | translate }}</th>
+        <th *matHeaderCellDef mat-header-cell mat-multi-sort-header="location">{{ 'MANAGEMENT_USERS_LOCATION' | translate }}</th>
         <td *matCellDef="let user" mat-cell>{{ user.location }}</td>
       </ng-container>
 
       <!-- phone numbers Column -->
       <ng-container matColumnDef="phoneNumbers">
-        <th *matHeaderCellDef mat-header-cell mat-sort-header>{{ 'MANAGEMENT_USERS_PHONENUMBERS' | translate }}</th>
+        <th *matHeaderCellDef mat-header-cell mat-multi-sort-header="phoneNumbers">{{ 'MANAGEMENT_USERS_PHONENUMBERS' | translate }}</th>
         <td *matCellDef="let user" mat-cell>{{ user.getPhoneNumbersAsString() }}</td>
       </ng-container>
 
       <!-- phone numbers Column -->
       <ng-container matColumnDef="activity">
-        <th *matHeaderCellDef mat-header-cell mat-sort-header>{{ 'MANAGEMENT_USERS_ACTIVITY' | translate }}</th>
+        <th *matHeaderCellDef mat-header-cell mat-multi-sort-header="activity">{{ 'MANAGEMENT_USERS_ACTIVITY' | translate }}</th>
         <td *matCellDef="let user" mat-cell>{{ user.activity }}</td>
       </ng-container>
 
       <!-- Username Column -->
       <ng-container matColumnDef="username">
-        <th *matHeaderCellDef mat-header-cell mat-sort-header>{{ 'MANAGEMENT_USERS_USERNAME' | translate }}</th>
+        <th *matHeaderCellDef mat-header-cell mat-multi-sort-header="username">{{ 'MANAGEMENT_USERS_USERNAME' | translate }}</th>
         <td *matCellDef="let user" mat-cell>{{ user.username }}</td>
       </ng-container>
 
       <!-- Bv member Column -->
       <ng-container matColumnDef="bvMember">
-        <th *matHeaderCellDef mat-header-cell mat-sort-header>{{ 'MANAGEMENT_USERS_BV_MEMBER' | translate }}</th>
+        <th *matHeaderCellDef mat-header-cell mat-multi-sort-header="bvMember">{{ 'MANAGEMENT_USERS_BV_MEMBER' | translate }}</th>
         <td *matCellDef="let user" mat-cell>{{ user.bvMember | boolean }}</td>
       </ng-container>
 
@@ -173,12 +179,19 @@
         </td>
       </ng-container>
 
-      <tr *matHeaderRowDef="displayedColumns; sticky: true" mat-header-row></tr>
-      <tr (click)="onEdit(row)" *matRowDef="let row; columns: displayedColumns" mat-row></tr>
+      <tr *matHeaderRowDef="table.displayedColumns; sticky: true" mat-header-row></tr>
+      <tr (click)="onEdit(row)" *matRowDef="let row; columns: table.displayedColumns" mat-row></tr>
     </table>
 
-    <mat-progress-bar *ngIf="!usersLoaded" mode="indeterminate"></mat-progress-bar>
+    <mat-paginator
+      [pageSize]="table.pageSize"
+      [pageIndex]="table.pageIndex"
+      [pageSizeOptions]="table.pageSizeOptions"
+      [length]="table.totalElements ? table.totalElements : 0"
+      (page)="table.onPagnationEvent($event)"
+    >
+    </mat-paginator>
 
-    <mat-paginator [pageSizeOptions]="[10, 20, 50, 100]" showFirstLastButtons></mat-paginator>
+    <mat-progress-bar *ngIf="!usersLoaded" mode="indeterminate"></mat-progress-bar>
   </mat-card-content>
 </mat-card>
