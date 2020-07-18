@@ -125,9 +125,7 @@ export class GroupAndSubgroupTypeInputSelectComponent implements OnInit, OnChang
     const toDelete = [];
     if (this.parentGroupLocked && group.type === GroupType.PARENTGROUP) {
       for (const subgroup of this.selectedGroupsAndSubgroups) {
-        console.log(subgroup.name);
         if (subgroup.type === GroupType.SUBGROUP && group.id === subgroup.groupId) {
-          this.allGroupsAndSubgroups.push(subgroup);
           toDelete.push(subgroup);
         }
       }

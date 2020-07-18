@@ -125,23 +125,14 @@ export class UserCreateModalComponent implements OnDestroy {
     const zipcode = form.controls.zipcode.value;
     const location = form.controls.location.value;
     const activity = form.controls.activity.value;
-    let memberNumber = form.controls.memberNumber.value;
+    const memberNumber = form.controls.memberNumber.value;
     const internalComment = form.controls.internalComment.value;
     let activated = form.controls.activated.value;
-    let informationDenied = form.controls.informationDenied.value;
-    let bvMember = form.controls.bvMember.value;
+    const informationDenied = form.controls.informationDenied.value;
+    const bvMember = form.controls.bvMember.value;
 
     if (activated.toString().length === 0) {
       activated = false;
-    }
-    if (informationDenied.toString().length === 0) {
-      informationDenied = false;
-    }
-    if (bvMember.toString().length === 0) {
-      bvMember = false;
-    }
-    if (Number.isNaN(memberNumber) || memberNumber?.length === 0) {
-      memberNumber = null;
     }
 
     const birthdayformatted = Converter.getDateFormatted(this.birthday);
@@ -198,7 +189,11 @@ export class UserCreateModalComponent implements OnDestroy {
                 },
                 error => console.log(error)
               );
-            } else if (group.type === GroupType.SUBGROUP) {
+            }
+          }
+
+          for (const group of this.joined) {
+            if (group.type === GroupType.SUBGROUP) {
               this.groupsService.addUserToSubgroup(userID, group.id).subscribe(
                 (sdata: any) => {
                   console.log(sdata);
