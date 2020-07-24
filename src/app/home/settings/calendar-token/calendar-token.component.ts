@@ -15,6 +15,8 @@ export class CalendarTokenComponent {
 
   constructor(private httpService: HttpService) {
     this.fetchCalendarToken();
+    const i = this.apiUrl.indexOf('/api');
+    this.apiUrl = this.apiUrl.slice(0, i) + '/calendar';
   }
 
   public resetCalendarToken() {
@@ -38,7 +40,7 @@ export class CalendarTokenComponent {
     this.httpService.loggedInV1GETRequest('/user/myself/token/calendar', 'fetchCalendarToken').subscribe(
       (data: any) => {
         console.log(data);
-        this.calendarToken = this.apiUrl + '/user/calendar/' + data.token;
+        this.calendarToken = this.apiUrl + '/' + data.token;
       },
       error => console.log(error)
     );
