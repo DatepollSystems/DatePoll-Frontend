@@ -9,7 +9,9 @@
 <mat-progress-bar *ngIf="sendingRequest" mode="indeterminate" style="margin-top: 15px;"></mat-progress-bar>
 
 <div fxLayout="column" fxLayoutGap="2%" fxLayoutGap.xs="5%" *ngIf="!sendingRequest">
-  <app-event-dates-list fxFlex="100%" [dates]="dates"></app-event-dates-list>
+  <app-event-dates-user-list fxFlex="100%" [dates]="dates"></app-event-dates-user-list>
+
+  <mat-divider></mat-divider>
 
   <!-- Complete chart for all votes -->
   <app-result-user-bar-chart
@@ -60,8 +62,6 @@
   </mat-expansion-panel>
 
   <div fxFlex="100%">
-    <app-divider></app-divider>
-
     <mat-form-field>
       <input
         (ngModelChange)="applyFilter($event)"

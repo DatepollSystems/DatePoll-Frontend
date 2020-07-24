@@ -15,7 +15,7 @@ import {ColorPickerComponentModule} from '../../utils/shared-components/color-pi
 import {GroupAndSubgroupTypeInputSelectModule} from '../../utils/shared-components/group-and-subgroup-type-input-select/group-and-subgroup-type-input-select.module';
 import {MapsModule} from '../../utils/shared-components/maps-component/maps.module';
 import {QuestionDialogComponentModule} from '../../utils/shared-components/question-dialog/question-dialog-component.module';
-import {EventDatesListComponentModule} from './event-dates-list/event-dates-list-component.module';
+import {EventDatesListComponentModule} from './events-administration/event-dates-list/event-dates-list-component.module';
 
 import {EventsUserService} from './events-user.service';
 

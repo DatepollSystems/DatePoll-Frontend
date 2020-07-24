@@ -1,0 +1,99 @@
+<h2>{{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE_TITLE' | translate }}:</h2>
+
+<div *ngIf="isOnOneDay" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between center">
+  <span fxFlexAlign.xs="start">
+    {{ dates[0].date | date: 'EE, dd.MM.yyyy HH:mm' }}
+    <ng-container *ngFor="let date of dates"
+      ><ng-container *ngIf="dates[0].date.toString() != date.date.toString()">
+        - {{ dates[0].date | date: 'HH:mm' }}</ng-container
+      ></ng-container
+    >
+  </span>
+  <a
+    fxFlexAlign.xs="start"
+    mat-flat-button
+    color="primary"
+    target="_blank"
+    rel="noopener"
+    href="https://www.google.com/maps/place/{{ dates[0].x }}+{{ dates[0].y }}"
+    *ngIf="dates[0].location?.length > 0 && dates[0]?.x !== -199 && dates[0]?.y !== -199"
+  >
+    {{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE_LIST_OPEN_LOCATION_1' | translate }}{{ dates[0].location
+    }}{{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE_LIST_OPEN_LOCATION_2' | translate }}
+  </a>
+
+  <a
+    fxFlexAlign.xs="start"
+    mat-flat-button
+    target="_blank"
+    color="primary"
+    rel="noopener"
+    href="https://www.google.com/maps/place/{{ dates[0].x }}+{{ dates[0].y }}"
+    *ngIf="(dates[0].location == null || dates[0].location?.length == 0) && dates[0]?.x !== -199 && dates[0]?.y !== -199"
+  >
+    {{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE_LIST_OPEN_LOCATION_3' | translate }}
+  </a>
+
+  <a
+    fxFlexAlign.xs="start"
+    mat-flat-button
+    target="_blank"
+    color="primary"
+    rel="noopener"
+    href="https://www.google.com/maps/search/?api=1&query={{ dates[0].location }}"
+    *ngIf="dates[0].location?.length > 0 && dates[0]?.x === -199 && dates[0]?.y === -199"
+  >
+    {{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE_LIST_OPEN_LOCATION_4' | translate }}{{ dates[0].location
+    }}{{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE_LIST_OPEN_LOCATION_5' | translate }}
+  </a>
+</div>
+
+<mat-list role="list" *ngIf="!isOnOneDay">
+  <mat-list-item role="listitem" *ngFor="let date of dates">
+    <span matLine>
+      {{ date.date | date: 'EE, dd.MM.yyyy HH:mm' }}
+    </span>
+    <a
+      mat-mini-fab
+      color="primary"
+      target="_blank"
+      rel="noopener"
+      matTooltip="{{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE_LIST_OPEN_LOCATION_1' | translate }}{{ date.location }}{{
+        'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE_LIST_OPEN_LOCATION_2' | translate
+      }}"
+      matTooltipPosition="before"
+      href="https://www.google.com/maps/place/{{ date.x }}+{{ date.y }}"
+      *ngIf="date.location?.length > 0 && date?.x !== -199 && date?.y !== -199"
+    >
+      <mat-icon>map</mat-icon>
+    </a>
+
+    <a
+      mat-mini-fab
+      target="_blank"
+      color="primary"
+      rel="noopener"
+      matTooltip="{{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE_LIST_OPEN_LOCATION_3' | translate }}"
+      matTooltipPosition="before"
+      href="https://www.google.com/maps/place/{{ date.x }}+{{ date.y }}"
+      *ngIf="(date.location == null || date.location?.length == 0) && date?.x !== -199 && date?.y !== -199"
+    >
+      <mat-icon>map</mat-icon>
+    </a>
+
+    <a
+      mat-mini-fab
+      target="_blank"
+      color="primary"
+      rel="noopener"
+      matTooltip="{{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE_LIST_OPEN_LOCATION_4' | translate }}{{ date.location }}{{
+        'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE_LIST_OPEN_LOCATION_5' | translate
+      }}"
+      matTooltipPosition="before"
+      href="https://www.google.com/maps/search/?api=1&query={{ date.location }}"
+      *ngIf="date.location?.length > 0 && date?.x === -199 && date?.y === -199"
+    >
+      <mat-icon>map</mat-icon>
+    </a>
+  </mat-list-item>
+</mat-list>
