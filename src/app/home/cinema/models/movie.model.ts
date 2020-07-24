@@ -30,14 +30,25 @@ export class Movie implements CalendarEvent {
   draggable: false;
   end: null;
   meta = null;
-  resizable: { beforeStart: false; afterEnd: false };
+  resizable: {beforeStart: false; afterEnd: false};
 
   private bookingUsers: MovieBookingUser[] = [];
 
   private weatherForecasts: WeatherForecast[] = [];
 
-  constructor(id: number, name: string, movieDate: Date, trailerLink: string, posterLink: string, workerID: number, workerName: string,
-              emergencyWorkerID: number, emergencyWorkerName: string, bookedTickets: number, movieYearID: number) {
+  constructor(
+    id: number,
+    name: string,
+    movieDate: Date,
+    trailerLink: string,
+    posterLink: string,
+    workerID: number,
+    workerName: string,
+    emergencyWorkerID: number,
+    emergencyWorkerName: string,
+    bookedTickets: number,
+    movieYearID: number
+  ) {
     this.id = id;
     this.name = name;
     this.date = movieDate;
@@ -93,16 +104,14 @@ export class WeatherForecast {
   public readonly cloudy: number;
   public readonly windSpeed: number;
   public readonly windDirection: number;
-  public readonly rain: number;
   public readonly date: Date;
 
-  constructor(temperature: number, weather: string, cloudy: number, windSpeed: number, windDirection: number, rain: number, date: Date) {
+  constructor(temperature: number, weather: string, cloudy: number, windSpeed: number, windDirection: number, date: Date) {
     this.temperature = temperature;
     this.weather = weather;
     this.cloudy = cloudy;
     this.windSpeed = windSpeed;
     this.windDirection = windDirection;
-    this.rain = rain;
     this.date = date;
   }
 }
