@@ -544,6 +544,8 @@
   "MANAGEMENT_PERFORMANCE_BADGES_BADGE_REMOVE_CONTROL_QUESTION": "Willst du dieses Abzeichen wirklich löschen?",
   "MANAGEMENT_PERFORMANCE_BADGES_BADGE_REMOVE_SUCCESSFULLY": "Das Abzeichen wurde entfernt!",
 
+  "MANAGEMENT_PERFORMANCE_BADGES_CURRENT_YEAR": "Diesjährige Abzeichen",
+
   "MANAGEMENT_DATEPOLL_FEATURE_SETTINGS": "DatePoll-Feature Einstellungen",
   "MANAGEMENT_DATEPOLL_FEATURE_SETTINGS_SUBTITLE": "Hier kannst du grundlegende Funktionen von DatePoll Konfigurieren!",
   "MANAGEMENT_DATEPOLL_CINEMA_SERVICE": "Kinoservice",

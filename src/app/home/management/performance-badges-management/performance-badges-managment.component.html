@@ -198,6 +198,26 @@
           <mat-spinner></mat-spinner>
         </mat-card-content>
       </mat-card>
+
+      <mat-card class="mat-elevation-z3" fxFlex="48%">
+        <mat-card-title>{{ 'MANAGEMENT_PERFORMANCE_BADGES_CURRENT_YEAR' | translate }}</mat-card-title>
+        <mat-card-content *ngIf="currentYearUsers != null">
+          <mat-list>
+            <mat-list-item *ngFor="let currentYearUser of this.currentYearUsers">
+              <div matLine>
+                {{ currentYearUser.firstname }} {{ currentYearUser.surname }} - {{ currentYearUser.joinDate | date: 'dd.MM.yyyy' }}
+              </div>
+              <div matLine *ngFor="let currentYearBadge of currentYearUser.currentYearBadges">
+                > {{ currentYearBadge.description }} {{ 'MANAGEMENT_PERFORMANCE_BADGES_BADGE_LIST_AFTER' | translate }}
+                {{ currentYearBadge.afterYears }} {{ 'MANAGEMENT_PERFORMANCE_BADGES_BADGE_LIST_YEARS' | translate }}
+              </div>
+            </mat-list-item>
+          </mat-list>
+        </mat-card-content>
+        <mat-card-content *ngIf="currentYearUsers == null" fxLayout="row" fxLayoutAlign="center center">
+          <mat-spinner></mat-spinner>
+        </mat-card-content>
+      </mat-card>
     </div>
   </mat-card-content>
 </mat-card>

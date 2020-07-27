@@ -5,6 +5,7 @@ import {Converter} from '../../../utils/converter';
 import {HttpService} from '../../../utils/http.service';
 
 import {UserPerformanceBadge} from '../users-management/userPerformanceBadge.model';
+import {CurrentYearBadge, CurrentYearUser} from './models/currentYearUser.model';
 import {Instrument} from './models/instrument.model';
 import {PerformanceBadge} from './models/performanceBadge.model';
 
@@ -15,9 +16,11 @@ export class PerformanceBadgesService {
   public performanceBadgesChange: Subject<PerformanceBadge[]> = new Subject<PerformanceBadge[]>();
   public instrumentsChange: Subject<Instrument[]> = new Subject<Instrument[]>();
   public userPerformanceBadgesChange: Subject<UserPerformanceBadge[]> = new Subject<UserPerformanceBadge[]>();
+  public currentYearUsersChange: Subject<CurrentYearUser[]> = new Subject<CurrentYearUser[]>();
   private performanceBadges: PerformanceBadge[];
   private instruments: Instrument[];
   private userPerformanceBadges: UserPerformanceBadge[] = [];
+  private currentYearUsers: CurrentYearUser[];
 
   constructor(private httpService: HttpService) {}
 
@@ -181,5 +184,42 @@ export class PerformanceBadgesService {
   private setUserPerformanceBadges(userPerformanceBadges: UserPerformanceBadge[]) {
     this.userPerformanceBadges = userPerformanceBadges;
     this.userPerformanceBadgesChange.next(this.userPerformanceBadges.slice());
+  }
+
+  private setCurrentYearUsers(currentYearUsers: CurrentYearUser[]) {
+    this.currentYearUsers = currentYearUsers.slice();
+    this.currentYearUsersChange.next(this.currentYearUsers.slice());
+  }
+
+  public fetchCurrentYearUsers() {
+    this.httpService.loggedInV1GETRequest('/management/currentYearBadges', 'fetchCurrentYearUsers').subscribe(
+      (response: any) => {
+        console.log(response);
+
+        const usersToSave = [];
+        for (const user of response.users) {
+          const userToSave = new CurrentYearUser(user.id, user.firstname, user.surname, user.join_date);
+          const yearBadgesToSave = [];
+          for (const badge of user.current_year_badges) {
+            yearBadgesToSave.push(new CurrentYearBadge(badge.id, badge.description, badge.afterYears));
+          }
+          userToSave.currentYearBadges = yearBadgesToSave;
+          usersToSave.push(userToSave);
+
+          this.setCurrentYearUsers(usersToSave);
+        }
+      },
+      error => console.log(error)
+    );
+  }
+
+  public getCurrentYearUsers(): CurrentYearUser[] {
+    this.fetchCurrentYearUsers();
+
+    if (this.performanceBadges == null) {
+      return null;
+    }
+
+    return this.currentYearUsers.slice();
   }
 }
