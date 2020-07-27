@@ -1,0 +1,27 @@
+<mat-form-field *ngIf="broadcasts.length != 0">
+  <mat-label>{{ 'SEARCH' | translate }}</mat-label>
+  <input matInput [(ngModel)]="searchFilter" (input)="searchFilterUpdate($event)" />
+</mat-form-field>
+
+<div fxLayout="row break" fxLayoutGap="2%" fxLayout.lt-md="column" fxLayoutAlign="start">
+  <mat-card *ngFor="let broadcast of this.broadcastsCopy">
+    <mat-card-subtitle
+      >{{ broadcast.subject }} <span>(~{{ broadcast.readTime }})</span></mat-card-subtitle
+    >
+    <p>{{ 'BROADCASTS_ADMINISTRATION_ADMIN_INFO_SENT_ON' | translate }} {{ broadcast.sent | date: 'EE, dd.MM.yyyy HH:mm' }}</p>
+    <p>{{ 'BROADCASTS_ADMINISTRATION_ADMIN_INFO_AUTHOR' | translate }} {{ broadcast.writerName }}</p>
+    <div fxLayout="row" fxLayoutAlign="end">
+      <div>
+        <button mat-flat-button color="primary" (click)="routeTo(broadcast)">{{ 'SHOW_MORE' | translate }}</button>
+      </div>
+    </div>
+  </mat-card>
+</div>
+
+<div fxLayout="row" fxLayoutAlign="center" *ngIf="empty">
+  <div fxFlex style="text-align: center">
+    {{ 'BROADCASTS_EMPTY' | translate }}
+  </div>
+</div>
+
+<mat-spinner *ngIf="broadcasts?.length === 0"></mat-spinner>

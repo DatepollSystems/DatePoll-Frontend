@@ -1,7 +1,8 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Subscription} from 'rxjs';
+
 import {SettingsService} from '../../../utils/settings.service';
 import {MovieOrder, MovieTicketsService} from '../movieTickets.service';
-import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-movie-service',

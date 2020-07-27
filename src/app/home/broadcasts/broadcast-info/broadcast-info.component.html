@@ -1,0 +1,14 @@
+<ng-container *ngIf="broadcast != null">
+  <h1>{{ broadcast.subject }}</h1>
+
+  <h3 matLine>{{ 'BROADCASTS_ADMINISTRATION_ADMIN_INFO_SENT_ON' | translate }} {{ broadcast.sent | date: 'EE, dd.MM.yyyy HH:mm' }}</h3>
+  <h3 matLine>{{ 'BROADCASTS_ADMINISTRATION_ADMIN_INFO_AUTHOR' | translate }} {{ broadcast.writerName }}</h3>
+
+  <div class="border" [innerHTML]="getSanitizedContent(broadcast.bodyHTML)" *ngIf="loaded"></div>
+</ng-container>
+
+<mat-progress-bar mode="indeterminate" *ngIf="!loaded"></mat-progress-bar>
+
+<button mat-fab aria-label="Go back button" class="my-fab" (click)="goBack()">
+  <mat-icon>arrow_back_ios</mat-icon>
+</button>

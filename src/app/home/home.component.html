@@ -61,7 +61,7 @@
       <div *ngIf="serverInfo.broadcasts_enabled && myUserService.hasPermission(broadcastAdministration)">
         <a (click)="onPageChange()" mat-list-item routerLink="/home/broadcasts/administration" routerLinkActive="activated">
           <mat-icon>email</mat-icon>
-          <b>[{{ 'BETA' | translate }}]</b>&nbsp;{{ 'NAV_BROADCASTS_ADMINISTRATION' | translate }}
+          {{ 'NAV_BROADCASTS_ADMINISTRATION' | translate }}
         </a>
 
         <mat-divider></mat-divider>

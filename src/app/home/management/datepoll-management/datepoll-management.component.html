@@ -16,7 +16,7 @@
           </mat-slide-toggle>
 
           <mat-slide-toggle (change)="broadcastServiceChange($event)" [(ngModel)]="serverInfo.broadcasts_enabled" color="primary">
-            <b>[{{ 'BETA' | translate }}]</b>&nbsp;{{ 'MANAGEMENT_DATEPOLL_BROADCAST_SERVICE' | translate }}
+            {{ 'MANAGEMENT_DATEPOLL_BROADCAST_SERVICE' | translate }}
           </mat-slide-toggle>
 
           <form #changeAppUrlForm="ngForm" (ngSubmit)="changeAppUrl(changeAppUrlForm)" fxLayout="row wrap" fxLayoutGap="2%">
