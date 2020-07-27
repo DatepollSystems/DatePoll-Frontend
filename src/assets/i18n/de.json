@@ -30,6 +30,7 @@
   "DATE": "Datum",
   "BETA": "Beta",
   "EXPORT": "Exportieren",
+  "PRINT": "Drucken",
 
   "LANGUAGE": "Sprache",
   "LANGUAGE_GERMAN": "Deutsch",
@@ -141,6 +142,9 @@
   "STARTPAGE_EMERGENCY_CINEMA_SERVICE": "Notfall-Kinodienst",
 
   "STARTPAGE_EVENTS": "Nächsten Events",
+  "STARTPAGE_BROADCASTS": "Letzten Mitteilungen",
+  "STARTPAGE_BROADCASTS_INFO": "Zeige alle Mitteilungen",
+  "STARTPAGE_BROADCASTS_BY": "von",
 
   "CALENDAR": "Kalender",
 
@@ -245,6 +249,7 @@
   "CINEMA_TICKETS_ADMINISTRATION_MOVIE_BOOKINGS_MANAGEMENT_MODAL_TICKETS_TO_BOOK": "Kartenanzahl",
   "CINEMA_TICKETS_ADMINISTRATION_MOVIE_BOOKINGS_MANAGEMENT_MODAL_TICKETS_TO_BOOK_INVALID": "Min. 1 Karte",
 
+  "BROADCASTS_EMPTY": "Es gibt keine Mitteilungen!",
   "BROADCASTS_ADMINISTRATION_REFRESH_LIST": "Mitteilungen aktualisieren",
   "BROADCASTS_ADMINISTRATION_SEARCH_LIST": "Suche nach Namen, Daten oder Inhalten...",
   "BROADCASTS_ADMINISTRATION_SUBJECT": "Betreff",
