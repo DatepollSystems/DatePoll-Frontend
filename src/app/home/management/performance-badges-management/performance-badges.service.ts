@@ -198,7 +198,7 @@ export class PerformanceBadgesService {
 
         const usersToSave = [];
         for (const user of response.users) {
-          const userToSave = new CurrentYearUser(user.id, user.firstname, user.surname, user.join_date);
+          const userToSave = new CurrentYearUser(user.id, user.firstname, user.surname, Converter.getIOSDate(user.join_date));
           const yearBadgesToSave = [];
           for (const badge of user.current_year_badges) {
             yearBadgesToSave.push(new CurrentYearBadge(badge.id, badge.description, badge.afterYears));
