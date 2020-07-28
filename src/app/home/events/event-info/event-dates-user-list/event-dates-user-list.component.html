@@ -5,7 +5,7 @@
     {{ dates[0].date | date: 'EE, dd.MM.yyyy HH:mm' }}
     <ng-container *ngFor="let date of dates"
       ><ng-container *ngIf="dates[0].date.toString() != date.date.toString()">
-        - {{ dates[0].date | date: 'HH:mm' }}</ng-container
+        - {{ date.date | date: 'HH:mm' }}</ng-container
       ></ng-container
     >
   </span>
