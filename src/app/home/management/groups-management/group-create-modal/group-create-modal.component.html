@@ -1,35 +1,57 @@
-<h1 mat-dialog-title>{{'MANAGEMENT_GROUPS_CREATE_GROUP_MODAL_TITLE' | translate}}</h1>
+<h1 mat-dialog-title>{{ 'MANAGEMENT_GROUPS_CREATE_GROUP_MODAL_TITLE' | translate }}</h1>
 <div mat-dialog-content>
-  <form #form="ngForm" (ngSubmit)="onCreate(form)">
-    <div class="row">
-      <mat-form-field class="col-12">
-        <!-- Title -->
-        <input #nameModel="ngModel" id="name" matInput maxlength="190"
-               name="name" ngModel
-               placeholder="{{'MANAGEMENT_GROUPS_CREATE_GROUP_MODAL_FORM_NAME' | translate}}" required
-               type="text">
-        <mat-error *ngIf="nameModel.invalid">
-          {{'MANAGEMENT_GROUPS_CREATE_GROUP_MODAL_FORM_NAME_INCORRECT' | translate}}
-        </mat-error>
-      </mat-form-field>
-    </div>
+  <form #form="ngForm" (ngSubmit)="onCreate(form)" fxLayout.xs="column" fxLayout="row break" fxLayoutAlign="space-around">
+    <mat-form-field fxFlex="50%">
+      <input
+        #nameModel="ngModel"
+        id="name"
+        matInput
+        maxlength="190"
+        name="name"
+        ngModel
+        placeholder="{{ 'MANAGEMENT_GROUPS_CREATE_GROUP_MODAL_FORM_NAME' | translate }}"
+        required
+        type="text"
+      />
+      <mat-error *ngIf="nameModel.invalid">
+        {{ 'MANAGEMENT_GROUPS_CREATE_GROUP_MODAL_FORM_NAME_INCORRECT' | translate }}
+      </mat-error>
+    </mat-form-field>
 
-    <div class="row" style="margin-top: 18px">
-      <mat-form-field class="col-12">
-        <!-- Title -->
-        <input #descriptionModel="ngModel" id="description" matInput maxlength="190"
-               name="description" ngModel
-               placeholder="{{'MANAGEMENT_GROUPS_CREATE_GROUP_MODAL_FORM_DESCRIPTION' | translate}}"
-               type="text">
-        <mat-error *ngIf="descriptionModel.invalid">
-          {{'MANAGEMENT_GROUPS_CREATE_GROUP_MODAL_FORM_DESCRIPTION_INCORRECT' | translate}}
-        </mat-error>
-      </mat-form-field>
-    </div>
+    <mat-form-field fxFlex="50%">
+      <input
+        #orderNModel="ngModel"
+        id="orderN"
+        matInput
+        name="orderN"
+        ngModel
+        required
+        placeholder="{{ 'MANAGEMENT_GROUPS_CREATE_GROUP_MODAL_FORM_ORDER_NUMBER' | translate }}"
+        type="number"
+      />
+      <mat-error *ngIf="orderNModel.invalid">
+        {{ 'MANAGEMENT_GROUPS_CREATE_GROUP_MODAL_FORM_ORDER_NUMBER_INCORRECT' | translate }}
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field fxFlex="100%">
+      <input
+        #descriptionModel="ngModel"
+        id="description"
+        matInput
+        maxlength="190"
+        name="description"
+        ngModel
+        placeholder="{{ 'MANAGEMENT_GROUPS_CREATE_GROUP_MODAL_FORM_DESCRIPTION' | translate }}"
+        type="text"
+      />
+      <mat-error *ngIf="descriptionModel.invalid">
+        {{ 'MANAGEMENT_GROUPS_CREATE_GROUP_MODAL_FORM_DESCRIPTION_INCORRECT' | translate }}
+      </mat-error>
+    </mat-form-field>
   </form>
 </div>
 <div mat-dialog-actions style="margin-top: 15px">
-  <button [mat-dialog-close] mat-button>{{'CLOSE' | translate}}</button>
-  <button (click)="form.ngSubmit.emit()" [disabled]="!form.form.valid" class="success-button"
-          mat-button>{{'PUT' | translate}}</button>
+  <button [mat-dialog-close] mat-button>{{ 'CLOSE' | translate }}</button>
+  <button (click)="form.ngSubmit.emit()" [disabled]="!form.form.valid" color="accent" mat-flat-button>{{ 'PUT' | translate }}</button>
 </div>

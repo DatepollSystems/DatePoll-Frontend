@@ -57,5 +57,5 @@
 </div>
 <div mat-dialog-actions>
   <button [mat-dialog-close] mat-button>{{ 'CLOSE' | translate }}</button>
-  <button (click)="form.ngSubmit.emit()" [disabled]="!form.form.valid" class="success-button" mat-button>{{ 'SAVE' | translate }}</button>
+  <button (click)="form.ngSubmit.emit()" [disabled]="!form.form.valid" color="accent" mat-flat-button>{{ 'SAVE' | translate }}</button>
 </div>

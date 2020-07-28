@@ -1,7 +1,18 @@
 <h2 mat-dialog-title>{{ 'SETTINGS_SECURITY_CALENDAR' | translate }}</h2>
 <mat-dialog-content>
-  <div *ngIf="calendarToken != null" fxLayout="row wrap" fxLayout.lt-md="column" fxLayoutAlign="center" fxLayoutGap="2%">
-    <mat-form-field appearance="outline" fxFlex="96%">
+  <div *ngIf="calendarToken != null" fxLayout="row wrap" fxLayout.lt-md="column" fxLayoutAlign="space-between" fxLayoutGap="2%">
+    <mat-form-field appearance="outline" fxFlex="47%">
+      <mat-label>{{ 'SETTINGS_SECURITY_MDOAL_CALENDAR_COMPLETE' | translate }}</mat-label>
+      <input matInput readonly value="{{ apiUrl }}" #completeCalendarElement />
+    </mat-form-field>
+
+    <div fxFlex="47%">
+      <button (click)="copyTokenToClipboard(completeCalendarElement)" mat-flat-button color="accent" style="width: 100%">
+        {{ 'SETTINGS_SECURITY_MODAL_CALENDAR_COPY_TOKEN_TOOLTIP' | translate }}
+      </button>
+    </div>
+
+    <mat-form-field appearance="outline" fxFlex="100%">
       <mat-label>{{ 'SETTINGS_SECURITY_MDOAL_CALENDAR_INPUT_TITLE' | translate }}</mat-label>
       <input matInput readonly value="{{ calendarToken }}" #calendarTokenElement />
     </mat-form-field>

@@ -224,12 +224,22 @@
       </mat-error>
     </mat-form-field>
 
-    <div fxFlex="22%" fxFlex.lt-md="30%" fxFlex.md="30%">
-      <!-- Bv member -->
-      <mat-checkbox color="accent" id="bvMember" name="bvMember" ngModel>
-        {{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_BV_MEMBER' | translate }}
-      </mat-checkbox>
-    </div>
+    <!-- Bv Member -->
+    <mat-form-field fxFlex="22%" fxFlex.lt-md="30%">
+      <input
+        #bvMemberModel="ngModel"
+        id="bvMember"
+        matInput
+        maxlength="190"
+        name="bvMember"
+        ngModel
+        placeholder="{{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_BV_MEMBER' | translate }}"
+        type="text"
+      />
+      <mat-error *ngIf="bvMemberModel.invalid">
+        {{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_BV_MEMBER_INCORRECT' | translate }}
+      </mat-error>
+    </mat-form-field>
 
     <app-divider></app-divider>
 

@@ -1,10 +1,10 @@
 import {Component, Inject} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {NgForm} from '@angular/forms';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {NotificationsService} from 'angular2-notifications';
 
-import {GroupsService} from '../groups.service';
 import {TranslateService} from '../../../../translation/translate.service';
+import {GroupsService} from '../groups.service';
 
 @Component({
   selector: 'app-subgroup-update-modal',
@@ -16,15 +16,20 @@ export class SubgroupUpdateModalComponent {
   subgroupID: number;
   name: string;
   description: string;
+  orderN: number;
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any,
-              private groupsService: GroupsService, private dialogRef: MatDialogRef<SubgroupUpdateModalComponent>,
-              private translate: TranslateService,
-              private notificationsService: NotificationsService) {
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private groupsService: GroupsService,
+    private dialogRef: MatDialogRef<SubgroupUpdateModalComponent>,
+    private translate: TranslateService,
+    private notificationsService: NotificationsService
+  ) {
     this.groupID = data.groupID;
     this.subgroupID = data.subgroup.id;
     this.name = data.subgroup.name;
     this.description = data.subgroup.description;
+    this.orderN = data.subgroup.orderN;
   }
 
   onUpdate(form: NgForm) {
@@ -32,29 +37,28 @@ export class SubgroupUpdateModalComponent {
 
     const name = form.controls.name.value;
     const description = form.controls.description.value;
-
-    console.log('updateSubgroup: ' + this.subgroupID);
-    console.log('updateSubgroup: ' + name);
-    console.log('updateSubgroup: ' + description);
-    console.log('updateSubgroup: ' + this.groupID);
+    const orderN = form.controls.orderN.value;
 
     const subgroup = {
-      'name': name,
-      'description': description,
-      'group_id': this.groupID
+      name,
+      description,
+      orderN,
+      group_id: this.groupID
     };
+    console.log(subgroup);
     this.groupsService.updateSubgroup(subgroup, this.subgroupID).subscribe(
       (data: any) => {
         console.log(data);
         this.groupsService.fetchGroups();
-        this.notificationsService.success(this.translate.getTranslationFor('SUCCESSFULLY'),
-          this.translate.getTranslationFor('MANAGEMENT_GROUPS_UPDATE_SUBGROUP_SUCCESSFUL'));
+        this.notificationsService.success(
+          this.translate.getTranslationFor('SUCCESSFULLY'),
+          this.translate.getTranslationFor('MANAGEMENT_GROUPS_UPDATE_SUBGROUP_SUCCESSFUL')
+        );
       },
-      (error) => {
+      error => {
         console.log(error);
         this.groupsService.fetchGroups();
       }
     );
   }
-
 }

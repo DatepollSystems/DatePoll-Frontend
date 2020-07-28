@@ -52,7 +52,7 @@ export class GroupsService {
         for (const groupsData of data.groups) {
           const subgroupsToStore = [];
           for (const subgroupsData of groupsData.subgroups) {
-            subgroupsToStore.push(new Subgroup(subgroupsData.id, subgroupsData.name, subgroupsData.description));
+            subgroupsToStore.push(new Subgroup(subgroupsData.id, subgroupsData.name, subgroupsData.description, subgroupsData.orderN));
 
             const subgroup = new GroupAndSubgroupModel(subgroupsData.id, subgroupsData.name, GroupType.SUBGROUP);
             subgroup.groupId = groupsData.id;
@@ -60,7 +60,7 @@ export class GroupsService {
             groupsAndSubgroupsToStore.push(subgroup);
           }
 
-          groupsToStore.push(new Group(groupsData.id, groupsData.name, groupsData.description, subgroupsToStore));
+          groupsToStore.push(new Group(groupsData.id, groupsData.name, groupsData.description, groupsData.orderN, subgroupsToStore));
           groupsAndSubgroupsToStore.push(new GroupAndSubgroupModel(groupsData.id, groupsData.name, GroupType.PARENTGROUP));
         }
 

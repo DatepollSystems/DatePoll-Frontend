@@ -29,6 +29,8 @@
   "MANAGEMENT": "Verwaltung",
   "DATE": "Datum",
   "BETA": "Beta",
+  "EXPORT": "Exportieren",
+  "PRINT": "Drucken",
 
   "LANGUAGE": "Sprache",
   "LANGUAGE_GERMAN": "Deutsch",
@@ -52,7 +54,7 @@
   "ABOUT_PAGE_STATS_PHONE_NUMBERS": "Hinterlegte Telefonnummern:",
   "ABOUT_PAGE_STATS_EVENT_VOTES": "Abgegebene Stimmen für Events:",
   "ABOUT_PAGE_STATS_EVENT_DECISIONS": "Event Entscheidungsmöglichkeiten:",
-  "ABOUT_PAGE_STATS_EVENT_DATES": "Event Zeit- & Treffpunkte",
+  "ABOUT_PAGE_STATS_EVENT_DATES": "Event Zeit- & Treffpunkte:",
   "ABOUT_PAGE_STATS_BROADCASTS": "Mitteilungen",
   "ABOUT_PAGE_STATS_BROADCASTS_SENT": "Verschickte Mitteilungen:",
   "ABOUT_PAGE_STATS_MOVIES_TICKETS": "Verbuchte Kinotickets:",
@@ -90,8 +92,8 @@
   "SIGNIN_YOU_NEED_TO_CHANGE_PASSWORD": "Bitte ändere das Passwort nach der ersten Anmeldung!",
   "SIGNIN_PASSWORD_ARE_NOT_EQUAL": "Die Passwörter stimmen nicht überein",
   "SIGNIN_APP_INFO": "Downloade die dazugehörige App",
-  "SIGNIN_GET_THE_APP": "Lade die dazugehörige App runter (Coming soon...)",
-  "SIGNIN_SCAN_ME": "Scan mich mit der DatePoll-App (Coming soon...)",
+  "SIGNIN_GET_THE_APP": "Lade die dazugehörige App runter",
+  "SIGNIN_SCAN_ME": "Scan mich mit der DatePoll-App",
 
   "FORGOT_PASSWORD": "Setzte dein Passwort zurück",
   "FORGOT_PASSWORD_UNKOWN_USERNAME": "Für diesen Benutzernamen gibt es keinen DatePoll-Account",
@@ -126,7 +128,7 @@
   "BROWSER_COMPATIBILITY_CONTENT_1": "Dein Internet Browser bekommt seit 2016 keine Updates mehr... es ist mittlerweile ",
   "BROWSER_COMPATIBILITY_CONTENT_2": "<br>Ich versuche mein bestes alle unterschiedlichen Browser als auch Endgeräte zu unterstützen. Der Internet Explorer ist jedoch ein Mysterium.\n  <a href=\"https://www.derstandard.at/story/2000097801064/microsoft-bittet-nutzer-internet-explorer-nicht-mehr-zu-verwenden\" target=\"_blank\" rel=\"noopener\">\n    Selbst <b>Microsoft</b> bittet seine eigenen Nutzer Internet Explorer hinter sich zu lassen.\n  </a>\n  <br><br>Aber wenn genörgelt wird, müssen auch Alternativen angeboten werden:\n  <ul>\n    <li><i>(Empfehlung) </i><a href=\"https://firefox.com/\" rel=\"noopener\" target=\"_blank\">Firefox Browser</a></li>\n    <li><a href=\"https://www.google.com/chrome/\" rel=\"noopener\" target=\"_blank\">Google Chrome</a></li>\n  </ul>",
 
-  "STARTPAGE_BIRTHDAY": "Geburtstage des Monat",
+  "STARTPAGE_BIRTHDAY": "Geburtstage des Monats",
   "STARTPAGE_BIRTHDAY_INFO": "Hier kannst du es deaktivieren dass dein Name bei den Geburtstagen aufscheint.",
   "STARTPAGE_BIRTHDAY_MORE": "Zeige alle Geburtstage an",
   "STARTPAGE_BIRTHDAY_NAME": "Name",
@@ -140,6 +142,9 @@
   "STARTPAGE_EMERGENCY_CINEMA_SERVICE": "Notfall-Kinodienst",
 
   "STARTPAGE_EVENTS": "Nächsten Events",
+  "STARTPAGE_BROADCASTS": "Letzten Mitteilungen",
+  "STARTPAGE_BROADCASTS_INFO": "Zeige alle Mitteilungen",
+  "STARTPAGE_BROADCASTS_BY": "von",
 
   "CALENDAR": "Kalender",
 
@@ -244,6 +249,7 @@
   "CINEMA_TICKETS_ADMINISTRATION_MOVIE_BOOKINGS_MANAGEMENT_MODAL_TICKETS_TO_BOOK": "Kartenanzahl",
   "CINEMA_TICKETS_ADMINISTRATION_MOVIE_BOOKINGS_MANAGEMENT_MODAL_TICKETS_TO_BOOK_INVALID": "Min. 1 Karte",
 
+  "BROADCASTS_EMPTY": "Es gibt keine Mitteilungen!",
   "BROADCASTS_ADMINISTRATION_REFRESH_LIST": "Mitteilungen aktualisieren",
   "BROADCASTS_ADMINISTRATION_SEARCH_LIST": "Suche nach Namen, Daten oder Inhalten...",
   "BROADCASTS_ADMINISTRATION_SUBJECT": "Betreff",
@@ -332,6 +338,7 @@
   "SETTINGS_SECURITY_MODAL_CHANGE_PASSWORD_OLD_PASSWORD": "Altes Passwort",
   "SETTINGS_SECURITY_MODAL_CHANGE_PASSWORD_FINISHED": "Dein Passwort wurde geändert!",
 
+  "SETTINGS_SECURITY_MDOAL_CALENDAR_COMPLETE": "Gesamter Kalender (Nicht personalisiert)",
   "SETTINGS_SECURITY_MDOAL_CALENDAR_INPUT_TITLE": "Persönlicher Kalender",
   "SETTINGS_SECURITY_MODAL_CALENDAR_COPY_TOKEN_TOOLTIP": "In die Zwischenablage kopieren",
   "SETTINGS_SECURITY_MODAL_CALENDAR_RESET_TOKEN": "Zurücksetzen",
@@ -401,7 +408,8 @@
   "MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_LOCATION_INCORRECT": "Der Ortsname darf weder leer sein, noch mehr als 190 Zeichen haben!",
   "MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_ACTIVITY": "Aktivität",
   "MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_ACTIVITY_INCORRECT": "Die Aktivität darf weder leer sein, noch mehr als 190 Zeichen haben!",
-  "MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_BV_MEMBER": "Blasmusikverbandsmitglied",
+  "MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_BV_MEMBER": "Blasmusikverbandsmeldung",
+  "MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_BV_MEMBER_INCORRECT": "Blasmusikverbandmeldung darf nicht mehr als 190 Zeichen haben!",
   "MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_MEMBER_NUMBER": "Mitgliedsnummer",
   "MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_MEMBER_NUMBER_INCORRECT": "Die Mitgliedernummer darf weder leer sein, noch mehr als 190 Zeichen haben!",
   "MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_ACTIVATED": "Account aktiviert",
@@ -465,6 +473,8 @@
   "MANAGEMENT_GROUPS_CREATE_GROUP_MODAL_FORM_NAME_INCORRECT": "Der Name darf weder leer sein, noch mehr als 190 Zeichen haben!",
   "MANAGEMENT_GROUPS_CREATE_GROUP_MODAL_FORM_DESCRIPTION": "Beschreibung",
   "MANAGEMENT_GROUPS_CREATE_GROUP_MODAL_FORM_DESCRIPTION_INCORRECT": "Die Beschreibung darf nicht mehr als 190 Zeichen haben!",
+  "MANAGEMENT_GROUPS_CREATE_GROUP_MODAL_FORM_ORDER_NUMBER": "Ordnungszahl",
+  "MANAGEMENT_GROUPS_CREATE_GROUP_MODAL_FORM_ORDER_NUMBER_INCORRECT": "Bitte gib eine Zahl ein!",
   "MANAGEMENT_GROUPS_CREATE_GROUP_SUCCESSFUL": "Die Gruppe wurde erstellt.",
 
   "MANAGEMENT_GROUPS_UPDATE_GROUP_MODAL_TITLE": "Bearbeite die Gruppe ",
@@ -535,6 +545,8 @@
   "MANAGEMENT_PERFORMANCE_BADGES_BADGE_REMOVE_CONTROL_QUESTION": "Willst du dieses Abzeichen wirklich löschen?",
   "MANAGEMENT_PERFORMANCE_BADGES_BADGE_REMOVE_SUCCESSFULLY": "Das Abzeichen wurde entfernt!",
 
+  "MANAGEMENT_PERFORMANCE_BADGES_CURRENT_YEAR": "Diesjährige Abzeichen",
+
   "MANAGEMENT_DATEPOLL_FEATURE_SETTINGS": "DatePoll-Feature Einstellungen",
   "MANAGEMENT_DATEPOLL_FEATURE_SETTINGS_SUBTITLE": "Hier kannst du grundlegende Funktionen von DatePoll Konfigurieren!",
   "MANAGEMENT_DATEPOLL_CINEMA_SERVICE": "Kinoservice",
@@ -577,6 +589,11 @@
   "MANAGEMENT_DATEPOLL_LOGS_LOG_TYPE": "Log-Level",
   "MANAGEMENT_DATEPOLL_LOGS_NO_LOGS": "Es gibt keine Logs mit diesem Log-Level!",
 
+  "MANAGEMENT_DATEPOLL_JOBS": "Jobs",
+  "MANAGEMENT_DATEPOLL_JOBS_REFRESH": "Fehlgeschlagenen Jobliste aktualisieren",
+  "MANAGEMENT_DATEPOLL_JOBS_MODAL_TITLE": "Fehlgeschlagener Job - ",
+  "MANAGEMENT_DATEPOLL_JOBS_NOT_FOUND": "Keine fehlgeschlagenen Jobs gefunden!",
+
   "MANAGEMENT_BADGES_TITLE": "Abzeichenverwaltung",
 
   "EVENTS_VIEW": "Events",
@@ -594,6 +611,9 @@
   "EVENTS_VIEW_EVENT_VOTE_FOR_ADDITIONAL_INFORMATION_MODAL_TITLE": "Zusatzinformationen",
   "EVENTS_VIEW_EVENT_VOTE_FOR_ADDITIONAL_INFORMATION_MODAL_INFO": "Im nächsten Schritt kannst du dich für eine Antwort entscheiden!",
   "EVENTS_VIEW_EVENT_VOTE_FOR_ADDITIONAL_INFORMATION_MODAL_FORM_PLACEHOLDER": "Zusatzinformationen",
+  "EVENTS_VIEW_EVENT_EXPORT_ALL_FILE_NAME": "abstimmungsergebnis_alle_mitglieder",
+  "EVENTS_VIEW_EVENT_EXPORT_GROUP_FILE_NAME": "abstimmungsergebnis_gruppe_",
+  "EVENTS_VIEW_EVENT_EXPORT_SUBGROUP_FILE_NAME": "abstimmungsergebnis_register_",
 
   "EVENTS_CANCEL_VOTING": "Willst du deine Stimme wirklich entfernen?",
 

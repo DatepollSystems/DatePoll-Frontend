@@ -44,7 +44,7 @@ export class UserUpdateModalComponent implements OnDestroy {
   zipcode: number;
   location: string;
   activity: string;
-  bvMember: boolean;
+  bvMember: string;
   memberNumber: string;
   activated: boolean;
   internalComment: string;
@@ -223,7 +223,7 @@ export class UserUpdateModalComponent implements OnDestroy {
     this.userBadges = badges;
   }
 
-  update(form: NgForm) {
+  async update(form: NgForm) {
     this.dialogRef.close();
 
     const title = form.controls.title.value;
@@ -236,22 +236,13 @@ export class UserUpdateModalComponent implements OnDestroy {
     const location = form.controls.location.value;
     const activity = form.controls.activity.value;
     const internalComment = form.controls.internalComment.value;
-    let memberNumber = form.controls.memberNumber.value;
+    const memberNumber = form.controls.memberNumber.value;
     let activated = form.controls.activated.value;
-    let informationDenied = form.controls.informationDenied.value;
-    let bvMember = form.controls.bvMember.value;
+    const informationDenied = form.controls.informationDenied.value;
+    const bvMember = form.controls.bvMember.value;
 
     if (activated.toString().length === 0) {
       activated = false;
-    }
-    if (informationDenied.toString().length === 0) {
-      informationDenied = false;
-    }
-    if (bvMember.toString().length === 0) {
-      bvMember = false;
-    }
-    if (Number.isNaN(memberNumber) || memberNumber?.length === 0) {
-      memberNumber = null;
     }
 
     const birthdayformatted = Converter.getDateFormatted(this.birthday);
@@ -415,29 +406,51 @@ export class UserUpdateModalComponent implements OnDestroy {
 
     /* Groups and subgroups **/
     for (const group of this.joined) {
-      let toUpdate = true;
+      if (group.type === GroupType.PARENTGROUP) {
+        let toUpdate = true;
 
-      for (const joinedCopy of this.joinedCopy) {
-        if (group.type === joinedCopy.type) {
-          if (group.id === joinedCopy.id) {
-            toUpdate = false;
-            console.log('toUpdate | joined | false | ' + group.name + ' | ' + joinedCopy.name);
-            break;
+        for (const joinedCopy of this.joinedCopy) {
+          if (group.type === joinedCopy.type) {
+            if (group.id === joinedCopy.id) {
+              toUpdate = false;
+              console.log('toUpdate | joined | false | ' + group.name + ' | ' + joinedCopy.name);
+              break;
+            }
           }
         }
-      }
 
-      if (toUpdate) {
-        console.log('toUpdate | joined | true | ' + group.name);
+        if (toUpdate) {
+          console.log('toUpdate | joined | true | ' + group.name);
 
-        if (group.type === GroupType.PARENTGROUP) {
           this.groupsService.addUserToGroup(this.user.id, group.id).subscribe(
             (data: any) => {
               console.log(data);
             },
             error => console.log(error)
           );
-        } else {
+        }
+      }
+    }
+
+    await sleep(200);
+
+    for (const group of this.joined) {
+      if (group.type === GroupType.SUBGROUP) {
+        let toUpdate = true;
+
+        for (const joinedCopy of this.joinedCopy) {
+          if (group.type === joinedCopy.type) {
+            if (group.id === joinedCopy.id) {
+              toUpdate = false;
+              console.log('toUpdate | joined | false | ' + group.name + ' | ' + joinedCopy.name);
+              break;
+            }
+          }
+        }
+
+        if (toUpdate) {
+          console.log('toUpdate | joined | true | ' + group.name);
+
           this.groupsService.addUserToSubgroup(this.user.id, group.id).subscribe(
             (data: any) => {
               console.log(data);
@@ -449,29 +462,50 @@ export class UserUpdateModalComponent implements OnDestroy {
     }
 
     for (const group of this.free) {
-      let toUpdate = true;
+      if (group.type === GroupType.PARENTGROUP) {
+        let toUpdate = true;
 
-      for (const freeCopy of this.freeCopy) {
-        if (group.type === freeCopy.type) {
-          if (group.id === freeCopy.id) {
-            toUpdate = false;
-            console.log('toUpdate | free | false | ' + group.name + ' | ' + freeCopy.name);
-            break;
+        for (const freeCopy of this.freeCopy) {
+          if (group.type === freeCopy.type) {
+            if (group.id === freeCopy.id) {
+              toUpdate = false;
+              console.log('toUpdate | free | false | ' + group.name + ' | ' + freeCopy.name);
+              break;
+            }
           }
         }
-      }
 
-      if (toUpdate) {
-        console.log('toUpdate | free | true | ' + group.name);
+        if (toUpdate) {
+          console.log('toUpdate | free | true | ' + group.name);
 
-        if (group.type === GroupType.PARENTGROUP) {
           this.groupsService.removeUserFromGroup(this.user.id, group.id).subscribe(
             (data: any) => {
               console.log(data);
             },
             error => console.log(error)
           );
-        } else {
+        }
+      }
+    }
+
+    await sleep(200);
+
+    for (const group of this.free) {
+      if (group.type === GroupType.SUBGROUP) {
+        let toUpdate = true;
+
+        for (const freeCopy of this.freeCopy) {
+          if (group.type === freeCopy.type) {
+            if (group.id === freeCopy.id) {
+              toUpdate = false;
+              console.log('toUpdate | free | false | ' + group.name + ' | ' + freeCopy.name);
+              break;
+            }
+          }
+        }
+
+        if (toUpdate) {
+          console.log('toUpdate | free | true | ' + group.name);
           this.groupsService.removeUserFromSubgroup(this.user.id, group.id).subscribe(
             (data: any) => {
               console.log(data);
@@ -482,4 +516,8 @@ export class UserUpdateModalComponent implements OnDestroy {
       }
     }
   }
+}
+
+async function sleep(msec) {
+  return new Promise(resolve => setTimeout(resolve, msec * 2));
 }

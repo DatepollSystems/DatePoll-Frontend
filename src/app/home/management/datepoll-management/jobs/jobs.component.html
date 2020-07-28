@@ -1,0 +1,33 @@
+<div fxLayout="row">
+  <h1>{{ 'MANAGEMENT_DATEPOLL_JOBS' | translate }}</h1>
+</div>
+
+<div fxLayout="row wrap" fxLayoutGap="2%" fxLayoutAlign="center">
+  <mat-form-field fxFlex="90%" fxFlex.xs="80%">
+    <input (keyup)="applyFilter($event.target.value)" matInput placeholder="{{ 'SEARCH' | translate }}" />
+  </mat-form-field>
+
+  <div fxFlex="8%" fxFlex.xs="17%" style="text-align: center">
+    <button
+      (click)="refreshLogsList()"
+      mat-icon-button
+      matTooltip="{{ 'MANAGEMENT_DATEPOLL_JOBS_REFRESH' | translate }}"
+      matTooltipPosition="left"
+    >
+      <mat-icon>refresh</mat-icon>
+    </button>
+  </div>
+</div>
+
+<mat-divider></mat-divider>
+
+<div class="myContainer" *ngIf="!loading" fxLayout="column" fxLayoutAlign="start">
+  <div class="myCol" *ngFor="let job of jobsCopy" (click)="openJobInfo(job)">
+    failed Job {{ job.id }}: Connection {{ job.connection }} - {{ job.queue }} | {{ job.failedAt | date: 'dd.MM.yyyy HH:mm:ss' }}
+  </div>
+  <div class="myCol" *ngIf="jobsCopy.length === 0">
+    {{ 'MANAGEMENT_DATEPOLL_JOBS_NOT_FOUND' | translate }}
+  </div>
+</div>
+
+<mat-progress-bar mode="indeterminate" *ngIf="loading"></mat-progress-bar>

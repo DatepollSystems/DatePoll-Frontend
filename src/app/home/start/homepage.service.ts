@@ -6,6 +6,7 @@ import {Converter} from '../../utils/converter';
 import {HttpService} from '../../utils/http.service';
 
 import {TranslateService} from '../../translation/translate.service';
+import {Broadcast} from '../broadcasts/models/broadcast.model';
 import {Decision} from '../events/models/decision.model';
 import {EventDate} from '../events/models/event-date.model';
 import {Event} from '../events/models/event.model';
@@ -19,9 +20,13 @@ export class HomepageService {
   public birthdaysChange: Subject<HomeBirthdayModel[]> = new Subject<HomeBirthdayModel[]>();
   public bookingsChange: Subject<HomeBookingsModel[]> = new Subject<HomeBookingsModel[]>();
   public eventsChange: Subject<Event[]> = new Subject<Event[]>();
+  public broadcastChange: Subject<Broadcast[]> = new Subject<Broadcast[]>();
   private _birthdays: HomeBirthdayModel[] = [];
   private _bookings: HomeBookingsModel[] = [];
   private _events: Event[] = [];
+  private _broadcasts: Broadcast[] = [];
+
+  private counter = 3;
 
   constructor(private httpService: HttpService, private translate: TranslateService) {}
 
@@ -45,51 +50,55 @@ export class HomepageService {
     return this._events.slice();
   }
 
-  public fetchData() {
+  public getBroadcasts(): Broadcast[] {
+    this.fetchData();
+    return this._broadcasts.slice();
+  }
+
+  public fetchData(force = false) {
+    if (this.counter === 3) {
+      force = true;
+    }
+
+    if (this.counter < 3 && !force) {
+      this.counter++;
+      return;
+    }
+    this.counter = 1;
+
     this.httpService.loggedInV1GETRequest('/user/homepage', 'fetchHomepageData').subscribe(
       (data: any) => {
         console.log(data);
 
-        const bookings = data.bookings;
-
         const bookingsToSave = [];
-        for (let i = 0; i < bookings.length; i++) {
+        for (const booking of data.bookings) {
           bookingsToSave.push(
             new HomeBookingsModel(
-              bookings[i].movie_id,
-              bookings[i].movie_name,
-              bookings[i].amount,
-              bookings[i].movie_date,
-              bookings[i].worker_id,
-              bookings[i].worker_name,
-              bookings[i].emergency_worker_id,
-              bookings[i].emergency_worker_name
+              booking.movie_id,
+              booking.movie_name,
+              booking.amount,
+              booking.movie_date,
+              booking.worker_id,
+              booking.worker_name,
+              booking.emergency_worker_id,
+              booking.emergency_worker_name
             )
           );
         }
 
         this.setBookings(bookingsToSave);
 
-        const birthdays = data.birthdays;
-
         const birthdaysToSave = [];
-        for (let i = 0; i < birthdays.length; i++) {
+        for (const birthday of data.birthdays) {
           birthdaysToSave.push(
-            new HomeBirthdayModel(
-              birthdays[i].name,
-              new Date(birthdays[i].date),
-              this.translate.getTranslationFor('CALENDAR_USERS_BIRTHDAY')
-            )
+            new HomeBirthdayModel(birthday.name, new Date(birthday.date), this.translate.getTranslationFor('CALENDAR_USERS_BIRTHDAY'))
           );
         }
 
         this.setBirthdays(birthdaysToSave);
 
-        const events = data.events;
         const eventsToSave = [];
-        for (let i = 0; i < events.length; i++) {
-          const fetchedEvent = events[i];
-
+        for (const fetchedEvent of data.events) {
           const decisions = [];
           for (const decision of fetchedEvent.decisions) {
             decisions.push(new Decision(decision.id, decision.decision, decision.color));
@@ -127,6 +136,19 @@ export class HomepageService {
           eventsToSave.push(event);
         }
         this.setEvents(eventsToSave);
+
+        const broadcasts = [];
+        for (const broadcast of data.broadcasts) {
+          const toSaveBroadcast = new Broadcast(
+            broadcast.id,
+            broadcast.subject,
+            Converter.getIOSDate(broadcast.created_at),
+            broadcast.body,
+            broadcast.writer_name
+          );
+          broadcasts.push(toSaveBroadcast);
+        }
+        this.setBroadcasts(broadcasts);
       },
       error => console.log(error)
     );
@@ -140,5 +162,10 @@ export class HomepageService {
   private setEvents(events: Event[]) {
     this._events = events;
     this.eventsChange.next(this._events.slice());
+  }
+
+  private setBroadcasts(broadcasts: Broadcast[]) {
+    this._broadcasts = broadcasts;
+    this.broadcastChange.next(this._broadcasts.slice());
   }
 }

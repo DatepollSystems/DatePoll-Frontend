@@ -61,7 +61,7 @@ export class UsersManagementComponent implements OnInit, OnDestroy {
 
       this.users = value;
       this.usersCopy = this.users.slice();
-      this.getData();
+      this.applyFilter(this.filterValue);
     });
 
     this.table = new TableData<User>(
@@ -152,14 +152,33 @@ export class UsersManagementComponent implements OnInit, OnDestroy {
       const firstname = user.firstname.trim().toLowerCase();
       const surname = user.surname.trim().toLowerCase();
       const memberNumber = user.memberNumber?.trim().toLowerCase();
-      const emailAddress = user
-        .getEmailAddressesAsString()
-        .trim()
-        .toLowerCase();
-      const numbers = user
-        .getPhoneNumbersAsString()
-        .trim()
-        .toLowerCase();
+      let check = false;
+      for (const email of user.getEmailAddresses()) {
+        if (
+          email
+            .trim()
+            .toLowerCase()
+            .includes(this.filterValue)
+        ) {
+          check = true;
+          break;
+        }
+      }
+      for (const number of user.getPhoneNumbers()) {
+        if (
+          number.label
+            .trim()
+            .toLowerCase()
+            .includes(this.filterValue) ||
+          number.phoneNumber
+            .trim()
+            .toLowerCase()
+            .includes(this.filterValue)
+        ) {
+          check = true;
+          break;
+        }
+      }
       const streetName = user.streetname.trim().toLowerCase();
       const streetNumber = user.streetnumber.trim().toLowerCase();
       const location = user.location.trim().toLowerCase();
@@ -173,8 +192,7 @@ export class UsersManagementComponent implements OnInit, OnDestroy {
         firstname.includes(this.filterValue) ||
         surname.includes(this.filterValue) ||
         memberNumber?.includes(this.filterValue) ||
-        emailAddress.includes(this.filterValue) ||
-        numbers.includes(this.filterValue) ||
+        check ||
         streetName.includes(this.filterValue) ||
         streetNumber.includes(this.filterValue) ||
         location.includes(this.filterValue) ||

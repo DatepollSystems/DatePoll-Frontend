@@ -55,11 +55,6 @@ import {UsersExportBottomSheetComponent, UsersManagementComponent} from './users
     CommonComponentsModule,
     GroupAndSubgroupTypeInputSelectModule
   ],
-  providers: [
-    UsersService,
-    ExcelService,
-    {provide: DateAdapter, useClass: CustomDateAdapter},
-    {provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS}
-  ]
+  providers: [UsersService, {provide: DateAdapter, useClass: CustomDateAdapter}, {provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS}]
 })
 export class UsersManagementModule {}

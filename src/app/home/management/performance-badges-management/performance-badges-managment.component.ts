@@ -9,12 +9,13 @@ import {TranslateService} from '../../../translation/translate.service';
 import {BadgesService} from './badges.service';
 import {PerformanceBadgesService} from './performance-badges.service';
 
+import {Badge} from './models/badge.model';
+import {CurrentYearUser} from './models/currentYearUser.model';
 import {Instrument} from './models/instrument.model';
 import {PerformanceBadge} from './models/performanceBadge.model';
 
 import {QuestionDialogComponent} from '../../../utils/shared-components/question-dialog/question-dialog.component';
 import {InstrumentUpdateModalComponent} from './instrument-update-modal/instrument-update-modal.component';
-import {Badge} from './models/badge.model';
 import {PerformanceBadgeUpdateModalComponent} from './performance-badge-update-modal/performance-badge-update-modal.component';
 
 @Component({
@@ -31,6 +32,9 @@ export class PerformanceBadgesManagmentComponent implements OnDestroy {
 
   badgesSubscription: Subscription;
   badges: Badge[];
+
+  currentYearUsers: CurrentYearUser[];
+  currentYearUsersSubscription: Subscription;
 
   answers = [
     {
@@ -65,21 +69,29 @@ export class PerformanceBadgesManagmentComponent implements OnDestroy {
     this.badgesSubscription = this.badgesService.badgesChange.subscribe(value => {
       this.badges = value;
     });
+
+    this.currentYearUsers = this.performanceBadgesService.getCurrentYearUsers();
+    this.currentYearUsersSubscription = this.performanceBadgesService.currentYearUsersChange.subscribe(value => {
+      this.currentYearUsers = value;
+    });
   }
 
   ngOnDestroy(): void {
     this.performanceBadgesSubscription.unsubscribe();
     this.instrumentsSubscription.unsubscribe();
     this.badgesSubscription.unsubscribe();
+    this.currentYearUsersSubscription.unsubscribe();
   }
 
   onRefresh() {
     this.performanceBadges = null;
     this.instruments = null;
     this.badges = null;
+    this.currentYearUsers = null;
     this.performanceBadgesService.fetchPerformanceBadges();
     this.performanceBadgesService.fetchInstruments();
     this.badgesService.fetchBadges();
+    this.performanceBadgesService.fetchCurrentYearUsers();
   }
 
   addPerformanceBadge(form: NgForm) {

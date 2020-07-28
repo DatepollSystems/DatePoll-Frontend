@@ -9,7 +9,6 @@ export class EventResultGroup {
   public chartIsEmpty = true;
   private resultSubgroups: EventResultSubgroup[];
   private resultUsers: EventResultUser[];
-  private chartData: any[] = null;
 
   constructor(id: number, name: string) {
     this.id = id;
@@ -32,38 +31,18 @@ export class EventResultGroup {
     return this.resultUsers.slice();
   }
 
-  public getChartData(): any[] {
-    if (this.chartData == null) {
-      this.calculateChartData();
+  public getExportResultUser(): any[] {
+    const r = [];
+
+    for (const user of this.resultUsers) {
+      r.push({
+        Vorname: user.firstname,
+        Nachname: user.surname,
+        Entscheidung: user.decision,
+        Zusatz_Information: user.additionalInformation
+      });
     }
 
-    return this.chartData;
-  }
-
-  private calculateChartData() {
-    const data = [];
-    for (let i = 0; i < this.event.getDecisions().length; i++) {
-      const object = {
-        'id': this.event.getDecisions()[i].id,
-        'value': 0
-      };
-      data.push(object);
-    }
-
-    for (let i = 0; i < this.resultUsers.length; i++) {
-      for (let j = 0; j < data.length; j++) {
-        if (data[j].id === this.resultUsers[i].decisionId) {
-          data[j].value++;
-          this.chartIsEmpty = false;
-          break;
-        }
-      }
-    }
-    const toReturn = [];
-
-    for (let i = 0; i < data.length; i++) {
-      toReturn.push(data[i].value);
-    }
-    this.chartData = toReturn;
+    return r;
   }
 }

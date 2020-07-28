@@ -34,7 +34,7 @@ export class TableBookingsRowComponent {
       },
       error => {
         console.log(error);
-        this.homePageService.fetchData();
+        this.homePageService.fetchData(true);
       }
     );
   }
@@ -50,7 +50,7 @@ export class TableBookingsRowComponent {
       },
       error => {
         console.log(error);
-        this.homePageService.fetchData();
+        this.homePageService.fetchData(true);
       }
     );
   }
@@ -66,7 +66,7 @@ export class TableBookingsRowComponent {
       },
       error => {
         console.log(error);
-        this.homePageService.fetchData();
+        this.homePageService.fetchData(true);
       }
     );
   }
@@ -82,7 +82,7 @@ export class TableBookingsRowComponent {
       },
       error => {
         console.log(error);
-        this.homePageService.fetchData();
+        this.homePageService.fetchData(true);
       }
     );
   }

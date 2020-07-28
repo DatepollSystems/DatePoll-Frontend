@@ -1,5 +1,10 @@
-<div fxLayout="row">
+<div fxLayout="row" fxLayoutAlign="space-between" fxLayoutGap="2%">
   <h1>{{ 'MANAGEMENT_DATEPOLL_LOGS' | translate }}</h1>
+  <div>
+    <a mat-flat-button href="{{ apiUrl }}?token={{ this.token }}" target="_blank" rel="noopener" color="warn">
+      Lumen Logging
+    </a>
+  </div>
 </div>
 
 <div fxLayout="row wrap" fxLayoutGap="2%" fxLayoutAlign="center">

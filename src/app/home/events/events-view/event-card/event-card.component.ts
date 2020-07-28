@@ -58,7 +58,7 @@ export class EventCardComponent {
           (response: any) => {
             console.log(response);
             this.eventsUserSerivce.fetchEvents();
-            this.homepageService.fetchData();
+            this.homepageService.fetchData(true);
             this.notificationsService.success(
               this.translate.getTranslationFor('SUCCESSFULLY'),
               this.translate.getTranslationFor('EVENTS_VIEW_EVENT_SUCCESSFULLY_VOTED')
@@ -78,7 +78,7 @@ export class EventCardComponent {
       (response: any) => {
         console.log(response);
         this.eventsUserSerivce.fetchEvents();
-        this.homepageService.fetchData();
+        this.homepageService.fetchData(true);
         this.notificationsService.success(
           this.translate.getTranslationFor('SUCCESSFULLY'),
           this.translate.getTranslationFor('EVENTS_VIEW_EVENT_SUCCESSFULLY_REMOVED_VOTING')

@@ -23,7 +23,7 @@ export class EventInfoViewComponent {
         console.log(localEvent);
         if (localEvent != null) {
           if (localEvent?.name) {
-            this.event = new Event(Number(id), localEvent.subject, new Date(), new Date(), false, 'Loading', [], []);
+            this.event = new Event(Number(id), localEvent.name, new Date(), new Date(), false, 'Loading', [], []);
             return;
           }
           this.event = new Event(Number(id), 'Loading', new Date(), new Date(), false, 'Loading', [], []);

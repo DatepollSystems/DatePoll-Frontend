@@ -1,0 +1,24 @@
+<h2 mat-dialog-title>{{ 'MANAGEMENT_DATEPOLL_JOBS_MODAL_TITLE' | translate }} {{ job?.id }}</h2>
+<mat-dialog-content>
+  <h3>Id: {{ job?.id }}</h3>
+  <h3>Failed at: {{ job?.failedAt | date: 'dd.MM.yyyy HH:mm:ss' }}</h3>
+  <h3>Connection: {{ job?.connection }}</h3>
+  <h3>Queue: {{ job?.queue }}</h3>
+
+  <mat-divider></mat-divider>
+
+  <h3>Payload</h3>
+  <div style="word-break: break-all">
+    {{ job?.payload }}
+  </div>
+
+  <mat-divider></mat-divider>
+
+  <h3>Exception</h3>
+  <div style="word-break: break-all">
+    {{ job?.exception }}
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>{{ 'CLOSE' | translate }}</button>
+</mat-dialog-actions>

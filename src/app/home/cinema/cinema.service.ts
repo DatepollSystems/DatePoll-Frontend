@@ -276,16 +276,13 @@ export class CinemaService {
               minDate.setHours(18);
 
               if (minDate.getTime() <= date.getTime() && maxDate.getTime() >= date.getTime()) {
-                // console.log(movie.name + ': Date - ' + date + ' | MinDate - ' + minDate.getTime() + ' | MaxDate - '
-                // + maxDate.getTime() + ' | Date: ' + date.getTime());
-
                 const temperature = tempObject.main.temp;
                 const weather = tempObject.weather[0].description;
                 const cloudy = tempObject.clouds.all;
                 const windSpeed = tempObject.wind.speed;
                 const windDirection = tempObject.wind.deg;
 
-                const weatherForecast = new WeatherForecast(temperature, weather, cloudy, windSpeed, windDirection, 0, date);
+                const weatherForecast = new WeatherForecast(temperature, weather, cloudy, windSpeed, windDirection, date);
 
                 const weatherForecasts = movie.getWeatherForecasts();
                 weatherForecasts.push(weatherForecast);

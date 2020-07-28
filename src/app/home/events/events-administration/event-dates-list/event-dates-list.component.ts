@@ -1,9 +1,9 @@
 import {Component, EventEmitter, Input, OnDestroy, Output} from '@angular/core';
 import {Subscription} from 'rxjs';
 
-import {IsMobileService} from '../../../utils/is-mobile.service';
+import {IsMobileService} from '../../../../utils/is-mobile.service';
 
-import {EventDate} from '../models/event-date.model';
+import {EventDate} from '../../models/event-date.model';
 
 @Component({
   selector: 'app-event-dates-list',
@@ -13,9 +13,6 @@ import {EventDate} from '../models/event-date.model';
 export class EventDatesListComponent implements OnDestroy {
   @Input()
   public dates: EventDate[] = [];
-
-  @Input()
-  public adminView = false;
 
   @Output()
   public datesChanged = new EventEmitter();

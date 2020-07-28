@@ -6,6 +6,8 @@ import {Permissions} from '../../../permissions';
 import {MyUserService} from '../../my-user.service';
 import {EventsService} from '../events.service';
 
+import {TranslateService} from '../../../translation/translate.service';
+import {ExcelService} from '../../../utils/excel.service';
 import {EventDate} from '../models/event-date.model';
 import {EventResultGroup} from '../models/event-result-group.model';
 import {Event} from '../models/event.model';
@@ -43,7 +45,12 @@ export class EventInfoComponent implements OnInit, OnDestroy {
   public EVENTS_ADMINISTRATION_PERMISSION = Permissions.EVENTS_ADMINISTRATION;
   public ROOT_PERMISSION = Permissions.ROOT_ADMINISTRATION;
 
-  constructor(private eventsService: EventsService, myUserService: MyUserService) {
+  constructor(
+    private eventsService: EventsService,
+    myUserService: MyUserService,
+    private excelService: ExcelService,
+    private translate: TranslateService
+  ) {
     this.myUserService = myUserService;
   }
 
@@ -97,5 +104,12 @@ export class EventInfoComponent implements OnInit, OnDestroy {
 
   changeAdminMode(ob: MatSlideToggleChange) {
     this.showAdminModeInResultUserTable = ob.checked;
+  }
+
+  exportAllResultUsers() {
+    this.excelService.exportAsExcelFile(
+      this.event.getExportResultUser(),
+      this.translate.getTranslationFor('EVENTS_VIEW_EVENT_EXPORT_ALL_FILE_NAME')
+    );
   }
 }

@@ -64,6 +64,14 @@ export class MovieOrder {
     this.date = date;
   }
 
+  public getBookedTicketsAmount() {
+    let amount = 0;
+    for (const ticket of this.getTicketOrders()) {
+      amount += ticket.amount;
+    }
+    return amount;
+  }
+
   public setTicketOrders(ticketOrders: TicketOrder[]) {
     this._ticketOrders = ticketOrders;
   }

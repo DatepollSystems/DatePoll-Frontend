@@ -8,10 +8,12 @@ import {QuestionDialogComponentModule} from '../../../utils/shared-components/qu
 import {DatepollManagementRoutingModule} from './datepoll-management-routing.module';
 
 import {DatepollManagementComponent} from './datepoll-management.component';
+import {JobViewModalComponent} from './jobs/job-view-modal/job-view-modal.component';
+import {JobsComponent} from './jobs/jobs.component';
 import {LogsComponent} from './logs/logs.component';
 
 @NgModule({
-  declarations: [DatepollManagementComponent, LogsComponent],
+  declarations: [DatepollManagementComponent, LogsComponent, JobsComponent, JobViewModalComponent],
   imports: [CommonModule, FormsModule, MaterialModule, TranslationModule, QuestionDialogComponentModule, DatepollManagementRoutingModule]
 })
 export class DatepollManagementModule {}

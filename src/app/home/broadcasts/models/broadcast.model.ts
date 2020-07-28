@@ -14,6 +14,8 @@ export class Broadcast {
 
   public userInfos: UserBroadcastInfo[];
 
+  public readTime: string;
+
   constructor(id: number, subject: string, sent: Date, body: string, writerName: string) {
     this.id = id;
     this.subject = subject;
@@ -25,6 +27,15 @@ export class Broadcast {
       this.bodyPreview = this.body;
     }
     this.writerName = writerName;
+
+    // Calculate read time at about 265 words per minute
+    const words = this.body.split(' ').length;
+    const minutesToRead = words / 265;
+    if (minutesToRead < 1) {
+      this.readTime = Math.ceil(minutesToRead / 10) + 's';
+    } else {
+      this.readTime = Math.ceil(minutesToRead) + 'm';
+    }
   }
 }
 

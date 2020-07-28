@@ -1,5 +1,5 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {MatBottomSheet, MatDialog} from '@angular/material';
+import {Component, OnDestroy} from '@angular/core';
+import {MatBottomSheet} from '@angular/material';
 import {Router} from '@angular/router';
 
 import {Subscription} from 'rxjs';
@@ -11,14 +11,13 @@ import {EventsUserService} from '../events/events-user.service';
 import {MyUserService} from '../my-user.service';
 import {HomepageService} from './homepage.service';
 
+import {Broadcast} from '../broadcasts/models/broadcast.model';
 import {Event} from '../events/models/event.model';
 import {HomeBirthdayModel} from './birthdays.model';
 import {HomeBookingsModel} from './bookings.model';
 
-import {IsMobileService} from '../../utils/is-mobile.service';
-import {EventInfoModalComponent} from '../events/event-info/event-info-modal/event-info-modal.component';
-import {EventsVoteForDecisionModalComponent} from '../events/events-view/events-vote-for-decision-modal/events-vote-for-decision-modal.component';
 import {QuestionDialogComponent} from '../../utils/shared-components/question-dialog/question-dialog.component';
+import {EventsVoteForDecisionModalComponent} from '../events/events-view/events-vote-for-decision-modal/events-vote-for-decision-modal.component';
 
 @Component({
   selector: 'app-start',
@@ -36,8 +35,8 @@ export class StartComponent implements OnDestroy {
   events: Event[];
   eventsSubscription: Subscription;
 
-  isMobile = true;
-  isMobileSubscription: Subscription;
+  broadcasts: Broadcast[];
+  broadcastSubscription: Subscription;
 
   eventVotingChangeLoading = false;
 
@@ -50,9 +49,7 @@ export class StartComponent implements OnDestroy {
     private bottomSheet: MatBottomSheet,
     private notificationsService: NotificationsService,
     private translate: TranslateService,
-    private isMobileService: IsMobileService,
-    private router: Router,
-    private dialog: MatDialog
+    private router: Router
   ) {
     this.birthdays = homePageService.getBirthdays();
     this.birthdaysSubscription = homePageService.birthdaysChange.subscribe(value => {
@@ -76,9 +73,9 @@ export class StartComponent implements OnDestroy {
       this.eventVotingChangeLoading = false;
     });
 
-    this.isMobile = this.isMobileService.getIsMobile();
-    this.isMobileSubscription = this.isMobileService.isMobileChange.subscribe(value => {
-      this.isMobile = value;
+    this.broadcasts = homePageService.getBroadcasts();
+    this.broadcastSubscription = homePageService.broadcastChange.subscribe(value => {
+      this.broadcasts = value;
     });
   }
 
@@ -86,7 +83,7 @@ export class StartComponent implements OnDestroy {
     this.bookingsSubscription.unsubscribe();
     this.birthdaysSubscription.unsubscribe();
     this.eventsSubscription.unsubscribe();
-    this.isMobileSubscription.unsubscribe();
+    this.broadcastSubscription.unsubscribe();
   }
 
   onBirthdaysExpand() {
@@ -95,6 +92,10 @@ export class StartComponent implements OnDestroy {
     } else {
       this.howMuchBirthdaysToShow = 7;
     }
+  }
+
+  onBroadcastItemClick(broadcast: Broadcast) {
+    this.router.navigateByUrl('/home/broadcasts/' + broadcast.id, {state: broadcast});
   }
 
   onEventItemClick(event: Event) {
@@ -106,16 +107,7 @@ export class StartComponent implements OnDestroy {
   }
 
   onEventInfo(event: Event) {
-    if (this.isMobile) {
-      this.router.navigateByUrl('/home/events/' + event.id, {state: event});
-    } else {
-      this.dialog.open(EventInfoModalComponent, {
-        width: '80vh',
-        data: {
-          event
-        }
-      });
-    }
+    this.router.navigateByUrl('/home/events/' + event.id, {state: event});
   }
 
   onEventVote(event: Event) {
@@ -128,7 +120,7 @@ export class StartComponent implements OnDestroy {
         this.eventsUserSerivce.voteForDecision(event.id, dto.decision, dto.additionalInformation).subscribe(
           (response: any) => {
             console.log(response);
-            this.homePageService.fetchData();
+            this.homePageService.fetchData(true);
             this.notificationsService.success(
               this.translate.getTranslationFor('SUCCESSFULLY'),
               this.translate.getTranslationFor('EVENTS_VIEW_EVENT_SUCCESSFULLY_VOTED')
@@ -165,7 +157,7 @@ export class StartComponent implements OnDestroy {
     bottomSheetRef.afterDismissed().subscribe((value: string) => {
       if (value != null) {
         if (value.includes('yes')) {
-          if (this.eventVotingChangeLoading && this.isMobile) {
+          if (this.eventVotingChangeLoading) {
             return;
           }
           this.eventVotingChangeLoading = true;
@@ -175,7 +167,7 @@ export class StartComponent implements OnDestroy {
           this.eventsUserSerivce.removeDecision(event.id).subscribe(
             (response: any) => {
               console.log(response);
-              this.homePageService.fetchData();
+              this.homePageService.fetchData(true);
               this.notificationsService.success(
                 this.translate.getTranslationFor('SUCCESSFULLY'),
                 this.translate.getTranslationFor('EVENTS_VIEW_EVENT_SUCCESSFULLY_REMOVED_VOTING')

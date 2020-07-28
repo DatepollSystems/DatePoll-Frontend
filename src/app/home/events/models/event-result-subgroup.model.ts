@@ -21,4 +21,19 @@ export class EventResultSubgroup {
   public getResultUsers(): EventResultUser[] {
     return this.resultUsers.slice();
   }
+
+  public getExportResultUser(): any[] {
+    const r = [];
+
+    for (const user of this.resultUsers) {
+      r.push({
+        Vorname: user.firstname,
+        Nachname: user.surname,
+        Entscheidung: user.decision,
+        Zusatz_Information: user.additionalInformation
+      });
+    }
+
+    return r;
+  }
 }
