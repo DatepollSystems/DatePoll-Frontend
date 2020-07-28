@@ -30,6 +30,7 @@ export class EventInfoComponent implements OnInit, OnDestroy {
 
   name: string;
   description: string;
+  descriptionMinRows = 1;
 
   startDate: Date;
   endDate: Date;
@@ -79,6 +80,9 @@ export class EventInfoComponent implements OnInit, OnDestroy {
     this.dates = this.event.getEventDates();
     this.resultGroups = this.event.getResultGroups();
     this.sortedResultGroups = this.resultGroups.slice();
+    if (this.description?.length > 0) {
+      this.descriptionMinRows = this.description?.split('\n').length;
+    }
   }
 
   applyFilter(filterValue: string) {

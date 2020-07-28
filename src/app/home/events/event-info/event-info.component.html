@@ -2,7 +2,14 @@
 <div fxLayout="row" *ngIf="description?.length > 0">
   <mat-form-field appearance="outline" fxFlex>
     <mat-label>{{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DESCRIPTION' | translate }}</mat-label>
-    <textarea cdkTextareaAutosize [(ngModel)]="description" matInput readonly></textarea>
+    <textarea
+      cdkTextareaAutosize
+      [(ngModel)]="description"
+      [cdkAutosizeMinRows]="descriptionMinRows"
+      matInput
+      readonly
+      id="description"
+    ></textarea>
   </mat-form-field>
 </div>
 
