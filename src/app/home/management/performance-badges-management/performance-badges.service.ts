@@ -216,7 +216,7 @@ export class PerformanceBadgesService {
   public getCurrentYearUsers(): CurrentYearUser[] {
     this.fetchCurrentYearUsers();
 
-    if (this.performanceBadges == null) {
+    if (this.currentYearUsers == null) {
       return null;
     }
 
