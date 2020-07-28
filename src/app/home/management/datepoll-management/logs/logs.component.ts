@@ -1,10 +1,15 @@
 import {Component, OnDestroy} from '@angular/core';
 import {MatBottomSheet} from '@angular/material/bottom-sheet';
 import {Subscription} from 'rxjs';
+import {environment} from '../../../../../environments/environment';
+
 import {QuestionDialogComponent} from '../../../../utils/shared-components/question-dialog/question-dialog.component';
+
 import {TranslateService} from '../../../../translation/translate.service';
-import {Log, LogType} from './log.model';
 import {LogsService} from './logs.service';
+
+import {Log, LogType} from './log.model';
+import {AuthService} from '../../../../auth/auth.service';
 
 @Component({
   selector: 'app-logs',
@@ -12,6 +17,9 @@ import {LogsService} from './logs.service';
   styleUrls: ['./logs.component.css']
 })
 export class LogsComponent implements OnDestroy {
+  apiUrl = environment.apiUrl.slice(0, environment.apiUrl.length - 3) + 'logs';
+  token = '';
+
   logs: Log[];
   logsCopy: Log[];
   logsSubscription: Subscription;
@@ -25,7 +33,12 @@ export class LogsComponent implements OnDestroy {
 
   loading = true;
 
-  constructor(private logsService: LogsService, private bottomSheet: MatBottomSheet, private translate: TranslateService) {
+  constructor(
+    private logsService: LogsService,
+    private bottomSheet: MatBottomSheet,
+    private translate: TranslateService,
+    private authService: AuthService
+  ) {
     this.logs = this.logsService.getLogs();
     this.logsCopy = this.logs.slice();
     this.redoLogsList();
@@ -35,6 +48,8 @@ export class LogsComponent implements OnDestroy {
       this.redoLogsList();
       this.loading = false;
     });
+
+    this.token = this.authService.getJWTToken();
   }
 
   selectedLogTypeChange(event: any) {
