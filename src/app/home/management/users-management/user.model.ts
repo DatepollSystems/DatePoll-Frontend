@@ -18,7 +18,7 @@ export class User {
   public memberNumber: string;
   public internalComment: string;
   public informationDenied: boolean;
-  public bvMember: boolean;
+  public bvMember: string;
   private _phoneNumbers: PhoneNumber[] = [];
   private _permissions: string[] = [];
   private readonly _emailAddresses: string[] = [];
@@ -42,7 +42,7 @@ export class User {
     memberNumber: string,
     internalComent: string,
     informationDenied: boolean,
-    bvMember: boolean,
+    bvMember: string,
     phoneNumbers: PhoneNumber[],
     permissions: string[]
   ) {

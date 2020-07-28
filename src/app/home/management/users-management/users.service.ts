@@ -63,7 +63,7 @@ export class UsersService {
     const birthday = new Date(user.birthday);
     const join_date = new Date(user.join_date);
 
-    const localUser = new User(
+    return new User(
       user.id,
       user.username,
       user.email_addresses,
@@ -86,8 +86,6 @@ export class UsersService {
       localPhoneNumbers,
       user.permissions
     );
-
-    return localUser;
   }
 
   public addUser(user: any) {

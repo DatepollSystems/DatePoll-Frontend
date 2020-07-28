@@ -44,7 +44,7 @@ export class UserUpdateModalComponent implements OnDestroy {
   zipcode: number;
   location: string;
   activity: string;
-  bvMember: boolean;
+  bvMember: string;
   memberNumber: string;
   activated: boolean;
   internalComment: string;
