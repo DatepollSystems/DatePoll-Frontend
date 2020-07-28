@@ -31,5 +31,7 @@ export class Permissions {
 
   public static SETTINGS_ADMINISTRATION = 'settings.*';
 
+  public static SYSTEM_ADMINISTRATION = 'system.*';
+  public static SYSTEM_JOBS_ADMINISTRATION = 'system.jobs.*';
   public static SYSTEM_LOGS_ADMINISTRATION = 'system.logs.*';
 }

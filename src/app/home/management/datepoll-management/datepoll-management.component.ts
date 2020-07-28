@@ -37,7 +37,9 @@ export class DatepollManagementComponent implements OnDestroy {
   openWeatherMapCinemaCityIdSaving = false;
 
   SETTINGS_ADMINISTRATION = Permissions.SETTINGS_ADMINISTRATION;
+  SYSTEM_ADMINISTRATION = Permissions.SYSTEM_ADMINISTRATION;
   SYSTEM_LOGS_ADMINISTRATION = Permissions.SYSTEM_LOGS_ADMINISTRATION;
+  SYSTEM_JOBS_ADMINISTRATION = Permissions.SYSTEM_JOBS_ADMINISTRATION;
 
   myUserService: MyUserService;
 

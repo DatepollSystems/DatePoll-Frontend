@@ -323,8 +323,17 @@
           </form>
         </div>
       </mat-tab>
-      <mat-tab label="{{ 'MANAGEMENT_DATEPOLL_LOGS' | translate }}" *ngIf="this.myUserService.hasPermission(SYSTEM_LOGS_ADMINISTRATION)">
+      <mat-tab
+        label="{{ 'MANAGEMENT_DATEPOLL_LOGS' | translate }}"
+        *ngIf="this.myUserService.hasPermission(SYSTEM_LOGS_ADMINISTRATION) || this.myUserService.hasPermission(SYSTEM_ADMINISTRATION)"
+      >
         <app-logs></app-logs>
+      </mat-tab>
+      <mat-tab
+        label="{{ 'MANAGEMENT_DATEPOLL_JOBS' | translate }}"
+        *ngIf="this.myUserService.hasPermission(SYSTEM_JOBS_ADMINISTRATION) || this.myUserService.hasPermission(SYSTEM_ADMINISTRATION)"
+      >
+        <app-jobs></app-jobs>
       </mat-tab>
     </mat-tab-group>
   </mat-card-content>

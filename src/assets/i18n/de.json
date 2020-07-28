@@ -408,7 +408,8 @@
   "MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_LOCATION_INCORRECT": "Der Ortsname darf weder leer sein, noch mehr als 190 Zeichen haben!",
   "MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_ACTIVITY": "Aktivität",
   "MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_ACTIVITY_INCORRECT": "Die Aktivität darf weder leer sein, noch mehr als 190 Zeichen haben!",
-  "MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_BV_MEMBER": "Blasmusikverbandsmitglied",
+  "MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_BV_MEMBER": "Blasmusikverbandsmeldung",
+  "MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_BV_MEMBER_INCORRECT": "Blasmusikverbandmeldung darf nicht mehr als 190 Zeichen haben!",
   "MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_MEMBER_NUMBER": "Mitgliedsnummer",
   "MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_MEMBER_NUMBER_INCORRECT": "Die Mitgliedernummer darf weder leer sein, noch mehr als 190 Zeichen haben!",
   "MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_ACTIVATED": "Account aktiviert",
@@ -587,6 +588,11 @@
   "MANAGEMENT_DATEPOLL_LOGS_DELETE_CONFIRM": "Willst du wirklich alle Logs löschen?",
   "MANAGEMENT_DATEPOLL_LOGS_LOG_TYPE": "Log-Level",
   "MANAGEMENT_DATEPOLL_LOGS_NO_LOGS": "Es gibt keine Logs mit diesem Log-Level!",
+
+  "MANAGEMENT_DATEPOLL_JOBS": "Jobs",
+  "MANAGEMENT_DATEPOLL_JOBS_REFRESH": "Fehlgeschlagenen Jobliste aktualisieren",
+  "MANAGEMENT_DATEPOLL_JOBS_MODAL_TITLE": "Fehlgeschlagener Job - ",
+  "MANAGEMENT_DATEPOLL_JOBS_NOT_FOUND": "Keine fehlgeschlagenen Jobs gefunden!",
 
   "MANAGEMENT_BADGES_TITLE": "Abzeichenverwaltung",
 
