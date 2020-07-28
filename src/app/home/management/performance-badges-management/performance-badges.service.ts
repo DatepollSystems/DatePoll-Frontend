@@ -205,9 +205,9 @@ export class PerformanceBadgesService {
           }
           userToSave.currentYearBadges = yearBadgesToSave;
           usersToSave.push(userToSave);
-
-          this.setCurrentYearUsers(usersToSave);
         }
+
+        this.setCurrentYearUsers(usersToSave);
       },
       error => console.log(error)
     );
