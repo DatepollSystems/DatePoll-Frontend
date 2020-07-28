@@ -81,7 +81,7 @@ export class EventInfoComponent implements OnInit, OnDestroy {
     this.resultGroups = this.event.getResultGroups();
     this.sortedResultGroups = this.resultGroups.slice();
     if (this.description?.length > 0) {
-      this.descriptionMinRows = this.description?.split('\n').length;
+      this.descriptionMinRows = this.description?.split('\n').length + 1;
     }
   }
 
