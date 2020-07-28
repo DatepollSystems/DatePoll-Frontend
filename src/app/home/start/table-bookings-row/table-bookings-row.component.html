@@ -1,5 +1,5 @@
 <td>{{ booking.name }}</td>
-<td>{{ booking.date | date: 'EE, dd.MM.yyyy' }}</td>
+<td>{{ booking.date | date: 'EE, dd.MM' }}</td>
 <td>{{ booking.bookedTickets }}</td>
 <td *ngIf="booking.workerName != null">
   {{ booking.workerName }}
