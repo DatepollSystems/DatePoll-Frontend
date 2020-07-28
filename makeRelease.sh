@@ -29,6 +29,8 @@ echo -e "\e[32mdone\e[0m"
 
 ls
 
+cd ..
+
 FILE=./deploy.sh
 if [[ -f "$FILE" ]]; then
 	echo "Deploy.sh exists... Executing it!"
