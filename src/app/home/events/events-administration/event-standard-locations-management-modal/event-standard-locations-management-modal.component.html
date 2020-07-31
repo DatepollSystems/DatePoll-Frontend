@@ -81,7 +81,14 @@
     ></app-maps-component>
 
     <div class="row justify-content-around">
-      <button mat-button type="button" class="success-button col-11" (click)="form.ngSubmit.emit()" [disabled]="!form.form.valid">
+      <button
+        mat-flat-button
+        color="primary"
+        type="button"
+        class="not-selectable col-11"
+        (click)="form.ngSubmit.emit()"
+        [disabled]="!form.form.valid"
+      >
         {{ 'ADD' | translate }}
       </button>
     </div>
