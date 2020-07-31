@@ -30,6 +30,7 @@ export class UserCreateModalComponent implements OnDestroy {
   emailAddresses: string[] = [];
   birthday: Date;
   join_date: Date;
+  bvMember: string;
   phoneNumbers: PhoneNumber[] = [];
 
   groupsSubscription: Subscription;
@@ -129,7 +130,6 @@ export class UserCreateModalComponent implements OnDestroy {
     const internalComment = form.controls.internalComment.value;
     let activated = form.controls.activated.value;
     const informationDenied = form.controls.informationDenied.value;
-    const bvMember = form.controls.bvMember.value;
 
     if (activated.toString().length === 0) {
       activated = false;
@@ -160,7 +160,7 @@ export class UserCreateModalComponent implements OnDestroy {
       location,
       activated,
       activity,
-      bv_member: bvMember,
+      bv_member: this.bvMember,
       information_denied: informationDenied,
       member_number: memberNumber,
       internal_comment: internalComment,

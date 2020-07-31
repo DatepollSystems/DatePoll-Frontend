@@ -236,20 +236,23 @@
 
     <!-- Bv Member -->
     <mat-form-field fxFlex="22%" fxFlex.lt-md="30%">
-      <input
-        #bvMemberModel="ngModel"
-        [(ngModel)]="bvMember"
-        id="bvMember"
-        matInput
-        maxlength="190"
-        name="bvMember"
-        ngModel
-        placeholder="{{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_BV_MEMBER' | translate }}"
-        type="text"
-      />
-      <mat-error *ngIf="bvMemberModel.invalid">
-        {{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_BV_MEMBER_INCORRECT' | translate }}
-      </mat-error>
+      <mat-label>{{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_BV_MEMBER' | translate }}</mat-label>
+      <mat-select id="bvMember" [(value)]="bvMember">
+        <mat-option value="">None</mat-option>
+        <mat-option value="{{ 'ACTIVE' | translate }}">{{ 'ACTIVE' | translate }}</mat-option>
+        <mat-option value="{{ 'INACTIVE' | translate }}">{{ 'INACTIVE' | translate }}</mat-option>
+        <!-- Backwards compatibility reasons -->
+        <mat-option
+          *ngIf="
+            bvMember
+              .trim()
+              .toLowerCase()
+              .includes('gemeldet')
+          "
+          value="gemeldet"
+          >gemeldet</mat-option
+        >
+      </mat-select>
     </mat-form-field>
 
     <app-divider></app-divider>

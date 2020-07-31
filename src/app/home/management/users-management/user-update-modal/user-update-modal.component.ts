@@ -239,7 +239,6 @@ export class UserUpdateModalComponent implements OnDestroy {
     const memberNumber = form.controls.memberNumber.value;
     let activated = form.controls.activated.value;
     const informationDenied = form.controls.informationDenied.value;
-    const bvMember = form.controls.bvMember.value;
 
     if (activated.toString().length === 0) {
       activated = false;
@@ -270,7 +269,7 @@ export class UserUpdateModalComponent implements OnDestroy {
       location,
       activated,
       activity,
-      bv_member: bvMember,
+      bv_member: this.bvMember,
       information_denied: informationDenied,
       member_number: memberNumber,
       internal_comment: internalComment,
