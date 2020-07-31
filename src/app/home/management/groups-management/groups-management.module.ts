@@ -2,6 +2,8 @@ import {CommonModule} from '@angular/common';
 import {NgModule} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 
+import {NgxPrintModule} from 'ngx-print';
+
 import {MaterialModule} from '../../../material-module';
 import {TranslationModule} from '../../../translation/translation.module';
 import {GroupsManagementRoutingModule} from './groups-management-routing.module';
@@ -35,6 +37,6 @@ import {SubgroupUserRoleUpdateModalComponent} from './subgroup-user-list-modal/s
     SubgroupDeleteModalComponent
   ],
   providers: [GroupsService],
-  imports: [CommonModule, FormsModule, MaterialModule, TranslationModule, GroupsManagementRoutingModule]
+  imports: [CommonModule, FormsModule, MaterialModule, TranslationModule, NgxPrintModule, GroupsManagementRoutingModule]
 })
 export class GroupsManagementModule {}
