@@ -8,6 +8,7 @@ import {RouterModule} from '@angular/router';
 import {MaterialModule} from '../../../material-module';
 import {TranslationModule} from '../../../translation/translation.module';
 import {CustomDateAdapter, MY_DATE_FORMATS} from '../../../utils/custom-date-adapter';
+import {GoBackButtonModule} from '../../../utils/shared-components/go-back-button/go-back-button.module';
 import {MapsModule} from '../../../utils/shared-components/maps-component/maps.module';
 
 import {EventUserManagementComponent} from '../events-administration/event-user-management-modal/event-user-management/event-user-management.component';
@@ -36,7 +37,7 @@ import {ResultUserTableComponent} from './result-user-table/result-user-table.co
     EventsVoteForDecisionAdditionalInformationModalComponent,
     EventDatesUserListComponent
   ],
-  imports: [CommonModule, RouterModule, FormsModule, MaterialModule, TranslationModule, MapsModule],
+  imports: [CommonModule, RouterModule, FormsModule, MaterialModule, TranslationModule, MapsModule, GoBackButtonModule],
   providers: [
     {provide: DateAdapter, useClass: CustomDateAdapter},
     {provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS}

@@ -3,6 +3,4 @@
   <span style="color: gray;" *ngIf="objectLoaded">({{ event.getUntil() }})</span>
 </h1>
 <app-event-info [eventId]="event.id" (eventLoaded)="eventLoaded($event)"></app-event-info>
-<button mat-fab aria-label="Go back button" class="my-fab" routerLink="/home">
-  <mat-icon>arrow_back_ios</mat-icon>
-</button>
+<app-go-back-button></app-go-back-button>
