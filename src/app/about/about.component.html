@@ -2,7 +2,7 @@
   <div fxLayout="column" fxLayoutAlign="space-between center">
     <div fxFlex>
       <div fxLayout="row" fxLayoutGap="2%">
-        <img src="./../../assets/datepollIcon.svg" style="height: 110px;" />
+        <img src="./../../assets/logo.png" style="height: 110px;" />
         <h1 style="color: white; padding-top: 21%;">DatePoll</h1>
       </div>
     </div>
@@ -11,11 +11,11 @@
     fxLayout="row"
     fxLayoutGap="2%"
     fxLayoutAlign="center start"
-    fxLayout.xs="column"
-    fxLayoutAlign.xs="center stretch"
+    fxLayout.lt-md="column"
+    fxLayoutAlign.lt-md="center"
     style="margin-top: 15px; padding-left: 10px; padding-right: 10px;"
   >
-    <div fxFlex="40%" fxFlex.xs="90%">
+    <div fxFlex.gt-lg="30%" fxFlex="40%">
       <div fxLayout="column" fxLayoutGap="2%">
         <mat-card class="mat-elevation-z3">
           <form #f="ngForm" (ngSubmit)="onSignin(f)" fxLayout="column" style="padding-left: 10px; padding-right: 10px;">
@@ -83,7 +83,10 @@
       <div fxLayout="column" fxLayoutGap="2%">
         <mat-card class="mat-elevation-z3">
           <h2>
-            > <a href="{{ serverInfo.community_url }}" target="_blank" rel="noopener">{{ serverInfo.community_name }}</a>
+            >
+            <b
+              ><a href="{{ serverInfo.community_url }}" target="_blank" rel="noopener">{{ serverInfo.community_name }}</a></b
+            >
           </h2>
           <p
             *ngIf="getDescriptionPreview(serverInfo.community_description) == null || showMoreCommunityDescription"
@@ -111,7 +114,7 @@
           </button>
         </mat-card>
         <mat-card class="mat-elevation-z3">
-          <div class="level is-mobile" style="margin-bottom: 5px;">
+          <div class="level is-mobile" style="margin-bottom: 5px;" (click)="count()">
             <div class="level-item">
               <div>
                 <h3>{{ 'ABOUT_PAGE_STATS_USER' | translate }}</h3>
