@@ -1,6 +1,6 @@
 import {Component, Input} from '@angular/core';
+import {Router} from '@angular/router';
 import {MatBottomSheet} from '@angular/material/bottom-sheet';
-import {MatDialog} from '@angular/material/dialog';
 
 import {NotificationsService} from 'angular2-notifications';
 
@@ -10,7 +10,6 @@ import {EventsUserService} from '../../events-user.service';
 
 import {Event} from '../../models/event.model';
 
-import {EventInfoModalComponent} from '../../event-info/event-info-modal/event-info-modal.component';
 import {EventsVoteForDecisionModalComponent} from '../events-vote-for-decision-modal/events-vote-for-decision-modal.component';
 
 @Component({
@@ -28,19 +27,14 @@ export class EventCardComponent {
   constructor(
     private translate: TranslateService,
     private notificationsService: NotificationsService,
-    private dialog: MatDialog,
+    private router: Router,
     private bottomSheet: MatBottomSheet,
     private eventsUserSerivce: EventsUserService,
     private homepageService: HomepageService
   ) {}
 
   onInfo(event: Event) {
-    this.dialog.open(EventInfoModalComponent, {
-      width: '80vh',
-      data: {
-        event
-      }
-    });
+    this.router.navigateByUrl('/home/events/' + event.id, {state: event});
   }
 
   onVote() {

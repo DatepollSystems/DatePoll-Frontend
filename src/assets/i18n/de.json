@@ -41,8 +41,8 @@
   "ABOUT": "Über",
   "ABOUT_GENERAL": "Allgemeines",
   "ABOUT_TECHNICAL": "Technisches",
-  "ABOUT_DESCRIPTION": "DatePoll ist eine Vereinsmanagement Applikation mit dem Schwerpunkt auf Schützen und Musik.",
-  "ABOUT_VISIT_DATEPOLL": "Besuch die Projekt-Website",
+  "ABOUT_DESCRIPTION": "DatePoll ist eine Vereinsmanagement Applikation. Sie deckt alle Aufgaben von Mitgliedererfassung / verwaltung bis Eventzeitmanagement!",
+  "ABOUT_VISIT_DATEPOLL": "Besuch (DatePoll.org) die Projekt-Website",
   "ABOUT_FRONTEND_VERSION": "Version der Webapplication: ",
   "ABOUT_BACKEND_VERSION": "Version des Backends: ",
   "ABOUT_NEEDED_BACKEND_VERSION": "Benötigte Backend Version (Zahl): ",
@@ -63,7 +63,7 @@
   "ABOUT_PAGE_STATS_MOVIES_WORKERS": "Kinodienste geleistet:",
   "ABOUT_PAGE_STATS_PERFORMANCE_BADGES": "Vergebene Leistungsabzeichen:",
   "ABOUT_PAGE_STATS_DATEPOLL_INSTANCE_INTERACTIONS": "Interaktionen mit DatePoll:",
-  "ABOUT_PAGE_TROUBLE_LOGGING_IN": "Probleme beim anmelden?",
+  "ABOUT_PAGE_TROUBLE_LOGGING_IN": "Probleme beim anmelden oder Passwort vergessen?",
 
   "IMPRINT": "Impressum",
   "PRIVACY_POLICY": "Datenschutzerklärung",
@@ -342,7 +342,7 @@
 
   "SETTINGS_SECURITY_MDOAL_CALENDAR_COMPLETE": "Gesamter Kalender (Nicht personalisiert)",
   "SETTINGS_SECURITY_MDOAL_CALENDAR_INPUT_TITLE": "Persönlicher Kalender",
-  "SETTINGS_SECURITY_MODAL_CALENDAR_COPY_TOKEN_TOOLTIP": "In die Zwischenablage kopieren",
+  "SETTINGS_SECURITY_MODAL_CALENDAR_COPY_TOKEN_TOOLTIP": "Kopieren",
   "SETTINGS_SECURITY_MODAL_CALENDAR_RESET_TOKEN": "Zurücksetzen",
 
   "SETTINGS_SECURITY_MODAL_SESSION_REMOVE_TOOLTIP": "Beende die Session",
@@ -686,7 +686,6 @@
   "EVENTS_ADMINISTRATION_INFO_EVENT_SINGLE_SUBGROUPS": "Einzelne Register",
   "EVENTS_ADMINISTRATION_INFO_EVENT_UNKNOWN_VOTING": "Unbekannt",
   "EVENTS_ADMINISTRATION_INFO_EVENT_MEMBERS_IN": "Alle Mitglieder in ",
-  "EVENTS_ADMINISTRATION_INFO_EVENT_REGISTER": "Register: ",
   "EVENTS_ADMINISTRATION_INFO_EVENT_COMPLETE_USERS_TABLE": "Alle Mitglieder",
   "EVENTS_ADMINISTRATION_INFO_EVENT_FIRSTNAME": "Vorname",
   "EVENTS_ADMINISTRATION_INFO_EVENT_SURNAME": "Nachname",

@@ -37,6 +37,7 @@
 
     <div
       fxLayout="row"
+      fxLayout.xs="column"
       fxLayoutAlign="space-between"
       *ngIf="this.myUserService.hasPermission(ROOT_PERMISSION) || this.myUserService.hasPermission(EVENTS_ADMINISTRATION_PERMISSION)"
     >
@@ -68,23 +69,26 @@
     ></app-event-user-management>
   </mat-expansion-panel>
 
-  <div fxFlex="100%">
-    <mat-form-field>
-      <input
-        (ngModelChange)="applyFilter($event)"
-        [(ngModel)]="searchValue"
-        matInput
-        placeholder="{{ 'MANAGEMENT_GROUPS_SEARCH' | translate }}"
-      />
-      <button (click)="searchValue = ''; applyFilter('')" *ngIf="searchValue" aria-label="Clear" mat-button mat-icon-button matSuffix>
-        <mat-icon>close</mat-icon>
-      </button>
-    </mat-form-field>
+  <mat-form-field>
+    <input
+      (ngModelChange)="applyFilter($event)"
+      [(ngModel)]="searchValue"
+      matInput
+      placeholder="{{ 'MANAGEMENT_GROUPS_SEARCH' | translate }}"
+    />
+    <button (click)="searchValue = ''; applyFilter('')" *ngIf="searchValue" aria-label="Clear" mat-button mat-icon-button matSuffix>
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-form-field>
 
-    <app-group-info-card
-      *ngFor="let resultGroup of sortedResultGroups; trackBy: trackByFn"
-      [resultGroup]="resultGroup"
-      [searchValue]="searchValue"
-    ></app-group-info-card>
+  <div fxFlex="100%">
+    <div fxLayout="row break" fxLayoutAlign="space-around" fxLayout.lt-lg="column">
+      <app-group-info-card
+        fxFlex="49%"
+        *ngFor="let resultGroup of sortedResultGroups; trackBy: trackByFn"
+        [resultGroup]="resultGroup"
+        [searchValue]="searchValue"
+      ></app-group-info-card>
+    </div>
   </div>
 </div>

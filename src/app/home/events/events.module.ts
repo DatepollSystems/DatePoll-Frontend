@@ -6,8 +6,8 @@ import {MAT_DATE_FORMATS} from '@angular/material/core';
 
 import {MaterialModule} from '../../material-module';
 import {TranslationModule} from '../../translation/translation.module';
-import {CommonComponentsModule} from '../../utils/common-components.module';
 import {CustomDateAdapter, MY_DATE_FORMATS} from '../../utils/custom-date-adapter';
+import {GoBackButtonModule} from '../../utils/shared-components/go-back-button/go-back-button.module';
 import {GroupAndSubgroupTypeInputSelectModule} from '../../utils/shared-components/group-and-subgroup-type-input-select/group-and-subgroup-type-input-select.module';
 import {MapsModule} from '../../utils/shared-components/maps-component/maps.module';
 import {EventInfoModule} from './event-info/event-info.module';
@@ -17,7 +17,7 @@ import {EventsService} from './events.service';
 
 import {ColorPickerComponentModule} from '../../utils/shared-components/color-picker/color-picker-component.module';
 import {CommonEventsComponentsModule} from './common-events-components.module';
-import {EventCreateModalComponent} from './events-administration/event-create-modal/event-create-modal.component';
+import {EventCreateComponent} from './events-administration/event-create/event-create.component';
 import {EventStandardDecisionsManagementModalComponent} from './events-administration/event-standard-decisions-management-modal/event-standard-decisions-management-modal.component';
 import {EventStandardLocationsManagementModalComponent} from './events-administration/event-standard-locations-management-modal/event-standard-locations-management-modal.component';
 import {EventUserManagementModalComponent} from './events-administration/event-user-management-modal/event-user-management-modal.component';
@@ -27,7 +27,7 @@ import {EventsViewComponent} from './events-view/events-view.component';
 @NgModule({
   declarations: [
     EventsAdministrationComponent,
-    EventCreateModalComponent,
+    EventCreateComponent,
     EventUserManagementModalComponent,
     EventStandardDecisionsManagementModalComponent,
     EventStandardLocationsManagementModalComponent,
@@ -39,12 +39,12 @@ import {EventsViewComponent} from './events-view/events-view.component';
     ReactiveFormsModule,
     MaterialModule,
     TranslationModule,
-    CommonComponentsModule,
     CommonEventsComponentsModule,
     ColorPickerComponentModule,
     MapsModule,
     EventInfoModule,
     EventsRoutingModule,
+    GoBackButtonModule,
     GroupAndSubgroupTypeInputSelectModule
   ],
   providers: [EventsService, {provide: DateAdapter, useClass: CustomDateAdapter}, {provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS}]

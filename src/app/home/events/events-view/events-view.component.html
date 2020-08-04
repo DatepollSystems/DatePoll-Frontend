@@ -1,26 +1,22 @@
-<mat-card class="mat-elevation-z3">
-  <mat-card-content>
-    <div class="row justify-content-between">
-      <div class="col-4 col-sm-6 col-md-8 col-lg-8 col-xl-8">
-        <h1>{{ 'EVENTS_VIEW' | translate }}</h1>
-      </div>
-      <div class="col-8 col-sm-6 col-md-4 col-lg-4 col-xl-4" style="text-align: end">
-        <mat-slide-toggle (change)="onShowAllEventsChange($event)" [(ngModel)]="showAllEvents" color="primary">
-          {{ 'EVENTS_VIEW_SHOW_ALREADY_VOTED_EVENTS' | translate }}
-        </mat-slide-toggle>
-      </div>
-    </div>
+<div fxLayout="row" fxLayoutAlign="space-between" style="margin-top: 5px;">
+  <div>
+    <h1>{{ 'EVENTS_VIEW' | translate }}</h1>
+  </div>
+  <div [matBadge]="eventsHidden.toString()" matBadgeOverlap="false" style="margin-right: 15px;">
+    <mat-slide-toggle (change)="onShowAllEventsChange($event)" [(ngModel)]="showAllEvents" color="primary">
+      {{ 'EVENTS_VIEW_SHOW_ALREADY_VOTED_EVENTS' | translate }}
+    </mat-slide-toggle>
+  </div>
+</div>
 
-    <div *ngIf="!loading" class="row">
-      <app-event-card *ngFor="let event of eventsToShow" [event]="event" class="col-12 col-sm-12 col-md-6 col-lg-4"></app-event-card>
-      <h3 *ngIf="eventsToShow.length === 0" class="col-12" style="text-align: center">
-        {{ 'EVENTS_VIEW_EVENT_NO_NEW_VOTINGS' | translate }}
-      </h3>
-    </div>
-    <div *ngIf="loading" class="row" style="margin-bottom: 15px;">
-      <div class="col-12">
-        <mat-progress-spinner mode="indeterminate" style="margin: auto"></mat-progress-spinner>
-      </div>
-    </div>
-  </mat-card-content>
-</mat-card>
+<div *ngIf="!loading" class="row">
+  <app-event-card *ngFor="let event of eventsToShow" [event]="event" class="col-12 col-sm-12 col-md-6 col-lg-4"></app-event-card>
+  <h3 *ngIf="eventsToShow.length === 0" class="col-12" style="text-align: center">
+    {{ 'EVENTS_VIEW_EVENT_NO_NEW_VOTINGS' | translate }}
+  </h3>
+</div>
+<div *ngIf="loading" class="row" style="margin-bottom: 15px;">
+  <div class="col-12">
+    <mat-progress-spinner mode="indeterminate" style="margin: auto"></mat-progress-spinner>
+  </div>
+</div>

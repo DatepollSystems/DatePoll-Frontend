@@ -99,7 +99,9 @@ export class CalendarComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    if (this.settingsService.getServerInfo()?.cinema_enabled) {
+    const serverinfo = this.settingsService.getServerInfo();
+
+    if (serverinfo?.cinema_enabled) {
       this.movies = this.cinemaService.getNotShownMovies();
 
       this.moviesSubscription = this.cinemaService.notShownMoviesChange.subscribe(value => {
@@ -108,7 +110,7 @@ export class CalendarComponent implements OnInit, OnDestroy {
       });
     }
 
-    if (this.settingsService.getServerInfo()?.events_enabled) {
+    if (serverinfo?.events_enabled) {
       if (this.myUserService.hasPermission(Permissions.EVENTS_ADMINISTRATION)) {
         this.avents = this.eventsService.getEvents();
 
@@ -269,7 +271,7 @@ export class CalendarComponent implements OnInit, OnDestroy {
       }
     } else if (object instanceof Event) {
       this.dialog.open(EventInfoModalComponent, {
-        width: '80vh',
+        width: '80%',
         data: {
           event: object
         }

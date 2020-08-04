@@ -1,9 +1,9 @@
 import {Injectable} from '@angular/core';
-
-import {Subject} from 'rxjs';
-import {HttpService} from '../../../utils/http.service';
 import {NotificationsService} from 'angular2-notifications';
+import {Subject} from 'rxjs';
+
 import {TranslateService} from '../../../translation/translate.service';
+import {HttpService} from '../../../utils/http.service';
 
 @Injectable({
   providedIn: 'root'

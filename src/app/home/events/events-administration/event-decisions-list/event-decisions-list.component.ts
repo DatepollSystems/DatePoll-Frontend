@@ -1,9 +1,12 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {NgForm} from '@angular/forms';
+import {Subscription} from 'rxjs';
 
 import {NotificationsService} from 'angular2-notifications';
 
 import {TranslateService} from '../../../../translation/translate.service';
+import {IsMobileService} from '../../../../utils/is-mobile.service';
+
 import {Decision} from '../../models/decision.model';
 
 @Component({
@@ -11,7 +14,7 @@ import {Decision} from '../../models/decision.model';
   templateUrl: './event-decisions-list.component.html',
   styleUrls: ['./event-decisions-list.component.css']
 })
-export class EventDecisionsListComponent implements OnInit {
+export class EventDecisionsListComponent implements OnInit, OnDestroy {
   @Input() decisions: Decision[];
   @Output() decisionsChanged = new EventEmitter();
 
@@ -20,10 +23,26 @@ export class EventDecisionsListComponent implements OnInit {
 
   private i: number;
 
-  constructor(private notificationsService: NotificationsService, private translate: TranslateService) {}
+  isMobile = true;
+  isMobileSubscription: Subscription;
+
+  constructor(
+    private notificationsService: NotificationsService,
+    private translate: TranslateService,
+    private isMobileService: IsMobileService
+  ) {
+    this.isMobile = this.isMobileService.getIsMobile();
+    this.isMobileSubscription = this.isMobileService.isMobileChange.subscribe(value => {
+      this.isMobile = value;
+    });
+  }
 
   ngOnInit(): void {
     this.i = -1;
+  }
+
+  ngOnDestroy() {
+    this.isMobileSubscription.unsubscribe();
   }
 
   showInCalendarChange(e) {
