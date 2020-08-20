@@ -1,8 +1,39 @@
 {
   "short_name": "DatePoll",
-  "name": "DatePoll - The highway to poll",
+  "name": "DatePoll",
+  "description": "More than polls",
   "start_url": "/home",
-
+  "display": "standalone",
+  "background_color": "#000",
+  "theme_color": "#607D8B",
+  "prefer_related_applications": true,
+  "related_applications": [
+    {
+      "platform": "play",
+      "id": "com.datepollsystems.datepoll",
+      "url": "https://play.google.com/store/apps/details?id=com.datepollsystems.datepoll"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Events view",
+      "short_name": "Events",
+      "description": "View events",
+      "url": "/home/events/start"
+    },
+    {
+      "name": "Movies view",
+      "short_name": "Movies",
+      "description": "View movies",
+      "url": "/home/cinema/tickets"
+    },
+    {
+      "name": "Broadcast view",
+      "short_name": "Broadcasts",
+      "description": "View broadcasts",
+      "url": "/home/broadcasts"
+    }
+  ],
   "icons": [
     {
       "src": "/assets/favis/android-icon-36x36.png",
@@ -39,19 +70,6 @@
       "sizes": "192x192",
       "type": "image/png",
       "density": "4.0"
-    }
-  ],
-
-  "display": "standalone",
-
-  "background_color": "#ffffff",
-  "theme_color": "#3f51b5",
-
-  "prefer_related_applications": true,
-  "related_applications": [
-    {
-      "platform": "play",
-      "id": "com.bke.datepoll"
     }
   ]
 }
