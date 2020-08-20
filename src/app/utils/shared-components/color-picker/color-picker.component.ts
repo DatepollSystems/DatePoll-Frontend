@@ -10,6 +10,8 @@ import {IsMobileService} from '../../is-mobile.service';
 export class ColorPickerComponent implements OnDestroy {
   showColorPicker = false;
 
+  colors = ['#ff5151', '#ffce5c', '#27dd70', '#16e7d9', '#CD47FF', '#726DFF', '#B6F423', '#BE935B'];
+
   @Input()
   color = '#fffff';
 
