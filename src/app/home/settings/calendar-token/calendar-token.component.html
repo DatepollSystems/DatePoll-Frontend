@@ -9,11 +9,11 @@
   >
     <div>
       <mat-card-subtitle>{{ 'SETTINGS_SECURITY_MDOAL_CALENDAR_COMPLETE' | translate }}</mat-card-subtitle>
-      <a href="{{ apiUrl }}" target="_blank" rel="noopener" #completeCalendarElement>{{ apiUrl }}</a>
+      <a href="{{ apiUrl }}" target="_blank" rel="noopener">{{ apiUrl }}</a>
     </div>
 
     <div>
-      <button (click)="copyTokenToClipboard(completeCalendarElement)" mat-flat-button color="accent" style="width: 100%">
+      <button (click)="copyTokenToClipboard(apiUrl)" mat-flat-button color="accent" style="width: 100%">
         <mat-icon>content_copy</mat-icon>
         {{ 'SETTINGS_SECURITY_MODAL_CALENDAR_COPY_TOKEN_TOOLTIP' | translate }}
       </button>
@@ -32,11 +32,11 @@
   >
     <div>
       <mat-card-subtitle>{{ 'SETTINGS_SECURITY_MDOAL_CALENDAR_INPUT_TITLE' | translate }}</mat-card-subtitle>
-      <a href="{{ apiUrl }}" target="_blank" rel="noopener" #calendarTokenElement>{{ calendarToken }}</a>
+      <a href="{{ calendarToken }}" target="_blank" rel="noopener">{{ calendarToken }}</a>
     </div>
 
     <div>
-      <button (click)="copyTokenToClipboard(calendarTokenElement)" mat-flat-button color="accent" style="width: 100%">
+      <button (click)="copyTokenToClipboard(calendarToken)" mat-flat-button color="accent" style="width: 100%">
         <mat-icon>content_copy</mat-icon>
         {{ 'SETTINGS_SECURITY_MODAL_CALENDAR_COPY_TOKEN_TOOLTIP' | translate }}
       </button>
