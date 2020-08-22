@@ -89,7 +89,7 @@ export class EventDatesManagementComponent implements OnDestroy {
     console.log(date);
 
     form.reset();
-    this.mapsComponent.removeMarker();
+    this.mapsComponent.removeMarker(true);
     // Recreate date to not override first date while creating a new date object
     this.createNewEventDateDate = new Date();
   }
