@@ -250,13 +250,13 @@ export class UsersManagementComponent implements OnInit, OnDestroy {
 
   onCreate() {
     this.dialog.open(UserCreateModalComponent, {
-      width: '80vh'
+      width: '80%'
     });
   }
 
   onEdit(user: User) {
     this.dialog.open(UserUpdateModalComponent, {
-      width: '80vh',
+      width: '80%',
       data: {user}
     });
   }
