@@ -1,297 +1,301 @@
-<div *ngIf="events.length == 0 && bookings.length == 0 && birthdays.length == 0" fxLayout="column" fxLayoutAlign="center">
+<div
+  *ngIf="events.length == 0 && bookings.length == 0 && birthdays.length == 0 && broadcasts.length === 0"
+  fxLayout="column"
+  fxLayoutAlign="center"
+>
   <div fxFlex style="text-align: center; margin-top: 20%">
     <h2>Hiii!! Beautiful day, isn't it?</h2>
   </div>
 </div>
 
-<div fxShow [fxHide.gt-sm]="true" *ngIf="events.length != 0 || bookings.length != 0 || birthdays.length != 0">
-  <mat-card class="mat-elevation-z4">
-    <mat-list>
-      <div mat-subheader *ngIf="events.length != 0" class="sub-header" style="padding-top: 1px;">
-        <span [matBadge]="openEventsCount.toString()" matBadgeOverlap="false">{{ 'STARTPAGE_EVENTS' | translate }}</span>
+<mat-card
+  class="mat-elevation-z4"
+  [fxHide.gt-sm]="true"
+  *ngIf="events.length != 0 || bookings.length != 0 || birthdays.length != 0 || broadcasts.length != 0"
+>
+  <mat-list>
+    <div mat-subheader *ngIf="events.length != 0" class="sub-header" style="padding-top: 1px;">
+      <span [matBadge]="openEventsCount.toString()" matBadgeOverlap="false">{{ 'STARTPAGE_EVENTS' | translate }}</span>
+    </div>
+    <mat-list-item *ngFor="let event of events" class="not-selectable" matRipple matRippleRadius="100" (click)="onEventItemClick(event)">
+      <div mat-list-icon class="circle" [style.background-color]="event.decisionColor" *ngIf="event.alreadyVotedFor"></div>
+      <mat-icon mat-list-icon *ngIf="!event.alreadyVotedFor">live_help</mat-icon>
+      <div mat-line>
+        <span *ngIf="event.alreadyVotedFor">{{ event.name }}</span
+        ><b *ngIf="!event.alreadyVotedFor">{{ event.name }}</b>
       </div>
-      <mat-list-item *ngFor="let event of events" class="not-selectable" matRipple matRippleRadius="100" (click)="onEventItemClick(event)">
-        <div mat-list-icon class="circle" [style.background-color]="event.decisionColor" *ngIf="event.alreadyVotedFor"></div>
-        <mat-icon mat-list-icon *ngIf="!event.alreadyVotedFor">live_help</mat-icon>
-        <div mat-line>
-          <span *ngIf="event.alreadyVotedFor">{{ event.name }}</span
-          ><b *ngIf="!event.alreadyVotedFor">{{ event.name }}</b>
-        </div>
-        <div mat-line *ngIf="event.startDate.getDay() === event.endDate.getDay()">
-          {{ event.startDate | date: 'EE, dd.MM. HH:mm' }} - {{ event.endDate | date: 'HH:mm' }}
-          <span class="until-left">({{ event.getUntil() }})</span>
-        </div>
-        <div mat-line *ngIf="event.startDate.getDay() !== event.endDate.getDay()">
-          {{ event.startDate | date: 'EE, dd.MM. HH:mm' }} - {{ event.endDate | date: 'dd.MM. HH:mm' }}
-          <span class="until-left">({{ event.getUntil() }})</span>
-        </div>
-        <div mat-line *ngIf="event.description?.length > 0">
-          {{ event.descriptionPreview }}
-        </div>
-        <button mat-flat-button (click)="onEventInfo(event); $event.stopPropagation()" color="accent">
-          <mat-icon>arrow_forward</mat-icon>
-        </button>
-      </mat-list-item>
-
-      <mat-divider *ngIf="events.length != 0"></mat-divider>
-
-      <div mat-subheader *ngIf="bookings.length != 0" class="sub-header">{{ 'STARTPAGE_BOOKINGS' | translate }}</div>
-      <mat-list-item *ngFor="let booking of bookings">
-        <div mat-line>
-          <b>{{ booking.name }}</b>
-        </div>
-        <div mat-line>
-          {{ booking.date | date: 'EE, dd.MM' }} 21:00
-          <span class="until-left">({{ booking.getUntil() }})</span>
-        </div>
-        <div mat-line>{{ 'STARTPAGE_BOOKED_TICKETS' | translate }}: {{ booking.bookedTickets }}</div>
-        <div mat-line *ngIf="booking.workerName || booking.emergencyWorkerName">
-          {{ 'STARTPAGE_CINEMA_SERVICE' | translate }}: <span *ngIf="booking.workerName">{{ booking.workerName }}</span
-          ><span *ngIf="booking.workerName && booking.emergencyWorkerName">,</span>
-          <span *ngIf="booking.emergencyWorkerName"> {{ booking.emergencyWorkerName }}</span>
-        </div>
-      </mat-list-item>
-
-      <mat-divider *ngIf="bookings.length != 0"></mat-divider>
-
-      <div mat-subheader *ngIf="broadcasts.length != 0" class="sub-header">
-        {{ 'STARTPAGE_BROADCASTS' | translate }}
-        <button
-          mat-icon-button
-          matTooltip="{{ 'STARTPAGE_BROADCASTS_INFO' | translate }}"
-          matTooltipPosition="right"
-          routerLink="/home/broadcasts"
-          aria-label="Button that show you all broadcasts"
-        >
-          <mat-icon>view_quilt</mat-icon>
-        </button>
+      <div mat-line *ngIf="event.startDateC.getTime() === event.endDateC.getTime()">
+        {{ event.startDate | date: 'EE, dd.MM. HH:mm' }} - {{ event.endDate | date: 'HH:mm' }}
+        <span class="until-left">({{ event.getUntil() }})</span>
       </div>
-      <mat-list-item
-        *ngFor="let broadcast of broadcasts"
-        class="not-selectable"
-        matRipple
-        matRippleRadius="100"
-        (click)="onBroadcastItemClick(broadcast)"
+      <div mat-line *ngIf="event.startDateC.getTime() !== event.endDateC.getTime()">
+        {{ event.startDate | date: 'EE, dd.MM. HH:mm' }} - {{ event.endDate | date: 'dd.MM. HH:mm' }}
+        <span class="until-left">({{ event.getUntil() }})</span>
+      </div>
+      <div mat-line *ngIf="event.description?.length > 0">
+        {{ event.descriptionPreview }}
+      </div>
+      <button mat-flat-button (click)="onEventInfo(event); $event.stopPropagation()" color="accent">
+        <mat-icon>arrow_forward</mat-icon>
+      </button>
+    </mat-list-item>
+
+    <mat-divider *ngIf="events.length != 0"></mat-divider>
+
+    <div mat-subheader *ngIf="bookings.length != 0" class="sub-header">{{ 'STARTPAGE_BOOKINGS' | translate }}</div>
+    <mat-list-item *ngFor="let booking of bookings">
+      <div mat-line>
+        <b>{{ booking.name }}</b>
+      </div>
+      <div mat-line>
+        {{ booking.date | date: 'EE, dd.MM' }} 21:00
+        <span class="until-left">({{ booking.getUntil() }})</span>
+      </div>
+      <div mat-line>{{ 'STARTPAGE_BOOKED_TICKETS' | translate }}: {{ booking.bookedTickets }}</div>
+      <div mat-line *ngIf="booking.workerName || booking.emergencyWorkerName">
+        {{ 'STARTPAGE_CINEMA_SERVICE' | translate }}: <span *ngIf="booking.workerName">{{ booking.workerName }}</span
+        ><span *ngIf="booking.workerName && booking.emergencyWorkerName">,</span>
+        <span *ngIf="booking.emergencyWorkerName"> {{ booking.emergencyWorkerName }}</span>
+      </div>
+    </mat-list-item>
+
+    <mat-divider *ngIf="bookings.length != 0"></mat-divider>
+
+    <div mat-subheader *ngIf="broadcasts.length != 0" class="sub-header">
+      {{ 'STARTPAGE_BROADCASTS' | translate }}
+      <button
+        mat-icon-button
+        matTooltip="{{ 'STARTPAGE_BROADCASTS_INFO' | translate }}"
+        matTooltipPosition="right"
+        routerLink="/home/broadcasts"
+        aria-label="Button that show you all broadcasts"
       >
-        <div mat-line>
-          <i>{{ broadcast.subject }}</i
-          ><small class="until-left"> (~{{ broadcast.readTime }})</small>
-        </div>
-        <div mat-line>
-          {{ 'STARTPAGE_BROADCASTS_BY' | translate }}
-          {{ broadcast.writerName }} ({{ broadcast.sent | date: 'dd.MM - HH:mm' }})
-        </div>
-      </mat-list-item>
-
-      <mat-divider *ngIf="broadcasts.length != 0"></mat-divider>
-
-      <div mat-subheader *ngIf="birthdays.length != 0" class="sub-header">
-        {{ 'STARTPAGE_BIRTHDAY' | translate }}
-        <button
-          *ngIf="howMuchBirthdaysToShow === 7"
-          mat-icon-button
-          matTooltip="{{ 'STARTPAGE_BIRTHDAY_MORE' | translate }}"
-          matTooltipPosition="above"
-          (click)="onBirthdaysExpand()"
-          aria-label="Button to show all birthdays"
-        >
-          <mat-icon>expand_more</mat-icon>
-        </button>
-        <button
-          *ngIf="howMuchBirthdaysToShow === birthdays.length"
-          mat-icon-button
-          matTooltip="{{ 'STARTPAGE_BIRTHDAY_MORE' | translate }}"
-          matTooltipPosition="above"
-          (click)="onBirthdaysExpand()"
-          aria-label="Button to show all birthdays"
-        >
-          <mat-icon>expand_less</mat-icon>
-        </button>
-        <button
-          mat-icon-button
-          matTooltip="{{ 'STARTPAGE_BIRTHDAY_INFO' | translate }}"
-          matTooltipPosition="right"
-          routerLink="settings/privacySettings"
-          aria-label="Button that brings you to a page where you can deactivate your account for showing up when you have birhtday."
-        >
-          <mat-icon>info</mat-icon>
-        </button>
+        <mat-icon>view_quilt</mat-icon>
+      </button>
+    </div>
+    <mat-list-item
+      *ngFor="let broadcast of broadcasts"
+      class="not-selectable"
+      matRipple
+      matRippleRadius="100"
+      (click)="onBroadcastItemClick(broadcast)"
+    >
+      <div mat-line>
+        <i>{{ broadcast.subject }}</i
+        ><small class="until-left"> (~{{ broadcast.readTime }})</small>
       </div>
-      <mat-list-item *ngFor="let birthday of birthdays.slice(0, howMuchBirthdaysToShow)">
-        <div mat-line>
-          {{ birthday.name }}
+      <div mat-line>
+        {{ 'STARTPAGE_BROADCASTS_BY' | translate }}
+        {{ broadcast.writerName }} ({{ broadcast.sent | date: 'dd.MM - HH:mm' }})
+      </div>
+    </mat-list-item>
+
+    <mat-divider *ngIf="broadcasts.length != 0"></mat-divider>
+
+    <div mat-subheader *ngIf="birthdays.length != 0" class="sub-header">
+      {{ 'STARTPAGE_BIRTHDAY' | translate }}
+      <button
+        *ngIf="howMuchBirthdaysToShow === 7"
+        mat-icon-button
+        matTooltip="{{ 'STARTPAGE_BIRTHDAY_MORE' | translate }}"
+        matTooltipPosition="above"
+        (click)="onBirthdaysExpand()"
+        aria-label="Button to show all birthdays"
+      >
+        <mat-icon>expand_more</mat-icon>
+      </button>
+      <button
+        *ngIf="howMuchBirthdaysToShow === birthdays.length"
+        mat-icon-button
+        matTooltip="{{ 'STARTPAGE_BIRTHDAY_MORE' | translate }}"
+        matTooltipPosition="above"
+        (click)="onBirthdaysExpand()"
+        aria-label="Button to show all birthdays"
+      >
+        <mat-icon>expand_less</mat-icon>
+      </button>
+      <button
+        mat-icon-button
+        matTooltip="{{ 'STARTPAGE_BIRTHDAY_INFO' | translate }}"
+        matTooltipPosition="right"
+        routerLink="settings/privacySettings"
+        aria-label="Button that brings you to a page where you can deactivate your account for showing up when you have birhtday."
+      >
+        <mat-icon>info</mat-icon>
+      </button>
+    </div>
+    <mat-list-item *ngFor="let birthday of birthdays.slice(0, howMuchBirthdaysToShow)">
+      <div mat-line>
+        {{ birthday.name }}
+      </div>
+      <div mat-line>{{ birthday.date | date: 'dd.MM.yyyy' }} ({{ birthday.age }})</div>
+    </mat-list-item>
+  </mat-list>
+</mat-card>
+
+<div fxLayout="row" [fxHide.lt-md]="true">
+  <div *ngIf="events.length != 0" fxFlex>
+    <mat-card class="mat-elevation-z4">
+      <mat-card-content>
+        <mat-card-title style="padding-top: 5px;">
+          <span [matBadge]="openEventsCount.toString()" matBadgeOverlap="false">{{ 'STARTPAGE_EVENTS' | translate }}</span>
+        </mat-card-title>
+        <div class="table-responsive">
+          <table>
+            <thead>
+              <tr>
+                <th></th>
+                <th>{{ 'EVENTS_ADMINISTRATION_TABLE_NAME' | translate }}</th>
+                <th>{{ 'EVENTS_ADMINISTRATION_TABLE_START_DATE' | translate }}</th>
+                <th>{{ 'EVENTS_VIEW_EVENT_CARD_BUTTON_INFO' | translate }}</th>
+                <th>{{ 'EVENTS_VIEW_EVENT_CARD_BUTTON_DECIDE' | translate }}</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let event of events">
+                <td>
+                  <div class="circle" [style.background-color]="event.decisionColor" *ngIf="event.alreadyVotedFor"></div>
+                </td>
+                <td>{{ event.name }}</td>
+                <td>{{ event.startDate | date: 'EE, dd.MM.yyyy HH:mm' }}</td>
+                <td>
+                  <button (click)="onEventInfo(event)" mat-button>
+                    <mat-icon>info</mat-icon>
+                    {{ 'EVENTS_VIEW_EVENT_CARD_BUTTON_INFO' | translate }}
+                  </button>
+                </td>
+                <td *ngIf="!event.alreadyVotedFor">
+                  <button (click)="onEventVote(event)" color="primary" mat-flat-button>
+                    {{ 'EVENTS_VIEW_EVENT_CARD_BUTTON_DECIDE' | translate }}
+                  </button>
+                </td>
+                <td *ngIf="event.alreadyVotedFor">
+                  <button #cancelVotingButton (click)="cancelEventVoting(event, cancelVotingButton)" color="accent" mat-flat-button>
+                    {{ 'EVENTS_VIEW_EVENT_CARD_BUTTON_CANCEL_VOTING' | translate }}
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
-        <div mat-line>{{ birthday.date | date: 'dd.MM.yyyy' }} ({{ birthday.age }})</div>
-      </mat-list-item>
-    </mat-list>
-  </mat-card>
-</div>
-
-<div fxShow [fxHide.xs]="true">
-  <div fxLayout="row">
-    <div *ngIf="events.length != 0" fxFlex>
-      <mat-card class="mat-elevation-z4">
-        <mat-card-content>
-          <mat-card-title style="padding-top: 5px;">
-            <span [matBadge]="openEventsCount.toString()" matBadgeOverlap="false">{{ 'STARTPAGE_EVENTS' | translate }}</span>
-          </mat-card-title>
-          <div class="table-responsive">
-            <table>
-              <thead>
-                <tr>
-                  <th></th>
-                  <th>{{ 'EVENTS_ADMINISTRATION_TABLE_NAME' | translate }}</th>
-                  <th>{{ 'EVENTS_ADMINISTRATION_TABLE_START_DATE' | translate }}</th>
-                  <th>{{ 'EVENTS_VIEW_EVENT_CARD_BUTTON_INFO' | translate }}</th>
-                  <th>{{ 'EVENTS_VIEW_EVENT_CARD_BUTTON_DECIDE' | translate }}</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let event of events">
-                  <td>
-                    <div class="circle" [style.background-color]="event.decisionColor" *ngIf="event.alreadyVotedFor"></div>
-                  </td>
-                  <td>{{ event.name }}</td>
-                  <td>{{ event.startDate | date: 'EE, dd.MM.yyyy HH:mm' }}</td>
-                  <td>
-                    <button (click)="onEventInfo(event)" mat-button>
-                      <mat-icon>info</mat-icon>
-                      {{ 'EVENTS_VIEW_EVENT_CARD_BUTTON_INFO' | translate }}
-                    </button>
-                  </td>
-                  <td *ngIf="!event.alreadyVotedFor">
-                    <button (click)="onEventVote(event)" color="primary" mat-flat-button>
-                      {{ 'EVENTS_VIEW_EVENT_CARD_BUTTON_DECIDE' | translate }}
-                    </button>
-                  </td>
-                  <td *ngIf="event.alreadyVotedFor">
-                    <button #cancelVotingButton (click)="cancelEventVoting(event, cancelVotingButton)" color="accent" mat-flat-button>
-                      {{ 'EVENTS_VIEW_EVENT_CARD_BUTTON_CANCEL_VOTING' | translate }}
-                    </button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </mat-card-content>
-      </mat-card>
-    </div>
+      </mat-card-content>
+    </mat-card>
   </div>
-  <div fxLayout="row break" fxLayoutGap="2%">
-    <div fxFlex.md="34%" fxFlex.gt-md="33%">
-      <mat-card class="mat-elevation-z4" *ngIf="broadcasts.length != 0">
-        <mat-card-content>
-          <mat-card-title fxLayout="row" fxLayoutAlign="end">
-            <div fxFlex.md="70%" fxFlex.lg="90%" fxFlexAlign="center">{{ 'STARTPAGE_BROADCASTS' | translate }}</div>
-            <div fxFlex.md="30%" fxFlex.lg="10%" fxLayout="row">
-              <button
-                mat-icon-button
-                matTooltip="{{ 'STARTPAGE_BROADCASTS_INFO' | translate }}"
-                matTooltipPosition="right"
-                routerLink="/home/broadcasts"
-                aria-label="Button that show you all broadcasts"
-              >
-                <mat-icon>view_quilt</mat-icon>
-              </button>
-            </div>
-          </mat-card-title>
-
-          <div class="table-responsive">
-            <table>
-              <tbody>
-                <tr *ngFor="let broadcast of broadcasts" class="not-selectable" (click)="onBroadcastItemClick(broadcast)">
-                  <td matRipple matRippleRadius="100">
-                    <b>{{ broadcast.subject }}</b> {{ 'STARTPAGE_BROADCASTS_BY' | translate }} {{ broadcast.writerName }} <br />{{
-                      broadcast.sent | date: 'dd.MM - HH:mm'
-                    }}
-                    <small class="until-left"> (~{{ broadcast.readTime }})</small>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+</div>
+<div fxLayout="row break" fxLayoutGap="2%" [fxHide.lt-md]="true">
+  <div fxFlex.md="34%" fxFlex.gt-md="33%">
+    <mat-card class="mat-elevation-z4" *ngIf="broadcasts.length != 0">
+      <mat-card-content>
+        <mat-card-title fxLayout="row" fxLayoutAlign="end">
+          <div fxFlex.md="70%" fxFlex.lg="90%" fxFlexAlign="center">{{ 'STARTPAGE_BROADCASTS' | translate }}</div>
+          <div fxFlex.md="30%" fxFlex.lg="10%" fxLayout="row">
+            <button
+              mat-icon-button
+              matTooltip="{{ 'STARTPAGE_BROADCASTS_INFO' | translate }}"
+              matTooltipPosition="right"
+              routerLink="/home/broadcasts"
+              aria-label="Button that show you all broadcasts"
+            >
+              <mat-icon>view_quilt</mat-icon>
+            </button>
           </div>
-        </mat-card-content>
-      </mat-card>
+        </mat-card-title>
 
-      <mat-card class="mat-elevation-z4" *ngIf="birthdays.length != 0">
-        <mat-card-content>
-          <mat-card-title fxLayout="row" fxLayoutAlign="end">
-            <div fxFlex.md="70%" fxFlex.lg="80%" fxFlexAlign="center">{{ 'STARTPAGE_BIRTHDAY' | translate }}</div>
-            <div fxFlex.md="30%" fxFlex.lg="20%" fxLayout="row">
-              <button
-                *ngIf="howMuchBirthdaysToShow === 7"
-                mat-icon-button
-                matTooltip="{{ 'STARTPAGE_BIRTHDAY_MORE' | translate }}"
-                matTooltipPosition="above"
-                (click)="onBirthdaysExpand()"
-                aria-label="Button to show all birthdays"
-              >
-                <mat-icon>expand_more</mat-icon>
-              </button>
-              <button
-                *ngIf="howMuchBirthdaysToShow === birthdays.length"
-                mat-icon-button
-                matTooltip="{{ 'STARTPAGE_BIRTHDAY_MORE' | translate }}"
-                matTooltipPosition="above"
-                (click)="onBirthdaysExpand()"
-                aria-label="Button to show all birthdays"
-              >
-                <mat-icon>expand_less</mat-icon>
-              </button>
-              <button
-                mat-icon-button
-                matTooltip="{{ 'STARTPAGE_BIRTHDAY_INFO' | translate }}"
-                matTooltipPosition="right"
-                routerLink="settings/privacySettings"
-                aria-label="Button that brings you to a page where you can deactivate your account for showing up when you have birhtday."
-              >
-                <mat-icon>info</mat-icon>
-              </button>
-            </div>
-          </mat-card-title>
+        <div class="table-responsive">
+          <table>
+            <tbody>
+              <tr *ngFor="let broadcast of broadcasts" class="not-selectable" (click)="onBroadcastItemClick(broadcast)">
+                <td matRipple matRippleRadius="100">
+                  <b>{{ broadcast.subject }}</b> {{ 'STARTPAGE_BROADCASTS_BY' | translate }} {{ broadcast.writerName }} <br />{{
+                    broadcast.sent | date: 'dd.MM - HH:mm'
+                  }}
+                  <small class="until-left"> (~{{ broadcast.readTime }})</small>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </mat-card-content>
+    </mat-card>
 
-          <div class="table-responsive">
-            <table>
-              <thead>
-                <tr>
-                  <th>{{ 'STARTPAGE_BIRTHDAY_NAME' | translate }}</th>
-                  <th>{{ 'STARTPAGE_BIRTHDAY_DATE' | translate }}</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let birthday of birthdays.slice(0, howMuchBirthdaysToShow)">
-                  <td>{{ birthday.name }}</td>
-                  <td>{{ birthday.date | date: 'dd.MM.yyyy' }} ({{ birthday.age }})</td>
-                </tr>
-              </tbody>
-            </table>
+    <mat-card class="mat-elevation-z4" *ngIf="birthdays.length != 0">
+      <mat-card-content>
+        <mat-card-title fxLayout="row" fxLayoutAlign="end">
+          <div fxFlex.md="70%" fxFlex.lg="80%" fxFlexAlign="center">{{ 'STARTPAGE_BIRTHDAY' | translate }}</div>
+          <div fxFlex.md="30%" fxFlex.lg="20%" fxLayout="row">
+            <button
+              *ngIf="howMuchBirthdaysToShow === 7"
+              mat-icon-button
+              matTooltip="{{ 'STARTPAGE_BIRTHDAY_MORE' | translate }}"
+              matTooltipPosition="above"
+              (click)="onBirthdaysExpand()"
+              aria-label="Button to show all birthdays"
+            >
+              <mat-icon>expand_more</mat-icon>
+            </button>
+            <button
+              *ngIf="howMuchBirthdaysToShow === birthdays.length"
+              mat-icon-button
+              matTooltip="{{ 'STARTPAGE_BIRTHDAY_MORE' | translate }}"
+              matTooltipPosition="above"
+              (click)="onBirthdaysExpand()"
+              aria-label="Button to show all birthdays"
+            >
+              <mat-icon>expand_less</mat-icon>
+            </button>
+            <button
+              mat-icon-button
+              matTooltip="{{ 'STARTPAGE_BIRTHDAY_INFO' | translate }}"
+              matTooltipPosition="right"
+              routerLink="settings/privacySettings"
+              aria-label="Button that brings you to a page where you can deactivate your account for showing up when you have birhtday."
+            >
+              <mat-icon>info</mat-icon>
+            </button>
           </div>
-        </mat-card-content>
-      </mat-card>
-    </div>
-    <div *ngIf="bookings.length != 0" fxFlex.md="63%" fxFlex.gt-md="65%">
-      <mat-card class="mat-elevation-z4">
-        <mat-card-content>
-          <mat-card-title>{{ 'STARTPAGE_BOOKINGS' | translate }}</mat-card-title>
+        </mat-card-title>
 
-          <div class="table-responsive">
-            <table>
-              <thead>
-                <tr>
-                  <th>{{ 'STARTPAGE_MOVIE_NAME' | translate }}</th>
-                  <th>{{ 'STARTPAGE_MOVIE_DATE' | translate }}</th>
-                  <th>{{ 'STARTPAGE_BOOKED_TICKETS' | translate }}</th>
-                  <th>{{ 'STARTPAGE_CINEMA_SERVICE' | translate }}</th>
-                  <th>{{ 'STARTPAGE_EMERGENCY_CINEMA_SERVICE' | translate }}</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr app-table-bookings-row *ngFor="let booking of bookings" [booking]="booking"></tr>
-              </tbody>
-            </table>
-          </div>
-        </mat-card-content>
-      </mat-card>
-    </div>
+        <div class="table-responsive">
+          <table>
+            <thead>
+              <tr>
+                <th>{{ 'STARTPAGE_BIRTHDAY_NAME' | translate }}</th>
+                <th>{{ 'STARTPAGE_BIRTHDAY_DATE' | translate }}</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let birthday of birthdays.slice(0, howMuchBirthdaysToShow)">
+                <td>{{ birthday.name }}</td>
+                <td>{{ birthday.date | date: 'dd.MM.yyyy' }} ({{ birthday.age }})</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <div *ngIf="bookings.length != 0" fxFlex.md="63%" fxFlex.gt-md="65%">
+    <mat-card class="mat-elevation-z4">
+      <mat-card-content>
+        <mat-card-title>{{ 'STARTPAGE_BOOKINGS' | translate }}</mat-card-title>
+
+        <div class="table-responsive">
+          <table>
+            <thead>
+              <tr>
+                <th>{{ 'STARTPAGE_MOVIE_NAME' | translate }}</th>
+                <th>{{ 'STARTPAGE_MOVIE_DATE' | translate }}</th>
+                <th>{{ 'STARTPAGE_BOOKED_TICKETS' | translate }}</th>
+                <th>{{ 'STARTPAGE_CINEMA_SERVICE' | translate }}</th>
+                <th>{{ 'STARTPAGE_EMERGENCY_CINEMA_SERVICE' | translate }}</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr app-table-bookings-row *ngFor="let booking of bookings" [booking]="booking"></tr>
+            </tbody>
+          </table>
+        </div>
+      </mat-card-content>
+    </mat-card>
   </div>
 </div>

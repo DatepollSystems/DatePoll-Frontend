@@ -20,6 +20,7 @@ export class EventsViewComponent implements OnDestroy {
   eventsToShow: Event[];
   events: Event[];
   eventsSubscription: Subscription;
+  eventsHidden = 0;
 
   isMobile = true;
   isMobileSubscription: Subscription;
@@ -49,11 +50,15 @@ export class EventsViewComponent implements OnDestroy {
   refreshView() {
     if (this.showAllEvents) {
       this.eventsToShow = this.events.slice();
+      this.eventsHidden = 0;
     } else {
+      this.eventsHidden = 0;
       this.eventsToShow = [];
       for (let i = 0; i < this.events.length; i++) {
         if (!this.events[i].alreadyVotedFor) {
           this.eventsToShow.push(this.events.slice()[i]);
+        } else {
+          this.eventsHidden++;
         }
       }
     }

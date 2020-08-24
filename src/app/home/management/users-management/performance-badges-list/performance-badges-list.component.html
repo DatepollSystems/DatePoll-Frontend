@@ -1,122 +1,115 @@
-<mat-expansion-panel>
-  <mat-expansion-panel-header>
-    <mat-panel-title>
-      {{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_PERFORMANCE_BADGES_TITLE' | translate }}
-    </mat-panel-title>
-  </mat-expansion-panel-header>
-  <form
-    #performanceBadgeForm="ngForm"
-    (ngSubmit)="addPerformanceBadge(performanceBadgeForm)"
-    fxLayout="row wrap"
-    fxLayout.xs="column"
-    fxLayoutAlign="space-between"
-  >
-    <app-instrument-select fxFlex="23%" fxFlex.lt-md="48%" (instrumentChanged)="onInstrumentChanged($event)"></app-instrument-select>
+<form
+  #performanceBadgeForm="ngForm"
+  (ngSubmit)="addPerformanceBadge(performanceBadgeForm)"
+  fxLayout="row wrap"
+  fxLayout.xs="column"
+  fxLayoutAlign="space-between"
+>
+  <app-instrument-select fxFlex="23%" fxFlex.lt-md="48%" (instrumentChanged)="onInstrumentChanged($event)"></app-instrument-select>
 
-    <app-performance-badge-select
-      fxFlex="23%"
-      fxFlex.lt-md="48%"
-      (performanceBadgeChanged)="onPerformanceBadgeChanged($event)"
-    ></app-performance-badge-select>
+  <app-performance-badge-select
+    fxFlex="23%"
+    fxFlex.lt-md="48%"
+    (performanceBadgeChanged)="onPerformanceBadgeChanged($event)"
+  ></app-performance-badge-select>
 
-    <mat-form-field fxFlex="23%" fxFlex.lt-md="48%" class="datepicker-field">
-      <input
-        [(ngModel)]="performanceBadgeDate"
-        [matDatepicker]="picker_performanceBadge"
-        id="datepicker-performanceBadge"
-        matInput
-        name="datepicker-performanceBadge"
-        placeholder="{{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_PERFORMANCE_BADGES_DATE' | translate }}"
-      />
-      <mat-datepicker-toggle [for]="picker_performanceBadge" matSuffix></mat-datepicker-toggle>
-      <mat-datepicker #picker_performanceBadge></mat-datepicker>
-    </mat-form-field>
+  <mat-form-field fxFlex="23%" fxFlex.lt-md="48%" class="datepicker-field">
+    <input
+      [(ngModel)]="performanceBadgeDate"
+      [matDatepicker]="picker_performanceBadge"
+      id="datepicker-performanceBadge"
+      matInput
+      name="datepicker-performanceBadge"
+      placeholder="{{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_PERFORMANCE_BADGES_DATE' | translate }}"
+    />
+    <mat-datepicker-toggle [for]="picker_performanceBadge" matSuffix></mat-datepicker-toggle>
+    <mat-datepicker #picker_performanceBadge></mat-datepicker>
+  </mat-form-field>
 
-    <mat-form-field fxFlex="23%" fxFlex.lt-md="48%" class="datepicker-field-mobile">
-      <input
-        [(ngModel)]="performanceBadgeDate"
-        [matDatepicker]="picker_mobile_performanceBadge"
-        id="datepicker-performanceBadge-mobile"
-        matInput
-        name="datepicker-performanceBadge-mobile"
-        placeholder="{{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_PERFORMANCE_BADGES_DATE' | translate }}"
-      />
-      <mat-datepicker-toggle [for]="picker_mobile_performanceBadge" matSuffix></mat-datepicker-toggle>
-      <mat-datepicker #picker_mobile_performanceBadge touchUi></mat-datepicker>
-    </mat-form-field>
+  <mat-form-field fxFlex="23%" fxFlex.lt-md="48%" class="datepicker-field-mobile">
+    <input
+      [(ngModel)]="performanceBadgeDate"
+      [matDatepicker]="picker_mobile_performanceBadge"
+      id="datepicker-performanceBadge-mobile"
+      matInput
+      name="datepicker-performanceBadge-mobile"
+      placeholder="{{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_PERFORMANCE_BADGES_DATE' | translate }}"
+    />
+    <mat-datepicker-toggle [for]="picker_mobile_performanceBadge" matSuffix></mat-datepicker-toggle>
+    <mat-datepicker #picker_mobile_performanceBadge touchUi></mat-datepicker>
+  </mat-form-field>
 
-    <mat-form-field fxFlex="23%" fxFlex.lt-md="48%">
-      <input
-        #performanceBadgeGradeModel="ngModel"
-        id="performanceBadge-grade"
-        matInput
-        maxlength="190"
-        name="performanceBadgeGrade"
-        ngModel
-        placeholder="{{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_PERFORMANCE_BADGES_GRADE' | translate }}"
-        type="text"
-      />
-      <mat-error *ngIf="performanceBadgeGradeModel.invalid">
-        {{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_PERFORMANCE_BADGES_GRADE_INCORRECT' | translate }}
-      </mat-error>
-    </mat-form-field>
+  <mat-form-field fxFlex="23%" fxFlex.lt-md="48%">
+    <input
+      #performanceBadgeGradeModel="ngModel"
+      id="performanceBadge-grade"
+      matInput
+      maxlength="190"
+      name="performanceBadgeGrade"
+      ngModel
+      placeholder="{{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_PERFORMANCE_BADGES_GRADE' | translate }}"
+      type="text"
+    />
+    <mat-error *ngIf="performanceBadgeGradeModel.invalid">
+      {{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_PERFORMANCE_BADGES_GRADE_INCORRECT' | translate }}
+    </mat-error>
+  </mat-form-field>
 
-    <mat-form-field fxFlex="70%" fxFlex.lt-md="60%">
-      <input
-        #performanceBadgeNoteModel="ngModel"
-        id="performanceBadge-note"
-        matInput
-        maxlength="190"
-        name="performanceBadgeNote"
-        ngModel
-        placeholder="{{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_PERFORMANCE_BADGES_NOTE' | translate }}"
-        type="text"
-      />
-      <mat-error *ngIf="performanceBadgeNoteModel.invalid">
-        {{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_PERFORMANCE_BADGES_NOTE_INCORRECT' | translate }}
-      </mat-error>
-    </mat-form-field>
+  <mat-form-field fxFlex="70%" fxFlex.lt-md="60%">
+    <input
+      #performanceBadgeNoteModel="ngModel"
+      id="performanceBadge-note"
+      matInput
+      maxlength="190"
+      name="performanceBadgeNote"
+      ngModel
+      placeholder="{{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_PERFORMANCE_BADGES_NOTE' | translate }}"
+      type="text"
+    />
+    <mat-error *ngIf="performanceBadgeNoteModel.invalid">
+      {{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_PERFORMANCE_BADGES_NOTE_INCORRECT' | translate }}
+    </mat-error>
+  </mat-form-field>
 
-    <div fxFlex="25%" fxFlex.lt-md="38%">
-      <button
-        [disabled]="!performanceBadgeForm.valid || selectedInstrument == null || selectedPerformanceBadge == null"
-        color="primary"
-        id="addPerformanceBadge-button"
-        mat-raised-button
-        style="width: 100%"
-        type="submit"
-      >
-        {{ 'ADD' | translate }}
-        <mat-icon aria-label="Submit button">playlist_add</mat-icon>
-      </button>
-    </div>
-  </form>
-
-  <mat-divider></mat-divider>
-
-  <div fxLayout="column">
-    <mat-list>
-      <mat-list-item *ngFor="let userPerformanceBadge of userPerformanceBadges">
-        <span matLine
-          >{{ userPerformanceBadge.performanceBadgeName }}
-          {{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_PERFORMANCE_BADGES_WITH' | translate }}
-          {{ userPerformanceBadge.instrumentName }}
-        </span>
-        <span *ngIf="userPerformanceBadge.date != null" matLine>Datum: {{ userPerformanceBadge.date | date: 'dd.MM.yyyy' }}</span>
-        <span *ngIf="userPerformanceBadge.grade != null" matLine>Erfolg: {{ userPerformanceBadge.grade }}</span>
-        <span *ngIf="userPerformanceBadge.note != null" matLine>Anmerkung: {{ userPerformanceBadge.note }}</span>
-        <button
-          (click)="removePerformanceBadge(userPerformanceBadge.id)"
-          mat-icon-button
-          matTooltip="{{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_PERFORMANCE_BADGES_REMOVE_TOOLTIP' | translate }}"
-          matTooltipPosition="right"
-        >
-          <mat-icon>delete_forever</mat-icon>
-        </button>
-      </mat-list-item>
-    </mat-list>
-    <mat-card *ngIf="userPerformanceBadges.length == 0" matRipple style="background-color: #b2ff59" class="not-selectable">
-      <b>{{ 'INFORMATION' | translate }}</b> {{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_PERFORMANCE_BADGES_NO_AVAILABLE' | translate }}
-    </mat-card>
+  <div fxFlex="25%" fxFlex.lt-md="38%">
+    <button
+      [disabled]="!performanceBadgeForm.valid || selectedInstrument == null || selectedPerformanceBadge == null"
+      color="primary"
+      id="addPerformanceBadge-button"
+      mat-raised-button
+      style="width: 100%"
+      type="submit"
+    >
+      {{ 'ADD' | translate }}
+      <mat-icon aria-label="Submit button">playlist_add</mat-icon>
+    </button>
   </div>
-</mat-expansion-panel>
+</form>
+
+<mat-divider></mat-divider>
+
+<div fxLayout="column">
+  <mat-list>
+    <mat-list-item *ngFor="let userPerformanceBadge of userPerformanceBadges">
+      <span matLine
+        >{{ userPerformanceBadge.performanceBadgeName }}
+        {{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_PERFORMANCE_BADGES_WITH' | translate }}
+        {{ userPerformanceBadge.instrumentName }}
+      </span>
+      <span *ngIf="userPerformanceBadge.date != null" matLine>Datum: {{ userPerformanceBadge.date | date: 'dd.MM.yyyy' }}</span>
+      <span *ngIf="userPerformanceBadge.grade != null" matLine>Erfolg: {{ userPerformanceBadge.grade }}</span>
+      <span *ngIf="userPerformanceBadge.note != null" matLine>Anmerkung: {{ userPerformanceBadge.note }}</span>
+      <button
+        (click)="removePerformanceBadge(userPerformanceBadge.id)"
+        mat-icon-button
+        matTooltip="{{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_PERFORMANCE_BADGES_REMOVE_TOOLTIP' | translate }}"
+        matTooltipPosition="right"
+      >
+        <mat-icon>delete_forever</mat-icon>
+      </button>
+    </mat-list-item>
+  </mat-list>
+  <mat-card *ngIf="userPerformanceBadges.length == 0" matRipple style="background-color: #b2ff59" class="not-selectable">
+    <b>{{ 'INFORMATION' | translate }}</b> {{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_PERFORMANCE_BADGES_NO_AVAILABLE' | translate }}
+  </mat-card>
+</div>

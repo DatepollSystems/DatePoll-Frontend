@@ -31,6 +31,8 @@
   "BETA": "Beta",
   "EXPORT": "Exportieren",
   "PRINT": "Drucken",
+  "ACTIVE": "Aktiv",
+  "INACTIVE": "Inaktiv",
 
   "LANGUAGE": "Sprache",
   "LANGUAGE_GERMAN": "Deutsch",
@@ -39,8 +41,8 @@
   "ABOUT": "Über",
   "ABOUT_GENERAL": "Allgemeines",
   "ABOUT_TECHNICAL": "Technisches",
-  "ABOUT_DESCRIPTION": "DatePoll ist eine Vereinsmanagement Applikation mit dem Schwerpunkt auf Schützen und Musik.",
-  "ABOUT_VISIT_DATEPOLL": "Besuch die Projekt-Website",
+  "ABOUT_DESCRIPTION": "DatePoll ist eine Vereinsmanagement Applikation. Sie deckt alle Aufgaben von Mitgliedererfassung / verwaltung bis Eventzeitmanagement!",
+  "ABOUT_VISIT_DATEPOLL": "Besuch (DatePoll.org) die Projekt-Website",
   "ABOUT_FRONTEND_VERSION": "Version der Webapplication: ",
   "ABOUT_BACKEND_VERSION": "Version des Backends: ",
   "ABOUT_NEEDED_BACKEND_VERSION": "Benötigte Backend Version (Zahl): ",
@@ -61,7 +63,7 @@
   "ABOUT_PAGE_STATS_MOVIES_WORKERS": "Kinodienste geleistet:",
   "ABOUT_PAGE_STATS_PERFORMANCE_BADGES": "Vergebene Leistungsabzeichen:",
   "ABOUT_PAGE_STATS_DATEPOLL_INSTANCE_INTERACTIONS": "Interaktionen mit DatePoll:",
-  "ABOUT_PAGE_TROUBLE_LOGGING_IN": "Probleme beim anmelden?",
+  "ABOUT_PAGE_TROUBLE_LOGGING_IN": "Probleme beim anmelden oder Passwort vergessen?",
 
   "IMPRINT": "Impressum",
   "PRIVACY_POLICY": "Datenschutzerklärung",
@@ -113,7 +115,7 @@
   "NAV_CINEMA_SERVICE": "Kinodienst",
   "NAV_CINEMA_ADMINISTRATION": "Filmverwaltung",
 
-  "NAV_BROADCASTS_ADMINISTRATION": "Mitteilungsverwatlung",
+  "NAV_BROADCASTS_ADMINISTRATION": "Mitteilungsverwaltung",
 
   "NAV_MANAGEMENT_USERS": "Mitgliederverwaltung",
   "NAV_MANAGEMENT_GROUPS": "Gruppenverwaltung",
@@ -164,6 +166,7 @@
   "CALENDAR_WEEK": "Woche",
   "CALENDAR_DAY": "Tag",
 
+  "MAPS_SHOW_HIDE": "Karte anzeigen / ausblenden",
   "MAPS_CLEAR_SELECTION": "Auswahl entfernen",
 
   "CINEMA_TICKETS_BOOK_A_TICKET": "Karten reservieren",
@@ -340,7 +343,7 @@
 
   "SETTINGS_SECURITY_MDOAL_CALENDAR_COMPLETE": "Gesamter Kalender (Nicht personalisiert)",
   "SETTINGS_SECURITY_MDOAL_CALENDAR_INPUT_TITLE": "Persönlicher Kalender",
-  "SETTINGS_SECURITY_MODAL_CALENDAR_COPY_TOKEN_TOOLTIP": "In die Zwischenablage kopieren",
+  "SETTINGS_SECURITY_MODAL_CALENDAR_COPY_TOKEN_TOOLTIP": "Kopieren",
   "SETTINGS_SECURITY_MODAL_CALENDAR_RESET_TOKEN": "Zurücksetzen",
 
   "SETTINGS_SECURITY_MODAL_SESSION_REMOVE_TOOLTIP": "Beende die Session",
@@ -496,14 +499,17 @@
   "MANAGEMENT_GROUPS_DELETE_SUBGROUP_MODAL_TITLE": "Willst du dieses Register wirklich löschen?",
   "MANAGEMENT_GROUPS_DELETE_SUBGROUP_MODAL_SUCCESSFUL": "Das Register wurde gelöscht!",
 
-  "MANAGEMENT_GROUPS_INFO_GROUP_MODAL_TITLE": "Mitglieder - ",
+  "MANAGEMENT_GROUPS_INFO_GROUP_MODAL_TITLE": "Informationen zu ",
+  "MANAGEMENT_GROUPS_INFO_GROUP_MODAL_MEMBERS": "Mitglieder",
   "MANAGEMENT_GROUPS_INFO_GROUP_MODAL_TABLE_HEADER_ROLE": "Rolle",
   "MANAGEMENT_GROUPS_INFO_GROUP_MODAL_TABLE_ACTION_REMOVE": "Entferne dieses Mitglied aus der Gruppe",
   "MANAGEMENT_GROUPS_INFO_GROUP_MDOAL_TABLE_ACTION_EDIT": "Bearbeite die Rolle des Mitglieds in der Gruppe",
-
   "MANAGEMENT_GROUPS_INFO_GROUP_MODAL_ROLE_UPDATE_MODAL_TITLE": "Bearbeite die Rolle von ",
   "MANAGEMENT_GROUPS_INFO_GROUP_MODAL_ROLE_UPDATE_MODAL_ROLE": "Rolle",
   "MANAGEMENT_GROUPS_INFO_GROUP_MODAL_ROLE_UPDATE_MODAL_ROLE_INCORRECT": "Die Rolle darf nicht mehr als 190 Zeichen haben!",
+  "MANAGEMENT_GROUPS_INFO_GROUP_MODAL_STATISTICS": "Statistiken",
+  "MANAGEMENT_GROUPS_INFO_GROUP_MODAL_USERS_ONLY_IN_THIS_GROUP": "Mitglieder nur in dieser Gruppe",
+  "MANAGEMENT_GROUPS_INFO_GROUP_MODAL_USERS_BY_JOIN_YEAR": "Mitglieder gruppiert nach (Gruppen) Beitrittsjahr",
 
   "MANAGEMENT_GROUPS_INFO_SUBGROUP_MODAL_TABLE_ACTION_REMOVE": "Entferne dieses Mitglied aus der Gruppe",
   "MANAGEMENT_GROUPS_INFO_SUBGROUP_MDOAL_TABLE_ACTION_EDIT": "Bearbeite die Rolle des Mitglieds in der Gruppe",
@@ -681,7 +687,6 @@
   "EVENTS_ADMINISTRATION_INFO_EVENT_SINGLE_SUBGROUPS": "Einzelne Register",
   "EVENTS_ADMINISTRATION_INFO_EVENT_UNKNOWN_VOTING": "Unbekannt",
   "EVENTS_ADMINISTRATION_INFO_EVENT_MEMBERS_IN": "Alle Mitglieder in ",
-  "EVENTS_ADMINISTRATION_INFO_EVENT_REGISTER": "Register: ",
   "EVENTS_ADMINISTRATION_INFO_EVENT_COMPLETE_USERS_TABLE": "Alle Mitglieder",
   "EVENTS_ADMINISTRATION_INFO_EVENT_FIRSTNAME": "Vorname",
   "EVENTS_ADMINISTRATION_INFO_EVENT_SURNAME": "Nachname",

@@ -1,10 +1,8 @@
 <h1 mat-dialog-title>{{ 'EVENTS_ADMINISTRATION_UPDATE_EVENT' | translate }} {{ name }}</h1>
-<div mat-dialog-content style="padding-bottom: 15px;">
-  <form #form="ngForm" (ngSubmit)="update(form)" fxLayout="column" fxLayoutGap="0.5%">
-    <app-do-not-forget-to-save fxFlex="98%"></app-do-not-forget-to-save>
-
+<div mat-dialog-content>
+  <form #form="ngForm" (ngSubmit)="update(form)" fxLayout="row break" fxLayout.lt-xl="column" fxLayoutGap="2%" fxLayoutAlign="start">
     <!-- Name -->
-    <mat-form-field>
+    <mat-form-field fxFlex="48%">
       <input
         #nameModel="ngModel"
         [(ngModel)]="name"
@@ -25,6 +23,7 @@
 
     <!-- Group management -->
     <app-group-and-subgroup-type-input-select
+      fxFlex="48%"
       (allGroupsAndSubgroupsChange)="onFreeChange($event)"
       (groupsAndSubgroupsChange)="onJoinedChange($event)"
       [allGroupsAndSubgroups]="free"
@@ -32,27 +31,29 @@
     >
     </app-group-and-subgroup-type-input-select>
 
-    <mat-card matRipple style="background-color: #b2ff59" class="not-selectable">
+    <mat-card matRipple style="background-color: #b2ff59" class="not-selectable" fxFlex="98%">
       <b>{{ 'INFORMATION' | translate }}</b> {{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_GROUPS_DESCRIPTION' | translate }}
     </mat-card>
 
-    <app-event-dates-management [dates]="dates" (datesChange)="onEventDatesChange($event)"></app-event-dates-management>
+    <app-event-dates-management fxFlex="48%" [dates]="dates" (datesChange)="onEventDatesChange($event)"></app-event-dates-management>
 
-    <!-- Decisions -->
-    <app-event-decisions-list (decisionsChanged)="onDecisionsChange($event)" [decisions]="decisions"></app-event-decisions-list>
+    <div fxFlex="48%">
+      <!-- Decisions -->
+      <app-event-decisions-list (decisionsChanged)="onDecisionsChange($event)" [decisions]="decisions"></app-event-decisions-list>
 
-    <!-- Description -->
-    <mat-expansion-panel>
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          {{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DESCRIPTION' | translate }}
-        </mat-panel-title>
-      </mat-expansion-panel-header>
+      <!-- Description -->
+      <mat-expansion-panel style="margin-top: 10px;">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            {{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DESCRIPTION' | translate }}
+          </mat-panel-title>
+        </mat-expansion-panel-header>
 
-      <mat-form-field appearance="outline" style="width: 100%">
-        <textarea [(ngModel)]="description" matInput name="description" ngModel style="min-height: 15vh;"></textarea>
-      </mat-form-field>
-    </mat-expansion-panel>
+        <mat-form-field appearance="outline" style="width: 100%">
+          <textarea [(ngModel)]="description" matInput name="description" ngModel style="min-height: 15vh;"></textarea>
+        </mat-form-field>
+      </mat-expansion-panel>
+    </div>
   </form>
 </div>
 <div mat-dialog-actions>

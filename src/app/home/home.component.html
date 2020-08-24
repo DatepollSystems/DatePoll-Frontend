@@ -10,7 +10,12 @@
         Home</a
       >
 
-      <a (click)="onPageChange()" mat-list-item routerLink="calendar" routerLinkActive="activated">
+      <a (click)="onPageChange()" [fxHide.lt-sm]="true" mat-list-item routerLink="calendar" routerLinkActive="activated">
+        <mat-icon>today</mat-icon>
+        {{ 'CALENDAR' | translate }}</a
+      >
+
+      <a (click)="onPageChange()" [fxHide.gt-xs]="true" mat-list-item routerLink="calendar/agenda" routerLinkActive="activated">
         <mat-icon>today</mat-icon>
         {{ 'CALENDAR' | translate }}</a
       >
@@ -88,7 +93,13 @@
         </a>
       </div>
 
-      <mat-divider></mat-divider>
+      <mat-divider
+        *ngIf="
+          myUserService.hasPermission(managementAdministration) ||
+          myUserService.hasPermission(settingsAdministration) ||
+          myUserService.hasPermission(logsAdministration)
+        "
+      ></mat-divider>
       <a (click)="changeTheme()" mat-list-item>
         <mat-icon>brightness_medium</mat-icon>
         {{ 'NAV_CHANGE_THEME' | translate }}
@@ -103,7 +114,7 @@
   </mat-sidenav>
 
   <mat-sidenav-content>
-    <mat-toolbar class="mat-elevation-z5" color="primary">
+    <mat-toolbar class="mat-elevation-z5 not-selectable" color="primary">
       <mat-icon (click)="sidenav.toggle()" class="toolbar-sidenav-toggler">menu</mat-icon>
       <span class="toolbar-heading" routerLink="/home">{{ serverInfo.community_name }}</span>
     </mat-toolbar>

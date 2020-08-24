@@ -69,6 +69,12 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.serverInfoSubscription = this.settingsService.serverInfoChange.subscribe(value => {
       this.serverInfo = value;
     });
+
+    // Detect Android, iOS, Windows and MacOS dark mode
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      localStorage.setItem('theme', 'dark');
+      this.setTheme();
+    }
   }
 
   onPageChange() {

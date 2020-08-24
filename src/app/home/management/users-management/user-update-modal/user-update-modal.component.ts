@@ -11,6 +11,7 @@ import {MyUserService} from '../../../my-user.service';
 import {GroupsService} from '../../groups-management/groups.service';
 import {BadgesService} from '../../performance-badges-management/badges.service';
 import {PerformanceBadgesService} from '../../performance-badges-management/performance-badges.service';
+import {IsMobileService} from '../../../../utils/is-mobile.service';
 import {UsersService} from '../users.service';
 
 import {Permissions} from '../../../../permissions';
@@ -72,6 +73,9 @@ export class UserUpdateModalComponent implements OnDestroy {
   userBadgesCopy: UserBadge[];
   userBadgesSubscription: Subscription;
 
+  isMobile = false;
+  isMobileSubscription: Subscription;
+
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     private dialogRef: MatDialogRef<UserUpdateModalComponent>,
@@ -81,7 +85,8 @@ export class UserUpdateModalComponent implements OnDestroy {
     private performanceBadgesService: PerformanceBadgesService,
     private badgesService: BadgesService,
     private translate: TranslateService,
-    private notificationsService: NotificationsService
+    private notificationsService: NotificationsService,
+    private isMobileService: IsMobileService
   ) {
     this.user = data.user;
     this.title = this.user.title;
@@ -149,12 +154,18 @@ export class UserUpdateModalComponent implements OnDestroy {
       this.userBadges = value;
       this.userBadgesCopy = this.userBadges.slice();
     });
+
+    this.isMobile = this.isMobileService.getIsMobile();
+    this.isMobileSubscription = this.isMobileService.isMobileChange.subscribe(value => {
+      this.isMobile = value;
+    });
   }
 
   ngOnDestroy() {
     this.joinedSubscription.unsubscribe();
     this.freeSubscription.unsubscribe();
     this.userPerformanceBadgesSubscription.unsubscribe();
+    this.isMobileSubscription.unsubscribe();
   }
 
   changePassword(form: NgForm) {
@@ -239,7 +250,6 @@ export class UserUpdateModalComponent implements OnDestroy {
     const memberNumber = form.controls.memberNumber.value;
     let activated = form.controls.activated.value;
     const informationDenied = form.controls.informationDenied.value;
-    const bvMember = form.controls.bvMember.value;
 
     if (activated.toString().length === 0) {
       activated = false;
@@ -270,7 +280,7 @@ export class UserUpdateModalComponent implements OnDestroy {
       location,
       activated,
       activity,
-      bv_member: bvMember,
+      bv_member: this.bvMember,
       information_denied: informationDenied,
       member_number: memberNumber,
       internal_comment: internalComment,

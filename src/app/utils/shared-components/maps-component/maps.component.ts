@@ -27,6 +27,7 @@ export class MapsComponentComponent implements AfterViewInit {
   public coordinatesChanged = new EventEmitter();
 
   public randomMapId = 0;
+  public hideMap = true;
 
   constructor(private http: HttpClient) {
     this.randomMapId = Math.random();
@@ -108,7 +109,10 @@ export class MapsComponentComponent implements AfterViewInit {
     this.marker = L.marker([x, y]).addTo(this.map);
   }
 
-  removeMarker() {
+  removeMarker(hideMap = false) {
+    if (hideMap) {
+      this.hideMap = true;
+    }
     if (this.marker != null) {
       this.marker.removeFrom(this.map);
     }

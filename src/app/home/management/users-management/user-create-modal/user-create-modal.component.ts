@@ -7,6 +7,7 @@ import {NotificationsService} from 'angular2-notifications';
 
 import {TranslateService} from '../../../../translation/translate.service';
 import {Converter} from '../../../../utils/converter';
+import {IsMobileService} from '../../../../utils/is-mobile.service';
 import {MyUserService} from '../../../my-user.service';
 import {GroupsService} from '../../groups-management/groups.service';
 import {BadgesService} from '../../performance-badges-management/badges.service';
@@ -14,6 +15,7 @@ import {PerformanceBadgesService} from '../../performance-badges-management/perf
 import {UsersService} from '../users.service';
 
 import {Permissions} from '../../../../permissions';
+
 import {GroupAndSubgroupModel, GroupType} from '../../../../utils/models/groupAndSubgroup.model';
 import {PhoneNumber} from '../../../phoneNumber.model';
 import {UserBadge} from '../badges-list/userBadge.model';
@@ -30,6 +32,7 @@ export class UserCreateModalComponent implements OnDestroy {
   emailAddresses: string[] = [];
   birthday: Date;
   join_date: Date;
+  bvMember: string;
   phoneNumbers: PhoneNumber[] = [];
 
   groupsSubscription: Subscription;
@@ -42,6 +45,9 @@ export class UserCreateModalComponent implements OnDestroy {
   userPerformanceBadges: UserPerformanceBadge[] = [];
   userBadges: UserBadge[] = [];
 
+  isMobile = false;
+  isMobileSubscription: Subscription;
+
   constructor(
     private usersService: UsersService,
     private myUserService: MyUserService,
@@ -50,6 +56,7 @@ export class UserCreateModalComponent implements OnDestroy {
     private badgesService: BadgesService,
     private notificationsService: NotificationsService,
     private translate: TranslateService,
+    private isMobileService: IsMobileService,
     private performanceBadgesService: PerformanceBadgesService
   ) {
     this.free = this.groupsService.getGroupsAndSubgroups();
@@ -65,10 +72,16 @@ export class UserCreateModalComponent implements OnDestroy {
     for (const user of users) {
       this.usernames.push(user.username);
     }
+
+    this.isMobile = this.isMobileService.getIsMobile();
+    this.isMobileSubscription = this.isMobileService.isMobileChange.subscribe(value => {
+      this.isMobile = value;
+    });
   }
 
   ngOnDestroy() {
     this.groupsSubscription.unsubscribe();
+    this.isMobileSubscription.unsubscribe();
   }
 
   onUsernameChange(usernameModel) {
@@ -129,7 +142,6 @@ export class UserCreateModalComponent implements OnDestroy {
     const internalComment = form.controls.internalComment.value;
     let activated = form.controls.activated.value;
     const informationDenied = form.controls.informationDenied.value;
-    const bvMember = form.controls.bvMember.value;
 
     if (activated.toString().length === 0) {
       activated = false;
@@ -160,7 +172,7 @@ export class UserCreateModalComponent implements OnDestroy {
       location,
       activated,
       activity,
-      bv_member: bvMember,
+      bv_member: this.bvMember,
       information_denied: informationDenied,
       member_number: memberNumber,
       internal_comment: internalComment,

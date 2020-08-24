@@ -3,8 +3,11 @@ import {MAT_DIALOG_DATA, MatDialog} from '@angular/material/dialog';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
-import {GroupsService} from '../groups.service';
+
 import {Subscription} from 'rxjs';
+
+import {GroupsService} from '../groups.service';
+
 import {GroupUserRoleUpdateModalComponent} from './group-user-role-update-modal/group-user-role-update-modal.component';
 
 @Component({
@@ -24,6 +27,10 @@ export class GroupUserListModalComponent implements OnDestroy {
   public sendingRequest = false;
   private readonly groupID: number;
   private groupSubscription: Subscription;
+
+  viewMode = 'list';
+  showUsersOnlyInThisGroup = false;
+  showUsersGroupedByJoinYear = false;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, private dialog: MatDialog, private groupsService: GroupsService) {
     this.groupID = data.groupID;
@@ -63,7 +70,7 @@ export class GroupUserListModalComponent implements OnDestroy {
   onEditRole(user: any) {
     this.dialog.open(GroupUserRoleUpdateModalComponent, {
       width: '80vh',
-      data: {user: user, groupID: this.groupID}
+      data: {user, groupID: this.groupID}
     });
   }
 

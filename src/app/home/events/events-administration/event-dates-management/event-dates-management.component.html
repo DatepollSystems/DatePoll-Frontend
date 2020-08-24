@@ -1,5 +1,5 @@
-<div fxLayout="row" style="margin-bottom: 15px; margin-top: 15px;">
-  <mat-expansion-panel fxFlex>
+<div fxLayout="row">
+  <mat-expansion-panel fxFlex [expanded]="!isMobile">
     <mat-expansion-panel-header>
       <mat-panel-title>
         {{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE_TITLE' | translate }}

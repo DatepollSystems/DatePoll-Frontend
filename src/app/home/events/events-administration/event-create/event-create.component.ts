@@ -1,6 +1,6 @@
 import {Component, OnDestroy} from '@angular/core';
 import {NgForm} from '@angular/forms';
-import {MatDialogRef} from '@angular/material';
+import {Router} from '@angular/router';
 import {Subscription} from 'rxjs';
 
 import {NotificationsService} from 'angular2-notifications';
@@ -16,11 +16,11 @@ import {EventDate} from '../../models/event-date.model';
 import {Event} from '../../models/event.model';
 
 @Component({
-  selector: 'app-event-create-modal',
-  templateUrl: './event-create-modal.component.html',
-  styleUrls: ['./event-create-modal.component.css']
+  selector: 'app-event-create',
+  templateUrl: './event-create.component.html',
+  styleUrls: ['./event-create.component.css']
 })
-export class EventCreateModalComponent implements OnDestroy {
+export class EventCreateComponent implements OnDestroy {
   startDate: Date;
   endDate: Date;
 
@@ -36,7 +36,7 @@ export class EventCreateModalComponent implements OnDestroy {
 
   constructor(
     private groupsService: GroupsService,
-    private dialogRef: MatDialogRef<EventCreateModalComponent>,
+    private router: Router,
     private notificationsService: NotificationsService,
     private standardDecisionsService: StandardDecisionsService,
     private translate: TranslateService,
@@ -97,12 +97,12 @@ export class EventCreateModalComponent implements OnDestroy {
       return;
     }
 
-    this.dialogRef.close();
-
     const name = form.controls.name.value;
     const description = form.controls.description.value;
 
     const forEveryone = this.joined.length === 0;
+
+    this.router.navigateByUrl('/home/events/administration');
 
     const event = new Event(0, name, new Date(), new Date(), forEveryone, description, this.decisions, this.dates);
     console.log(event);

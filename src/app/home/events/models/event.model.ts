@@ -9,6 +9,8 @@ export class Event {
   public name: string;
   public startDate: Date;
   public endDate: Date;
+  public startDateC: Date;
+  public endDateC: Date;
   public forEveryone: boolean;
   public description: string;
   public descriptionPreview = '';
@@ -52,7 +54,9 @@ export class Event {
     this.id = id;
     this.name = name;
     this.startDate = startDate;
+    this.startDateC = new Date(this.startDate.getFullYear(), this.startDate.getMonth(), this.startDate.getDay());
     this.endDate = endDate;
+    this.endDateC = new Date(this.endDate.getFullYear(), this.endDate.getMonth(), this.endDate.getDay());
     this.forEveryone = forEveryone;
     this.description = description;
     if (description != null) {

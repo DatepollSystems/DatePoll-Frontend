@@ -94,13 +94,14 @@ export class ForgotPasswordComponent {
       },
       error => {
         console.log(error);
-        if (error.error.error_code != null) {
-          if (error.error.error_code.includes('code_incorrect')) {
-            this.verificationCodeIncorrect = true;
-          } else if (error.error.error_code.includes('rate_limit_exceeded')) {
-            this.verificationCodeRateLimitExceeded = true;
-          }
+        if (error.error?.error_code?.includes('code_incorrect')) {
+          this.verificationCodeIncorrect = true;
+        } else if (error.error?.error_code?.includes('rate_limit_exceeded')) {
+          this.verificationCodeRateLimitExceeded = true;
+        } else {
+          this.verificationCodeIncorrect = true;
         }
+
         this.sendingRequest = false;
       }
     );

@@ -1,120 +1,112 @@
-<mat-expansion-panel>
-  <mat-expansion-panel-header>
-    <mat-panel-title>
-      {{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_BADGES_TITLE' | translate }}
-    </mat-panel-title>
-  </mat-expansion-panel-header>
+<mat-card *ngIf="!this.joinDate" matRipple style="background-color: #b2ff59" class="not-selectable">
+  {{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_BADGES_SET_JOIN_DATE' | translate }}
+</mat-card>
 
-  <mat-card *ngIf="!this.joinDate" matRipple style="background-color: #b2ff59" class="not-selectable">
-    {{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_BADGES_SET_JOIN_DATE' | translate }}
-  </mat-card>
+<ng-container *ngIf="this.joinDate">
+  <h3>{{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_BADGES_POSSIBLE' | translate }}</h3>
+  <mat-list *ngIf="badges != null">
+    <mat-list-item *ngFor="let badge of badges">
+      <span matLine
+        >{{ badge.description }} | {{ 'MANAGEMENT_PERFORMANCE_BADGES_BADGE_LIST_AFTER' | translate }} {{ badge.afterYears }}
+        {{ 'MANAGEMENT_PERFORMANCE_BADGES_BADGE_LIST_YEARS' | translate }}
+        <span *ngIf="badge.remainingYears > 0"
+          >| {{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_BADGES_REMAINING_YEARS' | translate }} : {{ badge.remainingYears }}</span
+        ></span
+      >
+      <button mat-icon-button mat-flat-button color="accent" type="button" [disabled]="badge.disabled" (click)="addBadgeToUser(badge)">
+        <mat-icon>playlist_add</mat-icon>
+      </button>
+    </mat-list-item>
+  </mat-list>
+</ng-container>
 
-  <ng-container *ngIf="this.joinDate">
-    <h3>{{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_BADGES_POSSIBLE' | translate }}</h3>
-    <mat-list *ngIf="badges != null">
-      <mat-list-item *ngFor="let badge of badges">
-        <span matLine
-          >{{ badge.description }} | {{ 'MANAGEMENT_PERFORMANCE_BADGES_BADGE_LIST_AFTER' | translate }} {{ badge.afterYears }}
-          {{ 'MANAGEMENT_PERFORMANCE_BADGES_BADGE_LIST_YEARS' | translate }}
-          <span *ngIf="badge.remainingYears > 0"
-            >| {{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_BADGES_REMAINING_YEARS' | translate }} : {{ badge.remainingYears }}</span
-          ></span
-        >
-        <button mat-icon-button mat-flat-button color="accent" type="button" [disabled]="badge.disabled" (click)="addBadgeToUser(badge)">
-          <mat-icon>playlist_add</mat-icon>
-        </button>
-      </mat-list-item>
-    </mat-list>
-  </ng-container>
+<div fxLayout="row" fxLayoutAlign="end center">
+  <button mat-flat-button type="button" color="primary" (click)="extraBadgeEnabled = !extraBadgeEnabled">
+    {{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_EXTRA_BADGE' | translate }}
+    <mat-icon *ngIf="!extraBadgeEnabled">expand_more</mat-icon>
+    <mat-icon *ngIf="extraBadgeEnabled">expand_less</mat-icon>
+  </button>
+</div>
+<form
+  #addExtraBadgeForm="ngForm"
+  (ngSubmit)="addExtraBadge(addExtraBadgeForm)"
+  fxLayout.gt-xs="row wrap"
+  fxLayout="column"
+  *ngIf="extraBadgeEnabled"
+  style="margin-top: 15px;"
+>
+  <mat-form-field fxFlex.lt-lg="50%" fxFlex="25%">
+    <input
+      #badgeDescriptionModel="ngModel"
+      id="badgeDescription"
+      matInput
+      maxlength="190"
+      minlength="1"
+      name="badgeDescription"
+      ngModel
+      placeholder="{{ 'MANAGEMENT_PERFORMANCE_BADGES_BADGE_ADD_DESCRIPTION' | translate }}"
+      required
+      type="text"
+    />
+    <mat-error *ngIf="badgeDescriptionModel.invalid">
+      {{ 'MANAGEMENT_PERFORMANCE_BADGES_BADGE_ADD_DESCRIPTION_INCORRECT' | translate }}
+    </mat-error>
+  </mat-form-field>
 
-  <div fxLayout="row" fxLayoutAlign="end center">
-    <button mat-flat-button type="button" color="primary" (click)="extraBadgeEnabled = !extraBadgeEnabled">
-      {{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_EXTRA_BADGE' | translate }}
-      <mat-icon *ngIf="!extraBadgeEnabled">expand_more</mat-icon>
-      <mat-icon *ngIf="extraBadgeEnabled">expand_less</mat-icon>
+  <mat-form-field fxFlex.lt-lg="50%" fxFlex="25%">
+    <input
+      id="badgeReason"
+      matInput
+      maxlength="190"
+      name="badgeReason"
+      ngModel
+      placeholder="{{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_BADGES_EXTRA_REASON' | translate }}"
+      type="text"
+    />
+  </mat-form-field>
+
+  <mat-form-field fxFlex.lt-lg="50%" fxFlex="25%">
+    <input
+      [(ngModel)]="extraBadgeDate"
+      [matDatepicker]="picker_birthday"
+      id="datepicker-badgeGetDate"
+      matInput
+      required
+      name="datepicker-badgeGetDate"
+      placeholder="{{ 'DATE' | translate }}"
+    />
+    <mat-datepicker-toggle [for]="picker_birthday" matSuffix></mat-datepicker-toggle>
+    <mat-datepicker #picker_birthday></mat-datepicker>
+  </mat-form-field>
+
+  <div fxFlex.lt-lg="50%" fxFlex="25%">
+    <button [disabled]="!addExtraBadgeForm.valid" mat-flat-button style="width: 100%;" type="submit" color="accent">
+      {{ 'ADD' | translate }}
+      <mat-icon aria-label="Submit button">library_add</mat-icon>
     </button>
   </div>
-  <form
-    #addExtraBadgeForm="ngForm"
-    (ngSubmit)="addExtraBadge(addExtraBadgeForm)"
-    fxLayout.gt-xs="row wrap"
-    fxLayout="column"
-    *ngIf="extraBadgeEnabled"
-    style="margin-top: 15px;"
-  >
-    <mat-form-field fxFlex.lt-lg="50%" fxFlex="25%">
-      <input
-        #badgeDescriptionModel="ngModel"
-        id="badgeDescription"
-        matInput
-        maxlength="190"
-        minlength="1"
-        name="badgeDescription"
-        ngModel
-        placeholder="{{ 'MANAGEMENT_PERFORMANCE_BADGES_BADGE_ADD_DESCRIPTION' | translate }}"
-        required
-        type="text"
-      />
-      <mat-error *ngIf="badgeDescriptionModel.invalid">
-        {{ 'MANAGEMENT_PERFORMANCE_BADGES_BADGE_ADD_DESCRIPTION_INCORRECT' | translate }}
-      </mat-error>
-    </mat-form-field>
-
-    <mat-form-field fxFlex.lt-lg="50%" fxFlex="25%">
-      <input
-        id="badgeReason"
-        matInput
-        maxlength="190"
-        name="badgeReason"
-        ngModel
-        placeholder="{{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_BADGES_EXTRA_REASON' | translate }}"
-        type="text"
-      />
-    </mat-form-field>
-
-    <mat-form-field fxFlex.lt-lg="50%" fxFlex="25%">
-      <input
-        [(ngModel)]="extraBadgeDate"
-        [matDatepicker]="picker_birthday"
-        id="datepicker-badgeGetDate"
-        matInput
-        required
-        name="datepicker-badgeGetDate"
-        placeholder="{{ 'DATE' | translate }}"
-      />
-      <mat-datepicker-toggle [for]="picker_birthday" matSuffix></mat-datepicker-toggle>
-      <mat-datepicker #picker_birthday></mat-datepicker>
-    </mat-form-field>
-
-    <div fxFlex.lt-lg="50%" fxFlex="25%">
-      <button [disabled]="!addExtraBadgeForm.valid" mat-flat-button style="width: 100%;" type="submit" color="accent">
-        {{ 'ADD' | translate }}
-        <mat-icon aria-label="Submit button">library_add</mat-icon>
+</form>
+<h3>{{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_BADGES_GOT' | translate }}</h3>
+<mat-divider></mat-divider>
+<div fxLayout="column">
+  <mat-list>
+    <mat-list-item *ngFor="let badge of userBadges">
+      <span matLine
+        >{{ badge.description }}
+        <span>| {{ badge.getDate | date: 'dd.MM.yyyy' }} </span>
+        <span *ngIf="badge.reason != null">| {{ badge.reason }}</span>
+      </span>
+      <button
+        (click)="removeUserBadge(badge)"
+        mat-icon-button
+        matTooltip="{{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_REMOVE_BADGE' | translate }}"
+        matTooltipPosition="right"
+      >
+        <mat-icon>delete_forever</mat-icon>
       </button>
-    </div>
-  </form>
-  <h3>{{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_BADGES_GOT' | translate }}</h3>
-  <mat-divider></mat-divider>
-  <div fxLayout="column">
-    <mat-list>
-      <mat-list-item *ngFor="let badge of userBadges">
-        <span matLine
-          >{{ badge.description }}
-          <span>| {{ badge.getDate | date: 'dd.MM.yyyy' }} </span>
-          <span *ngIf="badge.reason != null">| {{ badge.reason }}</span>
-        </span>
-        <button
-          (click)="removeUserBadge(badge)"
-          mat-icon-button
-          matTooltip="{{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_REMOVE_BADGE' | translate }}"
-          matTooltipPosition="right"
-        >
-          <mat-icon>delete_forever</mat-icon>
-        </button>
-      </mat-list-item>
-    </mat-list>
-    <mat-card *ngIf="userBadges?.length == 0" matRipple style="background-color: #b2ff59" class="not-selectable">
-      <b>{{ 'INFORMATION' | translate }}</b> {{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_BADGES_EMPTY' | translate }}
-    </mat-card>
-  </div>
-</mat-expansion-panel>
+    </mat-list-item>
+  </mat-list>
+  <mat-card *ngIf="userBadges?.length == 0" matRipple style="background-color: #b2ff59" class="not-selectable">
+    <b>{{ 'INFORMATION' | translate }}</b> {{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_BADGES_EMPTY' | translate }}
+  </mat-card>
+</div>

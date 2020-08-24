@@ -1,5 +1,8 @@
-import {Component, EventEmitter, Input, Output, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, Output, ViewChild} from '@angular/core';
 import {NgForm} from '@angular/forms';
+import {Subscription} from 'rxjs';
+
+import {IsMobileService} from '../../../../utils/is-mobile.service';
 
 import {MapsComponentComponent} from '../../../../utils/shared-components/maps-component/maps.component';
 
@@ -11,7 +14,7 @@ import {EventStandardLocation} from '../../models/event-standard-location.model'
   templateUrl: './event-dates-management.component.html',
   styleUrls: ['./event-dates-management.component.css']
 })
-export class EventDatesManagementComponent {
+export class EventDatesManagementComponent implements OnDestroy {
   @Input()
   public dates: EventDate[];
 
@@ -28,7 +31,19 @@ export class EventDatesManagementComponent {
 
   selectedStandardLocation: EventStandardLocation;
 
-  constructor() {}
+  isMobile = true;
+  isMobileSubscription: Subscription;
+
+  constructor(private isMobileService: IsMobileService) {
+    this.isMobile = this.isMobileService.getIsMobile();
+    this.isMobileSubscription = this.isMobileService.isMobileChange.subscribe(value => {
+      this.isMobile = value;
+    });
+  }
+
+  ngOnDestroy() {
+    this.isMobileSubscription.unsubscribe();
+  }
 
   onStandardLocationChanged(standardLocation: EventStandardLocation) {
     console.log('Selected standard location: ' + standardLocation.name);
@@ -74,7 +89,7 @@ export class EventDatesManagementComponent {
     console.log(date);
 
     form.reset();
-    this.mapsComponent.removeMarker();
+    this.mapsComponent.removeMarker(true);
     // Recreate date to not override first date while creating a new date object
     this.createNewEventDateDate = new Date();
   }

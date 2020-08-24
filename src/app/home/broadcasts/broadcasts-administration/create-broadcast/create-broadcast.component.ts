@@ -116,6 +116,15 @@ export class CreateBroadcastComponent implements OnDestroy {
       return;
     }
 
+    if (this.body.length < 10) {
+      console.log('Mail body length < 10');
+      this.notificationService.alert(
+        this.translate.getTranslationFor('WARNING'),
+        this.translate.getTranslationFor('BROADCASTS_ADMINISTRATION_CREATE_NOTIFICATION_BODY_LENGTH')
+      );
+      return;
+    }
+
     const draft = new BroadcastDraft(-1, this.subject, this.body, null);
     draft.bodyHTML = this.bodyHTML;
     this.draftsService.setDraft(draft);

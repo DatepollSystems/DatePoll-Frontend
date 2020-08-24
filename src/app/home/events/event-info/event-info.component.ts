@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {MatSlideToggleChange} from '@angular/material/slide-toggle';
+import {Router} from '@angular/router';
 import {Subscription} from 'rxjs';
 
 import {Permissions} from '../../../permissions';
@@ -50,13 +51,19 @@ export class EventInfoComponent implements OnInit, OnDestroy {
     private eventsService: EventsService,
     myUserService: MyUserService,
     private excelService: ExcelService,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private router: Router
   ) {
     this.myUserService = myUserService;
   }
 
   ngOnInit(): void {
     if (this.eventId != null) {
+      if (isNaN(this.eventId)) {
+        console.log('Event id not integer');
+        this.router.navigate(['/home']);
+        return;
+      }
       this.event = this.eventsService.getEvent(this.eventId);
       this.eventSubscription = this.eventsService.eventChange.subscribe(value => {
         this.event = value;
@@ -69,7 +76,7 @@ export class EventInfoComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.eventSubscription.unsubscribe();
+    this.eventSubscription?.unsubscribe();
   }
 
   refreshValues() {
@@ -81,7 +88,11 @@ export class EventInfoComponent implements OnInit, OnDestroy {
     this.resultGroups = this.event.getResultGroups();
     this.sortedResultGroups = this.resultGroups.slice();
     if (this.description?.length > 0) {
-      this.descriptionMinRows = this.description?.split('\n').length;
+      this.descriptionMinRows = this.description?.split('\n').length + 1;
+      // Check length because one would be to small
+      if (this.descriptionMinRows === 1) {
+        this.descriptionMinRows++;
+      }
     }
   }
 

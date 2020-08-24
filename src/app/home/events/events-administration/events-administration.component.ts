@@ -1,4 +1,5 @@
 import {Component, OnDestroy, TemplateRef, ViewChild} from '@angular/core';
+import {Router} from '@angular/router';
 import {MatBottomSheet, MatDialog, MatPaginator, MatSlideToggleChange, MatSort, MatTableDataSource} from '@angular/material';
 import {Subscription} from 'rxjs';
 
@@ -11,7 +12,6 @@ import {Event} from '../models/event.model';
 
 import {QuestionDialogComponent} from '../../../utils/shared-components/question-dialog/question-dialog.component';
 import {EventInfoModalComponent} from '../event-info/event-info-modal/event-info-modal.component';
-import {EventCreateModalComponent} from './event-create-modal/event-create-modal.component';
 import {EventStandardDecisionsManagementModalComponent} from './event-standard-decisions-management-modal/event-standard-decisions-management-modal.component';
 import {EventStandardLocationsManagementModalComponent} from './event-standard-locations-management-modal/event-standard-locations-management-modal.component';
 import {EventUpdateModalComponent} from './event-update-modal/event-update-modal.component';
@@ -43,6 +43,7 @@ export class EventsAdministrationComponent implements OnDestroy {
     private eventsService: EventsService,
     private translate: TranslateService,
     private dialog: MatDialog,
+    private router: Router,
     private notificationsService: NotificationsService,
     private bottomSheet: MatBottomSheet
   ) {
@@ -85,13 +86,13 @@ export class EventsAdministrationComponent implements OnDestroy {
 
   onShowStandardDecisionManagementModal() {
     this.dialog.open(EventStandardDecisionsManagementModalComponent, {
-      width: '80vh'
+      width: '80%'
     });
   }
 
   onShowStandardLocationManagementModal() {
     this.dialog.open(EventStandardLocationsManagementModalComponent, {
-      width: '80vh'
+      width: '80%'
     });
   }
 
@@ -117,14 +118,12 @@ export class EventsAdministrationComponent implements OnDestroy {
   }
 
   onCreate() {
-    this.dialog.open(EventCreateModalComponent, {
-      width: '80vh'
-    });
+    this.router.navigateByUrl('/home/events/administration/create');
   }
 
   onInfo(event: Event) {
     this.dialog.open(EventInfoModalComponent, {
-      width: '80vh',
+      width: '80%',
       data: {
         event
       }
@@ -133,7 +132,7 @@ export class EventsAdministrationComponent implements OnDestroy {
 
   onUserManagement(event: Event) {
     this.dialog.open(EventUserManagementModalComponent, {
-      width: '80vh',
+      width: '80%',
       data: {
         event
       }
@@ -142,7 +141,7 @@ export class EventsAdministrationComponent implements OnDestroy {
 
   onEdit(event: Event) {
     this.dialog.open(EventUpdateModalComponent, {
-      width: '80vh',
+      width: '95%',
       data: {
         event
       }

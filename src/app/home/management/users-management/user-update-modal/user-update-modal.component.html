@@ -236,20 +236,23 @@
 
     <!-- Bv Member -->
     <mat-form-field fxFlex="22%" fxFlex.lt-md="30%">
-      <input
-        #bvMemberModel="ngModel"
-        [(ngModel)]="bvMember"
-        id="bvMember"
-        matInput
-        maxlength="190"
-        name="bvMember"
-        ngModel
-        placeholder="{{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_BV_MEMBER' | translate }}"
-        type="text"
-      />
-      <mat-error *ngIf="bvMemberModel.invalid">
-        {{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_BV_MEMBER_INCORRECT' | translate }}
-      </mat-error>
+      <mat-label>{{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_BV_MEMBER' | translate }}</mat-label>
+      <mat-select id="bvMember" [(value)]="bvMember">
+        <mat-option value="">None</mat-option>
+        <mat-option value="{{ 'ACTIVE' | translate }}">{{ 'ACTIVE' | translate }}</mat-option>
+        <mat-option value="{{ 'INACTIVE' | translate }}">{{ 'INACTIVE' | translate }}</mat-option>
+        <!-- Backwards compatibility reasons -->
+        <mat-option
+          *ngIf="
+            bvMember
+              .trim()
+              .toLowerCase()
+              .includes('gemeldet')
+          "
+          value="gemeldet"
+          >gemeldet
+        </mat-option>
+      </mat-select>
     </mat-form-field>
 
     <app-divider></app-divider>
@@ -264,109 +267,142 @@
     >
     </app-group-and-subgroup-type-input-select>
 
-    <div fxLayout="column" fxLayoutGap="0.5%" fxFlex="100%">
-      <mat-expansion-panel>
-        <mat-expansion-panel-header>
-          <mat-panel-title>
-            {{ 'MANAGEMENT_USERS_UPDATE_USER_MODAL_PASSWORD_CHANGE' | translate }}
-          </mat-panel-title>
-        </mat-expansion-panel-header>
-        <small
-          ><b>{{ 'MANAGEMENT_USERS_UPDATE_USER_MODAL_PASSWORD_CHANGE_DESCRIPTION' | translate }}</b></small
-        >
-        <form #changePasswordForm="ngForm" (ngSubmit)="changePassword(changePasswordForm)">
-          <div fxLayout="row wrap" fxLayout.xs="column" fxLayoutAlign="space-around" style="margin-top: 15px;">
-            <mat-form-field fxFlex="28%" fxFlex.lt-md="50%">
-              <input
-                #passwordModel="ngModel"
-                matInput
-                minlength="6"
-                name="password"
-                ngModel
-                placeholder="{{ 'SIGNIN_NEW_PASSWORD' | translate }}"
-                required
-                type="password"
-              />
-              <mat-error *ngIf="passwordModel.invalid">
-                {{ 'SIGNIN_PASSWORD_REQUIREMENTS' | translate }}
-              </mat-error>
-            </mat-form-field>
+    <div fxLayout="row break" fxLayout.lt-xl="column" fxLayoutGap="2%" fxLayoutAlign="start" fxFlex="100%">
+      <div fxFlex="48%">
+        <!-- Password change -->
+        <mat-expansion-panel [expanded]="!isMobile">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              {{ 'MANAGEMENT_USERS_UPDATE_USER_MODAL_PASSWORD_CHANGE' | translate }}
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <small
+            ><b>{{ 'MANAGEMENT_USERS_UPDATE_USER_MODAL_PASSWORD_CHANGE_DESCRIPTION' | translate }}</b></small
+          >
+          <form #changePasswordForm="ngForm" (ngSubmit)="changePassword(changePasswordForm)">
+            <div fxLayout="row wrap" fxLayout.lt-md="column" fxLayoutGap="3%" style="margin-top: 15px;">
+              <mat-form-field fxFlex="30%">
+                <input
+                  #passwordModel="ngModel"
+                  matInput
+                  minlength="6"
+                  name="password"
+                  ngModel
+                  placeholder="{{ 'SIGNIN_NEW_PASSWORD' | translate }}"
+                  required
+                  type="password"
+                />
+                <mat-error *ngIf="passwordModel.invalid">
+                  {{ 'SIGNIN_PASSWORD_REQUIREMENTS' | translate }}
+                </mat-error>
+              </mat-form-field>
 
-            <mat-form-field fxFlex="28%" fxFlex.lt-md="50%">
-              <input
-                #passwordRepeatModel="ngModel"
-                matInput
-                minlength="6"
-                name="password_repeat"
-                ngModel
-                placeholder="{{ 'SIGNIN_NEW_PASSWORD_REPEAT' | translate }}"
-                required
-                type="password"
-              />
-            </mat-form-field>
+              <mat-form-field fxFlex="30%">
+                <input
+                  #passwordRepeatModel="ngModel"
+                  matInput
+                  minlength="6"
+                  name="password_repeat"
+                  ngModel
+                  placeholder="{{ 'SIGNIN_NEW_PASSWORD_REPEAT' | translate }}"
+                  required
+                  type="password"
+                />
+              </mat-form-field>
 
-            <div fxFlex="28%" fxFlex.lt-md="98%">
-              <button [disabled]="!changePasswordForm.form.valid" color="primary" mat-flat-button style="width: 100%">
-                {{ 'MANAGEMENT_USERS_UPDATE_USER_MODAL_PASSWORD_CHANGE' | translate }}
-              </button>
+              <div fxFlex="25%">
+                <button [disabled]="!changePasswordForm.form.valid" color="primary" mat-flat-button style="width: 100%">
+                  {{ 'MANAGEMENT_USERS_UPDATE_USER_MODAL_PASSWORD_CHANGE' | translate }}
+                </button>
+              </div>
             </div>
-          </div>
-        </form>
-      </mat-expansion-panel>
+          </form>
+        </mat-expansion-panel>
 
-      <!-- Email addresses -->
-      <mat-expansion-panel>
-        <mat-expansion-panel-header>
-          <mat-panel-title>
-            {{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_LIST_EMAIL_ADDRESSES' | translate }}
-          </mat-panel-title>
-        </mat-expansion-panel-header>
-        <app-email-addresses-list
-          (emailAddressesChanged)="onEmailAddressChanged($event)"
-          [emailAddresses]="emailAddresses"
-        ></app-email-addresses-list>
-      </mat-expansion-panel>
+        <!-- Email addresses -->
+        <mat-expansion-panel [expanded]="!isMobile" style="margin-top: 7px;">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              {{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_LIST_EMAIL_ADDRESSES' | translate }}
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <app-email-addresses-list
+            (emailAddressesChanged)="onEmailAddressChanged($event)"
+            [emailAddresses]="emailAddresses"
+          ></app-email-addresses-list>
+        </mat-expansion-panel>
 
-      <!-- Phone number -->
-      <app-phone-numbers-list (phoneNumbersChanged)="onPhoneNumbersChanged($event)" [phoneNumbers]="phoneNumbers"></app-phone-numbers-list>
+        <!-- Internal comment -->
+        <mat-expansion-panel [expanded]="!isMobile" style="margin-top: 7px;">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              {{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_INTERAL_COMMENT' | translate }}
+            </mat-panel-title>
+          </mat-expansion-panel-header>
 
-      <!-- Performance badges -->
-      <app-performance-badges-list
-        (performanceBadgesChanged)="onUserPerformanceBadgesChange($event)"
-        [userPerformanceBadges]="userPerformanceBadges"
-      >
-      </app-performance-badges-list>
+          <mat-form-field appearance="outline" style="width: 100%">
+            <textarea [(ngModel)]="internalComment" matInput name="internalComment" ngModel style="min-height: 15vh;"></textarea>
+          </mat-form-field>
+        </mat-expansion-panel>
+      </div>
 
-      <!-- Badges -->
-      <app-badges-list [joinDate]="join_date" [userBadges]="userBadges" (userBadgesChange)="onUserBadgesChange($event)"></app-badges-list>
+      <div fxFlex="48%">
+        <!-- Phone number -->
+        <mat-expansion-panel [expanded]="!isMobile">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              {{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_PHONE_NUMBERS' | translate }}
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <app-phone-numbers-list
+            (phoneNumbersChanged)="onPhoneNumbersChanged($event)"
+            [phoneNumbers]="phoneNumbers"
+          ></app-phone-numbers-list>
+        </mat-expansion-panel>
 
-      <!-- Internal comment -->
-      <mat-expansion-panel>
-        <mat-expansion-panel-header>
-          <mat-panel-title>
-            {{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_INTERAL_COMMENT' | translate }}
-          </mat-panel-title>
-        </mat-expansion-panel-header>
+        <!-- Performance badges -->
+        <mat-expansion-panel [expanded]="!isMobile" style="margin-top: 7px;">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              {{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_PERFORMANCE_BADGES_TITLE' | translate }}
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <app-performance-badges-list
+            (performanceBadgesChanged)="onUserPerformanceBadgesChange($event)"
+            [userPerformanceBadges]="userPerformanceBadges"
+          >
+          </app-performance-badges-list>
+        </mat-expansion-panel>
 
-        <mat-form-field appearance="outline" style="width: 100%">
-          <textarea [(ngModel)]="internalComment" matInput name="internalComment" ngModel style="min-height: 15vh;"></textarea>
-        </mat-form-field>
-      </mat-expansion-panel>
+        <!-- Badges -->
+        <mat-expansion-panel [expanded]="!isMobile" style="margin-top: 7px;">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              {{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_BADGES_TITLE' | translate }}
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <app-badges-list
+            [joinDate]="join_date"
+            [userBadges]="userBadges"
+            (userBadgesChange)="onUserBadgesChange($event)"
+          ></app-badges-list>
+        </mat-expansion-panel>
 
-      <!-- Permissions -->
-      <mat-expansion-panel *ngIf="hasPermissionToChangePermission">
-        <mat-expansion-panel-header>
-          <mat-panel-title>
-            {{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_PERMISSIONS' | translate }}
-          </mat-panel-title>
-        </mat-expansion-panel-header>
-        <app-permissions-list (permissionsChanged)="onPermissionsChange($event)" [permissions]="permissions"></app-permissions-list>
-      </mat-expansion-panel>
+        <!-- Permissions -->
+        <mat-expansion-panel *ngIf="hasPermissionToChangePermission" [expanded]="!isMobile" style="margin-top: 7px;">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              {{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_PERMISSIONS' | translate }}
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <app-permissions-list (permissionsChanged)="onPermissionsChange($event)" [permissions]="permissions"></app-permissions-list>
+        </mat-expansion-panel>
+      </div>
     </div>
 
     <app-divider></app-divider>
 
-    <div fxFlex="100%" fxLayout="row" fxLayoutAlign="space-around">
+    <div fxFlex="100%" fxLayout="row" fxLayoutAlign="space-around" fxLayout.lt-sm="column">
       <!-- Activity -->
       <mat-checkbox
         [(ngModel)]="activated"

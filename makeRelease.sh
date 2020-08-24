@@ -33,8 +33,16 @@ cd ..
 
 FILE=./deploy.sh
 if [[ -f "$FILE" ]]; then
-	echo "Deploy.sh exists... Executing it!"
-	./deploy.sh
+  echo "Deploy.sh exists... "
+
+  read -p "Are you sure you want to upload the release to the server? [y/N] " prompt
+  if [[ $prompt == "y" || $prompt == "Y" || $prompt == "yes" || $prompt == "Yes" ]]
+  then
+    echo "Executing it!"
+    ./deploy.sh
+   else
+     echo "not uploading!"
+   fi
 fi
 
 echo "> Finished"
