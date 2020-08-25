@@ -13,12 +13,12 @@
             <mat-icon>refresh</mat-icon>
             <span>{{ 'EVENTS_ADMINISTRATION_MENU_REFRESH' | translate }}</span>
           </button>
-          <div mat-menu-item *ngIf="settingsService.getServerInfo()?.cinema_enabled">
+          <div mat-menu-item *ngIf="serverInfo?.cinema_enabled">
             <mat-slide-toggle (change)="onShowMoviesChange($event)" [(ngModel)]="showMovies" color="primary">
               {{ 'CALENDAR_SETTINGS_SHOW_MOVIES' | translate }}
             </mat-slide-toggle>
           </div>
-          <div mat-menu-item *ngIf="settingsService.getServerInfo()?.events_enabled">
+          <div mat-menu-item *ngIf="serverInfo?.events_enabled">
             <mat-slide-toggle (change)="onShowEventsChange($event)" [(ngModel)]="showEvents" color="primary">
               {{ 'CALENDAR_SETTINGS_SHOW_EVENTS' | translate }}
             </mat-slide-toggle>

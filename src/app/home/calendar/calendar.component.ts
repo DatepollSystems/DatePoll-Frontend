@@ -5,8 +5,10 @@ import {MatSlideToggleChange} from '@angular/material/slide-toggle';
 import {Subject, Subscription} from 'rxjs';
 
 import {CalendarEvent, CalendarEventTimesChangedEvent, CalendarView} from 'angular-calendar';
+import {NotificationsService} from 'angular2-notifications';
 import {isSameDay, isSameMonth} from 'date-fns';
 
+import {QuestionDialogComponent} from '../../utils/shared-components/question-dialog/question-dialog.component';
 import {MovieDeleteModalComponent} from '../cinema/movie-administration/movie-delete-modal/movie-delete-modal.component';
 import {MovieEditModalComponent} from '../cinema/movie-administration/movie-edit-modal/movie-edit-modal.component';
 import {MovieInfoModalComponent} from '../cinema/movie-administration/movie-info-modal/movie-info-modal.component';
@@ -14,6 +16,7 @@ import {EventInfoModalComponent} from '../events/event-info/event-info-modal/eve
 import {EventUpdateModalComponent} from '../events/events-administration/event-update-modal/event-update-modal.component';
 
 import {Permissions} from '../../permissions';
+import {TranslateService} from '../../translation/translate.service';
 import {SettingsService} from '../../utils/settings.service';
 import {CinemaService} from '../cinema/cinema.service';
 import {EventsUserService} from '../events/events-user.service';
@@ -63,21 +66,27 @@ export class CalendarComponent implements OnInit, OnDestroy {
   private birthdays: HomeBirthdayModel[];
   private birthdaysSubscription: Subscription;
 
-  public settingsService: SettingsService;
+  public serverInfo = null;
+  private serverInfoSubscription: Subscription;
 
   constructor(
-    settingsService: SettingsService,
+    private settingsService: SettingsService,
     private cinemaService: CinemaService,
     private eventsUserService: EventsUserService,
     private eventsService: EventsService,
     private myUserService: MyUserService,
     private cdr: ChangeDetectorRef,
     private dialog: MatDialog,
+    private notificationsService: NotificationsService,
+    private translate: TranslateService,
     private userSettingsService: UserSettingsService,
     private homepageService: HomepageService,
     private bottomSheet: MatBottomSheet
   ) {
-    this.settingsService = settingsService;
+    this.serverInfo = this.settingsService.getServerInfo();
+    this.serverInfoSubscription = this.settingsService.serverInfoChange.subscribe(value => {
+      this.serverInfo = value;
+    });
 
     this.showMovies = this.userSettingsService.getShowMoviesInCalendar();
     this.showMoviesSubscription = this.userSettingsService.showMoviesInCalendarChange.subscribe(value => {
@@ -99,40 +108,40 @@ export class CalendarComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    const serverinfo = this.settingsService.getServerInfo();
+    setTimeout(() => {
+      if (this.serverInfo?.cinema_enabled) {
+        this.movies = this.cinemaService.getNotShownMovies();
 
-    if (serverinfo?.cinema_enabled) {
-      this.movies = this.cinemaService.getNotShownMovies();
-
-      this.moviesSubscription = this.cinemaService.notShownMoviesChange.subscribe(value => {
-        this.movies = value;
-        this.refreshCalendar();
-      });
-    }
-
-    if (serverinfo?.events_enabled) {
-      if (this.myUserService.hasPermission(Permissions.EVENTS_ADMINISTRATION)) {
-        this.avents = this.eventsService.getEvents();
-
-        this.aventSubscription = this.eventsService.eventsChange.subscribe(value => {
-          this.avents = value;
-          this.refreshCalendar();
-        });
-      } else {
-        this.avents = this.eventsUserService.getEvents();
-
-        this.aventSubscription = this.eventsUserService.eventsChange.subscribe(value => {
-          this.avents = value;
+        this.moviesSubscription = this.cinemaService.notShownMoviesChange.subscribe(value => {
+          this.movies = value;
           this.refreshCalendar();
         });
       }
-    }
 
-    this.birthdays = this.homepageService.getBirthdays();
-    this.birthdaysSubscription = this.homepageService.birthdaysChange.subscribe(value => {
-      this.birthdays = value;
-      this.refreshCalendar();
-    });
+      if (this.serverInfo?.events_enabled) {
+        if (this.myUserService.hasPermission(Permissions.EVENTS_ADMINISTRATION)) {
+          this.avents = this.eventsService.getEvents();
+
+          this.aventSubscription = this.eventsService.eventsChange.subscribe(value => {
+            this.avents = value;
+            this.refreshCalendar();
+          });
+        } else {
+          this.avents = this.eventsUserService.getEvents();
+
+          this.aventSubscription = this.eventsUserService.eventsChange.subscribe(value => {
+            this.avents = value;
+            this.refreshCalendar();
+          });
+        }
+      }
+
+      this.birthdays = this.homepageService.getBirthdays();
+      this.birthdaysSubscription = this.homepageService.birthdaysChange.subscribe(value => {
+        this.birthdays = value;
+        this.refreshCalendar();
+      });
+    }, 1000);
   }
 
   refreshEntries() {
@@ -146,6 +155,7 @@ export class CalendarComponent implements OnInit, OnDestroy {
     if (this.aventSubscription != null) {
       this.aventSubscription.unsubscribe();
     }
+    this.serverInfoSubscription.unsubscribe();
     this.birthdaysSubscription.unsubscribe();
     this.showMoviesSubscription.unsubscribe();
     this.showEventsSubscription.unsubscribe();
@@ -156,61 +166,92 @@ export class CalendarComponent implements OnInit, OnDestroy {
     this.activeDayIsOpen = false;
     this.events = [];
 
-    if (this.showMovies) {
-      if (this.movies != null) {
-        for (let i = 0; i < this.movies.length; i++) {
-          if (this.myUserService.hasPermission(Permissions.CINEMA_MOVIE_ADMINISTRATION)) {
-            this.movies[i].actions = [
-              {
-                label: '[&#9997;] ',
-                onClick: ({event}: {event: CalendarEvent}): void => {
-                  this.dialog.open(MovieEditModalComponent, {
-                    width: '80vh',
-                    data: {movie: this.movies[i]}
-                  });
-                }
-              },
-              {
-                label: '[&#10060;]',
-                onClick: ({event}: {event: CalendarEvent}): void => {
-                  this.bottomSheet.open(MovieDeleteModalComponent, {
-                    data: {movieID: this.movies[i].id}
-                  });
-                }
+    if (this.showMovies && this.movies) {
+      for (const movie of this.movies) {
+        if (this.myUserService.hasPermission(Permissions.CINEMA_MOVIE_ADMINISTRATION)) {
+          movie.actions = [
+            {
+              label: '[&#9997;] ',
+              onClick: (): void => {
+                this.dialog.open(MovieEditModalComponent, {
+                  width: '80%',
+                  data: {movie: movie.id}
+                });
               }
-            ];
-          }
-          this.events.push(this.movies[i]);
+            },
+            {
+              label: '[&#10060;]',
+              onClick: (): void => {
+                this.bottomSheet.open(MovieDeleteModalComponent, {
+                  data: {movieID: movie.id}
+                });
+              }
+            }
+          ];
         }
+        this.events.push(movie);
       }
     }
 
-    if (this.showEvents) {
-      if (this.avents != null) {
-        for (let i = 0; i < this.avents.length; i++) {
-          if (this.myUserService.hasPermission(Permissions.EVENTS_ADMINISTRATION)) {
-            this.avents[i].actions = [
-              {
-                label: '[&#9997;] ',
-                onClick: ({event}: {event: CalendarEvent}): void => {
-                  this.dialog.open(EventUpdateModalComponent, {
-                    width: '80vh',
-                    data: {
-                      event: this.avents[i]
-                    }
-                  });
-                }
-              },
-              {
-                label: '[&#10060;]',
-                onClick: ({event}: {event: CalendarEvent}): void => {
-                  // TODO: Calendar event delete click
-                }
+    if (this.showEvents && this.avents) {
+      for (const avent of this.avents) {
+        if (this.myUserService.hasPermission(Permissions.EVENTS_ADMINISTRATION)) {
+          avent.actions = [
+            {
+              label: '[&#9997;] ',
+              onClick: (): void => {
+                this.dialog.open(EventUpdateModalComponent, {
+                  width: '80%',
+                  data: {
+                    event: avent
+                  }
+                });
               }
-            ];
-          }
-          this.events.push(this.avents[i]);
+            },
+            {
+              label: '[&#10060;]',
+              onClick: (): void => {
+                const answers = [
+                  {
+                    answer: this.translate.getTranslationFor('YES'),
+                    value: 'yes'
+                  },
+                  {
+                    answer: this.translate.getTranslationFor('NO'),
+                    value: 'no'
+                  }
+                ];
+                const question = this.translate.getTranslationFor('EVENTS_ADMINISTRATION_DELETE_EVENT_QUESTION');
+
+                const bottomSheetRef = this.bottomSheet.open(QuestionDialogComponent, {
+                  data: {
+                    answers,
+                    question
+                  }
+                });
+
+                bottomSheetRef.afterDismissed().subscribe((value: string) => {
+                  if (value != null) {
+                    if (value.includes('yes')) {
+                      this.eventsService.deleteEvent(avent.id).subscribe(
+                        (response: any) => {
+                          console.log(response);
+                          this.eventsService.fetchEvents();
+                          this.notificationsService.success(
+                            this.translate.getTranslationFor('SUCCESSFULLY'),
+                            this.translate.getTranslationFor('EVENTS_ADMINISTRATION_DELETE_EVENT_SUCCESSFULLY_DELETED')
+                          );
+                        },
+                        error => console.log(error)
+                      );
+                    }
+                  }
+                });
+              }
+            }
+          ];
         }
+        this.events.push(avent);
       }
     }
 
@@ -231,11 +272,7 @@ export class CalendarComponent implements OnInit, OnDestroy {
 
   dayClicked({date, events}: {date: Date; events: CalendarEvent[]}): void {
     if (isSameMonth(date, this.viewDate)) {
-      if ((isSameDay(this.viewDate, date) && this.activeDayIsOpen === true) || events.length === 0) {
-        this.activeDayIsOpen = false;
-      } else {
-        this.activeDayIsOpen = true;
-      }
+      this.activeDayIsOpen = !((isSameDay(this.viewDate, date) && this.activeDayIsOpen === true) || events.length === 0);
       this.viewDate = date;
     }
   }
@@ -265,7 +302,7 @@ export class CalendarComponent implements OnInit, OnDestroy {
     if (object instanceof Movie) {
       if (this.myUserService.hasPermission(Permissions.CINEMA_MOVIE_ADMINISTRATION)) {
         this.dialog.open(MovieInfoModalComponent, {
-          width: '80vh',
+          width: '80%',
           data: {movie: object}
         });
       }
