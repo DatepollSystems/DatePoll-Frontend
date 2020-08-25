@@ -3,6 +3,20 @@
 
   <h3 matLine>{{ 'BROADCASTS_ADMINISTRATION_ADMIN_INFO_SENT_ON' | translate }} {{ broadcast.sent | date: 'EE, dd.MM.yyyy HH:mm' }}</h3>
   <h3 matLine>{{ 'BROADCASTS_ADMINISTRATION_ADMIN_INFO_AUTHOR' | translate }} {{ broadcast.writerName }}</h3>
+  <h3 matLine *ngIf="broadcast.forEveryone">
+    {{ 'BROADCASTS_ADMINISTRATION_ADMIN_INFO_RECIPENT' | translate }}
+    {{ 'BROADCASTS_ADMINISTRATION_ADMIN_INFO_RECIPENT_ALL' | translate }}
+  </h3>
+  <h3 matLine *ngIf="!broadcast.forEveryone">
+    {{ 'BROADCASTS_ADMINISTRATION_ADMIN_INFO_RECIPENT' | translate }}
+    <span *ngFor="let group of broadcast.groups"
+      ><b>{{ group.name }}</b
+      >,
+    </span>
+    <span *ngFor="let subgroup of broadcast.subgroups"
+      ><b>{{ subgroup.group_name }}</b> {{ subgroup.name }},
+    </span>
+  </h3>
 
   <div class="border" [innerHTML]="getSanitizedContent(broadcast.bodyHTML)" *ngIf="loaded"></div>
 </ng-container>
