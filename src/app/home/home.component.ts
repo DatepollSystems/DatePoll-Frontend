@@ -71,7 +71,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     });
 
     // Detect Android, iOS, Windows and MacOS dark mode
-    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches && localStorage.getItem('theme') == null) {
       localStorage.setItem('theme', 'dark');
       this.setTheme();
     }

@@ -257,7 +257,7 @@
           </div>
         </mat-card-title>
 
-        <div class="table-responsive">
+        <div class="table-responsive" *ngIf="showBirthdays">
           <table>
             <thead>
               <tr>
@@ -265,7 +265,7 @@
                 <th>{{ 'STARTPAGE_BIRTHDAY_DATE' | translate }}</th>
               </tr>
             </thead>
-            <tbody *ngIf="showBirthdays">
+            <tbody>
               <tr *ngFor="let birthday of birthdays">
                 <td>{{ birthday.name }}</td>
                 <td>{{ birthday.date | date: 'dd.MM.yyyy' }} ({{ birthday.age }})</td>
