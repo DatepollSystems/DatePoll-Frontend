@@ -27,7 +27,7 @@ import {EventsVoteForDecisionModalComponent} from '../events/events-view/events-
 export class StartComponent implements OnDestroy {
   birthdays: HomeBirthdayModel[];
   birthdaysSubscription: Subscription;
-  howMuchBirthdaysToShow = 7;
+  showBirthdays = false;
 
   bookings: HomeBookingsModel[];
   bookingsSubscription: Subscription;
@@ -84,14 +84,6 @@ export class StartComponent implements OnDestroy {
     this.birthdaysSubscription.unsubscribe();
     this.eventsSubscription.unsubscribe();
     this.broadcastSubscription.unsubscribe();
-  }
-
-  onBirthdaysExpand() {
-    if (this.howMuchBirthdaysToShow === 7) {
-      this.howMuchBirthdaysToShow = this.birthdays.length;
-    } else {
-      this.howMuchBirthdaysToShow = 7;
-    }
   }
 
   onBroadcastItemClick(broadcast: Broadcast) {
