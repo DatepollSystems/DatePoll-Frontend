@@ -31,8 +31,8 @@
   "BETA": "Beta",
   "EXPORT": "Exportieren",
   "PRINT": "Drucken",
-  "ACTIVE": "Aktiv",
-  "INACTIVE": "Inaktiv",
+  "ACTIVE": "aktiv",
+  "INACTIVE": "inaktiv",
 
   "LANGUAGE": "Sprache",
   "LANGUAGE_GERMAN": "Deutsch",
