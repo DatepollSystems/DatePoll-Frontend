@@ -17,6 +17,7 @@
       <div
         fxLayout="row"
         fxLayout.xs="column"
+        fxLayoutGap.lt-sm="5%"
         fxLayoutAlign="space-between"
         *ngIf="this.myUserService.hasPermission(ROOT_PERMISSION) || this.myUserService.hasPermission(EVENTS_ADMINISTRATION_PERMISSION)"
       >
