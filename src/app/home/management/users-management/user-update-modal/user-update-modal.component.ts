@@ -141,7 +141,7 @@ export class UserUpdateModalComponent implements OnDestroy {
       }
     });
 
-    this.hasPermissionToChangePermission = this.myUserService.hasPermission(Permissions.PERMISSION_ADMINISTRATION);
+    this.hasPermissionToChangePermission = this.myUserService.hasPermission(Permissions.MANAGEMENT_EXTRA_USER_PERMISSIONS);
 
     const users = this.usersService.getUsersWithoutFetch();
     for (const user of users) {

@@ -268,8 +268,8 @@
     </app-group-and-subgroup-type-input-select>
 
     <div fxLayout="row break" fxLayout.lt-xl="column" fxLayoutGap="2%" fxLayoutAlign="start" fxFlex="100%">
+      <!-- Password change -->
       <div fxFlex="48%">
-        <!-- Password change -->
         <mat-expansion-panel [expanded]="!isMobile">
           <mat-expansion-panel-header>
             <mat-panel-title>
@@ -318,8 +318,10 @@
             </div>
           </form>
         </mat-expansion-panel>
+      </div>
 
-        <!-- Email addresses -->
+      <!-- Email addresses -->
+      <div fxFlex="48%">
         <mat-expansion-panel [expanded]="!isMobile" style="margin-top: 7px;">
           <mat-expansion-panel-header>
             <mat-panel-title>
@@ -331,8 +333,10 @@
             [emailAddresses]="emailAddresses"
           ></app-email-addresses-list>
         </mat-expansion-panel>
+      </div>
 
-        <!-- Internal comment -->
+      <!-- Internal comment -->
+      <div fxFlex="48%">
         <mat-expansion-panel [expanded]="!isMobile" style="margin-top: 7px;">
           <mat-expansion-panel-header>
             <mat-panel-title>
@@ -346,8 +350,8 @@
         </mat-expansion-panel>
       </div>
 
+      <!-- Phone number -->
       <div fxFlex="48%">
-        <!-- Phone number -->
         <mat-expansion-panel [expanded]="!isMobile">
           <mat-expansion-panel-header>
             <mat-panel-title>
@@ -359,8 +363,10 @@
             [phoneNumbers]="phoneNumbers"
           ></app-phone-numbers-list>
         </mat-expansion-panel>
+      </div>
 
-        <!-- Performance badges -->
+      <!-- Performance badges -->
+      <div fxFlex="48%">
         <mat-expansion-panel [expanded]="!isMobile" style="margin-top: 7px;">
           <mat-expansion-panel-header>
             <mat-panel-title>
@@ -373,8 +379,10 @@
           >
           </app-performance-badges-list>
         </mat-expansion-panel>
+      </div>
 
-        <!-- Badges -->
+      <!-- Badges -->
+      <div fxFlex="48%">
         <mat-expansion-panel [expanded]="!isMobile" style="margin-top: 7px;">
           <mat-expansion-panel-header>
             <mat-panel-title>
@@ -387,8 +395,10 @@
             (userBadgesChange)="onUserBadgesChange($event)"
           ></app-badges-list>
         </mat-expansion-panel>
+      </div>
 
-        <!-- Permissions -->
+      <!-- Permissions -->
+      <div fxFlex="48%">
         <mat-expansion-panel *ngIf="hasPermissionToChangePermission" [expanded]="!isMobile" style="margin-top: 7px;">
           <mat-expansion-panel-header>
             <mat-panel-title>

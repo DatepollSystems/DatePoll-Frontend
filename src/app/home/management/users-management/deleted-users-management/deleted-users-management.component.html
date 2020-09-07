@@ -1,0 +1,40 @@
+<mat-card>
+  <mat-card-title>{{ 'MANAGEMENT_USERS_DELETED_USERS' | translate }}</mat-card-title>
+  <mat-card-content>
+    <div fxLayout="row" fxLayoutAlign="space-between" fxLayoutGap="2%" fxLayout.lt-sm="column">
+      <mat-form-field>
+        <input (keyup)="applyFilter($event.target.value)" matInput placeholder="{{ 'SEARCH' | translate }}" />
+      </mat-form-field>
+
+      <div>
+        <button mat-stroked-button color="warn" style="width: 100%" (click)="deleteAll()">
+          {{ 'MANAGEMENT_USERS_DELETED_USERS_DELETE_ALL' | translate }}
+        </button>
+      </div>
+    </div>
+
+    <mat-accordion>
+      <mat-expansion-panel *ngFor="let user of sortedUsers">
+        <mat-expansion-panel-header>
+          <mat-panel-title> {{ user.firstname }} {{ user.surname }} </mat-panel-title>
+        </mat-expansion-panel-header>
+        <p>{{ 'MANAGEMENT_USERS_DELETED_USERS_JOINED_AT' | translate }} {{ user.join_date | date: 'dd.MM.yyyy' }}</p>
+        <p>{{ 'MANAGEMENT_USERS_DELETED_USERS_LEFT_AT' | translate }} {{ user.deletedAt | date: 'dd.MM.yyyy' }}</p>
+        <p>{{ 'MANAGEMENT_USERS_DELETED_USERS_COMMENT' | translate }}</p>
+        <mat-form-field appearance="outline" style="width: 100%">
+          <textarea
+            [(ngModel)]="user.internalComment"
+            matInput
+            name="internalComment"
+            ngModel
+            readonly
+            cdkTextareaAutosize
+            [cdkAutosizeMinRows]="user.internalComment?.split('\n').length + 3"
+          ></textarea>
+        </mat-form-field>
+      </mat-expansion-panel>
+    </mat-accordion>
+
+    <mat-progress-bar mode="indeterminate" *ngIf="!deletedUsersLoaded"></mat-progress-bar>
+  </mat-card-content>
+</mat-card>

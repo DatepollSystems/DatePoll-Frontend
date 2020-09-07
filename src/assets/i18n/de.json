@@ -381,8 +381,16 @@
   "MANAGEMENT_USERS_ACTIVATE_ALL": "Alle Mitglieder aktivieren",
   "MANAGEMENT_USERS_ACTIVATE_ALL_QUESTION_DIALOG": "Willst du wirklich alle Mitglieder aktivieren?",
   "MANAGEMENT_USERS_ACTIVATE_ALL_FINISHED": "Alle nicht aktivierten Mitglieder wurden aktiviert!",
+  "MANAGEMENT_USERS_DELETED_USERS": "Gelöschte Mitglieder",
   "MANAGEMENT_USERS_MANAGE_COLUMNS": "Spalten bearbeiten",
   "MANAGEMENT_USERS_MANAGE_COLUMNS_TOOLTIP": "Sortierreihenfole ändern",
+
+  "MANAGEMENT_USERS_DELETED_USERS_JOINED_AT": "Beigetreten am ",
+  "MANAGEMENT_USERS_DELETED_USERS_LEFT_AT": "Ausgetreten am ",
+  "MANAGEMENT_USERS_DELETED_USERS_COMMENT": "Interner Kommentar:",
+  "MANAGEMENT_USERS_DELETED_USERS_DELETE_ALL": "Endgültig löschen",
+  "MANAGEMENT_USERS_DELETED_USERS_DELETE_ALL_CONFIRM": "Bestätige alle gelöschten Mitglieder endgültig zu entfernen?",
+  "MANAGEMENT_USERS_DELETED_USERS_DELETE_ALL_SUCCESSFUL": "Alle gelöschten Mitglieder entfernt!",
 
   "MANAGEMENT_USERS_CREATE_USER_MODAL_TITLE": "Lege ein neues Mitglied an",
   "MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_TITLE": "Titel",
