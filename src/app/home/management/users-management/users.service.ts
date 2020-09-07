@@ -2,8 +2,10 @@ import {Injectable} from '@angular/core';
 import {Subject} from 'rxjs';
 
 import {HttpService} from '../../../utils/http.service';
+
 import {GroupAndSubgroupModel, GroupType} from '../../../utils/models/groupAndSubgroup.model';
 import {PhoneNumber} from '../../phoneNumber.model';
+import {DeletedUser} from './deletedUser.model';
 import {User} from './user.model';
 
 @Injectable({
@@ -11,9 +13,11 @@ import {User} from './user.model';
 })
 export class UsersService {
   public usersChange: Subject<User[]> = new Subject<User[]>();
+  public deletedUserChange: Subject<DeletedUser[]> = new Subject<DeletedUser[]>();
   public joinedGroupsChange: Subject<any[]> = new Subject<any[]>();
   public freeGroupsChange: Subject<any[]> = new Subject<any[]>();
   private _users: User[];
+  private _deletedUsers: DeletedUser[] = [];
   private _joinedGroups: GroupAndSubgroupModel[];
   private _freeGroups: GroupAndSubgroupModel[];
 
@@ -195,5 +199,33 @@ export class UsersService {
   private setJoinedOfUser(groups: GroupAndSubgroupModel[]) {
     this._joinedGroups = groups;
     this.joinedGroupsChange.next(this._joinedGroups.slice());
+  }
+
+  public getDeletedUsers(): DeletedUser[] {
+    this.fetchDeletedUsers();
+    return this._deletedUsers.slice();
+  }
+
+  private fetchDeletedUsers() {
+    this.httpService.loggedInV1GETRequest('/management/deleted/users', 'getDeletedUsers').subscribe(
+      (response: any) => {
+        console.log(response);
+        const users = [];
+        for (const user of response.users) {
+          users.push(new DeletedUser(user.id, user.firstname, user.surname, user.join_date, user.internal_comment, user.created_at));
+        }
+        this.setDeletedUsers(users);
+      },
+      error => console.log(error)
+    );
+  }
+
+  public setDeletedUsers(deletedUsers: DeletedUser[]) {
+    this._deletedUsers = deletedUsers;
+    this.deletedUserChange.next(this._deletedUsers.slice());
+  }
+
+  public deleteAllDeletedUsers() {
+    return this.httpService.loggedInV1DELETERequest('/management/deleted/users', 'deleteAllDeletedUsers');
   }
 }

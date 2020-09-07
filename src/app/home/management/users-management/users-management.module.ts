@@ -15,10 +15,10 @@ import {UsersManagementRoutingModule} from './users-management-routing.module';
 
 import {MatMultiSortModule} from 'ngx-mat-multi-sort';
 
-import {ExcelService} from '../../../utils/excel.service';
 import {UsersService} from './users.service';
 
 import {BadgesListComponent} from './badges-list/badges-list.component';
+import {DeletedUsersManagementComponent} from './deleted-users-management/deleted-users-management.component';
 import {InstrumentSelectComponent} from './instrument-select/instrument-select.component';
 import {PerformanceBadgeSelectComponent} from './performance-badge-select/performance-badge-select.component';
 import {PerformanceBadgesListComponent} from './performance-badges-list/performance-badges-list.component';
@@ -41,7 +41,8 @@ import {UsersExportBottomSheetComponent, UsersManagementComponent} from './users
     PermissionsListComponent,
     PhoneNumbersListComponent,
     UserDeleteModalComponent,
-    BadgesListComponent
+    BadgesListComponent,
+    DeletedUsersManagementComponent
   ],
   imports: [
     CommonModule,

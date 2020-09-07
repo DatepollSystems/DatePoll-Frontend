@@ -33,6 +33,10 @@
         </mat-menu>
 
         <mat-menu #managementMenu="matMenu">
+          <button routerLink="/home/management/user/deleted" mat-menu-item *ngIf="hasPermissionToDeleteUser">
+            <mat-icon>delete_sweep</mat-icon>
+            <span>{{ 'MANAGEMENT_USERS_DELETED_USERS' | translate }}</span>
+          </button>
           <button routerLink="/home/management/group" mat-menu-item>
             <mat-icon>group</mat-icon>
             <span>{{ 'NAV_MANAGEMENT_GROUPS' | translate }}</span>
@@ -169,6 +173,7 @@
           </button>
 
           <button
+            *ngIf="hasPermissionToDeleteUser"
             (click)="onDelete(user.id)"
             color="warn"
             mat-icon-button

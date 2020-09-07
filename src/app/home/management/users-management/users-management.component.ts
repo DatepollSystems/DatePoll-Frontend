@@ -18,6 +18,7 @@ import {UserDeleteModalComponent} from './user-delete-modal/user-delete-modal.co
 import {UserUpdateModalComponent} from './user-update-modal/user-update-modal.component';
 
 import {MatMultiSort, MatMultiSortTableDataSource, TableData} from 'ngx-mat-multi-sort';
+import {Permissions} from '../../../permissions';
 import {User} from './user.model';
 
 @Component({
@@ -26,6 +27,8 @@ import {User} from './user.model';
   styleUrls: ['./users-management.component.css']
 })
 export class UsersManagementComponent implements OnInit, OnDestroy {
+  hasPermissionToDeleteUser = false;
+
   usersLoaded = true;
   filterValue = '';
 
@@ -103,6 +106,7 @@ export class UsersManagementComponent implements OnInit, OnDestroy {
 
     setTimeout(() => {
       this.refreshTable();
+      this.hasPermissionToDeleteUser = this.myUserService.hasPermission(Permissions.MANAGEMENT_EXTRA_USER_DELETE);
     });
   }
 

@@ -10,7 +10,7 @@
       <app-color-picker (colorChange)="changeColor($event)"></app-color-picker>
     </div>
 
-    <mat-form-field fxFlex="40%" fxFlex.lt-lg="45%" fxFlex.xs="98%">
+    <mat-form-field fxFlex="35%" fxFlex.lt-lg="45%" fxFlex.xs="98%">
       <input
         #decisionModel="ngModel"
         id="decision"
@@ -34,7 +34,7 @@
       </mat-slide-toggle>
     </div>
 
-    <div fxFlex="15%" fxFlex.lt-lg="45%" fxFlex.xs="98%">
+    <div fxFlex="20%" fxFlex.lt-lg="45%" fxFlex.xs="98%">
       <button [disabled]="!addDecisionForm.valid" color="accent" mat-raised-button style="width: 100%; text-align: center" type="submit">
         {{ 'ADD' | translate }}
         <mat-icon aria-label="Submit button">library_add</mat-icon>
