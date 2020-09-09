@@ -36,7 +36,7 @@ export class CalendarTokenComponent {
     selBox.style.left = '0';
     selBox.style.top = '0';
     selBox.style.opacity = '0';
-    selBox.value = val;
+    selBox.value = val + '.ics';
     document.body.appendChild(selBox);
     selBox.focus();
     selBox.select();
