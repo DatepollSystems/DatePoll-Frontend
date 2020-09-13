@@ -4,5 +4,5 @@
   padding: 10px;
   min-height: 50vh;
   max-width: 100%;
-  word-break: break-all;
+  word-break: break-word;
 }
