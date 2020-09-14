@@ -3,7 +3,7 @@
     <quill-editor [modules]="modules" [styles]="{height: '50vh'}" (onEditorChanged)="changedEditor($event)"></quill-editor>
   </mat-tab>
   <mat-tab label="{{ 'EDITOR_PREVIEW' | translate }}">
-    <div class="border" *ngIf="bodyHTML?.length > 0" [innerHTML]="getSanitizedContent(this.bodyHTML)"></div>
+    <app-editor-preview *ngIf="bodyHTML?.length > 0" [bodyHTML]="this.bodyHTML"></app-editor-preview>
     <div class="border" *ngIf="bodyHTML?.length == 0 || bodyHTML == null">{{ 'EDITOR_NO_PREVIEW' | translate }}</div>
   </mat-tab>
 </mat-tab-group>

@@ -1,5 +1,4 @@
 import {Component, OnDestroy} from '@angular/core';
-import {DomSanitizer} from '@angular/platform-browser';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Subscription} from 'rxjs';
 
@@ -17,12 +16,7 @@ export class BroadcastInfoComponent implements OnDestroy {
   broadcastSubscription: Subscription;
   loaded = false;
 
-  constructor(
-    private route: ActivatedRoute,
-    private broadcastsService: BroadcastsService,
-    private sanitizer: DomSanitizer,
-    private router: Router
-  ) {
+  constructor(private route: ActivatedRoute, private broadcastsService: BroadcastsService, private router: Router) {
     this.route.paramMap.subscribe(params => {
       const id = params.get('id');
       if (id != null) {
@@ -54,10 +48,6 @@ export class BroadcastInfoComponent implements OnDestroy {
         console.log('No broadcast to open');
       }
     });
-  }
-
-  getSanitizedContent(content: string) {
-    return this.sanitizer.bypassSecurityTrustHtml(content);
   }
 
   ngOnDestroy(): void {

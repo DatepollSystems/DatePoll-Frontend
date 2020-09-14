@@ -18,7 +18,7 @@
     </span>
   </h3>
 
-  <div class="border" [innerHTML]="getSanitizedContent(broadcast.bodyHTML)" *ngIf="loaded"></div>
+  <app-editor-preview [bodyHTML]="broadcast.bodyHTML" *ngIf="loaded"></app-editor-preview>
 </ng-container>
 
 <mat-progress-bar mode="indeterminate" *ngIf="!loaded"></mat-progress-bar>

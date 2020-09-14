@@ -1,11 +1,9 @@
 import {Component, OnDestroy, ViewChild} from '@angular/core';
-import {DomSanitizer} from '@angular/platform-browser';
 import {ActivatedRoute} from '@angular/router';
+import {Subscription} from 'rxjs';
 
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
-
-import {Subscription} from 'rxjs';
 
 import {BroadcastsAdministrationService} from '../broadcasts-administration.service';
 
@@ -28,7 +26,7 @@ export class BroadcastAdminInfoComponent implements OnDestroy {
 
   loaded = false;
 
-  constructor(private route: ActivatedRoute, private broadcastSerivce: BroadcastsAdministrationService, private sanitizer: DomSanitizer) {
+  constructor(private route: ActivatedRoute, private broadcastSerivce: BroadcastsAdministrationService) {
     this.route.paramMap.subscribe(params => {
       const id = params.get('id');
 
@@ -66,10 +64,6 @@ export class BroadcastAdminInfoComponent implements OnDestroy {
 
   ngOnDestroy(): void {
     this.broadcastSubscription.unsubscribe();
-  }
-
-  getSanitizedContent(content: string) {
-    return this.sanitizer.bypassSecurityTrustHtml(content);
   }
 
   applyFilter(filterValue: string) {

@@ -10,6 +10,7 @@ import {MaterialModule} from '../../../material-module';
 import {TranslationModule} from '../../../translation/translation.module';
 import {CustomDateAdapter, MY_DATE_FORMATS} from '../../../utils/custom-date-adapter';
 import {AllMembersSwitchModule} from '../../../utils/shared-components/all-members-switch/all-members-switch.module';
+import {EditorPreviewModule} from '../../../utils/shared-components/editor-preview/editor-preview.module';
 import {EditorModule} from '../../../utils/shared-components/editor/editor.module';
 import {GroupAndSubgroupTypeInputSelectModule} from '../../../utils/shared-components/group-and-subgroup-type-input-select/group-and-subgroup-type-input-select.module';
 import {QuestionDialogComponentModule} from '../../../utils/shared-components/question-dialog/question-dialog-component.module';
@@ -32,8 +33,9 @@ import {LoadDraftDialogComponent} from './create-broadcast/load-draft-dialog/loa
     QuestionDialogComponentModule,
     AllMembersSwitchModule,
     GroupAndSubgroupTypeInputSelectModule,
-    BroadcastsAdministrationRoutingModule,
-    FormsModule
+    FormsModule,
+    EditorPreviewModule,
+    BroadcastsAdministrationRoutingModule
   ],
   providers: [
     {provide: DateAdapter, useClass: CustomDateAdapter},
