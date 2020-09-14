@@ -33,6 +33,8 @@
   "PRINT": "Drucken",
   "ACTIVE": "aktiv",
   "INACTIVE": "inaktiv",
+  "CANCEL": "Abbrechen",
+  "EDIT": "Bearbeiten",
 
   "LANGUAGE": "Sprache",
   "LANGUAGE_GERMAN": "Deutsch",
@@ -678,6 +680,7 @@
   "EVENTS_ADMINISTRATION_CREATE_EVENT_GROUPS_JOINED": "Ausgewählte Züge und Register",
   "EVENTS_ADMINISTRATION_CREATE_EVENT_GROUPS_JOINED_EMPTY": "Wähle eine Gruppe oder ein Register.",
   "EVENTS_ADMINISTRATION_CREATE_EVENT_DECISIONS": "Antwortmöglichkeiten",
+  "EVENTS_ADMINISTRATION_CREATE_EVENT_DECISIONS_UPDATE_DESCRIPTION": "Bearbeite die bestehende Antwortmöglichkeit.",
   "EVENTS_ADMINISTRATION_UPDATE_EVENT": "Bearbeite das Event ",
   "EVENTS_ADMINISTRATION_UPDATE_EVENT_SUCCESSFULLY_UPDATED": "Das Event wurde gespeichert!",
 

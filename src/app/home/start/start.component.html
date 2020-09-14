@@ -81,12 +81,12 @@
       (click)="onBroadcastItemClick(broadcast)"
     >
       <div mat-line>
-        <i>{{ broadcast.subject }}</i
-        ><small class="until-left"> (~{{ broadcast.readTime }})</small>
+        <i>{{ broadcast.subject }}</i>
       </div>
       <div mat-line>
         {{ 'STARTPAGE_BROADCASTS_BY' | translate }}
-        {{ broadcast.writerName }} ({{ broadcast.sent | date: 'dd.MM - HH:mm' }})
+        <i>{{ broadcast.writerName }}</i> ({{ broadcast.sent | date: 'dd.MM - HH:mm' }})
+        <small class="until-left"> (~{{ broadcast.readTime }})</small>
       </div>
     </mat-list-item>
 
@@ -208,9 +208,11 @@
             <tbody>
               <tr *ngFor="let broadcast of broadcasts" class="not-selectable" (click)="onBroadcastItemClick(broadcast)">
                 <td matRipple matRippleRadius="100">
-                  <b>{{ broadcast.subject }}</b> {{ 'STARTPAGE_BROADCASTS_BY' | translate }} {{ broadcast.writerName }} <br />{{
+                  <b>{{ broadcast.subject }}</b
+                  ><br />
+                  {{ 'STARTPAGE_BROADCASTS_BY' | translate }} <i>{{ broadcast.writerName }}</i> ({{
                     broadcast.sent | date: 'dd.MM - HH:mm'
-                  }}
+                  }})
                   <small class="until-left"> (~{{ broadcast.readTime }})</small>
                 </td>
               </tr>

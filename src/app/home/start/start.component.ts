@@ -62,14 +62,10 @@ export class StartComponent implements OnDestroy {
     });
 
     this.events = homePageService.getEvents().slice(0, 5);
+    this.countOpenEvents();
     this.eventsSubscription = homePageService.eventsChange.subscribe(value => {
       this.events = value.slice(0, 5);
-      this.openEventsCount = 0;
-      for (const event of this.events) {
-        if (!event.alreadyVotedFor) {
-          this.openEventsCount++;
-        }
-      }
+      this.countOpenEvents();
       this.eventVotingChangeLoading = false;
     });
 
@@ -102,7 +98,7 @@ export class StartComponent implements OnDestroy {
     this.router.navigateByUrl('/home/events/' + event.id, {state: event});
   }
 
-  onEventVote(event: Event) {
+  private onEventVote(event: Event) {
     const bottomSheetRef = this.bottomSheet.open(EventsVoteForDecisionModalComponent, {
       data: {event}
     });
@@ -126,7 +122,7 @@ export class StartComponent implements OnDestroy {
     });
   }
 
-  cancelEventVoting(event, button: any) {
+  private cancelEventVoting(event, button: any) {
     const answers = [
       {
         answer: this.translate.getTranslationFor('YES'),
@@ -173,5 +169,14 @@ export class StartComponent implements OnDestroy {
         }
       }
     });
+  }
+
+  private countOpenEvents() {
+    this.openEventsCount = 0;
+    for (const event of this.events) {
+      if (!event.alreadyVotedFor) {
+        this.openEventsCount++;
+      }
+    }
   }
 }
