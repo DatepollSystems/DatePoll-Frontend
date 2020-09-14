@@ -5,9 +5,16 @@
     </mat-panel-title>
   </mat-expansion-panel-header>
 
+  <mat-card class="not-selectable" style="background-color: #29b6f6;" *ngIf="decisionUpdating">
+    {{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_DECISIONS_UPDATE_DESCRIPTION' | translate }}
+    <a (click)="cancelUpdateMode()" style="float: right; color: black"
+      ><b> {{ 'CANCEL' | translate }}</b></a
+    >
+  </mat-card>
+
   <form #addDecisionForm="ngForm" (ngSubmit)="addDecision(addDecisionForm)" fxLayout="row wrap" fxLayoutGap="2%" fxLayoutAlign="start">
     <div fxFlex="15%" fxFlex.lt-lg="45%" fxFlex.xs="98%">
-      <app-color-picker (colorChange)="changeColor($event)"></app-color-picker>
+      <app-color-picker (colorChange)="changeColor($event)" [color]="color"></app-color-picker>
     </div>
 
     <mat-form-field fxFlex="35%" fxFlex.lt-lg="45%" fxFlex.xs="98%">
@@ -19,6 +26,7 @@
         minlength="1"
         name="decision"
         ngModel
+        [(ngModel)]="decisionString"
         placeholder="{{ 'EVENTS_STANDARD_DECISIONS_MANAGEMENT_ADD_STANDARD_DECISION' | translate }}"
         required
         type="text"
@@ -35,8 +43,9 @@
     </div>
 
     <div fxFlex="20%" fxFlex.lt-lg="45%" fxFlex.xs="98%">
-      <button [disabled]="!addDecisionForm.valid" color="accent" mat-raised-button style="width: 100%; text-align: center" type="submit">
-        {{ 'ADD' | translate }}
+      <button [disabled]="!addDecisionForm.valid" color="accent" mat-flat-button style="width: 100%; text-align: center" type="submit">
+        <span *ngIf="!decisionUpdating">{{ 'ADD' | translate }}</span>
+        <span *ngIf="decisionUpdating">{{ 'SAVE' | translate }}</span>
         <mat-icon aria-label="Submit button">library_add</mat-icon>
       </button>
     </div>
@@ -53,10 +62,19 @@
         {{ decision.showInCalendar | boolean }}</span
       >
       <button
+        type="button"
+        (click)="changeToUpdateDecision(decision)"
+        mat-icon-button
+        matTooltip="{{ 'EDIT' | translate }}"
+        matTooltipPosition="left"
+      >
+        <mat-icon>create</mat-icon>
+      </button>
+      <button
         (click)="removeDecision(decision)"
         mat-icon-button
         matTooltip="{{ 'EVENTS_STANDARD_DECISIONS_MANAGEMENT_REMOVE_STANDARD_DECISION_BUTTON_TOOLTIP' | translate }}"
-        matTooltipPosition="right"
+        matTooltipPosition="above"
       >
         <mat-icon>delete_forever</mat-icon>
       </button>
