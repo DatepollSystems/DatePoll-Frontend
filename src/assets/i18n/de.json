@@ -137,18 +137,18 @@
   "STARTPAGE_BIRTHDAY_MORE": "Zeige alle Geburtstage an",
   "STARTPAGE_BIRTHDAY_NAME": "Name",
   "STARTPAGE_BIRTHDAY_DATE": "Geburtsdatum",
-
   "STARTPAGE_BOOKINGS": "Deine Reservierungen",
   "STARTPAGE_MOVIE_NAME": "Filmname",
   "STARTPAGE_MOVIE_DATE": "Datum",
   "STARTPAGE_BOOKED_TICKETS": "Gebuchte Karten",
   "STARTPAGE_CINEMA_SERVICE": "Kinodienst",
   "STARTPAGE_EMERGENCY_CINEMA_SERVICE": "Notfall-Kinodienst",
-
   "STARTPAGE_EVENTS": "Nächsten Events",
   "STARTPAGE_BROADCASTS": "Letzten Mitteilungen",
   "STARTPAGE_BROADCASTS_INFO": "Zeige alle Mitteilungen",
   "STARTPAGE_BROADCASTS_BY": "von",
+  "STARTPAGE_FIREWORK_SHOW": "Feuerwerk anzeigen",
+  "STARTPAGE_FIREWORK_HIDE": "Feuerwerk ausblenden",
 
   "CALENDAR": "Kalender",
 
@@ -597,6 +597,9 @@
   "MANAGEMENT_DATEPOLL_OPENWEATHERMAP_CINEMA_CITY_ID": "OpenWeatherMap Kino City Id",
   "MANAGEMENT_DATEPOLL_OPENWEATHERMAP_CINEMA_CITY_ID_INVALID": "Die Kino City Id darf nicht mehr als 50 Zeichen haben!",
   "MANAGEMENT_DATEPOLL_OPENWEATHERMAP_CINEMA_CITY_ID_CHANGED_SUCCESSFULLY": "Die Kino City Id wurde geändert!",
+
+  "MANAGEMENT_DATEPOLL_HAPPY_ALERT": "Happy Benachrichtigung",
+  "MANAGEMENT_DATEPOLL_HAPPY_ALERT_CHANGED_SUCCESSFULLY": "Die Happy Benachrichtigung wurde geändert!",
 
   "MANAGEMENT_DATEPOLL_LOGS": "Logs",
   "MANAGEMENT_DATEPOLL_LOGS_REFRESH": "Log-Liste aktualisieren",

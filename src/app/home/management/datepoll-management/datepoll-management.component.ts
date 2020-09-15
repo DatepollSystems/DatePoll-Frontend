@@ -36,6 +36,10 @@ export class DatepollManagementComponent implements OnDestroy {
   openWeatherMapCinemaCityIdSubscription: Subscription;
   openWeatherMapCinemaCityIdSaving = false;
 
+  happyAlert: string;
+  happyAlertSubscription: Subscription;
+  happyAlertSaving = false;
+
   SETTINGS_ADMINISTRATION = Permissions.SETTINGS_ADMINISTRATION;
   SYSTEM_ADMINISTRATION = Permissions.SYSTEM_ADMINISTRATION;
   SYSTEM_LOGS_ADMINISTRATION = Permissions.SYSTEM_LOGS_ADMINISTRATION;
@@ -65,6 +69,11 @@ export class DatepollManagementComponent implements OnDestroy {
     this.openWeatherMapCinemaCityId = settingsService.getOpenWeatherMapCinemaCityId();
     this.openWeatherMapCinemaCityIdSubscription = settingsService.openWeatherMapCinemaCityIdChange.subscribe(value => {
       this.openWeatherMapCinemaCityId = value;
+    });
+
+    this.happyAlert = settingsService.getHappyAlert();
+    this.happyAlertSubscription = settingsService.happyAlertChange.subscribe(value => {
+      this.happyAlert = value;
     });
   }
 
@@ -211,6 +220,22 @@ export class DatepollManagementComponent implements OnDestroy {
         this.notificationsService.success(
           this.translate.getTranslationFor('SUCCESSFULLY'),
           this.translate.getTranslationFor('MANAGEMENT_DATEPOLL_OPENWEATHERMAP_CINEMA_CITY_ID_CHANGED_SUCCESSFULLY')
+        );
+      },
+      error => console.log(error)
+    );
+  }
+
+  changeHappyAlert(form: NgForm) {
+    this.happyAlertSaving = true;
+    const happyAlert = form.controls.happyAlert.value;
+    this.settingsService.setAdminHappyAlert(happyAlert).subscribe(
+      (response: any) => {
+        console.log(response);
+        this.happyAlertSaving = false;
+        this.notificationsService.success(
+          this.translate.getTranslationFor('SUCCESSFULLY'),
+          this.translate.getTranslationFor('MANAGEMENT_DATEPOLL_HAPPY_ALERT_CHANGED_SUCCESSFULLY')
         );
       },
       error => console.log(error)

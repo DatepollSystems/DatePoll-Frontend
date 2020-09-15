@@ -62,6 +62,39 @@
           <h2>Vereins Einstellungen</h2>
 
           <form
+            #changeHappyAlertForm="ngForm"
+            (ngSubmit)="changeHappyAlert(changeHappyAlertForm)"
+            fxLayout="row wrap"
+            fxLayoutGap="2%"
+            fxLayout.xs="column"
+          >
+            <mat-form-field fxFlex="60%">
+              <input
+                [(ngModel)]="happyAlert"
+                id="happyAlert"
+                matInput
+                name="happyAlert"
+                ngModel
+                placeholder="{{ 'MANAGEMENT_DATEPOLL_HAPPY_ALERT' | translate }}"
+                type="text"
+              />
+            </mat-form-field>
+
+            <div fxFlex.xs="100%">
+              <button
+                style="width: 100%"
+                color="accent"
+                mat-flat-button
+                [class.spinner]="happyAlertSaving"
+                [disabled]="!changeHappyAlertForm.valid || happyAlertSaving"
+                type="submit"
+              >
+                {{ 'SAVE' | translate }}
+              </button>
+            </div>
+          </form>
+
+          <form
             #changeCommunityNameForm="ngForm"
             (ngSubmit)="changeCommunityName(changeCommunityNameForm)"
             fxLayout="row wrap"

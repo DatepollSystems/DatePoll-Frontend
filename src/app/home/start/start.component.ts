@@ -16,6 +16,7 @@ import {Event} from '../events/models/event.model';
 import {HomeBirthdayModel} from './birthdays.model';
 import {HomeBookingsModel} from './bookings.model';
 
+import {SettingsService} from '../../utils/settings.service';
 import {QuestionDialogComponent} from '../../utils/shared-components/question-dialog/question-dialog.component';
 import {EventsVoteForDecisionModalComponent} from '../events/events-view/events-vote-for-decision-modal/events-vote-for-decision-modal.component';
 
@@ -42,6 +43,10 @@ export class StartComponent implements OnDestroy {
 
   openEventsCount = 0;
 
+  happyAlert = '';
+  happyAlertSubscription: Subscription;
+  showFirework = false;
+
   constructor(
     private homePageService: HomepageService,
     public myUserService: MyUserService,
@@ -49,7 +54,8 @@ export class StartComponent implements OnDestroy {
     private bottomSheet: MatBottomSheet,
     private notificationsService: NotificationsService,
     private translate: TranslateService,
-    private router: Router
+    private router: Router,
+    private settingsService: SettingsService
   ) {
     this.birthdays = homePageService.getBirthdays();
     this.birthdaysSubscription = homePageService.birthdaysChange.subscribe(value => {
@@ -72,6 +78,13 @@ export class StartComponent implements OnDestroy {
     this.broadcasts = homePageService.getBroadcasts();
     this.broadcastSubscription = homePageService.broadcastChange.subscribe(value => {
       this.broadcasts = value;
+    });
+
+    this.happyAlert = this.settingsService.getHappyAlert();
+    this.checkIfFireworkShouldBeShown();
+    this.happyAlertSubscription = this.settingsService.happyAlertChange.subscribe(value => {
+      this.happyAlert = value;
+      this.checkIfFireworkShouldBeShown();
     });
   }
 
@@ -178,5 +191,29 @@ export class StartComponent implements OnDestroy {
         this.openEventsCount++;
       }
     }
+  }
+
+  private checkIfFireworkShouldBeShown() {
+    if (this.happyAlert?.trim().toLowerCase().length > 0) {
+      if (localStorage.getItem('firework') == null) {
+        localStorage.setItem('firework', 'true');
+      }
+      if (localStorage.getItem('firework') === 'true') {
+        this.showFirework = true;
+      } else {
+        this.showFirework = false;
+      }
+    }
+  }
+
+  toggleFirework() {
+    this.showFirework = !this.showFirework;
+    let b = '';
+    if (this.showFirework) {
+      b = 'true';
+    } else {
+      b = 'false';
+    }
+    localStorage.setItem('firework', b);
   }
 }

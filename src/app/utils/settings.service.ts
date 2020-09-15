@@ -11,14 +11,12 @@ import {ServerInfoModel} from './server-info.model';
   providedIn: 'root'
 })
 export class SettingsService {
-  public showCinemaChange: Subject<boolean> = new Subject<boolean>();
-  public showEventsChange: Subject<boolean> = new Subject<boolean>();
   public openWeatherMapKeyChange: Subject<string> = new Subject<string>();
   public openWeatherMapCinemaCityIdChange: Subject<string> = new Subject<string>();
-  private _showCinema = true;
-  private _showEvents = true;
   private _openWeatherMapKey = '';
   private _openWeatherMapCinemaCityId = '';
+  public happyAlertChange: Subject<string> = new Subject<string>();
+  private _happyAlert = '';
 
   public serverInfoChange: Subject<ServerInfoModel> = new Subject<ServerInfoModel>();
   private _serverInfo = new ServerInfoModel();
@@ -185,6 +183,26 @@ export class SettingsService {
     return this.httpService.setSettingsRequest('/openweathermap/cinemaCityId', body, 'setOpenWeatherMapCinemaCityId');
   }
 
+  public getHappyAlert(): string {
+    this.httpService.getSettingRequest('/happyAlert', 'getHappyAlert').subscribe(
+      (response: any) => {
+        console.log(response);
+        this.setHappyAlert(response.happy_alert);
+      },
+      error => console.log(error)
+    );
+    return this._happyAlert;
+  }
+
+  public setAdminHappyAlert(key: string) {
+    this.setHappyAlert(key);
+
+    const body = {
+      happy_alert: key
+    };
+    return this.httpService.setSettingsRequest('/happyAlert', body, 'setHappyAlert');
+  }
+
   private setShowCinema(showCinema: boolean) {
     this._serverInfo.cinema_enabled = showCinema;
     this.updateLocalServerInfo();
@@ -223,6 +241,11 @@ export class SettingsService {
   private setOpenWeatherMapCinemaCityId(id: string) {
     this._openWeatherMapCinemaCityId = id;
     this.openWeatherMapCinemaCityIdChange.next(this._openWeatherMapCinemaCityId);
+  }
+
+  private setHappyAlert(key: string) {
+    this._happyAlert = key;
+    this.happyAlertChange.next(this._happyAlert);
   }
 
   private updateLocalServerInfo() {
