@@ -151,22 +151,18 @@
   "STARTPAGE_FIREWORK_HIDE": "Feuerwerk ausblenden",
 
   "CALENDAR": "Kalender",
-
+  "CALENDAR_SETTINGS_INFO": "Diese Einstellungen gelten auch für den ICS Kalendar Export.",
   "CALENDAR_SETTINGS_SHOW_MOVIES": "Filme anzeigen",
   "CALENDAR_SETTINGS_SHOW_EVENTS": "Events anzeigen",
   "CALENDAR_SETTINGS_SHOW_BIRTHDAYS": "Geburtstage anzeigen",
-
   "CALENDAR_USERS_BIRTHDAY": "'s Geburtstag",
-
-  "CALENDAR_AGENDA": "Agenda",
-
   "CALENDAR_PREVIOUS": "Zurück",
   "CALENDAR_TODAY": "Heute",
   "CALENDAR_NEXT": "Weiter",
-
   "CALENDAR_MONTH": "Monat",
   "CALENDAR_WEEK": "Woche",
   "CALENDAR_DAY": "Tag",
+  "CALENDAR_DATE": "Angezeigtes Datum",
 
   "MAPS_SHOW_HIDE": "Karte anzeigen / ausblenden",
   "MAPS_CLEAR_SELECTION": "Auswahl entfernen",

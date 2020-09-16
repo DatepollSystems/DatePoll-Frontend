@@ -3,8 +3,9 @@ import {Decision} from './decision.model';
 import {EventDate} from './event-date.model';
 import {EventResultGroup} from './event-result-group.model';
 import {EventResultUser} from './event-result-user.model';
+import {CalendarEvent} from 'angular-calendar';
 
-export class Event {
+export class Event implements CalendarEvent {
   public id: number;
   public name: string;
   public startDate: Date;

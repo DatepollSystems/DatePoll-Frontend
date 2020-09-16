@@ -4,7 +4,7 @@ import {MatDialog} from '@angular/material/dialog';
 import {MatSlideToggleChange} from '@angular/material/slide-toggle';
 import {Subject, Subscription} from 'rxjs';
 
-import {CalendarEvent, CalendarEventTimesChangedEvent, CalendarView} from 'angular-calendar';
+import {CalendarDateFormatter, CalendarEvent, CalendarEventTimesChangedEvent, CalendarView} from 'angular-calendar';
 import {NotificationsService} from 'angular2-notifications';
 import {isSameDay, isSameMonth} from 'date-fns';
 
@@ -25,6 +25,8 @@ import {MyUserService} from '../my-user.service';
 import {UserSettingsService} from '../settings/privacy-settings/userSettings.service';
 import {HomepageService} from '../start/homepage.service';
 
+import {CustomDateFormatter} from './custom-date-formatter.provider';
+
 import {Movie} from '../cinema/models/movie.model';
 import {Event} from '../events/models/event.model';
 import {HomeBirthdayModel} from '../start/birthdays.model';
@@ -33,12 +35,19 @@ import {HomeBirthdayModel} from '../start/birthdays.model';
   selector: 'app-calendar',
   changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['./calendar.component.css'],
-  templateUrl: './calendar.component.html'
+  templateUrl: './calendar.component.html',
+  providers: [
+    {
+      provide: CalendarDateFormatter,
+      useClass: CustomDateFormatter
+    }
+  ]
 })
 export class CalendarComponent implements OnInit, OnDestroy {
   locale = 'de';
 
   view: CalendarView = CalendarView.Month;
+  mobileView: CalendarView = CalendarView.Day;
 
   CalendarView = CalendarView;
 
@@ -298,7 +307,7 @@ export class CalendarComponent implements OnInit, OnDestroy {
     this.activeDayIsOpen = false;
   }
 
-  handleEvent(object: any) {
+  handleEvent(object: CalendarEvent) {
     if (object instanceof Movie) {
       if (this.myUserService.hasPermission(Permissions.CINEMA_MOVIE_ADMINISTRATION)) {
         this.dialog.open(MovieInfoModalComponent, {
@@ -327,5 +336,17 @@ export class CalendarComponent implements OnInit, OnDestroy {
   onShowBirthdaysChange(ob: MatSlideToggleChange) {
     this.userSettingsService.setShowBirthdaysInCalendar(ob.checked, true);
     this.refreshCalendar();
+  }
+
+  isEvent(ev: CalendarEvent) {
+    return ev instanceof Event;
+  }
+
+  isMovie(ev: CalendarEvent) {
+    return ev instanceof Movie;
+  }
+
+  isBirthday(ev: CalendarEvent) {
+    return ev instanceof HomeBirthdayModel;
   }
 }

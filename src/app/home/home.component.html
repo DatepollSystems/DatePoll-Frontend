@@ -10,12 +10,7 @@
         Home</a
       >
 
-      <a (click)="onPageChange()" [fxHide.lt-sm]="true" mat-list-item routerLink="calendar" routerLinkActive="activated">
-        <mat-icon>today</mat-icon>
-        {{ 'CALENDAR' | translate }}</a
-      >
-
-      <a (click)="onPageChange()" [fxHide.gt-xs]="true" mat-list-item routerLink="calendar/agenda" routerLinkActive="activated">
+      <a (click)="onPageChange()" mat-list-item routerLink="calendar" routerLinkActive="activated">
         <mat-icon>today</mat-icon>
         {{ 'CALENDAR' | translate }}</a
       >

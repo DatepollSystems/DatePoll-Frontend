@@ -1,6 +1,6 @@
 /** Adapts the native JS Date for use with cdk-based components that work with dates. */
-import {NativeDateAdapter} from '@angular/material';
 import {Injectable} from '@angular/core';
+import {NativeDateAdapter} from '@angular/material';
 
 export const MY_DATE_FORMATS = {
   parse: {

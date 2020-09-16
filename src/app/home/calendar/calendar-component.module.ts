@@ -6,14 +6,14 @@ import {CalendarModule, DateAdapter} from 'angular-calendar';
 import {adapterFactory} from 'angular-calendar/date-adapters/date-fns';
 
 import {MaterialModule} from '../../material-module';
-import {CommonComponentsModule} from '../../utils/common-components.module';
 import {TranslationModule} from '../../translation/translation.module';
+import {CommonComponentsModule} from '../../utils/common-components.module';
 import {CalendarComponentRoutingModule} from './calendar-component-routing.module';
-import {CalendarAgendaComponent} from './calendar-agenda/calendar-agenda.component';
+
 import {CalendarComponent} from './calendar.component';
 
 @NgModule({
-  declarations: [CalendarComponent, CalendarAgendaComponent],
+  declarations: [CalendarComponent],
   imports: [
     CommonModule,
     MaterialModule,

@@ -16,7 +16,7 @@ export class HomeBirthdayModel implements CalendarEvent {
     secondary: '#D1E8FF'
   };
   draggable: false;
-  end: null;
+  end: Date;
   meta = null;
   resizable: {beforeStart: false; afterEnd: false};
 
@@ -28,5 +28,6 @@ export class HomeBirthdayModel implements CalendarEvent {
 
     this.title = this.name + usersBirthday;
     this.start = this.date;
+    this.end = this.date;
   }
 }
