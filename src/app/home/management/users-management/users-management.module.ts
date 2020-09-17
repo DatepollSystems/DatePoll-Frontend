@@ -1,8 +1,7 @@
 import {CommonModule} from '@angular/common';
 import {NgModule} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {DateAdapter} from '@angular/material';
-import {MAT_DATE_FORMATS} from '@angular/material/core';
+import {DateAdapter, MAT_DATE_FORMATS} from '@angular/material/core';
 
 import {NgxMatSelectSearchModule} from 'ngx-mat-select-search';
 
@@ -42,7 +41,7 @@ import {UsersExportBottomSheetComponent, UsersManagementComponent} from './users
     PhoneNumbersListComponent,
     UserDeleteModalComponent,
     BadgesListComponent,
-    DeletedUsersManagementComponent
+    DeletedUsersManagementComponent,
   ],
   imports: [
     CommonModule,
@@ -54,8 +53,8 @@ import {UsersExportBottomSheetComponent, UsersManagementComponent} from './users
     MatMultiSortModule,
     UsersManagementRoutingModule,
     CommonComponentsModule,
-    GroupAndSubgroupTypeInputSelectModule
+    GroupAndSubgroupTypeInputSelectModule,
   ],
-  providers: [UsersService, {provide: DateAdapter, useClass: CustomDateAdapter}, {provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS}]
+  providers: [UsersService, {provide: DateAdapter, useClass: CustomDateAdapter}, {provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS}],
 })
 export class UsersManagementModule {}

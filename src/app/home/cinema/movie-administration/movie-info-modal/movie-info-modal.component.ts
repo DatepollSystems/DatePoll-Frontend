@@ -1,5 +1,6 @@
 import {Component, Inject, OnDestroy} from '@angular/core';
-import {MAT_DIALOG_DATA, MatTableDataSource} from '@angular/material';
+import {MAT_DIALOG_DATA} from '@angular/material/dialog';
+import {MatTableDataSource} from '@angular/material/table';
 import {Subscription} from 'rxjs';
 
 import {Movie, MovieBookingUser} from '../../models/movie.model';
@@ -8,7 +9,7 @@ import {CinemaService} from '../../cinema.service';
 @Component({
   selector: 'app-movie-info-modal',
   templateUrl: './movie-info-modal.component.html',
-  styleUrls: ['./movie-info-modal.component.css']
+  styleUrls: ['./movie-info-modal.component.css'],
 })
 export class MovieInfoModalComponent implements OnDestroy {
   loading = true;

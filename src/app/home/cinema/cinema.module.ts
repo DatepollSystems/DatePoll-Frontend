@@ -1,8 +1,7 @@
 import {CommonModule} from '@angular/common';
 import {NgModule} from '@angular/core';
 import {FormsModule} from '@angular/forms';
-import {DateAdapter} from '@angular/material';
-import {MAT_DATE_FORMATS} from '@angular/material/core';
+import {DateAdapter, MAT_DATE_FORMATS} from '@angular/material/core';
 import {NgxPrintModule} from 'ngx-print';
 
 import {MaterialModule} from '../../material-module';
@@ -25,9 +24,9 @@ import {MovieTicketsComponent} from './movie-tickets/movie-tickets.component';
     MovieServiceComponent,
     MovieTicketComponent,
     MovieBookTicketsModalComponent,
-    MovieWeatherforecastModalComponent
+    MovieWeatherforecastModalComponent,
   ],
   imports: [CommonModule, FormsModule, MaterialModule, TranslationModule, CommonComponentsModule, NgxPrintModule, CinemaRoutingModule],
-  providers: [CinemaService, {provide: DateAdapter, useClass: CustomDateAdapter}, {provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS}]
+  providers: [CinemaService, {provide: DateAdapter, useClass: CustomDateAdapter}, {provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS}],
 })
 export class CinemaModule {}

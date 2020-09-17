@@ -1,17 +1,17 @@
 /** Adapts the native JS Date for use with cdk-based components that work with dates. */
 import {Injectable} from '@angular/core';
-import {NativeDateAdapter} from '@angular/material';
+import {NativeDateAdapter} from '@angular/material/core';
 
 export const MY_DATE_FORMATS = {
   parse: {
-    dateInput: {month: 'short', year: 'numeric', day: 'numeric'}
+    dateInput: {month: 'short', year: 'numeric', day: 'numeric'},
   },
   display: {
     dateInput: 'input',
     monthYearLabel: 'inputMonth',
     dateA11yLabel: {year: 'numeric', month: 'long', day: 'numeric'},
-    monthYearA11yLabel: {year: 'numeric', month: 'long'}
-  }
+    monthYearA11yLabel: {year: 'numeric', month: 'long'},
+  },
 };
 
 @Injectable()

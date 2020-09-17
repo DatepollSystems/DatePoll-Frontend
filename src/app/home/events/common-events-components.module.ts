@@ -1,8 +1,7 @@
 import {CommonModule} from '@angular/common';
 import {NgModule} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {DateAdapter} from '@angular/material';
-import {MAT_DATE_FORMATS} from '@angular/material/core';
+import {DateAdapter, MAT_DATE_FORMATS} from '@angular/material/core';
 import {RouterModule} from '@angular/router';
 
 import {NgxMatSelectSearchModule} from 'ngx-mat-select-search';
@@ -31,7 +30,7 @@ import {EventCardComponent} from './events-view/event-card/event-card.component'
     EventDecisionsListComponent,
     EventDatesManagementComponent,
     EventStandardLocationsSelectComponent,
-    EventCardComponent
+    EventCardComponent,
   ],
   imports: [
     CommonModule,
@@ -46,13 +45,13 @@ import {EventCardComponent} from './events-view/event-card/event-card.component'
     EventDatesListComponentModule,
     MapsModule,
     CommonComponentsModule,
-    GroupAndSubgroupTypeInputSelectModule
+    GroupAndSubgroupTypeInputSelectModule,
   ],
   providers: [
     EventsUserService,
     {provide: DateAdapter, useClass: CustomDateAdapter},
-    {provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS}
+    {provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS},
   ],
-  exports: [EventUpdateModalComponent, EventDecisionsListComponent, EventDatesManagementComponent, EventCardComponent]
+  exports: [EventUpdateModalComponent, EventDecisionsListComponent, EventDatesManagementComponent, EventCardComponent],
 })
 export class CommonEventsComponentsModule {}

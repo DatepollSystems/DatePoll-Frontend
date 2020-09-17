@@ -1,8 +1,7 @@
 import {CommonModule} from '@angular/common';
 import {NgModule} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {DateAdapter} from '@angular/material';
-import {MAT_DATE_FORMATS} from '@angular/material/core';
+import {DateAdapter, MAT_DATE_FORMATS} from '@angular/material/core';
 
 import {NgxMatSelectSearchModule} from 'ngx-mat-select-search';
 
@@ -35,11 +34,11 @@ import {LoadDraftDialogComponent} from './create-broadcast/load-draft-dialog/loa
     GroupAndSubgroupTypeInputSelectModule,
     FormsModule,
     EditorPreviewModule,
-    BroadcastsAdministrationRoutingModule
+    BroadcastsAdministrationRoutingModule,
   ],
   providers: [
     {provide: DateAdapter, useClass: CustomDateAdapter},
-    {provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS}
-  ]
+    {provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS},
+  ],
 })
 export class BroadcastsAdministrationModule {}

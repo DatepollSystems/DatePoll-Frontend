@@ -1,6 +1,6 @@
 import {ChangeDetectorRef, Component, Inject} from '@angular/core';
-import {MAT_BOTTOM_SHEET_DATA, MatBottomSheetRef} from '@angular/material';
 import {MatDialog} from '@angular/material/dialog';
+import {MAT_BOTTOM_SHEET_DATA, MatBottomSheetRef} from '@angular/material/bottom-sheet';
 
 import {Decision} from '../../models/decision.model';
 import {Event} from '../../models/event.model';
@@ -9,7 +9,7 @@ import {EventsVoteForDecisionAdditionalInformationModalComponent} from './events
 @Component({
   selector: 'app-events-vote-for-decision-modal',
   templateUrl: './events-vote-for-decision-modal.component.html',
-  styleUrls: ['./events-vote-for-decision-modal.component.css']
+  styleUrls: ['./events-vote-for-decision-modal.component.css'],
 })
 export class EventsVoteForDecisionModalComponent {
   event: Event;
@@ -17,18 +17,20 @@ export class EventsVoteForDecisionModalComponent {
 
   additionalInformation = null;
 
-  constructor(@Inject(MAT_BOTTOM_SHEET_DATA) public data: any,
-              private bottomSheetRef: MatBottomSheetRef<EventsVoteForDecisionModalComponent>,
-              private dialog: MatDialog,
-              private changeRef: ChangeDetectorRef) {
+  constructor(
+    @Inject(MAT_BOTTOM_SHEET_DATA) public data: any,
+    private bottomSheetRef: MatBottomSheetRef<EventsVoteForDecisionModalComponent>,
+    private dialog: MatDialog,
+    private changeRef: ChangeDetectorRef
+  ) {
     this.event = data.event;
     this.name = this.event.name;
   }
 
   voteFor(decision: Decision) {
     const dto = {
-      'decision': decision,
-      'additionalInformation': this.additionalInformation
+      decision: decision,
+      additionalInformation: this.additionalInformation,
     };
 
     this.bottomSheetRef.dismiss(dto);
@@ -37,7 +39,7 @@ export class EventsVoteForDecisionModalComponent {
   addAdditionalInformation() {
     const bottomSheetRef = this.dialog.open(EventsVoteForDecisionAdditionalInformationModalComponent, {
       width: '80vh',
-      data: { additionalInformation: this.additionalInformation },
+      data: {additionalInformation: this.additionalInformation},
     });
 
     bottomSheetRef.afterClosed().subscribe((additionalInformation) => {

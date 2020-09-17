@@ -1,15 +1,15 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {PhoneNumber} from '../../../phoneNumber.model';
 import {NgForm} from '@angular/forms';
-import {MatTableDataSource} from '@angular/material';
+import {MatTableDataSource} from '@angular/material/table';
+
+import {PhoneNumber} from '../../../phoneNumber.model';
 
 @Component({
   selector: 'app-phone-numbers-list',
   templateUrl: './phone-numbers-list.component.html',
-  styleUrls: ['./phone-numbers-list.component.css']
+  styleUrls: ['./phone-numbers-list.component.css'],
 })
 export class PhoneNumbersListComponent implements OnInit {
-
   displayedColumns: string[] = ['label', 'phonenumber', 'action'];
   dataSource: MatTableDataSource<PhoneNumber>;
 
@@ -17,8 +17,7 @@ export class PhoneNumbersListComponent implements OnInit {
 
   @Output() phoneNumbersChanged = new EventEmitter();
 
-  constructor() {
-  }
+  constructor() {}
 
   ngOnInit(): void {
     this.dataSource = new MatTableDataSource(this.phoneNumbers);
@@ -33,9 +32,9 @@ export class PhoneNumbersListComponent implements OnInit {
 
   removePhoneNumber(number: string) {
     const localPhoneNumbers = [];
-    for (let i = 0; i < this.phoneNumbers.length; i++) {
-      if (this.phoneNumbers[i].phoneNumber !== number) {
-        localPhoneNumbers.push(this.phoneNumbers[i]);
+    for (const phoneNumber of this.phoneNumbers) {
+      if (phoneNumber.phoneNumber !== number) {
+        localPhoneNumbers.push(phoneNumber);
       }
     }
 
@@ -43,5 +42,4 @@ export class PhoneNumbersListComponent implements OnInit {
     this.dataSource = new MatTableDataSource(this.phoneNumbers);
     this.phoneNumbersChanged.emit(this.phoneNumbers.slice());
   }
-
 }

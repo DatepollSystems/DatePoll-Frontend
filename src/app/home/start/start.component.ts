@@ -1,5 +1,5 @@
 import {Component, OnDestroy} from '@angular/core';
-import {MatBottomSheet} from '@angular/material';
+import {MatBottomSheet} from '@angular/material/bottom-sheet';
 import {Router} from '@angular/router';
 
 import {Subscription} from 'rxjs';
@@ -23,7 +23,7 @@ import {EventsVoteForDecisionModalComponent} from '../events/events-view/events-
 @Component({
   selector: 'app-start',
   templateUrl: './start.component.html',
-  styleUrls: ['./start.component.css']
+  styleUrls: ['./start.component.css'],
 })
 export class StartComponent implements OnDestroy {
   birthdays: HomeBirthdayModel[];
@@ -58,31 +58,31 @@ export class StartComponent implements OnDestroy {
     private settingsService: SettingsService
   ) {
     this.birthdays = homePageService.getBirthdays();
-    this.birthdaysSubscription = homePageService.birthdaysChange.subscribe(value => {
+    this.birthdaysSubscription = homePageService.birthdaysChange.subscribe((value) => {
       this.birthdays = value;
     });
 
     this.bookings = homePageService.getBookings();
-    this.bookingsSubscription = homePageService.bookingsChange.subscribe(value => {
+    this.bookingsSubscription = homePageService.bookingsChange.subscribe((value) => {
       this.bookings = value;
     });
 
     this.events = homePageService.getEvents().slice(0, 5);
     this.countOpenEvents();
-    this.eventsSubscription = homePageService.eventsChange.subscribe(value => {
+    this.eventsSubscription = homePageService.eventsChange.subscribe((value) => {
       this.events = value.slice(0, 5);
       this.countOpenEvents();
       this.eventVotingChangeLoading = false;
     });
 
     this.broadcasts = homePageService.getBroadcasts();
-    this.broadcastSubscription = homePageService.broadcastChange.subscribe(value => {
+    this.broadcastSubscription = homePageService.broadcastChange.subscribe((value) => {
       this.broadcasts = value;
     });
 
     this.happyAlert = this.settingsService.getHappyAlert();
     this.checkIfFireworkShouldBeShown();
-    this.happyAlertSubscription = this.settingsService.happyAlertChange.subscribe(value => {
+    this.happyAlertSubscription = this.settingsService.happyAlertChange.subscribe((value) => {
       this.happyAlert = value;
       this.checkIfFireworkShouldBeShown();
     });
@@ -113,10 +113,10 @@ export class StartComponent implements OnDestroy {
 
   private onEventVote(event: Event) {
     const bottomSheetRef = this.bottomSheet.open(EventsVoteForDecisionModalComponent, {
-      data: {event}
+      data: {event},
     });
 
-    bottomSheetRef.afterDismissed().subscribe(dto => {
+    bottomSheetRef.afterDismissed().subscribe((dto) => {
       if (dto != null) {
         this.eventsUserSerivce.voteForDecision(event.id, dto.decision, dto.additionalInformation).subscribe(
           (response: any) => {
@@ -127,7 +127,7 @@ export class StartComponent implements OnDestroy {
               this.translate.getTranslationFor('EVENTS_VIEW_EVENT_SUCCESSFULLY_VOTED')
             );
           },
-          error => console.log(error)
+          (error) => console.log(error)
         );
       } else {
         console.log('events-view | Closed bottom sheet, voted for nohting');
@@ -139,20 +139,20 @@ export class StartComponent implements OnDestroy {
     const answers = [
       {
         answer: this.translate.getTranslationFor('YES'),
-        value: 'yes'
+        value: 'yes',
       },
       {
         answer: this.translate.getTranslationFor('NO'),
-        value: 'no'
-      }
+        value: 'no',
+      },
     ];
     const question = this.translate.getTranslationFor('EVENTS_CANCEL_VOTING');
 
     const bottomSheetRef = this.bottomSheet.open(QuestionDialogComponent, {
       data: {
         answers,
-        question
-      }
+        question,
+      },
     });
 
     bottomSheetRef.afterDismissed().subscribe((value: string) => {
@@ -174,7 +174,7 @@ export class StartComponent implements OnDestroy {
                 this.translate.getTranslationFor('EVENTS_VIEW_EVENT_SUCCESSFULLY_REMOVED_VOTING')
               );
             },
-            error => {
+            (error) => {
               console.log(error);
               this.eventVotingChangeLoading = false;
             }

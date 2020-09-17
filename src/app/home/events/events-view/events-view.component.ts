@@ -1,5 +1,6 @@
 import {Component, OnDestroy, TemplateRef, ViewChild} from '@angular/core';
-import {MatDialog, MatSlideToggleChange} from '@angular/material';
+import {MatDialog} from '@angular/material/dialog';
+import {MatSlideToggleChange} from '@angular/material/slide-toggle';
 import {Subscription} from 'rxjs';
 
 import {EventsUserService} from '../events-user.service';
@@ -10,7 +11,7 @@ import {Event} from '../models/event.model';
 @Component({
   selector: 'app-events-view',
   templateUrl: './events-view.component.html',
-  styleUrls: ['./events-view.component.css']
+  styleUrls: ['./events-view.component.css'],
 })
 export class EventsViewComponent implements OnDestroy {
   @ViewChild('successfullyRemovedDecision', {static: true}) successfullyRemovedDecision: TemplateRef<any>;
@@ -31,14 +32,14 @@ export class EventsViewComponent implements OnDestroy {
     if (this.events.length > 0) {
       this.loading = false;
     }
-    this.eventsSubscription = this.eventsUserSerivce.eventsChange.subscribe(value => {
+    this.eventsSubscription = this.eventsUserSerivce.eventsChange.subscribe((value) => {
       this.events = value;
       this.loading = false;
       this.refreshView();
     });
 
     this.isMobile = this.isMobileService.getIsMobile();
-    this.isMobileSubscription = this.isMobileService.isMobileChange.subscribe(value => {
+    this.isMobileSubscription = this.isMobileService.isMobileChange.subscribe((value) => {
       this.isMobile = value;
     });
   }

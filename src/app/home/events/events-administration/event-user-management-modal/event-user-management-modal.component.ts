@@ -1,5 +1,5 @@
 import {Component, Inject, OnDestroy} from '@angular/core';
-import {MAT_DIALOG_DATA} from '@angular/material';
+import {MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {Subscription} from 'rxjs';
 
 import {EventsService} from '../../events.service';
@@ -8,7 +8,7 @@ import {Event} from '../../models/event.model';
 @Component({
   selector: 'app-event-user-management-modal',
   templateUrl: './event-user-management-modal.component.html',
-  styleUrls: ['./event-user-management-modal.component.css']
+  styleUrls: ['./event-user-management-modal.component.css'],
 })
 export class EventUserManagementModalComponent implements OnDestroy {
   event: Event;
@@ -16,8 +16,7 @@ export class EventUserManagementModalComponent implements OnDestroy {
   name: string;
   sendingRequest = true;
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any,
-              private eventsService: EventsService) {
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any, private eventsService: EventsService) {
     this.event = data.event;
     this.name = this.event.name;
 

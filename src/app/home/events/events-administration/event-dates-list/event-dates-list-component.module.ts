@@ -1,7 +1,6 @@
 import {CommonModule} from '@angular/common';
 import {NgModule} from '@angular/core';
-import {DateAdapter} from '@angular/material';
-import {MAT_DATE_FORMATS} from '@angular/material/core';
+import {DateAdapter, MAT_DATE_FORMATS} from '@angular/material/core';
 
 import {MaterialModule} from '../../../../material-module';
 import {TranslationModule} from '../../../../translation/translation.module';
@@ -15,8 +14,8 @@ import {EventDatesListComponent} from './event-dates-list.component';
   imports: [CommonModule, MaterialModule, TranslationModule, MapsModule],
   providers: [
     {provide: DateAdapter, useClass: CustomDateAdapter},
-    {provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS}
+    {provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS},
   ],
-  exports: [EventDatesListComponent]
+  exports: [EventDatesListComponent],
 })
 export class EventDatesListComponentModule {}

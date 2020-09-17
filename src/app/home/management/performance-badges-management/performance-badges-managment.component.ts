@@ -1,6 +1,6 @@
-import {Component, OnDestroy, TemplateRef, ViewChild} from '@angular/core';
+import {Component, OnDestroy} from '@angular/core';
 import {NgForm} from '@angular/forms';
-import {MatBottomSheet} from '@angular/material';
+import {MatBottomSheet} from '@angular/material/bottom-sheet';
 import {MatDialog} from '@angular/material/dialog';
 import {Subscription} from 'rxjs';
 
@@ -21,7 +21,7 @@ import {PerformanceBadgeUpdateModalComponent} from './performance-badge-update-m
 @Component({
   selector: 'app-performance-badges-managment',
   templateUrl: './performance-badges-managment.component.html',
-  styleUrls: ['./performance-badges-managment.component.css']
+  styleUrls: ['./performance-badges-managment.component.css'],
 })
 export class PerformanceBadgesManagmentComponent implements OnDestroy {
   performanceBadgesSubscription: Subscription;
@@ -39,12 +39,12 @@ export class PerformanceBadgesManagmentComponent implements OnDestroy {
   answers = [
     {
       answer: this.translate.getTranslationFor('YES'),
-      value: 'yes'
+      value: 'yes',
     },
     {
       answer: this.translate.getTranslationFor('NO'),
-      value: 'no'
-    }
+      value: 'no',
+    },
   ];
 
   constructor(
@@ -56,22 +56,22 @@ export class PerformanceBadgesManagmentComponent implements OnDestroy {
     private dialog: MatDialog
   ) {
     this.performanceBadges = this.performanceBadgesService.getPerformanceBadges();
-    this.performanceBadgesSubscription = this.performanceBadgesService.performanceBadgesChange.subscribe(value => {
+    this.performanceBadgesSubscription = this.performanceBadgesService.performanceBadgesChange.subscribe((value) => {
       this.performanceBadges = value;
     });
 
     this.instruments = this.performanceBadgesService.getInstruments();
-    this.instrumentsSubscription = this.performanceBadgesService.instrumentsChange.subscribe(value => {
+    this.instrumentsSubscription = this.performanceBadgesService.instrumentsChange.subscribe((value) => {
       this.instruments = value;
     });
 
     this.badges = this.badgesService.getBadges();
-    this.badgesSubscription = this.badgesService.badgesChange.subscribe(value => {
+    this.badgesSubscription = this.badgesService.badgesChange.subscribe((value) => {
       this.badges = value;
     });
 
     this.currentYearUsers = this.performanceBadgesService.getCurrentYearUsers();
-    this.currentYearUsersSubscription = this.performanceBadgesService.currentYearUsersChange.subscribe(value => {
+    this.currentYearUsersSubscription = this.performanceBadgesService.currentYearUsersChange.subscribe((value) => {
       this.currentYearUsers = value;
     });
   }
@@ -106,7 +106,7 @@ export class PerformanceBadgesManagmentComponent implements OnDestroy {
           this.translate.getTranslationFor('MANAGEMENT_PERFORMANCE_BADGES_ADD_PERFORMANCE_BADGE_SUCCESSFUL')
         );
       },
-      error => {
+      (error) => {
         console.log(error);
         this.performanceBadgesService.fetchPerformanceBadges();
       }
@@ -117,7 +117,7 @@ export class PerformanceBadgesManagmentComponent implements OnDestroy {
   updatePerformanceBadge(performanceBadge: PerformanceBadge) {
     this.dialog.open(PerformanceBadgeUpdateModalComponent, {
       width: '80vh',
-      data: {performanceBadge}
+      data: {performanceBadge},
     });
   }
 
@@ -127,8 +127,8 @@ export class PerformanceBadgesManagmentComponent implements OnDestroy {
     const bottomSheetRef = this.bottomSheet.open(QuestionDialogComponent, {
       data: {
         answers: this.answers,
-        question
-      }
+        question,
+      },
     });
 
     bottomSheetRef.afterDismissed().subscribe((value: string) => {
@@ -143,7 +143,7 @@ export class PerformanceBadgesManagmentComponent implements OnDestroy {
                 this.translate.getTranslationFor('MANAGEMENT_PERFORMANCE_BADGES_REMOVED_PERFORMANCE_BADGE_SUCCESSFUL')
               );
             },
-            error => {
+            (error) => {
               console.log(error);
               this.performanceBadgesService.fetchPerformanceBadges();
             }
@@ -165,7 +165,7 @@ export class PerformanceBadgesManagmentComponent implements OnDestroy {
           this.translate.getTranslationFor('MANAGEMENT_PERFORMANCE_BADGES_ADD_INSTRUMENT_SUCCESSFUL')
         );
       },
-      error => {
+      (error) => {
         console.log(error);
         this.performanceBadgesService.fetchInstruments();
       }
@@ -176,7 +176,7 @@ export class PerformanceBadgesManagmentComponent implements OnDestroy {
   updateInstrument(instrument: Instrument) {
     this.dialog.open(InstrumentUpdateModalComponent, {
       width: '80vh',
-      data: {instrument}
+      data: {instrument},
     });
   }
 
@@ -186,8 +186,8 @@ export class PerformanceBadgesManagmentComponent implements OnDestroy {
     const bottomSheetRef = this.bottomSheet.open(QuestionDialogComponent, {
       data: {
         answers: this.answers,
-        question
-      }
+        question,
+      },
     });
 
     bottomSheetRef.afterDismissed().subscribe((value: string) => {
@@ -202,7 +202,7 @@ export class PerformanceBadgesManagmentComponent implements OnDestroy {
                 this.translate.getTranslationFor('MANAGEMENT_PERFORMANCE_BADGES_REMOVED_INSTRUMENT_SUCCESSFUL')
               );
             },
-            error => {
+            (error) => {
               console.log(error);
               this.performanceBadgesService.fetchInstruments();
             }
@@ -225,7 +225,7 @@ export class PerformanceBadgesManagmentComponent implements OnDestroy {
           this.translate.getTranslationFor('MANAGEMENT_PERFORMANCE_BADGES_BADGE_ADD_SUCCESSFULLY')
         );
       },
-      error => {
+      (error) => {
         console.log(error);
         this.badgesService.fetchBadges();
       }
@@ -239,8 +239,8 @@ export class PerformanceBadgesManagmentComponent implements OnDestroy {
     const bottomSheetRef = this.bottomSheet.open(QuestionDialogComponent, {
       data: {
         answers: this.answers,
-        question
-      }
+        question,
+      },
     });
 
     bottomSheetRef.afterDismissed().subscribe((value: string) => {
@@ -255,7 +255,7 @@ export class PerformanceBadgesManagmentComponent implements OnDestroy {
                 this.translate.getTranslationFor('MANAGEMENT_PERFORMANCE_BADGES_BADGE_REMOVE_SUCCESSFULLY')
               );
             },
-            error => {
+            (error) => {
               console.log(error);
               this.badgesService.fetchBadges();
             }

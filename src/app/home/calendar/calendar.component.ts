@@ -1,5 +1,5 @@
 import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewRef} from '@angular/core';
-import {MatBottomSheet} from '@angular/material';
+import {MatBottomSheet} from '@angular/material/bottom-sheet';
 import {MatDialog} from '@angular/material/dialog';
 import {MatSlideToggleChange} from '@angular/material/slide-toggle';
 import {Subject, Subscription} from 'rxjs';
@@ -39,9 +39,9 @@ import {HomeBirthdayModel} from '../start/birthdays.model';
   providers: [
     {
       provide: CalendarDateFormatter,
-      useClass: CustomDateFormatter
-    }
-  ]
+      useClass: CustomDateFormatter,
+    },
+  ],
 })
 export class CalendarComponent implements OnInit, OnDestroy {
   locale = 'de';
@@ -93,24 +93,24 @@ export class CalendarComponent implements OnInit, OnDestroy {
     private bottomSheet: MatBottomSheet
   ) {
     this.serverInfo = this.settingsService.getServerInfo();
-    this.serverInfoSubscription = this.settingsService.serverInfoChange.subscribe(value => {
+    this.serverInfoSubscription = this.settingsService.serverInfoChange.subscribe((value) => {
       this.serverInfo = value;
     });
 
     this.showMovies = this.userSettingsService.getShowMoviesInCalendar();
-    this.showMoviesSubscription = this.userSettingsService.showMoviesInCalendarChange.subscribe(value => {
+    this.showMoviesSubscription = this.userSettingsService.showMoviesInCalendarChange.subscribe((value) => {
       this.showMovies = value;
       this.refreshCalendar();
     });
 
     this.showEvents = this.userSettingsService.getShowEventsInCalendar();
-    this.showEventsSubscription = this.userSettingsService.showEventsInCalendarChange.subscribe(value => {
+    this.showEventsSubscription = this.userSettingsService.showEventsInCalendarChange.subscribe((value) => {
       this.showEvents = value;
       this.refreshCalendar();
     });
 
     this.showBirthdays = this.userSettingsService.getShowBirthdaysInCalendar();
-    this.showBirthdaysSubscription = this.userSettingsService.showBirthdayChange.subscribe(value => {
+    this.showBirthdaysSubscription = this.userSettingsService.showBirthdayChange.subscribe((value) => {
       this.showBirthdays = value;
       this.refreshCalendar();
     });
@@ -121,7 +121,7 @@ export class CalendarComponent implements OnInit, OnDestroy {
       if (this.serverInfo?.cinema_enabled) {
         this.movies = this.cinemaService.getNotShownMovies();
 
-        this.moviesSubscription = this.cinemaService.notShownMoviesChange.subscribe(value => {
+        this.moviesSubscription = this.cinemaService.notShownMoviesChange.subscribe((value) => {
           this.movies = value;
           this.refreshCalendar();
         });
@@ -131,14 +131,14 @@ export class CalendarComponent implements OnInit, OnDestroy {
         if (this.myUserService.hasPermission(Permissions.EVENTS_ADMINISTRATION)) {
           this.avents = this.eventsService.getEvents();
 
-          this.aventSubscription = this.eventsService.eventsChange.subscribe(value => {
+          this.aventSubscription = this.eventsService.eventsChange.subscribe((value) => {
             this.avents = value;
             this.refreshCalendar();
           });
         } else {
           this.avents = this.eventsUserService.getEvents();
 
-          this.aventSubscription = this.eventsUserService.eventsChange.subscribe(value => {
+          this.aventSubscription = this.eventsUserService.eventsChange.subscribe((value) => {
             this.avents = value;
             this.refreshCalendar();
           });
@@ -146,7 +146,7 @@ export class CalendarComponent implements OnInit, OnDestroy {
       }
 
       this.birthdays = this.homepageService.getBirthdays();
-      this.birthdaysSubscription = this.homepageService.birthdaysChange.subscribe(value => {
+      this.birthdaysSubscription = this.homepageService.birthdaysChange.subscribe((value) => {
         this.birthdays = value;
         this.refreshCalendar();
       });
@@ -184,18 +184,18 @@ export class CalendarComponent implements OnInit, OnDestroy {
               onClick: (): void => {
                 this.dialog.open(MovieEditModalComponent, {
                   width: '80%',
-                  data: {movie: movie.id}
+                  data: {movie: movie.id},
                 });
-              }
+              },
             },
             {
               label: '[&#10060;]',
               onClick: (): void => {
                 this.bottomSheet.open(MovieDeleteModalComponent, {
-                  data: {movieID: movie.id}
+                  data: {movieID: movie.id},
                 });
-              }
-            }
+              },
+            },
           ];
         }
         this.events.push(movie);
@@ -212,10 +212,10 @@ export class CalendarComponent implements OnInit, OnDestroy {
                 this.dialog.open(EventUpdateModalComponent, {
                   width: '80%',
                   data: {
-                    event: avent
-                  }
+                    event: avent,
+                  },
                 });
-              }
+              },
             },
             {
               label: '[&#10060;]',
@@ -223,20 +223,20 @@ export class CalendarComponent implements OnInit, OnDestroy {
                 const answers = [
                   {
                     answer: this.translate.getTranslationFor('YES'),
-                    value: 'yes'
+                    value: 'yes',
                   },
                   {
                     answer: this.translate.getTranslationFor('NO'),
-                    value: 'no'
-                  }
+                    value: 'no',
+                  },
                 ];
                 const question = this.translate.getTranslationFor('EVENTS_ADMINISTRATION_DELETE_EVENT_QUESTION');
 
                 const bottomSheetRef = this.bottomSheet.open(QuestionDialogComponent, {
                   data: {
                     answers,
-                    question
-                  }
+                    question,
+                  },
                 });
 
                 bottomSheetRef.afterDismissed().subscribe((value: string) => {
@@ -251,13 +251,13 @@ export class CalendarComponent implements OnInit, OnDestroy {
                             this.translate.getTranslationFor('EVENTS_ADMINISTRATION_DELETE_EVENT_SUCCESSFULLY_DELETED')
                           );
                         },
-                        error => console.log(error)
+                        (error) => console.log(error)
                       );
                     }
                   }
                 });
-              }
-            }
+              },
+            },
           ];
         }
         this.events.push(avent);
@@ -287,12 +287,12 @@ export class CalendarComponent implements OnInit, OnDestroy {
   }
 
   eventTimesChanged({event, newStart, newEnd}: CalendarEventTimesChangedEvent): void {
-    this.events = this.events.map(iEvent => {
+    this.events = this.events.map((iEvent) => {
       if (iEvent === event) {
         return {
           ...event,
           start: newStart,
-          end: newEnd
+          end: newEnd,
         };
       }
       return iEvent;
@@ -312,15 +312,15 @@ export class CalendarComponent implements OnInit, OnDestroy {
       if (this.myUserService.hasPermission(Permissions.CINEMA_MOVIE_ADMINISTRATION)) {
         this.dialog.open(MovieInfoModalComponent, {
           width: '80%',
-          data: {movie: object}
+          data: {movie: object},
         });
       }
     } else if (object instanceof Event) {
       this.dialog.open(EventInfoModalComponent, {
         width: '80%',
         data: {
-          event: object
-        }
+          event: object,
+        },
       });
     }
   }

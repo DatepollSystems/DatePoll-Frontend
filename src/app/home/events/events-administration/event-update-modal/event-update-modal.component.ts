@@ -1,6 +1,6 @@
 import {Component, Inject, OnDestroy} from '@angular/core';
 import {NgForm} from '@angular/forms';
-import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {Subscription} from 'rxjs';
 
 import {NotificationsService} from 'angular2-notifications';
@@ -16,7 +16,7 @@ import {Event} from '../../models/event.model';
 @Component({
   selector: 'app-event-update-modal',
   templateUrl: './event-update-modal.component.html',
-  styleUrls: ['./event-update-modal.component.css']
+  styleUrls: ['./event-update-modal.component.css'],
 })
 export class EventUpdateModalComponent implements OnDestroy {
   event: Event;
@@ -55,14 +55,14 @@ export class EventUpdateModalComponent implements OnDestroy {
 
     this.joined = this.eventsService.getJoinedOfEvent(this.event.id);
     this.joinedCopy = this.joined.slice();
-    this.joinedSubscription = this.eventsService.joinedGroupsChange.subscribe(value => {
+    this.joinedSubscription = this.eventsService.joinedGroupsChange.subscribe((value) => {
       this.joined = value;
       this.joinedCopy = this.joined.slice();
     });
 
     this.free = this.eventsService.getFreeOfEvent(this.event.id);
     this.freeCopy = this.free.slice();
-    this.freeSubscription = this.eventsService.freeGroupsChange.subscribe(value => {
+    this.freeSubscription = this.eventsService.freeGroupsChange.subscribe((value) => {
       this.free = value;
       this.freeCopy = this.free.slice();
     });
@@ -112,7 +112,7 @@ export class EventUpdateModalComponent implements OnDestroy {
           this.translate.getTranslationFor('EVENTS_ADMINISTRATION_UPDATE_EVENT_SUCCESSFULLY_UPDATED')
         );
       },
-      error => console.log(error)
+      (error) => console.log(error)
     );
 
     // Groups and subgroups
@@ -137,14 +137,14 @@ export class EventUpdateModalComponent implements OnDestroy {
             (data: any) => {
               console.log(data);
             },
-            error => console.log(error)
+            (error) => console.log(error)
           );
         } else {
           this.eventsService.addSubgroupToEvent(this.event.id, group.id).subscribe(
             (data: any) => {
               console.log(data);
             },
-            error => console.log(error)
+            (error) => console.log(error)
           );
         }
       }
@@ -171,14 +171,14 @@ export class EventUpdateModalComponent implements OnDestroy {
             (data: any) => {
               console.log(data);
             },
-            error => console.log(error)
+            (error) => console.log(error)
           );
         } else {
           this.eventsService.removeSubgroupFromEvent(this.event.id, group.id).subscribe(
             (data: any) => {
               console.log(data);
             },
-            error => console.log(error)
+            (error) => console.log(error)
           );
         }
       }
