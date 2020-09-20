@@ -10,7 +10,7 @@ mat-form-field {
 }
 
 .mat-row:hover {
-  background-color: #EEEEEE;
+  background-color: #ccc;
 }
 
 .mat-cell,
@@ -31,6 +31,10 @@ td > a {
 
 td > a:hover {
   border-bottom-style: solid;
+}
+
+tr:nth-child(even) {
+  background: #eee;
 }
 
 th.mat-sort-header-sorted {
