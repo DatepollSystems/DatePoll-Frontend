@@ -14,10 +14,7 @@ import {UsersManagementRoutingModule} from './users-management-routing.module';
 
 import {MatMultiSortModule} from 'ngx-mat-multi-sort';
 
-import {UsersService} from './users.service';
-
 import {BadgesListComponent} from './badges-list/badges-list.component';
-import {DeletedUsersManagementComponent} from './deleted-users-management/deleted-users-management.component';
 import {InstrumentSelectComponent} from './instrument-select/instrument-select.component';
 import {PerformanceBadgeSelectComponent} from './performance-badge-select/performance-badge-select.component';
 import {PerformanceBadgesListComponent} from './performance-badges-list/performance-badges-list.component';
@@ -53,8 +50,9 @@ import {UsersExportBottomSheetComponent, UsersManagementComponent} from './users
     MatMultiSortModule,
     UsersManagementRoutingModule,
     CommonComponentsModule,
-    GroupAndSubgroupTypeInputSelectModule,
+    GroupAndSubgroupTypeInputSelectModule
   ],
-  providers: [UsersService, {provide: DateAdapter, useClass: CustomDateAdapter}, {provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS}],
+  providers: [{provide: DateAdapter, useClass: CustomDateAdapter}, {provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS}]
 })
-export class UsersManagementModule {}
+export class UsersManagementModule {
+}

@@ -7,14 +7,14 @@ import {NotificationsService} from 'angular2-notifications';
 import {QuestionDialogComponent} from '../../../../utils/shared-components/question-dialog/question-dialog.component';
 
 import {TranslateService} from '../../../../translation/translate.service';
-import {UsersService} from '../users.service';
+import {DeletedUsersService} from './deleted-users.service';
 
-import {DeletedUser} from '../deletedUser.model';
+import {DeletedUser} from './deletedUser.model';
 
 @Component({
   selector: 'app-deleted-users-management',
   templateUrl: './deleted-users-management.component.html',
-  styleUrls: ['./deleted-users-management.component.css']
+  styleUrls: ['./deleted-users-management.component.css'],
 })
 export class DeletedUsersManagementComponent implements OnDestroy {
   sortedUsers: DeletedUser[];
@@ -23,14 +23,14 @@ export class DeletedUsersManagementComponent implements OnDestroy {
   deletedUsersLoaded = false;
 
   constructor(
-    private usersSerivce: UsersService,
+    private deletedUsersService: DeletedUsersService,
     private translate: TranslateService,
     private bottomSheet: MatBottomSheet,
     private notificationsService: NotificationsService
   ) {
-    this.deletedUsers = this.usersSerivce.getDeletedUsers();
+    this.deletedUsers = this.deletedUsersService.getDeletedUsers();
     this.sortedUsers = this.deletedUsers.slice();
-    this.deletedUsersSubscription = this.usersSerivce.deletedUserChange.subscribe(value => {
+    this.deletedUsersSubscription = this.deletedUsersService.deletedUserChange.subscribe((value) => {
       this.deletedUsersLoaded = true;
       this.deletedUsers = value;
       this.sortedUsers = this.deletedUsers.slice();
@@ -47,20 +47,11 @@ export class DeletedUsersManagementComponent implements OnDestroy {
 
     for (const user of this.deletedUsers) {
       if (
-        user.firstname
-          ?.trim()
-          .toLowerCase()
-          .includes(filterValue) ||
-        user.surname
-          ?.trim()
-          .toLowerCase()
-          .includes(filterValue) ||
+        user.firstname?.trim().toLowerCase().includes(filterValue) ||
+        user.surname?.trim().toLowerCase().includes(filterValue) ||
         user.join_date?.toString().includes(filterValue) ||
         user.deletedAt?.toString().includes(filterValue) ||
-        user.internalComment
-          ?.trim()
-          .toLowerCase()
-          .includes(filterValue)
+        user.internalComment?.trim().toLowerCase().includes(filterValue)
       ) {
         this.sortedUsers.push(user);
       }
@@ -71,36 +62,36 @@ export class DeletedUsersManagementComponent implements OnDestroy {
     const answers = [
       {
         answer: this.translate.getTranslationFor('YES'),
-        value: 'yes'
+        value: 'yes',
       },
       {
         answer: this.translate.getTranslationFor('NO'),
-        value: 'no'
-      }
+        value: 'no',
+      },
     ];
     const question = this.translate.getTranslationFor('MANAGEMENT_USERS_DELETED_USERS_DELETE_ALL_CONFIRM');
 
     const bottomSheetRef = this.bottomSheet.open(QuestionDialogComponent, {
       data: {
         answers,
-        question
-      }
+        question,
+      },
     });
 
     bottomSheetRef.afterDismissed().subscribe((value: string) => {
       if (value != null) {
         if (value.includes('yes')) {
-          this.usersSerivce.deleteAllDeletedUsers().subscribe(
+          this.deletedUsersService.deleteAllDeletedUsers().subscribe(
             (response: any) => {
               console.log(response);
               this.deletedUsersLoaded = false;
-              this.usersSerivce.getDeletedUsers();
+              this.deletedUsersService.getDeletedUsers();
               this.notificationsService.success(
                 this.translate.getTranslationFor('SUCCESSFULLY'),
                 this.translate.getTranslationFor('MANAGEMENT_USERS_DELETED_USERS_DELETE_ALL_SUCCESSFUL')
               );
             },
-            error => console.log(error)
+            (error) => console.log(error)
           );
         }
       }
