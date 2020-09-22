@@ -165,7 +165,9 @@ export class CalendarComponent implements OnInit, OnDestroy {
       this.aventSubscription.unsubscribe();
     }
     this.serverInfoSubscription.unsubscribe();
-    this.birthdaysSubscription.unsubscribe();
+    if (this.birthdaysSubscription) {
+      this.birthdaysSubscription.unsubscribe();
+    }
     this.showMoviesSubscription.unsubscribe();
     this.showEventsSubscription.unsubscribe();
     this.showBirthdaysSubscription.unsubscribe();
