@@ -24,6 +24,7 @@ import {UserCreateModalComponent} from './user-create-modal/user-create-modal.co
 import {UserDeleteModalComponent} from './user-delete-modal/user-delete-modal.component';
 import {UserUpdateModalComponent} from './user-update-modal/user-update-modal.component';
 import {UsersExportBottomSheetComponent, UsersManagementComponent} from './users-management.component';
+import {UsersChangesManagementComponent} from './users-changes-management/users-changes-management.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,7 @@ import {UsersExportBottomSheetComponent, UsersManagementComponent} from './users
     PhoneNumbersListComponent,
     UserDeleteModalComponent,
     BadgesListComponent,
-    DeletedUsersManagementComponent,
+    UsersChangesManagementComponent,
   ],
   imports: [
     CommonModule,
@@ -50,9 +51,11 @@ import {UsersExportBottomSheetComponent, UsersManagementComponent} from './users
     MatMultiSortModule,
     UsersManagementRoutingModule,
     CommonComponentsModule,
-    GroupAndSubgroupTypeInputSelectModule
+    GroupAndSubgroupTypeInputSelectModule,
   ],
-  providers: [{provide: DateAdapter, useClass: CustomDateAdapter}, {provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS}]
+  providers: [
+    {provide: DateAdapter, useClass: CustomDateAdapter},
+    {provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS},
+  ],
 })
-export class UsersManagementModule {
-}
+export class UsersManagementModule {}

@@ -24,7 +24,7 @@ import {User} from './user.model';
 @Component({
   selector: 'app-users-management',
   templateUrl: './users-management.component.html',
-  styleUrls: ['./users-management.component.css']
+  styleUrls: ['./users-management.component.css'],
 })
 export class UsersManagementComponent implements OnInit, OnDestroy {
   hasPermissionToDeleteUser = false;
@@ -59,7 +59,7 @@ export class UsersManagementComponent implements OnInit, OnDestroy {
       this.usersLoaded = true;
     }
 
-    this.usersSubscription = usersService.usersChange.subscribe(value => {
+    this.usersSubscription = usersService.usersChange.subscribe((value) => {
       this.usersLoaded = true;
 
       this.users = value;
@@ -84,7 +84,7 @@ export class UsersManagementComponent implements OnInit, OnDestroy {
         {id: 'activity', name: 'activity'},
         {id: 'username', name: 'username'},
         {id: 'bvMember', name: 'bvMember'},
-        {id: 'actions', name: 'actions'}
+        {id: 'actions', name: 'actions'},
       ],
       {defaultSortParams: ['surname'], defaultSortDirs: ['asc']}
     );
@@ -133,7 +133,7 @@ export class UsersManagementComponent implements OnInit, OnDestroy {
       {id: 'activity', name: this.translate.getTranslationFor('MANAGEMENT_USERS_ACTIVITY')},
       {id: 'username', name: this.translate.getTranslationFor('MANAGEMENT_USERS_USERNAME')},
       {id: 'bvMember', name: this.translate.getTranslationFor('MANAGEMENT_USERS_BV_MEMBER')},
-      {id: 'actions', name: this.translate.getTranslationFor('MANAGEMENT_USERS_ACTIONS')}
+      {id: 'actions', name: this.translate.getTranslationFor('MANAGEMENT_USERS_ACTIONS')},
     ]);
 
     this.table.pageSize = 10;
@@ -158,26 +158,15 @@ export class UsersManagementComponent implements OnInit, OnDestroy {
       const memberNumber = user.memberNumber?.trim().toLowerCase();
       let check = false;
       for (const email of user.getEmailAddresses()) {
-        if (
-          email
-            .trim()
-            .toLowerCase()
-            .includes(this.filterValue)
-        ) {
+        if (email.trim().toLowerCase().includes(this.filterValue)) {
           check = true;
           break;
         }
       }
       for (const number of user.getPhoneNumbers()) {
         if (
-          number.label
-            .trim()
-            .toLowerCase()
-            .includes(this.filterValue) ||
-          number.phoneNumber
-            .trim()
-            .toLowerCase()
-            .includes(this.filterValue)
+          number.label.trim().toLowerCase().includes(this.filterValue) ||
+          number.phoneNumber.trim().toLowerCase().includes(this.filterValue)
         ) {
           check = true;
           break;
@@ -186,10 +175,7 @@ export class UsersManagementComponent implements OnInit, OnDestroy {
       const streetName = user.streetname.trim().toLowerCase();
       const streetNumber = user.streetnumber.trim().toLowerCase();
       const location = user.location.trim().toLowerCase();
-      const zipcode = user.zipcode
-        .toString()
-        .trim()
-        .toLowerCase();
+      const zipcode = user.zipcode.toString().trim().toLowerCase();
       const activity = user.activity?.trim().toLowerCase();
       if (
         title?.includes(this.filterValue) ||
@@ -206,7 +192,9 @@ export class UsersManagementComponent implements OnInit, OnDestroy {
         this.users.push(user);
       }
     }
-    this.getData();
+    if (this.table.dataSource) {
+      this.getData();
+    }
   }
 
   openExportUsersBottomSheet(): void {
@@ -217,20 +205,20 @@ export class UsersManagementComponent implements OnInit, OnDestroy {
     const answers = [
       {
         answer: this.translate.getTranslationFor('YES'),
-        value: 'yes'
+        value: 'yes',
       },
       {
         answer: this.translate.getTranslationFor('NO'),
-        value: 'no'
-      }
+        value: 'no',
+      },
     ];
     const question = this.translate.getTranslationFor('MANAGEMENT_USERS_ACTIVATE_ALL_QUESTION_DIALOG');
 
     const bottomSheetRef = this.bottomSheet.open(QuestionDialogComponent, {
       data: {
         answers,
-        question
-      }
+        question,
+      },
     });
 
     bottomSheetRef.afterDismissed().subscribe((value: string) => {
@@ -245,7 +233,7 @@ export class UsersManagementComponent implements OnInit, OnDestroy {
                 this.translate.getTranslationFor('MANAGEMENT_USERS_ACTIVATE_ALL_FINISHED')
               );
             },
-            error => console.log(error)
+            (error) => console.log(error)
           );
         }
       }
@@ -254,20 +242,20 @@ export class UsersManagementComponent implements OnInit, OnDestroy {
 
   onCreate() {
     this.dialog.open(UserCreateModalComponent, {
-      width: '80%'
+      width: '80%',
     });
   }
 
   onEdit(user: User) {
     this.dialog.open(UserUpdateModalComponent, {
       width: '80%',
-      data: {user}
+      data: {user},
     });
   }
 
   onDelete(userID: number) {
     this.bottomSheet.open(UserDeleteModalComponent, {
-      data: {userID}
+      data: {userID},
     });
   }
 
@@ -284,7 +272,7 @@ export class UsersManagementComponent implements OnInit, OnDestroy {
       users: [],
       page,
       pagesize,
-      totalElements: tempUsers.length
+      totalElements: tempUsers.length,
     };
 
     if (sorting.length === 0) {
@@ -320,7 +308,7 @@ export class UsersManagementComponent implements OnInit, OnDestroy {
 @Component({
   selector: 'app-users-export-bottom-sheet',
   templateUrl: 'users-export-bottom-sheet.html',
-  styles: ['mat-icon { margin-right: 15px }']
+  styles: ['mat-icon { margin-right: 15px }'],
 })
 export class UsersExportBottomSheetComponent {
   @ViewChild('waitForExport', {static: true}) waitForExport: TemplateRef<any>;
@@ -345,7 +333,7 @@ export class UsersExportBottomSheetComponent {
 
         this.notificationsService.html(this.successfullyExported, NotificationType.Success, null, 'success');
       },
-      error => console.log(error)
+      (error) => console.log(error)
     );
   }
 }
