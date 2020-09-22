@@ -1,5 +1,12 @@
 <mat-card>
-  <mat-card-title>{{ 'MANAGEMENT_USERS_DELETED_USERS' | translate }}</mat-card-title>
+  <div fxLayout="row" fxLayoutGap="2%">
+    <div>
+      <button mat-stroked-button routerLink="/home/management/user">
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+    </div>
+    <h1 style="padding-top: 5px">{{ 'MANAGEMENT_USERS_DELETED_USERS' | translate }}</h1>
+  </div>
   <mat-card-content>
     <div fxLayout="row" fxLayoutAlign="space-between" fxLayoutGap="2%" fxLayout.lt-sm="column">
       <mat-form-field>
