@@ -34,4 +34,12 @@ $dark-theme: mat-dark-theme($dark-primary, $dark-accent, $dark-warn);
 // `.dark-theme` will be affected by this alternate dark theme instead of the default theme.
 .dark-theme {
   @include angular-material-theme($dark-theme);
+
+  tr:nth-child(even) {
+    background: #616161;
+  }
+
+  .mat-row:hover {
+    background-color: #757575;
+  }
 }
