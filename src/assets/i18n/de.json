@@ -269,7 +269,7 @@
   "BROADCASTS_ADMINISTRATION_CREATE_NOTIFICATION_SUBJECT_LENGTH": "Der Betreff muss aus mindestens 4 Zeichen bestehen!",
   "BROADCASTS_ADMINISTRATION_CREATE_NOTIFICATION_NO_GROUPS_AND_NOT_ALL_MEMBERS": "Sende die Email an alle oder wähle eine Gruppe / Register aus",
   "BROADCASTS_ADMINISTRATION_CREATE_NOTIFICATION_BODY_LENGTH": "Bitte schreibe eine etwas längere Email!",
-  "BROADCASTS_ADMINISTRATION_CREATE_NOTIFICATION_SENDING_LENGTH": "Das senden kann einige Sekunden dauern! Außerdem kann sich die Aussendung an alle Mitglieder je nach Empfängerlistenlänge eine Minuten dauern.",
+  "BROADCASTS_ADMINISTRATION_CREATE_NOTIFICATION_SENDING_LENGTH": "Die Verteilung kann je nach Empfängerlistenlänge über eine Stunde dauern...",
   "BROADCASTS_ADMINISTRATION_CREATE_NOTIFICATION_SUCCESSFUL": "Die Email wird nun verteilt.",
   "BROADCASTS_ADMINISTRATION_CREATE_NOTIFICATION_DRAFT_SUCCESSFUL_SAVED": "Entwurf gespeichert!",
   "BROADCASTS_ADMINISTRATION_CREATE_NOTIFICATION_DRAFT_SUCCESSFUL_DELETED": "Entwurf gelöscht!",
