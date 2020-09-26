@@ -26,23 +26,25 @@
     >
       <span *ngIf="userChange.editorId !== userChange.userId">
         {{ userChange.editedAt | date: 'dd.MM.yyyy HH:mm:ss' }}
-        | <code>{{ userChange.editorName }}</code> {{ 'MANAGEMENT_USERS_CHANGES_HAS' | translate }} <code>{{ userChange.property }}</code>
-        {{ 'MANAGEMENT_USERS_CHANGES_BY' | translate }} <code>{{ userChange.userName }}</code>
+        | <code class="change-mark">{{ userChange.editorName }}</code> {{ 'MANAGEMENT_USERS_CHANGES_HAS' | translate }}
+        <code class="change-mark">{{ userChange.property }}</code>
+        {{ 'MANAGEMENT_USERS_CHANGES_BY' | translate }} <code class="change-mark">{{ userChange.userName }}</code>
         {{ 'MANAGEMENT_USERS_CHANGES_BY_CHANGED' | translate }}
       </span>
       <span *ngIf="userChange.editorId === userChange.userId">
         {{ userChange.editedAt | date: 'dd.MM.yyyy HH:mm:ss' }}
-        | <code>{{ userChange.userName }}</code> {{ 'MANAGEMENT_USERS_CHANGES_HAS' | translate }} <code>{{ userChange.property }}</code>
+        | <code class="change-mark">{{ userChange.userName }}</code> {{ 'MANAGEMENT_USERS_CHANGES_HAS' | translate }}
+        <code class="change-mark">{{ userChange.property }}</code>
         {{ 'MANAGEMENT_USERS_CHANGES_CHANGED_HIMSELF' | translate }}
       </span>
       <span *ngIf="userChange.oldValue && userChange.newValue"
-        >[~] <code>{{ userChange.oldValue }}</code> ⇒ <code>{{ userChange.newValue }}</code></span
+        >[~] <code class="change-mark">{{ userChange.oldValue }}</code> ⇒ <code class="change-mark">{{ userChange.newValue }}</code></span
       >
       <span *ngIf="userChange.oldValue && !userChange.newValue"
-        >[-] <code>{{ userChange.oldValue }}</code></span
+        >[-] <code class="change-mark">{{ userChange.oldValue }}</code></span
       >
       <span *ngIf="!userChange.oldValue && userChange.newValue"
-        >[+] <code>{{ userChange.newValue }}</code></span
+        >[+] <code class="change-mark">{{ userChange.newValue }}</code></span
       >
     </mat-card>
   </mat-card-content>

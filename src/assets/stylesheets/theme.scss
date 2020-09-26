@@ -42,4 +42,8 @@ $dark-theme: mat-dark-theme($dark-primary, $dark-accent, $dark-warn);
   .mat-row:hover {
     background-color: #757575;
   }
+
+  .change-mark {
+    color: black;
+  }
 }
