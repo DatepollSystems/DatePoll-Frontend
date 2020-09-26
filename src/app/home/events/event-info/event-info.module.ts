@@ -1,8 +1,7 @@
 import {CommonModule} from '@angular/common';
 import {NgModule} from '@angular/core';
 import {FormsModule} from '@angular/forms';
-import {DateAdapter} from '@angular/material';
-import {MAT_DATE_FORMATS} from '@angular/material/core';
+import {DateAdapter, MAT_DATE_FORMATS} from '@angular/material/core';
 import {RouterModule} from '@angular/router';
 
 import {MaterialModule} from '../../../material-module';
@@ -35,13 +34,13 @@ import {ResultUserTableComponent} from './result-user-table/result-user-table.co
     SubgroupInfoCardComponent,
     EventsVoteForDecisionModalComponent,
     EventsVoteForDecisionAdditionalInformationModalComponent,
-    EventDatesUserListComponent
+    EventDatesUserListComponent,
   ],
   imports: [CommonModule, RouterModule, FormsModule, MaterialModule, TranslationModule, MapsModule, GoBackButtonModule],
   providers: [
     {provide: DateAdapter, useClass: CustomDateAdapter},
-    {provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS}
+    {provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS},
   ],
-  exports: [EventInfoModalComponent, EventUserManagementComponent]
+  exports: [EventInfoModalComponent, EventUserManagementComponent],
 })
 export class EventInfoModule {}

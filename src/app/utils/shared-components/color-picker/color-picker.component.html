@@ -1,4 +1,11 @@
-<button mat-stroked-button id="color-picker-button" class="popup" (click)="changeColorPickerVisibility()" type="button">
+<button
+  mat-stroked-button
+  id="color-picker-button"
+  class="popup"
+  (click)="changeColorPickerVisibility()"
+  type="button"
+  [style.background-color]="color"
+>
   {{ 'COLOR_PICKER' | translate }}
 </button>
 <color-github *ngIf="showColorPicker" (onChangeComplete)="changeComplete($event)" [colors]="colors"></color-github>

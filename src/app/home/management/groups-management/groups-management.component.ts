@@ -1,5 +1,5 @@
 import {Component, OnDestroy} from '@angular/core';
-import {MatBottomSheet} from '@angular/material';
+import {MatBottomSheet} from '@angular/material/bottom-sheet';
 import {MatDialog} from '@angular/material/dialog';
 import {Router} from '@angular/router';
 
@@ -23,7 +23,7 @@ import {Subgroup} from './models/subgroup.model';
 @Component({
   selector: 'app-groups-management',
   templateUrl: './groups-management.component.html',
-  styleUrls: ['./groups-management.component.css']
+  styleUrls: ['./groups-management.component.css'],
 })
 export class GroupsManagementComponent implements OnDestroy {
   groupsLoaded = true;
@@ -49,7 +49,7 @@ export class GroupsManagementComponent implements OnDestroy {
       this.groupsLoaded = true;
     }
 
-    this.groupsSubscription = this.groupsService.groupsChange.subscribe(value => {
+    this.groupsSubscription = this.groupsService.groupsChange.subscribe((value) => {
       this.groupsLoaded = true;
 
       this.groups = value;
@@ -69,12 +69,7 @@ export class GroupsManagementComponent implements OnDestroy {
         this.sortedGroups.push(this.groups[i]);
       } else {
         for (let j = 0; j < this.groups[i].getSubgroups().length; j++) {
-          if (
-            this.groups[i]
-              .getSubgroups()
-              [j].name.toLowerCase()
-              .includes(filterValue.toLowerCase())
-          ) {
+          if (this.groups[i].getSubgroups()[j].name.toLowerCase().includes(filterValue.toLowerCase())) {
             this.sortedGroups.push(this.groups[i]);
             break;
           }
@@ -92,54 +87,54 @@ export class GroupsManagementComponent implements OnDestroy {
 
   onCreateGroup() {
     this.dialog.open(GroupCreateModalComponent, {
-      width: '80vh'
+      width: '80vh',
     });
   }
 
   onUpdateGroup(group: Group) {
     this.dialog.open(GroupUpdateModalComponent, {
       width: '80vh',
-      data: {group}
+      data: {group},
     });
   }
 
   onDeleteGroup(groupID: number) {
     this.bottomSheet.open(GroupDeleteModalComponent, {
-      data: {groupID: groupID}
+      data: {groupID: groupID},
     });
   }
 
   onInfoGroup(groupID: number) {
     this.dialog.open(GroupUserListModalComponent, {
       width: '80vh',
-      data: {groupID}
+      data: {groupID},
     });
   }
 
   onCreateSubgroup(groupID: number) {
     this.dialog.open(SubgroupCreateModalComponent, {
       width: '80vh',
-      data: {groupID}
+      data: {groupID},
     });
   }
 
   onUpdateSubgroup(groupID: number, subgroup: Subgroup) {
     this.dialog.open(SubgroupUpdateModalComponent, {
       width: '80vh',
-      data: {groupID, subgroup}
+      data: {groupID, subgroup},
     });
   }
 
   onDeleteSubgroup(subgroupID: number) {
     this.bottomSheet.open(SubgroupDeleteModalComponent, {
-      data: {subgroupID: subgroupID}
+      data: {subgroupID: subgroupID},
     });
   }
 
   onInfoSubgroup(subgroupID: number) {
     this.dialog.open(SubgroupUserListModalComponent, {
       width: '80vh',
-      data: {subgroupID}
+      data: {subgroupID},
     });
   }
 

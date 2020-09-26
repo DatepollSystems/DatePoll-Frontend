@@ -17,42 +17,6 @@ a:hover {
   cursor: pointer;
 }
 
-/* ----- Show different datepicker for mobile and desktop ----- */
-#datepicker-field {
-  display: unset;
-}
-
-#datepicker-field-mobile {
-  display: none;
-}
-
-.datepicker-field {
-  display: unset !important;
-}
-
-.datepicker-field-mobile {
-  display: none !important;
-}
-
-@media only screen and (max-width: 992px) {
-  #datepicker-field {
-    display: none;
-  }
-
-  #datepicker-field-mobile {
-    display: unset;
-  }
-
-  .datepicker-field {
-    display: none !important;
-  }
-
-  .datepicker-field-mobile {
-    display: unset !important;
-  }
-}
-/* ------------------------------------------------------------- */
-
 .not-selectable {
   user-select: none;
 }
@@ -72,9 +36,8 @@ mat-card {
   margin-bottom: 0;
 }
 
-.hidden {
-  display: none;
-  visibility: hidden;
+.mat-menu-info {
+  padding-left: 18px;
 }
 
 /* Loading animation for buttons */

@@ -33,6 +33,7 @@
                 "output": "assets/svg-country-flags/svg"
               }
             ],
+            "allowedCommonJsDependencies": ["qrcode", "file-saver", "xlsx"],
             "styles": [
               "src/styles.css",
               "node_modules/bootstrap/dist/css/bootstrap-grid.min.css",

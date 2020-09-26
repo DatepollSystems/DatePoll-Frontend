@@ -4,46 +4,46 @@
       {{ resultSubgroup.name }}
     </mat-panel-title>
   </mat-expansion-panel-header>
-  <div fxLayout="column" fxLayoutGap="2%">
-    <!-- Chart for the subgroups -->
-    <app-result-user-bar-chart
-      [resultUsers]="resultSubgroup.getResultUsers()"
-      [decisions]="resultSubgroup.event.getDecisions()"
-    ></app-result-user-bar-chart>
+  <!-- Chart for the subgroups -->
+  <app-result-user-bar-chart
+    [resultUsers]="resultSubgroup.getResultUsers()"
+    [decisions]="resultSubgroup.event.getDecisions()"
+  ></app-result-user-bar-chart>
 
-    <div
-      fxLayout="row"
-      fxLayout.xs="column"
-      fxLayoutAlign="space-between"
-      *ngIf="this.myUserService.hasPermission(ROOT_PERMISSION) || this.myUserService.hasPermission(EVENTS_ADMINISTRATION_PERMISSION)"
-    >
-      <button mat-flat-button color="accent" (click)="exportSubgroupResultUsers()">{{ 'EXPORT' | translate }}</button>
-      <mat-slide-toggle (change)="changeAdminMode($event)" labelPosition="before">
-        {{ 'EVENTS_ADMINISTRATION_INFO_EVENT_SHOW_ADMINISTRATION_MODE' | translate }}
-      </mat-slide-toggle>
-    </div>
-
-    <app-result-user-table
-      [resultUsers]="resultSubgroup.getResultUsers()"
-      [decisions]="resultSubgroup.event.getDecisions()"
-      *ngIf="
-        resultSubgroup != null &&
-        (!showAdminModeInResultUserTable ||
-          (!this.myUserService.hasPermission(ROOT_PERMISSION) && !this.myUserService.hasPermission(EVENTS_ADMINISTRATION_PERMISSION)))
-      "
-    >
-    </app-result-user-table>
-
-    <app-event-user-management
-      *ngIf="
-        resultSubgroup != null &&
-        showAdminModeInResultUserTable &&
-        (this.myUserService.hasPermission(ROOT_PERMISSION) || this.myUserService.hasPermission(EVENTS_ADMINISTRATION_PERMISSION))
-      "
-      [resultUsers]="resultSubgroup.getResultUsers()"
-      [event]="resultSubgroup.event"
-    ></app-event-user-management>
+  <div
+    style="margin-top: 10px;"
+    fxLayout="row"
+    fxLayout.xs="column"
+    fxLayoutGap.lt-sm="5%"
+    fxLayoutAlign="space-between"
+    *ngIf="this.myUserService.hasPermission(ROOT_PERMISSION) || this.myUserService.hasPermission(EVENTS_ADMINISTRATION_PERMISSION)"
+  >
+    <button mat-flat-button color="accent" (click)="exportSubgroupResultUsers()">{{ 'EXPORT' | translate }}</button>
+    <mat-slide-toggle (change)="changeAdminMode($event)" labelPosition="before">
+      {{ 'EVENTS_ADMINISTRATION_INFO_EVENT_SHOW_ADMINISTRATION_MODE' | translate }}
+    </mat-slide-toggle>
   </div>
+
+  <app-result-user-table
+    [resultUsers]="resultSubgroup.getResultUsers()"
+    [decisions]="resultSubgroup.event.getDecisions()"
+    *ngIf="
+      resultSubgroup != null &&
+      (!showAdminModeInResultUserTable ||
+        (!this.myUserService.hasPermission(ROOT_PERMISSION) && !this.myUserService.hasPermission(EVENTS_ADMINISTRATION_PERMISSION)))
+    "
+  >
+  </app-result-user-table>
+
+  <app-event-user-management
+    *ngIf="
+      resultSubgroup != null &&
+      showAdminModeInResultUserTable &&
+      (this.myUserService.hasPermission(ROOT_PERMISSION) || this.myUserService.hasPermission(EVENTS_ADMINISTRATION_PERMISSION))
+    "
+    [resultUsers]="resultSubgroup.getResultUsers()"
+    [event]="resultSubgroup.event"
+  ></app-event-user-management>
 </mat-expansion-panel>
 
 <mat-card *ngIf="resultSubgroup?.event?.anonymous">

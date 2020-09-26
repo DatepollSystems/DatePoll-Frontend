@@ -69,17 +69,10 @@ export class ResultUserBarChartComponent implements OnDestroy {
     const resultBarElements = [];
 
     for (const object of objects) {
-      let percent = Math.round((object.count / votedUsersCount) * 100);
-
-      const percentWidth = Math.round((object.count / votedUsersCount) * 100);
-
-      if (percent.toString().includes('NaN')) {
-        percent = 0;
-      }
+      const percentWidth = Math.floor((object.count / votedUsersCount) * 100);
 
       resultBarElements.push({
         name: object.name,
-        percent,
         percentWidth,
         count: object.count,
         color: object.color
@@ -88,6 +81,7 @@ export class ResultUserBarChartComponent implements OnDestroy {
 
     if (check) {
       this.resultBarElements = resultBarElements;
+      console.log(resultBarElements);
     }
   }
 }

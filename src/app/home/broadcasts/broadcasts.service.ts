@@ -42,6 +42,7 @@ export class BroadcastsService {
             broadcast.body,
             broadcast.writer_name
           );
+          toSaveBroadcast.forEveryone = broadcast.for_everyone;
           toSaveBroadcast.groups = broadcast.groups;
           toSaveBroadcast.subgroups = broadcast.subgroups;
 
@@ -71,6 +72,9 @@ export class BroadcastsService {
           broadcast.body,
           broadcast.writer_name
         );
+        toSaveBroadcast.forEveryone = broadcast.for_everyone;
+        toSaveBroadcast.groups = broadcast.groups;
+        toSaveBroadcast.subgroups = broadcast.subgroups;
         toSaveBroadcast.bodyHTML = broadcast.bodyHTML;
         this.setBroadcast(toSaveBroadcast);
       },

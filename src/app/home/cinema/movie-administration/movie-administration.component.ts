@@ -1,6 +1,6 @@
 import {AfterViewInit, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {FormControl} from '@angular/forms';
-import {MatBottomSheet} from '@angular/material';
+import {MatBottomSheet} from '@angular/material/bottom-sheet';
 import {MatDialog} from '@angular/material/dialog';
 import {MatSelect} from '@angular/material/select';
 import {MatSort} from '@angular/material/sort';
@@ -26,7 +26,7 @@ import {MovieInfoModalComponent} from './movie-info-modal/movie-info-modal.compo
 @Component({
   selector: 'app-movie-administration',
   templateUrl: './movie-administration.component.html',
-  styleUrls: ['./movie-administration.component.css']
+  styleUrls: ['./movie-administration.component.css'],
 })
 export class MovieAdministrationComponent implements OnInit, AfterViewInit, OnDestroy {
   // @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -67,7 +67,7 @@ export class MovieAdministrationComponent implements OnInit, AfterViewInit, OnDe
 
     this.years = this.cinemaService.getYears();
     this.selectedYear = this.years[this.years.length - 1];
-    this.yearsSubscription = cinemaService.yearsChange.subscribe(value => {
+    this.yearsSubscription = cinemaService.yearsChange.subscribe((value) => {
       this.years = value;
       this.filteredYears.next(this.years.slice());
       this.yearCtrl.setValue(this.years[this.years.length - 1]);
@@ -84,7 +84,7 @@ export class MovieAdministrationComponent implements OnInit, AfterViewInit, OnDe
       this.moviesLoaded = true;
     }
 
-    this.moviesSubscription = cinemaService.moviesChange.subscribe(value => {
+    this.moviesSubscription = cinemaService.moviesChange.subscribe((value) => {
       this.moviesLoaded = true;
 
       this.movies = value;
@@ -172,34 +172,34 @@ export class MovieAdministrationComponent implements OnInit, AfterViewInit, OnDe
 
   onCreate() {
     this.dialog.open(MovieCreateModalComponent, {
-      width: '80vh'
+      width: '80vh',
     });
   }
 
   onEdit(movie: Movie) {
     this.dialog.open(MovieEditModalComponent, {
       width: '80vh',
-      data: {movie}
+      data: {movie},
     });
   }
 
   onBookings(movie: Movie) {
     this.dialog.open(MovieBookingsModalComponent, {
       width: '80vh',
-      data: {movie}
+      data: {movie},
     });
   }
 
   onInfo(movie: Movie) {
     this.dialog.open(MovieInfoModalComponent, {
       width: '80vh',
-      data: {movie}
+      data: {movie},
     });
   }
 
   deleteMovie(id: number) {
     this.bottomSheet.open(MovieDeleteModalComponent, {
-      data: {movieID: id}
+      data: {movieID: id},
     });
   }
 
@@ -236,14 +236,6 @@ export class MovieAdministrationComponent implements OnInit, AfterViewInit, OnDe
       search = search.toLowerCase();
     }
     // filter the years
-    this.filteredYears.next(
-      this.years.filter(
-        year =>
-          year.year
-            .toString()
-            .toLowerCase()
-            .indexOf(search) > -1
-      )
-    );
+    this.filteredYears.next(this.years.filter((year) => year.year.toString().toLowerCase().indexOf(search) > -1));
   }
 }

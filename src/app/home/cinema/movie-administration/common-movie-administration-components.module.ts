@@ -1,8 +1,7 @@
 import {CommonModule} from '@angular/common';
 import {NgModule} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {DateAdapter} from '@angular/material';
-import {MAT_DATE_FORMATS} from '@angular/material/core';
+import {DateAdapter, MAT_DATE_FORMATS} from '@angular/material/core';
 
 import {MaterialModule} from '../../../material-module';
 
@@ -23,19 +22,19 @@ import {MovieInfoModalComponent} from './movie-info-modal/movie-info-modal.compo
     MovieInfoModalComponent,
     MovieDeleteModalComponent,
     MovieBookingsTableComponent,
-    MovieBookingsModalComponent
+    MovieBookingsModalComponent,
   ],
   imports: [CommonModule, FormsModule, ReactiveFormsModule, MaterialModule, CommonComponentsModule, TranslationModule],
   providers: [
     {provide: DateAdapter, useClass: CustomDateAdapter},
-    {provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS}
+    {provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS},
   ],
   exports: [
     MovieCreateModalComponent,
     MovieEditModalComponent,
     MovieInfoModalComponent,
     MovieDeleteModalComponent,
-    MovieBookingsModalComponent
-  ]
+    MovieBookingsModalComponent,
+  ],
 })
 export class CommonMovieAdministrationComponentsModule {}

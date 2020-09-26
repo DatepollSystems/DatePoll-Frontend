@@ -1,5 +1,7 @@
 import {AfterViewInit, Component, Input, ViewChild} from '@angular/core';
-import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
+import {MatTableDataSource} from '@angular/material/table';
+import {MatSort} from '@angular/material/sort';
+import {MatPaginator} from '@angular/material/paginator';
 
 import {Decision} from '../../models/decision.model';
 import {EventResultUser} from '../../models/event-result-user.model';
@@ -7,7 +9,7 @@ import {EventResultUser} from '../../models/event-result-user.model';
 @Component({
   selector: 'app-result-user-table',
   templateUrl: './result-user-table.component.html',
-  styleUrls: ['./result-user-table.component.css']
+  styleUrls: ['./result-user-table.component.css'],
 })
 export class ResultUserTableComponent implements AfterViewInit {
   @Input()

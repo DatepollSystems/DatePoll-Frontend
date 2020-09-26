@@ -1,0 +1,51 @@
+<mat-card>
+  <div fxLayout="row" fxLayoutGap="2%">
+    <div>
+      <button mat-stroked-button routerLink="/home/management/user">
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+    </div>
+    <h1 style="padding-top: 5px">{{ 'MANAGEMENT_USERS_CHANGES' | translate }}</h1>
+  </div>
+  <mat-card-content>
+    <div fxLayout="row" fxLayoutAlign="space-between" fxLayoutGap="2%" fxLayout.lt-sm="column">
+      <mat-form-field>
+        <input (keyup)="applyFilter($event.target.value)" matInput placeholder="{{ 'SEARCH' | translate }}" />
+        <mat-hint
+          ><b>{{ ignoreEditorChangesChars }}</b> {{ 'MANAGEMENT_USERS_CHANGES_SEARCH_HINT' | translate }}</mat-hint
+        >
+      </mat-form-field>
+    </div>
+
+    <mat-card
+      *ngFor="let userChange of filteredUserChanges"
+      fxLayout="row"
+      fxLayout.lt-sm="column"
+      fxLayoutAlign="space-between"
+      fxLayoutGap.lt-sm="5%"
+    >
+      <span *ngIf="userChange.editorId !== userChange.userId">
+        {{ userChange.editedAt | date: 'dd.MM.yyyy HH:mm:ss' }}
+        | <code class="change-mark">{{ userChange.editorName }}</code> {{ 'MANAGEMENT_USERS_CHANGES_HAS' | translate }}
+        <code class="change-mark">{{ userChange.property }}</code>
+        {{ 'MANAGEMENT_USERS_CHANGES_BY' | translate }} <code class="change-mark">{{ userChange.userName }}</code>
+        {{ 'MANAGEMENT_USERS_CHANGES_BY_CHANGED' | translate }}
+      </span>
+      <span *ngIf="userChange.editorId === userChange.userId">
+        {{ userChange.editedAt | date: 'dd.MM.yyyy HH:mm:ss' }}
+        | <code class="change-mark">{{ userChange.userName }}</code> {{ 'MANAGEMENT_USERS_CHANGES_HAS' | translate }}
+        <code class="change-mark">{{ userChange.property }}</code>
+        {{ 'MANAGEMENT_USERS_CHANGES_CHANGED_HIMSELF' | translate }}
+      </span>
+      <span *ngIf="userChange.oldValue && userChange.newValue"
+        >[~] <code class="change-mark">{{ userChange.oldValue }}</code> ⇒ <code class="change-mark">{{ userChange.newValue }}</code></span
+      >
+      <span *ngIf="userChange.oldValue && !userChange.newValue"
+        >[-] <code class="change-mark">{{ userChange.oldValue }}</code></span
+      >
+      <span *ngIf="!userChange.oldValue && userChange.newValue"
+        >[+] <code class="change-mark">{{ userChange.newValue }}</code></span
+      >
+    </mat-card>
+  </mat-card-content>
+</mat-card>

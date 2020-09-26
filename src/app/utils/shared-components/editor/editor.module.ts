@@ -6,12 +6,13 @@ import {QuillModule} from 'ngx-quill';
 
 import {MaterialModule} from '../../../material-module';
 import {TranslationModule} from '../../../translation/translation.module';
+import {EditorPreviewModule} from '../editor-preview/editor-preview.module';
 
 import {EditorComponent} from './editor.component';
 
 @NgModule({
   declarations: [EditorComponent],
-  imports: [CommonModule, FormsModule, MaterialModule, TranslationModule, QuillModule.forRoot()],
+  imports: [CommonModule, FormsModule, MaterialModule, TranslationModule, EditorPreviewModule, QuillModule.forRoot()],
   exports: [EditorComponent]
 })
 export class EditorModule {}

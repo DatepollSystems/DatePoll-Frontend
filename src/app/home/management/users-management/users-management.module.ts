@@ -1,8 +1,7 @@
 import {CommonModule} from '@angular/common';
 import {NgModule} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {DateAdapter} from '@angular/material';
-import {MAT_DATE_FORMATS} from '@angular/material/core';
+import {DateAdapter, MAT_DATE_FORMATS} from '@angular/material/core';
 
 import {NgxMatSelectSearchModule} from 'ngx-mat-select-search';
 
@@ -15,9 +14,6 @@ import {UsersManagementRoutingModule} from './users-management-routing.module';
 
 import {MatMultiSortModule} from 'ngx-mat-multi-sort';
 
-import {ExcelService} from '../../../utils/excel.service';
-import {UsersService} from './users.service';
-
 import {BadgesListComponent} from './badges-list/badges-list.component';
 import {InstrumentSelectComponent} from './instrument-select/instrument-select.component';
 import {PerformanceBadgeSelectComponent} from './performance-badge-select/performance-badge-select.component';
@@ -28,6 +24,7 @@ import {UserCreateModalComponent} from './user-create-modal/user-create-modal.co
 import {UserDeleteModalComponent} from './user-delete-modal/user-delete-modal.component';
 import {UserUpdateModalComponent} from './user-update-modal/user-update-modal.component';
 import {UsersExportBottomSheetComponent, UsersManagementComponent} from './users-management.component';
+import {UsersChangesManagementComponent} from './users-changes-management/users-changes-management.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +38,8 @@ import {UsersExportBottomSheetComponent, UsersManagementComponent} from './users
     PermissionsListComponent,
     PhoneNumbersListComponent,
     UserDeleteModalComponent,
-    BadgesListComponent
+    BadgesListComponent,
+    UsersChangesManagementComponent,
   ],
   imports: [
     CommonModule,
@@ -53,8 +51,11 @@ import {UsersExportBottomSheetComponent, UsersManagementComponent} from './users
     MatMultiSortModule,
     UsersManagementRoutingModule,
     CommonComponentsModule,
-    GroupAndSubgroupTypeInputSelectModule
+    GroupAndSubgroupTypeInputSelectModule,
   ],
-  providers: [UsersService, {provide: DateAdapter, useClass: CustomDateAdapter}, {provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS}]
+  providers: [
+    {provide: DateAdapter, useClass: CustomDateAdapter},
+    {provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS},
+  ],
 })
 export class UsersManagementModule {}

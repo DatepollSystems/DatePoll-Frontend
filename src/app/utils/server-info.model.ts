@@ -11,17 +11,17 @@ export class ServerInfoModel {
 
   public logged_interactions_count = 1;
 
-  public broadcasts_enabled = true;
+  public broadcasts_enabled = false;
   public broadcasts_count = 1;
   public broadcasts_sent_count = 1;
 
-  public events_enabled = true;
+  public events_enabled = false;
   public events_count = 1;
   public event_votes_count = 1;
   public event_decisions_count = 1;
   public event_dates_count = 1;
 
-  public cinema_enabled = true;
+  public cinema_enabled = false;
   public movies_count = 1;
   public movies_tickets_count = 1;
   public movies_workers_count = 1;

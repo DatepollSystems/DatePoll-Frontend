@@ -1,8 +1,7 @@
 import {CommonModule} from '@angular/common';
 import {NgModule} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {DateAdapter} from '@angular/material';
-import {MAT_DATE_FORMATS} from '@angular/material/core';
+import {DateAdapter, MAT_DATE_FORMATS} from '@angular/material/core';
 
 import {MaterialModule} from '../../material-module';
 import {TranslationModule} from '../../translation/translation.module';
@@ -31,7 +30,7 @@ import {EventsViewComponent} from './events-view/events-view.component';
     EventUserManagementModalComponent,
     EventStandardDecisionsManagementModalComponent,
     EventStandardLocationsManagementModalComponent,
-    EventsViewComponent
+    EventsViewComponent,
   ],
   imports: [
     CommonModule,
@@ -45,8 +44,8 @@ import {EventsViewComponent} from './events-view/events-view.component';
     EventInfoModule,
     EventsRoutingModule,
     GoBackButtonModule,
-    GroupAndSubgroupTypeInputSelectModule
+    GroupAndSubgroupTypeInputSelectModule,
   ],
-  providers: [EventsService, {provide: DateAdapter, useClass: CustomDateAdapter}, {provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS}]
+  providers: [EventsService, {provide: DateAdapter, useClass: CustomDateAdapter}, {provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS}],
 })
 export class EventsModule {}

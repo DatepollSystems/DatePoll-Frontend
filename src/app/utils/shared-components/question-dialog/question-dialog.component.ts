@@ -1,16 +1,16 @@
 import {Component, Inject} from '@angular/core';
-import {MAT_BOTTOM_SHEET_DATA, MatBottomSheetRef} from '@angular/material';
+import {MAT_BOTTOM_SHEET_DATA, MatBottomSheetRef} from '@angular/material/bottom-sheet';
 
 @Component({
   selector: 'app-question-dialog',
   templateUrl: './question-dialog.component.html',
-  styleUrls: ['./question-dialog.component.css']
+  styleUrls: ['./question-dialog.component.css'],
 })
 export class QuestionDialogComponent {
-  answers: Array<{
+  answers: {
     answer;
     value;
-  }>;
+  }[];
 
   question: string;
 

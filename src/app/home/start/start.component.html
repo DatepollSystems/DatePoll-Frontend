@@ -1,3 +1,20 @@
+<div class="pyro" *ngIf="showFirework">
+  <div class="before"></div>
+  <div class="after"></div>
+</div>
+
+<mat-card *ngIf="happyAlert?.trim().toLowerCase().length > 0">
+  <mat-card-content style="text-align: center; margin-bottom: 0;">
+    <h1 style="margin-bottom: 0">{{ happyAlert }}</h1>
+  </mat-card-content>
+  <mat-card-actions style="margin-top: 0; padding-top: 0">
+    <button mat-flat-button color="primary" (click)="toggleFirework()">
+      <span *ngIf="showFirework">{{ 'STARTPAGE_FIREWORK_HIDE' | translate }}</span>
+      <span *ngIf="!showFirework">{{ 'STARTPAGE_FIREWORK_SHOW' | translate }}</span>
+    </button>
+  </mat-card-actions>
+</mat-card>
+
 <div
   *ngIf="events.length == 0 && bookings.length == 0 && birthdays.length == 0 && broadcasts.length === 0"
   fxLayout="column"
@@ -40,7 +57,7 @@
       </button>
     </mat-list-item>
 
-    <mat-divider *ngIf="events.length != 0"></mat-divider>
+    <mat-divider *ngIf="bookings.length != 0"></mat-divider>
 
     <div mat-subheader *ngIf="bookings.length != 0" class="sub-header">{{ 'STARTPAGE_BOOKINGS' | translate }}</div>
     <mat-list-item *ngFor="let booking of bookings">
@@ -59,7 +76,7 @@
       </div>
     </mat-list-item>
 
-    <mat-divider *ngIf="bookings.length != 0"></mat-divider>
+    <mat-divider *ngIf="broadcasts.length != 0"></mat-divider>
 
     <div mat-subheader *ngIf="broadcasts.length != 0" class="sub-header">
       {{ 'STARTPAGE_BROADCASTS' | translate }}
@@ -81,35 +98,35 @@
       (click)="onBroadcastItemClick(broadcast)"
     >
       <div mat-line>
-        <i>{{ broadcast.subject }}</i
-        ><small class="until-left"> (~{{ broadcast.readTime }})</small>
+        <i>{{ broadcast.subject }}</i>
       </div>
       <div mat-line>
         {{ 'STARTPAGE_BROADCASTS_BY' | translate }}
-        {{ broadcast.writerName }} ({{ broadcast.sent | date: 'dd.MM - HH:mm' }})
+        <i>{{ broadcast.writerName }}</i> ({{ broadcast.sent | date: 'dd.MM - HH:mm' }})
+        <small class="until-left"> (~{{ broadcast.readTime }})</small>
       </div>
     </mat-list-item>
 
-    <mat-divider *ngIf="broadcasts.length != 0"></mat-divider>
+    <mat-divider *ngIf="birthdays.length != 0"></mat-divider>
 
     <div mat-subheader *ngIf="birthdays.length != 0" class="sub-header">
       {{ 'STARTPAGE_BIRTHDAY' | translate }}
       <button
-        *ngIf="howMuchBirthdaysToShow === 7"
+        *ngIf="!showBirthdays"
         mat-icon-button
         matTooltip="{{ 'STARTPAGE_BIRTHDAY_MORE' | translate }}"
         matTooltipPosition="above"
-        (click)="onBirthdaysExpand()"
+        (click)="showBirthdays = !showBirthdays"
         aria-label="Button to show all birthdays"
       >
         <mat-icon>expand_more</mat-icon>
       </button>
       <button
-        *ngIf="howMuchBirthdaysToShow === birthdays.length"
+        *ngIf="showBirthdays"
         mat-icon-button
         matTooltip="{{ 'STARTPAGE_BIRTHDAY_MORE' | translate }}"
         matTooltipPosition="above"
-        (click)="onBirthdaysExpand()"
+        (click)="showBirthdays = !showBirthdays"
         aria-label="Button to show all birthdays"
       >
         <mat-icon>expand_less</mat-icon>
@@ -124,12 +141,14 @@
         <mat-icon>info</mat-icon>
       </button>
     </div>
-    <mat-list-item *ngFor="let birthday of birthdays.slice(0, howMuchBirthdaysToShow)">
-      <div mat-line>
-        {{ birthday.name }}
-      </div>
-      <div mat-line>{{ birthday.date | date: 'dd.MM.yyyy' }} ({{ birthday.age }})</div>
-    </mat-list-item>
+    <ng-container *ngIf="showBirthdays">
+      <mat-list-item *ngFor="let birthday of birthdays">
+        <div mat-line>
+          {{ birthday.name }}
+        </div>
+        <div mat-line>{{ birthday.date | date: 'dd.MM.yyyy' }} ({{ birthday.age }})</div>
+      </mat-list-item>
+    </ng-container>
   </mat-list>
 </mat-card>
 
@@ -206,9 +225,11 @@
             <tbody>
               <tr *ngFor="let broadcast of broadcasts" class="not-selectable" (click)="onBroadcastItemClick(broadcast)">
                 <td matRipple matRippleRadius="100">
-                  <b>{{ broadcast.subject }}</b> {{ 'STARTPAGE_BROADCASTS_BY' | translate }} {{ broadcast.writerName }} <br />{{
+                  <b>{{ broadcast.subject }}</b
+                  ><br />
+                  {{ 'STARTPAGE_BROADCASTS_BY' | translate }} <i>{{ broadcast.writerName }}</i> ({{
                     broadcast.sent | date: 'dd.MM - HH:mm'
-                  }}
+                  }})
                   <small class="until-left"> (~{{ broadcast.readTime }})</small>
                 </td>
               </tr>
@@ -224,21 +245,21 @@
           <div fxFlex.md="70%" fxFlex.lg="80%" fxFlexAlign="center">{{ 'STARTPAGE_BIRTHDAY' | translate }}</div>
           <div fxFlex.md="30%" fxFlex.lg="20%" fxLayout="row">
             <button
-              *ngIf="howMuchBirthdaysToShow === 7"
+              *ngIf="!showBirthdays"
               mat-icon-button
               matTooltip="{{ 'STARTPAGE_BIRTHDAY_MORE' | translate }}"
               matTooltipPosition="above"
-              (click)="onBirthdaysExpand()"
+              (click)="showBirthdays = !showBirthdays"
               aria-label="Button to show all birthdays"
             >
               <mat-icon>expand_more</mat-icon>
             </button>
             <button
-              *ngIf="howMuchBirthdaysToShow === birthdays.length"
+              *ngIf="showBirthdays"
               mat-icon-button
               matTooltip="{{ 'STARTPAGE_BIRTHDAY_MORE' | translate }}"
               matTooltipPosition="above"
-              (click)="onBirthdaysExpand()"
+              (click)="showBirthdays = !showBirthdays"
               aria-label="Button to show all birthdays"
             >
               <mat-icon>expand_less</mat-icon>
@@ -255,7 +276,7 @@
           </div>
         </mat-card-title>
 
-        <div class="table-responsive">
+        <div class="table-responsive" *ngIf="showBirthdays">
           <table>
             <thead>
               <tr>
@@ -264,7 +285,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let birthday of birthdays.slice(0, howMuchBirthdaysToShow)">
+              <tr *ngFor="let birthday of birthdays">
                 <td>{{ birthday.name }}</td>
                 <td>{{ birthday.date | date: 'dd.MM.yyyy' }} ({{ birthday.age }})</td>
               </tr>

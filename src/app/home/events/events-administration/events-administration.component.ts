@@ -1,9 +1,14 @@
 import {Component, OnDestroy, TemplateRef, ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
-import {MatBottomSheet, MatDialog, MatPaginator, MatSlideToggleChange, MatSort, MatTableDataSource} from '@angular/material';
+import {MatSort} from '@angular/material/sort';
+import {MatTableDataSource} from '@angular/material/table';
+import {MatDialog} from '@angular/material/dialog';
+import {MatBottomSheet} from '@angular/material/bottom-sheet';
+import {MatPaginator} from '@angular/material/paginator';
+import {MatSlideToggleChange} from '@angular/material/slide-toggle';
 import {Subscription} from 'rxjs';
 
-import {NotificationsService, NotificationType} from 'angular2-notifications';
+import {NotificationsService} from 'angular2-notifications';
 
 import {TranslateService} from '../../../translation/translate.service';
 import {EventsService} from '../events.service';
@@ -20,7 +25,7 @@ import {EventUserManagementModalComponent} from './event-user-management-modal/e
 @Component({
   selector: 'app-events-administration',
   templateUrl: './events-administration.component.html',
-  styleUrls: ['./events-administration.component.css']
+  styleUrls: ['./events-administration.component.css'],
 })
 export class EventsAdministrationComponent implements OnDestroy {
   @ViewChild('successfullyDeletedEvent', {static: true}) successfullyDeletedEvent: TemplateRef<any>;
@@ -55,7 +60,7 @@ export class EventsAdministrationComponent implements OnDestroy {
       this.eventsLoaded = true;
     }
 
-    this.eventsSubscription = this.eventsService.eventsChange.subscribe(value => {
+    this.eventsSubscription = this.eventsService.eventsChange.subscribe((value) => {
       this.events = value;
       this.eventsLoaded = true;
       this.refreshTable();
@@ -71,10 +76,10 @@ export class EventsAdministrationComponent implements OnDestroy {
       this.eventsCopy = this.events.slice();
     } else {
       this.eventsCopy = [];
-      for (let i = 0; i < this.events.length; i++) {
+      for (const event of this.events) {
         const now = new Date().getTime();
-        if (this.events[i].endDate.getTime() > now) {
-          this.eventsCopy.push(this.events[i]);
+        if (event.endDate.getTime() > now) {
+          this.eventsCopy.push(event);
         }
       }
     }
@@ -86,13 +91,13 @@ export class EventsAdministrationComponent implements OnDestroy {
 
   onShowStandardDecisionManagementModal() {
     this.dialog.open(EventStandardDecisionsManagementModalComponent, {
-      width: '80%'
+      width: '80%',
     });
   }
 
   onShowStandardLocationManagementModal() {
     this.dialog.open(EventStandardLocationsManagementModalComponent, {
-      width: '80%'
+      width: '80%',
     });
   }
 
@@ -125,8 +130,8 @@ export class EventsAdministrationComponent implements OnDestroy {
     this.dialog.open(EventInfoModalComponent, {
       width: '80%',
       data: {
-        event
-      }
+        event,
+      },
     });
   }
 
@@ -134,8 +139,8 @@ export class EventsAdministrationComponent implements OnDestroy {
     this.dialog.open(EventUserManagementModalComponent, {
       width: '80%',
       data: {
-        event
-      }
+        event,
+      },
     });
   }
 
@@ -143,8 +148,8 @@ export class EventsAdministrationComponent implements OnDestroy {
     this.dialog.open(EventUpdateModalComponent, {
       width: '95%',
       data: {
-        event
-      }
+        event,
+      },
     });
   }
 
@@ -152,20 +157,20 @@ export class EventsAdministrationComponent implements OnDestroy {
     const answers = [
       {
         answer: this.translate.getTranslationFor('YES'),
-        value: 'yes'
+        value: 'yes',
       },
       {
         answer: this.translate.getTranslationFor('NO'),
-        value: 'no'
-      }
+        value: 'no',
+      },
     ];
     const question = this.translate.getTranslationFor('EVENTS_ADMINISTRATION_DELETE_EVENT_QUESTION');
 
     const bottomSheetRef = this.bottomSheet.open(QuestionDialogComponent, {
       data: {
         answers,
-        question
-      }
+        question,
+      },
     });
 
     bottomSheetRef.afterDismissed().subscribe((value: string) => {
@@ -180,7 +185,7 @@ export class EventsAdministrationComponent implements OnDestroy {
                 this.translate.getTranslationFor('EVENTS_ADMINISTRATION_DELETE_EVENT_SUCCESSFULLY_DELETED')
               );
             },
-            error => console.log(error)
+            (error) => console.log(error)
           );
         }
       }

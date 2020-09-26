@@ -2,12 +2,13 @@ import {Injectable} from '@angular/core';
 import {Subject} from 'rxjs';
 
 import {HttpService} from '../../../utils/http.service';
+
 import {GroupAndSubgroupModel, GroupType} from '../../../utils/models/groupAndSubgroup.model';
 import {PhoneNumber} from '../../phoneNumber.model';
 import {User} from './user.model';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UsersService {
   public usersChange: Subject<User[]> = new Subject<User[]>();
@@ -50,7 +51,7 @@ export class UsersService {
         }
         this.setUsers(users);
       },
-      error => console.log(error)
+      (error) => console.log(error)
     );
   }
 
@@ -102,7 +103,7 @@ export class UsersService {
 
   public changePasswordForUser(userID: number, password: string) {
     const dto = {
-      password
+      password,
     };
     return this.httpService.loggedInV1PUTRequest('/management/users/changePassword/' + userID, dto, 'changePasswordFromUser');
   }
@@ -136,10 +137,10 @@ export class UsersService {
 
             this.setJoinedOfUser(groups);
           },
-          error => console.log(error)
+          (error) => console.log(error)
         );
       },
-      error => console.log(error)
+      (error) => console.log(error)
     );
   }
 
@@ -177,10 +178,10 @@ export class UsersService {
 
             this.setFreeOfUser(groups);
           },
-          error => console.log(error)
+          (error) => console.log(error)
         );
       },
-      error => console.log(error)
+      (error) => console.log(error)
     );
   }
 
