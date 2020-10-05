@@ -1,16 +1,12 @@
 .my-container {
   margin-top: 60px;
   padding: 15px;
-  min-height: 80vh;
+  min-height: 85vh;
 }
 
 mat-toolbar {
   position: fixed;
   z-index: 1000;
-}
-
-.toolbar-sidenav-toggler {
-  cursor: pointer;
 }
 
 .toolbar-heading {
