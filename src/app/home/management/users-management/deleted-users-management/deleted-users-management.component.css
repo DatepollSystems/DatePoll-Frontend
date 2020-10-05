@@ -1,0 +1,9 @@
+/* Add the capability to print hidden accordian / expansion panel content. Not working on global level! */
+@media print {
+  ::ng-deep .mat-expansion-panel-content {
+    overflow: visible !important;
+    display: block !important;
+    visibility: visible !important;
+    height: inherit !important;
+  }
+}
