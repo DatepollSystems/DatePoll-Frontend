@@ -19,7 +19,7 @@ import {BroadcastDraft} from '../../models/broadcast-draft.model';
 @Component({
   selector: 'app-create-broadcast',
   templateUrl: './create-broadcast.component.html',
-  styleUrls: ['./create-broadcast.component.css']
+  styleUrls: ['./create-broadcast.component.css'],
 })
 export class CreateBroadcastComponent implements OnDestroy {
   groupsAndSubgroups: GroupAndSubgroupModel[] = [];
@@ -47,11 +47,11 @@ export class CreateBroadcastComponent implements OnDestroy {
     private translate: TranslateService
   ) {
     this.groupsAndSubgroups = this.groupsService.getGroupsAndSubgroups();
-    this.groupsSubscription = this.groupsService.groupsAndSubgroupsChange.subscribe(value => {
+    this.groupsSubscription = this.groupsService.groupsAndSubgroupsChange.subscribe((value) => {
       this.groupsAndSubgroups = value;
     });
 
-    this.route.paramMap.subscribe(params => {
+    this.route.paramMap.subscribe((params) => {
       const id = params.get('id');
 
       if (id != null) {
@@ -60,7 +60,7 @@ export class CreateBroadcastComponent implements OnDestroy {
         this.remake();
         console.log('Draft to load: ' + id);
 
-        this.draftSubscription = this.draftsService.draftChange.subscribe(value => {
+        this.draftSubscription = this.draftsService.draftChange.subscribe((value) => {
           this.draft = value;
           this.remake();
         });
@@ -139,7 +139,7 @@ export class CreateBroadcastComponent implements OnDestroy {
           );
           this.router.navigate(['/home/broadcasts/administration/draft/' + response.draft.id]);
         },
-        error => {
+        (error) => {
           console.log(error);
         }
       );
@@ -152,7 +152,7 @@ export class CreateBroadcastComponent implements OnDestroy {
             this.translate.getTranslationFor('BROADCASTS_ADMINISTRATION_CREATE_NOTIFICATION_DRAFT_SUCCESSFUL_SAVED')
           );
         },
-        error => {
+        (error) => {
           console.log(error);
         }
       );
@@ -190,20 +190,20 @@ export class CreateBroadcastComponent implements OnDestroy {
     const answers = [
       {
         answer: this.translate.getTranslationFor('YES'),
-        value: 'yes'
+        value: 'yes',
       },
       {
         answer: this.translate.getTranslationFor('NO'),
-        value: 'no'
-      }
+        value: 'no',
+      },
     ];
     const question = this.translate.getTranslationFor('BROADCASTS_ADMINISTRATION_CREATE_CONFIRM_QUESTION');
 
     const bottomSheetRef = this.bottomSheet.open(QuestionDialogComponent, {
       data: {
         answers,
-        question
-      }
+        question,
+      },
     });
 
     bottomSheetRef.afterDismissed().subscribe((value: string) => {
@@ -234,7 +234,7 @@ export class CreateBroadcastComponent implements OnDestroy {
             body: this.body,
             for_everyone: this.allMembers,
             groups,
-            subgroups
+            subgroups,
           };
 
           this.notificationService.info(
@@ -262,15 +262,15 @@ export class CreateBroadcastComponent implements OnDestroy {
                     );
                     this.draftsService.fetchDrafts();
                   },
-                  error => {
+                  (error) => {
                     console.log(error);
                   }
                 );
               }
-              this.router.navigate(['/home/broadcasts/administration']);
             },
-            error => console.log(error)
+            (error) => console.log(error)
           );
+          this.router.navigate(['/home/broadcasts/administration']);
         }
       }
     });
