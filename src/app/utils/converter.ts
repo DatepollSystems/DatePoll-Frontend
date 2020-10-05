@@ -51,9 +51,20 @@ export class Converter {
 
   public static getIOSDate(value: string): Date {
     let temp = value.toString().replace(' ', 'T');
+    let date;
     if (Browser.getInfos().name.includes('Safari')) {
-      temp += '.000+02:00';
+      if (temp.includes('000000Z')) {
+        temp = temp.replace('.000000Z', '');
+
+        date = new Date(temp);
+        date.setHours(date.getHours() + 2);
+        return date;
+      }
+      if (temp.includes('T')) {
+        temp += '.000+02:00';
+      }
     }
-    return new Date(temp);
+    date = new Date(temp);
+    return date;
   }
 }
