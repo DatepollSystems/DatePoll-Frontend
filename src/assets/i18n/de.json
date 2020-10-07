@@ -380,7 +380,7 @@
   "MANAGEMENT_USERS_ACTIVATE_ALL_QUESTION_DIALOG": "Willst du wirklich alle Mitglieder aktivieren?",
   "MANAGEMENT_USERS_ACTIVATE_ALL_FINISHED": "Alle nicht aktivierten Mitglieder wurden aktiviert!",
   "MANAGEMENT_USERS_DELETED_USERS": "Gelöschte Mitglieder",
-  "MANAGEMENT_USERS_CHANGES": "Äktivitätenprotokoll",
+  "MANAGEMENT_USERS_CHANGES": "Aktivitätenprotokoll",
   "MANAGEMENT_USERS_MANAGE_COLUMNS": "Spalten bearbeiten",
   "MANAGEMENT_USERS_MANAGE_COLUMNS_TOOLTIP": "Sortierreihenfole ändern",
 

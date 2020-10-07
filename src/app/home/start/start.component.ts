@@ -42,6 +42,7 @@ export class StartComponent implements OnDestroy {
   eventVotingChangeLoading = false;
 
   openEventsCount = 0;
+  loaded = false;
 
   happyAlert = '';
   happyAlertSubscription: Subscription;
@@ -65,6 +66,7 @@ export class StartComponent implements OnDestroy {
     this.bookings = homePageService.getBookings();
     this.bookingsSubscription = homePageService.bookingsChange.subscribe((value) => {
       this.bookings = value;
+      this.loaded = true;
     });
 
     this.events = homePageService.getEvents().slice(0, 5);
@@ -73,11 +75,13 @@ export class StartComponent implements OnDestroy {
       this.events = value.slice(0, 5);
       this.countOpenEvents();
       this.eventVotingChangeLoading = false;
+      this.loaded = true;
     });
 
     this.broadcasts = homePageService.getBroadcasts();
     this.broadcastSubscription = homePageService.broadcastChange.subscribe((value) => {
       this.broadcasts = value;
+      this.loaded = true;
     });
 
     this.happyAlert = this.settingsService.getHappyAlert();

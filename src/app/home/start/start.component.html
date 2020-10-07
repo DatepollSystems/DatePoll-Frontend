@@ -16,12 +16,21 @@
 </mat-card>
 
 <div
-  *ngIf="events.length == 0 && bookings.length == 0 && birthdays.length == 0 && broadcasts.length === 0"
+  *ngIf="loaded && events.length == 0 && bookings.length == 0 && birthdays.length == 0 && broadcasts.length === 0"
   fxLayout="column"
   fxLayoutAlign="center"
 >
   <div fxFlex style="text-align: center; margin-top: 20%">
     <h2>Hiii!! Beautiful day, isn't it?</h2>
+  </div>
+</div>
+
+<div
+  *ngIf="!loaded && events.length === 0 && bookings.length === 0 && birthdays.length === 0 && broadcasts.length === 0"
+  style="margin-top: 30%"
+>
+  <div fxLayout="column" fxLayoutAlign="center">
+    <mat-spinner style="margin: auto auto 10px"></mat-spinner>
   </div>
 </div>
 

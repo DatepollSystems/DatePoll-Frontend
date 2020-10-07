@@ -13,9 +13,9 @@
   </mat-form-field>
 </div>
 
-<mat-progress-bar *ngIf="sendingRequest" mode="indeterminate" style="margin-top: 15px;"></mat-progress-bar>
+<mat-progress-bar *ngIf="sendingRequest" mode="indeterminate" style="margin-top: 15px"></mat-progress-bar>
 
-<div fxLayout="column" fxLayoutGap="2%" fxLayoutGap.xs="5%" *ngIf="!sendingRequest">
+<div fxLayout="column" fxLayoutGap="2%" fxLayoutGap.gt-md="0.5%" fxLayoutGap.xs="5%" *ngIf="!sendingRequest">
   <app-event-dates-user-list fxFlex="100%" [dates]="dates"></app-event-dates-user-list>
 
   <mat-divider></mat-divider>
