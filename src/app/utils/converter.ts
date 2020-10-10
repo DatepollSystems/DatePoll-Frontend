@@ -54,14 +54,7 @@ export class Converter {
     let date;
     if (Browser.getInfos().name.includes('Safari')) {
       if (temp.includes('000000Z')) {
-        temp = temp.replace('.000000Z', '');
-
-        date = new Date(temp);
-        date.setHours(date.getHours() + 2);
-        return date;
-      }
-      if (temp.includes('T')) {
-        temp += '.000+02:00';
+        temp = temp.replace('.000000Z', '.000+00:00');
       }
     }
     date = new Date(temp);
