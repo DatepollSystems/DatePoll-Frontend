@@ -50,14 +50,26 @@ export class Converter {
   }
 
   public static getIOSDate(value: string): Date {
-    let temp = value.toString().replace(' ', 'T');
-    let date;
+    const temp = value.toString().replace(' ', 'T');
+    let date = new Date(temp);
     if (Browser.getInfos().name.includes('Safari')) {
-      if (temp.includes('000000Z')) {
-        temp = temp.replace('.000000Z', '.000+00:00');
+      if (temp.includes('T')) {
+        const dDate = temp.split('T')[0].replace(/-/g, '/');
+        const hours = temp.substring(11, 13);
+        const minutes = temp.substring(14, 16);
+        const seconds = temp.substring(17, 19);
+
+        // console.log('hours: ' + hours + ' minutes: ' + minutes + ' seconds: ' + seconds);
+
+        date = new Date(dDate);
+        date.setHours(Number(hours));
+        date.setMinutes(Number(minutes));
+        date.setSeconds(Number(seconds));
+      } else {
+        const dDate = temp.split('T')[0].replace(/-/g, '/');
+        date = new Date(dDate);
       }
     }
-    date = new Date(temp);
     return date;
   }
 }
