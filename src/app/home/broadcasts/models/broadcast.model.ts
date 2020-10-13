@@ -12,6 +12,8 @@ export class Broadcast {
   public groups: any[];
   public subgroups: any[];
 
+  public attachments: any[];
+
   public userInfos: UserBroadcastInfo[];
 
   public readTime: string;

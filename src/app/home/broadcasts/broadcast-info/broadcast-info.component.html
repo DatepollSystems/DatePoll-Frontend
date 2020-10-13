@@ -18,7 +18,29 @@
     </span>
   </h3>
 
-  <app-editor-preview [bodyHTML]="broadcast.bodyHTML" *ngIf="loaded"></app-editor-preview>
+  <mat-tab-group mat-align-tabs="start">
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon class="tab-icon">email</mat-icon>
+        {{ 'CONTENT' | translate }}
+      </ng-template>
+      <app-editor-preview [bodyHTML]="broadcast.bodyHTML" *ngIf="loaded"></app-editor-preview>
+    </mat-tab>
+
+    <mat-tab *ngIf="broadcast.attachments?.length > 0">
+      <ng-template mat-tab-label>
+        <mat-icon class="tab-icon">attachment</mat-icon>
+        {{ 'ATTACHMENTS' | translate }}
+      </ng-template>
+
+      <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="2%">
+        <app-broadcast-attachment-card
+          *ngFor="let attachment of broadcast.attachments"
+          [attachment]="attachment"
+        ></app-broadcast-attachment-card>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
 </ng-container>
 
 <mat-progress-bar mode="indeterminate" *ngIf="!loaded"></mat-progress-bar>

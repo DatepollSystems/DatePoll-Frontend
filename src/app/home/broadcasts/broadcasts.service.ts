@@ -7,7 +7,7 @@ import {HttpService} from '../../utils/http.service';
 import {Broadcast} from './models/broadcast.model';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class BroadcastsService {
   private _broadcasts: Broadcast[] = [];
@@ -43,14 +43,12 @@ export class BroadcastsService {
             broadcast.writer_name
           );
           toSaveBroadcast.forEveryone = broadcast.for_everyone;
-          toSaveBroadcast.groups = broadcast.groups;
-          toSaveBroadcast.subgroups = broadcast.subgroups;
 
           broadcasts.push(toSaveBroadcast);
         }
         this.setBroadcasts(broadcasts);
       },
-      error => console.log(error)
+      (error) => console.log(error)
     );
   }
 
@@ -75,10 +73,11 @@ export class BroadcastsService {
         toSaveBroadcast.forEveryone = broadcast.for_everyone;
         toSaveBroadcast.groups = broadcast.groups;
         toSaveBroadcast.subgroups = broadcast.subgroups;
+        toSaveBroadcast.attachments = broadcast.attachments;
         toSaveBroadcast.bodyHTML = broadcast.bodyHTML;
         this.setBroadcast(toSaveBroadcast);
       },
-      error => console.log(error)
+      (error) => console.log(error)
     );
   }
 

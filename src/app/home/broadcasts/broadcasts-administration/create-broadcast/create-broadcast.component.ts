@@ -15,6 +15,7 @@ import {LoadDraftDialogComponent} from './load-draft-dialog/load-draft-dialog-co
 
 import {GroupAndSubgroupModel} from '../../../../utils/models/groupAndSubgroup.model';
 import {BroadcastDraft} from '../../models/broadcast-draft.model';
+import {Attachment} from './broadcast-attachment/broadcast-attachment.component';
 
 @Component({
   selector: 'app-create-broadcast',
@@ -27,6 +28,8 @@ export class CreateBroadcastComponent implements OnDestroy {
 
   allMembers = false;
   selectedGroupsAndSubgroups: GroupAndSubgroupModel[] = [];
+
+  attachments: Attachment[] = [];
 
   subject = '';
   body = '';
@@ -102,18 +105,32 @@ export class CreateBroadcastComponent implements OnDestroy {
     console.log(this.selectedGroupsAndSubgroups);
   }
 
+  attachmentsChanged(attachments: Attachment[]) {
+    this.attachments = attachments;
+    console.log(this.attachments);
+  }
+
+  leave() {
+    for (const attachment of this.attachments) {
+      this.broadcastsService.deleteAttachment(attachment.id).subscribe(
+        (response) => console.log(response),
+        (error) => console.log(error)
+      );
+    }
+  }
+
   loadDraft() {
     this.bottomSheet.open(LoadDraftDialogComponent);
   }
 
-  saveDraft() {
+  makeCheck() {
     if (this.subject.length < 1 || this.subject.length > 190) {
       console.log('Subject size wrong! - ' + this.subject.length);
       this.notificationService.alert(
         this.translate.getTranslationFor('WARNING'),
         this.translate.getTranslationFor('BROADCASTS_ADMINISTRATION_CREATE_NOTIFICATION_SUBJECT_LENGTH')
       );
-      return;
+      return false;
     }
 
     if (this.body.length < 10) {
@@ -122,6 +139,14 @@ export class CreateBroadcastComponent implements OnDestroy {
         this.translate.getTranslationFor('WARNING'),
         this.translate.getTranslationFor('BROADCASTS_ADMINISTRATION_CREATE_NOTIFICATION_BODY_LENGTH')
       );
+      return false;
+    }
+
+    return true;
+  }
+
+  saveDraft() {
+    if (!this.makeCheck()) {
       return;
     }
 
@@ -160,12 +185,7 @@ export class CreateBroadcastComponent implements OnDestroy {
   }
 
   send() {
-    if (this.subject.length < 1 || this.subject.length > 190) {
-      console.log('Subject size wrong! - ' + this.subject.length);
-      this.notificationService.alert(
-        this.translate.getTranslationFor('WARNING'),
-        this.translate.getTranslationFor('BROADCASTS_ADMINISTRATION_CREATE_NOTIFICATION_SUBJECT_LENGTH')
-      );
+    if (!this.makeCheck()) {
       return;
     }
 
@@ -174,15 +194,6 @@ export class CreateBroadcastComponent implements OnDestroy {
       this.notificationService.alert(
         this.translate.getTranslationFor('WARNING'),
         this.translate.getTranslationFor('BROADCASTS_ADMINISTRATION_CREATE_NOTIFICATION_NO_GROUPS_AND_NOT_ALL_MEMBERS')
-      );
-      return;
-    }
-
-    if (this.body.length < 10) {
-      console.log('Mail body length < 10');
-      this.notificationService.alert(
-        this.translate.getTranslationFor('WARNING'),
-        this.translate.getTranslationFor('BROADCASTS_ADMINISTRATION_CREATE_NOTIFICATION_BODY_LENGTH')
       );
       return;
     }
@@ -228,6 +239,11 @@ export class CreateBroadcastComponent implements OnDestroy {
             }
           }
 
+          const attachmentIds = [];
+          for (const attachment of this.attachments) {
+            attachmentIds.push(attachment.id);
+          }
+
           const broadcast = {
             subject: this.subject,
             bodyHTML: this.bodyHTML,
@@ -235,6 +251,7 @@ export class CreateBroadcastComponent implements OnDestroy {
             for_everyone: this.allMembers,
             groups,
             subgroups,
+            attachments: attachmentIds,
           };
 
           this.notificationService.info(

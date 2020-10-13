@@ -1,0 +1,27 @@
+<mat-card class="mat-elevation-z2" (click)="toggleImageView()" mat-ripple [matRippleRadius]="100">
+  <mat-card-content class="last-child">
+    <h3 style="margin-bottom: 0">{{ attachment.name }}</h3>
+    <small class="not-selectable" *ngIf="showShowImage">{{
+      'BROADCASTS_ADMINISTRATION_ATTACHMENT_VIEW_CLICK_ME_FOR_IMAGE' | translate
+    }}</small>
+
+    <img *ngIf="showImage" mat-card-image src="{{ apiUrl }}{{ attachment.token }}" alt="Photo of a {{ attachment.name }}" />
+    <mat-card-actions>
+      <a href="{{ apiUrl }}{{ attachment.token }}" target="_blank" rel="noopener" mat-flat-button color="primary">
+        <mat-icon>cloud_download</mat-icon>
+        {{ 'DOWNLOAD' | translate }}</a
+      >
+      <button
+        mat-stroked-button
+        (click)="copyTokenToClipboard(apiUrl + attachment.token); tooltip.disabled = false; tooltip.show()"
+        [matTooltipDisabled]="true"
+        matTooltip="{{ 'COPIED_LINK' | translate }}"
+        #tooltip="matTooltip"
+        matTooltipPosition="right"
+      >
+        <mat-icon>content_copy</mat-icon>
+        {{ 'COPY_LINK' | translate }}
+      </button>
+    </mat-card-actions>
+  </mat-card-content>
+</mat-card>
