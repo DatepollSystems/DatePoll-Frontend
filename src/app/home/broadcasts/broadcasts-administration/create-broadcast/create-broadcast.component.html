@@ -11,7 +11,7 @@
     </div>
 
     <div fxLayout="row break" fxLayoutGap="2%" fxLayoutAlign="space-between center">
-      <button mat-stroked-button routerLink="/home/broadcasts/administration" fxFlex.xs="25%">
+      <button mat-stroked-button routerLink="/home/broadcasts/administration" fxFlex.xs="25%" (click)="leave()">
         <mat-icon>arrow_back</mat-icon>
       </button>
 
@@ -39,10 +39,16 @@
       </div>
     </div>
 
-    <mat-form-field>
-      <mat-label>{{ 'BROADCASTS_ADMINISTRATION_SUBJECT' | translate }}</mat-label>
-      <input matInput type="text" min="1" max="119" minlength="1" maxlength="119" required [(ngModel)]="subject" />
-    </mat-form-field>
+    <div fxLayout="row break" fxLayoutGap="2%" fxLayoutAlign="space-between center">
+      <mat-form-field fxFlex.gt-md="48%" fxFlex.gt-xs="49%" fxFlex.xs="100%">
+        <mat-label>{{ 'BROADCASTS_ADMINISTRATION_SUBJECT' | translate }}</mat-label>
+        <input matInput type="text" min="1" max="119" minlength="1" maxlength="119" required [(ngModel)]="subject" />
+      </mat-form-field>
+
+      <div fxFlex.gt-md="48%" fxFlex.gt-xs="49%" fxFlex.xs="100%">
+        <app-broadcast-attachment (attachmentsChange)="attachmentsChanged($event)"></app-broadcast-attachment>
+      </div>
+    </div>
 
     <app-editor
       (bodyChanged)="bodyChanged($event)"

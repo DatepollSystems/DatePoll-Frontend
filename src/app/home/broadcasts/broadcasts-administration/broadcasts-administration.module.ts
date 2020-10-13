@@ -19,9 +19,17 @@ import {BroadcastAdminInfoComponent} from './broadcast-admin-info/broadcast-admi
 import {BroadcastsAdministrationComponent} from './broadcasts-administration.component';
 import {CreateBroadcastComponent} from './create-broadcast/create-broadcast.component';
 import {LoadDraftDialogComponent} from './create-broadcast/load-draft-dialog/load-draft-dialog-component';
+import {BroadcastAttachmentComponent} from './create-broadcast/broadcast-attachment/broadcast-attachment.component';
+import {BroadcastsModule} from '../broadcasts.module';
 
 @NgModule({
-  declarations: [BroadcastsAdministrationComponent, CreateBroadcastComponent, BroadcastAdminInfoComponent, LoadDraftDialogComponent],
+  declarations: [
+    BroadcastsAdministrationComponent,
+    CreateBroadcastComponent,
+    BroadcastAdminInfoComponent,
+    LoadDraftDialogComponent,
+    BroadcastAttachmentComponent,
+  ],
   imports: [
     CommonModule,
     MaterialModule,
@@ -35,6 +43,7 @@ import {LoadDraftDialogComponent} from './create-broadcast/load-draft-dialog/loa
     FormsModule,
     EditorPreviewModule,
     BroadcastsAdministrationRoutingModule,
+    BroadcastsModule,
   ],
   providers: [
     {provide: DateAdapter, useClass: CustomDateAdapter},

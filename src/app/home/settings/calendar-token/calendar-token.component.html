@@ -13,14 +13,23 @@
     </div>
 
     <div>
-      <button (click)="copyTokenToClipboard(apiUrl)" mat-flat-button color="accent" style="width: 100%">
+      <button
+        (click)="copyTokenToClipboard(apiUrl); tooltip.disabled = false; tooltip.show()"
+        mat-flat-button
+        color="accent"
+        style="width: 100%"
+        [matTooltipDisabled]="true"
+        matTooltip="{{ 'COPIED_LINK' | translate }}"
+        #tooltip="matTooltip"
+        matTooltipPosition="right"
+      >
         <mat-icon>content_copy</mat-icon>
         {{ 'SETTINGS_SECURITY_MODAL_CALENDAR_COPY_TOKEN_TOOLTIP' | translate }}
       </button>
     </div>
   </div>
 
-  <mat-divider style="margin-top: 15px; margin-bottom: 15px;"></mat-divider>
+  <mat-divider style="margin-top: 15px; margin-bottom: 15px"></mat-divider>
 
   <div
     *ngIf="calendarToken != null"
@@ -36,14 +45,23 @@
     </div>
 
     <div>
-      <button (click)="copyTokenToClipboard(calendarToken)" mat-flat-button color="accent" style="width: 100%">
+      <button
+        (click)="copyTokenToClipboard(calendarToken); tooltip.disabled = false; tooltip.show()"
+        mat-flat-button
+        color="accent"
+        style="width: 100%"
+        [matTooltipDisabled]="true"
+        matTooltip="{{ 'COPIED_LINK' | translate }}"
+        #tooltip="matTooltip"
+        matTooltipPosition="above"
+      >
         <mat-icon>content_copy</mat-icon>
         {{ 'SETTINGS_SECURITY_MODAL_CALENDAR_COPY_TOKEN_TOOLTIP' | translate }}
       </button>
     </div>
 
     <div fxFlex.xs="100%">
-      <button (click)="resetCalendarToken()" color="warn" mat-flat-button style="width: 100%;">
+      <button (click)="resetCalendarToken()" color="warn" mat-flat-button style="width: 100%">
         <mat-icon>refresh</mat-icon>
         {{ 'SETTINGS_SECURITY_MODAL_CALENDAR_RESET_TOKEN' | translate }}
       </button>
