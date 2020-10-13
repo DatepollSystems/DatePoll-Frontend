@@ -13,13 +13,15 @@ import {CustomDateAdapter, MY_DATE_FORMATS} from '../../utils/custom-date-adapte
 
 import {BroadcastInfoComponent} from './broadcast-info/broadcast-info.component';
 import {BroadcastsViewComponent} from './broadcasts-view/broadcasts-view.component';
+import {BroadcastAttachmentCardComponent} from './broadcast-info/broadcast-attachment-card/broadcast-attachment-card.component';
 
 @NgModule({
-  declarations: [BroadcastInfoComponent, BroadcastsViewComponent],
+  declarations: [BroadcastInfoComponent, BroadcastsViewComponent, BroadcastAttachmentCardComponent],
   imports: [CommonModule, FormsModule, MaterialModule, TranslationModule, GoBackButtonModule, EditorPreviewModule, BroadcastsRoutingModule],
   providers: [
     {provide: DateAdapter, useClass: CustomDateAdapter},
     {provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS},
   ],
+  exports: [BroadcastAttachmentCardComponent],
 })
 export class BroadcastsModule {}

@@ -4,7 +4,7 @@
 </div>
 
 <mat-card *ngIf="happyAlert?.trim().toLowerCase().length > 0">
-  <mat-card-content style="text-align: center; margin-bottom: 0;">
+  <mat-card-content style="text-align: center; margin-bottom: 0">
     <h1 style="margin-bottom: 0">{{ happyAlert }}</h1>
   </mat-card-content>
   <mat-card-actions style="margin-top: 0; padding-top: 0">
@@ -16,12 +16,21 @@
 </mat-card>
 
 <div
-  *ngIf="events.length == 0 && bookings.length == 0 && birthdays.length == 0 && broadcasts.length === 0"
+  *ngIf="loaded && events.length == 0 && bookings.length == 0 && birthdays.length == 0 && broadcasts.length === 0"
   fxLayout="column"
   fxLayoutAlign="center"
 >
   <div fxFlex style="text-align: center; margin-top: 20%">
     <h2>Hiii!! Beautiful day, isn't it?</h2>
+  </div>
+</div>
+
+<div
+  *ngIf="!loaded && events.length === 0 && bookings.length === 0 && birthdays.length === 0 && broadcasts.length === 0"
+  style="margin-top: 20%"
+>
+  <div fxLayout="column" fxLayoutAlign="center">
+    <mat-spinner style="margin: auto auto 10px"></mat-spinner>
   </div>
 </div>
 
@@ -31,7 +40,7 @@
   *ngIf="events.length != 0 || bookings.length != 0 || birthdays.length != 0 || broadcasts.length != 0"
 >
   <mat-list>
-    <div mat-subheader *ngIf="events.length != 0" class="sub-header" style="padding-top: 1px;">
+    <div mat-subheader *ngIf="events.length != 0" class="sub-header" style="padding-top: 1px">
       <span [matBadge]="openEventsCount.toString()" matBadgeOverlap="false">{{ 'STARTPAGE_EVENTS' | translate }}</span>
     </div>
     <mat-list-item *ngFor="let event of events" class="not-selectable" matRipple matRippleRadius="100" (click)="onEventItemClick(event)">
@@ -102,7 +111,7 @@
       </div>
       <div mat-line>
         {{ 'STARTPAGE_BROADCASTS_BY' | translate }}
-        <i>{{ broadcast.writerName }}</i> ({{ broadcast.sent | date: 'dd.MM - HH:mm' }})
+        <i>{{ broadcast.writerName }}</i> ({{ broadcast.sent | date: 'EE, dd.MM. HH:mm' }})
         <small class="until-left"> (~{{ broadcast.readTime }})</small>
       </div>
     </mat-list-item>
@@ -156,7 +165,7 @@
   <div *ngIf="events.length != 0" fxFlex>
     <mat-card class="mat-elevation-z4">
       <mat-card-content>
-        <mat-card-title style="padding-top: 5px;">
+        <mat-card-title style="padding-top: 5px">
           <span [matBadge]="openEventsCount.toString()" matBadgeOverlap="false">{{ 'STARTPAGE_EVENTS' | translate }}</span>
         </mat-card-title>
         <div class="table-responsive">

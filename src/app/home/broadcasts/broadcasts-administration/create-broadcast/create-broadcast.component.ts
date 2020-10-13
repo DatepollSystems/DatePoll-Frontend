@@ -15,11 +15,12 @@ import {LoadDraftDialogComponent} from './load-draft-dialog/load-draft-dialog-co
 
 import {GroupAndSubgroupModel} from '../../../../utils/models/groupAndSubgroup.model';
 import {BroadcastDraft} from '../../models/broadcast-draft.model';
+import {Attachment} from './broadcast-attachment/broadcast-attachment.component';
 
 @Component({
   selector: 'app-create-broadcast',
   templateUrl: './create-broadcast.component.html',
-  styleUrls: ['./create-broadcast.component.css']
+  styleUrls: ['./create-broadcast.component.css'],
 })
 export class CreateBroadcastComponent implements OnDestroy {
   groupsAndSubgroups: GroupAndSubgroupModel[] = [];
@@ -27,6 +28,8 @@ export class CreateBroadcastComponent implements OnDestroy {
 
   allMembers = false;
   selectedGroupsAndSubgroups: GroupAndSubgroupModel[] = [];
+
+  attachments: Attachment[] = [];
 
   subject = '';
   body = '';
@@ -47,11 +50,11 @@ export class CreateBroadcastComponent implements OnDestroy {
     private translate: TranslateService
   ) {
     this.groupsAndSubgroups = this.groupsService.getGroupsAndSubgroups();
-    this.groupsSubscription = this.groupsService.groupsAndSubgroupsChange.subscribe(value => {
+    this.groupsSubscription = this.groupsService.groupsAndSubgroupsChange.subscribe((value) => {
       this.groupsAndSubgroups = value;
     });
 
-    this.route.paramMap.subscribe(params => {
+    this.route.paramMap.subscribe((params) => {
       const id = params.get('id');
 
       if (id != null) {
@@ -60,7 +63,7 @@ export class CreateBroadcastComponent implements OnDestroy {
         this.remake();
         console.log('Draft to load: ' + id);
 
-        this.draftSubscription = this.draftsService.draftChange.subscribe(value => {
+        this.draftSubscription = this.draftsService.draftChange.subscribe((value) => {
           this.draft = value;
           this.remake();
         });
@@ -102,18 +105,32 @@ export class CreateBroadcastComponent implements OnDestroy {
     console.log(this.selectedGroupsAndSubgroups);
   }
 
+  attachmentsChanged(attachments: Attachment[]) {
+    this.attachments = attachments;
+    console.log(this.attachments);
+  }
+
+  leave() {
+    for (const attachment of this.attachments) {
+      this.broadcastsService.deleteAttachment(attachment.id).subscribe(
+        (response) => console.log(response),
+        (error) => console.log(error)
+      );
+    }
+  }
+
   loadDraft() {
     this.bottomSheet.open(LoadDraftDialogComponent);
   }
 
-  saveDraft() {
+  makeCheck() {
     if (this.subject.length < 1 || this.subject.length > 190) {
       console.log('Subject size wrong! - ' + this.subject.length);
       this.notificationService.alert(
         this.translate.getTranslationFor('WARNING'),
         this.translate.getTranslationFor('BROADCASTS_ADMINISTRATION_CREATE_NOTIFICATION_SUBJECT_LENGTH')
       );
-      return;
+      return false;
     }
 
     if (this.body.length < 10) {
@@ -122,6 +139,14 @@ export class CreateBroadcastComponent implements OnDestroy {
         this.translate.getTranslationFor('WARNING'),
         this.translate.getTranslationFor('BROADCASTS_ADMINISTRATION_CREATE_NOTIFICATION_BODY_LENGTH')
       );
+      return false;
+    }
+
+    return true;
+  }
+
+  saveDraft() {
+    if (!this.makeCheck()) {
       return;
     }
 
@@ -139,7 +164,7 @@ export class CreateBroadcastComponent implements OnDestroy {
           );
           this.router.navigate(['/home/broadcasts/administration/draft/' + response.draft.id]);
         },
-        error => {
+        (error) => {
           console.log(error);
         }
       );
@@ -152,7 +177,7 @@ export class CreateBroadcastComponent implements OnDestroy {
             this.translate.getTranslationFor('BROADCASTS_ADMINISTRATION_CREATE_NOTIFICATION_DRAFT_SUCCESSFUL_SAVED')
           );
         },
-        error => {
+        (error) => {
           console.log(error);
         }
       );
@@ -160,12 +185,7 @@ export class CreateBroadcastComponent implements OnDestroy {
   }
 
   send() {
-    if (this.subject.length < 1 || this.subject.length > 190) {
-      console.log('Subject size wrong! - ' + this.subject.length);
-      this.notificationService.alert(
-        this.translate.getTranslationFor('WARNING'),
-        this.translate.getTranslationFor('BROADCASTS_ADMINISTRATION_CREATE_NOTIFICATION_SUBJECT_LENGTH')
-      );
+    if (!this.makeCheck()) {
       return;
     }
 
@@ -178,32 +198,23 @@ export class CreateBroadcastComponent implements OnDestroy {
       return;
     }
 
-    if (this.body.length < 10) {
-      console.log('Mail body length < 10');
-      this.notificationService.alert(
-        this.translate.getTranslationFor('WARNING'),
-        this.translate.getTranslationFor('BROADCASTS_ADMINISTRATION_CREATE_NOTIFICATION_BODY_LENGTH')
-      );
-      return;
-    }
-
     const answers = [
       {
         answer: this.translate.getTranslationFor('YES'),
-        value: 'yes'
+        value: 'yes',
       },
       {
         answer: this.translate.getTranslationFor('NO'),
-        value: 'no'
-      }
+        value: 'no',
+      },
     ];
     const question = this.translate.getTranslationFor('BROADCASTS_ADMINISTRATION_CREATE_CONFIRM_QUESTION');
 
     const bottomSheetRef = this.bottomSheet.open(QuestionDialogComponent, {
       data: {
         answers,
-        question
-      }
+        question,
+      },
     });
 
     bottomSheetRef.afterDismissed().subscribe((value: string) => {
@@ -228,13 +239,19 @@ export class CreateBroadcastComponent implements OnDestroy {
             }
           }
 
+          const attachmentIds = [];
+          for (const attachment of this.attachments) {
+            attachmentIds.push(attachment.id);
+          }
+
           const broadcast = {
             subject: this.subject,
             bodyHTML: this.bodyHTML,
             body: this.body,
             for_everyone: this.allMembers,
             groups,
-            subgroups
+            subgroups,
+            attachments: attachmentIds,
           };
 
           this.notificationService.info(
@@ -262,15 +279,15 @@ export class CreateBroadcastComponent implements OnDestroy {
                     );
                     this.draftsService.fetchDrafts();
                   },
-                  error => {
+                  (error) => {
                     console.log(error);
                   }
                 );
               }
-              this.router.navigate(['/home/broadcasts/administration']);
             },
-            error => console.log(error)
+            (error) => console.log(error)
           );
+          this.router.navigate(['/home/broadcasts/administration']);
         }
       }
     });

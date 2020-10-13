@@ -110,7 +110,7 @@ export class CalendarComponent implements OnInit, OnDestroy {
     });
 
     this.showBirthdays = this.userSettingsService.getShowBirthdaysInCalendar();
-    this.showBirthdaysSubscription = this.userSettingsService.showBirthdayChange.subscribe((value) => {
+    this.showBirthdaysSubscription = this.userSettingsService.showBirthdaysInCalendarChange.subscribe((value) => {
       this.showBirthdays = value;
       this.refreshCalendar();
     });

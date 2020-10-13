@@ -35,6 +35,11 @@
   "INACTIVE": "inaktiv",
   "CANCEL": "Abbrechen",
   "EDIT": "Bearbeiten",
+  "DOWNLOAD": "Download",
+  "COPY_LINK": "Link kopieren",
+  "COPIED_LINK": "Link kopiert!",
+  "ATTACHMENTS": "Anhänge",
+  "CONTENT": "Inhalt",
 
   "LANGUAGE": "Sprache",
   "LANGUAGE_GERMAN": "Deutsch",
@@ -274,6 +279,8 @@
   "BROADCASTS_ADMINISTRATION_CREATE_NOTIFICATION_DRAFT_SUCCESSFUL_SAVED": "Entwurf gespeichert!",
   "BROADCASTS_ADMINISTRATION_CREATE_NOTIFICATION_DRAFT_SUCCESSFUL_DELETED": "Entwurf gelöscht!",
 
+  "BROADCASTS_ADMINISTRATION_CREATE_ATTACHMENTS_TITLE": "Füge mehrere Anhänge hinzu...",
+
   "BROADCASTS_ADMINISTRATION_DELETE_TOOLTIP": "Mitteilung löschen",
   "BROADCASTS_ADMINISTRATION_DELETE_CONFIRMATION_QUESTION": "Willst du diese Mitteilung wirklich löschen?",
   "BROADCASTS_ADMINISTRATION_DELETE_SUCCESSFULLY": "Die Mitteilung wurde gelöscht!",
@@ -289,6 +296,7 @@
   "BROADCASTS_ADMINISTRATION_ADMIN_INFO_SENT": "Versendet",
   "BROADCASTS_ADMINISTRATION_ADMIN_INFO_QUEUED_AT": "In Auftrag gegeben am",
   "BROADCASTS_ADMINISTRATION_ADMIN_INFO_SENT_AT": "Versendet am",
+  "BROADCASTS_ADMINISTRATION_ATTACHMENT_VIEW_CLICK_ME_FOR_IMAGE": "Klicke auf mich um das Bild anzuzeigen.",
 
   "SETTINGS_PERSONAL_DATA": "Persönliche Daten",
   "SETTINGS_PERSONAL_DATA_DESCRIPTION": "Bearbeiten Sie Ihre Persönlichen Daten.",
@@ -380,7 +388,7 @@
   "MANAGEMENT_USERS_ACTIVATE_ALL_QUESTION_DIALOG": "Willst du wirklich alle Mitglieder aktivieren?",
   "MANAGEMENT_USERS_ACTIVATE_ALL_FINISHED": "Alle nicht aktivierten Mitglieder wurden aktiviert!",
   "MANAGEMENT_USERS_DELETED_USERS": "Gelöschte Mitglieder",
-  "MANAGEMENT_USERS_CHANGES": "Äktivitätenprotokoll",
+  "MANAGEMENT_USERS_CHANGES": "Aktivitätenprotokoll",
   "MANAGEMENT_USERS_MANAGE_COLUMNS": "Spalten bearbeiten",
   "MANAGEMENT_USERS_MANAGE_COLUMNS_TOOLTIP": "Sortierreihenfole ändern",
 

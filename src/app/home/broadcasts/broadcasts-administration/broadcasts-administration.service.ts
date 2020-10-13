@@ -4,18 +4,23 @@ import {Subject} from 'rxjs';
 import {Converter} from '../../../utils/converter';
 import {HttpService} from '../../../utils/http.service';
 import {Broadcast, UserBroadcastInfo} from '../models/broadcast.model';
+import {environment} from '../../../../environments/environment';
+import {HttpClient, HttpEventType} from '@angular/common/http';
+import {map} from 'rxjs/operators';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class BroadcastsAdministrationService {
+  apiUrl = environment.apiUrl;
+
   private _broadcasts: Broadcast[] = [];
   public broadcastsChange: Subject<Broadcast[]> = new Subject<Broadcast[]>();
 
   private broadcast: Broadcast;
   public broadcastChange = new Subject<Broadcast>();
 
-  constructor(private httpService: HttpService) {}
+  constructor(private httpService: HttpService, private httpClient: HttpClient) {}
 
   public getBroadcasts(): Broadcast[] {
     this.fetchBroadcasts();
@@ -41,14 +46,12 @@ export class BroadcastsAdministrationService {
             broadcast.body,
             broadcast.writer_name
           );
-          toSaveBroadcast.groups = broadcast.groups;
-          toSaveBroadcast.subgroups = broadcast.subgroups;
 
           broadcasts.push(toSaveBroadcast);
         }
         this.setBroadcasts(broadcasts);
       },
-      error => console.log(error)
+      (error) => console.log(error)
     );
   }
 
@@ -88,12 +91,13 @@ export class BroadcastsAdministrationService {
         );
         toSaveBroadcast.groups = broadcast.groups;
         toSaveBroadcast.subgroups = broadcast.subgroups;
+        toSaveBroadcast.attachments = broadcast.attachments;
         toSaveBroadcast.forEveryone = broadcast.for_everyone;
         toSaveBroadcast.bodyHTML = broadcast.bodyHTML;
         toSaveBroadcast.userInfos = userInfos;
         this.setBroadcast(toSaveBroadcast);
       },
-      error => console.log(error)
+      (error) => console.log(error)
     );
   }
 
@@ -104,5 +108,33 @@ export class BroadcastsAdministrationService {
 
   public deleteBroadcast(id: number) {
     return this.httpService.loggedInV1DELETERequest('/broadcast/administration/broadcast/' + id, 'deleteBroadcast');
+  }
+
+  public uploadAttachments(data) {
+    const uploadURL = this.apiUrl + '/v1/broadcast/administration/attachment';
+
+    return this.httpClient
+      .post<any>(uploadURL, data, {
+        reportProgress: true,
+        observe: 'events',
+      })
+      .pipe(
+        map((event) => {
+          switch (event.type) {
+            case HttpEventType.UploadProgress:
+              const progress = Math.round((100 * event.loaded) / event.total);
+              return {status: 'progress', message: progress};
+
+            case HttpEventType.Response:
+              return event.body;
+            default:
+              return `Unhandled event: ${event.type}`;
+          }
+        })
+      );
+  }
+
+  public deleteAttachment(attachmentId: number) {
+    return this.httpService.loggedInV1DELETERequest('/broadcast/administration/attachment/' + attachmentId, 'deleteAttachment');
   }
 }

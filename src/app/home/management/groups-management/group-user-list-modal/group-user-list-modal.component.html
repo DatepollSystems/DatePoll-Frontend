@@ -21,7 +21,7 @@
           mat-flat-button
           printSectionId="users-only-in-this-group"
           ngxPrint
-          [disabled]="!showUsersOnlyInThisGroup"
+          *ngIf="showUsersOnlyInThisGroup"
           [useExistingCss]="true"
           printTitle="{{ 'MANAGEMENT_GROUPS_INFO_GROUP_MODAL_USERS_ONLY_IN_THIS_GROUP' | translate }}"
         >
@@ -58,7 +58,7 @@
 
   <mat-divider></mat-divider>
 
-  <div fxLayout="row" fxLayoutAlign="space-between" style="margin-top: 15px;">
+  <div fxLayout="row" fxLayoutAlign="space-between" style="margin-top: 15px">
     <h3>{{ 'MANAGEMENT_GROUPS_INFO_GROUP_MODAL_USERS_BY_JOIN_YEAR' | translate }}</h3>
     <div fxLayout="row" fxLayoutGap="2%">
       <div>
@@ -95,7 +95,7 @@
           printSectionId="users-grouped-by-join-year-{{ year.id }}"
           ngxPrint
           [useExistingCss]="true"
-          style="margin-right: 10px;"
+          style="margin-right: 10px"
           printTitle="{{ 'MANAGEMENT_GROUPS_INFO_GROUP_MODAL_USERS_BY_JOIN_YEAR' | translate }}"
         >
           <mat-icon>print</mat-icon>

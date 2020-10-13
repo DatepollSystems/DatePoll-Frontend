@@ -50,10 +50,38 @@ export class Converter {
   }
 
   public static getIOSDate(value: string): Date {
-    let temp = value.toString().replace(' ', 'T');
+    const temp = value.toString().replace(' ', 'T');
+    let date = new Date(temp);
     if (Browser.getInfos().name.includes('Safari')) {
-      temp += '.000+02:00';
+      const dDate = temp.split('T')[0].replace(/-/g, '/');
+      date = new Date(dDate);
+      if (temp.includes('T')) {
+        let hours = Number(temp.substring(11, 13));
+        const minutes = temp.substring(14, 16);
+        const seconds = temp.substring(17, 19);
+
+        // Check for server time in wrong timezone and add austrian utc offset
+        if (temp.includes('000000Z')) {
+          if (this.isDaylightSavingTime(date)) {
+            hours = hours + 2;
+          } else {
+            hours = hours + 1;
+          }
+        }
+
+        // console.log('hours: ' + hours + ' minutes: ' + minutes + ' seconds: ' + seconds);
+
+        date.setHours(hours);
+        date.setMinutes(Number(minutes));
+        date.setSeconds(Number(seconds));
+      }
     }
-    return new Date(temp);
+    return date;
+  }
+
+  private static isDaylightSavingTime(d) {
+    const jan = new Date(d.getFullYear(), 0, 1).getTimezoneOffset();
+    const jul = new Date(d.getFullYear(), 6, 1).getTimezoneOffset();
+    return Math.max(jan, jul) !== d.getTimezoneOffset();
   }
 }
