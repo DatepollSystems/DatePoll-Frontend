@@ -23,6 +23,7 @@
       fxLayout.lt-sm="column"
       fxLayoutAlign="space-between"
       fxLayoutGap.lt-sm="5%"
+      (click)="deleteUserChange(userChange)"
     >
       <span *ngIf="userChange.editorId !== userChange.userId">
         {{ userChange.editedAt | date: 'dd.MM.yyyy HH:mm:ss' }}

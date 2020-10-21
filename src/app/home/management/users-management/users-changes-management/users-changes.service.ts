@@ -51,4 +51,8 @@ export class UsersChangesService {
     this._userChanges = userChanges;
     this.userChangesChange.next(this._userChanges.slice());
   }
+
+  public deleteUserChange(userChangeId: number) {
+    return this.httpService.loggedInV1DELETERequest('/management/changes/users/' + userChangeId, 'deleteUserChange');
+  }
 }

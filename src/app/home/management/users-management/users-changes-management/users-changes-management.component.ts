@@ -1,26 +1,48 @@
-import {Component, OnDestroy} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Subscription} from 'rxjs';
-import {UserChange} from './userChange.model';
+import {NotificationsService} from 'angular2-notifications';
+
 import {UsersChangesService} from './users-changes.service';
+import {MyUserService} from '../../../my-user.service';
+import {Permissions} from '../../../../permissions';
+import {TranslateService} from '../../../../translation/translate.service';
+
+import {UserChange} from './userChange.model';
+import {QuestionDialogComponent} from '../../../../utils/shared-components/question-dialog/question-dialog.component';
+import {MatBottomSheet} from '@angular/material/bottom-sheet';
 
 @Component({
   selector: 'app-users-changes-management',
   templateUrl: './users-changes-management.component.html',
   styleUrls: ['./users-changes-management.component.css'],
 })
-export class UsersChangesManagementComponent implements OnDestroy {
+export class UsersChangesManagementComponent implements OnInit, OnDestroy {
   userChanges: UserChange[] = [];
   filteredUserChanges: UserChange[] = [];
   userChangesSubscription: Subscription;
 
   ignoreEditorChangesChars = '!e';
 
-  constructor(private userChangesService: UsersChangesService) {
+  hasPermissionToDeleteUserChanage = false;
+
+  constructor(
+    private userChangesService: UsersChangesService,
+    private myUserService: MyUserService,
+    private translate: TranslateService,
+    private notificationsService: NotificationsService,
+    private bottomSheet: MatBottomSheet
+  ) {
     this.userChanges = this.userChangesService.getUserChanges();
     this.filteredUserChanges = this.userChanges.slice();
     this.userChangesSubscription = this.userChangesService.userChangesChange.subscribe((value) => {
       this.userChanges = value;
       this.filteredUserChanges = this.userChanges.slice();
+    });
+  }
+
+  ngOnInit() {
+    setTimeout(() => {
+      this.hasPermissionToDeleteUserChanage = this.myUserService.hasPermission(Permissions.MANAGEMENT_EXTRA_USER_DELETE);
     });
   }
 
@@ -49,6 +71,47 @@ export class UsersChangesManagementComponent implements OnDestroy {
       ) {
         this.filteredUserChanges.push(user);
       }
+    }
+  }
+
+  deleteUserChange(userChange: UserChange) {
+    if (this.hasPermissionToDeleteUserChanage) {
+      const answers = [
+        {
+          answer: this.translate.getTranslationFor('YES'),
+          value: 'yes',
+        },
+        {
+          answer: this.translate.getTranslationFor('NO'),
+          value: 'no',
+        },
+      ];
+      const question = this.translate.getTranslationFor('MANAGEMENT_USERS_CHANGES_DELETE_CONFIRMATION');
+
+      const bottomSheetRef = this.bottomSheet.open(QuestionDialogComponent, {
+        data: {
+          answers,
+          question,
+        },
+      });
+
+      bottomSheetRef.afterDismissed().subscribe((value: string) => {
+        if (value != null) {
+          if (value.includes('yes')) {
+            this.userChangesService.deleteUserChange(userChange.id).subscribe(
+              (response: any) => {
+                console.log(response);
+                this.userChangesService.getUserChanges();
+                this.notificationsService.success(
+                  this.translate.getTranslationFor('SUCCESSFULLY'),
+                  this.translate.getTranslationFor('MANAGEMENT_USERS_CHANGES_DELETE_CONFIRMATION_SUCCESSFULLY')
+                );
+              },
+              (error) => console.log(error)
+            );
+          }
+        }
+      });
     }
   }
 }

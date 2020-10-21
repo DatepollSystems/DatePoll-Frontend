@@ -404,6 +404,8 @@
   "MANAGEMENT_USERS_CHANGES_BY": "von",
   "MANAGEMENT_USERS_CHANGES_BY_CHANGED": "bearbeitet.",
   "MANAGEMENT_USERS_CHANGES_CHANGED_HIMSELF": "bei sich selbst bearbeitet.",
+  "MANAGEMENT_USERS_CHANGES_DELETE_CONFIRMATION": "Willst du diesen Änderungseintrag wirklich löschen?",
+  "MANAGEMENT_USERS_CHANGES_DELETE_CONFIRMATION_SUCCESSFULLY": "Der Änderungseintrag wurde gelöscht!",
 
   "MANAGEMENT_USERS_CREATE_USER_MODAL_TITLE": "Lege ein neues Mitglied an",
   "MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_TITLE": "Titel",
