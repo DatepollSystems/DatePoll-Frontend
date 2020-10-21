@@ -70,6 +70,20 @@
   <div *ngIf="calendarToken == null">
     <mat-progress-bar mode="indeterminate"></mat-progress-bar>
   </div>
+
+  <mat-divider style="margin-bottom: 15px; margin-top: 15px"></mat-divider>
+
+  <div fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="space-around">
+    <mat-slide-toggle (change)="onShowMoviesChange($event)" [(ngModel)]="showMovies" color="primary" *ngIf="serverInfo?.cinema_enabled">
+      {{ 'CALENDAR_SETTINGS_SHOW_MOVIES' | translate }}
+    </mat-slide-toggle>
+    <mat-slide-toggle (change)="onShowEventsChange($event)" [(ngModel)]="showEvents" color="primary" *ngIf="serverInfo?.events_enabled">
+      {{ 'CALENDAR_SETTINGS_SHOW_EVENTS' | translate }}
+    </mat-slide-toggle>
+    <mat-slide-toggle (change)="onShowBirthdaysChange($event)" [(ngModel)]="showBirthdays" color="primary">
+      {{ 'CALENDAR_SETTINGS_SHOW_BIRTHDAYS' | translate }}
+    </mat-slide-toggle>
+  </div>
 </mat-dialog-content>
 <mat-dialog-actions fxLayout="row" fxLayoutAlign="end">
   <button mat-button mat-dialog-close>{{ 'CLOSE' | translate }}</button>
