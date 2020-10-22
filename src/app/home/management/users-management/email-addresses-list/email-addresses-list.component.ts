@@ -5,7 +5,7 @@ import {MatTableDataSource} from '@angular/material/table';
 @Component({
   selector: 'app-email-addresses-list',
   templateUrl: './email-addresses-list.component.html',
-  styleUrls: ['./email-addresses-list.component.css']
+  styleUrls: ['./email-addresses-list.component.css'],
 })
 export class EmailAddressesListComponent implements OnInit {
   displayedColumns: string[] = ['emailAddress', 'action'];
@@ -34,7 +34,7 @@ export class EmailAddressesListComponent implements OnInit {
       }
     }
 
-    this.emailAddresses.push(emailAddress);
+    this.emailAddresses.push(emailAddress.trim());
     this.setEmailAddressesInTable(this.emailAddresses);
 
     form.reset();
