@@ -22,6 +22,7 @@ import {EventStandardLocationsManagementModalComponent} from './events-administr
 import {EventUserManagementModalComponent} from './events-administration/event-user-management-modal/event-user-management-modal.component';
 import {EventsAdministrationComponent} from './events-administration/events-administration.component';
 import {EventsViewComponent} from './events-view/events-view.component';
+import {NgxMatSelectSearchModule} from 'ngx-mat-select-search';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import {EventsViewComponent} from './events-view/events-view.component';
     EventsRoutingModule,
     GoBackButtonModule,
     GroupAndSubgroupTypeInputSelectModule,
+    NgxMatSelectSearchModule,
   ],
   providers: [EventsService, {provide: DateAdapter, useClass: CustomDateAdapter}, {provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS}],
 })

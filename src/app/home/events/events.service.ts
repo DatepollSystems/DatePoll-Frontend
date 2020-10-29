@@ -13,22 +13,48 @@ import {Event} from './models/event.model';
 import {GroupAndSubgroupModel, GroupType} from '../../utils/models/groupAndSubgroup.model';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class EventsService {
-  public eventsChange: Subject<Event[]> = new Subject<Event[]>();
-  public eventChange: Subject<Event> = new Subject<Event>();
-  public joinedGroupsChange: Subject<GroupAndSubgroupModel[]> = new Subject<GroupAndSubgroupModel[]>();
-  public freeGroupsChange: Subject<GroupAndSubgroupModel[]> = new Subject<GroupAndSubgroupModel[]>();
   private _events: Event[] = [];
+  public eventsChange: Subject<Event[]> = new Subject<Event[]>();
+
   private _event: Event;
+  public eventChange: Subject<Event> = new Subject<Event>();
+
   private _joinedGroups: GroupAndSubgroupModel[] = [];
+  public joinedGroupsChange: Subject<GroupAndSubgroupModel[]> = new Subject<GroupAndSubgroupModel[]>();
+
   private _freeGroups: GroupAndSubgroupModel[] = [];
+  public freeGroupsChange: Subject<GroupAndSubgroupModel[]> = new Subject<GroupAndSubgroupModel[]>();
+
+  private _years: string[] = [];
+  public yearsChange: Subject<string[]> = new Subject<string[]>();
 
   constructor(public httpService: HttpService) {}
 
-  public getEvents(): Event[] {
-    this.fetchEvents();
+  public getYears(): string[] {
+    this.fetchYears();
+    return this._years.slice();
+  }
+
+  public setYears(years: string[]) {
+    this._years = years;
+    this.yearsChange.next(this._years.slice());
+  }
+
+  private fetchYears() {
+    this.httpService.loggedInV1GETRequest('/avent/administration/avent/years').subscribe(
+      (response: any) => {
+        console.log(response);
+        this.setYears(response.years);
+      },
+      (error) => console.log(error)
+    );
+  }
+
+  public getEvents(year: number = null): Event[] {
+    this.fetchEvents(year);
     return this._events.slice();
   }
 
@@ -37,8 +63,12 @@ export class EventsService {
     this.eventsChange.next(this._events.slice());
   }
 
-  public fetchEvents() {
-    this.httpService.loggedInV1GETRequest('/avent/administration/avent', 'fetchEvents').subscribe(
+  public fetchEvents(year: number = null) {
+    let url = '/avent/administration/avent';
+    if (year != null) {
+      url += '/' + year;
+    }
+    this.httpService.loggedInV1GETRequest(url, 'fetchEvents').subscribe(
       (data: any) => {
         console.log(data);
 
@@ -81,7 +111,7 @@ export class EventsService {
 
         this.setEvents(events);
       },
-      error => console.log(error)
+      (error) => console.log(error)
     );
   }
 
@@ -92,7 +122,7 @@ export class EventsService {
         id: -1,
         decision: decision.decision,
         show_in_calendar: decision.showInCalendar,
-        color: decision.color
+        color: decision.color,
       });
     }
     const dates = [];
@@ -103,7 +133,7 @@ export class EventsService {
         y: date.y,
         date: Converter.getDateFormattedWithHoursMinutesAndSeconds(date.date),
         location: date.location,
-        description: date.description
+        description: date.description,
       });
     }
     const object = {
@@ -113,7 +143,7 @@ export class EventsService {
       forEveryone: event.forEveryone,
       description: event.description,
       decisions,
-      dates
+      dates,
     };
 
     return this.httpService.loggedInV1POSTRequest('/avent/administration/avent', object, 'createEvent');
@@ -126,7 +156,7 @@ export class EventsService {
         id: decision.id,
         decision: decision.decision,
         show_in_calendar: decision.showInCalendar,
-        color: decision.color
+        color: decision.color,
       });
     }
     const dates = [];
@@ -137,7 +167,7 @@ export class EventsService {
         y: date.y,
         date: Converter.getDateFormattedWithHoursMinutesAndSeconds(date.date),
         location: date.location,
-        description: date.description
+        description: date.description,
       });
     }
     const object = {
@@ -145,7 +175,7 @@ export class EventsService {
       forEveryone: event.forEveryone,
       description: event.description,
       decisions,
-      dates
+      dates,
     };
 
     return this.httpService.loggedInV1PUTRequest('/avent/administration/avent/' + event.id, object, 'updateEvent');
@@ -158,7 +188,7 @@ export class EventsService {
   public addGroupToEvent(eventId: number, groupId: number) {
     const dto = {
       event_id: eventId,
-      group_id: groupId
+      group_id: groupId,
     };
 
     return this.httpService.loggedInV1POSTRequest('/avent/administration/addGroupToEvent', dto, 'addGroupToEvent');
@@ -167,7 +197,7 @@ export class EventsService {
   public addSubgroupToEvent(eventId: number, subgroupId: number) {
     const dto = {
       event_id: eventId,
-      subgroup_id: subgroupId
+      subgroup_id: subgroupId,
     };
 
     return this.httpService.loggedInV1POSTRequest('/avent/administration/addSubgroupToEvent', dto, 'addSubgroupToEvent');
@@ -176,7 +206,7 @@ export class EventsService {
   public removeGroupFromEvent(eventId: number, groupId: number) {
     const dto = {
       event_id: eventId,
-      group_id: groupId
+      group_id: groupId,
     };
 
     return this.httpService.loggedInV1POSTRequest('/avent/administration/removeGroupFromEvent', dto, 'removeGroupFromEvent');
@@ -185,7 +215,7 @@ export class EventsService {
   public removeSubgroupFromEvent(eventId: number, subgroupId: number) {
     const dto = {
       event_id: eventId,
-      subgroup_id: subgroupId
+      subgroup_id: subgroupId,
     };
 
     return this.httpService.loggedInV1POSTRequest('/avent/administration/removeSubgroupFromEvent', dto, 'removeSubgroupFromEvent');
@@ -220,10 +250,10 @@ export class EventsService {
 
             this.setJoinedOfEvent(groups);
           },
-          error => console.log(error)
+          (error) => console.log(error)
         );
       },
-      error => console.log(error)
+      (error) => console.log(error)
     );
   }
 
@@ -256,10 +286,10 @@ export class EventsService {
 
             this.setFreeOfEvent(groups);
           },
-          error => console.log(error)
+          (error) => console.log(error)
         );
       },
-      error => console.log(error)
+      (error) => console.log(error)
     );
   }
 
@@ -322,8 +352,7 @@ export class EventsService {
         event.anonymous = response.resultGroups.anonymous;
 
         let resultUsers = [];
-        for (let i = 0; i < response.resultGroups.allUsers.length; i++) {
-          const resultUser = response.resultGroups.allUsers[i];
+        for (const resultUser of response.resultGroups.allUsers) {
           resultUsers.push(
             new EventResultUser(
               resultUser.id,
@@ -339,15 +368,11 @@ export class EventsService {
 
         const data_resultGroups = response.resultGroups.groups;
         const resultGroups = [];
-        for (let i = 0; i < data_resultGroups.length; i++) {
-          const localResultGroup = data_resultGroups[i];
-
+        for (const localResultGroup of data_resultGroups) {
           const resultGroup = new EventResultGroup(localResultGroup.id, localResultGroup.name);
           resultGroup.event = event;
           resultUsers = [];
-          for (let j = 0; j < localResultGroup.users.length; j++) {
-            const localResultUser = localResultGroup.users[j];
-
+          for (const localResultUser of localResultGroup.users) {
             resultUsers.push(
               new EventResultUser(
                 localResultUser.id,
@@ -362,9 +387,7 @@ export class EventsService {
           resultGroup.setResultUsers(resultUsers);
 
           const resultSubgroups = [];
-          for (let j = 0; j < localResultGroup.subgroups.length; j++) {
-            const localResultSubgroup = localResultGroup.subgroups[j];
-
+          for (const localResultSubgroup of localResultGroup.subgroups) {
             const resultSubgroup = new EventResultSubgroup(
               localResultSubgroup.id,
               localResultSubgroup.name,
@@ -373,9 +396,7 @@ export class EventsService {
             resultSubgroup.event = event;
 
             resultUsers = [];
-            for (let x = 0; x < localResultSubgroup.users.length; x++) {
-              const localResultUser = localResultSubgroup.users[x];
-
+            for (const localResultUser of localResultSubgroup.users) {
               resultUsers.push(
                 new EventResultUser(
                   localResultUser.id,
@@ -399,7 +420,7 @@ export class EventsService {
         event.setResultGroups(resultGroups);
         this.setEvent(event);
       },
-      error => console.log(error)
+      (error) => console.log(error)
     );
   }
 
@@ -412,7 +433,7 @@ export class EventsService {
     const dto = {
       decision_id: decision.id,
       user_ids: userIds,
-      additional_information: additionalInformation
+      additional_information: additionalInformation,
     };
 
     return this.httpService.loggedInV1POSTRequest('/avent/administration/avent/' + event.id + '/voteForUsers', dto);
@@ -425,7 +446,7 @@ export class EventsService {
     }
 
     const dto = {
-      user_ids: userIds
+      user_ids: userIds,
     };
 
     return this.httpService.loggedInV1POSTRequest('/avent/administration/avent/' + event.id + '/cancelVotingForUsers', dto);
