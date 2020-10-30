@@ -15,6 +15,11 @@
         {{ 'CALENDAR' | translate }}</a
       >
 
+      <a (click)="onPageChange()" mat-list-item routerLink="/home/seatReservation" routerLinkActive="activated">
+        <mat-icon>place</mat-icon>
+        {{ 'NAV_SEAT_RESERVATION' | translate }}</a
+      >
+
       <mat-divider></mat-divider>
 
       <div *ngIf="serverInfo?.events_enabled">
