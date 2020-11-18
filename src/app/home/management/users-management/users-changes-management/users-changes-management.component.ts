@@ -21,6 +21,7 @@ export class UsersChangesManagementComponent implements OnInit, OnDestroy {
   filteredUserChanges: UserChange[] = [];
   userChangesSubscription: Subscription;
 
+  filterValue = '';
   ignoreEditorChangesChars = '!e';
 
   hasPermissionToDeleteUserChanage = false;
@@ -50,8 +51,8 @@ export class UsersChangesManagementComponent implements OnInit, OnDestroy {
     this.userChangesSubscription.unsubscribe();
   }
 
-  applyFilter(filterValue: string) {
-    filterValue = filterValue?.trim().toLowerCase();
+  applyFilter() {
+    let filterValue = this.filterValue?.trim().toLowerCase();
     this.filteredUserChanges = [];
 
     let includesIgnoreEditorChars = false;

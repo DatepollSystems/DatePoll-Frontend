@@ -64,7 +64,7 @@ export class UsersManagementComponent implements OnInit, OnDestroy {
 
       this.users = value;
       this.usersCopy = this.users.slice();
-      this.applyFilter(this.filterValue);
+      this.applyFilter();
     });
 
     this.table = new TableData<User>(
@@ -148,8 +148,8 @@ export class UsersManagementComponent implements OnInit, OnDestroy {
     this.table.data = res.users;
   }
 
-  applyFilter(filterValue: string) {
-    this.filterValue = filterValue.trim().toLowerCase();
+  applyFilter() {
+    const filterValue = this.filterValue.trim().toLowerCase();
     this.users = [];
     for (const user of this.usersCopy) {
       const title = user.title?.trim().toLowerCase();
@@ -158,16 +158,13 @@ export class UsersManagementComponent implements OnInit, OnDestroy {
       const memberNumber = user.memberNumber?.trim().toLowerCase();
       let check = false;
       for (const email of user.getEmailAddresses()) {
-        if (email.trim().toLowerCase().includes(this.filterValue)) {
+        if (email.trim().toLowerCase().includes(filterValue)) {
           check = true;
           break;
         }
       }
       for (const number of user.getPhoneNumbers()) {
-        if (
-          number.label.trim().toLowerCase().includes(this.filterValue) ||
-          number.phoneNumber.trim().toLowerCase().includes(this.filterValue)
-        ) {
+        if (number.label.trim().toLowerCase().includes(filterValue) || number.phoneNumber.trim().toLowerCase().includes(filterValue)) {
           check = true;
           break;
         }
@@ -178,16 +175,16 @@ export class UsersManagementComponent implements OnInit, OnDestroy {
       const zipcode = user.zipcode.toString().trim().toLowerCase();
       const activity = user.activity?.trim().toLowerCase();
       if (
-        title?.includes(this.filterValue) ||
-        firstname.includes(this.filterValue) ||
-        surname.includes(this.filterValue) ||
-        memberNumber?.includes(this.filterValue) ||
+        title?.includes(filterValue) ||
+        firstname.includes(filterValue) ||
+        surname.includes(filterValue) ||
+        memberNumber?.includes(filterValue) ||
         check ||
-        streetName.includes(this.filterValue) ||
-        streetNumber.includes(this.filterValue) ||
-        location.includes(this.filterValue) ||
-        zipcode.includes(this.filterValue) ||
-        activity?.includes(this.filterValue)
+        streetName.includes(filterValue) ||
+        streetNumber.includes(filterValue) ||
+        location.includes(filterValue) ||
+        zipcode.includes(filterValue) ||
+        activity?.includes(filterValue)
       ) {
         this.users.push(user);
       }

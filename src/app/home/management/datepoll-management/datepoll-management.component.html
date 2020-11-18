@@ -40,9 +40,7 @@
             </mat-form-field>
 
             <div fxFlex.xs="35%" fxFlex="10%">
-              <button mat-raised-button color="primary" type="button" (click)="autoDetectAppUrl()" style="width: 100%">
-                Autodetect
-              </button>
+              <button mat-raised-button color="primary" type="button" (click)="autoDetectAppUrl()" style="width: 100%">Autodetect</button>
             </div>
 
             <div fxFlex.xs="100%" fxFlex="10%">
@@ -62,22 +60,36 @@
           <h2>Vereins Einstellungen</h2>
 
           <form
-            #changeHappyAlertForm="ngForm"
-            (ngSubmit)="changeHappyAlert(changeHappyAlertForm)"
+            #changeAlertForm="ngForm"
+            (ngSubmit)="changeAlert(changeAlertForm)"
             fxLayout="row wrap"
             fxLayoutGap="2%"
             fxLayout.xs="column"
           >
-            <mat-form-field fxFlex="60%">
-              <input
-                [(ngModel)]="happyAlert"
-                id="happyAlert"
-                matInput
-                name="happyAlert"
-                ngModel
-                placeholder="{{ 'MANAGEMENT_DATEPOLL_HAPPY_ALERT' | translate }}"
-                type="text"
-              />
+            <div fxFlex="30%">
+              <mat-form-field>
+                <input
+                  [(ngModel)]="alertText"
+                  id="alert"
+                  matInput
+                  name="alert"
+                  ngModel
+                  placeholder="{{ 'MANAGEMENT_DATEPOLL_ALERT' | translate }}"
+                  type="text"
+                />
+                <button mat-button *ngIf="alertText" matSuffix mat-icon-button aria-label="Clear" (click)="alertText = ''">
+                  <mat-icon>close</mat-icon>
+                </button>
+              </mat-form-field>
+              <small>{{ 'MANAGEMENT_DATEPOLL_ALERT_HELP' | translate }}</small>
+            </div>
+
+            <mat-form-field fxFlex="30%">
+              <mat-label>{{ 'MANAGEMENT_DATEPOLL_ALERT_TYPE' | translate }}</mat-label>
+              <mat-select [(value)]="selectedAlertType">
+                <mat-option value="happy">Happy</mat-option>
+                <mat-option value="normal">Normal</mat-option>
+              </mat-select>
             </mat-form-field>
 
             <div fxFlex.xs="100%">
@@ -85,8 +97,8 @@
                 style="width: 100%"
                 color="accent"
                 mat-flat-button
-                [class.spinner]="happyAlertSaving"
-                [disabled]="!changeHappyAlertForm.valid || happyAlertSaving"
+                [class.spinner]="alertSaving"
+                [disabled]="!changeAlertForm.valid || alertSaving"
                 type="submit"
               >
                 {{ 'SAVE' | translate }}

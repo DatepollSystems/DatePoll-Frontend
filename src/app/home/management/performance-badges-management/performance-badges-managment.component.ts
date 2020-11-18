@@ -33,8 +33,9 @@ export class PerformanceBadgesManagmentComponent implements OnDestroy {
   badgesSubscription: Subscription;
   badges: Badge[];
 
-  currentYearUsers: CurrentYearUser[];
-  currentYearUsersSubscription: Subscription;
+  selectedYear = new Date().getFullYear();
+  yearBadges: CurrentYearUser[];
+  yearBadgesSubscription: Subscription;
 
   answers = [
     {
@@ -70,9 +71,9 @@ export class PerformanceBadgesManagmentComponent implements OnDestroy {
       this.badges = value;
     });
 
-    this.currentYearUsers = this.performanceBadgesService.getCurrentYearUsers();
-    this.currentYearUsersSubscription = this.performanceBadgesService.currentYearUsersChange.subscribe((value) => {
-      this.currentYearUsers = value;
+    this.yearBadges = this.performanceBadgesService.getYearBadges(this.selectedYear);
+    this.yearBadgesSubscription = this.performanceBadgesService.yearBadgesChange.subscribe((value) => {
+      this.yearBadges = value;
     });
   }
 
@@ -80,18 +81,28 @@ export class PerformanceBadgesManagmentComponent implements OnDestroy {
     this.performanceBadgesSubscription.unsubscribe();
     this.instrumentsSubscription.unsubscribe();
     this.badgesSubscription.unsubscribe();
-    this.currentYearUsersSubscription.unsubscribe();
+    this.yearBadgesSubscription.unsubscribe();
   }
 
   onRefresh() {
     this.performanceBadges = null;
     this.instruments = null;
     this.badges = null;
-    this.currentYearUsers = null;
+    this.yearBadges = null;
     this.performanceBadgesService.fetchPerformanceBadges();
     this.performanceBadgesService.fetchInstruments();
     this.badgesService.fetchBadges();
-    this.performanceBadgesService.fetchCurrentYearUsers();
+    this.refreshYearBadges();
+  }
+
+  refreshYearBadges() {
+    if (this.selectedYear && Number(this.selectedYear) > 0) {
+      // I know this is a dirty fix. However this code will work for ~ 7980 years and will redruce unwanted requests.
+      if (this.selectedYear > 9999 || this.selectedYear < 1000) {
+        return;
+      }
+      this.performanceBadgesService.fetchYearBadges(this.selectedYear);
+    }
   }
 
   addPerformanceBadge(form: NgForm) {

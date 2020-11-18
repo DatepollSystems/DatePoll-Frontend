@@ -576,7 +576,7 @@
   "MANAGEMENT_PERFORMANCE_BADGES_BADGE_REMOVE_CONTROL_QUESTION": "Willst du dieses Abzeichen wirklich löschen?",
   "MANAGEMENT_PERFORMANCE_BADGES_BADGE_REMOVE_SUCCESSFULLY": "Das Abzeichen wurde entfernt!",
 
-  "MANAGEMENT_PERFORMANCE_BADGES_CURRENT_YEAR": "Diesjährige Abzeichen",
+  "MANAGEMENT_PERFORMANCE_BADGES_YEAR": "Abzeichen fürs Jahr",
 
   "MANAGEMENT_DATEPOLL_FEATURE_SETTINGS": "DatePoll-Feature Einstellungen",
   "MANAGEMENT_DATEPOLL_FEATURE_SETTINGS_SUBTITLE": "Hier kannst du grundlegende Funktionen von DatePoll Konfigurieren!",
@@ -613,8 +613,10 @@
   "MANAGEMENT_DATEPOLL_OPENWEATHERMAP_CINEMA_CITY_ID_INVALID": "Die Kino City Id darf nicht mehr als 50 Zeichen haben!",
   "MANAGEMENT_DATEPOLL_OPENWEATHERMAP_CINEMA_CITY_ID_CHANGED_SUCCESSFULLY": "Die Kino City Id wurde geändert!",
 
-  "MANAGEMENT_DATEPOLL_HAPPY_ALERT": "Happy Benachrichtigung",
-  "MANAGEMENT_DATEPOLL_HAPPY_ALERT_CHANGED_SUCCESSFULLY": "Die Happy Benachrichtigung wurde geändert!",
+  "MANAGEMENT_DATEPOLL_ALERT": "Benachrichtigung",
+  "MANAGEMENT_DATEPOLL_ALERT_HELP": "Um die Benachrichtigung zu deaktivieren, entferne alles aus diesem Textfeld.",
+  "MANAGEMENT_DATEPOLL_ALERT_TYPE": "Type",
+  "MANAGEMENT_DATEPOLL_ALERT_CHANGED_SUCCESSFULLY": "Die Benachrichtigung wurde geändert!",
 
   "MANAGEMENT_DATEPOLL_LOGS": "Logs",
   "MANAGEMENT_DATEPOLL_LOGS_REFRESH": "Log-Liste aktualisieren",
