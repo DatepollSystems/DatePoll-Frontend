@@ -117,7 +117,7 @@ export class UsersManagementComponent implements OnInit, OnDestroy {
   refreshTable() {
     this.table.dataSource = new MatMultiSortTableDataSource(this.sort, this.CLIENT_SIDE);
 
-    this.table.updateColumNames([
+    this.table.updateColumnNames([
       {id: 'memberNumber', name: this.translate.getTranslationFor('MANAGEMENT_USERS_MEMBER_NUMBER')},
       {id: 'title', name: this.translate.getTranslationFor('MANAGEMENT_USERS_TITLE')},
       {id: 'firstname', name: this.translate.getTranslationFor('MANAGEMENT_USERS_FIRSTNAME')},
