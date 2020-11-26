@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {environment} from '../../../../../environments/environment';
+import {ClipboardHelper} from '../../../../utils/clipboard';
 
 @Component({
   selector: 'app-broadcast-attachment-card',
@@ -28,17 +29,7 @@ export class BroadcastAttachmentCardComponent implements OnInit {
   }
 
   public copyTokenToClipboard(val) {
-    const selBox = document.createElement('textarea');
-    selBox.style.position = 'fixed';
-    selBox.style.left = '0';
-    selBox.style.top = '0';
-    selBox.style.opacity = '0';
-    selBox.value = val;
-    document.body.appendChild(selBox);
-    selBox.focus();
-    selBox.select();
-    document.execCommand('copy');
-    document.body.removeChild(selBox);
+    ClipboardHelper.copyToClipboard(val);
   }
 
   toggleImageView() {

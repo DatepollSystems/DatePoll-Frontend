@@ -1,9 +1,9 @@
-<div class="about-container dark-theme">
+<div class="d-container dark-theme">
   <div fxLayout="column" fxLayoutAlign="space-between center">
     <div fxFlex>
       <div fxLayout="row" fxLayoutGap="2%">
-        <img src="./../../assets/logo.png" style="height: 110px;" />
-        <h1 style="color: white; padding-top: 21%;">DatePoll</h1>
+        <img src="./../../assets/logo.png" style="height: 110px" />
+        <h1 style="color: white; padding-top: 21%">DatePoll</h1>
       </div>
     </div>
   </div>
@@ -13,12 +13,12 @@
     fxLayoutAlign="center start"
     fxLayout.lt-md="column"
     fxLayoutAlign.lt-md="center"
-    style="margin-top: 15px; padding-left: 10px; padding-right: 10px;"
+    style="margin-top: 15px; padding-left: 10px; padding-right: 10px"
   >
     <div fxFlex.gt-lg="30%" fxFlex="40%">
       <div fxLayout="column" fxLayoutGap="2%">
         <mat-card class="mat-elevation-z3">
-          <form #f="ngForm" (ngSubmit)="onSignin(f)" fxLayout="column" style="padding-left: 10px; padding-right: 10px;">
+          <form #f="ngForm" (ngSubmit)="onSignin(f)" fxLayout="column" style="padding-left: 10px; padding-right: 10px">
             <mat-form-field>
               <input
                 id="username"
@@ -34,7 +34,7 @@
               <mat-icon matSuffix>account_circle</mat-icon>
             </mat-form-field>
 
-            <mat-form-field style="margin-bottom: 10px;">
+            <mat-form-field style="margin-bottom: 10px">
               <input
                 id="password"
                 matInput
@@ -56,23 +56,23 @@
               <mat-icon aria-label="Send icon">send</mat-icon>
             </button>
 
-            <div style="text-align: center; margin-top: 5px;">
+            <div style="text-align: center; margin-top: 5px">
               <a routerLink="/auth/signin">{{ 'ABOUT_PAGE_TROUBLE_LOGGING_IN' | translate }}</a>
             </div>
           </form>
         </mat-card>
 
         <mat-card class="mat-elevation-z3">
-          <button (click)="openMobileAppBottomSheet()" mat-stroked-button style="width: 100%;">
+          <button (click)="openMobileAppBottomSheet()" mat-stroked-button style="width: 100%">
             {{ 'SIGNIN_APP_INFO' | translate }}
           </button>
         </mat-card>
 
         <mat-card class="mat-elevation-z3" fxLayout="column" fxLayoutGap="3%">
-          <button routerLink="/info/imprint" mat-stroked-button style="width: 100%;">
+          <button routerLink="/info/imprint" mat-stroked-button style="width: 100%">
             {{ 'IMPRINT' | translate }}
           </button>
-          <button routerLink="/info/privacypolicy" mat-stroked-button style="width: 100%;">
+          <button routerLink="/info/privacypolicy" mat-stroked-button style="width: 100%">
             {{ 'PRIVACY_POLICY' | translate }}
           </button>
         </mat-card>
@@ -114,7 +114,7 @@
           </button>
         </mat-card>
         <mat-card class="mat-elevation-z3">
-          <div class="level is-mobile" style="margin-bottom: 5px;" (click)="count()">
+          <div class="level is-mobile" style="margin-bottom: 5px" (click)="count()">
             <div class="level-item">
               <div>
                 <h3>{{ 'ABOUT_PAGE_STATS_USER' | translate }}</h3>
