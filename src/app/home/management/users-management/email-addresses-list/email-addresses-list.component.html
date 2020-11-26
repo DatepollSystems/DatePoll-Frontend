@@ -42,7 +42,7 @@
   <table [dataSource]="dataSource" class="col-12" mat-table>
     <ng-container matColumnDef="emailAddress">
       <th *matHeaderCellDef mat-header-cell>{{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_LIST_EMAIL_ADDRESSES' | translate }}</th>
-      <td *matCellDef="let emailAddress" mat-cell>{{ emailAddress }}</td>
+      <td *matCellDef="let emailAddress" mat-cell>"{{ emailAddress }}"</td>
     </ng-container>
 
     <ng-container matColumnDef="action">
