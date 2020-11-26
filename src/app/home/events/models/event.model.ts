@@ -21,7 +21,6 @@ export class Event implements CalendarEvent {
   public userDecision = null;
   public decisionColor: string;
 
-  public chartIsEmpty = true;
   // Calendar specific values
   start: Date;
   end: Date;
@@ -30,11 +29,12 @@ export class Event implements CalendarEvent {
   allDay = false;
   color = {
     primary: '#43A047',
-    secondary: '#D1E8FF'
+    secondary: '#D1E8FF',
   };
   draggable: false;
   meta = null;
   resizable: {beforeStart: false; afterEnd: false};
+
   private decisions: Decision[] = [];
   private resultGroups: EventResultGroup[] = [];
   private resultUsers: EventResultUser[] = [];
@@ -110,7 +110,7 @@ export class Event implements CalendarEvent {
         Vorname: user.firstname,
         Nachname: user.surname,
         Entscheidung: user.decision,
-        Zusatz_Information: user.additionalInformation
+        Zusatz_Information: user.additionalInformation,
       });
     }
 

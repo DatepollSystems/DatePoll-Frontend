@@ -30,6 +30,7 @@ export class CreateBroadcastComponent implements OnDestroy {
   selectedGroupsAndSubgroups: GroupAndSubgroupModel[] = [];
 
   attachments: Attachment[] = [];
+  currentlyUploading = false;
 
   subject = '';
   body = '';
@@ -108,6 +109,10 @@ export class CreateBroadcastComponent implements OnDestroy {
   attachmentsChanged(attachments: Attachment[]) {
     this.attachments = attachments;
     console.log(this.attachments);
+  }
+
+  currentlyUploadingChanged(currentUploading: boolean) {
+    this.currentlyUploading = currentUploading;
   }
 
   leave() {

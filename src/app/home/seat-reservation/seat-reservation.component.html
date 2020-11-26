@@ -1,0 +1,31 @@
+<mat-card>
+  <div class="row justify-content-between">
+    <div class="col-10 col-sm-10 col-md-8 col-lg-8 col-xl-8">
+      <h1>{{ 'NAV_SEAT_RESERVATION' | translate }}</h1>
+    </div>
+    <div class="col-2 col-sm-2 col-md-4 col-lg-4 col-xl-4" style="text-align: end">
+      <button [matMenuTriggerFor]="menu" mat-icon-button>
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item>
+          <mat-icon>refresh</mat-icon>
+          <span>{{ 'EVENTS_ADMINISTRATION_MENU_REFRESH' | translate }}</span>
+        </button>
+        <div mat-menu-item>
+          <mat-slide-toggle color="primary">
+            {{ 'EVENTS_ADMINISTRATION_MENU_SHOW_ALL_EVENTS' | translate }}
+          </mat-slide-toggle>
+        </div>
+        <button mat-menu-item>
+          <mat-icon>question_answer</mat-icon>
+          <span>{{ 'EVENTS_STANDARD_DECISIONS_MANAGEMENT' | translate }}</span>
+        </button>
+        <button mat-menu-item>
+          <mat-icon>location_searching</mat-icon>
+          <span>{{ 'EVENTS_STANDARD_LOCATIONS_MANAGEMENT' | translate }}</span>
+        </button>
+      </mat-menu>
+    </div>
+  </div>
+</mat-card>

@@ -5,7 +5,7 @@
         {{ 'BROADCASTS_ADMINISTRATION_CREATE_TITLE' | translate }}
         <span *ngIf="draft">{{ 'BROADCASTS_ADMINISTRATION_CREATE_TITLE_DRAFT' | translate }} {{ draft.subject }}</span>
       </h1>
-      <button color="accent" mat-fab (click)="send()">
+      <button color="accent" mat-fab (click)="send()" [disabled]="currentlyUploading">
         <mat-icon>send</mat-icon>
       </button>
     </div>
@@ -46,7 +46,10 @@
       </mat-form-field>
 
       <div fxFlex.gt-md="48%" fxFlex.gt-xs="49%" fxFlex.xs="100%">
-        <app-broadcast-attachment (attachmentsChange)="attachmentsChanged($event)"></app-broadcast-attachment>
+        <app-broadcast-attachment
+          (attachmentsChange)="attachmentsChanged($event)"
+          (currentlyUploadingChange)="currentlyUploadingChanged($event)"
+        ></app-broadcast-attachment>
       </div>
     </div>
 

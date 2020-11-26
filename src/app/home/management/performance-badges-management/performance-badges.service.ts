@@ -10,17 +10,17 @@ import {Instrument} from './models/instrument.model';
 import {PerformanceBadge} from './models/performanceBadge.model';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class PerformanceBadgesService {
   public performanceBadgesChange: Subject<PerformanceBadge[]> = new Subject<PerformanceBadge[]>();
   public instrumentsChange: Subject<Instrument[]> = new Subject<Instrument[]>();
   public userPerformanceBadgesChange: Subject<UserPerformanceBadge[]> = new Subject<UserPerformanceBadge[]>();
-  public currentYearUsersChange: Subject<CurrentYearUser[]> = new Subject<CurrentYearUser[]>();
+  public yearBadgesChange: Subject<CurrentYearUser[]> = new Subject<CurrentYearUser[]>();
   private performanceBadges: PerformanceBadge[];
   private instruments: Instrument[];
   private userPerformanceBadges: UserPerformanceBadge[] = [];
-  private currentYearUsers: CurrentYearUser[];
+  private yearBadges: CurrentYearUser[];
 
   constructor(private httpService: HttpService) {}
 
@@ -52,13 +52,13 @@ export class PerformanceBadgesService {
 
         this.setPerformanceBadges(performanceBadgesToSave);
       },
-      error => console.log(error)
+      (error) => console.log(error)
     );
   }
 
   public addPerformanceBadge(name: string) {
     const dto = {
-      name
+      name,
     };
 
     return this.httpService.loggedInV1POSTRequest('/management/performanceBadges', dto, 'addPerformanceBadge');
@@ -66,7 +66,7 @@ export class PerformanceBadgesService {
 
   public updatePerformanceBadge(id: number, name: string) {
     const dto = {
-      name
+      name,
     };
     return this.httpService.loggedInV1PUTRequest('/management/performanceBadges/' + id, dto, 'updatePerformanceBadge');
   }
@@ -102,13 +102,13 @@ export class PerformanceBadgesService {
 
         this.setInstruments(instrumentsToSave);
       },
-      error => console.log(error)
+      (error) => console.log(error)
     );
   }
 
   public addInstrument(name: string) {
     const dto = {
-      name
+      name,
     };
 
     return this.httpService.loggedInV1POSTRequest('/management/instruments', dto, 'addInstrument');
@@ -116,7 +116,7 @@ export class PerformanceBadgesService {
 
   public updateInstrument(id: number, name: string) {
     const dto = {
-      name
+      name,
     };
     return this.httpService.loggedInV1PUTRequest('/management/instruments/' + id, dto, 'updateInstrument');
   }
@@ -132,7 +132,7 @@ export class PerformanceBadgesService {
       performanceBadge_id: userPerformanceBadge.performanceBadgeId,
       date: Converter.getDateFormatted(userPerformanceBadge.date),
       grade: userPerformanceBadge.grade,
-      note: userPerformanceBadge.note
+      note: userPerformanceBadge.note,
     };
 
     return this.httpService.loggedInV1POSTRequest(
@@ -177,7 +177,7 @@ export class PerformanceBadgesService {
 
         this.setUserPerformanceBadges(userPerformanceBadgesToSave);
       },
-      error => console.log(error)
+      (error) => console.log(error)
     );
   }
 
@@ -186,13 +186,13 @@ export class PerformanceBadgesService {
     this.userPerformanceBadgesChange.next(this.userPerformanceBadges.slice());
   }
 
-  private setCurrentYearUsers(currentYearUsers: CurrentYearUser[]) {
-    this.currentYearUsers = currentYearUsers.slice();
-    this.currentYearUsersChange.next(this.currentYearUsers.slice());
+  private setYearBadges(yearBadges: CurrentYearUser[]) {
+    this.yearBadges = yearBadges.slice();
+    this.yearBadgesChange.next(this.yearBadges.slice());
   }
 
-  public fetchCurrentYearUsers() {
-    this.httpService.loggedInV1GETRequest('/management/currentYearBadges', 'fetchCurrentYearUsers').subscribe(
+  public fetchYearBadges(year: number) {
+    this.httpService.loggedInV1GETRequest('/management/yearBadge/' + year, 'fetchYearBadges').subscribe(
       (response: any) => {
         console.log(response);
 
@@ -207,19 +207,19 @@ export class PerformanceBadgesService {
           usersToSave.push(userToSave);
         }
 
-        this.setCurrentYearUsers(usersToSave);
+        this.setYearBadges(usersToSave);
       },
-      error => console.log(error)
+      (error) => console.log(error)
     );
   }
 
-  public getCurrentYearUsers(): CurrentYearUser[] {
-    this.fetchCurrentYearUsers();
+  public getYearBadges(year: number): CurrentYearUser[] {
+    this.fetchYearBadges(year);
 
-    if (this.currentYearUsers == null) {
+    if (this.yearBadges == null) {
       return null;
     }
 
-    return this.currentYearUsers.slice();
+    return this.yearBadges.slice();
   }
 }

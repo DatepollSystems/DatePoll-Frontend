@@ -44,7 +44,7 @@ export class StartComponent implements OnDestroy {
   openEventsCount = 0;
   loaded = false;
 
-  happyAlert = '';
+  alert: any;
   happyAlertSubscription: Subscription;
   showFirework = false;
 
@@ -84,10 +84,10 @@ export class StartComponent implements OnDestroy {
       this.loaded = true;
     });
 
-    this.happyAlert = this.settingsService.getHappyAlert();
+    this.alert = this.settingsService.getAlert();
     this.checkIfFireworkShouldBeShown();
-    this.happyAlertSubscription = this.settingsService.happyAlertChange.subscribe((value) => {
-      this.happyAlert = value;
+    this.happyAlertSubscription = this.settingsService.alertChange.subscribe((value) => {
+      this.alert = value;
       this.checkIfFireworkShouldBeShown();
     });
   }
@@ -198,7 +198,7 @@ export class StartComponent implements OnDestroy {
   }
 
   private checkIfFireworkShouldBeShown() {
-    if (this.happyAlert?.trim().toLowerCase().length > 0) {
+    if (this.alert?.message?.trim().toLowerCase().length > 0 && this.alert?.type?.includes('happy')) {
       if (localStorage.getItem('firework') == null) {
         localStorage.setItem('firework', 'true');
       }

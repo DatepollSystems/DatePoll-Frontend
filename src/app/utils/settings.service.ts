@@ -8,15 +8,15 @@ import {HttpService} from './http.service';
 import {ServerInfoModel} from './server-info.model';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class SettingsService {
   public openWeatherMapKeyChange: Subject<string> = new Subject<string>();
   public openWeatherMapCinemaCityIdChange: Subject<string> = new Subject<string>();
   private _openWeatherMapKey = '';
   private _openWeatherMapCinemaCityId = '';
-  public happyAlertChange: Subject<string> = new Subject<string>();
-  private _happyAlert = '';
+  public alertChange: Subject<any> = new Subject<any>();
+  private _alert: any;
 
   public serverInfoChange: Subject<ServerInfoModel> = new Subject<ServerInfoModel>();
   private _serverInfo = new ServerInfoModel();
@@ -40,14 +40,14 @@ export class SettingsService {
     this.setShowCinema(showCinema);
 
     const body = {
-      isEnabled: showCinema
+      isEnabled: showCinema,
     };
 
     this.httpService.setSettingsRequest('/cinema', body, 'setCinemaFeatureEnabled').subscribe(
       (response: any) => {
         console.log(response);
       },
-      error => console.log(error)
+      (error) => console.log(error)
     );
   }
 
@@ -62,14 +62,14 @@ export class SettingsService {
     this.setShowEvents(showEvents);
 
     const body = {
-      isEnabled: showEvents
+      isEnabled: showEvents,
     };
 
     this.httpService.setSettingsRequest('/events', body, 'setEventsFeatureEnabled').subscribe(
       (response: any) => {
         console.log(response);
       },
-      error => console.log(error)
+      (error) => console.log(error)
     );
   }
 
@@ -77,14 +77,14 @@ export class SettingsService {
     this.setShowBroadcasts(showBroadcasts);
 
     const body = {
-      isEnabled: showBroadcasts
+      isEnabled: showBroadcasts,
     };
 
     this.httpService.setSettingsRequest('/broadcast', body, 'setBroadcastFeatureEnabled').subscribe(
       (response: any) => {
         console.log(response);
       },
-      error => console.log(error)
+      (error) => console.log(error)
     );
   }
 
@@ -92,7 +92,7 @@ export class SettingsService {
     this.setCommunityName(communityName);
 
     const body = {
-      community_name: communityName
+      community_name: communityName,
     };
     return this.httpService.setSettingsRequest('/name', body, 'setCommunityName');
   }
@@ -101,7 +101,7 @@ export class SettingsService {
     this.setCommunityUrl(communityUrl);
 
     const body = {
-      community_url: communityUrl
+      community_url: communityUrl,
     };
     return this.httpService.setSettingsRequest('/communityUrl', body, 'setCommunityUrl');
   }
@@ -119,7 +119,7 @@ export class SettingsService {
     this.updateLocalServerInfo();
 
     const body = {
-      community_imprint: imprint
+      community_imprint: imprint,
     };
     return this.httpService.setSettingsRequest('/imprint', body, 'setImprint');
   }
@@ -129,7 +129,7 @@ export class SettingsService {
     this.updateLocalServerInfo();
 
     const body = {
-      community_privacy_policy: privacyPolicy
+      community_privacy_policy: privacyPolicy,
     };
     return this.httpService.setSettingsRequest('/privacyPolicy', body, 'setPrivacyPolicy');
   }
@@ -138,7 +138,7 @@ export class SettingsService {
     this.setAppUrl(url);
 
     const body = {
-      url
+      url,
     };
     return this.httpService.setSettingsRequest('/url', body, 'setAppUrl');
   }
@@ -149,7 +149,7 @@ export class SettingsService {
         console.log(response);
         this.setOpenWeatherMapKey(response.openweathermap_key);
       },
-      error => console.log(error)
+      (error) => console.log(error)
     );
     return this._openWeatherMapKey;
   }
@@ -158,7 +158,7 @@ export class SettingsService {
     this.setOpenWeatherMapKey(key);
 
     const body = {
-      openweathermap_key: key
+      openweathermap_key: key,
     };
     return this.httpService.setSettingsRequest('/openweathermap/key', body, 'setOpenWeatherMapKey');
   }
@@ -169,7 +169,7 @@ export class SettingsService {
         console.log(response);
         this.setOpenWeatherMapCinemaCityId(response.openweathermap_cinema_city_id);
       },
-      error => console.log(error)
+      (error) => console.log(error)
     );
     return this._openWeatherMapCinemaCityId;
   }
@@ -178,29 +178,26 @@ export class SettingsService {
     this.setOpenWeatherMapCinemaCityId(id);
 
     const body = {
-      openweathermap_cinema_city_id: id
+      openweathermap_cinema_city_id: id,
     };
     return this.httpService.setSettingsRequest('/openweathermap/cinemaCityId', body, 'setOpenWeatherMapCinemaCityId');
   }
 
-  public getHappyAlert(): string {
-    this.httpService.getSettingRequest('/happyAlert', 'getHappyAlert').subscribe(
+  public getAlert(): string {
+    this.httpService.getSettingRequest('/alert', 'getAlert').subscribe(
       (response: any) => {
         console.log(response);
-        this.setHappyAlert(response.happy_alert);
+        this.setAlert(response.alert);
       },
-      error => console.log(error)
+      (error) => console.log(error)
     );
-    return this._happyAlert;
+    return this._alert;
   }
 
-  public setAdminHappyAlert(key: string) {
-    this.setHappyAlert(key);
-
-    const body = {
-      happy_alert: key
-    };
-    return this.httpService.setSettingsRequest('/happyAlert', body, 'setHappyAlert');
+  public setAdminAlert(alert: any) {
+    this.setAlert(alert);
+    console.log('daöslkdjföalskjdföalskjdfölakjsdfölasjkdöflasdfa');
+    return this.httpService.setSettingsRequest('/alert', alert, 'setAlert');
   }
 
   private setShowCinema(showCinema: boolean) {
@@ -243,9 +240,9 @@ export class SettingsService {
     this.openWeatherMapCinemaCityIdChange.next(this._openWeatherMapCinemaCityId);
   }
 
-  private setHappyAlert(key: string) {
-    this._happyAlert = key;
-    this.happyAlertChange.next(this._happyAlert);
+  private setAlert(alert: any) {
+    this._alert = alert;
+    this.alertChange.next(this._alert);
   }
 
   private updateLocalServerInfo() {

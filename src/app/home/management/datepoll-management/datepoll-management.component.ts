@@ -15,7 +15,7 @@ import {ServerInfoModel} from '../../../utils/server-info.model';
 @Component({
   selector: 'app-datepoll-management',
   templateUrl: './datepoll-management.component.html',
-  styleUrls: ['./datepoll-management.component.css']
+  styleUrls: ['./datepoll-management.component.css'],
 })
 export class DatepollManagementComponent implements OnDestroy {
   communityNameSaving = false;
@@ -36,9 +36,11 @@ export class DatepollManagementComponent implements OnDestroy {
   openWeatherMapCinemaCityIdSubscription: Subscription;
   openWeatherMapCinemaCityIdSaving = false;
 
-  happyAlert: string;
-  happyAlertSubscription: Subscription;
-  happyAlertSaving = false;
+  alert: any;
+  alertText = '';
+  selectedAlertType = '';
+  alertSubscription: Subscription;
+  alertSaving = false;
 
   SETTINGS_ADMINISTRATION = Permissions.SETTINGS_ADMINISTRATION;
   SYSTEM_ADMINISTRATION = Permissions.SYSTEM_ADMINISTRATION;
@@ -57,23 +59,25 @@ export class DatepollManagementComponent implements OnDestroy {
     this.myUserService = myUserService;
 
     this.serverInfo = this.settingsService.getServerInfo();
-    this.serverInfoSubscription = this.settingsService.serverInfoChange.subscribe(value => {
+    this.serverInfoSubscription = this.settingsService.serverInfoChange.subscribe((value) => {
       this.serverInfo = value;
     });
 
     this.openWeatherMapKey = settingsService.getOpenWeatherMapKey();
-    this.openWeatherMapKeySubscription = settingsService.openWeatherMapKeyChange.subscribe(value => {
+    this.openWeatherMapKeySubscription = settingsService.openWeatherMapKeyChange.subscribe((value) => {
       this.openWeatherMapKey = value;
     });
 
     this.openWeatherMapCinemaCityId = settingsService.getOpenWeatherMapCinemaCityId();
-    this.openWeatherMapCinemaCityIdSubscription = settingsService.openWeatherMapCinemaCityIdChange.subscribe(value => {
+    this.openWeatherMapCinemaCityIdSubscription = settingsService.openWeatherMapCinemaCityIdChange.subscribe((value) => {
       this.openWeatherMapCinemaCityId = value;
     });
 
-    this.happyAlert = settingsService.getHappyAlert();
-    this.happyAlertSubscription = settingsService.happyAlertChange.subscribe(value => {
-      this.happyAlert = value;
+    this.alert = settingsService.getAlert();
+    this.alertSubscription = settingsService.alertChange.subscribe((value) => {
+      this.alert = value;
+      this.alertText = this.alert.message;
+      this.selectedAlertType = this.alert.type;
     });
   }
 
@@ -81,6 +85,7 @@ export class DatepollManagementComponent implements OnDestroy {
     this.serverInfoSubscription.unsubscribe();
     this.openWeatherMapKeySubscription.unsubscribe();
     this.openWeatherMapCinemaCityIdSubscription.unsubscribe();
+    this.alertSubscription.unsubscribe();
   }
 
   cinemaServiceChange(ob: MatSlideToggleChange) {
@@ -107,7 +112,7 @@ export class DatepollManagementComponent implements OnDestroy {
           this.translate.getTranslationFor('MANAGEMENT_DATEPOLL_COMMUNITY_NAME_CHANGED_SUCCESSFULLY')
         );
       },
-      error => console.log(error)
+      (error) => console.log(error)
     );
   }
 
@@ -123,7 +128,7 @@ export class DatepollManagementComponent implements OnDestroy {
           this.translate.getTranslationFor('MANAGEMENT_DATEPOLL_COMMUNITY_URL_CHANGED_SUCCESSFULLY')
         );
       },
-      error => console.log(error)
+      (error) => console.log(error)
     );
   }
 
@@ -138,7 +143,7 @@ export class DatepollManagementComponent implements OnDestroy {
           this.translate.getTranslationFor('MANAGEMENT_DATEPOLL_COMMUNITY_DESCRIPTION_CHANGED_SUCCESSFULLY')
         );
       },
-      error => console.log(error)
+      (error) => console.log(error)
     );
   }
 
@@ -154,7 +159,7 @@ export class DatepollManagementComponent implements OnDestroy {
           this.translate.getTranslationFor('MANAGEMENT_DATEPOLL_IMPRINT_CHANGED_SUCCESSFULLY')
         );
       },
-      error => console.log(error)
+      (error) => console.log(error)
     );
   }
 
@@ -170,7 +175,7 @@ export class DatepollManagementComponent implements OnDestroy {
           this.translate.getTranslationFor('MANAGEMENT_DATEPOLL_PRIVACY_POLICY_CHANGED_SUCCESSFULLY')
         );
       },
-      error => console.log(error)
+      (error) => console.log(error)
     );
   }
 
@@ -190,7 +195,7 @@ export class DatepollManagementComponent implements OnDestroy {
           this.translate.getTranslationFor('MANAGEMENT_DATEPOLL_APP_URL_CHANGED_SUCCESSFULLY')
         );
       },
-      error => console.log(error)
+      (error) => console.log(error)
     );
   }
 
@@ -206,7 +211,7 @@ export class DatepollManagementComponent implements OnDestroy {
           this.translate.getTranslationFor('MANAGEMENT_DATEPOLL_OPENWEATHERMAP_KEY_CHANGED_SUCCESSFULLY')
         );
       },
-      error => console.log(error)
+      (error) => console.log(error)
     );
   }
 
@@ -222,23 +227,30 @@ export class DatepollManagementComponent implements OnDestroy {
           this.translate.getTranslationFor('MANAGEMENT_DATEPOLL_OPENWEATHERMAP_CINEMA_CITY_ID_CHANGED_SUCCESSFULLY')
         );
       },
-      error => console.log(error)
+      (error) => console.log(error)
     );
   }
 
-  changeHappyAlert(form: NgForm) {
-    this.happyAlertSaving = true;
-    const happyAlert = form.controls.happyAlert.value;
-    this.settingsService.setAdminHappyAlert(happyAlert).subscribe(
+  changeAlert(form: NgForm) {
+    this.alertSaving = true;
+    let alertS = form.controls.alert.value;
+    if (alertS == null || alertS?.length === 0) {
+      alertS = '';
+    }
+    const alert = {
+      message: alertS,
+      type: this.selectedAlertType,
+    };
+    this.settingsService.setAdminAlert(alert).subscribe(
       (response: any) => {
         console.log(response);
-        this.happyAlertSaving = false;
+        this.alertSaving = false;
         this.notificationsService.success(
           this.translate.getTranslationFor('SUCCESSFULLY'),
-          this.translate.getTranslationFor('MANAGEMENT_DATEPOLL_HAPPY_ALERT_CHANGED_SUCCESSFULLY')
+          this.translate.getTranslationFor('MANAGEMENT_DATEPOLL_ALERT_CHANGED_SUCCESSFULLY')
         );
       },
-      error => console.log(error)
+      (error) => console.log(error)
     );
   }
 }

@@ -23,6 +23,9 @@ export class BroadcastAttachmentComponent {
   @Output()
   attachmentsChange = new EventEmitter<Attachment[]>();
 
+  @Output()
+  currentlyUploadingChange = new EventEmitter<boolean>();
+
   constructor(private broadcastsService: BroadcastsAdministrationService) {}
 
   remove(attachment: Attachment): void {
@@ -43,6 +46,8 @@ export class BroadcastAttachmentComponent {
 
   onFileChange(event) {
     if (event.target.files.length > 0) {
+      this.currentlyUploadingChange.emit(true);
+
       const file = event.target.files[0];
 
       const formData = new FormData();
@@ -59,10 +64,14 @@ export class BroadcastAttachmentComponent {
               name: res.files[0].name.trim(),
             });
             this.attachmentsChange.emit(this.attachments.slice());
+            this.currentlyUploadingChange.emit(false);
             event.target.files = [];
           }
         },
-        (err) => (this.error = err)
+        (err) => {
+          this.currentlyUploadingChange.emit(false);
+          this.error = err;
+        }
       );
     }
   }

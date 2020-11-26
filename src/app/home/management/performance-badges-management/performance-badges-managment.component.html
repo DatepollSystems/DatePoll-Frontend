@@ -209,10 +209,23 @@
       </mat-card>
 
       <mat-card class="mat-elevation-z3" fxFlex="48%">
-        <mat-card-title>{{ 'MANAGEMENT_PERFORMANCE_BADGES_CURRENT_YEAR' | translate }}</mat-card-title>
-        <mat-card-content *ngIf="currentYearUsers != null">
-          <mat-list>
-            <mat-list-item *ngFor="let currentYearUser of this.currentYearUsers">
+        <mat-card-title>{{ 'MANAGEMENT_PERFORMANCE_BADGES_YEAR' | translate }} {{ selectedYear }}</mat-card-title>
+        <mat-card-content *ngIf="yearBadges != null" fxLayout="row" fxLayout.lt-sm="column">
+          <mat-form-field [fxHide.gt-xs]="true">
+            <input
+              id="badgesYear_small"
+              matInput
+              name="badgesYear"
+              ngModel
+              placeholder="{{ 'CINEMA_TICKETS_ADMINISTRATION_YEAR_SELECT_PLACEHOLDER' | translate }}"
+              required
+              type="number"
+              [(ngModel)]="selectedYear"
+              (keyup)="refreshYearBadges()"
+            />
+          </mat-form-field>
+          <mat-list fxFlex="80%">
+            <mat-list-item *ngFor="let currentYearUser of this.yearBadges">
               <div matLine>
                 {{ currentYearUser.firstname }} {{ currentYearUser.surname }} - {{ currentYearUser.joinDate | date: 'dd.MM.yyyy' }}
               </div>
@@ -222,8 +235,21 @@
               </div>
             </mat-list-item>
           </mat-list>
+          <mat-form-field fxFlex="20%" [fxHide.lt-sm]="true">
+            <input
+              id="badgesYear"
+              matInput
+              name="badgesYear"
+              ngModel
+              placeholder="{{ 'CINEMA_TICKETS_ADMINISTRATION_YEAR_SELECT_PLACEHOLDER' | translate }}"
+              required
+              type="number"
+              [(ngModel)]="selectedYear"
+              (keyup)="refreshYearBadges()"
+            />
+          </mat-form-field>
         </mat-card-content>
-        <mat-card-content *ngIf="currentYearUsers == null" fxLayout="row" fxLayoutAlign="center center">
+        <mat-card-content *ngIf="yearBadges == null" fxLayout="row" fxLayoutAlign="center center">
           <mat-spinner></mat-spinner>
         </mat-card-content>
       </mat-card>

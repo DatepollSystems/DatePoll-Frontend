@@ -10,6 +10,8 @@ export class Permissions {
 
   public static BROADCASTS_ADMINISTRATION = 'broadcasts.*';
 
+  public static SEATRESERVATION_ADMINISTRATION = 'seatReservation.*';
+
   public static MANAGEMENT_ADMINISTRATION = 'management.*';
   public static MANAGEMENT_EXTRA_USER_PERMISSIONS = 'management.user.permissions';
   public static MANAGEMENT_EXTRA_USER_DELETE = 'management.user.delete';
@@ -27,13 +29,14 @@ export class Permissions {
       this.EVENTS_ADMINISTRATION,
       this.EVENTS_VIEW_DETAILS,
       this.BROADCASTS_ADMINISTRATION,
+      this.SEATRESERVATION_ADMINISTRATION,
       this.MANAGEMENT_ADMINISTRATION,
       this.MANAGEMENT_EXTRA_USER_DELETE,
       this.MANAGEMENT_EXTRA_USER_PERMISSIONS,
       this.SETTINGS_ADMINISTRATION,
       this.SYSTEM_ADMINISTRATION,
       this.SYSTEM_JOBS_ADMINISTRATION,
-      this.SYSTEM_LOGS_ADMINISTRATION
+      this.SYSTEM_LOGS_ADMINISTRATION,
     ];
   }
 }

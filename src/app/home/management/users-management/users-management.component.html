@@ -61,7 +61,17 @@
       </div>
       <div class="col-10 col-sm-8 col-lg-11">
         <mat-form-field class="col-12">
-          <input (keyup)="applyFilter($event.target.value)" matInput placeholder="{{ 'MANAGEMENT_USERS_SEARCH' | translate }}" />
+          <input (keyup)="applyFilter()" matInput placeholder="{{ 'MANAGEMENT_USERS_SEARCH' | translate }}" [(ngModel)]="filterValue" />
+          <button
+            mat-button
+            *ngIf="filterValue"
+            matSuffix
+            mat-icon-button
+            aria-label="Clear"
+            (click)="this.filterValue = ''; applyFilter()"
+          >
+            <mat-icon>close</mat-icon>
+          </button>
         </mat-form-field>
       </div>
     </div>
@@ -197,7 +207,7 @@
       [pageIndex]="table.pageIndex"
       [pageSizeOptions]="table.pageSizeOptions"
       [length]="table.totalElements ? table.totalElements : 0"
-      (page)="table.onPagnationEvent($event)"
+      (page)="table.onPaginationEvent($event)"
     >
     </mat-paginator>
 

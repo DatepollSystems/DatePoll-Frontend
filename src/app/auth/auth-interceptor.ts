@@ -14,7 +14,7 @@ export class AuthInterceptor implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     // Don't intercept this requests
-    const paths = ['/auth', 'https://api.openweathermap.org', 'https://geocode.xyz'];
+    const paths = ['/auth', 'https://api.openweathermap.org', 'https://geocode.xyz', 'de.json', 'en.json'];
 
     let toIntercept = true;
     for (const path of paths) {
@@ -32,7 +32,7 @@ export class AuthInterceptor implements HttpInterceptor {
       }
 
       return next.handle(req).pipe(
-        catchError(error => {
+        catchError((error) => {
           if (error instanceof HttpErrorResponse && error.status === 401) {
             return this.handle401Error(req, next);
           } else {
@@ -50,7 +50,7 @@ export class AuthInterceptor implements HttpInterceptor {
     newParams = newParams.append('token', token);
 
     return req.clone({
-      params: newParams
+      params: newParams,
     });
   }
 
@@ -77,7 +77,7 @@ export class AuthInterceptor implements HttpInterceptor {
           this.refreshTokenSubject.next(data.token);
           return next.handle(this.addToken(request, data.token));
         }),
-        catchError(error => {
+        catchError((error) => {
           this.authService.clearCookies();
           window.location.reload();
 
@@ -86,9 +86,9 @@ export class AuthInterceptor implements HttpInterceptor {
       );
     } else {
       return this.refreshTokenSubject.pipe(
-        filter(token => token != null),
+        filter((token) => token != null),
         take(1),
-        switchMap(jwt => {
+        switchMap((jwt) => {
           console.log('authInterceptor | Already refreshing | JWT: ' + jwt);
           return next.handle(this.addToken(request, jwt));
         })

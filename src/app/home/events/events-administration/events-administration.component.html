@@ -1,46 +1,63 @@
 <mat-card class="mat-elevation-z3">
   <mat-card-content>
-    <div class="row justify-content-between">
-      <div class="col-10 col-sm-10 col-md-8 col-lg-8 col-xl-8">
+    <div fxLayout="row" fxLayoutAlign="space-between" fxLayout.lt-md="column">
+      <div>
         <h1>{{ 'NAV_EVENTS_ADMINISTRATION' | translate }}</h1>
       </div>
-      <div class="col-2 col-sm-2 col-md-4 col-lg-4 col-xl-4" style="text-align: end">
-        <button [matMenuTriggerFor]="menu" mat-icon-button>
-          <mat-icon>more_vert</mat-icon>
-        </button>
-        <mat-menu #menu="matMenu">
-          <button (click)="refreshEvents()" mat-menu-item>
-            <mat-icon>refresh</mat-icon>
-            <span>{{ 'EVENTS_ADMINISTRATION_MENU_REFRESH' | translate }}</span>
+
+      <div fxLayout="row" fxLayoutAlign.lt-md="space-between">
+        <div>
+          <mat-form-field>
+            <mat-select
+              #yearSelect
+              (selectionChange)="yearSelectChange($event.value)"
+              [formControl]="yearCtrl"
+              placeholder="{{ 'CINEMA_TICKETS_ADMINISTRATION_YEAR_SELECT_PLACEHOLDER' | translate }}"
+            >
+              <mat-option>
+                <ngx-mat-select-search [formControl]="yearFilterCtrl"></ngx-mat-select-search>
+              </mat-option>
+
+              <mat-option *ngFor="let year of filteredYears | async" [value]="year">
+                {{ year }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div>
+          <button [matMenuTriggerFor]="menu" mat-icon-button>
+            <mat-icon>more_vert</mat-icon>
           </button>
-          <div mat-menu-item>
-            <mat-slide-toggle (change)="onShowAllEventsChange($event)" [(ngModel)]="showAllEvents" color="primary">
-              {{ 'EVENTS_ADMINISTRATION_MENU_SHOW_ALL_EVENTS' | translate }}
-            </mat-slide-toggle>
-          </div>
-          <button (click)="onShowStandardDecisionManagementModal()" mat-menu-item>
-            <mat-icon>question_answer</mat-icon>
-            <span>{{ 'EVENTS_STANDARD_DECISIONS_MANAGEMENT' | translate }}</span>
-          </button>
-          <button (click)="onShowStandardLocationManagementModal()" mat-menu-item>
-            <mat-icon>location_searching</mat-icon>
-            <span>{{ 'EVENTS_STANDARD_LOCATIONS_MANAGEMENT' | translate }}</span>
-          </button>
-        </mat-menu>
+          <mat-menu #menu="matMenu">
+            <button (click)="refreshEvents()" mat-menu-item>
+              <mat-icon>refresh</mat-icon>
+              <span>{{ 'EVENTS_ADMINISTRATION_MENU_REFRESH' | translate }}</span>
+            </button>
+            <div mat-menu-item>
+              <mat-slide-toggle (change)="onShowAllEventsChange($event)" [(ngModel)]="showAllEvents" color="primary">
+                {{ 'EVENTS_ADMINISTRATION_MENU_SHOW_ALL_EVENTS' | translate }}
+              </mat-slide-toggle>
+            </div>
+            <button (click)="onShowStandardDecisionManagementModal()" mat-menu-item>
+              <mat-icon>question_answer</mat-icon>
+              <span>{{ 'EVENTS_STANDARD_DECISIONS_MANAGEMENT' | translate }}</span>
+            </button>
+            <button (click)="onShowStandardLocationManagementModal()" mat-menu-item>
+              <mat-icon>location_searching</mat-icon>
+              <span>{{ 'EVENTS_STANDARD_LOCATIONS_MANAGEMENT' | translate }}</span>
+            </button>
+          </mat-menu>
+        </div>
       </div>
     </div>
 
-    <div class="row" style="margin-bottom: 15px;">
-      <div class="col-2 col-sm-4 col-lg-1">
-        <button (click)="onCreate()" color="accent" mat-fab>
-          <mat-icon>add</mat-icon>
-        </button>
-      </div>
-      <div class="col-10 col-sm-8 col-lg-11">
-        <mat-form-field class="col-12">
-          <input (keyup)="applyFilter($event.target.value)" matInput placeholder="{{ 'SEARCH' | translate }}" />
-        </mat-form-field>
-      </div>
+    <div fxLayout="row" fxLayoutGap="5%" style="margin-bottom: 15px">
+      <button (click)="onCreate()" color="accent" mat-fab>
+        <mat-icon>add</mat-icon>
+      </button>
+      <mat-form-field>
+        <input (keyup)="applyFilter($event.target.value)" matInput placeholder="{{ 'SEARCH' | translate }}" />
+      </mat-form-field>
     </div>
 
     <table [dataSource]="dataSource" class="table-responsive" mat-table matSort>

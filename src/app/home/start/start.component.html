@@ -3,11 +3,11 @@
   <div class="after"></div>
 </div>
 
-<mat-card *ngIf="happyAlert?.trim().toLowerCase().length > 0">
+<mat-card *ngIf="alert?.message?.trim().toLowerCase().length > 0">
   <mat-card-content style="text-align: center; margin-bottom: 0">
-    <h1 style="margin-bottom: 0">{{ happyAlert }}</h1>
+    <h1 style="margin-bottom: 0">{{ alert.message }}</h1>
   </mat-card-content>
-  <mat-card-actions style="margin-top: 0; padding-top: 0">
+  <mat-card-actions style="margin-top: 0; padding-top: 0" *ngIf="alert?.type?.includes('happy')">
     <button mat-flat-button color="primary" (click)="toggleFirework()">
       <span *ngIf="showFirework">{{ 'STARTPAGE_FIREWORK_HIDE' | translate }}</span>
       <span *ngIf="!showFirework">{{ 'STARTPAGE_FIREWORK_SHOW' | translate }}</span>

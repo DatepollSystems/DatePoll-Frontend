@@ -10,7 +10,10 @@
   <mat-card-content>
     <div fxLayout="row" fxLayoutAlign="space-between" fxLayoutGap="2%" fxLayout.lt-sm="column">
       <mat-form-field>
-        <input (keyup)="applyFilter($event.target.value)" matInput placeholder="{{ 'SEARCH' | translate }}" />
+        <input (keyup)="applyFilter()" matInput placeholder="{{ 'SEARCH' | translate }}" [(ngModel)]="filterValue" />
+        <button mat-button *ngIf="filterValue" matSuffix mat-icon-button aria-label="Clear" (click)="this.filterValue = ''; applyFilter()">
+          <mat-icon>close</mat-icon>
+        </button>
         <mat-hint
           ><b>{{ ignoreEditorChangesChars }}</b> {{ 'MANAGEMENT_USERS_CHANGES_SEARCH_HINT' | translate }}</mat-hint
         >
@@ -23,6 +26,7 @@
       fxLayout.lt-sm="column"
       fxLayoutAlign="space-between"
       fxLayoutGap.lt-sm="5%"
+      (click)="deleteUserChange(userChange)"
     >
       <span *ngIf="userChange.editorId !== userChange.userId">
         {{ userChange.editedAt | date: 'dd.MM.yyyy HH:mm:ss' }}
