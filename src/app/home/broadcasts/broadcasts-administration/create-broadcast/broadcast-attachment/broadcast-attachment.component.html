@@ -1,28 +1,34 @@
 <div *ngIf="error">
   {{ error.message }}
 </div>
-<div *ngIf="uploadResponse.status === 'error'">
-  {{ uploadResponse.message }}
-</div>
 
 <mat-form-field>
   <mat-label *ngIf="!(attachments?.length < 1)">{{ 'BROADCASTS_ADMINISTRATION_CREATE_ATTACHMENTS_TITLE' | translate }}</mat-label>
   <mat-chip-list #chipList>
-    <mat-chip *ngFor="let attachment of attachments" [selectable]="true" [removable]="true" (removed)="remove(attachment)">
+    <mat-chip *ngFor="let attachment of attachments" [removable]="true" (removed)="remove(attachment)">
       {{ attachment.name }}
       <mat-icon matChipRemove>cancel</mat-icon>
     </mat-chip>
     <input
-      [disabled]="uploadResponse.status === 'progress'"
       [matChipInputFor]="chipList"
       [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
       type="file"
+      multiple
       name="attachment"
       (change)="onFileChange($event)"
     />
   </mat-chip-list>
 </mat-form-field>
 
-<div *ngIf="uploadResponse.status === 'progress'">
-  <mat-progress-bar mode="determinate" value="{{ uploadResponse.message }}"></mat-progress-bar>
+<div *ngFor="let uploadResponse of uploadResponses" fxLayout="column">
+  <div fxFlex style="margin-bottom: 15px">
+    <mat-progress-bar
+      mode="determinate"
+      *ngIf="uploadResponse.status === 'progress'"
+      value="{{ uploadResponse.message }}"
+    ></mat-progress-bar>
+    <div *ngIf="uploadResponse.status === 'error'">
+      {{ uploadResponse.message }}
+    </div>
+  </div>
 </div>
