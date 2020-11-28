@@ -70,8 +70,15 @@ export class EventsAdministrationComponent implements OnInit, OnDestroy {
     this.yearsSubscription = eventsService.yearsChange.subscribe((value) => {
       this.years = value;
       this.filteredYears.next(this.years.slice());
-      this.yearCtrl.setValue(this.years[this.years.length - 1]);
       this.selectedYear = this.years[this.years.length - 1];
+      for (const year of this.years) {
+        if (year.includes(new Date().getFullYear().toString())) {
+          console.log('in');
+          this.selectedYear = year;
+          break;
+        }
+      }
+      this.yearCtrl.setValue(this.selectedYear);
       this.setInitialValue();
 
       this.eventsLoaded = false;
@@ -142,7 +149,7 @@ export class EventsAdministrationComponent implements OnInit, OnDestroy {
 
   refreshEvents() {
     this.eventsLoaded = false;
-    this.eventsService.fetchEvents(Number(this.selectedYear));
+    this.eventsService.fetchEvents();
     this.events = [];
     this.refreshTable();
   }
@@ -229,7 +236,9 @@ export class EventsAdministrationComponent implements OnInit, OnDestroy {
 
   yearSelectChange(value) {
     this.selectedYear = value;
-    this.showAllEvents = true;
+    if (!this.showAllEvents) {
+      this.showAllEvents = Number(value) < new Date().getFullYear();
+    }
     this.eventsService.getEvents(value);
   }
 

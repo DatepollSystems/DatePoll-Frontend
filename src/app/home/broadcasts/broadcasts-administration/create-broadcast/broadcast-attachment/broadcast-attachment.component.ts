@@ -18,13 +18,15 @@ export class BroadcastAttachmentComponent {
   attachments: Attachment[] = [];
 
   error: string;
-  uploadResponse = {status: '', message: '', filePath: ''};
+  uploadResponses: any[] = [];
 
   @Output()
   attachmentsChange = new EventEmitter<Attachment[]>();
 
   @Output()
   currentlyUploadingChange = new EventEmitter<boolean>();
+
+  internalUploadId = 0;
 
   constructor(private broadcastsService: BroadcastsAdministrationService) {}
 
@@ -45,27 +47,62 @@ export class BroadcastAttachmentComponent {
   }
 
   onFileChange(event) {
-    if (event.target.files.length > 0) {
+    if (event.target?.files?.length > 0) {
       this.currentlyUploadingChange.emit(true);
 
-      const file = event.target.files[0];
-
       const formData = new FormData();
-      formData.append('file_0', file);
-      formData.append('files_count', '1');
+      let i = 0;
+      for (const upFile of event.target.files) {
+        formData.append('file_' + i, upFile);
+        i++;
+      }
+      formData.append('files_count', event.target.files.length);
+
+      const currentInternalUploadId = this.internalUploadId;
+      this.internalUploadId++;
 
       this.broadcastsService.uploadAttachments(formData).subscribe(
         (res) => {
-          this.uploadResponse = res;
+          let updated = false;
+          for (const uploadResponse of this.uploadResponses) {
+            if (currentInternalUploadId === uploadResponse.id) {
+              uploadResponse.status = res.status;
+              uploadResponse.message = res.message;
+              uploadResponse.filePath = res.filePath;
+              updated = true;
+              break;
+            }
+          }
+
+          if (!updated) {
+            this.uploadResponses.push({
+              id: currentInternalUploadId,
+              status: res.status,
+              message: res.message,
+              filePath: res.filePath,
+            });
+          }
           if (res.files) {
             console.log(res);
-            this.attachments.push({
-              id: res.files[0].id,
-              name: res.files[0].name.trim(),
-            });
+            for (const upFile of res.files) {
+              this.attachments.push({
+                id: upFile.id,
+                name: upFile.name.trim(),
+              });
+            }
             this.attachmentsChange.emit(this.attachments.slice());
-            this.currentlyUploadingChange.emit(false);
-            event.target.files = [];
+
+            let everythingNull = true;
+            for (const uploadResponse of this.uploadResponses) {
+              if (uploadResponse.filePath != null || uploadResponse.message != null || uploadResponse.status != null) {
+                everythingNull = false;
+                break;
+              }
+            }
+
+            if (everythingNull) {
+              this.currentlyUploadingChange.emit(false);
+            }
           }
         },
         (err) => {

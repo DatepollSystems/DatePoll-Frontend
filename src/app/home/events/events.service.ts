@@ -28,6 +28,7 @@ export class EventsService {
   private _freeGroups: GroupAndSubgroupModel[] = [];
   public freeGroupsChange: Subject<GroupAndSubgroupModel[]> = new Subject<GroupAndSubgroupModel[]>();
 
+  private _lastUsedYear: number;
   private _years: string[] = [];
   public yearsChange: Subject<string[]> = new Subject<string[]>();
 
@@ -54,6 +55,7 @@ export class EventsService {
   }
 
   public getEvents(year: number = null): Event[] {
+    this._lastUsedYear = year;
     this.fetchEvents(year);
     return this._events.slice();
   }
@@ -64,6 +66,9 @@ export class EventsService {
   }
 
   public fetchEvents(year: number = null) {
+    if (this._lastUsedYear != null) {
+      year = this._lastUsedYear;
+    }
     let url = '/avent/administration/avent';
     if (year != null) {
       url += '/' + year;
