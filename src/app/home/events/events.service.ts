@@ -48,7 +48,11 @@ export class EventsService {
     this.httpService.loggedInV1GETRequest('/avent/administration/avent/years').subscribe(
       (response: any) => {
         console.log(response);
-        this.setYears(response.years);
+        const years = [];
+        for (const year of response.years) {
+          years.push(year.toString());
+        }
+        this.setYears(years);
       },
       (error) => console.log(error)
     );
