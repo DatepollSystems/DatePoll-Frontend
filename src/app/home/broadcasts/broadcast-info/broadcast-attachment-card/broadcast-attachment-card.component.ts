@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {environment} from '../../../../../environments/environment';
 import {ClipboardHelper} from '../../../../utils/clipboard';
+import {SettingsService} from '../../../../utils/settings.service';
 
 @Component({
   selector: 'app-broadcast-attachment-card',
@@ -9,6 +10,7 @@ import {ClipboardHelper} from '../../../../utils/clipboard';
 })
 export class BroadcastAttachmentCardComponent implements OnInit {
   apiUrl = environment.apiUrl;
+  appUrl = '';
 
   @Input()
   attachment: any;
@@ -16,9 +18,10 @@ export class BroadcastAttachmentCardComponent implements OnInit {
   showShowImage = false;
   showImage = false;
 
-  constructor() {
+  constructor(private settingsService: SettingsService) {
     const i = this.apiUrl.indexOf('/api');
     this.apiUrl = this.apiUrl.slice(0, i) + '/attachment/';
+    this.appUrl = this.settingsService.getServerInfo().application_url + '/download/';
   }
 
   ngOnInit() {
