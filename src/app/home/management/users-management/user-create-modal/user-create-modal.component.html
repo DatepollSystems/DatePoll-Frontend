@@ -250,7 +250,7 @@
     <div fxLayout="row break" fxLayout.lt-xl="column" fxLayoutGap="2%" fxLayoutAlign="start" fxFlex="100%">
       <!-- Email addresses -->
       <div fxFlex="48%">
-        <mat-expansion-panel [expanded]="!isMobile">
+        <mat-expansion-panel [expanded]="!isMobile" style="margin-bottom: 7px">
           <mat-expansion-panel-header>
             <mat-panel-title>
               {{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_LIST_EMAIL_ADDRESSES' | translate }}
@@ -265,7 +265,7 @@
 
       <!-- Performance badges -->
       <div fxFlex="48%">
-        <mat-expansion-panel [expanded]="!isMobile" style="margin-top: 7px;">
+        <mat-expansion-panel [expanded]="!isMobile" style="margin-bottom: 7px">
           <mat-expansion-panel-header>
             <mat-panel-title>
               {{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_PERFORMANCE_BADGES_TITLE' | translate }}
@@ -281,21 +281,21 @@
 
       <!-- Internal comment -->
       <div fxFlex="48%">
-        <mat-expansion-panel [expanded]="!isMobile" style="margin-top: 7px;">
+        <mat-expansion-panel [expanded]="!isMobile" style="margin-bottom: 7px">
           <mat-expansion-panel-header>
             <mat-panel-title>
               {{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_INTERAL_COMMENT' | translate }}
             </mat-panel-title>
           </mat-expansion-panel-header>
           <mat-form-field appearance="outline" style="width: 100%">
-            <textarea matInput name="internalComment" ngModel style="min-height: 15vh;"></textarea>
+            <textarea matInput name="internalComment" ngModel style="min-height: 15vh"></textarea>
           </mat-form-field>
         </mat-expansion-panel>
       </div>
 
       <!-- Phone number -->
       <div fxFlex="48%">
-        <mat-expansion-panel [expanded]="!isMobile" style="margin-top: 7px;">
+        <mat-expansion-panel [expanded]="!isMobile" style="margin-bottom: 7px">
           <mat-expansion-panel-header>
             <mat-panel-title>
               {{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_PHONE_NUMBERS' | translate }}
@@ -310,7 +310,7 @@
 
       <!-- Badges -->
       <div fxFlex="48%">
-        <mat-expansion-panel [expanded]="!isMobile" style="margin-top: 7px;">
+        <mat-expansion-panel [expanded]="!isMobile" style="margin-bottom: 7px">
           <mat-expansion-panel-header>
             <mat-panel-title>
               {{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_BADGES_TITLE' | translate }}
@@ -326,7 +326,7 @@
 
       <!-- Permissions -->
       <div fxFlex="48%">
-        <mat-expansion-panel *ngIf="hasPermissionToChangePermission" style="margin-top: 7px;" [expanded]="!isMobile">
+        <mat-expansion-panel *ngIf="hasPermissionToChangePermission" style="margin-bottom: 7px" [expanded]="!isMobile">
           <mat-expansion-panel-header>
             <mat-panel-title>
               {{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_PERMISSIONS' | translate }}

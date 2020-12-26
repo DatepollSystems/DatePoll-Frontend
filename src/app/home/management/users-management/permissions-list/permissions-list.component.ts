@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {FormControl, NgForm} from '@angular/forms';
+import {FormControl} from '@angular/forms';
 import {ReplaySubject, Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
 
@@ -8,12 +8,9 @@ import {Permissions} from '../../../../permissions';
 @Component({
   selector: 'app-permissions-list',
   templateUrl: './permissions-list.component.html',
-  styleUrls: ['./permissions-list.component.css']
+  styleUrls: ['./permissions-list.component.css'],
 })
 export class PermissionsListComponent implements OnInit {
-  /** control for the selected years */
-  public permissionCtrl: FormControl = new FormControl();
-
   /** control for the MatSelect filter keyword */
   public permissionFilterCtrl: FormControl = new FormControl();
 
@@ -21,7 +18,7 @@ export class PermissionsListComponent implements OnInit {
   public filteredPermissions: ReplaySubject<string[]> = new ReplaySubject<string[]>(1);
 
   allPermissions: string[] = [];
-  selectedPermission: string;
+  selectedPermission: string = null;
   @Output() permissionChanged = new EventEmitter();
   /** Subject that emits when the component has been destroyed. */
   protected _onDestroy = new Subject<void>();
@@ -39,11 +36,9 @@ export class PermissionsListComponent implements OnInit {
     this.filteredPermissions.next(this.allPermissions.slice());
 
     // listen for search field value changes
-    this.permissionFilterCtrl.valueChanges
-      .pipe(takeUntil(this._onDestroy))
-      .subscribe(() => {
-        this.filterPermissions();
-      });
+    this.permissionFilterCtrl.valueChanges.pipe(takeUntil(this._onDestroy)).subscribe(() => {
+      this.filterPermissions();
+    });
   }
 
   permissionSelectChange(value) {
@@ -63,9 +58,7 @@ export class PermissionsListComponent implements OnInit {
       search = search.toLowerCase();
     }
     // filter the permissions
-    this.filteredPermissions.next(
-      this.allPermissions.filter(p => p.toString().toLowerCase().indexOf(search) > -1)
-    );
+    this.filteredPermissions.next(this.allPermissions.filter((p) => p.toString().toLowerCase().indexOf(search) > -1));
   }
 
   addPermission() {
@@ -77,17 +70,12 @@ export class PermissionsListComponent implements OnInit {
     const permission = this.selectedPermission;
     this.permissions.push(permission);
     this.permissionsChanged.emit(this.permissions.slice());
+    this.selectedPermission = null;
   }
 
   removePermission(permission: string) {
-    const permissions = [];
-    for (let i = 0; i < this.permissions.length; i++) {
-      if (!this.permissions[i].includes(permission)) {
-        permissions.push(this.permissions[i]);
-      }
-    }
-    this.permissions = permissions;
+    const i = this.permissions.indexOf(permission);
+    this.permissions.splice(i, 1);
     this.permissionsChanged.emit(this.permissions.slice());
   }
-
 }

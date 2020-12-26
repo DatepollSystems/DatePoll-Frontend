@@ -242,16 +242,7 @@
         <mat-option value="{{ 'ACTIVE' | translate }}">{{ 'ACTIVE' | translate }}</mat-option>
         <mat-option value="{{ 'INACTIVE' | translate }}">{{ 'INACTIVE' | translate }}</mat-option>
         <!-- Backwards compatibility reasons -->
-        <mat-option
-          *ngIf="
-            bvMember
-              .trim()
-              .toLowerCase()
-              .includes('gemeldet')
-          "
-          value="gemeldet"
-          >gemeldet
-        </mat-option>
+        <mat-option *ngIf="bvMember.trim().toLowerCase().includes('gemeldet')" value="gemeldet">gemeldet </mat-option>
       </mat-select>
     </mat-form-field>
 
@@ -270,7 +261,7 @@
     <div fxLayout="row break" fxLayout.lt-xl="column" fxLayoutGap="2%" fxLayoutAlign="start" fxFlex="100%">
       <!-- Password change -->
       <div fxFlex="48%">
-        <mat-expansion-panel [expanded]="!isMobile">
+        <mat-expansion-panel [expanded]="!isMobile" style="margin-bottom: 7px">
           <mat-expansion-panel-header>
             <mat-panel-title>
               {{ 'MANAGEMENT_USERS_UPDATE_USER_MODAL_PASSWORD_CHANGE' | translate }}
@@ -280,7 +271,7 @@
             ><b>{{ 'MANAGEMENT_USERS_UPDATE_USER_MODAL_PASSWORD_CHANGE_DESCRIPTION' | translate }}</b></small
           >
           <form #changePasswordForm="ngForm" (ngSubmit)="changePassword(changePasswordForm)">
-            <div fxLayout="row wrap" fxLayout.lt-md="column" fxLayoutGap="3%" style="margin-top: 15px;">
+            <div fxLayout="row wrap" fxLayout.lt-md="column" fxLayoutGap="3%" style="margin-top: 15px">
               <mat-form-field fxFlex="30%">
                 <input
                   #passwordModel="ngModel"
@@ -322,7 +313,7 @@
 
       <!-- Email addresses -->
       <div fxFlex="48%">
-        <mat-expansion-panel [expanded]="!isMobile" style="margin-top: 7px;">
+        <mat-expansion-panel [expanded]="!isMobile" style="margin-bottom: 7px">
           <mat-expansion-panel-header>
             <mat-panel-title>
               {{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_LIST_EMAIL_ADDRESSES' | translate }}
@@ -337,7 +328,7 @@
 
       <!-- Internal comment -->
       <div fxFlex="48%">
-        <mat-expansion-panel [expanded]="!isMobile" style="margin-top: 7px;">
+        <mat-expansion-panel [expanded]="!isMobile" style="margin-bottom: 7px">
           <mat-expansion-panel-header>
             <mat-panel-title>
               {{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_INTERAL_COMMENT' | translate }}
@@ -345,7 +336,7 @@
           </mat-expansion-panel-header>
 
           <mat-form-field appearance="outline" style="width: 100%">
-            <textarea [(ngModel)]="internalComment" matInput name="internalComment" ngModel style="min-height: 15vh;"></textarea>
+            <textarea [(ngModel)]="internalComment" matInput name="internalComment" ngModel style="min-height: 15vh"></textarea>
           </mat-form-field>
         </mat-expansion-panel>
       </div>
@@ -367,7 +358,7 @@
 
       <!-- Performance badges -->
       <div fxFlex="48%">
-        <mat-expansion-panel [expanded]="!isMobile" style="margin-top: 7px;">
+        <mat-expansion-panel [expanded]="!isMobile" style="margin-bottom: 7px">
           <mat-expansion-panel-header>
             <mat-panel-title>
               {{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_PERFORMANCE_BADGES_TITLE' | translate }}
@@ -383,7 +374,7 @@
 
       <!-- Badges -->
       <div fxFlex="48%">
-        <mat-expansion-panel [expanded]="!isMobile" style="margin-top: 7px;">
+        <mat-expansion-panel [expanded]="!isMobile" style="margin-bottom: 7px">
           <mat-expansion-panel-header>
             <mat-panel-title>
               {{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_BADGES_TITLE' | translate }}
@@ -399,7 +390,7 @@
 
       <!-- Permissions -->
       <div fxFlex="48%">
-        <mat-expansion-panel *ngIf="hasPermissionToChangePermission" [expanded]="!isMobile" style="margin-top: 7px;">
+        <mat-expansion-panel *ngIf="hasPermissionToChangePermission" [expanded]="!isMobile" style="margin-bottom: 7px">
           <mat-expansion-panel-header>
             <mat-panel-title>
               {{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_PERMISSIONS' | translate }}

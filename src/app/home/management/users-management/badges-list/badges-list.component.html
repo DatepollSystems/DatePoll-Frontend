@@ -1,4 +1,4 @@
-<mat-card *ngIf="!this.joinDate" matRipple style="background-color: #b2ff59" class="not-selectable">
+<mat-card *ngIf="!this.joinDate" matRipple class="mat-info-card not-selectable">
   {{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_BADGES_SET_JOIN_DATE' | translate }}
 </mat-card>
 
@@ -21,21 +21,24 @@
 </ng-container>
 
 <div fxLayout="row" fxLayoutAlign="end center">
-  <button mat-flat-button type="button" color="primary" (click)="extraBadgeEnabled = !extraBadgeEnabled">
-    {{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_EXTRA_BADGE' | translate }}
-    <mat-icon *ngIf="!extraBadgeEnabled">expand_more</mat-icon>
-    <mat-icon *ngIf="extraBadgeEnabled">expand_less</mat-icon>
-  </button>
+  <div fxFlex="35%" fxFlex.lt-md="100%">
+    <button mat-flat-button type="button" color="primary" (click)="extraBadgeEnabled = !extraBadgeEnabled" style="width: 100%">
+      {{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_EXTRA_BADGE' | translate }}
+      <mat-icon *ngIf="!extraBadgeEnabled">expand_more</mat-icon>
+      <mat-icon *ngIf="extraBadgeEnabled">expand_less</mat-icon>
+    </button>
+  </div>
 </div>
 <form
   #addExtraBadgeForm="ngForm"
   (ngSubmit)="addExtraBadge(addExtraBadgeForm)"
   fxLayout.gt-xs="row wrap"
   fxLayout="column"
+  fxLayoutAlign="space-between"
   *ngIf="extraBadgeEnabled"
-  style="margin-top: 15px;"
+  style="margin-top: 15px"
 >
-  <mat-form-field fxFlex.lt-lg="50%" fxFlex="25%">
+  <mat-form-field fxFlex.lt-lg="49%" fxFlex="24%">
     <input
       #badgeDescriptionModel="ngModel"
       id="badgeDescription"
@@ -53,7 +56,7 @@
     </mat-error>
   </mat-form-field>
 
-  <mat-form-field fxFlex.lt-lg="50%" fxFlex="25%">
+  <mat-form-field fxFlex.lt-lg="49%" fxFlex="24%">
     <input
       id="badgeReason"
       matInput
@@ -65,7 +68,7 @@
     />
   </mat-form-field>
 
-  <mat-form-field fxFlex.lt-lg="50%" fxFlex="25%">
+  <mat-form-field fxFlex.lt-lg="49%" fxFlex="24%">
     <input
       [(ngModel)]="extraBadgeDate"
       [matDatepicker]="picker_birthday"
@@ -79,8 +82,8 @@
     <mat-datepicker #picker_birthday></mat-datepicker>
   </mat-form-field>
 
-  <div fxFlex.lt-lg="50%" fxFlex="25%">
-    <button [disabled]="!addExtraBadgeForm.valid" mat-flat-button style="width: 100%;" type="submit" color="accent">
+  <div fxFlex.lt-lg="49%" fxFlex="24%">
+    <button [disabled]="!addExtraBadgeForm.valid" mat-flat-button style="width: 100%" type="submit" color="accent">
       {{ 'ADD' | translate }}
       <mat-icon aria-label="Submit button">library_add</mat-icon>
     </button>
@@ -106,7 +109,7 @@
       </button>
     </mat-list-item>
   </mat-list>
-  <mat-card *ngIf="userBadges?.length == 0" matRipple style="background-color: #b2ff59" class="not-selectable">
+  <mat-card *ngIf="userBadges?.length == 0" matRipple class="mat-info-card not-selectable">
     <b>{{ 'INFORMATION' | translate }}</b> {{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_BADGES_EMPTY' | translate }}
   </mat-card>
 </div>
