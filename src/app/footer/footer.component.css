@@ -1,13 +1,17 @@
 #footerContainer {
-  padding-top: 15px;
-  padding-bottom: 15px;
   background-color: #607d8b;
   color: white;
 }
 
+#footerHeaderContainer {
+  padding: 18px 25px 15px 15px;
+}
+
 #footerBarContainer {
   background-color: #455a64;
-  padding: 15px;
+  padding-top: 18px;
+  padding-left: 15px;
+  padding-bottom: 15px;
   color: rgba(255, 255, 255, 0.8);
 }
 
