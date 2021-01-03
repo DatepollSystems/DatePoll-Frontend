@@ -43,7 +43,7 @@
 
   "LANGUAGE": "Sprache",
   "LANGUAGE_GERMAN": "Deutsch",
-  "LANGUAGE_ENGLISH": "Englisch",
+  "LANGUAGE_ENGLISH": "English",
 
   "ABOUT": "Über",
   "ABOUT_GENERAL": "Allgemeines",
@@ -54,6 +54,9 @@
   "ABOUT_BACKEND_VERSION": "Version des Backends: ",
   "ABOUT_NEEDED_BACKEND_VERSION": "Benötigte Backend Version (Zahl): ",
   "ABOUT_LICENSE": "Lizenz",
+  "ABOUT_MORE_INFORMATION": "Mehr Informationen über",
+  "ABOUT_FOLLOW_CALENDER": "Verfolge alle Veranstaltungen über den",
+  "ABOUT_FOLLOW_CALENDER_1": "öffentlichen Kalendar",
 
   "ABOUT_PAGE_STATS_USER": "Benutzer",
   "ABOUT_PAGE_STATS_EVENTS": "Events",
