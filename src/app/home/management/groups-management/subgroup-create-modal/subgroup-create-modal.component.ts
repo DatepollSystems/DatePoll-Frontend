@@ -9,7 +9,7 @@ import {GroupsService} from '../groups.service';
 @Component({
   selector: 'app-subgroup-create-modal',
   templateUrl: './subgroup-create-modal.component.html',
-  styleUrls: ['./subgroup-create-modal.component.css']
+  styleUrls: ['./subgroup-create-modal.component.css'],
 })
 export class SubgroupCreateModalComponent {
   groupID: number;
@@ -29,13 +29,13 @@ export class SubgroupCreateModalComponent {
 
     const name = form.controls.name.value;
     const description = form.controls.description.value;
-    const orderN = form.controls.orderN.value;
+    const orderN = Number(form.controls.orderN.value);
 
     const subgroup = {
       name,
       description,
       orderN,
-      group_id: this.groupID
+      group_id: this.groupID,
     };
     console.log(subgroup);
 
@@ -48,7 +48,7 @@ export class SubgroupCreateModalComponent {
           this.translate.getTranslationFor('MANAGEMENT_GROUPS_CREATE_SUBGROUP_SUCCESSFUL')
         );
       },
-      error => {
+      (error) => {
         console.log(error);
         this.groupsService.fetchGroups();
       }
