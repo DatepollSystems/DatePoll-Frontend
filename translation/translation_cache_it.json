@@ -570,5 +570,9 @@
   "Die Standard-Location wurde hinzugefügt.": "La posizione predefinita è stata aggiunta.",
   "Die Standard-Location wurde entfernt.": "La posizione predefinita è stata rimossa.",
   "Diese Standard-Location hat keinen verknüpften Standort!": "Questa posizione standard non ha una posizione collegata!",
-  "Diese Standard-Location hat keine hinterlegten Coordinaten.": "Questa posizione predefinita non ha coordinate definite."
+  "Diese Standard-Location hat keine hinterlegten Coordinaten.": "Questa posizione predefinita non ha coordinate definite.",
+  "Español": "Español",
+  "Français": "Français",
+  "Italiano": "Italiano",
+  "Portugués": "Portugués"
 }

@@ -570,5 +570,9 @@
   "Die Standard-Location wurde hinzugefügt.": "O local padrão foi adicionado.",
   "Die Standard-Location wurde entfernt.": "A localização padrão foi removida.",
   "Diese Standard-Location hat keinen verknüpften Standort!": "Esta localização padrão não tem localização vinculada!",
-  "Diese Standard-Location hat keine hinterlegten Coordinaten.": "Este local padrão não tem coordenadas definidas."
+  "Diese Standard-Location hat keine hinterlegten Coordinaten.": "Este local padrão não tem coordenadas definidas.",
+  "Español": "Español",
+  "Français": "França",
+  "Italiano": "Italiano",
+  "Portugués": "Português"
 }

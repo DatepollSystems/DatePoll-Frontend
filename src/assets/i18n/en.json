@@ -44,6 +44,10 @@
   "LANGUAGE": "Language",
   "LANGUAGE_GERMAN": "Deutsch",
   "LANGUAGE_ENGLISH": "English",
+  "LANGUAGE_SPANISH": "Español",
+  "LANGUAGE_FRANCE": "Français",
+  "LANGUAGE_ITALIEN": "Italiano",
+  "LANGUAGE_PORTUGUES": "Portugués",
 
   "ABOUT": "About",
   "ABOUT_GENERAL": "Generel",
