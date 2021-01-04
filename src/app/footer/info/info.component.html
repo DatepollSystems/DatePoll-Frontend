@@ -1,15 +1,11 @@
-<div class="container-fluid" style="min-height: 90%">
-  <div class="row">
-    <div class="col-12 col-sm-12 col-md-4 col-lg-2">
-      <mat-action-list>
-        <button mat-list-item mat-ripple routerLink="imprint" routerLinkActive="active">Impressum</button>
-        <button mat-list-item mat-ripple routerLink="privacypolicy" routerLinkActive="active">Datenschutzerklärung</button>
-        <button mat-list-item mat-ripple routerLink="/about">Go back</button>
-      </mat-action-list>
-    </div>
-    <div class="col-12 col-sm-12 col-md-8 col-lg-8">
-      <router-outlet></router-outlet>
-    </div>
+<div style="min-height: 90%">
+  <div fxLayout="row" fxLayout.lt-md="column">
+    <mat-action-list fxFlex="20%">
+      <button mat-list-item mat-ripple routerLink="imprint" routerLinkActive="active">{{ 'IMPRINT' | translate }}</button>
+      <button mat-list-item mat-ripple routerLink="privacypolicy" routerLinkActive="active">{{ 'PRIVACY_POLICY' | translate }}</button>
+      <button mat-list-item mat-ripple routerLink="/about">{{ '404_GO_BACK' | translate }}</button>
+    </mat-action-list>
+    <router-outlet></router-outlet>
   </div>
 </div>
 <app-footer></app-footer>

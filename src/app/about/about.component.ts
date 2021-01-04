@@ -2,6 +2,7 @@ import {Component, OnDestroy} from '@angular/core';
 import {NgForm} from '@angular/forms';
 import {MatBottomSheet} from '@angular/material/bottom-sheet';
 import {Router} from '@angular/router';
+import {DomSanitizer} from '@angular/platform-browser';
 import {Subscription} from 'rxjs';
 
 import {AuthService} from '../auth/auth.service';
@@ -9,15 +10,17 @@ import {SettingsService} from '../utils/settings.service';
 
 import {MobileAppBottomSheetComponent} from '../auth/signin/mobile-app-bottom-sheet/mobile-app-bottom-sheet.component';
 
-import {DomSanitizer} from '@angular/platform-browser';
 import {ServerInfoModel} from '../utils/server-info.model';
+import {environment} from '../../environments/environment';
 
 @Component({
   selector: 'app-about',
   templateUrl: './about.component.html',
-  styleUrls: ['./about.component.css']
+  styleUrls: ['./about.component.css'],
 })
 export class AboutComponent implements OnDestroy {
+  calendarUrl = environment.apiUrl;
+
   serverInfo: ServerInfoModel;
   serverInfoSubscription: Subscription;
 
@@ -35,10 +38,13 @@ export class AboutComponent implements OnDestroy {
     private settingsService: SettingsService,
     private sanitizer: DomSanitizer
   ) {
+    const i = this.calendarUrl.indexOf('/api');
+    this.calendarUrl = this.calendarUrl.slice(0, i) + '/calendar';
+
     this.serverInfo = this.settingsService.getServerInfo();
     // noinspection JSIgnoredPromiseFromCall
     this.count();
-    this.serverInfoSubscription = this.settingsService.serverInfoChange.subscribe(value => {
+    this.serverInfoSubscription = this.settingsService.serverInfoChange.subscribe((value) => {
       this.serverInfo = value;
       // noinspection JSIgnoredPromiseFromCall
       this.count();
@@ -60,13 +66,13 @@ export class AboutComponent implements OnDestroy {
         this.authService.signin(data.token, data.session_token);
         this.uiLogin();
       },
-      error => {
+      (error) => {
         console.log(error);
 
         if (error.error.error_code != null) {
           if (error.error.error_code === 'not_activated' || error.error.error_code === 'change_password') {
             this.router.navigateByUrl('/auth/signin', {
-              state: {routingReason: 'forward', state: error.error.error_code, username, password}
+              state: {routingReason: 'forward', state: error.error.error_code, username, password},
             });
 
             return;
@@ -125,7 +131,7 @@ export class AboutComponent implements OnDestroy {
     this.instanceUsersString = '0';
     for (let i = 0; i < max; ) {
       i += factor;
-      await sleep(1);
+      await sleep(10);
       this.instanceUsersString = i.toString();
     }
   }
@@ -134,7 +140,7 @@ export class AboutComponent implements OnDestroy {
     this.instanceEventsString = '0';
     for (let i = 0; i < max; ) {
       i += factor;
-      await sleep(1);
+      await sleep(10);
       this.instanceEventsString = i.toString();
     }
   }
@@ -143,7 +149,7 @@ export class AboutComponent implements OnDestroy {
     this.instanceMoviesString = '0';
     for (let i = 0; i < max; ) {
       i += factor;
-      await sleep(1);
+      await sleep(10);
       this.instanceMoviesString = i.toString();
     }
   }
@@ -152,12 +158,12 @@ export class AboutComponent implements OnDestroy {
     this.instanceBroadcasts = '0';
     for (let i = 0; i < max; ) {
       i += factor;
-      await sleep(1);
+      await sleep(10);
       this.instanceBroadcasts = i.toString();
     }
   }
 }
 
 async function sleep(msec) {
-  return new Promise(resolve => setTimeout(resolve, msec * 2));
+  return new Promise((resolve) => setTimeout(resolve, msec * 2));
 }

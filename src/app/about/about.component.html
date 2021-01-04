@@ -112,31 +112,46 @@
           >
             {{ 'SHOW_LESS' | translate }}
           </button>
+
+          <p style="margin-top: 25px">
+            {{ 'ABOUT_FOLLOW_CALENDER' | translate }}
+            <a href="{{ calendarUrl }}" target="_blank" rel="noopener">{{ 'ABOUT_FOLLOW_CALENDER_1' | translate }}</a
+            >.
+          </p>
         </mat-card>
+
+        <mat-card class="mat-elevation-z3">
+          <p>{{ 'ABOUT_MORE_INFORMATION' | translate }}</p>
+          <h1>
+            <a href="https://datepoll.org/projects/datepoll" target="_blank" rel="noopener">DatePoll</a> and
+            <a href="https://datepoll.org" target="_blank" rel="noopener">DatePoll-Systems</a>.
+          </h1>
+        </mat-card>
+
         <mat-card class="mat-elevation-z3">
           <div class="level is-mobile" style="margin-bottom: 5px" (click)="count()">
             <div class="level-item">
               <div>
                 <h3>{{ 'ABOUT_PAGE_STATS_USER' | translate }}</h3>
-                <h1>{{ instanceUsersString }}</h1>
+                <h1 style="color: #ffce5c">{{ instanceUsersString }}</h1>
               </div>
             </div>
             <div class="level-item">
               <div>
                 <h3>{{ 'ABOUT_PAGE_STATS_EVENTS' | translate }}</h3>
-                <h1>{{ instanceEventsString }}</h1>
+                <h1 style="color: #27dd70">{{ instanceEventsString }}</h1>
               </div>
             </div>
             <div class="level-item">
               <div>
                 <h3>{{ 'ABOUT_PAGE_STATS_MOVIES' | translate }}</h3>
-                <h1>{{ instanceMoviesString }}</h1>
+                <h1 style="color: #16e7d9">{{ instanceMoviesString }}</h1>
               </div>
             </div>
             <div class="level-item">
               <div>
                 <h3>{{ 'ABOUT_PAGE_STATS_BROADCASTS' | translate }}</h3>
-                <h1>{{ instanceBroadcasts }}</h1>
+                <h1 style="color: #726dff">{{ instanceBroadcasts }}</h1>
               </div>
             </div>
           </div>
