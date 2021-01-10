@@ -18,7 +18,7 @@ import {EventUpdateModalComponent} from '../events/events-administration/event-u
 import {Permissions} from '../../permissions';
 import {TranslateService} from '../../translation/translate.service';
 import {SettingsService} from '../../utils/settings.service';
-import {CinemaService} from '../cinema/cinema.service';
+import {CinemaUserService} from '../cinema/cinema-user.service';
 import {EventsUserService} from '../events/events-user.service';
 import {EventsService} from '../events/events.service';
 import {MyUserService} from '../my-user.service';
@@ -80,7 +80,7 @@ export class CalendarComponent implements OnInit, OnDestroy {
 
   constructor(
     private settingsService: SettingsService,
-    private cinemaService: CinemaService,
+    private cinemaService: CinemaUserService,
     private eventsUserService: EventsUserService,
     private eventsService: EventsService,
     private myUserService: MyUserService,

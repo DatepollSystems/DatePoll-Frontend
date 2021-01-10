@@ -1,24 +1,113 @@
-<mat-card class="mat-elevation-z3">
+<mat-list-item *ngIf="listView" (click)="openWeatherForecastModal()">
+  <div mat-line>
+    <b
+      >{{ movie.name
+      }}<span *ngIf="movie.bookedTickets == movie.maximalTickets"> |&#32; {{ 'CINEMA_TICKETS_SOLD_OUT' | translate }}</span></b
+    >
+  </div>
+  <div mat-line>
+    {{ movie.date | date: 'EE, dd.MM' }} 21:00
+    <span class="until-left">({{ movie.getUntil() }})</span>
+  </div>
+  <div mat-line>{{ 'CINEMA_TICKETS_AVAILABLE_TICKETS' | translate }} {{ movie.maximalTickets - movie.bookedTickets }}</div>
+  <div mat-line>{{ 'CINEMA_TICKETS_WORKER' | translate }} {{ movie.workerName }}</div>
+  <div mat-line>{{ 'CINEMA_TICKETS_EMERGENCY_WORKER' | translate }} {{ movie.emergencyWorkerName }}</div>
+  <div mat-line *ngIf="movie.bookedTicketsForYourself != 0">
+    {{ 'CINEMA_TICKETS_BOOKED_TICKETS' | translate }} {{ movie.bookedTicketsForYourself }}
+  </div>
+  <div mat-line>
+    <a href="{{ movie.trailerLink }}" rel="noopener" target="_blank">{{ movie.trailerLink }}</a>
+  </div>
+  <div mat-line fxLayout="row" fxLayoutAlign="space-between">
+    <button
+      mat-flat-button
+      (click)="bookTickets(); $event.stopPropagation()"
+      [disabled]="movie.bookedTickets == movie.maximalTickets"
+      color="primary"
+    >
+      {{ 'CINEMA_TICKETS_BOOK_A_TICKET' | translate }}
+    </button>
+
+    <div>
+      <button
+        mat-stroked-button
+        (click)="applyForWorker(); $event.stopPropagation()"
+        *ngIf="movie.workerName == null"
+        [class.spinner]="applyingForWorker"
+        [disabled]="applyingForWorker"
+        color="primary"
+      >
+        <mat-icon>person_add</mat-icon>
+      </button>
+
+      <button
+        mat-stroked-button
+        (click)="signOutForWorker(); $event.stopPropagation()"
+        *ngIf="movie.workerID === myUserService.getID()"
+        [class.spinner]="signingOutForWorker"
+        [disabled]="signingOutForWorker"
+        color="primary"
+      >
+        <mat-icon>cancel</mat-icon>
+      </button>
+
+      <button
+        mat-stroked-button
+        (click)="applyForEmergencyWorker(); $event.stopPropagation()"
+        *ngIf="movie.emergencyWorkerName == null"
+        [class.spinner]="applyingForEmergencyWorker"
+        [disabled]="applyingForEmergencyWorker"
+        color="accent"
+      >
+        <mat-icon>person_add</mat-icon>
+      </button>
+
+      <button
+        mat-stroked-button
+        (click)="signOutForEmergencyWorker(); $event.stopPropagation()"
+        *ngIf="movie.emergencyWorkerID === myUserService.getID()"
+        [class.spinner]="signingOutForEmergencyWorker"
+        [disabled]="signingOutForEmergencyWorker"
+        color="accent"
+      >
+        <mat-icon>cancel</mat-icon>
+      </button>
+    </div>
+  </div>
+  <div mat-line>
+    <mat-divider></mat-divider>
+  </div>
+</mat-list-item>
+
+<mat-card class="mat-elevation-z3" *ngIf="!listView">
   <mat-card-header>
     <mat-card-title-group>
-      <mat-card-title>{{movie.name}}<span
-        *ngIf="soldOut"> |&#32; <b>{{'CINEMA_TICKETS_SOLD_OUT' | translate}}</b></span>
+      <mat-card-title
+        >{{ movie.name
+        }}<span *ngIf="movie.bookedTickets == movie.maximalTickets">
+          |&#32; <b>{{ 'CINEMA_TICKETS_SOLD_OUT' | translate }}</b></span
+        >
       </mat-card-title>
-      <mat-card-subtitle>{{movie.date | date:'dd.MM.yyyy'}}</mat-card-subtitle>
+      <mat-card-subtitle>{{ movie.date | date: 'dd.MM' }} 21:00</mat-card-subtitle>
     </mat-card-title-group>
   </mat-card-header>
-  <img alt="Movie image" mat-card-image src="{{movie.posterLink}}">
+  <img alt="Movie image" mat-card-image src="{{ movie.posterLink }}" />
   <mat-card-content>
     <div *ngIf="movie.workerName != null" class="row align-items-center justify-content-between">
       <div class="col-5 col-sm-5 col-md-4 col-lg-2">
-        {{'CINEMA_TICKETS_WORKER' | translate}}
+        {{ 'CINEMA_TICKETS_WORKER' | translate }}
       </div>
       <div class="col-7 col-sm-7 col-md-8 col-lg-10" style="text-align: right">
-        {{movie.workerName}}
-        <button (click)="signOutForWorker()" [class.spinner]="signingOutForWorker" [disabled]="signingOutForWorker"
-                *ngIf="movie.workerID == myUserService.getID()"
-                mat-icon-button matTooltip="{{'CINEMA_TICKETS_CANCEL_CINEMA_SERVICE_TOOLTIP' | translate}}"
-                matTooltipPosition="right">
+        {{ movie.workerName }}
+        <button
+          (click)="signOutForWorker()"
+          [class.spinner]="signingOutForWorker"
+          [disabled]="signingOutForWorker"
+          *ngIf="movie.workerID == myUserService.getID()"
+          mat-icon-button
+          matTooltip="{{ 'CINEMA_TICKETS_CANCEL_CINEMA_SERVICE_TOOLTIP' | translate }}"
+          matTooltipPosition="right"
+        >
           <mat-icon aria-label="Cancel worker">cancel</mat-icon>
         </button>
       </div>
@@ -26,24 +115,36 @@
 
     <div *ngIf="movie.workerName == null" class="row align-items-center justify-content-between">
       <div class="col">
-        {{'CINEMA_TICKETS_WORKER' | translate}}
+        {{ 'CINEMA_TICKETS_WORKER' | translate }}
       </div>
       <div class="col" style="text-align: right">
-        <button (click)="applyForWorker()" [class.spinner]="applyingForWorker" [disabled]="applyingForWorker" color="primary"
-                mat-stroked-button>{{'CINEMA_TICKETS_APPLY' | translate}}</button>
+        <button
+          (click)="applyForWorker()"
+          [class.spinner]="applyingForWorker"
+          [disabled]="applyingForWorker"
+          color="primary"
+          mat-stroked-button
+        >
+          {{ 'CINEMA_TICKETS_APPLY' | translate }}
+        </button>
       </div>
     </div>
 
     <div *ngIf="movie.emergencyWorkerName != null" class="row align-items-center justify-content-between">
       <div class="col-5 col-sm-5 col-md-4 col-lg-5">
-        {{'CINEMA_TICKETS_EMERGENCY_WORKER' | translate}}
+        {{ 'CINEMA_TICKETS_EMERGENCY_WORKER' | translate }}
       </div>
       <div class="col-7 col-sm-7 col-md-8 col-lg-7" style="text-align: right">
-        {{movie.emergencyWorkerName}}
-        <button (click)="signOutForEmergencyWorker()" [class.spinner]="signingOutForEmergencyWorker" [disabled]="signingOutForEmergencyWorker"
-                *ngIf="movie.emergencyWorkerID == myUserService.getID()"
-                mat-icon-button matTooltip="{{'CINEMA_TICKETS_CANCEL_CINEMA_SERVICE_TOOLTIP' | translate}}"
-                matTooltipPosition="right">
+        {{ movie.emergencyWorkerName }}
+        <button
+          (click)="signOutForEmergencyWorker()"
+          [class.spinner]="signingOutForEmergencyWorker"
+          [disabled]="signingOutForEmergencyWorker"
+          *ngIf="movie.emergencyWorkerID == myUserService.getID()"
+          mat-icon-button
+          matTooltip="{{ 'CINEMA_TICKETS_CANCEL_CINEMA_SERVICE_TOOLTIP' | translate }}"
+          matTooltipPosition="right"
+        >
           <mat-icon aria-label="Cancel worker">cancel</mat-icon>
         </button>
       </div>
@@ -51,61 +152,71 @@
 
     <div *ngIf="movie.emergencyWorkerName == null" class="row align-items-center justify-content-between">
       <div class="col-auto">
-        {{'CINEMA_TICKETS_EMERGENCY_WORKER' | translate}}
+        {{ 'CINEMA_TICKETS_EMERGENCY_WORKER' | translate }}
       </div>
       <div class="col" style="text-align: end">
-        <button (click)="applyForEmergencyWorker()" [class.spinner]="applyingForEmergencyWorker" [disabled]="applyingForEmergencyWorker"
-                color="accent"
-                mat-stroked-button>{{'CINEMA_TICKETS_APPLY' | translate}}</button>
+        <button
+          (click)="applyForEmergencyWorker()"
+          [class.spinner]="applyingForEmergencyWorker"
+          [disabled]="applyingForEmergencyWorker"
+          color="accent"
+          mat-stroked-button
+        >
+          {{ 'CINEMA_TICKETS_APPLY' | translate }}
+        </button>
       </div>
     </div>
 
     <div class="row align-items-center justify-content-between">
       <div class="col-auto">
-        {{'CINEMA_TICKETS_TRAILER' | translate}}
+        {{ 'CINEMA_TICKETS_TRAILER' | translate }}
       </div>
       <div class="col" style="text-align: right">
-        <a href="{{movie.trailerLink}}" mat-stroked-button rel="noopener"
-           target="_blank">{{'CINEMA_TICLETS_TRAILER_WATCH' | translate}}</a>
+        <a href="{{ movie.trailerLink }}" mat-stroked-button rel="noopener" target="_blank">{{
+          'CINEMA_TICLETS_TRAILER_WATCH' | translate
+        }}</a>
       </div>
     </div>
 
     <div class="row align-items-center justify-content-between">
       <div class="col-auto">
-        {{'CINEMA_TICKETS_WEATHER_FORECAST' | translate}}
+        {{ 'CINEMA_TICKETS_WEATHER_FORECAST' | translate }}
       </div>
       <div class="col" style="text-align: right">
-        <button (click)="openWeatherForecastModal()"
-                mat-stroked-button>{{'CINEMA_TICKETS_WEATHER_FORECAST_SHOW' | translate}}</button>
+        <button (click)="openWeatherForecastModal()" mat-stroked-button>{{ 'CINEMA_TICKETS_WEATHER_FORECAST_SHOW' | translate }}</button>
       </div>
     </div>
 
     <div class="row align-items-center justify-content-between">
       <div class="col-auto">
-        {{'CINEMA_TICKETS_AVAILABLE_TICKETS' | translate}}
+        {{ 'CINEMA_TICKETS_AVAILABLE_TICKETS' | translate }}
       </div>
       <div class="col" style="text-align: right">
-        <button mat-stroked-button>{{20 - movie.bookedTickets}}</button>
+        <button mat-stroked-button>{{ movie.maximalTickets - movie.bookedTickets }}</button>
       </div>
     </div>
 
     <div *ngIf="movie.bookedTicketsForYourself != 0" class="row align-items-center justify-content-between">
       <div class="col-auto">
-        {{'CINEMA_TICKETS_BOOKED_TICKETS' | translate}}
+        {{ 'CINEMA_TICKETS_BOOKED_TICKETS' | translate }}
       </div>
       <div class="col" style="text-align: right">
-        {{movie.bookedTicketsForYourself}}
-        <button #cancelTicketsButton (click)="cancelTickets(cancelTicketsButton)" mat-icon-button
-                matTooltip="{{'CINEMA_TICKETS_CANCEL_BOOKED_TICKETS_TOOLTIP' | translate}}"
-                matTooltipPosition="right">
+        {{ movie.bookedTicketsForYourself }}
+        <button
+          #cancelTicketsButton
+          (click)="cancelTickets(cancelTicketsButton)"
+          mat-icon-button
+          matTooltip="{{ 'CINEMA_TICKETS_CANCEL_BOOKED_TICKETS_TOOLTIP' | translate }}"
+          matTooltipPosition="right"
+        >
           <mat-icon aria-label="Cancel worker">cancel</mat-icon>
         </button>
       </div>
     </div>
-
   </mat-card-content>
   <mat-card-actions>
-    <button (click)="bookTickets()" [disabled]="soldOut" color="primary"
-            mat-flat-button>{{'CINEMA_TICKETS_BOOK_A_TICKET' | translate}}</button>
+    <button (click)="bookTickets()" [disabled]="movie.bookedTickets == movie.maximalTickets" color="primary" mat-flat-button>
+      {{ 'CINEMA_TICKETS_BOOK_A_TICKET' | translate }}
+    </button>
   </mat-card-actions>
 </mat-card>

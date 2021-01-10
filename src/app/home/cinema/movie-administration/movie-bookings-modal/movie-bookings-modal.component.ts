@@ -1,4 +1,4 @@
-import {Component, Inject, OnDestroy} from '@angular/core';
+import {Component, Inject, OnDestroy, ViewChild} from '@angular/core';
 import {Movie, MovieBookingUser} from '../../models/movie.model';
 import {Subscription} from 'rxjs';
 import {MatTableDataSource} from '@angular/material/table';
@@ -7,30 +7,29 @@ import {CinemaService} from '../../cinema.service';
 import {SelectionModel} from '@angular/cdk/collections';
 import {NotificationsService} from 'angular2-notifications';
 import {TranslateService} from '../../../../translation/translate.service';
+import {MatSort} from '@angular/material/sort';
+import {MatPaginator} from '@angular/material/paginator';
 
 @Component({
   selector: 'app-movie-bookings-modal',
   templateUrl: './movie-bookings-modal.component.html',
-  styleUrls: ['./movie-bookings-modal.component.css']
+  styleUrls: ['./movie-bookings-modal.component.css'],
 })
 export class MovieBookingsModalComponent implements OnDestroy {
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   displayedColumns: string[] = ['select', 'name', 'amount'];
-  loading = true;
-
+  bookings: MatTableDataSource<MovieBookingUser>;
+  selection = new SelectionModel<MovieBookingUser>(true, []);
+  filterValue = '';
   movie: Movie;
   movieSubscription: Subscription;
 
-  bookedTickets = 0;
-  bookings: MatTableDataSource<MovieBookingUser>;
-  selection = new SelectionModel<MovieBookingUser>(true, []);
-
-  name = '';
+  loading = true;
 
   savingBooking = false;
   savingClearBooking = false;
   ticketsToBook = 1;
-
-  filterValue = '';
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -54,11 +53,9 @@ export class MovieBookingsModalComponent implements OnDestroy {
   }
 
   private refresh() {
-    this.name = this.movie.name;
-    this.bookedTickets = this.movie.bookedTickets;
-
     this.bookings = new MatTableDataSource<MovieBookingUser>(this.movie.getBookingUsers());
-    this.applyFilter(this.filterValue);
+    this.bookings.sort = this.sort;
+    this.bookings.paginator = this.paginator;
   }
 
   onBook() {
@@ -93,7 +90,6 @@ export class MovieBookingsModalComponent implements OnDestroy {
         for (const booking of this.selection.selected) {
           booking.amount += this.ticketsToBook;
         }
-        this.calculateBookedTickets();
         this.ticketsToBook = 1;
         this.selection.clear();
         this.cinemaService.fetchMovies();
@@ -103,7 +99,7 @@ export class MovieBookingsModalComponent implements OnDestroy {
           this.translate.getTranslationFor('CINEMA_TICKETS_ADMINISTRATION_MOVIE_BOOKINGS_MANAGEMENT_MODAL_BOOK_SUCCESSFULLY')
         );
       },
-      error => {
+      (error) => {
         console.log(error);
         this.cinemaService.getMovie(this.movie.id);
       }
@@ -133,7 +129,6 @@ export class MovieBookingsModalComponent implements OnDestroy {
         for (const booking of this.selection.selected) {
           booking.amount = 0;
         }
-        this.calculateBookedTickets();
         this.selection.clear();
         this.cinemaService.fetchMovies();
         this.notificationsService.success(
@@ -141,7 +136,7 @@ export class MovieBookingsModalComponent implements OnDestroy {
           this.translate.getTranslationFor('CINEMA_TICKETS_ADMINISTRATION_MOVIE_BOOKINGS_MANAGEMENT_MODAL_REMOVE_BOOKING_SUCCESSFULLY')
         );
       },
-      error => {
+      (error) => {
         console.log(error);
         this.cinemaService.getMovie(this.movie.id);
       }
@@ -151,6 +146,12 @@ export class MovieBookingsModalComponent implements OnDestroy {
   applyFilter(filterValue: string) {
     this.bookings.filter = filterValue.trim().toLowerCase();
     this.filterValue = this.bookings.filter.slice();
+
+    this.bookings.sort = this.sort;
+
+    if (this.bookings.paginator) {
+      this.bookings.paginator.firstPage();
+    }
   }
 
   /** Whether the number of selected elements matches the total number of rows. */
@@ -162,7 +163,7 @@ export class MovieBookingsModalComponent implements OnDestroy {
 
   /** Selects all rows if they are not all selected; otherwise clear selection. */
   masterToggle() {
-    this.isAllSelected() ? this.selection.clear() : this.bookings.data.forEach(row => this.selection.select(row));
+    this.isAllSelected() ? this.selection.clear() : this.bookings.data.forEach((row) => this.selection.select(row));
   }
 
   /** The label for the checkbox on the passed row */
@@ -171,12 +172,5 @@ export class MovieBookingsModalComponent implements OnDestroy {
       return `${this.isAllSelected() ? 'select' : 'deselect'} all`;
     }
     return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.firstname + ' ' + row.surname}`;
-  }
-
-  private calculateBookedTickets() {
-    this.bookedTickets = 0;
-    for (const booking of this.bookings.data) {
-      this.bookedTickets += booking.amount;
-    }
   }
 }

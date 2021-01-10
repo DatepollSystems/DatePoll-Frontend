@@ -1,9 +1,9 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
 
 import {HttpService} from '../../../../utils/http.service';
 import {MyUserService} from '../../../my-user.service';
-import {CinemaService} from '../../cinema.service';
+import {CinemaUserService} from '../../cinema-user.service';
 
 import {MovieBookTicketsModalComponent} from './movie-book-tickets-modal/movie-book-tickets-modal.component';
 import {MovieWeatherforecastModalComponent} from './movie-weatherforecast-modal/movie-weatherforecast-modal.component';
@@ -13,11 +13,13 @@ import {Movie} from '../../models/movie.model';
 @Component({
   selector: 'app-movie-ticket',
   templateUrl: './movie-ticket.component.html',
-  styleUrls: ['./movie-ticket.component.css']
+  styleUrls: ['./movie-ticket.component.css'],
 })
-export class MovieTicketComponent implements OnInit {
+export class MovieTicketComponent {
   @Input()
   movie: Movie;
+  @Input()
+  listView = false;
 
   soldOut: boolean;
 
@@ -31,21 +33,17 @@ export class MovieTicketComponent implements OnInit {
 
   constructor(
     private dialog: MatDialog,
-    private cinemaService: CinemaService,
+    private cinemaService: CinemaUserService,
     myUserService: MyUserService,
     private httpService: HttpService
   ) {
     this.myUserService = myUserService;
   }
 
-  ngOnInit(): void {
-    this.soldOut = this.movie.bookedTickets >= 20;
-  }
-
   bookTickets() {
     this.dialog.open(MovieBookTicketsModalComponent, {
       width: '60vh',
-      data: {movie: this.movie}
+      data: {movie: this.movie},
     });
   }
 
@@ -67,7 +65,7 @@ export class MovieTicketComponent implements OnInit {
           this.cinemaService.fetchNotShownMovies();
         }
       },
-      error => {
+      (error) => {
         console.log(error);
         this.cinemaService.fetchNotShownMovies();
       }
@@ -77,7 +75,7 @@ export class MovieTicketComponent implements OnInit {
   openWeatherForecastModal() {
     this.dialog.open(MovieWeatherforecastModalComponent, {
       width: '80vh',
-      data: {movie: this.movie}
+      data: {movie: this.movie},
     });
   }
 
@@ -90,7 +88,7 @@ export class MovieTicketComponent implements OnInit {
         this.movie.workerName = this.myUserService.getFirstname() + ' ' + this.myUserService.getSurname();
         this.movie.workerID = this.myUserService.getID();
       },
-      error => {
+      (error) => {
         console.log(error);
         this.cinemaService.fetchNotShownMovies();
       }
@@ -106,7 +104,7 @@ export class MovieTicketComponent implements OnInit {
         this.movie.workerName = null;
         this.movie.workerID = -1;
       },
-      error => {
+      (error) => {
         console.log(error);
         this.cinemaService.fetchNotShownMovies();
       }
@@ -122,7 +120,7 @@ export class MovieTicketComponent implements OnInit {
         this.movie.emergencyWorkerName = this.myUserService.getFirstname() + ' ' + this.myUserService.getSurname();
         this.movie.emergencyWorkerID = this.myUserService.getID();
       },
-      error => {
+      (error) => {
         console.log(error);
         this.cinemaService.fetchNotShownMovies();
       }
@@ -138,7 +136,7 @@ export class MovieTicketComponent implements OnInit {
         this.movie.emergencyWorkerName = null;
         this.movie.emergencyWorkerID = -1;
       },
-      error => {
+      (error) => {
         console.log(error);
         this.cinemaService.fetchNotShownMovies();
       }

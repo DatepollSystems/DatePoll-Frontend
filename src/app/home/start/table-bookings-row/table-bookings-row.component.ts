@@ -1,6 +1,6 @@
 import {Component, Input} from '@angular/core';
 
-import {CinemaService} from '../../cinema/cinema.service';
+import {CinemaUserService} from '../../cinema/cinema-user.service';
 import {MyUserService} from '../../my-user.service';
 import {HomepageService} from '../homepage.service';
 
@@ -10,7 +10,7 @@ import {HomeBookingsModel} from '../bookings.model';
   // tslint:disable-next-line:component-selector
   selector: '[app-table-bookings-row]',
   templateUrl: './table-bookings-row.component.html',
-  styleUrls: ['./table-bookings-row.component.css', './../start.component.css']
+  styleUrls: ['./table-bookings-row.component.css', './../start.component.css'],
 })
 export class TableBookingsRowComponent {
   @Input()
@@ -21,7 +21,11 @@ export class TableBookingsRowComponent {
   sendingApplyForEmergencyWorkerRequest = false;
   sendingSignOutForEmergencyWorkerRequest = false;
 
-  constructor(private cinemaService: CinemaService, private homePageService: HomepageService, private myUserService: MyUserService) {}
+  public myUserService: MyUserService;
+
+  constructor(private cinemaService: CinemaUserService, private homePageService: HomepageService, myUserService: MyUserService) {
+    this.myUserService = myUserService;
+  }
 
   applyForWorker() {
     this.sendingApplyForWorkerRequest = true;
@@ -32,7 +36,7 @@ export class TableBookingsRowComponent {
         this.booking.workerID = this.myUserService.getID();
         this.sendingApplyForWorkerRequest = false;
       },
-      error => {
+      (error) => {
         console.log(error);
         this.homePageService.fetchData(true);
       }
@@ -48,7 +52,7 @@ export class TableBookingsRowComponent {
         this.booking.workerID = -1;
         this.sendingSignOutForWorkerRequest = false;
       },
-      error => {
+      (error) => {
         console.log(error);
         this.homePageService.fetchData(true);
       }
@@ -64,7 +68,7 @@ export class TableBookingsRowComponent {
         this.booking.emergencyWorkerID = this.myUserService.getID();
         this.sendingApplyForEmergencyWorkerRequest = false;
       },
-      error => {
+      (error) => {
         console.log(error);
         this.homePageService.fetchData(true);
       }
@@ -80,7 +84,7 @@ export class TableBookingsRowComponent {
         this.booking.emergencyWorkerID = -1;
         this.sendingSignOutForEmergencyWorkerRequest = false;
       },
-      error => {
+      (error) => {
         console.log(error);
         this.homePageService.fetchData(true);
       }

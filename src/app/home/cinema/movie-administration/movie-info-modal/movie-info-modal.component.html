@@ -1,36 +1,28 @@
-<h1 mat-dialog-title>{{'CINEMA_TICKETS_ADMINISTRATION_MOVIE_INFO_MODAL_INFO' | translate}} {{name}}</h1>
+<h1 mat-dialog-title>{{ 'CINEMA_TICKETS_ADMINISTRATION_MOVIE_INFO_MODAL_INFO' | translate }} {{ name }}</h1>
 <div mat-dialog-content>
-  <div class="row">
-    <p class="col-12">
-      <b>{{'CINEMA_TICKETS_ADMINISTRATION_DATE' | translate}}:</b>
-      {{date | date:'dd.MM.yyyy'}}
-    </p>
-  </div>
+  <p>
+    <b>{{ 'CINEMA_TICKETS_ADMINISTRATION_DATE' | translate }}:</b>
+    {{ date | date: 'dd.MM.yyyy' }}
+  </p>
 
-  <div class="row" style="margin-bottom: 15px;">
-    <p class="col-12">
-      <b>{{'CINEMA_TICKETS_ADMINISTRATION_TRAILER' | translate}}: </b>
-      <a href="{{trailerLink}}" target="_blank" rel="noopener">{{trailerLink}}</a>
-    </p>
-  </div>
+  <p>
+    <b>{{ 'CINEMA_TICKETS_ADMINISTRATION_TRAILER' | translate }}: </b>
+    <a href="{{ trailerLink }}" target="_blank" rel="noopener">{{ trailerLink }}</a>
+  </p>
 
-  <mat-expansion-panel>
+  <mat-expansion-panel style="text-align: center">
     <mat-expansion-panel-header>
       <mat-panel-title>
-        {{'CINEMA_TICKETS_ADMINISTRATION_MOVIE_EDIT_MODAL_POSTER_PREVIEW' | translate}}
+        {{ 'CINEMA_TICKETS_ADMINISTRATION_MOVIE_EDIT_MODAL_POSTER_PREVIEW' | translate }}
       </mat-panel-title>
     </mat-expansion-panel-header>
-
-    <img alt="Poster of the movie" class="col-12 col-sm-12 col-md-8 col-lg-4 offset-md-2 offset-lg-4"
-         src="{{imageLink}}"/>
+    <img alt="Poster of the movie" src="{{ imageLink }}" />
   </mat-expansion-panel>
 
   <app-movie-bookings-table [bookedTickets]="bookedTickets" [bookings]="bookings" *ngIf="!loading"></app-movie-bookings-table>
 
-  <mat-progress-bar mode="indeterminate" *ngIf="loading" style="margin-top: 15px;"></mat-progress-bar>
-
-
+  <mat-progress-bar mode="indeterminate" *ngIf="loading" style="margin-top: 15px"></mat-progress-bar>
 </div>
 <div mat-dialog-actions>
-  <button [mat-dialog-close] mat-button>{{'CLOSE' | translate}}</button>
+  <button [mat-dialog-close] mat-button>{{ 'CLOSE' | translate }}</button>
 </div>

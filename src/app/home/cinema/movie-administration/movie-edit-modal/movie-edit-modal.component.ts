@@ -1,6 +1,5 @@
 import {Component, Inject, OnDestroy} from '@angular/core';
 import {MAT_DIALOG_DATA} from '@angular/material/dialog';
-import {MatTableDataSource} from '@angular/material/table';
 import {NotificationsService} from 'angular2-notifications';
 import {Subscription} from 'rxjs';
 
@@ -8,12 +7,12 @@ import {CinemaService} from '../../cinema.service';
 import {Converter} from '../../../../utils/converter';
 import {TranslateService} from '../../../../translation/translate.service';
 
-import {Movie, MovieBookingUser} from '../../models/movie.model';
+import {Movie} from '../../models/movie.model';
 
 @Component({
   selector: 'app-movie-edit-modal',
   templateUrl: './movie-edit-modal.component.html',
-  styleUrls: ['./movie-edit-modal.component.css']
+  styleUrls: ['./movie-edit-modal.component.css'],
 })
 export class MovieEditModalComponent implements OnDestroy {
   loading = true;
@@ -27,8 +26,7 @@ export class MovieEditModalComponent implements OnDestroy {
   trailerLink: string;
   imageLink: string;
   bookedTickets: number;
-
-  bookings: MatTableDataSource<MovieBookingUser>;
+  maximalTickets: number;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -58,6 +56,7 @@ export class MovieEditModalComponent implements OnDestroy {
     this.trailerLink = this.movie.trailerLink;
     this.imageLink = this.movie.posterLink;
     this.bookedTickets = this.movie.bookedTickets;
+    this.maximalTickets = this.movie.maximalTickets;
 
     const localBookings = [];
     for (const booking of this.movie.getBookingUsers()) {
@@ -65,62 +64,28 @@ export class MovieEditModalComponent implements OnDestroy {
         localBookings.push(booking);
       }
     }
-    this.bookings = new MatTableDataSource<MovieBookingUser>(localBookings);
   }
 
   save() {
-    const year = this.date.getFullYear();
-
-    const years = this.cinemaService.getYears();
-    let yearID = null;
-
-    for (let i = 0; i < years.length; i++) {
-      if (years[i].year.toString().toLowerCase() === year.toString().toLowerCase()) {
-        yearID = years[i].id;
-        break;
-      }
-    }
-
-    if (yearID === null) {
-      console.log('updateMovie | no yearID found!');
-      const yearObject = {year: year};
-      this.cinemaService.addYear(yearObject).subscribe(
-        (data: any) => {
-          console.log(data);
-          yearID = data.year.id;
-          console.log('updateMovie | yearID: ' + yearID);
-          this.cinemaService.fetchYears();
-          this.updateMovie(yearID);
-        },
-        error => console.log(error)
-      );
-    } else {
-      console.log('updateMovie | Using existing yearID: ' + yearID);
-      this.updateMovie(yearID);
-    }
-  }
-
-  updateMovie(yearID: number) {
     const movieObject = {
       name: this.name,
       date: Converter.getDateFormatted(this.date),
       trailer_link: this.trailerLink,
       poster_link: this.imageLink,
       booked_tickets: this.bookedTickets,
-      movie_year_id: yearID
+      maximal_tickets: this.maximalTickets,
     };
     console.log(movieObject);
     this.cinemaService.updateMovie(this.movie.id, movieObject).subscribe(
       (data: any) => {
         console.log(data);
         this.cinemaService.fetchMovies();
-        this.cinemaService.fetchNotShownMovies();
         this.notificationsService.success(
           this.translate.getTranslationFor('SUCCESSFULLY'),
           this.translate.getTranslationFor('CINEMA_TICKETS_ADMINISTRATION_MOVIE_UPDATE_SUCCESSFULLY')
         );
       },
-      error => console.log(error)
+      (error) => console.log(error)
     );
   }
 }
