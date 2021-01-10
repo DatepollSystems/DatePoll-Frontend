@@ -1,12 +1,10 @@
 import {Injectable} from '@angular/core';
-import {EventStandardDecision} from './models/standardDecision.model';
 import {Subject} from 'rxjs';
 import {HttpService} from '../../utils/http.service';
-import {EventDate} from './models/event-date.model';
 import {EventStandardLocation} from './models/event-standard-location.model';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class StandardLocationsService {
   public standardLocationsChange: Subject<EventStandardLocation[]> = new Subject<EventStandardLocation[]>();
@@ -42,7 +40,7 @@ export class StandardLocationsService {
 
         this.setStandardLocations(standardLocations);
       },
-      error => console.log(error)
+      (error) => console.log(error)
     );
   }
 
@@ -51,7 +49,7 @@ export class StandardLocationsService {
       name: name,
       location: location,
       x: x,
-      y: y
+      y: y,
     };
     return this.httpService.loggedInV1POSTRequest('/avent/administration/standardLocation', dto, 'addStandardLocation');
   }
