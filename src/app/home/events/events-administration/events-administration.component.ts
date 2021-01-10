@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit, TemplateRef, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
@@ -31,8 +31,6 @@ import {EventUserManagementModalComponent} from './event-user-management-modal/e
   styleUrls: ['./events-administration.component.css'],
 })
 export class EventsAdministrationComponent implements OnInit, OnDestroy {
-  @ViewChild('successfullyDeletedEvent', {static: true}) successfullyDeletedEvent: TemplateRef<any>;
-
   eventsLoaded = false;
 
   showAllEvents: boolean;
@@ -89,8 +87,8 @@ export class EventsAdministrationComponent implements OnInit, OnDestroy {
         this.eventsLoaded = true;
       }
 
-      this.eventsSubscription = this.eventsService.eventsChange.subscribe((value) => {
-        this.events = value;
+      this.eventsSubscription = this.eventsService.eventsChange.subscribe((eValue) => {
+        this.events = eValue;
         this.eventsLoaded = true;
         this.refreshTable();
       });
