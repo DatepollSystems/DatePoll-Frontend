@@ -1,6 +1,9 @@
 <mat-sidenav-container>
   <mat-sidenav #sidenav [(opened)]="navBarOpened" [mode]="navBarMode">
-    <h2 class="sidenav-head-text">Hallo {{ firstname }},</h2>
+    <h2 class="sidenav-head-text">
+      {{ 'HELLO' | translate }} <span style="color: #607d8b">{{ firstname }}</span
+      >,
+    </h2>
     <h4 class="sidenav-head-text">{{ username }}</h4>
 
     <mat-nav-list>

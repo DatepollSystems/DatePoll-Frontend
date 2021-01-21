@@ -40,6 +40,7 @@
   "COPIED_LINK": "Link kopiert!",
   "ATTACHMENTS": "Anhänge",
   "CONTENT": "Inhalt",
+  "HELLO": "Hallo",
 
   "LANGUAGE": "Sprache",
   "LANGUAGE_GERMAN": "Deutsch",
@@ -336,7 +337,7 @@
   "SETTINGS_PERSONAL_DATA_MODAL_PHONE_NUMBER_NOT_VALID": "Bitte gib eine Bezeichnung und eine Telefonnummer an!",
 
   "SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_NOTIFY_TITLE": "Email-Benachrichtigungen",
-  "SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_NOTIFY_ME_ON_NEW_EVENT": "Benachrichtige mich per Email über neue Events.",
+  "SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_NOTIFY_ME_ON_NEW_EVENT": "Neues Event",
   "SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_SAVED_SUCCESSFULLY": "Deine Email-Adressen wurden übernommen!",
   "SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_MINIMUM_ONE_EMAIL_ADDRESS": "Es muss mindestens eine Email-Adresse hinterlegt sein!",
 
@@ -591,6 +592,11 @@
   "MANAGEMENT_DATEPOLL_CINEMA_SERVICE": "Kinoservice",
   "MANAGEMENT_DATEPOLL_EVENTS_SERVICE": "Events",
   "MANAGEMENT_DATEPOLL_BROADCAST_SERVICE": "Mitteilungen",
+  "MANAGEMENT_DATEPOLL_BROADCAST_PROCESS_INCOMING_MAILS": "Verarbeite an die DatePoll-Verteiler E-Mail Addresse gesendete Emails.",
+  "MANAGEMENT_DATEPOLL_BROADCAST_PROCESS_INCOMING_MAILS_FORWARDING": "Leite nicht verarbeitbare E-Mails an definierte E-Mail Addressen weiter.",
+  "MANAGEMENT_DATEPOLL_BROADCAST_PROCESS_INCOMING_MAILS_FORWARDING_EMAIL_ADDRESSES": "E-Mail Addressen für die E-Mail Weiterleitung",
+  "MANAGEMENT_DATEPOLL_BROADCAST_PROCESS_INCOMING_MAILS_FORWARDING_EMAIL_ADDRESSES_PLACEHOLDER": "Neue E-Mail Addresse...",
+  "MANAGEMENT_DATEPOLL_BROADCAST_PROCESS_INCOMING_MAILS_FORWARDING_EMAIL_ADDRESSES_CHANGED_SUCCESSFULLY": "E-Mail Addressen gespeichert!",
 
   "MANAGEMENT_DATEPOLL_COMMUNITY_NAME": "Vereinsname",
   "MANAGEMENT_DATEPOLL_COMMUNITY_NAME_NOT_VALID": "Der Vereinsname darf weder leer sein, noch mehr als 50 Zeichen haben!",
@@ -599,6 +605,8 @@
   "MANAGEMENT_DATEPOLL_COMMUNITY_URL": "Vereinswebsite URL",
   "MANAGEMENT_DATEPOLL_COMMUNITY_URL_NOT_VALID": "Die URL der Vereinswebsite darf weder leer sein, noch mehr als 128 Zeichen haben!",
   "MANAGEMENT_DATEPOLL_COMMUNITY_URL_CHANGED_SUCCESSFULLY": "Die URL zur Vereinswebsite wurde geändert!",
+
+  "MANAGEMENT_DATEPOLL_COMMUNITY_HTML_SUPPORTED": "Hier kann auch HTML verwendet werden.",
 
   "MANAGEMENT_DATEPOLL_COMMUNITY_DESCRIPTION": "Vereinsbeschreibung",
   "MANAGEMENT_DATEPOLL_COMMUNITY_DESCRIPTION_CHANGED_SUCCESSFULLY": "Die Vereinsbeschreibung wurde gespeichert!",
@@ -622,7 +630,7 @@
   "MANAGEMENT_DATEPOLL_OPENWEATHERMAP_CINEMA_CITY_ID_CHANGED_SUCCESSFULLY": "Die Kino City Id wurde geändert!",
 
   "MANAGEMENT_DATEPOLL_ALERT": "Benachrichtigung",
-  "MANAGEMENT_DATEPOLL_ALERT_HELP": "Um die Benachrichtigung zu deaktivieren, entferne alles aus diesem Textfeld.",
+  "MANAGEMENT_DATEPOLL_ALERT_HELP": "Leere das Textfeld um die Benachrichtigung zu löschen.",
   "MANAGEMENT_DATEPOLL_ALERT_TYPE": "Type",
   "MANAGEMENT_DATEPOLL_ALERT_CHANGED_SUCCESSFULLY": "Die Benachrichtigung wurde geändert!",
 
