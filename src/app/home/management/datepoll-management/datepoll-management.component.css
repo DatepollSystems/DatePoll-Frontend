@@ -15,3 +15,12 @@ h2 {
 mat-card {
   min-height: 100%;
 }
+
+.textarea-form {
+  border-style: solid;
+  border-color: lightseagreen;
+  padding-top: 10px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-radius: 15px;
+}

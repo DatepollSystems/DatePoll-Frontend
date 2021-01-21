@@ -7,17 +7,59 @@
           <h2>{{ 'MANAGEMENT_DATEPOLL_FEATURE_SETTINGS' | translate }}</h2>
           <h4>{{ 'MANAGEMENT_DATEPOLL_FEATURE_SETTINGS_SUBTITLE' | translate }}</h4>
 
-          <mat-slide-toggle (change)="cinemaServiceChange($event)" [(ngModel)]="serverInfo.cinema_enabled" color="primary">
-            {{ 'MANAGEMENT_DATEPOLL_CINEMA_SERVICE' | translate }}
-          </mat-slide-toggle>
+          <div fxLayout="column" fxLayoutGap="1.5%">
+            <mat-slide-toggle (change)="cinemaServiceChange($event)" [(ngModel)]="serverInfo.cinema_enabled" color="primary">
+              {{ 'MANAGEMENT_DATEPOLL_CINEMA_SERVICE' | translate }}
+            </mat-slide-toggle>
 
-          <mat-slide-toggle (change)="eventsServiceChange($event)" [(ngModel)]="serverInfo.events_enabled" color="primary">
-            {{ 'MANAGEMENT_DATEPOLL_EVENTS_SERVICE' | translate }}
-          </mat-slide-toggle>
+            <mat-slide-toggle (change)="eventsServiceChange($event)" [(ngModel)]="serverInfo.events_enabled" color="primary">
+              {{ 'MANAGEMENT_DATEPOLL_EVENTS_SERVICE' | translate }}
+            </mat-slide-toggle>
+          </div>
 
-          <mat-slide-toggle (change)="broadcastServiceChange($event)" [(ngModel)]="serverInfo.broadcasts_enabled" color="primary">
-            {{ 'MANAGEMENT_DATEPOLL_BROADCAST_SERVICE' | translate }}
-          </mat-slide-toggle>
+          <mat-card fxLayout="column" fxLayoutGap="1.5%" class="mat-elevation-z3">
+            <mat-slide-toggle (change)="broadcastServiceChange($event)" [(ngModel)]="serverInfo.broadcasts_enabled" color="primary">
+              {{ 'MANAGEMENT_DATEPOLL_BROADCAST_SERVICE' | translate }}
+            </mat-slide-toggle>
+
+            <mat-slide-toggle
+              (change)="broadcastProcessIncomingMailsChange($event)"
+              [(ngModel)]="serverInfo.broadcasts_process_incoming_mails_enabled"
+              color="primary"
+              [disabled]="!serverInfo.broadcasts_enabled"
+            >
+              {{ 'MANAGEMENT_DATEPOLL_BROADCAST_PROCESS_INCOMING_MAILS' | translate }}
+            </mat-slide-toggle>
+
+            <mat-slide-toggle
+              (change)="broadcastProcessIncomingMailsForwardingChange($event)"
+              [(ngModel)]="serverInfo.broadcasts_process_incoming_mails_forwarding_enabled"
+              color="primary"
+              [disabled]="!serverInfo.broadcasts_enabled || !serverInfo.broadcasts_process_incoming_mails_enabled"
+            >
+              {{ 'MANAGEMENT_DATEPOLL_BROADCAST_PROCESS_INCOMING_MAILS_FORWARDING' | translate }}
+            </mat-slide-toggle>
+
+            <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="2%">
+              <app-list-chip-input
+                fxFlex="70%"
+                [disabled]="
+                  !serverInfo.broadcasts_process_incoming_mails_forwarding_enabled ||
+                  !serverInfo.broadcasts_enabled ||
+                  !serverInfo.broadcasts_process_incoming_mails_enabled
+                "
+                [label]="'MANAGEMENT_DATEPOLL_BROADCAST_PROCESS_INCOMING_MAILS_FORWARDING_EMAIL_ADDRESSES'"
+                [placeHolder]="'MANAGEMENT_DATEPOLL_BROADCAST_PROCESS_INCOMING_MAILS_FORWARDING_EMAIL_ADDRESSES_PLACEHOLDER'"
+                [strings]="broadcastIncomingMailForwardingEmailAddresses"
+                (valueChange)="changeBroadcastIncomingMailForwardingEmailAddresses($event)"
+              ></app-list-chip-input>
+              <div fxFlex="10%">
+                <button mat-flat-button color="accent" style="width: 100%" (click)="saveBroadcastIncomingMailForwardingEmailAddresses()">
+                  {{ 'SAVE' | translate }}
+                </button>
+              </div>
+            </div>
+          </mat-card>
 
           <form #changeAppUrlForm="ngForm" (ngSubmit)="changeAppUrl(changeAppUrlForm)" fxLayout="row wrap" fxLayoutGap="2%">
             <mat-form-field fxFlex="60%" fxFlex.xs="60%">
@@ -57,6 +99,8 @@
             </div>
           </form>
 
+          <mat-divider></mat-divider>
+
           <h2>Vereins Einstellungen</h2>
 
           <form
@@ -81,7 +125,7 @@
                   <mat-icon>close</mat-icon>
                 </button>
               </mat-form-field>
-              <small>{{ 'MANAGEMENT_DATEPOLL_ALERT_HELP' | translate }}</small>
+              <small *ngIf="alertText">{{ 'MANAGEMENT_DATEPOLL_ALERT_HELP' | translate }}</small>
             </div>
 
             <mat-form-field fxFlex="30%">
@@ -194,7 +238,7 @@
             fxLayoutGap="2%"
             fxLayout.xs="column"
           >
-            <mat-form-field fxFlex="60%">
+            <mat-form-field fxFlex="60%" class="textarea-form">
               <textarea
                 [(ngModel)]="serverInfo.community_description"
                 id="communityDescription"
@@ -202,9 +246,13 @@
                 minlength="1"
                 name="communityDescription"
                 ngModel
+                rows="9"
                 placeholder="{{ 'MANAGEMENT_DATEPOLL_COMMUNITY_DESCRIPTION' | translate }}"
                 required
               ></textarea>
+              <small
+                ><b>{{ 'MANAGEMENT_DATEPOLL_COMMUNITY_HTML_SUPPORTED' | translate }}</b></small
+              >
             </mat-form-field>
 
             <div fxFlex.xs="100%">
@@ -218,6 +266,9 @@
               >
                 {{ 'SAVE' | translate }}
               </button>
+              <a href="/about?mode=preview" target="_blank" style="width: 100%" mat-stroked-button color="primary">
+                {{ 'EDITOR_PREVIEW' | translate }}
+              </a>
             </div>
           </form>
 
@@ -228,7 +279,7 @@
             fxLayoutGap="2%"
             fxLayout.xs="column"
           >
-            <mat-form-field fxFlex="60%">
+            <mat-form-field fxFlex="60%" class="textarea-form">
               <textarea
                 [(ngModel)]="serverInfo.community_imprint"
                 id="imprint"
@@ -236,9 +287,13 @@
                 minlength="1"
                 name="imprint"
                 ngModel
+                rows="9"
                 placeholder="{{ 'MANAGEMENT_DATEPOLL_IMPRINT' | translate }}"
                 required
               ></textarea>
+              <small
+                ><b>{{ 'MANAGEMENT_DATEPOLL_COMMUNITY_HTML_SUPPORTED' | translate }}</b></small
+              >
             </mat-form-field>
 
             <div fxFlex.xs="100%">
@@ -252,6 +307,9 @@
               >
                 {{ 'SAVE' | translate }}
               </button>
+              <a routerLink="/info/imprint" target="_blank" style="width: 100%" mat-stroked-button color="primary">
+                {{ 'EDITOR_PREVIEW' | translate }}
+              </a>
             </div>
           </form>
 
@@ -262,7 +320,7 @@
             fxLayoutGap="2%"
             fxLayout.xs="column"
           >
-            <mat-form-field fxFlex="60%">
+            <mat-form-field fxFlex="60%" class="textarea-form">
               <textarea
                 [(ngModel)]="serverInfo.community_privacy_policy"
                 id="privacyPolicy"
@@ -270,9 +328,13 @@
                 minlength="1"
                 name="privacyPolicy"
                 ngModel
+                rows="9"
                 placeholder="{{ 'MANAGEMENT_DATEPOLL_PRIVACY_POLICY' | translate }}"
                 required
               ></textarea>
+              <small
+                ><b>{{ 'MANAGEMENT_DATEPOLL_COMMUNITY_HTML_SUPPORTED' | translate }}</b></small
+              >
             </mat-form-field>
 
             <div fxFlex.xs="100%">
@@ -286,8 +348,13 @@
               >
                 {{ 'SAVE' | translate }}
               </button>
+              <a routerLink="/info/privacypolicy" target="_blank" style="width: 100%" mat-stroked-button color="primary">
+                {{ 'EDITOR_PREVIEW' | translate }}
+              </a>
             </div>
           </form>
+
+          <mat-divider></mat-divider>
 
           <h2>OpenWeatherMap Einstellungen</h2>
 

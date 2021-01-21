@@ -17,6 +17,8 @@ export class SettingsService {
   private _openWeatherMapCinemaCityId = '';
   public alertChange: Subject<any> = new Subject<any>();
   private _alert: any;
+  public broadcastIncomingMailForwardingEmailAddressesChange: Subject<string[]> = new Subject<string[]>();
+  private _broadcastIncomingMailForwardingEmailAddresses: string[] = [];
 
   public serverInfoChange: Subject<ServerInfoModel> = new Subject<ServerInfoModel>();
   private _serverInfo = new ServerInfoModel();
@@ -51,13 +53,6 @@ export class SettingsService {
     );
   }
 
-  public checkShowCinema() {
-    if (!this._serverInfo?.cinema_enabled) {
-      this.router.navigate(['/home']);
-      return;
-    }
-  }
-
   public setAdminShowEvents(showEvents: boolean) {
     this.setShowEvents(showEvents);
 
@@ -85,6 +80,50 @@ export class SettingsService {
         console.log(response);
       },
       (error) => console.log(error)
+    );
+  }
+
+  public setAdminBroadcastProcessIncomingMails(processIncomingMails: boolean) {
+    this.setBroadcastProcessIncomingMails(processIncomingMails);
+
+    const body = {
+      isEnabled: processIncomingMails,
+    };
+
+    this.httpService.setSettingsRequest('/broadcast/processIncomingEmails', body, 'setBroadcastProcessIncomingMails').subscribe(
+      (response: any) => {
+        console.log(response);
+      },
+      (error) => console.log(error)
+    );
+  }
+
+  public setAdminBroadcastProcessIncomingMailsForwarding(forwardIncomingMails: boolean) {
+    this.setBroadcastProcessIncomingMailsForwarding(forwardIncomingMails);
+
+    const body = {
+      isEnabled: forwardIncomingMails,
+    };
+
+    this.httpService.setSettingsRequest('/broadcast/forwardIncomingEmails', body, 'setBroadcastProcessIncomingMailsForwading').subscribe(
+      (response: any) => {
+        console.log(response);
+      },
+      (error) => console.log(error)
+    );
+  }
+
+  public setAdminBroadcastProcessIncomingMailsForwardingEmailAddresses(forwardIncomingMailsEmailAddresses: string[]) {
+    this.setBroadcastIncomingMailForwardingEmailAddresses(forwardIncomingMailsEmailAddresses);
+
+    const body = {
+      email_addresses: forwardIncomingMailsEmailAddresses,
+    };
+
+    return this.httpService.setSettingsRequest(
+      '/broadcast/forwardIncomingEmailsEmailAddresses',
+      body,
+      'setBroadcastProcessIncomingMailsForwadingEmailAddresses'
     );
   }
 
@@ -143,6 +182,29 @@ export class SettingsService {
     return this.httpService.setSettingsRequest('/url', body, 'setAppUrl');
   }
 
+  public setAdminOpenWeatherMapKey(key: string) {
+    this.setOpenWeatherMapKey(key);
+
+    const body = {
+      openweathermap_key: key,
+    };
+    return this.httpService.setSettingsRequest('/openweathermap/key', body, 'setOpenWeatherMapKey');
+  }
+
+  public setAdminOpenWeatherMapCinemaCityId(id: string) {
+    this.setOpenWeatherMapCinemaCityId(id);
+
+    const body = {
+      openweathermap_cinema_city_id: id,
+    };
+    return this.httpService.setSettingsRequest('/openweathermap/cinemaCityId', body, 'setOpenWeatherMapCinemaCityId');
+  }
+
+  public setAdminAlert(alert: any) {
+    this.setAlert(alert);
+    return this.httpService.setSettingsRequest('/alert', alert, 'setAlert');
+  }
+
   public getOpenWeatherMapKey(): string {
     this.httpService.getSettingRequest('/openweathermap/key', 'settingsOpenWeatherMapKey').subscribe(
       (response: any) => {
@@ -152,15 +214,6 @@ export class SettingsService {
       (error) => console.log(error)
     );
     return this._openWeatherMapKey;
-  }
-
-  public setAdminOpenWeatherMapKey(key: string) {
-    this.setOpenWeatherMapKey(key);
-
-    const body = {
-      openweathermap_key: key,
-    };
-    return this.httpService.setSettingsRequest('/openweathermap/key', body, 'setOpenWeatherMapKey');
   }
 
   public getOpenWeatherMapCinemaCityId(): string {
@@ -174,13 +227,17 @@ export class SettingsService {
     return this._openWeatherMapCinemaCityId;
   }
 
-  public setAdminOpenWeatherMapCinemaCityId(id: string) {
-    this.setOpenWeatherMapCinemaCityId(id);
-
-    const body = {
-      openweathermap_cinema_city_id: id,
-    };
-    return this.httpService.setSettingsRequest('/openweathermap/cinemaCityId', body, 'setOpenWeatherMapCinemaCityId');
+  public getBroadcastIncomingMailForwardingEmailAddresses(): string[] {
+    this.httpService
+      .getSettingRequest('/broadcast/forwardIncomingEmailsEmailAddresses', 'settingsBroadcastIncomingMailForwardingEmailAddresses')
+      .subscribe(
+        (response: any) => {
+          console.log(response);
+          this.setBroadcastIncomingMailForwardingEmailAddresses(response.email_addresses);
+        },
+        (error) => console.log(error)
+      );
+    return this._broadcastIncomingMailForwardingEmailAddresses;
   }
 
   public getAlert(): string {
@@ -192,12 +249,6 @@ export class SettingsService {
       (error) => console.log(error)
     );
     return this._alert;
-  }
-
-  public setAdminAlert(alert: any) {
-    this.setAlert(alert);
-    console.log('daöslkdjföalskjdföalskjdfölakjsdfölasjkdöflasdfa');
-    return this.httpService.setSettingsRequest('/alert', alert, 'setAlert');
   }
 
   private setShowCinema(showCinema: boolean) {
@@ -212,6 +263,16 @@ export class SettingsService {
 
   private setShowBroadcasts(showBroadcasts: boolean) {
     this._serverInfo.broadcasts_enabled = showBroadcasts;
+    this.updateLocalServerInfo();
+  }
+
+  private setBroadcastProcessIncomingMails(processIncomingMails: boolean) {
+    this._serverInfo.broadcasts_process_incoming_mails_enabled = processIncomingMails;
+    this.updateLocalServerInfo();
+  }
+
+  private setBroadcastProcessIncomingMailsForwarding(forwardIncomingMails: boolean) {
+    this._serverInfo.broadcasts_process_incoming_mails_forwarding_enabled = forwardIncomingMails;
     this.updateLocalServerInfo();
   }
 
@@ -238,6 +299,11 @@ export class SettingsService {
   private setOpenWeatherMapCinemaCityId(id: string) {
     this._openWeatherMapCinemaCityId = id;
     this.openWeatherMapCinemaCityIdChange.next(this._openWeatherMapCinemaCityId);
+  }
+
+  private setBroadcastIncomingMailForwardingEmailAddresses(incomingMailForwardingMailAddresses: string[]) {
+    this._broadcastIncomingMailForwardingEmailAddresses = incomingMailForwardingMailAddresses;
+    this.broadcastIncomingMailForwardingEmailAddressesChange.next(this._broadcastIncomingMailForwardingEmailAddresses);
   }
 
   private setAlert(alert: any) {
