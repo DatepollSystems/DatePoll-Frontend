@@ -11,11 +11,10 @@ import {InfoComponent} from './info/info.component';
 import {PrivacyPolicyComponent} from './info/privacy-policy/privacy-policy.component';
 import {FooterComponent} from './footer.component';
 import {AboutModalComponent} from './modals/about-modal/about-modal.component';
-import {FeedbackModalComponent} from './modals/feedback-modal/feedback-modal.component';
 
 @NgModule({
-  declarations: [FooterComponent, FeedbackModalComponent, AboutModalComponent, InfoComponent, ImprintComponent, PrivacyPolicyComponent],
+  declarations: [FooterComponent, AboutModalComponent, InfoComponent, ImprintComponent, PrivacyPolicyComponent],
   imports: [CommonModule, FormsModule, MaterialModule, TranslationModule, FooterRoutingModule],
-  exports: [FooterComponent]
+  exports: [FooterComponent],
 })
 export class FooterModule {}
