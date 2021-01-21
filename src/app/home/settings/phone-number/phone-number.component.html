@@ -1,66 +1,62 @@
 <h2 mat-dialog-title>{{ 'SETTINGS_PERSONAL_DATA_PERSONAL_NUMBER_CHANGE' | translate }}</h2>
 <mat-dialog-content>
-  <form #f="ngForm" (ngSubmit)="addPhoneNumber(f)">
-    <div class="row justify-content-around" style="margin-top: 15px;">
-      <div class="col-12 col-sm-12 col-md-6 col-lg-3">
-        <mat-form-field>
-          <input
-            #labelModel="ngModel"
-            id="label"
-            matInput
-            maxlength="190"
-            minlength="1"
-            name="label"
-            ngModel
-            placeholder="{{ 'SETTINGS_PERSONAL_DATA_MODAL_PHONE_NUMBER_LABEL' | translate }}"
-            required
-            type="text"
-          />
-          <mat-error *ngIf="labelModel.invalid">
-            {{ 'SETTINGS_PERSONAL_DATA_MODAL_PHONE_NUMBER_LABEL_INVALID' | translate }}
-          </mat-error>
-        </mat-form-field>
-      </div>
+  <form #f="ngForm" (ngSubmit)="addPhoneNumber(f)" fxLayout="row" fxLayout.sm="column" fxLayoutAlign="space-between">
+    <div fxFlex="33%">
+      <mat-form-field>
+        <input
+          #labelModel="ngModel"
+          id="label"
+          matInput
+          maxlength="190"
+          minlength="1"
+          name="label"
+          ngModel
+          placeholder="{{ 'SETTINGS_PERSONAL_DATA_MODAL_PHONE_NUMBER_LABEL' | translate }}"
+          required
+          type="text"
+        />
+        <mat-error *ngIf="labelModel.invalid">
+          {{ 'SETTINGS_PERSONAL_DATA_MODAL_PHONE_NUMBER_LABEL_INVALID' | translate }}
+        </mat-error>
+      </mat-form-field>
+    </div>
 
-      <div class="col-12 col-sm-12 col-md-6 col-lg-5">
-        <mat-form-field>
-          <input
-            #phoneNumber="ngModel"
-            id="phoneNumber"
-            matInput
-            maxlength="190"
-            minlength="1"
-            name="phoneNumber"
-            ngModel
-            phone="AT"
-            placeholder="{{ 'SETTINGS_PERSONAL_DATA_MODAL_PHONE_NUMBER_PHONE_NUMBER' | translate }}"
-            required
-            type="text"
-          />
-          <mat-error *ngIf="phoneNumber.invalid">
-            {{ 'SETTINGS_PERSONAL_DATA_MODAL_PHONE_NUMBER_PHONE_NUMBER_NOT_VALID' | translate }}
-          </mat-error>
-        </mat-form-field>
-      </div>
+    <div fxFlex="33%">
+      <mat-form-field>
+        <input
+          #phoneNumber="ngModel"
+          id="phoneNumber"
+          matInput
+          maxlength="190"
+          minlength="1"
+          name="phoneNumber"
+          ngModel
+          phone="AT"
+          placeholder="{{ 'SETTINGS_PERSONAL_DATA_MODAL_PHONE_NUMBER_PHONE_NUMBER' | translate }}"
+          required
+          type="text"
+        />
+        <mat-error *ngIf="phoneNumber.invalid">
+          {{ 'SETTINGS_PERSONAL_DATA_MODAL_PHONE_NUMBER_PHONE_NUMBER_NOT_VALID' | translate }}
+        </mat-error>
+      </mat-form-field>
+    </div>
 
-      <div class="col-12 col-sm-12 col-md-12 col-lg-4">
-        <button [disabled]="!f.valid" color="primary" mat-raised-button style="width: 100%; text-align: center" type="submit">
-          {{ 'SETTINGS_PERSONAL_DATA_MODAL_PHONE_NUMBER_ADD' | translate }}
-          <mat-icon aria-label="Submit button">library_add</mat-icon>
-        </button>
-      </div>
+    <div fxFlex="25%">
+      <button [disabled]="!f.valid" color="primary" mat-raised-button style="width: 100%; text-align: center" type="submit">
+        {{ 'SETTINGS_PERSONAL_DATA_MODAL_PHONE_NUMBER_ADD' | translate }}
+        <mat-icon aria-label="Submit button">library_add</mat-icon>
+      </button>
     </div>
   </form>
 
-  <div class="row" style="margin-top: 15px;">
-    <mat-form-field class="col-12">
-      <input
-        (keyup)="applyFilter($event.target.value)"
-        matInput
-        placeholder="{{ 'SETTINGS_PERSONAL_DATA_MODAL_PHONE_NUMBER_SEARCH' | translate }}"
-      />
-    </mat-form-field>
-  </div>
+  <mat-form-field>
+    <input
+      (keyup)="applyFilter($event.target.value)"
+      matInput
+      placeholder="{{ 'SETTINGS_PERSONAL_DATA_MODAL_PHONE_NUMBER_SEARCH' | translate }}"
+    />
+  </mat-form-field>
 
   <table [dataSource]="dataSource" class="table-responsive" mat-table>
     <ng-container matColumnDef="label">

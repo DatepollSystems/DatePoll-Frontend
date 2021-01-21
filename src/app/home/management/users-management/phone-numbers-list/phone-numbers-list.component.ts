@@ -30,15 +30,9 @@ export class PhoneNumbersListComponent implements OnInit {
     this.phoneNumbersChanged.emit(this.phoneNumbers.slice());
   }
 
-  removePhoneNumber(number: string) {
-    const localPhoneNumbers = [];
-    for (const phoneNumber of this.phoneNumbers) {
-      if (phoneNumber.phoneNumber !== number) {
-        localPhoneNumbers.push(phoneNumber);
-      }
-    }
-
-    this.phoneNumbers = localPhoneNumbers;
+  removePhoneNumber(number: PhoneNumber) {
+    const i = this.phoneNumbers.indexOf(number);
+    this.phoneNumbers.splice(i, 1);
     this.dataSource = new MatTableDataSource(this.phoneNumbers);
     this.phoneNumbersChanged.emit(this.phoneNumbers.slice());
   }

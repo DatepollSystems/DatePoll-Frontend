@@ -1,22 +1,27 @@
-<div fxLayout="row" fxLayoutAlign="space-between" style="margin-top: 5px;">
+<div fxLayout="row" fxLayoutAlign="space-between" style="margin-top: 5px">
   <div>
     <h1>{{ 'EVENTS_VIEW' | translate }}</h1>
   </div>
-  <div [matBadge]="eventsHidden.toString()" matBadgeOverlap="false" style="margin-right: 15px;">
+  <div [matBadge]="eventsHidden.toString()" matBadgeOverlap="false" style="margin-right: 15px">
     <mat-slide-toggle (change)="onShowAllEventsChange($event)" [(ngModel)]="showAllEvents" color="primary">
       {{ 'EVENTS_VIEW_SHOW_ALREADY_VOTED_EVENTS' | translate }}
     </mat-slide-toggle>
   </div>
 </div>
 
-<div *ngIf="!loading" class="row">
-  <app-event-card *ngFor="let event of eventsToShow" [event]="event" class="col-12 col-sm-12 col-md-6 col-lg-4"></app-event-card>
-  <h3 *ngIf="eventsToShow.length === 0" class="col-12" style="text-align: center">
+<div *ngIf="!loading" fxLayout="row break" fxLayoutGap="2%" fxLayoutAlign="start">
+  <app-event-card
+    *ngFor="let event of eventsToShow"
+    [event]="event"
+    fxFlex.gt-xs="48%"
+    fxFlex.md="48%"
+    fxFlex.gt-md="22%"
+    fxFlex.lg="30%"
+  ></app-event-card>
+  <h3 *ngIf="eventsToShow.length === 0" fxFlex="100%" style="text-align: center">
     {{ 'EVENTS_VIEW_EVENT_NO_NEW_VOTINGS' | translate }}
   </h3>
 </div>
-<div *ngIf="loading" class="row" style="margin-bottom: 15px;">
-  <div class="col-12">
-    <mat-progress-spinner mode="indeterminate" style="margin: auto"></mat-progress-spinner>
-  </div>
+<div *ngIf="loading" fxLayout="column" style="margin-bottom: 15px">
+  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
 </div>

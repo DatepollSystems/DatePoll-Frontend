@@ -1,22 +1,24 @@
 import {Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import {GroupsService} from '../../groups.service';
 import {NgForm} from '@angular/forms';
+
+import {GroupsService} from '../../groups.service';
 
 @Component({
   selector: 'app-subgroup-user-role-update-modal',
   templateUrl: './subgroup-user-role-update-modal.component.html',
-  styleUrls: ['./subgroup-user-role-update-modal.component.css']
+  styleUrls: ['./subgroup-user-role-update-modal.component.css'],
 })
 export class SubgroupUserRoleUpdateModalComponent {
-
   public user: any;
   public sendingRequest = false;
   private readonly subgroupID: number;
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any,
-              private dialogRef: MatDialogRef<SubgroupUserRoleUpdateModalComponent>,
-              private groupsService: GroupsService) {
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private dialogRef: MatDialogRef<SubgroupUserRoleUpdateModalComponent>,
+    private groupsService: GroupsService
+  ) {
     this.user = data.user;
     this.subgroupID = data.subgroupID;
   }
@@ -36,5 +38,4 @@ export class SubgroupUserRoleUpdateModalComponent {
       (error) => console.log(error)
     );
   }
-
 }

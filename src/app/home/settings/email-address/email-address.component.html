@@ -1,10 +1,6 @@
 <h2 mat-dialog-title>{{ 'SETTINGS_PERSONAL_DATA_PERSONAL_EMAIL_ADDRESSES_CHANGE' | translate }}</h2>
 <mat-dialog-content>
-  <div class="row">
-    <div class="col-12">
-      <app-do-not-forget-to-save></app-do-not-forget-to-save>
-    </div>
-  </div>
+  <app-do-not-forget-to-save></app-do-not-forget-to-save>
 
   <app-email-addresses-list
     (emailAddressesChanged)="onEmailAddressesChange($event)"
@@ -14,19 +10,11 @@
 
   <app-divider></app-divider>
 
-  <div class="row">
-    <div class="col-12">
-      <h2>{{ 'SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_NOTIFY_TITLE' | translate }}</h2>
-    </div>
-    <div class="col-2 col-md-1">
-      <mat-slide-toggle
-        (change)="notifyMeOnNewEventChange($event)"
-        [(ngModel)]="notifyViaEmailOnNewEvent"
-        color="primary"
-      ></mat-slide-toggle>
-    </div>
-    <p class="col-10 col-md-10">{{ 'SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_NOTIFY_ME_ON_NEW_EVENT' | translate }}</p>
-  </div>
+  <h2>{{ 'SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_NOTIFY_TITLE' | translate }}</h2>
+
+  <mat-slide-toggle (change)="notifyMeOnNewEventChange($event)" [(ngModel)]="notifyViaEmailOnNewEvent" color="primary">{{
+    'SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_NOTIFY_ME_ON_NEW_EVENT' | translate
+  }}</mat-slide-toggle>
 </mat-dialog-content>
 <mat-dialog-actions fxLayout="row" fxLayoutAlign="end">
   <button mat-button mat-dialog-close>{{ 'CLOSE' | translate }}</button>

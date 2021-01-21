@@ -30,7 +30,7 @@
   >
   </app-group-and-subgroup-type-input-select>
 
-  <mat-card matRipple style="background-color: #b2ff59" class="not-selectable" fxFlex="98%">
+  <mat-card matRipple class="mat-info-card not-selectable" fxFlex="98%">
     <b>{{ 'INFORMATION' | translate }}</b> {{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_GROUPS_DESCRIPTION' | translate }}
   </mat-card>
 
@@ -42,7 +42,7 @@
     <app-event-decisions-list (decisionsChanged)="onDecisionsChange($event)" [decisions]="decisions"></app-event-decisions-list>
 
     <!-- Description -->
-    <mat-expansion-panel style="margin-top: 10px;">
+    <mat-expansion-panel style="margin-top: 10px">
       <mat-expansion-panel-header>
         <mat-panel-title>
           {{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DESCRIPTION' | translate }}
@@ -50,7 +50,7 @@
       </mat-expansion-panel-header>
 
       <mat-form-field appearance="outline" style="width: 100%">
-        <textarea matInput name="description" ngModel style="min-height: 15vh;"></textarea>
+        <textarea matInput name="description" ngModel style="min-height: 15vh"></textarea>
       </mat-form-field>
     </mat-expansion-panel>
   </div>
@@ -61,7 +61,7 @@
   [disabled]="!form.form.valid"
   color="primary"
   mat-raised-button
-  style="width: 100%; margin-top: 15px;"
+  style="width: 100%; margin-top: 15px"
 >
   {{ 'CREATE' | translate }}
 </button>

@@ -1,10 +1,8 @@
 <mat-card class="mat-elevation-z3">
   <mat-card-content>
-    <div class="row justify-content-between">
-      <div class="col">
-        <h1>{{ 'NAV_MANAGEMENT_USERS' | translate }}</h1>
-      </div>
-      <div class="col" style="text-align: end">
+    <div fxLayout="row" fxLayoutAlign="space-between">
+      <h1>{{ 'NAV_MANAGEMENT_USERS' | translate }}</h1>
+      <div style="text-align: end">
         <button [matMenuTriggerFor]="menu" mat-icon-button>
           <mat-icon>more_vert</mat-icon>
         </button>
@@ -53,27 +51,16 @@
       </div>
     </div>
 
-    <div class="row" style="margin-bottom: 15px">
-      <div class="col-2 col-sm-4 col-lg-1">
-        <button (click)="onCreate()" color="accent" mat-fab>
-          <mat-icon>add</mat-icon>
+    <div fxLayout="row" fxLayoutGap="2%">
+      <button (click)="onCreate()" color="accent" mat-fab>
+        <mat-icon>add</mat-icon>
+      </button>
+      <mat-form-field>
+        <input (keyup)="applyFilter()" matInput placeholder="{{ 'MANAGEMENT_USERS_SEARCH' | translate }}" [(ngModel)]="filterValue" />
+        <button mat-button *ngIf="filterValue" matSuffix mat-icon-button aria-label="Clear" (click)="this.filterValue = ''; applyFilter()">
+          <mat-icon>close</mat-icon>
         </button>
-      </div>
-      <div class="col-10 col-sm-8 col-lg-11">
-        <mat-form-field class="col-12">
-          <input (keyup)="applyFilter()" matInput placeholder="{{ 'MANAGEMENT_USERS_SEARCH' | translate }}" [(ngModel)]="filterValue" />
-          <button
-            mat-button
-            *ngIf="filterValue"
-            matSuffix
-            mat-icon-button
-            aria-label="Clear"
-            (click)="this.filterValue = ''; applyFilter()"
-          >
-            <mat-icon>close</mat-icon>
-          </button>
-        </mat-form-field>
-      </div>
+      </mat-form-field>
     </div>
 
     <mat-multi-sort-table-settings [tableData]="table" sortToolTip="{{ 'MANAGEMENT_USERS_MANAGE_COLUMNS_TOOLTIP' | translate }}">

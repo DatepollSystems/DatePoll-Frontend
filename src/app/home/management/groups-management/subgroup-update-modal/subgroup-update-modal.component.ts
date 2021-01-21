@@ -9,7 +9,7 @@ import {GroupsService} from '../groups.service';
 @Component({
   selector: 'app-subgroup-update-modal',
   templateUrl: './subgroup-update-modal.component.html',
-  styleUrls: ['./subgroup-update-modal.component.css']
+  styleUrls: ['./subgroup-update-modal.component.css'],
 })
 export class SubgroupUpdateModalComponent {
   groupID: number;
@@ -37,13 +37,13 @@ export class SubgroupUpdateModalComponent {
 
     const name = form.controls.name.value;
     const description = form.controls.description.value;
-    const orderN = form.controls.orderN.value;
+    const orderN = Number(form.controls.orderN.value);
 
     const subgroup = {
       name,
       description,
       orderN,
-      group_id: this.groupID
+      group_id: this.groupID,
     };
     console.log(subgroup);
     this.groupsService.updateSubgroup(subgroup, this.subgroupID).subscribe(
@@ -55,7 +55,7 @@ export class SubgroupUpdateModalComponent {
           this.translate.getTranslationFor('MANAGEMENT_GROUPS_UPDATE_SUBGROUP_SUCCESSFUL')
         );
       },
-      error => {
+      (error) => {
         console.log(error);
         this.groupsService.fetchGroups();
       }

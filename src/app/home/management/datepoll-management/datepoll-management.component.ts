@@ -36,6 +36,10 @@ export class DatepollManagementComponent implements OnDestroy {
   openWeatherMapCinemaCityIdSubscription: Subscription;
   openWeatherMapCinemaCityIdSaving = false;
 
+  broadcastIncomingMailForwardingEmailAddresses: string[] = [];
+  broadcastIncomingMailForwardingEmailAddressesSubscription: Subscription;
+  broadcastIncomingMailForwardingEmailAddressesSaving = false;
+
   alert: any;
   alertText = '';
   selectedAlertType = '';
@@ -73,6 +77,13 @@ export class DatepollManagementComponent implements OnDestroy {
       this.openWeatherMapCinemaCityId = value;
     });
 
+    this.broadcastIncomingMailForwardingEmailAddresses = settingsService.getBroadcastIncomingMailForwardingEmailAddresses();
+    this.broadcastIncomingMailForwardingEmailAddressesSubscription = settingsService.broadcastIncomingMailForwardingEmailAddressesChange.subscribe(
+      (value) => {
+        this.broadcastIncomingMailForwardingEmailAddresses = value;
+      }
+    );
+
     this.alert = settingsService.getAlert();
     this.alertSubscription = settingsService.alertChange.subscribe((value) => {
       this.alert = value;
@@ -85,6 +96,7 @@ export class DatepollManagementComponent implements OnDestroy {
     this.serverInfoSubscription.unsubscribe();
     this.openWeatherMapKeySubscription.unsubscribe();
     this.openWeatherMapCinemaCityIdSubscription.unsubscribe();
+    this.broadcastIncomingMailForwardingEmailAddressesSubscription.unsubscribe();
     this.alertSubscription.unsubscribe();
   }
 
@@ -98,6 +110,14 @@ export class DatepollManagementComponent implements OnDestroy {
 
   broadcastServiceChange(ob: MatSlideToggleChange) {
     this.settingsService.setAdminShowBroadcasts(ob.checked);
+  }
+
+  broadcastProcessIncomingMailsChange(ob: MatSlideToggleChange) {
+    this.settingsService.setAdminBroadcastProcessIncomingMails(ob.checked);
+  }
+
+  broadcastProcessIncomingMailsForwardingChange(ob: MatSlideToggleChange) {
+    this.settingsService.setAdminBroadcastProcessIncomingMailsForwarding(ob.checked);
   }
 
   changeCommunityName(form: NgForm) {
@@ -229,6 +249,29 @@ export class DatepollManagementComponent implements OnDestroy {
       },
       (error) => console.log(error)
     );
+  }
+
+  changeBroadcastIncomingMailForwardingEmailAddresses(strings: string[]) {
+    this.broadcastIncomingMailForwardingEmailAddresses = strings;
+  }
+
+  saveBroadcastIncomingMailForwardingEmailAddresses() {
+    this.broadcastIncomingMailForwardingEmailAddressesSaving = true;
+    this.settingsService
+      .setAdminBroadcastProcessIncomingMailsForwardingEmailAddresses(this.broadcastIncomingMailForwardingEmailAddresses)
+      .subscribe(
+        (response: any) => {
+          console.log(response);
+          this.broadcastIncomingMailForwardingEmailAddressesSaving = false;
+          this.notificationsService.success(
+            this.translate.getTranslationFor('SUCCESSFULLY'),
+            this.translate.getTranslationFor(
+              'MANAGEMENT_DATEPOLL_BROADCAST_PROCESS_INCOMING_MAILS_FORWARDING_EMAIL_ADDRESSES_CHANGED_SUCCESSFULLY'
+            )
+          );
+        },
+        (error) => console.log(error)
+      );
   }
 
   changeAlert(form: NgForm) {

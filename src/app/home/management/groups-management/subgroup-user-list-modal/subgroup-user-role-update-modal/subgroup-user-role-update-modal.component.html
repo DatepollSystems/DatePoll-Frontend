@@ -2,26 +2,24 @@
   {{ 'MANAGEMENT_GROUPS_INFO_GROUP_MODAL_ROLE_UPDATE_MODAL_TITLE' | translate }}{{ user.firstname }} {{ user.surname }}
 </h1>
 <div mat-dialog-content>
-  <form #form="ngForm" (ngSubmit)="onUpdate(form)">
-    <div class="row">
-      <mat-form-field class="col-12">
-        <!-- Role -->
-        <input
-          #roleModel="ngModel"
-          [(ngModel)]="user.role"
-          id="role"
-          matInput
-          maxlength="190"
-          name="role"
-          ngModel
-          placeholder="{{ 'MANAGEMENT_GROUPS_INFO_GROUP_MODAL_ROLE_UPDATE_MODAL_ROLE' | translate }}"
-          type="text"
-        />
-        <mat-error *ngIf="roleModel.invalid">
-          {{ 'MANAGEMENT_GROUPS_INFO_GROUP_MODAL_ROLE_UPDATE_MODAL_ROLE_INCORRECT' | translate }}
-        </mat-error>
-      </mat-form-field>
-    </div>
+  <form #form="ngForm" (ngSubmit)="onUpdate(form)" fxLayout="column">
+    <mat-form-field>
+      <!-- Role -->
+      <input
+        #roleModel="ngModel"
+        [(ngModel)]="user.role"
+        id="role"
+        matInput
+        maxlength="190"
+        name="role"
+        ngModel
+        placeholder="{{ 'MANAGEMENT_GROUPS_INFO_GROUP_MODAL_ROLE_UPDATE_MODAL_ROLE' | translate }}"
+        type="text"
+      />
+      <mat-error *ngIf="roleModel.invalid">
+        {{ 'MANAGEMENT_GROUPS_INFO_GROUP_MODAL_ROLE_UPDATE_MODAL_ROLE_INCORRECT' | translate }}
+      </mat-error>
+    </mat-form-field>
   </form>
   <mat-progress-bar *ngIf="sendingRequest" mode="indeterminate"></mat-progress-bar>
 </div>

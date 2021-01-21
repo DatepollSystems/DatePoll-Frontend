@@ -1,6 +1,14 @@
 import {Browser} from './browser';
 
 export class Converter {
+  public static stringToBoolean(string: string): boolean {
+    return string.trim().toLowerCase() === 'true';
+  }
+
+  public static booleanToString(boolean: boolean): string {
+    return boolean ? 'true' : 'false';
+  }
+
   public static getDateFormattedWithHoursMinutesAndSeconds(date: Date): string {
     const d = new Date(date);
     let month = '' + (d.getMonth() + 1),

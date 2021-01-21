@@ -10,12 +10,10 @@ import {Router} from '@angular/router';
 import {ReplaySubject, Subject, Subscription} from 'rxjs';
 import {take, takeUntil} from 'rxjs/operators';
 
-import {SettingsService} from '../../../utils/settings.service';
 import {MyUserService} from '../../my-user.service';
 import {CinemaService} from '../cinema.service';
 
 import {Movie} from '../models/movie.model';
-import {Year} from '../models/year.model';
 
 import {MovieBookingsModalComponent} from './movie-bookings-modal/movie-bookings-modal.component';
 import {MovieCreateModalComponent} from './movie-create-modal/movie-create-modal.component';
@@ -29,75 +27,63 @@ import {MovieInfoModalComponent} from './movie-info-modal/movie-info-modal.compo
   styleUrls: ['./movie-administration.component.css'],
 })
 export class MovieAdministrationComponent implements OnInit, AfterViewInit, OnDestroy {
-  // @ViewChild(MatPaginator) paginator: MatPaginator;
-  displayedColumns: string[] = ['name', 'date', 'trailer', 'poster', 'worker', 'emergencyWorker', 'bookedTickets', 'deleteMovie'];
-  filterValue: string = null;
+  protected _onDestroy = new Subject<void>();
+  @ViewChild('yearSelect', {static: true}) yearSelect: MatSelect;
+  public yearCtrl: FormControl = new FormControl();
+  public yearFilterCtrl: FormControl = new FormControl();
+  public filteredYears: ReplaySubject<string[]> = new ReplaySubject<string[]>(1);
+  private yearsSubscription: Subscription;
+  private years: string[];
+  private selectedYear: string = null;
 
   @ViewChild(MatSort, {static: true}) sort: MatSort;
-
-  /** control for the selected years */
-  public yearCtrl: FormControl = new FormControl();
-
-  /** control for the MatSelect filter keyword */
-  public yearFilterCtrl: FormControl = new FormControl();
-
-  /** list of years filtered by search keyword */
-  public filteredYears: ReplaySubject<Year[]> = new ReplaySubject<Year[]>(1);
-
-  @ViewChild('yearSelect', {static: true}) yearSelect: MatSelect;
+  displayedColumns: string[] = ['name', 'date', 'trailer', 'poster', 'worker', 'emergencyWorker', 'bookedTickets', 'deleteMovie'];
+  filterValue: string = null;
   dataSource: MatTableDataSource<Movie>;
-  moviesLoaded = true;
-  /** Subject that emits when the component has been destroyed. */
-  protected _onDestroy = new Subject<void>();
+  moviesLoaded = false;
   private moviesSubscription: Subscription;
   private movies: Movie[];
-  private yearsSubscription: Subscription;
-  private years: Year[];
-  private selectedYear: Year = null;
 
   constructor(
     private cinemaService: CinemaService,
     private myUserService: MyUserService,
-    private settingsService: SettingsService,
     private router: Router,
     private dialog: MatDialog,
     private bottomSheet: MatBottomSheet
   ) {
-    this.moviesLoaded = false;
-
     this.years = this.cinemaService.getYears();
     this.selectedYear = this.years[this.years.length - 1];
     this.yearsSubscription = cinemaService.yearsChange.subscribe((value) => {
       this.years = value;
       this.filteredYears.next(this.years.slice());
-      this.yearCtrl.setValue(this.years[this.years.length - 1]);
       this.selectedYear = this.years[this.years.length - 1];
+      for (const year of this.years) {
+        if (year.includes(new Date().getFullYear().toString())) {
+          console.log('in');
+          this.selectedYear = year;
+          break;
+        }
+      }
+      this.yearCtrl.setValue(this.selectedYear);
       this.setInitialValue();
 
+      this.moviesLoaded = false;
+      this.movies = cinemaService.getMovies(Number(this.selectedYear));
       this.refreshTable();
-    });
 
-    this.movies = this.cinemaService.getMovies();
-    this.refreshTable();
+      if (this.movies.length > 0) {
+        this.moviesLoaded = true;
+      }
 
-    if (this.movies.length > 0) {
-      this.moviesLoaded = true;
-    }
-
-    this.moviesSubscription = cinemaService.moviesChange.subscribe((value) => {
-      this.moviesLoaded = true;
-
-      this.movies = value;
-      this.refreshTable();
+      this.moviesSubscription = this.cinemaService.moviesChange.subscribe((eValue) => {
+        this.movies = eValue;
+        this.moviesLoaded = true;
+        this.refreshTable();
+      });
     });
   }
 
   ngOnInit() {
-    this.settingsService.checkShowCinema();
-
-    // this.dataSource.paginator = this.paginator;
-
-    // set initial selection
     this.yearCtrl.setValue(this.years[1]);
 
     // load the initial years list
@@ -121,53 +107,14 @@ export class MovieAdministrationComponent implements OnInit, AfterViewInit, OnDe
   }
 
   refreshTable() {
-    if (this.selectedYear == null) {
-      this.dataSource = new MatTableDataSource(this.movies);
-      this.dataSource.sort = this.sort;
-    } else {
-      const moviesToShow = [];
-
-      if (this.selectedYear.id != null) {
-        for (let i = 0; i < this.movies.length; i++) {
-          if (this.movies[i].movieYearID === this.selectedYear.id) {
-            moviesToShow.push(this.movies[i]);
-          }
-        }
-        this.dataSource = new MatTableDataSource(moviesToShow);
-        this.dataSource.sort = this.sort;
-      } else {
-        this.dataSource = new MatTableDataSource(this.movies);
-        this.dataSource.sort = this.sort;
-      }
-    }
+    this.dataSource = new MatTableDataSource(this.movies);
+    this.dataSource.sort = this.sort;
   }
 
   applyFilter(filterValue: string) {
     this.filterValue = filterValue;
     this.dataSource.filter = this.filterValue.trim().toLowerCase();
     this.dataSource.sort = this.sort;
-
-    // if (this.dataSource.paginator) {
-    //   this.dataSource.paginator.firstPage();
-    // }
-  }
-
-  yearSelectChange(value) {
-    this.selectedYear = value;
-
-    const moviesToShow = [];
-
-    for (let i = 0; i < this.movies.length; i++) {
-      if (this.movies[i].movieYearID === this.selectedYear.id) {
-        moviesToShow.push(this.movies[i]);
-      }
-    }
-
-    this.dataSource = new MatTableDataSource(moviesToShow);
-    this.dataSource.sort = this.sort;
-    if (this.filterValue !== null) {
-      this.applyFilter(this.filterValue);
-    }
   }
 
   onCreate() {
@@ -208,8 +155,13 @@ export class MovieAdministrationComponent implements OnInit, AfterViewInit, OnDe
     this.movies = [];
     this.years = [];
     this.refreshTable();
-    this.cinemaService.fetchYears();
+    this.cinemaService.getYears();
     this.cinemaService.fetchMovies();
+  }
+
+  yearSelectChange(value) {
+    this.selectedYear = value;
+    this.cinemaService.getMovies(value);
   }
 
   private setInitialValue() {
@@ -219,7 +171,7 @@ export class MovieAdministrationComponent implements OnInit, AfterViewInit, OnDe
       // the form control (i.e. _initializeSelection())
       // this needs to be done after the filteredYears are loaded initially
       // and after the mat-option elements are available
-      this.yearSelect.compareWith = (a: Year, b: Year) => a && b && a.id === b.id;
+      this.yearSelect.compareWith = (a: string, b: string) => a && b && a === b;
     });
   }
 
@@ -236,6 +188,6 @@ export class MovieAdministrationComponent implements OnInit, AfterViewInit, OnDe
       search = search.toLowerCase();
     }
     // filter the years
-    this.filteredYears.next(this.years.filter((year) => year.year.toString().toLowerCase().indexOf(search) > -1));
+    this.filteredYears.next(this.years.filter((year) => year.toLowerCase().indexOf(search) > -1));
   }
 }

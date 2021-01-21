@@ -4,7 +4,7 @@ import {Subject} from 'rxjs';
 import {HttpService} from '../../utils/http.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class StandardDecisionsService {
   public standardDecisionsChange: Subject<EventStandardDecision[]> = new Subject<EventStandardDecision[]>();
@@ -31,7 +31,7 @@ export class StandardDecisionsService {
             new EventStandardDecision(
               localStandardDecision.id,
               localStandardDecision.decision,
-              localStandardDecision.showInCalendar,
+              localStandardDecision.show_in_calendar,
               localStandardDecision.color
             )
           );
@@ -40,7 +40,7 @@ export class StandardDecisionsService {
         console.log(standardDecisions);
         this.setStandardDecisions(standardDecisions);
       },
-      error => console.log(error)
+      (error) => console.log(error)
     );
   }
 
@@ -48,7 +48,7 @@ export class StandardDecisionsService {
     const dto = {
       decision: decision,
       show_in_calendar: showInCalendar,
-      color: color
+      color: color,
     };
     return this.httpService.loggedInV1POSTRequest('/avent/administration/standardDecision', dto, 'addStandardDecision');
   }

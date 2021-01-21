@@ -20,7 +20,7 @@
       >
       <button
         mat-stroked-button
-        (click)="$event.stopPropagation(); copyTokenToClipboard(apiUrl + attachment.token); tooltip.disabled = false; tooltip.show()"
+        (click)="$event.stopPropagation(); copyTokenToClipboard(appUrl + attachment.token); tooltip.disabled = false; tooltip.show()"
         [matTooltipDisabled]="true"
         matTooltip="{{ 'COPIED_LINK' | translate }}"
         #tooltip="matTooltip"

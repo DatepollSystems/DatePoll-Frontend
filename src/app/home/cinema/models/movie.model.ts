@@ -1,5 +1,6 @@
 import {CalendarEvent} from 'angular-calendar';
 import {EventAction} from 'calendar-utils';
+import {UIHelper} from '../../../utils/UIHelper';
 
 export class Movie implements CalendarEvent {
   public id: number;
@@ -14,6 +15,7 @@ export class Movie implements CalendarEvent {
   public emergencyWorkerName: string;
 
   public bookedTickets: number;
+  public maximalTickets: number;
 
   public bookedTicketsForYourself: number;
 
@@ -25,7 +27,7 @@ export class Movie implements CalendarEvent {
   allDay = false;
   color = {
     primary: '#1e90ff',
-    secondary: '#D1E8FF'
+    secondary: '#D1E8FF',
   };
   draggable: false;
   end: null;
@@ -47,7 +49,7 @@ export class Movie implements CalendarEvent {
     emergencyWorkerID: number,
     emergencyWorkerName: string,
     bookedTickets: number,
-    movieYearID: number
+    maximalTickets: number
   ) {
     this.id = id;
     this.name = name;
@@ -59,7 +61,7 @@ export class Movie implements CalendarEvent {
     this.emergencyWorkerID = emergencyWorkerID;
     this.emergencyWorkerName = emergencyWorkerName;
     this.bookedTickets = bookedTickets;
-    this.movieYearID = movieYearID;
+    this.maximalTickets = maximalTickets;
 
     this.start = movieDate;
     this.start.setHours(20);
@@ -81,6 +83,13 @@ export class Movie implements CalendarEvent {
 
   public getWeatherForecasts(): WeatherForecast[] {
     return this.weatherForecasts;
+  }
+
+  public getUntil(): string {
+    const date = new Date(this.date);
+    date.setHours(21);
+
+    return UIHelper.getTimeLeft(date);
   }
 }
 

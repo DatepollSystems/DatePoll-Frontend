@@ -30,9 +30,9 @@ export class Broadcast {
     }
     this.writerName = writerName;
 
-    // Calculate read time at about 265 words per minute
+    // Calculate read time at about 200 words per minute
     const words = this.body.split(' ').length;
-    const secondsToRead = words / 4.41;
+    const secondsToRead = words / 3.33333;
     if (secondsToRead > 60) {
       this.readTime = Math.ceil(secondsToRead / 60) + 'm';
     } else {

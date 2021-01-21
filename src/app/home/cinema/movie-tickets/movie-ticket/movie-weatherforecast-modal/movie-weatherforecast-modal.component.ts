@@ -2,7 +2,7 @@ import {Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 
 import {Movie} from '../../../models/movie.model';
-import {CinemaService} from '../../../cinema.service';
+import {CinemaUserService} from '../../../cinema-user.service';
 
 @Component({
   selector: 'app-movie-weatherforecast-modal',
@@ -15,7 +15,7 @@ export class MovieWeatherforecastModalComponent {
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     public dialogRef: MatDialogRef<MovieWeatherforecastModalComponent>,
-    public cinemaService: CinemaService
+    public cinemaService: CinemaUserService
   ) {
     this.movie = data.movie;
 

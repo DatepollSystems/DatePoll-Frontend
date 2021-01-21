@@ -1,11 +1,11 @@
-<h1 mat-dialog-title>{{ 'CINEMA_TICKETS_ADMINISTRATION_MOVIE_BOOKINGS_MANAGEMENT_MODAL_TITLE' | translate }} {{ name }}</h1>
+<h1 mat-dialog-title>{{ 'CINEMA_TICKETS_ADMINISTRATION_MOVIE_BOOKINGS_MANAGEMENT_MODAL_TITLE' | translate }} {{ movie?.name }}</h1>
 <div mat-dialog-content>
-  <div class="row">
-    <mat-form-field class="col-12 col-sm-12 col-md-12 col-lg-5">
+  <div fxLayout="row wrap" fxLayoutAlign="space-between">
+    <mat-form-field fxFlex="49%" fxFlex.lt-md="100%">
       <input (keyup)="applyFilter($event.target.value)" matInput placeholder="{{ 'SEARCH' | translate }}" />
     </mat-form-field>
 
-    <div class="col-5 col-sm-5 col-md-6 col-lg-3" style="margin-bottom: 10px;">
+    <div fxFlex="24%" fxFlex.lt-md="100%" style="margin-bottom: 10px">
       <button
         mat-flat-button
         color="primary"
@@ -18,29 +18,27 @@
       </button>
     </div>
 
-    <div class="col-4 col-sm-4 col-md-3 col-lg-2">
-      <mat-form-field>
-        <input
-          #ticketsToBookModel="ngModel"
-          [(ngModel)]="ticketsToBook"
-          min="1"
-          max="100"
-          id="ticketsToBook"
-          matInput
-          name="ticketsToBook"
-          ngModel
-          number
-          placeholder="{{ 'CINEMA_TICKETS_ADMINISTRATION_MOVIE_BOOKINGS_MANAGEMENT_MODAL_TICKETS_TO_BOOK' | translate }}"
-          required
-          type="number"
-        />
-        <mat-error *ngIf="ticketsToBookModel.invalid">
-          {{ 'CINEMA_TICKETS_ADMINISTRATION_MOVIE_BOOKINGS_MANAGEMENT_MODAL_TICKETS_TO_BOOK_INVALID' | translate }}
-        </mat-error>
-      </mat-form-field>
-    </div>
+    <mat-form-field fxFlex="10%" fxFlex.lt-md="74%">
+      <input
+        #ticketsToBookModel="ngModel"
+        [(ngModel)]="ticketsToBook"
+        min="1"
+        max="100"
+        id="ticketsToBook"
+        matInput
+        name="ticketsToBook"
+        ngModel
+        number
+        placeholder="{{ 'CINEMA_TICKETS_ADMINISTRATION_MOVIE_BOOKINGS_MANAGEMENT_MODAL_TICKETS_TO_BOOK' | translate }}"
+        required
+        type="number"
+      />
+      <mat-error *ngIf="ticketsToBookModel.invalid">
+        {{ 'CINEMA_TICKETS_ADMINISTRATION_MOVIE_BOOKINGS_MANAGEMENT_MODAL_TICKETS_TO_BOOK_INVALID' | translate }}
+      </mat-error>
+    </mat-form-field>
 
-    <div class="col-2 col-sm-2 col-md-3 col-lg-2">
+    <div fxFlex="10%" fxFlex.lt-md="23%">
       <button
         mat-stroked-button
         aria-label="Remove votings for selected users"
@@ -53,52 +51,54 @@
       </button>
     </div>
   </div>
-  <div *ngIf="!loading">
-    <table [dataSource]="bookings" class="table-responsive" mat-table>
-      <!-- Checkbox Column -->
-      <ng-container matColumnDef="select">
-        <th mat-header-cell *matHeaderCellDef>
-          <mat-checkbox
-            (change)="$event ? masterToggle() : null"
-            [checked]="selection.hasValue() && isAllSelected()"
-            [indeterminate]="selection.hasValue() && !isAllSelected()"
-            [aria-label]="checkboxLabel()"
-          >
-          </mat-checkbox>
-        </th>
-        <td mat-cell *matCellDef="let row">
-          <mat-checkbox
-            (click)="$event.stopPropagation()"
-            (change)="$event ? selection.toggle(row) : null"
-            [checked]="selection.isSelected(row)"
-            [aria-label]="checkboxLabel(row)"
-          >
-          </mat-checkbox>
-        </td>
-        <td *matFooterCellDef mat-footer-cell>
-          <b>{{ 'CINEMA_TICKETS_BOOKED_TICKETS' | translate }}</b>
-        </td>
-      </ng-container>
 
-      <ng-container matColumnDef="name">
-        <th *matHeaderCellDef mat-header-cell>{{ 'CINEMA_TICKETS_ADMINISTRATION_MOVIE_INFO_MODAL_TABLE_NAME' | translate }}</th>
-        <td *matCellDef="let booking" mat-cell>{{ booking.firstname + ' ' + booking.surname }}</td>
-        <td *matFooterCellDef mat-footer-cell></td>
-      </ng-container>
+  <table [dataSource]="bookings" class="table-responsive" mat-table matSort>
+    <!-- Checkbox Column -->
+    <ng-container matColumnDef="select">
+      <th mat-header-cell *matHeaderCellDef>
+        <mat-checkbox
+          (change)="$event ? masterToggle() : null"
+          [checked]="selection.hasValue() && isAllSelected()"
+          [indeterminate]="selection.hasValue() && !isAllSelected()"
+          [aria-label]="checkboxLabel()"
+        >
+        </mat-checkbox>
+      </th>
+      <td mat-cell *matCellDef="let row">
+        <mat-checkbox
+          (click)="$event.stopPropagation()"
+          (change)="$event ? selection.toggle(row) : null"
+          [checked]="selection.isSelected(row)"
+          [aria-label]="checkboxLabel(row)"
+        >
+        </mat-checkbox>
+      </td>
+      <td *matFooterCellDef mat-footer-cell>
+        <b>{{ 'CINEMA_TICKETS_BOOKED_TICKETS' | translate }}</b>
+      </td>
+    </ng-container>
 
-      <ng-container matColumnDef="amount">
-        <th *matHeaderCellDef mat-header-cell>{{ 'CINEMA_TICKETS_ADMINISTRATION_MOVIE_INFO_MODAL_TABLE_AMOUNT' | translate }}</th>
-        <td *matCellDef="let booking" mat-cell>{{ booking.amount }}</td>
-        <td *matFooterCellDef mat-footer-cell>{{ bookedTickets }}</td>
-      </ng-container>
+    <ng-container matColumnDef="name">
+      <th *matHeaderCellDef mat-header-cell>{{ 'CINEMA_TICKETS_ADMINISTRATION_MOVIE_INFO_MODAL_TABLE_NAME' | translate }}</th>
+      <td *matCellDef="let booking" mat-cell>{{ booking.firstname + ' ' + booking.surname }}</td>
+      <td *matFooterCellDef mat-footer-cell></td>
+    </ng-container>
 
-      <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
-      <tr *matRowDef="let row; columns: displayedColumns" mat-row (click)="onBookForSingle(row)"></tr>
-      <tr *matFooterRowDef="displayedColumns" mat-footer-row></tr>
-    </table>
-  </div>
+    <ng-container matColumnDef="amount">
+      <th *matHeaderCellDef mat-header-cell mat-sort-header>
+        {{ 'CINEMA_TICKETS_ADMINISTRATION_MOVIE_INFO_MODAL_TABLE_AMOUNT' | translate }}
+      </th>
+      <td *matCellDef="let booking" mat-cell>{{ booking.amount }}</td>
+      <td *matFooterCellDef mat-footer-cell>{{ movie?.bookedTickets }}</td>
+    </ng-container>
 
-  <mat-progress-bar mode="indeterminate" *ngIf="loading" style="margin-top: 15px;"></mat-progress-bar>
+    <tr *matHeaderRowDef="displayedColumns; sticky: true" mat-header-row></tr>
+    <tr *matRowDef="let row; columns: displayedColumns" mat-row (click)="onBookForSingle(row)"></tr>
+    <tr *matFooterRowDef="displayedColumns" mat-footer-row></tr>
+  </table>
+  <mat-progress-bar mode="indeterminate" *ngIf="loading" style="margin-top: 15px"></mat-progress-bar>
+
+  <mat-paginator [pageSizeOptions]="[20, 40, 80, 160]" showFirstLastButtons></mat-paginator>
 </div>
 <div mat-dialog-actions>
   <button [mat-dialog-close] mat-button>{{ 'CLOSE' | translate }}</button>

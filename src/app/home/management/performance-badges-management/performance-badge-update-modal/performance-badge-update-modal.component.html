@@ -1,26 +1,24 @@
 <h1 mat-dialog-title>{{ 'MANAGEMENT_PERFORMANCE_BADGES_UPDATE_PERFORMANCE_BADGE_MODAL_TITLE' | translate }} {{ name }}</h1>
 <div mat-dialog-content>
-  <form #form="ngForm" (ngSubmit)="update(form)" class="row">
-    <div class="col-12">
-      <mat-form-field>
-        <input
-          #performanceBadgeNameModel="ngModel"
-          [(ngModel)]="name"
-          id="performanceBadgeName"
-          matInput
-          maxlength="190"
-          minlength="1"
-          name="performanceBadgeName"
-          ngModel
-          placeholder="{{ 'MANAGEMENT_PERFORMANCE_BADGES_ADD_PERFORMANCE_BADGE_NAME' | translate }}"
-          required
-          type="text"
-        />
-        <mat-error *ngIf="performanceBadgeNameModel.invalid">
-          {{ 'MANAGEMENT_PERFORMANCE_BADGES_ADD_PERFORMANCE_BADGE_NAME_INCORRECT' | translate }}
-        </mat-error>
-      </mat-form-field>
-    </div>
+  <form #form="ngForm" (ngSubmit)="update(form)" fxLayout="column">
+    <mat-form-field>
+      <input
+        #performanceBadgeNameModel="ngModel"
+        [(ngModel)]="name"
+        id="performanceBadgeName"
+        matInput
+        maxlength="190"
+        minlength="1"
+        name="performanceBadgeName"
+        ngModel
+        placeholder="{{ 'MANAGEMENT_PERFORMANCE_BADGES_ADD_PERFORMANCE_BADGE_NAME' | translate }}"
+        required
+        type="text"
+      />
+      <mat-error *ngIf="performanceBadgeNameModel.invalid">
+        {{ 'MANAGEMENT_PERFORMANCE_BADGES_ADD_PERFORMANCE_BADGE_NAME_INCORRECT' | translate }}
+      </mat-error>
+    </mat-form-field>
   </form>
 </div>
 <div mat-dialog-actions style="margin-top: 15px">
@@ -29,5 +27,5 @@
 </div>
 
 <ng-template #successfullyUpdatedPerformanceBadge>
-  <h2>{{ 'MANAGEMENT_PERFORMANCE_BADGES_UPDATE_PERFORMANCE_BADGE_SUCCESSFUL' | translate }}</h2>
+  <h2>{{ '' | translate }}</h2>
 </ng-template>

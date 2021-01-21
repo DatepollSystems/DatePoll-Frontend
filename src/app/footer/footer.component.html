@@ -1,15 +1,14 @@
-<footer class="container-fluid">
-  <div class="row" id="footerContainer">
-    <div class="footer-heading col-md-3 offset-md-2 col-sm-8 offset-sm-2">
-      <a href="https://datepoll.org" rel="noopener" style="color: white" target="_blank">DatePoll</a>
+<footer id="footerContainer">
+  <div fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="space-around" id="footerHeaderContainer">
+    <div>
+      <h2><a href="https://datepoll.org" rel="noopener" style="color: white" target="_blank">DatePoll</a></h2>
     </div>
-    <div class="col-md-3 offset-md-2 col-sm-8 offset-sm-2">
-      <div class="footer-heading">Links</div>
+    <div fxFlex="20%">
+      <h2>Links</h2>
       <ul>
         <li>
           <a href="{{ serverInfo.community_url }}" rel="noopener" target="_blank">{{ serverInfo.community_name }}</a>
         </li>
-        <!--        <li><a (click)="openFeedbackModal()">Feedback</a></li>-->
         <li>
           <a (click)="openAboutModal()">{{ 'ABOUT' | translate }}</a>
         </li>
@@ -17,23 +16,27 @@
           <mat-select (selectionChange)="setLang($event)" [(value)]="selected" placeholder="{{ 'LANGUAGE' | translate }}">
             <mat-option value="de">{{ 'LANGUAGE_GERMAN' | translate }}</mat-option>
             <mat-option value="en">{{ 'LANGUAGE_ENGLISH' | translate }}</mat-option>
+            <mat-option value="es">{{ 'LANGUAGE_SPANISH' | translate }}</mat-option>
+            <mat-option value="fr">{{ 'LANGUAGE_FRANCE' | translate }}</mat-option>
+            <mat-option value="it">{{ 'LANGUAGE_ITALIEN' | translate }}</mat-option>
+            <mat-option value="pt">{{ 'LANGUAGE_PORTUGUES' | translate }}</mat-option>
           </mat-select>
         </li>
       </ul>
     </div>
   </div>
 
-  <div class="row" id="footerBarContainer">
-    <div class="col-md-3 offset-md-2 col-sm-8 offset-sm-2" style="margin-bottom: 1.5vh">
-      <div style="float: left;">Mady with&nbsp;</div>
+  <div id="footerBarContainer" fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="space-around">
+    <div>
+      <div style="float: left">Mady with&nbsp;</div>
       <div style="float: left; color: red">&hearts;&nbsp;</div>
-      <div style="float: left;">
+      <div style="float: left">
         by
         <a href="https://datepoll.org" rel="noopener" style="color: #2196f3" target="_blank">DatePoll</a>
       </div>
     </div>
 
-    <div class="col-md-3 offset-md-2 col-sm-8 offset-sm-2 text-right">
+    <div>
       <a routerLink="/info/imprint" style="color: #2196f3"> {{ 'IMPRINT' | translate }} & {{ 'PRIVACY_POLICY' | translate }}</a>
     </div>
   </div>

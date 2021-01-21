@@ -12,6 +12,8 @@ export class ServerInfoModel {
   public logged_interactions_count = 1;
 
   public broadcasts_enabled = false;
+  public broadcasts_process_incoming_mails_enabled = false;
+  public broadcasts_process_incoming_mails_forwarding_enabled = false;
   public broadcasts_count = 1;
   public broadcasts_sent_count = 1;
 

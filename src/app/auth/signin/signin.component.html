@@ -50,13 +50,13 @@
           </div>
         </mat-card-content>
 
-        <mat-card-actions style="margin-top: 10px;">
+        <mat-card-actions style="margin-top: 10px">
           <div fxLayout="row" fxLayoutAlign="stretch" fxLayoutGap="2%" fxLayout.xs="column">
             <div fxFlex>
               <button
                 *ngIf="!showLoadingSpinnerDuringLogin"
                 [disabled]="!f.valid"
-                style="width: 100%; margin-bottom: 15px;"
+                style="width: 100%; margin-bottom: 15px"
                 color="primary"
                 mat-raised-button
                 type="submit"
@@ -94,7 +94,7 @@
         *ngIf="state === 'change_password'"
         [formGroup]="changePasswordAfterSigninForm"
       >
-        <mat-card style="background-color: #b2ff59; color: black;" class="not-selectable">
+        <mat-card class="mat-info-card not-selectable">
           <mat-card-content class="last-child">
             {{ 'SIGNIN_YOU_NEED_TO_CHANGE_PASSWORD' | translate }}
           </mat-card-content>
@@ -139,7 +139,7 @@
       </form>
 
       <div *ngIf="state === 'not_activated'">
-        <mat-card style="background-color: #b2ff59" class="not-selectable" matRipple>
+        <mat-card class="mat-info-card not-selectable" matRipple>
           <mat-card-content class="last-child">
             <h3 style="color: black">{{ 'SIGNIN_ACCOUNT_NOT_ACTIVATED' | translate }}</h3>
           </mat-card-content>
@@ -150,7 +150,7 @@
         </button>
       </div>
 
-      <button (click)="openMobileAppBottomSheet()" mat-stroked-button style="width: 100%; margin-top: 10px;">
+      <button (click)="openMobileAppBottomSheet()" mat-stroked-button style="width: 100%; margin-top: 10px">
         {{ 'SIGNIN_APP_INFO' | translate }}
       </button>
     </mat-card>

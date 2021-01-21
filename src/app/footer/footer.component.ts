@@ -7,14 +7,13 @@ import {TranslateService} from '../translation/translate.service';
 import {SettingsService} from '../utils/settings.service';
 
 import {AboutModalComponent} from './modals/about-modal/about-modal.component';
-import {FeedbackModalComponent} from './modals/feedback-modal/feedback-modal.component';
 
 import {ServerInfoModel} from '../utils/server-info.model';
 
 @Component({
   selector: 'app-footer',
   templateUrl: './footer.component.html',
-  styleUrls: ['./footer.component.css']
+  styleUrls: ['./footer.component.css'],
 })
 export class FooterComponent implements OnDestroy {
   serverInfo: ServerInfoModel;
@@ -34,7 +33,7 @@ export class FooterComponent implements OnDestroy {
     }
 
     this.serverInfo = this.settingsService.getServerInfo();
-    this.serverInfoSubscription = this.settingsService.serverInfoChange.subscribe(value => {
+    this.serverInfoSubscription = this.settingsService.serverInfoChange.subscribe((value) => {
       this.serverInfo = value;
     });
   }
@@ -56,15 +55,9 @@ export class FooterComponent implements OnDestroy {
     });
   }
 
-  openFeedbackModal() {
-    this.dialog.open(FeedbackModalComponent, {
-      width: '90%'
-    });
-  }
-
   openAboutModal() {
     this.dialog.open(AboutModalComponent, {
-      width: '45vh'
+      width: '45vh',
     });
   }
 }

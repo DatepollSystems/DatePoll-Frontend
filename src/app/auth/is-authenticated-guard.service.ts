@@ -8,6 +8,10 @@ export class IsAuthenticatedGuardService implements CanActivate {
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     if (this.authService.isAuthenticated('isAuthenticatedGuard')) {
+      const mode = route.queryParams['mode'];
+      if (mode?.includes('preview')) {
+        return true;
+      }
       this.router.navigate(['/home']);
       return false;
     } else {

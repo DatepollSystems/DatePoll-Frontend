@@ -40,10 +40,15 @@
   "COPIED_LINK": "Link kopiert!",
   "ATTACHMENTS": "Anhänge",
   "CONTENT": "Inhalt",
+  "HELLO": "Hallo",
 
   "LANGUAGE": "Sprache",
   "LANGUAGE_GERMAN": "Deutsch",
-  "LANGUAGE_ENGLISH": "Englisch",
+  "LANGUAGE_ENGLISH": "English",
+  "LANGUAGE_SPANISH": "Español",
+  "LANGUAGE_FRANCE": "Français",
+  "LANGUAGE_ITALIEN": "Italiano",
+  "LANGUAGE_PORTUGUES": "Portugués",
 
   "ABOUT": "Über",
   "ABOUT_GENERAL": "Allgemeines",
@@ -54,7 +59,9 @@
   "ABOUT_BACKEND_VERSION": "Version des Backends: ",
   "ABOUT_NEEDED_BACKEND_VERSION": "Benötigte Backend Version (Zahl): ",
   "ABOUT_LICENSE": "Lizenz",
-
+  "ABOUT_MORE_INFORMATION": "Mehr Informationen über",
+  "ABOUT_FOLLOW_CALENDER": "Verfolge alle Veranstaltungen über den",
+  "ABOUT_FOLLOW_CALENDER_1": "öffentlichen Kalendar",
   "ABOUT_PAGE_STATS_USER": "Benutzer",
   "ABOUT_PAGE_STATS_EVENTS": "Events",
   "ABOUT_PAGE_STATS_MOVIES": "Filme",
@@ -174,7 +181,7 @@
   "MAPS_SHOW_HIDE": "Karte anzeigen / ausblenden",
   "MAPS_CLEAR_SELECTION": "Auswahl entfernen",
 
-  "CINEMA_TICKETS_BOOK_A_TICKET": "Karten reservieren",
+  "CINEMA_TICKETS_BOOK_A_TICKET": "Reservieren",
   "CINEMA_TICKETS_DATE": "Datum:",
   "CINEMA_TICKETS_TRAILER": "Trailer:",
   "CINEMA_TICLETS_TRAILER_WATCH": "Anschauen",
@@ -224,6 +231,7 @@
   "CINEMA_TICKETS_ADMINISTRATION_WORKER": "Kinodienst",
   "CINEMA_TICKETS_ADMINISTRATION_EMERGENCY_WORKER": "Notfall-Kinodienst",
   "CINEMA_TICKETS_ADMINISTRATION_BOOKED_TICKETS": "Gebuchte Karten",
+  "CINEMA_TICKETS_ADMINISTRATION_MAXIMAL_TICKETS": "Maximal buchbare Karten",
   "CINEMA_TICKETS_ADMINISTRATION_ACTION": "Aktionen",
   "CINEMA_TICKETS_ADMINISTRATION_DELETE_MOVIE_BUTTON_TOOLTIP": "Lösche diesen Film",
   "CINEMA_TICKETS_ADMINISTRATION_UPDATE_MOVIE_BUTTON_TOOLTIP": "Bearbeite diesen Film",
@@ -329,7 +337,7 @@
   "SETTINGS_PERSONAL_DATA_MODAL_PHONE_NUMBER_NOT_VALID": "Bitte gib eine Bezeichnung und eine Telefonnummer an!",
 
   "SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_NOTIFY_TITLE": "Email-Benachrichtigungen",
-  "SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_NOTIFY_ME_ON_NEW_EVENT": "Benachrichtige mich per Email über neue Events.",
+  "SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_NOTIFY_ME_ON_NEW_EVENT": "Neues Event",
   "SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_SAVED_SUCCESSFULLY": "Deine Email-Adressen wurden übernommen!",
   "SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_MINIMUM_ONE_EMAIL_ADDRESS": "Es muss mindestens eine Email-Adresse hinterlegt sein!",
 
@@ -417,7 +425,7 @@
   "MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_USERNAME_INCORRECT": "Der Benutzername darf weeder leer sein, noch mehr als 190 Zeichen haben!",
   "MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_EMAIL_ADDRESS": "Email-Adresse",
   "MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_EMAIL_ADDRESS_INCORRECT": "Gib bitte eine gültige Email-Adresse ein!",
-  "MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_EMAIL_ADDRESS_NO_EMAIL_ADDRESSES": "Füge eine Email-Adresse hinzu, damit sie hier angezeigt wird.",
+  "MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_EMAIL_ADDRESS_NO_EMAIL_ADDRESSES": "Dieses Mitglied hat noch keine Email-Adressen eingetragen.",
   "MANAGEMENT_USERS_CREATE_USER_MODAL_LIST_EMAIL_ADDRESSES": "Email-Adressen",
   "MANAGEMENT_USERS_CREATE_USER_MODAL_LIST_EMAIL_ADDRESSES_REMOVE_TOOLTIP": "Entferne diese Email-Adresse",
   "MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_FIRSTNAME": "Vorname",
@@ -445,6 +453,7 @@
   "MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_INFORMATION_DENIED_DESCRIPTION": "Wenn \"Informationsfluss gesperrt\" angehakt ist, wird der jeweilige Benutzer nicht über neue Events oder Mitteilungen informiert.",
   "MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_ACTIVATED_DESCRIPTION": "Wenn \"Account aktiviert\" angehakt ist, wird direkt nach der Erstellung / Bearbeitung des Benutzers eine Einladungsemail versendet.",
   "MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_PHONE_NUMBERS": "Telefonnummern",
+  "MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_PHONE_NUMBERS_NO_PHONE_NUMBERS": "Dieses Mitglied hat noch keine Telefonnummern eingetragen.",
   "MANAGEMENT_USERS_CREATE_USER_MODAL_NO_JOINED_GROUPS": "Das Mitglied ist noch keiner Gruppe oder keinem Register zugeteilt",
   "MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_INTERAL_COMMENT": "Kommentar (Nicht für den Benutzer sichtbar)",
   "MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_PERMISSIONS": "Berechtigungen",
@@ -452,7 +461,7 @@
   "MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_PERMISSIONS_SMALL_1": " auf.",
   "MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_REMOVE_PERMISSION_TOOLTIP": "Entferne diese Berechtigung",
   "MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_PERMISSION": "Berechtigung",
-  "MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_NO_PERMISSIONS_AVAILABLE": "Dieses Mitglied besitzt noch keine Berechtigungen",
+  "MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_NO_PERMISSIONS_AVAILABLE": "Dieses Mitglied hat noch keine Berechtigungen eingetragen.",
   "MANAGEMENT_USERS_CREATE_USER_MODAL_SUCCESSFULLY_CREATED_USER": "Das Mitglied wurde angelegt!",
   "MANAGEMENT_USERS_CREATE_USER_MODAL_PERFORMANCE_BADGES_TITLE": "Leistungsabzeichen",
   "MANAGEMENT_USERS_CREATE_USER_MODAL_PERFORMANCE_BADGES_REMOVE_TOOLTIP": "Entferne dieses Leistungsabzeichen",
@@ -473,7 +482,7 @@
   "MANAGEMENT_USERS_CREATE_USER_MODAL_BADGES_GOT": "Bekommene Abzeichen",
   "MANAGEMENT_USERS_CREATE_USER_MODAL_REMOVE_BADGE": "Entferne das Abzeichen",
   "MANAGEMENT_USERS_CREATE_USER_MODAL_BADGES_EXTRA_REASON": "Grund für außerordentliche Abzeichen",
-  "MANAGEMENT_USERS_CREATE_USER_MODAL_BADGES_EMPTY": "Dieses Mitglied hat noch keine Vereinsabzeichen!",
+  "MANAGEMENT_USERS_CREATE_USER_MODAL_BADGES_EMPTY": "Dieses Mitglied hat noch keine Vereinsabzeichen eingetragen!",
 
   "MANAGEMENT_USERS_UPDATE_USER_MODAL_TITLE": "Bearbeite ",
   "MANAGEMENT_USERS_UPDATE_USER_MODAL_SUCCESSFULLY_UPDATED_USER": "Die Änderungen wurden übernommen!",
@@ -583,6 +592,11 @@
   "MANAGEMENT_DATEPOLL_CINEMA_SERVICE": "Kinoservice",
   "MANAGEMENT_DATEPOLL_EVENTS_SERVICE": "Events",
   "MANAGEMENT_DATEPOLL_BROADCAST_SERVICE": "Mitteilungen",
+  "MANAGEMENT_DATEPOLL_BROADCAST_PROCESS_INCOMING_MAILS": "Verarbeite an die DatePoll-Verteiler E-Mail Addresse gesendete Emails.",
+  "MANAGEMENT_DATEPOLL_BROADCAST_PROCESS_INCOMING_MAILS_FORWARDING": "Leite nicht verarbeitbare E-Mails an definierte E-Mail Addressen weiter.",
+  "MANAGEMENT_DATEPOLL_BROADCAST_PROCESS_INCOMING_MAILS_FORWARDING_EMAIL_ADDRESSES": "E-Mail Addressen für die E-Mail Weiterleitung",
+  "MANAGEMENT_DATEPOLL_BROADCAST_PROCESS_INCOMING_MAILS_FORWARDING_EMAIL_ADDRESSES_PLACEHOLDER": "Neue E-Mail Addresse...",
+  "MANAGEMENT_DATEPOLL_BROADCAST_PROCESS_INCOMING_MAILS_FORWARDING_EMAIL_ADDRESSES_CHANGED_SUCCESSFULLY": "E-Mail Addressen gespeichert!",
 
   "MANAGEMENT_DATEPOLL_COMMUNITY_NAME": "Vereinsname",
   "MANAGEMENT_DATEPOLL_COMMUNITY_NAME_NOT_VALID": "Der Vereinsname darf weder leer sein, noch mehr als 50 Zeichen haben!",
@@ -591,6 +605,8 @@
   "MANAGEMENT_DATEPOLL_COMMUNITY_URL": "Vereinswebsite URL",
   "MANAGEMENT_DATEPOLL_COMMUNITY_URL_NOT_VALID": "Die URL der Vereinswebsite darf weder leer sein, noch mehr als 128 Zeichen haben!",
   "MANAGEMENT_DATEPOLL_COMMUNITY_URL_CHANGED_SUCCESSFULLY": "Die URL zur Vereinswebsite wurde geändert!",
+
+  "MANAGEMENT_DATEPOLL_COMMUNITY_HTML_SUPPORTED": "Hier kann auch HTML verwendet werden.",
 
   "MANAGEMENT_DATEPOLL_COMMUNITY_DESCRIPTION": "Vereinsbeschreibung",
   "MANAGEMENT_DATEPOLL_COMMUNITY_DESCRIPTION_CHANGED_SUCCESSFULLY": "Die Vereinsbeschreibung wurde gespeichert!",
@@ -614,7 +630,7 @@
   "MANAGEMENT_DATEPOLL_OPENWEATHERMAP_CINEMA_CITY_ID_CHANGED_SUCCESSFULLY": "Die Kino City Id wurde geändert!",
 
   "MANAGEMENT_DATEPOLL_ALERT": "Benachrichtigung",
-  "MANAGEMENT_DATEPOLL_ALERT_HELP": "Um die Benachrichtigung zu deaktivieren, entferne alles aus diesem Textfeld.",
+  "MANAGEMENT_DATEPOLL_ALERT_HELP": "Leere das Textfeld um die Benachrichtigung zu löschen.",
   "MANAGEMENT_DATEPOLL_ALERT_TYPE": "Type",
   "MANAGEMENT_DATEPOLL_ALERT_CHANGED_SUCCESSFULLY": "Die Benachrichtigung wurde geändert!",
 

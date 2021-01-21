@@ -9,7 +9,7 @@ import {GroupsService} from '../groups.service';
 @Component({
   selector: 'app-group-create-modal',
   templateUrl: './group-create-modal.component.html',
-  styleUrls: ['./group-create-modal.component.css']
+  styleUrls: ['./group-create-modal.component.css'],
 })
 export class GroupCreateModalComponent {
   constructor(
@@ -24,12 +24,12 @@ export class GroupCreateModalComponent {
 
     const name = form.controls.name.value;
     const description = form.controls.description.value;
-    const orderN = form.controls.orderN.value;
+    const orderN = Number(form.controls.orderN.value);
 
     const group = {
       name,
       description,
-      orderN
+      orderN,
     };
     console.log(group);
 
@@ -42,7 +42,7 @@ export class GroupCreateModalComponent {
           this.translate.getTranslationFor('MANAGEMENT_GROUPS_CREATE_GROUP_SUCCESSFUL')
         );
       },
-      error => {
+      (error) => {
         console.log(error);
         this.groupsService.fetchGroups();
       }
