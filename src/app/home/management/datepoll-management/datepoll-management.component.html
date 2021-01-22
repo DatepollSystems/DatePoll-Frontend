@@ -356,7 +356,7 @@
 
           <mat-divider></mat-divider>
 
-          <h2>OpenWeatherMap Einstellungen</h2>
+          <h2>API Einstellungen</h2>
 
           <form
             #changeOpenWeatherMapKeyForm="ngForm"
@@ -427,6 +427,45 @@
                 mat-flat-button
                 [class.spinner]="openWeatherMapCinemaCityIdSaving"
                 [disabled]="!changeOpenWeatherMapCinemaCityIdForm.valid || openWeatherMapCinemaCityIdSaving"
+                type="submit"
+              >
+                {{ 'SAVE' | translate }}
+              </button>
+            </div>
+          </form>
+
+          <form
+            #changeJitsiMeetInstanceUrlForm="ngForm"
+            (ngSubmit)="changeJitsiMeetInstanceUrl(changeJitsiMeetInstanceUrlForm)"
+            fxLayout="row wrap"
+            fxLayoutGap="2%"
+            fxLayout.xs="column"
+          >
+            <mat-form-field fxFlex="60%">
+              <input
+                #jitsiInstanceUrlModel="ngModel"
+                [(ngModel)]="jitsiMeetInstanceUrl"
+                matInput
+                maxlength="190"
+                name="jitsiMeetInstanceUrl"
+                id="jitsiMeetInstanceUrl"
+                ngModel
+                placeholder="{{ 'MANAGEMENT_DATEPOLL_JITSI_MEET_INSTANCE_URL' | translate }}"
+                type="text"
+              />
+              <small *ngIf="!jitsiMeetInstanceUrl">{{ 'MANAGEMENT_DATEPOLL_JITSI_MEET_INSTANCE_URL_HELP' | translate }}</small>
+              <mat-error *ngIf="jitsiInstanceUrlModel.invalid">
+                {{ 'MANAGEMENT_DATEPOLL_JITSI_MEET_INSTANCE_URL_INVALID' | translate }}
+              </mat-error>
+            </mat-form-field>
+
+            <div fxFlex.xs="100%">
+              <button
+                style="width: 100%"
+                color="accent"
+                mat-flat-button
+                [class.spinner]="jitsiMeetInstanceUrlSaving"
+                [disabled]="!changeJitsiMeetInstanceUrlForm.valid || jitsiMeetInstanceUrlSaving"
                 type="submit"
               >
                 {{ 'SAVE' | translate }}

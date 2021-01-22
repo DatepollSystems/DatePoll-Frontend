@@ -1,10 +1,11 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {EventDate} from '../../models/event-date.model';
+import {UIHelper} from '../../../../utils/helper/UIHelper';
 
 @Component({
   selector: 'app-event-dates-user-list',
   templateUrl: './event-dates-user-list.component.html',
-  styleUrls: ['./event-dates-user-list.component.css']
+  styleUrls: ['./event-dates-user-list.component.css'],
 })
 export class EventDatesUserListComponent implements OnInit {
   @Input()
@@ -22,5 +23,9 @@ export class EventDatesUserListComponent implements OnInit {
         break;
       }
     }
+  }
+
+  isUrl(url: string) {
+    return UIHelper.isStringUrl(url);
   }
 }

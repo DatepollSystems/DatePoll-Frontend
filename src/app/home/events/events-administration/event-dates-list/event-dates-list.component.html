@@ -30,10 +30,19 @@
           target="_blank"
           rel="noopener"
           href="https://www.google.com/maps/search/?api=1&query={{ date.location }}"
-          *ngIf="date.location?.length > 0 && date?.x === -199 && date?.y === -199"
+          *ngIf="date.location?.length > 0 && date?.x === -199 && date?.y === -199 && !isUrl(date.location)"
         >
           {{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE_LIST_OPEN_LOCATION_4' | translate }}{{ date.location
           }}{{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE_LIST_OPEN_LOCATION_5' | translate }}
+        </a>
+
+        <a
+          target="_blank"
+          rel="noopener"
+          href="{{ date.location }}"
+          *ngIf="date.location?.length > 0 && date?.x === -199 && date?.y === -199 && isUrl(date.location)"
+        >
+          {{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE_LIST_OPEN_LOCATION_LINK' | translate }}
         </a>
       </mat-panel-description>
     </mat-expansion-panel-header>
@@ -53,10 +62,10 @@
 
     <div *ngIf="isMobile" fxLayout="column" fxLayoutAlign="center">
       <a
-        mat-flat-button
+        mat-stroked-button
         target="_blank"
         rel="noopener"
-        color="accent"
+        color="primary"
         href="https://www.google.com/maps/place/{{ date.x }}+{{ date.y }}"
         *ngIf="date.location?.length > 0 && date?.x !== -199 && date?.y !== -199"
       >
@@ -65,10 +74,10 @@
       </a>
 
       <a
-        mat-flat-button
+        mat-stroked-button
         target="_blank"
         rel="noopener"
-        color="accent"
+        color="primary"
         href="https://www.google.com/maps/place/{{ date.x }}+{{ date.y }}"
         *ngIf="(date.location == null || date.location?.length == 0) && date?.x !== -199 && date?.y !== -199"
       >
@@ -76,15 +85,26 @@
       </a>
 
       <a
-        mat-flat-button
+        mat-stroked-button
         target="_blank"
         rel="noopener"
-        color="accent"
+        color="primary"
         href="https://www.google.com/maps/search/?api=1&query={{ date.location }}"
-        *ngIf="date.location?.length > 0 && date?.x === -199 && date?.y === -199"
+        *ngIf="date.location?.length > 0 && date?.x === -199 && date?.y === -199 && !isUrl(date.location)"
       >
         {{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE_LIST_OPEN_LOCATION_4' | translate }}{{ date.location
         }}{{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE_LIST_OPEN_LOCATION_5' | translate }}
+      </a>
+
+      <a
+        mat-stroked-button
+        target="_blank"
+        rel="noopener"
+        color="primary"
+        href="{{ date.location }}"
+        *ngIf="date.location?.length > 0 && date?.x === -199 && date?.y === -199 && isUrl(date.location)"
+      >
+        {{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE_LIST_OPEN_LOCATION_LINK' | translate }}
       </a>
     </div>
 

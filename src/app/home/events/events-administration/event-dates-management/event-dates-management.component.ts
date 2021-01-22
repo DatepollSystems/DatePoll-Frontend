@@ -8,11 +8,13 @@ import {MapsComponentComponent} from '../../../../utils/shared-components/maps-c
 
 import {EventDate} from '../../models/event-date.model';
 import {EventStandardLocation} from '../../models/event-standard-location.model';
+import {SettingsService} from '../../../../utils/settings.service';
+import {Generator} from '../../../../utils/helper/Generator';
 
 @Component({
   selector: 'app-event-dates-management',
   templateUrl: './event-dates-management.component.html',
-  styleUrls: ['./event-dates-management.component.css']
+  styleUrls: ['./event-dates-management.component.css'],
 })
 export class EventDatesManagementComponent implements OnDestroy {
   @Input()
@@ -34,15 +36,24 @@ export class EventDatesManagementComponent implements OnDestroy {
   isMobile = true;
   isMobileSubscription: Subscription;
 
-  constructor(private isMobileService: IsMobileService) {
+  jitsiMeetInstanceUrl: string;
+  jitsiMeetInstanceUrlSubscription: Subscription;
+
+  constructor(private isMobileService: IsMobileService, private settingsService: SettingsService) {
     this.isMobile = this.isMobileService.getIsMobile();
-    this.isMobileSubscription = this.isMobileService.isMobileChange.subscribe(value => {
+    this.isMobileSubscription = this.isMobileService.isMobileChange.subscribe((value) => {
       this.isMobile = value;
+    });
+
+    this.jitsiMeetInstanceUrl = this.settingsService.getJistiMeetInstanceUrl();
+    this.jitsiMeetInstanceUrlSubscription = this.settingsService.jitsiMeetInstanceUrlChange.subscribe((value) => {
+      this.jitsiMeetInstanceUrl = value;
     });
   }
 
   ngOnDestroy() {
     this.isMobileSubscription.unsubscribe();
+    this.jitsiMeetInstanceUrlSubscription.unsubscribe();
   }
 
   onStandardLocationChanged(standardLocation: EventStandardLocation) {
@@ -68,6 +79,10 @@ export class EventDatesManagementComponent implements OnDestroy {
   onCoordinatesChange(coordinates: any) {
     this.x = coordinates.x;
     this.y = coordinates.y;
+  }
+
+  generateRandomJitsiMeetConferenceUrl() {
+    this.location = this.jitsiMeetInstanceUrl + '/' + Generator.generateRandomString(10);
   }
 
   save(form: NgForm) {
