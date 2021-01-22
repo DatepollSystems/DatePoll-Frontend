@@ -5,10 +5,10 @@ import {AuthService} from '../auth/auth.service';
 import {HttpService} from '../utils/http.service';
 import {Permissions} from '../permissions';
 import {PhoneNumber} from './phoneNumber.model';
-import {Converter} from '../utils/converter';
+import {Converter} from '../utils/helper/Converter';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class MyUserService {
   public firstnameChange: Subject<string> = new Subject<string>();
@@ -65,7 +65,7 @@ export class MyUserService {
         }
         this.setPhoneNumbers(localPhoneNumbers);
       },
-      error => console.log(error)
+      (error) => console.log(error)
     );
   }
 
@@ -76,7 +76,7 @@ export class MyUserService {
       streetnumber: this.getStreetnumber(),
       zipcode: this.getZipcode(),
       location: this.getLocation(),
-      birthday: Converter.getDateFormatted(this.getBirthday())
+      birthday: Converter.getDateFormatted(this.getBirthday()),
     };
 
     return this.httpService.loggedInV1PUTRequest('/user/myself', userObject, 'updateMyself');
@@ -180,7 +180,7 @@ export class MyUserService {
 
   public setEmailAddressesPerRequest(emailAddresses: string[]) {
     const request = {
-      email_addresses: emailAddresses
+      email_addresses: emailAddresses,
     };
     return this.httpService.loggedInV1POSTRequest('/user/myself/changeEmailAddresses', request, 'updateEmailAddresses');
   }

@@ -3,7 +3,7 @@ import {NotificationsService} from 'angular2-notifications';
 
 import {CinemaService} from '../../cinema.service';
 import {TranslateService} from '../../../../translation/translate.service';
-import {Converter} from '../../../../utils/converter';
+import {Converter} from '../../../../utils/helper/Converter';
 
 @Component({
   selector: 'app-movie-create-modal',

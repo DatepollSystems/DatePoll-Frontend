@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Subject} from 'rxjs';
 
-import {Converter} from '../../utils/converter';
+import {Converter} from '../../utils/helper/Converter';
 import {HttpService} from '../../utils/http.service';
 
 import {Decision} from './models/decision.model';
@@ -9,7 +9,7 @@ import {EventDate} from './models/event-date.model';
 import {Event} from './models/event.model';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class EventsUserService {
   public eventsChange: Subject<Event[]> = new Subject<Event[]>();
@@ -74,7 +74,7 @@ export class EventsUserService {
 
         this.setEvents(events);
       },
-      error => console.log(error)
+      (error) => console.log(error)
     );
   }
 
@@ -82,7 +82,7 @@ export class EventsUserService {
     const dto = {
       event_id: eventId,
       decision_id: decision.id,
-      additional_information: additionalInformation
+      additional_information: additionalInformation,
     };
     return this.httpService.loggedInV1POSTRequest('/avent/vote', dto, 'voteForDecision');
   }

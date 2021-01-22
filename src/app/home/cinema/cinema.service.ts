@@ -4,7 +4,7 @@ import {Subject} from 'rxjs';
 import {AuthService} from '../../auth/auth.service';
 import {HttpService} from '../../utils/http.service';
 import {Movie, MovieBookingUser} from './models/movie.model';
-import {Converter} from '../../utils/converter';
+import {Converter} from '../../utils/helper/Converter';
 
 @Injectable({
   providedIn: 'root',

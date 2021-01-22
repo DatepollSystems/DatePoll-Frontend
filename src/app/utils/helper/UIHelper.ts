@@ -14,4 +14,18 @@ export class UIHelper {
       return days + 'd';
     }
   }
+
+  public static isStringUrl(url: string) {
+    // http://www.at
+    if (url.length < 13) {
+      return false;
+    }
+    if (!url.includes('http') && !url.includes('https')) {
+      return false;
+    }
+    if (!url.includes('.') || !url.includes(':') || !url.includes('//')) {
+      return false;
+    }
+    return true;
+  }
 }

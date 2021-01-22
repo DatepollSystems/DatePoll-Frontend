@@ -5,10 +5,10 @@ import {HttpService} from '../../../utils/http.service';
 
 import {UserBadge} from '../users-management/badges-list/userBadge.model';
 import {Badge} from './models/badge.model';
-import {Converter} from '../../../utils/converter';
+import {Converter} from '../../../utils/helper/Converter';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class BadgesService {
   public badgesChange: Subject<Badge[]> = new Subject<Badge[]>();
@@ -46,14 +46,14 @@ export class BadgesService {
 
         this.setBadges(badgesToSave);
       },
-      error => console.log(error)
+      (error) => console.log(error)
     );
   }
 
   public addBadge(description: string, afterYears: number) {
     const dto = {
       description,
-      after_years: afterYears
+      after_years: afterYears,
     };
 
     return this.httpService.loggedInV1POSTRequest('/management/badges', dto, 'addBadge');
@@ -68,7 +68,7 @@ export class BadgesService {
       description,
       get_date: Converter.getDateFormatted(getDate),
       reason,
-      user_id: userId
+      user_id: userId,
     };
     return this.httpService.loggedInV1POSTRequest('/management/badgeForUser', dto, 'addBadgeForUser');
   }

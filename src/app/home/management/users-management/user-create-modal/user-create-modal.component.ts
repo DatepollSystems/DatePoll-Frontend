@@ -6,7 +6,7 @@ import {Subscription} from 'rxjs';
 import {NotificationsService} from 'angular2-notifications';
 
 import {TranslateService} from '../../../../translation/translate.service';
-import {Converter} from '../../../../utils/converter';
+import {Converter} from '../../../../utils/helper/Converter';
 import {IsMobileService} from '../../../../utils/is-mobile.service';
 import {MyUserService} from '../../../my-user.service';
 import {GroupsService} from '../../groups-management/groups.service';
@@ -24,7 +24,7 @@ import {UserPerformanceBadge} from '../userPerformanceBadge.model';
 @Component({
   selector: 'app-user-create-modal',
   templateUrl: './user-create-modal.component.html',
-  styleUrls: ['./user-create-modal.component.css']
+  styleUrls: ['./user-create-modal.component.css'],
 })
 export class UserCreateModalComponent implements OnDestroy {
   usernames: string[] = [];
@@ -61,7 +61,7 @@ export class UserCreateModalComponent implements OnDestroy {
   ) {
     this.free = this.groupsService.getGroupsAndSubgroups();
     this.joined = [];
-    this.groupsSubscription = this.groupsService.groupsAndSubgroupsChange.subscribe(value => {
+    this.groupsSubscription = this.groupsService.groupsAndSubgroupsChange.subscribe((value) => {
       this.free = value;
       this.joined = [];
     });
@@ -74,7 +74,7 @@ export class UserCreateModalComponent implements OnDestroy {
     }
 
     this.isMobile = this.isMobileService.getIsMobile();
-    this.isMobileSubscription = this.isMobileService.isMobileChange.subscribe(value => {
+    this.isMobileSubscription = this.isMobileService.isMobileChange.subscribe((value) => {
       this.isMobile = value;
     });
   }
@@ -154,7 +154,7 @@ export class UserCreateModalComponent implements OnDestroy {
     for (const phoneNumber of this.phoneNumbers) {
       const phoneNumberObject = {
         label: phoneNumber.label,
-        number: phoneNumber.phoneNumber
+        number: phoneNumber.phoneNumber,
       };
       phoneNumbersObject.push(phoneNumberObject);
     }
@@ -178,7 +178,7 @@ export class UserCreateModalComponent implements OnDestroy {
       internal_comment: internalComment,
       email_addresses: this.emailAddresses,
       phone_numbers: phoneNumbersObject,
-      permissions: this.permissions
+      permissions: this.permissions,
     };
     console.log(userObject);
 
@@ -199,7 +199,7 @@ export class UserCreateModalComponent implements OnDestroy {
                 (sdata: any) => {
                   console.log(sdata);
                 },
-                error => console.log(error)
+                (error) => console.log(error)
               );
             }
           }
@@ -210,7 +210,7 @@ export class UserCreateModalComponent implements OnDestroy {
                 (sdata: any) => {
                   console.log(sdata);
                 },
-                error => console.log(error)
+                (error) => console.log(error)
               );
             }
           }
@@ -222,7 +222,7 @@ export class UserCreateModalComponent implements OnDestroy {
           for (const userPerformanceBadge of this.userPerformanceBadges) {
             this.performanceBadgesService.addUserHasPerformanceBadgeWithInstrument(userID, userPerformanceBadge).subscribe(
               (sdata: any) => console.log(sdata),
-              error => console.log(error)
+              (error) => console.log(error)
             );
           }
         }
@@ -233,7 +233,7 @@ export class UserCreateModalComponent implements OnDestroy {
           for (const badge of this.userBadges) {
             this.badgesService.addBadgeToUser(badge.description, badge.getDate, badge.reason, userID).subscribe(
               (sdata: any) => console.log(sdata),
-              error => console.log(error)
+              (error) => console.log(error)
             );
           }
         }
@@ -245,7 +245,7 @@ export class UserCreateModalComponent implements OnDestroy {
           this.translate.getTranslationFor('MANAGEMENT_USERS_CREATE_USER_MODAL_SUCCESSFULLY_CREATED_USER')
         );
       },
-      error => {
+      (error) => {
         console.log(error);
         this.usersService.fetchUsers();
       }

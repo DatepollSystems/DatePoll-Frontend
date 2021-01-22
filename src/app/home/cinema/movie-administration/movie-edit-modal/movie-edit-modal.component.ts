@@ -4,7 +4,7 @@ import {NotificationsService} from 'angular2-notifications';
 import {Subscription} from 'rxjs';
 
 import {CinemaService} from '../../cinema.service';
-import {Converter} from '../../../../utils/converter';
+import {Converter} from '../../../../utils/helper/Converter';
 import {TranslateService} from '../../../../translation/translate.service';
 
 import {Movie} from '../../models/movie.model';

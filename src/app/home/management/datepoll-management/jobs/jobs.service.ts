@@ -1,13 +1,13 @@
 import {Injectable} from '@angular/core';
 import {Subject} from 'rxjs';
 
-import {Converter} from '../../../../utils/converter';
+import {Converter} from '../../../../utils/helper/Converter';
 import {HttpService} from '../../../../utils/http.service';
 
 import {Job} from './jobs.model';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class JobsService {
   private jobs: Job[] = [];
@@ -37,7 +37,7 @@ export class JobsService {
 
         this.setJobs(jobs);
       },
-      error => console.log(error)
+      (error) => console.log(error)
     );
   }
 }
