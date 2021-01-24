@@ -4,11 +4,12 @@ import {Subscription} from 'rxjs';
 import {IsMobileService} from '../../../../utils/is-mobile.service';
 
 import {EventDate} from '../../models/event-date.model';
+import {UIHelper} from '../../../../utils/helper/UIHelper';
 
 @Component({
   selector: 'app-event-dates-list',
   templateUrl: './event-dates-list.component.html',
-  styleUrls: ['./event-dates-list.component.css']
+  styleUrls: ['./event-dates-list.component.css'],
 })
 export class EventDatesListComponent implements OnDestroy {
   @Input()
@@ -22,13 +23,17 @@ export class EventDatesListComponent implements OnDestroy {
 
   constructor(private isMobileService: IsMobileService) {
     this.isMobile = this.isMobileService.getIsMobile();
-    this.isMobileSubscription = this.isMobileService.isMobileChange.subscribe(value => {
+    this.isMobileSubscription = this.isMobileService.isMobileChange.subscribe((value) => {
       this.isMobile = value;
     });
   }
 
   ngOnDestroy(): void {
     this.isMobileSubscription.unsubscribe();
+  }
+
+  isUrl(url: string): boolean {
+    return UIHelper.isStringUrl(url);
   }
 
   deleteDate(dateToDelete: EventDate) {

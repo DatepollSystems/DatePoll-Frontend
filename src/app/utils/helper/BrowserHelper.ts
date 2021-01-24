@@ -1,4 +1,4 @@
-export class Browser {
+export class BrowserHelper {
   public static getInfos(): any {
     const unknown = '-';
 
@@ -121,7 +121,7 @@ export class Browser {
       {s: 'UNIX', r: /UNIX/},
       {s: 'BeOS', r: /BeOS/},
       {s: 'OS/2', r: /OS\/2/},
-      {s: 'Search Bot', r: /(nuhk|Googlebot|Yammybot|Openbot|Slurp|MSNBot|Ask Jeeves\/Teoma|ia_archiver)/}
+      {s: 'Search Bot', r: /(nuhk|Googlebot|Yammybot|Openbot|Slurp|MSNBot|Ask Jeeves\/Teoma|ia_archiver)/},
     ];
     for (const clientString of clientStrings) {
       const cs = clientString;
@@ -138,7 +138,7 @@ export class Browser {
       majorVersion: majorVersion,
       mobile: mobile,
       os: os,
-      cookies: cookieEnabled
+      cookies: cookieEnabled,
     };
   }
 }

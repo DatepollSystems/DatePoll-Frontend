@@ -1,4 +1,4 @@
-import {Browser} from './browser';
+import {BrowserHelper} from './BrowserHelper';
 
 export class Converter {
   public static stringToBoolean(string: string): boolean {
@@ -60,7 +60,7 @@ export class Converter {
   public static getIOSDate(value: string): Date {
     const temp = value.toString().replace(' ', 'T');
     let date = new Date(temp);
-    if (Browser.getInfos().name.includes('Safari')) {
+    if (BrowserHelper.getInfos().name.includes('Safari')) {
       const dDate = temp.split('T')[0].replace(/-/g, '/');
       date = new Date(dDate);
       if (temp.includes('T')) {

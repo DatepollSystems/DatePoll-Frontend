@@ -6,7 +6,7 @@
       </mat-panel-title>
     </mat-expansion-panel-header>
 
-    <form #form="ngForm" (ngSubmit)="save(form)" style="margin-bottom: 15px;">
+    <form #form="ngForm" (ngSubmit)="save(form)" style="margin-bottom: 15px">
       <div fxLayout="row wrap" fxLayoutGap="2%" fxLayoutAlign="space-between">
         <app-event-standard-locations-select
           fxFlex="69%"
@@ -22,7 +22,7 @@
         </div>
       </div>
 
-      <div fxLayout="row wrap" fxLayoutGap="2%" style="margin-top: 15px;" fxLayoutAlign="space-between">
+      <div fxLayout="row wrap" fxLayoutGap="2%" style="margin-top: 15px" fxLayoutAlign="space-between">
         <mat-form-field fxFlex.xs="98%" fxFlex="24%">
           <input
             [(ngModel)]="createNewEventDateDate"
@@ -109,7 +109,7 @@
           </mat-error>
         </mat-form-field>
 
-        <mat-form-field fxFlex.xs="98%" fxFlex="65%">
+        <mat-form-field fxFlex.xs="98%" fxFlex="60%">
           <input
             #locationModel="ngModel"
             id="location"
@@ -121,12 +121,30 @@
             placeholder="{{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_LOCATION' | translate }}"
             [(ngModel)]="location"
           />
+
+          <small>{{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_LOCATION_HELP' | translate }}</small>
           <mat-error *ngIf="locationModel.invalid">
             {{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_LOCATION_INCORRECT' | translate }}
           </mat-error>
         </mat-form-field>
 
-        <div fxFlex.xs="98%" fxFlex="25%">
+        <div fxFlex.xs="49%" fxFlex="8%">
+          <button
+            mat-stroked-button
+            type="button"
+            style="width: 100%"
+            color="primary"
+            (click)="generateRandomJitsiMeetConferenceUrl()"
+            *ngIf="jitsiMeetInstanceUrl?.length > 0"
+            matTooltip="{{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_LOCATION_GENERATE_JTSI_CONFERENCE_LINK_TOOLTIP' | translate }}"
+            matTooltipPosition="above"
+          >
+            <mat-icon>refresh</mat-icon>
+            <mat-icon>video_call</mat-icon>
+          </button>
+        </div>
+
+        <div fxFlex.xs="49%" fxFlex="19%">
           <button
             mat-flat-button
             type="button"

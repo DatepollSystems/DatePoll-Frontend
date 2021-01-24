@@ -2,7 +2,7 @@ import {Component, OnDestroy} from '@angular/core';
 import {Subscription} from 'rxjs';
 
 import {CinemaUserService} from '../cinema-user.service';
-import {Converter} from '../../../utils/converter';
+import {Converter} from '../../../utils/helper/Converter';
 
 import {Movie} from '../models/movie.model';
 

@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {environment} from '../../../../../environments/environment';
-import {ClipboardHelper} from '../../../../utils/clipboard';
+import {ClipboardHelper} from '../../../../utils/helper/ClipboardHelper';
 import {SettingsService} from '../../../../utils/settings.service';
 
 @Component({

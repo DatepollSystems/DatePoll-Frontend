@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 
 import {Subject} from 'rxjs';
 
-import {Converter} from '../../utils/converter';
+import {Converter} from '../../utils/helper/Converter';
 import {HttpService} from '../../utils/http.service';
 
 import {TranslateService} from '../../translation/translate.service';
@@ -14,7 +14,7 @@ import {HomeBirthdayModel} from './birthdays.model';
 import {HomeBookingsModel} from './bookings.model';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class HomepageService {
   public birthdaysChange: Subject<HomeBirthdayModel[]> = new Subject<HomeBirthdayModel[]>();
@@ -150,7 +150,7 @@ export class HomepageService {
         }
         this.setBroadcasts(broadcasts);
       },
-      error => console.log(error)
+      (error) => console.log(error)
     );
   }
 

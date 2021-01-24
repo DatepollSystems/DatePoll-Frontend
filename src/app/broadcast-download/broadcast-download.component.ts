@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {environment} from '../../environments/environment';
-import {ClipboardHelper} from '../utils/clipboard';
+import {ClipboardHelper} from '../utils/helper/ClipboardHelper';
 
 @Component({
   selector: 'app-broadcast-download',

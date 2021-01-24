@@ -6,7 +6,7 @@ import {Subscription} from 'rxjs';
 import {NotificationsService} from 'angular2-notifications';
 
 import {TranslateService} from '../../../../translation/translate.service';
-import {Converter} from '../../../../utils/converter';
+import {Converter} from '../../../../utils/helper/Converter';
 import {MyUserService} from '../../../my-user.service';
 import {GroupsService} from '../../groups-management/groups.service';
 import {BadgesService} from '../../performance-badges-management/badges.service';
@@ -24,7 +24,7 @@ import {UserPerformanceBadge} from '../userPerformanceBadge.model';
 @Component({
   selector: 'app-user-update-modal',
   templateUrl: './user-update-modal.component.html',
-  styleUrls: ['./user-update-modal.component.css']
+  styleUrls: ['./user-update-modal.component.css'],
 })
 export class UserUpdateModalComponent implements OnDestroy {
   usernames: string[] = [];
@@ -112,14 +112,14 @@ export class UserUpdateModalComponent implements OnDestroy {
 
     this.joined = this.usersService.getJoinedOfUser(this.user.id);
     this.joinedCopy = this.joined.slice();
-    this.joinedSubscription = this.usersService.joinedGroupsChange.subscribe(value => {
+    this.joinedSubscription = this.usersService.joinedGroupsChange.subscribe((value) => {
       this.joined = value;
       this.joinedCopy = this.joined.slice();
     });
 
     this.free = this.usersService.getFreeOfUser(this.user.id);
     this.freeCopy = this.free.slice();
-    this.freeSubscription = this.usersService.freeGroupsChange.subscribe(value => {
+    this.freeSubscription = this.usersService.freeGroupsChange.subscribe((value) => {
       this.free = value;
       this.freeCopy = this.free.slice();
     });
@@ -131,7 +131,7 @@ export class UserUpdateModalComponent implements OnDestroy {
         this.userPerformanceBadgeCount = performanceBadge.id + 1;
       }
     }
-    this.userPerformanceBadgesSubscription = this.performanceBadgesService.userPerformanceBadgesChange.subscribe(value => {
+    this.userPerformanceBadgesSubscription = this.performanceBadgesService.userPerformanceBadgesChange.subscribe((value) => {
       this.userPerformanceBadges = value;
       this.userPerformanceBadgesCopy = this.userPerformanceBadges.slice();
       for (const performanceBadge of this.userPerformanceBadges) {
@@ -150,13 +150,13 @@ export class UserUpdateModalComponent implements OnDestroy {
 
     this.userBadges = this.badgesService.getUserBadges(this.user.id);
     this.userBadgesCopy = this.userBadges.slice();
-    this.userBadgesSubscription = this.badgesService.userBadgesChange.subscribe(value => {
+    this.userBadgesSubscription = this.badgesService.userBadgesChange.subscribe((value) => {
       this.userBadges = value;
       this.userBadgesCopy = this.userBadges.slice();
     });
 
     this.isMobile = this.isMobileService.getIsMobile();
-    this.isMobileSubscription = this.isMobileService.isMobileChange.subscribe(value => {
+    this.isMobileSubscription = this.isMobileService.isMobileChange.subscribe((value) => {
       this.isMobile = value;
     });
   }
@@ -186,7 +186,7 @@ export class UserUpdateModalComponent implements OnDestroy {
           this.translate.getTranslationFor('MANAGEMENT_USERS_UPDATE_USER_MODAL_PASSWORD_CHANGE_SUCCESSFUL')
         );
       },
-      error => console.log(error)
+      (error) => console.log(error)
     );
   }
 
@@ -262,7 +262,7 @@ export class UserUpdateModalComponent implements OnDestroy {
     for (const phoneNumber of this.phoneNumbers) {
       const phoneNumberObject = {
         label: phoneNumber.label,
-        number: phoneNumber.phoneNumber
+        number: phoneNumber.phoneNumber,
       };
       phoneNumbersObject.push(phoneNumberObject);
     }
@@ -286,7 +286,7 @@ export class UserUpdateModalComponent implements OnDestroy {
       internal_comment: internalComment,
       email_addresses: this.emailAddresses,
       phone_numbers: phoneNumbersObject,
-      permissions: this.permissions
+      permissions: this.permissions,
     };
     console.log(userObject);
 
@@ -310,7 +310,7 @@ export class UserUpdateModalComponent implements OnDestroy {
           this.translate.getTranslationFor('MANAGEMENT_USERS_UPDATE_USER_MODAL_SUCCESSFULLY_UPDATED_USER')
         );
       },
-      error => {
+      (error) => {
         console.log(error);
         this.usersService.fetchUsers();
       }
@@ -336,7 +336,7 @@ export class UserUpdateModalComponent implements OnDestroy {
         );
         this.performanceBadgesService.addUserHasPerformanceBadgeWithInstrument(this.user.id, userPerformanceBadge).subscribe(
           (data: any) => console.log(data),
-          error => console.log(error)
+          (error) => console.log(error)
         );
       }
     }
@@ -366,7 +366,7 @@ export class UserUpdateModalComponent implements OnDestroy {
         );
         this.performanceBadgesService.removeUserHasPerformanceBadgeWithInstrument(userPerformanceBadgeCopy.id).subscribe(
           (data: any) => console.log(data),
-          error => console.log(error)
+          (error) => console.log(error)
         );
       }
     }
@@ -387,7 +387,7 @@ export class UserUpdateModalComponent implements OnDestroy {
         console.log('badge | toAdd | true | ' + badge.description + ' | ' + badge.getDate + ' | ' + badge.reason);
         this.badgesService.addBadgeToUser(badge.description, badge.getDate, badge.reason, this.user.id).subscribe(
           (data: any) => console.log(data),
-          error => console.log(error)
+          (error) => console.log(error)
         );
       }
     }
@@ -409,7 +409,7 @@ export class UserUpdateModalComponent implements OnDestroy {
         );
         this.badgesService.removeBadgeFromUser(badgeCopy.id).subscribe(
           (data: any) => console.log(data),
-          error => console.log(error)
+          (error) => console.log(error)
         );
       }
     }
@@ -436,7 +436,7 @@ export class UserUpdateModalComponent implements OnDestroy {
             (data: any) => {
               console.log(data);
             },
-            error => console.log(error)
+            (error) => console.log(error)
           );
         }
       }
@@ -465,7 +465,7 @@ export class UserUpdateModalComponent implements OnDestroy {
             (data: any) => {
               console.log(data);
             },
-            error => console.log(error)
+            (error) => console.log(error)
           );
         }
       }
@@ -492,7 +492,7 @@ export class UserUpdateModalComponent implements OnDestroy {
             (data: any) => {
               console.log(data);
             },
-            error => console.log(error)
+            (error) => console.log(error)
           );
         }
       }
@@ -520,7 +520,7 @@ export class UserUpdateModalComponent implements OnDestroy {
             (data: any) => {
               console.log(data);
             },
-            error => console.log(error)
+            (error) => console.log(error)
           );
         }
       }
@@ -529,5 +529,5 @@ export class UserUpdateModalComponent implements OnDestroy {
 }
 
 async function sleep(msec) {
-  return new Promise(resolve => setTimeout(resolve, msec * 2));
+  return new Promise((resolve) => setTimeout(resolve, msec * 2));
 }

@@ -19,6 +19,8 @@ export class SettingsService {
   private _alert: any;
   public broadcastIncomingMailForwardingEmailAddressesChange: Subject<string[]> = new Subject<string[]>();
   private _broadcastIncomingMailForwardingEmailAddresses: string[] = [];
+  public jitsiMeetInstanceUrlChange: Subject<string> = new Subject<string>();
+  private _jitsiMeetInstanceUrl: string;
 
   public serverInfoChange: Subject<ServerInfoModel> = new Subject<ServerInfoModel>();
   private _serverInfo = new ServerInfoModel();
@@ -205,6 +207,15 @@ export class SettingsService {
     return this.httpService.setSettingsRequest('/alert', alert, 'setAlert');
   }
 
+  public setAdminJitsiMeetInstanceUrl(instanceUrl: string) {
+    this.setJitsiMeetInstanceUrl(instanceUrl);
+    const body = {
+      instance_url: instanceUrl,
+    };
+
+    return this.httpService.setSettingsRequest('/jitsiInstanceUrl', body, 'setJitsiInstanceUrl');
+  }
+
   public getOpenWeatherMapKey(): string {
     this.httpService.getSettingRequest('/openweathermap/key', 'settingsOpenWeatherMapKey').subscribe(
       (response: any) => {
@@ -229,7 +240,10 @@ export class SettingsService {
 
   public getBroadcastIncomingMailForwardingEmailAddresses(): string[] {
     this.httpService
-      .getSettingRequest('/broadcast/forwardIncomingEmailsEmailAddresses', 'settingsBroadcastIncomingMailForwardingEmailAddresses')
+      .loggedInV1GETRequest(
+        '/system/settings/broadcast/forwardIncomingEmailsEmailAddresses',
+        'settingsBroadcastIncomingMailForwardingEmailAddresses'
+      )
       .subscribe(
         (response: any) => {
           console.log(response);
@@ -249,6 +263,17 @@ export class SettingsService {
       (error) => console.log(error)
     );
     return this._alert;
+  }
+
+  public getJistiMeetInstanceUrl(): string {
+    this.httpService.getSettingRequest('/jitsiInstanceUrl', 'getJitsiInstanceUrl').subscribe(
+      (response: any) => {
+        console.log(response);
+        this.setJitsiMeetInstanceUrl(response.instance_url);
+      },
+      (error) => console.log(error)
+    );
+    return this._jitsiMeetInstanceUrl;
   }
 
   private setShowCinema(showCinema: boolean) {
@@ -309,6 +334,11 @@ export class SettingsService {
   private setAlert(alert: any) {
     this._alert = alert;
     this.alertChange.next(this._alert);
+  }
+
+  private setJitsiMeetInstanceUrl(instanceUrl: string) {
+    this._jitsiMeetInstanceUrl = instanceUrl;
+    this.jitsiMeetInstanceUrlChange.next(this._jitsiMeetInstanceUrl);
   }
 
   private updateLocalServerInfo() {

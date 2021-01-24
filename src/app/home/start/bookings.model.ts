@@ -1,4 +1,4 @@
-import {UIHelper} from '../../utils/UIHelper';
+import {UIHelper} from '../../utils/helper/UIHelper';
 
 export class HomeBookingsModel {
   public readonly movieID: number;

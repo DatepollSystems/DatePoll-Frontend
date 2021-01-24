@@ -3,10 +3,10 @@ import {Injectable} from '@angular/core';
 import {tap} from 'rxjs/operators';
 
 import {environment} from '../../environments/environment';
-import {Browser} from '../utils/browser';
+import {BrowserHelper} from '../utils/helper/BrowserHelper';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
   apiUrl = environment.apiUrl;
@@ -23,12 +23,12 @@ export class AuthService {
   }
 
   public trySignin(username: string, password: string) {
-    const browser = Browser.getInfos();
+    const browser = BrowserHelper.getInfos();
     const signInObject = {
       username,
       password,
       stay_logged_in: true,
-      session_information: browser.name + ' - ' + browser.majorVersion + '; OS: ' + browser.os + '; Phone: ' + browser.mobile
+      session_information: browser.name + ' - ' + browser.majorVersion + '; OS: ' + browser.os + '; Phone: ' + browser.mobile,
     };
 
     return this.http.post(this.apiUrl + '/auth/signin', signInObject, {headers: this.httpHeaders});
@@ -41,7 +41,7 @@ export class AuthService {
 
   public logout() {
     const object = {
-      session_token: this.getSessionToken()
+      session_token: this.getSessionToken(),
     };
 
     this.http.post(this.apiUrl + '/v1/user/myself/session/logoutCurrentSession', object, {headers: this.httpHeaders}).subscribe(
@@ -51,7 +51,7 @@ export class AuthService {
 
         window.location.reload();
       },
-      error => {
+      (error) => {
         console.log(error);
       }
     );
@@ -66,11 +66,11 @@ export class AuthService {
   }
 
   public refreshJWTToken() {
-    const browser = Browser.getInfos();
+    const browser = BrowserHelper.getInfos();
 
     const object = {
       session_token: this.getSessionToken(),
-      session_information: browser.name + ' - ' + browser.majorVersion + '; OS: ' + browser.os + '; Phone: ' + browser.mobile
+      session_information: browser.name + ' - ' + browser.majorVersion + '; OS: ' + browser.os + '; Phone: ' + browser.mobile,
     };
 
     return this.http.post(this.apiUrl + '/auth/IamLoggedIn', object, {headers: this.httpHeaders}).pipe(
@@ -129,7 +129,7 @@ export class AuthService {
   }
 
   public changePasswordAfterSignin(username: string, oldPassword: string, newPassword: string) {
-    const browser = Browser.getInfos();
+    const browser = BrowserHelper.getInfos();
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
 
     const changePasswordAfterSigninObject = {
@@ -137,7 +137,7 @@ export class AuthService {
       old_password: oldPassword,
       new_password: newPassword,
       stay_logged_in: true,
-      session_information: browser.name + ' - ' + browser.majorVersion + '; OS: ' + browser.os + '; Phone: ' + browser.mobile
+      session_information: browser.name + ' - ' + browser.majorVersion + '; OS: ' + browser.os + '; Phone: ' + browser.mobile,
     };
 
     return this.http.post(this.apiUrl + '/auth/changePasswordAfterSignin', changePasswordAfterSigninObject, {headers});

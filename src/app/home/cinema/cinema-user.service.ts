@@ -5,7 +5,7 @@ import {HttpClient} from '@angular/common/http';
 import {AuthService} from '../../auth/auth.service';
 import {HttpService} from '../../utils/http.service';
 import {SettingsService} from '../../utils/settings.service';
-import {Converter} from '../../utils/converter';
+import {Converter} from '../../utils/helper/Converter';
 
 import {Movie, WeatherForecast} from './models/movie.model';
 

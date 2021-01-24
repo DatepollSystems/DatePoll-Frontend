@@ -11,7 +11,7 @@
   </span>
   <a
     fxFlexAlign.xs="start"
-    mat-flat-button
+    mat-stroked-button
     color="primary"
     target="_blank"
     rel="noopener"
@@ -24,7 +24,7 @@
 
   <a
     fxFlexAlign.xs="start"
-    mat-flat-button
+    mat-stroked-button
     target="_blank"
     color="primary"
     rel="noopener"
@@ -36,15 +36,27 @@
 
   <a
     fxFlexAlign.xs="start"
-    mat-flat-button
+    mat-stroked-button
     target="_blank"
     color="primary"
     rel="noopener"
     href="https://www.google.com/maps/search/?api=1&query={{ dates[0].location }}"
-    *ngIf="dates[0].location?.length > 0 && dates[0]?.x === -199 && dates[0]?.y === -199"
+    *ngIf="dates[0].location?.length > 0 && dates[0]?.x === -199 && dates[0]?.y === -199 && !isUrl(dates[0]?.location)"
   >
     {{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE_LIST_OPEN_LOCATION_4' | translate }}{{ dates[0].location
     }}{{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE_LIST_OPEN_LOCATION_5' | translate }}
+  </a>
+
+  <a
+    fxFlexAlign.xs="start"
+    mat-stroked-button
+    target="_blank"
+    color="primary"
+    rel="noopener"
+    href="{{ dates[0].location }}"
+    *ngIf="dates[0].location?.length > 0 && dates[0]?.x === -199 && dates[0]?.y === -199 && isUrl(dates[0]?.location)"
+  >
+    {{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE_LIST_OPEN_LOCATION_LINK' | translate }}
   </a>
 </div>
 

@@ -40,6 +40,10 @@ export class DatepollManagementComponent implements OnDestroy {
   broadcastIncomingMailForwardingEmailAddressesSubscription: Subscription;
   broadcastIncomingMailForwardingEmailAddressesSaving = false;
 
+  jitsiMeetInstanceUrl: string;
+  jitsiMeetInstanceUrlSubscription: Subscription;
+  jitsiMeetInstanceUrlSaving = false;
+
   alert: any;
   alertText = '';
   selectedAlertType = '';
@@ -90,6 +94,11 @@ export class DatepollManagementComponent implements OnDestroy {
       this.alertText = this.alert.message;
       this.selectedAlertType = this.alert.type;
     });
+
+    this.jitsiMeetInstanceUrl = settingsService.getJistiMeetInstanceUrl();
+    this.jitsiMeetInstanceUrlSubscription = settingsService.jitsiMeetInstanceUrlChange.subscribe((value) => {
+      this.jitsiMeetInstanceUrl = value;
+    });
   }
 
   ngOnDestroy(): void {
@@ -98,6 +107,7 @@ export class DatepollManagementComponent implements OnDestroy {
     this.openWeatherMapCinemaCityIdSubscription.unsubscribe();
     this.broadcastIncomingMailForwardingEmailAddressesSubscription.unsubscribe();
     this.alertSubscription.unsubscribe();
+    this.jitsiMeetInstanceUrlSubscription.unsubscribe();
   }
 
   cinemaServiceChange(ob: MatSlideToggleChange) {
@@ -291,6 +301,22 @@ export class DatepollManagementComponent implements OnDestroy {
         this.notificationsService.success(
           this.translate.getTranslationFor('SUCCESSFULLY'),
           this.translate.getTranslationFor('MANAGEMENT_DATEPOLL_ALERT_CHANGED_SUCCESSFULLY')
+        );
+      },
+      (error) => console.log(error)
+    );
+  }
+
+  changeJitsiMeetInstanceUrl(form: NgForm) {
+    this.jitsiMeetInstanceUrlSaving = true;
+    const jitsiMeetInstanceUrl = form.controls.jitsiMeetInstanceUrl.value;
+    this.settingsService.setAdminJitsiMeetInstanceUrl(jitsiMeetInstanceUrl).subscribe(
+      (response: any) => {
+        console.log(response);
+        this.jitsiMeetInstanceUrlSaving = false;
+        this.notificationsService.success(
+          this.translate.getTranslationFor('SUCCESSFULLY'),
+          this.translate.getTranslationFor('MANAGEMENT_DATEPOLL_JITSI_MEET_INSTANCE_URL_CHANGED_SUCCESSFULLY')
         );
       },
       (error) => console.log(error)

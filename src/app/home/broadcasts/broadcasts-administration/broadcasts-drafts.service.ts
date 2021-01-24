@@ -1,13 +1,13 @@
 import {Injectable} from '@angular/core';
 import {Subject} from 'rxjs';
 
-import {Converter} from '../../../utils/converter';
+import {Converter} from '../../../utils/helper/Converter';
 import {HttpService} from '../../../utils/http.service';
 import {Broadcast, UserBroadcastInfo} from '../models/broadcast.model';
 import {BroadcastDraft} from '../models/broadcast-draft.model';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class BroadcastsDraftsService {
   private _drafts: BroadcastDraft[] = [];
@@ -41,7 +41,7 @@ export class BroadcastsDraftsService {
         }
         this.setDrafts(drafts);
       },
-      error => console.log(error)
+      (error) => console.log(error)
     );
   }
 
@@ -64,7 +64,7 @@ export class BroadcastsDraftsService {
         draft.bodyHTML = dto.bodyHTML;
         this.setDraft(draft);
       },
-      error => console.log(error)
+      (error) => console.log(error)
     );
   }
 
@@ -72,7 +72,7 @@ export class BroadcastsDraftsService {
     const dto = {
       subject: draft.subject,
       body: draft.body,
-      bodyHTML: draft.bodyHTML
+      bodyHTML: draft.bodyHTML,
     };
 
     return this.httpService.loggedInV1POSTRequest('/broadcast/administration/draft', dto, 'createDraft');
@@ -82,7 +82,7 @@ export class BroadcastsDraftsService {
     const dto = {
       subject: draft.subject,
       body: draft.body,
-      bodyHTML: draft.bodyHTML
+      bodyHTML: draft.bodyHTML,
     };
 
     return this.httpService.loggedInV1PUTRequest('/broadcast/administration/draft/' + draftId, dto, 'updateDraft');

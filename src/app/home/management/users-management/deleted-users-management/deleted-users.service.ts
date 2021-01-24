@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {Subject} from 'rxjs';
 
 import {HttpService} from '../../../../utils/http.service';
-import {Converter} from '../../../../utils/converter';
+import {Converter} from '../../../../utils/helper/Converter';
 
 import {DeletedUser} from './deletedUser.model';
 
