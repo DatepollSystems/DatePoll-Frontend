@@ -62,7 +62,8 @@
           </mat-card>
 
           <form #changeAppUrlForm="ngForm" (ngSubmit)="changeAppUrl(changeAppUrlForm)" fxLayout="row wrap" fxLayoutGap="2%">
-            <mat-form-field fxFlex="60%" fxFlex.xs="60%">
+            <mat-form-field fxFlex="60%" fxFlex.xs="60%" appearance="outline">
+              <mat-label>{{ 'MANAGEMENT_DATEPOLL_APP_URL' | translate }}</mat-label>
               <input
                 #appUrlModel="ngModel"
                 [(ngModel)]="serverInfo.application_url"
@@ -72,7 +73,6 @@
                 minlength="1"
                 name="appUrl"
                 ngModel
-                placeholder="{{ 'MANAGEMENT_DATEPOLL_APP_URL' | translate }}"
                 required
                 type="text"
               />
@@ -111,16 +111,9 @@
             fxLayout.xs="column"
           >
             <div fxFlex="30%">
-              <mat-form-field>
-                <input
-                  [(ngModel)]="alertText"
-                  id="alert"
-                  matInput
-                  name="alert"
-                  ngModel
-                  placeholder="{{ 'MANAGEMENT_DATEPOLL_ALERT' | translate }}"
-                  type="text"
-                />
+              <mat-form-field appearance="outline">
+                <mat-label>{{ 'MANAGEMENT_DATEPOLL_ALERT' | translate }}</mat-label>
+                <input [(ngModel)]="alertText" id="alert" matInput name="alert" ngModel type="text" />
                 <button mat-button *ngIf="alertText" matSuffix mat-icon-button aria-label="Clear" (click)="alertText = ''">
                   <mat-icon>close</mat-icon>
                 </button>
@@ -128,7 +121,7 @@
               <small *ngIf="alertText">{{ 'MANAGEMENT_DATEPOLL_ALERT_HELP' | translate }}</small>
             </div>
 
-            <mat-form-field fxFlex="30%">
+            <mat-form-field fxFlex="30%" appearance="outline">
               <mat-label>{{ 'MANAGEMENT_DATEPOLL_ALERT_TYPE' | translate }}</mat-label>
               <mat-select [(value)]="selectedAlertType">
                 <mat-option value="happy">Happy</mat-option>
@@ -157,7 +150,8 @@
             fxLayoutGap="2%"
             fxLayout.xs="column"
           >
-            <mat-form-field fxFlex="60%">
+            <mat-form-field fxFlex="60%" appearance="outline">
+              <mat-label>{{ 'MANAGEMENT_DATEPOLL_COMMUNITY_NAME' | translate }}</mat-label>
               <input
                 #communityNameModel="ngModel"
                 [(ngModel)]="serverInfo.community_name"
@@ -167,7 +161,6 @@
                 minlength="1"
                 name="communityName"
                 ngModel
-                placeholder="{{ 'MANAGEMENT_DATEPOLL_COMMUNITY_NAME' | translate }}"
                 required
                 type="text"
               />
@@ -197,7 +190,8 @@
             fxLayoutGap="2%"
             fxLayout.xs="column"
           >
-            <mat-form-field fxFlex="60%">
+            <mat-form-field fxFlex="60%" appearance="outline">
+              <mat-label>{{ 'MANAGEMENT_DATEPOLL_COMMUNITY_URL' | translate }}</mat-label>
               <input
                 #communityUrlModel="ngModel"
                 [(ngModel)]="serverInfo.community_url"
@@ -207,10 +201,8 @@
                 minlength="1"
                 name="communityUrl"
                 ngModel
-                placeholder="{{ 'MANAGEMENT_DATEPOLL_COMMUNITY_URL' | translate }}"
                 required
                 type="text"
-                url
               />
               <mat-error *ngIf="communityUrlModel.invalid">
                 {{ 'MANAGEMENT_DATEPOLL_COMMUNITY_URL_NOT_VALID' | translate }}
@@ -238,7 +230,8 @@
             fxLayoutGap="2%"
             fxLayout.xs="column"
           >
-            <mat-form-field fxFlex="60%" class="textarea-form">
+            <mat-form-field fxFlex="60%" appearance="outline">
+              <mat-label>{{ 'MANAGEMENT_DATEPOLL_COMMUNITY_DESCRIPTION' | translate }}</mat-label>
               <textarea
                 [(ngModel)]="serverInfo.community_description"
                 id="communityDescription"
@@ -247,7 +240,6 @@
                 name="communityDescription"
                 ngModel
                 rows="9"
-                placeholder="{{ 'MANAGEMENT_DATEPOLL_COMMUNITY_DESCRIPTION' | translate }}"
                 required
               ></textarea>
               <small
@@ -279,7 +271,8 @@
             fxLayoutGap="2%"
             fxLayout.xs="column"
           >
-            <mat-form-field fxFlex="60%" class="textarea-form">
+            <mat-form-field fxFlex="60%" appearance="outline">
+              <mat-label>{{ 'MANAGEMENT_DATEPOLL_IMPRINT' | translate }}</mat-label>
               <textarea
                 [(ngModel)]="serverInfo.community_imprint"
                 id="imprint"
@@ -288,7 +281,6 @@
                 name="imprint"
                 ngModel
                 rows="9"
-                placeholder="{{ 'MANAGEMENT_DATEPOLL_IMPRINT' | translate }}"
                 required
               ></textarea>
               <small
@@ -320,7 +312,8 @@
             fxLayoutGap="2%"
             fxLayout.xs="column"
           >
-            <mat-form-field fxFlex="60%" class="textarea-form">
+            <mat-form-field fxFlex="60%" appearance="outline">
+              <mat-label>{{ 'MANAGEMENT_DATEPOLL_PRIVACY_POLICY' | translate }}</mat-label>
               <textarea
                 [(ngModel)]="serverInfo.community_privacy_policy"
                 id="privacyPolicy"
@@ -329,7 +322,6 @@
                 name="privacyPolicy"
                 ngModel
                 rows="9"
-                placeholder="{{ 'MANAGEMENT_DATEPOLL_PRIVACY_POLICY' | translate }}"
                 required
               ></textarea>
               <small
@@ -365,7 +357,8 @@
             fxLayoutGap="2%"
             fxLayout.xs="column"
           >
-            <mat-form-field fxFlex="60%">
+            <mat-form-field fxFlex="60%" appearance="outline">
+              <mat-label>{{ 'MANAGEMENT_DATEPOLL_OPENWEATHERMAP_KEY' | translate }}</mat-label>
               <input
                 #openWeatherMapKeyModel="ngModel"
                 [(ngModel)]="openWeatherMapKey"
@@ -374,7 +367,6 @@
                 maxlength="50"
                 name="openWeatherMapKey"
                 ngModel
-                placeholder="{{ 'MANAGEMENT_DATEPOLL_OPENWEATHERMAP_KEY' | translate }}"
                 type="text"
               />
               <mat-error *ngIf="openWeatherMapKeyModel.invalid">
@@ -403,7 +395,8 @@
             fxLayoutGap="2%"
             fxLayout.xs="column"
           >
-            <mat-form-field fxFlex="60%">
+            <mat-form-field fxFlex="60%" appearance="outline">
+              <mat-label>{{ 'MANAGEMENT_DATEPOLL_OPENWEATHERMAP_CINEMA_CITY_ID' | translate }}</mat-label>
               <input
                 #openWeatherMapCinemaCityIdModel="ngModel"
                 [(ngModel)]="openWeatherMapCinemaCityId"
@@ -412,7 +405,6 @@
                 name="openWeatherMapCinemaCityId"
                 id="openWeatherMapCinemaCityId"
                 ngModel
-                placeholder="{{ 'MANAGEMENT_DATEPOLL_OPENWEATHERMAP_CINEMA_CITY_ID' | translate }}"
                 type="text"
               />
               <mat-error *ngIf="openWeatherMapCinemaCityIdModel.invalid">
@@ -441,7 +433,8 @@
             fxLayoutGap="2%"
             fxLayout.xs="column"
           >
-            <mat-form-field fxFlex="60%">
+            <mat-form-field fxFlex="60%" appearance="outline">
+              <mat-label>{{ 'MANAGEMENT_DATEPOLL_JITSI_MEET_INSTANCE_URL' | translate }}</mat-label>
               <input
                 #jitsiInstanceUrlModel="ngModel"
                 [(ngModel)]="jitsiMeetInstanceUrl"
@@ -450,7 +443,6 @@
                 name="jitsiMeetInstanceUrl"
                 id="jitsiMeetInstanceUrl"
                 ngModel
-                placeholder="{{ 'MANAGEMENT_DATEPOLL_JITSI_MEET_INSTANCE_URL' | translate }}"
                 type="text"
               />
               <small *ngIf="!jitsiMeetInstanceUrl">{{ 'MANAGEMENT_DATEPOLL_JITSI_MEET_INSTANCE_URL_HELP' | translate }}</small>

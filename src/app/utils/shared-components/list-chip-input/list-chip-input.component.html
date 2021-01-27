@@ -1,4 +1,4 @@
-<mat-form-field class="example-chip-list">
+<mat-form-field>
   <mat-label>{{ label | translate }}</mat-label>
   <mat-chip-list #chipList [disabled]="disabled">
     <mat-chip *ngFor="let string of strings" [disabled]="disabled" [removable]="removable" (removed)="remove(string)">
