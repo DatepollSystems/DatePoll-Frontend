@@ -11,8 +11,8 @@ export class Converter {
 
   public static getDateFormattedWithHoursMinutesAndSeconds(date: Date): string {
     const d = new Date(date);
-    let month = '' + (d.getMonth() + 1),
-      day = '' + d.getDate();
+    let month = '' + (d.getMonth() + 1);
+    let day = '' + d.getDate();
     const year = d.getFullYear();
 
     let hour = '' + d.getHours();
@@ -43,8 +43,8 @@ export class Converter {
 
   public static getDateFormatted(date: Date): string {
     const d = new Date(date);
-    let month = '' + (d.getMonth() + 1),
-      day = '' + d.getDate();
+    let month = '' + (d.getMonth() + 1);
+    let day = '' + d.getDate();
     const year = d.getFullYear();
 
     if (month.length < 2) {
@@ -76,8 +76,6 @@ export class Converter {
             hours = hours + 1;
           }
         }
-
-        // console.log('hours: ' + hours + ' minutes: ' + minutes + ' seconds: ' + seconds);
 
         date.setHours(hours);
         date.setMinutes(Number(minutes));

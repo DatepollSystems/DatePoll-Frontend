@@ -1,3 +1,4 @@
+/* tslint:disable:no-conditional-assignment */
 export class BrowserHelper {
   public static getInfos(): any {
     const unknown = '-';
@@ -16,7 +17,9 @@ export class BrowserHelper {
     let browser = navigator.appName;
     let version = '' + parseFloat(navigator.appVersion);
     let majorVersion: number;
-    let nameOffset, verOffset, ix;
+    let nameOffset;
+    let verOffset;
+    let ix;
 
     // Opera
     if ((verOffset = nAgt.indexOf('Opera')) !== -1) {
@@ -134,10 +137,10 @@ export class BrowserHelper {
     return {
       screensize: screenSize,
       name: browser,
-      version: version,
-      majorVersion: majorVersion,
-      mobile: mobile,
-      os: os,
+      version,
+      majorVersion,
+      mobile,
+      os,
       cookies: cookieEnabled,
     };
   }
