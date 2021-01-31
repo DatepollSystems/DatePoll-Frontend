@@ -5,6 +5,8 @@ import {NotificationsService} from 'angular2-notifications';
 
 import {TranslateService} from '../../../../translation/translate.service';
 import {GroupsService} from '../groups.service';
+import {Permissions} from '../../../../permissions';
+import {MyUserService} from '../../../my-user.service';
 
 @Component({
   selector: 'app-group-update-modal',
@@ -16,9 +18,13 @@ export class GroupUpdateModalComponent {
   name: string;
   description: string;
   orderN: string;
+  hasPermissionToChangePermissions = false;
+  permissions: string[];
+  allPermissions: string[] = null;
 
   constructor(
     private groupsService: GroupsService,
+    private myUserService: MyUserService,
     private dialogRef: MatDialogRef<GroupUpdateModalComponent>,
     private translate: TranslateService,
     private notificationsService: NotificationsService,
@@ -28,6 +34,14 @@ export class GroupUpdateModalComponent {
     this.name = data.group.name;
     this.orderN = data.group.orderN;
     this.description = data.group.description;
+    this.permissions = data.group.permissions;
+    this.allPermissions = Permissions.getAll();
+    this.hasPermissionToChangePermissions = this.myUserService.hasPermission(Permissions.MANAGEMENT_EXTRA_USER_PERMISSIONS);
+  }
+
+  permissionsChange(permisions: string[]) {
+    this.permissions = permisions;
+    console.log(this.permissions);
   }
 
   onUpdate(form: NgForm) {
@@ -41,6 +55,7 @@ export class GroupUpdateModalComponent {
       name,
       description,
       orderN,
+      permissions: this.permissions,
     };
     console.log(group);
 

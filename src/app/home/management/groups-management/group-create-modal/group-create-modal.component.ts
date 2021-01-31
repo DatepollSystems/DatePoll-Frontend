@@ -1,10 +1,14 @@
 import {Component} from '@angular/core';
 import {NgForm} from '@angular/forms';
 import {MatDialogRef} from '@angular/material/dialog';
+
 import {NotificationsService} from 'angular2-notifications';
 
 import {TranslateService} from '../../../../translation/translate.service';
 import {GroupsService} from '../groups.service';
+import {MyUserService} from '../../../my-user.service';
+
+import {Permissions} from '../../../../permissions';
 
 @Component({
   selector: 'app-group-create-modal',
@@ -12,12 +16,25 @@ import {GroupsService} from '../groups.service';
   styleUrls: ['./group-create-modal.component.css'],
 })
 export class GroupCreateModalComponent {
+  permissions: string[];
+  allPermissions: string[] = null;
+  hasPermissionToChangePermissions = false;
+
   constructor(
     private groupsService: GroupsService,
+    private myUserService: MyUserService,
     private dialogRef: MatDialogRef<GroupCreateModalComponent>,
     private notificationsService: NotificationsService,
     private translate: TranslateService
-  ) {}
+  ) {
+    this.allPermissions = Permissions.getAll();
+    this.hasPermissionToChangePermissions = this.myUserService.hasPermission(Permissions.MANAGEMENT_EXTRA_USER_PERMISSIONS);
+  }
+
+  permissionsChange(permisions: string[]) {
+    this.permissions = permisions;
+    console.log(this.permissions);
+  }
 
   onCreate(form: NgForm) {
     this.dialogRef.close();
@@ -30,6 +47,7 @@ export class GroupCreateModalComponent {
       name,
       description,
       orderN,
+      permissions: this.permissions,
     };
     console.log(group);
 

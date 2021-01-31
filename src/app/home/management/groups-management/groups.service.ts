@@ -8,7 +8,7 @@ import {Group} from './models/group.model';
 import {Subgroup} from './models/subgroup.model';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class GroupsService {
   public groupsChange: Subject<Group[]> = new Subject<Group[]>();
@@ -60,14 +60,16 @@ export class GroupsService {
             groupsAndSubgroupsToStore.push(subgroup);
           }
 
-          groupsToStore.push(new Group(groupsData.id, groupsData.name, groupsData.description, groupsData.orderN, subgroupsToStore));
+          groupsToStore.push(
+            new Group(groupsData.id, groupsData.name, groupsData.description, groupsData.orderN, subgroupsToStore, groupsData.permissions)
+          );
           groupsAndSubgroupsToStore.push(new GroupAndSubgroupModel(groupsData.id, groupsData.name, GroupType.PARENTGROUP));
         }
 
         this.setGroups(groupsToStore);
         this.setGroupsAndSubgroups(groupsAndSubgroupsToStore);
       },
-      error => console.log(error)
+      (error) => console.log(error)
     );
   }
 
@@ -87,7 +89,7 @@ export class GroupsService {
     const dto = {
       user_id: userID,
       group_id: groupID,
-      role
+      role,
     };
 
     return this.httpService.loggedInV1POSTRequest('/management/groups/addUser', dto, 'addUserToGroup');
@@ -96,7 +98,7 @@ export class GroupsService {
   public removeUserFromGroup(userID: number, groupID: number) {
     const dto = {
       user_id: userID,
-      group_id: groupID
+      group_id: groupID,
     };
 
     return this.httpService.loggedInV1POSTRequest('/management/groups/removeUser', dto, 'removeUserFromGroup');
@@ -106,7 +108,7 @@ export class GroupsService {
     const dto = {
       user_id: userID,
       group_id: groupID,
-      role
+      role,
     };
 
     return this.httpService.loggedInV1POSTRequest('/management/groups/updateUser', dto, 'updateUserInGroup');
@@ -128,7 +130,7 @@ export class GroupsService {
     const dto = {
       user_id: userID,
       subgroup_id: subgroupID,
-      role
+      role,
     };
 
     return this.httpService.loggedInV1POSTRequest('/management/subgroups/addUser', dto, 'addUserToSubgroup');
@@ -137,7 +139,7 @@ export class GroupsService {
   public removeUserFromSubgroup(userID: number, subgroupID: number) {
     const dto = {
       user_id: userID,
-      subgroup_id: subgroupID
+      subgroup_id: subgroupID,
     };
 
     return this.httpService.loggedInV1POSTRequest('/management/subgroups/removeUser', dto, 'removeUserFromSubgroup');
@@ -147,7 +149,7 @@ export class GroupsService {
     const dto = {
       user_id: userID,
       subgroup_id: subgroupID,
-      role
+      role,
     };
 
     return this.httpService.loggedInV1POSTRequest('/management/subgroups/updateUser', dto, 'updateUserInSubgroup');
@@ -169,7 +171,7 @@ export class GroupsService {
         console.log(data);
         this.setGroup(data.group);
       },
-      error => console.log(error)
+      (error) => console.log(error)
     );
   }
 
@@ -189,7 +191,7 @@ export class GroupsService {
         console.log(data);
         this.setSubgroup(data.subgroup);
       },
-      error => console.log(error)
+      (error) => console.log(error)
     );
   }
 }

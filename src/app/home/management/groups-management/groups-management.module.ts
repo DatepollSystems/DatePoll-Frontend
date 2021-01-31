@@ -21,6 +21,7 @@ import {SubgroupDeleteModalComponent} from './subgroup-delete-modal/subgroup-del
 import {SubgroupUpdateModalComponent} from './subgroup-update-modal/subgroup-update-modal.component';
 import {SubgroupUserListModalComponent} from './subgroup-user-list-modal/subgroup-user-list-modal.component';
 import {SubgroupUserRoleUpdateModalComponent} from './subgroup-user-list-modal/subgroup-user-role-update-modal/subgroup-user-role-update-modal.component';
+import {ListChipInputModule} from '../../../utils/shared-components/list-chip-input/list-chip-input.module';
 
 @NgModule({
   declarations: [
@@ -34,9 +35,17 @@ import {SubgroupUserRoleUpdateModalComponent} from './subgroup-user-list-modal/s
     GroupUserRoleUpdateModalComponent,
     SubgroupUserRoleUpdateModalComponent,
     GroupDeleteModalComponent,
-    SubgroupDeleteModalComponent
+    SubgroupDeleteModalComponent,
   ],
   providers: [GroupsService],
-  imports: [CommonModule, FormsModule, MaterialModule, TranslationModule, NgxPrintModule, GroupsManagementRoutingModule]
+  imports: [
+    CommonModule,
+    FormsModule,
+    MaterialModule,
+    TranslationModule,
+    NgxPrintModule,
+    GroupsManagementRoutingModule,
+    ListChipInputModule,
+  ],
 })
 export class GroupsManagementModule {}

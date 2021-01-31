@@ -7,16 +7,19 @@
     </mat-chip>
     <input
       placeholder="{{ placeHolder | translate }}"
-      #fruitInput
+      #stringInput
       [formControl]="stringCtrl"
+      [matAutocomplete]="auto"
       [matChipInputFor]="chipList"
       [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
       (matChipInputTokenEnd)="add($event)"
     />
   </mat-chip-list>
-  <mat-autocomplete (optionSelected)="selected($event)" *ngIf="allStringsToAutoComplete?.length > 0">
-    <mat-option *ngFor="let string of filteredStrings | async" [value]="string">
-      {{ string }}
-    </mat-option>
+  <mat-autocomplete (optionSelected)="selected($event)" #auto="matAutocomplete">
+    <ng-container *ngIf="allStringsToAutoComplete?.length > 0">
+      <mat-option *ngFor="let string of filteredStrings | async" [value]="string">
+        {{ string }}
+      </mat-option>
+    </ng-container>
   </mat-autocomplete>
 </mat-form-field>
