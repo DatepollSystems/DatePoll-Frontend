@@ -32,6 +32,8 @@ export class ListChipInputComponent implements OnInit {
   removable = true;
   @Input()
   disabled = false;
+  @Input()
+  inHighComma = false;
 
   /**
    * Already filled in strings

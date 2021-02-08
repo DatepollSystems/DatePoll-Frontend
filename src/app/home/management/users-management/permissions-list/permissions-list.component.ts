@@ -1,7 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {FormControl} from '@angular/forms';
-import {ReplaySubject, Subject} from 'rxjs';
-import {takeUntil} from 'rxjs/operators';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 
 import {Permissions} from '../../../../permissions';
 
@@ -10,18 +7,8 @@ import {Permissions} from '../../../../permissions';
   templateUrl: './permissions-list.component.html',
   styleUrls: ['./permissions-list.component.css'],
 })
-export class PermissionsListComponent implements OnInit {
-  /** control for the MatSelect filter keyword */
-  public permissionFilterCtrl: FormControl = new FormControl();
-
-  /** list of permissions filtered by search keyword */
-  public filteredPermissions: ReplaySubject<string[]> = new ReplaySubject<string[]>(1);
-
+export class PermissionsListComponent {
   allPermissions: string[] = [];
-  selectedPermission: string = null;
-  @Output() permissionChanged = new EventEmitter();
-  /** Subject that emits when the component has been destroyed. */
-  protected _onDestroy = new Subject<void>();
 
   @Input() permissions: string[] = [];
 
@@ -31,51 +18,7 @@ export class PermissionsListComponent implements OnInit {
     this.allPermissions = Permissions.getAll();
   }
 
-  ngOnInit(): void {
-    // load the initial years list
-    this.filteredPermissions.next(this.allPermissions.slice());
-
-    // listen for search field value changes
-    this.permissionFilterCtrl.valueChanges.pipe(takeUntil(this._onDestroy)).subscribe(() => {
-      this.filterPermissions();
-    });
-  }
-
-  permissionSelectChange(value) {
-    this.selectedPermission = value;
-  }
-
-  private filterPermissions() {
-    if (!this.allPermissions) {
-      return;
-    }
-    // get the search keyword
-    let search = this.permissionFilterCtrl.value;
-    if (!search) {
-      this.filteredPermissions.next(this.allPermissions.slice());
-      return;
-    } else {
-      search = search.toLowerCase();
-    }
-    // filter the permissions
-    this.filteredPermissions.next(this.allPermissions.filter((p) => p.toString().toLowerCase().indexOf(search) > -1));
-  }
-
-  addPermission() {
-    if (this.selectedPermission == null) {
-      return;
-    } else if (this.selectedPermission.length < 1) {
-      return;
-    }
-    const permission = this.selectedPermission;
-    this.permissions.push(permission);
-    this.permissionsChanged.emit(this.permissions.slice());
-    this.selectedPermission = null;
-  }
-
-  removePermission(permission: string) {
-    const i = this.permissions.indexOf(permission);
-    this.permissions.splice(i, 1);
-    this.permissionsChanged.emit(this.permissions.slice());
+  permissionChange(value: string[]) {
+    this.permissionsChanged.emit(value.slice());
   }
 }

@@ -13,7 +13,7 @@ import {MatDialogRef} from '@angular/material/dialog';
 @Component({
   selector: 'app-email-address',
   templateUrl: './email-address.component.html',
-  styleUrls: ['./email-address.component.css']
+  styleUrls: ['./email-address.component.css'],
 })
 export class EmailAddressComponent implements OnDestroy {
   @ViewChild('emailList', {static: true}) emailAddressesList: EmailAddressesListComponent;
@@ -33,13 +33,12 @@ export class EmailAddressComponent implements OnDestroy {
   ) {
     this.emailAddresses = this._myUserService.getEmailAddresses();
 
-    this.emailAddressesSubscription = this._myUserService.emailAddressesChange.subscribe(value => {
+    this.emailAddressesSubscription = this._myUserService.emailAddressesChange.subscribe((value) => {
       this.emailAddresses = value;
-      this.emailAddressesList.setEmailAddressesInTable(this.emailAddresses);
     });
 
     this.notifyViaEmailOnNewEvent = this.settingsService.getNotifyMeOnNewEventViaEmail();
-    this.notifyViaEmailOnNewEventSubscription = this.settingsService.notifyMeOnNewEventViaEmailChange.subscribe(value => {
+    this.notifyViaEmailOnNewEventSubscription = this.settingsService.notifyMeOnNewEventViaEmailChange.subscribe((value) => {
       this.notifyViaEmailOnNewEvent = value;
     });
   }
@@ -66,7 +65,7 @@ export class EmailAddressComponent implements OnDestroy {
           this.translate.getTranslationFor('SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_SAVED_SUCCESSFULLY')
         );
       },
-      error => console.log(error)
+      (error) => console.log(error)
     );
     this.dialog.close();
   }
