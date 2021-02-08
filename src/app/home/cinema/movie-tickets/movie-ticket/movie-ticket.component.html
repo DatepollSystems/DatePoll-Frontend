@@ -93,11 +93,9 @@
   </mat-card-header>
   <img alt="Movie image" mat-card-image src="{{ movie.posterLink }}" />
   <mat-card-content>
-    <div *ngIf="movie.workerName != null" class="row align-items-center justify-content-between">
-      <div class="col-5 col-sm-5 col-md-4 col-lg-2">
-        {{ 'CINEMA_TICKETS_WORKER' | translate }}
-      </div>
-      <div class="col-7 col-sm-7 col-md-8 col-lg-10" style="text-align: right">
+    <div *ngIf="movie.workerName != null" fxLayout="row" fxLayoutAlign="space-between center" class="myRow">
+      <div>{{ 'CINEMA_TICKETS_WORKER' | translate }}</div>
+      <div>
         {{ movie.workerName }}
         <button
           (click)="signOutForWorker()"
@@ -113,11 +111,11 @@
       </div>
     </div>
 
-    <div *ngIf="movie.workerName == null" class="row align-items-center justify-content-between">
-      <div class="col">
+    <div *ngIf="movie.workerName == null" fxLayout="row" fxLayoutAlign="space-between center" class="myRow">
+      <div>
         {{ 'CINEMA_TICKETS_WORKER' | translate }}
       </div>
-      <div class="col" style="text-align: right">
+      <div>
         <button
           (click)="applyForWorker()"
           [class.spinner]="applyingForWorker"
@@ -130,11 +128,11 @@
       </div>
     </div>
 
-    <div *ngIf="movie.emergencyWorkerName != null" class="row align-items-center justify-content-between">
-      <div class="col-5 col-sm-5 col-md-4 col-lg-5">
+    <div *ngIf="movie.emergencyWorkerName != null" fxLayout="row" fxLayoutAlign="space-between center" class="myRow">
+      <div>
         {{ 'CINEMA_TICKETS_EMERGENCY_WORKER' | translate }}
       </div>
-      <div class="col-7 col-sm-7 col-md-8 col-lg-7" style="text-align: right">
+      <div>
         {{ movie.emergencyWorkerName }}
         <button
           (click)="signOutForEmergencyWorker()"
@@ -150,11 +148,11 @@
       </div>
     </div>
 
-    <div *ngIf="movie.emergencyWorkerName == null" class="row align-items-center justify-content-between">
-      <div class="col-auto">
+    <div *ngIf="movie.emergencyWorkerName == null" fxLayout="row" fxLayoutAlign="space-between center" class="myRow">
+      <div>
         {{ 'CINEMA_TICKETS_EMERGENCY_WORKER' | translate }}
       </div>
-      <div class="col" style="text-align: end">
+      <div>
         <button
           (click)="applyForEmergencyWorker()"
           [class.spinner]="applyingForEmergencyWorker"
@@ -167,40 +165,40 @@
       </div>
     </div>
 
-    <div class="row align-items-center justify-content-between">
-      <div class="col-auto">
+    <div fxLayout="row" fxLayoutAlign="space-between center" class="myRow">
+      <div>
         {{ 'CINEMA_TICKETS_TRAILER' | translate }}
       </div>
-      <div class="col" style="text-align: right">
+      <div>
         <a href="{{ movie.trailerLink }}" mat-stroked-button rel="noopener" target="_blank">{{
           'CINEMA_TICLETS_TRAILER_WATCH' | translate
         }}</a>
       </div>
     </div>
 
-    <div class="row align-items-center justify-content-between">
-      <div class="col-auto">
+    <div fxLayout="row" fxLayoutAlign="space-between center" class="myRow">
+      <div>
         {{ 'CINEMA_TICKETS_WEATHER_FORECAST' | translate }}
       </div>
-      <div class="col" style="text-align: right">
+      <div>
         <button (click)="openWeatherForecastModal()" mat-stroked-button>{{ 'CINEMA_TICKETS_WEATHER_FORECAST_SHOW' | translate }}</button>
       </div>
     </div>
 
-    <div class="row align-items-center justify-content-between">
-      <div class="col-auto">
+    <div fxLayout="row" fxLayoutAlign="space-between center" class="myRow">
+      <div>
         {{ 'CINEMA_TICKETS_AVAILABLE_TICKETS' | translate }}
       </div>
-      <div class="col" style="text-align: right">
+      <div>
         <button mat-stroked-button>{{ movie.maximalTickets - movie.bookedTickets }}</button>
       </div>
     </div>
 
-    <div *ngIf="movie.bookedTicketsForYourself != 0" class="row align-items-center justify-content-between">
-      <div class="col-auto">
+    <div *ngIf="movie.bookedTicketsForYourself != 0" fxLayout="row" fxLayoutAlign="space-between center" class="myRow">
+      <div>
         {{ 'CINEMA_TICKETS_BOOKED_TICKETS' | translate }}
       </div>
-      <div class="col" style="text-align: right">
+      <div>
         {{ movie.bookedTicketsForYourself }}
         <button
           #cancelTicketsButton
