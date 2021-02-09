@@ -9,6 +9,10 @@ import {MovieBookTicketsModalComponent} from './movie-book-tickets-modal/movie-b
 import {MovieWeatherforecastModalComponent} from './movie-weatherforecast-modal/movie-weatherforecast-modal.component';
 
 import {Movie} from '../../models/movie.model';
+import {UIHelper} from '../../../../utils/helper/UIHelper';
+import {PhoneNumber} from '../../../phoneNumber.model';
+import {MatBottomSheet} from '@angular/material/bottom-sheet';
+import {MovieWorkerNumbersModalComponent} from './movie-worker-numbers-modal/movie-worker-numbers-modal.component';
 
 @Component({
   selector: 'app-movie-ticket',
@@ -33,6 +37,7 @@ export class MovieTicketComponent {
 
   constructor(
     private dialog: MatDialog,
+    private bottomSheet: MatBottomSheet,
     private cinemaService: CinemaUserService,
     myUserService: MyUserService,
     private httpService: HttpService
@@ -77,6 +82,27 @@ export class MovieTicketComponent {
       width: '80vh',
       data: {movie: this.movie},
     });
+  }
+
+  openPhoneNumbersModal(numbers: PhoneNumber[]) {
+    this.bottomSheet.open(MovieWorkerNumbersModalComponent, {
+      data: {numbers},
+    });
+  }
+
+  getUntil(sdate: Date) {
+    const date = new Date(sdate);
+    date.setHours(21);
+
+    return UIHelper.getTimeLeft(date);
+  }
+
+  getPhoneNumberString(numbers: PhoneNumber[]) {
+    let s = '';
+    for (const number of numbers) {
+      s += number.phoneNumber + ', ';
+    }
+    return s;
   }
 
   applyForWorker() {

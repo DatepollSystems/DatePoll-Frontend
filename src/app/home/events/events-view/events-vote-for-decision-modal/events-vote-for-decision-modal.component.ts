@@ -29,7 +29,7 @@ export class EventsVoteForDecisionModalComponent {
 
   voteFor(decision: Decision) {
     const dto = {
-      decision: decision,
+      decision,
       additionalInformation: this.additionalInformation,
     };
 

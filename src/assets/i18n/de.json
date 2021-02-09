@@ -371,6 +371,13 @@
   "SETTINGS_SECURITY_MODAL_SETTINGS_TITLE": "Privatsphäre-Einstellungen",
   "SETTINGS_SECURITY_MODAL_SETTINGS_SAVE_SUCCESS": "Deine Einstellungen wurden gespeichert!",
   "SETTINGS_SECURITY_MODAL_SETTINGS_SHOW_BIRTHDAY": "Zeige deinen Geburtstag für jedes Vereinsmitglied auf der Startseite an",
+  "SETTINGS_SECURITY_MODAL_SETTINGS_SHOW_MOVIE_WORKER_NUMBER_ERROR_0": "Wir können leider keine Telefonnummern für dieses Mitglied anzeigen. Das kann an folgenden Gründen liegen: ",
+  "SETTINGS_SECURITY_MODAL_SETTINGS_SHOW_MOVIE_WORKER_NUMBER_ERROR_1": "Das Mitglied hat keine Telefonnummer hinterlegt.",
+  "SETTINGS_SECURITY_MODAL_SETTINGS_SHOW_MOVIE_WORKER_NUMBER_ERROR_2": "Du hast deine Telefonnummer für den Kinodienst nicht freigegeben. Das kannst du jedoch",
+  "SETTINGS_SECURITY_MODAL_SETTINGS_SHOW_MOVIE_WORKER_NUMBER_ERROR_3": "hier",
+  "SETTINGS_SECURITY_MODAL_SETTINGS_SHOW_MOVIE_WORKER_NUMBER_ERROR_4": "ändern.",
+  "SETTINGS_SECURITY_MODAL_SETTINGS_SHOW_MOVIE_WORKER_NUMBER_ERROR_5": "Das Mitglied hat seine Telefonnummer für den Kinodienst nicht freigegeben.",
+  "SETTINGS_SECURITY_MODAL_SETTINGS_SHOW_MOVIE_WORKER_NUMBER_ERROR_6": "Wir bitten um dein Verständnis aus diesem Grund keine Telefonnummern anzeigen zu können.",
 
   "MANAGEMENT_USERS_SEARCH": "Suche...",
   "MANAGEMENT_USERS_MEMBER_NUMBER": "Nummer",

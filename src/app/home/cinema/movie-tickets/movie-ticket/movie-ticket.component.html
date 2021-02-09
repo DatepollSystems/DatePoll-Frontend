@@ -7,11 +7,15 @@
   </div>
   <div mat-line>
     {{ movie.date | date: 'EE, dd.MM' }} 21:00
-    <span class="until-left">({{ movie.getUntil() }})</span>
+    <span class="until-left">({{ getUntil(movie.date) }})</span>
   </div>
   <div mat-line>{{ 'CINEMA_TICKETS_AVAILABLE_TICKETS' | translate }} {{ movie.maximalTickets - movie.bookedTickets }}</div>
-  <div mat-line>{{ 'CINEMA_TICKETS_WORKER' | translate }} {{ movie.workerName }}</div>
-  <div mat-line>{{ 'CINEMA_TICKETS_EMERGENCY_WORKER' | translate }} {{ movie.emergencyWorkerName }}</div>
+  <div mat-line (click)="openPhoneNumbersModal(movie.workerNumbers); $event.stopPropagation()">
+    {{ 'CINEMA_TICKETS_WORKER' | translate }} {{ movie.workerName }}
+  </div>
+  <div mat-line (click)="openPhoneNumbersModal(movie.emergencyWorkerNumbers); $event.stopPropagation()">
+    {{ 'CINEMA_TICKETS_EMERGENCY_WORKER' | translate }} {{ movie.emergencyWorkerName }}
+  </div>
   <div mat-line *ngIf="movie.bookedTicketsForYourself != 0">
     {{ 'CINEMA_TICKETS_BOOKED_TICKETS' | translate }} {{ movie.bookedTicketsForYourself }}
   </div>
@@ -88,7 +92,9 @@
           |&#32; <b>{{ 'CINEMA_TICKETS_SOLD_OUT' | translate }}</b></span
         >
       </mat-card-title>
-      <mat-card-subtitle>{{ movie.date | date: 'dd.MM' }} 21:00</mat-card-subtitle>
+      <mat-card-subtitle
+        >{{ movie.date | date: 'dd.MM' }} 21:00 <span class="until-left">({{ getUntil(movie.date) }} )</span></mat-card-subtitle
+      >
     </mat-card-title-group>
   </mat-card-header>
   <img alt="Movie image" mat-card-image src="{{ movie.posterLink }}" />
@@ -96,7 +102,12 @@
     <div *ngIf="movie.workerName != null" fxLayout="row" fxLayoutAlign="space-between center" class="myRow">
       <div>{{ 'CINEMA_TICKETS_WORKER' | translate }}</div>
       <div>
-        {{ movie.workerName }}
+        <span
+          [matTooltip]="getPhoneNumberString(movie.workerNumbers)"
+          matTooltipPosition="above"
+          (click)="openPhoneNumbersModal(movie.workerNumbers)"
+          >{{ movie.workerName }}</span
+        >
         <button
           (click)="signOutForWorker()"
           [class.spinner]="signingOutForWorker"
@@ -133,7 +144,12 @@
         {{ 'CINEMA_TICKETS_EMERGENCY_WORKER' | translate }}
       </div>
       <div>
-        {{ movie.emergencyWorkerName }}
+        <span
+          [matTooltip]="getPhoneNumberString(movie.emergencyWorkerNumbers)"
+          matTooltipPosition="below"
+          (click)="openPhoneNumbersModal(movie.emergencyWorkerNumbers)"
+          >{{ movie.emergencyWorkerName }}</span
+        >
         <button
           (click)="signOutForEmergencyWorker()"
           [class.spinner]="signingOutForEmergencyWorker"
