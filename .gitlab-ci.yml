@@ -4,36 +4,50 @@ cache:
   paths:
     - node_modules/
 
-before_script:
-  - apt-get update -qq && apt-get install -y -qq zip
-  - rm ./package-lock.json
-  - npm install
-  - ./node_modules/@angular/cli/bin/ng build --progress false --prod
-  - eval "$(ssh-agent -s)"
-  - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
-  - mkdir -p ~/.ssh
-  - chmod 700 ~/.ssh
-  - echo -e “Host *\n\tStrictHostKeyChecking no\n\n” > ~/.ssh/config
+stages:
+  - build
+  - deploy
+
+build:
+  stage: build
+  artifacts:
+    untracked: true
+  script:
+    - rm ./package-lock.json
+    - npm install
+    - ./node_modules/@angular/cli/bin/ng build --progress false --prod
+    - cd dist/
+    - ls -al
 
 deploy-dev:
   stage: deploy
-  environment: Staging
+  dependencies:
+    - build
   only:
     - development
   script:
-    - cd dist/
-    - ls
-    - zip -r DatePoll-Frontend-dev.zip ./DatePoll-Frontend
+    - apt-get update -qq && apt-get install -y -qq zip
+    - eval "$(ssh-agent -s)"
+    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+    - echo -e “Host *\n\tStrictHostKeyChecking no\n\n” > ~/.ssh/config
+    - zip -r DatePoll-Frontend-dev.zip ./DatePoll-Frontend >> /dev/null
     - scp -P $SSH_PORT -o StrictHostKeyChecking=no ./DatePoll-Frontend-dev.zip $SSH_USERNAME@$SSH_HOST:/var/www/datepoll-share/DatePoll/Frontend-Releases/ > /dev/null
 
 deploy-release:
   stage: deploy
-  environment: Staging
+  dependencies:
+    - build
   only:
     - master
   script:
-    - cd dist/
-    - ls
+    - apt-get update -qq && apt-get install -y -qq zip
+    - eval "$(ssh-agent -s)"
+    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+    - echo -e “Host *\n\tStrictHostKeyChecking no\n\n” > ~/.ssh/config
     - version=$(git describe --tags $(git rev-list --tags --max-count=1))
     - zip -r "DatePoll-Frontend-${version}.zip" ./DatePoll-Frontend >> /dev/null
     - cp "DatePoll-Frontend-${version}.zip" DatePoll-Frontend-latest.zip
