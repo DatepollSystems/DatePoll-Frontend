@@ -40,7 +40,9 @@ deploy-release:
   dependencies:
     - build
   only:
-    - master
+    - tags
+  except:
+    - branches
   script:
     - apt-get update -qq && apt-get install -y -qq zip
     - eval "$(ssh-agent -s)"
