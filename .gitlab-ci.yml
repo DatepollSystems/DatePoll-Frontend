@@ -30,7 +30,7 @@ deploy-dev:
     - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
     - mkdir -p ~/.ssh
     - chmod 700 ~/.ssh
-    - echo -e “Host *\n\tStrictHostKeyChecking no\n\n” > ~/.ssh/config
+    - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
     - cd dist/
     - zip -r DatePoll-Frontend-dev.zip ./DatePoll-Frontend >> /dev/null
     - scp -P $SSH_PORT -o StrictHostKeyChecking=no ./DatePoll-Frontend-dev.zip $SSH_USERNAME@$SSH_HOST:/var/www/datepoll-share/DatePoll/Frontend-Releases/ > /dev/null
@@ -49,7 +49,7 @@ deploy-release:
     - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
     - mkdir -p ~/.ssh
     - chmod 700 ~/.ssh
-    - echo -e “Host *\n\tStrictHostKeyChecking no\n\n” > ~/.ssh/config
+    - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
     - version=$(git describe --tags $(git rev-list --tags --max-count=1))
     - cd dist/
     - zip -r "DatePoll-Frontend-${version}.zip" ./DatePoll-Frontend >> /dev/null
