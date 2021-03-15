@@ -2,32 +2,27 @@
 
 ## Information
 
-<h4>
-    Get notified about updates and join us at
-    <a href="https://discord.gg/Tc5kAH5zhH">
-        <img src="https://img.shields.io/discord/697139052717146123?logo=discord&style=for-the-badge" alt="chat on Discord">
-    </a>
-</h4>
-
 - Project website (https://datepoll.org)
-- API / backend documentation (https://docs.datepoll.org)
+- API / backend documentation (https://datepoll.org/docs/DatePoll)
 - Other projects
   - [DatePoll-Backend](https://gitlab.com/DatePoll/DatePoll/datepoll-backend-php)
   - [DatePoll-Android](https://gitlab.com/DatePoll/DatePoll/datepoll-android)
   - [DatePoll-Dockerized](https://gitlab.com/DatePoll/DatePoll/datepoll-dockerized)
-- created with [Angular](https://angular.io) [used libaries](https://gitlab.com/DatePoll/DatePoll/datepoll-frontend/-/blob/master/package.json)
+- created with [Angular](https://angular.io), [used libaries](https://gitlab.com/DatePoll/DatePoll/datepoll-frontend/-/blob/master/package.json).
 
 ## Releases
 
-Releases are deployed into [this directory](https://share.dafnik.me/DatePoll-Frontend-Releases/).
+Releases are deployed into [this directory](https://releases.datepoll.org/DatePoll/Frontend-Releases/).
 
 There are 3 different build types:
 
-1. Latest release version: [DatePoll-Frontend-latest.zip](https://share.dafnik.me/DatePoll-Frontend-Releases/DatePoll-Frontend-latest.zip)
-1. Latest dev version (happens after every commit to [development](https://gitlab.com/DatePoll/DatePoll/datepoll-frontend/-/tree/development)): [DatePoll-Frontend-dev.zip](https://share.dafnik.me/DatePoll-Frontend-Releases/DatePoll-Frontend-dev.zip)
-1. Release candidate version (updated only sometimes): [DatePoll-Frontend-rc.zip](https://share.dafnik.me/DatePoll-Frontend-Releases/DatePoll-Frontend-rc.zip)
+1. Latest release version (builded after a tag is created): [DatePoll-Frontend-latest.zip](https://releases.datepoll.org/DatePoll/Frontend-Releases/DatePoll-Frontend-latest.zip)
+1. Latest dev version (builded after every commit to [development](https://gitlab.com/DatePoll/DatePoll/datepoll-frontend/-/tree/development)): [DatePoll-Frontend-dev.zip](https://releases.datepoll.org/DatePoll/Frontend-Releases/DatePoll-Frontend-dev.zip)
+1. Release candidate version (updated only sometimes): [DatePoll-Frontend-rc.zip](https://releases.datepoll.org/DatePoll/Frontend-Releases/DatePoll-Frontend-rc.zip)
 
 ## Development
+
+A more complete / more detailed development setup guide can be found [here](https://datepoll.org/docs/DatePoll/devAndBuilding).
 
 ### Requirements
 
