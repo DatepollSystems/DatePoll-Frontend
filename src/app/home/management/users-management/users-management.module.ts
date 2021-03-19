@@ -26,6 +26,7 @@ import {UserUpdateModalComponent} from './user-update-modal/user-update-modal.co
 import {UsersExportBottomSheetComponent, UsersManagementComponent} from './users-management.component';
 import {UsersChangesManagementComponent} from './users-changes-management/users-changes-management.component';
 import {ListChipInputModule} from '../../../utils/shared-components/list-chip-input/list-chip-input.module';
+import {UserInfoModalComponent} from './user-info-modal/user-info-modal.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import {ListChipInputModule} from '../../../utils/shared-components/list-chip-in
     UsersExportBottomSheetComponent,
     UserCreateModalComponent,
     UserUpdateModalComponent,
+    UserInfoModalComponent,
     PerformanceBadgeSelectComponent,
     InstrumentSelectComponent,
     PerformanceBadgesListComponent,

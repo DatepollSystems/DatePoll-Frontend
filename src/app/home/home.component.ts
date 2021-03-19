@@ -12,7 +12,7 @@ import {ServerInfoModel} from '../utils/server-info.model';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit, OnDestroy {
   @ViewChild('sidenav', {static: true})
@@ -24,6 +24,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   cinemaMovieAdministration = Permissions.CINEMA_MOVIE_ADMINISTRATION;
   eventAdministration = Permissions.EVENTS_ADMINISTRATION;
   managementAdministration = Permissions.MANAGEMENT_ADMINISTRATION;
+  managementUserView = Permissions.MANAGEMENT_USER_VIEW;
   broadcastAdministration = Permissions.BROADCASTS_ADMINISTRATION;
   settingsAdministration = Permissions.SETTINGS_ADMINISTRATION;
   logsAdministration = Permissions.SYSTEM_LOGS_ADMINISTRATION;
@@ -51,22 +52,22 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.myUserService = myUserService;
 
     this.firstname = this.myUserService.getFirstname();
-    this.firstnameSubscription = myUserService.firstnameChange.subscribe(value => {
+    this.firstnameSubscription = myUserService.firstnameChange.subscribe((value) => {
       this.firstname = value;
     });
 
     this.surname = this.myUserService.getSurname();
-    this.surnameSubscription = myUserService.surnameChange.subscribe(value => {
+    this.surnameSubscription = myUserService.surnameChange.subscribe((value) => {
       this.surname = value;
     });
 
     this.username = this.myUserService.getUsername();
-    this.usernameSubscription = this.myUserService.usernameChange.subscribe(value => {
+    this.usernameSubscription = this.myUserService.usernameChange.subscribe((value) => {
       this.username = value;
     });
 
     this.serverInfo = this.settingsService.getServerInfo();
-    this.serverInfoSubscription = this.settingsService.serverInfoChange.subscribe(value => {
+    this.serverInfoSubscription = this.settingsService.serverInfoChange.subscribe((value) => {
       this.serverInfo = value;
     });
 
@@ -95,7 +96,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       this.navBarMode = 'over';
     }
 
-    this.isMobileSubscription = this.isMobileService.isMobileChange.subscribe(isMobile => {
+    this.isMobileSubscription = this.isMobileService.isMobileChange.subscribe((isMobile) => {
       if (isMobile) {
         this.navBarOpened = false;
         this.navBarMode = 'over';

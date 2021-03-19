@@ -1,0 +1,83 @@
+<h1 mat-dialog-title>{{ 'MANAGEMENT_USERS_INFO_USER_MODAL_TITLE' | translate }} {{ firstname }} {{ surname }}</h1>
+<div mat-dialog-content>
+  <div fxLayout="column" fxLayoutGap="0.5%">
+    <div>{{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_TITLE' | translate }}: {{ title }}</div>
+    <div>{{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_FIRSTNAME' | translate }}: {{ firstname }}</div>
+    <div>{{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_SURNAME' | translate }}: {{ surname }}</div>
+    <div>{{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_BIRTHDAY' | translate }}: {{ birthday | date: 'EE, dd.MM.yyyy' }}</div>
+    <div>{{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_JOIN_DATE' | translate }} : {{ join_date | date: 'EE, dd.MM.yyyy' }}</div>
+    <mat-divider></mat-divider>
+
+    <div>{{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_STREETNAME' | translate }}: {{ streetname }}</div>
+    <div>{{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_STREETNUMBER' | translate }}: {{ streetnumber }}</div>
+    <div>{{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_ZIPCODE' | translate }}: {{ zipcode }}</div>
+    <div>{{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_LOCATION' | translate }}: {{ location }}</div>
+    <mat-divider></mat-divider>
+
+    <div>
+      {{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_LIST_EMAIL_ADDRESSES' | translate }}:
+      <ng-container *ngFor="let emailAddress of emailAddresses"
+        ><a [href]="'mailto:' + emailAddress">{{ emailAddress }}</a
+        >,
+      </ng-container>
+    </div>
+    <div>
+      {{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_PHONE_NUMBERS' | translate }}:
+      <ng-container *ngFor="let number of phoneNumbers"
+        >({{ number.label }}) <a [href]="'tel:' + number.phoneNumber">{{ number.phoneNumber }}</a
+        >,
+      </ng-container>
+    </div>
+    <mat-divider></mat-divider>
+
+    <div>{{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_ACTIVITY' | translate }}: {{ activity }}</div>
+    <div>{{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_BV_MEMBER' | translate }}: {{ bvMember }}</div>
+    <div>{{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_MEMBER_NUMBER' | translate }}: {{ memberNumber }}</div>
+    <mat-divider></mat-divider>
+
+    <div>{{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_GROUPS_JOINED' | translate }}:</div>
+    <ol>
+      <li *ngFor="let group of this.joined">
+        <b *ngIf="group.type === 1">[{{ group.groupName }}]</b> {{ group.name }}
+      </li>
+    </ol>
+    <mat-divider></mat-divider>
+
+    <div>{{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_PERFORMANCE_BADGES_TITLE' | translate }}:</div>
+    <ol>
+      <li *ngFor="let userPerformanceBadge of this.userPerformanceBadges">
+        <span matLine
+          >{{ userPerformanceBadge.performanceBadgeName }}
+          {{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_PERFORMANCE_BADGES_WITH' | translate }}
+          {{ userPerformanceBadge.instrumentName }}
+        </span>
+        <span *ngIf="userPerformanceBadge.date" matLine>; Datum: {{ userPerformanceBadge.date | date: 'dd.MM.yyyy' }}</span>
+        <span *ngIf="userPerformanceBadge.grade" matLine>; Erfolg: {{ userPerformanceBadge.grade }}</span>
+        <span *ngIf="userPerformanceBadge.note" matLine>; Anmerkung: {{ userPerformanceBadge.note }}</span>
+      </li>
+    </ol>
+
+    <div>{{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_BADGES_TITLE' | translate }}:</div>
+    <ol>
+      <li *ngFor="let badge of this.userBadges">
+        <span matLine
+          >{{ badge.description }};
+          <span>Datum: {{ badge.getDate | date: 'dd.MM.yyyy' }}</span>
+          <span *ngIf="badge.reason">; Begründung: {{ badge.reason }}</span>
+        </span>
+      </li>
+    </ol>
+    <mat-divider></mat-divider>
+
+    <div>{{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_INTERAL_COMMENT' | translate }}:</div>
+    <mat-form-field appearance="outline" style="width: 100%">
+      <textarea [(ngModel)]="internalComment" matInput name="internalComment" ngModel readonly></textarea>
+    </mat-form-field>
+    <div>{{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_USERNAME' | translate }}: {{ username }}</div>
+    <div>{{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_ACTIVATED' | translate }}: {{ activated | boolean }}</div>
+    <div>{{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_INFORMATION_DENIED' | translate }} : {{ informationDenied | boolean }}</div>
+  </div>
+</div>
+<div mat-dialog-actions>
+  <button [mat-dialog-close] mat-button>{{ 'CLOSE' | translate }}</button>
+</div>

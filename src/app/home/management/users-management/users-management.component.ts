@@ -20,6 +20,7 @@ import {UserUpdateModalComponent} from './user-update-modal/user-update-modal.co
 import {MatMultiSort, MatMultiSortTableDataSource, TableData} from 'ngx-mat-multi-sort';
 import {Permissions} from '../../../permissions';
 import {User} from './user.model';
+import {UserInfoModalComponent} from './user-info-modal/user-info-modal.component';
 
 @Component({
   selector: 'app-users-management',
@@ -27,7 +28,9 @@ import {User} from './user.model';
   styleUrls: ['./users-management.component.css'],
 })
 export class UsersManagementComponent implements OnInit, OnDestroy {
-  hasPermissionToDeleteUser = false;
+  managementAdministration = Permissions.MANAGEMENT_ADMINISTRATION;
+  managementExtraDeletePermission = Permissions.MANAGEMENT_EXTRA_USER_PERMISSIONS;
+  myUserService: MyUserService;
 
   usersLoaded = true;
   filterValue = '';
@@ -46,7 +49,7 @@ export class UsersManagementComponent implements OnInit, OnDestroy {
     private router: Router,
     private bottomSheet: MatBottomSheet,
     private dialog: MatDialog,
-    private myUserService: MyUserService,
+    myUserService: MyUserService,
     private notificationsService: NotificationsService,
     private usersService: UsersService
   ) {
@@ -88,6 +91,8 @@ export class UsersManagementComponent implements OnInit, OnDestroy {
       ],
       {defaultSortParams: ['surname'], defaultSortDirs: ['asc']}
     );
+
+    this.myUserService = myUserService;
   }
 
   ngOnInit() {
@@ -106,7 +111,6 @@ export class UsersManagementComponent implements OnInit, OnDestroy {
 
     setTimeout(() => {
       this.refreshTable();
-      this.hasPermissionToDeleteUser = this.myUserService.hasPermission(Permissions.MANAGEMENT_EXTRA_USER_DELETE);
     });
   }
 
@@ -245,6 +249,13 @@ export class UsersManagementComponent implements OnInit, OnDestroy {
 
   onEdit(user: User) {
     this.dialog.open(UserUpdateModalComponent, {
+      width: '80%',
+      data: {user},
+    });
+  }
+
+  onInfo(user: User) {
+    this.dialog.open(UserInfoModalComponent, {
       width: '80%',
       data: {user},
     });

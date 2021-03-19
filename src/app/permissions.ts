@@ -14,6 +14,7 @@ export class Permissions {
   public static SEATRESERVATION_ADMINISTRATION = 'seatReservation.*';
 
   public static MANAGEMENT_ADMINISTRATION = 'management.*';
+  public static MANAGEMENT_USER_VIEW = 'management.user.view';
   public static MANAGEMENT_EXTRA_USER_PERMISSIONS = 'management.user.permissions';
   public static MANAGEMENT_EXTRA_USER_DELETE = 'management.user.delete';
 
@@ -33,6 +34,7 @@ export class Permissions {
       this.BROADCASTS_DELETE_EXTRA,
       this.SEATRESERVATION_ADMINISTRATION,
       this.MANAGEMENT_ADMINISTRATION,
+      this.MANAGEMENT_USER_VIEW,
       this.MANAGEMENT_EXTRA_USER_DELETE,
       this.MANAGEMENT_EXTRA_USER_PERMISSIONS,
       this.SETTINGS_ADMINISTRATION,

@@ -397,6 +397,7 @@
   "MANAGEMENT_USERS_ACTIVITY": "Aktivität",
   "MANAGEMENT_USERS_ACTIONS": "Aktionen",
   "MANAGEMENT_USERS_ACTIONS_EDIT_TOOLTIP": "Bearbeite dieses Mitglied",
+  "MANAGEMENT_USERS_ACTIONS_INFO_TOOLTIP": "Zeige Informationen über dieses Mitglied",
   "MANAGEMENT_USERS_ACTIONS_DELETE_TOOLTIP": "Lösche dieses Mitglied",
   "MANAGEMENT_USERS_REFRESH": "Mitgliederliste aktualisieren",
   "MANAGEMENT_USERS_EXPORT_LOADING": "Die Mitgliederliste wird erstellt... Dies kann einige Sekunden dauern! Bitte schließe den Browser in dieser Zeit nicht.",
@@ -493,6 +494,8 @@
   "MANAGEMENT_USERS_UPDATE_USER_MODAL_PASSWORD_CHANGE": "Passwort ändern",
   "MANAGEMENT_USERS_UPDATE_USER_MODAL_PASSWORD_CHANGE_DESCRIPTION": "Das Passwort wird unabhängig von den restlichen Daten verändert! Nachdem ein Passwort eingegeben wurde und auf \"Passwort ändern\" geklickt wurde, gibt es kein zurück.",
   "MANAGEMENT_USERS_UPDATE_USER_MODAL_PASSWORD_CHANGE_SUCCESSFUL": "Das Passwort wurde geändert!",
+
+  "MANAGEMENT_USERS_INFO_USER_MODAL_TITLE": "Informationen über ",
 
   "MANAGEMENT_USERS_DELETE_USER_MODAL_TITLE": "Willst du den Benutzer wirklich löschen?",
   "MANAGEMENT_USERS_DELETE_USER_MODAL_SUCCESSFUL": "Das Mitglied wurde gelöscht!",

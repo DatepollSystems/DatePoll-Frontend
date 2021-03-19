@@ -11,12 +11,15 @@
             <mat-icon>refresh</mat-icon>
             <span>{{ 'MANAGEMENT_USERS_REFRESH' | translate }}</span>
           </button>
-          <mat-divider></mat-divider>
 
-          <button mat-menu-item [matMenuTriggerFor]="actionsMenu">{{ 'ACTION' | translate }}</button>
-          <mat-divider></mat-divider>
+          <ng-container *ngIf="myUserService.hasPermission(managementAdministration)">
+            <mat-divider></mat-divider>
 
-          <button mat-menu-item [matMenuTriggerFor]="managementMenu">{{ 'MANAGEMENT' | translate }}</button>
+            <button mat-menu-item [matMenuTriggerFor]="actionsMenu">{{ 'ACTION' | translate }}</button>
+            <mat-divider></mat-divider>
+
+            <button mat-menu-item [matMenuTriggerFor]="managementMenu">{{ 'MANAGEMENT' | translate }}</button>
+          </ng-container>
         </mat-menu>
 
         <mat-menu #actionsMenu="matMenu">
@@ -31,7 +34,11 @@
         </mat-menu>
 
         <mat-menu #managementMenu="matMenu">
-          <button routerLink="/home/management/user/deleted" mat-menu-item *ngIf="hasPermissionToDeleteUser">
+          <button
+            routerLink="/home/management/user/deleted"
+            mat-menu-item
+            *ngIf="myUserService.hasPermission(managementExtraDeletePermission)"
+          >
             <mat-icon>delete_sweep</mat-icon>
             <span>{{ 'MANAGEMENT_USERS_DELETED_USERS' | translate }}</span>
           </button>
@@ -52,7 +59,7 @@
     </div>
 
     <div fxLayout="row" fxLayoutGap="2%">
-      <button (click)="onCreate()" color="accent" mat-fab>
+      <button (click)="onCreate()" color="accent" mat-fab *ngIf="myUserService.hasPermission(managementAdministration)">
         <mat-icon>add</mat-icon>
       </button>
       <mat-form-field>
@@ -165,6 +172,7 @@
         <th *matHeaderCellDef mat-header-cell>{{ 'MANAGEMENT_USERS_ACTIONS' | translate }}</th>
         <td (click)="$event.stopPropagation()" *matCellDef="let user" mat-cell>
           <button
+            *ngIf="myUserService.hasPermission(managementAdministration)"
             (click)="onEdit(user)"
             color="accent"
             mat-icon-button
@@ -173,8 +181,12 @@
             <mat-icon>create</mat-icon>
           </button>
 
+          <button (click)="onInfo(user)" mat-icon-button matTooltip="{{ 'MANAGEMENT_USERS_ACTIONS_EDIT_TOOLTIP' | translate }}">
+            <mat-icon>info</mat-icon>
+          </button>
+
           <button
-            *ngIf="hasPermissionToDeleteUser"
+            *ngIf="myUserService.hasPermission(managementExtraDeletePermission)"
             (click)="onDelete(user.id)"
             color="warn"
             mat-icon-button
@@ -186,7 +198,7 @@
       </ng-container>
 
       <tr *matHeaderRowDef="table.displayedColumns; sticky: true" mat-header-row></tr>
-      <tr (click)="onEdit(row)" *matRowDef="let row; columns: table.displayedColumns" mat-row></tr>
+      <tr (click)="onInfo(row)" *matRowDef="let row; columns: table.displayedColumns" mat-row></tr>
     </table>
 
     <mat-paginator
