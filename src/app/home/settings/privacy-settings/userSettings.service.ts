@@ -6,11 +6,14 @@ import {TranslateService} from '../../../translation/translate.service';
 import {HttpService} from '../../../utils/http.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UserSettingsService {
   public showBirthdayChange: Subject<boolean> = new Subject<boolean>();
   private _showBirthday = true;
+
+  public shareMovieWorkerPhoneNumberChange: Subject<boolean> = new Subject<boolean>();
+  private _shareMovieWorkerPhoneNumber = true;
 
   public showMoviesInCalendarChange: Subject<boolean> = new Subject<boolean>();
   private _showMoviesInCalendar = true;
@@ -23,6 +26,9 @@ export class UserSettingsService {
 
   public notifyMeOnNewEventViaEmailChange: Subject<boolean> = new Subject<boolean>();
   private _notifyMeOnNewEventViaEmail = false;
+
+  public notifyMeViaEmailOnBroadcastChange: Subject<boolean> = new Subject<boolean>();
+  private _notifyMeViaEmailOnBroadcast = true;
 
   constructor(private httpService: HttpService, private notificationsService: NotificationsService, private translate: TranslateService) {}
 
@@ -45,7 +51,30 @@ export class UserSettingsService {
         console.log(response);
         this.setShowBirthday(response.setting_value);
       },
-      error => console.log(error)
+      (error) => console.log(error)
+    );
+  }
+
+  public setShareMovieWorkerPhoneNumber(shareMovieWorkerPhoneNumber: boolean, saveInCloud = false) {
+    this._shareMovieWorkerPhoneNumber = shareMovieWorkerPhoneNumber;
+    this.shareMovieWorkerPhoneNumberChange.next(this._shareMovieWorkerPhoneNumber);
+    if (saveInCloud) {
+      this.setSettingsRequest('shareMovieWorkerPhoneNumber', this._shareMovieWorkerPhoneNumber);
+    }
+  }
+
+  public getShareMovieWorkerPhoneNumber(): boolean {
+    this.fetchShareMovieWorkerPhoneNumber();
+    return this._shareMovieWorkerPhoneNumber;
+  }
+
+  private fetchShareMovieWorkerPhoneNumber() {
+    this.httpService.loggedInV1GETRequest('/user/myself/settings/shareMovieWorkerPhoneNumber').subscribe(
+      (response: any) => {
+        console.log(response);
+        this.setShareMovieWorkerPhoneNumber(response.setting_value);
+      },
+      (error) => console.log(error)
     );
   }
 
@@ -68,7 +97,7 @@ export class UserSettingsService {
         console.log(response);
         this.setShowMoviesInCalendar(response.setting_value);
       },
-      error => console.log(error)
+      (error) => console.log(error)
     );
   }
 
@@ -91,7 +120,7 @@ export class UserSettingsService {
         console.log(response);
         this.setShowEventsInCalendar(response.setting_value);
       },
-      error => console.log(error)
+      (error) => console.log(error)
     );
   }
 
@@ -114,7 +143,7 @@ export class UserSettingsService {
         console.log(response);
         this.setShowBirthdaysInCalendar(response.setting_value);
       },
-      error => console.log(error)
+      (error) => console.log(error)
     );
   }
 
@@ -137,13 +166,36 @@ export class UserSettingsService {
         console.log(response);
         this.setNotifyMeOnNewEventViaEmail(response.setting_value);
       },
-      error => console.log(error)
+      (error) => console.log(error)
+    );
+  }
+
+  public setNotifyMeViaEmailOnBroadcast(notifyMeViaEmailOnBroadcast: boolean, saveInCloud = false) {
+    this._notifyMeViaEmailOnBroadcast = notifyMeViaEmailOnBroadcast;
+    this.notifyMeViaEmailOnBroadcastChange.next(this._notifyMeViaEmailOnBroadcast);
+    if (saveInCloud) {
+      this.setSettingsRequest('notifyMeViaEmailOnBroadcast', this._notifyMeViaEmailOnBroadcast);
+    }
+  }
+
+  public getNotifyMeViaEmailOnBroadcast(): boolean {
+    this.fetchNotifyMeViaEmailOnBroadcast();
+    return this._notifyMeViaEmailOnBroadcast;
+  }
+
+  private fetchNotifyMeViaEmailOnBroadcast() {
+    this.httpService.loggedInV1GETRequest('/user/myself/settings/notifyMeViaEmailOnBroadcast').subscribe(
+      (response: any) => {
+        console.log(response);
+        this.setNotifyMeViaEmailOnBroadcast(response.setting_value);
+      },
+      (error) => console.log(error)
     );
   }
 
   private setSettingsRequest(url: string, value: boolean) {
     const body = {
-      setting_value: value
+      setting_value: value,
     };
     this.httpService.loggedInV1POSTRequest('/user/myself/settings/' + url, body, 'setSettingsRequest').subscribe(
       (response: any) => {
@@ -153,7 +205,7 @@ export class UserSettingsService {
           this.translate.getTranslationFor('SETTINGS_SECURITY_MODAL_SETTINGS_SAVE_SUCCESS')
         );
       },
-      error => console.log(error)
+      (error) => console.log(error)
     );
   }
 }

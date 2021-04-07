@@ -28,9 +28,8 @@ import {UserInfoModalComponent} from './user-info-modal/user-info-modal.componen
   styleUrls: ['./users-management.component.css'],
 })
 export class UsersManagementComponent implements OnInit, OnDestroy {
-  managementAdministration = Permissions.MANAGEMENT_ADMINISTRATION;
-  managementExtraDeletePermission = Permissions.MANAGEMENT_EXTRA_USER_PERMISSIONS;
-  myUserService: MyUserService;
+  hasManagementAdministration = false;
+  hasManagementExtraDeletePermission = false;
 
   usersLoaded = true;
   filterValue = '';
@@ -53,6 +52,9 @@ export class UsersManagementComponent implements OnInit, OnDestroy {
     private notificationsService: NotificationsService,
     private usersService: UsersService
   ) {
+    this.hasManagementAdministration = myUserService.hasPermission(Permissions.MANAGEMENT_ADMINISTRATION);
+    this.hasManagementExtraDeletePermission = myUserService.hasPermission(Permissions.MANAGEMENT_EXTRA_USER_PERMISSIONS);
+
     this.usersLoaded = false;
 
     this.users = usersService.getUsers();
@@ -91,8 +93,6 @@ export class UsersManagementComponent implements OnInit, OnDestroy {
       ],
       {defaultSortParams: ['surname'], defaultSortDirs: ['asc']}
     );
-
-    this.myUserService = myUserService;
   }
 
   ngOnInit() {

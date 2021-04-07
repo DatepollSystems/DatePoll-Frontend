@@ -24,6 +24,9 @@ export class EmailAddressComponent implements OnDestroy {
   public notifyViaEmailOnNewEvent = true;
   private notifyViaEmailOnNewEventSubscription: Subscription;
 
+  public notifyMeViaEmailOnBroadcast = true;
+  private notifyMeViaEmailOnBroadcastSubscription: Subscription;
+
   constructor(
     private _myUserService: MyUserService,
     private notificationsService: NotificationsService,
@@ -40,6 +43,11 @@ export class EmailAddressComponent implements OnDestroy {
     this.notifyViaEmailOnNewEvent = this.settingsService.getNotifyMeOnNewEventViaEmail();
     this.notifyViaEmailOnNewEventSubscription = this.settingsService.notifyMeOnNewEventViaEmailChange.subscribe((value) => {
       this.notifyViaEmailOnNewEvent = value;
+    });
+
+    this.notifyMeViaEmailOnBroadcast = this.settingsService.getNotifyMeViaEmailOnBroadcast();
+    this.notifyMeViaEmailOnBroadcastSubscription = this.settingsService.notifyMeViaEmailOnBroadcastChange.subscribe((value) => {
+      this.notifyMeViaEmailOnBroadcast = value;
     });
   }
 
@@ -73,9 +81,14 @@ export class EmailAddressComponent implements OnDestroy {
   ngOnDestroy(): void {
     this.emailAddressesSubscription.unsubscribe();
     this.notifyViaEmailOnNewEventSubscription.unsubscribe();
+    this.notifyMeViaEmailOnBroadcastSubscription.unsubscribe();
   }
 
   notifyMeOnNewEventChange(ob: MatSlideToggleChange) {
     this.settingsService.setNotifyMeOnNewEventViaEmail(ob.checked, true);
+  }
+
+  notifyMeViaEmailOnBroadcastChange(ob: MatSlideToggleChange) {
+    this.settingsService.setNotifyMeViaEmailOnBroadcast(ob.checked, true);
   }
 }

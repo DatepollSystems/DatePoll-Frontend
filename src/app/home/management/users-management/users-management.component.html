@@ -12,7 +12,7 @@
             <span>{{ 'MANAGEMENT_USERS_REFRESH' | translate }}</span>
           </button>
 
-          <ng-container *ngIf="myUserService.hasPermission(managementAdministration)">
+          <ng-container *ngIf="hasManagementAdministration">
             <mat-divider></mat-divider>
 
             <button mat-menu-item [matMenuTriggerFor]="actionsMenu">{{ 'ACTION' | translate }}</button>
@@ -34,11 +34,7 @@
         </mat-menu>
 
         <mat-menu #managementMenu="matMenu">
-          <button
-            routerLink="/home/management/user/deleted"
-            mat-menu-item
-            *ngIf="myUserService.hasPermission(managementExtraDeletePermission)"
-          >
+          <button routerLink="/home/management/user/deleted" mat-menu-item *ngIf="hasManagementExtraDeletePermission">
             <mat-icon>delete_sweep</mat-icon>
             <span>{{ 'MANAGEMENT_USERS_DELETED_USERS' | translate }}</span>
           </button>
@@ -59,7 +55,7 @@
     </div>
 
     <div fxLayout="row" fxLayoutGap="2%">
-      <button (click)="onCreate()" color="accent" mat-fab *ngIf="myUserService.hasPermission(managementAdministration)">
+      <button (click)="onCreate()" color="accent" mat-fab *ngIf="hasManagementAdministration">
         <mat-icon>add</mat-icon>
       </button>
       <mat-form-field>
@@ -172,7 +168,7 @@
         <th *matHeaderCellDef mat-header-cell>{{ 'MANAGEMENT_USERS_ACTIONS' | translate }}</th>
         <td (click)="$event.stopPropagation()" *matCellDef="let user" mat-cell>
           <button
-            *ngIf="myUserService.hasPermission(managementAdministration)"
+            *ngIf="hasManagementAdministration"
             (click)="onEdit(user)"
             color="accent"
             mat-icon-button
@@ -186,7 +182,7 @@
           </button>
 
           <button
-            *ngIf="myUserService.hasPermission(managementExtraDeletePermission)"
+            *ngIf="hasManagementExtraDeletePermission"
             (click)="onDelete(user.id)"
             color="warn"
             mat-icon-button
@@ -198,7 +194,12 @@
       </ng-container>
 
       <tr *matHeaderRowDef="table.displayedColumns; sticky: true" mat-header-row></tr>
-      <tr (click)="onInfo(row)" *matRowDef="let row; columns: table.displayedColumns" mat-row></tr>
+      <ng-container *ngIf="hasManagementAdministration"
+        ><tr (click)="onEdit(row)" *matRowDef="let row; columns: table.displayedColumns" mat-row></tr
+      ></ng-container>
+      <ng-container *ngIf="!hasManagementAdministration"
+        ><tr (click)="onInfo(row)" *matRowDef="let row; columns: table.displayedColumns" mat-row></tr
+      ></ng-container>
     </table>
 
     <mat-paginator

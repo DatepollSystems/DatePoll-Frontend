@@ -337,7 +337,8 @@
   "SETTINGS_PERSONAL_DATA_MODAL_PHONE_NUMBER_NOT_VALID": "Bitte gib eine Bezeichnung und eine Telefonnummer an!",
 
   "SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_NOTIFY_TITLE": "Email-Benachrichtigungen",
-  "SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_NOTIFY_ME_ON_NEW_EVENT": "Neues Event",
+  "SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_NOTIFY_ME_ON_NEW_EVENT": "Bei neuem Event",
+  "SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_NOTIFY_ME_ON_BROADCAST_VIA_EMAIL": "Mitteilungen per Email zustellen",
   "SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_SAVED_SUCCESSFULLY": "Deine Email-Adressen wurden übernommen!",
   "SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_MINIMUM_ONE_EMAIL_ADDRESS": "Es muss mindestens eine Email-Adresse hinterlegt sein!",
 
@@ -371,13 +372,14 @@
   "SETTINGS_SECURITY_MODAL_SETTINGS_TITLE": "Privatsphäre-Einstellungen",
   "SETTINGS_SECURITY_MODAL_SETTINGS_SAVE_SUCCESS": "Deine Einstellungen wurden gespeichert!",
   "SETTINGS_SECURITY_MODAL_SETTINGS_SHOW_BIRTHDAY": "Zeige deinen Geburtstag für jedes Vereinsmitglied auf der Startseite an",
+  "SETTINGS_SECURITY_MODAL_SETTINGS_SHOW_MOVIE_WORKER_NUMBER": "Zeige deine Telefonnummer wenn du dich für einen Kinodienst meldest.",
   "SETTINGS_SECURITY_MODAL_SETTINGS_SHOW_MOVIE_WORKER_NUMBER_ERROR_0": "Wir können leider keine Telefonnummern für dieses Mitglied anzeigen. Das kann an folgenden Gründen liegen: ",
   "SETTINGS_SECURITY_MODAL_SETTINGS_SHOW_MOVIE_WORKER_NUMBER_ERROR_1": "Das Mitglied hat keine Telefonnummer hinterlegt.",
   "SETTINGS_SECURITY_MODAL_SETTINGS_SHOW_MOVIE_WORKER_NUMBER_ERROR_2": "Du hast deine Telefonnummer für den Kinodienst nicht freigegeben. Das kannst du jedoch",
   "SETTINGS_SECURITY_MODAL_SETTINGS_SHOW_MOVIE_WORKER_NUMBER_ERROR_3": "hier",
   "SETTINGS_SECURITY_MODAL_SETTINGS_SHOW_MOVIE_WORKER_NUMBER_ERROR_4": "ändern.",
   "SETTINGS_SECURITY_MODAL_SETTINGS_SHOW_MOVIE_WORKER_NUMBER_ERROR_5": "Das Mitglied hat seine Telefonnummer für den Kinodienst nicht freigegeben.",
-  "SETTINGS_SECURITY_MODAL_SETTINGS_SHOW_MOVIE_WORKER_NUMBER_ERROR_6": "Wir bitten um dein Verständnis aus diesem Grund keine Telefonnummern anzeigen zu können.",
+  "SETTINGS_SECURITY_MODAL_SETTINGS_SHOW_MOVIE_WORKER_NUMBER_ERROR_6": "Wir bitten um dein Verständnis darum nichts anzeigen zu können.",
 
   "MANAGEMENT_USERS_SEARCH": "Suche...",
   "MANAGEMENT_USERS_MEMBER_NUMBER": "Nummer",
