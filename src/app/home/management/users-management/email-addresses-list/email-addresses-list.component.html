@@ -1,71 +1,10 @@
-<form
-  #emailAddressForm="ngForm"
-  (ngSubmit)="addEmailAddress(emailAddressForm)"
-  fxLayout="row"
-  fxLayout.lt-md="column"
-  fxLayoutAlign="space-between"
->
-  <div fxFlex="70%">
-    <mat-form-field>
-      <input
-        #emailAddressModel="ngModel"
-        email
-        id="emailAddress"
-        matInput
-        maxlength="190"
-        minlength="1"
-        npm
-        name="emailAddress"
-        ngModel
-        placeholder="{{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_EMAIL_ADDRESS' | translate }}"
-        required
-        type="email"
-      />
-      <mat-error *ngIf="emailAddressModel.errors?.email">
-        {{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_EMAIL_ADDRESS_INCORRECT' | translate }}
-      </mat-error>
-    </mat-form-field>
-  </div>
+<app-list-chip-input
+  [strings]="emailAddresses"
+  [label]="'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_EMAIL_ADDRESS'"
+  [inHighComma]="true"
+  (valueChange)="onEmailAddressChange($event)"
+></app-list-chip-input>
 
-  <div fxFlex="25%">
-    <button
-      (submit)="emailAddressForm.ngSubmit.emit()"
-      [disabled]="!emailAddressForm.valid"
-      color="primary"
-      id="addEmail-button"
-      mat-raised-button
-      style="width: 100%"
-    >
-      {{ 'ADD' | translate }}
-      <mat-icon aria-label="Submit button">playlist_add</mat-icon>
-    </button>
-  </div>
-</form>
-
-<table [dataSource]="dataSource" class="table-responsive" mat-table>
-  <ng-container matColumnDef="emailAddress">
-    <th *matHeaderCellDef mat-header-cell>{{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_LIST_EMAIL_ADDRESSES' | translate }}</th>
-    <td *matCellDef="let emailAddress" mat-cell>"{{ emailAddress }}"</td>
-  </ng-container>
-
-  <ng-container matColumnDef="action">
-    <th *matHeaderCellDef mat-header-cell>{{ 'ACTION' | translate }}</th>
-    <td *matCellDef="let emailAddress" mat-cell>
-      <button
-        (click)="removeEmailAddress(emailAddress)"
-        [matTooltipPosition]="'right'"
-        mat-icon-button
-        matTooltip="{{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_LIST_EMAIL_ADDRESSES_REMOVE_TOOLTIP' | translate }}"
-      >
-        <mat-icon>delete_foreve</mat-icon>
-      </button>
-    </td>
-  </ng-container>
-
-  <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
-  <tr *matRowDef="let row; columns: displayedColumns" mat-row></tr>
-</table>
-
-<mat-card class="not-selectable mat-info-card" *ngIf="dataSource.data.length == 0">
+<mat-card class="not-selectable mat-info-card" *ngIf="emailAddresses?.length == 0">
   <b>{{ 'INFORMATION' | translate }}</b> {{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_EMAIL_ADDRESS_NO_EMAIL_ADDRESSES' | translate }}
 </mat-card>

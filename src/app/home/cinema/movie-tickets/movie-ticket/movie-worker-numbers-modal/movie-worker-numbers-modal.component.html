@@ -1,0 +1,21 @@
+<h2>{{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_PHONE_NUMBERS' | translate }}</h2>
+<mat-divider></mat-divider>
+
+<div *ngIf="numbers.length < 1">
+  {{ 'SETTINGS_SECURITY_MODAL_SETTINGS_SHOW_MOVIE_WORKER_NUMBER_ERROR_0' | translate }}
+  <ol>
+    <li>{{ 'SETTINGS_SECURITY_MODAL_SETTINGS_SHOW_MOVIE_WORKER_NUMBER_ERROR_1' | translate }}</li>
+    <li>
+      {{ 'SETTINGS_SECURITY_MODAL_SETTINGS_SHOW_MOVIE_WORKER_NUMBER_ERROR_2' | translate }}
+      <a routerLink="/home/settings/privacySettings">{{
+        'SETTINGS_SECURITY_MODAL_SETTINGS_SHOW_MOVIE_WORKER_NUMBER_ERROR_3' | translate
+      }}</a>
+      {{ 'SETTINGS_SECURITY_MODAL_SETTINGS_SHOW_MOVIE_WORKER_NUMBER_ERROR_4' | translate }}
+    </li>
+    <li>{{ 'SETTINGS_SECURITY_MODAL_SETTINGS_SHOW_MOVIE_WORKER_NUMBER_ERROR_5' | translate }}</li>
+  </ol>
+  {{ 'SETTINGS_SECURITY_MODAL_SETTINGS_SHOW_MOVIE_WORKER_NUMBER_ERROR_6' | translate }}
+</div>
+<mat-nav-list>
+  <a mat-list-item *ngFor="let number of numbers" href="tel:{{ number.phoneNumber }}">{{ number.label }}: "{{ number.phoneNumber }}"</a>
+</mat-nav-list>

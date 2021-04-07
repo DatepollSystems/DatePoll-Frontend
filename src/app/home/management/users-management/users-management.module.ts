@@ -25,6 +25,8 @@ import {UserDeleteModalComponent} from './user-delete-modal/user-delete-modal.co
 import {UserUpdateModalComponent} from './user-update-modal/user-update-modal.component';
 import {UsersExportBottomSheetComponent, UsersManagementComponent} from './users-management.component';
 import {UsersChangesManagementComponent} from './users-changes-management/users-changes-management.component';
+import {ListChipInputModule} from '../../../utils/shared-components/list-chip-input/list-chip-input.module';
+import {UserInfoModalComponent} from './user-info-modal/user-info-modal.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +34,7 @@ import {UsersChangesManagementComponent} from './users-changes-management/users-
     UsersExportBottomSheetComponent,
     UserCreateModalComponent,
     UserUpdateModalComponent,
+    UserInfoModalComponent,
     PerformanceBadgeSelectComponent,
     InstrumentSelectComponent,
     PerformanceBadgesListComponent,
@@ -52,6 +55,7 @@ import {UsersChangesManagementComponent} from './users-changes-management/users-
     UsersManagementRoutingModule,
     CommonComponentsModule,
     GroupAndSubgroupTypeInputSelectModule,
+    ListChipInputModule,
   ],
   providers: [
     {provide: DateAdapter, useClass: CustomDateAdapter},

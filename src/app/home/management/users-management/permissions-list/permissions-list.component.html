@@ -1,58 +1,17 @@
 <p>
   <small>
     {{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_PERMISSIONS_SMALL_0' | translate }}
-    <a href="https://datepoll.dafnik.me/permissions/" rel="noopener" target="_blank">Link</a
+    <a href="https://datepoll.org/docs/DatePoll/permissions" rel="noopener" target="_blank">Link</a
     >{{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_PERMISSIONS_SMALL_1' | translate }}
   </small>
 </p>
 
-<form #permissionsForm="ngForm" (ngSubmit)="addPermission()" fxLayout="row" fxLayout.lt-sm="column" fxLayoutAlign="space-between">
-  <div fxFlex="70%">
-    <mat-form-field>
-      <mat-select
-        (selectionChange)="permissionSelectChange($event.value)"
-        placeholder="{{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_PERMISSION' | translate }}"
-        required
-      >
-        <mat-option>
-          <ngx-mat-select-search [formControl]="permissionFilterCtrl"></ngx-mat-select-search>
-        </mat-option>
-
-        <mat-option *ngFor="let permission of filteredPermissions | async" [value]="permission">
-          {{ permission }}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-  </div>
-
-  <div fxFlex="25%">
-    <button
-      [disabled]="!permissionsForm.valid || selectedPermission == null"
-      color="primary"
-      id="addPermission-button"
-      mat-raised-button
-      style="width: 100%"
-      type="submit"
-    >
-      {{ 'ADD' | translate }}
-      <mat-icon aria-label="Submit button">playlist_add</mat-icon>
-    </button>
-  </div>
-</form>
-
-<mat-list>
-  <mat-list-item *ngFor="let permission of permissions">
-    <span matLine>{{ permission }}</span>
-    <button
-      (click)="removePermission(permission)"
-      mat-icon-button
-      matTooltip="{{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_REMOVE_PERMISSION_TOOLTIP' | translate }}"
-      matTooltipPosition="right"
-    >
-      <mat-icon>delete_forever</mat-icon>
-    </button>
-  </mat-list-item>
-</mat-list>
+<app-list-chip-input
+  [strings]="permissions"
+  [allStringsToAutoComplete]="allPermissions"
+  [label]="'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_PERMISSION'"
+  (valueChange)="permissionChange($event)"
+></app-list-chip-input>
 
 <mat-card class="mat-info-card not-selectable" *ngIf="permissions.length == 0">
   <b>{{ 'INFORMATION' | translate }}</b> {{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_NO_PERMISSIONS_AVAILABLE' | translate }}

@@ -1,4 +1,4 @@
-import {Component, OnDestroy, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
 
 import {MatBottomSheet} from '@angular/material/bottom-sheet';
@@ -14,13 +14,17 @@ import {TranslateService} from '../../../translation/translate.service';
 import {QuestionDialogComponent} from '../../../utils/shared-components/question-dialog/question-dialog.component';
 import {Broadcast} from '../models/broadcast.model';
 import {NotificationsService} from 'angular2-notifications';
+import {Permissions} from '../../../permissions';
+import {MyUserService} from '../../my-user.service';
 
 @Component({
   selector: 'app-broadcasts-administration',
   templateUrl: './broadcasts-administration.component.html',
-  styleUrls: ['./broadcasts-administration.component.css']
+  styleUrls: ['./broadcasts-administration.component.css'],
 })
-export class BroadcastsAdministrationComponent implements OnDestroy {
+export class BroadcastsAdministrationComponent implements OnInit, OnDestroy {
+  hasPermissionToDeleteBroadcast = false;
+
   displayedColumns: string[] = ['subject', 'date', 'writer', 'body', 'action'];
   filterValue: string = null;
   dataSource: MatTableDataSource<Broadcast>;
@@ -33,6 +37,7 @@ export class BroadcastsAdministrationComponent implements OnDestroy {
   loading = true;
 
   constructor(
+    private myUserService: MyUserService,
     private broadcastsService: BroadcastsAdministrationService,
     private router: Router,
     private bottomSheet: MatBottomSheet,
@@ -46,12 +51,18 @@ export class BroadcastsAdministrationComponent implements OnDestroy {
     this.dataSource = new MatTableDataSource(this.broadcasts);
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
-    this.broadcastsSubscription = this.broadcastsService.broadcastsChange.subscribe(value => {
+    this.broadcastsSubscription = this.broadcastsService.broadcastsChange.subscribe((value) => {
       this.broadcasts = value;
       this.loading = false;
       this.dataSource = new MatTableDataSource(this.broadcasts);
       this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;
+    });
+  }
+
+  ngOnInit() {
+    setTimeout(() => {
+      this.hasPermissionToDeleteBroadcast = this.myUserService.hasPermission(Permissions.BROADCASTS_DELETE_EXTRA);
     });
   }
 
@@ -82,20 +93,20 @@ export class BroadcastsAdministrationComponent implements OnDestroy {
     const answers = [
       {
         answer: this.translate.getTranslationFor('YES'),
-        value: 'yes'
+        value: 'yes',
       },
       {
         answer: this.translate.getTranslationFor('NO'),
-        value: 'no'
-      }
+        value: 'no',
+      },
     ];
     const question = this.translate.getTranslationFor('BROADCASTS_ADMINISTRATION_DELETE_CONFIRMATION_QUESTION');
 
     const bottomSheetRef = this.bottomSheet.open(QuestionDialogComponent, {
       data: {
         answers,
-        question
-      }
+        question,
+      },
     });
 
     bottomSheetRef.afterDismissed().subscribe((value: string) => {
@@ -110,7 +121,7 @@ export class BroadcastsAdministrationComponent implements OnDestroy {
                 this.translate.getTranslationFor('BROADCASTS_ADMINISTRATION_DELETE_SUCCESSFULLY')
               );
             },
-            error => console.log(error)
+            (error) => console.log(error)
           );
         }
       }

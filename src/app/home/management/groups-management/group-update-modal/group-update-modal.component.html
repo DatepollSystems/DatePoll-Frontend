@@ -51,6 +51,15 @@
         {{ 'MANAGEMENT_GROUPS_CREATE_GROUP_MODAL_FORM_DESCRIPTION_INCORRECT' | translate }}
       </mat-error>
     </mat-form-field>
+
+    <app-list-chip-input
+      [label]="'MANAGEMENT_GROUPS_CREATE_GROUP_MODAL_FORM_PERMISSIONS'"
+      *ngIf="hasPermissionToChangePermissions"
+      [strings]="permissions"
+      (valueChange)="permissionsChange($event)"
+      [allStringsToAutoComplete]="allPermissions"
+      fxFlex="100%"
+    ></app-list-chip-input>
   </form>
 </div>
 <div mat-dialog-actions style="margin-top: 15px">

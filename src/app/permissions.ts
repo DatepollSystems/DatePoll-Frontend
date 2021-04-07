@@ -9,10 +9,12 @@ export class Permissions {
   public static FILES_ADMINISTRATION = 'files.*';
 
   public static BROADCASTS_ADMINISTRATION = 'broadcasts.*';
+  public static BROADCASTS_DELETE_EXTRA = 'broadcasts.delete';
 
   public static SEATRESERVATION_ADMINISTRATION = 'seatReservation.*';
 
   public static MANAGEMENT_ADMINISTRATION = 'management.*';
+  public static MANAGEMENT_USER_VIEW = 'management.user.view';
   public static MANAGEMENT_EXTRA_USER_PERMISSIONS = 'management.user.permissions';
   public static MANAGEMENT_EXTRA_USER_DELETE = 'management.user.delete';
 
@@ -29,8 +31,10 @@ export class Permissions {
       this.EVENTS_ADMINISTRATION,
       this.EVENTS_VIEW_DETAILS,
       this.BROADCASTS_ADMINISTRATION,
+      this.BROADCASTS_DELETE_EXTRA,
       this.SEATRESERVATION_ADMINISTRATION,
       this.MANAGEMENT_ADMINISTRATION,
+      this.MANAGEMENT_USER_VIEW,
       this.MANAGEMENT_EXTRA_USER_DELETE,
       this.MANAGEMENT_EXTRA_USER_PERMISSIONS,
       this.SETTINGS_ADMINISTRATION,

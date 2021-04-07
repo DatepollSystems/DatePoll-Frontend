@@ -8,6 +8,7 @@ import {SettingsService} from '../../utils/settings.service';
 import {Converter} from '../../utils/helper/Converter';
 
 import {Movie, WeatherForecast} from './models/movie.model';
+import {PhoneNumber} from '../phoneNumber.model';
 
 @Injectable({
   providedIn: 'root',
@@ -86,6 +87,20 @@ export class CinemaUserService {
             movie.maximal_tickets
           );
           localMovie.bookedTicketsForYourself = movie.booked_tickets_for_yourself;
+
+          const workerNumbers = [];
+          for (const fNumber of movie.worker_numbers) {
+            workerNumbers.push(new PhoneNumber(fNumber.id, fNumber.label, fNumber.number));
+          }
+
+          const emWorkerNumber = [];
+          for (const fNumber of movie.emergency_worker_numbers) {
+            emWorkerNumber.push(new PhoneNumber(fNumber.id, fNumber.label, fNumber.number));
+          }
+
+          localMovie.workerNumbers = workerNumbers;
+          localMovie.emergencyWorkerNumbers = emWorkerNumber;
+
           movies.push(localMovie);
         }
         this.setNotShownMovies(movies);

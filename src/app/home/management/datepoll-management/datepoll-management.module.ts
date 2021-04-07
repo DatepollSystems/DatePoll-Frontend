@@ -10,11 +10,10 @@ import {DatepollManagementRoutingModule} from './datepoll-management-routing.mod
 import {DatepollManagementComponent} from './datepoll-management.component';
 import {JobViewModalComponent} from './jobs/job-view-modal/job-view-modal.component';
 import {JobsComponent} from './jobs/jobs.component';
-import {LogsComponent} from './logs/logs.component';
 import {ListChipInputModule} from '../../../utils/shared-components/list-chip-input/list-chip-input.module';
 
 @NgModule({
-  declarations: [DatepollManagementComponent, LogsComponent, JobsComponent, JobViewModalComponent],
+  declarations: [DatepollManagementComponent, JobsComponent, JobViewModalComponent],
   imports: [
     CommonModule,
     FormsModule,

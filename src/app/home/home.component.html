@@ -81,7 +81,7 @@
       </a>
 
       <mat-divider></mat-divider>
-      <div *ngIf="myUserService.hasPermission(managementAdministration)">
+      <div *ngIf="myUserService.hasPermission(managementAdministration) || myUserService.hasPermission(managementUserView)">
         <a (click)="onPageChange()" mat-list-item routerLink="management/user" routerLinkActive="activated">
           <mat-icon>contacts</mat-icon>
           {{ 'NAV_MANAGEMENT_USERS' | translate }}

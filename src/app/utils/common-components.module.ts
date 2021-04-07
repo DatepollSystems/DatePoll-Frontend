@@ -11,10 +11,11 @@ import {CustomDateAdapter, MY_DATE_FORMATS} from './custom-date-adapter';
 import {EmailAddressesListComponent} from '../home/management/users-management/email-addresses-list/email-addresses-list.component';
 import {AppDividerComponent} from './shared-components/app-divider/app-divider.component';
 import {DoNotForgetToSaveComponent} from './shared-components/do-not-forget-to-save/do-not-forget-to-save.component';
+import {ListChipInputModule} from './shared-components/list-chip-input/list-chip-input.module';
 
 @NgModule({
   declarations: [AppDividerComponent, DoNotForgetToSaveComponent, EmailAddressesListComponent],
-  imports: [CommonModule, MaterialModule, TranslationModule, FormsModule],
+  imports: [CommonModule, MaterialModule, TranslationModule, FormsModule, ListChipInputModule],
   exports: [AppDividerComponent, DoNotForgetToSaveComponent, EmailAddressesListComponent],
   providers: [
     {provide: DateAdapter, useClass: CustomDateAdapter},

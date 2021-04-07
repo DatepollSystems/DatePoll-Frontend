@@ -63,6 +63,7 @@
           </button>
 
           <button
+            *ngIf="hasPermissionToDeleteBroadcast"
             color="warn"
             mat-icon-button
             (click)="removeBroadcast(broadcast.id)"

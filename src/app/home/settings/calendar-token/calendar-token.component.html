@@ -73,16 +73,25 @@
 
   <mat-divider style="margin-bottom: 15px; margin-top: 15px"></mat-divider>
 
-  <div fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="space-around">
-    <mat-slide-toggle (change)="onShowMoviesChange($event)" [(ngModel)]="showMovies" color="primary" *ngIf="serverInfo?.cinema_enabled">
-      {{ 'CALENDAR_SETTINGS_SHOW_MOVIES' | translate }}
-    </mat-slide-toggle>
-    <mat-slide-toggle (change)="onShowEventsChange($event)" [(ngModel)]="showEvents" color="primary" *ngIf="serverInfo?.events_enabled">
-      {{ 'CALENDAR_SETTINGS_SHOW_EVENTS' | translate }}
-    </mat-slide-toggle>
-    <mat-slide-toggle (change)="onShowBirthdaysChange($event)" [(ngModel)]="showBirthdays" color="primary">
-      {{ 'CALENDAR_SETTINGS_SHOW_BIRTHDAYS' | translate }}
-    </mat-slide-toggle>
+  <div fxLayout="row" fxLayoutGap="5%" fxLayoutGap.lt-md="2%">
+    <div fxFlex="5%" fxFlex.lt-md="15%">
+      <mat-slide-toggle (change)="onShowBirthdaysChange($event)" [(ngModel)]="showBirthdays" color="primary"> </mat-slide-toggle>
+    </div>
+    <p fxFlex="85%" fxFlex.lt-md="70%">{{ 'CALENDAR_SETTINGS_SHOW_BIRTHDAYS' | translate }}</p>
+  </div>
+
+  <div fxLayout="row" fxLayoutGap="5%" fxLayoutGap.lt-md="2%" *ngIf="serverInfo?.cinema_enabled">
+    <div fxFlex="5%" fxFlex.lt-md="15%">
+      <mat-slide-toggle (change)="onShowMoviesChange($event)" [(ngModel)]="showMovies" color="primary"> </mat-slide-toggle>
+    </div>
+    <p fxFlex="85%" fxFlex.lt-md="70%">{{ 'CALENDAR_SETTINGS_SHOW_MOVIES' | translate }}</p>
+  </div>
+
+  <div fxLayout="row" fxLayoutGap="5%" fxLayoutGap.lt-md="2%" *ngIf="serverInfo?.cinema_enabled">
+    <div fxFlex="5%" fxFlex.lt-md="15%">
+      <mat-slide-toggle (change)="onShowEventsChange($event)" [(ngModel)]="showEvents" color="primary"> </mat-slide-toggle>
+    </div>
+    <p fxFlex="85%" fxFlex.lt-md="70%">{{ 'CALENDAR_SETTINGS_SHOW_EVENTS' | translate }}</p>
   </div>
 </mat-dialog-content>
 <mat-dialog-actions fxLayout="row" fxLayoutAlign="end">
