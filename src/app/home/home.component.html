@@ -103,16 +103,10 @@
           myUserService.hasPermission(logsAdministration)
         "
       ></mat-divider>
-      <a (click)="changeTheme()" mat-list-item>
-        <mat-icon>brightness_medium</mat-icon>
-        {{ 'NAV_CHANGE_THEME' | translate }}
-      </a>
-
-      <mat-divider></mat-divider>
-      <a (click)="logout()" mat-list-item>
-        <mat-icon>power_settings_new</mat-icon>
-        {{ 'NAV_LOGOUT' | translate }}
-      </a>
+      <mat-list-item>
+        <button mat-button (click)="logout()"><mat-icon>power_settings_new</mat-icon>{{ 'NAV_LOGOUT' | translate }}</button>
+        <button mat-button (click)="changeTheme()"><mat-icon>brightness_medium</mat-icon>{{ 'NAV_CHANGE_THEME' | translate }}</button>
+      </mat-list-item>
     </mat-nav-list>
   </mat-sidenav>
 

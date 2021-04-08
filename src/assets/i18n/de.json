@@ -140,6 +140,7 @@
 
   "NAV_CHANGE_THEME": "Theme ändern",
   "NAV_LOGOUT": "Abmelden",
+  "LOGOUT_CONFIRM": "Bestätige die Abmeldung",
 
   "BROWSER_COMPATIBILITY_HEADER": "Herst Hawara! Dein Internet Browser ist veraltet und wird nicht mehr unterstützt!",
   "BROWSER_COMPATIBILITY_INFO_NEVER_COME_BACK": "Das Warnungsfenster wirst du nach dem Schließen nicht nocheinmal sehen. ",

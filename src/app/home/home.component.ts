@@ -8,6 +8,9 @@ import {SettingsService} from '../utils/settings.service';
 import {MyUserService} from './my-user.service';
 
 import {ServerInfoModel} from '../utils/server-info.model';
+import {QuestionDialogComponent} from '../utils/shared-components/question-dialog/question-dialog.component';
+import {TranslateService} from '../translation/translate.service';
+import {MatBottomSheet, MatBottomSheetRef} from '@angular/material/bottom-sheet';
 
 @Component({
   selector: 'app-home',
@@ -47,7 +50,9 @@ export class HomeComponent implements OnInit, OnDestroy {
     myUserService: MyUserService,
     private authService: AuthService,
     private settingsService: SettingsService,
-    private isMobileService: IsMobileService
+    private isMobileService: IsMobileService,
+    private translate: TranslateService,
+    private bottomSheet: MatBottomSheet
   ) {
     this.myUserService = myUserService;
 
@@ -116,7 +121,32 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   logout() {
-    this.authService.logout();
+    const answers = [
+      {
+        answer: this.translate.getTranslationFor('YES'),
+        value: 'yes',
+      },
+      {
+        answer: this.translate.getTranslationFor('NO'),
+        value: 'no',
+      },
+    ];
+    const question = this.translate.getTranslationFor('LOGOUT_CONFIRM');
+
+    const bottomSheetRef = this.bottomSheet.open(QuestionDialogComponent, {
+      data: {
+        answers,
+        question,
+      },
+    });
+
+    bottomSheetRef.afterDismissed().subscribe((value: string) => {
+      if (value != null) {
+        if (value.includes('yes')) {
+          this.authService.logout();
+        }
+      }
+    });
   }
 
   changeTheme() {
