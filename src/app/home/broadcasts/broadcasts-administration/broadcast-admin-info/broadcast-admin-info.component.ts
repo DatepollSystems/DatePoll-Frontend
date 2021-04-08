@@ -12,7 +12,7 @@ import {Broadcast, UserBroadcastInfo} from '../../models/broadcast.model';
 @Component({
   selector: 'app-broadcast-admin-info',
   templateUrl: './broadcast-admin-info.component.html',
-  styleUrls: ['./broadcast-admin-info.component.css']
+  styleUrls: ['./broadcast-admin-info.component.css'],
 })
 export class BroadcastAdminInfoComponent implements OnDestroy {
   displayedColumns: string[] = ['userName', 'sent', 'queuedAt', 'sentAt'];
@@ -27,7 +27,7 @@ export class BroadcastAdminInfoComponent implements OnDestroy {
   loaded = false;
 
   constructor(private route: ActivatedRoute, private broadcastSerivce: BroadcastsAdministrationService) {
-    this.route.paramMap.subscribe(params => {
+    this.route.paramMap.subscribe((params) => {
       const id = params.get('id');
 
       if (id != null) {
@@ -50,7 +50,9 @@ export class BroadcastAdminInfoComponent implements OnDestroy {
         }
 
         this.broadcast = this.broadcastSerivce.getSentReceiptBroadcast(Number(id));
-        this.broadcastSubscription = this.broadcastSerivce.broadcastChange.subscribe(value => {
+        this.dataSource = new MatTableDataSource([]);
+        this.dataSource.sort = this.sort;
+        this.broadcastSubscription = this.broadcastSerivce.broadcastChange.subscribe((value) => {
           this.broadcast = value;
           this.loaded = true;
           this.dataSource = new MatTableDataSource(this.broadcast.userInfos);

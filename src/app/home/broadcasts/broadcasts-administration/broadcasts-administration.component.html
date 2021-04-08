@@ -33,7 +33,7 @@
       </ng-container>
 
       <!-- Date Column -->
-      <ng-container matColumnDef="date">
+      <ng-container matColumnDef="sent">
         <th *matHeaderCellDef mat-header-cell mat-sort-header>{{ 'BROADCASTS_ADMINISTRATION_DATE' | translate }}</th>
         <td *matCellDef="let broadcast" mat-cell>{{ broadcast.sent | date: 'dd.MM.yyyy HH:mm:ss' }}</td>
       </ng-container>

@@ -13,7 +13,7 @@
     <div fxLayout="row" fxLayoutAlign="center center" *ngIf="!loaded">
       <mat-spinner></mat-spinner>
     </div>
-    <div *ngIf="loaded">
+    <div [hidden]="!loaded">
       <h3 matLine>{{ 'BROADCASTS_ADMINISTRATION_ADMIN_INFO_SUBJECT' | translate }} {{ broadcast.subject }}</h3>
       <h3 matLine>{{ 'BROADCASTS_ADMINISTRATION_ADMIN_INFO_SENT_ON' | translate }} {{ broadcast.sent | date: 'EE, dd.MM.yyyy HH:mm' }}</h3>
       <h3 matLine>{{ 'BROADCASTS_ADMINISTRATION_ADMIN_INFO_AUTHOR' | translate }} {{ broadcast.writerName }}</h3>

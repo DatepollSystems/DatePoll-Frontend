@@ -25,7 +25,7 @@ import {MyUserService} from '../../my-user.service';
 export class BroadcastsAdministrationComponent implements OnInit, OnDestroy {
   hasPermissionToDeleteBroadcast = false;
 
-  displayedColumns: string[] = ['subject', 'date', 'writer', 'body', 'action'];
+  displayedColumns: string[] = ['subject', 'sent', 'writer', 'body', 'action'];
   filterValue: string = null;
   dataSource: MatTableDataSource<Broadcast>;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
