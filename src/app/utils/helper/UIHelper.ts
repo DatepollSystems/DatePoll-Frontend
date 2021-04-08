@@ -16,8 +16,8 @@ export class UIHelper {
   }
 
   public static isStringUrl(url: string) {
-    // http://www.at
-    if (url.length < 13) {
+    // http://w.at
+    if (url.length < 10) {
       return false;
     }
     if (!url.includes('http') && !url.includes('https')) {
