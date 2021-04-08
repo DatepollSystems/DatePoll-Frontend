@@ -50,11 +50,21 @@
         <span *ngIf="event.alreadyVotedFor">{{ event.name }}</span
         ><b *ngIf="!event.alreadyVotedFor">{{ event.name }}</b>
       </div>
-      <div mat-line *ngIf="event.startDateC.getTime() === event.endDateC.getTime()">
+      <div mat-line *ngIf="event.startDate.getTime() === event.endDate.getTime()">
+        {{ event.startDate | date: 'EE, dd.MM. HH:mm' }}
+        <span class="until-left">({{ event.getUntil() }})</span>
+      </div>
+      <div
+        mat-line
+        *ngIf="
+          event.startDateWithOutHoursAndMinutes.getTime() === event.endDateWithOutHoursAndMinutes.getTime() &&
+          !(event.startDate.getTime() === event.endDate.getTime())
+        "
+      >
         {{ event.startDate | date: 'EE, dd.MM. HH:mm' }} - {{ event.endDate | date: 'HH:mm' }}
         <span class="until-left">({{ event.getUntil() }})</span>
       </div>
-      <div mat-line *ngIf="event.startDateC.getTime() !== event.endDateC.getTime()">
+      <div mat-line *ngIf="event.startDateWithOutHoursAndMinutes.getTime() !== event.endDateWithOutHoursAndMinutes.getTime()">
         {{ event.startDate | date: 'EE, dd.MM. HH:mm' }} - {{ event.endDate | date: 'dd.MM. HH:mm' }}
         <span class="until-left">({{ event.getUntil() }})</span>
       </div>
