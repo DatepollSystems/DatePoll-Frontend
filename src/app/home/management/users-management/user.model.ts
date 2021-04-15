@@ -1,4 +1,5 @@
 import {PhoneNumber} from '../../phoneNumber.model';
+import {UIHelper} from '../../../utils/helper/UIHelper';
 
 export class User {
   public readonly id: number;
@@ -19,7 +20,7 @@ export class User {
   public internalComment: string;
   public informationDenied: boolean;
   public bvMember: string;
-  private _phoneNumbers: PhoneNumber[] = [];
+  private readonly _phoneNumbers: PhoneNumber[] = [];
   private _permissions: string[] = [];
   private readonly _emailAddresses: string[] = [];
 
@@ -74,16 +75,12 @@ export class User {
   }
 
   public getPhoneNumbersAsString(): string {
-    let phoneNumber = '';
-    for (let i = 0; i < this._phoneNumbers.length; i++) {
-      phoneNumber += this._phoneNumbers[i].phoneNumber + ', ';
+    const phoneNumbers = [];
+    for (const number of this._phoneNumbers) {
+      phoneNumbers.push(number.phoneNumber);
     }
 
-    if (phoneNumber !== '') {
-      return phoneNumber.slice(0, 10) + '...';
-    } else {
-      return phoneNumber;
-    }
+    return UIHelper.cutString(phoneNumbers, 14, '...');
   }
 
   public getPermissions(): string[] {
@@ -95,15 +92,6 @@ export class User {
   }
 
   public getEmailAddressesAsString(): string {
-    let email = '';
-    for (let i = 0; i < this._emailAddresses.length; i++) {
-      email += this._emailAddresses[i] + ', ';
-    }
-
-    if (email !== '') {
-      return email.slice(0, 10) + '...';
-    } else {
-      return email;
-    }
+    return UIHelper.cutString(this._emailAddresses, 24, '...');
   }
 }

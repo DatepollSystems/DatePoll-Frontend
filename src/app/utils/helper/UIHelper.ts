@@ -28,4 +28,16 @@ export class UIHelper {
     }
     return true;
   }
+
+  public static cutString(strings: string[], length: number, prefix: string = null, seperator: string = ',') {
+    let toReturn = '';
+    for (const string of strings) {
+      toReturn += string + seperator + ' ';
+    }
+
+    if (toReturn.length > length) {
+      return toReturn.slice(0, length) + prefix;
+    }
+    return toReturn;
+  }
 }
