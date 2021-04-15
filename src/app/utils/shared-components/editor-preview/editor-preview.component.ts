@@ -1,18 +1,23 @@
 import {Component, Input} from '@angular/core';
-import {DomSanitizer} from '@angular/platform-browser';
+import {DomSanitizer, SafeHtml} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-editor-preview',
   templateUrl: './editor-preview.component.html',
-  styleUrls: ['./editor-preview.component.css']
+  styleUrls: ['./editor-preview.component.css'],
 })
 export class EditorPreviewComponent {
   @Input()
   bodyHTML: string;
 
+  html: SafeHtml = null;
+
   constructor(private sanitizer: DomSanitizer) {}
 
-  getSanitizedContent(content: string) {
-    return this.sanitizer.bypassSecurityTrustHtml(content);
+  getSanitizedContent() {
+    if (this.html == null) {
+      this.html = this.sanitizer.bypassSecurityTrustHtml(this.bodyHTML.replace(/<style.*?<\/style>/g, ''));
+    }
+    return this.html;
   }
 }
