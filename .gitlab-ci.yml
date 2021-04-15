@@ -54,5 +54,5 @@ deploy-release:
     - cd dist/
     - zip -r "DatePoll-Frontend-${version}.zip" ./DatePoll-Frontend >> /dev/null
     - cp "DatePoll-Frontend-${version}.zip" DatePoll-Frontend-latest.zip
-    - scp -P $SSH_PORT -o StrictHostKeyChecking=no ./DatePoll-Frontend-latest.zip $SSH_USERNAME@$SSH_HOST:/var/www/datepoll-share/DatePoll/Frontend-Releases/ > /dev/null
-    - scp -P $SSH_PORT -o StrictHostKeyChecking=no "DatePoll-Frontend-${version}.zip" $SSH_USERNAME@$SSH_HOST:/var/www/datepoll-share/DatePoll/Frontend-Releases/ > /dev/null
+    - scp -P $SSH_PORT -o StrictHostKeyChecking=no -o LogLevel=ERROR ./DatePoll-Frontend-latest.zip $SSH_USERNAME@$SSH_HOST:/var/www/datepoll-share/DatePoll/Frontend-Releases/ > /dev/null
+    - scp -P $SSH_PORT -o StrictHostKeyChecking=no -o LogLevel=ERROR "DatePoll-Frontend-${version}.zip" $SSH_USERNAME@$SSH_HOST:/var/www/datepoll-share/DatePoll/Frontend-Releases/ > /dev/null
