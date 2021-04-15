@@ -44,9 +44,9 @@ import {NgxMatSelectSearchModule} from 'ngx-mat-select-search';
     MapsModule,
     EventInfoModule,
     EventsRoutingModule,
-    GoBackButtonModule,
     GroupAndSubgroupTypeInputSelectModule,
     NgxMatSelectSearchModule,
+    GoBackButtonModule,
   ],
   providers: [EventsService, {provide: DateAdapter, useClass: CustomDateAdapter}, {provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS}],
 })

@@ -5,46 +5,46 @@
         <h1>{{ 'NAV_CINEMA_ADMINISTRATION' | translate }}</h1>
       </div>
 
-      <div style="text-align: end">
-        <button
-          (click)="refreshMovies()"
-          mat-icon-button
-          matTooltip="{{ 'CINEMA_TICKETS_ADMINISTRATION_REFRESH' | translate }}"
-          matTooltipPosition="left"
-        >
-          <mat-icon>refresh</mat-icon>
-        </button>
+      <div fxLayout="row" fxLayoutAlign.lt-md="space-between" fxLayoutGap="5%">
+        <div>
+          <mat-form-field>
+            <mat-select
+              #yearSelect
+              (selectionChange)="yearSelectChange($event.value)"
+              [formControl]="yearCtrl"
+              placeholder="{{ 'CINEMA_TICKETS_ADMINISTRATION_YEAR_SELECT_PLACEHOLDER' | translate }}"
+            >
+              <mat-option>
+                <ngx-mat-select-search [formControl]="yearFilterCtrl"></ngx-mat-select-search>
+              </mat-option>
+
+              <mat-option *ngFor="let year of filteredYears | async" [value]="year">
+                {{ year }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div>
+          <button
+            (click)="refreshMovies()"
+            mat-icon-button
+            matTooltip="{{ 'CINEMA_TICKETS_ADMINISTRATION_REFRESH' | translate }}"
+            matTooltipPosition="left"
+          >
+            <mat-icon>refresh</mat-icon>
+          </button>
+        </div>
       </div>
     </div>
 
-    <div fxLayout="row" fxLayoutAlign="space-between">
+    <div fxLayout="row" fxLayoutAlign="space-between" fxLayoutGap="5%">
       <div>
         <button (click)="onCreate()" color="accent" mat-fab>
           <mat-icon>add</mat-icon>
         </button>
       </div>
 
-      <div>
-        <mat-form-field>
-          <mat-select
-            #yearSelect
-            (selectionChange)="yearSelectChange($event.value)"
-            [formControl]="yearCtrl"
-            placeholder="{{ 'CINEMA_TICKETS_ADMINISTRATION_YEAR_SELECT_PLACEHOLDER' | translate }}"
-          >
-            <mat-option>
-              <ngx-mat-select-search [formControl]="yearFilterCtrl"></ngx-mat-select-search>
-            </mat-option>
-
-            <mat-option *ngFor="let year of filteredYears | async" [value]="year">
-              {{ year }}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-      </div>
-    </div>
-
-    <div fxLayout="column">
       <mat-form-field>
         <input (keyup)="applyFilter($event.target.value)" matInput placeholder="{{ 'CINEMA_TICKETS_ADMINISTRATION_SEARCH' | translate }}" />
       </mat-form-field>

@@ -71,7 +71,6 @@ export class EventsAdministrationComponent implements OnInit, OnDestroy {
       this.selectedYear = this.years[this.years.length - 1];
       for (const year of this.years) {
         if (year.includes(new Date().getFullYear().toString())) {
-          console.log('in');
           this.selectedYear = year;
           break;
         }

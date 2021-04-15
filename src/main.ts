@@ -6,8 +6,12 @@ import {environment} from './environments/environment';
 
 if (environment.production) {
   enableProdMode();
+  if (window) {
+    // tslint:disable-next-line:only-arrow-functions
+    window.console.log = window.console.warn = window.console.info = function () {};
+  }
 }
 
 platformBrowserDynamic()
   .bootstrapModule(AppModule)
-  .catch(err => console.log(err));
+  .catch((err) => console.log(err));

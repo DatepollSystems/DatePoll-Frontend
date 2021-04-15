@@ -1,6 +1,8 @@
-<h1>
-  <b>{{ 'EVENTS_ADMINISTRATION_INFO_EVENT' | translate }}</b> {{ event.name }}
-  <span style="color: gray;" *ngIf="objectLoaded">({{ event.getUntil() }})</span>
-</h1>
-<app-event-info [eventId]="event.id" (eventLoaded)="eventLoaded($event)"></app-event-info>
-<app-go-back-button></app-go-back-button>
+<mat-card>
+  <h1>
+    <b>{{ 'EVENTS_ADMINISTRATION_INFO_EVENT' | translate }}</b> {{ event.name }}
+    <span style="color: gray" *ngIf="objectLoaded">({{ event.getUntil() }})</span>
+  </h1>
+  <app-go-back-button></app-go-back-button>
+  <app-event-info [eventId]="event.id" (eventLoaded)="eventLoaded($event)"></app-event-info>
+</mat-card>
