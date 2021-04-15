@@ -28,11 +28,14 @@ mat-sidenav {
 }
 
 .activated {
-  background-color: #bdbdbd !important;
+  background-color: #bdbdbd;
 }
 
-.activated:hover {
-  background-color: #bdbdbd !important;
+.mat-list-item:hover {
+  background-color: #bdbdbd;
+}
+.mat-list-item:hover .dark-theme {
+  background-color: #616161;
 }
 
 mat-icon {

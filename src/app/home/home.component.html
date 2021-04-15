@@ -103,7 +103,7 @@
           myUserService.hasPermission(logsAdministration)
         "
       ></mat-divider>
-      <mat-list-item>
+      <mat-list-item disableRipple>
         <button mat-button (click)="logout()"><mat-icon>power_settings_new</mat-icon>{{ 'NAV_LOGOUT' | translate }}</button>
         <button mat-button (click)="changeTheme()"><mat-icon>brightness_medium</mat-icon>{{ 'NAV_CHANGE_THEME' | translate }}</button>
       </mat-list-item>

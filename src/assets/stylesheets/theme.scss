@@ -35,6 +35,10 @@ $dark-theme: mat-dark-theme($dark-primary, $dark-accent, $dark-warn);
 .dark-theme {
   @include angular-material-theme($dark-theme);
 
+  .activated {
+    background-color: #616161 !important;
+  }
+
   tr:nth-child(even) {
     background: #616161;
   }
