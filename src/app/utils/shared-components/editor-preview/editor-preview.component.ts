@@ -16,7 +16,7 @@ export class EditorPreviewComponent {
 
   getSanitizedContent() {
     if (this.html == null) {
-      this.html = this.sanitizer.bypassSecurityTrustHtml(this.bodyHTML.replace(/<style.*?<\/style>/g, ''));
+      this.html = this.sanitizer.bypassSecurityTrustHtml(this.bodyHTML.replace(/(<style[\w\W]+style>)/g, ''));
     }
     return this.html;
   }
