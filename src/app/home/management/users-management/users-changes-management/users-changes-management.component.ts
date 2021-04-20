@@ -77,22 +77,9 @@ export class UsersChangesManagementComponent implements OnInit, OnDestroy {
 
   deleteUserChange(userChange: UserChange) {
     if (this.hasPermissionToDeleteUserChanage) {
-      const answers = [
-        {
-          answer: this.translate.getTranslationFor('YES'),
-          value: 'yes',
-        },
-        {
-          answer: this.translate.getTranslationFor('NO'),
-          value: 'no',
-        },
-      ];
-      const question = this.translate.getTranslationFor('MANAGEMENT_USERS_CHANGES_DELETE_CONFIRMATION');
-
       const bottomSheetRef = this.bottomSheet.open(QuestionDialogComponent, {
         data: {
-          answers,
-          question,
+          question: 'MANAGEMENT_USERS_CHANGES_DELETE_CONFIRMATION',
         },
       });
 

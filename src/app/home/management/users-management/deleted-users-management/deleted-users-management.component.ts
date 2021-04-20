@@ -59,41 +59,26 @@ export class DeletedUsersManagementComponent implements OnDestroy {
   }
 
   deleteAll() {
-    const answers = [
-      {
-        answer: this.translate.getTranslationFor('YES'),
-        value: 'yes',
-      },
-      {
-        answer: this.translate.getTranslationFor('NO'),
-        value: 'no',
-      },
-    ];
-    const question = this.translate.getTranslationFor('MANAGEMENT_USERS_DELETED_USERS_DELETE_ALL_CONFIRM');
-
     const bottomSheetRef = this.bottomSheet.open(QuestionDialogComponent, {
       data: {
-        answers,
-        question,
+        question: 'MANAGEMENT_USERS_DELETED_USERS_DELETE_ALL_CONFIRM',
       },
     });
 
     bottomSheetRef.afterDismissed().subscribe((value: string) => {
-      if (value != null) {
-        if (value.includes('yes')) {
-          this.deletedUsersService.deleteAllDeletedUsers().subscribe(
-            (response: any) => {
-              console.log(response);
-              this.deletedUsersLoaded = false;
-              this.deletedUsersService.getDeletedUsers();
-              this.notificationsService.success(
-                this.translate.getTranslationFor('SUCCESSFULLY'),
-                this.translate.getTranslationFor('MANAGEMENT_USERS_DELETED_USERS_DELETE_ALL_SUCCESSFUL')
-              );
-            },
-            (error) => console.log(error)
-          );
-        }
+      if (value?.includes(QuestionDialogComponent.YES_VALUE)) {
+        this.deletedUsersService.deleteAllDeletedUsers().subscribe(
+          (response: any) => {
+            console.log(response);
+            this.deletedUsersLoaded = false;
+            this.deletedUsersService.getDeletedUsers();
+            this.notificationsService.success(
+              this.translate.getTranslationFor('SUCCESSFULLY'),
+              this.translate.getTranslationFor('MANAGEMENT_USERS_DELETED_USERS_DELETE_ALL_SUCCESSFUL')
+            );
+          },
+          (error) => console.log(error)
+        );
       }
     });
   }

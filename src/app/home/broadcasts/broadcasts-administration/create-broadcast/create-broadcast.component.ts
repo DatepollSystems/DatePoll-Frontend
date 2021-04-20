@@ -203,97 +203,79 @@ export class CreateBroadcastComponent implements OnDestroy {
       return;
     }
 
-    const answers = [
-      {
-        answer: this.translate.getTranslationFor('YES'),
-        value: 'yes',
-      },
-      {
-        answer: this.translate.getTranslationFor('NO'),
-        value: 'no',
-      },
-    ];
-    const question = this.translate.getTranslationFor('BROADCASTS_ADMINISTRATION_CREATE_CONFIRM_QUESTION');
-
     const bottomSheetRef = this.bottomSheet.open(QuestionDialogComponent, {
       data: {
-        answers,
-        question,
+        question: 'BROADCASTS_ADMINISTRATION_CREATE_CONFIRM_QUESTION',
       },
     });
 
     bottomSheetRef.afterDismissed().subscribe((value: string) => {
-      if (value != null) {
-        if (value.includes('yes')) {
-          const groups = [];
-          const subgroups = [];
-          if (!this.allMembers) {
-            for (const group of this.selectedGroupsAndSubgroups) {
-              if (group.type === 0) {
-                groups.push(group.id);
-              } else if (group.type === 1) {
-                subgroups.push(group.id);
-              } else {
-                console.log('Unknown group type in createBroadcast - ' + group.type);
-                this.notificationService.error(
-                  this.translate.getTranslationFor('ERROR'),
-                  this.translate.getTranslationFor('REQUEST_ERROR')
-                );
-                return;
-              }
+      if (value?.includes(QuestionDialogComponent.YES_VALUE)) {
+        const groups = [];
+        const subgroups = [];
+        if (!this.allMembers) {
+          for (const group of this.selectedGroupsAndSubgroups) {
+            if (group.type === 0) {
+              groups.push(group.id);
+            } else if (group.type === 1) {
+              subgroups.push(group.id);
+            } else {
+              console.log('Unknown group type in createBroadcast - ' + group.type);
+              this.notificationService.error(this.translate.getTranslationFor('ERROR'), this.translate.getTranslationFor('REQUEST_ERROR'));
+              return;
             }
           }
-
-          const attachmentIds = [];
-          for (const attachment of this.attachments) {
-            attachmentIds.push(attachment.id);
-          }
-
-          const broadcast = {
-            subject: this.subject,
-            bodyHTML: this.bodyHTML,
-            body: this.body,
-            for_everyone: this.allMembers,
-            groups,
-            subgroups,
-            attachments: attachmentIds,
-          };
-
-          this.notificationService.info(
-            this.translate.getTranslationFor('INFORMATION'),
-            this.translate.getTranslationFor('BROADCASTS_ADMINISTRATION_CREATE_NOTIFICATION_SENDING_LENGTH'),
-            {timeOut: 8000}
-          );
-          this.broadcastsService.createBroadcast(broadcast).subscribe(
-            (response: any) => {
-              console.log(response);
-              this.broadcastsService.fetchBroadcasts();
-              this.notificationService.success(
-                this.translate.getTranslationFor('SUCCESSFULLY'),
-                this.translate.getTranslationFor('BROADCASTS_ADMINISTRATION_CREATE_NOTIFICATION_SUCCESSFUL'),
-                {timeOut: 8000}
-              );
-              // Delete draft of email if broadcast was successful created
-              if (this.draftId > -1) {
-                this.draftsService.delete(this.draftId).subscribe(
-                  (deleteResponse: any) => {
-                    console.log(deleteResponse);
-                    this.notificationService.success(
-                      this.translate.getTranslationFor('SUCCESSFULLY'),
-                      this.translate.getTranslationFor('BROADCASTS_ADMINISTRATION_CREATE_NOTIFICATION_DRAFT_SUCCESSFUL_DELETED')
-                    );
-                    this.draftsService.fetchDrafts();
-                  },
-                  (error) => {
-                    console.log(error);
-                  }
-                );
-              }
-            },
-            (error) => console.log(error)
-          );
-          this.router.navigate(['/home/broadcasts/administration']);
         }
+
+        const attachmentIds = [];
+        for (const attachment of this.attachments) {
+          attachmentIds.push(attachment.id);
+        }
+
+        const broadcast = {
+          subject: this.subject,
+          bodyHTML: this.bodyHTML,
+          body: this.body,
+          for_everyone: this.allMembers,
+          groups,
+          subgroups,
+          attachments: attachmentIds,
+        };
+
+        this.notificationService.info(
+          this.translate.getTranslationFor('INFORMATION'),
+          this.translate.getTranslationFor('BROADCASTS_ADMINISTRATION_CREATE_NOTIFICATION_SENDING_LENGTH'),
+          {timeOut: 8000}
+        );
+        this.broadcastsService.createBroadcast(broadcast).subscribe(
+          (response: any) => {
+            console.log(response);
+            this.broadcastsService.fetchBroadcasts();
+            this.notificationService.success(
+              this.translate.getTranslationFor('SUCCESSFULLY'),
+              this.translate.getTranslationFor('BROADCASTS_ADMINISTRATION_CREATE_NOTIFICATION_SUCCESSFUL'),
+              {timeOut: 8000}
+            );
+            // Delete draft of email if broadcast was successful created
+            if (this.draftId > -1) {
+              this.draftsService.delete(this.draftId).subscribe(
+                (deleteResponse: any) => {
+                  console.log(deleteResponse);
+                  this.notificationService.success(
+                    this.translate.getTranslationFor('SUCCESSFULLY'),
+                    this.translate.getTranslationFor('BROADCASTS_ADMINISTRATION_CREATE_NOTIFICATION_DRAFT_SUCCESSFUL_DELETED')
+                  );
+                  this.draftsService.fetchDrafts();
+                },
+                (error) => {
+                  console.log(error);
+                }
+              );
+            }
+          },
+          (error) => console.log(error)
+        );
+        this.router.navigate(['/home/broadcasts/administration']);
       }
     });
   }

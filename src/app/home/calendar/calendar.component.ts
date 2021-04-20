@@ -9,7 +9,6 @@ import {NotificationsService} from 'angular2-notifications';
 import {isSameDay, isSameMonth} from 'date-fns';
 
 import {QuestionDialogComponent} from '../../utils/shared-components/question-dialog/question-dialog.component';
-import {MovieDeleteModalComponent} from '../cinema/movie-administration/movie-delete-modal/movie-delete-modal.component';
 import {MovieEditModalComponent} from '../cinema/movie-administration/movie-edit-modal/movie-edit-modal.component';
 import {MovieInfoModalComponent} from '../cinema/movie-administration/movie-info-modal/movie-info-modal.component';
 import {EventInfoModalComponent} from '../events/event-info/event-info-modal/event-info-modal.component';
@@ -24,6 +23,7 @@ import {EventsService} from '../events/events.service';
 import {MyUserService} from '../my-user.service';
 import {UserSettingsService} from '../settings/privacy-settings/userSettings.service';
 import {HomepageService} from '../start/homepage.service';
+import {CinemaService} from '../cinema/cinema.service';
 
 import {CustomDateFormatter} from './custom-date-formatter.provider';
 
@@ -80,7 +80,8 @@ export class CalendarComponent implements OnInit, OnDestroy {
 
   constructor(
     private settingsService: SettingsService,
-    private cinemaService: CinemaUserService,
+    private cinemaService: CinemaService,
+    private cinemaUserService: CinemaUserService,
     private eventsUserService: EventsUserService,
     private eventsService: EventsService,
     private myUserService: MyUserService,
@@ -119,9 +120,9 @@ export class CalendarComponent implements OnInit, OnDestroy {
   ngOnInit() {
     setTimeout(() => {
       if (this.serverInfo?.cinema_enabled) {
-        this.movies = this.cinemaService.getNotShownMovies();
+        this.movies = this.cinemaUserService.getNotShownMovies();
 
-        this.moviesSubscription = this.cinemaService.notShownMoviesChange.subscribe((value) => {
+        this.moviesSubscription = this.cinemaUserService.notShownMoviesChange.subscribe((value) => {
           this.movies = value;
           this.refreshCalendar();
         });
@@ -193,8 +194,26 @@ export class CalendarComponent implements OnInit, OnDestroy {
             {
               label: '[&#10060;]',
               onClick: (): void => {
-                this.bottomSheet.open(MovieDeleteModalComponent, {
-                  data: {movieID: movie.id},
+                const bottomSheetRef = this.bottomSheet.open(QuestionDialogComponent, {
+                  data: {
+                    question: 'CINEMA_TICKETS_ADMINISTRATION_MOVIE_DELETE_MODAL_TITLE',
+                  },
+                });
+
+                bottomSheetRef.afterDismissed().subscribe((value: string) => {
+                  if (value?.includes(QuestionDialogComponent.YES_VALUE)) {
+                    this.cinemaService.deleteMovie(movie.id).subscribe(
+                      (data: any) => {
+                        console.log(data);
+                        this.cinemaService.fetchMovies();
+                        this.notificationsService.success(
+                          this.translate.getTranslationFor('SUCCESSFULLY'),
+                          this.translate.getTranslationFor('CINEMA_TICKETS_ADMINISTRATION_MOVIE_DELETE_MODAL_SUCCESSFULLY_DELETED')
+                        );
+                      },
+                      (error) => console.log(error)
+                    );
+                  }
                 });
               },
             },
@@ -222,40 +241,25 @@ export class CalendarComponent implements OnInit, OnDestroy {
             {
               label: '[&#10060;]',
               onClick: (): void => {
-                const answers = [
-                  {
-                    answer: this.translate.getTranslationFor('YES'),
-                    value: 'yes',
-                  },
-                  {
-                    answer: this.translate.getTranslationFor('NO'),
-                    value: 'no',
-                  },
-                ];
-                const question = this.translate.getTranslationFor('EVENTS_ADMINISTRATION_DELETE_EVENT_QUESTION');
-
                 const bottomSheetRef = this.bottomSheet.open(QuestionDialogComponent, {
                   data: {
-                    answers,
-                    question,
+                    question: 'EVENTS_ADMINISTRATION_DELETE_EVENT_QUESTION',
                   },
                 });
 
                 bottomSheetRef.afterDismissed().subscribe((value: string) => {
-                  if (value != null) {
-                    if (value.includes('yes')) {
-                      this.eventsService.deleteEvent(avent.id).subscribe(
-                        (response: any) => {
-                          console.log(response);
-                          this.eventsService.fetchEvents();
-                          this.notificationsService.success(
-                            this.translate.getTranslationFor('SUCCESSFULLY'),
-                            this.translate.getTranslationFor('EVENTS_ADMINISTRATION_DELETE_EVENT_SUCCESSFULLY_DELETED')
-                          );
-                        },
-                        (error) => console.log(error)
-                      );
-                    }
+                  if (value?.includes(QuestionDialogComponent.YES_VALUE)) {
+                    this.eventsService.deleteEvent(avent.id).subscribe(
+                      (response: any) => {
+                        console.log(response);
+                        this.eventsService.fetchEvents();
+                        this.notificationsService.success(
+                          this.translate.getTranslationFor('SUCCESSFULLY'),
+                          this.translate.getTranslationFor('EVENTS_ADMINISTRATION_DELETE_EVENT_SUCCESSFULLY_DELETED')
+                        );
+                      },
+                      (error) => console.log(error)
+                    );
                   }
                 });
               },

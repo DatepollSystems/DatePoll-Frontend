@@ -19,6 +19,7 @@ import {HomeBookingsModel} from './bookings.model';
 import {SettingsService} from '../../utils/settings.service';
 import {QuestionDialogComponent} from '../../utils/shared-components/question-dialog/question-dialog.component';
 import {EventsVoteForDecisionModalComponent} from '../events/events-view/events-vote-for-decision-modal/events-vote-for-decision-modal.component';
+import {Converter} from '../../utils/helper/Converter';
 
 @Component({
   selector: 'app-start',
@@ -140,50 +141,35 @@ export class StartComponent implements OnDestroy {
   }
 
   private cancelEventVoting(event, button: any) {
-    const answers = [
-      {
-        answer: this.translate.getTranslationFor('YES'),
-        value: 'yes',
-      },
-      {
-        answer: this.translate.getTranslationFor('NO'),
-        value: 'no',
-      },
-    ];
-    const question = this.translate.getTranslationFor('EVENTS_CANCEL_VOTING');
-
     const bottomSheetRef = this.bottomSheet.open(QuestionDialogComponent, {
       data: {
-        answers,
-        question,
+        question: 'EVENTS_CANCEL_VOTING',
       },
     });
 
     bottomSheetRef.afterDismissed().subscribe((value: string) => {
-      if (value != null) {
-        if (value.includes('yes')) {
-          if (this.eventVotingChangeLoading) {
-            return;
-          }
-          this.eventVotingChangeLoading = true;
-          if (button) {
-            button.disabled = true;
-          }
-          this.eventsUserSerivce.removeDecision(event.id).subscribe(
-            (response: any) => {
-              console.log(response);
-              this.homePageService.fetchData(true);
-              this.notificationsService.success(
-                this.translate.getTranslationFor('SUCCESSFULLY'),
-                this.translate.getTranslationFor('EVENTS_VIEW_EVENT_SUCCESSFULLY_REMOVED_VOTING')
-              );
-            },
-            (error) => {
-              console.log(error);
-              this.eventVotingChangeLoading = false;
-            }
-          );
+      if (value?.includes(QuestionDialogComponent.YES_VALUE)) {
+        if (this.eventVotingChangeLoading) {
+          return;
         }
+        this.eventVotingChangeLoading = true;
+        if (button) {
+          button.disabled = true;
+        }
+        this.eventsUserSerivce.removeDecision(event.id).subscribe(
+          (response: any) => {
+            console.log(response);
+            this.homePageService.fetchData(true);
+            this.notificationsService.success(
+              this.translate.getTranslationFor('SUCCESSFULLY'),
+              this.translate.getTranslationFor('EVENTS_VIEW_EVENT_SUCCESSFULLY_REMOVED_VOTING')
+            );
+          },
+          (error) => {
+            console.log(error);
+            this.eventVotingChangeLoading = false;
+          }
+        );
       }
     });
   }
@@ -200,24 +186,14 @@ export class StartComponent implements OnDestroy {
   private checkIfFireworkShouldBeShown() {
     if (this.alert?.message?.trim().toLowerCase().length > 0 && this.alert?.type?.includes('happy')) {
       if (localStorage.getItem('firework') == null) {
-        localStorage.setItem('firework', 'true');
+        localStorage.setItem('firework', Converter.booleanToString(true));
       }
-      if (localStorage.getItem('firework') === 'true') {
-        this.showFirework = true;
-      } else {
-        this.showFirework = false;
-      }
+      this.showFirework = Converter.stringToBoolean(localStorage.getItem('firework'));
     }
   }
 
   toggleFirework() {
     this.showFirework = !this.showFirework;
-    let b = '';
-    if (this.showFirework) {
-      b = 'true';
-    } else {
-      b = 'false';
-    }
-    localStorage.setItem('firework', b);
+    localStorage.setItem('firework', Converter.booleanToString(this.showFirework));
   }
 }

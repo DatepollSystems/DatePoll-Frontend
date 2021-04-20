@@ -121,30 +121,15 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   logout() {
-    const answers = [
-      {
-        answer: this.translate.getTranslationFor('YES'),
-        value: 'yes',
-      },
-      {
-        answer: this.translate.getTranslationFor('NO'),
-        value: 'no',
-      },
-    ];
-    const question = this.translate.getTranslationFor('LOGOUT_CONFIRM');
-
     const bottomSheetRef = this.bottomSheet.open(QuestionDialogComponent, {
       data: {
-        answers,
-        question,
+        question: 'LOGOUT_CONFIRM',
       },
     });
 
     bottomSheetRef.afterDismissed().subscribe((value: string) => {
-      if (value != null) {
-        if (value.includes('yes')) {
-          this.authService.logout();
-        }
+      if (value?.includes(QuestionDialogComponent.YES_VALUE)) {
+        this.authService.logout();
       }
     });
   }

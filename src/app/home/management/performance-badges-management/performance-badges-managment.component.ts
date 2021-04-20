@@ -37,17 +37,6 @@ export class PerformanceBadgesManagmentComponent implements OnDestroy {
   yearBadges: CurrentYearUser[];
   yearBadgesSubscription: Subscription;
 
-  answers = [
-    {
-      answer: this.translate.getTranslationFor('YES'),
-      value: 'yes',
-    },
-    {
-      answer: this.translate.getTranslationFor('NO'),
-      value: 'no',
-    },
-  ];
-
   constructor(
     private performanceBadgesService: PerformanceBadgesService,
     private badgesService: BadgesService,
@@ -133,33 +122,28 @@ export class PerformanceBadgesManagmentComponent implements OnDestroy {
   }
 
   removePerformanceBadge(id: number) {
-    const question = this.translate.getTranslationFor('MANAGEMENT_PERFORMANCE_BADGES_REMOVE_PERFORMANCE_BADGE_CONTROL_QUESTION');
-
     const bottomSheetRef = this.bottomSheet.open(QuestionDialogComponent, {
       data: {
-        answers: this.answers,
-        question,
+        question: 'MANAGEMENT_PERFORMANCE_BADGES_REMOVE_PERFORMANCE_BADGE_CONTROL_QUESTION',
       },
     });
 
     bottomSheetRef.afterDismissed().subscribe((value: string) => {
-      if (value != null) {
-        if (value.includes('yes')) {
-          this.performanceBadgesService.removePerformanceBadge(id).subscribe(
-            (data: any) => {
-              console.log(data);
-              this.performanceBadgesService.fetchPerformanceBadges();
-              this.notificationsService.success(
-                this.translate.getTranslationFor('SUCCESSFULLY'),
-                this.translate.getTranslationFor('MANAGEMENT_PERFORMANCE_BADGES_REMOVED_PERFORMANCE_BADGE_SUCCESSFUL')
-              );
-            },
-            (error) => {
-              console.log(error);
-              this.performanceBadgesService.fetchPerformanceBadges();
-            }
-          );
-        }
+      if (value?.includes(QuestionDialogComponent.YES_VALUE)) {
+        this.performanceBadgesService.removePerformanceBadge(id).subscribe(
+          (data: any) => {
+            console.log(data);
+            this.performanceBadgesService.fetchPerformanceBadges();
+            this.notificationsService.success(
+              this.translate.getTranslationFor('SUCCESSFULLY'),
+              this.translate.getTranslationFor('MANAGEMENT_PERFORMANCE_BADGES_REMOVED_PERFORMANCE_BADGE_SUCCESSFUL')
+            );
+          },
+          (error) => {
+            console.log(error);
+            this.performanceBadgesService.fetchPerformanceBadges();
+          }
+        );
       }
     });
   }
@@ -192,33 +176,28 @@ export class PerformanceBadgesManagmentComponent implements OnDestroy {
   }
 
   removeInstrument(id: number) {
-    const question = this.translate.getTranslationFor('MANAGEMENT_PERFORMANCE_BADGES_REMOVE_INSTRUMENT_CONTROL_QUESTION');
-
     const bottomSheetRef = this.bottomSheet.open(QuestionDialogComponent, {
       data: {
-        answers: this.answers,
-        question,
+        question: 'MANAGEMENT_PERFORMANCE_BADGES_REMOVE_INSTRUMENT_CONTROL_QUESTION',
       },
     });
 
     bottomSheetRef.afterDismissed().subscribe((value: string) => {
-      if (value != null) {
-        if (value.includes('yes')) {
-          this.performanceBadgesService.removeInstrument(id).subscribe(
-            (data: any) => {
-              console.log(data);
-              this.performanceBadgesService.fetchInstruments();
-              this.notificationsService.success(
-                this.translate.getTranslationFor('SUCCESSFULLY'),
-                this.translate.getTranslationFor('MANAGEMENT_PERFORMANCE_BADGES_REMOVED_INSTRUMENT_SUCCESSFUL')
-              );
-            },
-            (error) => {
-              console.log(error);
-              this.performanceBadgesService.fetchInstruments();
-            }
-          );
-        }
+      if (value?.includes(QuestionDialogComponent.YES_VALUE)) {
+        this.performanceBadgesService.removeInstrument(id).subscribe(
+          (data: any) => {
+            console.log(data);
+            this.performanceBadgesService.fetchInstruments();
+            this.notificationsService.success(
+              this.translate.getTranslationFor('SUCCESSFULLY'),
+              this.translate.getTranslationFor('MANAGEMENT_PERFORMANCE_BADGES_REMOVED_INSTRUMENT_SUCCESSFUL')
+            );
+          },
+          (error) => {
+            console.log(error);
+            this.performanceBadgesService.fetchInstruments();
+          }
+        );
       }
     });
   }
@@ -245,33 +224,28 @@ export class PerformanceBadgesManagmentComponent implements OnDestroy {
   }
 
   removeBadge(id: number) {
-    const question = this.translate.getTranslationFor('MANAGEMENT_PERFORMANCE_BADGES_BADGE_REMOVE_CONTROL_QUESTION');
-
     const bottomSheetRef = this.bottomSheet.open(QuestionDialogComponent, {
       data: {
-        answers: this.answers,
-        question,
+        question: 'MANAGEMENT_PERFORMANCE_BADGES_BADGE_REMOVE_CONTROL_QUESTION',
       },
     });
 
     bottomSheetRef.afterDismissed().subscribe((value: string) => {
-      if (value != null) {
-        if (value.includes('yes')) {
-          this.badgesService.removeBadge(id).subscribe(
-            (data: any) => {
-              console.log(data);
-              this.badgesService.fetchBadges();
-              this.notificationsService.success(
-                this.translate.getTranslationFor('SUCCESSFULLY'),
-                this.translate.getTranslationFor('MANAGEMENT_PERFORMANCE_BADGES_BADGE_REMOVE_SUCCESSFULLY')
-              );
-            },
-            (error) => {
-              console.log(error);
-              this.badgesService.fetchBadges();
-            }
-          );
-        }
+      if (value?.includes(QuestionDialogComponent.YES_VALUE)) {
+        this.badgesService.removeBadge(id).subscribe(
+          (data: any) => {
+            console.log(data);
+            this.badgesService.fetchBadges();
+            this.notificationsService.success(
+              this.translate.getTranslationFor('SUCCESSFULLY'),
+              this.translate.getTranslationFor('MANAGEMENT_PERFORMANCE_BADGES_BADGE_REMOVE_SUCCESSFULLY')
+            );
+          },
+          (error) => {
+            console.log(error);
+            this.badgesService.fetchBadges();
+          }
+        );
       }
     });
   }

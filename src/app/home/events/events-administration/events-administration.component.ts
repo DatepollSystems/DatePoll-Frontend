@@ -193,40 +193,25 @@ export class EventsAdministrationComponent implements OnInit, OnDestroy {
   }
 
   onDelete(id: number) {
-    const answers = [
-      {
-        answer: this.translate.getTranslationFor('YES'),
-        value: 'yes',
-      },
-      {
-        answer: this.translate.getTranslationFor('NO'),
-        value: 'no',
-      },
-    ];
-    const question = this.translate.getTranslationFor('EVENTS_ADMINISTRATION_DELETE_EVENT_QUESTION');
-
     const bottomSheetRef = this.bottomSheet.open(QuestionDialogComponent, {
       data: {
-        answers,
-        question,
+        question: 'EVENTS_ADMINISTRATION_DELETE_EVENT_QUESTION',
       },
     });
 
     bottomSheetRef.afterDismissed().subscribe((value: string) => {
-      if (value != null) {
-        if (value.includes('yes')) {
-          this.eventsService.deleteEvent(id).subscribe(
-            (response: any) => {
-              console.log(response);
-              this.eventsService.fetchEvents();
-              this.notificationsService.success(
-                this.translate.getTranslationFor('SUCCESSFULLY'),
-                this.translate.getTranslationFor('EVENTS_ADMINISTRATION_DELETE_EVENT_SUCCESSFULLY_DELETED')
-              );
-            },
-            (error) => console.log(error)
-          );
-        }
+      if (value?.includes(QuestionDialogComponent.YES_VALUE)) {
+        this.eventsService.deleteEvent(id).subscribe(
+          (response: any) => {
+            console.log(response);
+            this.eventsService.fetchEvents();
+            this.notificationsService.success(
+              this.translate.getTranslationFor('SUCCESSFULLY'),
+              this.translate.getTranslationFor('EVENTS_ADMINISTRATION_DELETE_EVENT_SUCCESSFULLY_DELETED')
+            );
+          },
+          (error) => console.log(error)
+        );
       }
     });
   }

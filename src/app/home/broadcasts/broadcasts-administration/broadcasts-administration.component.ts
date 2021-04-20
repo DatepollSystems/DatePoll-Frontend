@@ -90,40 +90,25 @@ export class BroadcastsAdministrationComponent implements OnInit, OnDestroy {
   }
 
   removeBroadcast(id: number) {
-    const answers = [
-      {
-        answer: this.translate.getTranslationFor('YES'),
-        value: 'yes',
-      },
-      {
-        answer: this.translate.getTranslationFor('NO'),
-        value: 'no',
-      },
-    ];
-    const question = this.translate.getTranslationFor('BROADCASTS_ADMINISTRATION_DELETE_CONFIRMATION_QUESTION');
-
     const bottomSheetRef = this.bottomSheet.open(QuestionDialogComponent, {
       data: {
-        answers,
-        question,
+        question: 'BROADCASTS_ADMINISTRATION_DELETE_CONFIRMATION_QUESTION',
       },
     });
 
     bottomSheetRef.afterDismissed().subscribe((value: string) => {
-      if (value != null) {
-        if (value.includes('yes')) {
-          this.broadcastsService.deleteBroadcast(id).subscribe(
-            (response: any) => {
-              console.log(response);
-              this.broadcastsService.fetchBroadcasts();
-              this.notificationsService.success(
-                this.translate.getTranslationFor('SUCCESSFULLY'),
-                this.translate.getTranslationFor('BROADCASTS_ADMINISTRATION_DELETE_SUCCESSFULLY')
-              );
-            },
-            (error) => console.log(error)
-          );
-        }
+      if (value?.includes(QuestionDialogComponent.YES_VALUE)) {
+        this.broadcastsService.deleteBroadcast(id).subscribe(
+          (response: any) => {
+            console.log(response);
+            this.broadcastsService.fetchBroadcasts();
+            this.notificationsService.success(
+              this.translate.getTranslationFor('SUCCESSFULLY'),
+              this.translate.getTranslationFor('BROADCASTS_ADMINISTRATION_DELETE_SUCCESSFULLY')
+            );
+          },
+          (error) => console.log(error)
+        );
       }
     });
   }

@@ -14,7 +14,6 @@ import {UsersService} from './users.service';
 
 import {QuestionDialogComponent} from '../../../utils/shared-components/question-dialog/question-dialog.component';
 import {UserCreateModalComponent} from './user-create-modal/user-create-modal.component';
-import {UserDeleteModalComponent} from './user-delete-modal/user-delete-modal.component';
 import {UserUpdateModalComponent} from './user-update-modal/user-update-modal.component';
 
 import {MatMultiSort, MatMultiSortTableDataSource, TableData} from 'ngx-mat-multi-sort';
@@ -203,40 +202,25 @@ export class UsersManagementComponent implements OnInit, OnDestroy {
   }
 
   onActivateAll() {
-    const answers = [
-      {
-        answer: this.translate.getTranslationFor('YES'),
-        value: 'yes',
-      },
-      {
-        answer: this.translate.getTranslationFor('NO'),
-        value: 'no',
-      },
-    ];
-    const question = this.translate.getTranslationFor('MANAGEMENT_USERS_ACTIVATE_ALL_QUESTION_DIALOG');
-
     const bottomSheetRef = this.bottomSheet.open(QuestionDialogComponent, {
       data: {
-        answers,
-        question,
+        question: 'MANAGEMENT_USERS_ACTIVATE_ALL_QUESTION_DIALOG',
       },
     });
 
     bottomSheetRef.afterDismissed().subscribe((value: string) => {
-      if (value != null) {
-        if (value.includes('yes')) {
-          this.usersService.activateAll().subscribe(
-            (data: any) => {
-              console.log(data);
-              this.usersService.fetchUsers();
-              this.notificationsService.success(
-                this.translate.getTranslationFor('SUCCESSFULLY'),
-                this.translate.getTranslationFor('MANAGEMENT_USERS_ACTIVATE_ALL_FINISHED')
-              );
-            },
-            (error) => console.log(error)
-          );
-        }
+      if (value?.includes(QuestionDialogComponent.YES_VALUE)) {
+        this.usersService.activateAll().subscribe(
+          (data: any) => {
+            console.log(data);
+            this.usersService.fetchUsers();
+            this.notificationsService.success(
+              this.translate.getTranslationFor('SUCCESSFULLY'),
+              this.translate.getTranslationFor('MANAGEMENT_USERS_ACTIVATE_ALL_FINISHED')
+            );
+          },
+          (error) => console.log(error)
+        );
       }
     });
   }
@@ -262,8 +246,26 @@ export class UsersManagementComponent implements OnInit, OnDestroy {
   }
 
   onDelete(userID: number) {
-    this.bottomSheet.open(UserDeleteModalComponent, {
-      data: {userID},
+    const bottomSheetRef = this.bottomSheet.open(QuestionDialogComponent, {
+      data: {
+        question: 'MANAGEMENT_USERS_DELETE_USER_MODAL_TITLE',
+      },
+    });
+
+    bottomSheetRef.afterDismissed().subscribe((value: string) => {
+      if (value?.includes(QuestionDialogComponent.YES_VALUE)) {
+        this.usersService.deleteUser(userID).subscribe(
+          (data: any) => {
+            console.log(data);
+            this.usersService.fetchUsers();
+            this.notificationsService.success(
+              this.translate.getTranslationFor('SUCCESSFULLY'),
+              this.translate.getTranslationFor('MANAGEMENT_USERS_DELETE_USER_MODAL_SUCCESSFUL')
+            );
+          },
+          (error) => console.log(error)
+        );
+      }
     });
   }
 
