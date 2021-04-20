@@ -9,15 +9,21 @@ import {AuthService} from './auth.service';
 export class AuthInterceptor implements HttpInterceptor {
   constructor(private http: HttpClient, private authService: AuthService) {}
 
+  /**
+   * Don't intercept this requests
+   * "assets/i18n" - Language files for DatePoll frontend
+   * "/auth" - Auth routes for login, change password, etc.
+   * "https://api.openweathermap.org" - Open Weather Map url
+   * "https://geocode.xyz" - Geo tile provider for map input
+   */
+  private static paths = ['/auth', 'https://api.openweathermap.org', 'https://geocode.xyz', 'assets/i18n'];
+
   private isRefreshing = false;
   private refreshTokenSubject: BehaviorSubject<any> = new BehaviorSubject<any>(null);
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    // Don't intercept this requests
-    const paths = ['/auth', 'https://api.openweathermap.org', 'https://geocode.xyz', 'de.json', 'en.json'];
-
     let toIntercept = true;
-    for (const path of paths) {
+    for (const path of AuthInterceptor.paths) {
       if (req.url.includes(path)) {
         toIntercept = false;
         break;
