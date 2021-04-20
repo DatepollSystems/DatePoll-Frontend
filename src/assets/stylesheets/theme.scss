@@ -35,19 +35,35 @@ $dark-theme: mat-dark-theme($dark-primary, $dark-accent, $dark-warn);
 .dark-theme {
   @include angular-material-theme($dark-theme);
 
+  /* Left main nav color fix */
   .activated {
     background-color: #323232 !important;
   }
 
+  /* Table stripped color fix */
   tr:nth-child(even) {
     background: #616161;
   }
 
+  /* Table stripped hover color fix */
   .mat-row:hover {
     background-color: #757575;
   }
 
+  /* User changes mark fix */
   .change-mark {
     color: black;
+  }
+
+  /* Mat multi table sort tag color fix */
+  .sorting {
+    color: lightgray !important;
+  }
+  .mat-chip:hover {
+    background-color: #616161 !important;
+  }
+  /* Mat multi table sort select text color fix */
+  .mat-checkbox-label {
+    color: white !important;
   }
 }

@@ -1,5 +1,6 @@
 @import '../node_modules/angular-calendar/css/angular-calendar.css';
 
+/* General tweaks and settings */
 html,
 body {
   height: 100%;
@@ -17,23 +18,24 @@ a:hover {
   cursor: pointer;
 }
 
-.not-selectable {
-  user-select: none;
-}
-
-/* Disable stepper */
-.mat-vertical-stepper-header {
-  pointer-events: none !important;
-}
-
 mat-card {
   margin-top: 10px;
   margin-bottom: 10px;
 }
 
+.not-selectable {
+  user-select: none;
+}
+
+/* Style mat info card */
 .mat-info-card {
   background-color: #b2ff59 !important;
   color: black !important;
+}
+
+/* Disable stepper */
+.mat-vertical-stepper-header {
+  pointer-events: none !important;
 }
 
 /* Fix ripple bug which expand the card*/
