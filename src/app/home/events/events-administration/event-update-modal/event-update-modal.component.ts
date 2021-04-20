@@ -30,6 +30,8 @@ export class EventUpdateModalComponent implements OnDestroy {
   startDate: Date;
   endDate: Date;
 
+  allMembers = false;
+
   joinedCopy: GroupAndSubgroupModel[] = [];
   joined: GroupAndSubgroupModel[] = [];
   joinedSubscription: Subscription;
@@ -52,6 +54,7 @@ export class EventUpdateModalComponent implements OnDestroy {
     this.startDate = new Date();
     this.endDate = new Date();
     this.dates = this.event.getEventDates();
+    this.allMembers = this.event.forEveryone;
 
     this.joined = this.eventsService.getJoinedOfEvent(this.event.id);
     this.joinedCopy = this.joined.slice();
@@ -89,8 +92,25 @@ export class EventUpdateModalComponent implements OnDestroy {
     this.dates = eventDates;
   }
 
+  allMembersChanged(checked: boolean) {
+    this.allMembers = checked;
+  }
+
   update(form: NgForm) {
     if (this.dates.length === 0) {
+      this.notificationsService.alert(
+        this.translate.getTranslationFor('WARNING'),
+        this.translate.getTranslationFor('EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE_LIST_REQUIRED')
+      );
+      return;
+    }
+
+    if (this.joined.length === 0 && !this.allMembers) {
+      console.log('Groups length 0! - ' + this.joined.length + ' And allMembers - ' + this.allMembers);
+      this.notificationsService.alert(
+        this.translate.getTranslationFor('WARNING'),
+        this.translate.getTranslationFor('BROADCASTS_ADMINISTRATION_CREATE_NOTIFICATION_NO_GROUPS_AND_NOT_ALL_MEMBERS')
+      );
       return;
     }
 
@@ -99,9 +119,7 @@ export class EventUpdateModalComponent implements OnDestroy {
     const name = form.controls.name.value;
     const description = form.controls.description.value;
 
-    const forEveryone = this.joined.length === 0;
-
-    const event = new Event(this.event.id, name, this.startDate, this.endDate, forEveryone, description, this.decisions, this.dates);
+    const event = new Event(this.event.id, name, this.startDate, this.endDate, this.allMembers, description, this.decisions, this.dates);
     console.log(event);
     this.eventsService.updateEvent(event).subscribe(
       (response: any) => {

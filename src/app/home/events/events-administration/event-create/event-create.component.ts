@@ -18,14 +18,14 @@ import {Event} from '../../models/event.model';
 @Component({
   selector: 'app-event-create',
   templateUrl: './event-create.component.html',
-  styleUrls: ['./event-create.component.css']
+  styleUrls: ['./event-create.component.css'],
 })
 export class EventCreateComponent implements OnDestroy {
   startDate: Date;
   endDate: Date;
 
+  allMembers = false;
   groupsSubscription: Subscription;
-
   joined: GroupAndSubgroupModel[] = [];
   free: GroupAndSubgroupModel[] = [];
 
@@ -51,7 +51,7 @@ export class EventCreateComponent implements OnDestroy {
       i--;
     }
 
-    this.standardDecisionsSubscription = standardDecisionsService.standardDecisionsChange.subscribe(value => {
+    this.standardDecisionsSubscription = standardDecisionsService.standardDecisionsChange.subscribe((value) => {
       this.decisions = [];
       let y = -1;
       for (const decisionO of value) {
@@ -64,7 +64,7 @@ export class EventCreateComponent implements OnDestroy {
 
     this.free = this.groupsService.getGroupsAndSubgroups();
     this.joined = [];
-    this.groupsSubscription = this.groupsService.groupsAndSubgroupsChange.subscribe(value => {
+    this.groupsSubscription = this.groupsService.groupsAndSubgroupsChange.subscribe((value) => {
       this.free = value;
       this.joined = [];
     });
@@ -91,20 +91,34 @@ export class EventCreateComponent implements OnDestroy {
     this.dates = eventDates;
   }
 
+  allMembersChanged(checked: boolean) {
+    this.allMembers = checked;
+  }
+
   create(form: NgForm) {
     if (this.dates.length === 0) {
-      this.notificationsService.info('', this.translate.getTranslationFor('EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE_LIST_REQUIRED'));
+      this.notificationsService.alert(
+        this.translate.getTranslationFor('WARNING'),
+        this.translate.getTranslationFor('EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE_LIST_REQUIRED')
+      );
+      return;
+    }
+
+    if (this.joined.length === 0 && !this.allMembers) {
+      console.log('Groups length 0! - ' + this.joined.length + ' And allMembers - ' + this.allMembers);
+      this.notificationsService.alert(
+        this.translate.getTranslationFor('WARNING'),
+        this.translate.getTranslationFor('BROADCASTS_ADMINISTRATION_CREATE_NOTIFICATION_NO_GROUPS_AND_NOT_ALL_MEMBERS')
+      );
       return;
     }
 
     const name = form.controls.name.value;
     const description = form.controls.description.value;
 
-    const forEveryone = this.joined.length === 0;
-
     this.router.navigateByUrl('/home/events/administration');
 
-    const event = new Event(0, name, new Date(), new Date(), forEveryone, description, this.decisions, this.dates);
+    const event = new Event(0, name, new Date(), new Date(), this.allMembers, description, this.decisions, this.dates);
     console.log(event);
     this.eventsService.createEvent(event).subscribe(
       (response: any) => {
@@ -126,20 +140,20 @@ export class EventCreateComponent implements OnDestroy {
                 (sdata: any) => {
                   console.log(sdata);
                 },
-                error => console.log(error)
+                (error) => console.log(error)
               );
             } else {
               this.eventsService.addSubgroupToEvent(id, group.id).subscribe(
                 (sdata: any) => {
                   console.log(sdata);
                 },
-                error => console.log(error)
+                (error) => console.log(error)
               );
             }
           }
         }
       },
-      error => console.log(error)
+      (error) => console.log(error)
     );
   }
 }

@@ -3,6 +3,8 @@ import {NgModule} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {DateAdapter, MAT_DATE_FORMATS} from '@angular/material/core';
 
+import {NgxMatSelectSearchModule} from 'ngx-mat-select-search';
+
 import {MaterialModule} from '../../material-module';
 import {TranslationModule} from '../../translation/translation.module';
 import {CustomDateAdapter, MY_DATE_FORMATS} from '../../utils/custom-date-adapter';
@@ -11,6 +13,7 @@ import {GroupAndSubgroupTypeInputSelectModule} from '../../utils/shared-componen
 import {MapsModule} from '../../utils/shared-components/maps-component/maps.module';
 import {EventInfoModule} from './event-info/event-info.module';
 import {EventsRoutingModule} from './events-routing.module';
+import {AllMembersSwitchModule} from '../../utils/shared-components/all-members-switch/all-members-switch.module';
 
 import {EventsService} from './events.service';
 
@@ -22,7 +25,6 @@ import {EventStandardLocationsManagementModalComponent} from './events-administr
 import {EventUserManagementModalComponent} from './events-administration/event-user-management-modal/event-user-management-modal.component';
 import {EventsAdministrationComponent} from './events-administration/events-administration.component';
 import {EventsViewComponent} from './events-view/events-view.component';
-import {NgxMatSelectSearchModule} from 'ngx-mat-select-search';
 
 @NgModule({
   declarations: [
@@ -47,6 +49,7 @@ import {NgxMatSelectSearchModule} from 'ngx-mat-select-search';
     GroupAndSubgroupTypeInputSelectModule,
     NgxMatSelectSearchModule,
     GoBackButtonModule,
+    AllMembersSwitchModule,
   ],
   providers: [EventsService, {provide: DateAdapter, useClass: CustomDateAdapter}, {provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS}],
 })
