@@ -48,7 +48,7 @@ export class UIHelper {
     } // we only process strings!
     // @ts-ignore
     return (
-      !isNaN(str) && // use type coercion to parse the _entirety_ of the string (`parseFloat` alone does not do this)...
+      !isNaN(parseInt(str, 10)) && // use type coercion to parse the _entirety_ of the string (`parseFloat` alone does not do this)...
       !isNaN(parseFloat(str))
     ); // ...and ensure strings of whitespace fail
   }
