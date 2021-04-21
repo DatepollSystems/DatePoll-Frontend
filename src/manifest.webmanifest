@@ -7,7 +7,7 @@
   "display": "standalone",
   "background_color": "#000",
   "theme_color": "#607D8B",
-  "prefer_related_applications": true,
+  "prefer_related_applications": false,
   "related_applications": [
     {
       "platform": "play",
