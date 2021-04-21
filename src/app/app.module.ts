@@ -6,8 +6,6 @@ import {BrowserModule} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {ServiceWorkerModule} from '@angular/service-worker';
 
-import {SimpleNotificationsModule} from 'angular2-notifications';
-
 import {AppRoutingModule} from './app-routing.module';
 import {MaterialModule} from './material-module';
 import {TranslationModule} from './translation/translation.module';
@@ -44,9 +42,6 @@ registerLocaleData(localeDe);
     MaterialModule,
     TranslationModule,
     AppRoutingModule,
-    SimpleNotificationsModule.forRoot({
-      timeOut: 2000,
-    }),
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
       // Register the ServiceWorker as soon as the app is stable
