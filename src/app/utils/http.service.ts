@@ -1,14 +1,15 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
+import {MatSnackBar} from '@angular/material/snack-bar';
 import {throwError} from 'rxjs';
 import {catchError} from 'rxjs/operators';
 
 import {NotificationsService} from 'angular2-notifications';
 
 import {environment} from '../../environments/environment';
+
 import {AuthService} from '../auth/auth.service';
 import {TranslateService} from '../translation/translate.service';
-import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Injectable({
   providedIn: 'root',
