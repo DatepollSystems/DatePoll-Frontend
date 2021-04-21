@@ -1,11 +1,12 @@
-import {Component, OnDestroy, OnInit, TemplateRef, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {MatBottomSheet, MatBottomSheetRef} from '@angular/material/bottom-sheet';
 import {MatDialog} from '@angular/material/dialog';
 import {MatTableDataSource} from '@angular/material/table';
 import {Router} from '@angular/router';
+import {MatSnackBar} from '@angular/material/snack-bar';
 import {Subscription} from 'rxjs';
 
-import {NotificationsService, NotificationType} from 'angular2-notifications';
+import {MatMultiSort, MatMultiSortTableDataSource, TableData} from 'ngx-mat-multi-sort';
 
 import {TranslateService} from '../../../translation/translate.service';
 import {ExcelService} from '../../../utils/excel.service';
@@ -15,11 +16,10 @@ import {UsersService} from './users.service';
 import {QuestionDialogComponent} from '../../../utils/shared-components/question-dialog/question-dialog.component';
 import {UserCreateModalComponent} from './user-create-modal/user-create-modal.component';
 import {UserUpdateModalComponent} from './user-update-modal/user-update-modal.component';
+import {UserInfoModalComponent} from './user-info-modal/user-info-modal.component';
 
-import {MatMultiSort, MatMultiSortTableDataSource, TableData} from 'ngx-mat-multi-sort';
 import {Permissions} from '../../../permissions';
 import {User} from './user.model';
-import {UserInfoModalComponent} from './user-info-modal/user-info-modal.component';
 
 @Component({
   selector: 'app-users-management',
@@ -48,7 +48,7 @@ export class UsersManagementComponent implements OnInit, OnDestroy {
     private bottomSheet: MatBottomSheet,
     private dialog: MatDialog,
     myUserService: MyUserService,
-    private notificationsService: NotificationsService,
+    private snackBar: MatSnackBar,
     private usersService: UsersService
   ) {
     this.hasManagementAdministration = myUserService.hasPermission(Permissions.MANAGEMENT_ADMINISTRATION);
@@ -214,10 +214,7 @@ export class UsersManagementComponent implements OnInit, OnDestroy {
           (data: any) => {
             console.log(data);
             this.usersService.fetchUsers();
-            this.notificationsService.success(
-              this.translate.getTranslationFor('SUCCESSFULLY'),
-              this.translate.getTranslationFor('MANAGEMENT_USERS_ACTIVATE_ALL_FINISHED')
-            );
+            this.snackBar.open(this.translate.getTranslationFor('MANAGEMENT_USERS_ACTIVATE_ALL_FINISHED'));
           },
           (error) => console.log(error)
         );
@@ -258,10 +255,7 @@ export class UsersManagementComponent implements OnInit, OnDestroy {
           (data: any) => {
             console.log(data);
             this.usersService.fetchUsers();
-            this.notificationsService.success(
-              this.translate.getTranslationFor('SUCCESSFULLY'),
-              this.translate.getTranslationFor('MANAGEMENT_USERS_DELETE_USER_MODAL_SUCCESSFUL')
-            );
+            this.snackBar.open(this.translate.getTranslationFor('MANAGEMENT_USERS_DELETE_USER_MODAL_SUCCESSFUL'));
           },
           (error) => console.log(error)
         );
@@ -321,18 +315,16 @@ export class UsersManagementComponent implements OnInit, OnDestroy {
   styles: ['mat-icon { margin-right: 15px }'],
 })
 export class UsersExportBottomSheetComponent {
-  @ViewChild('waitForExport', {static: true}) waitForExport: TemplateRef<any>;
-  @ViewChild('successfullyExported', {static: true}) successfullyExported: TemplateRef<any>;
-
   constructor(
     private bottomSheetRef: MatBottomSheetRef<UsersExportBottomSheetComponent>,
     private excelService: ExcelService,
     private usersService: UsersService,
-    private notificationsService: NotificationsService
+    private translate: TranslateService,
+    private snackBar: MatSnackBar
   ) {}
 
   exportExcelSheet() {
-    this.notificationsService.html(this.waitForExport, NotificationType.Info, null, 'info');
+    this.snackBar.open(this.translate.getTranslationFor('MANAGEMENT_USERS_EXPORT_LOADING'));
     this.bottomSheetRef.dismiss();
 
     this.usersService.export().subscribe(
@@ -340,8 +332,7 @@ export class UsersExportBottomSheetComponent {
         console.log(data);
 
         this.excelService.exportAsExcelFile(data.users, 'Mitglieder');
-
-        this.notificationsService.html(this.successfullyExported, NotificationType.Success, null, 'success');
+        this.snackBar.open(this.translate.getTranslationFor('MANAGEMENT_USERS_EXPORT_FINISHED'));
       },
       (error) => console.log(error)
     );

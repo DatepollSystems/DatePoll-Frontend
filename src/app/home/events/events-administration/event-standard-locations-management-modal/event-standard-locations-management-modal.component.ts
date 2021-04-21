@@ -1,8 +1,7 @@
 import {Component, OnDestroy} from '@angular/core';
 import {NgForm} from '@angular/forms';
+import {MatSnackBar} from '@angular/material/snack-bar';
 import {Subscription} from 'rxjs';
-
-import {NotificationsService} from 'angular2-notifications';
 
 import {TranslateService} from '../../../../translation/translate.service';
 import {StandardLocationsService} from '../../standardLocations.service';
@@ -12,7 +11,7 @@ import {EventStandardLocation} from '../../models/event-standard-location.model'
 @Component({
   selector: 'app-event-standard-locations-management-modal',
   templateUrl: './event-standard-locations-management-modal.component.html',
-  styleUrls: ['./event-standard-locations-management-modal.component.css']
+  styleUrls: ['./event-standard-locations-management-modal.component.css'],
 })
 export class EventStandardLocationsManagementModalComponent implements OnDestroy {
   public standardLocations: EventStandardLocation[] = [];
@@ -23,11 +22,11 @@ export class EventStandardLocationsManagementModalComponent implements OnDestroy
 
   constructor(
     private standardLocationsService: StandardLocationsService,
-    private notificationsService: NotificationsService,
+    private snackBar: MatSnackBar,
     private translate: TranslateService
   ) {
     this.standardLocations = this.standardLocationsService.getStandardLocations();
-    this.standardLocationsSubscription = this.standardLocationsService.standardLocationsChange.subscribe(value => {
+    this.standardLocationsSubscription = this.standardLocationsService.standardLocationsChange.subscribe((value) => {
       this.standardLocations = value;
     });
   }
@@ -57,12 +56,9 @@ export class EventStandardLocationsManagementModalComponent implements OnDestroy
 
         this.standardLocationsService.fetchStandardLocations();
 
-        this.notificationsService.success(
-          this.translate.getTranslationFor('SUCCESSFULLY'),
-          this.translate.getTranslationFor('EVENTS_STANDARD_LOCATIONS_MANAGEMENT_SUCCESSFULLY_ADDED')
-        );
+        this.snackBar.open(this.translate.getTranslationFor('EVENTS_STANDARD_LOCATIONS_MANAGEMENT_SUCCESSFULLY_ADDED'));
       },
-      error => console.log(error)
+      (error) => console.log(error)
     );
 
     form.reset();
@@ -75,12 +71,9 @@ export class EventStandardLocationsManagementModalComponent implements OnDestroy
 
         this.standardLocationsService.fetchStandardLocations();
 
-        this.notificationsService.success(
-          this.translate.getTranslationFor('SUCCESSFULLY'),
-          this.translate.getTranslationFor('EVENTS_STANDARD_LOCATIONS_MANAGEMENT_SUCCESSFULLY_REMOVED')
-        );
+        this.snackBar.open(this.translate.getTranslationFor('EVENTS_STANDARD_LOCATIONS_MANAGEMENT_SUCCESSFULLY_REMOVED'));
       },
-      error => console.log(error)
+      (error) => console.log(error)
     );
   }
 }

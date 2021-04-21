@@ -1,15 +1,14 @@
 import {Component, OnDestroy} from '@angular/core';
 import {MatBottomSheet} from '@angular/material/bottom-sheet';
 import {Router} from '@angular/router';
-
+import {MatSnackBar} from '@angular/material/snack-bar';
 import {Subscription} from 'rxjs';
-
-import {NotificationsService} from 'angular2-notifications';
 
 import {TranslateService} from '../../translation/translate.service';
 import {EventsUserService} from '../events/events-user.service';
 import {MyUserService} from '../my-user.service';
 import {HomepageService} from './homepage.service';
+import {Converter} from '../../utils/helper/Converter';
 
 import {Broadcast} from '../broadcasts/models/broadcast.model';
 import {Event} from '../events/models/event.model';
@@ -19,7 +18,6 @@ import {HomeBookingsModel} from './bookings.model';
 import {SettingsService} from '../../utils/settings.service';
 import {QuestionDialogComponent} from '../../utils/shared-components/question-dialog/question-dialog.component';
 import {EventsVoteForDecisionModalComponent} from '../events/events-view/events-vote-for-decision-modal/events-vote-for-decision-modal.component';
-import {Converter} from '../../utils/helper/Converter';
 
 @Component({
   selector: 'app-start',
@@ -54,7 +52,7 @@ export class StartComponent implements OnDestroy {
     public myUserService: MyUserService,
     private eventsUserSerivce: EventsUserService,
     private bottomSheet: MatBottomSheet,
-    private notificationsService: NotificationsService,
+    private snackBar: MatSnackBar,
     private translate: TranslateService,
     private router: Router,
     private settingsService: SettingsService
@@ -116,7 +114,7 @@ export class StartComponent implements OnDestroy {
     this.router.navigateByUrl('/home/events/' + event.id, {state: event});
   }
 
-  private onEventVote(event: Event) {
+  onEventVote(event: Event) {
     const bottomSheetRef = this.bottomSheet.open(EventsVoteForDecisionModalComponent, {
       data: {event},
     });
@@ -127,10 +125,7 @@ export class StartComponent implements OnDestroy {
           (response: any) => {
             console.log(response);
             this.homePageService.fetchData(true);
-            this.notificationsService.success(
-              this.translate.getTranslationFor('SUCCESSFULLY'),
-              this.translate.getTranslationFor('EVENTS_VIEW_EVENT_SUCCESSFULLY_VOTED')
-            );
+            this.snackBar.open(this.translate.getTranslationFor('EVENTS_VIEW_EVENT_SUCCESSFULLY_VOTED'));
           },
           (error) => console.log(error)
         );
@@ -140,7 +135,7 @@ export class StartComponent implements OnDestroy {
     });
   }
 
-  private cancelEventVoting(event, button: any) {
+  cancelEventVoting(event, button: any) {
     const bottomSheetRef = this.bottomSheet.open(QuestionDialogComponent, {
       data: {
         question: 'EVENTS_CANCEL_VOTING',
@@ -160,10 +155,7 @@ export class StartComponent implements OnDestroy {
           (response: any) => {
             console.log(response);
             this.homePageService.fetchData(true);
-            this.notificationsService.success(
-              this.translate.getTranslationFor('SUCCESSFULLY'),
-              this.translate.getTranslationFor('EVENTS_VIEW_EVENT_SUCCESSFULLY_REMOVED_VOTING')
-            );
+            this.snackBar.open(this.translate.getTranslationFor('EVENTS_VIEW_EVENT_SUCCESSFULLY_REMOVED_VOTING'));
           },
           (error) => {
             console.log(error);

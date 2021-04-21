@@ -1,8 +1,7 @@
 import {Component, OnDestroy} from '@angular/core';
 import {MatBottomSheet} from '@angular/material/bottom-sheet';
+import {MatSnackBar} from '@angular/material/snack-bar';
 import {Subscription} from 'rxjs';
-
-import {NotificationsService} from 'angular2-notifications';
 
 import {QuestionDialogComponent} from '../../../../utils/shared-components/question-dialog/question-dialog.component';
 
@@ -26,7 +25,7 @@ export class DeletedUsersManagementComponent implements OnDestroy {
     private deletedUsersService: DeletedUsersService,
     private translate: TranslateService,
     private bottomSheet: MatBottomSheet,
-    private notificationsService: NotificationsService
+    private snackBar: MatSnackBar
   ) {
     this.deletedUsers = this.deletedUsersService.getDeletedUsers();
     this.sortedUsers = this.deletedUsers.slice();
@@ -72,10 +71,7 @@ export class DeletedUsersManagementComponent implements OnDestroy {
             console.log(response);
             this.deletedUsersLoaded = false;
             this.deletedUsersService.getDeletedUsers();
-            this.notificationsService.success(
-              this.translate.getTranslationFor('SUCCESSFULLY'),
-              this.translate.getTranslationFor('MANAGEMENT_USERS_DELETED_USERS_DELETE_ALL_SUCCESSFUL')
-            );
+            this.snackBar.open(this.translate.getTranslationFor('MANAGEMENT_USERS_DELETED_USERS_DELETE_ALL_SUCCESSFUL'));
           },
           (error) => console.log(error)
         );

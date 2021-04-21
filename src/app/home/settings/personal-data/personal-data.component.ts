@@ -1,12 +1,13 @@
 import {Component} from '@angular/core';
+import {MatSnackBar} from '@angular/material/snack-bar';
+
 import {MyUserService} from '../../my-user.service';
 import {TranslateService} from '../../../translation/translate.service';
-import {NotificationsService} from 'angular2-notifications';
 
 @Component({
   selector: 'app-personaldata',
   templateUrl: './personal-data.component.html',
-  styleUrls: ['./personal-data.component.css']
+  styleUrls: ['./personal-data.component.css'],
 })
 export class PersonalDataComponent {
   title: string;
@@ -18,11 +19,7 @@ export class PersonalDataComponent {
   zipcode: number;
   location: string;
 
-  constructor(
-    private myUserService: MyUserService,
-    private notificationsService: NotificationsService,
-    private translate: TranslateService
-  ) {
+  constructor(private myUserService: MyUserService, private snackBar: MatSnackBar, private translate: TranslateService) {
     this.title = this.myUserService.getTitle();
 
     this.birthday = this.myUserService.getBirthday();
@@ -53,12 +50,9 @@ export class PersonalDataComponent {
     this.myUserService.updateMyself().subscribe(
       (data: any) => {
         console.log(data);
-        this.notificationsService.success(
-          this.translate.getTranslationFor('SUCCESSFULLY'),
-          this.translate.getTranslationFor('SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_SAVED_SUCCESSFULLY')
-        );
+        this.snackBar.open(this.translate.getTranslationFor('SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_SAVED_SUCCESSFULLY'));
       },
-      error => console.log(error)
+      (error) => console.log(error)
     );
   }
 }

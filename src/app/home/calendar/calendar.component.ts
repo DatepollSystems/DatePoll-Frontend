@@ -3,9 +3,9 @@ import {MatBottomSheet} from '@angular/material/bottom-sheet';
 import {MatDialog} from '@angular/material/dialog';
 import {MatSlideToggleChange} from '@angular/material/slide-toggle';
 import {Subject, Subscription} from 'rxjs';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 import {CalendarDateFormatter, CalendarEvent, CalendarEventTimesChangedEvent, CalendarView} from 'angular-calendar';
-import {NotificationsService} from 'angular2-notifications';
 import {isSameDay, isSameMonth} from 'date-fns';
 
 import {QuestionDialogComponent} from '../../utils/shared-components/question-dialog/question-dialog.component';
@@ -87,7 +87,7 @@ export class CalendarComponent implements OnInit, OnDestroy {
     private myUserService: MyUserService,
     private cdr: ChangeDetectorRef,
     private dialog: MatDialog,
-    private notificationsService: NotificationsService,
+    private snackBar: MatSnackBar,
     private translate: TranslateService,
     private userSettingsService: UserSettingsService,
     private homepageService: HomepageService,
@@ -206,8 +206,7 @@ export class CalendarComponent implements OnInit, OnDestroy {
                       (data: any) => {
                         console.log(data);
                         this.cinemaService.fetchMovies();
-                        this.notificationsService.success(
-                          this.translate.getTranslationFor('SUCCESSFULLY'),
+                        this.snackBar.open(
                           this.translate.getTranslationFor('CINEMA_TICKETS_ADMINISTRATION_MOVIE_DELETE_MODAL_SUCCESSFULLY_DELETED')
                         );
                       },
@@ -253,10 +252,7 @@ export class CalendarComponent implements OnInit, OnDestroy {
                       (response: any) => {
                         console.log(response);
                         this.eventsService.fetchEvents();
-                        this.notificationsService.success(
-                          this.translate.getTranslationFor('SUCCESSFULLY'),
-                          this.translate.getTranslationFor('EVENTS_ADMINISTRATION_DELETE_EVENT_SUCCESSFULLY_DELETED')
-                        );
+                        this.snackBar.open(this.translate.getTranslationFor('EVENTS_ADMINISTRATION_DELETE_EVENT_SUCCESSFULLY_DELETED'));
                       },
                       (error) => console.log(error)
                     );

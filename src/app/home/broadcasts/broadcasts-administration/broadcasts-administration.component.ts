@@ -5,6 +5,7 @@ import {MatBottomSheet} from '@angular/material/bottom-sheet';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 import {Subscription} from 'rxjs';
 
@@ -13,7 +14,6 @@ import {TranslateService} from '../../../translation/translate.service';
 
 import {QuestionDialogComponent} from '../../../utils/shared-components/question-dialog/question-dialog.component';
 import {Broadcast} from '../models/broadcast.model';
-import {NotificationsService} from 'angular2-notifications';
 import {Permissions} from '../../../permissions';
 import {MyUserService} from '../../my-user.service';
 
@@ -41,7 +41,7 @@ export class BroadcastsAdministrationComponent implements OnInit, OnDestroy {
     private broadcastsService: BroadcastsAdministrationService,
     private router: Router,
     private bottomSheet: MatBottomSheet,
-    private notificationsService: NotificationsService,
+    private snackBar: MatSnackBar,
     private translate: TranslateService
   ) {
     this.broadcasts = this.broadcastsService.getBroadcasts();
@@ -102,10 +102,7 @@ export class BroadcastsAdministrationComponent implements OnInit, OnDestroy {
           (response: any) => {
             console.log(response);
             this.broadcastsService.fetchBroadcasts();
-            this.notificationsService.success(
-              this.translate.getTranslationFor('SUCCESSFULLY'),
-              this.translate.getTranslationFor('BROADCASTS_ADMINISTRATION_DELETE_SUCCESSFULLY')
-            );
+            this.snackBar.open(this.translate.getTranslationFor('BROADCASTS_ADMINISTRATION_DELETE_SUCCESSFULLY'));
           },
           (error) => console.log(error)
         );

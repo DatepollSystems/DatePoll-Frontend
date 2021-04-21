@@ -1,8 +1,7 @@
 import {Component} from '@angular/core';
 import {NgForm} from '@angular/forms';
 import {MatDialogRef} from '@angular/material/dialog';
-
-import {NotificationsService} from 'angular2-notifications';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 import {TranslateService} from '../../../../translation/translate.service';
 import {GroupsService} from '../groups.service';
@@ -24,7 +23,7 @@ export class GroupCreateModalComponent {
     private groupsService: GroupsService,
     private myUserService: MyUserService,
     private dialogRef: MatDialogRef<GroupCreateModalComponent>,
-    private notificationsService: NotificationsService,
+    private snackBar: MatSnackBar,
     private translate: TranslateService
   ) {
     this.allPermissions = Permissions.getAll();
@@ -55,10 +54,7 @@ export class GroupCreateModalComponent {
       (data: any) => {
         console.log(data);
         this.groupsService.fetchGroups();
-        this.notificationsService.success(
-          this.translate.getTranslationFor('SUCCESSFULLY'),
-          this.translate.getTranslationFor('MANAGEMENT_GROUPS_CREATE_GROUP_SUCCESSFUL')
-        );
+        this.snackBar.open(this.translate.getTranslationFor('MANAGEMENT_GROUPS_CREATE_GROUP_SUCCESSFUL'));
       },
       (error) => {
         console.log(error);

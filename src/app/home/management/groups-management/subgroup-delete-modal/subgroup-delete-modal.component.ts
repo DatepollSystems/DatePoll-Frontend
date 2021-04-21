@@ -1,9 +1,9 @@
-import {Component, Inject, TemplateRef, ViewChild} from '@angular/core';
+import {Component, Inject} from '@angular/core';
 import {MAT_BOTTOM_SHEET_DATA, MatBottomSheetRef} from '@angular/material/bottom-sheet';
-
-import {NotificationsService, NotificationType} from 'angular2-notifications';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 import {GroupsService} from '../groups.service';
+import {TranslateService} from '../../../../translation/translate.service';
 
 @Component({
   selector: 'app-subgroup-delete-modal',
@@ -11,13 +11,13 @@ import {GroupsService} from '../groups.service';
   styleUrls: ['./subgroup-delete-modal.component.css'],
 })
 export class SubgroupDeleteModalComponent {
-  @ViewChild('successfullyDeletedSubgroup', {static: true}) successfullyDeletedSubgroup: TemplateRef<any>;
   subgroupID: number;
 
   constructor(
     @Inject(MAT_BOTTOM_SHEET_DATA) public data: any,
     private bottomSheetRef: MatBottomSheetRef<SubgroupDeleteModalComponent>,
-    private notificationsService: NotificationsService,
+    private snackBar: MatSnackBar,
+    private translate: TranslateService,
     private groupsService: GroupsService
   ) {
     this.subgroupID = data.subgroupID;
@@ -28,7 +28,7 @@ export class SubgroupDeleteModalComponent {
       (data: any) => {
         console.log(data);
         this.groupsService.fetchGroups();
-        this.notificationsService.html(this.successfullyDeletedSubgroup, NotificationType.Success, null, 'success');
+        this.snackBar.open(this.translate.getTranslationFor('MANAGEMENT_GROUPS_DELETE_SUBGROUP_MODAL_SUCCESSFUL'));
       },
       (error) => {
         console.log(error);

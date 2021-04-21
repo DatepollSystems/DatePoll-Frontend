@@ -1,8 +1,7 @@
 import {Component, EventEmitter, Input, OnDestroy, Output} from '@angular/core';
 import {NgForm} from '@angular/forms';
+import {MatSnackBar} from '@angular/material/snack-bar';
 import {Subscription} from 'rxjs';
-
-import {NotificationsService} from 'angular2-notifications';
 
 import {TranslateService} from '../../../../translation/translate.service';
 import {IsMobileService} from '../../../../utils/is-mobile.service';
@@ -12,7 +11,7 @@ import {Decision} from '../../models/decision.model';
 @Component({
   selector: 'app-event-decisions-list',
   templateUrl: './event-decisions-list.component.html',
-  styleUrls: ['./event-decisions-list.component.css']
+  styleUrls: ['./event-decisions-list.component.css'],
 })
 export class EventDecisionsListComponent implements OnDestroy {
   @Input() decisions: Decision[];
@@ -30,13 +29,9 @@ export class EventDecisionsListComponent implements OnDestroy {
   decisionToUpdate: Decision;
   decisionString = '';
 
-  constructor(
-    private notificationsService: NotificationsService,
-    private translate: TranslateService,
-    private isMobileService: IsMobileService
-  ) {
+  constructor(private snackBar: MatSnackBar, private translate: TranslateService, private isMobileService: IsMobileService) {
     this.isMobile = this.isMobileService.getIsMobile();
-    this.isMobileSubscription = this.isMobileService.isMobileChange.subscribe(value => {
+    this.isMobileSubscription = this.isMobileService.isMobileChange.subscribe((value) => {
       this.isMobile = value;
     });
   }
@@ -61,10 +56,7 @@ export class EventDecisionsListComponent implements OnDestroy {
 
   addDecision(form: NgForm) {
     if (this.color == null) {
-      this.notificationsService.warn(
-        this.translate.getTranslationFor('WARNING'),
-        this.translate.getTranslationFor('EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_COLOR_REQUIRED')
-      );
+      this.snackBar.open(this.translate.getTranslationFor('EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_COLOR_REQUIRED'));
       return;
     }
     if (this.decisionUpdating) {
@@ -95,9 +87,10 @@ export class EventDecisionsListComponent implements OnDestroy {
     this.decisionString = decision.decision;
     this.color = decision.color;
     /**
-     * Setting this.showInCalendar = decision.showInClanedar the show in calendar mat toggle is always set to true.
+     * Setting this.showInCalendar = decision.showInClanedar sets the mat toggle is always to true.
      * This solution works. DO NOT simplify this logic.
      */
+    // noinspection RedundantIfStatementJS
     if (decision.showInCalendar) {
       this.showInCalendar = true;
     } else {

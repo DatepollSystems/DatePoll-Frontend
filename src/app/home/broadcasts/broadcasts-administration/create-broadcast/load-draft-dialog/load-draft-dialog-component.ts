@@ -3,7 +3,8 @@ import {MatBottomSheetRef} from '@angular/material/bottom-sheet';
 import {Router} from '@angular/router';
 import {Subscription} from 'rxjs';
 
-import {NotificationsService} from 'angular2-notifications';
+import {MatSnackBar} from '@angular/material/snack-bar';
+
 import {TranslateService} from '../../../../../translation/translate.service';
 import {BroadcastsDraftsService} from '../../broadcasts-drafts.service';
 
@@ -12,7 +13,7 @@ import {BroadcastDraft} from '../../../models/broadcast-draft.model';
 @Component({
   selector: 'app-load-draft-dialog',
   templateUrl: './load-draft-dialog.component.html',
-  styleUrls: ['./load-draft-dialog.component.css']
+  styleUrls: ['./load-draft-dialog.component.css'],
 })
 export class LoadDraftDialogComponent implements OnDestroy {
   drafts: BroadcastDraft[];
@@ -21,12 +22,12 @@ export class LoadDraftDialogComponent implements OnDestroy {
   constructor(
     private draftsService: BroadcastsDraftsService,
     private router: Router,
-    private notificationsService: NotificationsService,
+    private snackBar: MatSnackBar,
     private translate: TranslateService,
     private bottomSheetRef: MatBottomSheetRef<LoadDraftDialogComponent>
   ) {
     this.drafts = this.draftsService.getDrafts();
-    this.draftsSubscription = this.draftsService.draftsChange.subscribe(value => {
+    this.draftsSubscription = this.draftsService.draftsChange.subscribe((value) => {
       this.drafts = value;
     });
   }
@@ -45,14 +46,11 @@ export class LoadDraftDialogComponent implements OnDestroy {
     this.draftsService.delete(draft.id).subscribe(
       (response: any) => {
         console.log(response);
-        this.notificationsService.success(
-          this.translate.getTranslationFor('SUCCESSFULLY'),
-          this.translate.getTranslationFor('BROADCASTS_ADMINISTRATION_CREATE_NOTIFICATION_DRAFT_SUCCESSFUL_DELETED')
-        );
+        this.snackBar.open(this.translate.getTranslationFor('BROADCASTS_ADMINISTRATION_CREATE_NOTIFICATION_DRAFT_SUCCESSFUL_DELETED'));
         this.draftsService.fetchDrafts();
         this.bottomSheetRef.dismiss();
       },
-      error => {
+      (error) => {
         console.log(error);
         this.draftsService.fetchDrafts();
         this.bottomSheetRef.dismiss();

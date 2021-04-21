@@ -1,8 +1,7 @@
 import {Component, Input} from '@angular/core';
 import {Router} from '@angular/router';
 import {MatBottomSheet} from '@angular/material/bottom-sheet';
-
-import {NotificationsService} from 'angular2-notifications';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 import {TranslateService} from '../../../../translation/translate.service';
 import {HomepageService} from '../../../start/homepage.service';
@@ -15,7 +14,7 @@ import {EventsVoteForDecisionModalComponent} from '../events-vote-for-decision-m
 @Component({
   selector: 'app-event-card',
   templateUrl: './event-card.component.html',
-  styleUrls: ['./event-card.component.css']
+  styleUrls: ['./event-card.component.css'],
 })
 export class EventCardComponent {
   @Input()
@@ -26,7 +25,7 @@ export class EventCardComponent {
 
   constructor(
     private translate: TranslateService,
-    private notificationsService: NotificationsService,
+    private snackBar: MatSnackBar,
     private router: Router,
     private bottomSheet: MatBottomSheet,
     private eventsUserSerivce: EventsUserService,
@@ -40,9 +39,9 @@ export class EventCardComponent {
   onVote() {
     const event = this.event;
     const bottomSheetRef = this.bottomSheet.open(EventsVoteForDecisionModalComponent, {
-      data: {event}
+      data: {event},
     });
-    bottomSheetRef.afterDismissed().subscribe(dto => {
+    bottomSheetRef.afterDismissed().subscribe((dto) => {
       if (dto != null) {
         this.voting = true;
 
@@ -53,12 +52,9 @@ export class EventCardComponent {
             console.log(response);
             this.eventsUserSerivce.fetchEvents();
             this.homepageService.fetchData(true);
-            this.notificationsService.success(
-              this.translate.getTranslationFor('SUCCESSFULLY'),
-              this.translate.getTranslationFor('EVENTS_VIEW_EVENT_SUCCESSFULLY_VOTED')
-            );
+            this.snackBar.open(this.translate.getTranslationFor('EVENTS_VIEW_EVENT_SUCCESSFULLY_VOTED'));
           },
-          error => console.log(error)
+          (error) => console.log(error)
         );
       } else {
         console.log('events-view | Closed bottom sheet, voted for nohting');
@@ -73,12 +69,9 @@ export class EventCardComponent {
         console.log(response);
         this.eventsUserSerivce.fetchEvents();
         this.homepageService.fetchData(true);
-        this.notificationsService.success(
-          this.translate.getTranslationFor('SUCCESSFULLY'),
-          this.translate.getTranslationFor('EVENTS_VIEW_EVENT_SUCCESSFULLY_REMOVED_VOTING')
-        );
+        this.snackBar.open(this.translate.getTranslationFor('EVENTS_VIEW_EVENT_SUCCESSFULLY_REMOVED_VOTING'));
       },
-      error => console.log(error)
+      (error) => console.log(error)
     );
   }
 }

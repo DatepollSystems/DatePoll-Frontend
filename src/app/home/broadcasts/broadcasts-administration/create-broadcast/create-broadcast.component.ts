@@ -3,7 +3,7 @@ import {MatBottomSheet} from '@angular/material/bottom-sheet';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Subscription} from 'rxjs';
 
-import {NotificationsService} from 'angular2-notifications';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 import {TranslateService} from '../../../../translation/translate.service';
 import {GroupsService} from '../../../management/groups-management/groups.service';
@@ -47,7 +47,7 @@ export class CreateBroadcastComponent implements OnDestroy {
     private bottomSheet: MatBottomSheet,
     private router: Router,
     private route: ActivatedRoute,
-    private notificationService: NotificationsService,
+    private snackBar: MatSnackBar,
     private translate: TranslateService
   ) {
     this.groupsAndSubgroups = this.groupsService.getGroupsAndSubgroups();
@@ -131,19 +131,13 @@ export class CreateBroadcastComponent implements OnDestroy {
   makeCheck() {
     if (this.subject.length < 1 || this.subject.length > 190) {
       console.log('Subject size wrong! - ' + this.subject.length);
-      this.notificationService.alert(
-        this.translate.getTranslationFor('WARNING'),
-        this.translate.getTranslationFor('BROADCASTS_ADMINISTRATION_CREATE_NOTIFICATION_SUBJECT_LENGTH')
-      );
+      this.snackBar.open(this.translate.getTranslationFor('BROADCASTS_ADMINISTRATION_CREATE_NOTIFICATION_SUBJECT_LENGTH'));
       return false;
     }
 
     if (this.body.length < 10) {
       console.log('Mail body length < 10');
-      this.notificationService.alert(
-        this.translate.getTranslationFor('WARNING'),
-        this.translate.getTranslationFor('BROADCASTS_ADMINISTRATION_CREATE_NOTIFICATION_BODY_LENGTH')
-      );
+      this.snackBar.open(this.translate.getTranslationFor('BROADCASTS_ADMINISTRATION_CREATE_NOTIFICATION_BODY_LENGTH'));
       return false;
     }
 
@@ -163,10 +157,7 @@ export class CreateBroadcastComponent implements OnDestroy {
       this.draftsService.create(draft).subscribe(
         (response: any) => {
           console.log(response);
-          this.notificationService.success(
-            this.translate.getTranslationFor('SUCCESSFULLY'),
-            this.translate.getTranslationFor('BROADCASTS_ADMINISTRATION_CREATE_NOTIFICATION_DRAFT_SUCCESSFUL_SAVED')
-          );
+          this.snackBar.open(this.translate.getTranslationFor('BROADCASTS_ADMINISTRATION_CREATE_NOTIFICATION_DRAFT_SUCCESSFUL_SAVED'));
           this.router.navigate(['/home/broadcasts/administration/draft/' + response.draft.id]);
         },
         (error) => {
@@ -177,10 +168,7 @@ export class CreateBroadcastComponent implements OnDestroy {
       this.draftsService.update(draft, this.draftId).subscribe(
         (response: any) => {
           console.log(response);
-          this.notificationService.success(
-            this.translate.getTranslationFor('SUCCESSFULLY'),
-            this.translate.getTranslationFor('BROADCASTS_ADMINISTRATION_CREATE_NOTIFICATION_DRAFT_SUCCESSFUL_SAVED')
-          );
+          this.snackBar.open(this.translate.getTranslationFor('BROADCASTS_ADMINISTRATION_CREATE_NOTIFICATION_DRAFT_SUCCESSFUL_SAVED'));
         },
         (error) => {
           console.log(error);
@@ -196,10 +184,7 @@ export class CreateBroadcastComponent implements OnDestroy {
 
     if (this.selectedGroupsAndSubgroups.length === 0 && !this.allMembers) {
       console.log('Groups length 0! - ' + this.selectedGroupsAndSubgroups.length + ' And allMembers - ' + this.allMembers);
-      this.notificationService.alert(
-        this.translate.getTranslationFor('WARNING'),
-        this.translate.getTranslationFor('BROADCASTS_ADMINISTRATION_CREATE_NOTIFICATION_NO_GROUPS_AND_NOT_ALL_MEMBERS')
-      );
+      this.snackBar.open(this.translate.getTranslationFor('BROADCASTS_ADMINISTRATION_CREATE_NOTIFICATION_NO_GROUPS_AND_NOT_ALL_MEMBERS'));
       return;
     }
 
@@ -221,7 +206,7 @@ export class CreateBroadcastComponent implements OnDestroy {
               subgroups.push(group.id);
             } else {
               console.log('Unknown group type in createBroadcast - ' + group.type);
-              this.notificationService.error(this.translate.getTranslationFor('ERROR'), this.translate.getTranslationFor('REQUEST_ERROR'));
+              this.snackBar.open(this.translate.getTranslationFor('REQUEST_ERROR'));
               return;
             }
           }
@@ -242,27 +227,18 @@ export class CreateBroadcastComponent implements OnDestroy {
           attachments: attachmentIds,
         };
 
-        this.notificationService.info(
-          this.translate.getTranslationFor('INFORMATION'),
-          this.translate.getTranslationFor('BROADCASTS_ADMINISTRATION_CREATE_NOTIFICATION_SENDING_LENGTH'),
-          {timeOut: 8000}
-        );
+        this.snackBar.open(this.translate.getTranslationFor('BROADCASTS_ADMINISTRATION_CREATE_NOTIFICATION_SENDING_LENGTH'));
         this.broadcastsService.createBroadcast(broadcast).subscribe(
           (response: any) => {
             console.log(response);
             this.broadcastsService.fetchBroadcasts();
-            this.notificationService.success(
-              this.translate.getTranslationFor('SUCCESSFULLY'),
-              this.translate.getTranslationFor('BROADCASTS_ADMINISTRATION_CREATE_NOTIFICATION_SUCCESSFUL'),
-              {timeOut: 8000}
-            );
+            this.snackBar.open(this.translate.getTranslationFor('BROADCASTS_ADMINISTRATION_CREATE_NOTIFICATION_SUCCESSFUL'));
             // Delete draft of email if broadcast was successful created
             if (this.draftId > -1) {
               this.draftsService.delete(this.draftId).subscribe(
                 (deleteResponse: any) => {
                   console.log(deleteResponse);
-                  this.notificationService.success(
-                    this.translate.getTranslationFor('SUCCESSFULLY'),
+                  this.snackBar.open(
                     this.translate.getTranslationFor('BROADCASTS_ADMINISTRATION_CREATE_NOTIFICATION_DRAFT_SUCCESSFUL_DELETED')
                   );
                   this.draftsService.fetchDrafts();

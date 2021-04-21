@@ -1,9 +1,8 @@
 import {Component, OnDestroy} from '@angular/core';
 import {NgForm} from '@angular/forms';
 import {Router} from '@angular/router';
+import {MatSnackBar} from '@angular/material/snack-bar';
 import {Subscription} from 'rxjs';
-
-import {NotificationsService} from 'angular2-notifications';
 
 import {TranslateService} from '../../../../translation/translate.service';
 import {GroupsService} from '../../../management/groups-management/groups.service';
@@ -37,7 +36,7 @@ export class EventCreateComponent implements OnDestroy {
   constructor(
     private groupsService: GroupsService,
     private router: Router,
-    private notificationsService: NotificationsService,
+    private snackBar: MatSnackBar,
     private standardDecisionsService: StandardDecisionsService,
     private translate: TranslateService,
     private eventsService: EventsService
@@ -97,19 +96,13 @@ export class EventCreateComponent implements OnDestroy {
 
   create(form: NgForm) {
     if (this.dates.length === 0) {
-      this.notificationsService.alert(
-        this.translate.getTranslationFor('WARNING'),
-        this.translate.getTranslationFor('EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE_LIST_REQUIRED')
-      );
+      this.snackBar.open(this.translate.getTranslationFor('EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE_LIST_REQUIRED'));
       return;
     }
 
     if (this.joined.length === 0 && !this.allMembers) {
       console.log('Groups length 0! - ' + this.joined.length + ' And allMembers - ' + this.allMembers);
-      this.notificationsService.alert(
-        this.translate.getTranslationFor('WARNING'),
-        this.translate.getTranslationFor('BROADCASTS_ADMINISTRATION_CREATE_NOTIFICATION_NO_GROUPS_AND_NOT_ALL_MEMBERS')
-      );
+      this.snackBar.open(this.translate.getTranslationFor('BROADCASTS_ADMINISTRATION_CREATE_NOTIFICATION_NO_GROUPS_AND_NOT_ALL_MEMBERS'));
       return;
     }
 
@@ -124,10 +117,7 @@ export class EventCreateComponent implements OnDestroy {
       (response: any) => {
         console.log(response);
         this.eventsService.fetchEvents();
-        this.notificationsService.success(
-          this.translate.getTranslationFor('SUCCESSFULLY'),
-          this.translate.getTranslationFor('EVENTS_ADMINISTRATION_CREATE_EVENT_SUCCESSFULLY_CREATED')
-        );
+        this.snackBar.open(this.translate.getTranslationFor('EVENTS_ADMINISTRATION_CREATE_EVENT_SUCCESSFULLY_CREATED'));
 
         const id = response.event.id;
 

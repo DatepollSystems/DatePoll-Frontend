@@ -4,8 +4,6 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 import {throwError} from 'rxjs';
 import {catchError} from 'rxjs/operators';
 
-import {NotificationsService} from 'angular2-notifications';
-
 import {environment} from '../../environments/environment';
 
 import {AuthService} from '../auth/auth.service';
@@ -20,7 +18,6 @@ export class HttpService {
   constructor(
     private authService: AuthService,
     private http: HttpClient,
-    private notificationsService: NotificationsService,
     private translate: TranslateService,
     private snackBar: MatSnackBar
   ) {}

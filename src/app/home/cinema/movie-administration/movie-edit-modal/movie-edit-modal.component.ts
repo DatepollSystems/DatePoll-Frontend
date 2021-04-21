@@ -1,6 +1,6 @@
 import {Component, Inject, OnDestroy} from '@angular/core';
 import {MAT_DIALOG_DATA} from '@angular/material/dialog';
-import {NotificationsService} from 'angular2-notifications';
+import {MatSnackBar} from '@angular/material/snack-bar';
 import {Subscription} from 'rxjs';
 
 import {CinemaService} from '../../cinema.service';
@@ -31,7 +31,7 @@ export class MovieEditModalComponent implements OnDestroy {
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     private cinemaService: CinemaService,
-    private notificationsService: NotificationsService,
+    private snackBar: MatSnackBar,
     private translate: TranslateService
   ) {
     this.movie = data.movie;
@@ -80,10 +80,7 @@ export class MovieEditModalComponent implements OnDestroy {
       (data: any) => {
         console.log(data);
         this.cinemaService.fetchMovies();
-        this.notificationsService.success(
-          this.translate.getTranslationFor('SUCCESSFULLY'),
-          this.translate.getTranslationFor('CINEMA_TICKETS_ADMINISTRATION_MOVIE_UPDATE_SUCCESSFULLY')
-        );
+        this.snackBar.open(this.translate.getTranslationFor('CINEMA_TICKETS_ADMINISTRATION_MOVIE_UPDATE_SUCCESSFULLY'));
       },
       (error) => console.log(error)
     );

@@ -5,13 +5,11 @@ import {MatTableDataSource} from '@angular/material/table';
 import {MatDialog} from '@angular/material/dialog';
 import {MatBottomSheet} from '@angular/material/bottom-sheet';
 import {MatPaginator} from '@angular/material/paginator';
-import {MatSlideToggleChange} from '@angular/material/slide-toggle';
 import {FormControl} from '@angular/forms';
 import {MatSelect} from '@angular/material/select';
+import {MatSnackBar} from '@angular/material/snack-bar';
 import {ReplaySubject, Subject, Subscription} from 'rxjs';
 import {take, takeUntil} from 'rxjs/operators';
-
-import {NotificationsService} from 'angular2-notifications';
 
 import {TranslateService} from '../../../translation/translate.service';
 import {EventsService} from '../events.service';
@@ -60,7 +58,7 @@ export class EventsAdministrationComponent implements OnInit, OnDestroy {
     private translate: TranslateService,
     private dialog: MatDialog,
     private router: Router,
-    private notificationsService: NotificationsService,
+    private snackBar: MatSnackBar,
     private bottomSheet: MatBottomSheet
   ) {
     this.years = this.eventsService.getYears();
@@ -140,7 +138,7 @@ export class EventsAdministrationComponent implements OnInit, OnDestroy {
     });
   }
 
-  onShowAllEventsChange(ob: MatSlideToggleChange) {
+  onShowAllEventsChange() {
     this.refreshTable();
   }
 
@@ -205,10 +203,7 @@ export class EventsAdministrationComponent implements OnInit, OnDestroy {
           (response: any) => {
             console.log(response);
             this.eventsService.fetchEvents();
-            this.notificationsService.success(
-              this.translate.getTranslationFor('SUCCESSFULLY'),
-              this.translate.getTranslationFor('EVENTS_ADMINISTRATION_DELETE_EVENT_SUCCESSFULLY_DELETED')
-            );
+            this.snackBar.open(this.translate.getTranslationFor('EVENTS_ADMINISTRATION_DELETE_EVENT_SUCCESSFULLY_DELETED'));
           },
           (error) => console.log(error)
         );

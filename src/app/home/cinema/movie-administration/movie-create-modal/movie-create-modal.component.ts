@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {NotificationsService} from 'angular2-notifications';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 import {CinemaService} from '../../cinema.service';
 import {TranslateService} from '../../../../translation/translate.service';
@@ -19,11 +19,7 @@ export class MovieCreateModalComponent {
   bookedTickets: number;
   maximalTickets: number;
 
-  constructor(
-    private cinemaService: CinemaService,
-    private notificationsService: NotificationsService,
-    private translate: TranslateService
-  ) {}
+  constructor(private cinemaService: CinemaService, private snackBar: MatSnackBar, private translate: TranslateService) {}
 
   create() {
     const movieObject = {
@@ -39,10 +35,7 @@ export class MovieCreateModalComponent {
       (data: any) => {
         console.log(data);
         this.cinemaService.fetchMovies();
-        this.notificationsService.success(
-          this.translate.getTranslationFor('SUCCESSFULLY'),
-          this.translate.getTranslationFor('CINEMA_TICKETS_ADMINISTRATION_MOVIE_CREATE_SUCCESSFULLY')
-        );
+        this.snackBar.open(this.translate.getTranslationFor('CINEMA_TICKETS_ADMINISTRATION_MOVIE_CREATE_SUCCESSFULLY'));
       },
       (error) => console.log(error)
     );

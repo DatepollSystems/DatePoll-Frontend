@@ -1,7 +1,7 @@
 import {Component, Inject} from '@angular/core';
 import {NgForm} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import {NotificationsService} from 'angular2-notifications';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 import {TranslateService} from '../../../../translation/translate.service';
 import {GroupsService} from '../groups.service';
@@ -27,7 +27,7 @@ export class GroupUpdateModalComponent {
     private myUserService: MyUserService,
     private dialogRef: MatDialogRef<GroupUpdateModalComponent>,
     private translate: TranslateService,
-    private notificationsService: NotificationsService,
+    private snackBar: MatSnackBar,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     this.groupID = data.group.id;
@@ -63,10 +63,7 @@ export class GroupUpdateModalComponent {
       (data: any) => {
         console.log(data);
         this.groupsService.fetchGroups();
-        this.notificationsService.success(
-          this.translate.getTranslationFor('SUCCESSFULLY'),
-          this.translate.getTranslationFor('MANAGEMENT_GROUPS_UPDATE_GROUP_SUCCESSFUL')
-        );
+        this.snackBar.open(this.translate.getTranslationFor('MANAGEMENT_GROUPS_UPDATE_GROUP_SUCCESSFUL'));
       },
       (error) => {
         console.log(error);

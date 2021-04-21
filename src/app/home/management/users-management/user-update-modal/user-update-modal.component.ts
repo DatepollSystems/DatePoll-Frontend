@@ -1,9 +1,8 @@
 import {Component, Inject, OnDestroy} from '@angular/core';
 import {NgForm} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import {MatSnackBar} from '@angular/material/snack-bar';
 import {Subscription} from 'rxjs';
-
-import {NotificationsService} from 'angular2-notifications';
 
 import {TranslateService} from '../../../../translation/translate.service';
 import {Converter} from '../../../../utils/helper/Converter';
@@ -85,7 +84,7 @@ export class UserUpdateModalComponent implements OnDestroy {
     private performanceBadgesService: PerformanceBadgesService,
     private badgesService: BadgesService,
     private translate: TranslateService,
-    private notificationsService: NotificationsService,
+    private snackBar: MatSnackBar,
     private isMobileService: IsMobileService
   ) {
     this.user = data.user;
@@ -173,7 +172,7 @@ export class UserUpdateModalComponent implements OnDestroy {
     const passwordRepeat = form.controls.password_repeat.value;
 
     if (password !== passwordRepeat) {
-      this.notificationsService.info(null, this.translate.getTranslationFor('SIGNIN_PASSWORD_ARE_NOT_EQUAL'));
+      this.snackBar.open(this.translate.getTranslationFor('SIGNIN_PASSWORD_ARE_NOT_EQUAL'));
       return;
     }
 
@@ -181,10 +180,7 @@ export class UserUpdateModalComponent implements OnDestroy {
     this.usersService.changePasswordForUser(this.user.id, password).subscribe(
       (response: any) => {
         console.log(response);
-        this.notificationsService.success(
-          this.translate.getTranslationFor('SUCCESSFULLY'),
-          this.translate.getTranslationFor('MANAGEMENT_USERS_UPDATE_USER_MODAL_PASSWORD_CHANGE_SUCCESSFUL')
-        );
+        this.snackBar.open(this.translate.getTranslationFor('MANAGEMENT_USERS_UPDATE_USER_MODAL_PASSWORD_CHANGE_SUCCESSFUL'));
       },
       (error) => console.log(error)
     );
@@ -305,10 +301,7 @@ export class UserUpdateModalComponent implements OnDestroy {
 
         this.usersService.setUsers(users);
 
-        this.notificationsService.success(
-          this.translate.getTranslationFor('SUCCESSFULLY'),
-          this.translate.getTranslationFor('MANAGEMENT_USERS_UPDATE_USER_MODAL_SUCCESSFULLY_UPDATED_USER')
-        );
+        this.snackBar.open(this.translate.getTranslationFor('MANAGEMENT_USERS_UPDATE_USER_MODAL_SUCCESSFULLY_UPDATED_USER'));
       },
       (error) => {
         console.log(error);

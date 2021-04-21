@@ -6,10 +6,10 @@ import {MatSelect} from '@angular/material/select';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import {Router} from '@angular/router';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 import {ReplaySubject, Subject, Subscription} from 'rxjs';
 import {take, takeUntil} from 'rxjs/operators';
-import {NotificationsService} from 'angular2-notifications';
 
 import {MyUserService} from '../../my-user.service';
 import {CinemaService} from '../cinema.service';
@@ -52,7 +52,7 @@ export class MovieAdministrationComponent implements OnInit, AfterViewInit, OnDe
     private router: Router,
     private dialog: MatDialog,
     private bottomSheet: MatBottomSheet,
-    private notificationsService: NotificationsService,
+    private snackBar: MatSnackBar,
     private translate: TranslateService
   ) {
     this.years = this.cinemaService.getYears();
@@ -161,10 +161,7 @@ export class MovieAdministrationComponent implements OnInit, AfterViewInit, OnDe
           (data: any) => {
             console.log(data);
             this.cinemaService.fetchMovies();
-            this.notificationsService.success(
-              this.translate.getTranslationFor('SUCCESSFULLY'),
-              this.translate.getTranslationFor('CINEMA_TICKETS_ADMINISTRATION_MOVIE_DELETE_MODAL_SUCCESSFULLY_DELETED')
-            );
+            this.snackBar.open(this.translate.getTranslationFor('CINEMA_TICKETS_ADMINISTRATION_MOVIE_DELETE_MODAL_SUCCESSFULLY_DELETED'));
           },
           (error) => console.log(error)
         );
