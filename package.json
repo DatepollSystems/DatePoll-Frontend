@@ -29,6 +29,7 @@
     "@angular/platform-browser": "^11.2.10",
     "@angular/platform-browser-dynamic": "^11.2.10",
     "@angular/router": "^11.2.10",
+    "@angular/service-worker": "^11.2.10",
     "angular-calendar": "0.28.20",
     "angular2-notifications": "^9.0.0",
     "angularx-qrcode": "^11.0.0",

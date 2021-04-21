@@ -38,6 +38,22 @@ A more complete / more detailed development setup guide can be found [here](http
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
+#### Create dev build with service worker
+
+```bash
+rm -rf dist/DatePoll-Frontend && ng build --configuration=sw-testing
+```
+
+Serve dev build
+
+```bash
+ npm install http-server-spa -g
+```
+
+```bash
+http-server-spa dist/DatePoll-Frontend/ index.html 4200
+```
+
 ### Build
 
 Run `ng build --prod` in the `src`-folder to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.

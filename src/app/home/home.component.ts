@@ -11,6 +11,8 @@ import {ServerInfoModel} from '../utils/server-info.model';
 import {QuestionDialogComponent} from '../utils/shared-components/question-dialog/question-dialog.component';
 import {TranslateService} from '../translation/translate.service';
 import {MatBottomSheet, MatBottomSheetRef} from '@angular/material/bottom-sheet';
+import {MatDrawerMode} from '@angular/material/sidenav';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-home',
@@ -20,7 +22,7 @@ import {MatBottomSheet, MatBottomSheetRef} from '@angular/material/bottom-sheet'
 export class HomeComponent implements OnInit, OnDestroy {
   @ViewChild('sidenav', {static: true})
   navBarOpened = false;
-  navBarMode = 'over';
+  navBarMode: MatDrawerMode = 'over';
 
   public myUserService: MyUserService;
 
@@ -46,13 +48,16 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   isMobileSubscription: Subscription;
 
+  offline: boolean;
+
   constructor(
     myUserService: MyUserService,
     private authService: AuthService,
     private settingsService: SettingsService,
     private isMobileService: IsMobileService,
     private translate: TranslateService,
-    private bottomSheet: MatBottomSheet
+    private bottomSheet: MatBottomSheet,
+    private snackBar: MatSnackBar
   ) {
     this.myUserService = myUserService;
 
@@ -110,6 +115,9 @@ export class HomeComponent implements OnInit, OnDestroy {
         this.navBarMode = 'side';
       }
     });
+
+    window.addEventListener('online', this.onNetworkStatusChange.bind(this));
+    window.addEventListener('offline', this.onNetworkStatusChange.bind(this));
   }
 
   ngOnDestroy(): void {
@@ -118,6 +126,15 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.usernameSubscription.unsubscribe();
     this.serverInfoSubscription.unsubscribe();
     this.isMobileSubscription.unsubscribe();
+  }
+
+  onNetworkStatusChange(): void {
+    this.offline = !navigator.onLine;
+    console.log('offline ' + this.offline);
+  }
+
+  onOfflineButtonClick(): void {
+    this.snackBar.open(this.translate.getTranslationFor('OFFLINE_HELP'));
   }
 
   logout() {

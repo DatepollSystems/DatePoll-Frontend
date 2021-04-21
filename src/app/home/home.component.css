@@ -1,4 +1,4 @@
-.my-container {
+#my-container {
   margin-top: 60px;
   padding: 15px;
   min-height: 85vh;
@@ -12,6 +12,7 @@ mat-toolbar {
 .toolbar-heading {
   cursor: pointer;
   margin-left: 15px;
+  margin-right: 15px;
 }
 
 mat-sidenav {
@@ -39,5 +40,5 @@ mat-sidenav {
 }
 
 mat-icon {
-  margin-right: 5px;
+  margin-left: 0;
 }

@@ -197,7 +197,7 @@
                 <td>{{ event.name }}</td>
                 <td>{{ event.startDate | date: 'EE, dd.MM.yyyy HH:mm' }}</td>
                 <td>
-                  <button (click)="onEventInfo(event)" mat-button>
+                  <button (click)="onEventInfo(event)" mat-stroked-button>
                     <mat-icon>info</mat-icon>
                     {{ 'EVENTS_VIEW_EVENT_CARD_BUTTON_INFO' | translate }}
                   </button>

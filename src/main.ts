@@ -6,7 +6,7 @@ import {environment} from './environments/environment';
 
 if (environment.production) {
   enableProdMode();
-  if (window) {
+  if (window && !environment.testing) {
     // tslint:disable-next-line:only-arrow-functions
     window.console.log = window.console.warn = window.console.info = function () {};
   }
@@ -14,4 +14,10 @@ if (environment.production) {
 
 platformBrowserDynamic()
   .bootstrapModule(AppModule)
+  .then(() => {
+    if ('serviceWorker' in navigator) {
+      // noinspection JSIgnoredPromiseFromCall
+      navigator.serviceWorker.register('/ngsw-worker.js');
+    }
+  })
   .catch((err) => console.log(err));

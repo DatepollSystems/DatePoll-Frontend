@@ -104,8 +104,14 @@
         "
       ></mat-divider>
       <mat-list-item disableRipple>
-        <button mat-button (click)="logout()"><mat-icon>power_settings_new</mat-icon>{{ 'NAV_LOGOUT' | translate }}</button>
-        <button mat-button (click)="changeTheme()"><mat-icon>brightness_medium</mat-icon>{{ 'NAV_CHANGE_THEME' | translate }}</button>
+        <button mat-button (click)="logout()">
+          <mat-icon>power_settings_new</mat-icon>
+          {{ 'NAV_LOGOUT' | translate }}
+        </button>
+        <button mat-button (click)="changeTheme()">
+          <mat-icon>brightness_medium</mat-icon>
+          {{ 'NAV_CHANGE_THEME' | translate }}
+        </button>
       </mat-list-item>
     </mat-nav-list>
   </mat-sidenav>
@@ -116,9 +122,12 @@
         <mat-icon>menu</mat-icon>
       </button>
       <span class="toolbar-heading" routerLink="/home">{{ serverInfo.community_name }}</span>
+      <button mat-icon-button *ngIf="offline" (click)="onOfflineButtonClick()">
+        <mat-icon>report_problemn</mat-icon>
+      </button>
     </mat-toolbar>
 
-    <div class="my-container" id="my-container">
+    <div id="my-container">
       <router-outlet></router-outlet>
     </div>
     <app-footer></app-footer>
