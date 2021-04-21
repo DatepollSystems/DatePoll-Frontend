@@ -20,15 +20,6 @@
   ],
   "dataGroups": [
     {
-      "name": "api-performance",
-      "urls": ["/api/"],
-      "cacheConfig": {
-        "strategy": "performance",
-        "maxSize": 100,
-        "maxAge": "3d"
-      }
-    },
-    {
       "name": "api-freshness",
       "urls": ["/api/**"],
       "cacheConfig": {
