@@ -2,8 +2,7 @@ import {HttpClient} from '@angular/common/http';
 import {Component} from '@angular/core';
 import {NgForm} from '@angular/forms';
 import {Router} from '@angular/router';
-
-import {NotificationsService} from 'angular2-notifications';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 import {environment} from '../../../environments/environment';
 import {TranslateService} from '../../translation/translate.service';
@@ -11,7 +10,7 @@ import {TranslateService} from '../../translation/translate.service';
 @Component({
   selector: 'app-forgot-password',
   templateUrl: './forgot-password.component.html',
-  styleUrls: ['./forgot-password.component.css']
+  styleUrls: ['./forgot-password.component.css'],
 })
 export class ForgotPasswordComponent {
   // States: SUBMIT_USERNAME | SUBMIT_CODE | SUBMIT_PASSWORD | FINISHED
@@ -24,12 +23,7 @@ export class ForgotPasswordComponent {
   verificationCodeRateLimitExceeded = false;
   private apiUrl = environment.apiUrl + '/auth/forgotPassword/';
 
-  constructor(
-    private http: HttpClient,
-    private router: Router,
-    private notificationsService: NotificationsService,
-    private translate: TranslateService
-  ) {}
+  constructor(private http: HttpClient, private router: Router, private snackBar: MatSnackBar, private translate: TranslateService) {}
 
   onSubmitForm(form: NgForm) {
     if (this.state.includes('SUBMIT_USERNAME')) {
@@ -49,7 +43,7 @@ export class ForgotPasswordComponent {
     const username = form.controls.username.value;
 
     const dto = {
-      username
+      username,
     };
 
     this.sendingRequest = true;
@@ -61,7 +55,7 @@ export class ForgotPasswordComponent {
 
         this.sendingRequest = false;
       },
-      error => {
+      (error) => {
         console.log(error);
         if (error.error.error_code != null) {
           if (error.error.error_code.includes('unknown_username')) {
@@ -81,7 +75,7 @@ export class ForgotPasswordComponent {
 
     const dto = {
       username: this.username,
-      code
+      code,
     };
 
     this.sendingRequest = true;
@@ -92,7 +86,7 @@ export class ForgotPasswordComponent {
         this.state = 'SUBMIT_PASSWORD';
         this.sendingRequest = false;
       },
-      error => {
+      (error) => {
         console.log(error);
         if (error.error?.error_code?.includes('code_incorrect')) {
           this.verificationCodeIncorrect = true;
@@ -112,17 +106,14 @@ export class ForgotPasswordComponent {
     const passwordRepeat = form.controls.password_repeat.value;
 
     if (password !== passwordRepeat) {
-      this.notificationsService.info(
-        null,
-        this.translate.getTranslationFor('SETTINGS_SECURITY_MODAL_CHANGE_PASSWORD_NEW_PASSWORDS_ARE_NOT_EQUAL')
-      );
+      this.snackBar.open(this.translate.getTranslationFor('SETTINGS_SECURITY_MODAL_CHANGE_PASSWORD_NEW_PASSWORDS_ARE_NOT_EQUAL'));
       return;
     }
 
     const dto = {
       username: this.username,
       code: this.verificationCode,
-      new_password: password
+      new_password: password,
     };
 
     this.sendingRequest = true;
@@ -135,7 +126,7 @@ export class ForgotPasswordComponent {
           this.router.navigate(['/auth/signin']);
         }, 5000);
       },
-      error => {
+      (error) => {
         console.log(error);
         this.sendingRequest = false;
       }

@@ -1,9 +1,9 @@
 import {Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {NgForm} from '@angular/forms';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 import {PerformanceBadgesService} from '../performance-badges.service';
-import {NotificationsService} from 'angular2-notifications';
 import {Instrument} from '../models/instrument.model';
 import {TranslateService} from '../../../../translation/translate.service';
 
@@ -19,7 +19,7 @@ export class InstrumentUpdateModalComponent {
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     private performanceBadgesService: PerformanceBadgesService,
-    private notifationsService: NotificationsService,
+    private snackBar: MatSnackBar,
     private translate: TranslateService,
     private dialogRef: MatDialogRef<InstrumentUpdateModalComponent>
   ) {
@@ -34,10 +34,7 @@ export class InstrumentUpdateModalComponent {
       (data: any) => {
         console.log(data);
         this.performanceBadgesService.fetchInstruments();
-        this.notifationsService.success(
-          this.translate.getTranslationFor('SUCCESSFULLY'),
-          this.translate.getTranslationFor('MANAGEMENT_PERFORMANCE_BADGES_UPDATE_INSTRUMENT_SUCCESSFUL')
-        );
+        this.snackBar.open(this.translate.getTranslationFor('MANAGEMENT_PERFORMANCE_BADGES_UPDATE_INSTRUMENT_SUCCESSFUL'));
       },
       (error) => console.log(error)
     );

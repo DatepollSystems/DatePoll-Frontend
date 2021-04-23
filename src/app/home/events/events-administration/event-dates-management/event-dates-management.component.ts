@@ -3,13 +3,16 @@ import {NgForm} from '@angular/forms';
 import {Subscription} from 'rxjs';
 
 import {IsMobileService} from '../../../../utils/is-mobile.service';
+import {SettingsService} from '../../../../utils/settings.service';
+import {Generator} from '../../../../utils/helper/Generator';
+import {Converter} from '../../../../utils/helper/Converter';
+import {UIHelper} from '../../../../utils/helper/UIHelper';
 
-import {MapsComponentComponent} from '../../../../utils/shared-components/maps-component/maps.component';
+import {MapsComponent} from '../../../../utils/shared-components/maps-component/maps.component';
+import {TimeInputComponent} from '../../../../utils/shared-components/time-input/time-input.component';
 
 import {EventDate} from '../../models/event-date.model';
 import {EventStandardLocation} from '../../models/event-standard-location.model';
-import {SettingsService} from '../../../../utils/settings.service';
-import {Generator} from '../../../../utils/helper/Generator';
 
 @Component({
   selector: 'app-event-dates-management',
@@ -26,12 +29,12 @@ export class EventDatesManagementComponent implements OnDestroy {
   public x = 0;
   public y = 0;
   public location = null;
+  time: string;
 
-  @ViewChild(MapsComponentComponent, {static: true}) mapsComponent: MapsComponentComponent;
+  @ViewChild(MapsComponent, {static: true}) mapsComponent: MapsComponent;
+  @ViewChild(TimeInputComponent, {static: true}) timeComponent: TimeInputComponent;
 
   createNewEventDateDate = new Date();
-
-  selectedStandardLocation: EventStandardLocation;
 
   isMobile = true;
   isMobileSubscription: Subscription;
@@ -57,18 +60,24 @@ export class EventDatesManagementComponent implements OnDestroy {
   }
 
   onStandardLocationChanged(standardLocation: EventStandardLocation) {
-    console.log('Selected standard location: ' + standardLocation.name);
-    this.selectedStandardLocation = standardLocation;
-  }
-
-  applyStandardLocation() {
-    if (this.selectedStandardLocation == null) {
+    if (standardLocation == null) {
+      this.x = 0;
+      this.y = 0;
+      this.location = '';
       return;
     }
-    this.x = this.selectedStandardLocation.x;
-    this.y = this.selectedStandardLocation.y;
-    this.location = this.selectedStandardLocation.location;
-    this.mapsComponent.drawMarker(this.x, this.y);
+
+    console.log('Selected standard location: ' + standardLocation.name);
+    if (standardLocation.x !== -199) {
+      this.x = standardLocation.x;
+    }
+    if (standardLocation.y !== -199) {
+      this.y = standardLocation.y;
+    }
+    if (standardLocation.x !== -199 && standardLocation.y !== -199) {
+      this.mapsComponent.drawMarker(this.x, this.y);
+    }
+    this.location = standardLocation.location;
   }
 
   onDatesChange(dates: EventDate[]) {
@@ -79,6 +88,10 @@ export class EventDatesManagementComponent implements OnDestroy {
   onCoordinatesChange(coordinates: any) {
     this.x = coordinates.x;
     this.y = coordinates.y;
+  }
+
+  onTimeChange(event: any) {
+    this.time = event;
   }
 
   generateRandomJitsiMeetConferenceUrl() {
@@ -95,8 +108,8 @@ export class EventDatesManagementComponent implements OnDestroy {
       y = -199;
     }
     const description = '';
-    this.createNewEventDateDate.setHours(form.controls.dateHours.value);
-    this.createNewEventDateDate.setMinutes(form.controls.dateMinutes.value);
+    this.createNewEventDateDate.setHours(Converter.stringToNumber(this.time.split(':')[0]));
+    this.createNewEventDateDate.setMinutes(Converter.stringToNumber(this.time.split(':')[1]));
     const date = new EventDate(-1, form.controls.location.value, x, y, this.createNewEventDateDate, description);
     this.dates.push(date);
     this.datesChange.emit(this.dates.slice());
@@ -108,5 +121,7 @@ export class EventDatesManagementComponent implements OnDestroy {
     this.mapsComponent.removeMarker(true);
     // Recreate date to not override first date while creating a new date object
     this.createNewEventDateDate = new Date(d);
+    // Explicitely reset time input
+    this.timeComponent.reset();
   }
 }

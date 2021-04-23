@@ -1,14 +1,14 @@
-import {Component, OnDestroy, TemplateRef, ViewChild} from '@angular/core';
+import {Component, OnDestroy, ViewChild} from '@angular/core';
+import {MatSlideToggleChange} from '@angular/material/slide-toggle';
+import {MatDialogRef} from '@angular/material/dialog';
+import {MatSnackBar} from '@angular/material/snack-bar';
 import {Subscription} from 'rxjs';
 
-import {MatSlideToggleChange} from '@angular/material/slide-toggle';
-import {NotificationsService, NotificationType} from 'angular2-notifications';
 import {TranslateService} from '../../../translation/translate.service';
 import {MyUserService} from '../../my-user.service';
 import {UserSettingsService} from '../privacy-settings/userSettings.service';
 
 import {EmailAddressesListComponent} from '../../management/users-management/email-addresses-list/email-addresses-list.component';
-import {MatDialogRef} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-email-address',
@@ -29,7 +29,7 @@ export class EmailAddressComponent implements OnDestroy {
 
   constructor(
     private _myUserService: MyUserService,
-    private notificationsService: NotificationsService,
+    private snackBar: MatSnackBar,
     private settingsService: UserSettingsService,
     private translate: TranslateService,
     private dialog: MatDialogRef<EmailAddressComponent>
@@ -57,10 +57,7 @@ export class EmailAddressComponent implements OnDestroy {
 
   onSave() {
     if (this.emailAddresses.length < 1) {
-      this.notificationsService.warn(
-        this.translate.getTranslationFor('WARNING'),
-        this.translate.getTranslationFor('SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_MINIMUM_ONE_EMAIL_ADDRESS')
-      );
+      this.snackBar.open(this.translate.getTranslationFor('SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_MINIMUM_ONE_EMAIL_ADDRESS'));
       return;
     }
 
@@ -68,10 +65,7 @@ export class EmailAddressComponent implements OnDestroy {
       (response: any) => {
         console.log(response);
         this._myUserService.setEmailAddresses(this.emailAddresses);
-        this.notificationsService.success(
-          this.translate.getTranslationFor('SUCCESSFULLY'),
-          this.translate.getTranslationFor('SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_SAVED_SUCCESSFULLY')
-        );
+        this.snackBar.open(this.translate.getTranslationFor('SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_SAVED_SUCCESSFULLY'));
       },
       (error) => console.log(error)
     );

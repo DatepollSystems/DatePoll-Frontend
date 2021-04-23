@@ -156,36 +156,31 @@
             </div>
           </div>
 
-          <mat-expansion-panel>
-            <mat-expansion-panel-header>
-              <mat-panel-title>{{ 'ABOUT_PAGE_STATS_MORE' | translate }}</mat-panel-title>
-            </mat-expansion-panel-header>
+          <h4 style="margin-top: 20px; margin-bottom: -10px">{{ 'ABOUT_PAGE_STATS_MORE' | translate }}</h4>
 
-            <ul>
-              <li>{{ 'ABOUT_PAGE_STATS_EMAIL_ADDRESSES' | translate }} {{ serverInfo.user_email_addresses_count }}</li>
-              <li>{{ 'ABOUT_PAGE_STATS_PHONE_NUMBERS' | translate }} {{ serverInfo.user_phone_numbers_count }}</li>
-            </ul>
+          <ul>
+            <li>{{ 'ABOUT_PAGE_STATS_EMAIL_ADDRESSES' | translate }} {{ serverInfo.user_email_addresses_count }}</li>
+            <li>{{ 'ABOUT_PAGE_STATS_PHONE_NUMBERS' | translate }} {{ serverInfo.user_phone_numbers_count }}</li>
+          </ul>
 
-            <ul>
-              <li>{{ 'ABOUT_PAGE_STATS_EVENT_VOTES' | translate }} {{ serverInfo.event_votes_count }}</li>
-              <li>{{ 'ABOUT_PAGE_STATS_EVENT_DECISIONS' | translate }} {{ serverInfo.event_decisions_count }}</li>
-              <li>{{ 'ABOUT_PAGE_STATS_EVENT_DATES' | translate }} {{ serverInfo.event_dates_count }}</li>
-            </ul>
+          <ul>
+            <li>{{ 'ABOUT_PAGE_STATS_EVENT_VOTES' | translate }} {{ serverInfo.event_votes_count }}</li>
+            <li>{{ 'ABOUT_PAGE_STATS_EVENT_DECISIONS' | translate }} {{ serverInfo.event_decisions_count }}</li>
+            <li>{{ 'ABOUT_PAGE_STATS_EVENT_DATES' | translate }} {{ serverInfo.event_dates_count }}</li>
+          </ul>
 
-            <ul>
-              <li>{{ 'ABOUT_PAGE_STATS_MOVIES_TICKETS' | translate }} {{ serverInfo.movies_tickets_count }}</li>
-              <li>{{ 'ABOUT_PAGE_STATS_MOVIES_WORKERS' | translate }} {{ serverInfo.movies_workers_count }}</li>
-            </ul>
+          <ul>
+            <li>{{ 'ABOUT_PAGE_STATS_MOVIES_TICKETS' | translate }} {{ serverInfo.movies_tickets_count }}</li>
+            <li>{{ 'ABOUT_PAGE_STATS_MOVIES_WORKERS' | translate }} {{ serverInfo.movies_workers_count }}</li>
+          </ul>
 
-            <ul>
-              <li>{{ 'ABOUT_PAGE_STATS_BROADCASTS_SENT' | translate }} {{ serverInfo.broadcasts_sent_count }}</li>
-            </ul>
+          <ul>
+            <li>{{ 'ABOUT_PAGE_STATS_BROADCASTS_SENT' | translate }} {{ serverInfo.broadcasts_sent_count }}</li>
+          </ul>
 
-            <ul>
-              <li>{{ 'ABOUT_PAGE_STATS_PERFORMANCE_BADGES' | translate }} {{ serverInfo.performance_badges_count }}</li>
-              <li>{{ 'ABOUT_PAGE_STATS_DATEPOLL_INSTANCE_INTERACTIONS' | translate }} {{ serverInfo.logged_interactions_count }}</li>
-            </ul>
-          </mat-expansion-panel>
+          <ul>
+            <li>{{ 'ABOUT_PAGE_STATS_PERFORMANCE_BADGES' | translate }} {{ serverInfo.performance_badges_count }}</li>
+          </ul>
         </mat-card>
       </div>
     </div>

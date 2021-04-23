@@ -11,26 +11,37 @@
   </div>
   <div mat-line>{{ 'CINEMA_TICKETS_AVAILABLE_TICKETS' | translate }} {{ movie.maximalTickets - movie.bookedTickets }}</div>
   <div mat-line (click)="openPhoneNumbersModal(movie.workerNumbers); $event.stopPropagation()">
-    {{ 'CINEMA_TICKETS_WORKER' | translate }} {{ movie.workerName }}
+    {{ 'CINEMA_TICKETS_WORKER' | translate }} <span class="workerName">{{ movie.workerName }}</span>
   </div>
   <div mat-line (click)="openPhoneNumbersModal(movie.emergencyWorkerNumbers); $event.stopPropagation()">
-    {{ 'CINEMA_TICKETS_EMERGENCY_WORKER' | translate }} {{ movie.emergencyWorkerName }}
+    {{ 'CINEMA_TICKETS_EMERGENCY_WORKER' | translate }} <span class="eWorkerName">{{ movie.emergencyWorkerName }}</span>
   </div>
   <div mat-line *ngIf="movie.bookedTicketsForYourself != 0">
-    {{ 'CINEMA_TICKETS_BOOKED_TICKETS' | translate }} {{ movie.bookedTicketsForYourself }}
+    {{ 'CINEMA_TICKETS_BOOKED_TICKETS' | translate }} <span class="bookedTickets">{{ movie.bookedTicketsForYourself }}</span>
   </div>
   <div mat-line>
     <a href="{{ movie.trailerLink }}" rel="noopener" target="_blank">{{ movie.trailerLink }}</a>
   </div>
   <div mat-line fxLayout="row" fxLayoutAlign="space-between">
-    <button
-      mat-flat-button
-      (click)="bookTickets(); $event.stopPropagation()"
-      [disabled]="movie.bookedTickets == movie.maximalTickets"
-      color="primary"
-    >
-      {{ 'CINEMA_TICKETS_BOOK_A_TICKET' | translate }}
-    </button>
+    <div>
+      <button
+        mat-flat-button
+        (click)="bookTickets(); $event.stopPropagation()"
+        [disabled]="movie.bookedTickets == movie.maximalTickets"
+        color="primary"
+      >
+        {{ 'CINEMA_TICKETS_BOOK_A_TICKET' | translate }}
+      </button>
+      <button
+        *ngIf="movie.bookedTicketsForYourself != 0"
+        mat-stroked-button
+        color="warn"
+        (click)="cancelTickets(cancelListViewTicketsButton); $event.stopPropagation()"
+        #cancelListViewTicketsButton
+      >
+        <mat-icon>cancel</mat-icon>
+      </button>
+    </div>
 
     <div>
       <button
@@ -93,7 +104,7 @@
         >
       </mat-card-title>
       <mat-card-subtitle
-        >{{ movie.date | date: 'dd.MM' }} 21:00 <span class="until-left">({{ getUntil(movie.date) }} )</span>
+        >{{ movie.date | date: 'dd.MM' }} 21:00 <span class="until-left">({{ getUntil(movie.date) }})</span>
       </mat-card-subtitle>
     </mat-card-title-group>
   </mat-card-header>

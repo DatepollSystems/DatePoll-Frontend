@@ -53,9 +53,6 @@ const getManualEntry = (target, term) => {
       localManual = JSON.parse(fs.readFileSync(path, 'UTF-8'));
     }
   }
-  if (localManual[term]?.trim()?.length < 1) {
-    // return null;
-  }
   return localManual[term] ? localManual[term] : null;
 };
 
@@ -116,8 +113,6 @@ const getTranslation = (term, target) => {
 
   return new Promise((resolve, reject) => {
     setTimeout(() => {
-      // lets avoid throttle issue with googleapis request
-      // Google API limit number of concurrent calls, we'll call the API each 50 miliseconds
       fetch('https://translate.dafnik.me/translate', {
         method: 'POST',
         headers: {
@@ -140,11 +135,8 @@ const getTranslation = (term, target) => {
             if (json.error) {
               reject(json.error); // reject if response contains error
             } else {
-              // noinspection JSUnresolvedVariable
               console.log('Translating "' + term.value + '" to ' + target + ': "' + json.translatedText + '"');
-              // noinspection JSUnresolvedVariable
               writeToCache(term.value, json.translatedText, target);
-              // noinspection JSUnresolvedVariable
               resolve({
                 // resole the translation
                 key: term.key,
@@ -225,7 +217,7 @@ const convertToObject = (arr) => arr.reduce((acc = {}, curr) => ({...acc, [curr.
 
 /** Runs the application */
 
-// noinspection JSCheckFunctionSignatures,JSUnresolvedVariable
+// noinspection JSCheckFunctionSignatures
 getJSON(INPUT_FILE) // get data from input file
   .then((input_vars) => convertToArray(input_vars)) // convert data from object to array
   .then((input_arr) => processTranslation(input_arr, TARGET_LANG, process.env.GKEY)) // process the whole array

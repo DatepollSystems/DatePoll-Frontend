@@ -25,10 +25,6 @@ mat-form-field {
   vertical-align: middle;
 }
 
-td > a {
-  color: rgb(63, 81, 181);
-}
-
 td > a:hover {
   border-bottom-style: solid;
 }

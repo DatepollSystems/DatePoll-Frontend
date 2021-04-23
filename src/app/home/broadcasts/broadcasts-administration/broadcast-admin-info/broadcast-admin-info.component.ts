@@ -8,6 +8,7 @@ import {MatTableDataSource} from '@angular/material/table';
 import {BroadcastsAdministrationService} from '../broadcasts-administration.service';
 
 import {Broadcast, UserBroadcastInfo} from '../../models/broadcast.model';
+import {UIHelper} from '../../../../utils/helper/UIHelper';
 
 @Component({
   selector: 'app-broadcast-admin-info',
@@ -45,7 +46,7 @@ export class BroadcastAdminInfoComponent implements OnDestroy {
               localBroadcast.writerName
             );
           } else {
-            this.broadcast = new Broadcast(Number(id), 'Loading', new Date(), 'Loading', 'Loading');
+            this.broadcast = new Broadcast(Number(id), 'Loading', UIHelper.getCurrentDate(), 'Loading', 'Loading');
           }
         }
 

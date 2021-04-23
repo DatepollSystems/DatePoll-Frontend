@@ -6,9 +6,9 @@ import {icon, Marker} from 'leaflet';
 @Component({
   selector: 'app-maps-component',
   templateUrl: './maps.component.html',
-  styleUrls: ['./maps.component.css']
+  styleUrls: ['./maps.component.css'],
 })
-export class MapsComponentComponent implements AfterViewInit {
+export class MapsComponent implements AfterViewInit {
   private map;
   private marker;
   @Input()
@@ -44,7 +44,7 @@ export class MapsComponentComponent implements AfterViewInit {
     this.removeMarker();
     const coordinates = {
       x: 0,
-      y: 0
+      y: 0,
     };
     this.coordinatesChanged.emit(coordinates);
   }
@@ -55,19 +55,19 @@ export class MapsComponentComponent implements AfterViewInit {
         console.log(response);
         this.map.panTo(new L.LatLng(response.latt, response.longt));
       },
-      error => console.log(error)
+      (error) => console.log(error)
     );
   }
 
   private initMap(x: number, y: number): void {
     this.map = L.map(this.randomMapId.toString(), {
       center: [x, y],
-      zoom: 12
+      zoom: 12,
     });
 
     const tiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       maxZoom: 19,
-      attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+      attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
     });
 
     tiles.addTo(this.map);
@@ -80,7 +80,7 @@ export class MapsComponentComponent implements AfterViewInit {
 
         const coordinates = {
           x: this.x,
-          y: this.y
+          y: this.y,
         };
         this.coordinatesChanged.emit(coordinates);
 
@@ -103,7 +103,7 @@ export class MapsComponentComponent implements AfterViewInit {
       iconAnchor: [12, 41],
       popupAnchor: [1, -34],
       tooltipAnchor: [16, -28],
-      shadowSize: [41, 41]
+      shadowSize: [41, 41],
     });
 
     this.marker = L.marker([x, y]).addTo(this.map);

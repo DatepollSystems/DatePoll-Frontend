@@ -1,9 +1,8 @@
 import {Component, OnDestroy} from '@angular/core';
 import {NgForm} from '@angular/forms';
 import {MatDialogRef} from '@angular/material/dialog';
+import {MatSnackBar} from '@angular/material/snack-bar';
 import {Subscription} from 'rxjs';
-
-import {NotificationsService} from 'angular2-notifications';
 
 import {TranslateService} from '../../../../translation/translate.service';
 import {Converter} from '../../../../utils/helper/Converter';
@@ -54,7 +53,7 @@ export class UserCreateModalComponent implements OnDestroy {
     private dialogRef: MatDialogRef<UserCreateModalComponent>,
     private groupsService: GroupsService,
     private badgesService: BadgesService,
-    private notificationsService: NotificationsService,
+    private snackBar: MatSnackBar,
     private translate: TranslateService,
     private isMobileService: IsMobileService,
     private performanceBadgesService: PerformanceBadgesService
@@ -240,10 +239,7 @@ export class UserCreateModalComponent implements OnDestroy {
         const users = this.usersService.getUsersWithoutFetch();
         users.push(this.usersService.fetchUserCreateLocalUser(data.user));
         this.usersService.setUsers(users);
-        this.notificationsService.success(
-          this.translate.getTranslationFor('SUCCESSFULLY'),
-          this.translate.getTranslationFor('MANAGEMENT_USERS_CREATE_USER_MODAL_SUCCESSFULLY_CREATED_USER')
-        );
+        this.snackBar.open(this.translate.getTranslationFor('MANAGEMENT_USERS_CREATE_USER_MODAL_SUCCESSFULLY_CREATED_USER'));
       },
       (error) => {
         console.log(error);

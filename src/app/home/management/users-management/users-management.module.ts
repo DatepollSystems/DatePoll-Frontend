@@ -21,7 +21,6 @@ import {PerformanceBadgesListComponent} from './performance-badges-list/performa
 import {PermissionsListComponent} from './permissions-list/permissions-list.component';
 import {PhoneNumbersListComponent} from './phone-numbers-list/phone-numbers-list.component';
 import {UserCreateModalComponent} from './user-create-modal/user-create-modal.component';
-import {UserDeleteModalComponent} from './user-delete-modal/user-delete-modal.component';
 import {UserUpdateModalComponent} from './user-update-modal/user-update-modal.component';
 import {UsersExportBottomSheetComponent, UsersManagementComponent} from './users-management.component';
 import {UsersChangesManagementComponent} from './users-changes-management/users-changes-management.component';
@@ -40,7 +39,6 @@ import {UserInfoModalComponent} from './user-info-modal/user-info-modal.componen
     PerformanceBadgesListComponent,
     PermissionsListComponent,
     PhoneNumbersListComponent,
-    UserDeleteModalComponent,
     BadgesListComponent,
     UsersChangesManagementComponent,
   ],

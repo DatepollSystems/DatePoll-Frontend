@@ -1,4 +1,14 @@
 export class UIHelper {
+  private static currentDate: Date;
+
+  public static getCurrentDate(): Date {
+    if (this.currentDate == null) {
+      this.currentDate = new Date();
+    }
+    console.log(this.currentDate);
+    return this.currentDate;
+  }
+
   public static getTimeLeft(date: Date) {
     const current = new Date();
 
@@ -23,9 +33,30 @@ export class UIHelper {
     if (!url.includes('http') && !url.includes('https')) {
       return false;
     }
-    if (!url.includes('.') || !url.includes(':') || !url.includes('//')) {
-      return false;
+    return !(!url.includes('.') || !url.includes(':') || !url.includes('//'));
+  }
+
+  public static cutString(strings: string[], length: number, prefix: string = null, seperator: string = ',') {
+    let toReturn = '';
+    for (const string of strings) {
+      toReturn += string + seperator + ' ';
     }
-    return true;
+
+    if (toReturn.length > length) {
+      return toReturn.slice(0, length) + prefix;
+    }
+    return toReturn;
+  }
+
+  public static isNumeric(str: any) {
+    // tslint:disable-next-line:triple-equals
+    if (typeof str != 'string') {
+      return false;
+    } // we only process strings!
+    // @ts-ignore
+    return (
+      !isNaN(parseInt(str, 10)) && // use type coercion to parse the _entirety_ of the string (`parseFloat` alone does not do this)...
+      !isNaN(parseFloat(str))
+    ); // ...and ensure strings of whitespace fail
   }
 }

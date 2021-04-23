@@ -1,15 +1,14 @@
 import {Component, OnDestroy} from '@angular/core';
 import {MatBottomSheet} from '@angular/material/bottom-sheet';
 import {Router} from '@angular/router';
-
+import {MatSnackBar} from '@angular/material/snack-bar';
 import {Subscription} from 'rxjs';
-
-import {NotificationsService} from 'angular2-notifications';
 
 import {TranslateService} from '../../translation/translate.service';
 import {EventsUserService} from '../events/events-user.service';
 import {MyUserService} from '../my-user.service';
 import {HomepageService} from './homepage.service';
+import {Converter} from '../../utils/helper/Converter';
 
 import {Broadcast} from '../broadcasts/models/broadcast.model';
 import {Event} from '../events/models/event.model';
@@ -40,12 +39,11 @@ export class StartComponent implements OnDestroy {
   broadcastSubscription: Subscription;
 
   eventVotingChangeLoading = false;
-
   openEventsCount = 0;
   loaded = false;
 
   alert: any;
-  happyAlertSubscription: Subscription;
+  alertSubscription: Subscription;
   showFirework = false;
 
   constructor(
@@ -53,7 +51,7 @@ export class StartComponent implements OnDestroy {
     public myUserService: MyUserService,
     private eventsUserSerivce: EventsUserService,
     private bottomSheet: MatBottomSheet,
-    private notificationsService: NotificationsService,
+    private snackBar: MatSnackBar,
     private translate: TranslateService,
     private router: Router,
     private settingsService: SettingsService
@@ -86,7 +84,7 @@ export class StartComponent implements OnDestroy {
 
     this.alert = this.settingsService.getAlert();
     this.checkIfFireworkShouldBeShown();
-    this.happyAlertSubscription = this.settingsService.alertChange.subscribe((value) => {
+    this.alertSubscription = this.settingsService.alertChange.subscribe((value) => {
       this.alert = value;
       this.checkIfFireworkShouldBeShown();
     });
@@ -115,7 +113,7 @@ export class StartComponent implements OnDestroy {
     this.router.navigateByUrl('/home/events/' + event.id, {state: event});
   }
 
-  private onEventVote(event: Event) {
+  onEventVote(event: Event) {
     const bottomSheetRef = this.bottomSheet.open(EventsVoteForDecisionModalComponent, {
       data: {event},
     });
@@ -126,10 +124,7 @@ export class StartComponent implements OnDestroy {
           (response: any) => {
             console.log(response);
             this.homePageService.fetchData(true);
-            this.notificationsService.success(
-              this.translate.getTranslationFor('SUCCESSFULLY'),
-              this.translate.getTranslationFor('EVENTS_VIEW_EVENT_SUCCESSFULLY_VOTED')
-            );
+            this.snackBar.open(this.translate.getTranslationFor('EVENTS_VIEW_EVENT_SUCCESSFULLY_VOTED'));
           },
           (error) => console.log(error)
         );
@@ -139,51 +134,33 @@ export class StartComponent implements OnDestroy {
     });
   }
 
-  private cancelEventVoting(event, button: any) {
-    const answers = [
-      {
-        answer: this.translate.getTranslationFor('YES'),
-        value: 'yes',
-      },
-      {
-        answer: this.translate.getTranslationFor('NO'),
-        value: 'no',
-      },
-    ];
-    const question = this.translate.getTranslationFor('EVENTS_CANCEL_VOTING');
-
+  cancelEventVoting(event, button: any) {
     const bottomSheetRef = this.bottomSheet.open(QuestionDialogComponent, {
       data: {
-        answers,
-        question,
+        question: 'EVENTS_CANCEL_VOTING',
       },
     });
 
     bottomSheetRef.afterDismissed().subscribe((value: string) => {
-      if (value != null) {
-        if (value.includes('yes')) {
-          if (this.eventVotingChangeLoading) {
-            return;
-          }
-          this.eventVotingChangeLoading = true;
-          if (button) {
-            button.disabled = true;
-          }
-          this.eventsUserSerivce.removeDecision(event.id).subscribe(
-            (response: any) => {
-              console.log(response);
-              this.homePageService.fetchData(true);
-              this.notificationsService.success(
-                this.translate.getTranslationFor('SUCCESSFULLY'),
-                this.translate.getTranslationFor('EVENTS_VIEW_EVENT_SUCCESSFULLY_REMOVED_VOTING')
-              );
-            },
-            (error) => {
-              console.log(error);
-              this.eventVotingChangeLoading = false;
-            }
-          );
+      if (value?.includes(QuestionDialogComponent.YES_VALUE)) {
+        if (this.eventVotingChangeLoading) {
+          return;
         }
+        this.eventVotingChangeLoading = true;
+        if (button) {
+          button.disabled = true;
+        }
+        this.eventsUserSerivce.removeDecision(event.id).subscribe(
+          (response: any) => {
+            console.log(response);
+            this.homePageService.fetchData(true);
+            this.snackBar.open(this.translate.getTranslationFor('EVENTS_VIEW_EVENT_SUCCESSFULLY_REMOVED_VOTING'));
+          },
+          (error) => {
+            console.log(error);
+            this.eventVotingChangeLoading = false;
+          }
+        );
       }
     });
   }
@@ -200,24 +177,14 @@ export class StartComponent implements OnDestroy {
   private checkIfFireworkShouldBeShown() {
     if (this.alert?.message?.trim().toLowerCase().length > 0 && this.alert?.type?.includes('happy')) {
       if (localStorage.getItem('firework') == null) {
-        localStorage.setItem('firework', 'true');
+        localStorage.setItem('firework', Converter.booleanToString(true));
       }
-      if (localStorage.getItem('firework') === 'true') {
-        this.showFirework = true;
-      } else {
-        this.showFirework = false;
-      }
+      this.showFirework = Converter.stringToBoolean(localStorage.getItem('firework'));
     }
   }
 
   toggleFirework() {
     this.showFirework = !this.showFirework;
-    let b = '';
-    if (this.showFirework) {
-      b = 'true';
-    } else {
-      b = 'false';
-    }
-    localStorage.setItem('firework', b);
+    localStorage.setItem('firework', Converter.booleanToString(this.showFirework));
   }
 }

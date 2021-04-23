@@ -1,8 +1,7 @@
 import {Component, OnDestroy} from '@angular/core';
 import {MatBottomSheet} from '@angular/material/bottom-sheet';
+import {MatSnackBar} from '@angular/material/snack-bar';
 import {Subscription} from 'rxjs';
-
-import {NotificationsService} from 'angular2-notifications';
 
 import {QuestionDialogComponent} from '../../../../utils/shared-components/question-dialog/question-dialog.component';
 
@@ -26,7 +25,7 @@ export class DeletedUsersManagementComponent implements OnDestroy {
     private deletedUsersService: DeletedUsersService,
     private translate: TranslateService,
     private bottomSheet: MatBottomSheet,
-    private notificationsService: NotificationsService
+    private snackBar: MatSnackBar
   ) {
     this.deletedUsers = this.deletedUsersService.getDeletedUsers();
     this.sortedUsers = this.deletedUsers.slice();
@@ -59,41 +58,23 @@ export class DeletedUsersManagementComponent implements OnDestroy {
   }
 
   deleteAll() {
-    const answers = [
-      {
-        answer: this.translate.getTranslationFor('YES'),
-        value: 'yes',
-      },
-      {
-        answer: this.translate.getTranslationFor('NO'),
-        value: 'no',
-      },
-    ];
-    const question = this.translate.getTranslationFor('MANAGEMENT_USERS_DELETED_USERS_DELETE_ALL_CONFIRM');
-
     const bottomSheetRef = this.bottomSheet.open(QuestionDialogComponent, {
       data: {
-        answers,
-        question,
+        question: 'MANAGEMENT_USERS_DELETED_USERS_DELETE_ALL_CONFIRM',
       },
     });
 
     bottomSheetRef.afterDismissed().subscribe((value: string) => {
-      if (value != null) {
-        if (value.includes('yes')) {
-          this.deletedUsersService.deleteAllDeletedUsers().subscribe(
-            (response: any) => {
-              console.log(response);
-              this.deletedUsersLoaded = false;
-              this.deletedUsersService.getDeletedUsers();
-              this.notificationsService.success(
-                this.translate.getTranslationFor('SUCCESSFULLY'),
-                this.translate.getTranslationFor('MANAGEMENT_USERS_DELETED_USERS_DELETE_ALL_SUCCESSFUL')
-              );
-            },
-            (error) => console.log(error)
-          );
-        }
+      if (value?.includes(QuestionDialogComponent.YES_VALUE)) {
+        this.deletedUsersService.deleteAllDeletedUsers().subscribe(
+          (response: any) => {
+            console.log(response);
+            this.deletedUsersLoaded = false;
+            this.deletedUsersService.getDeletedUsers();
+            this.snackBar.open(this.translate.getTranslationFor('MANAGEMENT_USERS_DELETED_USERS_DELETE_ALL_SUCCESSFUL'));
+          },
+          (error) => console.log(error)
+        );
       }
     });
   }

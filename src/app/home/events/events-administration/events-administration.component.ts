@@ -5,13 +5,11 @@ import {MatTableDataSource} from '@angular/material/table';
 import {MatDialog} from '@angular/material/dialog';
 import {MatBottomSheet} from '@angular/material/bottom-sheet';
 import {MatPaginator} from '@angular/material/paginator';
-import {MatSlideToggleChange} from '@angular/material/slide-toggle';
 import {FormControl} from '@angular/forms';
 import {MatSelect} from '@angular/material/select';
+import {MatSnackBar} from '@angular/material/snack-bar';
 import {ReplaySubject, Subject, Subscription} from 'rxjs';
 import {take, takeUntil} from 'rxjs/operators';
-
-import {NotificationsService} from 'angular2-notifications';
 
 import {TranslateService} from '../../../translation/translate.service';
 import {EventsService} from '../events.service';
@@ -24,6 +22,7 @@ import {EventStandardDecisionsManagementModalComponent} from './event-standard-d
 import {EventStandardLocationsManagementModalComponent} from './event-standard-locations-management-modal/event-standard-locations-management-modal.component';
 import {EventUpdateModalComponent} from './event-update-modal/event-update-modal.component';
 import {EventUserManagementModalComponent} from './event-user-management-modal/event-user-management-modal.component';
+import {UIHelper} from '../../../utils/helper/UIHelper';
 
 @Component({
   selector: 'app-events-administration',
@@ -32,7 +31,6 @@ import {EventUserManagementModalComponent} from './event-user-management-modal/e
 })
 export class EventsAdministrationComponent implements OnInit, OnDestroy {
   eventsLoaded = false;
-
   showAllEvents: boolean;
 
   displayedColumns: string[] = ['name', 'startDate', 'endDate', 'description', 'actions'];
@@ -55,14 +53,18 @@ export class EventsAdministrationComponent implements OnInit, OnDestroy {
 
   @ViewChild('yearSelect', {static: true}) yearSelect: MatSelect;
 
+  private currentDate: Date;
+
   constructor(
     private eventsService: EventsService,
     private translate: TranslateService,
     private dialog: MatDialog,
     private router: Router,
-    private notificationsService: NotificationsService,
+    private snackBar: MatSnackBar,
     private bottomSheet: MatBottomSheet
   ) {
+    this.currentDate = UIHelper.getCurrentDate();
+
     this.years = this.eventsService.getYears();
     this.selectedYear = this.years[this.years.length - 1];
     this.yearsSubscription = eventsService.yearsChange.subscribe((value) => {
@@ -70,8 +72,7 @@ export class EventsAdministrationComponent implements OnInit, OnDestroy {
       this.filteredYears.next(this.years.slice());
       this.selectedYear = this.years[this.years.length - 1];
       for (const year of this.years) {
-        if (year.includes(new Date().getFullYear().toString())) {
-          console.log('in');
+        if (year.includes(this.currentDate.getFullYear().toString())) {
           this.selectedYear = year;
           break;
         }
@@ -117,7 +118,7 @@ export class EventsAdministrationComponent implements OnInit, OnDestroy {
     } else {
       this.eventsCopy = [];
       for (const event of this.events) {
-        const now = new Date().getTime();
+        const now = this.currentDate.getTime();
         if (event.endDate.getTime() > now) {
           this.eventsCopy.push(event);
         }
@@ -141,7 +142,7 @@ export class EventsAdministrationComponent implements OnInit, OnDestroy {
     });
   }
 
-  onShowAllEventsChange(ob: MatSlideToggleChange) {
+  onShowAllEventsChange() {
     this.refreshTable();
   }
 
@@ -194,40 +195,22 @@ export class EventsAdministrationComponent implements OnInit, OnDestroy {
   }
 
   onDelete(id: number) {
-    const answers = [
-      {
-        answer: this.translate.getTranslationFor('YES'),
-        value: 'yes',
-      },
-      {
-        answer: this.translate.getTranslationFor('NO'),
-        value: 'no',
-      },
-    ];
-    const question = this.translate.getTranslationFor('EVENTS_ADMINISTRATION_DELETE_EVENT_QUESTION');
-
     const bottomSheetRef = this.bottomSheet.open(QuestionDialogComponent, {
       data: {
-        answers,
-        question,
+        question: 'EVENTS_ADMINISTRATION_DELETE_EVENT_QUESTION',
       },
     });
 
     bottomSheetRef.afterDismissed().subscribe((value: string) => {
-      if (value != null) {
-        if (value.includes('yes')) {
-          this.eventsService.deleteEvent(id).subscribe(
-            (response: any) => {
-              console.log(response);
-              this.eventsService.fetchEvents();
-              this.notificationsService.success(
-                this.translate.getTranslationFor('SUCCESSFULLY'),
-                this.translate.getTranslationFor('EVENTS_ADMINISTRATION_DELETE_EVENT_SUCCESSFULLY_DELETED')
-              );
-            },
-            (error) => console.log(error)
-          );
-        }
+      if (value?.includes(QuestionDialogComponent.YES_VALUE)) {
+        this.eventsService.deleteEvent(id).subscribe(
+          (response: any) => {
+            console.log(response);
+            this.eventsService.fetchEvents();
+            this.snackBar.open(this.translate.getTranslationFor('EVENTS_ADMINISTRATION_DELETE_EVENT_SUCCESSFULLY_DELETED'));
+          },
+          (error) => console.log(error)
+        );
       }
     });
   }
@@ -235,7 +218,7 @@ export class EventsAdministrationComponent implements OnInit, OnDestroy {
   yearSelectChange(value) {
     this.selectedYear = value;
     if (!this.showAllEvents) {
-      this.showAllEvents = Number(value) < new Date().getFullYear();
+      this.showAllEvents = Number(value) < this.currentDate.getFullYear();
     }
     this.eventsService.getEvents(value);
   }

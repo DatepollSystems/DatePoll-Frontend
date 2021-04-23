@@ -11,7 +11,6 @@ import {TranslationModule} from '../../../translation/translation.module';
 import {MovieBookingsModalComponent} from './movie-bookings-modal/movie-bookings-modal.component';
 import {MovieBookingsTableComponent} from './movie-bookings-table/movie-bookings-table.component';
 import {MovieCreateModalComponent} from './movie-create-modal/movie-create-modal.component';
-import {MovieDeleteModalComponent} from './movie-delete-modal/movie-delete-modal.component';
 import {MovieEditModalComponent} from './movie-edit-modal/movie-edit-modal.component';
 import {MovieInfoModalComponent} from './movie-info-modal/movie-info-modal.component';
 
@@ -20,7 +19,6 @@ import {MovieInfoModalComponent} from './movie-info-modal/movie-info-modal.compo
     MovieCreateModalComponent,
     MovieEditModalComponent,
     MovieInfoModalComponent,
-    MovieDeleteModalComponent,
     MovieBookingsTableComponent,
     MovieBookingsModalComponent,
   ],
@@ -29,12 +27,6 @@ import {MovieInfoModalComponent} from './movie-info-modal/movie-info-modal.compo
     {provide: DateAdapter, useClass: CustomDateAdapter},
     {provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS},
   ],
-  exports: [
-    MovieCreateModalComponent,
-    MovieEditModalComponent,
-    MovieInfoModalComponent,
-    MovieDeleteModalComponent,
-    MovieBookingsModalComponent,
-  ],
+  exports: [MovieCreateModalComponent, MovieEditModalComponent, MovieInfoModalComponent, MovieBookingsModalComponent],
 })
 export class CommonMovieAdministrationComponentsModule {}

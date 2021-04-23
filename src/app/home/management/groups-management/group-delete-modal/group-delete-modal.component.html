@@ -1,13 +1,9 @@
-<h2>{{'MANAGEMENT_GROUPS_DELETE_GROUP_MODAL_TITLE' | translate}}</h2>
+<h2>{{ 'MANAGEMENT_GROUPS_DELETE_GROUP_MODAL_TITLE' | translate }}</h2>
 <mat-nav-list>
   <a (click)="yes()" mat-list-item>
-    <span mat-line>{{'YES' | translate}}</span>
+    <span mat-line>{{ 'YES' | translate }}</span>
   </a>
   <a (click)="no()" mat-list-item>
-    <span mat-line>{{'NO' | translate}}</span>
+    <span mat-line>{{ 'NO' | translate }}</span>
   </a>
 </mat-nav-list>
-
-<ng-template #successfullyDeletedGroup>
-  <h2>{{'MANAGEMENT_GROUPS_DELETE_GROUP_MODAL_SUCCESSFUL' | translate}}</h2>
-</ng-template>

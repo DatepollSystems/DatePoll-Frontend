@@ -1,13 +1,21 @@
 import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {MatBottomSheet} from '@angular/material/bottom-sheet';
+import {MatDrawerMode} from '@angular/material/sidenav';
+import {MatSnackBar} from '@angular/material/snack-bar';
 import {Subscription} from 'rxjs';
 
 import {AuthService} from '../auth/auth.service';
-import {Permissions} from '../permissions';
 import {IsMobileService} from '../utils/is-mobile.service';
 import {SettingsService} from '../utils/settings.service';
 import {MyUserService} from './my-user.service';
+import {TranslateService} from '../translation/translate.service';
+
+import {UIHelper} from '../utils/helper/UIHelper';
+import {Permissions} from '../permissions';
 
 import {ServerInfoModel} from '../utils/server-info.model';
+
+import {QuestionDialogComponent} from '../utils/shared-components/question-dialog/question-dialog.component';
 
 @Component({
   selector: 'app-home',
@@ -17,7 +25,7 @@ import {ServerInfoModel} from '../utils/server-info.model';
 export class HomeComponent implements OnInit, OnDestroy {
   @ViewChild('sidenav', {static: true})
   navBarOpened = false;
-  navBarMode = 'over';
+  navBarMode: MatDrawerMode = 'over';
 
   public myUserService: MyUserService;
 
@@ -43,11 +51,16 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   isMobileSubscription: Subscription;
 
+  offline: boolean;
+
   constructor(
     myUserService: MyUserService,
     private authService: AuthService,
     private settingsService: SettingsService,
-    private isMobileService: IsMobileService
+    private isMobileService: IsMobileService,
+    private translate: TranslateService,
+    private bottomSheet: MatBottomSheet,
+    private snackBar: MatSnackBar
   ) {
     this.myUserService = myUserService;
 
@@ -105,6 +118,14 @@ export class HomeComponent implements OnInit, OnDestroy {
         this.navBarMode = 'side';
       }
     });
+
+    window.addEventListener('online', this.onNetworkStatusChange.bind(this));
+    window.addEventListener('offline', this.onNetworkStatusChange.bind(this));
+
+    // if month is june
+    if (UIHelper.getCurrentDate().getMonth() === 5) {
+      document.getElementById('toolbar-heading').classList.add('rainbow-text');
+    }
   }
 
   ngOnDestroy(): void {
@@ -115,8 +136,27 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.isMobileSubscription.unsubscribe();
   }
 
+  onNetworkStatusChange(): void {
+    this.offline = !navigator.onLine;
+    console.log('offline ' + this.offline);
+  }
+
+  onOfflineButtonClick(): void {
+    this.snackBar.open(this.translate.getTranslationFor('OFFLINE_HELP'));
+  }
+
   logout() {
-    this.authService.logout();
+    const bottomSheetRef = this.bottomSheet.open(QuestionDialogComponent, {
+      data: {
+        question: 'LOGOUT_CONFIRM',
+      },
+    });
+
+    bottomSheetRef.afterDismissed().subscribe((value: string) => {
+      if (value?.includes(QuestionDialogComponent.YES_VALUE)) {
+        this.authService.logout();
+      }
+    });
   }
 
   changeTheme() {

@@ -2,7 +2,7 @@ import {Component, OnDestroy} from '@angular/core';
 import {NgForm} from '@angular/forms';
 import {MatSlideToggleChange} from '@angular/material/slide-toggle';
 import {Router} from '@angular/router';
-import {NotificationsService} from 'angular2-notifications';
+import {MatSnackBar} from '@angular/material/snack-bar';
 import {Subscription} from 'rxjs';
 
 import {TranslateService} from '../../../translation/translate.service';
@@ -62,7 +62,7 @@ export class DatepollManagementComponent implements OnDestroy {
     myUserService: MyUserService,
     private router: Router,
     private translate: TranslateService,
-    private notificationsService: NotificationsService
+    private snackBar: MatSnackBar
   ) {
     this.myUserService = myUserService;
 
@@ -137,10 +137,7 @@ export class DatepollManagementComponent implements OnDestroy {
       (response: any) => {
         console.log(response);
         this.communityNameSaving = false;
-        this.notificationsService.success(
-          this.translate.getTranslationFor('SUCCESSFULLY'),
-          this.translate.getTranslationFor('MANAGEMENT_DATEPOLL_COMMUNITY_NAME_CHANGED_SUCCESSFULLY')
-        );
+        this.snackBar.open(this.translate.getTranslationFor('MANAGEMENT_DATEPOLL_COMMUNITY_NAME_CHANGED_SUCCESSFULLY'));
       },
       (error) => console.log(error)
     );
@@ -153,10 +150,7 @@ export class DatepollManagementComponent implements OnDestroy {
       (response: any) => {
         console.log(response);
         this.communityUrlSaving = false;
-        this.notificationsService.success(
-          this.translate.getTranslationFor('SUCCESSFULLY'),
-          this.translate.getTranslationFor('MANAGEMENT_DATEPOLL_COMMUNITY_URL_CHANGED_SUCCESSFULLY')
-        );
+        this.snackBar.open(this.translate.getTranslationFor('MANAGEMENT_DATEPOLL_COMMUNITY_URL_CHANGED_SUCCESSFULLY'));
       },
       (error) => console.log(error)
     );
@@ -168,10 +162,7 @@ export class DatepollManagementComponent implements OnDestroy {
       (response: any) => {
         console.log(response);
         this.communityDescriptionSaving = false;
-        this.notificationsService.success(
-          this.translate.getTranslationFor('SUCCESSFULLY'),
-          this.translate.getTranslationFor('MANAGEMENT_DATEPOLL_COMMUNITY_DESCRIPTION_CHANGED_SUCCESSFULLY')
-        );
+        this.snackBar.open(this.translate.getTranslationFor('MANAGEMENT_DATEPOLL_COMMUNITY_DESCRIPTION_CHANGED_SUCCESSFULLY'));
       },
       (error) => console.log(error)
     );
@@ -184,10 +175,7 @@ export class DatepollManagementComponent implements OnDestroy {
       (response: any) => {
         console.log(response);
         this.imprintSaving = false;
-        this.notificationsService.success(
-          this.translate.getTranslationFor('SUCCESSFULLY'),
-          this.translate.getTranslationFor('MANAGEMENT_DATEPOLL_IMPRINT_CHANGED_SUCCESSFULLY')
-        );
+        this.snackBar.open(this.translate.getTranslationFor('MANAGEMENT_DATEPOLL_IMPRINT_CHANGED_SUCCESSFULLY'));
       },
       (error) => console.log(error)
     );
@@ -200,10 +188,7 @@ export class DatepollManagementComponent implements OnDestroy {
       (response: any) => {
         console.log(response);
         this.privacyPolicySaving = false;
-        this.notificationsService.success(
-          this.translate.getTranslationFor('SUCCESSFULLY'),
-          this.translate.getTranslationFor('MANAGEMENT_DATEPOLL_PRIVACY_POLICY_CHANGED_SUCCESSFULLY')
-        );
+        this.snackBar.open(this.translate.getTranslationFor('MANAGEMENT_DATEPOLL_PRIVACY_POLICY_CHANGED_SUCCESSFULLY'));
       },
       (error) => console.log(error)
     );
@@ -220,10 +205,7 @@ export class DatepollManagementComponent implements OnDestroy {
       (response: any) => {
         console.log(response);
         this.appUrlSaving = false;
-        this.notificationsService.success(
-          this.translate.getTranslationFor('SUCCESSFULLY'),
-          this.translate.getTranslationFor('MANAGEMENT_DATEPOLL_APP_URL_CHANGED_SUCCESSFULLY')
-        );
+        this.snackBar.open(this.translate.getTranslationFor('MANAGEMENT_DATEPOLL_APP_URL_CHANGED_SUCCESSFULLY'));
       },
       (error) => console.log(error)
     );
@@ -236,10 +218,7 @@ export class DatepollManagementComponent implements OnDestroy {
       (response: any) => {
         console.log(response);
         this.openWeatherMapKeySaving = false;
-        this.notificationsService.success(
-          this.translate.getTranslationFor('SUCCESSFULLY'),
-          this.translate.getTranslationFor('MANAGEMENT_DATEPOLL_OPENWEATHERMAP_KEY_CHANGED_SUCCESSFULLY')
-        );
+        this.snackBar.open(this.translate.getTranslationFor('MANAGEMENT_DATEPOLL_OPENWEATHERMAP_KEY_CHANGED_SUCCESSFULLY'));
       },
       (error) => console.log(error)
     );
@@ -252,10 +231,7 @@ export class DatepollManagementComponent implements OnDestroy {
       (response: any) => {
         console.log(response);
         this.openWeatherMapCinemaCityIdSaving = false;
-        this.notificationsService.success(
-          this.translate.getTranslationFor('SUCCESSFULLY'),
-          this.translate.getTranslationFor('MANAGEMENT_DATEPOLL_OPENWEATHERMAP_CINEMA_CITY_ID_CHANGED_SUCCESSFULLY')
-        );
+        this.snackBar.open(this.translate.getTranslationFor('MANAGEMENT_DATEPOLL_OPENWEATHERMAP_CINEMA_CITY_ID_CHANGED_SUCCESSFULLY'));
       },
       (error) => console.log(error)
     );
@@ -273,8 +249,7 @@ export class DatepollManagementComponent implements OnDestroy {
         (response: any) => {
           console.log(response);
           this.broadcastIncomingMailForwardingEmailAddressesSaving = false;
-          this.notificationsService.success(
-            this.translate.getTranslationFor('SUCCESSFULLY'),
+          this.snackBar.open(
             this.translate.getTranslationFor(
               'MANAGEMENT_DATEPOLL_BROADCAST_PROCESS_INCOMING_MAILS_FORWARDING_EMAIL_ADDRESSES_CHANGED_SUCCESSFULLY'
             )
@@ -298,10 +273,7 @@ export class DatepollManagementComponent implements OnDestroy {
       (response: any) => {
         console.log(response);
         this.alertSaving = false;
-        this.notificationsService.success(
-          this.translate.getTranslationFor('SUCCESSFULLY'),
-          this.translate.getTranslationFor('MANAGEMENT_DATEPOLL_ALERT_CHANGED_SUCCESSFULLY')
-        );
+        this.snackBar.open(this.translate.getTranslationFor('MANAGEMENT_DATEPOLL_ALERT_CHANGED_SUCCESSFULLY'));
       },
       (error) => console.log(error)
     );
@@ -314,10 +286,7 @@ export class DatepollManagementComponent implements OnDestroy {
       (response: any) => {
         console.log(response);
         this.jitsiMeetInstanceUrlSaving = false;
-        this.notificationsService.success(
-          this.translate.getTranslationFor('SUCCESSFULLY'),
-          this.translate.getTranslationFor('MANAGEMENT_DATEPOLL_JITSI_MEET_INSTANCE_URL_CHANGED_SUCCESSFULLY')
-        );
+        this.snackBar.open(this.translate.getTranslationFor('MANAGEMENT_DATEPOLL_JITSI_MEET_INSTANCE_URL_CHANGED_SUCCESSFULLY'));
       },
       (error) => console.log(error)
     );

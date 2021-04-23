@@ -1,0 +1,16 @@
+<mat-form-field>
+  <input
+    id="time"
+    matInput
+    name="time"
+    ngModel
+    required
+    [ngModel]="time"
+    (ngModelChange)="onTimeChange($event)"
+    placeholder="{{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_TIME' | translate }}"
+    type="text"
+  />
+  <small class="mat-error" [fxShow]="wrongTime">
+    {{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_TIME_INCORRECT' | translate }}
+  </small>
+</mat-form-field>

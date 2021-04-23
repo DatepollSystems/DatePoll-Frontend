@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnDestroy, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {FormControl} from '@angular/forms';
 
 import {ReplaySubject, Subject, Subscription} from 'rxjs';
@@ -12,25 +12,21 @@ import {EventStandardLocation} from '../../../models/event-standard-location.mod
 @Component({
   selector: 'app-event-standard-locations-select',
   templateUrl: './event-standard-locations-select.component.html',
-  styleUrls: ['./event-standard-locations-select.component.css']
+  styleUrls: ['./event-standard-locations-select.component.css'],
 })
 export class EventStandardLocationsSelectComponent implements OnInit, OnDestroy {
-  /** control for the selected standard location */
-  public standardLocationCtrl: FormControl = new FormControl();
-
-  /** control for the MatSelect filter keyword */
   public standardLocationFilterCtrl: FormControl = new FormControl();
-
-  /** list of standardLocation filtered by search keyword */
   public filteredStandardLocations: ReplaySubject<PerformanceBadge[]> = new ReplaySubject<PerformanceBadge[]>(1);
+
+  protected _onDestroy = new Subject<void>();
 
   standardLocations: EventStandardLocation[];
   standardLocationsSubscription: Subscription;
-  /** Subject that emits when the component has been destroyed. */
-  protected _onDestroy = new Subject<void>();
 
   selectedStandardLocation: EventStandardLocation;
-  @Output() standardLocationChanged = new EventEmitter();
+
+  @Output()
+  standardLocationChanged = new EventEmitter();
 
   constructor(private standardLocationsService: StandardLocationsService) {
     this.standardLocations = this.standardLocationsService.getStandardLocations();
@@ -38,7 +34,7 @@ export class EventStandardLocationsSelectComponent implements OnInit, OnDestroy 
       this.standardLocations = [];
     }
     this.filteredStandardLocations.next(this.standardLocations.slice());
-    this.standardLocationsSubscription = this.standardLocationsService.standardLocationsChange.subscribe(value => {
+    this.standardLocationsSubscription = this.standardLocationsService.standardLocationsChange.subscribe((value) => {
       this.standardLocations = value;
       if (this.standardLocations == null) {
         this.standardLocations = [];
@@ -79,14 +75,6 @@ export class EventStandardLocationsSelectComponent implements OnInit, OnDestroy 
       search = search.toLowerCase();
     }
     // filter the standard location
-    this.filteredStandardLocations.next(
-      this.standardLocations.filter(
-        p =>
-          p.name
-            .toString()
-            .toLowerCase()
-            .indexOf(search) > -1
-      )
-    );
+    this.filteredStandardLocations.next(this.standardLocations.filter((p) => p.name.toString().toLowerCase().indexOf(search) > -1));
   }
 }

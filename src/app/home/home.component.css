@@ -1,4 +1,4 @@
-.my-container {
+#my-container {
   margin-top: 60px;
   padding: 15px;
   min-height: 85vh;
@@ -9,9 +9,17 @@ mat-toolbar {
   z-index: 1000;
 }
 
-.toolbar-heading {
+#toolbar-heading {
   cursor: pointer;
   margin-left: 15px;
+  margin-right: 15px;
+}
+
+/*noinspection ALL*/
+.rainbow-text {
+  background: linear-gradient(to right, red, orange, yellow, green, cyan, blue, violet);
+  color: transparent;
+  background-clip: text;
 }
 
 mat-sidenav {
@@ -28,13 +36,16 @@ mat-sidenav {
 }
 
 .activated {
-  background-color: #bdbdbd !important;
+  background-color: #bdbdbd;
 }
 
-.activated:hover {
-  background-color: #bdbdbd !important;
+.mat-list-item:hover {
+  background-color: #bdbdbd;
+}
+.mat-list-item:hover .dark-theme {
+  background-color: #616161;
 }
 
 mat-icon {
-  margin-right: 5px;
+  margin-left: 0;
 }

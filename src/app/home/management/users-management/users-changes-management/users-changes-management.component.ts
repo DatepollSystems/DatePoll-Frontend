@@ -1,6 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
+import {MatBottomSheet} from '@angular/material/bottom-sheet';
+import {MatSnackBar} from '@angular/material/snack-bar';
 import {Subscription} from 'rxjs';
-import {NotificationsService} from 'angular2-notifications';
 
 import {UsersChangesService} from './users-changes.service';
 import {MyUserService} from '../../../my-user.service';
@@ -9,7 +10,6 @@ import {TranslateService} from '../../../../translation/translate.service';
 
 import {UserChange} from './userChange.model';
 import {QuestionDialogComponent} from '../../../../utils/shared-components/question-dialog/question-dialog.component';
-import {MatBottomSheet} from '@angular/material/bottom-sheet';
 
 @Component({
   selector: 'app-users-changes-management',
@@ -30,7 +30,7 @@ export class UsersChangesManagementComponent implements OnInit, OnDestroy {
     private userChangesService: UsersChangesService,
     private myUserService: MyUserService,
     private translate: TranslateService,
-    private notificationsService: NotificationsService,
+    private snackBar: MatSnackBar,
     private bottomSheet: MatBottomSheet
   ) {
     this.userChanges = this.userChangesService.getUserChanges();
@@ -77,22 +77,9 @@ export class UsersChangesManagementComponent implements OnInit, OnDestroy {
 
   deleteUserChange(userChange: UserChange) {
     if (this.hasPermissionToDeleteUserChanage) {
-      const answers = [
-        {
-          answer: this.translate.getTranslationFor('YES'),
-          value: 'yes',
-        },
-        {
-          answer: this.translate.getTranslationFor('NO'),
-          value: 'no',
-        },
-      ];
-      const question = this.translate.getTranslationFor('MANAGEMENT_USERS_CHANGES_DELETE_CONFIRMATION');
-
       const bottomSheetRef = this.bottomSheet.open(QuestionDialogComponent, {
         data: {
-          answers,
-          question,
+          question: 'MANAGEMENT_USERS_CHANGES_DELETE_CONFIRMATION',
         },
       });
 
@@ -103,10 +90,7 @@ export class UsersChangesManagementComponent implements OnInit, OnDestroy {
               (response: any) => {
                 console.log(response);
                 this.userChangesService.getUserChanges();
-                this.notificationsService.success(
-                  this.translate.getTranslationFor('SUCCESSFULLY'),
-                  this.translate.getTranslationFor('MANAGEMENT_USERS_CHANGES_DELETE_CONFIRMATION_SUCCESSFULLY')
-                );
+                this.snackBar.open(this.translate.getTranslationFor('MANAGEMENT_USERS_CHANGES_DELETE_CONFIRMATION_SUCCESSFULLY'));
               },
               (error) => console.log(error)
             );

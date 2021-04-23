@@ -9,6 +9,10 @@ export class Converter {
     return boolean ? 'true' : 'false';
   }
 
+  public static stringToNumber(string: string): number {
+    return parseInt(string, 10);
+  }
+
   public static getDateFormattedWithHoursMinutesAndSeconds(date: Date): string {
     const d = new Date(date);
     let month = '' + (d.getMonth() + 1);

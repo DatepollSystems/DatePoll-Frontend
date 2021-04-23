@@ -51,11 +51,7 @@
   </form>
 
   <mat-form-field>
-    <input
-      (keyup)="applyFilter($event.target.value)"
-      matInput
-      placeholder="{{ 'SETTINGS_PERSONAL_DATA_MODAL_PHONE_NUMBER_SEARCH' | translate }}"
-    />
+    <input (keyup)="applyFilter($event.target.value)" matInput placeholder="{{ 'SEARCH' | translate }}" />
   </mat-form-field>
 
   <table [dataSource]="dataSource" class="table-responsive" mat-table>

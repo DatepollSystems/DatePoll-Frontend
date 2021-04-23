@@ -9,8 +9,6 @@ export class ServerInfoModel {
   public community_imprint = '';
   public community_privacy_policy = '';
 
-  public logged_interactions_count = 1;
-
   public broadcasts_enabled = false;
   public broadcasts_process_incoming_mails_enabled = false;
   public broadcasts_process_incoming_mails_forwarding_enabled = false;

@@ -4,7 +4,7 @@ import {Subject} from 'rxjs';
 import {HttpService} from '../../utils/http.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class MovieTicketsService {
   public movieOrdersChange: Subject<MovieOrder[]> = new Subject<MovieOrder[]>();
@@ -28,17 +28,13 @@ export class MovieTicketsService {
   public fetchMovieOrders() {
     this.httpService.loggedInV1GETRequest('/cinema/worker', 'fetchMovieOrders').subscribe(
       (completeData: any) => {
-        const movies = completeData.movies;
-
         const movieOrdersToSave = [];
-        for (let i = 0; i < movies.length; i++) {
-          const localMovieOrder = new MovieOrder(movies[i].movie_id, movies[i].movie_name, movies[i].date);
+        for (const movie of completeData.movies) {
+          const localMovieOrder = new MovieOrder(movie.movie_id, movie.movie_name, movie.date);
 
           const ticketOrdersToSave = [];
-          for (let j = 0; j < movies[i].orders.length; j++) {
-            ticketOrdersToSave.push(
-              new TicketOrder(movies[i].orders[j].user_id, movies[i].orders[j].user_name, movies[i].orders[j].amount)
-            );
+          for (const order of movie.orders) {
+            ticketOrdersToSave.push(new TicketOrder(order.user_id, order.user_name, order.amount));
           }
           localMovieOrder.setTicketOrders(ticketOrdersToSave);
           movieOrdersToSave.push(localMovieOrder);
@@ -46,7 +42,7 @@ export class MovieTicketsService {
 
         this.setMovieOrders(movieOrdersToSave);
       },
-      error1 => console.log(error1)
+      (error1) => console.log(error1)
     );
   }
 }

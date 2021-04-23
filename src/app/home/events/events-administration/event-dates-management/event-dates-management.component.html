@@ -7,23 +7,17 @@
     </mat-expansion-panel-header>
 
     <form #form="ngForm" (ngSubmit)="save(form)" style="margin-bottom: 15px">
-      <div fxLayout="row wrap" fxLayoutGap="2%" fxLayoutAlign="space-between">
+      <div fxLayout="column"></div>
+
+      <div fxLayout="row wrap" fxLayoutGap="2%" style="margin-top: 15px" fxLayoutAlign="space-between">
         <app-event-standard-locations-select
-          fxFlex="69%"
-          fxFlex.lt-md="48%"
-          fxFlex.xs="98%"
+          fxFlex.lt-md="98%"
+          fxFlex="24%"
+          fxFlex.gt-md="30%"
           (standardLocationChanged)="onStandardLocationChanged($event)"
         ></app-event-standard-locations-select>
 
-        <div fxFlex="29%" fxFlex.xs="98%" fxFlex.lt-md="48%">
-          <button mat-stroked-button type="button" (click)="applyStandardLocation()" style="width: 100%">
-            {{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_APPLY_STANDARD_LOCATION' | translate }}
-          </button>
-        </div>
-      </div>
-
-      <div fxLayout="row wrap" fxLayoutGap="2%" style="margin-top: 15px" fxLayoutAlign="space-between">
-        <mat-form-field fxFlex.xs="98%" fxFlex="24%">
+        <mat-form-field fxFlex.lt-md="68%" fxFlex="24%" fxFlex.gt-md="15%">
           <input
             [(ngModel)]="createNewEventDateDate"
             [matDatepicker]="picker_date"
@@ -37,43 +31,11 @@
           <mat-datepicker #picker_date></mat-datepicker>
         </mat-form-field>
 
-        <mat-form-field fxFlex.xs="48%" fxFlex="10%">
-          <input
-            #dateHoursModel="ngModel"
-            id="hours-date"
-            matInput
-            max="24"
-            min="0"
-            name="dateHours"
-            ngModel
-            required
-            placeholder="{{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_HOURS' | translate }}"
-            type="number"
-          />
-          <mat-error *ngIf="dateHoursModel.invalid">
-            {{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_HOURS_INCORRECT' | translate }}
-          </mat-error>
-        </mat-form-field>
+        <div fxFlex.lt-md="28%" fxFlex="10%">
+          <app-time-input (timeChange)="onTimeChange($event)"></app-time-input>
+        </div>
 
-        <mat-form-field fxFlex.xs="48%" fxFlex="10%">
-          <input
-            #dateMinutesModel="ngModel"
-            id="minutes-date"
-            matInput
-            max="60"
-            min="0"
-            name="dateMinutes"
-            required
-            ngModel
-            placeholder="{{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_MINUTES' | translate }}"
-            type="number"
-          />
-          <mat-error *ngIf="dateMinutesModel.invalid">
-            {{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_MINUTES_INCORRECT' | translate }}
-          </mat-error>
-        </mat-form-field>
-
-        <mat-form-field fxFlex.xs="48%" fxFlex="20%">
+        <mat-form-field fxFlex.lt-md="48%" fxFlex="10%">
           <input
             #xModel="ngModel"
             id="x"
@@ -91,7 +53,7 @@
           </mat-error>
         </mat-form-field>
 
-        <mat-form-field fxFlex.xs="48%" fxFlex="20%">
+        <mat-form-field fxFlex.lt-md="48%" fxFlex="10%">
           <input
             #yModel="ngModel"
             id="y"
@@ -109,7 +71,7 @@
           </mat-error>
         </mat-form-field>
 
-        <mat-form-field fxFlex.xs="98%" fxFlex="60%">
+        <mat-form-field fxFlex.lt-md="98%" fxFlex="60%">
           <input
             #locationModel="ngModel"
             id="location"
@@ -128,7 +90,7 @@
           </mat-error>
         </mat-form-field>
 
-        <div fxFlex.xs="49%" fxFlex="8%">
+        <div fxFlex.lt-md="49%" fxFlex="14%">
           <button
             mat-stroked-button
             type="button"
@@ -144,7 +106,7 @@
           </button>
         </div>
 
-        <div fxFlex.xs="49%" fxFlex="19%">
+        <div fxFlex.lt-md="49%" fxFlex="19%">
           <button
             mat-flat-button
             type="button"

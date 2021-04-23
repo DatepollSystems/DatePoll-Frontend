@@ -2,7 +2,7 @@
 <div mat-dialog-content>
   <form #form="ngForm" (ngSubmit)="update(form)" fxLayout="row break" fxLayout.lt-xl="column" fxLayoutGap="2%" fxLayoutAlign="start">
     <!-- Name -->
-    <mat-form-field fxFlex="48%">
+    <mat-form-field fxFlex="100%%">
       <input
         #nameModel="ngModel"
         [(ngModel)]="name"
@@ -21,19 +21,20 @@
       </mat-error>
     </mat-form-field>
 
-    <!-- Group management -->
-    <app-group-and-subgroup-type-input-select
-      fxFlex="48%"
-      (allGroupsAndSubgroupsChange)="onFreeChange($event)"
-      (groupsAndSubgroupsChange)="onJoinedChange($event)"
-      [allGroupsAndSubgroups]="free"
-      [selectedGroupsAndSubgroups]="joined"
-    >
-    </app-group-and-subgroup-type-input-select>
+    <div fxFlex="100%" fxLayout="row" fxLayout.lt-sm="column" fxLayoutAlign="space-between">
+      <!-- Group management -->
+      <app-group-and-subgroup-type-input-select
+        fxFlex="90%"
+        (allGroupsAndSubgroupsChange)="onFreeChange($event)"
+        (groupsAndSubgroupsChange)="onJoinedChange($event)"
+        [allGroupsAndSubgroups]="free"
+        [disabled]="allMembers"
+        [selectedGroupsAndSubgroups]="joined"
+      >
+      </app-group-and-subgroup-type-input-select>
 
-    <mat-card matRipple class="mat-info-card not-selectable" fxFlex="98%">
-      <b>{{ 'INFORMATION' | translate }}</b> {{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_GROUPS_DESCRIPTION' | translate }}
-    </mat-card>
+      <app-all-groups-switch (toggleChange)="allMembersChanged($event)" [checked]="allMembers"></app-all-groups-switch>
+    </div>
 
     <app-event-dates-management fxFlex="48%" [dates]="dates" (datesChange)="onEventDatesChange($event)"></app-event-dates-management>
 

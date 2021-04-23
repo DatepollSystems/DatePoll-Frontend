@@ -7,11 +7,11 @@
   <ng-container *ngFor="let broadcast of this.broadcastsCopy">
     <mat-list-item matRipple matRippleRadius="100" class="not-selectable" (click)="routeTo(broadcast)">
       <div mat-line>
-        <b>{{ broadcast.subject }}</b
-        ><small> (~{{ broadcast.readTime }})</small>
+        <b>{{ broadcast.subject }}</b>
       </div>
       <div mat-line>
         {{ broadcast.sent | date: 'EE, dd.MM.yyyy HH:mm' }}
+        <small> (~{{ broadcast.readTime }})</small>
       </div>
       <div mat-line>{{ 'STARTPAGE_BROADCASTS_BY' | translate }} {{ broadcast.writerName }}</div>
     </mat-list-item>

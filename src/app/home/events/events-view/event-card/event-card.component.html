@@ -6,17 +6,16 @@
     >
   </mat-card-header>
   <mat-card-content>
-    <p style="margin-left: 15px;" *ngIf="event?.description?.length > 0">
+    <p style="margin-left: 15px" *ngIf="event?.description?.length > 0">
       {{ event.description }}
     </p>
-    <p style="margin-left: 15px;" *ngIf="event?.additionalInformation?.length > 0">
+    <p style="margin-left: 15px" *ngIf="event?.additionalInformation?.length > 0">
       {{ 'EVENTS_VIEW_EVENT_CARD_ADDITIONAL_INFORMATION' | translate }} <i>{{ event.additionalInformation }}</i>
     </p>
-    <b style="margin-left: 15px;" *ngIf="event?.userDecision?.length > 0">
+    <b style="margin-left: 15px" *ngIf="event?.userDecision?.length > 0">
       {{ 'EVENTS_VIEW_EVENT_CARD_VOTED_FOR' | translate }}: {{ event.userDecision }}
     </b>
-  </mat-card-content>
-  <mat-card-actions>
+
     <button (click)="onVote()" *ngIf="!event.alreadyVotedFor" color="primary" mat-flat-button [disabled]="voting" [class.spinner]="voting">
       {{ 'EVENTS_VIEW_EVENT_CARD_BUTTON_DECIDE' | translate }}
     </button>
@@ -34,5 +33,5 @@
       <mat-icon>info</mat-icon>
       {{ 'EVENTS_VIEW_EVENT_CARD_BUTTON_INFO' | translate }}
     </button>
-  </mat-card-actions>
+  </mat-card-content>
 </mat-card>

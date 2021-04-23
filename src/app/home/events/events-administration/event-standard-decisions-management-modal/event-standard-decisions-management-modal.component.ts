@@ -1,8 +1,7 @@
 import {Component, OnDestroy} from '@angular/core';
 import {NgForm} from '@angular/forms';
+import {MatSnackBar} from '@angular/material/snack-bar';
 import {Subscription} from 'rxjs';
-
-import {NotificationsService} from 'angular2-notifications';
 
 import {TranslateService} from '../../../../translation/translate.service';
 import {StandardDecisionsService} from '../../standardDecisions.service';
@@ -12,7 +11,7 @@ import {EventStandardDecision} from '../../models/standardDecision.model';
 @Component({
   selector: 'app-event-standard-decisions-management-modal',
   templateUrl: './event-standard-decisions-management-modal.component.html',
-  styleUrls: ['./event-standard-decisions-management-modal.component.css']
+  styleUrls: ['./event-standard-decisions-management-modal.component.css'],
 })
 export class EventStandardDecisionsManagementModalComponent implements OnDestroy {
   loadingStandardDecisions = true;
@@ -25,7 +24,7 @@ export class EventStandardDecisionsManagementModalComponent implements OnDestroy
 
   constructor(
     private standardDecisionsService: StandardDecisionsService,
-    private notificationsService: NotificationsService,
+    private snackBar: MatSnackBar,
     private translate: TranslateService
   ) {
     this.standardDecisions = standardDecisionsService.getStandardDecisions();
@@ -34,7 +33,7 @@ export class EventStandardDecisionsManagementModalComponent implements OnDestroy
       this.loadingStandardDecisions = true;
     }
 
-    this.standardDecisionsSubscription = standardDecisionsService.standardDecisionsChange.subscribe(value => {
+    this.standardDecisionsSubscription = standardDecisionsService.standardDecisionsChange.subscribe((value) => {
       this.standardDecisions = value;
       this.loadingStandardDecisions = false;
     });
@@ -54,10 +53,7 @@ export class EventStandardDecisionsManagementModalComponent implements OnDestroy
 
   addStandardDecision(form: NgForm) {
     if (this.color == null) {
-      this.notificationsService.warn(
-        this.translate.getTranslationFor('WARNING'),
-        this.translate.getTranslationFor('EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_COLOR_REQUIRED')
-      );
+      this.snackBar.open(this.translate.getTranslationFor('EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_COLOR_REQUIRED'));
       return;
     }
 
@@ -67,12 +63,9 @@ export class EventStandardDecisionsManagementModalComponent implements OnDestroy
       (response: any) => {
         console.log(response);
         this.standardDecisionsService.fetchStandardDecisions();
-        this.notificationsService.success(
-          this.translate.getTranslationFor('SUCCESSFULLY'),
-          this.translate.getTranslationFor('EVENTS_STANDARD_DECISIONS_MANAGEMENT_SUCCESSFULLY_ADDED')
-        );
+        this.snackBar.open(this.translate.getTranslationFor('EVENTS_STANDARD_DECISIONS_MANAGEMENT_SUCCESSFULLY_ADDED'));
       },
-      error => console.log(error)
+      (error) => console.log(error)
     );
 
     form.reset();
@@ -86,12 +79,9 @@ export class EventStandardDecisionsManagementModalComponent implements OnDestroy
       (response: any) => {
         console.log(response);
         this.standardDecisionsService.fetchStandardDecisions();
-        this.notificationsService.success(
-          this.translate.getTranslationFor('SUCCESSFULLY'),
-          this.translate.getTranslationFor('EVENTS_STANDARD_DECISIONS_MANAGEMENT_SUCCESSFULLY_REMOVED')
-        );
+        this.snackBar.open(this.translate.getTranslationFor('EVENTS_STANDARD_DECISIONS_MANAGEMENT_SUCCESSFULLY_REMOVED'));
       },
-      error => console.log(error)
+      (error) => console.log(error)
     );
   }
 }

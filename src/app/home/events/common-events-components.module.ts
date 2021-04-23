@@ -15,6 +15,7 @@ import {GroupAndSubgroupTypeInputSelectModule} from '../../utils/shared-componen
 import {MapsModule} from '../../utils/shared-components/maps-component/maps.module';
 import {QuestionDialogComponentModule} from '../../utils/shared-components/question-dialog/question-dialog-component.module';
 import {EventDatesListComponentModule} from './events-administration/event-dates-list/event-dates-list-component.module';
+import {AllMembersSwitchModule} from '../../utils/shared-components/all-members-switch/all-members-switch.module';
 
 import {EventsUserService} from './events-user.service';
 
@@ -23,6 +24,7 @@ import {EventStandardLocationsSelectComponent} from './events-administration/eve
 import {EventDecisionsListComponent} from './events-administration/event-decisions-list/event-decisions-list.component';
 import {EventUpdateModalComponent} from './events-administration/event-update-modal/event-update-modal.component';
 import {EventCardComponent} from './events-view/event-card/event-card.component';
+import {TimeInputModule} from '../../utils/shared-components/time-input/time-input.module';
 
 @NgModule({
   declarations: [
@@ -46,6 +48,8 @@ import {EventCardComponent} from './events-view/event-card/event-card.component'
     MapsModule,
     CommonComponentsModule,
     GroupAndSubgroupTypeInputSelectModule,
+    AllMembersSwitchModule,
+    TimeInputModule,
   ],
   providers: [
     EventsUserService,

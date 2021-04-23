@@ -1,10 +1,11 @@
 import {Component, OnDestroy} from '@angular/core';
 import {MatTableDataSource} from '@angular/material/table';
+import {MatSnackBar} from '@angular/material/snack-bar';
 import {Subscription} from 'rxjs';
-import {NotificationsService} from 'angular2-notifications';
 
 import {SessionsService} from './sessions.service';
 import {TranslateService} from '../../../translation/translate.service';
+
 import {Session} from './session.model';
 
 @Component({
@@ -19,11 +20,7 @@ export class SessionsComponent implements OnDestroy {
   sessions: Session[];
   sessionSubscription: Subscription;
 
-  constructor(
-    private sessionsService: SessionsService,
-    private notificationsService: NotificationsService,
-    private translate: TranslateService
-  ) {
+  constructor(private sessionsService: SessionsService, private snackBar: MatSnackBar, private translate: TranslateService) {
     this.sessions = this.sessionsService.getSessions();
     this.dataSource = new MatTableDataSource(this.sessions);
     this.sessionSubscription = this.sessionsService.sessionsChange.subscribe((value) => {
@@ -45,10 +42,7 @@ export class SessionsComponent implements OnDestroy {
       (data: any) => {
         console.log(data);
         this.sessionsService.fetchSessions();
-        this.notificationsService.success(
-          this.translate.getTranslationFor('SUCCESSFULLY'),
-          this.translate.getTranslationFor('SETTINGS_SECURITY_MODAL_SESSION_REMOVED_SUCCESSFUL')
-        );
+        this.snackBar.open(this.translate.getTranslationFor('SETTINGS_SECURITY_MODAL_SESSION_REMOVED_SUCCESSFUL'));
       },
       (error) => console.log(error)
     );

@@ -6,20 +6,23 @@ import {MatSelect} from '@angular/material/select';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import {Router} from '@angular/router';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 import {ReplaySubject, Subject, Subscription} from 'rxjs';
 import {take, takeUntil} from 'rxjs/operators';
 
 import {MyUserService} from '../../my-user.service';
 import {CinemaService} from '../cinema.service';
+import {TranslateService} from '../../../translation/translate.service';
 
 import {Movie} from '../models/movie.model';
 
 import {MovieBookingsModalComponent} from './movie-bookings-modal/movie-bookings-modal.component';
 import {MovieCreateModalComponent} from './movie-create-modal/movie-create-modal.component';
-import {MovieDeleteModalComponent} from './movie-delete-modal/movie-delete-modal.component';
 import {MovieEditModalComponent} from './movie-edit-modal/movie-edit-modal.component';
 import {MovieInfoModalComponent} from './movie-info-modal/movie-info-modal.component';
+import {QuestionDialogComponent} from '../../../utils/shared-components/question-dialog/question-dialog.component';
+import {UIHelper} from '../../../utils/helper/UIHelper';
 
 @Component({
   selector: 'app-movie-administration',
@@ -49,7 +52,9 @@ export class MovieAdministrationComponent implements OnInit, AfterViewInit, OnDe
     private myUserService: MyUserService,
     private router: Router,
     private dialog: MatDialog,
-    private bottomSheet: MatBottomSheet
+    private bottomSheet: MatBottomSheet,
+    private snackBar: MatSnackBar,
+    private translate: TranslateService
   ) {
     this.years = this.cinemaService.getYears();
     this.selectedYear = this.years[this.years.length - 1];
@@ -58,7 +63,7 @@ export class MovieAdministrationComponent implements OnInit, AfterViewInit, OnDe
       this.filteredYears.next(this.years.slice());
       this.selectedYear = this.years[this.years.length - 1];
       for (const year of this.years) {
-        if (year.includes(new Date().getFullYear().toString())) {
+        if (year.includes(UIHelper.getCurrentDate().getFullYear().toString())) {
           console.log('in');
           this.selectedYear = year;
           break;
@@ -145,8 +150,23 @@ export class MovieAdministrationComponent implements OnInit, AfterViewInit, OnDe
   }
 
   deleteMovie(id: number) {
-    this.bottomSheet.open(MovieDeleteModalComponent, {
-      data: {movieID: id},
+    const bottomSheetRef = this.bottomSheet.open(QuestionDialogComponent, {
+      data: {
+        question: 'CINEMA_TICKETS_ADMINISTRATION_MOVIE_DELETE_MODAL_TITLE',
+      },
+    });
+
+    bottomSheetRef.afterDismissed().subscribe((value: string) => {
+      if (value?.includes(QuestionDialogComponent.YES_VALUE)) {
+        this.cinemaService.deleteMovie(id).subscribe(
+          (data: any) => {
+            console.log(data);
+            this.cinemaService.fetchMovies();
+            this.snackBar.open(this.translate.getTranslationFor('CINEMA_TICKETS_ADMINISTRATION_MOVIE_DELETE_MODAL_SUCCESSFULLY_DELETED'));
+          },
+          (error) => console.log(error)
+        );
+      }
     });
   }
 

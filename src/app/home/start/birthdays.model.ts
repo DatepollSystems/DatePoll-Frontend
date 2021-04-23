@@ -1,5 +1,6 @@
 import {CalendarEvent} from 'angular-calendar';
 import {EventAction} from 'calendar-utils';
+import {UIHelper} from '../../utils/helper/UIHelper';
 
 export class HomeBirthdayModel implements CalendarEvent {
   public readonly name: string;
@@ -13,7 +14,7 @@ export class HomeBirthdayModel implements CalendarEvent {
   allDay = true;
   color = {
     primary: '#d2e812',
-    secondary: '#D1E8FF'
+    secondary: '#D1E8FF',
   };
   draggable: false;
   end: Date;
@@ -24,7 +25,7 @@ export class HomeBirthdayModel implements CalendarEvent {
     this.name = name;
     this.date = date;
 
-    this.age = new Date().getFullYear() - this.date.getFullYear();
+    this.age = UIHelper.getCurrentDate().getFullYear() - this.date.getFullYear();
 
     this.title = this.name + usersBirthday;
     this.start = this.date;

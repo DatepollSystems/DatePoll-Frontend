@@ -4,14 +4,15 @@ import {EventDate} from './event-date.model';
 import {EventResultGroup} from './event-result-group.model';
 import {EventResultUser} from './event-result-user.model';
 import {CalendarEvent} from 'angular-calendar';
+import {UIHelper} from '../../../utils/helper/UIHelper';
 
 export class Event implements CalendarEvent {
   public id: number;
   public name: string;
   public startDate: Date;
   public endDate: Date;
-  public startDateC: Date;
-  public endDateC: Date;
+  public startDateWithOutHoursAndMinutes: Date;
+  public endDateWithOutHoursAndMinutes: Date;
   public forEveryone: boolean;
   public description: string;
   public descriptionPreview = '';
@@ -55,9 +56,9 @@ export class Event implements CalendarEvent {
     this.id = id;
     this.name = name;
     this.startDate = startDate;
-    this.startDateC = new Date(this.startDate.getFullYear(), this.startDate.getMonth(), this.startDate.getDay());
+    this.startDateWithOutHoursAndMinutes = new Date(this.startDate.getFullYear(), this.startDate.getMonth(), this.startDate.getDay());
     this.endDate = endDate;
-    this.endDateC = new Date(this.endDate.getFullYear(), this.endDate.getMonth(), this.endDate.getDay());
+    this.endDateWithOutHoursAndMinutes = new Date(this.endDate.getFullYear(), this.endDate.getMonth(), this.endDate.getDay());
     this.forEveryone = forEveryone;
     this.description = description;
     if (description != null) {
@@ -118,12 +119,12 @@ export class Event implements CalendarEvent {
   }
 
   public getUntil(): string {
-    const current = new Date();
+    const currentDate = UIHelper.getCurrentDate();
 
-    const days = Math.round((this.startDate.getTime() - current.getTime()) / (1000 * 60 * 60 * 24));
+    const days = Math.round((this.startDate.getTime() - currentDate.getTime()) / (1000 * 60 * 60 * 24));
 
     if (days === 0) {
-      const hours = Math.round(Math.abs(this.startDate.getTime() - current.getTime()) / (60 * 60 * 1000));
+      const hours = Math.round(Math.abs(this.startDate.getTime() - currentDate.getTime()) / (60 * 60 * 1000));
       return hours + 'h';
     } else {
       return days + 'd';

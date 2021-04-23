@@ -18,8 +18,6 @@
 <div fxLayout="column" fxLayoutGap="2%" fxLayoutGap.gt-md="0.5%" fxLayoutGap.xs="5%" *ngIf="!sendingRequest">
   <app-event-dates-user-list fxFlex="100%" [dates]="dates"></app-event-dates-user-list>
 
-  <mat-divider></mat-divider>
-
   <!-- Complete chart for all votes -->
   <app-result-user-bar-chart
     fxFlex="100%"
