@@ -1,4 +1,14 @@
 export class UIHelper {
+  private static currentDate: Date;
+
+  public static getCurrentDate(): Date {
+    if (this.currentDate == null) {
+      this.currentDate = new Date();
+    }
+    console.log(this.currentDate);
+    return this.currentDate;
+  }
+
   public static getTimeLeft(date: Date) {
     const current = new Date();
 
@@ -23,10 +33,7 @@ export class UIHelper {
     if (!url.includes('http') && !url.includes('https')) {
       return false;
     }
-    if (!url.includes('.') || !url.includes(':') || !url.includes('//')) {
-      return false;
-    }
-    return true;
+    return !(!url.includes('.') || !url.includes(':') || !url.includes('//'));
   }
 
   public static cutString(strings: string[], length: number, prefix: string = null, seperator: string = ',') {

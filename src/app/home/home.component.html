@@ -121,7 +121,7 @@
       <button mat-icon-button aria-label="Opens or closes the navigation drawer" (click)="sidenav.toggle()">
         <mat-icon>menu</mat-icon>
       </button>
-      <span class="toolbar-heading" routerLink="/home">{{ serverInfo.community_name }}</span>
+      <span id="toolbar-heading" routerLink="/home">{{ serverInfo.community_name }}</span>
       <button mat-icon-button *ngIf="offline" (click)="onOfflineButtonClick()">
         <mat-icon>report_problemn</mat-icon>
       </button>

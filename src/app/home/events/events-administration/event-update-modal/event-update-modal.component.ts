@@ -11,6 +11,7 @@ import {GroupAndSubgroupModel, GroupType} from '../../../../utils/models/groupAn
 import {Decision} from '../../models/decision.model';
 import {EventDate} from '../../models/event-date.model';
 import {Event} from '../../models/event.model';
+import {UIHelper} from '../../../../utils/helper/UIHelper';
 
 @Component({
   selector: 'app-event-update-modal',
@@ -25,9 +26,6 @@ export class EventUpdateModalComponent implements OnDestroy {
   location: string;
   decisions: Decision[] = [];
   dates: EventDate[] = [];
-
-  startDate: Date;
-  endDate: Date;
 
   allMembers = false;
 
@@ -50,8 +48,6 @@ export class EventUpdateModalComponent implements OnDestroy {
     this.name = this.event.name;
     this.description = this.event.description;
     this.decisions = this.event.getDecisions();
-    this.startDate = new Date();
-    this.endDate = new Date();
     this.dates = this.event.getEventDates();
     this.allMembers = this.event.forEveryone;
 
@@ -111,8 +107,9 @@ export class EventUpdateModalComponent implements OnDestroy {
 
     const name = form.controls.name.value;
     const description = form.controls.description.value;
+    const currentDate = UIHelper.getCurrentDate();
 
-    const event = new Event(this.event.id, name, this.startDate, this.endDate, this.allMembers, description, this.decisions, this.dates);
+    const event = new Event(this.event.id, name, currentDate, currentDate, this.allMembers, description, this.decisions, this.dates);
     console.log(event);
     this.eventsService.updateEvent(event).subscribe(
       (response: any) => {

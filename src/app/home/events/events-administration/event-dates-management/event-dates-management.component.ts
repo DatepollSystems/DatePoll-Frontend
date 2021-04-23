@@ -6,6 +6,7 @@ import {IsMobileService} from '../../../../utils/is-mobile.service';
 import {SettingsService} from '../../../../utils/settings.service';
 import {Generator} from '../../../../utils/helper/Generator';
 import {Converter} from '../../../../utils/helper/Converter';
+import {UIHelper} from '../../../../utils/helper/UIHelper';
 
 import {MapsComponent} from '../../../../utils/shared-components/maps-component/maps.component';
 import {TimeInputComponent} from '../../../../utils/shared-components/time-input/time-input.component';

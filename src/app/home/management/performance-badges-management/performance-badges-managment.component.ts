@@ -17,6 +17,7 @@ import {PerformanceBadge} from './models/performanceBadge.model';
 import {QuestionDialogComponent} from '../../../utils/shared-components/question-dialog/question-dialog.component';
 import {InstrumentUpdateModalComponent} from './instrument-update-modal/instrument-update-modal.component';
 import {PerformanceBadgeUpdateModalComponent} from './performance-badge-update-modal/performance-badge-update-modal.component';
+import {UIHelper} from '../../../utils/helper/UIHelper';
 
 @Component({
   selector: 'app-performance-badges-managment',
@@ -33,7 +34,7 @@ export class PerformanceBadgesManagmentComponent implements OnDestroy {
   badgesSubscription: Subscription;
   badges: Badge[];
 
-  selectedYear = new Date().getFullYear();
+  selectedYear = UIHelper.getCurrentDate().getFullYear();
   yearBadges: CurrentYearUser[];
   yearBadgesSubscription: Subscription;
 

@@ -22,6 +22,7 @@ import {EventStandardDecisionsManagementModalComponent} from './event-standard-d
 import {EventStandardLocationsManagementModalComponent} from './event-standard-locations-management-modal/event-standard-locations-management-modal.component';
 import {EventUpdateModalComponent} from './event-update-modal/event-update-modal.component';
 import {EventUserManagementModalComponent} from './event-user-management-modal/event-user-management-modal.component';
+import {UIHelper} from '../../../utils/helper/UIHelper';
 
 @Component({
   selector: 'app-events-administration',
@@ -30,7 +31,6 @@ import {EventUserManagementModalComponent} from './event-user-management-modal/e
 })
 export class EventsAdministrationComponent implements OnInit, OnDestroy {
   eventsLoaded = false;
-
   showAllEvents: boolean;
 
   displayedColumns: string[] = ['name', 'startDate', 'endDate', 'description', 'actions'];
@@ -53,6 +53,8 @@ export class EventsAdministrationComponent implements OnInit, OnDestroy {
 
   @ViewChild('yearSelect', {static: true}) yearSelect: MatSelect;
 
+  private currentDate: Date;
+
   constructor(
     private eventsService: EventsService,
     private translate: TranslateService,
@@ -61,6 +63,8 @@ export class EventsAdministrationComponent implements OnInit, OnDestroy {
     private snackBar: MatSnackBar,
     private bottomSheet: MatBottomSheet
   ) {
+    this.currentDate = UIHelper.getCurrentDate();
+
     this.years = this.eventsService.getYears();
     this.selectedYear = this.years[this.years.length - 1];
     this.yearsSubscription = eventsService.yearsChange.subscribe((value) => {
@@ -68,7 +72,7 @@ export class EventsAdministrationComponent implements OnInit, OnDestroy {
       this.filteredYears.next(this.years.slice());
       this.selectedYear = this.years[this.years.length - 1];
       for (const year of this.years) {
-        if (year.includes(new Date().getFullYear().toString())) {
+        if (year.includes(this.currentDate.getFullYear().toString())) {
           this.selectedYear = year;
           break;
         }
@@ -114,7 +118,7 @@ export class EventsAdministrationComponent implements OnInit, OnDestroy {
     } else {
       this.eventsCopy = [];
       for (const event of this.events) {
-        const now = new Date().getTime();
+        const now = this.currentDate.getTime();
         if (event.endDate.getTime() > now) {
           this.eventsCopy.push(event);
         }
@@ -214,7 +218,7 @@ export class EventsAdministrationComponent implements OnInit, OnDestroy {
   yearSelectChange(value) {
     this.selectedYear = value;
     if (!this.showAllEvents) {
-      this.showAllEvents = Number(value) < new Date().getFullYear();
+      this.showAllEvents = Number(value) < this.currentDate.getFullYear();
     }
     this.eventsService.getEvents(value);
   }

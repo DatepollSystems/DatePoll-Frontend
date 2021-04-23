@@ -30,6 +30,7 @@ import {CustomDateFormatter} from './custom-date-formatter.provider';
 import {Movie} from '../cinema/models/movie.model';
 import {Event} from '../events/models/event.model';
 import {HomeBirthdayModel} from '../start/birthdays.model';
+import {UIHelper} from '../../utils/helper/UIHelper';
 
 @Component({
   selector: 'app-calendar',

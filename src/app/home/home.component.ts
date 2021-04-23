@@ -1,18 +1,21 @@
 import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {MatBottomSheet} from '@angular/material/bottom-sheet';
+import {MatDrawerMode} from '@angular/material/sidenav';
+import {MatSnackBar} from '@angular/material/snack-bar';
 import {Subscription} from 'rxjs';
 
 import {AuthService} from '../auth/auth.service';
-import {Permissions} from '../permissions';
 import {IsMobileService} from '../utils/is-mobile.service';
 import {SettingsService} from '../utils/settings.service';
 import {MyUserService} from './my-user.service';
+import {TranslateService} from '../translation/translate.service';
+
+import {UIHelper} from '../utils/helper/UIHelper';
+import {Permissions} from '../permissions';
 
 import {ServerInfoModel} from '../utils/server-info.model';
+
 import {QuestionDialogComponent} from '../utils/shared-components/question-dialog/question-dialog.component';
-import {TranslateService} from '../translation/translate.service';
-import {MatBottomSheet, MatBottomSheetRef} from '@angular/material/bottom-sheet';
-import {MatDrawerMode} from '@angular/material/sidenav';
-import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-home',
@@ -118,6 +121,11 @@ export class HomeComponent implements OnInit, OnDestroy {
 
     window.addEventListener('online', this.onNetworkStatusChange.bind(this));
     window.addEventListener('offline', this.onNetworkStatusChange.bind(this));
+
+    // if month is june
+    if (UIHelper.getCurrentDate().getMonth() === 5) {
+      document.getElementById('toolbar-heading').classList.add('rainbow-text');
+    }
   }
 
   ngOnDestroy(): void {

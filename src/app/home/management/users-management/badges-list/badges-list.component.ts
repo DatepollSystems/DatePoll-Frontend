@@ -1,14 +1,17 @@
 import {Component, EventEmitter, Input, OnChanges, OnDestroy, Output, SimpleChanges} from '@angular/core';
 import {NgForm} from '@angular/forms';
 import {Subscription} from 'rxjs';
+
 import {BadgesService} from '../../performance-badges-management/badges.service';
+import {UIHelper} from '../../../../utils/helper/UIHelper';
+
 import {Badge} from '../../performance-badges-management/models/badge.model';
 import {UserBadge} from './userBadge.model';
 
 @Component({
   selector: 'app-badges-list',
   templateUrl: './badges-list.component.html',
-  styleUrls: ['./badges-list.component.css']
+  styleUrls: ['./badges-list.component.css'],
 })
 export class BadgesListComponent implements OnChanges, OnDestroy {
   badges: Badge[];
@@ -24,13 +27,15 @@ export class BadgesListComponent implements OnChanges, OnDestroy {
   @Input()
   userBadges: UserBadge[] = [];
 
+  currentDate: Date = UIHelper.getCurrentDate();
+
   extraBadgeEnabled = false;
   extraBadgeDate: Date = new Date();
 
   constructor(private badgesService: BadgesService) {
     this.badges = this.badgesService.getBadges();
     this.remakeList();
-    this.badgesSubscription = this.badgesService.badgesChange.subscribe(value => {
+    this.badgesSubscription = this.badgesService.badgesChange.subscribe((value) => {
       this.badges = value;
       this.remakeList();
     });
@@ -51,7 +56,7 @@ export class BadgesListComponent implements OnChanges, OnDestroy {
     if (this.badges == null || this.joinDate == null) {
       return;
     }
-    const userIsInCommunityYears = new Date().getFullYear() - this.joinDate.getFullYear();
+    const userIsInCommunityYears = this.currentDate.getFullYear() - this.joinDate.getFullYear();
     for (const badge of this.badges) {
       let disabled = false;
       for (const userBadge of this.userBadges) {

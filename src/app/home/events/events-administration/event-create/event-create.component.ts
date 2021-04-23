@@ -13,6 +13,7 @@ import {GroupAndSubgroupModel, GroupType} from '../../../../utils/models/groupAn
 import {Decision} from '../../models/decision.model';
 import {EventDate} from '../../models/event-date.model';
 import {Event} from '../../models/event.model';
+import {UIHelper} from '../../../../utils/helper/UIHelper';
 
 @Component({
   selector: 'app-event-create',
@@ -20,9 +21,6 @@ import {Event} from '../../models/event.model';
   styleUrls: ['./event-create.component.css'],
 })
 export class EventCreateComponent implements OnDestroy {
-  startDate: Date;
-  endDate: Date;
-
   allMembers = false;
   groupsSubscription: Subscription;
   joined: GroupAndSubgroupModel[] = [];
@@ -108,10 +106,11 @@ export class EventCreateComponent implements OnDestroy {
 
     const name = form.controls.name.value;
     const description = form.controls.description.value;
+    const currentDate = UIHelper.getCurrentDate();
 
     this.router.navigateByUrl('/home/events/administration');
 
-    const event = new Event(0, name, new Date(), new Date(), this.allMembers, description, this.decisions, this.dates);
+    const event = new Event(0, name, currentDate, currentDate, this.allMembers, description, this.decisions, this.dates);
     console.log(event);
     this.eventsService.createEvent(event).subscribe(
       (response: any) => {

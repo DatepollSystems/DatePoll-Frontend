@@ -22,6 +22,7 @@ import {MovieCreateModalComponent} from './movie-create-modal/movie-create-modal
 import {MovieEditModalComponent} from './movie-edit-modal/movie-edit-modal.component';
 import {MovieInfoModalComponent} from './movie-info-modal/movie-info-modal.component';
 import {QuestionDialogComponent} from '../../../utils/shared-components/question-dialog/question-dialog.component';
+import {UIHelper} from '../../../utils/helper/UIHelper';
 
 @Component({
   selector: 'app-movie-administration',
@@ -62,7 +63,7 @@ export class MovieAdministrationComponent implements OnInit, AfterViewInit, OnDe
       this.filteredYears.next(this.years.slice());
       this.selectedYear = this.years[this.years.length - 1];
       for (const year of this.years) {
-        if (year.includes(new Date().getFullYear().toString())) {
+        if (year.includes(UIHelper.getCurrentDate().getFullYear().toString())) {
           console.log('in');
           this.selectedYear = year;
           break;

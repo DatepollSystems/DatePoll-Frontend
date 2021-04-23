@@ -9,10 +9,17 @@ mat-toolbar {
   z-index: 1000;
 }
 
-.toolbar-heading {
+#toolbar-heading {
   cursor: pointer;
   margin-left: 15px;
   margin-right: 15px;
+}
+
+/*noinspection ALL*/
+.rainbow-text {
+  background: linear-gradient(to right, red, orange, yellow, green, cyan, blue, violet);
+  color: transparent;
+  background-clip: text;
 }
 
 mat-sidenav {

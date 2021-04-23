@@ -39,12 +39,11 @@ export class StartComponent implements OnDestroy {
   broadcastSubscription: Subscription;
 
   eventVotingChangeLoading = false;
-
   openEventsCount = 0;
   loaded = false;
 
   alert: any;
-  happyAlertSubscription: Subscription;
+  alertSubscription: Subscription;
   showFirework = false;
 
   constructor(
@@ -85,7 +84,7 @@ export class StartComponent implements OnDestroy {
 
     this.alert = this.settingsService.getAlert();
     this.checkIfFireworkShouldBeShown();
-    this.happyAlertSubscription = this.settingsService.alertChange.subscribe((value) => {
+    this.alertSubscription = this.settingsService.alertChange.subscribe((value) => {
       this.alert = value;
       this.checkIfFireworkShouldBeShown();
     });
