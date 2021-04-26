@@ -1,1 +1,2 @@
-<div class="editor-preview" [innerHTML]="getSanitizedContent()"></div>
+<div *ngIf="livePreview" class="editor-preview" [innerHTML]="getSanitizedContentPreview(this.bodyHTML)"></div>
+<div *ngIf="!livePreview" class="editor-preview" [innerHTML]="getSanitizedContent()"></div>
