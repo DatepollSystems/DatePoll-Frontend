@@ -10,8 +10,6 @@ import {AppRoutingModule} from './app-routing.module';
 import {MaterialModule} from './material-module';
 import {TranslationModule} from './translation/translation.module';
 
-import {NoSanitizePipe} from './no-sanitize.pipe';
-
 import {AuthGuard} from './auth/auth-guard.service';
 import {AuthService} from './auth/auth.service';
 import {TranslateService} from './translation/translate.service';
@@ -30,11 +28,12 @@ import {environment} from '../environments/environment';
 import {AppComponent} from './app.component';
 import {BrowserCompatibilityModalComponent} from './browser-compatibility-modal/browser-compatibility-modal.component';
 import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
+import {NoSanitizeModule} from './utils/shared-components/no-sanitize/noSanitize.module';
 
 registerLocaleData(localeDe);
 
 @NgModule({
-  declarations: [AppComponent, PageNotFoundComponent, NoSanitizePipe, BrowserCompatibilityModalComponent],
+  declarations: [AppComponent, PageNotFoundComponent, BrowserCompatibilityModalComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -48,6 +47,7 @@ registerLocaleData(localeDe);
       // or after 30 seconds (whichever comes first).
       registrationStrategy: 'registerWhenStable:30000',
     }),
+    NoSanitizeModule,
   ],
   providers: [
     AuthService,
@@ -72,7 +72,6 @@ registerLocaleData(localeDe);
     {provide: MAT_DATE_LOCALE, useValue: 'de-AT'},
     {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 2500}},
   ],
-  exports: [NoSanitizePipe],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
