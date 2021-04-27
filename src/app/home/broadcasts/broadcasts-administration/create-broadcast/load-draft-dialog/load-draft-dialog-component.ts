@@ -9,6 +9,7 @@ import {TranslateService} from '../../../../../translation/translate.service';
 import {BroadcastsDraftsService} from '../../broadcasts-drafts.service';
 
 import {BroadcastDraft} from '../../../models/broadcast-draft.model';
+import {UIHelper} from '../../../../../utils/helper/UIHelper';
 
 @Component({
   selector: 'app-load-draft-dialog',
@@ -34,6 +35,10 @@ export class LoadDraftDialogComponent implements OnDestroy {
 
   ngOnDestroy() {
     this.draftsSubscription.unsubscribe();
+  }
+
+  getBroadcastContentPreview(str: string): string {
+    return UIHelper.cutString(str, 35);
   }
 
   loadDraft(draft: BroadcastDraft) {
