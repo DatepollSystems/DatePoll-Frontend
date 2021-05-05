@@ -50,14 +50,14 @@ export class AuthService {
         console.log(data);
         console.log('authService | Logout successful');
 
+        this.clearCookies();
         window.location.reload();
       },
       (error) => {
+        this.clearCookies();
         console.log(error);
       }
     );
-
-    this.clearCookies();
   }
 
   public clearCookies() {

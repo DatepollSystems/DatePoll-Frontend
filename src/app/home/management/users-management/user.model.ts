@@ -80,7 +80,7 @@ export class User {
       phoneNumbers.push(number.phoneNumber);
     }
 
-    return UIHelper.cutString(phoneNumbers, 14, '...');
+    return UIHelper.cutStrings(phoneNumbers, 14, '...');
   }
 
   public getPermissions(): string[] {
@@ -92,6 +92,6 @@ export class User {
   }
 
   public getEmailAddressesAsString(): string {
-    return UIHelper.cutString(this._emailAddresses, 24, '...');
+    return UIHelper.cutStrings(this._emailAddresses, 24, '...');
   }
 }

@@ -9,6 +9,10 @@ export class Converter {
     return boolean ? 'true' : 'false';
   }
 
+  public static numberToString(number: number): string {
+    return number.toString();
+  }
+
   public static stringToNumber(string: string): number {
     return parseInt(string, 10);
   }

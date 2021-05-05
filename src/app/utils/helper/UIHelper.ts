@@ -36,14 +36,21 @@ export class UIHelper {
     return !(!url.includes('.') || !url.includes(':') || !url.includes('//'));
   }
 
-  public static cutString(strings: string[], length: number, prefix: string = null, seperator: string = ',') {
+  public static cutString(string: string, length: number = 10, suffix: string = '...') {
+    if (string.length < length) {
+      return string;
+    }
+    return string.slice(0, length) + suffix;
+  }
+
+  public static cutStrings(strings: string[], length: number, suffix: string = null, seperator: string = ',') {
     let toReturn = '';
     for (const string of strings) {
       toReturn += string + seperator + ' ';
     }
 
     if (toReturn.length > length) {
-      return toReturn.slice(0, length) + prefix;
+      return toReturn.slice(0, length) + suffix;
     }
     return toReturn;
   }

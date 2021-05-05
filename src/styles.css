@@ -43,6 +43,11 @@ mat-card {
   margin-bottom: 0;
 }
 
+/* Fix icon alignment in tabs */
+.mat-tab-icon {
+  margin-right: 8px;
+}
+
 .mat-menu-info {
   padding-left: 18px;
 }

@@ -1,5 +1,5 @@
 <mat-card style="margin-left: 10px; margin-right: 10px">
   <mat-card-title>{{ 'PRIVACY_POLICY' | translate }}</mat-card-title>
 
-  <div [innerHTML]="getPrivacyPolicy()"></div>
+  <div [innerHTML]="serverInfo.community_privacy_policy | noSanitize"></div>
 </mat-card>

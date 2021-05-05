@@ -1,1 +1,6 @@
 @import './../editor-preview/editor-preview.component.css';
+
+.light-theme {
+  color: black !important;
+  background-color: white !important;
+}

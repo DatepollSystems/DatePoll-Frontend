@@ -9,6 +9,8 @@ import {DomSanitizer, SafeHtml} from '@angular/platform-browser';
 export class EditorPreviewComponent {
   @Input()
   bodyHTML: string;
+  @Input()
+  livePreview = false;
 
   html: SafeHtml = null;
 
@@ -16,8 +18,12 @@ export class EditorPreviewComponent {
 
   getSanitizedContent() {
     if (this.html == null) {
-      this.html = this.sanitizer.bypassSecurityTrustHtml(this.bodyHTML.replace(/(<style[\w\W]+style>)/g, ''));
+      this.html = this.getSanitizedContentPreview(this.bodyHTML);
     }
     return this.html;
+  }
+
+  getSanitizedContentPreview(html: string) {
+    return this.sanitizer.bypassSecurityTrustHtml(html.replace(/(<style[\w\W]+style>)/g, ''));
   }
 }

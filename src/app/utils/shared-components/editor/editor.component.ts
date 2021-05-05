@@ -1,11 +1,10 @@
 import {Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, ViewChild} from '@angular/core';
-import {DomSanitizer} from '@angular/platform-browser';
 import {EditorChangeContent, EditorChangeSelection, QuillEditorComponent} from 'ngx-quill';
 
 @Component({
   selector: 'app-editor',
   templateUrl: './editor.component.html',
-  styleUrls: ['./editor.component.css']
+  styleUrls: ['./editor.component.css'],
 })
 export class EditorComponent implements OnChanges {
   modules = {};
@@ -20,7 +19,7 @@ export class EditorComponent implements OnChanges {
 
   @ViewChild(QuillEditorComponent, {static: true}) quill: QuillEditorComponent;
 
-  constructor(private sanitizer: DomSanitizer) {
+  constructor() {
     this.modules = {
       toolbar: [
         ['bold', 'italic', 'underline', 'strike'], // toggled buttons
@@ -31,8 +30,8 @@ export class EditorComponent implements OnChanges {
         [{header: [1, 2, 3, 4, 5, 6, false]}],
         [{color: []}, {background: []}], // dropdown with defaults from theme
         ['clean'], // remove formatting button
-        ['link'] // link and image, video
-      ]
+        ['link'], // link and image, video
+      ],
     };
   }
 
@@ -40,10 +39,6 @@ export class EditorComponent implements OnChanges {
     if (this.body && this.bodyHTML) {
       this.quill.content = this.bodyHTML;
     }
-  }
-
-  getSanitizedContent(content: string) {
-    return this.sanitizer.bypassSecurityTrustHtml(content);
   }
 
   changedEditor(event: EditorChangeContent | EditorChangeSelection) {

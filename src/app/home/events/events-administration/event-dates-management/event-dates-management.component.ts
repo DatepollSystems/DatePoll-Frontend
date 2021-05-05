@@ -6,7 +6,6 @@ import {IsMobileService} from '../../../../utils/is-mobile.service';
 import {SettingsService} from '../../../../utils/settings.service';
 import {Generator} from '../../../../utils/helper/Generator';
 import {Converter} from '../../../../utils/helper/Converter';
-import {UIHelper} from '../../../../utils/helper/UIHelper';
 
 import {MapsComponent} from '../../../../utils/shared-components/maps-component/maps.component';
 import {TimeInputComponent} from '../../../../utils/shared-components/time-input/time-input.component';
@@ -68,12 +67,8 @@ export class EventDatesManagementComponent implements OnDestroy {
     }
 
     console.log('Selected standard location: ' + standardLocation.name);
-    if (standardLocation.x !== -199) {
-      this.x = standardLocation.x;
-    }
-    if (standardLocation.y !== -199) {
-      this.y = standardLocation.y;
-    }
+    this.x = standardLocation.x !== -199 ? standardLocation.x : 0;
+    this.y = standardLocation.y !== -199 ? standardLocation.y : 0;
     if (standardLocation.x !== -199 && standardLocation.y !== -199) {
       this.mapsComponent.drawMarker(this.x, this.y);
     }

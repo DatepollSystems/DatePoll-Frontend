@@ -38,7 +38,7 @@ export class BroadcastInfoComponent implements OnDestroy {
         }
 
         this.broadcast = this.broadcastsService.getBroadcast(Number(id));
-        if (this.broadcast != null) {
+        if (this.broadcast?.id === Number(id)) {
           this.loaded = true;
         }
         this.broadcastSubscription = this.broadcastsService.broadcastChange.subscribe((value) => {

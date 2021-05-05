@@ -27,7 +27,7 @@
           <mat-icon class="tab-icon">email</mat-icon>
           {{ 'CONTENT' | translate }}
         </ng-template>
-        <app-editor-preview [bodyHTML]="broadcast.bodyHTML" *ngIf="loaded"></app-editor-preview>
+        <app-editor-preview [bodyHTML]="broadcast.bodyHTML" *ngIf="loaded && broadcast?.bodyHTML?.length > 0"></app-editor-preview>
       </mat-tab>
 
       <mat-tab *ngIf="broadcast.attachments?.length > 0">

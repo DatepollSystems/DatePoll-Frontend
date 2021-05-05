@@ -2,7 +2,7 @@
   <div *ngFor="let draft of drafts" mat-list-item>
     <span mat-line
       >> {{ draft.subject }} {{ 'BROADCASTS_ADMINISTRATION_CREATE_LOAD_DRAFT_BY' | translate }} {{ draft.writerName }} |
-      {{ draft.body.slice(0, 18) }}</span
+      {{ getBroadcastContentPreview(draft.body) }}</span
     >
     <div mat-line fxLayout="row">
       <button mat-flat-button fxFlex="50%" color="accent" (click)="loadDraft(draft)">{{ 'LOAD' | translate }}</button>

@@ -12,4 +12,8 @@ export class ClipboardHelper {
     document.execCommand('copy');
     document.body.removeChild(selBox);
   }
+
+  public static getClipboard(): Promise<string> {
+    return navigator.clipboard.readText();
+  }
 }
