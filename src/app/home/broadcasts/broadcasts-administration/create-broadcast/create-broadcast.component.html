@@ -53,6 +53,11 @@
       </div>
     </div>
 
+    <mat-card class="mat-info-card">
+      <b>{{ 'BROADCASTS_ADMINISTRATION_CREATE_INFO_ATTACHMENTS_1' | translate }}</b>
+      {{ 'BROADCASTS_ADMINISTRATION_CREATE_INFO_ATTACHMENTS_2' | translate }}
+    </mat-card>
+
     <app-editor
       (bodyChanged)="bodyChanged($event)"
       (bodyHTMLChanged)="bodyHTMLChanged($event)"
