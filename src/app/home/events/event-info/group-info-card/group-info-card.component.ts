@@ -8,11 +8,12 @@ import {MyUserService} from '../../../my-user.service';
 
 import {EventResultGroup} from '../../models/event-result-group.model';
 import {EventResultSubgroup} from '../../models/event-result-subgroup.model';
+import {Converter} from '../../../../utils/helper/Converter';
 
 @Component({
   selector: 'app-group-info-card',
   templateUrl: './group-info-card.component.html',
-  styleUrls: ['./group-info-card.component.css']
+  styleUrls: ['./group-info-card.component.css'],
 })
 export class GroupInfoCardComponent implements OnInit, OnChanges {
   @Input()
@@ -24,6 +25,9 @@ export class GroupInfoCardComponent implements OnInit, OnChanges {
   resultSubgroup: EventResultSubgroup[] = [];
   sortedResultSubgroup: EventResultSubgroup[] = [];
 
+  simpleViewToken = 'event_info_simple_view';
+  simpleView = true;
+
   public myUserService: MyUserService;
   public EVENTS_ADMINISTRATION_PERMISSION = Permissions.EVENTS_ADMINISTRATION;
   public ROOT_PERMISSION = Permissions.ROOT_ADMINISTRATION;
@@ -32,6 +36,10 @@ export class GroupInfoCardComponent implements OnInit, OnChanges {
 
   constructor(myUserService: MyUserService, private excelService: ExcelService, private translate: TranslateService) {
     this.myUserService = myUserService;
+    const simpleView = localStorage.getItem(this.simpleViewToken);
+    if (simpleView != null) {
+      this.simpleView = Converter.stringToBoolean(simpleView);
+    }
   }
 
   ngOnInit() {
@@ -56,6 +64,11 @@ export class GroupInfoCardComponent implements OnInit, OnChanges {
 
   trackByFn(inde, item) {
     return item.id;
+  }
+
+  simpleViewChange($event) {
+    console.log('set simple view to ' + $event.checked);
+    localStorage.setItem(this.simpleViewToken, Converter.booleanToString($event.checked));
   }
 
   changeAdminMode(ob: MatSlideToggleChange) {
