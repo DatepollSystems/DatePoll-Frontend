@@ -122,7 +122,7 @@
       <div mat-line>
         {{ 'STARTPAGE_BROADCASTS_BY' | translate }}
         <i>{{ broadcast.writerName }}</i> ({{ broadcast.sent | date: 'EE, dd.MM. HH:mm' }})
-        <small class="until-left"> (~{{ broadcast.readTime }})</small>
+        <small class="until-left"> ({{ broadcast.readTime }})</small>
       </div>
     </mat-list-item>
 
@@ -249,7 +249,7 @@
                   {{ 'STARTPAGE_BROADCASTS_BY' | translate }} <i>{{ broadcast.writerName }}</i> ({{
                     broadcast.sent | date: 'dd.MM - HH:mm'
                   }})
-                  <small class="until-left"> (~{{ broadcast.readTime }})</small>
+                  <small class="until-left"> ({{ broadcast.readTime }})</small>
                 </td>
               </tr>
             </tbody>

@@ -2,8 +2,8 @@
   {{ error.message }}
 </div>
 
+<h3 style="margin-bottom: -11px">{{ 'BROADCASTS_ADMINISTRATION_CREATE_ATTACHMENTS_TITLE' | translate }}</h3>
 <mat-form-field>
-  <mat-label *ngIf="!(attachments?.length < 1)">{{ 'BROADCASTS_ADMINISTRATION_CREATE_ATTACHMENTS_TITLE' | translate }}</mat-label>
   <mat-chip-list #chipList>
     <mat-chip *ngFor="let attachment of attachments" [removable]="true" (removed)="remove(attachment)">
       {{ attachment.name }}
