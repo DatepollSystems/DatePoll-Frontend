@@ -1,48 +1,50 @@
-<ng-container *ngIf="broadcast != null">
-  <h1>{{ broadcast.subject }}</h1>
+<div class="fluid-container desktop-card-container">
+  <ng-container *ngIf="broadcast != null">
+    <h1>{{ broadcast.subject }}</h1>
 
-  <app-go-back-button></app-go-back-button>
+    <app-go-back-button></app-go-back-button>
 
-  <h3 matLine>{{ 'BROADCASTS_ADMINISTRATION_ADMIN_INFO_SENT_ON' | translate }} {{ broadcast.sent | date: 'EE, dd.MM.yyyy HH:mm' }}</h3>
-  <h3 matLine>{{ 'BROADCASTS_ADMINISTRATION_ADMIN_INFO_AUTHOR' | translate }} {{ broadcast.writerName }}</h3>
-  <h3 matLine *ngIf="broadcast.forEveryone">
-    {{ 'BROADCASTS_ADMINISTRATION_ADMIN_INFO_RECIPENT' | translate }}
-    {{ 'BROADCASTS_ADMINISTRATION_ADMIN_INFO_RECIPENT_ALL' | translate }}
-  </h3>
-  <h3 matLine *ngIf="!broadcast.forEveryone">
-    {{ 'BROADCASTS_ADMINISTRATION_ADMIN_INFO_RECIPENT' | translate }}
-    <span *ngFor="let group of broadcast.groups"
-      ><b>{{ group.name }}</b
-      >,
-    </span>
-    <span *ngFor="let subgroup of broadcast.subgroups"
-      ><b>{{ subgroup.group_name }}</b> {{ subgroup.name }},
-    </span>
-  </h3>
+    <h3 matLine>{{ 'BROADCASTS_ADMINISTRATION_ADMIN_INFO_SENT_ON' | translate }} {{ broadcast.sent | date: 'EE, dd.MM.yyyy HH:mm' }}</h3>
+    <h3 matLine>{{ 'BROADCASTS_ADMINISTRATION_ADMIN_INFO_AUTHOR' | translate }} {{ broadcast.writerName }}</h3>
+    <h3 matLine *ngIf="broadcast.forEveryone">
+      {{ 'BROADCASTS_ADMINISTRATION_ADMIN_INFO_RECIPENT' | translate }}
+      {{ 'BROADCASTS_ADMINISTRATION_ADMIN_INFO_RECIPENT_ALL' | translate }}
+    </h3>
+    <h3 matLine *ngIf="!broadcast.forEveryone">
+      {{ 'BROADCASTS_ADMINISTRATION_ADMIN_INFO_RECIPENT' | translate }}
+      <span *ngFor="let group of broadcast.groups"
+        ><b>{{ group.name }}</b
+        >,
+      </span>
+      <span *ngFor="let subgroup of broadcast.subgroups"
+        ><b>{{ subgroup.group_name }}</b> {{ subgroup.name }},
+      </span>
+    </h3>
 
-  <mat-tab-group mat-align-tabs="start">
-    <mat-tab>
-      <ng-template mat-tab-label>
-        <mat-icon class="tab-icon">email</mat-icon>
-        {{ 'CONTENT' | translate }}
-      </ng-template>
-      <app-editor-preview [bodyHTML]="broadcast.bodyHTML" *ngIf="loaded && broadcast?.bodyHTML?.length > 0"></app-editor-preview>
-    </mat-tab>
+    <mat-tab-group mat-align-tabs="start">
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <mat-icon class="tab-icon">email</mat-icon>
+          {{ 'CONTENT' | translate }}
+        </ng-template>
+        <app-editor-preview [bodyHTML]="broadcast.bodyHTML" *ngIf="loaded && broadcast?.bodyHTML?.length > 0"></app-editor-preview>
+      </mat-tab>
 
-    <mat-tab *ngIf="broadcast.attachments?.length > 0">
-      <ng-template mat-tab-label>
-        <mat-icon class="tab-icon">attachment</mat-icon>
-        {{ 'ATTACHMENTS' | translate }}
-      </ng-template>
+      <mat-tab *ngIf="broadcast.attachments?.length > 0">
+        <ng-template mat-tab-label>
+          <mat-icon class="tab-icon">attachment</mat-icon>
+          {{ 'ATTACHMENTS' | translate }}
+        </ng-template>
 
-      <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="2%">
-        <app-broadcast-attachment-card
-          *ngFor="let attachment of broadcast.attachments"
-          [attachment]="attachment"
-        ></app-broadcast-attachment-card>
-      </div>
-    </mat-tab>
-  </mat-tab-group>
-</ng-container>
+        <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="2%">
+          <app-broadcast-attachment-card
+            *ngFor="let attachment of broadcast.attachments"
+            [attachment]="attachment"
+          ></app-broadcast-attachment-card>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+  </ng-container>
 
-<mat-progress-bar mode="indeterminate" *ngIf="!loaded"></mat-progress-bar>
+  <mat-progress-bar mode="indeterminate" *ngIf="!loaded"></mat-progress-bar>
+</div>
