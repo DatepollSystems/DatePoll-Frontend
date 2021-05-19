@@ -1,28 +1,36 @@
-<mat-form-field *ngIf="broadcasts.length != 0">
-  <mat-label>{{ 'BROADCASTS_ADMINISTRATION_SEARCH_LIST' | translate }}</mat-label>
-  <input matInput [(ngModel)]="searchFilter" (input)="searchFilterUpdate($event)" />
-</mat-form-field>
+<div class="fluid-container">
+  <mat-card>
+    <mat-form-field *ngIf="broadcasts.length != 0">
+      <mat-label>{{ 'BROADCASTS_ADMINISTRATION_SEARCH_LIST' | translate }}</mat-label>
+      <input matInput [(ngModel)]="searchFilter" (input)="searchFilterUpdate($event)" />
+    </mat-form-field>
 
-<mat-list>
-  <ng-container *ngFor="let broadcast of this.broadcastsCopy">
-    <mat-list-item matRipple matRippleRadius="100" class="not-selectable" (click)="routeTo(broadcast)">
-      <div mat-line>
-        <b>{{ broadcast.subject }}</b>
-      </div>
-      <div mat-line>
-        {{ broadcast.sent | date: 'EE, dd.MM.yyyy HH:mm' }}
-        <small> ({{ broadcast.readTime }})</small>
-      </div>
-      <div mat-line>{{ 'STARTPAGE_BROADCASTS_BY' | translate }} {{ broadcast.writerName }}</div>
-    </mat-list-item>
-    <mat-divider></mat-divider>
-  </ng-container>
-</mat-list>
+    <div infinite-scroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" (scrolled)="onScrollDown()">
+      <mat-list>
+        <ng-container *ngFor="let broadcast of this.broadcastsCopy">
+          <mat-list-item matRipple matRippleRadius="100" class="not-selectable" (click)="routeTo(broadcast)">
+            <div mat-line>
+              <b>{{ broadcast.subject }}</b>
+            </div>
+            <div mat-line>
+              {{ broadcast.sent | date: 'EE, dd.MM.yyyy HH:mm' }}
+              <small> ({{ broadcast.readTime }})</small>
+            </div>
+            <div mat-line>{{ 'STARTPAGE_BROADCASTS_BY' | translate }} {{ broadcast.writerName }}</div>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+        </ng-container>
+      </mat-list>
+    </div>
 
-<div fxLayout="row" fxLayoutAlign="center" *ngIf="empty">
-  <div fxFlex style="text-align: center">
-    {{ 'BROADCASTS_EMPTY' | translate }}
-  </div>
+    <div fxLayout="row" fxLayoutAlign="center" *ngIf="empty">
+      <div fxFlex style="text-align: center">
+        {{ 'BROADCASTS_EMPTY' | translate }}
+      </div>
+    </div>
+
+    <div fxLayout="row" fxLayoutAlign="center" *ngIf="broadcasts?.length === 0 && !empty">
+      <mat-spinner></mat-spinner>
+    </div>
+  </mat-card>
 </div>
-
-<mat-spinner *ngIf="broadcasts?.length === 0"></mat-spinner>

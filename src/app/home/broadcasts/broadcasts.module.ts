@@ -2,6 +2,7 @@ import {CommonModule} from '@angular/common';
 import {NgModule} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {DateAdapter, MAT_DATE_FORMATS} from '@angular/material/core';
+import {InfiniteScrollModule} from 'ngx-infinite-scroll';
 
 import {MaterialModule} from '../../material-module';
 import {TranslationModule} from '../../translation/translation.module';
@@ -17,7 +18,16 @@ import {GoBackButtonModule} from '../../utils/shared-components/go-back-button/g
 
 @NgModule({
   declarations: [BroadcastInfoComponent, BroadcastsViewComponent, BroadcastAttachmentCardComponent],
-  imports: [CommonModule, FormsModule, MaterialModule, TranslationModule, GoBackButtonModule, EditorPreviewModule, BroadcastsRoutingModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    MaterialModule,
+    TranslationModule,
+    GoBackButtonModule,
+    EditorPreviewModule,
+    InfiniteScrollModule,
+    BroadcastsRoutingModule,
+  ],
   providers: [
     {provide: DateAdapter, useClass: CustomDateAdapter},
     {provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS},

@@ -1,4 +1,5 @@
 import {UIHelper} from '../../../utils/helper/UIHelper';
+import {Converter} from '../../../utils/helper/Converter';
 
 export class Broadcast {
   public id: number;
@@ -34,6 +35,16 @@ export class Broadcast {
 
     // Calculate read time at about 200 words per minute
     this.readTime = UIHelper.getReadTime(this.body);
+  }
+
+  public static createOfDTO(broadcast: any) {
+    return new Broadcast(
+      broadcast.id,
+      broadcast.subject,
+      Converter.getIOSDate(broadcast.created_at),
+      broadcast.body,
+      broadcast.writer_name
+    );
   }
 }
 

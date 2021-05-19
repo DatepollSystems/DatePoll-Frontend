@@ -5,6 +5,7 @@ import {Converter} from '../../utils/helper/Converter';
 import {HttpService} from '../../utils/http.service';
 
 import {Broadcast} from './models/broadcast.model';
+import {UserChange} from '../management/users-management/users-changes-management/userChange.model';
 
 @Injectable({
   providedIn: 'root',
@@ -13,13 +14,16 @@ export class BroadcastsService {
   private _broadcasts: Broadcast[] = [];
   public broadcastsChange: Subject<Broadcast[]> = new Subject<Broadcast[]>();
 
+  private _broadcastsSearched: Broadcast[] = [];
+  public broadcastsSearchedChange: Subject<Broadcast[]> = new Subject<Broadcast[]>();
+
   private broadcast: Broadcast;
   public broadcastChange = new Subject<Broadcast>();
 
   constructor(private httpService: HttpService) {}
 
-  public getBroadcasts(): Broadcast[] {
-    this.fetchBroadcasts();
+  public getBroadcasts(page: number = 0): Broadcast[] {
+    this.fetchBroadcasts(page);
     return this._broadcasts.slice();
   }
 
@@ -28,20 +32,14 @@ export class BroadcastsService {
     this.broadcastsChange.next(this._broadcasts.slice());
   }
 
-  public fetchBroadcasts() {
-    this.httpService.loggedInV1GETRequest('/broadcast', 'fetchBroadcasts').subscribe(
+  public fetchBroadcasts(page: number = 0) {
+    this.httpService.loggedInV1GETRequest('/broadcast/all/' + page + '/35', 'fetchBroadcasts').subscribe(
       (response: any) => {
         console.log(response);
 
         const broadcasts = [];
         for (const broadcast of response.broadcasts) {
-          const toSaveBroadcast = new Broadcast(
-            broadcast.id,
-            broadcast.subject,
-            Converter.getIOSDate(broadcast.created_at),
-            broadcast.body,
-            broadcast.writer_name
-          );
+          const toSaveBroadcast = Broadcast.createOfDTO(broadcast);
           toSaveBroadcast.forEveryone = broadcast.for_everyone;
 
           broadcasts.push(toSaveBroadcast);
@@ -63,13 +61,7 @@ export class BroadcastsService {
         console.log(response);
 
         const broadcast = response.broadcast;
-        const toSaveBroadcast = new Broadcast(
-          broadcast.id,
-          broadcast.subject,
-          Converter.getIOSDate(broadcast.created_at),
-          broadcast.body,
-          broadcast.writer_name
-        );
+        const toSaveBroadcast = Broadcast.createOfDTO(broadcast);
         toSaveBroadcast.forEveryone = broadcast.for_everyone;
         toSaveBroadcast.groups = broadcast.groups;
         toSaveBroadcast.subgroups = broadcast.subgroups;
@@ -84,5 +76,35 @@ export class BroadcastsService {
   private setBroadcast(broadcast: Broadcast) {
     this.broadcast = broadcast;
     this.broadcastChange.next(this.broadcast);
+  }
+
+  public searchBroadcast(search: string): Broadcast[] {
+    this.fetchSearchUserChanges(search);
+    return this._broadcastsSearched.slice();
+  }
+
+  private fetchSearchUserChanges(search: string) {
+    const dto = {
+      search,
+    };
+    this.httpService.loggedInV1POSTRequest('/broadcast/search', dto, 'fetchBroadcastSearch').subscribe(
+      (response: any) => {
+        console.log(response);
+        const broadcasts = [];
+        for (const broadcast of response.broadcasts) {
+          const toSaveBroadcast = Broadcast.createOfDTO(broadcast);
+          toSaveBroadcast.forEveryone = broadcast.for_everyone;
+
+          broadcasts.push(toSaveBroadcast);
+        }
+        this.setSearchedBroadcasts(broadcasts);
+      },
+      (error) => console.log(error)
+    );
+  }
+
+  private setSearchedBroadcasts(searchBroadcasts: Broadcast[]) {
+    this._broadcastsSearched = searchBroadcasts;
+    this.broadcastsSearchedChange.next(this._broadcastsSearched.slice());
   }
 }

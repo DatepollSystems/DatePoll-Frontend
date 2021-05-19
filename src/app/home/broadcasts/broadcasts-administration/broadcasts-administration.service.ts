@@ -39,13 +39,7 @@ export class BroadcastsAdministrationService {
 
         const broadcasts = [];
         for (const broadcast of response.broadcasts) {
-          const toSaveBroadcast = new Broadcast(
-            broadcast.id,
-            broadcast.subject,
-            Converter.getIOSDate(broadcast.created_at),
-            broadcast.body,
-            broadcast.writer_name
-          );
+          const toSaveBroadcast = Broadcast.createOfDTO(broadcast);
 
           broadcasts.push(toSaveBroadcast);
         }
@@ -82,13 +76,7 @@ export class BroadcastsAdministrationService {
         }
 
         const broadcast = response.broadcast;
-        const toSaveBroadcast = new Broadcast(
-          broadcast.id,
-          broadcast.subject,
-          Converter.getIOSDate(broadcast.created_at),
-          broadcast.body,
-          broadcast.writer_name
-        );
+        const toSaveBroadcast = Broadcast.createOfDTO(broadcast);
         toSaveBroadcast.groups = broadcast.groups;
         toSaveBroadcast.subgroups = broadcast.subgroups;
         toSaveBroadcast.attachments = broadcast.attachments;

@@ -7,25 +7,36 @@ import {Broadcast} from '../models/broadcast.model';
 @Component({
   selector: 'app-broadcasts-view',
   templateUrl: './broadcasts-view.component.html',
-  styleUrls: ['./broadcasts-view.component.css']
+  styleUrls: ['./broadcasts-view.component.css'],
 })
 export class BroadcastsViewComponent implements OnDestroy {
   broadcasts: Broadcast[] = [];
   broadcastsCopy: Broadcast[] = [];
   broadcastsSubscription: Subscription;
+  broadcastsSearchedSubscription: Subscription;
   empty = false;
 
   searchFilter = '';
 
+  page = 1;
+
   constructor(private broadcastsService: BroadcastsService, private router: Router) {
-    this.broadcasts = broadcastsService.getBroadcasts();
+    this.broadcasts = broadcastsService.getBroadcasts(0);
     this.broadcastsCopy = this.broadcasts.slice();
-    this.broadcastsSubscription = broadcastsService.broadcastsChange.subscribe(value => {
-      this.broadcasts = value;
+    this.broadcastsSubscription = broadcastsService.broadcastsChange.subscribe((value) => {
+      if (value.length === 0) {
+        this.page--;
+        return;
+      }
+
+      this.broadcasts = this.broadcasts.concat(value);
       this.broadcastsCopy = this.broadcasts.slice();
       if (this.broadcasts.length === 0) {
         this.empty = true;
       }
+    });
+    this.broadcastsSearchedSubscription = broadcastsService.broadcastsSearchedChange.subscribe((value) => {
+      this.broadcastsCopy = value;
     });
   }
 
@@ -38,16 +49,18 @@ export class BroadcastsViewComponent implements OnDestroy {
   }
 
   searchFilterUpdate(event) {
-    this.broadcastsCopy = [];
-    for (const broadcast of this.broadcasts) {
-      if (
-        broadcast.subject.toLocaleLowerCase().includes(this.searchFilter.toLocaleLowerCase()) ||
-        broadcast.writerName.toLowerCase().includes(this.searchFilter.toLowerCase()) ||
-        broadcast.body.toLowerCase().includes(this.searchFilter.toLowerCase()) ||
-        broadcast.sent.toString().includes(this.searchFilter.toLowerCase())
-      ) {
-        this.broadcastsCopy.push(broadcast);
-      }
+    if (!this.searchFilter || this.searchFilter?.length < 1) {
+      this.broadcastsCopy = this.broadcasts.slice();
+      return;
     }
+    this.broadcastsService.searchBroadcast(this.searchFilter);
+  }
+
+  onScrollDown() {
+    if (this.searchFilter || this.searchFilter?.length > 0) {
+      return;
+    }
+    this.page++;
+    this.broadcastsService.getBroadcasts(this.page);
   }
 }
