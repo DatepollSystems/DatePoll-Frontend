@@ -1,3 +1,6 @@
+import {UIHelper} from '../../../utils/helper/UIHelper';
+import {Converter} from '../../../utils/helper/Converter';
+
 export class Broadcast {
   public id: number;
   public subject: string;
@@ -31,13 +34,17 @@ export class Broadcast {
     this.writerName = writerName;
 
     // Calculate read time at about 200 words per minute
-    const words = this.body.split(' ').length;
-    const secondsToRead = words / 3.33333;
-    if (secondsToRead > 60) {
-      this.readTime = Math.ceil(secondsToRead / 60) + 'm';
-    } else {
-      this.readTime = Math.ceil(secondsToRead) + 's';
-    }
+    this.readTime = UIHelper.getReadTime(this.body);
+  }
+
+  public static createOfDTO(broadcast: any) {
+    return new Broadcast(
+      broadcast.id,
+      broadcast.subject,
+      Converter.getIOSDate(broadcast.created_at),
+      broadcast.body,
+      broadcast.writer_name
+    );
   }
 }
 

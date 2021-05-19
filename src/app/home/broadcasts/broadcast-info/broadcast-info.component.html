@@ -1,4 +1,4 @@
-<mat-card>
+<div class="fluid-container desktop-card-container">
   <ng-container *ngIf="broadcast != null">
     <h1>{{ broadcast.subject }}</h1>
 
@@ -45,6 +45,6 @@
       </mat-tab>
     </mat-tab-group>
   </ng-container>
-</mat-card>
 
-<mat-progress-bar mode="indeterminate" *ngIf="!loaded"></mat-progress-bar>
+  <mat-progress-bar mode="indeterminate" *ngIf="!loaded"></mat-progress-bar>
+</div>

@@ -134,6 +134,7 @@
   "NAV_CINEMA_SERVICE": "Kinodienst",
   "NAV_CINEMA_ADMINISTRATION": "Filmverwaltung",
 
+  "NAV_BROADCASTS": "Mitteilungen",
   "NAV_BROADCASTS_ADMINISTRATION": "Mitteilungsverwaltung",
 
   "NAV_MANAGEMENT_USERS": "Mitgliederverwaltung",
@@ -287,6 +288,8 @@
   "BROADCASTS_ADMINISTRATION_CREATE_SAVE_DRAFT": "Speichern",
   "BROADCASTS_ADMINISTRATION_CREATE_CONFIRM_QUESTION": "E-Mail-Versand bestätigen",
   "BROADCASTS_ADMINISTRATION_CREATE_ALL_MEMBERS": "Alle Mitglieder",
+  "BROADCASTS_ADMINISTRATION_CREATE_INFO_ATTACHMENTS_1": "Kopiere keine Anhänge in den Editor!",
+  "BROADCASTS_ADMINISTRATION_CREATE_INFO_ATTACHMENTS_2": "Füge Anhänge über das \"Anhänge hinzufügen\" Feld hinzu.",
   "BROADCASTS_ADMINISTRATION_CREATE_NOTIFICATION_SUBJECT_LENGTH": "Der Betreff muss aus mindestens 4 Zeichen bestehen.",
   "BROADCASTS_ADMINISTRATION_CREATE_NOTIFICATION_NO_GROUPS_AND_NOT_ALL_MEMBERS": "Alle Mitglieder oder eine Gruppe / Register auswählen",
   "BROADCASTS_ADMINISTRATION_CREATE_NOTIFICATION_BODY_LENGTH": "Schreibe eine etwas längere Email.",
@@ -676,9 +679,9 @@
   "EVENTS_VIEW_EVENT_VOTE_FOR_ADDITIONAL_INFORMATION_MODAL_TITLE": "Zusatzinformationen",
   "EVENTS_VIEW_EVENT_VOTE_FOR_ADDITIONAL_INFORMATION_MODAL_INFO": "Im nächsten Schritt kannst du dich für eine Antwort entscheiden.",
   "EVENTS_VIEW_EVENT_VOTE_FOR_ADDITIONAL_INFORMATION_MODAL_FORM_PLACEHOLDER": "Zusatzinformationen",
-  "EVENTS_VIEW_EVENT_EXPORT_ALL_FILE_NAME": "abstimmungsergebnis_alle_mitglieder",
-  "EVENTS_VIEW_EVENT_EXPORT_GROUP_FILE_NAME": "abstimmungsergebnis_gruppe_",
-  "EVENTS_VIEW_EVENT_EXPORT_SUBGROUP_FILE_NAME": "abstimmungsergebnis_register_",
+  "EVENTS_VIEW_EVENT_EXPORT_ALL_FILE_NAME": "anwesenheits_export_alle_mitglieder",
+  "EVENTS_VIEW_EVENT_EXPORT_GROUP_FILE_NAME": "anwesenheits_export_zug_",
+  "EVENTS_VIEW_EVENT_EXPORT_SUBGROUP_FILE_NAME": "anwesenheits_export_register_",
 
   "EVENTS_CANCEL_VOTING": "Willst du deine Stimme wirklich entfernen?",
 
@@ -751,6 +754,7 @@
   "EVENTS_ADMINISTRATION_INFO_EVENT_SURNAME": "Nachname",
   "EVENTS_ADMINISTRATION_INFO_EVENT_DECISION": "Antwort",
   "EVENTS_ADMINISTRATION_INFO_EVENT_SHOW_ADMINISTRATION_MODE": "Administrations-Modus",
+  "EVENTS_ADMINISTRATION_INFO_EVENT_SIMPLE_VIEW": "Einfache Übersicht",
 
   "EVENTS_STANDARD_DECISIONS_MANAGEMENT": "Standard-Antworten-Verwaltung",
   "EVENTS_STANDARD_DECISIONS_MANAGEMENT_SUCCESSFULLY_ADDED": "Standard-Antwort gespeichert.",

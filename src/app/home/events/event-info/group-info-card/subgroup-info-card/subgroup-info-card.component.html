@@ -1,4 +1,4 @@
-<mat-expansion-panel style="margin-bottom: 15px;" *ngIf="!resultSubgroup?.event?.anonymous">
+<mat-expansion-panel style="margin-bottom: 15px" *ngIf="!resultSubgroup?.event?.anonymous && !simpleView">
   <mat-expansion-panel-header>
     <mat-panel-title>
       {{ resultSubgroup.name }}
@@ -11,7 +11,7 @@
   ></app-result-user-bar-chart>
 
   <div
-    style="margin-top: 10px;"
+    style="margin-top: 10px"
     fxLayout="row"
     fxLayout.xs="column"
     fxLayoutGap.lt-sm="5%"
@@ -46,7 +46,7 @@
   ></app-event-user-management>
 </mat-expansion-panel>
 
-<mat-card *ngIf="resultSubgroup?.event?.anonymous">
+<mat-card *ngIf="resultSubgroup?.event?.anonymous || simpleView">
   <mat-card-content>
     <mat-card-subtitle>{{ resultSubgroup.name }}</mat-card-subtitle>
     <app-result-user-bar-chart

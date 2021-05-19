@@ -18,6 +18,11 @@
         {{ 'CALENDAR' | translate }}</a
       >
 
+      <a *ngIf="serverInfo.broadcasts_enabled" (click)="onPageChange()" mat-list-item routerLink="broadcasts" routerLinkActive="activated">
+        <mat-icon>message</mat-icon>
+        {{ 'NAV_BROADCASTS' | translate }}</a
+      >
+
       <!--      <a (click)="onPageChange()" mat-list-item routerLink="/home/seatReservation" routerLinkActive="activated">-->
       <!--        <mat-icon>place</mat-icon>-->
       <!--        {{ 'NAV_SEAT_RESERVATION' | translate }}</a-->

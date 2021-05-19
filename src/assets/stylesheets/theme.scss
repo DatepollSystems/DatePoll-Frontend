@@ -50,9 +50,16 @@ $dark-theme: mat-dark-theme($dark-primary, $dark-accent, $dark-warn);
     background-color: #757575;
   }
 
-  /* User changes mark fix */
+  @media screen and (min-width: 1314px) {
+    .desktop-card-container {
+      background-color: #424242;
+      color: white;
+    }
+  }
+
+  /* User changes marked colored */
   .change-mark {
-    color: black;
+    background-color: #616161;
   }
 
   /* Mat multi table sort tag color fix */

@@ -11,11 +11,14 @@ import {EventResultSubgroup} from '../../../models/event-result-subgroup.model';
 @Component({
   selector: 'app-subgroup-info-card',
   templateUrl: './subgroup-info-card.component.html',
-  styleUrls: ['./subgroup-info-card.component.css']
+  styleUrls: ['./subgroup-info-card.component.css'],
 })
 export class SubgroupInfoCardComponent {
   @Input()
   resultSubgroup: EventResultSubgroup;
+
+  @Input()
+  simpleView = true;
 
   public myUserService: MyUserService;
   public EVENTS_ADMINISTRATION_PERMISSION = Permissions.EVENTS_ADMINISTRATION;

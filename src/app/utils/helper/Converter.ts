@@ -2,7 +2,7 @@ import {BrowserHelper} from './BrowserHelper';
 
 export class Converter {
   public static stringToBoolean(string: string): boolean {
-    return string.trim().toLowerCase() === 'true';
+    return string?.trim().toLowerCase() === 'true';
   }
 
   public static booleanToString(boolean: boolean): string {
