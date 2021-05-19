@@ -50,6 +50,13 @@ $dark-theme: mat-dark-theme($dark-primary, $dark-accent, $dark-warn);
     background-color: #757575;
   }
 
+  @media screen and (min-width: 1314px) {
+    .desktop-card-container {
+      background-color: #424242;
+      color: white;
+    }
+  }
+
   /* User changes marked colored */
   .change-mark {
     background-color: #616161;

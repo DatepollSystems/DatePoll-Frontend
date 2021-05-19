@@ -27,6 +27,29 @@ mat-card {
   user-select: none;
 }
 
+.fluid-container {
+  width: 100%;
+}
+
+@media screen and (min-width: 1840px) {
+  .fluid-container {
+    margin-left: 20%;
+    margin-right: 20%;
+    width: 60%;
+  }
+}
+
+@media screen and (min-width: 1314px) {
+  .desktop-card-container {
+    display: block;
+    border-radius: 4px;
+    background-color: white;
+    padding: 16px;
+    position: relative;
+    box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.2), 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12);
+  }
+}
+
 /* Style mat info card */
 .mat-info-card {
   background-color: #b2ff59 !important;

@@ -42,7 +42,7 @@ export class UsersChangesManagementComponent implements OnInit, OnDestroy {
         return;
       }
       this.userChanges = this.userChanges.concat(val);
-      this.filteredUserChanges = this.filteredUserChanges.concat(val);
+      this.filteredUserChanges = this.userChanges.slice();
     });
     this.userChangesSearchSubscription = this.userChangesService.searchedUserChanges.subscribe((val) => {
       this.filteredUserChanges = val;
@@ -57,6 +57,7 @@ export class UsersChangesManagementComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.userChangesSubscription.unsubscribe();
+    this.userChangesSearchSubscription.unsubscribe();
   }
 
   applyFilter() {
