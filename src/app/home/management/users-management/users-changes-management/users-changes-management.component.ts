@@ -20,11 +20,13 @@ export class UsersChangesManagementComponent implements OnInit, OnDestroy {
   userChanges: UserChange[] = [];
   filteredUserChanges: UserChange[] = [];
   userChangesSubscription: Subscription;
+  userChangesSearchSubscription: Subscription;
 
   filterValue = '';
-  ignoreEditorChangesChars = '!e';
 
   hasPermissionToDeleteUserChanage = false;
+
+  page = 1;
 
   constructor(
     private userChangesService: UsersChangesService,
@@ -33,11 +35,17 @@ export class UsersChangesManagementComponent implements OnInit, OnDestroy {
     private snackBar: MatSnackBar,
     private bottomSheet: MatBottomSheet
   ) {
-    this.userChanges = this.userChangesService.getUserChanges();
-    this.filteredUserChanges = this.userChanges.slice();
-    this.userChangesSubscription = this.userChangesService.userChangesChange.subscribe((value) => {
-      this.userChanges = value;
-      this.filteredUserChanges = this.userChanges.slice();
+    this.userChanges = this.userChangesService.getUserChanges(0);
+    this.userChangesSubscription = this.userChangesService.userChangesChange.subscribe((val) => {
+      if (val.length === 0) {
+        this.page--;
+        return;
+      }
+      this.userChanges = this.userChanges.concat(val);
+      this.filteredUserChanges = this.filteredUserChanges.concat(val);
+    });
+    this.userChangesSearchSubscription = this.userChangesService.searchedUserChanges.subscribe((val) => {
+      this.filteredUserChanges = val;
     });
   }
 
@@ -52,27 +60,11 @@ export class UsersChangesManagementComponent implements OnInit, OnDestroy {
   }
 
   applyFilter() {
-    let filterValue = this.filterValue?.trim().toLowerCase();
-    this.filteredUserChanges = [];
-
-    let includesIgnoreEditorChars = false;
-    if (filterValue.includes(this.ignoreEditorChangesChars)) {
-      includesIgnoreEditorChars = true;
-      filterValue = filterValue.replace(this.ignoreEditorChangesChars, '').trim();
+    if (!this.filterValue || this.filterValue?.length < 1) {
+      this.filteredUserChanges = this.userChanges.slice();
+      return;
     }
-
-    for (const user of this.userChanges) {
-      if (
-        user.userName?.trim().toLowerCase().includes(filterValue) ||
-        (user.editorName?.trim().toLowerCase().includes(filterValue) && !includesIgnoreEditorChars) ||
-        user.editedAt?.toString().includes(filterValue) ||
-        user.property?.trim().toLowerCase().includes(filterValue) ||
-        user.newValue?.trim().toLowerCase().includes(filterValue) ||
-        user.oldValue?.trim().toLowerCase().includes(filterValue)
-      ) {
-        this.filteredUserChanges.push(user);
-      }
-    }
+    this.userChangesService.searchUserChanges(this.filterValue);
   }
 
   deleteUserChange(userChange: UserChange) {
@@ -98,5 +90,13 @@ export class UsersChangesManagementComponent implements OnInit, OnDestroy {
         }
       });
     }
+  }
+
+  onScrollDown() {
+    if (this.filterValue || this.filterValue?.length > 0) {
+      return;
+    }
+    this.page++;
+    this.userChangesService.getUserChanges(this.page);
   }
 }
