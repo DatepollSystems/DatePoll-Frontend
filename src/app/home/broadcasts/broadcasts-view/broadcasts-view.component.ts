@@ -21,27 +21,38 @@ export class BroadcastsViewComponent implements OnDestroy {
   page = 1;
 
   constructor(private broadcastsService: BroadcastsService, private router: Router) {
-    this.broadcasts = broadcastsService.getBroadcasts(0);
-    this.broadcastsCopy = this.broadcasts.slice();
-    this.broadcastsSubscription = broadcastsService.broadcastsChange.subscribe((value) => {
+    this.broadcasts = this.broadcastsService.getBroadcasts(0);
+    this.broadcastsSubscription = this.broadcastsService.broadcastsChange.subscribe((value) => {
       if (value.length === 0) {
         this.page--;
         return;
       }
 
-      this.broadcasts = this.broadcasts.concat(value);
+      for (const broadcast of value) {
+        let inn = false;
+        for (const aBroadcast of this.broadcasts) {
+          if (broadcast.id === aBroadcast.id) {
+            inn = true;
+            break;
+          }
+        }
+        if (!inn) {
+          this.broadcasts.push(broadcast);
+        }
+      }
       this.broadcastsCopy = this.broadcasts.slice();
       if (this.broadcasts.length === 0) {
         this.empty = true;
       }
     });
-    this.broadcastsSearchedSubscription = broadcastsService.broadcastsSearchedChange.subscribe((value) => {
+    this.broadcastsSearchedSubscription = this.broadcastsService.broadcastsSearchedChange.subscribe((value) => {
       this.broadcastsCopy = value;
     });
   }
 
   ngOnDestroy(): void {
     this.broadcastsSubscription.unsubscribe();
+    this.broadcastsSearchedSubscription.unsubscribe();
   }
 
   routeTo(broadcast: Broadcast) {

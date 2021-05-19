@@ -41,7 +41,19 @@ export class UsersChangesManagementComponent implements OnInit, OnDestroy {
         this.page--;
         return;
       }
-      this.userChanges = this.userChanges.concat(val);
+
+      for (const userChange of val) {
+        let inn = false;
+        for (const aUserChange of this.userChanges) {
+          if (userChange.id === aUserChange.id) {
+            inn = true;
+            break;
+          }
+        }
+        if (!inn) {
+          this.userChanges.push(userChange);
+        }
+      }
       this.filteredUserChanges = this.userChanges.slice();
     });
     this.userChangesSearchSubscription = this.userChangesService.searchedUserChanges.subscribe((val) => {
