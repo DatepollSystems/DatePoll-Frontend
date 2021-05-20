@@ -2,7 +2,7 @@ import {ChangeDetectorRef, Component, Inject} from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
 import {MAT_BOTTOM_SHEET_DATA, MatBottomSheetRef} from '@angular/material/bottom-sheet';
 
-import {Decision} from '../../models/decision.model';
+import {EventDecision} from '../../models/event-decision.model';
 import {Event} from '../../models/event.model';
 import {EventsVoteForDecisionAdditionalInformationModalComponent} from './events-vote-for-decision-additional-information-modal/events-vote-for-decision-additional-information-modal.component';
 
@@ -27,7 +27,7 @@ export class EventsVoteForDecisionModalComponent {
     this.name = this.event.name;
   }
 
-  voteFor(decision: Decision) {
+  voteFor(decision: EventDecision) {
     const dto = {
       decision,
       additionalInformation: this.additionalInformation,

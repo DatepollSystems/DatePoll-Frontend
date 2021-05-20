@@ -10,7 +10,7 @@ import {EventsService} from '../../events.service';
 import {StandardDecisionsService} from '../../standardDecisions.service';
 
 import {GroupAndSubgroupModel, GroupType} from '../../../../utils/models/groupAndSubgroup.model';
-import {Decision} from '../../models/decision.model';
+import {EventDecision} from '../../models/event-decision.model';
 import {EventDate} from '../../models/event-date.model';
 import {Event} from '../../models/event.model';
 import {UIHelper} from '../../../../utils/helper/UIHelper';
@@ -26,7 +26,7 @@ export class EventCreateComponent implements OnDestroy {
   joined: GroupAndSubgroupModel[] = [];
   free: GroupAndSubgroupModel[] = [];
 
-  decisions: Decision[] = [];
+  decisions: EventDecision[] = [];
   standardDecisionsSubscription: Subscription;
 
   dates: EventDate[] = [];
@@ -42,7 +42,7 @@ export class EventCreateComponent implements OnDestroy {
     const standardDecisions = this.standardDecisionsService.getStandardDecisions();
     let i = -1;
     for (const standardDecision of standardDecisions) {
-      const decision = new Decision(i, standardDecision.decision, standardDecision.color);
+      const decision = new EventDecision(i, standardDecision.decision, standardDecision.color);
       decision.showInCalendar = standardDecision.showInCalendar;
       this.decisions.push(decision);
       i--;
@@ -52,7 +52,7 @@ export class EventCreateComponent implements OnDestroy {
       this.decisions = [];
       let y = -1;
       for (const decisionO of value) {
-        const decision = new Decision(y, decisionO.decision, decisionO.color);
+        const decision = new EventDecision(y, decisionO.decision, decisionO.color);
         decision.showInCalendar = decisionO.showInCalendar;
         this.decisions.push(decision);
         y--;
@@ -72,7 +72,7 @@ export class EventCreateComponent implements OnDestroy {
     this.groupsSubscription.unsubscribe();
   }
 
-  onDecisionsChange(decisions: Decision[]) {
+  onDecisionsChange(decisions: EventDecision[]) {
     this.decisions = decisions;
   }
 

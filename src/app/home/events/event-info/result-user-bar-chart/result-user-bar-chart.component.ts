@@ -2,17 +2,17 @@ import {Component, Input, OnDestroy} from '@angular/core';
 import {Subscription} from 'rxjs';
 
 import {EventsService} from '../../events.service';
-import {Decision} from '../../models/decision.model';
+import {EventDecision} from '../../models/event-decision.model';
 import {EventResultUser} from '../../models/event-result-user.model';
 
 @Component({
   selector: 'app-result-user-bar-chart',
   templateUrl: './result-user-bar-chart.component.html',
-  styleUrls: ['./result-user-bar-chart.component.css']
+  styleUrls: ['./result-user-bar-chart.component.css'],
 })
 export class ResultUserBarChartComponent implements OnDestroy {
   @Input()
-  decisions: Decision[];
+  decisions: EventDecision[];
 
   @Input()
   resultUsers: EventResultUser[];
@@ -22,7 +22,7 @@ export class ResultUserBarChartComponent implements OnDestroy {
   private eventSubscription: Subscription;
 
   constructor(private eventsService: EventsService) {
-    this.eventSubscription = this.eventsService.eventChange.subscribe(value => {
+    this.eventSubscription = this.eventsService.eventChange.subscribe((value) => {
       setTimeout(() => {
         this.calculateResultBarElements();
       }, 1000);
@@ -49,7 +49,7 @@ export class ResultUserBarChartComponent implements OnDestroy {
         id: decision.id,
         name: decision.decision,
         color: decision.color,
-        count: 0
+        count: 0,
       };
       objects.push(object);
     }
@@ -75,7 +75,7 @@ export class ResultUserBarChartComponent implements OnDestroy {
         name: object.name,
         percentWidth,
         count: object.count,
-        color: object.color
+        color: object.color,
       });
     }
 

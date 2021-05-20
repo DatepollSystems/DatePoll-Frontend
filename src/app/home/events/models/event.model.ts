@@ -1,10 +1,11 @@
 import {EventAction} from 'calendar-utils';
-import {Decision} from './decision.model';
+import {EventDecision} from './event-decision.model';
 import {EventDate} from './event-date.model';
 import {EventResultGroup} from './event-result-group.model';
 import {EventResultUser} from './event-result-user.model';
 import {CalendarEvent} from 'angular-calendar';
 import {UIHelper} from '../../../utils/helper/UIHelper';
+import {Converter} from '../../../utils/helper/Converter';
 
 export class Event implements CalendarEvent {
   public id: number;
@@ -36,7 +37,7 @@ export class Event implements CalendarEvent {
   meta = null;
   resizable: {beforeStart: false; afterEnd: false};
 
-  private decisions: Decision[] = [];
+  private decisions: EventDecision[] = [];
   private resultGroups: EventResultGroup[] = [];
   private resultUsers: EventResultUser[] = [];
   public anonymous = false;
@@ -50,7 +51,7 @@ export class Event implements CalendarEvent {
     endDate: Date,
     forEveryone: boolean,
     description: string,
-    decisions: Decision[],
+    decisions: EventDecision[],
     dates: EventDate[]
   ) {
     this.id = id;
@@ -77,6 +78,24 @@ export class Event implements CalendarEvent {
     this.dates = dates;
   }
 
+  public static createOfDTO(event: any, decisions: EventDecision[]): Event {
+    const dates = [];
+    for (const fetchedDate of event.dates) {
+      dates.push(EventDate.createOfDTO(fetchedDate));
+    }
+
+    return new Event(
+      event.id,
+      event.name,
+      Converter.getIOSDate(event.start_date.toString()),
+      Converter.getIOSDate(event.end_date.toString()),
+      Converter.numberToBoolean(event.for_everyone),
+      event.description,
+      decisions,
+      dates
+    );
+  }
+
   // ------------------------------------------------------
 
   public setResultGroups(groups: EventResultGroup[]) {
@@ -87,7 +106,7 @@ export class Event implements CalendarEvent {
     return this.resultGroups.slice();
   }
 
-  public getDecisions(): Decision[] {
+  public getDecisions(): EventDecision[] {
     return this.decisions.slice();
   }
 
@@ -119,15 +138,6 @@ export class Event implements CalendarEvent {
   }
 
   public getUntil(): string {
-    const currentDate = UIHelper.getCurrentDate();
-
-    const days = Math.round((this.startDate.getTime() - currentDate.getTime()) / (1000 * 60 * 60 * 24));
-
-    if (days === 0) {
-      const hours = Math.round(Math.abs(this.startDate.getTime() - currentDate.getTime()) / (60 * 60 * 1000));
-      return hours + 'h';
-    } else {
-      return days + 'd';
-    }
+    return UIHelper.getTimeLeft(this.startDate);
   }
 }

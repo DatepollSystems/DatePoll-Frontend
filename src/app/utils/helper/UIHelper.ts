@@ -12,7 +12,7 @@ export class UIHelper {
   }
 
   public static getTimeLeft(date: Date) {
-    const current = new Date();
+    const current = this.getCurrentDate();
 
     const days = Math.round((date.getTime() - current.getTime()) / (1000 * 60 * 60 * 24));
 

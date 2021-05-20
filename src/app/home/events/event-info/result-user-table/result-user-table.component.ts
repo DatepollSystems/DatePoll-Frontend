@@ -3,7 +3,7 @@ import {MatTableDataSource} from '@angular/material/table';
 import {MatSort} from '@angular/material/sort';
 import {MatPaginator} from '@angular/material/paginator';
 
-import {Decision} from '../../models/decision.model';
+import {EventDecision} from '../../models/event-decision.model';
 import {EventResultUser} from '../../models/event-result-user.model';
 
 @Component({
@@ -13,7 +13,7 @@ import {EventResultUser} from '../../models/event-result-user.model';
 })
 export class ResultUserTableComponent implements AfterViewInit {
   @Input()
-  decisions: Decision[];
+  decisions: EventDecision[];
 
   @Input()
   resultUsers: EventResultUser[];

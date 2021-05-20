@@ -8,7 +8,7 @@ import {TranslateService} from '../../../../translation/translate.service';
 import {EventsService} from '../../events.service';
 
 import {GroupAndSubgroupModel, GroupType} from '../../../../utils/models/groupAndSubgroup.model';
-import {Decision} from '../../models/decision.model';
+import {EventDecision} from '../../models/event-decision.model';
 import {EventDate} from '../../models/event-date.model';
 import {Event} from '../../models/event.model';
 import {UIHelper} from '../../../../utils/helper/UIHelper';
@@ -24,7 +24,7 @@ export class EventUpdateModalComponent implements OnDestroy {
   name: string;
   description: string;
   location: string;
-  decisions: Decision[] = [];
+  decisions: EventDecision[] = [];
   dates: EventDate[] = [];
 
   allMembers = false;
@@ -71,7 +71,7 @@ export class EventUpdateModalComponent implements OnDestroy {
     this.freeSubscription.unsubscribe();
   }
 
-  onDecisionsChange(decisions: Decision[]) {
+  onDecisionsChange(decisions: EventDecision[]) {
     this.decisions = decisions;
   }
 

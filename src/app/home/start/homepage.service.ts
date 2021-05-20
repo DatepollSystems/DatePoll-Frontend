@@ -7,8 +7,7 @@ import {HttpService} from '../../utils/http.service';
 
 import {TranslateService} from '../../translation/translate.service';
 import {Broadcast} from '../broadcasts/models/broadcast.model';
-import {Decision} from '../events/models/decision.model';
-import {EventDate} from '../events/models/event-date.model';
+import {EventDecision} from '../events/models/event-decision.model';
 import {Event} from '../events/models/event.model';
 import {HomeBirthdayModel} from './birthdays.model';
 import {HomeBookingsModel} from './bookings.model';
@@ -101,33 +100,11 @@ export class HomepageService {
         for (const fetchedEvent of data.events) {
           const decisions = [];
           for (const decision of fetchedEvent.decisions) {
-            decisions.push(new Decision(decision.id, decision.decision, decision.color));
+            decisions.push(EventDecision.createOfDTO(decision));
           }
 
-          const dates = [];
-          for (const fetchedDate of fetchedEvent.dates) {
-            const date = new EventDate(
-              fetchedDate.id,
-              fetchedDate.location,
-              fetchedDate.x,
-              fetchedDate.y,
-              Converter.getIOSDate(fetchedDate.date),
-              fetchedDate.description
-            );
-            dates.push(date);
-          }
-
-          const event = new Event(
-            fetchedEvent.id,
-            fetchedEvent.name,
-            Converter.getIOSDate(fetchedEvent.start_date),
-            Converter.getIOSDate(fetchedEvent.end_date),
-            fetchedEvent.for_everyone,
-            fetchedEvent.description,
-            decisions,
-            dates
-          );
-          event.alreadyVotedFor = fetchedEvent.already_voted;
+          const event = Event.createOfDTO(fetchedEvent, decisions);
+          event.alreadyVotedFor = Converter.numberToBoolean(fetchedEvent.already_voted);
           if (event.alreadyVotedFor) {
             event.userDecision = fetchedEvent.user_decision.decision;
             event.additionalInformation = fetchedEvent.user_decision.additional_information;
@@ -139,14 +116,7 @@ export class HomepageService {
 
         const broadcasts = [];
         for (const broadcast of data.broadcasts) {
-          const toSaveBroadcast = new Broadcast(
-            broadcast.id,
-            broadcast.subject,
-            Converter.getIOSDate(broadcast.created_at),
-            broadcast.body,
-            broadcast.writer_name
-          );
-          broadcasts.push(toSaveBroadcast);
+          broadcasts.push(Broadcast.createOfDTO(broadcast));
         }
         this.setBroadcasts(broadcasts);
       },
