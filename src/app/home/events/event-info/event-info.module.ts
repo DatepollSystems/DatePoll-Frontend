@@ -21,6 +21,7 @@ import {GroupInfoCardComponent} from './group-info-card/group-info-card.componen
 import {SubgroupInfoCardComponent} from './group-info-card/subgroup-info-card/subgroup-info-card.component';
 import {ResultUserBarChartComponent} from './result-user-bar-chart/result-user-bar-chart.component';
 import {ResultUserTableComponent} from './result-user-table/result-user-table.component';
+import {EventInfoResultUserExportModalComponent} from './event-info-result-user-export-modal/event-info-result-user-export-modal.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import {ResultUserTableComponent} from './result-user-table/result-user-table.co
     EventsVoteForDecisionModalComponent,
     EventsVoteForDecisionAdditionalInformationModalComponent,
     EventDatesUserListComponent,
+    EventInfoResultUserExportModalComponent,
   ],
   imports: [CommonModule, RouterModule, FormsModule, MaterialModule, TranslationModule, MapsModule, GoBackButtonModule],
   providers: [

@@ -74,13 +74,13 @@ export class User {
     return this._phoneNumbers.slice();
   }
 
-  public getPhoneNumbersAsString(): string {
+  public getPhoneNumbersAsString(length = 14): string {
     const phoneNumbers = [];
     for (const number of this._phoneNumbers) {
       phoneNumbers.push(number.phoneNumber);
     }
 
-    return UIHelper.cutStrings(phoneNumbers, 14, '...');
+    return UIHelper.cutStrings(phoneNumbers, length, '...');
   }
 
   public getPermissions(): string[] {

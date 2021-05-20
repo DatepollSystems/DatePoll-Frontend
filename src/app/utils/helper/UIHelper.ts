@@ -45,13 +45,13 @@ export class UIHelper {
     return string.slice(0, length) + suffix;
   }
 
-  public static cutStrings(strings: string[], length: number, suffix: string = null, seperator: string = ',') {
+  public static cutStrings(strings: string[], length: number = -1, suffix: string = null, seperator: string = ',') {
     let toReturn = '';
     for (const string of strings) {
       toReturn += string + seperator + ' ';
     }
 
-    if (toReturn.length > length) {
+    if (toReturn.length > length && length !== -1) {
       return toReturn.slice(0, length) + suffix;
     }
     return toReturn;

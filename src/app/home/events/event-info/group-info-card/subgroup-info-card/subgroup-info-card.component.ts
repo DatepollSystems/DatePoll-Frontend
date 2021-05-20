@@ -1,10 +1,11 @@
 import {Component, Input} from '@angular/core';
 import {MatSlideToggleChange} from '@angular/material/slide-toggle';
+import {MatBottomSheet} from '@angular/material/bottom-sheet';
 
 import {Permissions} from '../../../../../permissions';
 import {TranslateService} from '../../../../../translation/translate.service';
-import {ExcelService} from '../../../../../utils/excel.service';
 import {MyUserService} from '../../../../my-user.service';
+import {EventInfoResultUserExportModalComponent} from '../../event-info-result-user-export-modal/event-info-result-user-export-modal.component';
 
 import {EventResultSubgroup} from '../../../models/event-result-subgroup.model';
 
@@ -26,7 +27,7 @@ export class SubgroupInfoCardComponent {
 
   showAdminModeInResultUserTable = false;
 
-  constructor(myUserService: MyUserService, private excelService: ExcelService, private translate: TranslateService) {
+  constructor(myUserService: MyUserService, private bottomSheet: MatBottomSheet, private translate: TranslateService) {
     this.myUserService = myUserService;
   }
 
@@ -35,9 +36,12 @@ export class SubgroupInfoCardComponent {
   }
 
   exportSubgroupResultUsers() {
-    this.excelService.exportAsExcelFile(
-      this.resultSubgroup.getExportResultUser(),
-      this.translate.getTranslationFor('EVENTS_VIEW_EVENT_EXPORT_SUBGROUP_FILE_NAME') + this.resultSubgroup.name
-    );
+    this.bottomSheet.open(EventInfoResultUserExportModalComponent, {
+      data: {
+        resultUsers: this.resultSubgroup.getResultUsers(),
+        date: this.resultSubgroup.event.startDate,
+        fileName: this.translate.getTranslationFor('EVENTS_VIEW_EVENT_EXPORT_SUBGROUP_FILE_NAME') + this.resultSubgroup.name,
+      },
+    });
   }
 }
