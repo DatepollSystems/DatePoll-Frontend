@@ -40,7 +40,7 @@ export class EventsUserService {
           }
 
           const event = Event.createOfDTO(fetchedEvent, decisions);
-          event.alreadyVotedFor = Converter.numberToBoolean(fetchedEvent.already_voted);
+          event.alreadyVotedFor = fetchedEvent.already_voted;
           if (event.alreadyVotedFor) {
             event.userDecision = fetchedEvent.user_decision.decision;
             event.additionalInformation = fetchedEvent.user_decision.additional_information;
