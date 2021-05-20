@@ -4,8 +4,7 @@ import {Subject} from 'rxjs';
 import {Converter} from '../../utils/helper/Converter';
 import {HttpService} from '../../utils/http.service';
 
-import {Decision} from './models/decision.model';
-import {EventDate} from './models/event-date.model';
+import {EventDecision} from './models/event-decision.model';
 import {EventResultGroup} from './models/event-result-group.model';
 import {EventResultSubgroup} from './models/event-result-subgroup.model';
 import {EventResultUser} from './models/event-result-user.model';
@@ -86,36 +85,12 @@ export class EventsService {
         for (const fetchedEvent of fetchedEvents) {
           const decisions = [];
           for (const fetchedDecision of fetchedEvent.decisions) {
-            const decision = new Decision(fetchedDecision.id, fetchedDecision.decision, fetchedDecision.color);
+            const decision = EventDecision.createOfDTO(fetchedDecision);
             decision.showInCalendar = fetchedDecision.show_in_calendar;
             decisions.push(decision);
           }
 
-          const dates = [];
-          for (const fetchedDate of fetchedEvent.dates) {
-            const date = new EventDate(
-              fetchedDate.id,
-              fetchedDate.location,
-              fetchedDate.x,
-              fetchedDate.y,
-              Converter.getIOSDate(fetchedDate.date.toString()),
-              fetchedDate.description
-            );
-            dates.push(date);
-          }
-
-          events.push(
-            new Event(
-              fetchedEvent.id,
-              fetchedEvent.name,
-              Converter.getIOSDate(fetchedEvent.start_date.toString()),
-              Converter.getIOSDate(fetchedEvent.end_date.toString()),
-              fetchedEvent.for_everyone,
-              fetchedEvent.description,
-              decisions,
-              dates
-            )
-          );
+          events.push(Event.createOfDTO(fetchedEvent, decisions));
         }
 
         this.setEvents(events);
@@ -330,34 +305,12 @@ export class EventsService {
 
         const decisions = [];
         for (const fetchedDecision of response.decisions) {
-          const decision = new Decision(fetchedDecision.id, fetchedDecision.decision, fetchedDecision.color);
+          const decision = EventDecision.createOfDTO(fetchedDecision);
           decision.showInCalendar = fetchedDecision.show_in_calendar;
           decisions.push(decision);
         }
 
-        const dates = [];
-        for (const fetchedDate of response.dates) {
-          const date = new EventDate(
-            fetchedDate.id,
-            fetchedDate.location,
-            fetchedDate.x,
-            fetchedDate.y,
-            Converter.getIOSDate(fetchedDate.date.toString()),
-            fetchedDate.description
-          );
-          dates.push(date);
-        }
-
-        const event = new Event(
-          response.id,
-          response.name,
-          Converter.getIOSDate(response.start_date.toString()),
-          Converter.getIOSDate(response.end_date.toString()),
-          response.for_everyone,
-          response.description,
-          decisions,
-          dates
-        );
+        const event = Event.createOfDTO(response, decisions);
         event.anonymous = response.resultGroups.anonymous;
 
         let resultUsers = [];
@@ -433,7 +386,7 @@ export class EventsService {
     );
   }
 
-  public voteForUsers(event: Event, decision: Decision, additionalInformation: string, users: EventResultUser[]) {
+  public voteForUsers(event: Event, decision: EventDecision, additionalInformation: string, users: EventResultUser[]) {
     const userIds = [];
     for (const user of users) {
       userIds.push(user.id);

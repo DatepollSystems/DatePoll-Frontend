@@ -1,4 +1,5 @@
 import {Event} from './event.model';
+import {Converter} from '../../../utils/helper/Converter';
 
 export class EventDate {
   public id: number;
@@ -16,5 +17,16 @@ export class EventDate {
     this.y = y;
     this.date = date;
     this.description = description;
+  }
+
+  public static createOfDTO(eventDate: any): EventDate {
+    return new EventDate(
+      eventDate.id,
+      eventDate.location,
+      eventDate.x,
+      eventDate.y,
+      Converter.getIOSDate(eventDate.date.toString()),
+      eventDate.description
+    );
   }
 }

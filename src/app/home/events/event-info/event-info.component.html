@@ -18,66 +18,70 @@
 <div fxLayout="column" fxLayoutGap="2%" fxLayoutGap.gt-md="0.5%" fxLayoutGap.xs="5%" *ngIf="!sendingRequest">
   <app-event-dates-user-list fxFlex="100%" [dates]="dates"></app-event-dates-user-list>
 
+  <div><mat-divider></mat-divider></div>
+
   <!-- Complete chart for all votes -->
-  <app-result-user-bar-chart
-    fxFlex="100%"
-    [resultUsers]="event.getResultUsers()"
-    *ngIf="event != null"
-    [decisions]="event.getDecisions()"
-  ></app-result-user-bar-chart>
-
-  <mat-expansion-panel *ngIf="!event?.anonymous" fxFlex="100%">
-    <mat-expansion-panel-header>
-      <mat-panel-title>
-        {{ 'EVENTS_ADMINISTRATION_INFO_EVENT_COMPLETE_USERS_TABLE' | translate }}
-      </mat-panel-title>
-    </mat-expansion-panel-header>
-
-    <div
-      fxLayout="row"
-      fxLayout.xs="column"
-      fxLayoutAlign="space-between"
-      *ngIf="this.myUserService.hasPermission(ROOT_PERMISSION) || this.myUserService.hasPermission(EVENTS_ADMINISTRATION_PERMISSION)"
-    >
-      <button mat-flat-button color="accent" (click)="exportAllResultUsers()">{{ 'EXPORT' | translate }}</button>
-      <mat-slide-toggle (change)="changeAdminMode($event)" labelPosition="before">
-        {{ 'EVENTS_ADMINISTRATION_INFO_EVENT_SHOW_ADMINISTRATION_MODE' | translate }}
-      </mat-slide-toggle>
-    </div>
-
-    <app-result-user-table
+  <ng-container *ngIf="resultGroups.length > 2">
+    <app-result-user-bar-chart
+      fxFlex="100%"
       [resultUsers]="event.getResultUsers()"
+      *ngIf="event != null"
       [decisions]="event.getDecisions()"
-      *ngIf="
-        event != null &&
-        (!showAdminModeInResultUserTable ||
-          (!this.myUserService.hasPermission(ROOT_PERMISSION) && !this.myUserService.hasPermission(EVENTS_ADMINISTRATION_PERMISSION)))
-      "
-    >
-    </app-result-user-table>
+    ></app-result-user-bar-chart>
 
-    <app-event-user-management
-      *ngIf="
-        event != null &&
-        showAdminModeInResultUserTable &&
-        (this.myUserService.hasPermission(ROOT_PERMISSION) || this.myUserService.hasPermission(EVENTS_ADMINISTRATION_PERMISSION))
-      "
-      [resultUsers]="event.getResultUsers()"
-      [event]="event"
-    ></app-event-user-management>
-  </mat-expansion-panel>
+    <mat-expansion-panel *ngIf="!event?.anonymous" fxFlex="100%">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          {{ 'EVENTS_ADMINISTRATION_INFO_EVENT_COMPLETE_USERS_TABLE' | translate }}
+        </mat-panel-title>
+      </mat-expansion-panel-header>
 
-  <mat-form-field>
-    <input
-      (ngModelChange)="applyFilter($event)"
-      [(ngModel)]="searchValue"
-      matInput
-      placeholder="{{ 'MANAGEMENT_GROUPS_SEARCH' | translate }}"
-    />
-    <button (click)="searchValue = ''; applyFilter('')" *ngIf="searchValue" aria-label="Clear" mat-button mat-icon-button matSuffix>
-      <mat-icon>close</mat-icon>
-    </button>
-  </mat-form-field>
+      <div
+        fxLayout="row"
+        fxLayout.xs="column"
+        fxLayoutAlign="space-between"
+        *ngIf="this.myUserService.hasPermission(ROOT_PERMISSION) || this.myUserService.hasPermission(EVENTS_ADMINISTRATION_PERMISSION)"
+      >
+        <button mat-flat-button color="accent" (click)="exportAllResultUsers()">{{ 'EXPORT' | translate }}</button>
+        <mat-slide-toggle (change)="changeAdminMode($event)" labelPosition="before">
+          {{ 'EVENTS_ADMINISTRATION_INFO_EVENT_SHOW_ADMINISTRATION_MODE' | translate }}
+        </mat-slide-toggle>
+      </div>
+
+      <app-result-user-table
+        [resultUsers]="event.getResultUsers()"
+        [decisions]="event.getDecisions()"
+        *ngIf="
+          event != null &&
+          (!showAdminModeInResultUserTable ||
+            (!this.myUserService.hasPermission(ROOT_PERMISSION) && !this.myUserService.hasPermission(EVENTS_ADMINISTRATION_PERMISSION)))
+        "
+      >
+      </app-result-user-table>
+
+      <app-event-user-management
+        *ngIf="
+          event != null &&
+          showAdminModeInResultUserTable &&
+          (this.myUserService.hasPermission(ROOT_PERMISSION) || this.myUserService.hasPermission(EVENTS_ADMINISTRATION_PERMISSION))
+        "
+        [resultUsers]="event.getResultUsers()"
+        [event]="event"
+      ></app-event-user-management>
+    </mat-expansion-panel>
+
+    <mat-form-field>
+      <input
+        (ngModelChange)="applyFilter($event)"
+        [(ngModel)]="searchValue"
+        matInput
+        placeholder="{{ 'MANAGEMENT_GROUPS_SEARCH' | translate }}"
+      />
+      <button (click)="searchValue = ''; applyFilter('')" *ngIf="searchValue" aria-label="Clear" mat-button mat-icon-button matSuffix>
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+  </ng-container>
 
   <div fxFlex="100%">
     <div fxLayout="row break" fxLayoutAlign="space-around" fxLayout.lt-xl="column">

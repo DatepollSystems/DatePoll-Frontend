@@ -1,14 +1,15 @@
 import {Component, Input, OnChanges, OnInit} from '@angular/core';
 import {MatSlideToggleChange} from '@angular/material/slide-toggle';
+import {MatBottomSheet} from '@angular/material/bottom-sheet';
 
 import {Permissions} from '../../../../permissions';
 import {TranslateService} from '../../../../translation/translate.service';
-import {ExcelService} from '../../../../utils/excel.service';
 import {MyUserService} from '../../../my-user.service';
+import {Converter} from '../../../../utils/helper/Converter';
+import {EventInfoResultUserExportModalComponent} from '../event-info-result-user-export-modal/event-info-result-user-export-modal.component';
 
 import {EventResultGroup} from '../../models/event-result-group.model';
 import {EventResultSubgroup} from '../../models/event-result-subgroup.model';
-import {Converter} from '../../../../utils/helper/Converter';
 
 @Component({
   selector: 'app-group-info-card',
@@ -34,7 +35,7 @@ export class GroupInfoCardComponent implements OnInit, OnChanges {
 
   showAdminModeInResultUserTable = false;
 
-  constructor(myUserService: MyUserService, private excelService: ExcelService, private translate: TranslateService) {
+  constructor(myUserService: MyUserService, private bottomSheet: MatBottomSheet, private translate: TranslateService) {
     this.myUserService = myUserService;
     const simpleView = localStorage.getItem(this.simpleViewToken);
     if (simpleView != null) {
@@ -76,9 +77,12 @@ export class GroupInfoCardComponent implements OnInit, OnChanges {
   }
 
   exportGroupResultUsers() {
-    this.excelService.exportAsExcelFile(
-      this.resultGroup.getExportResultUser(),
-      this.translate.getTranslationFor('EVENTS_VIEW_EVENT_EXPORT_GROUP_FILE_NAME') + this.resultGroup.name
-    );
+    this.bottomSheet.open(EventInfoResultUserExportModalComponent, {
+      data: {
+        resultUsers: this.resultGroup.getResultUsers(),
+        date: this.resultGroup.event.startDate,
+        fileName: this.translate.getTranslationFor('EVENTS_VIEW_EVENT_EXPORT_GROUP_FILE_NAME') + this.resultGroup.name,
+      },
+    });
   }
 }

@@ -1,6 +1,6 @@
 import {Event} from './event.model';
 
-export class Decision {
+export class EventDecision {
   public id: number;
   public decision: string;
   public showInCalendar: boolean;
@@ -11,5 +11,9 @@ export class Decision {
     this.id = id;
     this.decision = decision;
     this.color = color;
+  }
+
+  public static createOfDTO(decision: any): EventDecision {
+    return new EventDecision(decision.id, decision.decision, decision.color);
   }
 }

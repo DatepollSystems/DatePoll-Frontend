@@ -6,7 +6,7 @@ import {Subscription} from 'rxjs';
 import {TranslateService} from '../../../../translation/translate.service';
 import {IsMobileService} from '../../../../utils/is-mobile.service';
 
-import {Decision} from '../../models/decision.model';
+import {EventDecision} from '../../models/event-decision.model';
 
 @Component({
   selector: 'app-event-decisions-list',
@@ -14,7 +14,7 @@ import {Decision} from '../../models/decision.model';
   styleUrls: ['./event-decisions-list.component.css'],
 })
 export class EventDecisionsListComponent implements OnDestroy {
-  @Input() decisions: Decision[];
+  @Input() decisions: EventDecision[];
   @Output() decisionsChanged = new EventEmitter();
 
   showInCalendar = false;
@@ -26,7 +26,7 @@ export class EventDecisionsListComponent implements OnDestroy {
   isMobileSubscription: Subscription;
 
   decisionUpdating = false;
-  decisionToUpdate: Decision;
+  decisionToUpdate: EventDecision;
   decisionString = '';
 
   constructor(private snackBar: MatSnackBar, private translate: TranslateService, private isMobileService: IsMobileService) {
@@ -64,7 +64,7 @@ export class EventDecisionsListComponent implements OnDestroy {
       return;
     }
 
-    const decision = new Decision(this.i, form.controls.decision.value, this.color);
+    const decision = new EventDecision(this.i, form.controls.decision.value, this.color);
     decision.showInCalendar = this.showInCalendar;
     console.log(decision);
     this.decisions.push(decision);
@@ -73,14 +73,14 @@ export class EventDecisionsListComponent implements OnDestroy {
     this.clearForm();
   }
 
-  removeDecision(decision: Decision) {
+  removeDecision(decision: EventDecision) {
     const i = this.decisions.indexOf(decision);
     this.decisions.splice(i, 1);
     this.decisionsChanged.emit(this.decisions.slice());
     console.log(this.decisions);
   }
 
-  changeToUpdateDecision(decision: Decision) {
+  changeToUpdateDecision(decision: EventDecision) {
     console.log(decision);
     this.decisionUpdating = true;
     this.decisionToUpdate = decision;
@@ -102,7 +102,7 @@ export class EventDecisionsListComponent implements OnDestroy {
     const i = this.decisions.indexOf(this.decisionToUpdate);
     this.decisions.splice(i, 1);
 
-    const decision = new Decision(this.decisionToUpdate.id, this.decisionString, this.color);
+    const decision = new EventDecision(this.decisionToUpdate.id, this.decisionString, this.color);
     decision.showInCalendar = this.showInCalendar;
     this.decisions.push(decision);
     this.decisionsChanged.emit(this.decisions.slice());

@@ -17,6 +17,10 @@ export class Converter {
     return parseInt(string, 10);
   }
 
+  public static numberToBoolean(number: number): boolean {
+    return number === 1;
+  }
+
   public static getDateFormattedWithHoursMinutesAndSeconds(date: Date): string {
     const d = new Date(date);
     let month = '' + (d.getMonth() + 1);

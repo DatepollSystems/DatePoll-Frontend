@@ -679,9 +679,14 @@
   "EVENTS_VIEW_EVENT_VOTE_FOR_ADDITIONAL_INFORMATION_MODAL_TITLE": "Zusatzinformationen",
   "EVENTS_VIEW_EVENT_VOTE_FOR_ADDITIONAL_INFORMATION_MODAL_INFO": "Im nächsten Schritt kannst du dich für eine Antwort entscheiden.",
   "EVENTS_VIEW_EVENT_VOTE_FOR_ADDITIONAL_INFORMATION_MODAL_FORM_PLACEHOLDER": "Zusatzinformationen",
-  "EVENTS_VIEW_EVENT_EXPORT_ALL_FILE_NAME": "anwesenheits_export_alle_mitglieder",
-  "EVENTS_VIEW_EVENT_EXPORT_GROUP_FILE_NAME": "anwesenheits_export_zug_",
-  "EVENTS_VIEW_EVENT_EXPORT_SUBGROUP_FILE_NAME": "anwesenheits_export_register_",
+  "EVENTS_VIEW_EVENT_EXPORT_TITLE": "Anwesenheits Listen exportieren",
+  "EVENTS_VIEW_EVENT_EXPORT_SIMPLE": "Einfache Liste",
+  "EVENTS_VIEW_EVENT_EXPORT_SIMPLE_DESCRIPTION": "Beinhaltet Namen, Ergebnisse und Zusatzinformationen.",
+  "EVENTS_VIEW_EVENT_EXPORT_EXTRA": "Liste mit extra Benutzerdaten (COVID)",
+  "EVENTS_VIEW_EVENT_EXPORT_EXTRA_DESCRIPTION": "Beinhaltet Namen, Ergebnisse und Zusatzinformationen, sowie Kontaktmöglichkeiten wie E-Mail Adressen und Telefonnummern.",
+  "EVENTS_VIEW_EVENT_EXPORT_ALL_FILE_NAME": "anwesenheitsliste_alle_mitglieder",
+  "EVENTS_VIEW_EVENT_EXPORT_GROUP_FILE_NAME": "anwesenheitsliste_zug_",
+  "EVENTS_VIEW_EVENT_EXPORT_SUBGROUP_FILE_NAME": "anwesenheitsliste_register_",
 
   "EVENTS_CANCEL_VOTING": "Willst du deine Stimme wirklich entfernen?",
 

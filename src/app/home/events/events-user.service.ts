@@ -4,8 +4,7 @@ import {Subject} from 'rxjs';
 import {Converter} from '../../utils/helper/Converter';
 import {HttpService} from '../../utils/http.service';
 
-import {Decision} from './models/decision.model';
-import {EventDate} from './models/event-date.model';
+import {EventDecision} from './models/event-decision.model';
 import {Event} from './models/event.model';
 
 @Injectable({
@@ -37,32 +36,10 @@ export class EventsUserService {
         for (const fetchedEvent of fetchedEvents) {
           const decisions = [];
           for (const fetchedDecision of fetchedEvent.decisions) {
-            decisions.push(new Decision(fetchedDecision.id, fetchedDecision.decision, fetchedDecision.color));
+            decisions.push(EventDecision.createOfDTO(fetchedDecision));
           }
 
-          const dates = [];
-          for (const fetchedDate of fetchedEvent.dates) {
-            const date = new EventDate(
-              fetchedDate.id,
-              fetchedDate.location,
-              fetchedDate.x,
-              fetchedDate.y,
-              Converter.getIOSDate(fetchedDate.date),
-              fetchedDate.description
-            );
-            dates.push(date);
-          }
-
-          const event = new Event(
-            fetchedEvent.id,
-            fetchedEvent.name,
-            Converter.getIOSDate(fetchedEvent.start_date),
-            Converter.getIOSDate(fetchedEvent.end_date),
-            fetchedEvent.for_everyone,
-            fetchedEvent.description,
-            decisions,
-            dates
-          );
+          const event = Event.createOfDTO(fetchedEvent, decisions);
           event.alreadyVotedFor = fetchedEvent.already_voted;
           if (event.alreadyVotedFor) {
             event.userDecision = fetchedEvent.user_decision.decision;
@@ -78,7 +55,7 @@ export class EventsUserService {
     );
   }
 
-  public voteForDecision(eventId: number, decision: Decision, additionalInformation = null) {
+  public voteForDecision(eventId: number, decision: EventDecision, additionalInformation = null) {
     const dto = {
       event_id: eventId,
       decision_id: decision.id,

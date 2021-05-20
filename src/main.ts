@@ -8,7 +8,7 @@ if (environment.production) {
   enableProdMode();
   if (window && !environment.testing) {
     // tslint:disable-next-line:only-arrow-functions
-    window.console.log = window.console.warn = window.console.info = function () {};
+    // window.console.log = window.console.warn = window.console.info = function () {};
   }
 }
 

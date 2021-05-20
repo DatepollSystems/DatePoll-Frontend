@@ -26,7 +26,7 @@ export class UsersChangesManagementComponent implements OnInit, OnDestroy {
 
   hasPermissionToDeleteUserChanage = false;
 
-  page = 1;
+  page = 0;
 
   constructor(
     private userChangesService: UsersChangesService,

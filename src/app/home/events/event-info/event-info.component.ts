@@ -1,14 +1,15 @@
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {MatSlideToggleChange} from '@angular/material/slide-toggle';
+import {MatBottomSheet} from '@angular/material/bottom-sheet';
 import {Router} from '@angular/router';
 import {Subscription} from 'rxjs';
 
 import {Permissions} from '../../../permissions';
 import {MyUserService} from '../../my-user.service';
 import {EventsService} from '../events.service';
-
 import {TranslateService} from '../../../translation/translate.service';
-import {ExcelService} from '../../../utils/excel.service';
+import {EventInfoResultUserExportModalComponent} from './event-info-result-user-export-modal/event-info-result-user-export-modal.component';
+
 import {EventDate} from '../models/event-date.model';
 import {EventResultGroup} from '../models/event-result-group.model';
 import {Event} from '../models/event.model';
@@ -16,7 +17,7 @@ import {Event} from '../models/event.model';
 @Component({
   selector: 'app-event-info',
   templateUrl: './event-info.component.html',
-  styleUrls: ['./event-info.component.css']
+  styleUrls: ['./event-info.component.css'],
 })
 export class EventInfoComponent implements OnInit, OnDestroy {
   sendingRequest = true;
@@ -50,7 +51,7 @@ export class EventInfoComponent implements OnInit, OnDestroy {
   constructor(
     private eventsService: EventsService,
     myUserService: MyUserService,
-    private excelService: ExcelService,
+    private bottomSheet: MatBottomSheet,
     private translate: TranslateService,
     private router: Router
   ) {
@@ -65,7 +66,7 @@ export class EventInfoComponent implements OnInit, OnDestroy {
         return;
       }
       this.event = this.eventsService.getEvent(this.eventId);
-      this.eventSubscription = this.eventsService.eventChange.subscribe(value => {
+      this.eventSubscription = this.eventsService.eventChange.subscribe((value) => {
         this.event = value;
         this.refreshValues();
         this.sendingRequest = false;
@@ -122,9 +123,12 @@ export class EventInfoComponent implements OnInit, OnDestroy {
   }
 
   exportAllResultUsers() {
-    this.excelService.exportAsExcelFile(
-      this.event.getExportResultUser(),
-      this.translate.getTranslationFor('EVENTS_VIEW_EVENT_EXPORT_ALL_FILE_NAME')
-    );
+    this.bottomSheet.open(EventInfoResultUserExportModalComponent, {
+      data: {
+        resultUsers: this.event.getResultUsers(),
+        date: this.event.startDate,
+        fileName: this.translate.getTranslationFor('EVENTS_VIEW_EVENT_EXPORT_ALL_FILE_NAME'),
+      },
+    });
   }
 }

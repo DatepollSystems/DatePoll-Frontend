@@ -18,7 +18,7 @@ export class BroadcastsViewComponent implements OnDestroy {
 
   searchFilter = '';
 
-  page = 1;
+  page = 0;
 
   constructor(private broadcastsService: BroadcastsService, private router: Router) {
     this.broadcasts = this.broadcastsService.getBroadcasts(0);
