@@ -85,7 +85,8 @@ $dark-theme: mat-dark-theme($dark-primary, $dark-accent, $dark-warn);
   .mat-expansion-panel,
   .mat-table,
   .mat-paginator,
-  .mat-sidenav {
+  .mat-sidenav,
+  .mat-drawer-container {
     background-color: black;
   }
 
