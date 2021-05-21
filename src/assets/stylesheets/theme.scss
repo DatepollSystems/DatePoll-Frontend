@@ -87,6 +87,10 @@ $dark-theme: mat-dark-theme($dark-primary, $dark-accent, $dark-warn);
   .mat-paginator,
   .mat-sidenav {
     background-color: black;
+  }
+
+  .mat-card,
+  .mat-expansion-panel {
     border: solid;
     border-color: #424242 !important;
   }
