@@ -7,18 +7,24 @@
     <h4 class="sidenav-head-text">{{ username }}</h4>
 
     <mat-nav-list>
-      <mat-divider></mat-divider>
-      <a (click)="onPageChange()" mat-list-item routerLink="/home">
-        <mat-icon>home</mat-icon>
-        Home</a
-      >
+      <div mat-list-item disableRipple fxLayout="row" fxLayoutAlign="space-around">
+        <a mat-button (click)="onPageChange()" routerLink="/home">
+          <mat-icon>home</mat-icon>
+          Home
+        </a>
+        <a mat-button (click)="onPageChange()" routerLink="calendar" routerLinkActive="activated">
+          <mat-icon>today</mat-icon>
+          {{ 'CALENDAR' | translate }}</a
+        >
+      </div>
 
-      <a (click)="onPageChange()" mat-list-item routerLink="calendar" routerLinkActive="activated">
-        <mat-icon>today</mat-icon>
-        {{ 'CALENDAR' | translate }}</a
+      <a
+        *ngIf="serverInfo.broadcasts_enabled"
+        (click)="onPageChange()"
+        mat-list-item
+        routerLink="broadcasts/messages"
+        routerLinkActive="activated"
       >
-
-      <a *ngIf="serverInfo.broadcasts_enabled" (click)="onPageChange()" mat-list-item routerLink="broadcasts" routerLinkActive="activated">
         <mat-icon>message</mat-icon>
         {{ 'NAV_BROADCASTS' | translate }}</a
       >
