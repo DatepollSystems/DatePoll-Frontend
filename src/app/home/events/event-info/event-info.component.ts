@@ -6,7 +6,7 @@ import {Subscription} from 'rxjs';
 
 import {Permissions} from '../../../permissions';
 import {MyUserService} from '../../my-user.service';
-import {EventsService} from '../events.service';
+import {EventsUserService} from '../events-user.service';
 import {TranslateService} from '../../../translation/translate.service';
 import {EventInfoResultUserExportModalComponent} from './event-info-result-user-export-modal/event-info-result-user-export-modal.component';
 
@@ -49,7 +49,7 @@ export class EventInfoComponent implements OnInit, OnDestroy {
   public ROOT_PERMISSION = Permissions.ROOT_ADMINISTRATION;
 
   constructor(
-    private eventsService: EventsService,
+    private eventsUserService: EventsUserService,
     myUserService: MyUserService,
     private bottomSheet: MatBottomSheet,
     private translate: TranslateService,
@@ -65,8 +65,8 @@ export class EventInfoComponent implements OnInit, OnDestroy {
         this.router.navigate(['/home']);
         return;
       }
-      this.event = this.eventsService.getEvent(this.eventId);
-      this.eventSubscription = this.eventsService.eventChange.subscribe((value) => {
+      this.event = this.eventsUserService.getEvent(this.eventId);
+      this.eventSubscription = this.eventsUserService.eventChange.subscribe((value) => {
         this.event = value;
         this.refreshValues();
         this.sendingRequest = false;

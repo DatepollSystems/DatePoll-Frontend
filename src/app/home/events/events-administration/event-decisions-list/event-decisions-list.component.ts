@@ -64,8 +64,7 @@ export class EventDecisionsListComponent implements OnDestroy {
       return;
     }
 
-    const decision = new EventDecision(this.i, form.controls.decision.value, this.color);
-    decision.showInCalendar = this.showInCalendar;
+    const decision = new EventDecision(this.i, form.controls.decision.value, this.color, this.showInCalendar);
     console.log(decision);
     this.decisions.push(decision);
     this.decisionsChanged.emit(this.decisions.slice());
@@ -102,9 +101,7 @@ export class EventDecisionsListComponent implements OnDestroy {
     const i = this.decisions.indexOf(this.decisionToUpdate);
     this.decisions.splice(i, 1);
 
-    const decision = new EventDecision(this.decisionToUpdate.id, this.decisionString, this.color);
-    decision.showInCalendar = this.showInCalendar;
-    this.decisions.push(decision);
+    this.decisions.push(new EventDecision(this.decisionToUpdate.id, this.decisionString, this.color, this.showInCalendar));
     this.decisionsChanged.emit(this.decisions.slice());
     console.log(this.decisions);
     this.clearForm();

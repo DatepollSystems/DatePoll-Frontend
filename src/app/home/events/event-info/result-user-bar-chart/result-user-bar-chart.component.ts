@@ -1,7 +1,7 @@
 import {Component, Input, OnDestroy} from '@angular/core';
 import {Subscription} from 'rxjs';
 
-import {EventsService} from '../../events.service';
+import {EventsUserService} from '../../events-user.service';
 import {EventDecision} from '../../models/event-decision.model';
 import {EventResultUser} from '../../models/event-result-user.model';
 
@@ -21,8 +21,8 @@ export class ResultUserBarChartComponent implements OnDestroy {
 
   private eventSubscription: Subscription;
 
-  constructor(private eventsService: EventsService) {
-    this.eventSubscription = this.eventsService.eventChange.subscribe((value) => {
+  constructor(private eventsUserService: EventsUserService) {
+    this.eventSubscription = this.eventsUserService.eventChange.subscribe((value) => {
       setTimeout(() => {
         this.calculateResultBarElements();
       }, 1000);

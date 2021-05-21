@@ -11,6 +11,8 @@ import {EventsVoteForDecisionModalComponent} from '../../../events-view/events-v
 
 import {TranslateService} from '../../../../../translation/translate.service';
 import {EventsService} from '../../../events.service';
+import {EventsUserService} from '../../../events-user.service';
+
 import {EventResultUser} from '../../../models/event-result-user.model';
 import {Event} from '../../../models/event.model';
 
@@ -42,11 +44,12 @@ export class EventUserManagementComponent implements OnInit, AfterViewInit, OnDe
 
   constructor(
     private eventsService: EventsService,
+    private userEventsService: EventsUserService,
     private snackBar: MatSnackBar,
     private translate: TranslateService,
     private bottomSheet: MatBottomSheet
   ) {
-    this.eventSubscription = this.eventsService.eventChange.subscribe(() => {
+    this.eventSubscription = this.userEventsService.eventChange.subscribe(() => {
       setTimeout(() => {
         this.refreshValues();
       }, 1000);
@@ -94,12 +97,12 @@ export class EventUserManagementComponent implements OnInit, AfterViewInit, OnDe
 
             this.savingVoting = false;
             this.selection.clear();
-            this.eventsService.getEvent(this.event.id);
+            this.userEventsService.getEvent(this.event.id);
             this.snackBar.open(this.translate.getTranslationFor('EVENTS_ADMINISTRATION_USER_MANAGEMENT_FOR_EVENT_VOTE_SUCCESSFULLY'));
           },
           (error) => {
             console.log(error);
-            this.eventsService.getEvent(this.event.id);
+            this.userEventsService.getEvent(this.event.id);
           }
         );
       } else {
@@ -127,12 +130,12 @@ export class EventUserManagementComponent implements OnInit, AfterViewInit, OnDe
 
         this.savingClearVoting = false;
         this.selection.clear();
-        this.eventsService.getEvent(this.event.id);
+        this.userEventsService.getEvent(this.event.id);
         this.snackBar.open(this.translate.getTranslationFor('EVENTS_ADMINISTRATION_USER_MANAGEMENT_FOR_EVENT_REMOVE_VOTING_SUCCESSFULLY'));
       },
       (error) => {
         console.log(error);
-        this.eventsService.getEvent(this.event.id);
+        this.userEventsService.getEvent(this.event.id);
       }
     );
   }

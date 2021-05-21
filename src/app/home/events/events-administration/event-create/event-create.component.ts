@@ -42,9 +42,7 @@ export class EventCreateComponent implements OnDestroy {
     const standardDecisions = this.standardDecisionsService.getStandardDecisions();
     let i = -1;
     for (const standardDecision of standardDecisions) {
-      const decision = new EventDecision(i, standardDecision.decision, standardDecision.color);
-      decision.showInCalendar = standardDecision.showInCalendar;
-      this.decisions.push(decision);
+      this.decisions.push(new EventDecision(i, standardDecision.decision, standardDecision.color, standardDecision.showInCalendar));
       i--;
     }
 
@@ -52,9 +50,7 @@ export class EventCreateComponent implements OnDestroy {
       this.decisions = [];
       let y = -1;
       for (const decisionO of value) {
-        const decision = new EventDecision(y, decisionO.decision, decisionO.color);
-        decision.showInCalendar = decisionO.showInCalendar;
-        this.decisions.push(decision);
+        this.decisions.push(new EventDecision(y, decisionO.decision, decisionO.color, decisionO.showInCalendar));
         y--;
       }
     });

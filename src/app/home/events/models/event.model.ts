@@ -79,10 +79,15 @@ export class Event extends HasResultUsers implements CalendarEvent {
     this.dates = dates;
   }
 
-  public static createOfDTO(event: any, decisions: EventDecision[]): Event {
+  public static createOfDTO(event: any): Event {
     const dates = [];
     for (const fetchedDate of event.dates) {
       dates.push(EventDate.createOfDTO(fetchedDate));
+    }
+
+    const decisions = [];
+    for (const fetchedDecision of event.decisions) {
+      decisions.push(EventDecision.createOfDTO(fetchedDecision));
     }
 
     return new Event(
