@@ -12,6 +12,7 @@
 
     <!-- Chart for the group -->
     <app-result-user-bar-chart
+      *ngIf="resultGroup.id !== -1"
       [resultUsers]="resultGroup.getResultUsers()"
       [decisions]="resultGroup.event.getDecisions()"
     ></app-result-user-bar-chart>
