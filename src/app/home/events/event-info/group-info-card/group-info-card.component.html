@@ -11,11 +11,7 @@
     </div>
 
     <!-- Chart for the group -->
-    <app-result-user-bar-chart
-      *ngIf="resultGroup.id !== -1"
-      [resultUsers]="resultGroup.getResultUsers()"
-      [decisions]="resultGroup.event.getDecisions()"
-    ></app-result-user-bar-chart>
+    <app-result-user-bar-chart *ngIf="resultGroup.id !== -1" [chart]="resultGroup.chart"></app-result-user-bar-chart>
 
     <mat-expansion-panel style="margin-top: 15px" *ngIf="!resultGroup?.event?.anonymous && resultGroup.id !== -1 && !simpleView">
       <mat-expansion-panel-header>

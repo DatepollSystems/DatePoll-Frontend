@@ -86,53 +86,33 @@ export class EventsUserService {
 
         const event = Event.createOfDTO(response);
         event.anonymous = response.resultGroups.anonymous;
-
-        let resultUsers = [];
-        for (const resultUser of response.resultGroups.allUsers) {
-          resultUsers.push(
-            new EventResultUser(
-              resultUser.id,
-              resultUser.firstname,
-              resultUser.surname,
-              resultUser.decisionId,
-              resultUser.decision,
-              resultUser.additional_information
-            )
-          );
+        event.chart = response.resultGroups.chart;
+        if (!event.anonymous) {
+          const resultUsers = [];
+          for (const resultUser of response.resultGroups.allUsers) {
+            resultUsers.push(
+              new EventResultUser(
+                resultUser.id,
+                resultUser.firstname,
+                resultUser.surname,
+                resultUser.decisionId,
+                resultUser.decision,
+                resultUser.additional_information
+              )
+            );
+          }
+          event.setResultUsers(resultUsers);
         }
-        event.setResultUsers(resultUsers);
 
         const data_resultGroups = response.resultGroups.groups;
         const resultGroups = [];
         for (const localResultGroup of data_resultGroups) {
           const resultGroup = new EventResultGroup(localResultGroup.id, localResultGroup.name);
           resultGroup.event = event;
-          resultUsers = [];
-          for (const localResultUser of localResultGroup.users) {
-            resultUsers.push(
-              new EventResultUser(
-                localResultUser.id,
-                localResultUser.firstname,
-                localResultUser.surname,
-                localResultUser.decisionId,
-                localResultUser.decision,
-                localResultUser.additional_information
-              )
-            );
-          }
-          resultGroup.setResultUsers(resultUsers);
-
-          const resultSubgroups = [];
-          for (const localResultSubgroup of localResultGroup.subgroups) {
-            const resultSubgroup = new EventResultSubgroup(
-              localResultSubgroup.id,
-              localResultSubgroup.name,
-              localResultSubgroup.parent_group_name
-            );
-            resultSubgroup.event = event;
-
-            resultUsers = [];
-            for (const localResultUser of localResultSubgroup.users) {
+          resultGroup.chart = localResultGroup.chart;
+          if (!event.anonymous) {
+            const resultUsers = [];
+            for (const localResultUser of localResultGroup.users) {
               resultUsers.push(
                 new EventResultUser(
                   localResultUser.id,
@@ -144,8 +124,35 @@ export class EventsUserService {
                 )
               );
             }
+            resultGroup.setResultUsers(resultUsers);
+          }
 
-            resultSubgroup.setResultUsers(resultUsers);
+          const resultSubgroups = [];
+          for (const localResultSubgroup of localResultGroup.subgroups) {
+            const resultSubgroup = new EventResultSubgroup(
+              localResultSubgroup.id,
+              localResultSubgroup.name,
+              localResultSubgroup.parent_group_name
+            );
+            resultSubgroup.event = event;
+            resultSubgroup.chart = localResultSubgroup.chart;
+
+            if (!event.anonymous) {
+              const resultUsers = [];
+              for (const localResultUser of localResultSubgroup.users) {
+                resultUsers.push(
+                  new EventResultUser(
+                    localResultUser.id,
+                    localResultUser.firstname,
+                    localResultUser.surname,
+                    localResultUser.decisionId,
+                    localResultUser.decision,
+                    localResultUser.additional_information
+                  )
+                );
+              }
+              resultSubgroup.setResultUsers(resultUsers);
+            }
             resultSubgroups.push(resultSubgroup);
           }
 

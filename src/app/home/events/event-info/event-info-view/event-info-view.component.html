@@ -3,6 +3,8 @@
     <b>{{ 'EVENTS_ADMINISTRATION_INFO_EVENT' | translate }}</b> {{ event.name }}
     <span style="color: gray" *ngIf="objectLoaded">({{ event.getUntil() }})</span>
   </h1>
-  <app-go-back-button></app-go-back-button>
+  <div fxLayout="row" style="margin-bottom: 15px">
+    <app-go-back-button></app-go-back-button>
+  </div>
   <app-event-info [eventId]="event.id" (eventLoaded)="eventLoaded($event)"></app-event-info>
 </div>

@@ -22,12 +22,7 @@
 
   <!-- Complete chart for all votes -->
   <ng-container *ngIf="resultGroups.length > 2">
-    <app-result-user-bar-chart
-      fxFlex="100%"
-      [resultUsers]="event.getResultUsers()"
-      *ngIf="event != null"
-      [decisions]="event.getDecisions()"
-    ></app-result-user-bar-chart>
+    <app-result-user-bar-chart fxFlex="100%" [chart]="event.chart" *ngIf="event != null"></app-result-user-bar-chart>
 
     <mat-expansion-panel *ngIf="!event?.anonymous" fxFlex="100%">
       <mat-expansion-panel-header>
