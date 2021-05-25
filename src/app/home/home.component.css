@@ -46,6 +46,6 @@ mat-sidenav {
   background-color: #616161;
 }
 
-mat-icon {
+.mat-list-item mat-icon {
   margin-right: 5px;
 }
