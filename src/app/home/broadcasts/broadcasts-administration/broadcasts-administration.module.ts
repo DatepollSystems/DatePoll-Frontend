@@ -21,6 +21,7 @@ import {CreateBroadcastComponent} from './create-broadcast/create-broadcast.comp
 import {LoadDraftDialogComponent} from './create-broadcast/load-draft-dialog/load-draft-dialog-component';
 import {BroadcastAttachmentComponent} from './create-broadcast/broadcast-attachment/broadcast-attachment.component';
 import {BroadcastsModule} from '../broadcasts.module';
+import {GoBackButtonModule} from '../../../utils/shared-components/go-back-button/go-back-button.module';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import {BroadcastsModule} from '../broadcasts.module';
     EditorPreviewModule,
     BroadcastsAdministrationRoutingModule,
     BroadcastsModule,
+    GoBackButtonModule,
   ],
   providers: [
     {provide: DateAdapter, useClass: CustomDateAdapter},

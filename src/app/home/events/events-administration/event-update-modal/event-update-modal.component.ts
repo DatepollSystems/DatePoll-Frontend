@@ -7,7 +7,10 @@ import {Subscription} from 'rxjs';
 import {TranslateService} from '../../../../translation/translate.service';
 import {EventsService} from '../../events.service';
 
-import {GroupAndSubgroupModel, GroupType} from '../../../../utils/models/groupAndSubgroup.model';
+import {
+  GroupAndSubgroupModel,
+  GroupType,
+} from '../../../../utils/shared-components/group-and-subgroup-type-input-select/groupAndSubgroup.model';
 import {EventDecision} from '../../models/event-decision.model';
 import {EventDate} from '../../models/event-date.model';
 import {Event} from '../../models/event.model';

@@ -1,14 +1,12 @@
-<mat-card class="mat-elevation-z3">
-  <mat-card-content fxLayout="column" fxLayoutGap.xs="3%" fxLayoutGap="1%">
+<div class="fluid-container desktop-card-container">
+  <div fxLayout="column" fxLayoutGap.xs="3%" fxLayoutGap="1%">
     <div fxLayout="row" fxLayoutAlign="space-between center">
       <h1 class="not-selectable">
         {{ 'BROADCASTS_ADMINISTRATION_ADMIN_INFO_TITLE' | translate }} <span *ngIf="broadcast?.subject">{{ broadcast.subject }}</span>
       </h1>
     </div>
-    <div fxLayout="row break" fxLayoutGap="2%" fxLayoutAlign="space-between center">
-      <button mat-stroked-button routerLink="/home/broadcasts/administration" fxFlex.xs="25%">
-        <mat-icon>arrow_back</mat-icon>
-      </button>
+    <div fxLayout="row" fxLayoutGap="2%" fxLayoutAlign="space-between center">
+      <app-go-back-button></app-go-back-button>
     </div>
     <div fxLayout="row" fxLayoutAlign="center center" *ngIf="!loaded">
       <mat-spinner></mat-spinner>
@@ -92,5 +90,5 @@
         </mat-tab>
       </mat-tab-group>
     </div>
-  </mat-card-content>
-</mat-card>
+  </div>
+</div>

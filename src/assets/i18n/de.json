@@ -42,6 +42,7 @@
   "CONTENT": "Inhalt",
   "HELLO": "Hallo",
   "OK": "Ok",
+  "SEND": "Absenden",
 
   "LANGUAGE": "Sprache",
   "LANGUAGE_GERMAN": "Deutsch",
@@ -142,7 +143,6 @@
   "NAV_MANAGEMENT_PERFORMANCE_BADGES": "Abzeichenverwaltung",
   "NAV_MANAGEMENT_DATEPOLL": "Instanz Einstellungen",
 
-  "NAV_CHANGE_THEME": "Theme ändern",
   "NAV_LOGOUT": "Abmelden",
   "LOGOUT_CONFIRM": "Abmeldung bestätigen",
 

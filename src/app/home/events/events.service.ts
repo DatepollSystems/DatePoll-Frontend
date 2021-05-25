@@ -7,7 +7,7 @@ import {HttpService} from '../../utils/http.service';
 import {EventDecision} from './models/event-decision.model';
 import {EventResultUser} from './models/event-result-user.model';
 import {Event} from './models/event.model';
-import {GroupAndSubgroupModel, GroupType} from '../../utils/models/groupAndSubgroup.model';
+import {GroupAndSubgroupModel, GroupType} from '../../utils/shared-components/group-and-subgroup-type-input-select/groupAndSubgroup.model';
 
 @Injectable({
   providedIn: 'root',

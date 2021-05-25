@@ -1,9 +1,14 @@
 <mat-sidenav-container>
   <mat-sidenav #sidenav [(opened)]="navBarOpened" [mode]="navBarMode">
-    <h2 class="sidenav-head-text">
-      {{ 'HELLO' | translate }} <span style="color: #607d8b">{{ firstname }}</span
-      >,
-    </h2>
+    <div fxLayout="row" fxLayoutAlign="space-between">
+      <h2 class="sidenav-head-text">
+        {{ 'HELLO' | translate }} <span style="color: #607d8b">{{ firstname }}</span
+        >,
+      </h2>
+      <button mat-icon-button (click)="changeTheme()" style="margin-top: 5px; margin-right: 15px">
+        <mat-icon>brightness_medium</mat-icon>
+      </button>
+    </div>
     <h4 class="sidenav-head-text">{{ username }}</h4>
 
     <mat-nav-list>
@@ -114,15 +119,9 @@
           myUserService.hasPermission(logsAdministration)
         "
       ></mat-divider>
-      <mat-list-item disableRipple>
-        <button mat-button (click)="logout()">
-          <mat-icon>power_settings_new</mat-icon>
-          {{ 'NAV_LOGOUT' | translate }}
-        </button>
-        <button mat-button (click)="changeTheme()">
-          <mat-icon>brightness_medium</mat-icon>
-          {{ 'NAV_CHANGE_THEME' | translate }}
-        </button>
+      <mat-list-item>
+        <mat-icon>power_settings_new</mat-icon>
+        {{ 'NAV_LOGOUT' | translate }}
       </mat-list-item>
     </mat-nav-list>
   </mat-sidenav>

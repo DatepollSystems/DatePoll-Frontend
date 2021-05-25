@@ -6,12 +6,12 @@ import {MatChipInputEvent} from '@angular/material/chips';
 
 import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
-import {GroupAndSubgroupModel, GroupType} from '../../models/groupAndSubgroup.model';
+import {GroupAndSubgroupModel, GroupType} from './groupAndSubgroup.model';
 
 @Component({
   selector: 'app-group-and-subgroup-type-input-select',
   templateUrl: './group-and-subgroup-type-input-select.component.html',
-  styleUrls: ['./group-and-subgroup-type-input-select.component.css']
+  styleUrls: ['./group-and-subgroup-type-input-select.component.css'],
 })
 export class GroupAndSubgroupTypeInputSelectComponent implements OnInit, OnChanges {
   separatorKeysCodes: number[] = [ENTER, COMMA];
@@ -89,7 +89,7 @@ export class GroupAndSubgroupTypeInputSelectComponent implements OnInit, OnChang
     } else {
       filterValue = value.toLowerCase();
     }
-    return this.allGroupsAndSubgroups.filter(group => group.name.toLowerCase().indexOf(filterValue) === 0);
+    return this.allGroupsAndSubgroups.filter((group) => group.name.toLowerCase().indexOf(filterValue) === 0);
   }
 
   addToSelectedGroups(group: GroupAndSubgroupModel) {

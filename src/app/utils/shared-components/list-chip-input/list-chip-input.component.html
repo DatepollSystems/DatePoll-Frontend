@@ -8,6 +8,7 @@
     <input
       placeholder="{{ placeHolder | translate }}"
       #stringInput
+      (focusout)="addOut()"
       [formControl]="stringCtrl"
       [matAutocomplete]="auto"
       [matChipInputFor]="chipList"

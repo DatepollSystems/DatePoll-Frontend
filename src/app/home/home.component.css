@@ -32,7 +32,6 @@ mat-sidenav {
   margin-left: 15px;
   padding-top: 10px;
   margin-bottom: 0;
-  margin-right: 15px;
   word-break: break-all;
 }
 
@@ -48,5 +47,5 @@ mat-sidenav {
 }
 
 mat-icon {
-  margin-left: 0;
+  margin-right: 5px;
 }

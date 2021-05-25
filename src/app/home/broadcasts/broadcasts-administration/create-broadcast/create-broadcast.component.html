@@ -1,21 +1,18 @@
-<mat-card class="mat-elevation-z3">
-  <mat-card-content fxLayout="column" fxLayoutGap.xs="3%" fxLayoutGap="1%">
+<div class="fluid-container">
+  <mat-card fxLayout="column" fxLayoutGap.xs="3%" fxLayoutGap="1%">
     <div fxLayout="row" fxLayoutAlign="space-between center">
       <h1 class="not-selectable">
         {{ 'BROADCASTS_ADMINISTRATION_CREATE_TITLE' | translate }}
         <span *ngIf="draft">{{ 'BROADCASTS_ADMINISTRATION_CREATE_TITLE_DRAFT' | translate }} {{ draft.subject }}</span>
       </h1>
-      <button color="accent" mat-fab (click)="send()" [disabled]="currentlyUploading">
-        <mat-icon>send</mat-icon>
-      </button>
     </div>
 
-    <div fxLayout="row break" fxLayoutGap="2%" fxLayoutAlign="space-between center">
-      <button mat-stroked-button routerLink="/home/broadcasts/administration" fxFlex.xs="25%" (click)="leave()">
-        <mat-icon>arrow_back</mat-icon>
-      </button>
+    <div fxLayout="row break" fxLayoutGap="2%" fxLayoutAlign="space-between">
+      <div fxFlex="60%" fxFlex.lt-md="100%" fxLayout="row" fxLayoutGap="2%">
+        <button mat-stroked-button routerLink="/home/broadcasts/administration" (click)="leave()">
+          <mat-icon>arrow_back</mat-icon>
+        </button>
 
-      <div fxFlex.gt-md="20%" fxFlex.gt-xs="50%" fxFlex.xs="70%">
         <button mat-stroked-button (click)="loadDraft()">
           <mat-icon>cloud_download</mat-icon>
           {{ 'BROADCASTS_ADMINISTRATION_CREATE_LOAD_DRAFT' | translate }}
@@ -26,26 +23,41 @@
           {{ 'BROADCASTS_ADMINISTRATION_CREATE_SAVE_DRAFT' | translate }}
         </button>
       </div>
-
-      <div fxFlex.gt-md="70%" fxFlex.lt-lg="100%" fxLayout="row" fxLayoutAlign="end">
-        <app-group-and-subgroup-type-input-select
-          [allGroupsAndSubgroups]="groupsAndSubgroups"
-          fxFlex="80%"
-          [disabled]="allMembers"
-          (groupsAndSubgroupsChange)="groupsAndSubgroupChanged($event)"
-        >
-        </app-group-and-subgroup-type-input-select>
-        <app-all-groups-switch (toggleChange)="allMembersChanged($event)"></app-all-groups-switch>
-      </div>
+      <button color="accent" mat-flat-button (click)="send()" [disabled]="currentlyUploading" [fxHide.lt-md]="true">
+        <mat-icon>send</mat-icon>
+        {{ 'SEND' | translate }}
+      </button>
     </div>
 
-    <div fxLayout="row break" fxLayoutGap="2%" fxLayoutAlign="space-between center">
-      <mat-form-field fxFlex.gt-md="48%" fxFlex.gt-xs="49%" fxFlex.xs="100%">
+    <div fxLayout="row" fxLayoutAlign="space-between">
+      <app-group-and-subgroup-type-input-select
+        fxFlex="90%"
+        [allGroupsAndSubgroups]="groupsAndSubgroups"
+        [disabled]="allMembers"
+        (groupsAndSubgroupsChange)="groupsAndSubgroupChanged($event)"
+      >
+      </app-group-and-subgroup-type-input-select>
+      <app-all-groups-switch (toggleChange)="allMembersChanged($event)"></app-all-groups-switch>
+    </div>
+
+    <div fxLayout="column">
+      <button style="width: 100%" mat-flat-button color="primary" (click)="send()" [disabled]="currentlyUploading" [fxHide.gt-sm]="true">
+        <mat-icon>send</mat-icon>
+        {{ 'SEND' | translate }}
+      </button>
+    </div>
+
+    <div fxLayout="column">
+      <mat-divider></mat-divider>
+    </div>
+
+    <div fxLayout="column" fxLayoutGap="1%" fxLayoutAlign="center">
+      <mat-form-field>
         <mat-label>{{ 'BROADCASTS_ADMINISTRATION_SUBJECT' | translate }}</mat-label>
         <input matInput type="text" min="1" max="119" minlength="1" maxlength="119" required [(ngModel)]="subject" />
       </mat-form-field>
 
-      <div fxFlex.gt-md="48%" fxFlex.gt-xs="49%" fxFlex.xs="100%">
+      <div fxFlex="100%">
         <app-broadcast-attachment
           (attachmentsChange)="attachmentsChanged($event)"
           (currentlyUploadingChange)="currentlyUploadingChanged($event)"
@@ -64,5 +76,5 @@
       [body]="draft?.body"
       [bodyHTML]="draft?.bodyHTML"
     ></app-editor>
-  </mat-card-content>
-</mat-card>
+  </mat-card>
+</div>

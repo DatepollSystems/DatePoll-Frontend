@@ -51,11 +51,17 @@ $dark-theme: mat-dark-theme($dark-primary, $dark-accent, $dark-warn);
     background-color: #757575;
   }
 
+  /* Add material card to container if on desktop */
   @media screen and (min-width: 1314px) {
     .desktop-card-container {
       background-color: #424242;
       color: white;
     }
+  }
+
+  /* Remove dashed border on preview */
+  .editor-preview {
+    border-style: none !important;
   }
 
   /* User changes marked colored */
@@ -94,12 +100,14 @@ $dark-theme: mat-dark-theme($dark-primary, $dark-accent, $dark-warn);
   .mat-expansion-panel {
     border: solid;
     border-color: #424242 !important;
+    border-width: 2px;
   }
 
   @media screen and (min-width: 1314px) {
     .desktop-card-container {
       background-color: black !important;
       border: solid;
+      border-width: 1px;
       border-color: #424242 !important;
       color: white;
     }

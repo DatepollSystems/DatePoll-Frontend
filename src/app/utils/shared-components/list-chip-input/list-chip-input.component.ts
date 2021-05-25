@@ -34,6 +34,8 @@ export class ListChipInputComponent implements OnInit {
   disabled = false;
   @Input()
   inHighComma = false;
+  @Input()
+  outputOnFocusLost = false;
 
   /**
    * Already filled in strings
@@ -74,15 +76,18 @@ export class ListChipInputComponent implements OnInit {
     return this.allStringsToAutoComplete.filter((fruit) => fruit.toLowerCase().indexOf(filterValue) === 0);
   }
 
-  add(event: MatChipInputEvent): void {
-    const value = event.value;
-    if ((value || '').trim()) {
-      this.addValue(value.trim());
+  addOut() {
+    if (!this.outputOnFocusLost) {
+      return;
     }
+    this.addValue(this.stringInput.nativeElement.value);
+    this.stringInput.nativeElement.value = '';
+  }
 
-    const input = event.input;
-    if (input) {
-      input.value = '';
+  add(event: MatChipInputEvent): void {
+    this.addValue(event.value);
+    if (event.input) {
+      event.input.value = '';
     }
   }
 
@@ -101,6 +106,7 @@ export class ListChipInputComponent implements OnInit {
   }
 
   private addValue(value: string) {
+    value = value.trim();
     this.strings.push(value);
     this.stringCtrl.setValue(null);
     this.emitChange();
