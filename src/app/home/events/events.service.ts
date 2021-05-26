@@ -76,7 +76,7 @@ export class EventsService {
         console.log(data);
 
         const events = [];
-        const fetchedEvents = data.events;
+        const fetchedEvents = data.data;
         for (const fetchedEvent of fetchedEvents) {
           events.push(Event.createOfDTO(fetchedEvent));
         }
