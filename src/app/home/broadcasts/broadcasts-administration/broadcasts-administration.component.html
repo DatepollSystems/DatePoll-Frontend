@@ -1,16 +1,23 @@
 <div class="fluid-container">
   <mat-card class="mat-elevation-z3">
     <mat-card-content>
-      <div fxLayout="row" fxLayoutAlign="space-between center">
+      <div fxLayout="row" fxLayoutAlign="space-between" fxLayout.lt-md="column">
         <h1 class="not-selectable">{{ 'NAV_BROADCASTS_ADMINISTRATION' | translate }}</h1>
-        <button
-          mat-icon-button
-          (click)="refresh()"
-          matTooltip="{{ 'BROADCASTS_ADMINISTRATION_REFRESH_LIST' | translate }}"
-          matTooltipPosition="left"
-        >
-          <mat-icon>refresh</mat-icon>
-        </button>
+
+        <div fxLayout="row" fxLayoutAlign.lt-md="space-between" fxLayoutGap="5%">
+          <div><app-year-select (selectedYearChange)="yearSelectChange($event)"></app-year-select></div>
+
+          <div>
+            <button
+              mat-icon-button
+              (click)="refresh()"
+              matTooltip="{{ 'BROADCASTS_ADMINISTRATION_REFRESH_LIST' | translate }}"
+              matTooltipPosition="left"
+            >
+              <mat-icon>refresh</mat-icon>
+            </button>
+          </div>
+        </div>
       </div>
 
       <div fxLayout="row" fxLayoutGap="5%" style="margin-bottom: 15px">

@@ -7,7 +7,7 @@ export class Broadcast {
   public sent: Date;
   public body: string;
   public bodyPreview: string;
-  private previewLength = 30;
+  private static previewLength = 30;
   public bodyHTML: string;
   public writerName: string;
 
@@ -26,8 +26,8 @@ export class Broadcast {
     this.subject = subject;
     this.sent = sent;
     this.body = body;
-    if (this.body.length > this.previewLength) {
-      this.bodyPreview = this.body.slice(0, this.previewLength) + '...';
+    if (this.body.length > Broadcast.previewLength) {
+      this.bodyPreview = this.body.slice(0, Broadcast.previewLength) + '...';
     } else {
       this.bodyPreview = this.body;
     }

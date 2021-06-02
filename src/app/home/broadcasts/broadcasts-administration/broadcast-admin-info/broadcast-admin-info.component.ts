@@ -45,6 +45,7 @@ export class BroadcastAdminInfoComponent implements OnDestroy {
               localBroadcast.body,
               localBroadcast.writerName
             );
+            this.loaded = true;
           } else {
             this.broadcast = new Broadcast(Number(id), 'Loading', UIHelper.getCurrentDate(), 'Loading', 'Loading');
           }
