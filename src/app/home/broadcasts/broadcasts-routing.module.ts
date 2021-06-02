@@ -10,16 +10,17 @@ const broadcastRoutes: Routes = [
       {
         path: 'administration',
         loadChildren: () =>
-          import('./broadcasts-administration/broadcasts-administration.module').then(m => m.BroadcastsAdministrationModule)
+          import('./broadcasts-administration/broadcasts-administration.module').then((m) => m.BroadcastsAdministrationModule),
       },
+      {path: 'messages', component: BroadcastsViewComponent},
       {path: ':id', component: BroadcastInfoComponent},
-      {path: '', component: BroadcastsViewComponent}
-    ]
-  }
+      {path: '', redirectTo: 'messages'},
+    ],
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(broadcastRoutes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class BroadcastsRoutingModule {}

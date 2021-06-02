@@ -1,24 +1,35 @@
 <mat-sidenav-container>
   <mat-sidenav #sidenav [(opened)]="navBarOpened" [mode]="navBarMode">
-    <h2 class="sidenav-head-text">
-      {{ 'HELLO' | translate }} <span style="color: #607d8b">{{ firstname }}</span
-      >,
-    </h2>
+    <div fxLayout="row" fxLayoutAlign="space-between">
+      <h2 class="sidenav-head-text">
+        {{ 'HELLO' | translate }} <span style="color: #607d8b">{{ firstname }}</span
+        >,
+      </h2>
+      <button mat-icon-button (click)="changeTheme()" style="margin-top: 5px; margin-right: 15px">
+        <mat-icon>brightness_medium</mat-icon>
+      </button>
+    </div>
     <h4 class="sidenav-head-text">{{ username }}</h4>
 
     <mat-nav-list>
-      <mat-divider></mat-divider>
-      <a (click)="onPageChange()" mat-list-item routerLink="/home">
-        <mat-icon>home</mat-icon>
-        Home</a
-      >
+      <div mat-list-item disableRipple fxLayout="row" fxLayoutAlign="space-around">
+        <a mat-button (click)="onPageChange()" routerLink="/home">
+          <mat-icon>home</mat-icon>
+          Home
+        </a>
+        <a mat-button (click)="onPageChange()" routerLink="calendar" routerLinkActive="activated">
+          <mat-icon>today</mat-icon>
+          {{ 'CALENDAR' | translate }}</a
+        >
+      </div>
 
-      <a (click)="onPageChange()" mat-list-item routerLink="calendar" routerLinkActive="activated">
-        <mat-icon>today</mat-icon>
-        {{ 'CALENDAR' | translate }}</a
+      <a
+        *ngIf="serverInfo.broadcasts_enabled"
+        (click)="onPageChange()"
+        mat-list-item
+        routerLink="broadcasts/messages"
+        routerLinkActive="activated"
       >
-
-      <a *ngIf="serverInfo.broadcasts_enabled" (click)="onPageChange()" mat-list-item routerLink="broadcasts" routerLinkActive="activated">
         <mat-icon>message</mat-icon>
         {{ 'NAV_BROADCASTS' | translate }}</a
       >
@@ -108,27 +119,24 @@
           myUserService.hasPermission(logsAdministration)
         "
       ></mat-divider>
-      <mat-list-item disableRipple>
-        <button mat-button (click)="logout()">
-          <mat-icon>power_settings_new</mat-icon>
-          {{ 'NAV_LOGOUT' | translate }}
-        </button>
-        <button mat-button (click)="changeTheme()">
-          <mat-icon>brightness_medium</mat-icon>
-          {{ 'NAV_CHANGE_THEME' | translate }}
-        </button>
+      <mat-list-item>
+        <mat-icon>power_settings_new</mat-icon>
+        {{ 'NAV_LOGOUT' | translate }}
       </mat-list-item>
     </mat-nav-list>
   </mat-sidenav>
 
   <mat-sidenav-content>
-    <mat-toolbar class="mat-elevation-z5 not-selectable" color="primary">
+    <mat-toolbar class="mat-elevation-z3 not-selectable" color="primary">
       <button mat-icon-button aria-label="Opens or closes the navigation drawer" (click)="sidenav.toggle()">
         <mat-icon>menu</mat-icon>
       </button>
       <span id="toolbar-heading" routerLink="/home">{{ serverInfo.community_name }}</span>
-      <button mat-icon-button *ngIf="offline" (click)="onOfflineButtonClick()">
+      <button mat-icon-button *ngIf="offline" (click)="onNetworkStatusInfoClick()">
         <mat-icon>report_problemn</mat-icon>
+      </button>
+      <button mat-icon-button *ngIf="prideMonth" (click)="onPrideMonthInfoClick()">
+        <mat-icon>info</mat-icon>
       </button>
     </mat-toolbar>
 

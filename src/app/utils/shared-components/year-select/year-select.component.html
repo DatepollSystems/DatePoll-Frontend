@@ -1,0 +1,16 @@
+<mat-form-field>
+  <mat-select
+    #yearSelect
+    (selectionChange)="yearSelectChange($event.value)"
+    [formControl]="yearCtrl"
+    placeholder="{{ 'YEARS_SELECT_YEAR' | translate }}"
+  >
+    <mat-option>
+      <ngx-mat-select-search [formControl]="yearFilterCtrl"></ngx-mat-select-search>
+    </mat-option>
+
+    <mat-option *ngFor="let year of filteredYears | async" [value]="year">
+      {{ year }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>

@@ -1,19 +1,17 @@
-import {AfterViewInit, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {FormControl} from '@angular/forms';
+import {Component, OnDestroy, ViewChild} from '@angular/core';
 import {MatBottomSheet} from '@angular/material/bottom-sheet';
 import {MatDialog} from '@angular/material/dialog';
-import {MatSelect} from '@angular/material/select';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import {Router} from '@angular/router';
 import {MatSnackBar} from '@angular/material/snack-bar';
 
-import {ReplaySubject, Subject, Subscription} from 'rxjs';
-import {take, takeUntil} from 'rxjs/operators';
+import {Subscription} from 'rxjs';
 
 import {MyUserService} from '../../my-user.service';
 import {CinemaService} from '../cinema.service';
 import {TranslateService} from '../../../translation/translate.service';
+import {UIHelper} from '../../../utils/helper/UIHelper';
 
 import {Movie} from '../models/movie.model';
 
@@ -22,22 +20,18 @@ import {MovieCreateModalComponent} from './movie-create-modal/movie-create-modal
 import {MovieEditModalComponent} from './movie-edit-modal/movie-edit-modal.component';
 import {MovieInfoModalComponent} from './movie-info-modal/movie-info-modal.component';
 import {QuestionDialogComponent} from '../../../utils/shared-components/question-dialog/question-dialog.component';
-import {UIHelper} from '../../../utils/helper/UIHelper';
+import {YearSelectComponent} from '../../../utils/shared-components/year-select/year-select.component';
 
 @Component({
   selector: 'app-movie-administration',
   templateUrl: './movie-administration.component.html',
   styleUrls: ['./movie-administration.component.css'],
 })
-export class MovieAdministrationComponent implements OnInit, AfterViewInit, OnDestroy {
-  protected _onDestroy = new Subject<void>();
-  @ViewChild('yearSelect', {static: true}) yearSelect: MatSelect;
-  public yearCtrl: FormControl = new FormControl();
-  public yearFilterCtrl: FormControl = new FormControl();
-  public filteredYears: ReplaySubject<string[]> = new ReplaySubject<string[]>(1);
-  private yearsSubscription: Subscription;
+export class MovieAdministrationComponent implements OnDestroy {
   private years: string[];
+  private yearsSubscription: Subscription;
   private selectedYear: string = null;
+  @ViewChild(YearSelectComponent) yearSelect: YearSelectComponent;
 
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   displayedColumns: string[] = ['name', 'date', 'trailer', 'poster', 'worker', 'emergencyWorker', 'bookedTickets', 'deleteMovie'];
@@ -60,17 +54,15 @@ export class MovieAdministrationComponent implements OnInit, AfterViewInit, OnDe
     this.selectedYear = this.years[this.years.length - 1];
     this.yearsSubscription = cinemaService.yearsChange.subscribe((value) => {
       this.years = value;
-      this.filteredYears.next(this.years.slice());
       this.selectedYear = this.years[this.years.length - 1];
       for (const year of this.years) {
         if (year.includes(UIHelper.getCurrentDate().getFullYear().toString())) {
-          console.log('in');
           this.selectedYear = year;
           break;
         }
       }
-      this.yearCtrl.setValue(this.selectedYear);
-      this.setInitialValue();
+
+      this.yearSelect.initialize(this.selectedYear, this.years);
 
       this.moviesLoaded = false;
       this.movies = cinemaService.getMovies(Number(this.selectedYear));
@@ -88,27 +80,9 @@ export class MovieAdministrationComponent implements OnInit, AfterViewInit, OnDe
     });
   }
 
-  ngOnInit() {
-    this.yearCtrl.setValue(this.years[1]);
-
-    // load the initial years list
-    this.filteredYears.next(this.years.slice());
-
-    // listen for search field value changes
-    this.yearFilterCtrl.valueChanges.pipe(takeUntil(this._onDestroy)).subscribe(() => {
-      this.filterYears();
-    });
-  }
-
-  ngAfterViewInit() {
-    this.setInitialValue();
-  }
-
   ngOnDestroy() {
     this.moviesSubscription.unsubscribe();
     this.yearsSubscription.unsubscribe();
-    this._onDestroy.next();
-    this._onDestroy.complete();
   }
 
   refreshTable() {
@@ -182,32 +156,5 @@ export class MovieAdministrationComponent implements OnInit, AfterViewInit, OnDe
   yearSelectChange(value) {
     this.selectedYear = value;
     this.cinemaService.getMovies(value);
-  }
-
-  private setInitialValue() {
-    this.filteredYears.pipe(take(1), takeUntil(this._onDestroy)).subscribe(() => {
-      // setting the compareWith property to a comparison function
-      // triggers initializing the selection according to the initial value of
-      // the form control (i.e. _initializeSelection())
-      // this needs to be done after the filteredYears are loaded initially
-      // and after the mat-option elements are available
-      this.yearSelect.compareWith = (a: string, b: string) => a && b && a === b;
-    });
-  }
-
-  private filterYears() {
-    if (!this.years) {
-      return;
-    }
-    // get the search keyword
-    let search = this.yearFilterCtrl.value;
-    if (!search) {
-      this.filteredYears.next(this.years.slice());
-      return;
-    } else {
-      search = search.toLowerCase();
-    }
-    // filter the years
-    this.filteredYears.next(this.years.filter((year) => year.toLowerCase().indexOf(search) > -1));
   }
 }

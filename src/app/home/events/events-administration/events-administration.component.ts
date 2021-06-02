@@ -1,15 +1,12 @@
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, OnDestroy, ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatDialog} from '@angular/material/dialog';
 import {MatBottomSheet} from '@angular/material/bottom-sheet';
 import {MatPaginator} from '@angular/material/paginator';
-import {FormControl} from '@angular/forms';
-import {MatSelect} from '@angular/material/select';
 import {MatSnackBar} from '@angular/material/snack-bar';
-import {ReplaySubject, Subject, Subscription} from 'rxjs';
-import {take, takeUntil} from 'rxjs/operators';
+import {Subscription} from 'rxjs';
 
 import {TranslateService} from '../../../translation/translate.service';
 import {EventsService} from '../events.service';
@@ -23,13 +20,14 @@ import {EventStandardLocationsManagementModalComponent} from './event-standard-l
 import {EventUpdateModalComponent} from './event-update-modal/event-update-modal.component';
 import {EventUserManagementModalComponent} from './event-user-management-modal/event-user-management-modal.component';
 import {UIHelper} from '../../../utils/helper/UIHelper';
+import {YearSelectComponent} from '../../../utils/shared-components/year-select/year-select.component';
 
 @Component({
   selector: 'app-events-administration',
   templateUrl: './events-administration.component.html',
   styleUrls: ['./events-administration.component.css'],
 })
-export class EventsAdministrationComponent implements OnInit, OnDestroy {
+export class EventsAdministrationComponent implements OnDestroy {
   eventsLoaded = false;
   showAllEvents: boolean;
 
@@ -43,15 +41,10 @@ export class EventsAdministrationComponent implements OnInit, OnDestroy {
   dataSource: MatTableDataSource<Event>;
   private eventsSubscription: Subscription;
 
-  protected _onDestroy = new Subject<void>();
-  public yearCtrl: FormControl = new FormControl();
-  public yearFilterCtrl: FormControl = new FormControl();
-  public filteredYears: ReplaySubject<string[]> = new ReplaySubject<string[]>(1);
+  years: string[];
   private yearsSubscription: Subscription;
-  private years: string[];
-  private selectedYear: string = null;
-
-  @ViewChild('yearSelect', {static: true}) yearSelect: MatSelect;
+  selectedYear: string = null;
+  @ViewChild(YearSelectComponent) yearSelect: YearSelectComponent;
 
   private currentDate: Date;
 
@@ -69,7 +62,6 @@ export class EventsAdministrationComponent implements OnInit, OnDestroy {
     this.selectedYear = this.years[this.years.length - 1];
     this.yearsSubscription = eventsService.yearsChange.subscribe((value) => {
       this.years = value;
-      this.filteredYears.next(this.years.slice());
       this.selectedYear = this.years[this.years.length - 1];
       for (const year of this.years) {
         if (year.includes(this.currentDate.getFullYear().toString())) {
@@ -77,8 +69,8 @@ export class EventsAdministrationComponent implements OnInit, OnDestroy {
           break;
         }
       }
-      this.yearCtrl.setValue(this.selectedYear);
-      this.setInitialValue();
+
+      this.yearSelect.initialize(this.selectedYear, this.years);
 
       this.eventsLoaded = false;
       this.events = eventsService.getEvents(Number(this.selectedYear));
@@ -93,18 +85,6 @@ export class EventsAdministrationComponent implements OnInit, OnDestroy {
         this.eventsLoaded = true;
         this.refreshTable();
       });
-    });
-  }
-
-  ngOnInit() {
-    this.yearCtrl.setValue(this.years[1]);
-
-    // load the initial years list
-    this.filteredYears.next(this.years.slice());
-
-    // listen for search field value changes
-    this.yearFilterCtrl.valueChanges.pipe(takeUntil(this._onDestroy)).subscribe(() => {
-      this.filterYears();
     });
   }
 
@@ -221,30 +201,5 @@ export class EventsAdministrationComponent implements OnInit, OnDestroy {
       this.showAllEvents = Number(value) < this.currentDate.getFullYear();
     }
     this.eventsService.getEvents(value);
-  }
-
-  private setInitialValue() {
-    this.filteredYears.pipe(take(1), takeUntil(this._onDestroy)).subscribe(() => {
-      // setting the compareWith property to a comparison function
-      // triggers initializing the selection according to the initial value of
-      // the form control (i.e. _initializeSelection())
-      // this needs to be done after the filteredYears are loaded initially
-      // and after the mat-option elements are available
-      this.yearSelect.compareWith = (a: string, b: string) => a && b && a === b;
-    });
-  }
-
-  private filterYears() {
-    if (!this.years) {
-      return;
-    }
-    let search = this.yearFilterCtrl.value;
-    if (!search) {
-      this.filteredYears.next(this.years.slice());
-      return;
-    } else {
-      search = search.toLowerCase();
-    }
-    this.filteredYears.next(this.years.filter((year) => year.toString().toLowerCase().indexOf(search) > -1));
   }
 }

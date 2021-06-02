@@ -11,11 +11,15 @@ import {Subscription} from 'rxjs';
 
 import {BroadcastsAdministrationService} from './broadcasts-administration.service';
 import {TranslateService} from '../../../translation/translate.service';
+import {MyUserService} from '../../my-user.service';
+import {Permissions} from '../../../permissions';
 
 import {QuestionDialogComponent} from '../../../utils/shared-components/question-dialog/question-dialog.component';
+import {YearSelectComponent} from '../../../utils/shared-components/year-select/year-select.component';
+
 import {Broadcast} from '../models/broadcast.model';
-import {Permissions} from '../../../permissions';
-import {MyUserService} from '../../my-user.service';
+import {UIHelper} from '../../../utils/helper/UIHelper';
+import {Converter} from '../../../utils/helper/Converter';
 
 @Component({
   selector: 'app-broadcasts-administration',
@@ -24,6 +28,11 @@ import {MyUserService} from '../../my-user.service';
 })
 export class BroadcastsAdministrationComponent implements OnInit, OnDestroy {
   hasPermissionToDeleteBroadcast = false;
+
+  private years: string[];
+  private yearsSubscription: Subscription;
+  private selectedYear: string = null;
+  @ViewChild(YearSelectComponent) yearSelect: YearSelectComponent;
 
   displayedColumns: string[] = ['subject', 'sent', 'writer', 'body', 'action'];
   filterValue: string = null;
@@ -44,19 +53,35 @@ export class BroadcastsAdministrationComponent implements OnInit, OnDestroy {
     private snackBar: MatSnackBar,
     private translate: TranslateService
   ) {
-    this.broadcasts = this.broadcastsService.getBroadcasts();
-    if (this.broadcasts.length !== 0) {
-      this.loading = false;
-    }
-    this.dataSource = new MatTableDataSource(this.broadcasts);
-    this.dataSource.sort = this.sort;
-    this.dataSource.paginator = this.paginator;
-    this.broadcastsSubscription = this.broadcastsService.broadcastsChange.subscribe((value) => {
-      this.broadcasts = value;
-      this.loading = false;
+    this.years = this.broadcastsService.getYears();
+    this.selectedYear = this.years[this.years.length - 1];
+    this.yearsSubscription = this.broadcastsService.yearsChange.subscribe((value) => {
+      this.years = value;
+      this.selectedYear = this.years[this.years.length - 1];
+      for (const year of this.years) {
+        if (year.includes(UIHelper.getCurrentDate().getFullYear().toString())) {
+          console.log('in');
+          this.selectedYear = year;
+          break;
+        }
+      }
+
+      this.yearSelect.initialize(this.selectedYear, this.years);
+
+      this.broadcasts = this.broadcastsService.getBroadcasts(Converter.stringToNumber(this.selectedYear));
+      if (this.broadcasts.length !== 0) {
+        this.loading = false;
+      }
       this.dataSource = new MatTableDataSource(this.broadcasts);
       this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;
+      this.broadcastsSubscription = this.broadcastsService.broadcastsChange.subscribe((value) => {
+        this.broadcasts = value;
+        this.loading = false;
+        this.dataSource = new MatTableDataSource(this.broadcasts);
+        this.dataSource.sort = this.sort;
+        this.dataSource.paginator = this.paginator;
+      });
     });
   }
 
@@ -68,6 +93,12 @@ export class BroadcastsAdministrationComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.broadcastsSubscription.unsubscribe();
+    this.yearsSubscription.unsubscribe();
+  }
+
+  yearSelectChange(value) {
+    this.selectedYear = value;
+    this.broadcastsService.getBroadcasts(value);
   }
 
   refresh() {

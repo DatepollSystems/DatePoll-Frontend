@@ -2,7 +2,7 @@
   <div class="barContainer">
     <div
       class="barElement"
-      *ngFor="let element of getResultBarElements()"
+      *ngFor="let element of chart"
       [ngStyle]="{width: element.percentWidth + '%', 'background-color': element.color}"
     >
       <span class="barText" *ngIf="element.count > 0">{{ element.count }}</span>

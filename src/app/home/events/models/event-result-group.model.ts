@@ -7,7 +7,6 @@ export class EventResultGroup extends HasResultUsers {
   public id: number;
   public name: string;
   public event: Event;
-  public chartIsEmpty = true;
   private resultSubgroups: EventResultSubgroup[];
 
   constructor(id: number, name: string) {

@@ -13,7 +13,7 @@ import {BroadcastsDraftsService} from '../broadcasts-drafts.service';
 import {QuestionDialogComponent} from '../../../../utils/shared-components/question-dialog/question-dialog.component';
 import {LoadDraftDialogComponent} from './load-draft-dialog/load-draft-dialog-component';
 
-import {GroupAndSubgroupModel} from '../../../../utils/models/groupAndSubgroup.model';
+import {GroupAndSubgroupModel} from '../../../../utils/shared-components/group-and-subgroup-type-input-select/groupAndSubgroup.model';
 import {BroadcastDraft} from '../../models/broadcast-draft.model';
 import {Attachment} from './broadcast-attachment/broadcast-attachment.component';
 

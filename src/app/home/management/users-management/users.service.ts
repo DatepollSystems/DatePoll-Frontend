@@ -3,7 +3,10 @@ import {Subject} from 'rxjs';
 
 import {HttpService} from '../../../utils/http.service';
 
-import {GroupAndSubgroupModel, GroupType} from '../../../utils/models/groupAndSubgroup.model';
+import {
+  GroupAndSubgroupModel,
+  GroupType,
+} from '../../../utils/shared-components/group-and-subgroup-type-input-select/groupAndSubgroup.model';
 import {PhoneNumber} from '../../phoneNumber.model';
 import {User} from './user.model';
 

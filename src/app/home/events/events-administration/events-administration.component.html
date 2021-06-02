@@ -8,22 +8,7 @@
 
         <div fxLayout="row" fxLayoutAlign.lt-md="space-between" fxLayoutGap="5%">
           <div>
-            <mat-form-field>
-              <mat-select
-                #yearSelect
-                (selectionChange)="yearSelectChange($event.value)"
-                [formControl]="yearCtrl"
-                placeholder="{{ 'CINEMA_TICKETS_ADMINISTRATION_YEAR_SELECT_PLACEHOLDER' | translate }}"
-              >
-                <mat-option>
-                  <ngx-mat-select-search [formControl]="yearFilterCtrl"></ngx-mat-select-search>
-                </mat-option>
-
-                <mat-option *ngFor="let year of filteredYears | async" [value]="year">
-                  {{ year }}
-                </mat-option>
-              </mat-select>
-            </mat-form-field>
+            <app-year-select (selectedYearChange)="yearSelectChange($event)"></app-year-select>
           </div>
           <div>
             <button [matMenuTriggerFor]="menu" mat-icon-button>
@@ -57,6 +42,7 @@
           <mat-icon>add</mat-icon>
         </button>
         <mat-form-field>
+          <!--suppress TypeScriptUnresolvedVariable -->
           <input (keyup)="applyFilter($event.target.value)" matInput placeholder="{{ 'SEARCH' | translate }}" />
         </mat-form-field>
       </div>

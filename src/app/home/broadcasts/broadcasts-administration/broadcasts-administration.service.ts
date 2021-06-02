@@ -20,10 +20,39 @@ export class BroadcastsAdministrationService {
   private broadcast: Broadcast;
   public broadcastChange = new Subject<Broadcast>();
 
+  private _lastUsedYear: number;
+  private _years: string[] = [];
+  public yearsChange: Subject<string[]> = new Subject<string[]>();
+
   constructor(private httpService: HttpService, private httpClient: HttpClient) {}
 
-  public getBroadcasts(): Broadcast[] {
-    this.fetchBroadcasts();
+  public getYears(): string[] {
+    this.fetchYears();
+    return this._years.slice();
+  }
+
+  public setYears(years: string[]) {
+    this._years = years;
+    this.yearsChange.next(this._years.slice());
+  }
+
+  private fetchYears() {
+    this.httpService.loggedInV1GETRequest('/broadcast/administration/broadcast/years').subscribe(
+      (response: any) => {
+        console.log(response);
+        const years = [];
+        for (const year of response.years) {
+          years.push(year.toString());
+        }
+        this.setYears(years);
+      },
+      (error) => console.log(error)
+    );
+  }
+
+  public getBroadcasts(year: number): Broadcast[] {
+    this._lastUsedYear = year;
+    this.fetchBroadcasts(year);
     return this._broadcasts.slice();
   }
 
@@ -32,13 +61,21 @@ export class BroadcastsAdministrationService {
     this.broadcastsChange.next(this._broadcasts.slice());
   }
 
-  public fetchBroadcasts() {
-    this.httpService.loggedInV1GETRequest('/broadcast/administration/broadcast', 'fetchAdminBroadcasts').subscribe(
+  public fetchBroadcasts(year: number = null) {
+    if (this._lastUsedYear != null) {
+      year = this._lastUsedYear;
+    }
+    let url = '/broadcast/administration/broadcast';
+    if (year != null) {
+      url += '/' + year;
+    }
+
+    this.httpService.loggedInV1GETRequest(url, 'fetchAdminBroadcasts').subscribe(
       (response: any) => {
         console.log(response);
 
         const broadcasts = [];
-        for (const broadcast of response.broadcasts) {
+        for (const broadcast of response.data) {
           const toSaveBroadcast = Broadcast.createOfDTO(broadcast);
 
           broadcasts.push(toSaveBroadcast);
@@ -59,7 +96,7 @@ export class BroadcastsAdministrationService {
   }
 
   public fetchSentReceiptBroadcast(id: number) {
-    this.httpService.loggedInV1GETRequest('/broadcast/administration/broadcast/' + id, 'fetchSentReceiptBroadcast').subscribe(
+    this.httpService.loggedInV1GETRequest('/broadcast/administration/single/' + id, 'fetchSentReceiptBroadcast').subscribe(
       (response: any) => {
         console.log(response);
 

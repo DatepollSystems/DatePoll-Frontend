@@ -5,10 +5,7 @@
     </mat-panel-title>
   </mat-expansion-panel-header>
   <!-- Chart for the subgroups -->
-  <app-result-user-bar-chart
-    [resultUsers]="resultSubgroup.getResultUsers()"
-    [decisions]="resultSubgroup.event.getDecisions()"
-  ></app-result-user-bar-chart>
+  <app-result-user-bar-chart [chart]="resultSubgroup.chart"></app-result-user-bar-chart>
 
   <div
     style="margin-top: 10px"
@@ -49,9 +46,6 @@
 <mat-card *ngIf="resultSubgroup?.event?.anonymous || simpleView">
   <mat-card-content>
     <mat-card-subtitle>{{ resultSubgroup.name }}</mat-card-subtitle>
-    <app-result-user-bar-chart
-      [resultUsers]="resultSubgroup.getResultUsers()"
-      [decisions]="resultSubgroup.event.getDecisions()"
-    ></app-result-user-bar-chart>
+    <app-result-user-bar-chart [chart]="resultSubgroup.chart"></app-result-user-bar-chart>
   </mat-card-content>
 </mat-card>

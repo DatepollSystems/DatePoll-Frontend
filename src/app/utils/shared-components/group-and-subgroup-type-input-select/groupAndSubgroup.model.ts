@@ -1,6 +1,6 @@
 export enum GroupType {
   PARENTGROUP,
-  SUBGROUP
+  SUBGROUP,
 }
 
 export class GroupAndSubgroupModel {

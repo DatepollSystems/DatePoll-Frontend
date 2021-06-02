@@ -15,7 +15,10 @@ import {UsersService} from '../users.service';
 
 import {Permissions} from '../../../../permissions';
 
-import {GroupAndSubgroupModel, GroupType} from '../../../../utils/models/groupAndSubgroup.model';
+import {
+  GroupAndSubgroupModel,
+  GroupType,
+} from '../../../../utils/shared-components/group-and-subgroup-type-input-select/groupAndSubgroup.model';
 import {PhoneNumber} from '../../../phoneNumber.model';
 import {UserBadge} from '../badges-list/userBadge.model';
 import {UserPerformanceBadge} from '../userPerformanceBadge.model';

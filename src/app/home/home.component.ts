@@ -51,7 +51,8 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   isMobileSubscription: Subscription;
 
-  offline: boolean;
+  offline = false;
+  prideMonth = false;
 
   constructor(
     myUserService: MyUserService,
@@ -124,6 +125,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
     // if month is june
     if (UIHelper.getCurrentDate().getMonth() === 5) {
+      this.prideMonth = true;
       document.getElementById('toolbar-heading').classList.add('rainbow-text');
     }
   }
@@ -138,11 +140,17 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   onNetworkStatusChange(): void {
     this.offline = !navigator.onLine;
-    console.log('offline ' + this.offline);
   }
 
-  onOfflineButtonClick(): void {
+  onNetworkStatusInfoClick(): void {
     this.snackBar.open(this.translate.getTranslationFor('OFFLINE_HELP'));
+  }
+
+  onPrideMonthInfoClick() {
+    const snackBar = this.snackBar.open(this.translate.getTranslationFor('PRIDE_HELP'), this.translate.getTranslationFor('LEARN_MORE'));
+    snackBar.onAction().subscribe(() => {
+      window.open('https://www.studentjob.at/blog/4830-lgbtq-pride-month-die-bedeutung-dahinter', '_blank');
+    });
   }
 
   logout() {
@@ -163,6 +171,8 @@ export class HomeComponent implements OnInit, OnDestroy {
     const theme = localStorage.getItem('theme');
     if (theme === 'light') {
       localStorage.setItem('theme', 'dark');
+    } else if (theme === 'dark') {
+      localStorage.setItem('theme', 'black');
     } else {
       localStorage.setItem('theme', 'light');
     }
@@ -177,8 +187,13 @@ export class HomeComponent implements OnInit, OnDestroy {
     const theme = localStorage.getItem('theme');
     if (theme === 'light') {
       document.getElementById('body').classList.remove('dark-theme');
-    } else {
+      document.getElementById('body').classList.remove('black-theme');
+    } else if (theme === 'dark') {
+      document.getElementById('body').classList.remove('black-theme');
       document.getElementById('body').classList.add('dark-theme');
+    } else {
+      document.getElementById('body').classList.add('black-theme');
+      document.getElementById('body').classList.remove('dark-theme');
     }
   }
 }

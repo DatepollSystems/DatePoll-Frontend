@@ -8,7 +8,7 @@ import {BadgesService} from '../../performance-badges-management/badges.service'
 import {PerformanceBadgesService} from '../../performance-badges-management/performance-badges.service';
 import {UsersService} from '../users.service';
 
-import {GroupAndSubgroupModel} from '../../../../utils/models/groupAndSubgroup.model';
+import {GroupAndSubgroupModel} from '../../../../utils/shared-components/group-and-subgroup-type-input-select/groupAndSubgroup.model';
 import {PhoneNumber} from '../../../phoneNumber.model';
 import {UserBadge} from '../badges-list/userBadge.model';
 import {UserPerformanceBadge} from '../userPerformanceBadge.model';

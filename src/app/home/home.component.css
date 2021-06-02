@@ -31,7 +31,7 @@ mat-sidenav {
 .sidenav-head-text {
   margin-left: 15px;
   padding-top: 10px;
-  margin-right: 15px;
+  margin-bottom: 0;
   word-break: break-all;
 }
 
@@ -46,6 +46,6 @@ mat-sidenav {
   background-color: #616161;
 }
 
-mat-icon {
-  margin-left: 0;
+.mat-list-item mat-icon {
+  margin-right: 5px;
 }

@@ -9,7 +9,10 @@ import {GroupsService} from '../../../management/groups-management/groups.servic
 import {EventsService} from '../../events.service';
 import {StandardDecisionsService} from '../../standardDecisions.service';
 
-import {GroupAndSubgroupModel, GroupType} from '../../../../utils/models/groupAndSubgroup.model';
+import {
+  GroupAndSubgroupModel,
+  GroupType,
+} from '../../../../utils/shared-components/group-and-subgroup-type-input-select/groupAndSubgroup.model';
 import {EventDecision} from '../../models/event-decision.model';
 import {EventDate} from '../../models/event-date.model';
 import {Event} from '../../models/event.model';
@@ -42,9 +45,7 @@ export class EventCreateComponent implements OnDestroy {
     const standardDecisions = this.standardDecisionsService.getStandardDecisions();
     let i = -1;
     for (const standardDecision of standardDecisions) {
-      const decision = new EventDecision(i, standardDecision.decision, standardDecision.color);
-      decision.showInCalendar = standardDecision.showInCalendar;
-      this.decisions.push(decision);
+      this.decisions.push(new EventDecision(i, standardDecision.decision, standardDecision.color, standardDecision.showInCalendar));
       i--;
     }
 
@@ -52,9 +53,7 @@ export class EventCreateComponent implements OnDestroy {
       this.decisions = [];
       let y = -1;
       for (const decisionO of value) {
-        const decision = new EventDecision(y, decisionO.decision, decisionO.color);
-        decision.showInCalendar = decisionO.showInCalendar;
-        this.decisions.push(decision);
+        this.decisions.push(new EventDecision(y, decisionO.decision, decisionO.color, decisionO.showInCalendar));
         y--;
       }
     });

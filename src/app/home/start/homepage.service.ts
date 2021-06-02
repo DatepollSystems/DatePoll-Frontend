@@ -98,12 +98,7 @@ export class HomepageService {
 
         const eventsToSave = [];
         for (const fetchedEvent of data.events) {
-          const decisions = [];
-          for (const decision of fetchedEvent.decisions) {
-            decisions.push(EventDecision.createOfDTO(decision));
-          }
-
-          const event = Event.createOfDTO(fetchedEvent, decisions);
+          const event = Event.createOfDTO(fetchedEvent);
           event.alreadyVotedFor = fetchedEvent.already_voted;
           if (event.alreadyVotedFor) {
             event.userDecision = fetchedEvent.user_decision.decision;

@@ -79,10 +79,10 @@ export class CinemaService {
     }
 
     this.httpService.loggedInV1GETRequest(url, 'fetchMovies').subscribe(
-      (data: any) => {
-        console.log(data);
+      (response: any) => {
+        console.log(response);
 
-        const fetchedMovies = data.movies;
+        const fetchedMovies = response.data;
 
         const movies = [];
         for (const movie of fetchedMovies) {

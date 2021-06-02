@@ -2,7 +2,7 @@ import {Component, Inject, OnDestroy} from '@angular/core';
 import {MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {Subscription} from 'rxjs';
 
-import {EventsService} from '../../events.service';
+import {EventsUserService} from '../../events-user.service';
 import {Event} from '../../models/event.model';
 
 @Component({
@@ -16,12 +16,12 @@ export class EventUserManagementModalComponent implements OnDestroy {
   name: string;
   sendingRequest = true;
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any, private eventsService: EventsService) {
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any, private userEventsService: EventsUserService) {
     this.event = data.event;
     this.name = this.event.name;
 
-    this.event = this.eventsService.getEvent(this.event.id);
-    this.eventSubscription = this.eventsService.eventChange.subscribe((value) => {
+    this.event = this.userEventsService.getEvent(this.event.id);
+    this.eventSubscription = this.userEventsService.eventChange.subscribe((value) => {
       this.event = value;
       this.name = this.event.name;
       this.sendingRequest = false;

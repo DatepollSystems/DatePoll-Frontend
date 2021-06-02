@@ -1,7 +1,13 @@
 <mat-card
   ><h1>{{ 'EVENTS_ADMINISTRATION_CREATE_EVENT' | translate }}</h1>
 
-  <app-go-back-button></app-go-back-button>
+  <div fxLayout="row" fxLayoutAlign="space-between" style="margin-bottom: 10px">
+    <app-go-back-button></app-go-back-button>
+    <button (click)="form.ngSubmit.emit()" [disabled]="!form.form.valid" color="accent" mat-flat-button>
+      <mat-icon>mode_edit</mat-icon>
+      {{ 'CREATE' | translate }}
+    </button>
+  </div>
 
   <form #form="ngForm" (ngSubmit)="create(form)" fxLayout="row break" fxLayout.lt-xl="column" fxLayoutGap="2%" fxLayoutAlign="start">
     <!-- Name -->
@@ -49,14 +55,4 @@
       </mat-expansion-panel>
     </div>
   </form>
-
-  <button
-    (click)="form.ngSubmit.emit()"
-    [disabled]="!form.form.valid"
-    color="primary"
-    mat-raised-button
-    style="width: 100%; margin-top: 15px"
-  >
-    {{ 'CREATE' | translate }}
-  </button>
 </mat-card>
