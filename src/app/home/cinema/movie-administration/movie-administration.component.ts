@@ -57,10 +57,12 @@ export class MovieAdministrationComponent implements OnDestroy {
       this.selectedYear = this.years[this.years.length - 1];
       for (const year of this.years) {
         if (year.includes(UIHelper.getCurrentDate().getFullYear().toString())) {
-          console.log('in');
           this.selectedYear = year;
           break;
         }
+      }
+      if (this.years.length < 1) {
+        this.selectedYear = UIHelper.getCurrentDate().getFullYear().toString();
       }
 
       this.yearSelect.initialize(this.selectedYear, this.years);

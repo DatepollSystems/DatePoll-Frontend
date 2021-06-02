@@ -69,6 +69,9 @@ export class EventsAdministrationComponent implements OnDestroy {
           break;
         }
       }
+      if (this.years.length < 1) {
+        this.selectedYear = UIHelper.getCurrentDate().getFullYear().toString();
+      }
 
       this.yearSelect.initialize(this.selectedYear, this.years);
 
