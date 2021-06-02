@@ -65,13 +65,10 @@ export class BroadcastsAdministrationComponent implements OnInit, OnDestroy {
           break;
         }
       }
-      if (this.years.length < 1) {
-        this.selectedYear = UIHelper.getCurrentDate().getFullYear().toString();
-      }
 
       this.yearSelect.initialize(this.selectedYear, this.years);
 
-      this.broadcasts = this.broadcastsService.getBroadcasts(this.selectedYear ? Converter.stringToNumber(this.selectedYear) : null);
+      this.broadcasts = this.broadcastsService.getBroadcasts(Converter.stringToNumber(this.selectedYear));
       if (this.broadcasts.length !== 0) {
         this.loading = false;
       }

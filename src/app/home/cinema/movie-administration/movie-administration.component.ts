@@ -61,14 +61,11 @@ export class MovieAdministrationComponent implements OnDestroy {
           break;
         }
       }
-      if (this.years.length < 1) {
-        this.selectedYear = UIHelper.getCurrentDate().getFullYear().toString();
-      }
 
       this.yearSelect.initialize(this.selectedYear, this.years);
 
       this.moviesLoaded = false;
-      this.movies = cinemaService.getMovies(this.selectedYear ? Number(this.selectedYear) : null);
+      this.movies = cinemaService.getMovies(Number(this.selectedYear));
       this.refreshTable();
 
       if (this.movies.length > 0) {
