@@ -45,6 +45,8 @@
     </div>
     <mat-list-item *ngFor="let event of events" class="not-selectable" (click)="onEventInfo(event)" matRipple matRippleRadius="100">
       <div
+        matBadge="X"
+        matBadgeOverlap="true"
         mat-list-icon
         class="circle"
         [style.background-color]="event.decisionColor"

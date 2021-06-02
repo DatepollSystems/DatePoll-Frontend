@@ -25,6 +25,7 @@ import {EventStandardLocationsManagementModalComponent} from './events-administr
 import {EventUserManagementModalComponent} from './events-administration/event-user-management-modal/event-user-management-modal.component';
 import {EventsAdministrationComponent} from './events-administration/events-administration.component';
 import {EventsViewComponent} from './events-view/events-view.component';
+import {YearSelectModule} from '../../utils/shared-components/year-select/year-select.module';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import {EventsViewComponent} from './events-view/events-view.component';
     NgxMatSelectSearchModule,
     GoBackButtonModule,
     AllMembersSwitchModule,
+    YearSelectModule,
   ],
   providers: [EventsService, {provide: DateAdapter, useClass: CustomDateAdapter}, {provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS}],
 })

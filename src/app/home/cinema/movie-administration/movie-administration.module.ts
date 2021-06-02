@@ -13,6 +13,7 @@ import {CommonComponentsModule} from '../../../utils/common-components.module';
 
 import {CommonMovieAdministrationComponentsModule} from './common-movie-administration-components.module';
 import {MovieAdministrationComponent} from './movie-administration.component';
+import {YearSelectModule} from '../../../utils/shared-components/year-select/year-select.module';
 
 @NgModule({
   declarations: [MovieAdministrationComponent],
@@ -26,6 +27,7 @@ import {MovieAdministrationComponent} from './movie-administration.component';
     TranslationModule,
     CommonMovieAdministrationComponentsModule,
     MovieAdministrationRoutingModule,
+    YearSelectModule,
   ],
   providers: [
     {provide: DateAdapter, useClass: CustomDateAdapter},

@@ -27,7 +27,7 @@ export class MapsComponent implements AfterViewInit {
   public coordinatesChanged = new EventEmitter();
 
   public randomMapId = 0;
-  public hideMap = true;
+  public hideMap = false;
 
   constructor(private http: HttpClient) {
     this.randomMapId = Math.random();
@@ -38,6 +38,10 @@ export class MapsComponent implements AfterViewInit {
     if (this.showMarker) {
       this.drawMarker(this.x, this.y);
     }
+
+    setTimeout(() => {
+      this.hideMap = true;
+    });
   }
 
   clearSelection() {
