@@ -73,7 +73,7 @@ export class EventsAdministrationComponent implements OnDestroy {
       this.yearSelect.initialize(this.selectedYear, this.years);
 
       this.eventsLoaded = false;
-      this.events = eventsService.getEvents(Number(this.selectedYear));
+      this.events = eventsService.getEvents(this.selectedYear ? Number(this.selectedYear) : null);
       this.refreshTable();
 
       if (this.events.length > 0) {

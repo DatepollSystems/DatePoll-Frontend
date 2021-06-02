@@ -66,7 +66,7 @@ export class MovieAdministrationComponent implements OnDestroy {
       this.yearSelect.initialize(this.selectedYear, this.years);
 
       this.moviesLoaded = false;
-      this.movies = cinemaService.getMovies(Number(this.selectedYear));
+      this.movies = cinemaService.getMovies(this.selectedYear ? Number(this.selectedYear) : null);
       this.refreshTable();
 
       if (this.movies.length > 0) {
