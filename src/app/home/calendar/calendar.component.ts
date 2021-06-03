@@ -18,8 +18,8 @@ import {Permissions} from '../../permissions';
 import {TranslateService} from '../../translation/translate.service';
 import {SettingsService} from '../../utils/settings.service';
 import {CinemaUserService} from '../cinema/cinema-user.service';
-import {EventsUserService} from '../events/events-user.service';
-import {EventsService} from '../events/events.service';
+import {EventsUserService} from '../events/services/events-user.service';
+import {EventsService} from '../events/services/events.service';
 import {MyUserService} from '../my-user.service';
 import {UserSettingsService} from '../settings/privacy-settings/userSettings.service';
 import {HomepageService} from '../start/homepage.service';
@@ -30,7 +30,6 @@ import {CustomDateFormatter} from './custom-date-formatter.provider';
 import {Movie} from '../cinema/models/movie.model';
 import {Event} from '../events/models/event.model';
 import {HomeBirthdayModel} from '../start/birthdays.model';
-import {UIHelper} from '../../utils/helper/UIHelper';
 
 @Component({
   selector: 'app-calendar',
@@ -131,7 +130,7 @@ export class CalendarComponent implements OnInit, OnDestroy {
 
       if (this.serverInfo?.events_enabled) {
         if (this.myUserService.hasPermission(Permissions.EVENTS_ADMINISTRATION)) {
-          this.avents = this.eventsService.getEvents();
+          this.avents = this.eventsService.getEvents(null);
 
           this.aventSubscription = this.eventsService.eventsChange.subscribe((value) => {
             this.avents = value;

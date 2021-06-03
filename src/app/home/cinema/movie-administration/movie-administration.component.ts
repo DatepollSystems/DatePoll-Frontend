@@ -51,14 +51,14 @@ export class MovieAdministrationComponent implements OnDestroy {
     private translate: TranslateService
   ) {
     this.years = this.cinemaService.getYears();
-    this.selectedYear = this.years[this.years.length - 1];
     this.yearsSubscription = cinemaService.yearsChange.subscribe((value) => {
       this.years = value;
-      this.selectedYear = this.years[this.years.length - 1];
-      for (const year of this.years) {
-        if (year.includes(UIHelper.getCurrentDate().getFullYear().toString())) {
-          this.selectedYear = year;
-          break;
+      if (this.selectedYear == null) {
+        for (const year of this.years) {
+          if (year.includes(UIHelper.getCurrentDate().getFullYear().toString())) {
+            this.selectedYear = year;
+            break;
+          }
         }
       }
 
@@ -146,9 +146,6 @@ export class MovieAdministrationComponent implements OnDestroy {
 
   refreshMovies() {
     this.moviesLoaded = false;
-    this.movies = [];
-    this.years = [];
-    this.refreshTable();
     this.cinemaService.getYears();
     this.cinemaService.fetchMovies();
   }

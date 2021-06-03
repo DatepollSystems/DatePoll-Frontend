@@ -1,13 +1,13 @@
 import {Injectable} from '@angular/core';
 import {Subject} from 'rxjs';
 
-import {HttpService} from '../../utils/http.service';
+import {HttpService} from '../../../utils/http.service';
 
-import {EventDecision} from './models/event-decision.model';
-import {Event} from './models/event.model';
-import {EventResultUser} from './models/event-result-user.model';
-import {EventResultGroup} from './models/event-result-group.model';
-import {EventResultSubgroup} from './models/event-result-subgroup.model';
+import {EventDecision} from '../models/event-decision.model';
+import {Event} from '../models/event.model';
+import {EventResultUser} from '../models/event-result-user.model';
+import {EventResultGroup} from '../models/event-result-group.model';
+import {EventResultSubgroup} from '../models/event-result-subgroup.model';
 
 @Injectable({
   providedIn: 'root',

@@ -5,7 +5,7 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 import {Subscription} from 'rxjs';
 
 import {TranslateService} from '../../translation/translate.service';
-import {EventsUserService} from '../events/events-user.service';
+import {EventsUserService} from '../events/services/events-user.service';
 import {MyUserService} from '../my-user.service';
 import {HomepageService} from './homepage.service';
 import {Converter} from '../../utils/helper/Converter';

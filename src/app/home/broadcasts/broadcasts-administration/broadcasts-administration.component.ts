@@ -54,15 +54,15 @@ export class BroadcastsAdministrationComponent implements OnInit, OnDestroy {
     private translate: TranslateService
   ) {
     this.years = this.broadcastsService.getYears();
-    this.selectedYear = this.years[this.years.length - 1];
     this.yearsSubscription = this.broadcastsService.yearsChange.subscribe((value) => {
       this.years = value;
-      this.selectedYear = this.years[this.years.length - 1];
-      for (const year of this.years) {
-        if (year.includes(UIHelper.getCurrentDate().getFullYear().toString())) {
-          console.log('in');
-          this.selectedYear = year;
-          break;
+      if (this.selectedYear == null) {
+        for (const year of this.years) {
+          if (year.includes(UIHelper.getCurrentDate().getFullYear().toString())) {
+            console.log('in');
+            this.selectedYear = year;
+            break;
+          }
         }
       }
 
@@ -75,8 +75,8 @@ export class BroadcastsAdministrationComponent implements OnInit, OnDestroy {
       this.dataSource = new MatTableDataSource(this.broadcasts);
       this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;
-      this.broadcastsSubscription = this.broadcastsService.broadcastsChange.subscribe((value) => {
-        this.broadcasts = value;
+      this.broadcastsSubscription = this.broadcastsService.broadcastsChange.subscribe((bValue) => {
+        this.broadcasts = bValue;
         this.loading = false;
         this.dataSource = new MatTableDataSource(this.broadcasts);
         this.dataSource.sort = this.sort;
@@ -103,6 +103,7 @@ export class BroadcastsAdministrationComponent implements OnInit, OnDestroy {
 
   refresh() {
     this.loading = true;
+    this.broadcastsService.getYears();
     this.broadcastsService.fetchBroadcasts();
   }
 

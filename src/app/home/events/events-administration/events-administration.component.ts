@@ -9,7 +9,7 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 import {Subscription} from 'rxjs';
 
 import {TranslateService} from '../../../translation/translate.service';
-import {EventsService} from '../events.service';
+import {EventsService} from '../services/events.service';
 
 import {Event} from '../models/event.model';
 
@@ -59,14 +59,14 @@ export class EventsAdministrationComponent implements OnDestroy {
     this.currentDate = UIHelper.getCurrentDate();
 
     this.years = this.eventsService.getYears();
-    this.selectedYear = this.years[this.years.length - 1];
     this.yearsSubscription = eventsService.yearsChange.subscribe((value) => {
       this.years = value;
-      this.selectedYear = this.years[this.years.length - 1];
-      for (const year of this.years) {
-        if (year.includes(this.currentDate.getFullYear().toString())) {
-          this.selectedYear = year;
-          break;
+      if (this.selectedYear == null) {
+        for (const year of this.years) {
+          if (year.includes(this.currentDate.getFullYear().toString())) {
+            this.selectedYear = year;
+            break;
+          }
         }
       }
 
@@ -128,9 +128,8 @@ export class EventsAdministrationComponent implements OnDestroy {
 
   refreshEvents() {
     this.eventsLoaded = false;
+    this.eventsService.getYears();
     this.eventsService.fetchEvents();
-    this.events = [];
-    this.refreshTable();
   }
 
   applyFilter(filterValue: string) {

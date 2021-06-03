@@ -8,7 +8,7 @@ import {MyUserService} from '../../../my-user.service';
 import {Permissions} from '../../../../permissions';
 import {TranslateService} from '../../../../translation/translate.service';
 
-import {UserChange} from './userChange.model';
+import {UserChange} from '../models/userChange.model';
 import {QuestionDialogComponent} from '../../../../utils/shared-components/question-dialog/question-dialog.component';
 
 @Component({

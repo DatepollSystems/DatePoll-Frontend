@@ -7,11 +7,12 @@ import {Broadcast, UserBroadcastInfo} from '../models/broadcast.model';
 import {environment} from '../../../../environments/environment';
 import {HttpClient, HttpEventType} from '@angular/common/http';
 import {map} from 'rxjs/operators';
+import {AHasYears} from '../../../utils/HasYears/AHasYears';
 
 @Injectable({
   providedIn: 'root',
 })
-export class BroadcastsAdministrationService {
+export class BroadcastsAdministrationService extends AHasYears {
   apiUrl = environment.apiUrl;
 
   private _broadcasts: Broadcast[] = [];
@@ -20,34 +21,8 @@ export class BroadcastsAdministrationService {
   private broadcast: Broadcast;
   public broadcastChange = new Subject<Broadcast>();
 
-  private _lastUsedYear: number;
-  private _years: string[] = [];
-  public yearsChange: Subject<string[]> = new Subject<string[]>();
-
-  constructor(private httpService: HttpService, private httpClient: HttpClient) {}
-
-  public getYears(): string[] {
-    this.fetchYears();
-    return this._years.slice();
-  }
-
-  public setYears(years: string[]) {
-    this._years = years;
-    this.yearsChange.next(this._years.slice());
-  }
-
-  private fetchYears() {
-    this.httpService.loggedInV1GETRequest('/broadcast/administration/broadcast/years').subscribe(
-      (response: any) => {
-        console.log(response);
-        const years = [];
-        for (const year of response.years) {
-          years.push(year.toString());
-        }
-        this.setYears(years);
-      },
-      (error) => console.log(error)
-    );
+  constructor(httpService: HttpService, private httpClient: HttpClient) {
+    super(httpService, '/broadcast/administration/broadcast/years');
   }
 
   public getBroadcasts(year: number): Broadcast[] {
@@ -68,6 +43,8 @@ export class BroadcastsAdministrationService {
     let url = '/broadcast/administration/broadcast';
     if (year != null) {
       url += '/' + year;
+    } else {
+      url += '/null';
     }
 
     this.httpService.loggedInV1GETRequest(url, 'fetchAdminBroadcasts').subscribe(

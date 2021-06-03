@@ -4,7 +4,7 @@ import {Subject} from 'rxjs';
 import {AuthService} from '../auth/auth.service';
 import {HttpService} from '../utils/http.service';
 import {Permissions} from '../permissions';
-import {PhoneNumber} from './phoneNumber.model';
+import {PhoneNumber} from './management/users-management/models/phoneNumber.model';
 import {Converter} from '../utils/helper/Converter';
 
 @Injectable({

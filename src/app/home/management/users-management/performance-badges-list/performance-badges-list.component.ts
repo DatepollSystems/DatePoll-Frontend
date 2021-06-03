@@ -2,15 +2,14 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {PerformanceBadge} from '../../performance-badges-management/models/performanceBadge.model';
 import {Instrument} from '../../performance-badges-management/models/instrument.model';
 import {NgForm} from '@angular/forms';
-import {UserPerformanceBadge} from '../userPerformanceBadge.model';
+import {UserPerformanceBadge} from '../models/userPerformanceBadge.model';
 
 @Component({
   selector: 'app-performance-badges-list',
   templateUrl: './performance-badges-list.component.html',
-  styleUrls: ['./performance-badges-list.component.css']
+  styleUrls: ['./performance-badges-list.component.css'],
 })
 export class PerformanceBadgesListComponent {
-
   @Input() userPerformanceBadges: UserPerformanceBadge[] = [];
 
   userPerformanceBadgeCount = 0;
@@ -20,8 +19,7 @@ export class PerformanceBadgesListComponent {
 
   @Output() performanceBadgesChanged = new EventEmitter();
 
-  constructor() {
-  }
+  constructor() {}
 
   onPerformanceBadgeChanged(performanceBadge: PerformanceBadge) {
     console.log('Selected performance badge: ' + performanceBadge.name);
@@ -51,9 +49,18 @@ export class PerformanceBadgesListComponent {
       }
     }
 
-    this.userPerformanceBadges.push(new UserPerformanceBadge(this.userPerformanceBadgeCount, this.selectedPerformanceBadge.id,
-      this.selectedInstrument.id, this.selectedPerformanceBadge.name, this.selectedInstrument.name, this.performanceBadgeDate,
-      grade, node));
+    this.userPerformanceBadges.push(
+      new UserPerformanceBadge(
+        this.userPerformanceBadgeCount,
+        this.selectedPerformanceBadge.id,
+        this.selectedInstrument.id,
+        this.selectedPerformanceBadge.name,
+        this.selectedInstrument.name,
+        this.performanceBadgeDate,
+        grade,
+        node
+      )
+    );
 
     this.userPerformanceBadgeCount++;
     form.reset();

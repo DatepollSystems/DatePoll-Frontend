@@ -6,8 +6,10 @@ import {Subscription} from 'rxjs';
 
 import {TranslateService} from '../../../../translation/translate.service';
 import {GroupsService} from '../../../management/groups-management/groups.service';
-import {EventsService} from '../../events.service';
-import {StandardDecisionsService} from '../../standardDecisions.service';
+import {EventsService} from '../../services/events.service';
+import {StandardDecisionsService} from '../../services/standardDecisions.service';
+import {EventsCreateUpdateService} from '../../services/eventsCreateUpdate.service';
+import {UIHelper} from '../../../../utils/helper/UIHelper';
 
 import {
   GroupAndSubgroupModel,
@@ -16,7 +18,6 @@ import {
 import {EventDecision} from '../../models/event-decision.model';
 import {EventDate} from '../../models/event-date.model';
 import {Event} from '../../models/event.model';
-import {UIHelper} from '../../../../utils/helper/UIHelper';
 
 @Component({
   selector: 'app-event-create',
@@ -40,7 +41,8 @@ export class EventCreateComponent implements OnDestroy {
     private snackBar: MatSnackBar,
     private standardDecisionsService: StandardDecisionsService,
     private translate: TranslateService,
-    private eventsService: EventsService
+    private eventsService: EventsService,
+    private eventsCreateUpdateService: EventsCreateUpdateService
   ) {
     const standardDecisions = this.standardDecisionsService.getStandardDecisions();
     let i = -1;
@@ -111,7 +113,7 @@ export class EventCreateComponent implements OnDestroy {
 
     const event = new Event(0, name, currentDate, currentDate, this.allMembers, description, this.decisions, this.dates);
     console.log(event);
-    this.eventsService.createEvent(event).subscribe(
+    this.eventsCreateUpdateService.createEvent(event).subscribe(
       (response: any) => {
         console.log(response);
         this.eventsService.fetchEvents();
@@ -124,14 +126,14 @@ export class EventCreateComponent implements OnDestroy {
 
           for (const group of this.joined) {
             if (group.type === GroupType.PARENTGROUP) {
-              this.eventsService.addGroupToEvent(id, group.id).subscribe(
+              this.eventsCreateUpdateService.addGroupToEvent(id, group.id).subscribe(
                 (sdata: any) => {
                   console.log(sdata);
                 },
                 (error) => console.log(error)
               );
             } else {
-              this.eventsService.addSubgroupToEvent(id, group.id).subscribe(
+              this.eventsCreateUpdateService.addSubgroupToEvent(id, group.id).subscribe(
                 (sdata: any) => {
                   console.log(sdata);
                 },

@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
-import {EventStandardDecision} from './models/standardDecision.model';
+import {EventStandardDecision} from '../models/standardDecision.model';
 import {Subject} from 'rxjs';
-import {HttpService} from '../../utils/http.service';
+import {HttpService} from '../../../utils/http.service';
 
 @Injectable({
   providedIn: 'root',

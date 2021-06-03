@@ -17,7 +17,7 @@ import {QuestionDialogComponentModule} from '../../utils/shared-components/quest
 import {EventDatesListComponentModule} from './events-administration/event-dates-list/event-dates-list-component.module';
 import {AllMembersSwitchModule} from '../../utils/shared-components/all-members-switch/all-members-switch.module';
 
-import {EventsUserService} from './events-user.service';
+import {EventsUserService} from './services/events-user.service';
 
 import {EventDatesManagementComponent} from './events-administration/event-dates-management/event-dates-management.component';
 import {EventStandardLocationsSelectComponent} from './events-administration/event-dates-management/event-standard-locations-select/event-standard-locations-select.component';

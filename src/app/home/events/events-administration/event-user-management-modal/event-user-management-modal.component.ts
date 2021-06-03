@@ -2,7 +2,7 @@ import {Component, Inject, OnDestroy} from '@angular/core';
 import {MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {Subscription} from 'rxjs';
 
-import {EventsUserService} from '../../events-user.service';
+import {EventsUserService} from '../../services/events-user.service';
 import {Event} from '../../models/event.model';
 
 @Component({

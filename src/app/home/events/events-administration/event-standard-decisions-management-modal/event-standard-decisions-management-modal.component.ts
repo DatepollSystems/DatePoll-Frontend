@@ -4,7 +4,7 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 import {Subscription} from 'rxjs';
 
 import {TranslateService} from '../../../../translation/translate.service';
-import {StandardDecisionsService} from '../../standardDecisions.service';
+import {StandardDecisionsService} from '../../services/standardDecisions.service';
 
 import {EventStandardDecision} from '../../models/standardDecision.model';
 

@@ -6,7 +6,7 @@ import {Subscription} from 'rxjs';
 
 import {Permissions} from '../../../permissions';
 import {MyUserService} from '../../my-user.service';
-import {EventsUserService} from '../events-user.service';
+import {EventsUserService} from '../services/events-user.service';
 import {TranslateService} from '../../../translation/translate.service';
 import {EventInfoResultUserExportModalComponent} from './event-info-result-user-export-modal/event-info-result-user-export-modal.component';
 

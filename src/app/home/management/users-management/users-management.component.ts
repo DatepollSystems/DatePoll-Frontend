@@ -19,7 +19,7 @@ import {UserUpdateModalComponent} from './user-update-modal/user-update-modal.co
 import {UserInfoModalComponent} from './user-info-modal/user-info-modal.component';
 
 import {Permissions} from '../../../permissions';
-import {User} from './user.model';
+import {User} from './models/user.model';
 
 @Component({
   selector: 'app-users-management',

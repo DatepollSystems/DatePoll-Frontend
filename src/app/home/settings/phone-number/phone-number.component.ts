@@ -4,15 +4,14 @@ import {MatTableDataSource} from '@angular/material/table';
 import {Subscription} from 'rxjs';
 
 import {MyUserService} from '../../my-user.service';
-import {PhoneNumber} from '../../phoneNumber.model';
+import {PhoneNumber} from '../../management/users-management/models/phoneNumber.model';
 
 @Component({
   selector: 'app-phone-number',
   templateUrl: './phone-number.component.html',
-  styleUrls: ['./phone-number.component.css']
+  styleUrls: ['./phone-number.component.css'],
 })
 export class PhoneNumberComponent {
-
   phoneNumbersSubscription: Subscription;
   public phoneNumbers: PhoneNumber[];
 
@@ -34,17 +33,13 @@ export class PhoneNumberComponent {
   }
 
   addPhoneNumber(form: NgForm) {
-    if (form.value.label === ''
-      || form.value.phoneNumber === ''
-      || form.value.label === null
-      || form.value.phoneNumber === null) {
-
+    if (form.value.label === '' || form.value.phoneNumber === '' || form.value.label === null || form.value.phoneNumber === null) {
       return;
     }
 
     const phoneNumberObject = {
-      'label': form.value.label,
-      'number': form.value.phoneNumber
+      label: form.value.label,
+      number: form.value.phoneNumber,
     };
 
     this._myUserService.addPhoneNumber(phoneNumberObject).subscribe(

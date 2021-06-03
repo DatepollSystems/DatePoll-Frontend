@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Subject} from 'rxjs';
-import {HttpService} from '../../utils/http.service';
-import {EventStandardLocation} from './models/event-standard-location.model';
+import {HttpService} from '../../../utils/http.service';
+import {EventStandardLocation} from '../models/event-standard-location.model';
 
 @Injectable({
   providedIn: 'root',

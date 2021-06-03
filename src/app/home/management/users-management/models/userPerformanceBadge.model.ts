@@ -8,8 +8,16 @@ export class UserPerformanceBadge {
   public readonly grade: string;
   public readonly note: string;
 
-  constructor(id: number, performanceBadgeId: number, instrumentId: number, performanceBadgeName: string, instrumentName: string,
-              date: Date, grade: string, note: string) {
+  constructor(
+    id: number,
+    performanceBadgeId: number,
+    instrumentId: number,
+    performanceBadgeName: string,
+    instrumentName: string,
+    date: Date,
+    grade: string,
+    note: string
+  ) {
     this.id = id;
     this.performanceBadgeId = performanceBadgeId;
     this.instrumentId = instrumentId;

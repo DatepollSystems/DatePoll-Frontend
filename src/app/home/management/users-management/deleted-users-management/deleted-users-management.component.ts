@@ -8,7 +8,7 @@ import {QuestionDialogComponent} from '../../../../utils/shared-components/quest
 import {TranslateService} from '../../../../translation/translate.service';
 import {DeletedUsersService} from './deleted-users.service';
 
-import {DeletedUser} from './deletedUser.model';
+import {DeletedUser} from '../models/deletedUser.model';
 
 @Component({
   selector: 'app-deleted-users-management',

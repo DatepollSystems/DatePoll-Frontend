@@ -5,7 +5,7 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 import {Subscription} from 'rxjs';
 
 import {TranslateService} from '../../../../translation/translate.service';
-import {EventsService} from '../../events.service';
+import {EventsService} from '../../services/events.service';
 
 import {
   GroupAndSubgroupModel,
@@ -15,6 +15,7 @@ import {EventDecision} from '../../models/event-decision.model';
 import {EventDate} from '../../models/event-date.model';
 import {Event} from '../../models/event.model';
 import {UIHelper} from '../../../../utils/helper/UIHelper';
+import {EventsCreateUpdateService} from '../../services/eventsCreateUpdate.service';
 
 @Component({
   selector: 'app-event-update-modal',
@@ -45,7 +46,8 @@ export class EventUpdateModalComponent implements OnDestroy {
     private dialogRef: MatDialogRef<EventUpdateModalComponent>,
     private snackBar: MatSnackBar,
     private translate: TranslateService,
-    private eventsService: EventsService
+    private eventsService: EventsService,
+    private eventsCreateUpdateService: EventsCreateUpdateService
   ) {
     this.event = data.event;
     this.name = this.event.name;
@@ -54,16 +56,16 @@ export class EventUpdateModalComponent implements OnDestroy {
     this.dates = this.event.getEventDates();
     this.allMembers = this.event.forEveryone;
 
-    this.joined = this.eventsService.getJoinedOfEvent(this.event.id);
+    this.joined = this.eventsCreateUpdateService.getJoinedOfEvent(this.event.id);
     this.joinedCopy = this.joined.slice();
-    this.joinedSubscription = this.eventsService.joinedGroupsChange.subscribe((value) => {
+    this.joinedSubscription = this.eventsCreateUpdateService.joinedGroupsChange.subscribe((value) => {
       this.joined = value;
       this.joinedCopy = this.joined.slice();
     });
 
-    this.free = this.eventsService.getFreeOfEvent(this.event.id);
+    this.free = this.eventsCreateUpdateService.getFreeOfEvent(this.event.id);
     this.freeCopy = this.free.slice();
-    this.freeSubscription = this.eventsService.freeGroupsChange.subscribe((value) => {
+    this.freeSubscription = this.eventsCreateUpdateService.freeGroupsChange.subscribe((value) => {
       this.free = value;
       this.freeCopy = this.free.slice();
     });
@@ -114,7 +116,7 @@ export class EventUpdateModalComponent implements OnDestroy {
 
     const event = new Event(this.event.id, name, currentDate, currentDate, this.allMembers, description, this.decisions, this.dates);
     console.log(event);
-    this.eventsService.updateEvent(event).subscribe(
+    this.eventsCreateUpdateService.updateEvent(event).subscribe(
       (response: any) => {
         console.log(response);
         this.eventsService.fetchEvents();
@@ -141,14 +143,14 @@ export class EventUpdateModalComponent implements OnDestroy {
         console.log('toUpdate | joined | true | ' + group.name);
 
         if (group.type === GroupType.PARENTGROUP) {
-          this.eventsService.addGroupToEvent(this.event.id, group.id).subscribe(
+          this.eventsCreateUpdateService.addGroupToEvent(this.event.id, group.id).subscribe(
             (data: any) => {
               console.log(data);
             },
             (error) => console.log(error)
           );
         } else {
-          this.eventsService.addSubgroupToEvent(this.event.id, group.id).subscribe(
+          this.eventsCreateUpdateService.addSubgroupToEvent(this.event.id, group.id).subscribe(
             (data: any) => {
               console.log(data);
             },
@@ -175,14 +177,14 @@ export class EventUpdateModalComponent implements OnDestroy {
         console.log('toUpdate | free | true | ' + group.name);
 
         if (group.type === GroupType.PARENTGROUP) {
-          this.eventsService.removeGroupFromEvent(this.event.id, group.id).subscribe(
+          this.eventsCreateUpdateService.removeGroupFromEvent(this.event.id, group.id).subscribe(
             (data: any) => {
               console.log(data);
             },
             (error) => console.log(error)
           );
         } else {
-          this.eventsService.removeSubgroupFromEvent(this.event.id, group.id).subscribe(
+          this.eventsCreateUpdateService.removeSubgroupFromEvent(this.event.id, group.id).subscribe(
             (data: any) => {
               console.log(data);
             },

@@ -5,7 +5,7 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 
 import {TranslateService} from '../../../../translation/translate.service';
 import {HomepageService} from '../../../start/homepage.service';
-import {EventsUserService} from '../../events-user.service';
+import {EventsUserService} from '../../services/events-user.service';
 
 import {Event} from '../../models/event.model';
 

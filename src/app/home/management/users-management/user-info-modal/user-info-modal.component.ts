@@ -9,9 +9,9 @@ import {PerformanceBadgesService} from '../../performance-badges-management/perf
 import {UsersService} from '../users.service';
 
 import {GroupAndSubgroupModel} from '../../../../utils/shared-components/group-and-subgroup-type-input-select/groupAndSubgroup.model';
-import {PhoneNumber} from '../../../phoneNumber.model';
-import {UserBadge} from '../badges-list/userBadge.model';
-import {UserPerformanceBadge} from '../userPerformanceBadge.model';
+import {PhoneNumber} from '../models/phoneNumber.model';
+import {UserBadge} from '../models/userBadge.model';
+import {UserPerformanceBadge} from '../models/userPerformanceBadge.model';
 
 @Component({
   selector: 'app-user-info-modal',

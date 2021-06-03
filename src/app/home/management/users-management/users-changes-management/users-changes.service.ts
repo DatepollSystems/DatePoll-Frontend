@@ -4,7 +4,7 @@ import {Subject} from 'rxjs';
 import {HttpService} from '../../../../utils/http.service';
 import {Converter} from '../../../../utils/helper/Converter';
 
-import {UserChange} from './userChange.model';
+import {UserChange} from '../models/userChange.model';
 
 @Injectable({
   providedIn: 'root',

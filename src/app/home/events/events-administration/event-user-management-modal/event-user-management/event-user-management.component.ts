@@ -10,8 +10,8 @@ import {Subscription} from 'rxjs';
 import {EventsVoteForDecisionModalComponent} from '../../../events-view/events-vote-for-decision-modal/events-vote-for-decision-modal.component';
 
 import {TranslateService} from '../../../../../translation/translate.service';
-import {EventsService} from '../../../events.service';
-import {EventsUserService} from '../../../events-user.service';
+import {EventsService} from '../../../services/events.service';
+import {EventsUserService} from '../../../services/events-user.service';
 
 import {EventResultUser} from '../../../models/event-result-user.model';
 import {Event} from '../../../models/event.model';

@@ -8,7 +8,7 @@ import {SettingsService} from '../../utils/settings.service';
 import {Converter} from '../../utils/helper/Converter';
 
 import {Movie, WeatherForecast} from './models/movie.model';
-import {PhoneNumber} from '../phoneNumber.model';
+import {PhoneNumber} from '../management/users-management/models/phoneNumber.model';
 
 @Injectable({
   providedIn: 'root',

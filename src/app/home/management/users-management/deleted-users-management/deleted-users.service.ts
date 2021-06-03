@@ -4,7 +4,7 @@ import {Subject} from 'rxjs';
 import {HttpService} from '../../../../utils/http.service';
 import {Converter} from '../../../../utils/helper/Converter';
 
-import {DeletedUser} from './deletedUser.model';
+import {DeletedUser} from '../models/deletedUser.model';
 
 @Injectable({
   providedIn: 'root',

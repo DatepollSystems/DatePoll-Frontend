@@ -1,91 +1,26 @@
 import {Injectable} from '@angular/core';
 import {Subject} from 'rxjs';
 
-import {Converter} from '../../utils/helper/Converter';
-import {HttpService} from '../../utils/http.service';
+import {Converter} from '../../../utils/helper/Converter';
+import {HttpService} from '../../../utils/http.service';
 
-import {EventDecision} from './models/event-decision.model';
-import {EventResultUser} from './models/event-result-user.model';
-import {Event} from './models/event.model';
-import {GroupAndSubgroupModel, GroupType} from '../../utils/shared-components/group-and-subgroup-type-input-select/groupAndSubgroup.model';
+import {Event} from '../models/event.model';
+import {
+  GroupAndSubgroupModel,
+  GroupType,
+} from '../../../utils/shared-components/group-and-subgroup-type-input-select/groupAndSubgroup.model';
 
 @Injectable({
   providedIn: 'root',
 })
-export class EventsService {
-  private _events: Event[] = [];
-  public eventsChange: Subject<Event[]> = new Subject<Event[]>();
-
+export class EventsCreateUpdateService {
   private _joinedGroups: GroupAndSubgroupModel[] = [];
   public joinedGroupsChange: Subject<GroupAndSubgroupModel[]> = new Subject<GroupAndSubgroupModel[]>();
 
   private _freeGroups: GroupAndSubgroupModel[] = [];
   public freeGroupsChange: Subject<GroupAndSubgroupModel[]> = new Subject<GroupAndSubgroupModel[]>();
 
-  private _lastUsedYear: number;
-  private _years: string[] = [];
-  public yearsChange: Subject<string[]> = new Subject<string[]>();
-
-  constructor(public httpService: HttpService) {}
-
-  public getYears(): string[] {
-    this.fetchYears();
-    return this._years.slice();
-  }
-
-  public setYears(years: string[]) {
-    this._years = years;
-    this.yearsChange.next(this._years.slice());
-  }
-
-  private fetchYears() {
-    this.httpService.loggedInV1GETRequest('/avent/administration/avent/years').subscribe(
-      (response: any) => {
-        console.log(response);
-        const years = [];
-        for (const year of response.years) {
-          years.push(year.toString());
-        }
-        this.setYears(years);
-      },
-      (error) => console.log(error)
-    );
-  }
-
-  public getEvents(year: number = null): Event[] {
-    this._lastUsedYear = year;
-    this.fetchEvents(year);
-    return this._events.slice();
-  }
-
-  public setEvents(events: Event[]) {
-    this._events = events;
-    this.eventsChange.next(this._events.slice());
-  }
-
-  public fetchEvents(year: number = null) {
-    if (this._lastUsedYear != null) {
-      year = this._lastUsedYear;
-    }
-    let url = '/avent/administration/avent';
-    if (year != null) {
-      url += '/' + year;
-    }
-    this.httpService.loggedInV1GETRequest(url, 'fetchEvents').subscribe(
-      (data: any) => {
-        console.log(data);
-
-        const events = [];
-        const fetchedEvents = data.data;
-        for (const fetchedEvent of fetchedEvents) {
-          events.push(Event.createOfDTO(fetchedEvent));
-        }
-
-        this.setEvents(events);
-      },
-      (error) => console.log(error)
-    );
-  }
+  constructor(private httpService: HttpService) {}
 
   public createEvent(event: Event) {
     const decisions = [];
@@ -151,10 +86,6 @@ export class EventsService {
     };
 
     return this.httpService.loggedInV1PUTRequest('/avent/administration/avent/' + event.id, object, 'updateEvent');
-  }
-
-  public deleteEvent(id: number) {
-    return this.httpService.loggedInV1DELETERequest('/avent/administration/avent/' + id, 'deleteEvent');
   }
 
   public addGroupToEvent(eventId: number, groupId: number) {
@@ -273,33 +204,5 @@ export class EventsService {
   private setFreeOfEvent(groups: GroupAndSubgroupModel[]) {
     this._freeGroups = groups;
     this.freeGroupsChange.next(this._freeGroups.slice());
-  }
-
-  public voteForUsers(event: Event, decision: EventDecision, additionalInformation: string, users: EventResultUser[]) {
-    const userIds = [];
-    for (const user of users) {
-      userIds.push(user.id);
-    }
-
-    const dto = {
-      decision_id: decision.id,
-      user_ids: userIds,
-      additional_information: additionalInformation,
-    };
-
-    return this.httpService.loggedInV1POSTRequest('/avent/administration/avent/' + event.id + '/voteForUsers', dto);
-  }
-
-  public cancelVotingForUsers(event: Event, users: EventResultUser[]) {
-    const userIds = [];
-    for (const user of users) {
-      userIds.push(user.id);
-    }
-
-    const dto = {
-      user_ids: userIds,
-    };
-
-    return this.httpService.loggedInV1POSTRequest('/avent/administration/avent/' + event.id + '/cancelVotingForUsers', dto);
   }
 }

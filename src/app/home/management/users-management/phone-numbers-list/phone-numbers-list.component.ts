@@ -2,7 +2,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {NgForm} from '@angular/forms';
 import {MatTableDataSource} from '@angular/material/table';
 
-import {PhoneNumber} from '../../../phoneNumber.model';
+import {PhoneNumber} from '../models/phoneNumber.model';
 
 @Component({
   selector: 'app-phone-numbers-list',

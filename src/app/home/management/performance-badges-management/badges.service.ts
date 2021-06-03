@@ -3,7 +3,7 @@ import {Subject} from 'rxjs';
 
 import {HttpService} from '../../../utils/http.service';
 
-import {UserBadge} from '../users-management/badges-list/userBadge.model';
+import {UserBadge} from '../users-management/models/userBadge.model';
 import {Badge} from './models/badge.model';
 import {Converter} from '../../../utils/helper/Converter';
 
