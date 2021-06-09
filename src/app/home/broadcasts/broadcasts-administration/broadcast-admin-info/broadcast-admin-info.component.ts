@@ -34,22 +34,7 @@ export class BroadcastAdminInfoComponent implements OnDestroy {
       if (id != null) {
         console.log('Broadcast to open: ' + id);
 
-        const localBroadcast = window.history.state;
-        console.log(localBroadcast);
-        if (localBroadcast != null) {
-          if (localBroadcast?.subject) {
-            this.broadcast = new Broadcast(
-              Number(id),
-              localBroadcast.subject,
-              localBroadcast.sent,
-              localBroadcast.body,
-              localBroadcast.writerName
-            );
-            this.loaded = true;
-          } else {
-            this.broadcast = new Broadcast(Number(id), 'Loading', UIHelper.getCurrentDate(), 'Loading', 'Loading');
-          }
-        }
+        this.broadcast = new Broadcast(Number(id), 'Loading', UIHelper.getCurrentDate(), 'Loading', 'Loading');
 
         this.broadcast = this.broadcastSerivce.getSentReceiptBroadcast(Number(id));
         this.dataSource = new MatTableDataSource([]);
