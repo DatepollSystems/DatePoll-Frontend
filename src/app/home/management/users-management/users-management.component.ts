@@ -47,13 +47,10 @@ export class UsersManagementComponent implements OnInit, OnDestroy {
     private router: Router,
     private bottomSheet: MatBottomSheet,
     private dialog: MatDialog,
-    myUserService: MyUserService,
+    private myUserService: MyUserService,
     private snackBar: MatSnackBar,
     private usersService: UsersService
   ) {
-    this.hasManagementAdministration = myUserService.hasPermission(Permissions.MANAGEMENT_ADMINISTRATION);
-    this.hasManagementExtraDeletePermission = myUserService.hasPermission(Permissions.MANAGEMENT_EXTRA_USER_PERMISSIONS);
-
     this.usersLoaded = false;
 
     this.users = usersService.getUsers();
@@ -110,6 +107,8 @@ export class UsersManagementComponent implements OnInit, OnDestroy {
 
     setTimeout(() => {
       this.refreshTable();
+      this.hasManagementAdministration = this.myUserService.hasPermission(Permissions.MANAGEMENT_ADMINISTRATION);
+      this.hasManagementExtraDeletePermission = this.myUserService.hasPermission(Permissions.MANAGEMENT_EXTRA_USER_PERMISSIONS);
     });
   }
 

@@ -77,7 +77,7 @@ export class ListChipInputComponent implements OnInit {
   }
 
   addOut() {
-    if (!this.outputOnFocusLost) {
+    if (!this.outputOnFocusLost || this.stringInput.nativeElement.value.trim().length < 1) {
       return;
     }
     this.addValue(this.stringInput.nativeElement.value);
