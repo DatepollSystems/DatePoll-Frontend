@@ -1,71 +1,18 @@
-<h2>{{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE_TITLE' | translate }}:</h2>
-
-<mat-accordion>
-  <mat-expansion-panel *ngFor="let date of dates" hideToggle>
-    <mat-expansion-panel-header>
-      <mat-panel-title>
+<div fxLayout="column">
+  <div *ngFor="let date of dates">
+    <div fxLayout="row" fxLayoutAlign="space-between center">
+      <span>
         {{ date.date | date: 'EE, dd.MM.yyyy HH:mm' }}
-      </mat-panel-title>
-      <mat-panel-description *ngIf="!isMobile">
-        <a
-          target="_blank"
-          rel="noopener"
-          href="https://www.google.com/maps/place/{{ date.x }}+{{ date.y }}"
-          *ngIf="date.location?.length > 0 && date?.x !== -199 && date?.y !== -199"
-        >
-          {{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE_LIST_OPEN_LOCATION_1' | translate }}{{ date.location
-          }}{{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE_LIST_OPEN_LOCATION_2' | translate }}
-        </a>
+      </span>
 
-        <a
-          target="_blank"
-          rel="noopener"
-          href="https://www.google.com/maps/place/{{ date.x }}+{{ date.y }}"
-          *ngIf="(date.location == null || date.location?.length == 0) && date?.x !== -199 && date?.y !== -199"
-        >
-          {{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE_LIST_OPEN_LOCATION_3' | translate }}
-        </a>
-
-        <a
-          target="_blank"
-          rel="noopener"
-          href="https://www.google.com/maps/search/?api=1&query={{ date.location }}"
-          *ngIf="date.location?.length > 0 && date?.x === -199 && date?.y === -199 && !isUrl(date.location)"
-        >
-          {{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE_LIST_OPEN_LOCATION_4' | translate }}{{ date.location
-          }}{{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE_LIST_OPEN_LOCATION_5' | translate }}
-        </a>
-
-        <a
-          target="_blank"
-          rel="noopener"
-          href="{{ date.location }}"
-          *ngIf="date.location?.length > 0 && date?.x === -199 && date?.y === -199 && isUrl(date.location)"
-        >
-          {{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE_LIST_OPEN_LOCATION_LINK' | translate }}
-        </a>
-      </mat-panel-description>
-    </mat-expansion-panel-header>
-
-    <div fxLayout="row" fxLayoutAlign="end" style="margin-bottom: 10px">
-      <div fxLayout="20%" fxLayout.xs="100%">
-        <a
-          mat-stroked-button
-          color="warn"
-          (click)="deleteDate(date)"
-          matTooltip="{{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE_LIST_DELETE' | translate }}"
-        >
-          {{ 'DELETE' | translate }}</a
-        >
-      </div>
+      <button mat-icon-button color="warn" (click)="deleteDate(date)" matTooltip="{{ 'DELETE' | translate }}" matTooltipPosition="left">
+        <mat-icon>delete_forever</mat-icon>
+      </button>
     </div>
-
-    <div *ngIf="isMobile" fxLayout="column" fxLayoutAlign="center">
+    <span>
       <a
-        mat-stroked-button
         target="_blank"
         rel="noopener"
-        color="primary"
         href="https://www.google.com/maps/place/{{ date.x }}+{{ date.y }}"
         *ngIf="date.location?.length > 0 && date?.x !== -199 && date?.y !== -199"
       >
@@ -74,10 +21,8 @@
       </a>
 
       <a
-        mat-stroked-button
         target="_blank"
         rel="noopener"
-        color="primary"
         href="https://www.google.com/maps/place/{{ date.x }}+{{ date.y }}"
         *ngIf="(date.location == null || date.location?.length == 0) && date?.x !== -199 && date?.y !== -199"
       >
@@ -85,10 +30,8 @@
       </a>
 
       <a
-        mat-stroked-button
         target="_blank"
         rel="noopener"
-        color="primary"
         href="https://www.google.com/maps/search/?api=1&query={{ date.location }}"
         *ngIf="date.location?.length > 0 && date?.x === -199 && date?.y === -199 && !isUrl(date.location)"
       >
@@ -97,17 +40,19 @@
       </a>
 
       <a
-        mat-stroked-button
         target="_blank"
         rel="noopener"
-        color="primary"
         href="{{ date.location }}"
         *ngIf="date.location?.length > 0 && date?.x === -199 && date?.y === -199 && isUrl(date.location)"
       >
         {{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE_LIST_OPEN_LOCATION_LINK' | translate }}
       </a>
-    </div>
+    </span>
 
     <app-maps-component [x]="date.x" [y]="date.y" [showMarker]="true" *ngIf="date?.x !== -199 && date?.y !== -199"></app-maps-component>
-  </mat-expansion-panel>
-</mat-accordion>
+
+    <div style="margin-top: 7px; margin-bottom: 7px">
+      <mat-divider></mat-divider>
+    </div>
+  </div>
+</div>
