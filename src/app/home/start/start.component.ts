@@ -1,12 +1,7 @@
 import {Component, OnDestroy} from '@angular/core';
-import {MatBottomSheet} from '@angular/material/bottom-sheet';
 import {Router} from '@angular/router';
-import {MatSnackBar} from '@angular/material/snack-bar';
 import {Subscription} from 'rxjs';
 
-import {TranslateService} from '../../translation/translate.service';
-import {EventsUserService} from '../events/services/events-user.service';
-import {MyUserService} from '../my-user.service';
 import {HomepageService} from './homepage.service';
 import {Converter} from '../../utils/helper/Converter';
 
@@ -16,8 +11,6 @@ import {HomeBirthdayModel} from './birthdays.model';
 import {HomeBookingsModel} from './bookings.model';
 
 import {SettingsService} from '../../utils/settings.service';
-import {QuestionDialogComponent} from '../../utils/shared-components/question-dialog/question-dialog.component';
-import {EventsVoteForDecisionModalComponent} from '../events/events-view/events-vote-for-decision-modal/events-vote-for-decision-modal.component';
 
 @Component({
   selector: 'app-start',
@@ -46,16 +39,7 @@ export class StartComponent implements OnDestroy {
   alertSubscription: Subscription;
   showFirework = false;
 
-  constructor(
-    private homePageService: HomepageService,
-    public myUserService: MyUserService,
-    private eventsUserSerivce: EventsUserService,
-    private bottomSheet: MatBottomSheet,
-    private snackBar: MatSnackBar,
-    private translate: TranslateService,
-    private router: Router,
-    private settingsService: SettingsService
-  ) {
+  constructor(private homePageService: HomepageService, private router: Router, private settingsService: SettingsService) {
     this.birthdays = homePageService.getBirthdays();
     this.birthdaysSubscription = homePageService.birthdaysChange.subscribe((value) => {
       this.birthdays = value;
@@ -67,7 +51,7 @@ export class StartComponent implements OnDestroy {
       this.loaded = true;
     });
 
-    this.events = homePageService.getEvents().slice(0, 5);
+    this.events = homePageService.getEvents().slice(0, 7);
     this.countOpenEvents();
     this.eventsSubscription = homePageService.eventsChange.subscribe((value) => {
       this.events = value.slice(0, 5);
@@ -99,70 +83,6 @@ export class StartComponent implements OnDestroy {
 
   onBroadcastItemClick(broadcast: Broadcast) {
     this.router.navigateByUrl('/home/broadcasts/' + broadcast.id, {state: broadcast});
-  }
-
-  onEventItemClick(event: Event) {
-    if (event.alreadyVotedFor) {
-      this.cancelEventVoting(event, null);
-    } else {
-      this.onEventVote(event);
-    }
-  }
-
-  onEventInfo(event: Event) {
-    this.router.navigateByUrl('/home/events/' + event.id, {state: event});
-  }
-
-  onEventVote(event: Event) {
-    const bottomSheetRef = this.bottomSheet.open(EventsVoteForDecisionModalComponent, {
-      data: {event},
-    });
-
-    bottomSheetRef.afterDismissed().subscribe((dto) => {
-      if (dto != null) {
-        this.eventsUserSerivce.voteForDecision(event.id, dto.decision, dto.additionalInformation).subscribe(
-          (response: any) => {
-            console.log(response);
-            this.homePageService.fetchData(true);
-            this.snackBar.open(this.translate.getTranslationFor('EVENTS_VIEW_EVENT_SUCCESSFULLY_VOTED'));
-          },
-          (error) => console.log(error)
-        );
-      } else {
-        console.log('events-view | Closed bottom sheet, voted for nohting');
-      }
-    });
-  }
-
-  cancelEventVoting(event, button: any) {
-    const bottomSheetRef = this.bottomSheet.open(QuestionDialogComponent, {
-      data: {
-        question: 'EVENTS_CANCEL_VOTING',
-      },
-    });
-
-    bottomSheetRef.afterDismissed().subscribe((value: string) => {
-      if (value?.includes(QuestionDialogComponent.YES_VALUE)) {
-        if (this.eventVotingChangeLoading) {
-          return;
-        }
-        this.eventVotingChangeLoading = true;
-        if (button) {
-          button.disabled = true;
-        }
-        this.eventsUserSerivce.removeDecision(event.id).subscribe(
-          (response: any) => {
-            console.log(response);
-            this.homePageService.fetchData(true);
-            this.snackBar.open(this.translate.getTranslationFor('EVENTS_VIEW_EVENT_SUCCESSFULLY_REMOVED_VOTING'));
-          },
-          (error) => {
-            console.log(error);
-            this.eventVotingChangeLoading = false;
-          }
-        );
-      }
-    });
   }
 
   private countOpenEvents() {

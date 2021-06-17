@@ -34,33 +34,18 @@
         {{ 'NAV_BROADCASTS' | translate }}</a
       >
 
-      <!--      <a (click)="onPageChange()" mat-list-item routerLink="/home/seatReservation" routerLinkActive="activated">-->
-      <!--        <mat-icon>place</mat-icon>-->
-      <!--        {{ 'NAV_SEAT_RESERVATION' | translate }}</a-->
-      <!--      >-->
+      <a
+        *ngIf="serverInfo?.events_enabled"
+        (click)="onPageChange()"
+        mat-list-item
+        routerLink="/home/events/start"
+        routerLinkActive="activated"
+      >
+        <mat-icon>polls</mat-icon>
+        {{ 'NAV_EVENTS_EVENTS' | translate }}
+      </a>
 
-      <mat-divider></mat-divider>
-
-      <div *ngIf="serverInfo?.events_enabled">
-        <a (click)="onPageChange()" mat-list-item routerLink="/home/events/start" routerLinkActive="activated">
-          <mat-icon>polls</mat-icon>
-          {{ 'NAV_EVENTS_EVENTS' | translate }}
-        </a>
-
-        <a
-          (click)="onPageChange()"
-          *ngIf="myUserService.hasPermission(eventAdministration)"
-          mat-list-item
-          routerLink="/home/events/administration"
-          routerLinkActive="activated"
-        >
-          <mat-icon>class</mat-icon>
-          {{ 'NAV_EVENTS_ADMINISTRATION' | translate }}
-        </a>
-        <mat-divider></mat-divider>
-      </div>
-
-      <div *ngIf="serverInfo.cinema_enabled">
+      <ng-container *ngIf="serverInfo.cinema_enabled">
         <a (click)="onPageChange()" mat-list-item routerLink="/home/cinema/tickets" routerLinkActive="activated">
           <mat-icon>movie</mat-icon>
           {{ 'NAV_CINEMA_TICKETS' | translate }}
@@ -69,40 +54,73 @@
           <mat-icon>card_giftcard</mat-icon>
           {{ 'NAV_CINEMA_SERVICE' | translate }}
         </a>
-        <a
-          (click)="onPageChange()"
-          *ngIf="myUserService.hasPermission(cinemaMovieAdministration)"
-          mat-list-item
-          routerLink="/home/cinema/administration"
-          routerLinkActive="activated"
-        >
-          <mat-icon>local_movies</mat-icon>
-          {{ 'NAV_CINEMA_ADMINISTRATION' | translate }}</a
-        >
-        <mat-divider></mat-divider>
-      </div>
+      </ng-container>
 
-      <div *ngIf="serverInfo.broadcasts_enabled && myUserService.hasPermission(broadcastAdministration)">
-        <a (click)="onPageChange()" mat-list-item routerLink="/home/broadcasts/administration" routerLinkActive="activated">
-          <mat-icon>email</mat-icon>
-          {{ 'NAV_BROADCASTS_ADMINISTRATION' | translate }}
-        </a>
+      <!--      <a (click)="onPageChange()" mat-list-item routerLink="/home/seatReservation" routerLinkActive="activated">-->
+      <!--        <mat-icon>place</mat-icon>-->
+      <!--        {{ 'NAV_SEAT_RESERVATION' | translate }}</a-->
+      <!--      >-->
 
-        <mat-divider></mat-divider>
-      </div>
+      <mat-divider
+        *ngIf="
+          myUserService.hasPermission(broadcastAdministration) ||
+          myUserService.hasPermission(eventAdministration) ||
+          myUserService.hasPermission(cinemaMovieAdministration) ||
+          myUserService.hasPermission(managementAdministration) ||
+          myUserService.hasPermission(managementUserView)
+        "
+      ></mat-divider>
+
+      <a
+        (click)="onPageChange()"
+        mat-list-item
+        routerLink="/home/broadcasts/administration"
+        routerLinkActive="activated"
+        *ngIf="serverInfo.broadcasts_enabled && myUserService.hasPermission(broadcastAdministration)"
+      >
+        <mat-icon>email</mat-icon>
+        {{ 'NAV_BROADCASTS_ADMINISTRATION' | translate }}
+      </a>
+
+      <a
+        (click)="onPageChange()"
+        *ngIf="serverInfo?.events_enabled && myUserService.hasPermission(eventAdministration)"
+        mat-list-item
+        routerLink="/home/events/administration"
+        routerLinkActive="activated"
+      >
+        <mat-icon>class</mat-icon>
+        {{ 'NAV_EVENTS_ADMINISTRATION' | translate }}
+      </a>
+
+      <a
+        (click)="onPageChange()"
+        *ngIf="serverInfo.cinema_enabled && myUserService.hasPermission(cinemaMovieAdministration)"
+        mat-list-item
+        routerLink="/home/cinema/administration"
+        routerLinkActive="activated"
+      >
+        <mat-icon>local_movies</mat-icon>
+        {{ 'NAV_CINEMA_ADMINISTRATION' | translate }}</a
+      >
+
+      <a
+        (click)="onPageChange()"
+        mat-list-item
+        routerLink="management/user"
+        routerLinkActive="activated"
+        *ngIf="myUserService.hasPermission(managementAdministration) || myUserService.hasPermission(managementUserView)"
+      >
+        <mat-icon>contacts</mat-icon>
+        {{ 'NAV_MANAGEMENT_USERS' | translate }}
+      </a>
+
+      <mat-divider></mat-divider>
 
       <a (click)="onPageChange()" mat-list-item routerLink="settings" routerLinkActive="activated">
         <mat-icon>settings</mat-icon>
         {{ 'NAV_USER_SETTINGS' | translate }}
       </a>
-
-      <mat-divider></mat-divider>
-      <div *ngIf="myUserService.hasPermission(managementAdministration) || myUserService.hasPermission(managementUserView)">
-        <a (click)="onPageChange()" mat-list-item routerLink="management/user" routerLinkActive="activated">
-          <mat-icon>contacts</mat-icon>
-          {{ 'NAV_MANAGEMENT_USERS' | translate }}
-        </a>
-      </div>
 
       <div *ngIf="myUserService.hasPermission(settingsAdministration) || myUserService.hasPermission(logsAdministration)">
         <mat-divider></mat-divider>

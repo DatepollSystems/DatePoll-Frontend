@@ -16,7 +16,7 @@ import {Event} from '../models/event.model';
 export class EventsViewComponent implements OnDestroy {
   @ViewChild('successfullyRemovedDecision', {static: true}) successfullyRemovedDecision: TemplateRef<any>;
   loading = true;
-  showAllEvents = false;
+  showAllEvents = true;
 
   eventsToShow: Event[];
   events: Event[];

@@ -1,7 +1,15 @@
 #my-container {
-  margin-top: 60px;
+  margin-top: 52px;
   padding: 15px;
-  min-height: 85vh;
+  min-height: 90vh;
+}
+
+/* Fixes weird bug where the toolbar height jumps at 600px width. Without this there would be a large gap between
+    the content and the toolbar on the mobile version */
+@media screen and (max-width: 600px) {
+  #my-container {
+    margin-top: 40px;
+  }
 }
 
 mat-toolbar {
@@ -44,6 +52,7 @@ mat-sidenav {
 .mat-list-item:hover {
   background-color: #bdbdbd;
 }
+
 .mat-list-item:hover .dark-theme {
   background-color: #616161;
 }

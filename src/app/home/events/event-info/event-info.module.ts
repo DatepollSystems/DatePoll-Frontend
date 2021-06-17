@@ -11,8 +11,6 @@ import {GoBackButtonModule} from '../../../utils/shared-components/go-back-butto
 import {MapsModule} from '../../../utils/shared-components/maps-component/maps.module';
 
 import {EventUserManagementComponent} from '../events-administration/event-user-management-modal/event-user-management/event-user-management.component';
-import {EventsVoteForDecisionAdditionalInformationModalComponent} from '../events-view/events-vote-for-decision-modal/events-vote-for-decision-additional-information-modal/events-vote-for-decision-additional-information-modal.component';
-import {EventsVoteForDecisionModalComponent} from '../events-view/events-vote-for-decision-modal/events-vote-for-decision-modal.component';
 import {EventDatesUserListComponent} from './event-dates-user-list/event-dates-user-list.component';
 import {EventInfoModalComponent} from './event-info-modal/event-info-modal.component';
 import {EventInfoViewComponent} from './event-info-view/event-info-view.component';
@@ -33,8 +31,6 @@ import {EventInfoResultUserExportModalComponent} from './event-info-result-user-
     EventUserManagementComponent,
     GroupInfoCardComponent,
     SubgroupInfoCardComponent,
-    EventsVoteForDecisionModalComponent,
-    EventsVoteForDecisionAdditionalInformationModalComponent,
     EventDatesUserListComponent,
     EventInfoResultUserExportModalComponent,
   ],

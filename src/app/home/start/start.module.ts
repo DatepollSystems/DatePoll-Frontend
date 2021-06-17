@@ -9,10 +9,11 @@ import {HomepageService} from './homepage.service';
 
 import {StartComponent} from './start.component';
 import {TableBookingsRowComponent} from './table-bookings-row/table-bookings-row.component';
+import {EventsViewModule} from '../events/events-view/events-view.module';
 
 @NgModule({
   declarations: [StartComponent, TableBookingsRowComponent],
-  imports: [CommonModule, MaterialModule, TranslationModule, StartRoutingModule],
-  providers: [HomepageService]
+  imports: [CommonModule, MaterialModule, TranslationModule, StartRoutingModule, EventsViewModule],
+  providers: [HomepageService],
 })
 export class StartModule {}

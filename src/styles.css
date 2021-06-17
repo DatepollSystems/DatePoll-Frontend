@@ -23,6 +23,10 @@ mat-card {
   margin-bottom: 10px;
 }
 
+.hoverable:hover {
+  cursor: pointer;
+}
+
 .not-selectable {
   user-select: none;
 }
