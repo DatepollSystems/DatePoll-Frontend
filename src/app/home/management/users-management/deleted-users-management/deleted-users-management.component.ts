@@ -57,6 +57,30 @@ export class DeletedUsersManagementComponent implements OnDestroy {
     }
   }
 
+  delete(user: DeletedUser) {
+    const bottomSheetRef = this.bottomSheet.open(QuestionDialogComponent, {
+      data: {
+        question: 'MANAGEMENT_USERS_DELETED_USERS_DELETE_SINGLE_CONFIRM',
+      },
+    });
+
+    bottomSheetRef.afterDismissed().subscribe((value: string) => {
+      if (value != null) {
+        if (value.includes('yes')) {
+          this.deletedUsersService.delete(user.id).subscribe(
+            (response: any) => {
+              console.log(response);
+              this.deletedUsers.splice(this.deletedUsers.indexOf(user), 1);
+              this.sortedUsers.splice(this.sortedUsers.indexOf(user), 1);
+              this.snackBar.open(this.translate.getTranslationFor('MANAGEMENT_USERS_DELETED_USERS_DELETE_SUCCESSFUL'));
+            },
+            (error) => console.log(error)
+          );
+        }
+      }
+    });
+  }
+
   deleteAll() {
     const bottomSheetRef = this.bottomSheet.open(QuestionDialogComponent, {
       data: {

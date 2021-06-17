@@ -48,6 +48,10 @@ export class DeletedUsersService {
     this.deletedUserChange.next(this._deletedUsers.slice());
   }
 
+  public delete(id: number) {
+    return this.httpService.loggedInV1DELETERequest('/management/deleted/users/' + id, 'deleteSingleDeletedUsers');
+  }
+
   public deleteAllDeletedUsers() {
     return this.httpService.loggedInV1DELETERequest('/management/deleted/users', 'deleteAllDeletedUsers');
   }

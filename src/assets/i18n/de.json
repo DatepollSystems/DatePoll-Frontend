@@ -291,8 +291,10 @@
   "MANAGEMENT_USERS_DELETED_USERS_LEFT_AT": "Ausgetreten am ",
   "MANAGEMENT_USERS_DELETED_USERS_COMMENT": "Interner Kommentar:",
   "MANAGEMENT_USERS_DELETED_USERS_DELETE_ALL": "Endgültig löschen",
-  "MANAGEMENT_USERS_DELETED_USERS_DELETE_ALL_CONFIRM": "Bestätige alle gelöschten Mitglieder endgültig zu entfernen?",
+  "MANAGEMENT_USERS_DELETED_USERS_DELETE_ALL_CONFIRM": "Gelöschte Mitglieder endgültig entfernen?",
+  "MANAGEMENT_USERS_DELETED_USERS_DELETE_SINGLE_CONFIRM": "Gelöschtes Mitglied endgültig entfernen?",
   "MANAGEMENT_USERS_DELETED_USERS_DELETE_ALL_SUCCESSFUL": "Alle gelöschten Mitglieder entfernt.",
+  "MANAGEMENT_USERS_DELETED_USERS_DELETE_SUCCESSFUL": "Mitglied endgültig gelöscht.",
 
   "MANAGEMENT_USERS_CHANGES_SEARCH_HINT": " eingeben um administrative Bearbeitungen von der gesuchten Person auszublenden.",
   "MANAGEMENT_USERS_CHANGES_HAS": "hat",
