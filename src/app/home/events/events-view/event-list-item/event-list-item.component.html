@@ -1,8 +1,11 @@
 <mat-list-item class="not-selectable" (click)="onEventInfo(event)" matRipple matRippleRadius="100">
-  <div mat-list-icon (click)="onEventItemClick(event); $event.stopPropagation()" *ngIf="event.alreadyVotedFor">
-    <div class="left" [style.background-color]="event.decisionColor"></div>
-    <div class="right"></div>
-  </div>
+  <div
+    mat-list-icon
+    (click)="onEventItemClick(event); $event.stopPropagation()"
+    *ngIf="event.alreadyVotedFor"
+    class="circle"
+    [style.background-color]="event.decisionColor"
+  ></div>
   <div
     mat-list-icon
     class="not-selectable hoverable"

@@ -1,5 +1,5 @@
 #my-container {
-  margin-top: 52px;
+  margin-top: 60px;
   padding: 15px;
   min-height: 90vh;
 }
@@ -8,7 +8,7 @@
     the content and the toolbar on the mobile version */
 @media screen and (max-width: 600px) {
   #my-container {
-    margin-top: 40px;
+    margin-top: 53px;
   }
 }
 
