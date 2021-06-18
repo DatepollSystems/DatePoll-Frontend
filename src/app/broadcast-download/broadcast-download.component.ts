@@ -40,6 +40,10 @@ export class BroadcastDownloadComponent implements OnInit {
 
   goBack() {
     window.history.back();
+    // If history is smaller than two the link was directly accessed
+    if (window.history.length < 2) {
+      window.close();
+    }
   }
 
   copyToClipboard(val) {
