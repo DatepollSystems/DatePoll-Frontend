@@ -42,7 +42,7 @@ $dark-theme: mat-dark-theme($dark-primary, $dark-accent, $dark-warn);
   }
 
   /* Table stripped color fix */
-  tr:nth-child(even) {
+  .mat-table > tbody > tr:nth-child(even) {
     background: #616161;
   }
 
@@ -85,6 +85,14 @@ $dark-theme: mat-dark-theme($dark-primary, $dark-accent, $dark-warn);
 .black-theme {
   #my-container {
     background-color: black;
+  }
+
+  .mat-table > tbody > tr:nth-child(even) {
+    background: #212121;
+  }
+
+  .mat-row:hover {
+    background-color: #424242;
   }
 
   .mat-card,
