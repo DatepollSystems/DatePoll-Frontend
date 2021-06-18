@@ -1,16 +1,14 @@
 import {Component, OnDestroy, ViewChild} from '@angular/core';
+import {Router} from '@angular/router';
 import {MatBottomSheet} from '@angular/material/bottom-sheet';
 import {MatDialog} from '@angular/material/dialog';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
-import {Router} from '@angular/router';
-import {MatSnackBar} from '@angular/material/snack-bar';
-
 import {Subscription} from 'rxjs';
 
 import {MyUserService} from '../../my-user.service';
 import {CinemaService} from '../cinema.service';
-import {TranslateService} from '../../../translation/translate.service';
+import {NotificationService} from '../../../utils/notification.service';
 import {UIHelper} from '../../../utils/helper/UIHelper';
 
 import {Movie} from '../models/movie.model';
@@ -47,8 +45,7 @@ export class MovieAdministrationComponent implements OnDestroy {
     private router: Router,
     private dialog: MatDialog,
     private bottomSheet: MatBottomSheet,
-    private snackBar: MatSnackBar,
-    private translate: TranslateService
+    private notificationService: NotificationService
   ) {
     this.years = this.cinemaService.getYears();
     this.yearsSubscription = cinemaService.yearsChange.subscribe((value) => {
@@ -136,7 +133,7 @@ export class MovieAdministrationComponent implements OnDestroy {
           (data: any) => {
             console.log(data);
             this.cinemaService.fetchMovies();
-            this.snackBar.open(this.translate.getTranslationFor('CINEMA_TICKETS_ADMINISTRATION_MOVIE_DELETE_MODAL_SUCCESSFULLY_DELETED'));
+            this.notificationService.info('CINEMA_TICKETS_ADMINISTRATION_MOVIE_DELETE_MODAL_SUCCESSFULLY_DELETED');
           },
           (error) => console.log(error)
         );

@@ -4,11 +4,10 @@ import {MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {SelectionModel} from '@angular/cdk/collections';
 import {MatSort} from '@angular/material/sort';
 import {MatPaginator} from '@angular/material/paginator';
-import {MatSnackBar} from '@angular/material/snack-bar';
 import {Subscription} from 'rxjs';
 
 import {CinemaService} from '../../cinema.service';
-import {TranslateService} from '../../../../translation/translate.service';
+import {NotificationService} from '../../../../utils/notification.service';
 
 import {Movie, MovieBookingUser} from '../../models/movie.model';
 
@@ -36,8 +35,7 @@ export class MovieBookingsModalComponent implements OnDestroy {
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     private cinemaService: CinemaService,
-    private snackBar: MatSnackBar,
-    private translate: TranslateService
+    private notificationService: NotificationService
   ) {
     this.movie = data.movie;
     this.refresh();
@@ -71,9 +69,7 @@ export class MovieBookingsModalComponent implements OnDestroy {
     }
     console.log('movieBookingsModal | Selected MovieBookingUser: ' + selected);
     if (this.selection.selected.length === 0) {
-      this.snackBar.open(
-        this.translate.getTranslationFor('CINEMA_TICKETS_ADMINISTRATION_MOVIE_BOOKINGS_MANAGEMENT_MODAL_BOOK_NO_ONE_SELECTED')
-      );
+      this.notificationService.info('CINEMA_TICKETS_ADMINISTRATION_MOVIE_BOOKINGS_MANAGEMENT_MODAL_BOOK_NO_ONE_SELECTED');
       return;
     }
 
@@ -95,9 +91,7 @@ export class MovieBookingsModalComponent implements OnDestroy {
         this.selection.clear();
         this.cinemaService.fetchMovies();
 
-        this.snackBar.open(
-          this.translate.getTranslationFor('CINEMA_TICKETS_ADMINISTRATION_MOVIE_BOOKINGS_MANAGEMENT_MODAL_BOOK_SUCCESSFULLY')
-        );
+        this.notificationService.info('CINEMA_TICKETS_ADMINISTRATION_MOVIE_BOOKINGS_MANAGEMENT_MODAL_BOOK_SUCCESSFULLY');
       },
       (error) => {
         console.log(error);
@@ -114,9 +108,7 @@ export class MovieBookingsModalComponent implements OnDestroy {
   onClear() {
     console.log('movieBookingsModal | Selected MovieBookingUser: ' + this.selection.selected);
     if (this.selection.selected.length === 0) {
-      this.snackBar.open(
-        this.translate.getTranslationFor('CINEMA_TICKETS_ADMINISTRATION_MOVIE_BOOKINGS_MANAGEMENT_MODAL_BOOK_NO_ONE_SELECTED')
-      );
+      this.notificationService.info('CINEMA_TICKETS_ADMINISTRATION_MOVIE_BOOKINGS_MANAGEMENT_MODAL_BOOK_NO_ONE_SELECTED');
       return;
     }
     this.savingClearBooking = true;
@@ -130,9 +122,7 @@ export class MovieBookingsModalComponent implements OnDestroy {
         }
         this.selection.clear();
         this.cinemaService.fetchMovies();
-        this.snackBar.open(
-          this.translate.getTranslationFor('CINEMA_TICKETS_ADMINISTRATION_MOVIE_BOOKINGS_MANAGEMENT_MODAL_REMOVE_BOOKING_SUCCESSFULLY')
-        );
+        this.notificationService.info('CINEMA_TICKETS_ADMINISTRATION_MOVIE_BOOKINGS_MANAGEMENT_MODAL_REMOVE_BOOKING_SUCCESSFULLY');
       },
       (error) => {
         console.log(error);

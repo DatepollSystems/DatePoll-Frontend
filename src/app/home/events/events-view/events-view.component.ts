@@ -48,6 +48,10 @@ export class EventsViewComponent implements OnDestroy {
     this.eventsSubscription.unsubscribe();
   }
 
+  change() {
+    this.eventsUserSerivce.getEvents();
+  }
+
   refreshView() {
     if (this.showAllEvents) {
       this.eventsToShow = this.events.slice();

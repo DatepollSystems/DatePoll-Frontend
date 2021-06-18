@@ -1,14 +1,12 @@
-import {Component, Input} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {MatBottomSheet} from '@angular/material/bottom-sheet';
-import {MatSnackBar} from '@angular/material/snack-bar';
 import {Router} from '@angular/router';
 
 import {EventsVoteForDecisionModalComponent} from '../events-vote-for-decision-modal/events-vote-for-decision-modal.component';
 import {QuestionDialogComponent} from '../../../../utils/shared-components/question-dialog/question-dialog.component';
 
 import {EventsUserService} from '../../services/events-user.service';
-import {TranslateService} from '../../../../translation/translate.service';
-import {HomepageService} from '../../../start/homepage.service';
+import {NotificationService} from '../../../../utils/notification.service';
 
 import {Event} from '../../models/event.model';
 
@@ -22,14 +20,15 @@ export class EventListItemComponent {
   @Input()
   event: Event;
 
+  @Output()
+  voteOrCancelEvent = new EventEmitter<boolean>();
+
   eventVotingChangeLoading = false;
 
   constructor(
     private bottomSheet: MatBottomSheet,
     private eventsUserService: EventsUserService,
-    private snackBar: MatSnackBar,
-    private translate: TranslateService,
-    private homePageService: HomepageService,
+    private notificationService: NotificationService,
     private router: Router
   ) {}
 
@@ -55,8 +54,8 @@ export class EventListItemComponent {
         this.eventsUserService.voteForDecision(event.id, dto.decision, dto.additionalInformation).subscribe(
           (response: any) => {
             console.log(response);
-            this.homePageService.fetchData(true);
-            this.snackBar.open(this.translate.getTranslationFor('EVENTS_VIEW_EVENT_SUCCESSFULLY_VOTED'));
+            this.voteOrCancelEvent.emit(true);
+            this.notificationService.info('EVENTS_VIEW_EVENT_SUCCESSFULLY_VOTED');
           },
           (error) => console.log(error)
         );
@@ -85,8 +84,8 @@ export class EventListItemComponent {
         this.eventsUserService.removeDecision(event.id).subscribe(
           (response: any) => {
             console.log(response);
-            this.homePageService.fetchData(true);
-            this.snackBar.open(this.translate.getTranslationFor('EVENTS_VIEW_EVENT_SUCCESSFULLY_REMOVED_VOTING'));
+            this.voteOrCancelEvent.emit(true);
+            this.notificationService.info('EVENTS_VIEW_EVENT_SUCCESSFULLY_REMOVED_VOTING');
           },
           (error) => {
             console.log(error);

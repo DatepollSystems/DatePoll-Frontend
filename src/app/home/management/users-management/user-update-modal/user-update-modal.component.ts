@@ -22,6 +22,7 @@ import {PhoneNumber} from '../models/phoneNumber.model';
 import {UserBadge} from '../models/userBadge.model';
 import {User} from '../models/user.model';
 import {UserPerformanceBadge} from '../models/userPerformanceBadge.model';
+import {NotificationService} from '../../../../utils/notification.service';
 
 @Component({
   selector: 'app-user-update-modal',
@@ -86,8 +87,7 @@ export class UserUpdateModalComponent implements OnDestroy {
     private usersService: UsersService,
     private performanceBadgesService: PerformanceBadgesService,
     private badgesService: BadgesService,
-    private translate: TranslateService,
-    private snackBar: MatSnackBar,
+    private notificationService: NotificationService,
     private isMobileService: IsMobileService
   ) {
     this.user = data.user;
@@ -175,7 +175,7 @@ export class UserUpdateModalComponent implements OnDestroy {
     const passwordRepeat = form.controls.password_repeat.value;
 
     if (password !== passwordRepeat) {
-      this.snackBar.open(this.translate.getTranslationFor('SIGNIN_PASSWORD_ARE_NOT_EQUAL'));
+      this.notificationService.info('SIGNIN_PASSWORD_ARE_NOT_EQUAL');
       return;
     }
 
@@ -183,7 +183,7 @@ export class UserUpdateModalComponent implements OnDestroy {
     this.usersService.changePasswordForUser(this.user.id, password).subscribe(
       (response: any) => {
         console.log(response);
-        this.snackBar.open(this.translate.getTranslationFor('MANAGEMENT_USERS_UPDATE_USER_MODAL_PASSWORD_CHANGE_SUCCESSFUL'));
+        this.notificationService.info('MANAGEMENT_USERS_UPDATE_USER_MODAL_PASSWORD_CHANGE_SUCCESSFUL');
       },
       (error) => console.log(error)
     );
@@ -304,7 +304,7 @@ export class UserUpdateModalComponent implements OnDestroy {
 
         this.usersService.setUsers(users);
 
-        this.snackBar.open(this.translate.getTranslationFor('MANAGEMENT_USERS_UPDATE_USER_MODAL_SUCCESSFULLY_UPDATED_USER'));
+        this.notificationService.info('MANAGEMENT_USERS_UPDATE_USER_MODAL_SUCCESSFULLY_UPDATED_USER');
       },
       (error) => {
         console.log(error);

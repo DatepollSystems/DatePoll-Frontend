@@ -47,6 +47,8 @@
   "ADVANCED_SETTINGS": "Erweiterte Einstellungen",
 
   "LANGUAGE": "Sprache",
+  "LANGUAGE_CHANGED_TO": "Sprache geändert zu ",
+  "LANGUAGE_RESET": "Sprache zurückgesetzt",
   "LANGUAGE_GERMAN": "Deutsch",
   "LANGUAGE_ENGLISH": "English",
   "LANGUAGE_SPANISH": "Español",
@@ -112,6 +114,7 @@
   "SIGNIN_APP_INFO": "Downloade die dazugehörige App",
   "SIGNIN_GET_THE_APP": "Lade die dazugehörige App runter",
   "SIGNIN_SCAN_ME": "Scan mich mit der DatePoll-App",
+  "SIGNIN_SUCCESSFUL_LOGGED_IN": "Login erfolgreich.",
 
   "FORGOT_PASSWORD": "Passwort zurücksetzen",
   "FORGOT_PASSWORD_UNKOWN_USERNAME": "Dieser Benutzername ist nicht vergeben.",

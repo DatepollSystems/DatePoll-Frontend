@@ -11,7 +11,7 @@
   </div>
 
   <mat-list *ngIf="!loading">
-    <div app-event-list-item *ngFor="let event of eventsToShow" [event]="event"></div>
+    <div app-event-list-item *ngFor="let event of eventsToShow" [event]="event" (voteOrCancelEvent)="change()"></div>
     <h3 *ngIf="eventsToShow.length === 0" fxFlex="100%" style="text-align: center">
       {{ 'EVENTS_VIEW_EVENT_NO_NEW_VOTINGS' | translate }}
     </h3>

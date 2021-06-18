@@ -3,7 +3,6 @@ import {MatBottomSheet} from '@angular/material/bottom-sheet';
 import {MatDialog} from '@angular/material/dialog';
 import {MatSlideToggleChange} from '@angular/material/slide-toggle';
 import {Subject, Subscription} from 'rxjs';
-import {MatSnackBar} from '@angular/material/snack-bar';
 
 import {CalendarDateFormatter, CalendarEvent, CalendarEventTimesChangedEvent, CalendarView} from 'angular-calendar';
 import {isSameDay, isSameMonth} from 'date-fns';
@@ -15,7 +14,6 @@ import {EventInfoModalComponent} from '../events/event-info/event-info-modal/eve
 import {EventUpdateModalComponent} from '../events/events-administration/event-update-modal/event-update-modal.component';
 
 import {Permissions} from '../../permissions';
-import {TranslateService} from '../../translation/translate.service';
 import {SettingsService} from '../../utils/settings.service';
 import {CinemaUserService} from '../cinema/cinema-user.service';
 import {EventsUserService} from '../events/services/events-user.service';
@@ -24,6 +22,7 @@ import {MyUserService} from '../my-user.service';
 import {UserSettingsService} from '../settings/privacy-settings/userSettings.service';
 import {HomepageService} from '../start/homepage.service';
 import {CinemaService} from '../cinema/cinema.service';
+import {NotificationService} from '../../utils/notification.service';
 
 import {CustomDateFormatter} from './custom-date-formatter.provider';
 
@@ -87,8 +86,7 @@ export class CalendarComponent implements OnInit, OnDestroy {
     private myUserService: MyUserService,
     private cdr: ChangeDetectorRef,
     private dialog: MatDialog,
-    private snackBar: MatSnackBar,
-    private translate: TranslateService,
+    private notificationService: NotificationService,
     private userSettingsService: UserSettingsService,
     private homepageService: HomepageService,
     private bottomSheet: MatBottomSheet
@@ -206,9 +204,7 @@ export class CalendarComponent implements OnInit, OnDestroy {
                       (data: any) => {
                         console.log(data);
                         this.cinemaService.fetchMovies();
-                        this.snackBar.open(
-                          this.translate.getTranslationFor('CINEMA_TICKETS_ADMINISTRATION_MOVIE_DELETE_MODAL_SUCCESSFULLY_DELETED')
-                        );
+                        this.notificationService.info('CINEMA_TICKETS_ADMINISTRATION_MOVIE_DELETE_MODAL_SUCCESSFULLY_DELETED');
                       },
                       (error) => console.log(error)
                     );
@@ -252,7 +248,7 @@ export class CalendarComponent implements OnInit, OnDestroy {
                       (response: any) => {
                         console.log(response);
                         this.eventsService.fetchEvents();
-                        this.snackBar.open(this.translate.getTranslationFor('EVENTS_ADMINISTRATION_DELETE_EVENT_SUCCESSFULLY_DELETED'));
+                        this.notificationService.info('EVENTS_ADMINISTRATION_DELETE_EVENT_SUCCESSFULLY_DELETED');
                       },
                       (error) => console.log(error)
                     );

@@ -85,6 +85,10 @@ export class StartComponent implements OnDestroy {
     this.router.navigateByUrl('/home/broadcasts/' + broadcast.id, {state: broadcast});
   }
 
+  ticketBookingOrCancelChange() {
+    this.homePageService.fetchData(true);
+  }
+
   private countOpenEvents() {
     this.openEventsCount = 0;
     for (const event of this.events) {

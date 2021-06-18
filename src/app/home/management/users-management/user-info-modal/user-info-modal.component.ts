@@ -3,7 +3,6 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {Subscription} from 'rxjs';
 
 import {MyUserService} from '../../../my-user.service';
-import {GroupsService} from '../../groups-management/groups.service';
 import {BadgesService} from '../../performance-badges-management/badges.service';
 import {PerformanceBadgesService} from '../../performance-badges-management/performance-badges.service';
 import {UsersService} from '../users.service';
@@ -55,7 +54,6 @@ export class UserInfoModalComponent implements OnDestroy {
     @Inject(MAT_DIALOG_DATA) public data: any,
     private dialogRef: MatDialogRef<UserInfoModalComponent>,
     private myUserService: MyUserService,
-    private groupsService: GroupsService,
     private usersService: UsersService,
     private performanceBadgesService: PerformanceBadgesService,
     private badgesService: BadgesService

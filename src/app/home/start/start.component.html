@@ -44,7 +44,7 @@
     <div mat-subheader *ngIf="events.length != 0" class="sub-header" style="padding-top: 1px">
       <span [matBadge]="openEventsCount.toString()" matBadgeOverlap="false">{{ 'STARTPAGE_EVENTS' | translate }}</span>
     </div>
-    <div app-event-list-item *ngFor="let event of events" [event]="event"></div>
+    <div app-event-list-item *ngFor="let event of events" [event]="event" (voteOrCancelEvent)="ticketBookingOrCancelChange()"></div>
 
     <mat-divider *ngIf="bookings.length != 0"></mat-divider>
 
@@ -149,7 +149,7 @@
           <span [matBadge]="openEventsCount.toString()" matBadgeOverlap="false">{{ 'STARTPAGE_EVENTS' | translate }}</span>
         </mat-card-title>
         <mat-list>
-          <div app-event-list-item *ngFor="let event of events" [event]="event"></div>
+          <div app-event-list-item *ngFor="let event of events" [event]="event" (voteOrCancelEvent)="ticketBookingOrCancelChange()"></div>
         </mat-list>
       </mat-card-content>
     </mat-card>

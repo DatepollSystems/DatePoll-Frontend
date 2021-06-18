@@ -5,12 +5,11 @@ import {MatBottomSheet} from '@angular/material/bottom-sheet';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
-import {MatSnackBar} from '@angular/material/snack-bar';
 
 import {Subscription} from 'rxjs';
 
 import {BroadcastsAdministrationService} from './broadcasts-administration.service';
-import {TranslateService} from '../../../translation/translate.service';
+import {NotificationService} from '../../../utils/notification.service';
 import {MyUserService} from '../../my-user.service';
 import {Permissions} from '../../../permissions';
 
@@ -50,8 +49,7 @@ export class BroadcastsAdministrationComponent implements OnInit, OnDestroy {
     private broadcastsService: BroadcastsAdministrationService,
     private router: Router,
     private bottomSheet: MatBottomSheet,
-    private snackBar: MatSnackBar,
-    private translate: TranslateService
+    private notificationService: NotificationService
   ) {
     this.years = this.broadcastsService.getYears();
     this.yearsSubscription = this.broadcastsService.yearsChange.subscribe((value) => {
@@ -134,7 +132,7 @@ export class BroadcastsAdministrationComponent implements OnInit, OnDestroy {
           (response: any) => {
             console.log(response);
             this.broadcastsService.fetchBroadcasts();
-            this.snackBar.open(this.translate.getTranslationFor('BROADCASTS_ADMINISTRATION_DELETE_SUCCESSFULLY'));
+            this.notificationService.info('BROADCASTS_ADMINISTRATION_DELETE_SUCCESSFULLY');
           },
           (error) => console.log(error)
         );

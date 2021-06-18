@@ -2,10 +2,9 @@ import {HttpClient} from '@angular/common/http';
 import {Component} from '@angular/core';
 import {NgForm} from '@angular/forms';
 import {Router} from '@angular/router';
-import {MatSnackBar} from '@angular/material/snack-bar';
 
 import {environment} from '../../../environments/environment';
-import {TranslateService} from '../../translation/translate.service';
+import {NotificationService} from '../../utils/notification.service';
 
 @Component({
   selector: 'app-forgot-password',
@@ -23,7 +22,7 @@ export class ForgotPasswordComponent {
   verificationCodeRateLimitExceeded = false;
   private apiUrl = environment.apiUrl + '/auth/forgotPassword/';
 
-  constructor(private http: HttpClient, private router: Router, private snackBar: MatSnackBar, private translate: TranslateService) {}
+  constructor(private http: HttpClient, private router: Router, private notificationService: NotificationService) {}
 
   onSubmitForm(form: NgForm) {
     if (this.state.includes('SUBMIT_USERNAME')) {
@@ -106,7 +105,7 @@ export class ForgotPasswordComponent {
     const passwordRepeat = form.controls.password_repeat.value;
 
     if (password !== passwordRepeat) {
-      this.snackBar.open(this.translate.getTranslationFor('SETTINGS_SECURITY_MODAL_CHANGE_PASSWORD_NEW_PASSWORDS_ARE_NOT_EQUAL'));
+      this.notificationService.info('SETTINGS_SECURITY_MODAL_CHANGE_PASSWORD_NEW_PASSWORDS_ARE_NOT_EQUAL');
       return;
     }
 
