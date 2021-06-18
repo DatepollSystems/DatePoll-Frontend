@@ -29,6 +29,7 @@ export class EventDatesManagementComponent implements OnDestroy {
   public y = 0;
   public location = null;
   time: string;
+  timeIncorrect = true;
 
   @ViewChild(MapsComponent, {static: true}) mapsComponent: MapsComponent;
   @ViewChild(TimeInputComponent, {static: true}) timeComponent: TimeInputComponent;
@@ -87,6 +88,11 @@ export class EventDatesManagementComponent implements OnDestroy {
 
   onTimeChange(event: any) {
     this.time = event;
+    if (!this.time || this.time?.length < 1) {
+      this.timeIncorrect = true;
+      return;
+    }
+    this.timeIncorrect = false;
   }
 
   generateRandomJitsiMeetConferenceUrl() {
@@ -102,9 +108,13 @@ export class EventDatesManagementComponent implements OnDestroy {
     if (y == null || y === 0) {
       y = -199;
     }
+
+    const hours = Converter.stringToNumber(this.time.split(':')[0]);
+    const minutes = Converter.stringToNumber(this.time.split(':')[1]);
+
     const description = '';
-    this.createNewEventDateDate.setHours(Converter.stringToNumber(this.time.split(':')[0]));
-    this.createNewEventDateDate.setMinutes(Converter.stringToNumber(this.time.split(':')[1]));
+    this.createNewEventDateDate.setHours(hours);
+    this.createNewEventDateDate.setMinutes(minutes);
     const date = new EventDate(-1, form.controls.location.value, x, y, this.createNewEventDateDate, description);
     this.dates.push(date);
     this.datesChange.emit(this.dates.slice());
@@ -118,5 +128,7 @@ export class EventDatesManagementComponent implements OnDestroy {
     this.createNewEventDateDate = new Date(d);
     // Explicitely reset time input
     this.timeComponent.reset();
+    this.time = null;
+    this.timeIncorrect = true;
   }
 }

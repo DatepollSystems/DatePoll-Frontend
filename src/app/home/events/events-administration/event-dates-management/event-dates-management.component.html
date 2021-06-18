@@ -112,9 +112,10 @@
           color="primary"
           style="width: 100%"
           (click)="form.ngSubmit.emit()"
-          [disabled]="!form.form.valid"
+          [disabled]="!form.form.valid || timeIncorrect"
         >
           {{ 'ADD' | translate }}
+          <mat-icon>library_add</mat-icon>
         </button>
       </div>
     </div>

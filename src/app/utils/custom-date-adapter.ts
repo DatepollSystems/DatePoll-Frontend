@@ -37,6 +37,10 @@ export class CustomDateAdapter extends NativeDateAdapter {
     return isNaN(timestamp) ? null : new Date(timestamp);
   }
 
+  getFirstDayOfWeek(): number {
+    return 1;
+  }
+
   format(date: Date, displayFormat: any): string {
     if (displayFormat === 'input') {
       const day = date.getDate();
