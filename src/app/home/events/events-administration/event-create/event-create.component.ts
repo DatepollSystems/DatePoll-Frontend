@@ -39,6 +39,7 @@ export class EventCreateComponent implements OnDestroy {
   xWeeks = 1;
   xRepeats: number;
   repeats: any[] = [];
+  showCalendar = true;
 
   constructor(
     private groupsService: GroupsService,
@@ -118,6 +119,7 @@ export class EventCreateComponent implements OnDestroy {
       });
     }
     form.reset();
+    this.reloadCalendar();
   }
 
   deleteRepeats(repeat) {
@@ -125,6 +127,14 @@ export class EventCreateComponent implements OnDestroy {
     if (i > -1) {
       this.repeats.splice(i, 1);
     }
+    this.reloadCalendar();
+  }
+
+  private reloadCalendar() {
+    this.showCalendar = false;
+    setTimeout(() => {
+      this.showCalendar = true;
+    }, 1);
   }
 
   isSelected: MatCalendarCellClassFunction<Date> = (event, view) => {
