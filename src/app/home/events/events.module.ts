@@ -53,6 +53,9 @@ import {StartModule} from '../start/start.module';
     YearSelectModule,
     StartModule,
   ],
-  providers: [EventsService, {provide: DateAdapter, useClass: CustomDateAdapter}, {provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS}],
+  providers: [
+    {provide: DateAdapter, useClass: CustomDateAdapter},
+    {provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS},
+  ],
 })
 export class EventsModule {}

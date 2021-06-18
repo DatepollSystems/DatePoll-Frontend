@@ -50,7 +50,6 @@ import {TimeInputModule} from '../../utils/shared-components/time-input/time-inp
     TimeInputModule,
   ],
   providers: [
-    EventsUserService,
     {provide: DateAdapter, useClass: CustomDateAdapter},
     {provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS},
   ],
