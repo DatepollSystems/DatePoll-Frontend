@@ -2,12 +2,10 @@ import {Injectable} from '@angular/core';
 
 import {Subject} from 'rxjs';
 
-import {Converter} from '../../utils/helper/Converter';
 import {HttpService} from '../../utils/http.service';
 
 import {TranslateService} from '../../translation/translate.service';
 import {Broadcast} from '../broadcasts/models/broadcast.model';
-import {EventDecision} from '../events/models/event-decision.model';
 import {Event} from '../events/models/event.model';
 import {HomeBirthdayModel} from './birthdays.model';
 import {HomeBookingsModel} from './bookings.model';
