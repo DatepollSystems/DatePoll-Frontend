@@ -13,7 +13,18 @@
     <!-- Name -->
     <mat-form-field fxFlex="100%">
       <mat-label>{{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_NAME' | translate }}</mat-label>
-      <input #nameModel="ngModel" id="name" matInput maxlength="190" minlength="1" name="name" ngModel required type="text" />
+      <input
+        #nameModel="ngModel"
+        id="name"
+        matInput
+        maxlength="190"
+        minlength="1"
+        name="name"
+        ngModel
+        required
+        type="text"
+        [(ngModel)]="name"
+      />
       <mat-error *ngIf="nameModel.invalid">
         {{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_NAME_INCORRECT' | translate }}
       </mat-error>
@@ -91,7 +102,7 @@
           <mat-list fxFlex="40%">
             <mat-list-item *ngFor="let repeat of repeats">
               <div matLine fxLayout="row" fxLayoutAlign="space-between">
-                <span>Event {{ repeat.xRepeats }}</span>
+                <span>{{ name?.length > 0 ? '"' + name + '"' : 'Event' }} {{ repeat.xRepeats }}</span>
                 <button mat-stroked-button color="warn" type="button" (click)="deleteRepeats(repeat)">{{ 'DELETE' | translate }}</button>
               </div>
               <span matLine *ngFor="let date of repeat.dates">{{ date.date | date: 'EE, dd.MM.yyyy HH:mm' }}</span>

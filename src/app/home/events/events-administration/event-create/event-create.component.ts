@@ -26,6 +26,7 @@ import {NotificationService} from '../../../../utils/notification.service';
   encapsulation: ViewEncapsulation.None,
 })
 export class EventCreateComponent implements OnDestroy {
+  name: string;
   allMembers = false;
   groupsSubscription: Subscription;
   joined: GroupAndSubgroupModel[] = [];
