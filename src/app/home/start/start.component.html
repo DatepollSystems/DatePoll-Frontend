@@ -142,7 +142,7 @@
 </mat-card>
 
 <div fxLayout="row" fxLayout.lt-lg="column" fxLayoutGap="2%" [fxHide.lt-md]="true">
-  <div *ngIf="events.length != 0" fxFlex fxFlex.md="63%" fxFlex.gt-md="65%">
+  <div *ngIf="events.length != 0" fxFlex="55%">
     <mat-card class="mat-elevation-z4">
       <mat-card-content>
         <mat-card-title fxLayout="row" fxLayoutAlign="space-between">
@@ -161,7 +161,7 @@
     </mat-card>
   </div>
 
-  <div fxFlex.md="34%" fxFlex.gt-md="33%">
+  <div fxFlex="42%">
     <mat-card class="mat-elevation-z4" *ngIf="broadcasts.length != 0">
       <mat-card-content>
         <mat-card-title fxLayout="row break" fxLayoutAlign="space-between">
