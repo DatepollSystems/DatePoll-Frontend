@@ -2,7 +2,7 @@
  * Credits go to https://github.com/qunabu/translate-script.
  * Adds compatibility to LibreTranslation API (https://translate.dafnik.me)
  * Adds cache feature
- * Adds check agains manual written language files in /src/assets/i18n/{target}.json
+ * Adds check against manual written language files in /src/assets/i18n/{target}.json
  */
 
 const fetch = require('node-fetch');
