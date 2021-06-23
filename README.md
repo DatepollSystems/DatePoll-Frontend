@@ -1,5 +1,10 @@
 # DatePoll-Frontend
 
+<table><tr>
+<td> <img src="https://releases.datepoll.org/DatePoll/Screenshot_start_desk_light" alt="Light start page" style="width: 512px;"/> </td>
+<td> <img src="https://releases.datepoll.org/DatePoll/Screenshot_start_desk_dark" alt="Dark start page" style="width: 512px;"/> </td>
+</tr></table>
+
 ## Information
 
 - Project website (https://datepoll.org)
