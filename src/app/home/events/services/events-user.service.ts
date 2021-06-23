@@ -161,6 +161,14 @@ export class EventsUserService {
         }
 
         event.setResultGroups(resultGroups);
+
+        event.alreadyVotedFor = response.already_voted;
+        if (event.alreadyVotedFor) {
+          event.userDecision = response.user_decision.decision;
+          event.additionalInformation = response.user_decision.additional_information;
+          event.decisionColor = response.user_decision.color;
+        }
+
         this.setEvent(event);
       },
       (error) => console.log(error)
