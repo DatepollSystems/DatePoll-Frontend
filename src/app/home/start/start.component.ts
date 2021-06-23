@@ -54,7 +54,7 @@ export class StartComponent implements OnDestroy {
     this.events = homePageService.getEvents().slice(0, 7);
     this.countOpenEvents();
     this.eventsSubscription = homePageService.eventsChange.subscribe((value) => {
-      this.events = value.slice(0, 5);
+      this.events = value.slice(0, 7);
       this.countOpenEvents();
       this.eventVotingChangeLoading = false;
       this.loaded = true;
