@@ -25,7 +25,6 @@ export class BroadcastDownloadComponent implements OnInit {
         this.token = token;
         console.log('File to download: ' + token);
         const link = document.createElement('a');
-        link.download = name;
         link.href = this.apiUrl + token;
         document.body.appendChild(link);
         // If there is no file for this token the redirects happens on the server to not-found
