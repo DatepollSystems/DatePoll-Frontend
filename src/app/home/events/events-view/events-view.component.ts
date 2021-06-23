@@ -60,7 +60,7 @@ export class EventsViewComponent implements OnDestroy {
       this.eventsHidden = 0;
       this.eventsToShow = [];
       for (let i = 0; i < this.events.length; i++) {
-        if (!this.events[i].alreadyVotedFor) {
+        if (this.events[i].alreadyVotedFor) {
           this.eventsToShow.push(this.events.slice()[i]);
         } else {
           this.eventsHidden++;

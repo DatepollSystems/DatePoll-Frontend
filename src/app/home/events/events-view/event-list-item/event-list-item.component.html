@@ -17,7 +17,7 @@
     <mat-icon>live_help</mat-icon>
   </div>
 
-  <div mat-line>
+  <div mat-line class="hoverable">
     <span *ngIf="event.alreadyVotedFor">{{ event.name }}</span
     ><b *ngIf="!event.alreadyVotedFor">{{ event.name }}</b>
   </div>

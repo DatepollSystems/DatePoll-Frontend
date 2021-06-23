@@ -14,6 +14,7 @@ import {EventsViewComponent} from './events-view.component';
 import {EventsVoteForDecisionModalComponent} from './events-vote-for-decision-modal/events-vote-for-decision-modal.component';
 import {EventListItemComponent} from './event-list-item/event-list-item.component';
 import {EventsVoteForDecisionAdditionalInformationModalComponent} from './events-vote-for-decision-modal/events-vote-for-decision-additional-information-modal/events-vote-for-decision-additional-information-modal.component';
+import {GoBackButtonModule} from '../../../utils/shared-components/go-back-button/go-back-button.module';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,7 @@ import {EventsVoteForDecisionAdditionalInformationModalComponent} from './events
     EventsVoteForDecisionAdditionalInformationModalComponent,
     EventListItemComponent,
   ],
-  imports: [CommonModule, RouterModule, FormsModule, MaterialModule, EventsViewRoutingModule, TranslationModule],
+  imports: [CommonModule, RouterModule, FormsModule, MaterialModule, EventsViewRoutingModule, TranslationModule, GoBackButtonModule],
   providers: [
     {provide: DateAdapter, useClass: CustomDateAdapter},
     {provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS},
