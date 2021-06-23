@@ -1,10 +1,9 @@
 import {Component, OnDestroy} from '@angular/core';
 import {NgForm} from '@angular/forms';
-import {MatSnackBar} from '@angular/material/snack-bar';
 import {Subscription} from 'rxjs';
 
-import {TranslateService} from '../../../../translation/translate.service';
-import {StandardDecisionsService} from '../../standardDecisions.service';
+import {NotificationService} from '../../../../utils/notification.service';
+import {StandardDecisionsService} from '../../services/standardDecisions.service';
 
 import {EventStandardDecision} from '../../models/standardDecision.model';
 
@@ -22,11 +21,7 @@ export class EventStandardDecisionsManagementModalComponent implements OnDestroy
   showInCalendar = false;
   color: string;
 
-  constructor(
-    private standardDecisionsService: StandardDecisionsService,
-    private snackBar: MatSnackBar,
-    private translate: TranslateService
-  ) {
+  constructor(private standardDecisionsService: StandardDecisionsService, private notificationService: NotificationService) {
     this.standardDecisions = standardDecisionsService.getStandardDecisions();
 
     if (this.standardDecisions.length < 1) {
@@ -53,7 +48,7 @@ export class EventStandardDecisionsManagementModalComponent implements OnDestroy
 
   addStandardDecision(form: NgForm) {
     if (this.color == null) {
-      this.snackBar.open(this.translate.getTranslationFor('EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_COLOR_REQUIRED'));
+      this.notificationService.info('EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_COLOR_REQUIRED');
       return;
     }
 
@@ -63,7 +58,7 @@ export class EventStandardDecisionsManagementModalComponent implements OnDestroy
       (response: any) => {
         console.log(response);
         this.standardDecisionsService.fetchStandardDecisions();
-        this.snackBar.open(this.translate.getTranslationFor('EVENTS_STANDARD_DECISIONS_MANAGEMENT_SUCCESSFULLY_ADDED'));
+        this.notificationService.info('EVENTS_STANDARD_DECISIONS_MANAGEMENT_SUCCESSFULLY_ADDED');
       },
       (error) => console.log(error)
     );
@@ -79,7 +74,7 @@ export class EventStandardDecisionsManagementModalComponent implements OnDestroy
       (response: any) => {
         console.log(response);
         this.standardDecisionsService.fetchStandardDecisions();
-        this.snackBar.open(this.translate.getTranslationFor('EVENTS_STANDARD_DECISIONS_MANAGEMENT_SUCCESSFULLY_REMOVED'));
+        this.notificationService.info('EVENTS_STANDARD_DECISIONS_MANAGEMENT_SUCCESSFULLY_REMOVED');
       },
       (error) => console.log(error)
     );

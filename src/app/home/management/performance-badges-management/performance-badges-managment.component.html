@@ -19,7 +19,7 @@
         </button>
       </div>
     </div>
-    <div fxLayout.gt-md="row break" fxLayout="column" fxLayoutAlign="space-between" fxLayoutGap="2%">
+    <div fxLayout.gt-md="row break" fxLayout="column" fxLayoutAlign="space-between">
       <mat-card class="mat-elevation-z3" fxFlex="48%">
         <mat-card-title>{{ 'MANAGEMENT_PERFORMANCE_BADGES_TITLE_PERFORMANCE_BADGES' | translate }}</mat-card-title>
         <mat-card-content *ngIf="performanceBadges != null">
@@ -217,7 +217,7 @@
               matInput
               name="badgesYear"
               ngModel
-              placeholder="{{ 'CINEMA_TICKETS_ADMINISTRATION_YEAR_SELECT_PLACEHOLDER' | translate }}"
+              placeholder="{{ 'MANAGEMENT_PERFORMANCE_BADGES_YEAR' | translate }}"
               required
               type="number"
               [(ngModel)]="selectedYear"
@@ -241,7 +241,7 @@
               matInput
               name="badgesYear"
               ngModel
-              placeholder="{{ 'CINEMA_TICKETS_ADMINISTRATION_YEAR_SELECT_PLACEHOLDER' | translate }}"
+              placeholder="{{ 'MANAGEMENT_PERFORMANCE_BADGES_YEAR' | translate }}"
               required
               type="number"
               [(ngModel)]="selectedYear"

@@ -3,13 +3,11 @@ import {MatBottomSheetRef} from '@angular/material/bottom-sheet';
 import {Router} from '@angular/router';
 import {Subscription} from 'rxjs';
 
-import {MatSnackBar} from '@angular/material/snack-bar';
-
-import {TranslateService} from '../../../../../translation/translate.service';
+import {UIHelper} from '../../../../../utils/helper/UIHelper';
 import {BroadcastsDraftsService} from '../../broadcasts-drafts.service';
+import {NotificationService} from '../../../../../utils/notification.service';
 
 import {BroadcastDraft} from '../../../models/broadcast-draft.model';
-import {UIHelper} from '../../../../../utils/helper/UIHelper';
 
 @Component({
   selector: 'app-load-draft-dialog',
@@ -23,8 +21,7 @@ export class LoadDraftDialogComponent implements OnDestroy {
   constructor(
     private draftsService: BroadcastsDraftsService,
     private router: Router,
-    private snackBar: MatSnackBar,
-    private translate: TranslateService,
+    private notificationService: NotificationService,
     private bottomSheetRef: MatBottomSheetRef<LoadDraftDialogComponent>
   ) {
     this.drafts = this.draftsService.getDrafts();
@@ -51,7 +48,7 @@ export class LoadDraftDialogComponent implements OnDestroy {
     this.draftsService.delete(draft.id).subscribe(
       (response: any) => {
         console.log(response);
-        this.snackBar.open(this.translate.getTranslationFor('BROADCASTS_ADMINISTRATION_CREATE_NOTIFICATION_DRAFT_SUCCESSFUL_DELETED'));
+        this.notificationService.info('BROADCASTS_ADMINISTRATION_CREATE_NOTIFICATION_DRAFT_SUCCESSFUL_DELETED');
         this.draftsService.fetchDrafts();
         this.bottomSheetRef.dismiss();
       },

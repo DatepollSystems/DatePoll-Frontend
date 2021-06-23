@@ -1,0 +1,45 @@
+<mat-list-item class="not-selectable" (click)="onEventInfo(event)" matRipple matRippleRadius="100">
+  <div
+    mat-list-icon
+    (click)="onEventItemClick(event); $event.stopPropagation()"
+    *ngIf="event.alreadyVotedFor"
+    class="circle"
+    [style.background-color]="event.decisionColor"
+  ></div>
+  <div
+    mat-list-icon
+    class="not-selectable hoverable"
+    *ngIf="!event.alreadyVotedFor"
+    (click)="onEventItemClick(event); $event.stopPropagation()"
+    matRipple
+    matRippleRadius="200"
+  >
+    <mat-icon>live_help</mat-icon>
+  </div>
+
+  <div mat-line class="hoverable">
+    <span *ngIf="event.alreadyVotedFor">{{ event.name }}</span
+    ><b *ngIf="!event.alreadyVotedFor">{{ event.name }}</b>
+  </div>
+  <div mat-line *ngIf="event.startDate.getTime() === event.endDate.getTime()">
+    {{ event.startDate | date: 'EE, dd.MM. HH:mm' }}
+    <span class="until-left">({{ event.getUntil() }})</span>
+  </div>
+  <div
+    mat-line
+    *ngIf="
+      event.startDateWithOutHoursAndMinutes.getTime() === event.endDateWithOutHoursAndMinutes.getTime() &&
+      !(event.startDate.getTime() === event.endDate.getTime())
+    "
+  >
+    {{ event.startDate | date: 'EE, dd.MM. HH:mm' }} - {{ event.endDate | date: 'HH:mm' }}
+    <span class="until-left">({{ event.getUntil() }})</span>
+  </div>
+  <div mat-line *ngIf="event.startDateWithOutHoursAndMinutes.getTime() !== event.endDateWithOutHoursAndMinutes.getTime()">
+    {{ event.startDate | date: 'EE, dd.MM. HH:mm' }} - {{ event.endDate | date: 'dd.MM. HH:mm' }}
+    <span class="until-left">({{ event.getUntil() }})</span>
+  </div>
+  <div mat-line *ngIf="event.description?.length > 0">
+    {{ event.descriptionPreview }}
+  </div>
+</mat-list-item>

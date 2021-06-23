@@ -10,13 +10,7 @@ import {AppRoutingModule} from './app-routing.module';
 import {MaterialModule} from './material-module';
 import {TranslationModule} from './translation/translation.module';
 
-import {AuthGuard} from './auth/auth-guard.service';
-import {AuthService} from './auth/auth.service';
 import {TranslateService} from './translation/translate.service';
-import {HttpService} from './utils/http.service';
-import {IsMobileService} from './utils/is-mobile.service';
-import {SettingsService} from './utils/settings.service';
-import {IsAuthenticatedGuardService} from './auth/is-authenticated-guard.service';
 
 import {AuthInterceptor} from './auth/auth-interceptor';
 
@@ -50,13 +44,6 @@ registerLocaleData(localeDe);
     NoSanitizeModule,
   ],
   providers: [
-    AuthService,
-    AuthGuard,
-    IsAuthenticatedGuardService,
-    TranslateService,
-    HttpService,
-    IsMobileService,
-    SettingsService,
     {
       provide: APP_INITIALIZER,
       useFactory: setupTranslateFactory,

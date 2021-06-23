@@ -5,12 +5,11 @@ import {MatBottomSheet} from '@angular/material/bottom-sheet';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
-import {MatSnackBar} from '@angular/material/snack-bar';
 
 import {Subscription} from 'rxjs';
 
 import {BroadcastsAdministrationService} from './broadcasts-administration.service';
-import {TranslateService} from '../../../translation/translate.service';
+import {NotificationService} from '../../../utils/notification.service';
 import {MyUserService} from '../../my-user.service';
 import {Permissions} from '../../../permissions';
 
@@ -50,19 +49,18 @@ export class BroadcastsAdministrationComponent implements OnInit, OnDestroy {
     private broadcastsService: BroadcastsAdministrationService,
     private router: Router,
     private bottomSheet: MatBottomSheet,
-    private snackBar: MatSnackBar,
-    private translate: TranslateService
+    private notificationService: NotificationService
   ) {
     this.years = this.broadcastsService.getYears();
-    this.selectedYear = this.years[this.years.length - 1];
     this.yearsSubscription = this.broadcastsService.yearsChange.subscribe((value) => {
       this.years = value;
-      this.selectedYear = this.years[this.years.length - 1];
-      for (const year of this.years) {
-        if (year.includes(UIHelper.getCurrentDate().getFullYear().toString())) {
-          console.log('in');
-          this.selectedYear = year;
-          break;
+      if (this.selectedYear == null) {
+        for (const year of this.years) {
+          if (year.includes(UIHelper.getCurrentDate().getFullYear().toString())) {
+            console.log('in');
+            this.selectedYear = year;
+            break;
+          }
         }
       }
 
@@ -75,8 +73,8 @@ export class BroadcastsAdministrationComponent implements OnInit, OnDestroy {
       this.dataSource = new MatTableDataSource(this.broadcasts);
       this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;
-      this.broadcastsSubscription = this.broadcastsService.broadcastsChange.subscribe((value) => {
-        this.broadcasts = value;
+      this.broadcastsSubscription = this.broadcastsService.broadcastsChange.subscribe((bValue) => {
+        this.broadcasts = bValue;
         this.loading = false;
         this.dataSource = new MatTableDataSource(this.broadcasts);
         this.dataSource.sort = this.sort;
@@ -103,6 +101,7 @@ export class BroadcastsAdministrationComponent implements OnInit, OnDestroy {
 
   refresh() {
     this.loading = true;
+    this.broadcastsService.getYears();
     this.broadcastsService.fetchBroadcasts();
   }
 
@@ -133,7 +132,7 @@ export class BroadcastsAdministrationComponent implements OnInit, OnDestroy {
           (response: any) => {
             console.log(response);
             this.broadcastsService.fetchBroadcasts();
-            this.snackBar.open(this.translate.getTranslationFor('BROADCASTS_ADMINISTRATION_DELETE_SUCCESSFULLY'));
+            this.notificationService.info('BROADCASTS_ADMINISTRATION_DELETE_SUCCESSFULLY');
           },
           (error) => console.log(error)
         );

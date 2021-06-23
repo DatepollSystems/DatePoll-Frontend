@@ -1,7 +1,6 @@
 import {CalendarEvent} from 'angular-calendar';
 import {EventAction} from 'calendar-utils';
-import {UIHelper} from '../../../utils/helper/UIHelper';
-import {PhoneNumber} from '../../phoneNumber.model';
+import {PhoneNumber} from '../../management/users-management/models/phoneNumber.model';
 
 export class Movie implements CalendarEvent {
   public id: number;

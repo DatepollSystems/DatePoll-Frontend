@@ -17,13 +17,12 @@ import {QuestionDialogComponentModule} from '../../utils/shared-components/quest
 import {EventDatesListComponentModule} from './events-administration/event-dates-list/event-dates-list-component.module';
 import {AllMembersSwitchModule} from '../../utils/shared-components/all-members-switch/all-members-switch.module';
 
-import {EventsUserService} from './events-user.service';
+import {EventsUserService} from './services/events-user.service';
 
 import {EventDatesManagementComponent} from './events-administration/event-dates-management/event-dates-management.component';
 import {EventStandardLocationsSelectComponent} from './events-administration/event-dates-management/event-standard-locations-select/event-standard-locations-select.component';
 import {EventDecisionsListComponent} from './events-administration/event-decisions-list/event-decisions-list.component';
 import {EventUpdateModalComponent} from './events-administration/event-update-modal/event-update-modal.component';
-import {EventCardComponent} from './events-view/event-card/event-card.component';
 import {TimeInputModule} from '../../utils/shared-components/time-input/time-input.module';
 
 @NgModule({
@@ -32,7 +31,6 @@ import {TimeInputModule} from '../../utils/shared-components/time-input/time-inp
     EventDecisionsListComponent,
     EventDatesManagementComponent,
     EventStandardLocationsSelectComponent,
-    EventCardComponent,
   ],
   imports: [
     CommonModule,
@@ -52,10 +50,9 @@ import {TimeInputModule} from '../../utils/shared-components/time-input/time-inp
     TimeInputModule,
   ],
   providers: [
-    EventsUserService,
     {provide: DateAdapter, useClass: CustomDateAdapter},
     {provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS},
   ],
-  exports: [EventUpdateModalComponent, EventDecisionsListComponent, EventDatesManagementComponent, EventCardComponent],
+  exports: [EventUpdateModalComponent, EventDecisionsListComponent, EventDatesManagementComponent],
 })
 export class CommonEventsComponentsModule {}

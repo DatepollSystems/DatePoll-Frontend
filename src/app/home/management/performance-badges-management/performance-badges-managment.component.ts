@@ -2,12 +2,12 @@ import {Component, OnDestroy} from '@angular/core';
 import {NgForm} from '@angular/forms';
 import {MatBottomSheet} from '@angular/material/bottom-sheet';
 import {MatDialog} from '@angular/material/dialog';
-import {MatSnackBar} from '@angular/material/snack-bar';
 import {Subscription} from 'rxjs';
 
-import {TranslateService} from '../../../translation/translate.service';
 import {BadgesService} from './badges.service';
 import {PerformanceBadgesService} from './performance-badges.service';
+import {UIHelper} from '../../../utils/helper/UIHelper';
+import {NotificationService} from '../../../utils/notification.service';
 
 import {Badge} from './models/badge.model';
 import {CurrentYearUser} from './models/currentYearUser.model';
@@ -17,7 +17,6 @@ import {PerformanceBadge} from './models/performanceBadge.model';
 import {QuestionDialogComponent} from '../../../utils/shared-components/question-dialog/question-dialog.component';
 import {InstrumentUpdateModalComponent} from './instrument-update-modal/instrument-update-modal.component';
 import {PerformanceBadgeUpdateModalComponent} from './performance-badge-update-modal/performance-badge-update-modal.component';
-import {UIHelper} from '../../../utils/helper/UIHelper';
 
 @Component({
   selector: 'app-performance-badges-managment',
@@ -41,8 +40,7 @@ export class PerformanceBadgesManagmentComponent implements OnDestroy {
   constructor(
     private performanceBadgesService: PerformanceBadgesService,
     private badgesService: BadgesService,
-    private snackBar: MatSnackBar,
-    private translate: TranslateService,
+    private notificationService: NotificationService,
     private bottomSheet: MatBottomSheet,
     private dialog: MatDialog
   ) {
@@ -102,7 +100,7 @@ export class PerformanceBadgesManagmentComponent implements OnDestroy {
       (data: any) => {
         console.log(data);
         this.performanceBadgesService.fetchPerformanceBadges();
-        this.snackBar.open(this.translate.getTranslationFor('MANAGEMENT_PERFORMANCE_BADGES_ADD_PERFORMANCE_BADGE_SUCCESSFUL'));
+        this.notificationService.info('MANAGEMENT_PERFORMANCE_BADGES_ADD_PERFORMANCE_BADGE_SUCCESSFUL');
       },
       (error) => {
         console.log(error);
@@ -132,7 +130,7 @@ export class PerformanceBadgesManagmentComponent implements OnDestroy {
           (data: any) => {
             console.log(data);
             this.performanceBadgesService.fetchPerformanceBadges();
-            this.snackBar.open(this.translate.getTranslationFor('MANAGEMENT_PERFORMANCE_BADGES_REMOVED_PERFORMANCE_BADGE_SUCCESSFUL'));
+            this.notificationService.info('MANAGEMENT_PERFORMANCE_BADGES_REMOVED_PERFORMANCE_BADGE_SUCCESSFUL');
           },
           (error) => {
             console.log(error);
@@ -150,7 +148,7 @@ export class PerformanceBadgesManagmentComponent implements OnDestroy {
       (data: any) => {
         console.log(data);
         this.performanceBadgesService.fetchInstruments();
-        this.snackBar.open(this.translate.getTranslationFor('MANAGEMENT_PERFORMANCE_BADGES_ADD_INSTRUMENT_SUCCESSFUL'));
+        this.notificationService.info('MANAGEMENT_PERFORMANCE_BADGES_ADD_INSTRUMENT_SUCCESSFUL');
       },
       (error) => {
         console.log(error);
@@ -180,7 +178,7 @@ export class PerformanceBadgesManagmentComponent implements OnDestroy {
           (data: any) => {
             console.log(data);
             this.performanceBadgesService.fetchInstruments();
-            this.snackBar.open(this.translate.getTranslationFor('MANAGEMENT_PERFORMANCE_BADGES_REMOVED_INSTRUMENT_SUCCESSFUL'));
+            this.notificationService.info('MANAGEMENT_PERFORMANCE_BADGES_REMOVED_INSTRUMENT_SUCCESSFUL');
           },
           (error) => {
             console.log(error);
@@ -199,7 +197,7 @@ export class PerformanceBadgesManagmentComponent implements OnDestroy {
       (data: any) => {
         console.log(data);
         this.badgesService.fetchBadges();
-        this.snackBar.open(this.translate.getTranslationFor('MANAGEMENT_PERFORMANCE_BADGES_BADGE_ADD_SUCCESSFULLY'));
+        this.notificationService.info('MANAGEMENT_PERFORMANCE_BADGES_BADGE_ADD_SUCCESSFULLY');
       },
       (error) => {
         console.log(error);
@@ -222,7 +220,7 @@ export class PerformanceBadgesManagmentComponent implements OnDestroy {
           (data: any) => {
             console.log(data);
             this.badgesService.fetchBadges();
-            this.snackBar.open(this.translate.getTranslationFor('MANAGEMENT_PERFORMANCE_BADGES_BADGE_REMOVE_SUCCESSFULLY'));
+            this.notificationService.info('MANAGEMENT_PERFORMANCE_BADGES_BADGE_REMOVE_SUCCESSFULLY');
           },
           (error) => {
             console.log(error);

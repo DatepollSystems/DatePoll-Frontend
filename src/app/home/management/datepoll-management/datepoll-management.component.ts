@@ -1,15 +1,14 @@
 import {Component, OnDestroy} from '@angular/core';
+import {Router} from '@angular/router';
 import {NgForm} from '@angular/forms';
 import {MatSlideToggleChange} from '@angular/material/slide-toggle';
-import {Router} from '@angular/router';
-import {MatSnackBar} from '@angular/material/snack-bar';
 import {Subscription} from 'rxjs';
 
-import {TranslateService} from '../../../translation/translate.service';
 import {SettingsService} from '../../../utils/settings.service';
 import {MyUserService} from '../../my-user.service';
-
+import {NotificationService} from '../../../utils/notification.service';
 import {Permissions} from '../../../permissions';
+
 import {ServerInfoModel} from '../../../utils/server-info.model';
 
 @Component({
@@ -61,8 +60,7 @@ export class DatepollManagementComponent implements OnDestroy {
     private settingsService: SettingsService,
     myUserService: MyUserService,
     private router: Router,
-    private translate: TranslateService,
-    private snackBar: MatSnackBar
+    private notificationService: NotificationService
   ) {
     this.myUserService = myUserService;
 
@@ -82,11 +80,10 @@ export class DatepollManagementComponent implements OnDestroy {
     });
 
     this.broadcastIncomingMailForwardingEmailAddresses = settingsService.getBroadcastIncomingMailForwardingEmailAddresses();
-    this.broadcastIncomingMailForwardingEmailAddressesSubscription = settingsService.broadcastIncomingMailForwardingEmailAddressesChange.subscribe(
-      (value) => {
+    this.broadcastIncomingMailForwardingEmailAddressesSubscription =
+      settingsService.broadcastIncomingMailForwardingEmailAddressesChange.subscribe((value) => {
         this.broadcastIncomingMailForwardingEmailAddresses = value;
-      }
-    );
+      });
 
     this.alert = settingsService.getAlert();
     this.alertSubscription = settingsService.alertChange.subscribe((value) => {
@@ -137,7 +134,7 @@ export class DatepollManagementComponent implements OnDestroy {
       (response: any) => {
         console.log(response);
         this.communityNameSaving = false;
-        this.snackBar.open(this.translate.getTranslationFor('MANAGEMENT_DATEPOLL_COMMUNITY_NAME_CHANGED_SUCCESSFULLY'));
+        this.notificationService.info('MANAGEMENT_DATEPOLL_COMMUNITY_NAME_CHANGED_SUCCESSFULLY');
       },
       (error) => console.log(error)
     );
@@ -150,7 +147,7 @@ export class DatepollManagementComponent implements OnDestroy {
       (response: any) => {
         console.log(response);
         this.communityUrlSaving = false;
-        this.snackBar.open(this.translate.getTranslationFor('MANAGEMENT_DATEPOLL_COMMUNITY_URL_CHANGED_SUCCESSFULLY'));
+        this.notificationService.info('MANAGEMENT_DATEPOLL_COMMUNITY_URL_CHANGED_SUCCESSFULLY');
       },
       (error) => console.log(error)
     );
@@ -162,7 +159,7 @@ export class DatepollManagementComponent implements OnDestroy {
       (response: any) => {
         console.log(response);
         this.communityDescriptionSaving = false;
-        this.snackBar.open(this.translate.getTranslationFor('MANAGEMENT_DATEPOLL_COMMUNITY_DESCRIPTION_CHANGED_SUCCESSFULLY'));
+        this.notificationService.info('MANAGEMENT_DATEPOLL_COMMUNITY_DESCRIPTION_CHANGED_SUCCESSFULLY');
       },
       (error) => console.log(error)
     );
@@ -175,7 +172,7 @@ export class DatepollManagementComponent implements OnDestroy {
       (response: any) => {
         console.log(response);
         this.imprintSaving = false;
-        this.snackBar.open(this.translate.getTranslationFor('MANAGEMENT_DATEPOLL_IMPRINT_CHANGED_SUCCESSFULLY'));
+        this.notificationService.info('MANAGEMENT_DATEPOLL_IMPRINT_CHANGED_SUCCESSFULLY');
       },
       (error) => console.log(error)
     );
@@ -188,7 +185,7 @@ export class DatepollManagementComponent implements OnDestroy {
       (response: any) => {
         console.log(response);
         this.privacyPolicySaving = false;
-        this.snackBar.open(this.translate.getTranslationFor('MANAGEMENT_DATEPOLL_PRIVACY_POLICY_CHANGED_SUCCESSFULLY'));
+        this.notificationService.info('MANAGEMENT_DATEPOLL_PRIVACY_POLICY_CHANGED_SUCCESSFULLY');
       },
       (error) => console.log(error)
     );
@@ -205,7 +202,7 @@ export class DatepollManagementComponent implements OnDestroy {
       (response: any) => {
         console.log(response);
         this.appUrlSaving = false;
-        this.snackBar.open(this.translate.getTranslationFor('MANAGEMENT_DATEPOLL_APP_URL_CHANGED_SUCCESSFULLY'));
+        this.notificationService.info('MANAGEMENT_DATEPOLL_APP_URL_CHANGED_SUCCESSFULLY');
       },
       (error) => console.log(error)
     );
@@ -218,7 +215,7 @@ export class DatepollManagementComponent implements OnDestroy {
       (response: any) => {
         console.log(response);
         this.openWeatherMapKeySaving = false;
-        this.snackBar.open(this.translate.getTranslationFor('MANAGEMENT_DATEPOLL_OPENWEATHERMAP_KEY_CHANGED_SUCCESSFULLY'));
+        this.notificationService.info('MANAGEMENT_DATEPOLL_OPENWEATHERMAP_KEY_CHANGED_SUCCESSFULLY');
       },
       (error) => console.log(error)
     );
@@ -231,7 +228,7 @@ export class DatepollManagementComponent implements OnDestroy {
       (response: any) => {
         console.log(response);
         this.openWeatherMapCinemaCityIdSaving = false;
-        this.snackBar.open(this.translate.getTranslationFor('MANAGEMENT_DATEPOLL_OPENWEATHERMAP_CINEMA_CITY_ID_CHANGED_SUCCESSFULLY'));
+        this.notificationService.info('MANAGEMENT_DATEPOLL_OPENWEATHERMAP_CINEMA_CITY_ID_CHANGED_SUCCESSFULLY');
       },
       (error) => console.log(error)
     );
@@ -249,10 +246,8 @@ export class DatepollManagementComponent implements OnDestroy {
         (response: any) => {
           console.log(response);
           this.broadcastIncomingMailForwardingEmailAddressesSaving = false;
-          this.snackBar.open(
-            this.translate.getTranslationFor(
-              'MANAGEMENT_DATEPOLL_BROADCAST_PROCESS_INCOMING_MAILS_FORWARDING_EMAIL_ADDRESSES_CHANGED_SUCCESSFULLY'
-            )
+          this.notificationService.info(
+            'MANAGEMENT_DATEPOLL_BROADCAST_PROCESS_INCOMING_MAILS_FORWARDING_EMAIL_ADDRESSES_CHANGED_SUCCESSFULLY'
           );
         },
         (error) => console.log(error)
@@ -273,7 +268,7 @@ export class DatepollManagementComponent implements OnDestroy {
       (response: any) => {
         console.log(response);
         this.alertSaving = false;
-        this.snackBar.open(this.translate.getTranslationFor('MANAGEMENT_DATEPOLL_ALERT_CHANGED_SUCCESSFULLY'));
+        this.notificationService.info('MANAGEMENT_DATEPOLL_ALERT_CHANGED_SUCCESSFULLY');
       },
       (error) => console.log(error)
     );
@@ -286,7 +281,7 @@ export class DatepollManagementComponent implements OnDestroy {
       (response: any) => {
         console.log(response);
         this.jitsiMeetInstanceUrlSaving = false;
-        this.snackBar.open(this.translate.getTranslationFor('MANAGEMENT_DATEPOLL_JITSI_MEET_INSTANCE_URL_CHANGED_SUCCESSFULLY'));
+        this.notificationService.info('MANAGEMENT_DATEPOLL_JITSI_MEET_INSTANCE_URL_CHANGED_SUCCESSFULLY');
       },
       (error) => console.log(error)
     );

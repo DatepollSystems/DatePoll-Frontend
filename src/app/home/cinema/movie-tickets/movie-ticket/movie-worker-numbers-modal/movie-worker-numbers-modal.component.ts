@@ -1,6 +1,6 @@
 import {Component, Inject} from '@angular/core';
 import {MAT_BOTTOM_SHEET_DATA} from '@angular/material/bottom-sheet';
-import {PhoneNumber} from '../../../../phoneNumber.model';
+import {PhoneNumber} from '../../../../management/users-management/models/phoneNumber.model';
 
 @Component({
   selector: 'app-movie-worker-numbers-modal',

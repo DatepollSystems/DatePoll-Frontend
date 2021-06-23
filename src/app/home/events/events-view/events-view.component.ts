@@ -3,7 +3,7 @@ import {MatDialog} from '@angular/material/dialog';
 import {MatSlideToggleChange} from '@angular/material/slide-toggle';
 import {Subscription} from 'rxjs';
 
-import {EventsUserService} from '../events-user.service';
+import {EventsUserService} from '../services/events-user.service';
 
 import {IsMobileService} from '../../../utils/is-mobile.service';
 import {Event} from '../models/event.model';
@@ -16,7 +16,7 @@ import {Event} from '../models/event.model';
 export class EventsViewComponent implements OnDestroy {
   @ViewChild('successfullyRemovedDecision', {static: true}) successfullyRemovedDecision: TemplateRef<any>;
   loading = true;
-  showAllEvents = false;
+  showAllEvents = true;
 
   eventsToShow: Event[];
   events: Event[];
@@ -48,6 +48,10 @@ export class EventsViewComponent implements OnDestroy {
     this.eventsSubscription.unsubscribe();
   }
 
+  change() {
+    this.eventsUserSerivce.getEvents();
+  }
+
   refreshView() {
     if (this.showAllEvents) {
       this.eventsToShow = this.events.slice();
@@ -56,7 +60,7 @@ export class EventsViewComponent implements OnDestroy {
       this.eventsHidden = 0;
       this.eventsToShow = [];
       for (let i = 0; i < this.events.length; i++) {
-        if (!this.events[i].alreadyVotedFor) {
+        if (this.events[i].alreadyVotedFor) {
           this.eventsToShow.push(this.events.slice()[i]);
         } else {
           this.eventsHidden++;

@@ -4,7 +4,7 @@ import {FormControl} from '@angular/forms';
 import {ReplaySubject, Subject, Subscription} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
 
-import {StandardLocationsService} from '../../../standardLocations.service';
+import {StandardLocationsService} from '../../../services/standardLocations.service';
 
 import {PerformanceBadge} from '../../../../management/performance-badges-management/models/performanceBadge.model';
 import {EventStandardLocation} from '../../../models/event-standard-location.model';

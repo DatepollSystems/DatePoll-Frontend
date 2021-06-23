@@ -25,7 +25,9 @@
   </mat-chip-list>
   <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
     <mat-option *ngFor="let group of filteredGroups | async" [value]="group">
-      <span *ngIf="group.type === 0">{{ group.name }}</span>
+      <span *ngIf="group.type === 0"
+        ><b>{{ group.name }}</b></span
+      >
       <span *ngIf="group.type === 1"
         ><b>[{{ group.groupName }}]</b> {{ group.name }}</span
       >

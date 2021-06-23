@@ -3,12 +3,10 @@ import {MatBottomSheet} from '@angular/material/bottom-sheet';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Subscription} from 'rxjs';
 
-import {MatSnackBar} from '@angular/material/snack-bar';
-
-import {TranslateService} from '../../../../translation/translate.service';
 import {GroupsService} from '../../../management/groups-management/groups.service';
 import {BroadcastsAdministrationService} from '../broadcasts-administration.service';
 import {BroadcastsDraftsService} from '../broadcasts-drafts.service';
+import {NotificationService} from '../../../../utils/notification.service';
 
 import {QuestionDialogComponent} from '../../../../utils/shared-components/question-dialog/question-dialog.component';
 import {LoadDraftDialogComponent} from './load-draft-dialog/load-draft-dialog-component';
@@ -47,8 +45,7 @@ export class CreateBroadcastComponent implements OnDestroy {
     private bottomSheet: MatBottomSheet,
     private router: Router,
     private route: ActivatedRoute,
-    private snackBar: MatSnackBar,
-    private translate: TranslateService
+    private notificationService: NotificationService
   ) {
     this.groupsAndSubgroups = this.groupsService.getGroupsAndSubgroups();
     this.groupsSubscription = this.groupsService.groupsAndSubgroupsChange.subscribe((value) => {
@@ -131,13 +128,13 @@ export class CreateBroadcastComponent implements OnDestroy {
   makeCheck() {
     if (this.subject.length < 1 || this.subject.length > 190) {
       console.log('Subject size wrong! - ' + this.subject.length);
-      this.snackBar.open(this.translate.getTranslationFor('BROADCASTS_ADMINISTRATION_CREATE_NOTIFICATION_SUBJECT_LENGTH'));
+      this.notificationService.info('BROADCASTS_ADMINISTRATION_CREATE_NOTIFICATION_SUBJECT_LENGTH');
       return false;
     }
 
     if (this.body.length < 10) {
       console.log('Mail body length < 10');
-      this.snackBar.open(this.translate.getTranslationFor('BROADCASTS_ADMINISTRATION_CREATE_NOTIFICATION_BODY_LENGTH'));
+      this.notificationService.info('BROADCASTS_ADMINISTRATION_CREATE_NOTIFICATION_BODY_LENGTH');
       return false;
     }
 
@@ -157,7 +154,7 @@ export class CreateBroadcastComponent implements OnDestroy {
       this.draftsService.create(draft).subscribe(
         (response: any) => {
           console.log(response);
-          this.snackBar.open(this.translate.getTranslationFor('BROADCASTS_ADMINISTRATION_CREATE_NOTIFICATION_DRAFT_SUCCESSFUL_SAVED'));
+          this.notificationService.info('BROADCASTS_ADMINISTRATION_CREATE_NOTIFICATION_DRAFT_SUCCESSFUL_SAVED');
           this.router.navigate(['/home/broadcasts/administration/draft/' + response.draft.id]);
         },
         (error) => {
@@ -168,7 +165,7 @@ export class CreateBroadcastComponent implements OnDestroy {
       this.draftsService.update(draft, this.draftId).subscribe(
         (response: any) => {
           console.log(response);
-          this.snackBar.open(this.translate.getTranslationFor('BROADCASTS_ADMINISTRATION_CREATE_NOTIFICATION_DRAFT_SUCCESSFUL_SAVED'));
+          this.notificationService.info('BROADCASTS_ADMINISTRATION_CREATE_NOTIFICATION_DRAFT_SUCCESSFUL_SAVED');
         },
         (error) => {
           console.log(error);
@@ -184,7 +181,7 @@ export class CreateBroadcastComponent implements OnDestroy {
 
     if (this.selectedGroupsAndSubgroups.length === 0 && !this.allMembers) {
       console.log('Groups length 0! - ' + this.selectedGroupsAndSubgroups.length + ' And allMembers - ' + this.allMembers);
-      this.snackBar.open(this.translate.getTranslationFor('BROADCASTS_ADMINISTRATION_CREATE_NOTIFICATION_NO_GROUPS_AND_NOT_ALL_MEMBERS'));
+      this.notificationService.info('BROADCASTS_ADMINISTRATION_CREATE_NOTIFICATION_NO_GROUPS_AND_NOT_ALL_MEMBERS');
       return;
     }
 
@@ -206,7 +203,7 @@ export class CreateBroadcastComponent implements OnDestroy {
               subgroups.push(group.id);
             } else {
               console.log('Unknown group type in createBroadcast - ' + group.type);
-              this.snackBar.open(this.translate.getTranslationFor('REQUEST_ERROR'));
+              this.notificationService.info('REQUEST_ERROR');
               return;
             }
           }
@@ -227,20 +224,18 @@ export class CreateBroadcastComponent implements OnDestroy {
           attachments: attachmentIds,
         };
 
-        this.snackBar.open(this.translate.getTranslationFor('BROADCASTS_ADMINISTRATION_CREATE_NOTIFICATION_SENDING_LENGTH'));
+        this.notificationService.info('BROADCASTS_ADMINISTRATION_CREATE_NOTIFICATION_SENDING_LENGTH');
         this.broadcastsService.createBroadcast(broadcast).subscribe(
           (response: any) => {
             console.log(response);
             this.broadcastsService.fetchBroadcasts();
-            this.snackBar.open(this.translate.getTranslationFor('BROADCASTS_ADMINISTRATION_CREATE_NOTIFICATION_SUCCESSFUL'));
+            this.notificationService.info('BROADCASTS_ADMINISTRATION_CREATE_NOTIFICATION_SUCCESSFUL');
             // Delete draft of email if broadcast was successful created
             if (this.draftId > -1) {
               this.draftsService.delete(this.draftId).subscribe(
                 (deleteResponse: any) => {
                   console.log(deleteResponse);
-                  this.snackBar.open(
-                    this.translate.getTranslationFor('BROADCASTS_ADMINISTRATION_CREATE_NOTIFICATION_DRAFT_SUCCESSFUL_DELETED')
-                  );
+                  this.notificationService.info('BROADCASTS_ADMINISTRATION_CREATE_NOTIFICATION_DRAFT_SUCCESSFUL_DELETED');
                   this.draftsService.fetchDrafts();
                 },
                 (error) => {

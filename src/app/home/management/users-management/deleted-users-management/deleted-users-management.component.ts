@@ -8,7 +8,7 @@ import {QuestionDialogComponent} from '../../../../utils/shared-components/quest
 import {TranslateService} from '../../../../translation/translate.service';
 import {DeletedUsersService} from './deleted-users.service';
 
-import {DeletedUser} from './deletedUser.model';
+import {DeletedUser} from '../models/deletedUser.model';
 
 @Component({
   selector: 'app-deleted-users-management',
@@ -55,6 +55,30 @@ export class DeletedUsersManagementComponent implements OnDestroy {
         this.sortedUsers.push(user);
       }
     }
+  }
+
+  delete(user: DeletedUser) {
+    const bottomSheetRef = this.bottomSheet.open(QuestionDialogComponent, {
+      data: {
+        question: 'MANAGEMENT_USERS_DELETED_USERS_DELETE_SINGLE_CONFIRM',
+      },
+    });
+
+    bottomSheetRef.afterDismissed().subscribe((value: string) => {
+      if (value != null) {
+        if (value.includes('yes')) {
+          this.deletedUsersService.delete(user.id).subscribe(
+            (response: any) => {
+              console.log(response);
+              this.deletedUsers.splice(this.deletedUsers.indexOf(user), 1);
+              this.sortedUsers.splice(this.sortedUsers.indexOf(user), 1);
+              this.snackBar.open(this.translate.getTranslationFor('MANAGEMENT_USERS_DELETED_USERS_DELETE_SUCCESSFUL'));
+            },
+            (error) => console.log(error)
+          );
+        }
+      }
+    });
   }
 
   deleteAll() {

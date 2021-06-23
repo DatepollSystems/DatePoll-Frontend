@@ -10,7 +10,7 @@ import {MovieWeatherforecastModalComponent} from './movie-weatherforecast-modal/
 
 import {Movie} from '../../models/movie.model';
 import {UIHelper} from '../../../../utils/helper/UIHelper';
-import {PhoneNumber} from '../../../phoneNumber.model';
+import {PhoneNumber} from '../../../management/users-management/models/phoneNumber.model';
 import {MatBottomSheet} from '@angular/material/bottom-sheet';
 import {MovieWorkerNumbersModalComponent} from './movie-worker-numbers-modal/movie-worker-numbers-modal.component';
 

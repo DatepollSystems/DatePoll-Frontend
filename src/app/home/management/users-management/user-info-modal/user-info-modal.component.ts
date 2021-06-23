@@ -3,15 +3,14 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {Subscription} from 'rxjs';
 
 import {MyUserService} from '../../../my-user.service';
-import {GroupsService} from '../../groups-management/groups.service';
 import {BadgesService} from '../../performance-badges-management/badges.service';
 import {PerformanceBadgesService} from '../../performance-badges-management/performance-badges.service';
 import {UsersService} from '../users.service';
 
 import {GroupAndSubgroupModel} from '../../../../utils/shared-components/group-and-subgroup-type-input-select/groupAndSubgroup.model';
-import {PhoneNumber} from '../../../phoneNumber.model';
-import {UserBadge} from '../badges-list/userBadge.model';
-import {UserPerformanceBadge} from '../userPerformanceBadge.model';
+import {PhoneNumber} from '../models/phoneNumber.model';
+import {UserBadge} from '../models/userBadge.model';
+import {UserPerformanceBadge} from '../models/userPerformanceBadge.model';
 
 @Component({
   selector: 'app-user-info-modal',
@@ -55,7 +54,6 @@ export class UserInfoModalComponent implements OnDestroy {
     @Inject(MAT_DIALOG_DATA) public data: any,
     private dialogRef: MatDialogRef<UserInfoModalComponent>,
     private myUserService: MyUserService,
-    private groupsService: GroupsService,
     private usersService: UsersService,
     private performanceBadgesService: PerformanceBadgesService,
     private badgesService: BadgesService

@@ -8,7 +8,7 @@ import {MyUserService} from '../../../my-user.service';
 import {Permissions} from '../../../../permissions';
 import {TranslateService} from '../../../../translation/translate.service';
 
-import {UserChange} from './userChange.model';
+import {UserChange} from '../models/userChange.model';
 import {QuestionDialogComponent} from '../../../../utils/shared-components/question-dialog/question-dialog.component';
 
 @Component({
@@ -94,7 +94,8 @@ export class UsersChangesManagementComponent implements OnInit, OnDestroy {
             this.userChangesService.deleteUserChange(userChange.id).subscribe(
               (response: any) => {
                 console.log(response);
-                this.userChangesService.getUserChanges();
+                this.userChanges.splice(this.userChanges.indexOf(userChange), 1);
+                this.filteredUserChanges.splice(this.filteredUserChanges.indexOf(userChange), 1);
                 this.snackBar.open(this.translate.getTranslationFor('MANAGEMENT_USERS_CHANGES_DELETE_CONFIRMATION_SUCCESSFULLY'));
               },
               (error) => console.log(error)

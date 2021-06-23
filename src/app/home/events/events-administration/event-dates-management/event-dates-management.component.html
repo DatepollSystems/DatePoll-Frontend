@@ -1,133 +1,134 @@
-<div fxLayout="row">
-  <mat-expansion-panel fxFlex [expanded]="!isMobile">
-    <mat-expansion-panel-header>
-      <mat-panel-title>
-        {{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE_TITLE' | translate }}
-      </mat-panel-title>
-    </mat-expansion-panel-header>
+<mat-expansion-panel fxFlex [expanded]="!isMobile">
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      {{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE_TITLE' | translate }}
+    </mat-panel-title>
+  </mat-expansion-panel-header>
 
-    <form #form="ngForm" (ngSubmit)="save(form)" style="margin-bottom: 15px">
-      <div fxLayout="column"></div>
+  <form #form="ngForm" (ngSubmit)="save(form)" style="margin-bottom: 15px">
+    <div fxLayout="column"></div>
 
-      <div fxLayout="row wrap" fxLayoutGap="2%" style="margin-top: 15px" fxLayoutAlign="space-between">
-        <app-event-standard-locations-select
-          fxFlex.lt-md="98%"
-          fxFlex="24%"
-          fxFlex.gt-md="30%"
-          (standardLocationChanged)="onStandardLocationChanged($event)"
-        ></app-event-standard-locations-select>
+    <div fxLayout="row wrap" fxLayoutGap="2%" style="margin-top: 15px" fxLayoutAlign="space-between">
+      <app-event-standard-locations-select
+        fxFlex.lt-md="98%"
+        fxFlex="24%"
+        fxFlex.gt-md="30%"
+        (standardLocationChanged)="onStandardLocationChanged($event)"
+      ></app-event-standard-locations-select>
 
-        <mat-form-field fxFlex.lt-md="68%" fxFlex="24%" fxFlex.gt-md="15%">
-          <input
-            [(ngModel)]="createNewEventDateDate"
-            [matDatepicker]="picker_date"
-            id="datepicker-date"
-            matInput
-            name="datepicker-date"
-            required
-            placeholder="{{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE' | translate }}"
-          />
-          <mat-datepicker-toggle [for]="picker_date" matSuffix></mat-datepicker-toggle>
-          <mat-datepicker #picker_date></mat-datepicker>
-        </mat-form-field>
+      <mat-form-field fxFlex.lt-md="68%" fxFlex="24%" fxFlex.gt-md="15%">
+        <input
+          [(ngModel)]="createNewEventDateDate"
+          [matDatepicker]="picker_date"
+          id="datepicker-date"
+          matInput
+          name="datepicker-date"
+          required
+          placeholder="{{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE' | translate }}"
+        />
+        <mat-datepicker-toggle [for]="picker_date" matSuffix></mat-datepicker-toggle>
+        <mat-datepicker #picker_date></mat-datepicker>
+      </mat-form-field>
 
-        <div fxFlex.lt-md="28%" fxFlex="10%">
-          <app-time-input (timeChange)="onTimeChange($event)"></app-time-input>
-        </div>
-
-        <mat-form-field fxFlex.lt-md="48%" fxFlex="10%">
-          <input
-            #xModel="ngModel"
-            id="x"
-            matInput
-            [(ngModel)]="x"
-            min="-90"
-            max="90"
-            name="x"
-            ngModel
-            placeholder="{{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_X' | translate }}"
-            type="number"
-          />
-          <mat-error *ngIf="xModel.invalid">
-            {{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_X_INCORRECT' | translate }}
-          </mat-error>
-        </mat-form-field>
-
-        <mat-form-field fxFlex.lt-md="48%" fxFlex="10%">
-          <input
-            #yModel="ngModel"
-            id="y"
-            matInput
-            [(ngModel)]="y"
-            min="-180"
-            max="180"
-            name="y"
-            ngModel
-            placeholder="{{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_Y' | translate }}"
-            type="number"
-          />
-          <mat-error *ngIf="yModel.invalid">
-            {{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_Y_INCORRECT' | translate }}
-          </mat-error>
-        </mat-form-field>
-
-        <mat-form-field fxFlex.lt-md="98%" fxFlex="60%">
-          <input
-            #locationModel="ngModel"
-            id="location"
-            matInput
-            maxlength="190"
-            name="location"
-            type="text"
-            ngModel
-            placeholder="{{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_LOCATION' | translate }}"
-            [(ngModel)]="location"
-          />
-
-          <small>{{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_LOCATION_HELP' | translate }}</small>
-          <mat-error *ngIf="locationModel.invalid">
-            {{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_LOCATION_INCORRECT' | translate }}
-          </mat-error>
-        </mat-form-field>
-
-        <div fxFlex.lt-md="49%" fxFlex="14%">
-          <button
-            mat-stroked-button
-            type="button"
-            style="width: 100%"
-            color="primary"
-            (click)="generateRandomJitsiMeetConferenceUrl()"
-            *ngIf="jitsiMeetInstanceUrl?.length > 0"
-            matTooltip="{{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_LOCATION_GENERATE_JTSI_CONFERENCE_LINK_TOOLTIP' | translate }}"
-            matTooltipPosition="above"
-          >
-            <mat-icon>refresh</mat-icon>
-            <mat-icon>video_call</mat-icon>
-          </button>
-        </div>
-
-        <div fxFlex.lt-md="49%" fxFlex="19%">
-          <button
-            mat-flat-button
-            type="button"
-            color="primary"
-            style="width: 100%"
-            (click)="form.ngSubmit.emit()"
-            [disabled]="!form.form.valid"
-          >
-            {{ 'ADD' | translate }}
-          </button>
-        </div>
+      <div fxFlex.lt-md="28%" fxFlex="10%">
+        <app-time-input (timeChange)="onTimeChange($event)"></app-time-input>
       </div>
 
-      <app-maps-component
-        [x]="48.645333"
-        [y]="15.81711"
-        [edible]="true"
-        (coordinatesChanged)="onCoordinatesChange($event)"
-      ></app-maps-component>
-    </form>
+      <mat-form-field fxFlex.lt-md="48%" fxFlex="10%">
+        <input
+          #xModel="ngModel"
+          id="x"
+          matInput
+          [(ngModel)]="x"
+          min="-90"
+          max="90"
+          name="x"
+          ngModel
+          placeholder="{{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_X' | translate }}"
+          type="number"
+        />
+        <mat-error *ngIf="xModel.invalid">
+          {{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_X_INCORRECT' | translate }}
+        </mat-error>
+      </mat-form-field>
 
-    <app-event-dates-list [dates]="dates" (datesChanged)="onDatesChange($event)"></app-event-dates-list>
-  </mat-expansion-panel>
-</div>
+      <mat-form-field fxFlex.lt-md="48%" fxFlex="10%">
+        <input
+          #yModel="ngModel"
+          id="y"
+          matInput
+          [(ngModel)]="y"
+          min="-180"
+          max="180"
+          name="y"
+          ngModel
+          placeholder="{{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_Y' | translate }}"
+          type="number"
+        />
+        <mat-error *ngIf="yModel.invalid">
+          {{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_Y_INCORRECT' | translate }}
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field fxFlex.lt-md="98%" fxFlex="60%">
+        <input
+          #locationModel="ngModel"
+          id="location"
+          matInput
+          maxlength="190"
+          name="location"
+          type="text"
+          ngModel
+          placeholder="{{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_LOCATION' | translate }}"
+          [(ngModel)]="location"
+        />
+
+        <small>{{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_LOCATION_HELP' | translate }}</small>
+        <mat-error *ngIf="locationModel.invalid">
+          {{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_LOCATION_INCORRECT' | translate }}
+        </mat-error>
+      </mat-form-field>
+
+      <div fxFlex.lt-md="49%" fxFlex="14%">
+        <button
+          mat-stroked-button
+          type="button"
+          style="width: 100%"
+          color="primary"
+          (click)="generateRandomJitsiMeetConferenceUrl()"
+          *ngIf="jitsiMeetInstanceUrl?.length > 0"
+          matTooltip="{{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_LOCATION_GENERATE_JTSI_CONFERENCE_LINK_TOOLTIP' | translate }}"
+          matTooltipPosition="above"
+        >
+          <mat-icon>refresh</mat-icon>
+          <mat-icon>video_call</mat-icon>
+        </button>
+      </div>
+
+      <div fxFlex.lt-md="49%" fxFlex="19%">
+        <button
+          mat-flat-button
+          type="button"
+          color="primary"
+          style="width: 100%"
+          (click)="form.ngSubmit.emit()"
+          [disabled]="!form.form.valid || timeIncorrect"
+        >
+          {{ 'ADD' | translate }}
+          <mat-icon>library_add</mat-icon>
+        </button>
+      </div>
+    </div>
+
+    <app-maps-component
+      [x]="48.645333"
+      [y]="15.81711"
+      [edible]="true"
+      (coordinatesChanged)="onCoordinatesChange($event)"
+    ></app-maps-component>
+  </form>
+
+  <div style="margin-bottom: 7px"><mat-divider></mat-divider></div>
+
+  <app-event-dates-list [dates]="dates" (datesChanged)="onDatesChange($event)"></app-event-dates-list>
+</mat-expansion-panel>

@@ -15,7 +15,7 @@ import {EventInfoModule} from './event-info/event-info.module';
 import {EventsRoutingModule} from './events-routing.module';
 import {AllMembersSwitchModule} from '../../utils/shared-components/all-members-switch/all-members-switch.module';
 
-import {EventsService} from './events.service';
+import {EventsService} from './services/events.service';
 
 import {ColorPickerComponentModule} from '../../utils/shared-components/color-picker/color-picker-component.module';
 import {CommonEventsComponentsModule} from './common-events-components.module';
@@ -24,8 +24,8 @@ import {EventStandardDecisionsManagementModalComponent} from './events-administr
 import {EventStandardLocationsManagementModalComponent} from './events-administration/event-standard-locations-management-modal/event-standard-locations-management-modal.component';
 import {EventUserManagementModalComponent} from './events-administration/event-user-management-modal/event-user-management-modal.component';
 import {EventsAdministrationComponent} from './events-administration/events-administration.component';
-import {EventsViewComponent} from './events-view/events-view.component';
 import {YearSelectModule} from '../../utils/shared-components/year-select/year-select.module';
+import {StartModule} from '../start/start.module';
 
 @NgModule({
   declarations: [
@@ -34,7 +34,6 @@ import {YearSelectModule} from '../../utils/shared-components/year-select/year-s
     EventUserManagementModalComponent,
     EventStandardDecisionsManagementModalComponent,
     EventStandardLocationsManagementModalComponent,
-    EventsViewComponent,
   ],
   imports: [
     CommonModule,
@@ -52,7 +51,11 @@ import {YearSelectModule} from '../../utils/shared-components/year-select/year-s
     GoBackButtonModule,
     AllMembersSwitchModule,
     YearSelectModule,
+    StartModule,
   ],
-  providers: [EventsService, {provide: DateAdapter, useClass: CustomDateAdapter}, {provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS}],
+  providers: [
+    {provide: DateAdapter, useClass: CustomDateAdapter},
+    {provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS},
+  ],
 })
 export class EventsModule {}

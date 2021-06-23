@@ -13,7 +13,18 @@
     <!-- Name -->
     <mat-form-field fxFlex="100%">
       <mat-label>{{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_NAME' | translate }}</mat-label>
-      <input #nameModel="ngModel" id="name" matInput maxlength="190" minlength="1" name="name" ngModel required type="text" />
+      <input
+        #nameModel="ngModel"
+        id="name"
+        matInput
+        maxlength="190"
+        minlength="1"
+        name="name"
+        ngModel
+        required
+        type="text"
+        [(ngModel)]="name"
+      />
       <mat-error *ngIf="nameModel.invalid">
         {{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_NAME_INCORRECT' | translate }}
       </mat-error>
@@ -34,8 +45,74 @@
       <app-all-groups-switch (toggleChange)="allMembersChanged($event)"></app-all-groups-switch>
     </div>
 
-    <!-- Dates -->
-    <app-event-dates-management fxFlex="48%" [dates]="dates" (datesChange)="onEventDatesChange($event)"></app-event-dates-management>
+    <div fxFlex="48%">
+      <!-- Dates -->
+      <app-event-dates-management [dates]="dates" (datesChange)="onEventDatesChange($event)"></app-event-dates-management>
+
+      <mat-expansion-panel style="margin-top: 10px">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            {{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_REAPEAT' | translate }}
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <mat-card class="mat-info-card">
+          <b>{{ 'INFORMATION' | translate }}</b> {{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_REAPEAT_INFORMATION' | translate }}
+        </mat-card>
+
+        <!-- xWeeks -->
+        <form
+          #repeatForm="ngForm"
+          (ngSubmit)="addRepeating(repeatForm)"
+          fxLayout="row"
+          fxLayout.lt-sm="column"
+          fxLayoutGap="2%"
+          fxLayoutAlign="start"
+        >
+          <mat-form-field fxFlex="25%" fxFlex.lt-md="31%">
+            <mat-label>{{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_REAPEAT_WEEKS' | translate }}</mat-label>
+            <input [(ngModel)]="xWeeks" id="xWeeks" matInput name="xWeeks" ngModel required type="number" />
+          </mat-form-field>
+
+          <mat-form-field fxFlex="25%" fxFlex.lt-md="31%">
+            <mat-label>{{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_REAPEAT_REPEATS' | translate }}</mat-label>
+            <input [(ngModel)]="xRepeats" id="xRepeats" matInput name="xRepeats" ngModel required type="number" />
+          </mat-form-field>
+
+          <div fxFlex="20%" fxFlex.lt-md="0"></div>
+
+          <div fxFlex="28%" fxFlex.lt-md="31%">
+            <button
+              mat-flat-button
+              color="primary"
+              type="button"
+              style="width: 100%"
+              (click)="repeatForm.ngSubmit.emit()"
+              [disabled]="!repeatForm.valid"
+            >
+              {{ 'ADD' | translate }}
+              <mat-icon>library_add</mat-icon>
+            </button>
+          </div>
+        </form>
+
+        <mat-divider></mat-divider>
+
+        <div fxLayout="row" fxLayoutAlign="space-between" fxLayout.lt-md="column">
+          <mat-list fxFlex="40%">
+            <mat-list-item *ngFor="let repeat of repeats">
+              <div matLine fxLayout="row" fxLayoutAlign="space-between">
+                <span>{{ name?.length > 0 ? '"' + name + '"' : 'Event' }} {{ repeat.xRepeats }}</span>
+                <button mat-stroked-button color="warn" type="button" (click)="deleteRepeats(repeat)">{{ 'DELETE' | translate }}</button>
+              </div>
+              <span matLine *ngFor="let date of repeat.dates">{{ date.date | date: 'EE, dd.MM.yyyy HH:mm' }}</span>
+              <mat-divider></mat-divider>
+            </mat-list-item>
+          </mat-list>
+          <mat-calendar *ngIf="repeats?.length > 0 && showCalendar" [dateClass]="isSelected"></mat-calendar>
+        </div>
+      </mat-expansion-panel>
+    </div>
 
     <div fxFlex="48%">
       <!-- Decisions -->

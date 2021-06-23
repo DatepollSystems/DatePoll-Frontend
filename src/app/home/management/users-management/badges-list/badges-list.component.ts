@@ -6,7 +6,7 @@ import {BadgesService} from '../../performance-badges-management/badges.service'
 import {UIHelper} from '../../../../utils/helper/UIHelper';
 
 import {Badge} from '../../performance-badges-management/models/badge.model';
-import {UserBadge} from './userBadge.model';
+import {UserBadge} from '../models/userBadge.model';
 
 @Component({
   selector: 'app-badges-list',

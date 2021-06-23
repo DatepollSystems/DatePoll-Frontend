@@ -1,17 +1,16 @@
-import {SelectionModel} from '@angular/cdk/collections';
 import {AfterViewInit, Component, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {SelectionModel} from '@angular/cdk/collections';
 import {MatBottomSheet} from '@angular/material/bottom-sheet';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
-import {MatSnackBar} from '@angular/material/snack-bar';
 import {Subscription} from 'rxjs';
 
 import {EventsVoteForDecisionModalComponent} from '../../../events-view/events-vote-for-decision-modal/events-vote-for-decision-modal.component';
 
-import {TranslateService} from '../../../../../translation/translate.service';
-import {EventsService} from '../../../events.service';
-import {EventsUserService} from '../../../events-user.service';
+import {EventsService} from '../../../services/events.service';
+import {NotificationService} from '../../../../../utils/notification.service';
+import {EventsUserService} from '../../../services/events-user.service';
 
 import {EventResultUser} from '../../../models/event-result-user.model';
 import {Event} from '../../../models/event.model';
@@ -45,8 +44,7 @@ export class EventUserManagementComponent implements OnInit, AfterViewInit, OnDe
   constructor(
     private eventsService: EventsService,
     private userEventsService: EventsUserService,
-    private snackBar: MatSnackBar,
-    private translate: TranslateService,
+    private notificationService: NotificationService,
     private bottomSheet: MatBottomSheet
   ) {
     this.eventSubscription = this.userEventsService.eventChange.subscribe(() => {
@@ -79,7 +77,7 @@ export class EventUserManagementComponent implements OnInit, AfterViewInit, OnDe
     const selected = this.selection.selected.slice();
     console.log('eventUserManagement | Selected EventResultUsers: ' + selected);
     if (this.selection.selected.length === 0) {
-      this.snackBar.open(this.translate.getTranslationFor('EVENTS_ADMINISTRATION_USER_MANAGEMENT_FOR_EVENT_VOTE_NO_ONE_SELECTED'));
+      this.notificationService.info('EVENTS_ADMINISTRATION_USER_MANAGEMENT_FOR_EVENT_VOTE_NO_ONE_SELECTED');
       return;
     }
 
@@ -98,7 +96,7 @@ export class EventUserManagementComponent implements OnInit, AfterViewInit, OnDe
             this.savingVoting = false;
             this.selection.clear();
             this.userEventsService.getEvent(this.event.id);
-            this.snackBar.open(this.translate.getTranslationFor('EVENTS_ADMINISTRATION_USER_MANAGEMENT_FOR_EVENT_VOTE_SUCCESSFULLY'));
+            this.notificationService.info('EVENTS_ADMINISTRATION_USER_MANAGEMENT_FOR_EVENT_VOTE_SUCCESSFULLY');
           },
           (error) => {
             console.log(error);
@@ -120,7 +118,7 @@ export class EventUserManagementComponent implements OnInit, AfterViewInit, OnDe
   onClear() {
     console.log('eventUserManagement | Selected EventResultUsers: ' + this.selection.selected);
     if (this.selection.selected.length === 0) {
-      this.snackBar.open(this.translate.getTranslationFor('EVENTS_ADMINISTRATION_USER_MANAGEMENT_FOR_EVENT_VOTE_NO_ONE_SELECTED'));
+      this.notificationService.info('EVENTS_ADMINISTRATION_USER_MANAGEMENT_FOR_EVENT_VOTE_NO_ONE_SELECTED');
       return;
     }
     this.savingClearVoting = true;
@@ -131,7 +129,7 @@ export class EventUserManagementComponent implements OnInit, AfterViewInit, OnDe
         this.savingClearVoting = false;
         this.selection.clear();
         this.userEventsService.getEvent(this.event.id);
-        this.snackBar.open(this.translate.getTranslationFor('EVENTS_ADMINISTRATION_USER_MANAGEMENT_FOR_EVENT_REMOVE_VOTING_SUCCESSFULLY'));
+        this.notificationService.info('EVENTS_ADMINISTRATION_USER_MANAGEMENT_FOR_EVENT_REMOVE_VOTING_SUCCESSFULLY');
       },
       (error) => {
         console.log(error);

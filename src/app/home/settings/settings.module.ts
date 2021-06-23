@@ -7,8 +7,6 @@ import {TranslationModule} from '../../translation/translation.module';
 import {CommonComponentsModule} from '../../utils/common-components.module';
 import {SettingsRoutingModule} from './settings-routing.module';
 
-import {SessionsService} from './sessions/sessions.service';
-
 import {CalendarTokenComponent} from './calendar-token/calendar-token.component';
 import {EmailAddressComponent} from './email-address/email-address.component';
 import {PasswordComponent} from './password/password.component';
@@ -27,7 +25,7 @@ import {SettingsComponent} from './settings.component';
     PasswordComponent,
     CalendarTokenComponent,
     SessionsComponent,
-    PrivacySettingsComponent
+    PrivacySettingsComponent,
   ],
   imports: [
     CommonModule,
@@ -36,9 +34,8 @@ import {SettingsComponent} from './settings.component';
     MaterialModule,
     TranslationModule,
     CommonComponentsModule,
-    SettingsRoutingModule
+    SettingsRoutingModule,
   ],
-  providers: [SessionsService],
-  exports: [SettingsComponent]
+  exports: [SettingsComponent],
 })
 export class SettingsModule {}

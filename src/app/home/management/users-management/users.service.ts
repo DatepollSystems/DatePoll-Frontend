@@ -7,8 +7,8 @@ import {
   GroupAndSubgroupModel,
   GroupType,
 } from '../../../utils/shared-components/group-and-subgroup-type-input-select/groupAndSubgroup.model';
-import {PhoneNumber} from '../../phoneNumber.model';
-import {User} from './user.model';
+import {PhoneNumber} from './models/phoneNumber.model';
+import {User} from './models/user.model';
 
 @Injectable({
   providedIn: 'root',

@@ -1,5 +1,5 @@
-import {PhoneNumber} from '../../phoneNumber.model';
-import {UIHelper} from '../../../utils/helper/UIHelper';
+import {PhoneNumber} from './phoneNumber.model';
+import {UIHelper} from '../../../../utils/helper/UIHelper';
 
 export class User {
   public readonly id: number;

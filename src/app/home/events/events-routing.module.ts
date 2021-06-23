@@ -11,14 +11,14 @@ const eventRoutes: Routes = [
     children: [
       {path: 'administration', component: EventsAdministrationComponent},
       {path: 'administration/create', component: EventCreateComponent},
-      {path: 'start', component: EventsViewComponent},
-      {path: ':id', component: EventInfoViewComponent}
-    ]
-  }
+      {path: 'start', loadChildren: () => import('./events-view/events-view.module').then((m) => m.EventsViewModule)},
+      {path: ':id', component: EventInfoViewComponent},
+    ],
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(eventRoutes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class EventsRoutingModule {}

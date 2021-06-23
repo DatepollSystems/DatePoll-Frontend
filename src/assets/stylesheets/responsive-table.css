@@ -29,7 +29,7 @@ td > a:hover {
   border-bottom-style: solid;
 }
 
-tr:nth-child(even) {
+.mat-table > tbody > tr:nth-child(even) {
   background: #eee;
 }
 

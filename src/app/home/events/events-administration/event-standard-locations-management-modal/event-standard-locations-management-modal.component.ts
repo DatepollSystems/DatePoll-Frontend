@@ -4,7 +4,7 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 import {Subscription} from 'rxjs';
 
 import {TranslateService} from '../../../../translation/translate.service';
-import {StandardLocationsService} from '../../standardLocations.service';
+import {StandardLocationsService} from '../../services/standardLocations.service';
 
 import {EventStandardLocation} from '../../models/event-standard-location.model';
 

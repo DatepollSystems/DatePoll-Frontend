@@ -1,12 +1,12 @@
 import {Component, OnDestroy} from '@angular/core';
 import {FormBuilder, FormGroup, NgForm, Validators} from '@angular/forms';
 import {MatBottomSheet} from '@angular/material/bottom-sheet';
-import {MatSnackBar} from '@angular/material/snack-bar';
 import {Router} from '@angular/router';
 import {Subscription} from 'rxjs';
 
 import {SettingsService} from '../../utils/settings.service';
 import {AuthService} from '../auth.service';
+import {NotificationService} from '../../utils/notification.service';
 
 import {MobileAppBottomSheetComponent} from './mobile-app-bottom-sheet/mobile-app-bottom-sheet.component';
 
@@ -15,7 +15,7 @@ import {ServerInfoModel} from '../../utils/server-info.model';
 @Component({
   selector: 'app-signin',
   templateUrl: './signin.component.html',
-  styleUrls: ['./signin.component.css']
+  styleUrls: ['./signin.component.css'],
 })
 export class SigninComponent implements OnDestroy {
   serverInfo: ServerInfoModel;
@@ -34,22 +34,22 @@ export class SigninComponent implements OnDestroy {
     passwords: this.fb.group(
       {
         password: ['', [Validators.required, Validators.min(6)]],
-        repeat: ['', [Validators.required, Validators.min(6)]]
+        repeat: ['', [Validators.required, Validators.min(6)]],
       },
       {validator: this.checkPasswords}
-    )
+    ),
   });
 
   constructor(
     private router: Router,
-    private snackBar: MatSnackBar,
+    private notificationService: NotificationService,
     private authService: AuthService,
     private bottomSheet: MatBottomSheet,
     private settingsService: SettingsService,
     private fb: FormBuilder
   ) {
     this.serverInfo = this.settingsService.getServerInfo();
-    this.serverInfoSubscription = this.settingsService.serverInfoChange.subscribe(value => {
+    this.serverInfoSubscription = this.settingsService.serverInfoChange.subscribe((value) => {
       this.serverInfo = value;
     });
 
@@ -89,7 +89,7 @@ export class SigninComponent implements OnDestroy {
     this.bottomSheet.open(MobileAppBottomSheetComponent);
   }
 
-  protected onSignin(form: NgForm) {
+  onSignin(form: NgForm) {
     this.showLoadingSpinnerDuringLogin = true;
 
     this.username = form.value.username;
@@ -102,7 +102,7 @@ export class SigninComponent implements OnDestroy {
         this.authService.signin(data.token, data.session_token);
         this.uiLogin();
       },
-      error => {
+      (error) => {
         console.log(error);
         this.showLoadingSpinnerDuringLogin = false;
         if (error.error.error_code != null) {
@@ -117,7 +117,7 @@ export class SigninComponent implements OnDestroy {
     );
   }
 
-  protected onChangePasswordAfterSignin(form: FormGroup) {
+  onChangePasswordAfterSignin(form: FormGroup) {
     const password = form.controls.passwords.get('password').value;
 
     this.authService.changePasswordAfterSignin(this.username, this.password, password).subscribe(
@@ -126,13 +126,13 @@ export class SigninComponent implements OnDestroy {
         this.authService.signin(data.token, data.session_token);
         this.uiLogin();
       },
-      error => console.log(error)
+      (error) => console.log(error)
     );
   }
 
   private uiLogin() {
     this.loginFail = false;
-    this.snackBar.open('Login erfolgreich');
+    this.notificationService.info('SIGNIN_SUCCESSFUL_LOGGED_IN');
     this.router.navigate(['/home']);
   }
 }

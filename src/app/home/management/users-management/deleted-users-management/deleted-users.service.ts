@@ -4,7 +4,7 @@ import {Subject} from 'rxjs';
 import {HttpService} from '../../../../utils/http.service';
 import {Converter} from '../../../../utils/helper/Converter';
 
-import {DeletedUser} from './deletedUser.model';
+import {DeletedUser} from '../models/deletedUser.model';
 
 @Injectable({
   providedIn: 'root',
@@ -46,6 +46,10 @@ export class DeletedUsersService {
   public setDeletedUsers(deletedUsers: DeletedUser[]) {
     this._deletedUsers = deletedUsers;
     this.deletedUserChange.next(this._deletedUsers.slice());
+  }
+
+  public delete(id: number) {
+    return this.httpService.loggedInV1DELETERequest('/management/deleted/users/' + id, 'deleteSingleDeletedUsers');
   }
 
   public deleteAllDeletedUsers() {

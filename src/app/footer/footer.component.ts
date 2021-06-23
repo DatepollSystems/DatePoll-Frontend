@@ -46,11 +46,11 @@ export class FooterComponent implements OnDestroy {
     const oldLanguage = localStorage.getItem('language');
     this.translate.use(event.value);
 
-    const snackBarRef = this.snackBar.open('Sprache geändert zu ' + this.selected, 'Undo');
+    const snackBarRef = this.snackBar.open(this.translate.getTranslationFor('LANGUAGE_CHANGED_TO') + this.selected, 'Undo');
     snackBarRef.onAction().subscribe(() => {
       this.selected = oldLanguage;
       this.translate.use(oldLanguage);
-      this.snackBar.open('Sprache zurückgesetzt');
+      this.snackBar.open(this.translate.getTranslationFor('LANGUAGE_RESET'));
       console.log('Language was changed via undo to ' + this.selected);
     });
   }

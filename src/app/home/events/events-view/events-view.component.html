@@ -1,29 +1,25 @@
 <div class="fluid-container">
-  <div fxLayout="row" fxLayoutAlign="space-between" style="margin-top: 5px">
-    <div>
-      <h1>{{ 'EVENTS_VIEW' | translate }}</h1>
+  <mat-card>
+    <div fxLayout="row" fxLayoutAlign="space-between" style="margin-top: 5px">
+      <app-go-back-button></app-go-back-button>
+      <div [matBadge]="eventsHidden.toString()" matBadgeOverlap="false" style="margin-right: 15px">
+        <mat-slide-toggle (change)="onShowAllEventsChange($event)" [(ngModel)]="showAllEvents" color="primary">
+          {{ 'EVENTS_VIEW_SHOW_ALREADY_VOTED_EVENTS' | translate }}
+        </mat-slide-toggle>
+      </div>
     </div>
-    <div [matBadge]="eventsHidden.toString()" matBadgeOverlap="false" style="margin-right: 15px">
-      <mat-slide-toggle (change)="onShowAllEventsChange($event)" [(ngModel)]="showAllEvents" color="primary">
-        {{ 'EVENTS_VIEW_SHOW_ALREADY_VOTED_EVENTS' | translate }}
-      </mat-slide-toggle>
-    </div>
-  </div>
 
-  <div *ngIf="!loading" fxLayout="row break" fxLayoutGap="2%" fxLayoutAlign="start">
-    <app-event-card
-      *ngFor="let event of eventsToShow"
-      [event]="event"
-      fxFlex.gt-xs="48%"
-      fxFlex.md="48%"
-      fxFlex.gt-md="22%"
-      fxFlex.lg="30%"
-    ></app-event-card>
-    <h3 *ngIf="eventsToShow.length === 0" fxFlex="100%" style="text-align: center">
-      {{ 'EVENTS_VIEW_EVENT_NO_NEW_VOTINGS' | translate }}
-    </h3>
-  </div>
-  <div *ngIf="loading" fxLayout="column" style="margin-bottom: 15px">
-    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
-  </div>
+    <mat-list *ngIf="!loading">
+      <ng-container *ngFor="let event of eventsToShow">
+        <div app-event-list-item [event]="event" (voteOrCancelEvent)="change()"></div>
+        <mat-divider></mat-divider>
+      </ng-container>
+      <h3 *ngIf="eventsToShow.length === 0" fxFlex="100%" style="text-align: center">
+        {{ 'EVENTS_VIEW_EVENT_NO_NEW_VOTINGS' | translate }}
+      </h3>
+    </mat-list>
+    <div *ngIf="loading" fxLayout="column" style="margin-bottom: 15px">
+      <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    </div>
+  </mat-card>
 </div>

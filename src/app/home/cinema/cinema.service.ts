@@ -5,45 +5,20 @@ import {AuthService} from '../../auth/auth.service';
 import {HttpService} from '../../utils/http.service';
 import {Movie, MovieBookingUser} from './models/movie.model';
 import {Converter} from '../../utils/helper/Converter';
+import {AHasYears} from '../../utils/HasYears/AHasYears';
 
 @Injectable({
   providedIn: 'root',
 })
-export class CinemaService {
+export class CinemaService extends AHasYears {
   private _movies: Movie[] = [];
   public moviesChange: Subject<Movie[]> = new Subject<Movie[]>();
-
-  private _lastUsedYear: number;
-  private _years: string[] = [];
-  public yearsChange: Subject<string[]> = new Subject<string[]>();
 
   private _movie: Movie;
   public movieChange: Subject<Movie> = new Subject<Movie>();
 
-  constructor(private authService: AuthService, private httpService: HttpService) {}
-
-  public getYears(): string[] {
-    this.fetchYears();
-    return this._years.slice();
-  }
-
-  public setYears(years: string[]) {
-    this._years = years;
-    this.yearsChange.next(this._years.slice());
-  }
-
-  private fetchYears() {
-    this.httpService.loggedInV1GETRequest('/cinema/administration/movie/years').subscribe(
-      (response: any) => {
-        console.log(response);
-        const years = [];
-        for (const year of response.years) {
-          years.push(year.toString());
-        }
-        this.setYears(years);
-      },
-      (error) => console.log(error)
-    );
+  constructor(private authService: AuthService, httpService: HttpService) {
+    super(httpService, '/cinema/administration/movie/years');
   }
 
   public addMovie(movie: any) {
@@ -76,6 +51,8 @@ export class CinemaService {
     let url = '/cinema/administration/movie';
     if (year != null) {
       url += '/' + year;
+    } else {
+      url += '/null';
     }
 
     this.httpService.loggedInV1GETRequest(url, 'fetchMovies').subscribe(

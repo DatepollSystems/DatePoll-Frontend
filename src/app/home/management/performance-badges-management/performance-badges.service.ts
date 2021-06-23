@@ -4,7 +4,7 @@ import {Subject} from 'rxjs';
 import {Converter} from '../../../utils/helper/Converter';
 import {HttpService} from '../../../utils/http.service';
 
-import {UserPerformanceBadge} from '../users-management/userPerformanceBadge.model';
+import {UserPerformanceBadge} from '../users-management/models/userPerformanceBadge.model';
 import {CurrentYearBadge, CurrentYearUser} from './models/currentYearUser.model';
 import {Instrument} from './models/instrument.model';
 import {PerformanceBadge} from './models/performanceBadge.model';

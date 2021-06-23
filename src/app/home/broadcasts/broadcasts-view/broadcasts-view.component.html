@@ -1,9 +1,12 @@
 <div class="fluid-container">
   <mat-card>
-    <mat-form-field *ngIf="broadcasts.length != 0">
-      <mat-label>{{ 'BROADCASTS_ADMINISTRATION_SEARCH_LIST' | translate }}</mat-label>
-      <input matInput [(ngModel)]="searchFilter" (input)="searchFilterUpdate($event)" />
-    </mat-form-field>
+    <div fxLayout="row" fxLayoutAlign="space-between" fxLayoutGap="2.5%">
+      <app-go-back-button></app-go-back-button>
+      <mat-form-field *ngIf="broadcasts.length != 0">
+        <mat-label>{{ 'BROADCASTS_ADMINISTRATION_SEARCH_LIST' | translate }}</mat-label>
+        <input matInput [(ngModel)]="searchFilter" (input)="searchFilterUpdate($event)" />
+      </mat-form-field>
+    </div>
 
     <div infinite-scroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" (scrolled)="onScrollDown()">
       <mat-list>
