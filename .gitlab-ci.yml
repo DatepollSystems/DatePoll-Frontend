@@ -12,7 +12,7 @@ build:
     paths:
       - node_modules/
   script:
-    - npm install
+    - npm install --loglevel=error --no-progress
     - ./node_modules/@angular/cli/bin/ng build --progress false --configuration production
     - cd dist/
     - ls -al
