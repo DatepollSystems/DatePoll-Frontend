@@ -1,4 +1,4 @@
-image: trion/ng-cli-karma
+image: node:latest
 
 stages:
   - build
@@ -24,7 +24,7 @@ deploy-dev:
   only:
     - development
   script:
-    - apt-get update -qq && apt-get install -y -qq zip
+    - apt-get update -qq && apt-get install -y -qq zip openssh-client >> /dev/null
     - eval "$(ssh-agent -s)"
     - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
     - mkdir -p ~/.ssh
@@ -43,7 +43,7 @@ deploy-release:
   except:
     - branches
   script:
-    - apt-get update -qq && apt-get install -y -qq zip git
+    - apt-get update -qq && apt-get install -y -qq zip git openssh-client >> /dev/null
     - eval "$(ssh-agent -s)"
     - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
     - mkdir -p ~/.ssh
