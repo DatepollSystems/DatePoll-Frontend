@@ -12,6 +12,7 @@ build:
     paths:
       - node_modules/
   script:
+    - rm -rf package-lock.json
     - npm install --loglevel=error --no-progress
     - ./node_modules/@angular/cli/bin/ng build --progress false --configuration production
     - cd dist/
