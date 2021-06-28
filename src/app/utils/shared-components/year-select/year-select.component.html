@@ -3,7 +3,7 @@
     #yearSelect
     (selectionChange)="yearSelectChange($event.value)"
     [formControl]="yearCtrl"
-    placeholder="{{ 'YEARS_SELECT_YEAR' | translate }}"
+    placeholder="{{ 'YEARS_SELECT_YEAR' | tr }}"
   >
     <mat-option>
       <ngx-mat-select-search [formControl]="yearFilterCtrl"></ngx-mat-select-search>

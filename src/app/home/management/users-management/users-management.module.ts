@@ -6,7 +6,7 @@ import {DateAdapter, MAT_DATE_FORMATS} from '@angular/material/core';
 import {NgxMatSelectSearchModule} from 'ngx-mat-select-search';
 
 import {MaterialModule} from '../../../material-module';
-import {TranslationModule} from '../../../translation/translation.module';
+import {DfxTranslateModule} from 'dfx-translate';
 import {CommonComponentsModule} from '../../../utils/common-components.module';
 import {CustomDateAdapter, MY_DATE_FORMATS} from '../../../utils/custom-date-adapter';
 import {GroupAndSubgroupTypeInputSelectModule} from '../../../utils/shared-components/group-and-subgroup-type-input-select/group-and-subgroup-type-input-select.module';
@@ -27,6 +27,7 @@ import {UserUpdateModalComponent} from './user-update-modal/user-update-modal.co
 import {UsersExportBottomSheetComponent, UsersManagementComponent} from './users-management.component';
 import {UsersChangesManagementComponent} from './users-changes-management/users-changes-management.component';
 import {UserInfoModalComponent} from './user-info-modal/user-info-modal.component';
+import {BooleanTranslationModule} from '../../../utils/shared-components/boolean-translation/boolean-translation.module';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import {UserInfoModalComponent} from './user-info-modal/user-info-modal.componen
     FormsModule,
     ReactiveFormsModule,
     MaterialModule,
-    TranslationModule,
+    DfxTranslateModule,
+    BooleanTranslationModule,
     InfiniteScrollModule,
     NgxMatSelectSearchModule,
     MatMultiSortModule,

@@ -5,7 +5,7 @@ import {FormsModule} from '@angular/forms';
 import {DateAdapter, MAT_DATE_FORMATS} from '@angular/material/core';
 
 import {MaterialModule} from '../../../material-module';
-import {TranslationModule} from '../../../translation/translation.module';
+import {DfxTranslateModule} from 'dfx-translate';
 import {EventsViewRoutingModule} from './events-view-routing.module';
 
 import {CustomDateAdapter, MY_DATE_FORMATS} from '../../../utils/custom-date-adapter';
@@ -23,7 +23,7 @@ import {GoBackButtonModule} from '../../../utils/shared-components/go-back-butto
     EventsVoteForDecisionAdditionalInformationModalComponent,
     EventListItemComponent,
   ],
-  imports: [CommonModule, RouterModule, FormsModule, MaterialModule, EventsViewRoutingModule, TranslationModule, GoBackButtonModule],
+  imports: [CommonModule, RouterModule, FormsModule, MaterialModule, EventsViewRoutingModule, DfxTranslateModule, GoBackButtonModule],
   providers: [
     {provide: DateAdapter, useClass: CustomDateAdapter},
     {provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS},

@@ -14,7 +14,7 @@
       </mat-card-content>
       <div fxLayout="row break" fxLayoutGap="5% grid">
         <div>
-          <button mat-button (click)="goBack()">{{ 'BACK' | translate }}</button>
+          <button mat-button (click)="goBack()">{{ 'BACK' | tr }}</button>
         </div>
         <div>
           <button
@@ -22,12 +22,12 @@
             (click)="$event.stopPropagation(); copyToClipboard(apiUrl + this.token); tooltip.disabled = false; tooltip.show()"
             [matTooltipDisabled]="true"
             *ngIf="token"
-            matTooltip="{{ 'COPIED_LINK' | translate }}"
+            matTooltip="{{ 'COPIED_LINK' | tr }}"
             #tooltip="matTooltip"
             matTooltipPosition="right"
           >
             <mat-icon>content_copy</mat-icon>
-            {{ 'COPY_LINK' | translate }}
+            {{ 'COPY_LINK' | tr }}
           </button>
         </div>
         <div>

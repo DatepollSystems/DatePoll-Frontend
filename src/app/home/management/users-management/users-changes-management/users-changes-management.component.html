@@ -5,16 +5,16 @@
         <mat-icon>arrow_back</mat-icon>
       </button>
     </div>
-    <h1 style="padding-top: 5px">{{ 'MANAGEMENT_USERS_CHANGES' | translate }}</h1>
+    <h1 style="padding-top: 5px">{{ 'MANAGEMENT_USERS_CHANGES' | tr }}</h1>
   </div>
   <mat-card-content>
     <div fxLayout="row" fxLayoutAlign="space-between" fxLayoutGap="2%" fxLayout.lt-sm="column">
       <mat-form-field>
-        <input (keyup)="applyFilter()" matInput placeholder="{{ 'SEARCH' | translate }}" [(ngModel)]="filterValue" />
+        <input (keyup)="applyFilter()" matInput placeholder="{{ 'SEARCH' | tr }}" [(ngModel)]="filterValue" />
         <button mat-button *ngIf="filterValue" matSuffix mat-icon-button aria-label="Clear" (click)="this.filterValue = ''; applyFilter()">
           <mat-icon>close</mat-icon>
         </button>
-        <mat-hint><b>!e</b> {{ 'MANAGEMENT_USERS_CHANGES_SEARCH_HINT' | translate }}</mat-hint>
+        <mat-hint><b>!e</b> {{ 'MANAGEMENT_USERS_CHANGES_SEARCH_HINT' | tr }}</mat-hint>
       </mat-form-field>
     </div>
 
@@ -29,16 +29,16 @@
       >
         <span *ngIf="userChange.editorId !== userChange.userId">
           {{ userChange.editedAt | date: 'dd.MM.yyyy HH:mm:ss' }}
-          | <code class="change-mark">{{ userChange.editorName }}</code> {{ 'MANAGEMENT_USERS_CHANGES_HAS' | translate }}
+          | <code class="change-mark">{{ userChange.editorName }}</code> {{ 'MANAGEMENT_USERS_CHANGES_HAS' | tr }}
           <code class="change-mark">{{ userChange.property }}</code>
-          {{ 'MANAGEMENT_USERS_CHANGES_BY' | translate }} <code class="change-mark">{{ userChange.userName }}</code>
-          {{ 'MANAGEMENT_USERS_CHANGES_BY_CHANGED' | translate }}
+          {{ 'MANAGEMENT_USERS_CHANGES_BY' | tr }} <code class="change-mark">{{ userChange.userName }}</code>
+          {{ 'MANAGEMENT_USERS_CHANGES_BY_CHANGED' | tr }}
         </span>
         <span *ngIf="userChange.editorId === userChange.userId">
           {{ userChange.editedAt | date: 'dd.MM.yyyy HH:mm:ss' }}
-          | <code class="change-mark">{{ userChange.userName }}</code> {{ 'MANAGEMENT_USERS_CHANGES_HAS' | translate }}
+          | <code class="change-mark">{{ userChange.userName }}</code> {{ 'MANAGEMENT_USERS_CHANGES_HAS' | tr }}
           <code class="change-mark">{{ userChange.property }}</code>
-          {{ 'MANAGEMENT_USERS_CHANGES_CHANGED_HIMSELF' | translate }}
+          {{ 'MANAGEMENT_USERS_CHANGES_CHANGED_HIMSELF' | tr }}
         </span>
         <span *ngIf="userChange.oldValue && userChange.newValue"
           >[~] <code class="change-mark">{{ userChange.oldValue }}</code> ⇒ <code class="change-mark">{{ userChange.newValue }}</code></span

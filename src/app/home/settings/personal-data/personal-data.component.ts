@@ -1,8 +1,7 @@
 import {Component} from '@angular/core';
-import {MatSnackBar} from '@angular/material/snack-bar';
 
 import {MyUserService} from '../../my-user.service';
-import {TranslateService} from '../../../translation/translate.service';
+import {NotificationService} from '../../../utils/notification.service';
 
 @Component({
   selector: 'app-personaldata',
@@ -19,7 +18,7 @@ export class PersonalDataComponent {
   zipcode: number;
   location: string;
 
-  constructor(private myUserService: MyUserService, private snackBar: MatSnackBar, private translate: TranslateService) {
+  constructor(private myUserService: MyUserService, private notificationService: NotificationService) {
     this.title = this.myUserService.getTitle();
 
     this.birthday = this.myUserService.getBirthday();
@@ -50,7 +49,7 @@ export class PersonalDataComponent {
     this.myUserService.updateMyself().subscribe(
       (data: any) => {
         console.log(data);
-        this.snackBar.open(this.translate.getTranslationFor('SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_SAVED_SUCCESSFULLY'));
+        this.notificationService.info('SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_SAVED_SUCCESSFULLY');
       },
       (error) => console.log(error)
     );

@@ -1,10 +1,11 @@
 import {Component, Inject, OnDestroy} from '@angular/core';
 import {NgForm} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import {MatSnackBar} from '@angular/material/snack-bar';
 import {Subscription} from 'rxjs';
 
-import {TranslateService} from '../../../../translation/translate.service';
+import {UIHelper} from '../../../../utils/helper/UIHelper';
+import {EventsCreateUpdateService} from '../../services/eventsCreateUpdate.service';
+import {NotificationService} from '../../../../utils/notification.service';
 import {EventsService} from '../../services/events.service';
 
 import {
@@ -14,8 +15,6 @@ import {
 import {EventDecision} from '../../models/event-decision.model';
 import {EventDate} from '../../models/event-date.model';
 import {Event} from '../../models/event.model';
-import {UIHelper} from '../../../../utils/helper/UIHelper';
-import {EventsCreateUpdateService} from '../../services/eventsCreateUpdate.service';
 
 @Component({
   selector: 'app-event-update-modal',
@@ -44,8 +43,7 @@ export class EventUpdateModalComponent implements OnDestroy {
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     private dialogRef: MatDialogRef<EventUpdateModalComponent>,
-    private snackBar: MatSnackBar,
-    private translate: TranslateService,
+    private notificationSerivce: NotificationService,
     private eventsService: EventsService,
     private eventsCreateUpdateService: EventsCreateUpdateService
   ) {
@@ -98,13 +96,13 @@ export class EventUpdateModalComponent implements OnDestroy {
 
   update(form: NgForm) {
     if (this.dates.length === 0) {
-      this.snackBar.open(this.translate.getTranslationFor('EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE_LIST_REQUIRED'));
+      this.notificationSerivce.info('EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE_LIST_REQUIRED');
       return;
     }
 
     if (this.joined.length === 0 && !this.allMembers) {
       console.log('Groups length 0! - ' + this.joined.length + ' And allMembers - ' + this.allMembers);
-      this.snackBar.open(this.translate.getTranslationFor('BROADCASTS_ADMINISTRATION_CREATE_NOTIFICATION_NO_GROUPS_AND_NOT_ALL_MEMBERS'));
+      this.notificationSerivce.info('BROADCASTS_ADMINISTRATION_CREATE_NOTIFICATION_NO_GROUPS_AND_NOT_ALL_MEMBERS');
       return;
     }
 
@@ -120,7 +118,7 @@ export class EventUpdateModalComponent implements OnDestroy {
       (response: any) => {
         console.log(response);
         this.eventsService.fetchEvents();
-        this.snackBar.open(this.translate.getTranslationFor('EVENTS_ADMINISTRATION_UPDATE_EVENT_SUCCESSFULLY_UPDATED'));
+        this.notificationSerivce.info('EVENTS_ADMINISTRATION_UPDATE_EVENT_SUCCESSFULLY_UPDATED');
       },
       (error) => console.log(error)
     );

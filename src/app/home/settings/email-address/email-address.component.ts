@@ -1,11 +1,10 @@
 import {Component, OnDestroy, ViewChild} from '@angular/core';
 import {MatSlideToggleChange} from '@angular/material/slide-toggle';
 import {MatDialogRef} from '@angular/material/dialog';
-import {MatSnackBar} from '@angular/material/snack-bar';
 import {Subscription} from 'rxjs';
 
-import {TranslateService} from '../../../translation/translate.service';
 import {MyUserService} from '../../my-user.service';
+import {NotificationService} from '../../../utils/notification.service';
 import {UserSettingsService} from '../privacy-settings/userSettings.service';
 
 import {EmailAddressesListComponent} from '../../management/users-management/email-addresses-list/email-addresses-list.component';
@@ -29,9 +28,8 @@ export class EmailAddressComponent implements OnDestroy {
 
   constructor(
     private _myUserService: MyUserService,
-    private snackBar: MatSnackBar,
+    private notificationService: NotificationService,
     private settingsService: UserSettingsService,
-    private translate: TranslateService,
     private dialog: MatDialogRef<EmailAddressComponent>
   ) {
     this.emailAddresses = this._myUserService.getEmailAddresses();
@@ -57,7 +55,7 @@ export class EmailAddressComponent implements OnDestroy {
 
   onSave() {
     if (this.emailAddresses.length < 1) {
-      this.snackBar.open(this.translate.getTranslationFor('SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_MINIMUM_ONE_EMAIL_ADDRESS'));
+      this.notificationService.info('SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_MINIMUM_ONE_EMAIL_ADDRESS');
       return;
     }
 
@@ -65,7 +63,7 @@ export class EmailAddressComponent implements OnDestroy {
       (response: any) => {
         console.log(response);
         this._myUserService.setEmailAddresses(this.emailAddresses);
-        this.snackBar.open(this.translate.getTranslationFor('SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_SAVED_SUCCESSFULLY'));
+        this.notificationService.info('SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_SAVED_SUCCESSFULLY');
       },
       (error) => console.log(error)
     );

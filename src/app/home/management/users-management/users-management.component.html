@@ -1,7 +1,7 @@
 <mat-card class="mat-elevation-z3">
   <mat-card-content>
     <div fxLayout="row" fxLayoutAlign="space-between">
-      <h1>{{ 'NAV_MANAGEMENT_USERS' | translate }}</h1>
+      <h1>{{ 'NAV_MANAGEMENT_USERS' | tr }}</h1>
       <div style="text-align: end">
         <button [matMenuTriggerFor]="menu" mat-icon-button>
           <mat-icon>more_vert</mat-icon>
@@ -9,16 +9,16 @@
         <mat-menu #menu="matMenu">
           <button (click)="refreshUsers()" mat-menu-item>
             <mat-icon>refresh</mat-icon>
-            <span>{{ 'MANAGEMENT_USERS_REFRESH' | translate }}</span>
+            <span>{{ 'MANAGEMENT_USERS_REFRESH' | tr }}</span>
           </button>
 
           <ng-container *ngIf="hasManagementAdministration">
             <mat-divider></mat-divider>
 
-            <button mat-menu-item [matMenuTriggerFor]="actionsMenu">{{ 'ACTION' | translate }}</button>
+            <button mat-menu-item [matMenuTriggerFor]="actionsMenu">{{ 'ACTION' | tr }}</button>
             <mat-divider></mat-divider>
 
-            <button mat-menu-item [matMenuTriggerFor]="managementMenu">{{ 'MANAGEMENT' | translate }}</button>
+            <button mat-menu-item [matMenuTriggerFor]="managementMenu">{{ 'MANAGEMENT' | tr }}</button>
           </ng-container>
         </mat-menu>
 
@@ -29,26 +29,26 @@
           </button>
           <button (click)="onActivateAll()" mat-menu-item>
             <mat-icon>contact_mail</mat-icon>
-            <span>{{ 'MANAGEMENT_USERS_ACTIVATE_ALL' | translate }}</span>
+            <span>{{ 'MANAGEMENT_USERS_ACTIVATE_ALL' | tr }}</span>
           </button>
         </mat-menu>
 
         <mat-menu #managementMenu="matMenu">
           <button routerLink="/home/management/user/deleted" mat-menu-item *ngIf="hasManagementExtraDeletePermission">
             <mat-icon>delete_sweep</mat-icon>
-            <span>{{ 'MANAGEMENT_USERS_DELETED_USERS' | translate }}</span>
+            <span>{{ 'MANAGEMENT_USERS_DELETED_USERS' | tr }}</span>
           </button>
           <button routerLink="/home/management/user/changes" mat-menu-item>
             <mat-icon>archive</mat-icon>
-            <span>{{ 'MANAGEMENT_USERS_CHANGES' | translate }}</span>
+            <span>{{ 'MANAGEMENT_USERS_CHANGES' | tr }}</span>
           </button>
           <button routerLink="/home/management/group" mat-menu-item>
             <mat-icon>group</mat-icon>
-            <span>{{ 'NAV_MANAGEMENT_GROUPS' | translate }}</span>
+            <span>{{ 'NAV_MANAGEMENT_GROUPS' | tr }}</span>
           </button>
           <button routerLink="/home/management/performanceBadges" mat-menu-item>
             <mat-icon>star_rate</mat-icon>
-            <span>{{ 'NAV_MANAGEMENT_PERFORMANCE_BADGES' | translate }}</span>
+            <span>{{ 'NAV_MANAGEMENT_PERFORMANCE_BADGES' | tr }}</span>
           </button>
         </mat-menu>
       </div>
@@ -59,125 +59,125 @@
         <mat-icon>add</mat-icon>
       </button>
       <mat-form-field>
-        <input (keyup)="applyFilter()" matInput placeholder="{{ 'MANAGEMENT_USERS_SEARCH' | translate }}" [(ngModel)]="filterValue" />
+        <input (keyup)="applyFilter()" matInput placeholder="{{ 'MANAGEMENT_USERS_SEARCH' | tr }}" [(ngModel)]="filterValue" />
         <button mat-button *ngIf="filterValue" matSuffix mat-icon-button aria-label="Clear" (click)="this.filterValue = ''; applyFilter()">
           <mat-icon>close</mat-icon>
         </button>
       </mat-form-field>
     </div>
 
-    <mat-multi-sort-table-settings [tableData]="table" sortToolTip="{{ 'MANAGEMENT_USERS_MANAGE_COLUMNS_TOOLTIP' | translate }}">
+    <mat-multi-sort-table-settings [tableData]="table" sortToolTip="{{ 'MANAGEMENT_USERS_MANAGE_COLUMNS_TOOLTIP' | tr }}">
       <button mat-stroked-button>
-        {{ 'MANAGEMENT_USERS_MANAGE_COLUMNS' | translate }} &nbsp;
+        {{ 'MANAGEMENT_USERS_MANAGE_COLUMNS' | tr }} &nbsp;
         <mat-icon>menu</mat-icon>
       </button>
     </mat-multi-sort-table-settings>
     <table [dataSource]="table.dataSource" matMultiSort (matSortChange)="table.onSortEvent()" class="table-responsive" mat-table>
       <!-- Member number Column -->
       <ng-container matColumnDef="memberNumber">
-        <th *matHeaderCellDef mat-header-cell mat-multi-sort-header="memberNumber">{{ 'MANAGEMENT_USERS_MEMBER_NUMBER' | translate }}</th>
+        <th *matHeaderCellDef mat-header-cell mat-multi-sort-header="memberNumber">{{ 'MANAGEMENT_USERS_MEMBER_NUMBER' | tr }}</th>
         <td *matCellDef="let user" mat-cell>{{ user.memberNumber }}</td>
       </ng-container>
 
       <!-- Title Column -->
       <ng-container matColumnDef="title">
-        <th *matHeaderCellDef mat-header-cell mat-multi-sort-header="title">{{ 'MANAGEMENT_USERS_TITLE' | translate }}</th>
+        <th *matHeaderCellDef mat-header-cell mat-multi-sort-header="title">{{ 'MANAGEMENT_USERS_TITLE' | tr }}</th>
         <td *matCellDef="let user" mat-cell>{{ user.title }}</td>
       </ng-container>
 
       <!-- Firstname Column -->
       <ng-container matColumnDef="firstname">
-        <th *matHeaderCellDef mat-header-cell mat-multi-sort-header="firstname">{{ 'MANAGEMENT_USERS_FIRSTNAME' | translate }}</th>
+        <th *matHeaderCellDef mat-header-cell mat-multi-sort-header="firstname">{{ 'MANAGEMENT_USERS_FIRSTNAME' | tr }}</th>
         <td *matCellDef="let user" mat-cell>{{ user.firstname }}</td>
       </ng-container>
 
       <!-- Surname Column -->
       <ng-container matColumnDef="surname">
-        <th *matHeaderCellDef mat-header-cell mat-multi-sort-header="surname">{{ 'MANAGEMENT_USERS_SURNAME' | translate }}</th>
+        <th *matHeaderCellDef mat-header-cell mat-multi-sort-header="surname">{{ 'MANAGEMENT_USERS_SURNAME' | tr }}</th>
         <td *matCellDef="let user" mat-cell>{{ user.surname }}</td>
       </ng-container>
 
       <!-- Emails Column -->
       <ng-container matColumnDef="emails">
-        <th *matHeaderCellDef mat-header-cell mat-multi-sort-header="emails">{{ 'MANAGEMENT_USERS_EMAIL_ADDRESSES' | translate }}</th>
+        <th *matHeaderCellDef mat-header-cell mat-multi-sort-header="emails">{{ 'MANAGEMENT_USERS_EMAIL_ADDRESSES' | tr }}</th>
         <td *matCellDef="let user" mat-cell>{{ user.getEmailAddressesAsString() }}</td>
       </ng-container>
 
       <!-- Birthday Column -->
       <ng-container matColumnDef="birthday">
-        <th *matHeaderCellDef mat-header-cell mat-multi-sort-header="birthday">{{ 'MANAGEMENT_USERS_BIRTHDAY' | translate }}</th>
+        <th *matHeaderCellDef mat-header-cell mat-multi-sort-header="birthday">{{ 'MANAGEMENT_USERS_BIRTHDAY' | tr }}</th>
         <td *matCellDef="let user" mat-cell>{{ user.birthday | date: 'dd.MM.yyyy' }}</td>
       </ng-container>
 
       <!-- Join date Column -->
       <ng-container matColumnDef="join_date">
-        <th *matHeaderCellDef mat-header-cell mat-multi-sort-header="join_date">{{ 'MANAGEMENT_USERS_JOIN_DATE' | translate }}</th>
+        <th *matHeaderCellDef mat-header-cell mat-multi-sort-header="join_date">{{ 'MANAGEMENT_USERS_JOIN_DATE' | tr }}</th>
         <td *matCellDef="let user" mat-cell>{{ user.join_date | date: 'dd.MM.yyyy' }}</td>
       </ng-container>
 
       <!-- Streetname Column -->
       <ng-container matColumnDef="streetname">
-        <th *matHeaderCellDef mat-header-cell mat-multi-sort-header="streetname">{{ 'MANAGEMENT_USERS_STREETNAME' | translate }}</th>
+        <th *matHeaderCellDef mat-header-cell mat-multi-sort-header="streetname">{{ 'MANAGEMENT_USERS_STREETNAME' | tr }}</th>
         <td *matCellDef="let user" mat-cell>{{ user.streetname }}</td>
       </ng-container>
 
       <!-- Streetnumber Column -->
       <ng-container matColumnDef="streetnumber">
-        <th *matHeaderCellDef mat-header-cell mat-multi-sort-header="streetnumber">{{ 'MANAGEMENT_USERS_STREETNUMBER' | translate }}</th>
+        <th *matHeaderCellDef mat-header-cell mat-multi-sort-header="streetnumber">{{ 'MANAGEMENT_USERS_STREETNUMBER' | tr }}</th>
         <td *matCellDef="let user" mat-cell>{{ user.streetnumber }}</td>
       </ng-container>
 
       <!-- Zipcode Column -->
       <ng-container matColumnDef="zipcode">
-        <th *matHeaderCellDef mat-header-cell mat-multi-sort-header="zipcode">{{ 'MANAGEMENT_USERS_ZIPCODE' | translate }}</th>
+        <th *matHeaderCellDef mat-header-cell mat-multi-sort-header="zipcode">{{ 'MANAGEMENT_USERS_ZIPCODE' | tr }}</th>
         <td *matCellDef="let user" mat-cell>{{ user.zipcode }}</td>
       </ng-container>
 
       <!-- Location Column -->
       <ng-container matColumnDef="location">
-        <th *matHeaderCellDef mat-header-cell mat-multi-sort-header="location">{{ 'MANAGEMENT_USERS_LOCATION' | translate }}</th>
+        <th *matHeaderCellDef mat-header-cell mat-multi-sort-header="location">{{ 'MANAGEMENT_USERS_LOCATION' | tr }}</th>
         <td *matCellDef="let user" mat-cell>{{ user.location }}</td>
       </ng-container>
 
       <!-- phone numbers Column -->
       <ng-container matColumnDef="phoneNumbers">
-        <th *matHeaderCellDef mat-header-cell mat-multi-sort-header="phoneNumbers">{{ 'MANAGEMENT_USERS_PHONENUMBERS' | translate }}</th>
+        <th *matHeaderCellDef mat-header-cell mat-multi-sort-header="phoneNumbers">{{ 'MANAGEMENT_USERS_PHONENUMBERS' | tr }}</th>
         <td *matCellDef="let user" mat-cell>{{ user.getPhoneNumbersAsString() }}</td>
       </ng-container>
 
       <!-- phone numbers Column -->
       <ng-container matColumnDef="activity">
-        <th *matHeaderCellDef mat-header-cell mat-multi-sort-header="activity">{{ 'MANAGEMENT_USERS_ACTIVITY' | translate }}</th>
+        <th *matHeaderCellDef mat-header-cell mat-multi-sort-header="activity">{{ 'MANAGEMENT_USERS_ACTIVITY' | tr }}</th>
         <td *matCellDef="let user" mat-cell>{{ user.activity }}</td>
       </ng-container>
 
       <!-- Username Column -->
       <ng-container matColumnDef="username">
-        <th *matHeaderCellDef mat-header-cell mat-multi-sort-header="username">{{ 'MANAGEMENT_USERS_USERNAME' | translate }}</th>
+        <th *matHeaderCellDef mat-header-cell mat-multi-sort-header="username">{{ 'MANAGEMENT_USERS_USERNAME' | tr }}</th>
         <td *matCellDef="let user" mat-cell>{{ user.username }}</td>
       </ng-container>
 
       <!-- Bv member Column -->
       <ng-container matColumnDef="bvMember">
-        <th *matHeaderCellDef mat-header-cell mat-multi-sort-header="bvMember">{{ 'MANAGEMENT_USERS_BV_MEMBER' | translate }}</th>
+        <th *matHeaderCellDef mat-header-cell mat-multi-sort-header="bvMember">{{ 'MANAGEMENT_USERS_BV_MEMBER' | tr }}</th>
         <td *matCellDef="let user" mat-cell>{{ user.bvMember }}</td>
       </ng-container>
 
       <!-- Action movie Column -->
       <ng-container matColumnDef="actions">
-        <th *matHeaderCellDef mat-header-cell>{{ 'MANAGEMENT_USERS_ACTIONS' | translate }}</th>
+        <th *matHeaderCellDef mat-header-cell>{{ 'MANAGEMENT_USERS_ACTIONS' | tr }}</th>
         <td (click)="$event.stopPropagation()" *matCellDef="let user" mat-cell>
           <button
             *ngIf="hasManagementAdministration"
             (click)="onEdit(user)"
             color="accent"
             mat-icon-button
-            matTooltip="{{ 'MANAGEMENT_USERS_ACTIONS_EDIT_TOOLTIP' | translate }}"
+            matTooltip="{{ 'MANAGEMENT_USERS_ACTIONS_EDIT_TOOLTIP' | tr }}"
           >
             <mat-icon>create</mat-icon>
           </button>
 
-          <button (click)="onInfo(user)" mat-icon-button matTooltip="{{ 'MANAGEMENT_USERS_ACTIONS_EDIT_TOOLTIP' | translate }}">
+          <button (click)="onInfo(user)" mat-icon-button matTooltip="{{ 'MANAGEMENT_USERS_ACTIONS_EDIT_TOOLTIP' | tr }}">
             <mat-icon>info</mat-icon>
           </button>
 
@@ -186,7 +186,7 @@
             (click)="onDelete(user.id)"
             color="warn"
             mat-icon-button
-            matTooltip="{{ 'MANAGEMENT_USERS_ACTIONS_DELETE_TOOLTIP' | translate }}"
+            matTooltip="{{ 'MANAGEMENT_USERS_ACTIONS_DELETE_TOOLTIP' | tr }}"
           >
             <mat-icon>delete</mat-icon>
           </button>

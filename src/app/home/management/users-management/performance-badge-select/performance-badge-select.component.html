@@ -1,14 +1,17 @@
 <mat-form-field>
-  <mat-select #performanceBadgeSelect
-              (selectionChange)="performanceBadgeSelectChange($event.value)"
-              [formControl]="performanceBadgeCtrl"
-              placeholder="{{'MANAGEMENT_USERS_CREATE_USER_MODAL_PERFORMANCE_BADGES_BADGE' | translate}}" required>
+  <mat-select
+    #performanceBadgeSelect
+    (selectionChange)="performanceBadgeSelectChange($event.value)"
+    [formControl]="performanceBadgeCtrl"
+    placeholder="{{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_PERFORMANCE_BADGES_BADGE' | tr }}"
+    required
+  >
     <mat-option>
       <ngx-mat-select-search [formControl]="performanceBadgeFilterCtrl"></ngx-mat-select-search>
     </mat-option>
 
     <mat-option *ngFor="let performanceBadge of filteredPerformanceBadges | async" [value]="performanceBadge">
-      {{performanceBadge.name}}
+      {{ performanceBadge.name }}
     </mat-option>
   </mat-select>
 </mat-form-field>

@@ -1,10 +1,8 @@
 import {Component, Inject, OnDestroy} from '@angular/core';
 import {NgForm} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import {MatSnackBar} from '@angular/material/snack-bar';
 import {Subscription} from 'rxjs';
 
-import {TranslateService} from '../../../../translation/translate.service';
 import {Converter} from '../../../../utils/helper/Converter';
 import {MyUserService} from '../../../my-user.service';
 import {GroupsService} from '../../groups-management/groups.service';

@@ -3,7 +3,7 @@ import {NgModule} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 
 import {MaterialModule} from '../material-module';
-import {TranslationModule} from '../translation/translation.module';
+import {DfxTranslateModule} from 'dfx-translate';
 import {FooterRoutingModule} from './footer-routing.module';
 
 import {ImprintComponent} from './info/imprint/imprint.component';
@@ -15,7 +15,7 @@ import {NoSanitizeModule} from '../utils/shared-components/no-sanitize/noSanitiz
 
 @NgModule({
   declarations: [FooterComponent, AboutModalComponent, InfoComponent, ImprintComponent, PrivacyPolicyComponent],
-  imports: [CommonModule, FormsModule, MaterialModule, TranslationModule, FooterRoutingModule, NoSanitizeModule],
+  imports: [CommonModule, FormsModule, MaterialModule, DfxTranslateModule, FooterRoutingModule, NoSanitizeModule],
   exports: [FooterComponent],
 })
 export class FooterModule {}

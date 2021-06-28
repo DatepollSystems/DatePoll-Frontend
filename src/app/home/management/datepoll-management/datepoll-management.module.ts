@@ -3,7 +3,7 @@ import {NgModule} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 
 import {MaterialModule} from '../../../material-module';
-import {TranslationModule} from '../../../translation/translation.module';
+import {DfxTranslateModule} from 'dfx-translate';
 import {QuestionDialogComponentModule} from '../../../utils/shared-components/question-dialog/question-dialog-component.module';
 import {DatepollManagementRoutingModule} from './datepoll-management-routing.module';
 
@@ -18,7 +18,7 @@ import {ListChipInputModule} from '../../../utils/shared-components/list-chip-in
     CommonModule,
     FormsModule,
     MaterialModule,
-    TranslationModule,
+    DfxTranslateModule,
     QuestionDialogComponentModule,
     DatepollManagementRoutingModule,
     ListChipInputModule,

@@ -1,4 +1,4 @@
-<h2>{{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE_TITLE' | translate }}:</h2>
+<h2>{{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE_TITLE' | tr }}:</h2>
 
 <div *ngIf="isOnOneDay" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between center">
   <span fxFlexAlign.xs="start">
@@ -18,8 +18,8 @@
     href="https://www.google.com/maps/place/{{ dates[0].x }}+{{ dates[0].y }}"
     *ngIf="dates[0].location?.length > 0 && dates[0]?.x !== -199 && dates[0]?.y !== -199"
   >
-    {{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE_LIST_OPEN_LOCATION_1' | translate }}{{ dates[0].location
-    }}{{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE_LIST_OPEN_LOCATION_2' | translate }}
+    {{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE_LIST_OPEN_LOCATION_1' | tr }}{{ dates[0].location
+    }}{{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE_LIST_OPEN_LOCATION_2' | tr }}
   </a>
 
   <a
@@ -31,7 +31,7 @@
     href="https://www.google.com/maps/place/{{ dates[0].x }}+{{ dates[0].y }}"
     *ngIf="(dates[0].location == null || dates[0].location?.length == 0) && dates[0]?.x !== -199 && dates[0]?.y !== -199"
   >
-    {{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE_LIST_OPEN_LOCATION_3' | translate }}
+    {{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE_LIST_OPEN_LOCATION_3' | tr }}
   </a>
 
   <a
@@ -43,8 +43,8 @@
     href="https://www.google.com/maps/search/?api=1&query={{ dates[0].location }}"
     *ngIf="dates[0].location?.length > 0 && dates[0]?.x === -199 && dates[0]?.y === -199 && !isUrl(dates[0]?.location)"
   >
-    {{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE_LIST_OPEN_LOCATION_4' | translate }}{{ dates[0].location
-    }}{{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE_LIST_OPEN_LOCATION_5' | translate }}
+    {{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE_LIST_OPEN_LOCATION_4' | tr }}{{ dates[0].location
+    }}{{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE_LIST_OPEN_LOCATION_5' | tr }}
   </a>
 
   <a
@@ -56,7 +56,7 @@
     href="{{ dates[0].location }}"
     *ngIf="dates[0].location?.length > 0 && dates[0]?.x === -199 && dates[0]?.y === -199 && isUrl(dates[0]?.location)"
   >
-    {{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE_LIST_OPEN_LOCATION_LINK' | translate }}
+    {{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE_LIST_OPEN_LOCATION_LINK' | tr }}
   </a>
 </div>
 
@@ -70,8 +70,8 @@
       color="primary"
       target="_blank"
       rel="noopener"
-      matTooltip="{{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE_LIST_OPEN_LOCATION_1' | translate }}{{ date.location }}{{
-        'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE_LIST_OPEN_LOCATION_2' | translate
+      matTooltip="{{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE_LIST_OPEN_LOCATION_1' | tr }}{{ date.location }}{{
+        'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE_LIST_OPEN_LOCATION_2' | tr
       }}"
       matTooltipPosition="before"
       href="https://www.google.com/maps/place/{{ date.x }}+{{ date.y }}"
@@ -85,7 +85,7 @@
       target="_blank"
       color="primary"
       rel="noopener"
-      matTooltip="{{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE_LIST_OPEN_LOCATION_3' | translate }}"
+      matTooltip="{{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE_LIST_OPEN_LOCATION_3' | tr }}"
       matTooltipPosition="before"
       href="https://www.google.com/maps/place/{{ date.x }}+{{ date.y }}"
       *ngIf="(date.location == null || date.location?.length == 0) && date?.x !== -199 && date?.y !== -199"
@@ -98,8 +98,8 @@
       target="_blank"
       color="primary"
       rel="noopener"
-      matTooltip="{{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE_LIST_OPEN_LOCATION_4' | translate }}{{ date.location }}{{
-        'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE_LIST_OPEN_LOCATION_5' | translate
+      matTooltip="{{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE_LIST_OPEN_LOCATION_4' | tr }}{{ date.location }}{{
+        'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE_LIST_OPEN_LOCATION_5' | tr
       }}"
       matTooltipPosition="before"
       href="https://www.google.com/maps/search/?api=1&query={{ date.location }}"

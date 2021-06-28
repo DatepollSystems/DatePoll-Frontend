@@ -1,4 +1,4 @@
-<h1 mat-dialog-title>{{ 'MANAGEMENT_PERFORMANCE_BADGES_UPDATE_INSTRUMENT_MODAL_TITLE' | translate }} {{ name }}</h1>
+<h1 mat-dialog-title>{{ 'MANAGEMENT_PERFORMANCE_BADGES_UPDATE_INSTRUMENT_MODAL_TITLE' | tr }} {{ name }}</h1>
 <div mat-dialog-content>
   <form #form="ngForm" (ngSubmit)="update(form)" fxLayout="column">
     <mat-form-field>
@@ -11,17 +11,17 @@
         minlength="1"
         name="instrumentName"
         ngModel
-        placeholder="{{ 'MANAGEMENT_PERFORMANCE_BADGES_ADD_INSTRUMENT_NAME' | translate }}"
+        placeholder="{{ 'MANAGEMENT_PERFORMANCE_BADGES_ADD_INSTRUMENT_NAME' | tr }}"
         required
         type="text"
       />
       <mat-error *ngIf="instrumentNameModel.invalid">
-        {{ 'MANAGEMENT_PERFORMANCE_BADGES_ADD_INSTRUMENT_NAME_INCORRECT' | translate }}
+        {{ 'MANAGEMENT_PERFORMANCE_BADGES_ADD_INSTRUMENT_NAME_INCORRECT' | tr }}
       </mat-error>
     </mat-form-field>
   </form>
 </div>
 <div mat-dialog-actions style="margin-top: 15px">
-  <button [mat-dialog-close] mat-button>{{ 'CLOSE' | translate }}</button>
-  <button (click)="form.ngSubmit.emit()" [disabled]="!form.form.valid" color="accent" mat-flat-button>{{ 'SAVE' | translate }}</button>
+  <button [mat-dialog-close] mat-button>{{ 'CLOSE' | tr }}</button>
+  <button (click)="form.ngSubmit.emit()" [disabled]="!form.form.valid" color="accent" mat-flat-button>{{ 'SAVE' | tr }}</button>
 </div>

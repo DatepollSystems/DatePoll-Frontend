@@ -1,7 +1,7 @@
-<h2 mat-dialog-title>{{ 'CINEMA_TICKETS_BOOKING_MODAL_HEADER' | translate }} {{ movie.name }}</h2>
+<h2 mat-dialog-title>{{ 'CINEMA_TICKETS_BOOKING_MODAL_HEADER' | tr }} {{ movie.name }}</h2>
 <mat-dialog-content>
   <mat-card class="not-selectable mat-info-card" matRipple>
-    <mat-card-content class="last-child"><b>Info! </b>{{ 'CINEMA_TICKETS_BOOKING_MODAL_WARNING' | translate }} </mat-card-content>
+    <mat-card-content class="last-child"><b>Info! </b>{{ 'CINEMA_TICKETS_BOOKING_MODAL_WARNING' | tr }} </mat-card-content>
   </mat-card>
 
   <form #form="ngForm" (ngSubmit)="bookTickets()">
@@ -14,22 +14,22 @@
         matInput
         name="ticketsToBook"
         ngModel
-        placeholder="{{ 'CINEMA_TICKETS_BOOKING_MODAL_NUMBER_OF_TICKETS' | translate }}"
+        placeholder="{{ 'CINEMA_TICKETS_BOOKING_MODAL_NUMBER_OF_TICKETS' | tr }}"
         required
         type="number"
       />
       <mat-error *ngIf="ticketsToBookModel.invalid">
-        {{ 'CINEMA_TICKETS_BOOKING_MODAL_NUMBER_OF_TICKETS_INVALID_1' | translate }} {{ freeTickets }}
-        {{ 'CINEMA_TICKETS_BOOKING_MODAL_NUMBER_OF_TICKETS_INVALID_2' | translate }}
+        {{ 'CINEMA_TICKETS_BOOKING_MODAL_NUMBER_OF_TICKETS_INVALID_1' | tr }} {{ freeTickets }}
+        {{ 'CINEMA_TICKETS_BOOKING_MODAL_NUMBER_OF_TICKETS_INVALID_2' | tr }}
       </mat-error>
     </mat-form-field>
   </form>
 
-  <b>{{ 'CINEMA_TICKETS_BOOKING_MODAL_AVAILABLE_TICKETS' | translate }} {{ freeTickets }}</b>
+  <b>{{ 'CINEMA_TICKETS_BOOKING_MODAL_AVAILABLE_TICKETS' | tr }} {{ freeTickets }}</b>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-  <button mat-button mat-dialog-close>{{ 'CLOSE' | translate }}</button>
+  <button mat-button mat-dialog-close>{{ 'CLOSE' | tr }}</button>
   <button (click)="form.ngSubmit.emit()" [disabled]="this.ticketsToBook > this.freeTickets" color="accent" mat-flat-button type="button">
-    {{ 'CINEMA_TICKETS_BOOKING_MODAL_BOOK' | translate }}
+    {{ 'CINEMA_TICKETS_BOOKING_MODAL_BOOK' | tr }}
   </button>
 </mat-dialog-actions>

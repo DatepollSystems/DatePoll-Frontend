@@ -1,14 +1,13 @@
 import {Component, OnDestroy} from '@angular/core';
 import {MatBottomSheet} from '@angular/material/bottom-sheet';
-import {MatSnackBar} from '@angular/material/snack-bar';
 import {Subscription} from 'rxjs';
 
 import {QuestionDialogComponent} from '../../../../utils/shared-components/question-dialog/question-dialog.component';
 
-import {TranslateService} from '../../../../translation/translate.service';
 import {DeletedUsersService} from './deleted-users.service';
 
 import {DeletedUser} from '../models/deletedUser.model';
+import {NotificationService} from '../../../../utils/notification.service';
 
 @Component({
   selector: 'app-deleted-users-management',
@@ -23,9 +22,8 @@ export class DeletedUsersManagementComponent implements OnDestroy {
 
   constructor(
     private deletedUsersService: DeletedUsersService,
-    private translate: TranslateService,
-    private bottomSheet: MatBottomSheet,
-    private snackBar: MatSnackBar
+    private notificationService: NotificationService,
+    private bottomSheet: MatBottomSheet
   ) {
     this.deletedUsers = this.deletedUsersService.getDeletedUsers();
     this.sortedUsers = this.deletedUsers.slice();
@@ -72,7 +70,7 @@ export class DeletedUsersManagementComponent implements OnDestroy {
               console.log(response);
               this.deletedUsers.splice(this.deletedUsers.indexOf(user), 1);
               this.sortedUsers.splice(this.sortedUsers.indexOf(user), 1);
-              this.snackBar.open(this.translate.getTranslationFor('MANAGEMENT_USERS_DELETED_USERS_DELETE_SUCCESSFUL'));
+              this.notificationService.info('MANAGEMENT_USERS_DELETED_USERS_DELETE_SUCCESSFUL');
             },
             (error) => console.log(error)
           );
@@ -95,7 +93,7 @@ export class DeletedUsersManagementComponent implements OnDestroy {
             console.log(response);
             this.deletedUsersLoaded = false;
             this.deletedUsersService.getDeletedUsers();
-            this.snackBar.open(this.translate.getTranslationFor('MANAGEMENT_USERS_DELETED_USERS_DELETE_ALL_SUCCESSFUL'));
+            this.notificationService.info('MANAGEMENT_USERS_DELETED_USERS_DELETE_ALL_SUCCESSFUL');
           },
           (error) => console.log(error)
         );

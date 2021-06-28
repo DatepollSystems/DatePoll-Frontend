@@ -2,7 +2,7 @@
   <mat-card class="mat-elevation-z3">
     <mat-card-content>
       <div fxLayout="row" fxLayoutAlign="space-between" fxLayout.lt-md="column">
-        <h1 class="not-selectable">{{ 'NAV_BROADCASTS_ADMINISTRATION' | translate }}</h1>
+        <h1 class="not-selectable">{{ 'NAV_BROADCASTS_ADMINISTRATION' | tr }}</h1>
 
         <div fxLayout="row" fxLayoutAlign.lt-md="space-between" fxLayoutGap="5%">
           <div><app-year-select (selectedYearChange)="yearSelectChange($event)"></app-year-select></div>
@@ -11,7 +11,7 @@
             <button
               mat-icon-button
               (click)="refresh()"
-              matTooltip="{{ 'BROADCASTS_ADMINISTRATION_REFRESH_LIST' | translate }}"
+              matTooltip="{{ 'BROADCASTS_ADMINISTRATION_REFRESH_LIST' | tr }}"
               matTooltipPosition="left"
             >
               <mat-icon>refresh</mat-icon>
@@ -25,47 +25,43 @@
           <mat-icon>add</mat-icon>
         </button>
         <mat-form-field>
-          <input
-            (keyup)="applyFilter($event.target.value)"
-            matInput
-            placeholder="{{ 'BROADCASTS_ADMINISTRATION_SEARCH_LIST' | translate }}"
-          />
+          <input (keyup)="applyFilter($event.target.value)" matInput placeholder="{{ 'BROADCASTS_ADMINISTRATION_SEARCH_LIST' | tr }}" />
         </mat-form-field>
       </div>
 
       <table [dataSource]="dataSource" class="table-responsive" mat-table matSort>
         <!-- Subject Column -->
         <ng-container matColumnDef="subject">
-          <th *matHeaderCellDef mat-header-cell mat-sort-header>{{ 'BROADCASTS_ADMINISTRATION_SUBJECT' | translate }}</th>
+          <th *matHeaderCellDef mat-header-cell mat-sort-header>{{ 'BROADCASTS_ADMINISTRATION_SUBJECT' | tr }}</th>
           <td *matCellDef="let broadcast" mat-cell>{{ broadcast.subject }}</td>
         </ng-container>
 
         <!-- Date Column -->
         <ng-container matColumnDef="sent">
-          <th *matHeaderCellDef mat-header-cell mat-sort-header>{{ 'BROADCASTS_ADMINISTRATION_DATE' | translate }}</th>
+          <th *matHeaderCellDef mat-header-cell mat-sort-header>{{ 'BROADCASTS_ADMINISTRATION_DATE' | tr }}</th>
           <td *matCellDef="let broadcast" mat-cell>{{ broadcast.sent | date: 'dd.MM.yyyy HH:mm:ss' }}</td>
         </ng-container>
 
         <!-- Writer Column -->
         <ng-container matColumnDef="writer">
-          <th *matHeaderCellDef mat-header-cell>{{ 'BROADCASTS_ADMINISTRATION_WRITER' | translate }}</th>
+          <th *matHeaderCellDef mat-header-cell>{{ 'BROADCASTS_ADMINISTRATION_WRITER' | tr }}</th>
           <td *matCellDef="let broadcast" mat-cell>{{ broadcast.writerName }}</td>
         </ng-container>
 
         <!-- Body Column -->
         <ng-container matColumnDef="body">
-          <th *matHeaderCellDef mat-header-cell>{{ 'BROADCASTS_ADMINISTRATION_BODY' | translate }}</th>
+          <th *matHeaderCellDef mat-header-cell>{{ 'BROADCASTS_ADMINISTRATION_BODY' | tr }}</th>
           <td *matCellDef="let broadcast" mat-cell>{{ broadcast.bodyPreview }}</td>
         </ng-container>
 
         <!-- Action movie Column -->
         <ng-container matColumnDef="action">
-          <th *matHeaderCellDef mat-header-cell>{{ 'CINEMA_TICKETS_ADMINISTRATION_ACTION' | translate }}</th>
+          <th *matHeaderCellDef mat-header-cell>{{ 'CINEMA_TICKETS_ADMINISTRATION_ACTION' | tr }}</th>
           <td (click)="$event.stopPropagation()" *matCellDef="let broadcast" mat-cell>
             <button
               mat-icon-button
               (click)="openBroadcastAdminInfo(broadcast)"
-              matTooltip="{{ 'BROADCASTS_ADMINISTRATION_INFO_TOOLTIP' | translate }}"
+              matTooltip="{{ 'BROADCASTS_ADMINISTRATION_INFO_TOOLTIP' | tr }}"
             >
               <mat-icon>info</mat-icon>
             </button>
@@ -75,7 +71,7 @@
               color="warn"
               mat-icon-button
               (click)="removeBroadcast(broadcast.id)"
-              matTooltip="{{ 'BROADCASTS_ADMINISTRATION_DELETE_TOOLTIP' | translate }}"
+              matTooltip="{{ 'BROADCASTS_ADMINISTRATION_DELETE_TOOLTIP' | tr }}"
             >
               <mat-icon>delete</mat-icon>
             </button>

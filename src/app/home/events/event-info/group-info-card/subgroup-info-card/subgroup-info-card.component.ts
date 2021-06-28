@@ -3,7 +3,7 @@ import {MatSlideToggleChange} from '@angular/material/slide-toggle';
 import {MatBottomSheet} from '@angular/material/bottom-sheet';
 
 import {Permissions} from '../../../../../permissions';
-import {TranslateService} from '../../../../../translation/translate.service';
+import {TranslateService} from 'dfx-translate';
 import {MyUserService} from '../../../../my-user.service';
 import {EventInfoResultUserExportModalComponent} from '../../event-info-result-user-export-modal/event-info-result-user-export-modal.component';
 
@@ -40,7 +40,7 @@ export class SubgroupInfoCardComponent {
       data: {
         resultUsers: this.resultSubgroup.getResultUsers(),
         date: this.resultSubgroup.event.startDate,
-        fileName: this.translate.getTranslationFor('EVENTS_VIEW_EVENT_EXPORT_SUBGROUP_FILE_NAME') + this.resultSubgroup.name,
+        fileName: this.translate.translate('EVENTS_VIEW_EVENT_EXPORT_SUBGROUP_FILE_NAME') + this.resultSubgroup.name,
       },
     });
   }

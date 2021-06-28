@@ -6,7 +6,7 @@ import {DateAdapter, MAT_DATE_FORMATS} from '@angular/material/core';
 import {NgxMatSelectSearchModule} from 'ngx-mat-select-search';
 
 import {MaterialModule} from '../../../material-module';
-import {TranslationModule} from '../../../translation/translation.module';
+import {DfxTranslateModule} from 'dfx-translate';
 import {CustomDateAdapter, MY_DATE_FORMATS} from '../../../utils/custom-date-adapter';
 import {AllMembersSwitchModule} from '../../../utils/shared-components/all-members-switch/all-members-switch.module';
 import {EditorPreviewModule} from '../../../utils/shared-components/editor-preview/editor-preview.module';
@@ -36,7 +36,7 @@ import {YearSelectModule} from '../../../utils/shared-components/year-select/yea
     CommonModule,
     MaterialModule,
     ReactiveFormsModule,
-    TranslationModule,
+    DfxTranslateModule,
     EditorModule,
     NgxMatSelectSearchModule,
     QuestionDialogComponentModule,

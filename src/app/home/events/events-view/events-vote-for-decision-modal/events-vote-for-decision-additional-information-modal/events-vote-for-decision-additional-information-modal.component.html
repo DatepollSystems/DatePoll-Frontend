@@ -1,18 +1,18 @@
-<h1 mat-dialog-title>{{ 'EVENTS_VIEW_EVENT_VOTE_FOR_ADDITIONAL_INFORMATION_MODAL_TITLE' | translate }}</h1>
+<h1 mat-dialog-title>{{ 'EVENTS_VIEW_EVENT_VOTE_FOR_ADDITIONAL_INFORMATION_MODAL_TITLE' | tr }}</h1>
 <form #form="ngForm" (ngSubmit)="addAdditionalInformation(form)">
   <div mat-dialog-content>
-    <mat-card class="not-selectable" style="background-color: #29b6f6;">
-      {{ 'EVENTS_VIEW_EVENT_VOTE_FOR_ADDITIONAL_INFORMATION_MODAL_INFO' | translate }}
+    <mat-card class="not-selectable" style="background-color: #29b6f6">
+      {{ 'EVENTS_VIEW_EVENT_VOTE_FOR_ADDITIONAL_INFORMATION_MODAL_INFO' | tr }}
     </mat-card>
 
     <mat-form-field appearance="outline" style="width: 100%">
-      <mat-label>{{ 'EVENTS_VIEW_EVENT_VOTE_FOR_ADDITIONAL_INFORMATION_MODAL_FORM_PLACEHOLDER' | translate }}</mat-label>
+      <mat-label>{{ 'EVENTS_VIEW_EVENT_VOTE_FOR_ADDITIONAL_INFORMATION_MODAL_FORM_PLACEHOLDER' | tr }}</mat-label>
       <textarea matInput maxlength="128" ngModel #textarea name="additionalInformation" [ngModel]="additionalInformation"></textarea>
       <mat-hint align="end">{{ textarea.value.length }} / 128</mat-hint>
     </mat-form-field>
   </div>
   <div mat-dialog-actions style="margin-top: 15px">
-    <button [mat-dialog-close] mat-button>{{ 'CLOSE' | translate }}</button>
-    <button color="primary" (click)="form.ngSubmit.emit()" [disabled]="!form.form.valid" mat-flat-button>{{ 'NEXT' | translate }}</button>
+    <button [mat-dialog-close] mat-button>{{ 'CLOSE' | tr }}</button>
+    <button color="primary" (click)="form.ngSubmit.emit()" [disabled]="!form.form.valid" mat-flat-button>{{ 'NEXT' | tr }}</button>
   </div>
 </form>

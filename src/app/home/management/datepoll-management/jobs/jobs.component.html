@@ -1,5 +1,5 @@
 <div fxLayout="row" fxLayoutAlign="space-between" fxLayoutGap="2%">
-  <h1>{{ 'MANAGEMENT_DATEPOLL_JOBS' | translate }}</h1>
+  <h1>{{ 'MANAGEMENT_DATEPOLL_JOBS' | tr }}</h1>
   <div>
     <a mat-flat-button href="{{ apiUrl }}?token={{ this.token }}" target="_blank" rel="noopener" color="warn"> Lumen Logging </a>
   </div>
@@ -7,14 +7,14 @@
 
 <div fxLayout="row wrap" fxLayoutGap="2%" fxLayoutAlign="center">
   <mat-form-field fxFlex="90%" fxFlex.xs="80%">
-    <input (keyup)="applyFilter($event.target.value)" matInput placeholder="{{ 'SEARCH' | translate }}" />
+    <input (keyup)="applyFilter($event.target.value)" matInput placeholder="{{ 'SEARCH' | tr }}" />
   </mat-form-field>
 
   <div fxFlex="8%" fxFlex.xs="17%" style="text-align: center">
     <button
       (click)="refreshLogsList()"
       mat-icon-button
-      matTooltip="{{ 'MANAGEMENT_DATEPOLL_JOBS_REFRESH' | translate }}"
+      matTooltip="{{ 'MANAGEMENT_DATEPOLL_JOBS_REFRESH' | tr }}"
       matTooltipPosition="left"
     >
       <mat-icon>refresh</mat-icon>
@@ -29,7 +29,7 @@
     failed Job {{ job.id }}: Connection {{ job.connection }} - {{ job.queue }} | {{ job.failedAt | date: 'dd.MM.yyyy HH:mm:ss' }}
   </div>
   <div class="myCol" *ngIf="jobsCopy.length === 0">
-    {{ 'MANAGEMENT_DATEPOLL_JOBS_NOT_FOUND' | translate }}
+    {{ 'MANAGEMENT_DATEPOLL_JOBS_NOT_FOUND' | tr }}
   </div>
 </div>
 

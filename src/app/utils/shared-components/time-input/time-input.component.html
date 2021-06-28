@@ -7,10 +7,10 @@
     required
     [ngModel]="time"
     (ngModelChange)="onTimeChange($event)"
-    placeholder="{{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_TIME' | translate }}"
+    placeholder="{{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_TIME' | tr }}"
     type="text"
   />
   <small class="mat-error" [fxShow]="wrongTime">
-    {{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_TIME_INCORRECT' | translate }}
+    {{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_TIME_INCORRECT' | tr }}
   </small>
 </mat-form-field>

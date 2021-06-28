@@ -4,14 +4,14 @@
 
     <app-go-back-button></app-go-back-button>
 
-    <h3 matLine>{{ 'BROADCASTS_ADMINISTRATION_ADMIN_INFO_SENT_ON' | translate }} {{ broadcast.sent | date: 'EE, dd.MM.yyyy HH:mm' }}</h3>
-    <h3 matLine>{{ 'BROADCASTS_ADMINISTRATION_ADMIN_INFO_AUTHOR' | translate }} {{ broadcast.writerName }}</h3>
+    <h3 matLine>{{ 'BROADCASTS_ADMINISTRATION_ADMIN_INFO_SENT_ON' | tr }} {{ broadcast.sent | date: 'EE, dd.MM.yyyy HH:mm' }}</h3>
+    <h3 matLine>{{ 'BROADCASTS_ADMINISTRATION_ADMIN_INFO_AUTHOR' | tr }} {{ broadcast.writerName }}</h3>
     <h3 matLine *ngIf="broadcast.forEveryone">
-      {{ 'BROADCASTS_ADMINISTRATION_ADMIN_INFO_RECIPENT' | translate }}
-      {{ 'BROADCASTS_ADMINISTRATION_ADMIN_INFO_RECIPENT_ALL' | translate }}
+      {{ 'BROADCASTS_ADMINISTRATION_ADMIN_INFO_RECIPENT' | tr }}
+      {{ 'BROADCASTS_ADMINISTRATION_ADMIN_INFO_RECIPENT_ALL' | tr }}
     </h3>
     <h3 matLine *ngIf="!broadcast.forEveryone">
-      {{ 'BROADCASTS_ADMINISTRATION_ADMIN_INFO_RECIPENT' | translate }}
+      {{ 'BROADCASTS_ADMINISTRATION_ADMIN_INFO_RECIPENT' | tr }}
       <span *ngFor="let group of broadcast.groups"
         ><b>{{ group.name }}</b
         >,
@@ -25,7 +25,7 @@
       <mat-tab>
         <ng-template mat-tab-label>
           <mat-icon class="tab-icon">email</mat-icon>
-          {{ 'CONTENT' | translate }}
+          {{ 'CONTENT' | tr }}
         </ng-template>
         <app-editor-preview [bodyHTML]="broadcast.bodyHTML" *ngIf="loaded && broadcast?.bodyHTML?.length > 0"></app-editor-preview>
       </mat-tab>
@@ -33,7 +33,7 @@
       <mat-tab *ngIf="broadcast.attachments?.length > 0">
         <ng-template mat-tab-label>
           <mat-icon class="tab-icon">attachment</mat-icon>
-          {{ 'ATTACHMENTS' | translate }}
+          {{ 'ATTACHMENTS' | tr }}
         </ng-template>
 
         <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="2%">

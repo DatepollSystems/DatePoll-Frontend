@@ -4,7 +4,7 @@ import {Subject} from 'rxjs';
 
 import {HttpService} from '../../utils/http.service';
 
-import {TranslateService} from '../../translation/translate.service';
+import {TranslateService} from 'dfx-translate';
 import {Broadcast} from '../broadcasts/models/broadcast.model';
 import {Event} from '../events/models/event.model';
 import {HomeBirthdayModel} from './birthdays.model';
@@ -88,7 +88,7 @@ export class HomepageService {
         const birthdaysToSave = [];
         for (const birthday of data.birthdays) {
           birthdaysToSave.push(
-            new HomeBirthdayModel(birthday.name, new Date(birthday.date), this.translate.getTranslationFor('CALENDAR_USERS_BIRTHDAY'))
+            new HomeBirthdayModel(birthday.name, new Date(birthday.date), this.translate.translate('CALENDAR_USERS_BIRTHDAY'))
           );
         }
 

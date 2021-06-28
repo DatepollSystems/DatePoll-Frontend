@@ -1,11 +1,10 @@
 import {Component, Inject, OnDestroy} from '@angular/core';
 import {MAT_DIALOG_DATA} from '@angular/material/dialog';
-import {MatSnackBar} from '@angular/material/snack-bar';
 import {Subscription} from 'rxjs';
 
 import {CinemaService} from '../../cinema.service';
 import {Converter} from '../../../../utils/helper/Converter';
-import {TranslateService} from '../../../../translation/translate.service';
+import {NotificationService} from '../../../../utils/notification.service';
 
 import {Movie} from '../../models/movie.model';
 
@@ -31,8 +30,7 @@ export class MovieEditModalComponent implements OnDestroy {
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     private cinemaService: CinemaService,
-    private snackBar: MatSnackBar,
-    private translate: TranslateService
+    private notficationService: NotificationService
   ) {
     this.movie = data.movie;
     this.refresh();
@@ -80,7 +78,7 @@ export class MovieEditModalComponent implements OnDestroy {
       (data: any) => {
         console.log(data);
         this.cinemaService.fetchMovies();
-        this.snackBar.open(this.translate.getTranslationFor('CINEMA_TICKETS_ADMINISTRATION_MOVIE_UPDATE_SUCCESSFULLY'));
+        this.notficationService.info('CINEMA_TICKETS_ADMINISTRATION_MOVIE_UPDATE_SUCCESSFULLY');
       },
       (error) => console.log(error)
     );

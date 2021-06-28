@@ -5,11 +5,11 @@ import {MatTableDataSource} from '@angular/material/table';
 import {MatDialog} from '@angular/material/dialog';
 import {MatBottomSheet} from '@angular/material/bottom-sheet';
 import {MatPaginator} from '@angular/material/paginator';
-import {MatSnackBar} from '@angular/material/snack-bar';
 import {Subscription} from 'rxjs';
 
-import {TranslateService} from '../../../translation/translate.service';
 import {EventsService} from '../services/events.service';
+import {NotificationService} from '../../../utils/notification.service';
+import {UIHelper} from '../../../utils/helper/UIHelper';
 
 import {Event} from '../models/event.model';
 
@@ -19,7 +19,6 @@ import {EventStandardDecisionsManagementModalComponent} from './event-standard-d
 import {EventStandardLocationsManagementModalComponent} from './event-standard-locations-management-modal/event-standard-locations-management-modal.component';
 import {EventUpdateModalComponent} from './event-update-modal/event-update-modal.component';
 import {EventUserManagementModalComponent} from './event-user-management-modal/event-user-management-modal.component';
-import {UIHelper} from '../../../utils/helper/UIHelper';
 import {YearSelectComponent} from '../../../utils/shared-components/year-select/year-select.component';
 
 @Component({
@@ -50,10 +49,9 @@ export class EventsAdministrationComponent implements OnDestroy {
 
   constructor(
     private eventsService: EventsService,
-    private translate: TranslateService,
+    private notificationService: NotificationService,
     private dialog: MatDialog,
     private router: Router,
-    private snackBar: MatSnackBar,
     private bottomSheet: MatBottomSheet
   ) {
     this.currentDate = UIHelper.getCurrentDate();
@@ -186,7 +184,7 @@ export class EventsAdministrationComponent implements OnDestroy {
           (response: any) => {
             console.log(response);
             this.eventsService.fetchEvents();
-            this.snackBar.open(this.translate.getTranslationFor('EVENTS_ADMINISTRATION_DELETE_EVENT_SUCCESSFULLY_DELETED'));
+            this.notificationService.info('EVENTS_ADMINISTRATION_DELETE_EVENT_SUCCESSFULLY_DELETED');
           },
           (error) => console.log(error)
         );

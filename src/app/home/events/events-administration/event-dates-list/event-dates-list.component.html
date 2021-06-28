@@ -5,7 +5,7 @@
         {{ date.date | date: 'EE, dd.MM.yyyy HH:mm' }}
       </span>
 
-      <button mat-icon-button color="warn" (click)="deleteDate(date)" matTooltip="{{ 'DELETE' | translate }}" matTooltipPosition="left">
+      <button mat-icon-button color="warn" (click)="deleteDate(date)" matTooltip="{{ 'DELETE' | tr }}" matTooltipPosition="left">
         <mat-icon>delete_forever</mat-icon>
       </button>
     </div>
@@ -16,8 +16,8 @@
         href="https://www.google.com/maps/place/{{ date.x }}+{{ date.y }}"
         *ngIf="date.location?.length > 0 && date?.x !== -199 && date?.y !== -199"
       >
-        {{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE_LIST_OPEN_LOCATION_1' | translate }}{{ date.location
-        }}{{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE_LIST_OPEN_LOCATION_2' | translate }}
+        {{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE_LIST_OPEN_LOCATION_1' | tr }}{{ date.location
+        }}{{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE_LIST_OPEN_LOCATION_2' | tr }}
       </a>
 
       <a
@@ -26,7 +26,7 @@
         href="https://www.google.com/maps/place/{{ date.x }}+{{ date.y }}"
         *ngIf="(date.location == null || date.location?.length == 0) && date?.x !== -199 && date?.y !== -199"
       >
-        {{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE_LIST_OPEN_LOCATION_3' | translate }}
+        {{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE_LIST_OPEN_LOCATION_3' | tr }}
       </a>
 
       <a
@@ -35,8 +35,8 @@
         href="https://www.google.com/maps/search/?api=1&query={{ date.location }}"
         *ngIf="date.location?.length > 0 && date?.x === -199 && date?.y === -199 && !isUrl(date.location)"
       >
-        {{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE_LIST_OPEN_LOCATION_4' | translate }}{{ date.location
-        }}{{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE_LIST_OPEN_LOCATION_5' | translate }}
+        {{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE_LIST_OPEN_LOCATION_4' | tr }}{{ date.location
+        }}{{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE_LIST_OPEN_LOCATION_5' | tr }}
       </a>
 
       <a
@@ -45,7 +45,7 @@
         href="{{ date.location }}"
         *ngIf="date.location?.length > 0 && date?.x === -199 && date?.y === -199 && isUrl(date.location)"
       >
-        {{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE_LIST_OPEN_LOCATION_LINK' | translate }}
+        {{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE_LIST_OPEN_LOCATION_LINK' | tr }}
       </a>
     </span>
 

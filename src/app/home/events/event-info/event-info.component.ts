@@ -7,7 +7,7 @@ import {Subscription} from 'rxjs';
 import {Permissions} from '../../../permissions';
 import {MyUserService} from '../../my-user.service';
 import {EventsUserService} from '../services/events-user.service';
-import {TranslateService} from '../../../translation/translate.service';
+import {TranslateService} from 'dfx-translate';
 import {EventInfoResultUserExportModalComponent} from './event-info-result-user-export-modal/event-info-result-user-export-modal.component';
 
 import {EventDate} from '../models/event-date.model';
@@ -127,7 +127,7 @@ export class EventInfoComponent implements OnInit, OnDestroy {
       data: {
         resultUsers: this.event.getResultUsers(),
         date: this.event.startDate,
-        fileName: this.translate.getTranslationFor('EVENTS_VIEW_EVENT_EXPORT_ALL_FILE_NAME'),
+        fileName: this.translate.translate('EVENTS_VIEW_EVENT_EXPORT_ALL_FILE_NAME'),
       },
     });
   }

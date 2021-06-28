@@ -1,8 +1,8 @@
 <p>
   <small>
-    {{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_PERMISSIONS_SMALL_0' | translate }}
+    {{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_PERMISSIONS_SMALL_0' | tr }}
     <a href="https://datepoll.org/docs/DatePoll/permissions" rel="noopener" target="_blank">Link</a
-    >{{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_PERMISSIONS_SMALL_1' | translate }}
+    >{{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_PERMISSIONS_SMALL_1' | tr }}
   </small>
 </p>
 
@@ -14,5 +14,5 @@
 ></app-list-chip-input>
 
 <mat-card class="mat-info-card not-selectable" *ngIf="permissions.length == 0">
-  <b>{{ 'INFORMATION' | translate }}</b> {{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_NO_PERMISSIONS_AVAILABLE' | translate }}
+  <b>{{ 'INFORMATION' | tr }}</b> {{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_NO_PERMISSIONS_AVAILABLE' | tr }}
 </mat-card>

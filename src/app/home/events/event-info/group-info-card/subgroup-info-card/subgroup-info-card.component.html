@@ -15,9 +15,9 @@
     fxLayoutAlign="space-between"
     *ngIf="this.myUserService.hasPermission(ROOT_PERMISSION) || this.myUserService.hasPermission(EVENTS_ADMINISTRATION_PERMISSION)"
   >
-    <button mat-flat-button color="accent" (click)="exportSubgroupResultUsers()">{{ 'EXPORT' | translate }}</button>
+    <button mat-flat-button color="accent" (click)="exportSubgroupResultUsers()">{{ 'EXPORT' | tr }}</button>
     <mat-slide-toggle (change)="changeAdminMode($event)" labelPosition="before">
-      {{ 'EVENTS_ADMINISTRATION_INFO_EVENT_SHOW_ADMINISTRATION_MODE' | translate }}
+      {{ 'EVENTS_ADMINISTRATION_INFO_EVENT_SHOW_ADMINISTRATION_MODE' | tr }}
     </mat-slide-toggle>
   </div>
 

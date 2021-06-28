@@ -27,7 +27,7 @@
                 minlength="3"
                 name="username"
                 ngModel
-                placeholder="{{ 'SIGNIN_USERNAME' | translate }}"
+                placeholder="{{ 'SIGNIN_USERNAME' | tr }}"
                 required
                 type="text"
               />
@@ -42,38 +42,38 @@
                 minlength="6"
                 name="password"
                 ngModel
-                placeholder="{{ 'SIGNIN_PASSWORD' | translate }}"
+                placeholder="{{ 'SIGNIN_PASSWORD' | tr }}"
                 required
                 type="password"
               />
               <mat-error *ngIf="passwordModel.invalid">
-                {{ 'SIGNIN_PASSWORD_REQUIREMENTS' | translate }}
+                {{ 'SIGNIN_PASSWORD_REQUIREMENTS' | tr }}
               </mat-error>
             </mat-form-field>
 
             <button [disabled]="!f.valid" color="accent" mat-raised-button>
-              {{ 'SIGNIN' | translate }}
+              {{ 'SIGNIN' | tr }}
               <mat-icon aria-label="Send icon">send</mat-icon>
             </button>
 
             <div style="text-align: center; margin-top: 5px">
-              <a routerLink="/auth/signin">{{ 'ABOUT_PAGE_TROUBLE_LOGGING_IN' | translate }}</a>
+              <a routerLink="/auth/signin">{{ 'ABOUT_PAGE_TROUBLE_LOGGING_IN' | tr }}</a>
             </div>
           </form>
         </mat-card>
 
         <mat-card class="mat-elevation-z3">
           <button (click)="openMobileAppBottomSheet()" mat-stroked-button style="width: 100%">
-            {{ 'SIGNIN_APP_INFO' | translate }}
+            {{ 'SIGNIN_APP_INFO' | tr }}
           </button>
         </mat-card>
 
         <mat-card class="mat-elevation-z3" fxLayout="column" fxLayoutGap="3%">
           <button routerLink="/info/imprint" mat-stroked-button style="width: 100%">
-            {{ 'IMPRINT' | translate }}
+            {{ 'IMPRINT' | tr }}
           </button>
           <button routerLink="/info/privacypolicy" mat-stroked-button style="width: 100%">
-            {{ 'PRIVACY_POLICY' | translate }}
+            {{ 'PRIVACY_POLICY' | tr }}
           </button>
         </mat-card>
       </div>
@@ -102,7 +102,7 @@
             (click)="showMoreCommunityDescription = true"
             *ngIf="!showMoreCommunityDescription && getDescriptionPreview(serverInfo.community_description) != null"
           >
-            {{ 'SHOW_MORE' | translate }}
+            {{ 'SHOW_MORE' | tr }}
           </button>
           <button
             mat-stroked-button
@@ -110,18 +110,18 @@
             (click)="showMoreCommunityDescription = false"
             *ngIf="showMoreCommunityDescription && getDescriptionPreview(serverInfo.community_description) != null"
           >
-            {{ 'SHOW_LESS' | translate }}
+            {{ 'SHOW_LESS' | tr }}
           </button>
 
           <p style="margin-top: 25px">
-            {{ 'ABOUT_FOLLOW_CALENDER' | translate }}
-            <a href="{{ calendarUrl }}" target="_blank" rel="noopener">{{ 'ABOUT_FOLLOW_CALENDER_1' | translate }}</a
+            {{ 'ABOUT_FOLLOW_CALENDER' | tr }}
+            <a href="{{ calendarUrl }}" target="_blank" rel="noopener">{{ 'ABOUT_FOLLOW_CALENDER_1' | tr }}</a
             >.
           </p>
         </mat-card>
 
         <mat-card class="mat-elevation-z3">
-          <p>{{ 'ABOUT_MORE_INFORMATION' | translate }}</p>
+          <p>{{ 'ABOUT_MORE_INFORMATION' | tr }}</p>
           <h1>
             <a href="https://datepoll.org/projects/datepoll" target="_blank" rel="noopener">DatePoll</a> and
             <a href="https://datepoll.org" target="_blank" rel="noopener">DatePoll-Systems</a>.
@@ -132,54 +132,54 @@
           <div class="level is-mobile" style="margin-bottom: 5px" (click)="count()">
             <div class="level-item">
               <div>
-                <h3>{{ 'ABOUT_PAGE_STATS_USER' | translate }}</h3>
+                <h3>{{ 'ABOUT_PAGE_STATS_USER' | tr }}</h3>
                 <h1 style="color: #ffce5c">{{ instanceUsersString }}</h1>
               </div>
             </div>
             <div class="level-item">
               <div>
-                <h3>{{ 'ABOUT_PAGE_STATS_EVENTS' | translate }}</h3>
+                <h3>{{ 'ABOUT_PAGE_STATS_EVENTS' | tr }}</h3>
                 <h1 style="color: #27dd70">{{ instanceEventsString }}</h1>
               </div>
             </div>
             <div class="level-item">
               <div>
-                <h3>{{ 'ABOUT_PAGE_STATS_MOVIES' | translate }}</h3>
+                <h3>{{ 'ABOUT_PAGE_STATS_MOVIES' | tr }}</h3>
                 <h1 style="color: #16e7d9">{{ instanceMoviesString }}</h1>
               </div>
             </div>
             <div class="level-item">
               <div>
-                <h3>{{ 'ABOUT_PAGE_STATS_BROADCASTS' | translate }}</h3>
+                <h3>{{ 'ABOUT_PAGE_STATS_BROADCASTS' | tr }}</h3>
                 <h1 style="color: #726dff">{{ instanceBroadcasts }}</h1>
               </div>
             </div>
           </div>
 
-          <h4 style="margin-top: 20px; margin-bottom: -10px">{{ 'ABOUT_PAGE_STATS_MORE' | translate }}</h4>
+          <h4 style="margin-top: 20px; margin-bottom: -10px">{{ 'ABOUT_PAGE_STATS_MORE' | tr }}</h4>
 
           <ul>
-            <li>{{ 'ABOUT_PAGE_STATS_EMAIL_ADDRESSES' | translate }} {{ serverInfo.user_email_addresses_count }}</li>
-            <li>{{ 'ABOUT_PAGE_STATS_PHONE_NUMBERS' | translate }} {{ serverInfo.user_phone_numbers_count }}</li>
+            <li>{{ 'ABOUT_PAGE_STATS_EMAIL_ADDRESSES' | tr }} {{ serverInfo.user_email_addresses_count }}</li>
+            <li>{{ 'ABOUT_PAGE_STATS_PHONE_NUMBERS' | tr }} {{ serverInfo.user_phone_numbers_count }}</li>
           </ul>
 
           <ul>
-            <li>{{ 'ABOUT_PAGE_STATS_EVENT_VOTES' | translate }} {{ serverInfo.event_votes_count }}</li>
-            <li>{{ 'ABOUT_PAGE_STATS_EVENT_DECISIONS' | translate }} {{ serverInfo.event_decisions_count }}</li>
-            <li>{{ 'ABOUT_PAGE_STATS_EVENT_DATES' | translate }} {{ serverInfo.event_dates_count }}</li>
+            <li>{{ 'ABOUT_PAGE_STATS_EVENT_VOTES' | tr }} {{ serverInfo.event_votes_count }}</li>
+            <li>{{ 'ABOUT_PAGE_STATS_EVENT_DECISIONS' | tr }} {{ serverInfo.event_decisions_count }}</li>
+            <li>{{ 'ABOUT_PAGE_STATS_EVENT_DATES' | tr }} {{ serverInfo.event_dates_count }}</li>
           </ul>
 
           <ul>
-            <li>{{ 'ABOUT_PAGE_STATS_MOVIES_TICKETS' | translate }} {{ serverInfo.movies_tickets_count }}</li>
-            <li>{{ 'ABOUT_PAGE_STATS_MOVIES_WORKERS' | translate }} {{ serverInfo.movies_workers_count }}</li>
+            <li>{{ 'ABOUT_PAGE_STATS_MOVIES_TICKETS' | tr }} {{ serverInfo.movies_tickets_count }}</li>
+            <li>{{ 'ABOUT_PAGE_STATS_MOVIES_WORKERS' | tr }} {{ serverInfo.movies_workers_count }}</li>
           </ul>
 
           <ul>
-            <li>{{ 'ABOUT_PAGE_STATS_BROADCASTS_SENT' | translate }} {{ serverInfo.broadcasts_sent_count }}</li>
+            <li>{{ 'ABOUT_PAGE_STATS_BROADCASTS_SENT' | tr }} {{ serverInfo.broadcasts_sent_count }}</li>
           </ul>
 
           <ul>
-            <li>{{ 'ABOUT_PAGE_STATS_PERFORMANCE_BADGES' | translate }} {{ serverInfo.performance_badges_count }}</li>
+            <li>{{ 'ABOUT_PAGE_STATS_PERFORMANCE_BADGES' | tr }} {{ serverInfo.performance_badges_count }}</li>
           </ul>
         </mat-card>
       </div>

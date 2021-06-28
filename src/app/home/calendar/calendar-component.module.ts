@@ -6,7 +6,7 @@ import {CalendarModule, DateAdapter} from 'angular-calendar';
 import {adapterFactory} from 'angular-calendar/date-adapters/date-fns';
 
 import {MaterialModule} from '../../material-module';
-import {TranslationModule} from '../../translation/translation.module';
+import {DfxTranslateModule} from 'dfx-translate';
 import {CommonComponentsModule} from '../../utils/common-components.module';
 import {CalendarComponentRoutingModule} from './calendar-component-routing.module';
 
@@ -17,14 +17,14 @@ import {CalendarComponent} from './calendar.component';
   imports: [
     CommonModule,
     MaterialModule,
-    TranslationModule,
+    DfxTranslateModule,
     FormsModule,
     CommonComponentsModule,
     CalendarComponentRoutingModule,
     CalendarModule.forRoot({
       provide: DateAdapter,
-      useFactory: adapterFactory
-    })
-  ]
+      useFactory: adapterFactory,
+    }),
+  ],
 })
 export class CalendarComponentModule {}

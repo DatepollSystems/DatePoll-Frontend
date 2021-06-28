@@ -1,4 +1,4 @@
-<h1 mat-dialog-title>{{ 'MANAGEMENT_GROUPS_UPDATE_SUBGROUP_MODAL_TITLE' | translate }} {{ name }}</h1>
+<h1 mat-dialog-title>{{ 'MANAGEMENT_GROUPS_UPDATE_SUBGROUP_MODAL_TITLE' | tr }} {{ name }}</h1>
 <div mat-dialog-content>
   <form #form="ngForm" (ngSubmit)="onUpdate(form)" fxLayout.xs="column" fxLayout="row break" fxLayoutAlign="space-around">
     <mat-form-field fxFlex="50%">
@@ -10,12 +10,12 @@
         maxlength="190"
         name="name"
         ngModel
-        placeholder="{{ 'MANAGEMENT_GROUPS_CREATE_SUBGROUP_MODAL_FORM_NAME' | translate }}"
+        placeholder="{{ 'MANAGEMENT_GROUPS_CREATE_SUBGROUP_MODAL_FORM_NAME' | tr }}"
         required
         type="text"
       />
       <mat-error *ngIf="nameModel.invalid">
-        {{ 'MANAGEMENT_GROUPS_CREATE_SUBGROUP_MODAL_FORM_NAME_INCORRECT' | translate }}
+        {{ 'MANAGEMENT_GROUPS_CREATE_SUBGROUP_MODAL_FORM_NAME_INCORRECT' | tr }}
       </mat-error>
     </mat-form-field>
 
@@ -27,11 +27,11 @@
         matInput
         name="orderN"
         ngModel
-        placeholder="{{ 'MANAGEMENT_GROUPS_CREATE_GROUP_MODAL_FORM_ORDER_NUMBER' | translate }}"
+        placeholder="{{ 'MANAGEMENT_GROUPS_CREATE_GROUP_MODAL_FORM_ORDER_NUMBER' | tr }}"
         type="number"
       />
       <mat-error *ngIf="orderNModel.invalid">
-        {{ 'MANAGEMENT_GROUPS_CREATE_GROUP_MODAL_FORM_ORDER_NUMBER_INCORRECT' | translate }}
+        {{ 'MANAGEMENT_GROUPS_CREATE_GROUP_MODAL_FORM_ORDER_NUMBER_INCORRECT' | tr }}
       </mat-error>
     </mat-form-field>
 
@@ -44,16 +44,16 @@
         maxlength="190"
         name="description"
         ngModel
-        placeholder="{{ 'MANAGEMENT_GROUPS_CREATE_SUBGROUP_MODAL_FORM_DESCRIPTION' | translate }}"
+        placeholder="{{ 'MANAGEMENT_GROUPS_CREATE_SUBGROUP_MODAL_FORM_DESCRIPTION' | tr }}"
         type="text"
       />
       <mat-error *ngIf="descriptionModel.invalid">
-        {{ 'MANAGEMENT_GROUPS_CREATE_SUBGROUP_MODAL_FORM_DESCRIPTION_INCORRECT' | translate }}
+        {{ 'MANAGEMENT_GROUPS_CREATE_SUBGROUP_MODAL_FORM_DESCRIPTION_INCORRECT' | tr }}
       </mat-error>
     </mat-form-field>
   </form>
 </div>
 <div mat-dialog-actions style="margin-top: 15px">
-  <button [mat-dialog-close] mat-button>{{ 'CLOSE' | translate }}</button>
-  <button (click)="form.ngSubmit.emit()" [disabled]="!form.form.valid" color="accent" mat-flat-button>{{ 'SAVE' | translate }}</button>
+  <button [mat-dialog-close] mat-button>{{ 'CLOSE' | tr }}</button>
+  <button (click)="form.ngSubmit.emit()" [disabled]="!form.form.valid" color="accent" mat-flat-button>{{ 'SAVE' | tr }}</button>
 </div>

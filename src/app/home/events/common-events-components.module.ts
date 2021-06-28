@@ -7,7 +7,7 @@ import {RouterModule} from '@angular/router';
 import {NgxMatSelectSearchModule} from 'ngx-mat-select-search';
 
 import {MaterialModule} from '../../material-module';
-import {TranslationModule} from '../../translation/translation.module';
+import {DfxTranslateModule} from 'dfx-translate';
 import {CommonComponentsModule} from '../../utils/common-components.module';
 import {CustomDateAdapter, MY_DATE_FORMATS} from '../../utils/custom-date-adapter';
 import {ColorPickerComponentModule} from '../../utils/shared-components/color-picker/color-picker-component.module';
@@ -16,8 +16,6 @@ import {MapsModule} from '../../utils/shared-components/maps-component/maps.modu
 import {QuestionDialogComponentModule} from '../../utils/shared-components/question-dialog/question-dialog-component.module';
 import {EventDatesListComponentModule} from './events-administration/event-dates-list/event-dates-list-component.module';
 import {AllMembersSwitchModule} from '../../utils/shared-components/all-members-switch/all-members-switch.module';
-
-import {EventsUserService} from './services/events-user.service';
 
 import {EventDatesManagementComponent} from './events-administration/event-dates-management/event-dates-management.component';
 import {EventStandardLocationsSelectComponent} from './events-administration/event-dates-management/event-standard-locations-select/event-standard-locations-select.component';
@@ -38,7 +36,7 @@ import {TimeInputModule} from '../../utils/shared-components/time-input/time-inp
     FormsModule,
     ReactiveFormsModule,
     MaterialModule,
-    TranslationModule,
+    DfxTranslateModule,
     NgxMatSelectSearchModule,
     QuestionDialogComponentModule,
     ColorPickerComponentModule,

@@ -9,8 +9,8 @@
   </mat-card-content>
   <mat-card-actions style="margin-top: 0; padding-top: 0" *ngIf="alert?.type?.includes('happy')">
     <button mat-flat-button color="primary" (click)="toggleFirework()">
-      <span *ngIf="showFirework">{{ 'STARTPAGE_FIREWORK_HIDE' | translate }}</span>
-      <span *ngIf="!showFirework">{{ 'STARTPAGE_FIREWORK_SHOW' | translate }}</span>
+      <span *ngIf="showFirework">{{ 'STARTPAGE_FIREWORK_HIDE' | tr }}</span>
+      <span *ngIf="!showFirework">{{ 'STARTPAGE_FIREWORK_SHOW' | tr }}</span>
     </button>
   </mat-card-actions>
 </mat-card>
@@ -42,10 +42,10 @@
 >
   <mat-list>
     <div mat-subheader *ngIf="events.length != 0" class="sub-header" fxLayout="row" fxLayoutAlign="space-between">
-      <span [matBadge]="openEventsCount.toString()" matBadgeOverlap="false">{{ 'STARTPAGE_EVENTS' | translate }}</span>
+      <span [matBadge]="openEventsCount.toString()" matBadgeOverlap="false">{{ 'STARTPAGE_EVENTS' | tr }}</span>
       <div style="margin-top: -10px">
         <button mat-stroked-button routerLink="/home/events/start" type="button">
-          {{ 'STARTPAGE_EVENTS_INFO' | translate }}
+          {{ 'STARTPAGE_EVENTS_INFO' | tr }}
         </button>
       </div>
     </div>
@@ -53,7 +53,7 @@
 
     <mat-divider *ngIf="bookings.length != 0"></mat-divider>
 
-    <div mat-subheader *ngIf="bookings.length != 0" class="sub-header">{{ 'STARTPAGE_BOOKINGS' | translate }}</div>
+    <div mat-subheader *ngIf="bookings.length != 0" class="sub-header">{{ 'STARTPAGE_BOOKINGS' | tr }}</div>
     <mat-list-item *ngFor="let booking of bookings">
       <div mat-line>
         <b>{{ booking.name }}</b>
@@ -62,9 +62,9 @@
         {{ booking.date | date: 'EE, dd.MM' }} 21:00
         <span class="until-left">({{ booking.getUntil() }})</span>
       </div>
-      <div mat-line>{{ 'STARTPAGE_BOOKED_TICKETS' | translate }}: {{ booking.bookedTickets }}</div>
+      <div mat-line>{{ 'STARTPAGE_BOOKED_TICKETS' | tr }}: {{ booking.bookedTickets }}</div>
       <div mat-line *ngIf="booking.workerName || booking.emergencyWorkerName">
-        {{ 'STARTPAGE_CINEMA_SERVICE' | translate }}: <span *ngIf="booking.workerName">{{ booking.workerName }}</span
+        {{ 'STARTPAGE_CINEMA_SERVICE' | tr }}: <span *ngIf="booking.workerName">{{ booking.workerName }}</span
         ><span *ngIf="booking.workerName && booking.emergencyWorkerName">,</span>
         <span *ngIf="booking.emergencyWorkerName"> {{ booking.emergencyWorkerName }}</span>
       </div>
@@ -73,10 +73,10 @@
     <mat-divider *ngIf="broadcasts.length != 0"></mat-divider>
 
     <div mat-subheader *ngIf="broadcasts.length != 0" class="sub-header" fxLayout="row" fxLayoutAlign="space-between">
-      {{ 'STARTPAGE_BROADCASTS' | translate }}
+      {{ 'STARTPAGE_BROADCASTS' | tr }}
 
       <div style="margin-top: -10px">
-        <button mat-stroked-button routerLink="/home/broadcasts" type="button">{{ 'STARTPAGE_BROADCASTS_INFO' | translate }}</button>
+        <button mat-stroked-button routerLink="/home/broadcasts" type="button">{{ 'STARTPAGE_BROADCASTS_INFO' | tr }}</button>
       </div>
     </div>
     <mat-list-item
@@ -90,7 +90,7 @@
         {{ broadcast.subject }}
       </div>
       <div mat-line>
-        {{ 'STARTPAGE_BROADCASTS_BY' | translate }}
+        {{ 'STARTPAGE_BROADCASTS_BY' | tr }}
         <i>{{ broadcast.writerName }}</i> ({{ broadcast.sent | date: 'EE, dd.MM. HH:mm' }})
         <small class="until-left"> ({{ broadcast.readTime }})</small>
       </div>
@@ -99,11 +99,11 @@
     <mat-divider *ngIf="birthdays.length != 0"></mat-divider>
 
     <div mat-subheader *ngIf="birthdays.length != 0" class="sub-header">
-      {{ 'STARTPAGE_BIRTHDAY' | translate }}
+      {{ 'STARTPAGE_BIRTHDAY' | tr }}
       <button
         *ngIf="!showBirthdays"
         mat-icon-button
-        matTooltip="{{ 'STARTPAGE_BIRTHDAY_MORE' | translate }}"
+        matTooltip="{{ 'STARTPAGE_BIRTHDAY_MORE' | tr }}"
         matTooltipPosition="above"
         (click)="showBirthdays = !showBirthdays"
         aria-label="Button to show all birthdays"
@@ -113,7 +113,7 @@
       <button
         *ngIf="showBirthdays"
         mat-icon-button
-        matTooltip="{{ 'STARTPAGE_BIRTHDAY_MORE' | translate }}"
+        matTooltip="{{ 'STARTPAGE_BIRTHDAY_MORE' | tr }}"
         matTooltipPosition="above"
         (click)="showBirthdays = !showBirthdays"
         aria-label="Button to show all birthdays"
@@ -122,7 +122,7 @@
       </button>
       <button
         mat-icon-button
-        matTooltip="{{ 'STARTPAGE_BIRTHDAY_INFO' | translate }}"
+        matTooltip="{{ 'STARTPAGE_BIRTHDAY_INFO' | tr }}"
         matTooltipPosition="right"
         routerLink="settings/privacySettings"
         aria-label="Button that brings you to a page where you can deactivate your account for showing up when you have birhtday."
@@ -146,11 +146,11 @@
     <mat-card class="mat-elevation-z4">
       <mat-card-content>
         <mat-card-title fxLayout="row" fxLayoutAlign="space-between">
-          <span [matBadge]="openEventsCount.toString()" matBadgeOverlap="false">{{ 'STARTPAGE_EVENTS' | translate }}</span>
+          <span [matBadge]="openEventsCount.toString()" matBadgeOverlap="false">{{ 'STARTPAGE_EVENTS' | tr }}</span>
           <div style="margin-top: -8px">
             <button mat-stroked-button routerLink="/home/events/start" type="button">
               <mat-icon>view_quilt</mat-icon>
-              {{ 'STARTPAGE_EVENTS_INFO' | translate }}
+              {{ 'STARTPAGE_EVENTS_INFO' | tr }}
             </button>
           </div>
         </mat-card-title>
@@ -165,11 +165,11 @@
     <mat-card class="mat-elevation-z4" *ngIf="broadcasts.length != 0">
       <mat-card-content>
         <mat-card-title fxLayout="row break" fxLayoutAlign="space-between">
-          <span style="margin-bottom: 12px">{{ 'STARTPAGE_BROADCASTS' | translate }}</span>
+          <span style="margin-bottom: 12px">{{ 'STARTPAGE_BROADCASTS' | tr }}</span>
           <div style="margin-top: -8px">
             <button mat-stroked-button routerLink="/home/broadcasts" type="button">
               <mat-icon>view_quilt</mat-icon>
-              {{ 'STARTPAGE_BROADCASTS_INFO' | translate }}
+              {{ 'STARTPAGE_BROADCASTS_INFO' | tr }}
             </button>
           </div>
         </mat-card-title>
@@ -181,9 +181,7 @@
                 <td matRipple matRippleRadius="100">
                   <b>{{ broadcast.subject }}</b
                   ><br />
-                  {{ 'STARTPAGE_BROADCASTS_BY' | translate }} <i>{{ broadcast.writerName }}</i> ({{
-                    broadcast.sent | date: 'dd.MM - HH:mm'
-                  }})
+                  {{ 'STARTPAGE_BROADCASTS_BY' | tr }} <i>{{ broadcast.writerName }}</i> ({{ broadcast.sent | date: 'dd.MM - HH:mm' }})
                   <small class="until-left"> ({{ broadcast.readTime }})</small>
                 </td>
               </tr>
@@ -198,17 +196,17 @@
   <div *ngIf="bookings.length != 0" fxFlex.md="60%" fxFlex.gt-md="65%">
     <mat-card class="mat-elevation-z4">
       <mat-card-content>
-        <mat-card-title>{{ 'STARTPAGE_BOOKINGS' | translate }}</mat-card-title>
+        <mat-card-title>{{ 'STARTPAGE_BOOKINGS' | tr }}</mat-card-title>
 
         <div class="table-responsive">
           <table>
             <thead>
               <tr>
-                <th>{{ 'STARTPAGE_MOVIE_NAME' | translate }}</th>
-                <th>{{ 'STARTPAGE_MOVIE_DATE' | translate }}</th>
-                <th>{{ 'STARTPAGE_BOOKED_TICKETS' | translate }}</th>
-                <th>{{ 'STARTPAGE_CINEMA_SERVICE' | translate }}</th>
-                <th>{{ 'STARTPAGE_EMERGENCY_CINEMA_SERVICE' | translate }}</th>
+                <th>{{ 'STARTPAGE_MOVIE_NAME' | tr }}</th>
+                <th>{{ 'STARTPAGE_MOVIE_DATE' | tr }}</th>
+                <th>{{ 'STARTPAGE_BOOKED_TICKETS' | tr }}</th>
+                <th>{{ 'STARTPAGE_CINEMA_SERVICE' | tr }}</th>
+                <th>{{ 'STARTPAGE_EMERGENCY_CINEMA_SERVICE' | tr }}</th>
               </tr>
             </thead>
             <tbody>
@@ -223,12 +221,12 @@
     <mat-card class="mat-elevation-z4" *ngIf="birthdays.length != 0">
       <mat-card-content>
         <mat-card-title fxLayout="row">
-          <div fxFlexAlign="center">{{ 'STARTPAGE_BIRTHDAY' | translate }}</div>
+          <div fxFlexAlign="center">{{ 'STARTPAGE_BIRTHDAY' | tr }}</div>
           <div>
             <button
               *ngIf="!showBirthdays"
               mat-icon-button
-              matTooltip="{{ 'STARTPAGE_BIRTHDAY_MORE' | translate }}"
+              matTooltip="{{ 'STARTPAGE_BIRTHDAY_MORE' | tr }}"
               matTooltipPosition="above"
               (click)="showBirthdays = !showBirthdays"
               aria-label="Button to show all birthdays"
@@ -238,7 +236,7 @@
             <button
               *ngIf="showBirthdays"
               mat-icon-button
-              matTooltip="{{ 'STARTPAGE_BIRTHDAY_MORE' | translate }}"
+              matTooltip="{{ 'STARTPAGE_BIRTHDAY_MORE' | tr }}"
               matTooltipPosition="above"
               (click)="showBirthdays = !showBirthdays"
               aria-label="Button to show all birthdays"
@@ -247,7 +245,7 @@
             </button>
             <button
               mat-icon-button
-              matTooltip="{{ 'STARTPAGE_BIRTHDAY_INFO' | translate }}"
+              matTooltip="{{ 'STARTPAGE_BIRTHDAY_INFO' | tr }}"
               matTooltipPosition="right"
               routerLink="settings/privacySettings"
               aria-label="Button that brings you to a page where you can deactivate your account for showing up when you have birhtday."
@@ -261,8 +259,8 @@
           <table>
             <thead>
               <tr>
-                <th>{{ 'STARTPAGE_BIRTHDAY_NAME' | translate }}</th>
-                <th>{{ 'STARTPAGE_BIRTHDAY_DATE' | translate }}</th>
+                <th>{{ 'STARTPAGE_BIRTHDAY_NAME' | tr }}</th>
+                <th>{{ 'STARTPAGE_BIRTHDAY_DATE' | tr }}</th>
               </tr>
             </thead>
             <tbody>

@@ -2,7 +2,6 @@ import {Component, Inject} from '@angular/core';
 import {MAT_BOTTOM_SHEET_DATA, MatBottomSheetRef} from '@angular/material/bottom-sheet';
 
 import {ExcelService} from '../../../../utils/excel.service';
-import {TranslateService} from '../../../../translation/translate.service';
 
 import {EventResultUser} from '../../models/event-result-user.model';
 import {UsersService} from '../../../management/users-management/users.service';
@@ -24,7 +23,6 @@ export class EventInfoResultUserExportModalComponent {
   constructor(
     @Inject(MAT_BOTTOM_SHEET_DATA) public data: any,
     private bottomSheetRef: MatBottomSheetRef<EventInfoResultUserExportModalComponent>,
-    private translate: TranslateService,
     private usersService: UsersService,
     private myUserService: MyUserService,
     private excelService: ExcelService

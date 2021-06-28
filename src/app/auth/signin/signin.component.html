@@ -6,7 +6,7 @@
           <p class="projectName">{{ serverInfo.community_name }}</p>
         </mat-card-title>
 
-        <mat-card-title> DatePoll | {{ 'SIGNIN' | translate }} </mat-card-title>
+        <mat-card-title> DatePoll | {{ 'SIGNIN' | tr }} </mat-card-title>
       </mat-card-title-group>
 
       <form #f="ngForm" (ngSubmit)="onSignin(f)" *ngIf="state === 'login'">
@@ -20,7 +20,7 @@
                 minlength="3"
                 name="username"
                 ngModel
-                placeholder="{{ 'SIGNIN_USERNAME' | translate }}"
+                placeholder="{{ 'SIGNIN_USERNAME' | tr }}"
                 required
                 type="text"
               />
@@ -35,17 +35,17 @@
                 minlength="6"
                 name="password"
                 ngModel
-                placeholder="{{ 'SIGNIN_PASSWORD' | translate }}"
+                placeholder="{{ 'SIGNIN_PASSWORD' | tr }}"
                 required
                 type="password"
               />
               <mat-error *ngIf="passwordModel.invalid">
-                {{ 'SIGNIN_PASSWORD_REQUIREMENTS' | translate }}
+                {{ 'SIGNIN_PASSWORD_REQUIREMENTS' | tr }}
               </mat-error>
             </mat-form-field>
 
             <mat-hint *ngIf="loginFail">
-              <strong style="color: red">{{ 'SIGNIN_USERNAME_OR_PASSWORD_INCORRECT' | translate }}</strong>
+              <strong style="color: red">{{ 'SIGNIN_USERNAME_OR_PASSWORD_INCORRECT' | tr }}</strong>
             </mat-hint>
           </div>
         </mat-card-content>
@@ -61,7 +61,7 @@
                 mat-raised-button
                 type="submit"
               >
-                {{ 'SIGNIN' | translate }}
+                {{ 'SIGNIN' | tr }}
                 <mat-icon aria-label="Send icon">send</mat-icon>
               </button>
             </div>
@@ -96,20 +96,14 @@
       >
         <mat-card class="mat-info-card not-selectable">
           <mat-card-content class="last-child">
-            {{ 'SIGNIN_YOU_NEED_TO_CHANGE_PASSWORD' | translate }}
+            {{ 'SIGNIN_YOU_NEED_TO_CHANGE_PASSWORD' | tr }}
           </mat-card-content>
         </mat-card>
 
         <mat-card-content>
           <div fxLayout="column" formGroupName="passwords">
             <mat-form-field>
-              <input
-                formControlName="password"
-                matInput
-                name="password"
-                placeholder="{{ 'SIGNIN_NEW_PASSWORD' | translate }}"
-                type="password"
-              />
+              <input formControlName="password" matInput name="password" placeholder="{{ 'SIGNIN_NEW_PASSWORD' | tr }}" type="password" />
             </mat-form-field>
 
             <mat-form-field>
@@ -117,22 +111,22 @@
                 formControlName="repeat"
                 matInput
                 name="repeat"
-                placeholder="{{ 'SIGNIN_NEW_PASSWORD_REPEAT' | translate }}"
+                placeholder="{{ 'SIGNIN_NEW_PASSWORD_REPEAT' | tr }}"
                 type="password"
               />
             </mat-form-field>
             <mat-error *ngIf="changePasswordAfterSigninForm?.controls?.passwords?.errors?.wrongLength">
-              {{ 'SIGNIN_PASSWORD_REQUIREMENTS' | translate }}
+              {{ 'SIGNIN_PASSWORD_REQUIREMENTS' | tr }}
             </mat-error>
             <mat-error *ngIf="changePasswordAfterSigninForm?.controls?.passwords?.errors?.notSame">
-              {{ 'SIGNIN_PASSWORD_ARE_NOT_EQUAL' | translate }}
+              {{ 'SIGNIN_PASSWORD_ARE_NOT_EQUAL' | tr }}
             </mat-error>
           </div>
         </mat-card-content>
 
         <mat-card-actions>
           <button [disabled]="!changePasswordAfterSigninForm.valid" color="primary" mat-raised-button type="submit" style="width: 100%">
-            {{ 'SIGNIN_AND_CHANGE_PASSWORD' | translate }}
+            {{ 'SIGNIN_AND_CHANGE_PASSWORD' | tr }}
             <mat-icon aria-label="Submit icon">send</mat-icon>
           </button>
         </mat-card-actions>
@@ -141,17 +135,17 @@
       <div *ngIf="state === 'not_activated'">
         <mat-card class="mat-info-card not-selectable" matRipple>
           <mat-card-content class="last-child">
-            <h3 style="color: black">{{ 'SIGNIN_ACCOUNT_NOT_ACTIVATED' | translate }}</h3>
+            <h3 style="color: black">{{ 'SIGNIN_ACCOUNT_NOT_ACTIVATED' | tr }}</h3>
           </mat-card-content>
         </mat-card>
 
         <button (click)="state = 'login'" color="primary" mat-flat-button style="width: 100%">
-          {{ 'BACK' | translate }}
+          {{ 'BACK' | tr }}
         </button>
       </div>
 
       <button (click)="openMobileAppBottomSheet()" mat-stroked-button style="width: 100%; margin-top: 10px">
-        {{ 'SIGNIN_APP_INFO' | translate }}
+        {{ 'SIGNIN_APP_INFO' | tr }}
       </button>
     </mat-card>
   </div>

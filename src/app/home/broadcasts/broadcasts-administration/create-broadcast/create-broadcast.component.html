@@ -2,8 +2,8 @@
   <mat-card fxLayout="column" fxLayoutGap.xs="3%" fxLayoutGap="1%">
     <div fxLayout="row" fxLayoutAlign="space-between center">
       <h1 class="not-selectable">
-        {{ 'BROADCASTS_ADMINISTRATION_CREATE_TITLE' | translate }}
-        <span *ngIf="draft">{{ 'BROADCASTS_ADMINISTRATION_CREATE_TITLE_DRAFT' | translate }} {{ draft.subject }}</span>
+        {{ 'BROADCASTS_ADMINISTRATION_CREATE_TITLE' | tr }}
+        <span *ngIf="draft">{{ 'BROADCASTS_ADMINISTRATION_CREATE_TITLE_DRAFT' | tr }} {{ draft.subject }}</span>
       </h1>
     </div>
 
@@ -15,17 +15,17 @@
 
         <button mat-stroked-button (click)="loadDraft()">
           <mat-icon>cloud_download</mat-icon>
-          {{ 'BROADCASTS_ADMINISTRATION_CREATE_LOAD_DRAFT' | translate }}
+          {{ 'BROADCASTS_ADMINISTRATION_CREATE_LOAD_DRAFT' | tr }}
         </button>
 
         <button mat-stroked-button (click)="saveDraft()">
           <mat-icon>save</mat-icon>
-          {{ 'BROADCASTS_ADMINISTRATION_CREATE_SAVE_DRAFT' | translate }}
+          {{ 'BROADCASTS_ADMINISTRATION_CREATE_SAVE_DRAFT' | tr }}
         </button>
       </div>
       <button color="primary" mat-flat-button (click)="send()" [disabled]="currentlyUploading" [fxHide.lt-md]="true">
         <mat-icon>send</mat-icon>
-        {{ 'SEND' | translate }}
+        {{ 'SEND' | tr }}
       </button>
     </div>
 
@@ -43,7 +43,7 @@
     <div fxLayout="column">
       <button style="width: 100%" mat-flat-button color="primary" (click)="send()" [disabled]="currentlyUploading" [fxHide.gt-sm]="true">
         <mat-icon>send</mat-icon>
-        {{ 'SEND' | translate }}
+        {{ 'SEND' | tr }}
       </button>
     </div>
 
@@ -53,7 +53,7 @@
 
     <div fxLayout="column" fxLayoutGap="1%" fxLayoutAlign="center">
       <mat-form-field>
-        <mat-label>{{ 'BROADCASTS_ADMINISTRATION_SUBJECT' | translate }}</mat-label>
+        <mat-label>{{ 'BROADCASTS_ADMINISTRATION_SUBJECT' | tr }}</mat-label>
         <input matInput type="text" min="1" max="119" minlength="1" maxlength="119" required [(ngModel)]="subject" />
       </mat-form-field>
 
@@ -66,8 +66,8 @@
     </div>
 
     <mat-card class="mat-info-card">
-      <b>{{ 'BROADCASTS_ADMINISTRATION_CREATE_INFO_ATTACHMENTS_1' | translate }}</b>
-      {{ 'BROADCASTS_ADMINISTRATION_CREATE_INFO_ATTACHMENTS_2' | translate }}
+      <b>{{ 'BROADCASTS_ADMINISTRATION_CREATE_INFO_ATTACHMENTS_1' | tr }}</b>
+      {{ 'BROADCASTS_ADMINISTRATION_CREATE_INFO_ATTACHMENTS_2' | tr }}
     </mat-card>
 
     <app-editor

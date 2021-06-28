@@ -1,25 +1,24 @@
-<div class="row" style="margin-top: 15px;">
+<div class="row" style="margin-top: 15px">
   <mat-form-field class="col-12">
-    <input (keyup)="applyFilter($event.target.value)" matInput
-           placeholder="{{'SEARCH' | translate}}"/>
+    <input (keyup)="applyFilter($event.target.value)" matInput placeholder="{{ 'SEARCH' | tr }}" />
   </mat-form-field>
 </div>
 <table [dataSource]="bookings" class="table-responsive" mat-table>
   <ng-container matColumnDef="name">
-    <th *matHeaderCellDef
-        mat-header-cell> {{'CINEMA_TICKETS_ADMINISTRATION_MOVIE_INFO_MODAL_TABLE_NAME' | translate}} </th>
-    <td *matCellDef="let booking" mat-cell> {{booking.firstname + ' ' + booking.surname}} </td>
-    <td *matFooterCellDef mat-footer-cell><b>{{'CINEMA_TICKETS_BOOKED_TICKETS' | translate}}</b></td>
+    <th *matHeaderCellDef mat-header-cell>{{ 'CINEMA_TICKETS_ADMINISTRATION_MOVIE_INFO_MODAL_TABLE_NAME' | tr }}</th>
+    <td *matCellDef="let booking" mat-cell>{{ booking.firstname + ' ' + booking.surname }}</td>
+    <td *matFooterCellDef mat-footer-cell>
+      <b>{{ 'CINEMA_TICKETS_BOOKED_TICKETS' | tr }}</b>
+    </td>
   </ng-container>
 
   <ng-container matColumnDef="amount">
-    <th *matHeaderCellDef
-        mat-header-cell> {{'CINEMA_TICKETS_ADMINISTRATION_MOVIE_INFO_MODAL_TABLE_AMOUNT' | translate}} </th>
-    <td *matCellDef="let booking" mat-cell> {{booking.amount}} </td>
-    <td *matFooterCellDef mat-footer-cell> {{bookedTickets}} </td>
+    <th *matHeaderCellDef mat-header-cell>{{ 'CINEMA_TICKETS_ADMINISTRATION_MOVIE_INFO_MODAL_TABLE_AMOUNT' | tr }}</th>
+    <td *matCellDef="let booking" mat-cell>{{ booking.amount }}</td>
+    <td *matFooterCellDef mat-footer-cell>{{ bookedTickets }}</td>
   </ng-container>
 
   <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
-  <tr *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
+  <tr *matRowDef="let row; columns: displayedColumns" mat-row></tr>
   <tr *matFooterRowDef="displayedColumns" mat-footer-row></tr>
 </table>

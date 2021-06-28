@@ -1,9 +1,8 @@
 import {Injectable} from '@angular/core';
-import {MatSnackBar} from '@angular/material/snack-bar';
 import {Subject} from 'rxjs';
 
-import {TranslateService} from '../../../translation/translate.service';
 import {HttpService} from '../../../utils/http.service';
+import {NotificationService} from '../../../utils/notification.service';
 
 @Injectable({
   providedIn: 'root',
@@ -30,7 +29,7 @@ export class UserSettingsService {
   public notifyMeViaEmailOnBroadcastChange: Subject<boolean> = new Subject<boolean>();
   private _notifyMeViaEmailOnBroadcast = true;
 
-  constructor(private httpService: HttpService, private snackBar: MatSnackBar, private translate: TranslateService) {}
+  constructor(private httpService: HttpService, private notificationService: NotificationService) {}
 
   public setShowBirthday(showBirthday: boolean, saveInCloud = false) {
     this._showBirthday = showBirthday;
@@ -200,7 +199,7 @@ export class UserSettingsService {
     this.httpService.loggedInV1POSTRequest('/user/myself/settings/' + url, body, 'setSettingsRequest').subscribe(
       (response: any) => {
         console.log(response);
-        this.snackBar.open(this.translate.getTranslationFor('SETTINGS_SECURITY_MODAL_SETTINGS_SAVE_SUCCESS'));
+        this.notificationService.info('SETTINGS_SECURITY_MODAL_SETTINGS_SAVE_SUCCESS');
       },
       (error) => console.log(error)
     );

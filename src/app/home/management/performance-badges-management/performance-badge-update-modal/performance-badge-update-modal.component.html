@@ -1,4 +1,4 @@
-<h1 mat-dialog-title>{{ 'MANAGEMENT_PERFORMANCE_BADGES_UPDATE_PERFORMANCE_BADGE_MODAL_TITLE' | translate }} {{ name }}</h1>
+<h1 mat-dialog-title>{{ 'MANAGEMENT_PERFORMANCE_BADGES_UPDATE_PERFORMANCE_BADGE_MODAL_TITLE' | tr }} {{ name }}</h1>
 <div mat-dialog-content>
   <form #form="ngForm" (ngSubmit)="update(form)" fxLayout="column">
     <mat-form-field>
@@ -11,21 +11,21 @@
         minlength="1"
         name="performanceBadgeName"
         ngModel
-        placeholder="{{ 'MANAGEMENT_PERFORMANCE_BADGES_ADD_PERFORMANCE_BADGE_NAME' | translate }}"
+        placeholder="{{ 'MANAGEMENT_PERFORMANCE_BADGES_ADD_PERFORMANCE_BADGE_NAME' | tr }}"
         required
         type="text"
       />
       <mat-error *ngIf="performanceBadgeNameModel.invalid">
-        {{ 'MANAGEMENT_PERFORMANCE_BADGES_ADD_PERFORMANCE_BADGE_NAME_INCORRECT' | translate }}
+        {{ 'MANAGEMENT_PERFORMANCE_BADGES_ADD_PERFORMANCE_BADGE_NAME_INCORRECT' | tr }}
       </mat-error>
     </mat-form-field>
   </form>
 </div>
 <div mat-dialog-actions style="margin-top: 15px">
-  <button [mat-dialog-close] mat-button>{{ 'CLOSE' | translate }}</button>
-  <button (click)="form.ngSubmit.emit()" [disabled]="!form.form.valid" color="accent" mat-flat-button>{{ 'SAVE' | translate }}</button>
+  <button [mat-dialog-close] mat-button>{{ 'CLOSE' | tr }}</button>
+  <button (click)="form.ngSubmit.emit()" [disabled]="!form.form.valid" color="accent" mat-flat-button>{{ 'SAVE' | tr }}</button>
 </div>
 
 <ng-template #successfullyUpdatedPerformanceBadge>
-  <h2>{{ '' | translate }}</h2>
+  <h2>{{ '' | tr }}</h2>
 </ng-template>

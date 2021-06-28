@@ -1,13 +1,13 @@
-<h1 mat-dialog-title>{{ 'BROWSER_COMPATIBILITY_HEADER' | translate }}</h1>
+<h1 mat-dialog-title>{{ 'BROWSER_COMPATIBILITY_HEADER' | tr }}</h1>
 <div mat-dialog-content>
   <mat-card class="not-selectable mat-info-card">
-    {{ 'BROWSER_COMPATIBILITY_INFO_NEVER_COME_BACK' | translate }}
+    {{ 'BROWSER_COMPATIBILITY_INFO_NEVER_COME_BACK' | tr }}
   </mat-card>
 
-  {{ 'BROWSER_COMPATIBILITY_CONTENT_1' | translate }}{{ currentYear }}.
+  {{ 'BROWSER_COMPATIBILITY_CONTENT_1' | tr }}{{ currentYear }}.
 
   <div [innerHTML]="content2 | noSanitize"></div>
 </div>
 <div mat-dialog-actions style="margin-top: 15px">
-  <button [mat-dialog-close] mat-button>{{ 'CLOSE' | translate }}</button>
+  <button [mat-dialog-close] mat-button>{{ 'CLOSE' | tr }}</button>
 </div>

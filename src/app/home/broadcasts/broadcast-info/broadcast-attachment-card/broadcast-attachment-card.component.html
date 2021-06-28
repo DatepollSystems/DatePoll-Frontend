@@ -1,9 +1,7 @@
 <mat-card class="mat-elevation-z2" (click)="toggleImageView()" mat-ripple [matRippleRadius]="100">
   <mat-card-content class="last-child">
     <h3 style="margin-bottom: 0">{{ attachment.name }}</h3>
-    <small class="not-selectable" *ngIf="showShowImage">{{
-      'BROADCASTS_ADMINISTRATION_ATTACHMENT_VIEW_CLICK_ME_FOR_IMAGE' | translate
-    }}</small>
+    <small class="not-selectable" *ngIf="showShowImage">{{ 'BROADCASTS_ADMINISTRATION_ATTACHMENT_VIEW_CLICK_ME_FOR_IMAGE' | tr }}</small>
 
     <img *ngIf="showImage" mat-card-image src="{{ apiUrl }}{{ attachment.token }}" alt="Photo of a {{ attachment.name }}" />
     <mat-card-actions>
@@ -16,18 +14,18 @@
         color="primary"
       >
         <mat-icon>cloud_download</mat-icon>
-        {{ 'DOWNLOAD' | translate }}</a
+        {{ 'DOWNLOAD' | tr }}</a
       >
       <button
         mat-stroked-button
         (click)="$event.stopPropagation(); copyTokenToClipboard(appUrl + attachment.token); tooltip.disabled = false; tooltip.show()"
         [matTooltipDisabled]="true"
-        matTooltip="{{ 'COPIED_LINK' | translate }}"
+        matTooltip="{{ 'COPIED_LINK' | tr }}"
         #tooltip="matTooltip"
         matTooltipPosition="right"
       >
         <mat-icon>content_copy</mat-icon>
-        {{ 'COPY_LINK' | translate }}
+        {{ 'COPY_LINK' | tr }}
       </button>
     </mat-card-actions>
   </mat-card-content>

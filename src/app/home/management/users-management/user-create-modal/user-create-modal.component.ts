@@ -1,10 +1,8 @@
 import {Component, OnDestroy} from '@angular/core';
 import {NgForm} from '@angular/forms';
 import {MatDialogRef} from '@angular/material/dialog';
-import {MatSnackBar} from '@angular/material/snack-bar';
 import {Subscription} from 'rxjs';
 
-import {TranslateService} from '../../../../translation/translate.service';
 import {Converter} from '../../../../utils/helper/Converter';
 import {IsMobileService} from '../../../../utils/is-mobile.service';
 import {MyUserService} from '../../../my-user.service';
@@ -22,6 +20,7 @@ import {
 import {PhoneNumber} from '../models/phoneNumber.model';
 import {UserBadge} from '../models/userBadge.model';
 import {UserPerformanceBadge} from '../models/userPerformanceBadge.model';
+import {NotificationService} from '../../../../utils/notification.service';
 
 @Component({
   selector: 'app-user-create-modal',
@@ -56,8 +55,7 @@ export class UserCreateModalComponent implements OnDestroy {
     private dialogRef: MatDialogRef<UserCreateModalComponent>,
     private groupsService: GroupsService,
     private badgesService: BadgesService,
-    private snackBar: MatSnackBar,
-    private translate: TranslateService,
+    private notificationService: NotificationService,
     private isMobileService: IsMobileService,
     private performanceBadgesService: PerformanceBadgesService
   ) {
@@ -242,7 +240,7 @@ export class UserCreateModalComponent implements OnDestroy {
         const users = this.usersService.getUsersWithoutFetch();
         users.push(this.usersService.fetchUserCreateLocalUser(data.user));
         this.usersService.setUsers(users);
-        this.snackBar.open(this.translate.getTranslationFor('MANAGEMENT_USERS_CREATE_USER_MODAL_SUCCESSFULLY_CREATED_USER'));
+        this.notificationService.info('MANAGEMENT_USERS_CREATE_USER_MODAL_SUCCESSFULLY_CREATED_USER');
       },
       (error) => {
         console.log(error);

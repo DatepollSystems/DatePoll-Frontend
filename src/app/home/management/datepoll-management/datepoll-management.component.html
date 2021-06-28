@@ -4,24 +4,24 @@
       <mat-tab-group mat-stretch-tabs class="tabs">
         <mat-tab label="Einstellungen" *ngIf="this.myUserService.hasPermission(SETTINGS_ADMINISTRATION)">
           <div fxLayout="column" fxLayoutGap="2%">
-            <h1>{{ 'NAV_MANAGEMENT_DATEPOLL' | translate }}</h1>
-            <h2>{{ 'MANAGEMENT_DATEPOLL_FEATURE_SETTINGS' | translate }}</h2>
-            <h4>{{ 'MANAGEMENT_DATEPOLL_FEATURE_SETTINGS_SUBTITLE' | translate }}</h4>
+            <h1>{{ 'NAV_MANAGEMENT_DATEPOLL' | tr }}</h1>
+            <h2>{{ 'MANAGEMENT_DATEPOLL_FEATURE_SETTINGS' | tr }}</h2>
+            <h4>{{ 'MANAGEMENT_DATEPOLL_FEATURE_SETTINGS_SUBTITLE' | tr }}</h4>
 
             <div fxLayout="column" fxLayoutGap="1.5%">
               <mat-slide-toggle (change)="cinemaServiceChange($event)" [(ngModel)]="serverInfo.cinema_enabled" color="primary">
-                {{ 'MANAGEMENT_DATEPOLL_CINEMA_SERVICE' | translate }}
+                {{ 'MANAGEMENT_DATEPOLL_CINEMA_SERVICE' | tr }}
               </mat-slide-toggle>
 
               <mat-slide-toggle (change)="eventsServiceChange($event)" [(ngModel)]="serverInfo.events_enabled" color="primary">
-                {{ 'MANAGEMENT_DATEPOLL_EVENTS_SERVICE' | translate }}
+                {{ 'MANAGEMENT_DATEPOLL_EVENTS_SERVICE' | tr }}
               </mat-slide-toggle>
             </div>
 
             <div><mat-divider></mat-divider></div>
 
             <mat-slide-toggle (change)="broadcastServiceChange($event)" [(ngModel)]="serverInfo.broadcasts_enabled" color="primary">
-              {{ 'MANAGEMENT_DATEPOLL_BROADCAST_SERVICE' | translate }}
+              {{ 'MANAGEMENT_DATEPOLL_BROADCAST_SERVICE' | tr }}
             </mat-slide-toggle>
 
             <mat-slide-toggle
@@ -30,7 +30,7 @@
               color="primary"
               [disabled]="!serverInfo.broadcasts_enabled"
             >
-              {{ 'MANAGEMENT_DATEPOLL_BROADCAST_PROCESS_INCOMING_MAILS' | translate }}
+              {{ 'MANAGEMENT_DATEPOLL_BROADCAST_PROCESS_INCOMING_MAILS' | tr }}
             </mat-slide-toggle>
 
             <mat-slide-toggle
@@ -39,7 +39,7 @@
               color="primary"
               [disabled]="!serverInfo.broadcasts_enabled || !serverInfo.broadcasts_process_incoming_mails_enabled"
             >
-              {{ 'MANAGEMENT_DATEPOLL_BROADCAST_PROCESS_INCOMING_MAILS_FORWARDING' | translate }}
+              {{ 'MANAGEMENT_DATEPOLL_BROADCAST_PROCESS_INCOMING_MAILS_FORWARDING' | tr }}
             </mat-slide-toggle>
 
             <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="2%">
@@ -57,7 +57,7 @@
               ></app-list-chip-input>
               <div fxFlex="10%">
                 <button mat-flat-button color="accent" style="width: 100%" (click)="saveBroadcastIncomingMailForwardingEmailAddresses()">
-                  {{ 'SAVE' | translate }}
+                  {{ 'SAVE' | tr }}
                 </button>
               </div>
             </div>
@@ -66,7 +66,7 @@
 
             <form #changeAppUrlForm="ngForm" (ngSubmit)="changeAppUrl(changeAppUrlForm)" fxLayout="row wrap" fxLayoutGap="2%">
               <mat-form-field fxFlex="60%" fxFlex.xs="60%" appearance="outline">
-                <mat-label>{{ 'MANAGEMENT_DATEPOLL_APP_URL' | translate }}</mat-label>
+                <mat-label>{{ 'MANAGEMENT_DATEPOLL_APP_URL' | tr }}</mat-label>
                 <input
                   #appUrlModel="ngModel"
                   [(ngModel)]="serverInfo.application_url"
@@ -80,7 +80,7 @@
                   type="text"
                 />
                 <mat-error *ngIf="appUrlModel.invalid">
-                  {{ 'MANAGEMENT_DATEPOLL_APP_URL_NOT_VALID' | translate }}
+                  {{ 'MANAGEMENT_DATEPOLL_APP_URL_NOT_VALID' | tr }}
                 </mat-error>
               </mat-form-field>
 
@@ -97,7 +97,7 @@
                   [disabled]="!changeAppUrlForm.valid || appUrlSaving"
                   type="submit"
                 >
-                  {{ 'SAVE' | translate }}
+                  {{ 'SAVE' | tr }}
                 </button>
               </div>
             </form>
@@ -115,17 +115,17 @@
             >
               <div fxFlex="30%">
                 <mat-form-field appearance="outline">
-                  <mat-label>{{ 'MANAGEMENT_DATEPOLL_ALERT' | translate }}</mat-label>
+                  <mat-label>{{ 'MANAGEMENT_DATEPOLL_ALERT' | tr }}</mat-label>
                   <input [(ngModel)]="alertText" id="alert" matInput name="alert" ngModel type="text" />
                   <button mat-button *ngIf="alertText" matSuffix mat-icon-button aria-label="Clear" (click)="alertText = ''">
                     <mat-icon>close</mat-icon>
                   </button>
                 </mat-form-field>
-                <small *ngIf="alertText">{{ 'MANAGEMENT_DATEPOLL_ALERT_HELP' | translate }}</small>
+                <small *ngIf="alertText">{{ 'MANAGEMENT_DATEPOLL_ALERT_HELP' | tr }}</small>
               </div>
 
               <mat-form-field fxFlex="30%" appearance="outline">
-                <mat-label>{{ 'MANAGEMENT_DATEPOLL_ALERT_TYPE' | translate }}</mat-label>
+                <mat-label>{{ 'MANAGEMENT_DATEPOLL_ALERT_TYPE' | tr }}</mat-label>
                 <mat-select [(value)]="selectedAlertType">
                   <mat-option value="happy">Happy</mat-option>
                   <mat-option value="normal">Normal</mat-option>
@@ -141,7 +141,7 @@
                   [disabled]="!changeAlertForm.valid || alertSaving"
                   type="submit"
                 >
-                  {{ 'SAVE' | translate }}
+                  {{ 'SAVE' | tr }}
                 </button>
               </div>
             </form>
@@ -156,7 +156,7 @@
               fxLayout.xs="column"
             >
               <mat-form-field fxFlex="60%" appearance="outline">
-                <mat-label>{{ 'MANAGEMENT_DATEPOLL_COMMUNITY_NAME' | translate }}</mat-label>
+                <mat-label>{{ 'MANAGEMENT_DATEPOLL_COMMUNITY_NAME' | tr }}</mat-label>
                 <input
                   #communityNameModel="ngModel"
                   [(ngModel)]="serverInfo.community_name"
@@ -170,7 +170,7 @@
                   type="text"
                 />
                 <mat-error *ngIf="communityNameModel.invalid">
-                  {{ 'MANAGEMENT_DATEPOLL_COMMUNITY_NAME_NOT_VALID' | translate }}
+                  {{ 'MANAGEMENT_DATEPOLL_COMMUNITY_NAME_NOT_VALID' | tr }}
                 </mat-error>
               </mat-form-field>
 
@@ -183,7 +183,7 @@
                   [disabled]="!changeCommunityNameForm.valid || communityNameSaving"
                   type="submit"
                 >
-                  {{ 'SAVE' | translate }}
+                  {{ 'SAVE' | tr }}
                 </button>
               </div>
             </form>
@@ -196,7 +196,7 @@
               fxLayout.xs="column"
             >
               <mat-form-field fxFlex="60%" appearance="outline">
-                <mat-label>{{ 'MANAGEMENT_DATEPOLL_COMMUNITY_URL' | translate }}</mat-label>
+                <mat-label>{{ 'MANAGEMENT_DATEPOLL_COMMUNITY_URL' | tr }}</mat-label>
                 <input
                   #communityUrlModel="ngModel"
                   [(ngModel)]="serverInfo.community_url"
@@ -210,7 +210,7 @@
                   type="text"
                 />
                 <mat-error *ngIf="communityUrlModel.invalid">
-                  {{ 'MANAGEMENT_DATEPOLL_COMMUNITY_URL_NOT_VALID' | translate }}
+                  {{ 'MANAGEMENT_DATEPOLL_COMMUNITY_URL_NOT_VALID' | tr }}
                 </mat-error>
               </mat-form-field>
 
@@ -223,7 +223,7 @@
                   [disabled]="!changeCommunityUrlForm.valid || communityUrlSaving"
                   type="submit"
                 >
-                  {{ 'SAVE' | translate }}
+                  {{ 'SAVE' | tr }}
                 </button>
               </div>
             </form>
@@ -236,7 +236,7 @@
               fxLayout.xs="column"
             >
               <mat-form-field fxFlex="60%" appearance="outline">
-                <mat-label>{{ 'MANAGEMENT_DATEPOLL_COMMUNITY_DESCRIPTION' | translate }}</mat-label>
+                <mat-label>{{ 'MANAGEMENT_DATEPOLL_COMMUNITY_DESCRIPTION' | tr }}</mat-label>
                 <textarea
                   [(ngModel)]="serverInfo.community_description"
                   id="communityDescription"
@@ -248,7 +248,7 @@
                   required
                 ></textarea>
                 <small
-                  ><b>{{ 'MANAGEMENT_DATEPOLL_COMMUNITY_HTML_SUPPORTED' | translate }}</b></small
+                  ><b>{{ 'MANAGEMENT_DATEPOLL_COMMUNITY_HTML_SUPPORTED' | tr }}</b></small
                 >
               </mat-form-field>
 
@@ -261,10 +261,10 @@
                   [disabled]="!changeCommunityDescriptionForm.valid || communityDescriptionSaving"
                   type="submit"
                 >
-                  {{ 'SAVE' | translate }}
+                  {{ 'SAVE' | tr }}
                 </button>
                 <a href="/about?mode=preview" target="_blank" style="width: 100%" mat-stroked-button color="primary">
-                  {{ 'EDITOR_PREVIEW' | translate }}
+                  {{ 'EDITOR_PREVIEW' | tr }}
                 </a>
               </div>
             </form>
@@ -279,7 +279,7 @@
               fxLayout.xs="column"
             >
               <mat-form-field fxFlex="60%" appearance="outline">
-                <mat-label>{{ 'MANAGEMENT_DATEPOLL_IMPRINT' | translate }}</mat-label>
+                <mat-label>{{ 'MANAGEMENT_DATEPOLL_IMPRINT' | tr }}</mat-label>
                 <textarea
                   [(ngModel)]="serverInfo.community_imprint"
                   id="imprint"
@@ -291,7 +291,7 @@
                   required
                 ></textarea>
                 <small
-                  ><b>{{ 'MANAGEMENT_DATEPOLL_COMMUNITY_HTML_SUPPORTED' | translate }}</b></small
+                  ><b>{{ 'MANAGEMENT_DATEPOLL_COMMUNITY_HTML_SUPPORTED' | tr }}</b></small
                 >
               </mat-form-field>
 
@@ -304,10 +304,10 @@
                   [disabled]="!changeImprintForm.valid || imprintSaving"
                   type="submit"
                 >
-                  {{ 'SAVE' | translate }}
+                  {{ 'SAVE' | tr }}
                 </button>
                 <a routerLink="/info/imprint" target="_blank" style="width: 100%" mat-stroked-button color="primary">
-                  {{ 'EDITOR_PREVIEW' | translate }}
+                  {{ 'EDITOR_PREVIEW' | tr }}
                 </a>
               </div>
             </form>
@@ -320,7 +320,7 @@
               fxLayout.xs="column"
             >
               <mat-form-field fxFlex="60%" appearance="outline">
-                <mat-label>{{ 'MANAGEMENT_DATEPOLL_PRIVACY_POLICY' | translate }}</mat-label>
+                <mat-label>{{ 'MANAGEMENT_DATEPOLL_PRIVACY_POLICY' | tr }}</mat-label>
                 <textarea
                   [(ngModel)]="serverInfo.community_privacy_policy"
                   id="privacyPolicy"
@@ -332,7 +332,7 @@
                   required
                 ></textarea>
                 <small
-                  ><b>{{ 'MANAGEMENT_DATEPOLL_COMMUNITY_HTML_SUPPORTED' | translate }}</b></small
+                  ><b>{{ 'MANAGEMENT_DATEPOLL_COMMUNITY_HTML_SUPPORTED' | tr }}</b></small
                 >
               </mat-form-field>
 
@@ -345,10 +345,10 @@
                   [disabled]="!changePrivacyPolicyForm.valid || privacyPolicySaving"
                   type="submit"
                 >
-                  {{ 'SAVE' | translate }}
+                  {{ 'SAVE' | tr }}
                 </button>
                 <a routerLink="/info/privacypolicy" target="_blank" style="width: 100%" mat-stroked-button color="primary">
-                  {{ 'EDITOR_PREVIEW' | translate }}
+                  {{ 'EDITOR_PREVIEW' | tr }}
                 </a>
               </div>
             </form>
@@ -365,7 +365,7 @@
               fxLayout.xs="column"
             >
               <mat-form-field fxFlex="60%" appearance="outline">
-                <mat-label>{{ 'MANAGEMENT_DATEPOLL_OPENWEATHERMAP_KEY' | translate }}</mat-label>
+                <mat-label>{{ 'MANAGEMENT_DATEPOLL_OPENWEATHERMAP_KEY' | tr }}</mat-label>
                 <input
                   #openWeatherMapKeyModel="ngModel"
                   [(ngModel)]="openWeatherMapKey"
@@ -377,7 +377,7 @@
                   type="text"
                 />
                 <mat-error *ngIf="openWeatherMapKeyModel.invalid">
-                  {{ 'MANAGEMENT_DATEPOLL_OPENWEATHERMAP_KEY_INVALID' | translate }}
+                  {{ 'MANAGEMENT_DATEPOLL_OPENWEATHERMAP_KEY_INVALID' | tr }}
                 </mat-error>
               </mat-form-field>
 
@@ -390,7 +390,7 @@
                   [disabled]="!changeOpenWeatherMapKeyForm.valid || openWeatherMapKeySaving"
                   type="submit"
                 >
-                  {{ 'SAVE' | translate }}
+                  {{ 'SAVE' | tr }}
                 </button>
               </div>
             </form>
@@ -403,7 +403,7 @@
               fxLayout.xs="column"
             >
               <mat-form-field fxFlex="60%" appearance="outline">
-                <mat-label>{{ 'MANAGEMENT_DATEPOLL_OPENWEATHERMAP_CINEMA_CITY_ID' | translate }}</mat-label>
+                <mat-label>{{ 'MANAGEMENT_DATEPOLL_OPENWEATHERMAP_CINEMA_CITY_ID' | tr }}</mat-label>
                 <input
                   #openWeatherMapCinemaCityIdModel="ngModel"
                   [(ngModel)]="openWeatherMapCinemaCityId"
@@ -415,7 +415,7 @@
                   type="text"
                 />
                 <mat-error *ngIf="openWeatherMapCinemaCityIdModel.invalid">
-                  {{ 'MANAGEMENT_DATEPOLL_OPENWEATHERMAP_CINEMA_CITY_ID_INVALID' | translate }}
+                  {{ 'MANAGEMENT_DATEPOLL_OPENWEATHERMAP_CINEMA_CITY_ID_INVALID' | tr }}
                 </mat-error>
               </mat-form-field>
 
@@ -428,7 +428,7 @@
                   [disabled]="!changeOpenWeatherMapCinemaCityIdForm.valid || openWeatherMapCinemaCityIdSaving"
                   type="submit"
                 >
-                  {{ 'SAVE' | translate }}
+                  {{ 'SAVE' | tr }}
                 </button>
               </div>
             </form>
@@ -441,7 +441,7 @@
               fxLayout.xs="column"
             >
               <mat-form-field fxFlex="60%" appearance="outline">
-                <mat-label>{{ 'MANAGEMENT_DATEPOLL_JITSI_MEET_INSTANCE_URL' | translate }}</mat-label>
+                <mat-label>{{ 'MANAGEMENT_DATEPOLL_JITSI_MEET_INSTANCE_URL' | tr }}</mat-label>
                 <input
                   #jitsiInstanceUrlModel="ngModel"
                   [(ngModel)]="jitsiMeetInstanceUrl"
@@ -452,9 +452,9 @@
                   ngModel
                   type="text"
                 />
-                <small *ngIf="!jitsiMeetInstanceUrl">{{ 'MANAGEMENT_DATEPOLL_JITSI_MEET_INSTANCE_URL_HELP' | translate }}</small>
+                <small *ngIf="!jitsiMeetInstanceUrl">{{ 'MANAGEMENT_DATEPOLL_JITSI_MEET_INSTANCE_URL_HELP' | tr }}</small>
                 <mat-error *ngIf="jitsiInstanceUrlModel.invalid">
-                  {{ 'MANAGEMENT_DATEPOLL_JITSI_MEET_INSTANCE_URL_INVALID' | translate }}
+                  {{ 'MANAGEMENT_DATEPOLL_JITSI_MEET_INSTANCE_URL_INVALID' | tr }}
                 </mat-error>
               </mat-form-field>
 
@@ -467,14 +467,14 @@
                   [disabled]="!changeJitsiMeetInstanceUrlForm.valid || jitsiMeetInstanceUrlSaving"
                   type="submit"
                 >
-                  {{ 'SAVE' | translate }}
+                  {{ 'SAVE' | tr }}
                 </button>
               </div>
             </form>
           </div>
         </mat-tab>
         <mat-tab
-          label="{{ 'MANAGEMENT_DATEPOLL_JOBS' | translate }}"
+          label="{{ 'MANAGEMENT_DATEPOLL_JOBS' | tr }}"
           *ngIf="
             (this.myUserService.hasPermission(SYSTEM_JOBS_ADMINISTRATION) &&
               this.myUserService.hasPermission(SYSTEM_LOGS_ADMINISTRATION)) ||

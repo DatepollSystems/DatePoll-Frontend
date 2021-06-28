@@ -1,9 +1,8 @@
 import {Component, OnDestroy} from '@angular/core';
 import {NgForm} from '@angular/forms';
-import {MatSnackBar} from '@angular/material/snack-bar';
 import {Subscription} from 'rxjs';
 
-import {TranslateService} from '../../../../translation/translate.service';
+import {NotificationService} from '../../../../utils/notification.service';
 import {StandardLocationsService} from '../../services/standardLocations.service';
 
 import {EventStandardLocation} from '../../models/event-standard-location.model';
@@ -20,11 +19,7 @@ export class EventStandardLocationsManagementModalComponent implements OnDestroy
   public x = 0;
   public y = 0;
 
-  constructor(
-    private standardLocationsService: StandardLocationsService,
-    private snackBar: MatSnackBar,
-    private translate: TranslateService
-  ) {
+  constructor(private standardLocationsService: StandardLocationsService, private notificationService: NotificationService) {
     this.standardLocations = this.standardLocationsService.getStandardLocations();
     this.standardLocationsSubscription = this.standardLocationsService.standardLocationsChange.subscribe((value) => {
       this.standardLocations = value;
@@ -56,7 +51,7 @@ export class EventStandardLocationsManagementModalComponent implements OnDestroy
 
         this.standardLocationsService.fetchStandardLocations();
 
-        this.snackBar.open(this.translate.getTranslationFor('EVENTS_STANDARD_LOCATIONS_MANAGEMENT_SUCCESSFULLY_ADDED'));
+        this.notificationService.info('EVENTS_STANDARD_LOCATIONS_MANAGEMENT_SUCCESSFULLY_ADDED');
       },
       (error) => console.log(error)
     );
@@ -71,7 +66,7 @@ export class EventStandardLocationsManagementModalComponent implements OnDestroy
 
         this.standardLocationsService.fetchStandardLocations();
 
-        this.snackBar.open(this.translate.getTranslationFor('EVENTS_STANDARD_LOCATIONS_MANAGEMENT_SUCCESSFULLY_REMOVED'));
+        this.notificationService.info('EVENTS_STANDARD_LOCATIONS_MANAGEMENT_SUCCESSFULLY_REMOVED');
       },
       (error) => console.log(error)
     );

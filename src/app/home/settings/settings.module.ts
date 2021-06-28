@@ -3,7 +3,7 @@ import {NgModule} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import {MaterialModule} from '../../material-module';
-import {TranslationModule} from '../../translation/translation.module';
+import {DfxTranslateModule} from 'dfx-translate';
 import {CommonComponentsModule} from '../../utils/common-components.module';
 import {SettingsRoutingModule} from './settings-routing.module';
 
@@ -32,7 +32,7 @@ import {SettingsComponent} from './settings.component';
     FormsModule,
     ReactiveFormsModule,
     MaterialModule,
-    TranslationModule,
+    DfxTranslateModule,
     CommonComponentsModule,
     SettingsRoutingModule,
   ],

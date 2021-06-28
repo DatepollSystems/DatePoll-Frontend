@@ -3,13 +3,13 @@
     <div fxLayout="column" fxLayoutAlign="center">
       <mat-progress-spinner mode="indeterminate" style="margin: auto auto 10px"></mat-progress-spinner>
 
-      <h2 style="text-align: center">{{ 'LOADING' | translate }}</h2>
+      <h2 style="text-align: center">{{ 'LOADING' | tr }}</h2>
     </div>
   </div>
 
   <div *ngIf="movies?.length > 0" fxLayout="column" [fxHide.xs]="true">
     <mat-form-field>
-      <mat-label>{{ 'SEARCH' | translate }}</mat-label>
+      <mat-label>{{ 'SEARCH' | tr }}</mat-label>
       <input matInput [(ngModel)]="searchFilter" (input)="searchFilterUpdate()" />
     </mat-form-field>
 
@@ -29,7 +29,7 @@
   <div *ngIf="movies?.length > 0" [fxHide.gt-sm]="true">
     <div fxLayout="row" fxLayoutAlign="space-between">
       <mat-form-field fxFlex>
-        <mat-label>{{ 'SEARCH' | translate }}</mat-label>
+        <mat-label>{{ 'SEARCH' | tr }}</mat-label>
         <input matInput [(ngModel)]="searchFilter" (input)="searchFilterUpdate()" />
       </mat-form-field>
 
@@ -61,7 +61,7 @@
         <mat-icon>remove_circle_outline</mat-icon>
       </div>
       <div style="text-align: center; font-size: 2.5vh">
-        {{ 'CINEMA_TICKETS_SEARCH_NOTHING_FOUND' | translate }}
+        {{ 'CINEMA_TICKETS_SEARCH_NOTHING_FOUND' | tr }}
       </div>
     </div>
   </div>
@@ -72,7 +72,7 @@
         <mat-icon>remove_circle_outline</mat-icon>
       </div>
       <div style="text-align: center; font-size: 2.5vh">
-        {{ 'CINEMA_TICKETS_NO_MOVIES_AVAILABLE' | translate }}
+        {{ 'CINEMA_TICKETS_NO_MOVIES_AVAILABLE' | tr }}
       </div>
     </div>
   </div>

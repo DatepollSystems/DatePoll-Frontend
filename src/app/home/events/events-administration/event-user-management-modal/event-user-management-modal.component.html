@@ -1,10 +1,9 @@
-<h1 mat-dialog-title>{{'EVENTS_ADMINISTRATION_USER_MANAGEMENT_FOR_EVENT' | translate}} {{name}}</h1>
+<h1 mat-dialog-title>{{ 'EVENTS_ADMINISTRATION_USER_MANAGEMENT_FOR_EVENT' | tr }} {{ name }}</h1>
 <div mat-dialog-content>
-  <app-event-user-management *ngIf="event != null" [resultUsers]="event.getResultUsers()"
-                             [event]="event"></app-event-user-management>
+  <app-event-user-management *ngIf="event != null" [resultUsers]="event.getResultUsers()" [event]="event"></app-event-user-management>
 
-  <mat-progress-bar *ngIf="sendingRequest" mode="indeterminate" style="margin-top: 15px;"></mat-progress-bar>
+  <mat-progress-bar *ngIf="sendingRequest" mode="indeterminate" style="margin-top: 15px"></mat-progress-bar>
 </div>
 <div mat-dialog-actions style="margin-top: 15px">
-  <button [mat-dialog-close] mat-button>{{'CLOSE' | translate}}</button>
+  <button [mat-dialog-close] mat-button>{{ 'CLOSE' | tr }}</button>
 </div>

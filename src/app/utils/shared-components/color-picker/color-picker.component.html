@@ -6,6 +6,6 @@
   type="button"
   [style.background-color]="color"
 >
-  {{ 'COLOR_PICKER' | translate }}
+  {{ 'COLOR_PICKER' | tr }}
 </button>
 <color-github *ngIf="showColorPicker" (onChangeComplete)="changeComplete($event)" [colors]="colors"></color-github>

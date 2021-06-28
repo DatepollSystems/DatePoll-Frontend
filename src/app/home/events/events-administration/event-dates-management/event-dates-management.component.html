@@ -1,7 +1,7 @@
 <mat-expansion-panel fxFlex [expanded]="!isMobile">
   <mat-expansion-panel-header>
     <mat-panel-title>
-      {{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE_TITLE' | translate }}
+      {{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE_TITLE' | tr }}
     </mat-panel-title>
   </mat-expansion-panel-header>
 
@@ -24,7 +24,7 @@
           matInput
           name="datepicker-date"
           required
-          placeholder="{{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE' | translate }}"
+          placeholder="{{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE' | tr }}"
         />
         <mat-datepicker-toggle [for]="picker_date" matSuffix></mat-datepicker-toggle>
         <mat-datepicker #picker_date></mat-datepicker>
@@ -44,11 +44,11 @@
           max="90"
           name="x"
           ngModel
-          placeholder="{{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_X' | translate }}"
+          placeholder="{{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_X' | tr }}"
           type="number"
         />
         <mat-error *ngIf="xModel.invalid">
-          {{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_X_INCORRECT' | translate }}
+          {{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_X_INCORRECT' | tr }}
         </mat-error>
       </mat-form-field>
 
@@ -62,11 +62,11 @@
           max="180"
           name="y"
           ngModel
-          placeholder="{{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_Y' | translate }}"
+          placeholder="{{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_Y' | tr }}"
           type="number"
         />
         <mat-error *ngIf="yModel.invalid">
-          {{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_Y_INCORRECT' | translate }}
+          {{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_Y_INCORRECT' | tr }}
         </mat-error>
       </mat-form-field>
 
@@ -79,13 +79,13 @@
           name="location"
           type="text"
           ngModel
-          placeholder="{{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_LOCATION' | translate }}"
+          placeholder="{{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_LOCATION' | tr }}"
           [(ngModel)]="location"
         />
 
-        <small>{{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_LOCATION_HELP' | translate }}</small>
+        <small>{{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_LOCATION_HELP' | tr }}</small>
         <mat-error *ngIf="locationModel.invalid">
-          {{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_LOCATION_INCORRECT' | translate }}
+          {{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_LOCATION_INCORRECT' | tr }}
         </mat-error>
       </mat-form-field>
 
@@ -97,7 +97,7 @@
           color="primary"
           (click)="generateRandomJitsiMeetConferenceUrl()"
           *ngIf="jitsiMeetInstanceUrl?.length > 0"
-          matTooltip="{{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_LOCATION_GENERATE_JTSI_CONFERENCE_LINK_TOOLTIP' | translate }}"
+          matTooltip="{{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_LOCATION_GENERATE_JTSI_CONFERENCE_LINK_TOOLTIP' | tr }}"
           matTooltipPosition="above"
         >
           <mat-icon>refresh</mat-icon>
@@ -114,7 +114,7 @@
           (click)="form.ngSubmit.emit()"
           [disabled]="!form.form.valid || timeIncorrect"
         >
-          {{ 'ADD' | translate }}
+          {{ 'ADD' | tr }}
           <mat-icon>library_add</mat-icon>
         </button>
       </div>

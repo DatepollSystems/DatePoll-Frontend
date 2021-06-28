@@ -8,7 +8,7 @@ import {AuthService} from '../auth/auth.service';
 import {IsMobileService} from '../utils/is-mobile.service';
 import {SettingsService} from '../utils/settings.service';
 import {MyUserService} from './my-user.service';
-import {TranslateService} from '../translation/translate.service';
+import {TranslateService} from 'dfx-translate';
 
 import {UIHelper} from '../utils/helper/UIHelper';
 import {Permissions} from '../permissions';
@@ -143,11 +143,11 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   onNetworkStatusInfoClick(): void {
-    this.snackBar.open(this.translate.getTranslationFor('OFFLINE_HELP'));
+    this.snackBar.open(this.translate.translate('OFFLINE_HELP'));
   }
 
   onPrideMonthInfoClick() {
-    const snackBar = this.snackBar.open(this.translate.getTranslationFor('PRIDE_HELP'), this.translate.getTranslationFor('LEARN_MORE'));
+    const snackBar = this.snackBar.open(this.translate.translate('PRIDE_HELP'), this.translate.translate('LEARN_MORE'));
     snackBar.onAction().subscribe(() => {
       window.open('https://www.studentjob.at/blog/4830-lgbtq-pride-month-die-bedeutung-dahinter', '_blank');
     });

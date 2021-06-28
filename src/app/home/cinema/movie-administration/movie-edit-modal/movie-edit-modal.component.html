@@ -1,4 +1,4 @@
-<h1 mat-dialog-title>{{ 'CINEMA_TICKETS_ADMINISTRATION_MOVIE_EDIT_MODAL_EDIT' | translate }} {{ name }}</h1>
+<h1 mat-dialog-title>{{ 'CINEMA_TICKETS_ADMINISTRATION_MOVIE_EDIT_MODAL_EDIT' | tr }} {{ name }}</h1>
 <div mat-dialog-content>
   <app-do-not-forget-to-save></app-do-not-forget-to-save>
 
@@ -13,12 +13,12 @@
         minlength="1"
         name="name"
         ngModel
-        placeholder="{{ 'CINEMA_TICKETS_ADMINISTRATION_NAME' | translate }}"
+        placeholder="{{ 'CINEMA_TICKETS_ADMINISTRATION_NAME' | tr }}"
         required
         type="text"
       />
       <mat-error *ngIf="nameModel.invalid">
-        {{ 'CINEMA_TICKETS_ADMINISTRATION_MOVIE_EDIT_MODAL_NAME_INVALID' | translate }}
+        {{ 'CINEMA_TICKETS_ADMINISTRATION_MOVIE_EDIT_MODAL_NAME_INVALID' | tr }}
       </mat-error>
     </mat-form-field>
 
@@ -30,7 +30,7 @@
         id="datepicker"
         matInput
         name="datepicker"
-        placeholder="{{ 'CINEMA_TICKETS_ADMINISTRATION_DATE' | translate }}"
+        placeholder="{{ 'CINEMA_TICKETS_ADMINISTRATION_DATE' | tr }}"
       />
       <mat-datepicker-toggle [for]="picker" matSuffix></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
@@ -44,7 +44,7 @@
         name="bookedTickets"
         ngModel
         number
-        placeholder="{{ 'CINEMA_TICKETS_ADMINISTRATION_BOOKED_TICKETS' | translate }}"
+        placeholder="{{ 'CINEMA_TICKETS_ADMINISTRATION_BOOKED_TICKETS' | tr }}"
         required
         type="number"
       />
@@ -58,7 +58,7 @@
         name="maximalTickets"
         ngModel
         number
-        placeholder="{{ 'CINEMA_TICKETS_ADMINISTRATION_MAXIMAL_TICKETS' | translate }}"
+        placeholder="{{ 'CINEMA_TICKETS_ADMINISTRATION_MAXIMAL_TICKETS' | tr }}"
         required
         type="number"
       />
@@ -74,12 +74,12 @@
         minlength="6"
         name="trailerLink"
         ngModel
-        placeholder="{{ 'CINEMA_TICKETS_ADMINISTRATION_TRAILER' | translate }}"
+        placeholder="{{ 'CINEMA_TICKETS_ADMINISTRATION_TRAILER' | tr }}"
         required
         type="text"
       />
       <mat-error *ngIf="trailerLinkModel.invalid">
-        {{ 'CINEMA_TICKETS_ADMINISTRATION_MOVIE_EDIT_MODAL_TRAILER_INVALID' | translate }}
+        {{ 'CINEMA_TICKETS_ADMINISTRATION_MOVIE_EDIT_MODAL_TRAILER_INVALID' | tr }}
       </mat-error>
     </mat-form-field>
 
@@ -93,24 +93,24 @@
         minlength="6"
         name="imageLink"
         ngModel
-        placeholder="{{ 'CINEMA_TICKETS_ADMINISTRATION_POSTER' | translate }}"
+        placeholder="{{ 'CINEMA_TICKETS_ADMINISTRATION_POSTER' | tr }}"
         required
         type="text"
       />
       <mat-error *ngIf="imageLinkModel.invalid">
-        {{ 'CINEMA_TICKETS_ADMINISTRATION_MOVIE_EDIT_MODAL_POSTER_INVALID' | translate }}
+        {{ 'CINEMA_TICKETS_ADMINISTRATION_MOVIE_EDIT_MODAL_POSTER_INVALID' | tr }}
       </mat-error>
     </mat-form-field>
   </form>
 
-  <h2>{{ 'CINEMA_TICKETS_ADMINISTRATION_MOVIE_EDIT_MODAL_POSTER_PREVIEW' | translate }}</h2>
+  <h2>{{ 'CINEMA_TICKETS_ADMINISTRATION_MOVIE_EDIT_MODAL_POSTER_PREVIEW' | tr }}</h2>
   <div fxLayout="row" fxLayoutAlign="center">
     <img *ngIf="imageLink != null" alt="Poster of the movie" src="{{ imageLink }}" />
   </div>
 </div>
 <div mat-dialog-actions>
-  <button [mat-dialog-close] mat-button>{{ 'CLOSE' | translate }}</button>
+  <button [mat-dialog-close] mat-button>{{ 'CLOSE' | tr }}</button>
   <button (click)="form.ngSubmit.emit()" [disabled]="!form.form.valid" color="accent" mat-flat-button mat-dialog-close>
-    {{ 'SAVE' | translate }}
+    {{ 'SAVE' | tr }}
   </button>
 </div>

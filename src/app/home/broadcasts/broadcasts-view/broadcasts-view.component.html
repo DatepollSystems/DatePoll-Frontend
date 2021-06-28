@@ -3,7 +3,7 @@
     <div fxLayout="row" fxLayoutAlign="space-between" fxLayoutGap="2.5%">
       <app-go-back-button></app-go-back-button>
       <mat-form-field *ngIf="broadcasts.length != 0">
-        <mat-label>{{ 'BROADCASTS_ADMINISTRATION_SEARCH_LIST' | translate }}</mat-label>
+        <mat-label>{{ 'BROADCASTS_ADMINISTRATION_SEARCH_LIST' | tr }}</mat-label>
         <input matInput [(ngModel)]="searchFilter" (input)="searchFilterUpdate($event)" />
       </mat-form-field>
     </div>
@@ -19,7 +19,7 @@
               {{ broadcast.sent | date: 'EE, dd.MM.yyyy HH:mm' }}
               <small> ({{ broadcast.readTime }})</small>
             </div>
-            <div mat-line>{{ 'STARTPAGE_BROADCASTS_BY' | translate }} {{ broadcast.writerName }}</div>
+            <div mat-line>{{ 'STARTPAGE_BROADCASTS_BY' | tr }} {{ broadcast.writerName }}</div>
           </mat-list-item>
           <mat-divider></mat-divider>
         </ng-container>
@@ -28,7 +28,7 @@
 
     <div fxLayout="row" fxLayoutAlign="center" *ngIf="empty">
       <div fxFlex style="text-align: center">
-        {{ 'BROADCASTS_EMPTY' | translate }}
+        {{ 'BROADCASTS_EMPTY' | tr }}
       </div>
     </div>
 

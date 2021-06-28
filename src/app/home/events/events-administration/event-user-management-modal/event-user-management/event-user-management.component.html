@@ -1,11 +1,11 @@
 <div fxLayout="row wrap" fxLayoutGap="2%" fxLayoutAlign="start">
   <mat-form-field fxFlex="65%" fxFlex.lt-md="50%" fxFlex.xs="100%">
-    <input (keyup)="applyFilter($event.target.value)" matInput placeholder="{{ 'MANAGEMENT_USERS_SEARCH' | translate }}" />
+    <input (keyup)="applyFilter($event.target.value)" matInput placeholder="{{ 'MANAGEMENT_USERS_SEARCH' | tr }}" />
   </mat-form-field>
 
   <div fxFlex="15%" fxFlex.lt-md="30%" fxFlex.xs="65%">
     <button mat-flat-button color="primary" style="width: 100%" (click)="onVote()" [class.spinner]="savingVoting" [disabled]="savingVoting">
-      {{ 'EVENTS_ADMINISTRATION_USER_MANAGEMENT_FOR_EVENT_VOTE' | translate }}
+      {{ 'EVENTS_ADMINISTRATION_USER_MANAGEMENT_FOR_EVENT_VOTE' | tr }}
     </button>
   </div>
 
@@ -17,7 +17,7 @@
       style="width: 100%"
       [class.spinner]="savingClearVoting"
       [disabled]="savingClearVoting"
-      matTooltip="{{ 'EVENTS_ADMINISTRATION_USER_MANAGEMENT_FOR_EVENT_REMOVE_VOTING' | translate }}"
+      matTooltip="{{ 'EVENTS_ADMINISTRATION_USER_MANAGEMENT_FOR_EVENT_REMOVE_VOTING' | tr }}"
     >
       <mat-icon>delete</mat-icon>
     </button>
@@ -50,25 +50,25 @@
 
     <!-- Firstname Column -->
     <ng-container matColumnDef="firstname">
-      <th *matHeaderCellDef mat-header-cell mat-sort-header>{{ 'EVENTS_ADMINISTRATION_INFO_EVENT_FIRSTNAME' | translate }}</th>
+      <th *matHeaderCellDef mat-header-cell mat-sort-header>{{ 'EVENTS_ADMINISTRATION_INFO_EVENT_FIRSTNAME' | tr }}</th>
       <td *matCellDef="let resultUser" mat-cell>{{ resultUser.firstname }}</td>
     </ng-container>
 
     <!-- Surname Column -->
     <ng-container matColumnDef="surname">
-      <th *matHeaderCellDef mat-header-cell mat-sort-header>{{ 'EVENTS_ADMINISTRATION_INFO_EVENT_SURNAME' | translate }}</th>
+      <th *matHeaderCellDef mat-header-cell mat-sort-header>{{ 'EVENTS_ADMINISTRATION_INFO_EVENT_SURNAME' | tr }}</th>
       <td *matCellDef="let resultUser" mat-cell>{{ resultUser.surname }}</td>
     </ng-container>
 
     <!-- Decision Column -->
     <ng-container matColumnDef="decision">
-      <th *matHeaderCellDef mat-header-cell mat-sort-header>{{ 'EVENTS_ADMINISTRATION_INFO_EVENT_DECISION' | translate }}</th>
+      <th *matHeaderCellDef mat-header-cell mat-sort-header>{{ 'EVENTS_ADMINISTRATION_INFO_EVENT_DECISION' | tr }}</th>
       <td *matCellDef="let resultUser" mat-cell>
         <b *ngIf="resultUser.decision != null">{{ resultUser.decision }}</b>
         <i *ngIf="resultUser.decision != null && resultUser?.additionalInformation?.length > 0"
           >&nbsp;({{ resultUser.additionalInformation }})</i
         >
-        <span *ngIf="resultUser.decision == null">{{ 'EVENTS_ADMINISTRATION_INFO_EVENT_UNKNOWN_VOTING' | translate }}</span>
+        <span *ngIf="resultUser.decision == null">{{ 'EVENTS_ADMINISTRATION_INFO_EVENT_UNKNOWN_VOTING' | tr }}</span>
       </td>
     </ng-container>
 

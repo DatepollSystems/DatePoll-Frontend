@@ -1,4 +1,4 @@
-<h2 mat-dialog-title>{{ 'CINEMA_TICKETS_WEATHER_FORECAST_MODAL' | translate }} {{ movie.name }}</h2>
+<h2 mat-dialog-title>{{ 'CINEMA_TICKETS_WEATHER_FORECAST_MODAL' | tr }} {{ movie.name }}</h2>
 <mat-dialog-content>
   <mat-progress-bar mode="indeterminate" *ngIf="!cinemaService.fetchedWeatherForecast"></mat-progress-bar>
 
@@ -7,20 +7,18 @@
       <mat-list-item *ngFor="let weather of movie.getWeatherForecasts()" style="margin-bottom: 15px">
         <div mat-line fxLayout="row" fxLayoutAlign="space-between">
           <span
-            ><b
-              >{{ 'CINEMA_TICKETS_WEATHER_FORECAST_MODAL_BY' | translate }} {{ weather.date | date: 'HH:mm' }}: {{ weather.weather }}</b
-            ></span
+            ><b>{{ 'CINEMA_TICKETS_WEATHER_FORECAST_MODAL_BY' | tr }} {{ weather.date | date: 'HH:mm' }}: {{ weather.weather }}</b></span
           >
           <span style="text-align: right"
             ><b>{{ weather.temperature }}° C</b></span
           >
         </div>
         <div mat-line fxLayout="row" fxLayoutAlign="space-between">
-          <span>{{ 'CINEMA_TICKETS_WEATHER_FORECAST_MODAL_CLOUDS' | translate }}</span>
+          <span>{{ 'CINEMA_TICKETS_WEATHER_FORECAST_MODAL_CLOUDS' | tr }}</span>
           <span style="text-align: right">{{ weather.cloudy }}%</span>
         </div>
         <div mat-line fxLayout="row" fxLayoutAlign="space-between">
-          <span>{{ 'CINEMA_TICKETS_WEATHER_FORECAST_MODAL_WIND_SPEED' | translate }}</span>
+          <span>{{ 'CINEMA_TICKETS_WEATHER_FORECAST_MODAL_WIND_SPEED' | tr }}</span>
           <span style="text-align: right">{{ weather.windSpeed }}m/s</span>
         </div>
         <div mat-line>
@@ -30,16 +28,16 @@
     </div>
 
     <small>
-      {{ 'CINEMA_TICKETS_WEATHER_FORECAST_MODAL_PROVIDER_1' | translate }}
+      {{ 'CINEMA_TICKETS_WEATHER_FORECAST_MODAL_PROVIDER_1' | tr }}
       <a href="https://openweathermap.org" target="_blank" rel="noopener">OpenWeatherMap</a>
-      {{ 'CINEMA_TICKETS_WEATHER_FORECAST_MODAL_PROVIDER_2' | translate }}
+      {{ 'CINEMA_TICKETS_WEATHER_FORECAST_MODAL_PROVIDER_2' | tr }}
     </small>
 
     <div *ngIf="movie.getWeatherForecasts().length === 0">
-      {{ 'CINEMA_TICKETS_WEATHER_FORECAST_MODAL_NO_DATA' | translate }}
+      {{ 'CINEMA_TICKETS_WEATHER_FORECAST_MODAL_NO_DATA' | tr }}
     </div>
   </div>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-  <button mat-button mat-dialog-close>{{ 'CLOSE' | translate }}</button>
+  <button mat-button mat-dialog-close>{{ 'CLOSE' | tr }}</button>
 </mat-dialog-actions>

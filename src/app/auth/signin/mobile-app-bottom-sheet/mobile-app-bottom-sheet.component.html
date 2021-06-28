@@ -1,4 +1,4 @@
-<h3>{{ 'SIGNIN_GET_THE_APP' | translate }}</h3>
+<h3>{{ 'SIGNIN_GET_THE_APP' | tr }}</h3>
 <div fxLayout="row" fxLayoutAlign="stretch">
   <a
     fxFlex="50%"
@@ -7,14 +7,14 @@
     rel="noopener"
     style="text-align: start"
   >
-    <img src="./../../../../assets/signGetOnGPlay.png" alt="Get the DatePoll-App on Google Play Store" style="width: 176px;" />
+    <img src="./../../../../assets/signGetOnGPlay.png" alt="Get the DatePoll-App on Google Play Store" style="width: 176px" />
   </a>
   <!--  <a fxFlex="50%" href="https://f-droid.org" target="_blank" rel="noopener" style="text-align: end" disabled>-->
   <!--    <img src="./../../../../assets/signGetOnFDroid.png" alt="Get the DatePoll-App on F-Droid.org" style="width: 160px; margin-top: 13px;" />-->
   <!--  </a>-->
 </div>
 
-<h3 style="margin-top: 15px;">{{ 'SIGNIN_SCAN_ME' | translate }}</h3>
+<h3 style="margin-top: 15px">{{ 'SIGNIN_SCAN_ME' | tr }}</h3>
 <div fxLayout="row" fxLayoutAlign="center">
   <qrcode
     *ngIf="appUrl != null"
@@ -24,9 +24,9 @@
     [errorCorrectionLevel]="'M'"
     [elementType]="'img'"
     [allowEmptyString]="true"
-    style="margin: 0 auto;"
+    style="margin: 0 auto"
   ></qrcode>
-  <p *ngIf="appUrl == null">{{ 'REQUEST_ERROR' | translate }}</p>
+  <p *ngIf="appUrl == null">{{ 'REQUEST_ERROR' | tr }}</p>
 </div>
 
-<button mat-flat-button style="width: 100%; margin-top: 10px;" color="accent" (click)="close()">{{ 'CLOSE' | translate }}</button>
+<button mat-flat-button style="width: 100%; margin-top: 10px" color="accent" (click)="close()">{{ 'CLOSE' | tr }}</button>

@@ -5,7 +5,7 @@ import {FormsModule} from '@angular/forms';
 import {NgxPrintModule} from 'ngx-print';
 
 import {MaterialModule} from '../../../material-module';
-import {TranslationModule} from '../../../translation/translation.module';
+import {DfxTranslateModule} from 'dfx-translate';
 import {GroupsManagementRoutingModule} from './groups-management-routing.module';
 
 import {GroupsService} from './groups.service';
@@ -42,7 +42,7 @@ import {ListChipInputModule} from '../../../utils/shared-components/list-chip-in
     CommonModule,
     FormsModule,
     MaterialModule,
-    TranslationModule,
+    DfxTranslateModule,
     NgxPrintModule,
     GroupsManagementRoutingModule,
     ListChipInputModule,
