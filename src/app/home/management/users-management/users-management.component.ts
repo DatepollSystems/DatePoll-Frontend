@@ -84,7 +84,7 @@ export class UsersManagementComponent implements OnInit, OnDestroy {
         {id: 'phoneNumbers', name: 'phoneNumbers'},
         {id: 'activity', name: 'activity'},
         {id: 'username', name: 'username'},
-        {id: 'bvMember', name: 'bvMember'},
+        {id: 'govMember', name: 'govMember'},
         {id: 'actions', name: 'actions'},
       ],
       {defaultSortParams: ['surname'], defaultSortDirs: ['asc']}
@@ -134,7 +134,7 @@ export class UsersManagementComponent implements OnInit, OnDestroy {
       {id: 'phoneNumbers', name: this.translate.translate('MANAGEMENT_USERS_PHONENUMBERS')},
       {id: 'activity', name: this.translate.translate('MANAGEMENT_USERS_ACTIVITY')},
       {id: 'username', name: this.translate.translate('MANAGEMENT_USERS_USERNAME')},
-      {id: 'bvMember', name: this.translate.translate('MANAGEMENT_USERS_BV_MEMBER')},
+      {id: 'govMember', name: this.translate.translate('MANAGEMENT_USERS_GOV_MEMBER')},
       {id: 'actions', name: this.translate.translate('MANAGEMENT_USERS_ACTIONS')},
     ]);
 

@@ -19,7 +19,7 @@ export class User {
   public memberNumber: string;
   public internalComment: string;
   public informationDenied: boolean;
-  public bvMember: string;
+  public govMember: string;
   private readonly _phoneNumbers: PhoneNumber[] = [];
   private _permissions: string[] = [];
   private readonly _emailAddresses: string[] = [];
@@ -43,7 +43,7 @@ export class User {
     memberNumber: string,
     internalComent: string,
     informationDenied: boolean,
-    bvMember: string,
+    govMember: string,
     phoneNumbers: PhoneNumber[],
     permissions: string[]
   ) {
@@ -65,7 +65,7 @@ export class User {
     this.memberNumber = memberNumber;
     this.internalComment = internalComent;
     this.informationDenied = informationDenied;
-    this.bvMember = bvMember;
+    this.govMember = govMember;
     this._phoneNumbers = phoneNumbers;
     this._permissions = permissions;
   }

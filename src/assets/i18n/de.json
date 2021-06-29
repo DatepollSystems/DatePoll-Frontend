@@ -274,7 +274,7 @@
   "MANAGEMENT_USERS_ZIPCODE": "Postleitzahl",
   "MANAGEMENT_USERS_LOCATION": "Ortsname",
   "MANAGEMENT_USERS_PHONENUMBERS": "Telefonnummern",
-  "MANAGEMENT_USERS_BV_MEMBER": "Blasmusikverband",
+  "MANAGEMENT_USERS_GOV_MEMBER": "Dachverbandsmitglied",
   "MANAGEMENT_USERS_ACTIVITY": "Aktivität",
   "MANAGEMENT_USERS_ACTIONS": "Aktionen",
   "MANAGEMENT_USERS_ACTIONS_EDIT_TOOLTIP": "Bearbeite dieses Mitglied",

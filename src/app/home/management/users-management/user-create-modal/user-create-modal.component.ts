@@ -33,7 +33,7 @@ export class UserCreateModalComponent implements OnDestroy {
   emailAddresses: string[] = [];
   birthday: Date;
   join_date: Date;
-  bvMember: string;
+  govMember: string;
   phoneNumbers: PhoneNumber[] = [];
 
   groupsSubscription: Subscription;
@@ -172,7 +172,7 @@ export class UserCreateModalComponent implements OnDestroy {
       location,
       activated,
       activity,
-      bv_member: this.bvMember,
+      bv_member: this.govMember,
       information_denied: informationDenied,
       member_number: memberNumber,
       internal_comment: internalComment,
