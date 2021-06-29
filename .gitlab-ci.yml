@@ -12,8 +12,9 @@ build:
     paths:
       - node_modules/
   script:
-    - rm -rf package-lock.json
     - npm install --loglevel=error --no-progress
+    # Especially create dist folder, Angular appereantly does not do it anymore
+    - mkdir -p dist/DatePoll-Frontend/
     - ./node_modules/@angular/cli/bin/ng build --progress false --configuration production
     - cd dist/
     - ls -al

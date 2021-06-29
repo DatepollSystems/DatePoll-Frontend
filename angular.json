@@ -13,8 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "preserveSymlinks": true,
-            "outputPath": "dist/DatePoll-Frontend",
+            "outputPath": "./dist/DatePoll-Frontend",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -36,9 +35,9 @@
             ],
             "allowedCommonJsDependencies": ["qrcode", "file-saver", "xlsx"],
             "styles": [
-              "src/styles.css",
-              "node_modules/leaflet/dist/leaflet.css",
-              "src/assets/stylesheets/theme.scss",
+              "./src/styles.css",
+              "./node_modules/leaflet/dist/leaflet.css",
+              "./src/assets/stylesheets/theme.scss",
               "./node_modules/quill/dist/quill.core.css",
               "./node_modules/quill/dist/quill.snow.css"
             ],
