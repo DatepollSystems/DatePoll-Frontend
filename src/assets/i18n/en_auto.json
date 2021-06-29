@@ -120,7 +120,7 @@
   "MANAGEMENT_USERS_ZIPCODE": "postcode",
   "MANAGEMENT_USERS_LOCATION": "name",
   "MANAGEMENT_USERS_PHONENUMBERS": "telephone numbers",
-  "MANAGEMENT_USERS_BV_MEMBER": "ikea music band",
+  "MANAGEMENT_USERS_GOV_MEMBER": "ikea music band",
   "MANAGEMENT_USERS_ACTIVITY": "activity",
   "MANAGEMENT_USERS_ACTIONS": "activities",
   "MANAGEMENT_USERS_ACTIONS_EDIT_TOOLTIP": "ing this member",

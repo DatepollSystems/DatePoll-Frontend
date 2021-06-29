@@ -246,7 +246,7 @@
   "MANAGEMENT_USERS_ZIPCODE": "postcode",
   "MANAGEMENT_USERS_LOCATION": "nom",
   "MANAGEMENT_USERS_PHONENUMBERS": "numéros de téléphone",
-  "MANAGEMENT_USERS_BV_MEMBER": "ikea music band",
+  "MANAGEMENT_USERS_GOV_MEMBER": "ikea music band",
   "MANAGEMENT_USERS_ACTIVITY": "activité",
   "MANAGEMENT_USERS_ACTIONS": "activités",
   "MANAGEMENT_USERS_ACTIONS_EDIT_TOOLTIP": "ing this member",

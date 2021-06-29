@@ -33,7 +33,7 @@ export class UserInfoModalComponent implements OnDestroy {
   phoneNumbers: PhoneNumber[] = [];
 
   activity: string;
-  bvMember: string;
+  govMember: string;
   memberNumber: string;
 
   joined: GroupAndSubgroupModel[] = [];
@@ -72,7 +72,7 @@ export class UserInfoModalComponent implements OnDestroy {
     this.activity = data.user.activity;
     this.memberNumber = data.user.memberNumber;
     this.activated = data.user.activated;
-    this.bvMember = data.user.bvMember;
+    this.govMember = data.user.govMember;
     this.internalComment = data.user.internalComment;
     this.informationDenied = data.user.informationDenied;
     this.phoneNumbers = data.user.getPhoneNumbers();

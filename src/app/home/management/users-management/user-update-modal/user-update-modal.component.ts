@@ -46,7 +46,7 @@ export class UserUpdateModalComponent implements OnDestroy {
   zipcode: number;
   location: string;
   activity: string;
-  bvMember: string;
+  govMember: string;
   memberNumber: string;
   activated: boolean;
   internalComment: string;
@@ -104,7 +104,7 @@ export class UserUpdateModalComponent implements OnDestroy {
     this.activity = this.user.activity;
     this.memberNumber = this.user.memberNumber;
     this.activated = this.user.activated;
-    this.bvMember = this.user.bvMember;
+    this.govMember = this.user.govMember;
     this.internalComment = this.user.internalComment;
     this.informationDenied = this.user.informationDenied;
     this.phoneNumbers = this.user.getPhoneNumbers();
@@ -277,7 +277,7 @@ export class UserUpdateModalComponent implements OnDestroy {
       location,
       activated,
       activity,
-      bv_member: this.bvMember,
+      bv_member: this.govMember,
       information_denied: informationDenied,
       member_number: memberNumber,
       internal_comment: internalComment,
