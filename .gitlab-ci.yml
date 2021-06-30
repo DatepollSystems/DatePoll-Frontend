@@ -25,6 +25,7 @@ deploy-dev:
     - build
   only:
     - development
+  cache: {}
   script:
     - apt-get update -qq && apt-get install -y -qq zip openssh-client >> /dev/null
     - eval "$(ssh-agent -s)"
@@ -44,6 +45,7 @@ deploy-release:
     - tags
   except:
     - branches
+  cache: {}
   script:
     - apt-get update -qq && apt-get install -y -qq zip git openssh-client >> /dev/null
     - eval "$(ssh-agent -s)"
