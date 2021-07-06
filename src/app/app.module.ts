@@ -40,7 +40,7 @@ registerLocaleData(localeDe);
       registrationStrategy: 'registerWhenStable:30000',
     }),
     DfxTranslateModule,
-    DfxTranslateModule.config({defaultLanguage: 'de', useLocalStorage: null}),
+    DfxTranslateModule.setup({defaultLanguage: 'de'}),
   ],
   providers: [
     {
