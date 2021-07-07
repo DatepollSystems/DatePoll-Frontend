@@ -23,6 +23,7 @@ import {BroadcastAttachmentComponent} from './create-broadcast/broadcast-attachm
 import {BroadcastsModule} from '../broadcasts.module';
 import {GoBackButtonModule} from '../../../utils/shared-components/go-back-button/go-back-button.module';
 import {YearSelectModule} from '../../../utils/shared-components/year-select/year-select.module';
+import {BooleanTranslationModule} from '../../../utils/shared-components/boolean-translation/boolean-translation.module';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import {YearSelectModule} from '../../../utils/shared-components/year-select/yea
     NgxMatSelectSearchModule,
     QuestionDialogComponentModule,
     AllMembersSwitchModule,
+    BooleanTranslationModule,
     GroupAndSubgroupTypeInputSelectModule,
     FormsModule,
     EditorPreviewModule,

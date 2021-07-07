@@ -664,6 +664,9 @@
   "BROADCASTS_ADMINISTRATION_ADMIN_INFO_QUEUED_AT": "In Auftrag gegeben am",
   "BROADCASTS_ADMINISTRATION_ADMIN_INFO_SENT_AT": "Versendet am",
   "BROADCASTS_ADMINISTRATION_ATTACHMENT_VIEW_CLICK_ME_FOR_IMAGE": "Klicke auf mich um das Bild anzuzeigen.",
+  "BROADCASTS_ADMINISTRATION_ADMIN_INFO_REQUEUE_TOOL_TIP": "Versuche nicht gesendete E-Mails erneut zu versenden",
+  "BROADCASTS_ADMINISTRATION_ADMIN_INFO_REQUEUE_CONFIRM": "Bestätige das erneute versenden von fehlgeschlagenen E-Mails",
+  "BROADCASTS_ADMINISTRATION_ADMIN_INFO_REQUEUE_SUCCESSFUL": "Versendung bestätigt.",
 
   "EVENTS_VIEW_SHOW_ALREADY_VOTED_EVENTS": "Zeige unbeantwortete Events",
   "EVENTS_VIEW_EVENT_CARD_BUTTON_DECIDE": "Antworten",

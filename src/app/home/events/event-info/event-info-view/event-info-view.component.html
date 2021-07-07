@@ -5,13 +5,13 @@
   </h1>
   <div fxLayout="row break" fxLayoutAlign="space-between" style="margin-bottom: 15px">
     <app-go-back-button></app-go-back-button>
-    <button mat-flat-button color="accent" *ngIf="!event?.alreadyVotedFor" (click)="onEventVote(event)">
+    <button mat-flat-button color="accent" *ngIf="!event?.alreadyVotedFor && objectLoaded" (click)="onEventVote(event)">
       {{ 'EVENTS_ADMINISTRATION_USER_MANAGEMENT_FOR_EVENT_VOTE' | tr }}
     </button>
     <button
       mat-flat-button
       [style.background-color]="event?.decisionColor"
-      *ngIf="event?.alreadyVotedFor"
+      *ngIf="event?.alreadyVotedFor && objectLoaded"
       (click)="cancelEventVoting(event)"
     >
       <mat-icon>delete</mat-icon>

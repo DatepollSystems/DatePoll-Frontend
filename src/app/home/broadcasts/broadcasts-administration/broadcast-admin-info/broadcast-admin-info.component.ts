@@ -9,6 +9,9 @@ import {BroadcastsAdministrationService} from '../broadcasts-administration.serv
 
 import {Broadcast, UserBroadcastInfo} from '../../models/broadcast.model';
 import {UIHelper} from '../../../../utils/helper/UIHelper';
+import {QuestionDialogComponent} from '../../../../utils/shared-components/question-dialog/question-dialog.component';
+import {MatBottomSheet} from '@angular/material/bottom-sheet';
+import {NotificationService} from '../../../../utils/notification.service';
 
 @Component({
   selector: 'app-broadcast-admin-info',
@@ -27,7 +30,12 @@ export class BroadcastAdminInfoComponent implements OnDestroy {
 
   loaded = false;
 
-  constructor(private route: ActivatedRoute, private broadcastSerivce: BroadcastsAdministrationService) {
+  constructor(
+    private route: ActivatedRoute,
+    private broadcastSerivce: BroadcastsAdministrationService,
+    private bottomSheet: MatBottomSheet,
+    private notificationService: NotificationService
+  ) {
     this.route.paramMap.subscribe((params) => {
       const id = params.get('id');
 
@@ -59,5 +67,27 @@ export class BroadcastAdminInfoComponent implements OnDestroy {
     this.filterValue = filterValue;
     this.dataSource.filter = this.filterValue.trim().toLowerCase();
     this.dataSource.sort = this.sort;
+  }
+
+  requeBroadcast(id: number) {
+    const bottomSheetRef = this.bottomSheet.open(QuestionDialogComponent, {
+      data: {
+        question: 'BROADCASTS_ADMINISTRATION_ADMIN_INFO_REQUEUE_CONFIRM',
+      },
+    });
+
+    bottomSheetRef.afterDismissed().subscribe((value: string) => {
+      if (value?.includes(QuestionDialogComponent.YES_VALUE)) {
+        this.broadcastSerivce.requeueNotSentBroadcastMails(id).subscribe(
+          (data: any) => {
+            console.log(data);
+            this.notificationService.info('BROADCASTS_ADMINISTRATION_ADMIN_INFO_REQUEUE_SUCCESSFUL');
+          },
+          (error) => {
+            console.log(error);
+          }
+        );
+      }
+    });
   }
 }

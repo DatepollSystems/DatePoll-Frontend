@@ -7,6 +7,15 @@
     </div>
     <div fxLayout="row" fxLayoutGap="2%" fxLayoutAlign="space-between center">
       <app-go-back-button></app-go-back-button>
+      <button
+        mat-icon-button
+        (click)="requeBroadcast(broadcast.id)"
+        *ngIf="loaded"
+        matTooltip="{{ 'BROADCASTS_ADMINISTRATION_ADMIN_INFO_REQUEUE_TOOL_TIP' | tr }}"
+        matTooltipPosition="before"
+      >
+        <mat-icon>refresh</mat-icon>
+      </button>
     </div>
     <div fxLayout="row" fxLayoutAlign="center center" *ngIf="!loaded">
       <mat-spinner></mat-spinner>
