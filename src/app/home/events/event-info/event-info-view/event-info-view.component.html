@@ -15,7 +15,7 @@
       (click)="cancelEventVoting(event)"
     >
       <mat-icon>delete</mat-icon>
-      {{ 'EVENTS_VIEW_EVENT_CARD_VOTED_FOR' | tr }} {{ event?.userDecision }}
+      {{ event?.userDecision }}
     </button>
   </div>
   <app-event-info [eventId]="event.id" (eventLoaded)="eventLoaded($event)"></app-event-info>
