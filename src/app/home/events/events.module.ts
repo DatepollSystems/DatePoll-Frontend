@@ -24,6 +24,7 @@ import {EventUserManagementModalComponent} from './events-administration/event-u
 import {EventsAdministrationComponent} from './events-administration/events-administration.component';
 import {YearSelectModule} from '../../utils/shared-components/year-select/year-select.module';
 import {StartModule} from '../start/start.module';
+import {BooleanTranslationModule} from '../../utils/shared-components/boolean-translation/boolean-translation.module';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import {StartModule} from '../start/start.module';
     GroupAndSubgroupTypeInputSelectModule,
     NgxMatSelectSearchModule,
     GoBackButtonModule,
+    BooleanTranslationModule,
     AllMembersSwitchModule,
     YearSelectModule,
     StartModule,

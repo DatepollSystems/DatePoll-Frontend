@@ -22,6 +22,7 @@ import {EventStandardLocationsSelectComponent} from './events-administration/eve
 import {EventDecisionsListComponent} from './events-administration/event-decisions-list/event-decisions-list.component';
 import {EventUpdateModalComponent} from './events-administration/event-update-modal/event-update-modal.component';
 import {TimeInputModule} from '../../utils/shared-components/time-input/time-input.module';
+import {BooleanTranslationModule} from '../../utils/shared-components/boolean-translation/boolean-translation.module';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import {TimeInputModule} from '../../utils/shared-components/time-input/time-inp
     MapsModule,
     CommonComponentsModule,
     GroupAndSubgroupTypeInputSelectModule,
+    BooleanTranslationModule,
     AllMembersSwitchModule,
     TimeInputModule,
   ],
