@@ -14,8 +14,8 @@ build:
       - node_modules/
   script:
     - npm install --loglevel=error --no-progress
-    # Especially create dist folder, Angular appereantly does not do it anymore
-    - mkdir -p dist/DatePoll-Frontend/
+    - npm run ngcc # Run npm-script ngcc, if ng build does it, the ci breaks (not enough memory)
+    - mkdir -p dist/DatePoll-Frontend/ # Create dist folder, Angular sometimes does not do it
     - ./node_modules/@angular/cli/bin/ng build --progress false --configuration production
     - cd dist/
     - ls -al
