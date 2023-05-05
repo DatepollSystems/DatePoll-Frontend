@@ -10,11 +10,15 @@ build:
     paths:
       - dist/
   cache:
+    key:
+      files:
+        - pnpm-lock.yaml
     paths:
-      - node_modules/
+      - .pnpm-store
   before_script:
     - corepack enable
     - corepack prepare pnpm@latest-8 --activate
+    - pnpm config set store-dir .pnpm-store
   script:
     - pnpm install
     - pnpm ngcc # Run npm-script ngcc, if ng build does it, the ci breaks (not enough memory)
