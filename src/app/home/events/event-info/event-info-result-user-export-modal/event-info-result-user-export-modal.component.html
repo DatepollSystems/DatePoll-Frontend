@@ -1,13 +1,13 @@
-<h2>{{ 'EVENTS_VIEW_EVENT_EXPORT_TITLE' | translate }}</h2>
+<h2>{{ 'EVENTS_VIEW_EVENT_EXPORT_TITLE' | tr }}</h2>
 <mat-nav-list>
   <a mat-list-item (click)="simple()">
     <mat-icon mat-list-icon>attachment</mat-icon>
-    <span mat-line>{{ 'EVENTS_VIEW_EVENT_EXPORT_SIMPLE' | translate }}</span>
-    <small mat-line>{{ 'EVENTS_VIEW_EVENT_EXPORT_SIMPLE_DESCRIPTION' | translate }}</small>
+    <span mat-line>{{ 'EVENTS_VIEW_EVENT_EXPORT_SIMPLE' | tr }}</span>
+    <small mat-line>{{ 'EVENTS_VIEW_EVENT_EXPORT_SIMPLE_DESCRIPTION' | tr }}</small>
   </a>
   <a mat-list-item (click)="advanced()" *ngIf="allowedToPrintAdvanced">
     <mat-icon mat-list-icon>attachment</mat-icon>
-    <span mat-line>{{ 'EVENTS_VIEW_EVENT_EXPORT_EXTRA' | translate }}</span>
-    <small mat-line>{{ 'EVENTS_VIEW_EVENT_EXPORT_EXTRA_DESCRIPTION' | translate }}</small>
+    <span mat-line>{{ 'EVENTS_VIEW_EVENT_EXPORT_EXTRA' | tr }}</span>
+    <small mat-line>{{ 'EVENTS_VIEW_EVENT_EXPORT_EXTRA_DESCRIPTION' | tr }}</small>
   </a>
 </mat-nav-list>

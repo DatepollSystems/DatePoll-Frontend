@@ -1,4 +1,4 @@
-<h2 mat-dialog-title>{{ 'SETTINGS_SECURITY_CALENDAR' | translate }}</h2>
+<h2 mat-dialog-title>{{ 'SETTINGS_SECURITY_CALENDAR' | tr }}</h2>
 <mat-dialog-content>
   <div
     fxLayout="row wrap"
@@ -8,7 +8,7 @@
     fxLayoutGap="2%"
   >
     <div>
-      <mat-card-subtitle>{{ 'SETTINGS_SECURITY_MDOAL_CALENDAR_COMPLETE' | translate }}</mat-card-subtitle>
+      <mat-card-subtitle>{{ 'SETTINGS_SECURITY_MDOAL_CALENDAR_COMPLETE' | tr }}</mat-card-subtitle>
       <a href="{{ apiUrl }}" target="_blank" rel="noopener">{{ apiUrl }}</a>
     </div>
 
@@ -19,12 +19,12 @@
         color="accent"
         style="width: 100%"
         [matTooltipDisabled]="true"
-        matTooltip="{{ 'COPIED_LINK' | translate }}"
+        matTooltip="{{ 'COPIED_LINK' | tr }}"
         #tooltip="matTooltip"
         matTooltipPosition="right"
       >
         <mat-icon>content_copy</mat-icon>
-        {{ 'SETTINGS_SECURITY_MODAL_CALENDAR_COPY_TOKEN_TOOLTIP' | translate }}
+        {{ 'SETTINGS_SECURITY_MODAL_CALENDAR_COPY_TOKEN_TOOLTIP' | tr }}
       </button>
     </div>
   </div>
@@ -40,7 +40,7 @@
     fxLayoutGap="2%"
   >
     <div>
-      <mat-card-subtitle>{{ 'SETTINGS_SECURITY_MDOAL_CALENDAR_INPUT_TITLE' | translate }}</mat-card-subtitle>
+      <mat-card-subtitle>{{ 'SETTINGS_SECURITY_MDOAL_CALENDAR_INPUT_TITLE' | tr }}</mat-card-subtitle>
       <a href="{{ calendarToken }}" target="_blank" rel="noopener">{{ calendarToken }}</a>
     </div>
 
@@ -51,19 +51,19 @@
         color="accent"
         style="width: 100%"
         [matTooltipDisabled]="true"
-        matTooltip="{{ 'COPIED_LINK' | translate }}"
+        matTooltip="{{ 'COPIED_LINK' | tr }}"
         #tooltip="matTooltip"
         matTooltipPosition="above"
       >
         <mat-icon>content_copy</mat-icon>
-        {{ 'SETTINGS_SECURITY_MODAL_CALENDAR_COPY_TOKEN_TOOLTIP' | translate }}
+        {{ 'SETTINGS_SECURITY_MODAL_CALENDAR_COPY_TOKEN_TOOLTIP' | tr }}
       </button>
     </div>
 
     <div fxFlex.xs="100%">
       <button (click)="resetCalendarToken()" color="warn" mat-flat-button style="width: 100%">
         <mat-icon>refresh</mat-icon>
-        {{ 'SETTINGS_SECURITY_MODAL_CALENDAR_RESET_TOKEN' | translate }}
+        {{ 'SETTINGS_SECURITY_MODAL_CALENDAR_RESET_TOKEN' | tr }}
       </button>
     </div>
   </div>
@@ -77,23 +77,23 @@
     <div fxFlex="5%" fxFlex.lt-md="15%">
       <mat-slide-toggle (change)="onShowBirthdaysChange($event)" [(ngModel)]="showBirthdays" color="primary"> </mat-slide-toggle>
     </div>
-    <p fxFlex="85%" fxFlex.lt-md="70%">{{ 'CALENDAR_SETTINGS_SHOW_BIRTHDAYS' | translate }}</p>
+    <p fxFlex="85%" fxFlex.lt-md="70%">{{ 'CALENDAR_SETTINGS_SHOW_BIRTHDAYS' | tr }}</p>
   </div>
 
   <div fxLayout="row" fxLayoutGap="5%" fxLayoutGap.lt-md="2%" *ngIf="serverInfo?.cinema_enabled">
     <div fxFlex="5%" fxFlex.lt-md="15%">
       <mat-slide-toggle (change)="onShowMoviesChange($event)" [(ngModel)]="showMovies" color="primary"> </mat-slide-toggle>
     </div>
-    <p fxFlex="85%" fxFlex.lt-md="70%">{{ 'CALENDAR_SETTINGS_SHOW_MOVIES' | translate }}</p>
+    <p fxFlex="85%" fxFlex.lt-md="70%">{{ 'CALENDAR_SETTINGS_SHOW_MOVIES' | tr }}</p>
   </div>
 
   <div fxLayout="row" fxLayoutGap="5%" fxLayoutGap.lt-md="2%" *ngIf="serverInfo?.cinema_enabled">
     <div fxFlex="5%" fxFlex.lt-md="15%">
       <mat-slide-toggle (change)="onShowEventsChange($event)" [(ngModel)]="showEvents" color="primary"> </mat-slide-toggle>
     </div>
-    <p fxFlex="85%" fxFlex.lt-md="70%">{{ 'CALENDAR_SETTINGS_SHOW_EVENTS' | translate }}</p>
+    <p fxFlex="85%" fxFlex.lt-md="70%">{{ 'CALENDAR_SETTINGS_SHOW_EVENTS' | tr }}</p>
   </div>
 </mat-dialog-content>
 <mat-dialog-actions fxLayout="row" fxLayoutAlign="end">
-  <button mat-button mat-dialog-close>{{ 'CLOSE' | translate }}</button>
+  <button mat-button mat-dialog-close>{{ 'CLOSE' | tr }}</button>
 </mat-dialog-actions>

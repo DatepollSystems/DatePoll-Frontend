@@ -1,9 +1,8 @@
 import {Component, EventEmitter, Input, OnDestroy, Output} from '@angular/core';
 import {NgForm} from '@angular/forms';
-import {MatSnackBar} from '@angular/material/snack-bar';
 import {Subscription} from 'rxjs';
 
-import {TranslateService} from '../../../../translation/translate.service';
+import {NotificationService} from '../../../../utils/notification.service';
 import {IsMobileService} from '../../../../utils/is-mobile.service';
 
 import {EventDecision} from '../../models/event-decision.model';
@@ -29,7 +28,7 @@ export class EventDecisionsListComponent implements OnDestroy {
   decisionToUpdate: EventDecision;
   decisionString = '';
 
-  constructor(private snackBar: MatSnackBar, private translate: TranslateService, private isMobileService: IsMobileService) {
+  constructor(private notificationService: NotificationService, private isMobileService: IsMobileService) {
     this.isMobile = this.isMobileService.getIsMobile();
     this.isMobileSubscription = this.isMobileService.isMobileChange.subscribe((value) => {
       this.isMobile = value;
@@ -56,7 +55,7 @@ export class EventDecisionsListComponent implements OnDestroy {
 
   addDecision(form: NgForm) {
     if (this.color == null) {
-      this.snackBar.open(this.translate.getTranslationFor('EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_COLOR_REQUIRED'));
+      this.notificationService.info('EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_COLOR_REQUIRED');
       return;
     }
     if (this.decisionUpdating) {

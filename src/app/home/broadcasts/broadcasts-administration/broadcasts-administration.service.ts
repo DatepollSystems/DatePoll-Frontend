@@ -67,6 +67,10 @@ export class BroadcastsAdministrationService extends AHasYears {
     return this.httpService.loggedInV1POSTRequest('/broadcast/administration/broadcast', broadcast, 'createBroadcast');
   }
 
+  public requeueNotSentBroadcastMails(id: number) {
+    return this.httpService.loggedInV1PUTRequest('/broadcast/administration/broadcast/' + id, null, 'requeueNotSentBroadcastMails');
+  }
+
   public getSentReceiptBroadcast(id: number) {
     this.fetchSentReceiptBroadcast(id);
     return this.broadcast;

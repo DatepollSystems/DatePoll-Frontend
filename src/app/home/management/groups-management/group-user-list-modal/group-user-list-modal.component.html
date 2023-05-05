@@ -1,20 +1,20 @@
 <div fxLayout="row" fxLayoutAlign="space-between">
-  <h1 mat-dialog-title>{{ 'MANAGEMENT_GROUPS_INFO_GROUP_MODAL_TITLE' | translate }}{{ groupName }}</h1>
+  <h1 mat-dialog-title>{{ 'MANAGEMENT_GROUPS_INFO_GROUP_MODAL_TITLE' | tr }}{{ groupName }}</h1>
   <div *ngIf="viewMode.includes('list')">
     <button mat-flat-button color="primary" (click)="viewMode = 'statistics'">
-      {{ 'MANAGEMENT_GROUPS_INFO_GROUP_MODAL_STATISTICS' | translate }}
+      {{ 'MANAGEMENT_GROUPS_INFO_GROUP_MODAL_STATISTICS' | tr }}
     </button>
   </div>
   <div *ngIf="viewMode.includes('statistics')">
     <button mat-flat-button color="primary" (click)="viewMode = 'list'">
-      {{ 'MANAGEMENT_GROUPS_INFO_GROUP_MODAL_MEMBERS' | translate }}
+      {{ 'MANAGEMENT_GROUPS_INFO_GROUP_MODAL_MEMBERS' | tr }}
     </button>
   </div>
 </div>
 
 <div mat-dialog-content *ngIf="viewMode.includes('statistics')">
   <div fxLayout="row" fxLayoutAlign="space-between">
-    <h3>{{ 'MANAGEMENT_GROUPS_INFO_GROUP_MODAL_USERS_ONLY_IN_THIS_GROUP' | translate }} : {{ group?.users_only_in_this_group?.length }}</h3>
+    <h3>{{ 'MANAGEMENT_GROUPS_INFO_GROUP_MODAL_USERS_ONLY_IN_THIS_GROUP' | tr }} : {{ group?.users_only_in_this_group?.length }}</h3>
     <div fxLayout="row" fxLayoutGap="2%">
       <div>
         <button
@@ -23,10 +23,10 @@
           ngxPrint
           *ngIf="showUsersOnlyInThisGroup"
           [useExistingCss]="true"
-          printTitle="{{ 'MANAGEMENT_GROUPS_INFO_GROUP_MODAL_USERS_ONLY_IN_THIS_GROUP' | translate }}"
+          printTitle="{{ 'MANAGEMENT_GROUPS_INFO_GROUP_MODAL_USERS_ONLY_IN_THIS_GROUP' | tr }}"
         >
           <mat-icon>print</mat-icon>
-          {{ 'PRINT' | translate }}
+          {{ 'PRINT' | tr }}
         </button>
       </div>
       <div>
@@ -36,7 +36,7 @@
           *ngIf="!showUsersOnlyInThisGroup"
           (click)="showUsersOnlyInThisGroup = !showUsersOnlyInThisGroup"
         >
-          {{ 'SHOW_MORE' | translate }}
+          {{ 'SHOW_MORE' | tr }}
         </button>
         <button
           mat-flat-button
@@ -44,7 +44,7 @@
           *ngIf="showUsersOnlyInThisGroup"
           (click)="showUsersOnlyInThisGroup = !showUsersOnlyInThisGroup"
         >
-          {{ 'SHOW_LESS' | translate }}
+          {{ 'SHOW_LESS' | tr }}
         </button>
       </div>
     </div>
@@ -59,7 +59,7 @@
   <mat-divider></mat-divider>
 
   <div fxLayout="row" fxLayoutAlign="space-between" style="margin-top: 15px">
-    <h3>{{ 'MANAGEMENT_GROUPS_INFO_GROUP_MODAL_USERS_BY_JOIN_YEAR' | translate }}</h3>
+    <h3>{{ 'MANAGEMENT_GROUPS_INFO_GROUP_MODAL_USERS_BY_JOIN_YEAR' | tr }}</h3>
     <div fxLayout="row" fxLayoutGap="2%">
       <div>
         <button
@@ -68,7 +68,7 @@
           *ngIf="!showUsersGroupedByJoinYear"
           (click)="showUsersGroupedByJoinYear = !showUsersGroupedByJoinYear"
         >
-          {{ 'SHOW_MORE' | translate }}
+          {{ 'SHOW_MORE' | tr }}
         </button>
         <button
           mat-flat-button
@@ -76,7 +76,7 @@
           *ngIf="showUsersGroupedByJoinYear"
           (click)="showUsersGroupedByJoinYear = !showUsersGroupedByJoinYear"
         >
-          {{ 'SHOW_LESS' | translate }}
+          {{ 'SHOW_LESS' | tr }}
         </button>
       </div>
     </div>
@@ -96,10 +96,10 @@
           ngxPrint
           [useExistingCss]="true"
           style="margin-right: 10px"
-          printTitle="{{ 'MANAGEMENT_GROUPS_INFO_GROUP_MODAL_USERS_BY_JOIN_YEAR' | translate }}"
+          printTitle="{{ 'MANAGEMENT_GROUPS_INFO_GROUP_MODAL_USERS_BY_JOIN_YEAR' | tr }}"
         >
           <mat-icon>print</mat-icon>
-          {{ 'PRINT' | translate }}
+          {{ 'PRINT' | tr }}
         </button>
       </mat-expansion-panel-header>
 
@@ -114,37 +114,37 @@
 
 <div mat-dialog-content *ngIf="viewMode.includes('list')">
   <mat-form-field>
-    <input (keyup)="applyFilter($event.target.value)" matInput placeholder="{{ 'MANAGEMENT_USERS_SEARCH' | translate }}" />
+    <input (keyup)="applyFilter($event.target.value)" matInput placeholder="{{ 'MANAGEMENT_USERS_SEARCH' | tr }}" />
   </mat-form-field>
 
   <table [dataSource]="dataSource" class="table-responsive" mat-table matSort>
     <!-- Role Column -->
     <ng-container matColumnDef="role">
-      <th *matHeaderCellDef mat-header-cell mat-sort-header>{{ 'MANAGEMENT_GROUPS_INFO_GROUP_MODAL_TABLE_HEADER_ROLE' | translate }}</th>
+      <th *matHeaderCellDef mat-header-cell mat-sort-header>{{ 'MANAGEMENT_GROUPS_INFO_GROUP_MODAL_TABLE_HEADER_ROLE' | tr }}</th>
       <td *matCellDef="let user" mat-cell>{{ user.role }}</td>
     </ng-container>
 
     <!-- Firstname Column -->
     <ng-container matColumnDef="firstname">
-      <th *matHeaderCellDef mat-header-cell mat-sort-header>{{ 'MANAGEMENT_USERS_FIRSTNAME' | translate }}</th>
+      <th *matHeaderCellDef mat-header-cell mat-sort-header>{{ 'MANAGEMENT_USERS_FIRSTNAME' | tr }}</th>
       <td *matCellDef="let user" mat-cell>{{ user.firstname }}</td>
     </ng-container>
 
     <!-- Surname Column -->
     <ng-container matColumnDef="surname">
-      <th *matHeaderCellDef mat-header-cell mat-sort-header>{{ 'MANAGEMENT_USERS_SURNAME' | translate }}</th>
+      <th *matHeaderCellDef mat-header-cell mat-sort-header>{{ 'MANAGEMENT_USERS_SURNAME' | tr }}</th>
       <td *matCellDef="let user" mat-cell>{{ user.surname }}</td>
     </ng-container>
 
     <!-- Action movie Column -->
     <ng-container matColumnDef="actions">
-      <th *matHeaderCellDef mat-header-cell>{{ 'MANAGEMENT_USERS_ACTIONS' | translate }}</th>
+      <th *matHeaderCellDef mat-header-cell>{{ 'MANAGEMENT_USERS_ACTIONS' | tr }}</th>
       <td *matCellDef="let user" mat-cell (click)="$event.stopPropagation()">
         <button
           (click)="onEditRole(user)"
           color="accent"
           mat-icon-button
-          matTooltip="{{ 'MANAGEMENT_GROUPS_INFO_GROUP_MDOAL_TABLE_ACTION_EDIT' | translate }}"
+          matTooltip="{{ 'MANAGEMENT_GROUPS_INFO_GROUP_MDOAL_TABLE_ACTION_EDIT' | tr }}"
         >
           <mat-icon>create</mat-icon>
         </button>
@@ -153,7 +153,7 @@
           (click)="onRemoveUserFromGroup(user.id)"
           color="warn"
           mat-icon-button
-          matTooltip="{{ 'MANAGEMENT_GROUPS_INFO_GROUP_MODAL_TABLE_ACTION_REMOVE' | translate }}"
+          matTooltip="{{ 'MANAGEMENT_GROUPS_INFO_GROUP_MODAL_TABLE_ACTION_REMOVE' | tr }}"
         >
           <mat-icon>remove_circle</mat-icon>
         </button>
@@ -170,5 +170,5 @@
   <mat-spinner *ngIf="group == null" style="margin: auto"></mat-spinner>
 </div>
 <div mat-dialog-actions style="margin-top: 15px">
-  <button [mat-dialog-close] mat-button>{{ 'CLOSE' | translate }}</button>
+  <button [mat-dialog-close] mat-button>{{ 'CLOSE' | tr }}</button>
 </div>

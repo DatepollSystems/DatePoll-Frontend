@@ -2,25 +2,34 @@
   <div fxLayout="column" fxLayoutGap.xs="3%" fxLayoutGap="1%">
     <div fxLayout="row" fxLayoutAlign="space-between center">
       <h1 class="not-selectable">
-        {{ 'BROADCASTS_ADMINISTRATION_ADMIN_INFO_TITLE' | translate }} <span *ngIf="broadcast?.subject">{{ broadcast.subject }}</span>
+        {{ 'BROADCASTS_ADMINISTRATION_ADMIN_INFO_TITLE' | tr }} <span *ngIf="broadcast?.subject">{{ broadcast.subject }}</span>
       </h1>
     </div>
     <div fxLayout="row" fxLayoutGap="2%" fxLayoutAlign="space-between center">
       <app-go-back-button></app-go-back-button>
+      <button
+        mat-icon-button
+        (click)="requeBroadcast(broadcast.id)"
+        *ngIf="loaded"
+        matTooltip="{{ 'BROADCASTS_ADMINISTRATION_ADMIN_INFO_REQUEUE_TOOL_TIP' | tr }}"
+        matTooltipPosition="before"
+      >
+        <mat-icon>refresh</mat-icon>
+      </button>
     </div>
     <div fxLayout="row" fxLayoutAlign="center center" *ngIf="!loaded">
       <mat-spinner></mat-spinner>
     </div>
     <div *ngIf="loaded && broadcast?.subject">
-      <h3 matLine>{{ 'BROADCASTS_ADMINISTRATION_ADMIN_INFO_SUBJECT' | translate }} {{ broadcast.subject }}</h3>
-      <h3 matLine>{{ 'BROADCASTS_ADMINISTRATION_ADMIN_INFO_SENT_ON' | translate }} {{ broadcast.sent | date: 'EE, dd.MM.yyyy HH:mm' }}</h3>
-      <h3 matLine>{{ 'BROADCASTS_ADMINISTRATION_ADMIN_INFO_AUTHOR' | translate }} {{ broadcast.writerName }}</h3>
+      <h3 matLine>{{ 'BROADCASTS_ADMINISTRATION_ADMIN_INFO_SUBJECT' | tr }} {{ broadcast.subject }}</h3>
+      <h3 matLine>{{ 'BROADCASTS_ADMINISTRATION_ADMIN_INFO_SENT_ON' | tr }} {{ broadcast.sent | date: 'EE, dd.MM.yyyy HH:mm' }}</h3>
+      <h3 matLine>{{ 'BROADCASTS_ADMINISTRATION_ADMIN_INFO_AUTHOR' | tr }} {{ broadcast.writerName }}</h3>
       <h3 matLine *ngIf="broadcast.forEveryone">
-        {{ 'BROADCASTS_ADMINISTRATION_ADMIN_INFO_RECIPENT' | translate }}
-        {{ 'BROADCASTS_ADMINISTRATION_ADMIN_INFO_RECIPENT_ALL' | translate }}
+        {{ 'BROADCASTS_ADMINISTRATION_ADMIN_INFO_RECIPENT' | tr }}
+        {{ 'BROADCASTS_ADMINISTRATION_ADMIN_INFO_RECIPENT_ALL' | tr }}
       </h3>
       <h3 matLine *ngIf="!broadcast.forEveryone">
-        {{ 'BROADCASTS_ADMINISTRATION_ADMIN_INFO_RECIPENT' | translate }}
+        {{ 'BROADCASTS_ADMINISTRATION_ADMIN_INFO_RECIPENT' | tr }}
         <span *ngFor="let group of broadcast.groups"
           ><b>{{ group.name }}</b
           >,
@@ -34,33 +43,33 @@
         <mat-tab>
           <ng-template mat-tab-label>
             <mat-icon class="tab-icon">donut_large</mat-icon>
-            {{ 'BROADCASTS_ADMINISTRATION_ADMIN_INFO_SEND_RECIEPT' | translate }}
+            {{ 'BROADCASTS_ADMINISTRATION_ADMIN_INFO_SEND_RECIEPT' | tr }}
           </ng-template>
           <mat-form-field>
-            <input (keyup)="applyFilter($event.target.value)" matInput placeholder="{{ 'SEARCH' | translate }}" />
+            <input (keyup)="applyFilter($event.target.value)" matInput placeholder="{{ 'SEARCH' | tr }}" />
           </mat-form-field>
           <table [dataSource]="dataSource" class="table-responsive" mat-table matSort>
             <!-- Name Column -->
             <ng-container matColumnDef="userName">
-              <th *matHeaderCellDef mat-header-cell mat-sort-header>{{ 'BROADCASTS_ADMINISTRATION_ADMIN_INFO_NAME' | translate }}</th>
+              <th *matHeaderCellDef mat-header-cell mat-sort-header>{{ 'BROADCASTS_ADMINISTRATION_ADMIN_INFO_NAME' | tr }}</th>
               <td *matCellDef="let userInfo" mat-cell>{{ userInfo.userName }}</td>
             </ng-container>
 
             <!-- Date Column -->
             <ng-container matColumnDef="sent">
-              <th *matHeaderCellDef mat-header-cell mat-sort-header>{{ 'BROADCASTS_ADMINISTRATION_ADMIN_INFO_SENT' | translate }}</th>
+              <th *matHeaderCellDef mat-header-cell mat-sort-header>{{ 'BROADCASTS_ADMINISTRATION_ADMIN_INFO_SENT' | tr }}</th>
               <td *matCellDef="let userInfo" mat-cell>{{ userInfo.sent | boolean }}</td>
             </ng-container>
 
             <!-- Date Column -->
             <ng-container matColumnDef="queuedAt">
-              <th *matHeaderCellDef mat-header-cell mat-sort-header>{{ 'BROADCASTS_ADMINISTRATION_ADMIN_INFO_QUEUED_AT' | translate }}</th>
+              <th *matHeaderCellDef mat-header-cell mat-sort-header>{{ 'BROADCASTS_ADMINISTRATION_ADMIN_INFO_QUEUED_AT' | tr }}</th>
               <td *matCellDef="let userInfo" mat-cell>{{ userInfo.queuedAt | date: 'dd.MM.yyyy HH:mm:ss' }}</td>
             </ng-container>
 
             <!-- Date Column -->
             <ng-container matColumnDef="sentAt">
-              <th *matHeaderCellDef mat-header-cell mat-sort-header>{{ 'BROADCASTS_ADMINISTRATION_ADMIN_INFO_SENT_AT' | translate }}</th>
+              <th *matHeaderCellDef mat-header-cell mat-sort-header>{{ 'BROADCASTS_ADMINISTRATION_ADMIN_INFO_SENT_AT' | tr }}</th>
               <td *matCellDef="let userInfo" mat-cell>{{ userInfo.sentAt | date: 'dd.MM.yyyy HH:mm:ss' }}</td>
             </ng-container>
 
@@ -71,14 +80,14 @@
         <mat-tab>
           <ng-template mat-tab-label>
             <mat-icon class="tab-icon">email</mat-icon>
-            {{ 'CONTENT' | translate }}
+            {{ 'CONTENT' | tr }}
           </ng-template>
           <app-editor-preview [bodyHTML]="broadcast.bodyHTML" *ngIf="loaded"></app-editor-preview>
         </mat-tab>
         <mat-tab *ngIf="broadcast.attachments?.length > 0">
           <ng-template mat-tab-label>
             <mat-icon class="tab-icon">attachment</mat-icon>
-            {{ 'ATTACHMENTS' | translate }}
+            {{ 'ATTACHMENTS' | tr }}
           </ng-template>
 
           <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="2%">

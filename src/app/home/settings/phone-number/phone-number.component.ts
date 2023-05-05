@@ -61,9 +61,9 @@ export class PhoneNumberComponent {
         console.log(data);
         this.phoneNumbers = [];
 
-        for (let i = 0; i < this._myUserService.getPhoneNumbers().length; i++) {
-          if (this._myUserService.getPhoneNumbers()[i].id !== phoneNumberID) {
-            this.phoneNumbers.push(this._myUserService.getPhoneNumbers()[i]);
+        for (const phoneNumber of this._myUserService.getPhoneNumbers()) {
+          if (phoneNumber.id !== phoneNumberID) {
+            this.phoneNumbers.push(phoneNumber);
           }
         }
         this._myUserService.setPhoneNumbers(this.phoneNumbers);

@@ -4,7 +4,6 @@ import {tap} from 'rxjs/operators';
 
 import {environment} from '../../environments/environment';
 import {BrowserHelper} from '../utils/helper/BrowserHelper';
-import {UIHelper} from '../utils/helper/UIHelper';
 
 @Injectable({
   providedIn: 'root',
@@ -125,7 +124,7 @@ export class AuthService {
       return false;
     }
 
-    return UIHelper.getCurrentDate().getTime() < this.jwtTokenExpires.getTime();
+    return new Date().getTime() < this.jwtTokenExpires.getTime();
   }
 
   public changePasswordAfterSignin(username: string, oldPassword: string, newPassword: string) {

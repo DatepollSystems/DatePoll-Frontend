@@ -1,6 +1,6 @@
 <div *ngIf="movieOrders == null" style="margin-top: 20vh" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="0.5%">
   <mat-progress-spinner mode="indeterminate" style="margin: auto"></mat-progress-spinner>
-  <h2>{{ 'LOADING' | translate }}</h2>
+  <h2>{{ 'LOADING' | tr }}</h2>
 </div>
 
 <mat-accordion [multi]="true" *ngIf="movieOrders?.length != 0">
@@ -15,10 +15,10 @@
 
     <div fxLayout="row" fxLayoutAlign="space-between">
       <span *ngIf="movieOrder.getTicketOrders().length != 0">
-        {{ 'CINEMA_TICKETS_SERVICE_BOOKING' | translate }}: {{ movieOrder.getTicketOrders().length }}
+        {{ 'CINEMA_TICKETS_SERVICE_BOOKING' | tr }}: {{ movieOrder.getTicketOrders().length }}
       </span>
       <span *ngIf="movieOrder.getTicketOrders().length == 0">
-        {{ 'CINEMA_TICKETS_SERVICE_NO_TICKETS_BOOKED' | translate }}
+        {{ 'CINEMA_TICKETS_SERVICE_NO_TICKETS_BOOKED' | tr }}
       </span>
 
       <div>
@@ -31,22 +31,22 @@
           printTitle="{{ movieOrder.movieName }}"
         >
           <mat-icon>print</mat-icon>
-          {{ 'PRINT' | translate }}
+          {{ 'PRINT' | tr }}
         </button>
       </div>
     </div>
 
     <mat-list *ngIf="movieOrder.getTicketOrders().length == 0">
       <mat-list-item>
-        {{ 'CINEMA_TICKETS_SERVICE_NO_TICKETS_BOOKED' | translate }}
+        {{ 'CINEMA_TICKETS_SERVICE_NO_TICKETS_BOOKED' | tr }}
       </mat-list-item>
     </mat-list>
 
     <mat-list *ngIf="movieOrder.getTicketOrders().length != 0">
       <mat-list-item>
         <div matLine>
-          {{ 'CINEMA_TICKETS_SERVICE_USERNAME' | translate }}
-          <div style="float: right">{{ 'CINEMA_TICKETS_SERVICE_TICKET_AMOUNT' | translate }}</div>
+          {{ 'CINEMA_TICKETS_SERVICE_USERNAME' | tr }}
+          <div style="float: right">{{ 'CINEMA_TICKETS_SERVICE_TICKET_AMOUNT' | tr }}</div>
         </div>
       </mat-list-item>
       <mat-list-item *ngFor="let ticket of movieOrder.getTicketOrders()">
@@ -57,7 +57,7 @@
       </mat-list-item>
       <mat-list-item>
         <div matLine>
-          <b>{{ 'CINEMA_TICKETS_BOOKED_TICKETS' | translate }}</b>
+          <b>{{ 'CINEMA_TICKETS_BOOKED_TICKETS' | tr }}</b>
           <div style="float: right">
             <b>{{ movieOrder.getBookedTicketsAmount() }}</b>
           </div>
@@ -69,10 +69,10 @@
 
 <div *ngIf="movieOrders?.length == 0" style="margin-top: 20vh" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="0.5%">
   <mat-icon>remove_circle_outline</mat-icon>
-  <span> {{ 'CINEMA_TICKETS_SERVICE_NOT_APPLIED_FOR_SERVICE' | translate }}</span>
+  <span> {{ 'CINEMA_TICKETS_SERVICE_NOT_APPLIED_FOR_SERVICE' | tr }}</span>
   <div>
     <button color="primary" mat-flat-button routerLink="/home/cinema/tickets">
-      {{ 'CINEMA_TICKETS_SERVICE_NOT_APPLIED_FOR_SERVICE_APPLY_NOW' | translate }}
+      {{ 'CINEMA_TICKETS_SERVICE_NOT_APPLIED_FOR_SERVICE_APPLY_NOW' | tr }}
     </button>
   </div>
 </div>

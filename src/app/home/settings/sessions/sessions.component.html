@@ -1,33 +1,33 @@
-<h2 mat-dialog-title>{{ 'SETTINGS_SECURITY_SESSIONS' | translate }}</h2>
+<h2 mat-dialog-title>{{ 'SETTINGS_SECURITY_SESSIONS' | tr }}</h2>
 <mat-dialog-content>
   <div *ngIf="sessions?.length > 0">
     <mat-form-field>
       <input
         (keyup)="applyFilter($event.target.value)"
         matInput
-        placeholder="{{ 'SETTINGS_PERSONAL_DATA_MODAL_PHONE_NUMBER_SEARCH' | translate }}"
+        placeholder="{{ 'SETTINGS_PERSONAL_DATA_MODAL_PHONE_NUMBER_SEARCH' | tr }}"
       />
     </mat-form-field>
 
     <table [dataSource]="dataSource" class="table-responsive" mat-table>
       <ng-container matColumnDef="information">
-        <th *matHeaderCellDef mat-header-cell>{{ 'SETTINGS_SECURITY_MODAL_SESSION_INFORMATION' | translate }}</th>
+        <th *matHeaderCellDef mat-header-cell>{{ 'SETTINGS_SECURITY_MODAL_SESSION_INFORMATION' | tr }}</th>
         <td *matCellDef="let session" mat-cell>{{ session.information }}</td>
       </ng-container>
 
       <ng-container matColumnDef="lastUsed">
-        <th *matHeaderCellDef mat-header-cell>{{ 'SETTINGS_SECURITY_MODAL_SESSION_LAST_USED' | translate }}</th>
+        <th *matHeaderCellDef mat-header-cell>{{ 'SETTINGS_SECURITY_MODAL_SESSION_LAST_USED' | tr }}</th>
         <td *matCellDef="let session" mat-cell>{{ session.lastUsed | date: 'dd.MM.yyyy H:mm:ss' }}</td>
       </ng-container>
 
       <ng-container matColumnDef="action">
-        <th *matHeaderCellDef mat-header-cell>{{ 'ACTION' | translate }}</th>
+        <th *matHeaderCellDef mat-header-cell>{{ 'ACTION' | tr }}</th>
         <td *matCellDef="let session" mat-cell>
           <button
             (click)="removeSession(session.id)"
             [matTooltipPosition]="'right'"
             mat-icon-button
-            matTooltip="{{ 'SETTINGS_SECURITY_MODAL_SESSION_REMOVE_TOOLTIP' | translate }}"
+            matTooltip="{{ 'SETTINGS_SECURITY_MODAL_SESSION_REMOVE_TOOLTIP' | tr }}"
           >
             <mat-icon>delete_foreve</mat-icon>
           </button>
@@ -41,7 +41,7 @@
 
   <mat-card class="not-selectable mat-info-card" matRipple *ngIf="sessions?.length == 0">
     <mat-card-content class="last-child">
-      {{ 'SETTINGS_SECURITY_MODAL_SESSION_NO_SESSIONS_AVAILABLE' | translate }}
+      {{ 'SETTINGS_SECURITY_MODAL_SESSION_NO_SESSIONS_AVAILABLE' | tr }}
     </mat-card-content>
   </mat-card>
 
@@ -50,5 +50,5 @@
   </div>
 </mat-dialog-content>
 <mat-dialog-actions fxLayout="row" fxLayoutAlign="end">
-  <button mat-button mat-dialog-close>{{ 'CLOSE' | translate }}</button>
+  <button mat-button mat-dialog-close>{{ 'CLOSE' | tr }}</button>
 </mat-dialog-actions>

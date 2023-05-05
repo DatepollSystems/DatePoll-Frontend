@@ -1,4 +1,4 @@
-<h2 mat-dialog-title>{{ 'MANAGEMENT_DATEPOLL_JOBS_MODAL_TITLE' | translate }} {{ job?.id }}</h2>
+<h2 mat-dialog-title>{{ 'MANAGEMENT_DATEPOLL_JOBS_MODAL_TITLE' | tr }} {{ job?.id }}</h2>
 <mat-dialog-content>
   <h3>Id: {{ job?.id }}</h3>
   <h3>Failed at: {{ job?.failedAt | date: 'dd.MM.yyyy HH:mm:ss' }}</h3>
@@ -20,5 +20,5 @@
   </div>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-  <button mat-button mat-dialog-close>{{ 'CLOSE' | translate }}</button>
+  <button mat-button mat-dialog-close>{{ 'CLOSE' | tr }}</button>
 </mat-dialog-actions>

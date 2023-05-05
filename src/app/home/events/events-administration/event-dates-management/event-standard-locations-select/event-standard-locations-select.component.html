@@ -1,13 +1,13 @@
 <mat-form-field>
   <mat-select
     (selectionChange)="standardLocationSelectChange($event.value)"
-    placeholder="{{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_STANDARD_LOCATION' | translate }}"
+    placeholder="{{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_STANDARD_LOCATION' | tr }}"
   >
     <mat-option>
       <ngx-mat-select-search [formControl]="standardLocationFilterCtrl"></ngx-mat-select-search>
     </mat-option>
 
-    <mat-option [value]="null">{{ 'MAPS_CLEAR_SELECTION' | translate }}</mat-option>
+    <mat-option [value]="null">{{ 'MAPS_CLEAR_SELECTION' | tr }}</mat-option>
 
     <mat-option *ngFor="let standardLocation of filteredStandardLocations | async" [value]="standardLocation">
       {{ standardLocation.name }}

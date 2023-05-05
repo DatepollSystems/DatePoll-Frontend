@@ -5,7 +5,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {QRCodeModule} from 'angularx-qrcode';
 import {FooterModule} from '../footer/footer.module';
 import {MaterialModule} from '../material-module';
-import {TranslationModule} from '../translation/translation.module';
+import {DfxTranslateModule} from 'dfx-translate';
 import {AuthRoutingModule} from './auth-routing.module';
 
 import {ForgotPasswordComponent} from './forgot-password/forgot-password.component';
@@ -19,10 +19,10 @@ import {MobileAppBottomSheetComponent} from './signin/mobile-app-bottom-sheet/mo
     FormsModule,
     ReactiveFormsModule,
     MaterialModule,
-    TranslationModule,
+    DfxTranslateModule,
     FooterModule,
     QRCodeModule,
-    AuthRoutingModule
-  ]
+    AuthRoutingModule,
+  ],
 })
 export class AuthModule {}

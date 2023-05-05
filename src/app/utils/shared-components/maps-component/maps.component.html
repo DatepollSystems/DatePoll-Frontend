@@ -1,20 +1,20 @@
 <div fxLayout="row wrap" fxLayoutAlign="space-between" fxLayoutAlign.lt-md="space-around" fxLayoutGap.lt-sm="2%" style="margin-top: 10px">
   <div fxFlex="20%" fxFlex.lt-lg="45%" fxFlex.lt-sm="100%">
     <button style="width: 100%" mat-stroked-button type="button" (click)="hideMap = !hideMap">
-      {{ 'MAPS_SHOW_HIDE' | translate }}
+      {{ 'MAPS_SHOW_HIDE' | tr }}
     </button>
   </div>
 
   <mat-form-field fxFlex="35%" fxFlex.lt-lg="45%" fxFlex.lt-sm="100%" [fxHide]="hideMap">
-    <input matInput [(ngModel)]="searchFilter" name="search" placeholder="{{ 'SEARCH' | translate }}" />
+    <input matInput [(ngModel)]="searchFilter" name="search" placeholder="{{ 'SEARCH' | tr }}" />
   </mat-form-field>
   <div fxFlex="15%" fxFlex.lt-lg="45%" fxFlex.lt-sm="100%" [fxHide]="hideMap">
-    <button mat-flat-button (click)="search()" type="button" color="primary" style="width: 100%">{{ 'SEARCH' | translate }}</button>
+    <button mat-flat-button (click)="search()" type="button" color="primary" style="width: 100%">{{ 'SEARCH' | tr }}</button>
   </div>
 
   <div fxFlex="20%" fxFlex.lt-lg="45%" *ngIf="edible" fxFlex.lt-sm="100%" [fxHide]="hideMap">
     <button mat-stroked-button (click)="clearSelection()" type="button" color="warn" style="width: 100%">
-      {{ 'MAPS_CLEAR_SELECTION' | translate }}
+      {{ 'MAPS_CLEAR_SELECTION' | tr }}
     </button>
   </div>
 

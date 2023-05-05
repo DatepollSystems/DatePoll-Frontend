@@ -3,7 +3,7 @@ import {MatSlideToggleChange} from '@angular/material/slide-toggle';
 import {MatBottomSheet} from '@angular/material/bottom-sheet';
 
 import {Permissions} from '../../../../permissions';
-import {TranslateService} from '../../../../translation/translate.service';
+import {TranslateService} from 'dfx-translate';
 import {MyUserService} from '../../../my-user.service';
 import {Converter} from '../../../../utils/helper/Converter';
 import {EventInfoResultUserExportModalComponent} from '../event-info-result-user-export-modal/event-info-result-user-export-modal.component';
@@ -81,7 +81,7 @@ export class GroupInfoCardComponent implements OnInit, OnChanges {
       data: {
         resultUsers: this.resultGroup.getResultUsers(),
         date: this.resultGroup.event.startDate,
-        fileName: this.translate.getTranslationFor('EVENTS_VIEW_EVENT_EXPORT_GROUP_FILE_NAME') + this.resultGroup.name,
+        fileName: this.translate.translate('EVENTS_VIEW_EVENT_EXPORT_GROUP_FILE_NAME') + this.resultGroup.name,
       },
     });
   }

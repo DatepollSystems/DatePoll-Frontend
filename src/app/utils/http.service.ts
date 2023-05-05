@@ -7,7 +7,7 @@ import {catchError} from 'rxjs/operators';
 import {environment} from '../../environments/environment';
 
 import {AuthService} from '../auth/auth.service';
-import {TranslateService} from '../translation/translate.service';
+import {TranslateService} from 'dfx-translate';
 
 @Injectable({
   providedIn: 'root',
@@ -29,9 +29,9 @@ export class HttpService {
       console.error(`Backend returned code ${error.status}, ` + `body was: ${error.error}`);
     }
     if (!navigator.onLine) {
-      this.snackBar.open(this.translate.getTranslationFor('OFFLINE_HELP'));
+      this.snackBar.open(this.translate.translate('OFFLINE_HELP'));
     } else {
-      this.snackBar.open(this.translate.getTranslationFor('REQUEST_ERROR'));
+      this.snackBar.open(this.translate.translate('REQUEST_ERROR'));
     }
 
     return throwError('An unexpected error occured.');
@@ -52,7 +52,7 @@ export class HttpService {
 
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
 
-    return this.http.post(this.apiUrl + '/v1' + url, body, {headers: headers}).pipe(
+    return this.http.post(this.apiUrl + '/v1' + url, body, {headers}).pipe(
       catchError((error: HttpErrorResponse) => {
         return this.error(error);
       })
@@ -64,7 +64,7 @@ export class HttpService {
 
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
 
-    return this.http.put(this.apiUrl + '/v1' + url, body, {headers: headers}).pipe(
+    return this.http.put(this.apiUrl + '/v1' + url, body, {headers}).pipe(
       catchError((error: HttpErrorResponse) => {
         return this.error(error);
       })

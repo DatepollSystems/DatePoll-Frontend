@@ -2,7 +2,7 @@
   {{ error.message }}
 </div>
 
-<h3 style="margin-bottom: -11px">{{ 'BROADCASTS_ADMINISTRATION_CREATE_ATTACHMENTS_TITLE' | translate }}</h3>
+<h3 style="margin-bottom: -11px">{{ 'BROADCASTS_ADMINISTRATION_CREATE_ATTACHMENTS_TITLE' | tr }}</h3>
 <mat-form-field>
   <mat-chip-list #chipList>
     <mat-chip *ngFor="let attachment of attachments" [removable]="true" (removed)="remove(attachment)">

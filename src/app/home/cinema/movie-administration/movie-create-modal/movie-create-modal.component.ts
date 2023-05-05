@@ -1,8 +1,7 @@
 import {Component} from '@angular/core';
-import {MatSnackBar} from '@angular/material/snack-bar';
 
 import {CinemaService} from '../../cinema.service';
-import {TranslateService} from '../../../../translation/translate.service';
+import {NotificationService} from '../../../../utils/notification.service';
 import {Converter} from '../../../../utils/helper/Converter';
 
 @Component({
@@ -19,7 +18,7 @@ export class MovieCreateModalComponent {
   bookedTickets: number;
   maximalTickets: number;
 
-  constructor(private cinemaService: CinemaService, private snackBar: MatSnackBar, private translate: TranslateService) {}
+  constructor(private cinemaService: CinemaService, private notificationService: NotificationService) {}
 
   create() {
     const movieObject = {
@@ -35,7 +34,7 @@ export class MovieCreateModalComponent {
       (data: any) => {
         console.log(data);
         this.cinemaService.fetchMovies();
-        this.snackBar.open(this.translate.getTranslationFor('CINEMA_TICKETS_ADMINISTRATION_MOVIE_CREATE_SUCCESSFULLY'));
+        this.notificationService.info('CINEMA_TICKETS_ADMINISTRATION_MOVIE_CREATE_SUCCESSFULLY');
       },
       (error) => console.log(error)
     );

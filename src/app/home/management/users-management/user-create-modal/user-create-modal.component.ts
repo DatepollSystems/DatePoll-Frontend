@@ -1,10 +1,8 @@
 import {Component, OnDestroy} from '@angular/core';
 import {NgForm} from '@angular/forms';
 import {MatDialogRef} from '@angular/material/dialog';
-import {MatSnackBar} from '@angular/material/snack-bar';
 import {Subscription} from 'rxjs';
 
-import {TranslateService} from '../../../../translation/translate.service';
 import {Converter} from '../../../../utils/helper/Converter';
 import {IsMobileService} from '../../../../utils/is-mobile.service';
 import {MyUserService} from '../../../my-user.service';
@@ -17,11 +15,12 @@ import {Permissions} from '../../../../permissions';
 
 import {
   GroupAndSubgroupModel,
-  GroupType,
+  GroupType
 } from '../../../../utils/shared-components/group-and-subgroup-type-input-select/groupAndSubgroup.model';
 import {PhoneNumber} from '../models/phoneNumber.model';
 import {UserBadge} from '../models/userBadge.model';
 import {UserPerformanceBadge} from '../models/userPerformanceBadge.model';
+import {NotificationService} from '../../../../utils/notification.service';
 
 @Component({
   selector: 'app-user-create-modal',
@@ -34,7 +33,7 @@ export class UserCreateModalComponent implements OnDestroy {
   emailAddresses: string[] = [];
   birthday: Date;
   join_date: Date;
-  bvMember: string;
+  govMember: string;
   phoneNumbers: PhoneNumber[] = [];
 
   groupsSubscription: Subscription;
@@ -56,8 +55,7 @@ export class UserCreateModalComponent implements OnDestroy {
     private dialogRef: MatDialogRef<UserCreateModalComponent>,
     private groupsService: GroupsService,
     private badgesService: BadgesService,
-    private snackBar: MatSnackBar,
-    private translate: TranslateService,
+    private notificationService: NotificationService,
     private isMobileService: IsMobileService,
     private performanceBadgesService: PerformanceBadgesService
   ) {
@@ -141,6 +139,8 @@ export class UserCreateModalComponent implements OnDestroy {
     const location = form.controls.location.value;
     const activity = form.controls.activity.value;
     const memberNumber = form.controls.memberNumber.value;
+    const bvUser = form.controls.bvUser.value;
+    const bvPassword = form.controls.bvPassword.value;
     const internalComment = form.controls.internalComment.value;
     let activated = form.controls.activated.value;
     const informationDenied = form.controls.informationDenied.value;
@@ -174,9 +174,11 @@ export class UserCreateModalComponent implements OnDestroy {
       location,
       activated,
       activity,
-      bv_member: this.bvMember,
+      bv_member: this.govMember,
       information_denied: informationDenied,
       member_number: memberNumber,
+      bv_user: bvUser,
+      bv_password: bvPassword,
       internal_comment: internalComment,
       email_addresses: this.emailAddresses,
       phone_numbers: phoneNumbersObject,
@@ -242,7 +244,7 @@ export class UserCreateModalComponent implements OnDestroy {
         const users = this.usersService.getUsersWithoutFetch();
         users.push(this.usersService.fetchUserCreateLocalUser(data.user));
         this.usersService.setUsers(users);
-        this.snackBar.open(this.translate.getTranslationFor('MANAGEMENT_USERS_CREATE_USER_MODAL_SUCCESSFULLY_CREATED_USER'));
+        this.notificationService.info('MANAGEMENT_USERS_CREATE_USER_MODAL_SUCCESSFULLY_CREATED_USER');
       },
       (error) => {
         console.log(error);

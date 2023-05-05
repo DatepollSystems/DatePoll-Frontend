@@ -1,16 +1,16 @@
 <mat-nav-list>
   <a (click)="voteFor(decision)" *ngFor="let decision of event.getDecisions()" mat-list-item>
     <mat-icon>chevron_right</mat-icon>
-    <span>{{decision.decision}}</span>
+    <span>{{ decision.decision }}</span>
   </a>
   <a (click)="addAdditionalInformation()" mat-list-item>
     <mat-icon>note_add</mat-icon>
-    <span
-      *ngIf="this.additionalInformation == null">{{'EVENTS_VIEW_EVENT_VOTE_FOR_ADDITIONAL_INFORMATION_ADD' | translate}}</span>
-    <span
-      *ngIf="this.additionalInformation != null">{{'EVENTS_VIEW_EVENT_VOTE_FOR_ADDITIONAL_INFORMATION_CHANGE' | translate}}</span>
+    <span *ngIf="this.additionalInformation == null">{{ 'EVENTS_VIEW_EVENT_VOTE_FOR_ADDITIONAL_INFORMATION_ADD' | tr }}</span>
+    <span *ngIf="this.additionalInformation != null">{{ 'EVENTS_VIEW_EVENT_VOTE_FOR_ADDITIONAL_INFORMATION_CHANGE' | tr }}</span>
   </a>
   <a mat-list-item *ngIf="this.additionalInformation != null">
-    <span><i>{{this.additionalInformation}}</i></span>
+    <span
+      ><i>{{ this.additionalInformation }}</i></span
+    >
   </a>
 </mat-nav-list>

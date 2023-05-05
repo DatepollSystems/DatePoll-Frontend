@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
 main () {
- node ./translation/generateTranslation.js ./src/assets/i18n/de.json en
- node ./translation/generateTranslation.js ./src/assets/i18n/de.json fr
- node ./translation/generateTranslation.js ./src/assets/i18n/de.json es
- node ./translation/generateTranslation.js ./src/assets/i18n/de.json it
- node ./translation/generateTranslation.js ./src/assets/i18n/de.json pt
+ node ./node_modules/dfx-translate/translation/generateTranslation.js https://translate.dafnik.me/translate de en
+ node ./node_modules/dfx-translate/translation/generateTranslation.js https://translate.dafnik.me/translate de fr
+ node ./node_modules/dfx-translate/translation/generateTranslation.js https://translate.dafnik.me/translate de es
+ node ./node_modules/dfx-translate/translation/generateTranslation.js https://translate.dafnik.me/translate de it
+ node ./node_modules/dfx-translate/translation/generateTranslation.js https://translate.dafnik.me/translate de pt
 
  prettier --config ./.prettierrc --write ./src/assets/i18n
 
- printf "\nFinished!."
+ printf "\nFinished!"
 }
 time main

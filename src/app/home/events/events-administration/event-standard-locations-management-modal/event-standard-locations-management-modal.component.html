@@ -1,7 +1,7 @@
-<h1 mat-dialog-title>{{ 'EVENTS_STANDARD_DECISIONS_MANAGEMENT' | translate }}</h1>
-<div mat-dialog-content style="padding-bottom: 15px;">
-  <form #form="ngForm" (ngSubmit)="save(form)" style="margin-bottom: 15px;">
-    <div class="row justify-content-around" style="margin-bottom: 25px;">
+<h1 mat-dialog-title>{{ 'EVENTS_STANDARD_DECISIONS_MANAGEMENT' | tr }}</h1>
+<div mat-dialog-content style="padding-bottom: 15px">
+  <form #form="ngForm" (ngSubmit)="save(form)" style="margin-bottom: 15px">
+    <div class="row justify-content-around" style="margin-bottom: 25px">
       <mat-form-field class="col-12 col-sm-12 col-md-4 col-lg-2 col-xl-2">
         <input
           #nameModel="ngModel"
@@ -13,10 +13,10 @@
           required
           minlength="1"
           ngModel
-          placeholder="{{ 'EVENTS_STANDARD_LOCATIONS_MANAGEMENT_NAME' | translate }}"
+          placeholder="{{ 'EVENTS_STANDARD_LOCATIONS_MANAGEMENT_NAME' | tr }}"
         />
         <mat-error *ngIf="nameModel.invalid">
-          {{ 'EVENTS_STANDARD_LOCATIONS_MANAGEMENT_NAME_INCORRECT' | translate }}
+          {{ 'EVENTS_STANDARD_LOCATIONS_MANAGEMENT_NAME_INCORRECT' | tr }}
         </mat-error>
       </mat-form-field>
 
@@ -29,10 +29,10 @@
           name="location"
           type="text"
           ngModel
-          placeholder="{{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_LOCATION' | translate }}"
+          placeholder="{{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_LOCATION' | tr }}"
         />
         <mat-error *ngIf="locationModel.invalid">
-          {{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_LOCATION_INCORRECT' | translate }}
+          {{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_LOCATION_INCORRECT' | tr }}
         </mat-error>
       </mat-form-field>
 
@@ -46,11 +46,11 @@
           max="90"
           name="x"
           ngModel
-          placeholder="{{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_X' | translate }}"
+          placeholder="{{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_X' | tr }}"
           type="number"
         />
         <mat-error *ngIf="xModel.invalid">
-          {{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_X_INCORRECT' | translate }}
+          {{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_X_INCORRECT' | tr }}
         </mat-error>
       </mat-form-field>
 
@@ -64,11 +64,11 @@
           max="180"
           name="y"
           ngModel
-          placeholder="{{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_Y' | translate }}"
+          placeholder="{{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_Y' | tr }}"
           type="number"
         />
         <mat-error *ngIf="yModel.invalid">
-          {{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_Y_INCORRECT' | translate }}
+          {{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_Y_INCORRECT' | tr }}
         </mat-error>
       </mat-form-field>
     </div>
@@ -84,12 +84,12 @@
       mat-flat-button
       color="primary"
       type="button"
-      style="width: 100%; margin-top: 10px;"
+      style="width: 100%; margin-top: 10px"
       class="not-selectable"
       (click)="form.ngSubmit.emit()"
       [disabled]="!form.form.valid"
     >
-      {{ 'ADD' | translate }}
+      {{ 'ADD' | tr }}
     </button>
   </form>
 
@@ -103,8 +103,8 @@
           *ngIf="standardLocation.location?.length > 0 && standardLocation?.x !== -199 && standardLocation?.y !== -199"
         >
           <a target="_blank" rel="noopener" href="https://www.google.com/maps/place/{{ standardLocation.x }}+{{ standardLocation.y }}">
-            {{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE_LIST_OPEN_LOCATION_1' | translate }}{{ standardLocation.location
-            }}{{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE_LIST_OPEN_LOCATION_2' | translate }}
+            {{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE_LIST_OPEN_LOCATION_1' | tr }}{{ standardLocation.location
+            }}{{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE_LIST_OPEN_LOCATION_2' | tr }}
           </a>
         </mat-panel-description>
         <mat-panel-description
@@ -115,15 +115,15 @@
           "
         >
           <a target="_blank" rel="noopener" href="https://www.google.com/maps/place/{{ standardLocation.x }}+{{ standardLocation.y }}">
-            {{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE_LIST_OPEN_LOCATION_3' | translate }}
+            {{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE_LIST_OPEN_LOCATION_3' | tr }}
           </a>
         </mat-panel-description>
         <mat-panel-description
           *ngIf="standardLocation.location?.length > 0 && standardLocation?.x === -199 && standardLocation?.y === -199"
         >
           <a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query={{ standardLocation.location }}">
-            {{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE_LIST_OPEN_LOCATION_4' | translate }}{{ standardLocation.location
-            }}{{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE_LIST_OPEN_LOCATION_5' | translate }}
+            {{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE_LIST_OPEN_LOCATION_4' | tr }}{{ standardLocation.location
+            }}{{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE_LIST_OPEN_LOCATION_5' | tr }}
           </a>
         </mat-panel-description>
 
@@ -131,17 +131,17 @@
           <b
             ><a
               (click)="deleteStandardLocation(standardLocation)"
-              style="margin-right: 25px;"
-              matTooltip="{{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE_LIST_DELETE' | translate }}"
+              style="margin-right: 25px"
+              matTooltip="{{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DATE_LIST_DELETE' | tr }}"
             >
-              {{ 'DELETE' | translate }}</a
+              {{ 'DELETE' | tr }}</a
             ></b
           >
         </div>
       </mat-expansion-panel-header>
 
       <p *ngIf="standardLocation.location?.length == 0 && standardLocation.x == -199 && standardLocation.y == -199">
-        {{ 'EVENTS_STANDARD_LOCATIONS_MANAGEMENT_NO_LOCATION' | translate }}
+        {{ 'EVENTS_STANDARD_LOCATIONS_MANAGEMENT_NO_LOCATION' | tr }}
       </p>
 
       <app-maps-component
@@ -152,11 +152,11 @@
       ></app-maps-component>
 
       <p *ngIf="standardLocation?.x === -199 && standardLocation?.y === -199">
-        {{ 'EVENTS_STANDARD_LOCATIONS_MANAGEMENT_NO_COORDINATES' | translate }}
+        {{ 'EVENTS_STANDARD_LOCATIONS_MANAGEMENT_NO_COORDINATES' | tr }}
       </p>
     </mat-expansion-panel>
   </mat-accordion>
 </div>
 <div mat-dialog-actions style="margin-top: 15px">
-  <button [mat-dialog-close] mat-button>{{ 'CLOSE' | translate }}</button>
+  <button [mat-dialog-close] mat-button>{{ 'CLOSE' | tr }}</button>
 </div>

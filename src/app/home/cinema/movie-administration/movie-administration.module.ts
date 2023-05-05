@@ -7,7 +7,7 @@ import {NgxMatSelectSearchModule} from 'ngx-mat-select-search';
 
 import {CustomDateAdapter, MY_DATE_FORMATS} from '../../../utils/custom-date-adapter';
 import {MaterialModule} from '../../../material-module';
-import {TranslationModule} from '../../../translation/translation.module';
+import {DfxTranslateModule} from 'dfx-translate';
 import {MovieAdministrationRoutingModule} from './movie-administration-routing.module';
 import {CommonComponentsModule} from '../../../utils/common-components.module';
 
@@ -24,7 +24,7 @@ import {YearSelectModule} from '../../../utils/shared-components/year-select/yea
     NgxMatSelectSearchModule,
     MaterialModule,
     CommonComponentsModule,
-    TranslationModule,
+    DfxTranslateModule,
     CommonMovieAdministrationComponentsModule,
     MovieAdministrationRoutingModule,
     YearSelectModule,

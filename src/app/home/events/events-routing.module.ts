@@ -3,7 +3,6 @@ import {RouterModule, Routes} from '@angular/router';
 import {EventInfoViewComponent} from './event-info/event-info-view/event-info-view.component';
 import {EventCreateComponent} from './events-administration/event-create/event-create.component';
 import {EventsAdministrationComponent} from './events-administration/events-administration.component';
-import {EventsViewComponent} from './events-view/events-view.component';
 
 const eventRoutes: Routes = [
   {

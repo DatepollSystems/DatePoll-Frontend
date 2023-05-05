@@ -6,15 +6,10 @@
           <mat-icon>arrow_back</mat-icon>
         </button>
       </div>
-      <h1 style="padding-top: 5px">{{ 'NAV_MANAGEMENT_GROUPS' | translate }}</h1>
+      <h1 style="padding-top: 5px">{{ 'NAV_MANAGEMENT_GROUPS' | tr }}</h1>
 
       <div style="width: 100%; text-align: end">
-        <button
-          (click)="refreshGroups()"
-          mat-icon-button
-          matTooltip="{{ 'MANAGEMENT_GROUPS_REFRESH' | translate }}"
-          matTooltipPosition="right"
-        >
+        <button (click)="refreshGroups()" mat-icon-button matTooltip="{{ 'MANAGEMENT_GROUPS_REFRESH' | tr }}" matTooltipPosition="right">
           <mat-icon>refresh</mat-icon>
         </button>
       </div>
@@ -25,7 +20,7 @@
         <mat-icon>add</mat-icon>
       </button>
       <mat-form-field>
-        <input (keyup)="applyFilter($event.target.value)" matInput placeholder="{{ 'MANAGEMENT_GROUPS_SEARCH' | translate }}" />
+        <input (keyup)="applyFilter($event.target.value)" matInput placeholder="{{ 'MANAGEMENT_GROUPS_SEARCH' | tr }}" />
       </mat-form-field>
     </div>
 
@@ -39,7 +34,7 @@
                 (click)="onDeleteGroup(group.id)"
                 color="warn"
                 mat-icon-button
-                matTooltip="{{ 'MANAGEMENT_GROUPS_GROUP_DELETE_TOOLTIP' | translate }}"
+                matTooltip="{{ 'MANAGEMENT_GROUPS_GROUP_DELETE_TOOLTIP' | tr }}"
                 matTooltipPosition="above"
                 style="float: right"
               >
@@ -49,7 +44,7 @@
                 (click)="onUpdateGroup(group)"
                 color="accent"
                 mat-icon-button
-                matTooltip="{{ 'MANAGEMENT_GROUPS_GROUP_EDIT_TOOLTIP' | translate }}"
+                matTooltip="{{ 'MANAGEMENT_GROUPS_GROUP_EDIT_TOOLTIP' | tr }}"
                 matTooltipPosition="above"
                 style="float: right"
               >
@@ -58,7 +53,7 @@
               <button
                 (click)="onInfoGroup(group.id)"
                 mat-icon-button
-                matTooltip="{{ 'MANAGEMENT_GROUPS_INFO_TOOLTIP' | translate }}"
+                matTooltip="{{ 'MANAGEMENT_GROUPS_INFO_TOOLTIP' | tr }}"
                 matTooltipPosition="above"
                 style="float: right"
               >
@@ -72,7 +67,7 @@
           <mat-divider></mat-divider>
           <div fxLayout="row" fxLayoutAlign="space-between" style="margin-top: 10px">
             <h3 style="padding-top: 23px">
-              {{ 'MANAGEMENT_GROUPS_SUBGROUP' | translate }}
+              {{ 'MANAGEMENT_GROUPS_SUBGROUP' | tr }}
             </h3>
             <button (click)="onCreateSubgroup(group.id)" color="accent" mat-fab>
               <mat-icon>add</mat-icon>
@@ -85,7 +80,7 @@
                   (click)="onDeleteSubgroup(subgroup.id)"
                   color="warn"
                   mat-icon-button
-                  matTooltip="{{ 'MANAGEMENT_GROUPS_SUBGROUP_DELETE_TOOLTIP' | translate }}"
+                  matTooltip="{{ 'MANAGEMENT_GROUPS_SUBGROUP_DELETE_TOOLTIP' | tr }}"
                   matTooltipPosition="left"
                 >
                   <mat-icon>delete</mat-icon>
@@ -94,7 +89,7 @@
                   (click)="onUpdateSubgroup(group.id, subgroup)"
                   color="accent"
                   mat-icon-button
-                  matTooltip="{{ 'MANAGEMENT_GROUPS_SUBGROUP_EDIT_TOOLTIP' | translate }}"
+                  matTooltip="{{ 'MANAGEMENT_GROUPS_SUBGROUP_EDIT_TOOLTIP' | tr }}"
                   matTooltipPosition="above"
                 >
                   <mat-icon>create</mat-icon>
@@ -102,7 +97,7 @@
                 <button
                   (click)="onInfoSubgroup(subgroup.id)"
                   mat-icon-button
-                  matTooltip="{{ 'MANAGEMENT_GROUPS_SUBGROUP_INFO_TOOLTIP' | translate }}"
+                  matTooltip="{{ 'MANAGEMENT_GROUPS_SUBGROUP_INFO_TOOLTIP' | tr }}"
                   matTooltipPosition="above"
                 >
                   <mat-icon>info</mat-icon>
@@ -120,7 +115,7 @@
             </mat-card>
           </div>
           <div *ngIf="group.getSubgroups().length == 0">
-            {{ 'MANAGEMENT_GROUPS_NO_SUBGROUPS_FOR_THIS_GROUP' | translate }}
+            {{ 'MANAGEMENT_GROUPS_NO_SUBGROUPS_FOR_THIS_GROUP' | tr }}
           </div>
         </mat-card-content>
       </mat-card>
@@ -129,7 +124,7 @@
     <mat-progress-bar *ngIf="!groupsLoaded" mode="indeterminate"></mat-progress-bar>
 
     <div *ngIf="sortedGroups.length == 0 && groupsLoaded" style="text-align: center">
-      <h2>{{ 'MANAGEMENT_GROUPS_SEARCH_NOTHING_FOUND' | translate }}</h2>
+      <h2>{{ 'MANAGEMENT_GROUPS_SEARCH_NOTHING_FOUND' | tr }}</h2>
     </div>
   </mat-card-content>
 </mat-card>

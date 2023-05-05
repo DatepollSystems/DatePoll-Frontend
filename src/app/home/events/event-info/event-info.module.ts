@@ -5,7 +5,7 @@ import {DateAdapter, MAT_DATE_FORMATS} from '@angular/material/core';
 import {RouterModule} from '@angular/router';
 
 import {MaterialModule} from '../../../material-module';
-import {TranslationModule} from '../../../translation/translation.module';
+import {DfxTranslateModule} from 'dfx-translate';
 import {CustomDateAdapter, MY_DATE_FORMATS} from '../../../utils/custom-date-adapter';
 import {GoBackButtonModule} from '../../../utils/shared-components/go-back-button/go-back-button.module';
 import {MapsModule} from '../../../utils/shared-components/maps-component/maps.module';
@@ -34,7 +34,7 @@ import {EventInfoResultUserExportModalComponent} from './event-info-result-user-
     EventDatesUserListComponent,
     EventInfoResultUserExportModalComponent,
   ],
-  imports: [CommonModule, RouterModule, FormsModule, MaterialModule, TranslationModule, MapsModule, GoBackButtonModule],
+  imports: [CommonModule, RouterModule, FormsModule, MaterialModule, DfxTranslateModule, MapsModule, GoBackButtonModule],
   providers: [
     {provide: DateAdapter, useClass: CustomDateAdapter},
     {provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS},

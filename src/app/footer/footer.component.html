@@ -10,16 +10,16 @@
           <a href="{{ serverInfo.community_url }}" rel="noopener" target="_blank">{{ serverInfo.community_name }}</a>
         </li>
         <li>
-          <a (click)="openAboutModal()">{{ 'ABOUT' | translate }}</a>
+          <a (click)="openAboutModal()">{{ 'ABOUT' | tr }}</a>
         </li>
         <li class="dark-theme">
-          <mat-select (selectionChange)="setLang($event)" [(value)]="selected" placeholder="{{ 'LANGUAGE' | translate }}">
-            <mat-option value="de">{{ 'LANGUAGE_GERMAN' | translate }}</mat-option>
-            <mat-option value="en">{{ 'LANGUAGE_ENGLISH' | translate }}</mat-option>
-            <mat-option value="es">{{ 'LANGUAGE_SPANISH' | translate }}</mat-option>
-            <mat-option value="fr">{{ 'LANGUAGE_FRANCE' | translate }}</mat-option>
-            <mat-option value="it">{{ 'LANGUAGE_ITALIEN' | translate }}</mat-option>
-            <mat-option value="pt">{{ 'LANGUAGE_PORTUGUES' | translate }}</mat-option>
+          <mat-select (selectionChange)="setLang($event)" [(value)]="selected" placeholder="{{ 'LANGUAGE' | tr }}">
+            <mat-option value="de">{{ 'LANGUAGE_GERMAN' | tr }}</mat-option>
+            <mat-option value="en">{{ 'LANGUAGE_ENGLISH' | tr }}</mat-option>
+            <mat-option value="es">{{ 'LANGUAGE_SPANISH' | tr }}</mat-option>
+            <mat-option value="fr">{{ 'LANGUAGE_FRANCE' | tr }}</mat-option>
+            <mat-option value="it">{{ 'LANGUAGE_ITALIEN' | tr }}</mat-option>
+            <mat-option value="pt">{{ 'LANGUAGE_PORTUGUES' | tr }}</mat-option>
           </mat-select>
         </li>
       </ul>
@@ -37,7 +37,7 @@
     </div>
 
     <div>
-      <a routerLink="/info/imprint" style="color: #2196f3"> {{ 'IMPRINT' | translate }} & {{ 'PRIVACY_POLICY' | translate }}</a>
+      <a routerLink="/info/imprint" style="color: #2196f3"> {{ 'IMPRINT' | tr }} & {{ 'PRIVACY_POLICY' | tr }}</a>
     </div>
   </div>
 </footer>

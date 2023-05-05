@@ -4,7 +4,7 @@ import {FormsModule} from '@angular/forms';
 import {DateAdapter, MAT_DATE_FORMATS} from '@angular/material/core';
 
 import {MaterialModule} from '../material-module';
-import {TranslationModule} from '../translation/translation.module';
+import {DfxTranslateModule} from 'dfx-translate';
 
 import {CustomDateAdapter, MY_DATE_FORMATS} from './custom-date-adapter';
 
@@ -15,7 +15,7 @@ import {ListChipInputModule} from './shared-components/list-chip-input/list-chip
 
 @NgModule({
   declarations: [AppDividerComponent, DoNotForgetToSaveComponent, EmailAddressesListComponent],
-  imports: [CommonModule, MaterialModule, TranslationModule, FormsModule, ListChipInputModule],
+  imports: [CommonModule, MaterialModule, DfxTranslateModule, FormsModule, ListChipInputModule],
   exports: [AppDividerComponent, DoNotForgetToSaveComponent, EmailAddressesListComponent],
   providers: [
     {provide: DateAdapter, useClass: CustomDateAdapter},

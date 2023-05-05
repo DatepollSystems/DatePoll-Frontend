@@ -2,7 +2,7 @@
   <mat-sidenav #sidenav [(opened)]="navBarOpened" [mode]="navBarMode">
     <div fxLayout="row" fxLayoutAlign="space-between">
       <h2 class="sidenav-head-text">
-        {{ 'HELLO' | translate }} <span style="color: #607d8b">{{ firstname }}</span
+        {{ 'HELLO' | tr }} <span style="color: #607d8b">{{ firstname }}</span
         >,
       </h2>
       <button mat-icon-button (click)="changeTheme()" style="margin-top: 5px; margin-right: 15px">
@@ -12,16 +12,26 @@
     <h4 class="sidenav-head-text">{{ username }}</h4>
 
     <mat-nav-list>
-      <div mat-list-item disableRipple fxLayout="row" fxLayoutAlign="space-around">
-        <a mat-button (click)="onPageChange()" routerLink="/home">
-          <mat-icon>home</mat-icon>
+      <a
+        (click)="onPageChange()"
+        mat-list-item
+        routerLink="/home"
+      >
+         <mat-icon>home</mat-icon>
           Home
-        </a>
-        <a mat-button (click)="onPageChange()" routerLink="calendar" routerLinkActive="activated">
-          <mat-icon>today</mat-icon>
-          {{ 'CALENDAR' | translate }}</a
-        >
-      </div>
+      </a>
+
+
+      <a
+        (click)="onPageChange()"
+        mat-list-item
+        routerLink="calendar" routerLinkActive="activated"
+      >
+        <mat-icon>today</mat-icon>
+          {{ 'CALENDAR' | tr }}
+      </a>
+
+      <mat-divider></mat-divider>
 
       <a
         *ngIf="serverInfo.broadcasts_enabled"
@@ -31,7 +41,7 @@
         routerLinkActive="activated"
       >
         <mat-icon>message</mat-icon>
-        {{ 'NAV_BROADCASTS' | translate }}</a
+        {{ 'NAV_BROADCASTS' | tr }}</a
       >
 
       <a
@@ -42,23 +52,23 @@
         routerLinkActive="activated"
       >
         <mat-icon>polls</mat-icon>
-        {{ 'NAV_EVENTS_EVENTS' | translate }}
+        {{ 'NAV_EVENTS_EVENTS' | tr }}
       </a>
 
       <ng-container *ngIf="serverInfo.cinema_enabled">
         <a (click)="onPageChange()" mat-list-item routerLink="/home/cinema/tickets" routerLinkActive="activated">
           <mat-icon>movie</mat-icon>
-          {{ 'NAV_CINEMA_TICKETS' | translate }}
+          {{ 'NAV_CINEMA_TICKETS' | tr }}
         </a>
         <a (click)="onPageChange()" mat-list-item routerLink="/home/cinema/service" routerLinkActive="activated">
           <mat-icon>card_giftcard</mat-icon>
-          {{ 'NAV_CINEMA_SERVICE' | translate }}
+          {{ 'NAV_CINEMA_SERVICE' | tr }}
         </a>
       </ng-container>
 
       <!--      <a (click)="onPageChange()" mat-list-item routerLink="/home/seatReservation" routerLinkActive="activated">-->
       <!--        <mat-icon>place</mat-icon>-->
-      <!--        {{ 'NAV_SEAT_RESERVATION' | translate }}</a-->
+      <!--        {{ 'NAV_SEAT_RESERVATION' | tr }}</a-->
       <!--      >-->
 
       <mat-divider
@@ -79,7 +89,7 @@
         *ngIf="serverInfo.broadcasts_enabled && myUserService.hasPermission(broadcastAdministration)"
       >
         <mat-icon>email</mat-icon>
-        {{ 'NAV_BROADCASTS_ADMINISTRATION' | translate }}
+        {{ 'NAV_BROADCASTS_ADMINISTRATION' | tr }}
       </a>
 
       <a
@@ -90,7 +100,7 @@
         routerLinkActive="activated"
       >
         <mat-icon>class</mat-icon>
-        {{ 'NAV_EVENTS_ADMINISTRATION' | translate }}
+        {{ 'NAV_EVENTS_ADMINISTRATION' | tr }}
       </a>
 
       <a
@@ -101,7 +111,7 @@
         routerLinkActive="activated"
       >
         <mat-icon>local_movies</mat-icon>
-        {{ 'NAV_CINEMA_ADMINISTRATION' | translate }}</a
+        {{ 'NAV_CINEMA_ADMINISTRATION' | tr }}</a
       >
 
       <a
@@ -112,21 +122,21 @@
         *ngIf="myUserService.hasPermission(managementAdministration) || myUserService.hasPermission(managementUserView)"
       >
         <mat-icon>contacts</mat-icon>
-        {{ 'NAV_MANAGEMENT_USERS' | translate }}
+        {{ 'NAV_MANAGEMENT_USERS' | tr }}
       </a>
 
       <mat-divider></mat-divider>
 
       <a (click)="onPageChange()" mat-list-item routerLink="settings" routerLinkActive="activated">
         <mat-icon>settings</mat-icon>
-        {{ 'NAV_USER_SETTINGS' | translate }}
+        {{ 'NAV_USER_SETTINGS' | tr }}
       </a>
 
       <div *ngIf="myUserService.hasPermission(settingsAdministration) || myUserService.hasPermission(logsAdministration)">
         <mat-divider></mat-divider>
         <a (click)="onPageChange()" mat-list-item routerLink="management/datepoll" routerLinkActive="activated">
           <mat-icon>settings_input_component</mat-icon>
-          {{ 'NAV_MANAGEMENT_DATEPOLL' | translate }}
+          {{ 'NAV_MANAGEMENT_DATEPOLL' | tr }}
         </a>
       </div>
 
@@ -139,7 +149,7 @@
       ></mat-divider>
       <mat-list-item (click)="logout()">
         <mat-icon>power_settings_new</mat-icon>
-        {{ 'NAV_LOGOUT' | translate }}
+        {{ 'NAV_LOGOUT' | tr }}
       </mat-list-item>
     </mat-nav-list>
   </mat-sidenav>

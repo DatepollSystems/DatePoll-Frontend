@@ -1,4 +1,4 @@
-<h2 mat-dialog-title>{{ 'SETTINGS_PERSONAL_DATA_PERSONAL_DATA_CHANGE' | translate }}</h2>
+<h2 mat-dialog-title>{{ 'SETTINGS_PERSONAL_DATA_PERSONAL_DATA_CHANGE' | tr }}</h2>
 <mat-dialog-content>
   <app-do-not-forget-to-save></app-do-not-forget-to-save>
 
@@ -12,11 +12,11 @@
         maxlength="190"
         name="title"
         ngModel
-        placeholder="{{ 'SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_TITLE' | translate }}"
+        placeholder="{{ 'SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_TITLE' | tr }}"
         type="text"
       />
       <mat-error *ngIf="titleModel.invalid">
-        {{ 'SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_TITLE_NOT_VALID' | translate }}
+        {{ 'SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_TITLE_NOT_VALID' | tr }}
       </mat-error>
     </mat-form-field>
 
@@ -27,7 +27,7 @@
         id="datepicker"
         matInput
         name="datepicker"
-        placeholder="{{ 'SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_BIRTHDAY' | translate }}"
+        placeholder="{{ 'SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_BIRTHDAY' | tr }}"
         required
       />
       <mat-datepicker-toggle [for]="picker" matSuffix></mat-datepicker-toggle>
@@ -43,12 +43,12 @@
         maxlength="190"
         name="streetname"
         ngModel
-        placeholder="{{ 'SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_STREETNAME' | translate }}"
+        placeholder="{{ 'SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_STREETNAME' | tr }}"
         required
         type="text"
       />
       <mat-error *ngIf="streetnameModel.invalid">
-        {{ 'SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_STREETNAME_NOT_VALID' | translate }}
+        {{ 'SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_STREETNAME_NOT_VALID' | tr }}
       </mat-error>
     </mat-form-field>
 
@@ -61,12 +61,12 @@
         maxlength="190"
         name="streetnumber"
         ngModel
-        placeholder="{{ 'SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_STREETNUMBER' | translate }}"
+        placeholder="{{ 'SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_STREETNUMBER' | tr }}"
         required
         type="text"
       />
       <mat-error *ngIf="streetnumberModel.invalid">
-        {{ 'SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_STREETNUMBER_NOT_VALID' | translate }}
+        {{ 'SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_STREETNUMBER_NOT_VALID' | tr }}
       </mat-error>
     </mat-form-field>
 
@@ -80,12 +80,12 @@
         matInput
         name="zipcode"
         ngModel
-        placeholder="{{ 'SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_ZIPCODE' | translate }}"
+        placeholder="{{ 'SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_ZIPCODE' | tr }}"
         required
         type="number"
       />
       <mat-error *ngIf="zipcodeModel.invalid">
-        {{ 'SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_ZIPCODE_NOT_VALID' | translate }}
+        {{ 'SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_ZIPCODE_NOT_VALID' | tr }}
       </mat-error>
     </mat-form-field>
 
@@ -98,19 +98,54 @@
         maxlength="190"
         name="location"
         ngModel
-        placeholder="{{ 'SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_LOCATION' | translate }}"
+        placeholder="{{ 'SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_LOCATION' | tr }}"
         required
         type="text"
       />
       <mat-error *ngIf="locationModel.invalid">
-        {{ 'SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_LOCATION_NOT_VALID' | translate }}
+        {{ 'SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_LOCATION_NOT_VALID' | tr }}
       </mat-error>
     </mat-form-field>
+
+    <mat-form-field >
+      <input
+        #bvUserModel="ngModel" [(ngModel)]="bvUser"
+        id="bvUser"
+        matInput
+        name="bvUser"
+        ngModel
+        maxlength="190"
+        placeholder="{{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_BV_USER' | tr }}"
+        type="text"
+      />
+      <mat-error *ngIf="bvUserModel.invalid">
+        {{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_BV_INCORRECT' | tr }}
+      </mat-error>
+    </mat-form-field>
+
+
+    <mat-form-field>
+      <input
+        #bvPasswordModel="ngModel"
+        [(ngModel)]="bvPassword"
+        id="bvPassword"
+        matInput
+        name="bvPassword"
+        ngModel
+        maxlength="190"
+        placeholder="{{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_BV_PASSWORD' | tr }}"
+        type="text"
+      />
+      <mat-error *ngIf="bvPasswordModel.invalid">
+        {{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_BV_INCORRECT' | tr }}
+      </mat-error>
+    </mat-form-field>
+
   </form>
 </mat-dialog-content>
 <mat-dialog-actions fxLayout="row" fxLayoutAlign="end">
-  <button mat-button mat-dialog-close>{{ 'CLOSE' | translate }}</button>
+  <button mat-button mat-dialog-close>{{ 'CLOSE' | tr }}</button>
   <button (click)="form.ngSubmit.emit()" [disabled]="!form.form.valid" color="primary" mat-flat-button mat-dialog-close>
-    {{ 'SAVE' | translate }}
+    {{ 'SAVE' | tr }}
   </button>
 </mat-dialog-actions>

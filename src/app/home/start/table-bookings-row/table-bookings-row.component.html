@@ -9,7 +9,7 @@
     [class.spinner]="sendingSignOutForWorkerRequest"
     [disabled]="sendingSignOutForWorkerRequest"
     mat-icon-button
-    matTooltip="{{ 'CINEMA_TICKETS_CANCEL_CINEMA_SERVICE_TOOLTIP' | translate }}"
+    matTooltip="{{ 'CINEMA_TICKETS_CANCEL_CINEMA_SERVICE_TOOLTIP' | tr }}"
     matTooltipPosition="right"
   >
     <mat-icon aria-label="Cancel worker">cancel</mat-icon>
@@ -22,7 +22,7 @@
     [disabled]="sendingApplyForWorkerRequest"
     mat-stroked-button
   >
-    {{ 'CINEMA_TICKETS_APPLY' | translate }}
+    {{ 'CINEMA_TICKETS_APPLY' | tr }}
   </button>
 </td>
 
@@ -34,7 +34,7 @@
     [class.spinner]="sendingSignOutForEmergencyWorkerRequest"
     [disabled]="sendingSignOutForEmergencyWorkerRequest"
     mat-icon-button
-    matTooltip="{{ 'CINEMA_TICKETS_CANCEL_CINEMA_SERVICE_TOOLTIP' | translate }}"
+    matTooltip="{{ 'CINEMA_TICKETS_CANCEL_CINEMA_SERVICE_TOOLTIP' | tr }}"
     matTooltipPosition="right"
   >
     <mat-icon aria-label="Cancel worker">cancel</mat-icon>
@@ -47,6 +47,6 @@
     [disabled]="sendingApplyForEmergencyWorkerRequest"
     mat-stroked-button
   >
-    {{ 'CINEMA_TICKETS_APPLY' | translate }}
+    {{ 'CINEMA_TICKETS_APPLY' | tr }}
   </button>
 </td>

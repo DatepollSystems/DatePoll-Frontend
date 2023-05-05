@@ -1,8 +1,8 @@
-<h1 mat-dialog-title>{{ 'CINEMA_TICKETS_ADMINISTRATION_MOVIE_BOOKINGS_MANAGEMENT_MODAL_TITLE' | translate }} {{ movie?.name }}</h1>
+<h1 mat-dialog-title>{{ 'CINEMA_TICKETS_ADMINISTRATION_MOVIE_BOOKINGS_MANAGEMENT_MODAL_TITLE' | tr }} {{ movie?.name }}</h1>
 <div mat-dialog-content>
   <div fxLayout="row wrap" fxLayoutAlign="space-between">
     <mat-form-field fxFlex="49%" fxFlex.lt-md="100%">
-      <input (keyup)="applyFilter($event.target.value)" matInput placeholder="{{ 'SEARCH' | translate }}" />
+      <input (keyup)="applyFilter($event.target.value)" matInput placeholder="{{ 'SEARCH' | tr }}" />
     </mat-form-field>
 
     <div fxFlex="24%" fxFlex.lt-md="100%" style="margin-bottom: 10px">
@@ -14,7 +14,7 @@
         [class.spinner]="savingBooking"
         [disabled]="savingBooking"
       >
-        {{ 'CINEMA_TICKETS_ADMINISTRATION_MOVIE_BOOKINGS_MANAGEMENT_MODAL_BOOK' | translate }}
+        {{ 'CINEMA_TICKETS_ADMINISTRATION_MOVIE_BOOKINGS_MANAGEMENT_MODAL_BOOK' | tr }}
       </button>
     </div>
 
@@ -29,12 +29,12 @@
         name="ticketsToBook"
         ngModel
         number
-        placeholder="{{ 'CINEMA_TICKETS_ADMINISTRATION_MOVIE_BOOKINGS_MANAGEMENT_MODAL_TICKETS_TO_BOOK' | translate }}"
+        placeholder="{{ 'CINEMA_TICKETS_ADMINISTRATION_MOVIE_BOOKINGS_MANAGEMENT_MODAL_TICKETS_TO_BOOK' | tr }}"
         required
         type="number"
       />
       <mat-error *ngIf="ticketsToBookModel.invalid">
-        {{ 'CINEMA_TICKETS_ADMINISTRATION_MOVIE_BOOKINGS_MANAGEMENT_MODAL_TICKETS_TO_BOOK_INVALID' | translate }}
+        {{ 'CINEMA_TICKETS_ADMINISTRATION_MOVIE_BOOKINGS_MANAGEMENT_MODAL_TICKETS_TO_BOOK_INVALID' | tr }}
       </mat-error>
     </mat-form-field>
 
@@ -45,7 +45,7 @@
         (click)="onClear()"
         [class.spinner]="savingClearBooking"
         [disabled]="savingClearBooking"
-        matTooltip="{{ 'CINEMA_TICKETS_ADMINISTRATION_MOVIE_BOOKINGS_MANAGEMENT_MODAL_REMOVE_BOOKING' | translate }}"
+        matTooltip="{{ 'CINEMA_TICKETS_ADMINISTRATION_MOVIE_BOOKINGS_MANAGEMENT_MODAL_REMOVE_BOOKING' | tr }}"
       >
         <mat-icon>delete</mat-icon>
       </button>
@@ -74,19 +74,19 @@
         </mat-checkbox>
       </td>
       <td *matFooterCellDef mat-footer-cell>
-        <b>{{ 'CINEMA_TICKETS_BOOKED_TICKETS' | translate }}</b>
+        <b>{{ 'CINEMA_TICKETS_BOOKED_TICKETS' | tr }}</b>
       </td>
     </ng-container>
 
     <ng-container matColumnDef="name">
-      <th *matHeaderCellDef mat-header-cell>{{ 'CINEMA_TICKETS_ADMINISTRATION_MOVIE_INFO_MODAL_TABLE_NAME' | translate }}</th>
+      <th *matHeaderCellDef mat-header-cell>{{ 'CINEMA_TICKETS_ADMINISTRATION_MOVIE_INFO_MODAL_TABLE_NAME' | tr }}</th>
       <td *matCellDef="let booking" mat-cell>{{ booking.firstname + ' ' + booking.surname }}</td>
       <td *matFooterCellDef mat-footer-cell></td>
     </ng-container>
 
     <ng-container matColumnDef="amount">
       <th *matHeaderCellDef mat-header-cell mat-sort-header>
-        {{ 'CINEMA_TICKETS_ADMINISTRATION_MOVIE_INFO_MODAL_TABLE_AMOUNT' | translate }}
+        {{ 'CINEMA_TICKETS_ADMINISTRATION_MOVIE_INFO_MODAL_TABLE_AMOUNT' | tr }}
       </th>
       <td *matCellDef="let booking" mat-cell>{{ booking.amount }}</td>
       <td *matFooterCellDef mat-footer-cell>{{ movie?.bookedTickets }}</td>
@@ -101,5 +101,5 @@
   <mat-paginator [pageSizeOptions]="[20, 40, 80, 160]" showFirstLastButtons></mat-paginator>
 </div>
 <div mat-dialog-actions>
-  <button [mat-dialog-close] mat-button>{{ 'CLOSE' | translate }}</button>
+  <button [mat-dialog-close] mat-button>{{ 'CLOSE' | tr }}</button>
 </div>

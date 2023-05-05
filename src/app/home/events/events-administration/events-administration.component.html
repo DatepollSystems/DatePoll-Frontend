@@ -3,7 +3,7 @@
     <mat-card-content>
       <div fxLayout="row" fxLayoutAlign="space-between" fxLayout.lt-md="column">
         <div>
-          <h1>{{ 'NAV_EVENTS_ADMINISTRATION' | translate }}</h1>
+          <h1>{{ 'NAV_EVENTS_ADMINISTRATION' | tr }}</h1>
         </div>
 
         <div fxLayout="row" fxLayoutAlign.lt-md="space-between" fxLayoutGap="5%">
@@ -17,26 +17,26 @@
             <mat-menu #menu="matMenu">
               <button (click)="refreshEvents()" mat-menu-item>
                 <mat-icon>refresh</mat-icon>
-                <span>{{ 'EVENTS_ADMINISTRATION_MENU_REFRESH' | translate }}</span>
+                <span>{{ 'EVENTS_ADMINISTRATION_MENU_REFRESH' | tr }}</span>
               </button>
               <div mat-menu-item>
                 <mat-slide-toggle (change)="onShowAllEventsChange()" [(ngModel)]="showAllEvents" color="primary">
-                  {{ 'EVENTS_ADMINISTRATION_MENU_SHOW_ALL_EVENTS' | translate }}
+                  {{ 'EVENTS_ADMINISTRATION_MENU_SHOW_ALL_EVENTS' | tr }}
                 </mat-slide-toggle>
               </div>
               <button mat-menu-item [matMenuTriggerFor]="managementMenu">
                 <mat-icon>settings_applications</mat-icon>
-                <span>{{ 'ADVANCED_SETTINGS' | translate }}</span>
+                <span>{{ 'ADVANCED_SETTINGS' | tr }}</span>
               </button>
             </mat-menu>
             <mat-menu #managementMenu="matMenu">
               <button (click)="onShowStandardDecisionManagementModal()" mat-menu-item>
                 <mat-icon>question_answer</mat-icon>
-                <span>{{ 'EVENTS_STANDARD_DECISIONS_MANAGEMENT' | translate }}</span>
+                <span>{{ 'EVENTS_STANDARD_DECISIONS_MANAGEMENT' | tr }}</span>
               </button>
               <button (click)="onShowStandardLocationManagementModal()" mat-menu-item>
                 <mat-icon>location_searching</mat-icon>
-                <span>{{ 'EVENTS_STANDARD_LOCATIONS_MANAGEMENT' | translate }}</span>
+                <span>{{ 'EVENTS_STANDARD_LOCATIONS_MANAGEMENT' | tr }}</span>
               </button>
             </mat-menu>
           </div>
@@ -49,50 +49,46 @@
         </button>
         <mat-form-field>
           <!--suppress TypeScriptUnresolvedVariable -->
-          <input (keyup)="applyFilter($event.target.value)" matInput placeholder="{{ 'SEARCH' | translate }}" />
+          <input (keyup)="applyFilter($event.target.value)" matInput placeholder="{{ 'SEARCH' | tr }}" />
         </mat-form-field>
       </div>
 
       <table [dataSource]="dataSource" class="table-responsive" mat-table matSort>
         <!-- Name Column -->
         <ng-container matColumnDef="name">
-          <th *matHeaderCellDef mat-header-cell mat-sort-header>{{ 'EVENTS_ADMINISTRATION_TABLE_NAME' | translate }}</th>
+          <th *matHeaderCellDef mat-header-cell mat-sort-header>{{ 'EVENTS_ADMINISTRATION_TABLE_NAME' | tr }}</th>
           <td *matCellDef="let event" mat-cell>{{ event.name }}</td>
         </ng-container>
 
         <!-- Date Column -->
         <ng-container matColumnDef="startDate">
-          <th *matHeaderCellDef mat-header-cell mat-sort-header>{{ 'EVENTS_ADMINISTRATION_TABLE_START_DATE' | translate }}</th>
+          <th *matHeaderCellDef mat-header-cell mat-sort-header>{{ 'EVENTS_ADMINISTRATION_TABLE_START_DATE' | tr }}</th>
           <td *matCellDef="let event" mat-cell>{{ event.startDate | date: 'EE, dd.MM.yyyy HH:mm' }}</td>
         </ng-container>
 
         <ng-container matColumnDef="endDate">
-          <th *matHeaderCellDef mat-header-cell mat-sort-header>{{ 'EVENTS_ADMINISTRATION_TABLE_END_DATE' | translate }}</th>
+          <th *matHeaderCellDef mat-header-cell mat-sort-header>{{ 'EVENTS_ADMINISTRATION_TABLE_END_DATE' | tr }}</th>
           <td *matCellDef="let event" mat-cell>{{ event.endDate | date: 'EE, dd.MM.yyyy HH:mm' }}</td>
         </ng-container>
 
         <!-- Description Column -->
         <ng-container matColumnDef="description">
-          <th *matHeaderCellDef mat-header-cell mat-sort-header>{{ 'EVENTS_ADMINISTRATION_TABLE_DESCRIPTION' | translate }}</th>
+          <th *matHeaderCellDef mat-header-cell mat-sort-header>{{ 'EVENTS_ADMINISTRATION_TABLE_DESCRIPTION' | tr }}</th>
           <td *matCellDef="let event" mat-cell>{{ event.descriptionPreview }}</td>
         </ng-container>
 
         <!-- Action movie Column -->
         <ng-container matColumnDef="actions">
-          <th *matHeaderCellDef mat-header-cell>{{ 'ACTION' | translate }}</th>
+          <th *matHeaderCellDef mat-header-cell>{{ 'ACTION' | tr }}</th>
           <td (click)="$event.stopPropagation()" *matCellDef="let event" mat-cell>
-            <button
-              (click)="onInfo(event)"
-              mat-icon-button
-              matTooltip="{{ 'EVENTS_ADMINISTRATION_TABLE_ACTION_TOOLTIP_INFO' | translate }}"
-            >
+            <button (click)="onInfo(event)" mat-icon-button matTooltip="{{ 'EVENTS_ADMINISTRATION_TABLE_ACTION_TOOLTIP_INFO' | tr }}">
               <mat-icon>info</mat-icon>
             </button>
 
             <button
               (click)="onUserManagement(event)"
               mat-icon-button
-              matTooltip="{{ 'EVENTS_ADMINISTRATION_TABLE_ACTION_TOOLTIP_USER_MANAGEMENT' | translate }}"
+              matTooltip="{{ 'EVENTS_ADMINISTRATION_TABLE_ACTION_TOOLTIP_USER_MANAGEMENT' | tr }}"
             >
               <mat-icon>group</mat-icon>
             </button>
@@ -101,7 +97,7 @@
               (click)="onEdit(event)"
               color="accent"
               mat-icon-button
-              matTooltip="{{ 'EVENTS_ADMINISTRATION_TABLE_ACTION_TOOLTIP_EDIT' | translate }}"
+              matTooltip="{{ 'EVENTS_ADMINISTRATION_TABLE_ACTION_TOOLTIP_EDIT' | tr }}"
             >
               <mat-icon>create</mat-icon>
             </button>
@@ -110,7 +106,7 @@
               (click)="onDelete(event.id)"
               color="warn"
               mat-icon-button
-              matTooltip="{{ 'EVENTS_ADMINISTRATION_TABLE_ACTION_TOOLTIP_DELETE' | translate }}"
+              matTooltip="{{ 'EVENTS_ADMINISTRATION_TABLE_ACTION_TOOLTIP_DELETE' | tr }}"
             >
               <mat-icon>delete</mat-icon>
             </button>

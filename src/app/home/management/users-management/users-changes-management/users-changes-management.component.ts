@@ -1,15 +1,14 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {MatBottomSheet} from '@angular/material/bottom-sheet';
-import {MatSnackBar} from '@angular/material/snack-bar';
 import {Subscription} from 'rxjs';
 
 import {UsersChangesService} from './users-changes.service';
 import {MyUserService} from '../../../my-user.service';
 import {Permissions} from '../../../../permissions';
-import {TranslateService} from '../../../../translation/translate.service';
 
 import {UserChange} from '../models/userChange.model';
 import {QuestionDialogComponent} from '../../../../utils/shared-components/question-dialog/question-dialog.component';
+import {NotificationService} from '../../../../utils/notification.service';
 
 @Component({
   selector: 'app-users-changes-management',
@@ -31,8 +30,7 @@ export class UsersChangesManagementComponent implements OnInit, OnDestroy {
   constructor(
     private userChangesService: UsersChangesService,
     private myUserService: MyUserService,
-    private translate: TranslateService,
-    private snackBar: MatSnackBar,
+    private notificationService: NotificationService,
     private bottomSheet: MatBottomSheet
   ) {
     this.userChanges = this.userChangesService.getUserChanges(0);
@@ -96,7 +94,7 @@ export class UsersChangesManagementComponent implements OnInit, OnDestroy {
                 console.log(response);
                 this.userChanges.splice(this.userChanges.indexOf(userChange), 1);
                 this.filteredUserChanges.splice(this.filteredUserChanges.indexOf(userChange), 1);
-                this.snackBar.open(this.translate.getTranslationFor('MANAGEMENT_USERS_CHANGES_DELETE_CONFIRMATION_SUCCESSFULLY'));
+                this.notificationService.info('MANAGEMENT_USERS_CHANGES_DELETE_CONFIRMATION_SUCCESSFULLY');
               },
               (error) => console.log(error)
             );

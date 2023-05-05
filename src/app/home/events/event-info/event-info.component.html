@@ -1,7 +1,7 @@
 <!-- Description -->
 <div fxLayout="row" *ngIf="description?.length > 0">
   <mat-form-field appearance="outline" fxFlex>
-    <mat-label>{{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DESCRIPTION' | translate }}</mat-label>
+    <mat-label>{{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DESCRIPTION' | tr }}</mat-label>
     <textarea
       cdkTextareaAutosize
       [(ngModel)]="description"
@@ -27,7 +27,7 @@
     <mat-expansion-panel *ngIf="!event?.anonymous" fxFlex="100%">
       <mat-expansion-panel-header>
         <mat-panel-title>
-          {{ 'EVENTS_ADMINISTRATION_INFO_EVENT_COMPLETE_USERS_TABLE' | translate }}
+          {{ 'EVENTS_ADMINISTRATION_INFO_EVENT_COMPLETE_USERS_TABLE' | tr }}
         </mat-panel-title>
       </mat-expansion-panel-header>
 
@@ -37,9 +37,9 @@
         fxLayoutAlign="space-between"
         *ngIf="this.myUserService.hasPermission(ROOT_PERMISSION) || this.myUserService.hasPermission(EVENTS_ADMINISTRATION_PERMISSION)"
       >
-        <button mat-flat-button color="accent" (click)="exportAllResultUsers()">{{ 'EXPORT' | translate }}</button>
+        <button mat-flat-button color="accent" (click)="exportAllResultUsers()">{{ 'EXPORT' | tr }}</button>
         <mat-slide-toggle (change)="changeAdminMode($event)" labelPosition="before">
-          {{ 'EVENTS_ADMINISTRATION_INFO_EVENT_SHOW_ADMINISTRATION_MODE' | translate }}
+          {{ 'EVENTS_ADMINISTRATION_INFO_EVENT_SHOW_ADMINISTRATION_MODE' | tr }}
         </mat-slide-toggle>
       </div>
 
@@ -66,12 +66,7 @@
     </mat-expansion-panel>
 
     <mat-form-field>
-      <input
-        (ngModelChange)="applyFilter($event)"
-        [(ngModel)]="searchValue"
-        matInput
-        placeholder="{{ 'MANAGEMENT_GROUPS_SEARCH' | translate }}"
-      />
+      <input (ngModelChange)="applyFilter($event)" [(ngModel)]="searchValue" matInput placeholder="{{ 'MANAGEMENT_GROUPS_SEARCH' | tr }}" />
       <button (click)="searchValue = ''; applyFilter('')" *ngIf="searchValue" aria-label="Clear" mat-button mat-icon-button matSuffix>
         <mat-icon>close</mat-icon>
       </button>

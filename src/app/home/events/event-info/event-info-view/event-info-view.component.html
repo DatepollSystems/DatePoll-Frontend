@@ -1,10 +1,22 @@
 <div class="desktop-card-container">
   <h1>
-    <b>{{ 'EVENTS_ADMINISTRATION_INFO_EVENT' | translate }}</b> {{ event.name }}
+    <b>{{ 'EVENTS_ADMINISTRATION_INFO_EVENT' | tr }}</b> {{ event.name }}
     <span style="color: gray" *ngIf="objectLoaded">({{ event.getUntil() }})</span>
   </h1>
-  <div fxLayout="row" style="margin-bottom: 15px">
+  <div fxLayout="row break" fxLayoutAlign="space-between" style="margin-bottom: 15px">
     <app-go-back-button></app-go-back-button>
+    <button mat-flat-button color="accent" *ngIf="!event?.alreadyVotedFor && objectLoaded" (click)="onEventVote(event)">
+      {{ 'EVENTS_ADMINISTRATION_USER_MANAGEMENT_FOR_EVENT_VOTE' | tr }}
+    </button>
+    <button
+      mat-flat-button
+      [style.background-color]="event?.decisionColor"
+      *ngIf="event?.alreadyVotedFor && objectLoaded"
+      (click)="cancelEventVoting(event)"
+    >
+      <mat-icon>delete</mat-icon>
+      {{ event?.userDecision }}
+    </button>
   </div>
   <app-event-info [eventId]="event.id" (eventLoaded)="eventLoaded($event)"></app-event-info>
 </div>

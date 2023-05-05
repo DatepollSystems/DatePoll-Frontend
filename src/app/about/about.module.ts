@@ -4,14 +4,14 @@ import {FormsModule} from '@angular/forms';
 
 import {FooterModule} from '../footer/footer.module';
 import {MaterialModule} from '../material-module';
-import {TranslationModule} from '../translation/translation.module';
+import {DfxTranslateModule} from 'dfx-translate';
 import {AboutRoutingModule} from './about-routing.module';
 
 import {AboutComponent} from './about.component';
 
 @NgModule({
   declarations: [AboutComponent],
-  imports: [CommonModule, FormsModule, MaterialModule, TranslationModule, FooterModule, AboutRoutingModule],
-  providers: []
+  imports: [CommonModule, FormsModule, MaterialModule, DfxTranslateModule, FooterModule, AboutRoutingModule],
+  providers: [],
 })
 export class AboutModule {}

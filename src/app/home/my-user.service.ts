@@ -17,6 +17,8 @@ export class MyUserService {
   public phoneNumberChange: Subject<PhoneNumber[]> = new Subject<PhoneNumber[]>();
   public permissionsChange: Subject<string[]> = new Subject<string[]>();
   public emailAddressesChange: Subject<string[]> = new Subject<string[]>();
+  public bvUser?: string;
+  public bvPassword?: string;
   private _ID: number;
   private _title: string;
   private _firstname: string;
@@ -56,6 +58,9 @@ export class MyUserService {
         this.setJoindate(data.join_date);
         this.setPermissions(data.permissions);
 
+        this.bvUser = data.bv_user;
+        this.bvPassword = data.bv_password;
+
         const localPhoneNumbers = [];
         const localPhoneNumbersData = data.phone_numbers;
         for (let i = 0; i < localPhoneNumbersData.length; i++) {
@@ -77,6 +82,8 @@ export class MyUserService {
       zipcode: this.getZipcode(),
       location: this.getLocation(),
       birthday: Converter.getDateFormatted(this.getBirthday()),
+      bv_user: this.bvUser,
+      bv_password: this.bvPassword,
     };
 
     return this.httpService.loggedInV1PUTRequest('/user/myself', userObject, 'updateMyself');

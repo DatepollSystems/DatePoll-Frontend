@@ -1,10 +1,9 @@
 import {Component, Inject} from '@angular/core';
 import {NgForm} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import {MatSnackBar} from '@angular/material/snack-bar';
 
-import {TranslateService} from '../../../../translation/translate.service';
 import {GroupsService} from '../groups.service';
+import {NotificationService} from '../../../../utils/notification.service';
 
 @Component({
   selector: 'app-subgroup-create-modal',
@@ -18,8 +17,7 @@ export class SubgroupCreateModalComponent {
     @Inject(MAT_DIALOG_DATA) public data: any,
     private groupsService: GroupsService,
     private dialogRef: MatDialogRef<SubgroupCreateModalComponent>,
-    private translate: TranslateService,
-    private snackBar: MatSnackBar
+    private notificationService: NotificationService
   ) {
     this.groupID = data.groupID;
   }
@@ -43,7 +41,7 @@ export class SubgroupCreateModalComponent {
       (data: any) => {
         console.log(data);
         this.groupsService.fetchGroups();
-        this.snackBar.open(this.translate.getTranslationFor('MANAGEMENT_GROUPS_CREATE_SUBGROUP_SUCCESSFUL'));
+        this.notificationService.info('MANAGEMENT_GROUPS_CREATE_SUBGROUP_SUCCESSFUL');
       },
       (error) => {
         console.log(error);

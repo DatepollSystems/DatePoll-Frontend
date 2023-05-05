@@ -2,18 +2,18 @@
   <mat-card class="mat-elevation-z3" fxFlex.gt-md="25%" fxFlex="45%">
     <mat-card-title>
       <mat-icon>account_circle</mat-icon>
-      {{ 'SETTINGS_PERSONAL_DATA' | translate }}
+      {{ 'SETTINGS_PERSONAL_DATA' | tr }}
     </mat-card-title>
 
     <mat-card-content fxLayout="column" fxLayoutGap="2%">
-      <h4>{{ 'SETTINGS_PERSONAL_DATA_DESCRIPTION' | translate }}</h4>
+      <h4>{{ 'SETTINGS_PERSONAL_DATA_DESCRIPTION' | tr }}</h4>
 
-      <button mat-stroked-button (click)="openPersonalDataModal()">{{ 'SETTINGS_PERSONAL_DATA_PERSONAL_DATA_CHANGE' | translate }}</button>
+      <button mat-stroked-button (click)="openPersonalDataModal()">{{ 'SETTINGS_PERSONAL_DATA_PERSONAL_DATA_CHANGE' | tr }}</button>
 
-      <button mat-stroked-button (click)="openPhoneNumberModal()">{{ 'SETTINGS_PERSONAL_DATA_PERSONAL_NUMBER_CHANGE' | translate }}</button>
+      <button mat-stroked-button (click)="openPhoneNumberModal()">{{ 'SETTINGS_PERSONAL_DATA_PERSONAL_NUMBER_CHANGE' | tr }}</button>
 
       <button mat-stroked-button (click)="openEmailAddressModal()">
-        {{ 'SETTINGS_PERSONAL_DATA_PERSONAL_EMAIL_ADDRESSES_CHANGE' | translate }}
+        {{ 'SETTINGS_PERSONAL_DATA_PERSONAL_EMAIL_ADDRESSES_CHANGE' | tr }}
       </button>
     </mat-card-content>
   </mat-card>
@@ -21,16 +21,16 @@
   <mat-card class="mat-elevation-z3" fxFlex.gt-md="25%" fxFlex="45%">
     <mat-card-title>
       <mat-icon>security</mat-icon>
-      {{ 'SETTINGS_SECURITY' | translate }}
+      {{ 'SETTINGS_SECURITY' | tr }}
     </mat-card-title>
 
     <mat-card-content fxLayout="column" fxLayoutGap="2%">
-      <h4>{{ 'SETTINGS_SECURITY_DESCRIPTION' | translate }}</h4>
+      <h4>{{ 'SETTINGS_SECURITY_DESCRIPTION' | tr }}</h4>
 
-      <button mat-stroked-button (click)="openPasswordModal()">{{ 'SETTINGS_SECURITY_CHANGE_PASSWORD' | translate }}</button>
-      <button mat-stroked-button (click)="openCalendarTokenModal()">{{ 'SETTINGS_SECURITY_CALENDAR' | translate }}</button>
-      <button mat-stroked-button (click)="onSessionManagementModal()">{{ 'SETTINGS_SECURITY_SESSIONS' | translate }}</button>
-      <button mat-stroked-button (click)="onPrivacySettingsModal()">{{ 'SETTINGS_SECURITY_SETTINGS' | translate }}</button>
+      <button mat-stroked-button (click)="openPasswordModal()">{{ 'SETTINGS_SECURITY_CHANGE_PASSWORD' | tr }}</button>
+      <button mat-stroked-button (click)="openCalendarTokenModal()">{{ 'SETTINGS_SECURITY_CALENDAR' | tr }}</button>
+      <button mat-stroked-button (click)="onSessionManagementModal()">{{ 'SETTINGS_SECURITY_SESSIONS' | tr }}</button>
+      <button mat-stroked-button (click)="onPrivacySettingsModal()">{{ 'SETTINGS_SECURITY_SETTINGS' | tr }}</button>
     </mat-card-content>
   </mat-card>
 </div>

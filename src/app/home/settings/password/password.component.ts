@@ -1,13 +1,12 @@
 import {Component, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
-import {TranslateService} from '../../../translation/translate.service';
 import {HttpService} from '../../../utils/http.service';
 
 @Component({
   selector: 'app-password',
   templateUrl: './password.component.html',
-  styleUrls: ['./password.component.css']
+  styleUrls: ['./password.component.css'],
 })
 export class PasswordComponent {
   @ViewChild('stepper', {static: true}) stepper;
@@ -22,20 +21,20 @@ export class PasswordComponent {
     passwords: this.fb.group(
       {
         password: ['', [Validators.required, Validators.min(6)]],
-        repeat: ['', [Validators.required, Validators.min(6)]]
+        repeat: ['', [Validators.required, Validators.min(6)]],
       },
       {validator: this.checkPasswords}
-    )
+    ),
   });
 
-  constructor(private httpService: HttpService, private translate: TranslateService, private fb: FormBuilder) {}
+  constructor(private httpService: HttpService, private fb: FormBuilder) {}
 
   checkOldPassword() {
     this.showOldPasswordIncorrectCard = false;
     this.showCheckingOldPasswordSpinner = true;
 
     const body = {
-      password: this.oldPassword
+      password: this.oldPassword,
     };
 
     this.httpService.loggedInV1POSTRequest('/user/myself/changePassword/checkOldPassword', body, 'checkOldPassword').subscribe(
@@ -44,7 +43,7 @@ export class PasswordComponent {
         console.log('checkOldPasswort | Password is correct');
         this.nextStep();
       },
-      error => {
+      (error) => {
         console.log(error);
         console.log('checkOldPasswort | Password is incorrect');
         this.showOldPasswordIncorrectCard = true;
@@ -69,7 +68,7 @@ export class PasswordComponent {
 
     const body = {
       old_password: this.oldPassword,
-      new_password: form.controls.passwords.get('password').value
+      new_password: form.controls.passwords.get('password').value,
     };
 
     this.httpService.loggedInV1POSTRequest('/user/myself/changePassword/changePassword', body, 'changePassword').subscribe(
@@ -78,7 +77,7 @@ export class PasswordComponent {
         console.log('changePassword | Changed successful');
         this.nextStep();
       },
-      error => {
+      (error) => {
         console.log(error);
         console.log('changePassword | Password is incorrect');
       }

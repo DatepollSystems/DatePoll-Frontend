@@ -1,4 +1,4 @@
-<h2 mat-dialog-title>{{ 'SETTINGS_PERSONAL_DATA_PERSONAL_EMAIL_ADDRESSES_CHANGE' | translate }}</h2>
+<h2 mat-dialog-title>{{ 'SETTINGS_PERSONAL_DATA_PERSONAL_EMAIL_ADDRESSES_CHANGE' | tr }}</h2>
 <mat-dialog-content>
   <app-do-not-forget-to-save></app-do-not-forget-to-save>
 
@@ -10,14 +10,14 @@
 
   <app-divider></app-divider>
 
-  <h2>{{ 'SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_NOTIFY_TITLE' | translate }}</h2>
+  <h2>{{ 'SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_NOTIFY_TITLE' | tr }}</h2>
 
   <div fxLayout="row" fxLayoutGap="5%" fxLayoutGap.lt-md="2%">
     <div fxFlex="5%" fxFlex.lt-md="15%">
       <mat-slide-toggle (change)="notifyMeOnNewEventChange($event)" [(ngModel)]="notifyViaEmailOnNewEvent" color="primary">
       </mat-slide-toggle>
     </div>
-    <p fxFlex="85%" fxFlex.lt-md="70%">{{ 'SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_NOTIFY_ME_ON_NEW_EVENT' | translate }}</p>
+    <p fxFlex="85%" fxFlex.lt-md="70%">{{ 'SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_NOTIFY_ME_ON_NEW_EVENT' | tr }}</p>
   </div>
 
   <div fxLayout="row" fxLayoutGap="5%" fxLayoutGap.lt-md="2%">
@@ -25,10 +25,10 @@
       <mat-slide-toggle (change)="notifyMeViaEmailOnBroadcastChange($event)" [(ngModel)]="notifyMeViaEmailOnBroadcast" color="primary">
       </mat-slide-toggle>
     </div>
-    <p fxFlex="85%" fxFlex.lt-md="70%">{{ 'SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_NOTIFY_ME_ON_BROADCAST_VIA_EMAIL' | translate }}</p>
+    <p fxFlex="85%" fxFlex.lt-md="70%">{{ 'SETTINGS_PERSONAL_DATA_MODAL_EMAIL_ADDRESS_NOTIFY_ME_ON_BROADCAST_VIA_EMAIL' | tr }}</p>
   </div>
 </mat-dialog-content>
 <mat-dialog-actions fxLayout="row" fxLayoutAlign="end">
-  <button mat-button mat-dialog-close>{{ 'CLOSE' | translate }}</button>
-  <button (click)="onSave()" color="accent" mat-flat-button>{{ 'SAVE' | translate }}</button>
+  <button mat-button mat-dialog-close>{{ 'CLOSE' | tr }}</button>
+  <button (click)="onSave()" color="accent" mat-flat-button>{{ 'SAVE' | tr }}</button>
 </mat-dialog-actions>

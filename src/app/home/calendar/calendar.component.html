@@ -11,26 +11,26 @@
         <mat-menu #menu="matMenu">
           <p class="mat-menu-info">
             <small
-              ><b>{{ 'INFORMATION' | translate }}</b> {{ 'CALENDAR_SETTINGS_INFO' | translate }}
+              ><b>{{ 'INFORMATION' | tr }}</b> {{ 'CALENDAR_SETTINGS_INFO' | tr }}
             </small>
           </p>
           <button (click)="this.refreshEntries(); $event.stopPropagation()" mat-menu-item>
             <mat-icon>refresh</mat-icon>
-            <span>{{ 'EVENTS_ADMINISTRATION_MENU_REFRESH' | translate }}</span>
+            <span>{{ 'EVENTS_ADMINISTRATION_MENU_REFRESH' | tr }}</span>
           </button>
           <div mat-menu-item *ngIf="serverInfo?.cinema_enabled" (click)="$event.stopPropagation()">
             <mat-slide-toggle (change)="onShowMoviesChange($event)" [(ngModel)]="showMovies" color="primary">
-              {{ 'CALENDAR_SETTINGS_SHOW_MOVIES' | translate }}
+              {{ 'CALENDAR_SETTINGS_SHOW_MOVIES' | tr }}
             </mat-slide-toggle>
           </div>
           <div mat-menu-item *ngIf="serverInfo?.events_enabled" (click)="$event.stopPropagation()">
             <mat-slide-toggle (change)="onShowEventsChange($event)" [(ngModel)]="showEvents" color="primary">
-              {{ 'CALENDAR_SETTINGS_SHOW_EVENTS' | translate }}
+              {{ 'CALENDAR_SETTINGS_SHOW_EVENTS' | tr }}
             </mat-slide-toggle>
           </div>
           <div mat-menu-item (click)="$event.stopPropagation()">
             <mat-slide-toggle (change)="onShowBirthdaysChange($event)" [(ngModel)]="showBirthdays" color="primary">
-              {{ 'CALENDAR_SETTINGS_SHOW_BIRTHDAYS' | translate }}
+              {{ 'CALENDAR_SETTINGS_SHOW_BIRTHDAYS' | tr }}
             </mat-slide-toggle>
           </div>
         </mat-menu>
@@ -40,25 +40,25 @@
     <div fxLayout="row" fxLayoutAlign="space-between">
       <div style="text-align: center">
         <button (viewDateChange)="closeOpenMonthViewDay()" [(viewDate)]="viewDate" [view]="view" mat-button mwlCalendarPreviousView>
-          {{ 'CALENDAR_PREVIOUS' | translate }}
+          {{ 'CALENDAR_PREVIOUS' | tr }}
         </button>
 
-        <button [(viewDate)]="viewDate" color="primary" mat-flat-button mwlCalendarToday>{{ 'CALENDAR_TODAY' | translate }}</button>
+        <button [(viewDate)]="viewDate" color="primary" mat-flat-button mwlCalendarToday>{{ 'CALENDAR_TODAY' | tr }}</button>
 
         <button (viewDateChange)="closeOpenMonthViewDay()" [(viewDate)]="viewDate" [view]="view" mat-button mwlCalendarNextView>
-          {{ 'CALENDAR_NEXT' | translate }}
+          {{ 'CALENDAR_NEXT' | tr }}
         </button>
       </div>
 
       <div style="text-align: center">
         <button (click)="setView(CalendarView.Month)" [class.active]="view === CalendarView.Month" mat-stroked-button>
-          {{ 'CALENDAR_MONTH' | translate }}
+          {{ 'CALENDAR_MONTH' | tr }}
         </button>
         <button (click)="setView(CalendarView.Week)" [class.active]="view === CalendarView.Week" mat-stroked-button>
-          {{ 'CALENDAR_WEEK' | translate }}
+          {{ 'CALENDAR_WEEK' | tr }}
         </button>
         <button (click)="setView(CalendarView.Day)" [class.active]="view === CalendarView.Day" mat-stroked-button>
-          {{ 'CALENDAR_DAY' | translate }}
+          {{ 'CALENDAR_DAY' | tr }}
         </button>
       </div>
     </div>
@@ -117,7 +117,7 @@
         matInput
         name="datepicker-date"
         required
-        placeholder="{{ 'CALENDAR_DATE' | translate }}"
+        placeholder="{{ 'CALENDAR_DATE' | tr }}"
       />
       <mat-datepicker-toggle style="color: #000" [for]="picker_date" matSuffix></mat-datepicker-toggle>
       <mat-datepicker style="color: #000" #picker_date></mat-datepicker>
@@ -128,13 +128,13 @@
   </div>
   <div fxLayout="row" fxLayoutAlign="space-around">
     <button (viewDateChange)="closeOpenMonthViewDay()" [(viewDate)]="viewDate" [view]="mobileView" mat-button mwlCalendarPreviousView>
-      {{ 'CALENDAR_PREVIOUS' | translate }}
+      {{ 'CALENDAR_PREVIOUS' | tr }}
     </button>
 
-    <button [(viewDate)]="viewDate" color="primary" mat-flat-button mwlCalendarToday>{{ 'CALENDAR_TODAY' | translate }}</button>
+    <button [(viewDate)]="viewDate" color="primary" mat-flat-button mwlCalendarToday>{{ 'CALENDAR_TODAY' | tr }}</button>
 
     <button (viewDateChange)="closeOpenMonthViewDay()" [(viewDate)]="viewDate" [view]="mobileView" mat-button mwlCalendarNextView>
-      {{ 'CALENDAR_NEXT' | translate }}
+      {{ 'CALENDAR_NEXT' | tr }}
     </button>
   </div>
   <mwl-calendar-day-view

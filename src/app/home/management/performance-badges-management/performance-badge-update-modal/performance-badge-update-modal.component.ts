@@ -1,11 +1,10 @@
 import {Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {NgForm} from '@angular/forms';
-import {MatSnackBar} from '@angular/material/snack-bar';
 
 import {PerformanceBadgesService} from '../performance-badges.service';
-import {TranslateService} from '../../../../translation/translate.service';
 import {PerformanceBadge} from '../models/performanceBadge.model';
+import {NotificationService} from '../../../../utils/notification.service';
 
 @Component({
   selector: 'app-performance-badge-update-modal',
@@ -19,8 +18,7 @@ export class PerformanceBadgeUpdateModalComponent {
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     private performanceBadgesService: PerformanceBadgesService,
-    private snackBar: MatSnackBar,
-    private translate: TranslateService,
+    private notificationService: NotificationService,
     private dialogRef: MatDialogRef<PerformanceBadgeUpdateModalComponent>
   ) {
     this.performanceBadge = data.performanceBadge;
@@ -34,7 +32,7 @@ export class PerformanceBadgeUpdateModalComponent {
       (data: any) => {
         console.log(data);
         this.performanceBadgesService.fetchPerformanceBadges();
-        this.snackBar.open(this.translate.getTranslationFor('MANAGEMENT_PERFORMANCE_BADGES_UPDATE_PERFORMANCE_BADGE_SUCCESSFUL'));
+        this.notificationService.info('MANAGEMENT_PERFORMANCE_BADGES_UPDATE_PERFORMANCE_BADGE_SUCCESSFUL');
       },
       (error) => console.log(error)
     );

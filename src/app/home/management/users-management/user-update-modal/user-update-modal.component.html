@@ -1,4 +1,4 @@
-<h1 mat-dialog-title>{{ 'MANAGEMENT_USERS_UPDATE_USER_MODAL_TITLE' | translate }} {{ firstname }} {{ surname }}</h1>
+<h1 mat-dialog-title>{{ 'MANAGEMENT_USERS_UPDATE_USER_MODAL_TITLE' | tr }} {{ firstname }} {{ surname }}</h1>
 <div mat-dialog-content>
   <form #form="ngForm" (ngSubmit)="update(form)" fxLayout="row wrap" fxLayout.xs="column" fxLayoutGap="1%" fxLayoutAlign="space-between">
     <app-do-not-forget-to-save fxFlex="100%"></app-do-not-forget-to-save>
@@ -13,11 +13,11 @@
         maxlength="190"
         name="title"
         ngModel
-        placeholder="{{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_TITLE' | translate }}"
+        placeholder="{{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_TITLE' | tr }}"
         type="text"
       />
       <mat-error *ngIf="titleModel.invalid">
-        {{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_TITLE_INCORRECT' | translate }}
+        {{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_TITLE_INCORRECT' | tr }}
       </mat-error>
     </mat-form-field>
 
@@ -33,15 +33,15 @@
         minlength="1"
         name="username"
         ngModel
-        placeholder="{{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_USERNAME' | translate }}"
+        placeholder="{{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_USERNAME' | tr }}"
         required
         type="text"
       />
       <mat-error *ngIf="usernameModel.invalid && !usernameModel.errors?.alreadyTaken">
-        {{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_USERNAME_INCORRECT' | translate }}
+        {{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_USERNAME_INCORRECT' | tr }}
       </mat-error>
       <mat-error *ngIf="usernameModel.errors?.alreadyTaken">
-        {{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_USERNAME_ALREADY_TAKEN' | translate }}
+        {{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_USERNAME_ALREADY_TAKEN' | tr }}
       </mat-error>
     </mat-form-field>
 
@@ -56,12 +56,12 @@
         minlength="1"
         name="firstname"
         ngModel
-        placeholder="{{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_FIRSTNAME' | translate }}"
+        placeholder="{{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_FIRSTNAME' | tr }}"
         required
         type="text"
       />
       <mat-error *ngIf="firstnameModel.invalid">
-        {{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_FIRSTNAME_INCORRECT' | translate }}
+        {{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_FIRSTNAME_INCORRECT' | tr }}
       </mat-error>
     </mat-form-field>
 
@@ -76,12 +76,12 @@
         minlength="1"
         name="surname"
         ngModel
-        placeholder="{{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_SURNAME' | translate }}"
+        placeholder="{{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_SURNAME' | tr }}"
         required
         type="text"
       />
       <mat-error *ngIf="surnameModel.invalid">
-        {{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_SURNAME_INCORRECT' | translate }}
+        {{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_SURNAME_INCORRECT' | tr }}
       </mat-error>
     </mat-form-field>
 
@@ -94,7 +94,7 @@
         matInput
         required
         name="datepicker-birthday"
-        placeholder="{{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_BIRTHDAY' | translate }}"
+        placeholder="{{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_BIRTHDAY' | tr }}"
       />
       <mat-datepicker-toggle [for]="picker_birthday" matSuffix></mat-datepicker-toggle>
       <mat-datepicker #picker_birthday></mat-datepicker>
@@ -109,7 +109,7 @@
         matInput
         required
         name="datepicker-join_date"
-        placeholder="{{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_JOIN_DATE' | translate }}"
+        placeholder="{{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_JOIN_DATE' | tr }}"
       />
       <mat-datepicker-toggle [for]="picker_joindate" matSuffix></mat-datepicker-toggle>
       <mat-datepicker #picker_joindate></mat-datepicker>
@@ -126,12 +126,12 @@
         minlength="1"
         name="streetname"
         ngModel
-        placeholder="{{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_STREETNAME' | translate }}"
+        placeholder="{{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_STREETNAME' | tr }}"
         required
         type="text"
       />
       <mat-error *ngIf="streetnameModel.invalid">
-        {{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_STREETNAME_INCORRECT' | translate }}
+        {{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_STREETNAME_INCORRECT' | tr }}
       </mat-error>
     </mat-form-field>
 
@@ -146,12 +146,12 @@
         minlength="1"
         name="streetnumber"
         ngModel
-        placeholder="{{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_STREETNUMBER' | translate }}"
+        placeholder="{{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_STREETNUMBER' | tr }}"
         required
         type="text"
       />
       <mat-error *ngIf="streetnumberModel.invalid">
-        {{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_STREETNUMBER_INCORRECT' | translate }}
+        {{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_STREETNUMBER_INCORRECT' | tr }}
       </mat-error>
     </mat-form-field>
 
@@ -167,11 +167,12 @@
         name="zipcode"
         ngModel
         number
-        placeholder="{{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_ZIPCODE' | translate }}"
+        required
+        placeholder="{{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_ZIPCODE' | tr }}"
         type="number"
       />
       <mat-error *ngIf="zipcodeModel.invalid">
-        {{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_ZIPCODE_INCORRECT' | translate }}
+        {{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_ZIPCODE_INCORRECT' | tr }}
       </mat-error>
     </mat-form-field>
 
@@ -186,12 +187,12 @@
         minlength="1"
         name="location"
         ngModel
-        placeholder="{{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_LOCATION' | translate }}"
+        placeholder="{{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_LOCATION' | tr }}"
         required
         type="text"
       />
       <mat-error *ngIf="locationModel.invalid">
-        {{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_LOCATION_INCORRECT' | translate }}
+        {{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_LOCATION_INCORRECT' | tr }}
       </mat-error>
     </mat-form-field>
 
@@ -206,12 +207,12 @@
         minlength="1"
         name="activity"
         ngModel
-        placeholder="{{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_ACTIVITY' | translate }}"
+        placeholder="{{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_ACTIVITY' | tr }}"
         required
         type="text"
       />
       <mat-error *ngIf="activityModel.invalid">
-        {{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_ACTIVITY_INCORRECT' | translate }}
+        {{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_ACTIVITY_INCORRECT' | tr }}
       </mat-error>
     </mat-form-field>
 
@@ -226,24 +227,59 @@
         ngModel
         maxlength="190"
         minlength="1"
-        placeholder="{{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_MEMBER_NUMBER' | translate }}"
+        placeholder="{{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_MEMBER_NUMBER' | tr }}"
         type="text"
       />
       <mat-error *ngIf="memberNumberModel.invalid">
-        {{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_MEMBER_NUMBER_INCORRECT' | translate }}
+        {{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_MEMBER_NUMBER_INCORRECT' | tr }}
       </mat-error>
     </mat-form-field>
 
     <!-- Bv Member -->
     <mat-form-field fxFlex="22%" fxFlex.lt-md="30%">
-      <mat-label>{{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_BV_MEMBER' | translate }}</mat-label>
-      <mat-select id="bvMember" [(value)]="bvMember">
+      <mat-label>{{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_GOV_MEMBER' | tr }}</mat-label>
+      <mat-select id="govMember" [(value)]="govMember">
         <mat-option value="">None</mat-option>
-        <mat-option value="{{ 'ACTIVE' | translate }}">{{ 'ACTIVE' | translate }}</mat-option>
-        <mat-option value="{{ 'INACTIVE' | translate }}">{{ 'INACTIVE' | translate }}</mat-option>
+        <mat-option value="{{ 'ACTIVE' | tr }}">{{ 'ACTIVE' | tr }}</mat-option>
+        <mat-option value="{{ 'INACTIVE' | tr }}">{{ 'INACTIVE' | tr }}</mat-option>
         <!-- Backwards compatibility reasons -->
-        <mat-option *ngIf="bvMember.trim().toLowerCase().includes('gemeldet')" value="gemeldet">gemeldet </mat-option>
+        <mat-option *ngIf="govMember.trim().toLowerCase().includes('gemeldet')" value="gemeldet">gemeldet </mat-option>
       </mat-select>
+    </mat-form-field>
+
+
+    <mat-form-field fxFlex="22%" fxFlex.lt-md="30%">
+      <input
+        #bvUserModel="ngModel" [(ngModel)]="bvUser"
+        id="bvUser"
+        matInput
+        name="bvUser"
+        ngModel
+        maxlength="190"
+        placeholder="{{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_BV_USER' | tr }}"
+        type="text"
+      />
+      <mat-error *ngIf="bvUserModel.invalid">
+        {{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_BV_INCORRECT' | tr }}
+      </mat-error>
+    </mat-form-field>
+
+
+    <mat-form-field fxFlex="22%" fxFlex.lt-md="30%">
+      <input
+        #bvPasswordModel="ngModel"
+        [(ngModel)]="bvPassword"
+        id="bvPassword"
+        matInput
+        name="bvPassword"
+        ngModel
+        maxlength="190"
+        placeholder="{{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_BV_PASSWORD' | tr }}"
+        type="text"
+      />
+      <mat-error *ngIf="bvPasswordModel.invalid">
+        {{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_BV_INCORRECT' | tr }}
+      </mat-error>
     </mat-form-field>
 
     <app-divider></app-divider>
@@ -264,11 +300,11 @@
         <mat-expansion-panel [expanded]="!isMobile" style="margin-bottom: 7px">
           <mat-expansion-panel-header>
             <mat-panel-title>
-              {{ 'MANAGEMENT_USERS_UPDATE_USER_MODAL_PASSWORD_CHANGE' | translate }}
+              {{ 'MANAGEMENT_USERS_UPDATE_USER_MODAL_PASSWORD_CHANGE' | tr }}
             </mat-panel-title>
           </mat-expansion-panel-header>
           <small
-            ><b>{{ 'MANAGEMENT_USERS_UPDATE_USER_MODAL_PASSWORD_CHANGE_DESCRIPTION' | translate }}</b></small
+            ><b>{{ 'MANAGEMENT_USERS_UPDATE_USER_MODAL_PASSWORD_CHANGE_DESCRIPTION' | tr }}</b></small
           >
           <form #changePasswordForm="ngForm" (ngSubmit)="changePassword(changePasswordForm)">
             <div fxLayout="row wrap" fxLayout.lt-md="column" fxLayoutGap="3%" style="margin-top: 15px">
@@ -279,12 +315,12 @@
                   minlength="6"
                   name="password"
                   ngModel
-                  placeholder="{{ 'SIGNIN_NEW_PASSWORD' | translate }}"
+                  placeholder="{{ 'SIGNIN_NEW_PASSWORD' | tr }}"
                   required
                   type="password"
                 />
                 <mat-error *ngIf="passwordModel.invalid">
-                  {{ 'SIGNIN_PASSWORD_REQUIREMENTS' | translate }}
+                  {{ 'SIGNIN_PASSWORD_REQUIREMENTS' | tr }}
                 </mat-error>
               </mat-form-field>
 
@@ -295,7 +331,7 @@
                   minlength="6"
                   name="password_repeat"
                   ngModel
-                  placeholder="{{ 'SIGNIN_NEW_PASSWORD_REPEAT' | translate }}"
+                  placeholder="{{ 'SIGNIN_NEW_PASSWORD_REPEAT' | tr }}"
                   required
                   type="password"
                 />
@@ -303,7 +339,7 @@
 
               <div fxFlex="25%">
                 <button [disabled]="!changePasswordForm.form.valid" color="primary" mat-flat-button style="width: 100%">
-                  {{ 'MANAGEMENT_USERS_UPDATE_USER_MODAL_PASSWORD_CHANGE' | translate }}
+                  {{ 'MANAGEMENT_USERS_UPDATE_USER_MODAL_PASSWORD_CHANGE' | tr }}
                 </button>
               </div>
             </div>
@@ -316,7 +352,7 @@
         <mat-expansion-panel [expanded]="!isMobile" style="margin-bottom: 7px">
           <mat-expansion-panel-header>
             <mat-panel-title>
-              {{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_LIST_EMAIL_ADDRESSES' | translate }}
+              {{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_LIST_EMAIL_ADDRESSES' | tr }}
             </mat-panel-title>
           </mat-expansion-panel-header>
           <app-email-addresses-list
@@ -331,7 +367,7 @@
         <mat-expansion-panel [expanded]="!isMobile" style="margin-bottom: 7px">
           <mat-expansion-panel-header>
             <mat-panel-title>
-              {{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_INTERAL_COMMENT' | translate }}
+              {{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_INTERAL_COMMENT' | tr }}
             </mat-panel-title>
           </mat-expansion-panel-header>
 
@@ -346,7 +382,7 @@
         <mat-expansion-panel [expanded]="!isMobile">
           <mat-expansion-panel-header>
             <mat-panel-title>
-              {{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_PHONE_NUMBERS' | translate }}
+              {{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_PHONE_NUMBERS' | tr }}
             </mat-panel-title>
           </mat-expansion-panel-header>
           <app-phone-numbers-list
@@ -361,7 +397,7 @@
         <mat-expansion-panel [expanded]="!isMobile" style="margin-bottom: 7px">
           <mat-expansion-panel-header>
             <mat-panel-title>
-              {{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_PERFORMANCE_BADGES_TITLE' | translate }}
+              {{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_PERFORMANCE_BADGES_TITLE' | tr }}
             </mat-panel-title>
           </mat-expansion-panel-header>
           <app-performance-badges-list
@@ -377,7 +413,7 @@
         <mat-expansion-panel [expanded]="!isMobile" style="margin-bottom: 7px">
           <mat-expansion-panel-header>
             <mat-panel-title>
-              {{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_BADGES_TITLE' | translate }}
+              {{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_BADGES_TITLE' | tr }}
             </mat-panel-title>
           </mat-expansion-panel-header>
           <app-badges-list
@@ -393,7 +429,7 @@
         <mat-expansion-panel *ngIf="hasPermissionToChangePermission" [expanded]="!isMobile" style="margin-bottom: 7px">
           <mat-expansion-panel-header>
             <mat-panel-title>
-              {{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_PERMISSIONS' | translate }}
+              {{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_PERMISSIONS' | tr }}
             </mat-panel-title>
           </mat-expansion-panel-header>
           <app-permissions-list (permissionsChanged)="onPermissionsChange($event)" [permissions]="permissions"></app-permissions-list>
@@ -409,12 +445,12 @@
         [(ngModel)]="activated"
         color="accent"
         id="activated"
-        matTooltip="{{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_ACTIVATED_DESCRIPTION' | translate }}"
+        matTooltip="{{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_ACTIVATED_DESCRIPTION' | tr }}"
         matTooltipPosition="above"
         name="activated"
         ngModel
       >
-        {{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_ACTIVATED' | translate }}
+        {{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_ACTIVATED' | tr }}
       </mat-checkbox>
 
       <!-- Information denied -->
@@ -422,21 +458,21 @@
         [(ngModel)]="informationDenied"
         color="accent"
         id="informationDenied"
-        matTooltip="{{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_INFORMATION_DENIED_DESCRIPTION' | translate }}"
+        matTooltip="{{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_INFORMATION_DENIED_DESCRIPTION' | tr }}"
         matTooltipPosition="above"
         name="informationDenied"
         ngModel
       >
-        {{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_INFORMATION_DENIED' | translate }}
+        {{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_INFORMATION_DENIED' | tr }}
       </mat-checkbox>
     </div>
   </form>
 </div>
 <div mat-dialog-actions>
-  <button [mat-dialog-close] mat-button>{{ 'CLOSE' | translate }}</button>
-  <button (click)="form.ngSubmit.emit()" [disabled]="!form.form.valid" color="accent" mat-flat-button>{{ 'SAVE' | translate }}</button>
+  <button [mat-dialog-close] mat-button>{{ 'CLOSE' | tr }}</button>
+  <button (click)="form.ngSubmit.emit()" [disabled]="!form.form.valid" color="accent" mat-flat-button>{{ 'SAVE' | tr }}</button>
 </div>
 
 <ng-template #successfullyUpdatedUser>
-  <h2>{{ 'MANAGEMENT_USERS_UPDATE_USER_MODAL_SUCCESSFULLY_UPDATED_USER' | translate }}</h2>
+  <h2>{{ 'MANAGEMENT_USERS_UPDATE_USER_MODAL_SUCCESSFULLY_UPDATED_USER' | tr }}</h2>
 </ng-template>

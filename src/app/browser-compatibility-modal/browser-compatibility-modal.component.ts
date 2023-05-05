@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 
-import {TranslateService} from '../translation/translate.service';
+import {TranslateService} from 'dfx-translate';
 import {UIHelper} from '../utils/helper/UIHelper';
 
 @Component({
@@ -17,6 +17,6 @@ export class BrowserCompatibilityModalComponent implements OnInit {
 
   ngOnInit() {
     this.currentYear = UIHelper.getCurrentDate().getFullYear();
-    this.content2 = this.translate.getTranslationFor('BROWSER_COMPATIBILITY_CONTENT_2');
+    this.content2 = this.translate.translate('BROWSER_COMPATIBILITY_CONTENT_2');
   }
 }

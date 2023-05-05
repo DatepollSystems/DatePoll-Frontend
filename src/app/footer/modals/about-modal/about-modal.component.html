@@ -1,29 +1,29 @@
-<h1 mat-dialog-title>{{ 'ABOUT' | translate }}</h1>
+<h1 mat-dialog-title>{{ 'ABOUT' | tr }}</h1>
 <mat-dialog-content>
   <mat-tab-group mat-align-tabs="center">
-    <mat-tab label="{{ 'ABOUT_GENERAL' | translate }}">
+    <mat-tab label="{{ 'ABOUT_GENERAL' | tr }}">
       <div class="entry">
-        <h3>{{ 'ABOUT_DESCRIPTION' | translate }}</h3>
+        <h3>{{ 'ABOUT_DESCRIPTION' | tr }}</h3>
       </div>
       <mat-divider></mat-divider>
       <div class="entry">
         <h3>
-          <a href="https://datepoll.org" rel="noopener" target="_blank">{{ 'ABOUT_VISIT_DATEPOLL' | translate }}</a>
+          <a href="https://datepoll.org" rel="noopener" target="_blank">{{ 'ABOUT_VISIT_DATEPOLL' | tr }}</a>
         </h3>
       </div>
       <mat-divider></mat-divider>
     </mat-tab>
-    <mat-tab label="{{ 'ABOUT_TECHNICAL' | translate }}">
+    <mat-tab label="{{ 'ABOUT_TECHNICAL' | tr }}">
       <div class="entry">
-        <h3>{{ 'ABOUT_FRONTEND_VERSION' | translate }}{{ frontendVersion }}</h3>
+        <h3>{{ 'ABOUT_FRONTEND_VERSION' | tr }}{{ frontendVersion }}</h3>
       </div>
       <mat-divider></mat-divider>
       <div class="entry">
-        <h3>{{ 'ABOUT_BACKEND_VERSION' | translate }}{{ backendVersion }}</h3>
+        <h3>{{ 'ABOUT_BACKEND_VERSION' | tr }}{{ backendVersion }}</h3>
       </div>
       <mat-divider></mat-divider>
       <div class="entry">
-        <h3>{{ 'ABOUT_NEEDED_BACKEND_VERSION' | translate }}{{ requiredBackendVersion }}</h3>
+        <h3>{{ 'ABOUT_NEEDED_BACKEND_VERSION' | tr }}{{ requiredBackendVersion }}</h3>
       </div>
       <mat-divider></mat-divider>
       <div class="entry">
@@ -88,5 +88,5 @@
   </mat-tab-group>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-  <button mat-button mat-dialog-close>{{ 'CLOSE' | translate }}</button>
+  <button mat-button mat-dialog-close>{{ 'CLOSE' | tr }}</button>
 </mat-dialog-actions>

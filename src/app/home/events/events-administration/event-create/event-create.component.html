@@ -1,18 +1,18 @@
 <mat-card
-  ><h1>{{ 'EVENTS_ADMINISTRATION_CREATE_EVENT' | translate }}</h1>
+  ><h1>{{ 'EVENTS_ADMINISTRATION_CREATE_EVENT' | tr }}</h1>
 
   <div fxLayout="row" fxLayoutAlign="space-between" style="margin-bottom: 10px">
     <app-go-back-button></app-go-back-button>
     <button (click)="form.ngSubmit.emit()" [disabled]="!form.form.valid" color="accent" mat-flat-button>
       <mat-icon>mode_edit</mat-icon>
-      {{ 'CREATE' | translate }}
+      {{ 'CREATE' | tr }}
     </button>
   </div>
 
   <form #form="ngForm" (ngSubmit)="create(form)" fxLayout="row break" fxLayout.lt-xl="column" fxLayoutGap="2%" fxLayoutAlign="start">
     <!-- Name -->
     <mat-form-field fxFlex="100%">
-      <mat-label>{{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_NAME' | translate }}</mat-label>
+      <mat-label>{{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_NAME' | tr }}</mat-label>
       <input
         #nameModel="ngModel"
         id="name"
@@ -26,7 +26,7 @@
         [(ngModel)]="name"
       />
       <mat-error *ngIf="nameModel.invalid">
-        {{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_NAME_INCORRECT' | translate }}
+        {{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_NAME_INCORRECT' | tr }}
       </mat-error>
     </mat-form-field>
 
@@ -52,12 +52,12 @@
       <mat-expansion-panel style="margin-top: 10px">
         <mat-expansion-panel-header>
           <mat-panel-title>
-            {{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_REAPEAT' | translate }}
+            {{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_REAPEAT' | tr }}
           </mat-panel-title>
         </mat-expansion-panel-header>
 
         <mat-card class="mat-info-card">
-          <b>{{ 'INFORMATION' | translate }}</b> {{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_REAPEAT_INFORMATION' | translate }}
+          <b>{{ 'INFORMATION' | tr }}</b> {{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_REAPEAT_INFORMATION' | tr }}
         </mat-card>
 
         <!-- xWeeks -->
@@ -70,12 +70,12 @@
           fxLayoutAlign="start"
         >
           <mat-form-field fxFlex="25%" fxFlex.lt-md="31%">
-            <mat-label>{{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_REAPEAT_WEEKS' | translate }}</mat-label>
+            <mat-label>{{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_REAPEAT_WEEKS' | tr }}</mat-label>
             <input [(ngModel)]="xWeeks" id="xWeeks" matInput name="xWeeks" ngModel required type="number" />
           </mat-form-field>
 
           <mat-form-field fxFlex="25%" fxFlex.lt-md="31%">
-            <mat-label>{{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_REAPEAT_REPEATS' | translate }}</mat-label>
+            <mat-label>{{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_REAPEAT_REPEATS' | tr }}</mat-label>
             <input [(ngModel)]="xRepeats" id="xRepeats" matInput name="xRepeats" ngModel required type="number" />
           </mat-form-field>
 
@@ -90,7 +90,7 @@
               (click)="repeatForm.ngSubmit.emit()"
               [disabled]="!repeatForm.valid"
             >
-              {{ 'ADD' | translate }}
+              {{ 'ADD' | tr }}
               <mat-icon>library_add</mat-icon>
             </button>
           </div>
@@ -103,7 +103,7 @@
             <mat-list-item *ngFor="let repeat of repeats">
               <div matLine fxLayout="row" fxLayoutAlign="space-between">
                 <span>{{ name?.length > 0 ? '"' + name + '"' : 'Event' }} {{ repeat.xRepeats }}</span>
-                <button mat-stroked-button color="warn" type="button" (click)="deleteRepeats(repeat)">{{ 'DELETE' | translate }}</button>
+                <button mat-stroked-button color="warn" type="button" (click)="deleteRepeats(repeat)">{{ 'DELETE' | tr }}</button>
               </div>
               <span matLine *ngFor="let date of repeat.dates">{{ date.date | date: 'EE, dd.MM.yyyy HH:mm' }}</span>
               <mat-divider></mat-divider>
@@ -122,7 +122,7 @@
       <mat-expansion-panel style="margin-top: 10px">
         <mat-expansion-panel-header>
           <mat-panel-title>
-            {{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DESCRIPTION' | translate }}
+            {{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DESCRIPTION' | tr }}
           </mat-panel-title>
         </mat-expansion-panel-header>
 

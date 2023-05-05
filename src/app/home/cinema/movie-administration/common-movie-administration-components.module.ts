@@ -7,7 +7,7 @@ import {MaterialModule} from '../../../material-module';
 
 import {CommonComponentsModule} from '../../../utils/common-components.module';
 import {CustomDateAdapter, MY_DATE_FORMATS} from '../../../utils/custom-date-adapter';
-import {TranslationModule} from '../../../translation/translation.module';
+import {DfxTranslateModule} from 'dfx-translate';
 import {MovieBookingsModalComponent} from './movie-bookings-modal/movie-bookings-modal.component';
 import {MovieBookingsTableComponent} from './movie-bookings-table/movie-bookings-table.component';
 import {MovieCreateModalComponent} from './movie-create-modal/movie-create-modal.component';
@@ -22,7 +22,7 @@ import {MovieInfoModalComponent} from './movie-info-modal/movie-info-modal.compo
     MovieBookingsTableComponent,
     MovieBookingsModalComponent,
   ],
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, MaterialModule, CommonComponentsModule, TranslationModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, MaterialModule, CommonComponentsModule, DfxTranslateModule],
   providers: [
     {provide: DateAdapter, useClass: CustomDateAdapter},
     {provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS},

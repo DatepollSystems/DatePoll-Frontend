@@ -6,7 +6,7 @@ import {DateAdapter, MAT_DATE_FORMATS} from '@angular/material/core';
 import {NgxMatSelectSearchModule} from 'ngx-mat-select-search';
 
 import {MaterialModule} from '../../material-module';
-import {TranslationModule} from '../../translation/translation.module';
+import {DfxTranslateModule} from 'dfx-translate';
 import {CustomDateAdapter, MY_DATE_FORMATS} from '../../utils/custom-date-adapter';
 import {GoBackButtonModule} from '../../utils/shared-components/go-back-button/go-back-button.module';
 import {GroupAndSubgroupTypeInputSelectModule} from '../../utils/shared-components/group-and-subgroup-type-input-select/group-and-subgroup-type-input-select.module';
@@ -14,8 +14,6 @@ import {MapsModule} from '../../utils/shared-components/maps-component/maps.modu
 import {EventInfoModule} from './event-info/event-info.module';
 import {EventsRoutingModule} from './events-routing.module';
 import {AllMembersSwitchModule} from '../../utils/shared-components/all-members-switch/all-members-switch.module';
-
-import {EventsService} from './services/events.service';
 
 import {ColorPickerComponentModule} from '../../utils/shared-components/color-picker/color-picker-component.module';
 import {CommonEventsComponentsModule} from './common-events-components.module';
@@ -26,6 +24,7 @@ import {EventUserManagementModalComponent} from './events-administration/event-u
 import {EventsAdministrationComponent} from './events-administration/events-administration.component';
 import {YearSelectModule} from '../../utils/shared-components/year-select/year-select.module';
 import {StartModule} from '../start/start.module';
+import {BooleanTranslationModule} from '../../utils/shared-components/boolean-translation/boolean-translation.module';
 
 @NgModule({
   declarations: [
@@ -40,7 +39,7 @@ import {StartModule} from '../start/start.module';
     FormsModule,
     ReactiveFormsModule,
     MaterialModule,
-    TranslationModule,
+    DfxTranslateModule,
     CommonEventsComponentsModule,
     ColorPickerComponentModule,
     MapsModule,
@@ -49,6 +48,7 @@ import {StartModule} from '../start/start.module';
     GroupAndSubgroupTypeInputSelectModule,
     NgxMatSelectSearchModule,
     GoBackButtonModule,
+    BooleanTranslationModule,
     AllMembersSwitchModule,
     YearSelectModule,
     StartModule,

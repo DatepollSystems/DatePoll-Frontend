@@ -1,13 +1,16 @@
 <mat-form-field>
-  <mat-select (selectionChange)="instrumentSelectChange($event.value)"
-              [formControl]="instrumentCtrl"
-              placeholder="{{'MANAGEMENT_USERS_CREATE_USER_MODAL_PERFORMANCE_BADGES_INSTRUMENT' | translate}}" required>
+  <mat-select
+    (selectionChange)="instrumentSelectChange($event.value)"
+    [formControl]="instrumentCtrl"
+    placeholder="{{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_PERFORMANCE_BADGES_INSTRUMENT' | tr }}"
+    required
+  >
     <mat-option>
       <ngx-mat-select-search [formControl]="instrumentFilterCtrl"></ngx-mat-select-search>
     </mat-option>
 
     <mat-option *ngFor="let instrument of filteredInstruments | async" [value]="instrument">
-      {{instrument.name}}
+      {{ instrument.name }}
     </mat-option>
   </mat-select>
 </mat-form-field>

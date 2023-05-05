@@ -1,14 +1,14 @@
 <mat-expansion-panel [expanded]="!isMobile">
   <mat-expansion-panel-header>
     <mat-panel-title>
-      {{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_DECISIONS' | translate }}
+      {{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_DECISIONS' | tr }}
     </mat-panel-title>
   </mat-expansion-panel-header>
 
-  <mat-card class="not-selectable" style="background-color: #29b6f6;" *ngIf="decisionUpdating">
-    {{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_DECISIONS_UPDATE_DESCRIPTION' | translate }}
+  <mat-card class="not-selectable" style="background-color: #29b6f6" *ngIf="decisionUpdating">
+    {{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_DECISIONS_UPDATE_DESCRIPTION' | tr }}
     <a (click)="cancelUpdateMode()" style="float: right; color: black"
-      ><b> {{ 'CANCEL' | translate }}</b></a
+      ><b> {{ 'CANCEL' | tr }}</b></a
     >
   </mat-card>
 
@@ -27,25 +27,25 @@
         name="decision"
         ngModel
         [(ngModel)]="decisionString"
-        placeholder="{{ 'EVENTS_STANDARD_DECISIONS_MANAGEMENT_ADD_STANDARD_DECISION' | translate }}"
+        placeholder="{{ 'EVENTS_STANDARD_DECISIONS_MANAGEMENT_ADD_STANDARD_DECISION' | tr }}"
         required
         type="text"
       />
       <mat-error *ngIf="decisionModel.invalid">
-        {{ 'EVENTS_STANDARD_DECISIONS_MANAGEMENT_ADD_STANDARD_DECISION_INCORRECT' | translate }}
+        {{ 'EVENTS_STANDARD_DECISIONS_MANAGEMENT_ADD_STANDARD_DECISION_INCORRECT' | tr }}
       </mat-error>
     </mat-form-field>
 
     <div fxFlex="20%" fxFlex.lt-lg="45%" fxFlex.xs="98%" style="text-align: center">
       <mat-slide-toggle (change)="showInCalendarChange($event)" [checked]="showInCalendar">
-        {{ 'EVENTS_STANDARD_DECISIONS_MANAGEMENT_ADD_STANDARD_DECISION_SHOW_IN_CALENDAR' | translate }}
+        {{ 'EVENTS_STANDARD_DECISIONS_MANAGEMENT_ADD_STANDARD_DECISION_SHOW_IN_CALENDAR' | tr }}
       </mat-slide-toggle>
     </div>
 
     <div fxFlex="20%" fxFlex.lt-lg="45%" fxFlex.xs="98%">
       <button [disabled]="!addDecisionForm.valid" color="accent" mat-flat-button style="width: 100%; text-align: center" type="submit">
-        <span *ngIf="!decisionUpdating">{{ 'ADD' | translate }}</span>
-        <span *ngIf="decisionUpdating">{{ 'SAVE' | translate }}</span>
+        <span *ngIf="!decisionUpdating">{{ 'ADD' | tr }}</span>
+        <span *ngIf="decisionUpdating">{{ 'SAVE' | tr }}</span>
         <mat-icon aria-label="Submit button">library_add</mat-icon>
       </button>
     </div>
@@ -58,14 +58,14 @@
       <div matListAvatar [style.background-color]="decision.color"></div>
       <span matLine>{{ decision.decision }}</span>
       <span matLine
-        >{{ 'EVENTS_STANDARD_DECISIONS_MANAGEMENT_ADD_STANDARD_DECISION_SHOW_IN_CALENDAR' | translate }} :
+        >{{ 'EVENTS_STANDARD_DECISIONS_MANAGEMENT_ADD_STANDARD_DECISION_SHOW_IN_CALENDAR' | tr }} :
         {{ decision.showInCalendar | boolean }}</span
       >
       <button
         type="button"
         (click)="changeToUpdateDecision(decision)"
         mat-icon-button
-        matTooltip="{{ 'EDIT' | translate }}"
+        matTooltip="{{ 'EDIT' | tr }}"
         matTooltipPosition="left"
       >
         <mat-icon>create</mat-icon>
@@ -73,7 +73,7 @@
       <button
         (click)="removeDecision(decision)"
         mat-icon-button
-        matTooltip="{{ 'EVENTS_STANDARD_DECISIONS_MANAGEMENT_REMOVE_STANDARD_DECISION_BUTTON_TOOLTIP' | translate }}"
+        matTooltip="{{ 'EVENTS_STANDARD_DECISIONS_MANAGEMENT_REMOVE_STANDARD_DECISION_BUTTON_TOOLTIP' | tr }}"
         matTooltipPosition="above"
       >
         <mat-icon>delete_forever</mat-icon>

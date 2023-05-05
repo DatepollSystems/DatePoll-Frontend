@@ -1,4 +1,4 @@
-<h1 mat-dialog-title>{{ 'EVENTS_ADMINISTRATION_UPDATE_EVENT' | translate }} {{ name }}</h1>
+<h1 mat-dialog-title>{{ 'EVENTS_ADMINISTRATION_UPDATE_EVENT' | tr }} {{ name }}</h1>
 <div mat-dialog-content>
   <form #form="ngForm" (ngSubmit)="update(form)" fxLayout="row break" fxLayout.lt-xl="column" fxLayoutGap="2%" fxLayoutAlign="start">
     <!-- Name -->
@@ -12,12 +12,12 @@
         minlength="1"
         name="name"
         ngModel
-        placeholder="{{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_NAME' | translate }}"
+        placeholder="{{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_NAME' | tr }}"
         required
         type="text"
       />
       <mat-error *ngIf="nameModel.invalid">
-        {{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_NAME_INCORRECT' | translate }}
+        {{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_NAME_INCORRECT' | tr }}
       </mat-error>
     </mat-form-field>
 
@@ -46,7 +46,7 @@
       <mat-expansion-panel style="margin-top: 10px">
         <mat-expansion-panel-header>
           <mat-panel-title>
-            {{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DESCRIPTION' | translate }}
+            {{ 'EVENTS_ADMINISTRATION_CREATE_EVENT_FORM_DESCRIPTION' | tr }}
           </mat-panel-title>
         </mat-expansion-panel-header>
 
@@ -58,6 +58,6 @@
   </form>
 </div>
 <div mat-dialog-actions>
-  <button [mat-dialog-close] mat-button>{{ 'CLOSE' | translate }}</button>
-  <button (click)="form.ngSubmit.emit()" [disabled]="!form.form.valid" color="accent" mat-flat-button>{{ 'SAVE' | translate }}</button>
+  <button [mat-dialog-close] mat-button>{{ 'CLOSE' | tr }}</button>
+  <button (click)="form.ngSubmit.emit()" [disabled]="!form.form.valid" color="accent" mat-flat-button>{{ 'SAVE' | tr }}</button>
 </div>

@@ -15,12 +15,12 @@
         minlength="1"
         name="label"
         ngModel
-        placeholder="{{ 'SETTINGS_PERSONAL_DATA_MODAL_PHONE_NUMBER_LABEL' | translate }}"
+        placeholder="{{ 'SETTINGS_PERSONAL_DATA_MODAL_PHONE_NUMBER_LABEL' | tr }}"
         required
         type="text"
       />
       <mat-error *ngIf="labelModel.invalid">
-        {{ 'SETTINGS_PERSONAL_DATA_MODAL_PHONE_NUMBER_LABEL_INVALID' | translate }}
+        {{ 'SETTINGS_PERSONAL_DATA_MODAL_PHONE_NUMBER_LABEL_INVALID' | tr }}
       </mat-error>
     </mat-form-field>
   </div>
@@ -35,19 +35,19 @@
         minlength="1"
         name="phoneNumber"
         ngModel
-        placeholder="{{ 'SETTINGS_PERSONAL_DATA_MODAL_PHONE_NUMBER_PHONE_NUMBER' | translate }}"
+        placeholder="{{ 'SETTINGS_PERSONAL_DATA_MODAL_PHONE_NUMBER_PHONE_NUMBER' | tr }}"
         required
         type="text"
       />
       <mat-error *ngIf="phoneNumberModel.invalid">
-        {{ 'SETTINGS_PERSONAL_DATA_MODAL_PHONE_NUMBER_PHONE_NUMBER_NOT_VALID' | translate }}
+        {{ 'SETTINGS_PERSONAL_DATA_MODAL_PHONE_NUMBER_PHONE_NUMBER_NOT_VALID' | tr }}
       </mat-error>
     </mat-form-field>
   </div>
 
   <div fxFlex="25%">
     <button [disabled]="!phoneNumberForm.valid" color="primary" mat-raised-button style="width: 100%" type="submit">
-      {{ 'ADD' | translate }}
+      {{ 'ADD' | tr }}
       <mat-icon aria-label="Submit button">playlist_add</mat-icon>
     </button>
   </div>
@@ -55,23 +55,23 @@
 
 <table [dataSource]="dataSource" class="table-responsive" mat-table>
   <ng-container matColumnDef="label">
-    <th *matHeaderCellDef mat-header-cell>{{ 'SETTINGS_PERSONAL_DATA_MODAL_PHONE_NUMBER_LABEL' | translate }}</th>
+    <th *matHeaderCellDef mat-header-cell>{{ 'SETTINGS_PERSONAL_DATA_MODAL_PHONE_NUMBER_LABEL' | tr }}</th>
     <td *matCellDef="let phoneNumber" mat-cell>{{ phoneNumber.label }}</td>
   </ng-container>
 
   <ng-container matColumnDef="phonenumber">
-    <th *matHeaderCellDef mat-header-cell>{{ 'SETTINGS_PERSONAL_DATA_MODAL_PHONE_NUMBER_PHONE_NUMBER' | translate }}</th>
+    <th *matHeaderCellDef mat-header-cell>{{ 'SETTINGS_PERSONAL_DATA_MODAL_PHONE_NUMBER_PHONE_NUMBER' | tr }}</th>
     <td *matCellDef="let phoneNumber" mat-cell>{{ phoneNumber.phoneNumber }}</td>
   </ng-container>
 
   <ng-container matColumnDef="action">
-    <th *matHeaderCellDef mat-header-cell>{{ 'ACTION' | translate }}</th>
+    <th *matHeaderCellDef mat-header-cell>{{ 'ACTION' | tr }}</th>
     <td *matCellDef="let phoneNumber" mat-cell>
       <button
         (click)="removePhoneNumber(phoneNumber)"
         [matTooltipPosition]="'right'"
         mat-icon-button
-        matTooltip="{{ 'SETTINGS_PERSONAL_DATA_MODAL_PHONE_NUMBER_DELETE_TOOLTIP' | translate }}"
+        matTooltip="{{ 'SETTINGS_PERSONAL_DATA_MODAL_PHONE_NUMBER_DELETE_TOOLTIP' | tr }}"
       >
         <mat-icon>delete_foreve</mat-icon>
       </button>
@@ -83,5 +83,5 @@
 </table>
 
 <mat-card class="not-selectable mat-info-card" *ngIf="phoneNumbers?.length == 0">
-  <b>{{ 'INFORMATION' | translate }}</b> {{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_PHONE_NUMBERS_NO_PHONE_NUMBERS' | translate }}
+  <b>{{ 'INFORMATION' | tr }}</b> {{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_PHONE_NUMBERS_NO_PHONE_NUMBERS' | tr }}
 </mat-card>

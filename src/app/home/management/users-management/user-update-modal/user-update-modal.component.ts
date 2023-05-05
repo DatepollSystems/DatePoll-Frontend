@@ -1,10 +1,8 @@
 import {Component, Inject, OnDestroy} from '@angular/core';
 import {NgForm} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import {MatSnackBar} from '@angular/material/snack-bar';
 import {Subscription} from 'rxjs';
 
-import {TranslateService} from '../../../../translation/translate.service';
 import {Converter} from '../../../../utils/helper/Converter';
 import {MyUserService} from '../../../my-user.service';
 import {GroupsService} from '../../groups-management/groups.service';
@@ -16,7 +14,7 @@ import {UsersService} from '../users.service';
 import {Permissions} from '../../../../permissions';
 import {
   GroupAndSubgroupModel,
-  GroupType,
+  GroupType
 } from '../../../../utils/shared-components/group-and-subgroup-type-input-select/groupAndSubgroup.model';
 import {PhoneNumber} from '../models/phoneNumber.model';
 import {UserBadge} from '../models/userBadge.model';
@@ -48,7 +46,9 @@ export class UserUpdateModalComponent implements OnDestroy {
   zipcode: number;
   location: string;
   activity: string;
-  bvMember: string;
+  govMember: string;
+  bvUser?: string;
+  bvPassword?: string;
   memberNumber: string;
   activated: boolean;
   internalComment: string;
@@ -106,7 +106,9 @@ export class UserUpdateModalComponent implements OnDestroy {
     this.activity = this.user.activity;
     this.memberNumber = this.user.memberNumber;
     this.activated = this.user.activated;
-    this.bvMember = this.user.bvMember;
+    this.govMember = this.user.govMember;
+    this.bvUser = this.user.bvUser;
+    this.bvPassword = this.user.bvPassword;
     this.internalComment = this.user.internalComment;
     this.informationDenied = this.user.informationDenied;
     this.phoneNumbers = this.user.getPhoneNumbers();
@@ -247,6 +249,8 @@ export class UserUpdateModalComponent implements OnDestroy {
     const activity = form.controls.activity.value;
     const internalComment = form.controls.internalComment.value;
     const memberNumber = form.controls.memberNumber.value;
+    const bvUser = form.controls.bvUser.value;
+    const bvPassword = form.controls.bvPassword.value;
     let activated = form.controls.activated.value;
     const informationDenied = form.controls.informationDenied.value;
 
@@ -279,7 +283,9 @@ export class UserUpdateModalComponent implements OnDestroy {
       location,
       activated,
       activity,
-      bv_member: this.bvMember,
+      bv_member: this.govMember,
+      bv_user: bvUser,
+      bv_password: bvPassword,
       information_denied: informationDenied,
       member_number: memberNumber,
       internal_comment: internalComment,

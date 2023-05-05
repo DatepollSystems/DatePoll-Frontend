@@ -5,7 +5,7 @@ import {DateAdapter, MAT_DATE_FORMATS} from '@angular/material/core';
 import {InfiniteScrollModule} from 'ngx-infinite-scroll';
 
 import {MaterialModule} from '../../material-module';
-import {TranslationModule} from '../../translation/translation.module';
+import {DfxTranslateModule} from 'dfx-translate';
 import {EditorPreviewModule} from '../../utils/shared-components/editor-preview/editor-preview.module';
 import {BroadcastsRoutingModule} from './broadcasts-routing.module';
 
@@ -22,7 +22,7 @@ import {GoBackButtonModule} from '../../utils/shared-components/go-back-button/g
     CommonModule,
     FormsModule,
     MaterialModule,
-    TranslationModule,
+    DfxTranslateModule,
     GoBackButtonModule,
     EditorPreviewModule,
     InfiniteScrollModule,

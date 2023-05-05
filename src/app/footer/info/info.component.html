@@ -1,9 +1,9 @@
 <div style="min-height: 90%">
   <div fxLayout="row" fxLayout.lt-md="column">
     <mat-action-list fxFlex="20%">
-      <button mat-list-item mat-ripple routerLink="imprint" routerLinkActive="active">{{ 'IMPRINT' | translate }}</button>
-      <button mat-list-item mat-ripple routerLink="privacypolicy" routerLinkActive="active">{{ 'PRIVACY_POLICY' | translate }}</button>
-      <button mat-list-item mat-ripple routerLink="/about">{{ '404_GO_BACK' | translate }}</button>
+      <button mat-list-item mat-ripple routerLink="imprint" routerLinkActive="active">{{ 'IMPRINT' | tr }}</button>
+      <button mat-list-item mat-ripple routerLink="privacypolicy" routerLinkActive="active">{{ 'PRIVACY_POLICY' | tr }}</button>
+      <button mat-list-item mat-ripple routerLink="/about">{{ '404_GO_BACK' | tr }}</button>
     </mat-action-list>
     <router-outlet></router-outlet>
   </div>

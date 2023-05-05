@@ -86,8 +86,8 @@ export class ListChipInputComponent implements OnInit {
 
   add(event: MatChipInputEvent): void {
     this.addValue(event.value);
-    if (event.input) {
-      event.input.value = '';
+    if (event.chipInput) {
+      event.chipInput.inputElement.value = '';
     }
   }
 

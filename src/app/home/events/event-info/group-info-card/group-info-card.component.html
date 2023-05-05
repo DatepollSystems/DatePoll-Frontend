@@ -3,10 +3,10 @@
     <div fxLayout="row" fxLayoutAlign="space-between" style="margin-bottom: 10px">
       <div>
         <mat-card-title *ngIf="resultGroup.id !== -1">{{ resultGroup.name }}</mat-card-title>
-        <mat-card-title *ngIf="resultGroup.id == -1">{{ 'EVENTS_ADMINISTRATION_INFO_EVENT_SINGLE_SUBGROUPS' | translate }}</mat-card-title>
+        <mat-card-title *ngIf="resultGroup.id == -1">{{ 'EVENTS_ADMINISTRATION_INFO_EVENT_SINGLE_SUBGROUPS' | tr }}</mat-card-title>
       </div>
       <mat-slide-toggle [(ngModel)]="simpleView" (change)="simpleViewChange($event)" color="primary" *ngIf="!resultGroup?.event?.anonymous">
-        {{ 'EVENTS_ADMINISTRATION_INFO_EVENT_SIMPLE_VIEW' | translate }}
+        {{ 'EVENTS_ADMINISTRATION_INFO_EVENT_SIMPLE_VIEW' | tr }}
       </mat-slide-toggle>
     </div>
 
@@ -15,7 +15,7 @@
 
     <mat-expansion-panel style="margin-top: 15px" *ngIf="!resultGroup?.event?.anonymous && resultGroup.id !== -1 && !simpleView">
       <mat-expansion-panel-header>
-        <mat-panel-title> {{ 'EVENTS_ADMINISTRATION_INFO_EVENT_MEMBERS_IN' | translate }} {{ resultGroup.name }} </mat-panel-title>
+        <mat-panel-title> {{ 'EVENTS_ADMINISTRATION_INFO_EVENT_MEMBERS_IN' | tr }} {{ resultGroup.name }} </mat-panel-title>
       </mat-expansion-panel-header>
 
       <div
@@ -25,9 +25,9 @@
         fxLayoutAlign="space-between"
         *ngIf="this.myUserService.hasPermission(ROOT_PERMISSION) || this.myUserService.hasPermission(EVENTS_ADMINISTRATION_PERMISSION)"
       >
-        <button mat-flat-button color="accent" (click)="exportGroupResultUsers()">{{ 'EXPORT' | translate }}</button>
+        <button mat-flat-button color="accent" (click)="exportGroupResultUsers()">{{ 'EXPORT' | tr }}</button>
         <mat-slide-toggle (change)="changeAdminMode($event)" labelPosition="before">
-          {{ 'EVENTS_ADMINISTRATION_INFO_EVENT_SHOW_ADMINISTRATION_MODE' | translate }}
+          {{ 'EVENTS_ADMINISTRATION_INFO_EVENT_SHOW_ADMINISTRATION_MODE' | tr }}
         </mat-slide-toggle>
       </div>
 

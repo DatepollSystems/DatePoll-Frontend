@@ -7,7 +7,7 @@ import {Subscription} from 'rxjs';
 
 import {MatMultiSort, MatMultiSortTableDataSource, TableData} from 'ngx-mat-multi-sort';
 
-import {TranslateService} from '../../../translation/translate.service';
+import {TranslateService} from 'dfx-translate';
 import {ExcelService} from '../../../utils/excel.service';
 import {MyUserService} from '../../my-user.service';
 import {UsersService} from './users.service';
@@ -84,7 +84,7 @@ export class UsersManagementComponent implements OnInit, OnDestroy {
         {id: 'phoneNumbers', name: 'phoneNumbers'},
         {id: 'activity', name: 'activity'},
         {id: 'username', name: 'username'},
-        {id: 'bvMember', name: 'bvMember'},
+        {id: 'govMember', name: 'govMember'},
         {id: 'actions', name: 'actions'},
       ],
       {defaultSortParams: ['surname'], defaultSortDirs: ['asc']}
@@ -120,22 +120,22 @@ export class UsersManagementComponent implements OnInit, OnDestroy {
     this.table.dataSource = new MatMultiSortTableDataSource(this.sort, this.CLIENT_SIDE);
 
     this.table.updateColumnNames([
-      {id: 'memberNumber', name: this.translate.getTranslationFor('MANAGEMENT_USERS_MEMBER_NUMBER')},
-      {id: 'title', name: this.translate.getTranslationFor('MANAGEMENT_USERS_TITLE')},
-      {id: 'firstname', name: this.translate.getTranslationFor('MANAGEMENT_USERS_FIRSTNAME')},
-      {id: 'surname', name: this.translate.getTranslationFor('MANAGEMENT_USERS_SURNAME')},
-      {id: 'emails', name: this.translate.getTranslationFor('MANAGEMENT_USERS_EMAIL_ADDRESSES')},
-      {id: 'birthday', name: this.translate.getTranslationFor('MANAGEMENT_USERS_BIRTHDAY')},
-      {id: 'join_date', name: this.translate.getTranslationFor('MANAGEMENT_USERS_JOIN_DATE')},
-      {id: 'streetname', name: this.translate.getTranslationFor('MANAGEMENT_USERS_STREETNAME')},
-      {id: 'streetnumber', name: this.translate.getTranslationFor('MANAGEMENT_USERS_STREETNUMBER')},
-      {id: 'zipcode', name: this.translate.getTranslationFor('MANAGEMENT_USERS_ZIPCODE')},
-      {id: 'location', name: this.translate.getTranslationFor('MANAGEMENT_USERS_LOCATION')},
-      {id: 'phoneNumbers', name: this.translate.getTranslationFor('MANAGEMENT_USERS_PHONENUMBERS')},
-      {id: 'activity', name: this.translate.getTranslationFor('MANAGEMENT_USERS_ACTIVITY')},
-      {id: 'username', name: this.translate.getTranslationFor('MANAGEMENT_USERS_USERNAME')},
-      {id: 'bvMember', name: this.translate.getTranslationFor('MANAGEMENT_USERS_BV_MEMBER')},
-      {id: 'actions', name: this.translate.getTranslationFor('MANAGEMENT_USERS_ACTIONS')},
+      {id: 'memberNumber', name: this.translate.translate('MANAGEMENT_USERS_MEMBER_NUMBER')},
+      {id: 'title', name: this.translate.translate('MANAGEMENT_USERS_TITLE')},
+      {id: 'firstname', name: this.translate.translate('MANAGEMENT_USERS_FIRSTNAME')},
+      {id: 'surname', name: this.translate.translate('MANAGEMENT_USERS_SURNAME')},
+      {id: 'emails', name: this.translate.translate('MANAGEMENT_USERS_EMAIL_ADDRESSES')},
+      {id: 'birthday', name: this.translate.translate('MANAGEMENT_USERS_BIRTHDAY')},
+      {id: 'join_date', name: this.translate.translate('MANAGEMENT_USERS_JOIN_DATE')},
+      {id: 'streetname', name: this.translate.translate('MANAGEMENT_USERS_STREETNAME')},
+      {id: 'streetnumber', name: this.translate.translate('MANAGEMENT_USERS_STREETNUMBER')},
+      {id: 'zipcode', name: this.translate.translate('MANAGEMENT_USERS_ZIPCODE')},
+      {id: 'location', name: this.translate.translate('MANAGEMENT_USERS_LOCATION')},
+      {id: 'phoneNumbers', name: this.translate.translate('MANAGEMENT_USERS_PHONENUMBERS')},
+      {id: 'activity', name: this.translate.translate('MANAGEMENT_USERS_ACTIVITY')},
+      {id: 'username', name: this.translate.translate('MANAGEMENT_USERS_USERNAME')},
+      {id: 'govMember', name: this.translate.translate('MANAGEMENT_USERS_GOV_MEMBER')},
+      {id: 'actions', name: this.translate.translate('MANAGEMENT_USERS_ACTIONS')},
     ]);
 
     this.table.pageSize = 10;
