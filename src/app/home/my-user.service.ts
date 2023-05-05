@@ -58,8 +58,8 @@ export class MyUserService {
         this.setJoindate(data.join_date);
         this.setPermissions(data.permissions);
 
-        this.bvUser = data.bvUser;
-        this.bvPassword = data.bvPassword;
+        this.bvUser = data.bv_user;
+        this.bvPassword = data.bv_password;
 
         const localPhoneNumbers = [];
         const localPhoneNumbersData = data.phone_numbers;
