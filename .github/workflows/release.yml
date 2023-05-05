@@ -13,15 +13,18 @@ jobs:
       - uses: actions/checkout@master
 
       - name: setup node and pnpm
-        uses: dafnik/setup-node-pnpm@v1
+        uses: actions/setup-node@v3
         with:
-          node: 16
-          install: true
+          node-version: 14
+          cache: 'npm'
+
+      - name: npm install
+        run: npm install
 
       - name: build
         run: |
-          pnpm ngcc # Run npm-script ngcc, if ng build does it, the ci breaks (not enough memory)
-          pnpm build:prod
+          npm run ngcc # Run npm-script ngcc, if ng build does it, the ci breaks (not enough memory)
+          npm run build:prod
 
       - uses: actions/upload-artifact@master
         name: upload artifact
@@ -38,9 +41,10 @@ jobs:
       - uses: actions/checkout@master
 
       - name: setup node and pnpm
-        uses: dafnik/setup-node-pnpm@v1
+        uses: actions/setup-node@v3
         with:
-          node: 16
+          node-version: 14
+          cache: 'npm'
 
       - uses: actions/download-artifact@master
         with:
