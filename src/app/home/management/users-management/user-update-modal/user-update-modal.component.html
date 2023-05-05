@@ -167,6 +167,7 @@
         name="zipcode"
         ngModel
         number
+        required
         placeholder="{{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_ZIPCODE' | tr }}"
         type="number"
       />
@@ -244,6 +245,41 @@
         <!-- Backwards compatibility reasons -->
         <mat-option *ngIf="govMember.trim().toLowerCase().includes('gemeldet')" value="gemeldet">gemeldet </mat-option>
       </mat-select>
+    </mat-form-field>
+
+
+    <mat-form-field fxFlex="22%" fxFlex.lt-md="30%">
+      <input
+        #bvUserModel="ngModel" [(ngModel)]="bvUser"
+        id="bvUser"
+        matInput
+        name="bvUser"
+        ngModel
+        maxlength="190"
+        placeholder="{{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_BV_USER' | tr }}"
+        type="text"
+      />
+      <mat-error *ngIf="bvUserModel.invalid">
+        {{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_BV_INCORRECT' | tr }}
+      </mat-error>
+    </mat-form-field>
+
+
+    <mat-form-field fxFlex="22%" fxFlex.lt-md="30%">
+      <input
+        #bvPasswordModel="ngModel"
+        [(ngModel)]="bvPassword"
+        id="bvPassword"
+        matInput
+        name="bvPassword"
+        ngModel
+        maxlength="190"
+        placeholder="{{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_BV_PASSWORD' | tr }}"
+        type="text"
+      />
+      <mat-error *ngIf="bvPasswordModel.invalid">
+        {{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_BV_INCORRECT' | tr }}
+      </mat-error>
     </mat-form-field>
 
     <app-divider></app-divider>

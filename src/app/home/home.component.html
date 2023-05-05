@@ -12,16 +12,26 @@
     <h4 class="sidenav-head-text">{{ username }}</h4>
 
     <mat-nav-list>
-      <div mat-list-item disableRipple fxLayout="row" fxLayoutAlign="space-around">
-        <a mat-button (click)="onPageChange()" routerLink="/home">
-          <mat-icon>home</mat-icon>
+      <a
+        (click)="onPageChange()"
+        mat-list-item
+        routerLink="/home"
+      >
+         <mat-icon>home</mat-icon>
           Home
-        </a>
-        <a mat-button (click)="onPageChange()" routerLink="calendar" routerLinkActive="activated">
-          <mat-icon>today</mat-icon>
-          {{ 'CALENDAR' | tr }}</a
-        >
-      </div>
+      </a>
+
+
+      <a
+        (click)="onPageChange()"
+        mat-list-item
+        routerLink="calendar" routerLinkActive="activated"
+      >
+        <mat-icon>today</mat-icon>
+          {{ 'CALENDAR' | tr }}
+      </a>
+
+      <mat-divider></mat-divider>
 
       <a
         *ngIf="serverInfo.broadcasts_enabled"

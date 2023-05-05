@@ -15,7 +15,7 @@ import {Permissions} from '../../../../permissions';
 
 import {
   GroupAndSubgroupModel,
-  GroupType,
+  GroupType
 } from '../../../../utils/shared-components/group-and-subgroup-type-input-select/groupAndSubgroup.model';
 import {PhoneNumber} from '../models/phoneNumber.model';
 import {UserBadge} from '../models/userBadge.model';
@@ -139,6 +139,8 @@ export class UserCreateModalComponent implements OnDestroy {
     const location = form.controls.location.value;
     const activity = form.controls.activity.value;
     const memberNumber = form.controls.memberNumber.value;
+    const bvUser = form.controls.bvUser.value;
+    const bvPassword = form.controls.bvPassword.value;
     const internalComment = form.controls.internalComment.value;
     let activated = form.controls.activated.value;
     const informationDenied = form.controls.informationDenied.value;
@@ -175,6 +177,8 @@ export class UserCreateModalComponent implements OnDestroy {
       bv_member: this.govMember,
       information_denied: informationDenied,
       member_number: memberNumber,
+      bv_user: bvUser,
+      bv_password: bvPassword,
       internal_comment: internalComment,
       email_addresses: this.emailAddresses,
       phone_numbers: phoneNumbersObject,

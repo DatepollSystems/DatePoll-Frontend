@@ -5,7 +5,7 @@ import {HttpService} from '../../../utils/http.service';
 
 import {
   GroupAndSubgroupModel,
-  GroupType,
+  GroupType
 } from '../../../utils/shared-components/group-and-subgroup-type-input-select/groupAndSubgroup.model';
 import {PhoneNumber} from './models/phoneNumber.model';
 import {User} from './models/user.model';
@@ -87,6 +87,8 @@ export class UsersService {
       user.internal_comment,
       user.information_denied,
       user.bv_member,
+      user.bv_user,
+      user.bv_password,
       localPhoneNumbers,
       user.permissions
     );

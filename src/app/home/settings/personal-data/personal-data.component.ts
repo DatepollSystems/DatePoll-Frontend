@@ -17,6 +17,8 @@ export class PersonalDataComponent {
   streetnumber: string;
   zipcode: number;
   location: string;
+  bvUser?: string;
+  bvPassword?: string;
 
   constructor(private myUserService: MyUserService, private notificationService: NotificationService) {
     this.title = this.myUserService.getTitle();
@@ -27,6 +29,8 @@ export class PersonalDataComponent {
     this.streetnumber = this.myUserService.getStreetnumber();
     this.zipcode = this.myUserService.getZipcode();
     this.location = this.myUserService.getLocation();
+    this.bvUser = this.myUserService.bvUser;
+    this.bvPassword = this.myUserService.bvPassword;
   }
 
   saveData() {
@@ -37,6 +41,8 @@ export class PersonalDataComponent {
     console.log('personalData | Streetnumber: ' + this.streetnumber);
     console.log('personalData | Zipcode: ' + this.zipcode);
     console.log('personalData | Location: ' + this.location);
+    console.log('personalData | bvUser: ' + this.bvUser);
+    console.log('personalData | bvPassword: ' + this.bvPassword);
 
     this.myUserService.setTitle(this.title);
     this.myUserService.setBirthday(this.birthday);
@@ -44,6 +50,8 @@ export class PersonalDataComponent {
     this.myUserService.setStreetnumber(this.streetnumber);
     this.myUserService.setZipcode(this.zipcode);
     this.myUserService.setLocation(this.location);
+    this.myUserService.bvUser = this.bvUser;
+    this.myUserService.bvPassword = this.bvPassword;
 
     console.log('personalData | Saving...');
     this.myUserService.updateMyself().subscribe(

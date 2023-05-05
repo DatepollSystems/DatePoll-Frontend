@@ -106,6 +106,41 @@
         {{ 'SETTINGS_PERSONAL_DATA_MODAL_PERSONAL_DATA_LOCATION_NOT_VALID' | tr }}
       </mat-error>
     </mat-form-field>
+
+    <mat-form-field >
+      <input
+        #bvUserModel="ngModel" [(ngModel)]="bvUser"
+        id="bvUser"
+        matInput
+        name="bvUser"
+        ngModel
+        maxlength="190"
+        placeholder="{{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_BV_USER' | tr }}"
+        type="text"
+      />
+      <mat-error *ngIf="bvUserModel.invalid">
+        {{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_BV_INCORRECT' | tr }}
+      </mat-error>
+    </mat-form-field>
+
+
+    <mat-form-field>
+      <input
+        #bvPasswordModel="ngModel"
+        [(ngModel)]="bvPassword"
+        id="bvPassword"
+        matInput
+        name="bvPassword"
+        ngModel
+        maxlength="190"
+        placeholder="{{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_BV_PASSWORD' | tr }}"
+        type="text"
+      />
+      <mat-error *ngIf="bvPasswordModel.invalid">
+        {{ 'MANAGEMENT_USERS_CREATE_USER_MODAL_FORM_BV_INCORRECT' | tr }}
+      </mat-error>
+    </mat-form-field>
+
   </form>
 </mat-dialog-content>
 <mat-dialog-actions fxLayout="row" fxLayoutAlign="end">
