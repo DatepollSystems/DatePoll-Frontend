@@ -23,6 +23,7 @@ jobs:
       - name: setup node and pnpm
         uses: dafnik/setup-node-pnpm@v1
         with:
+          node: 16
           install: true
 
       - name: build
@@ -36,6 +37,7 @@ jobs:
           name: DatePoll-Frontend-dev
           path: ./dist/DatePoll-Frontend
           retention-days: 1
+
   deploy-testing:
     needs: [build]
     name: Deploy testing

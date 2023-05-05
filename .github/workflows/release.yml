@@ -15,6 +15,7 @@ jobs:
       - name: setup node and pnpm
         uses: dafnik/setup-node-pnpm@v1
         with:
+          node: 16
           install: true
 
       - name: build
