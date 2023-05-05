@@ -14,7 +14,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  build-prod:
+  build:
     name: Build prod
     runs-on: ubuntu-latest
     steps:
@@ -37,7 +37,7 @@ jobs:
           path: ./dist/DatePoll-Frontend
           retention-days: 1
   deploy-testing:
-    needs: [build-testing]
+    needs: [build]
     name: Deploy testing
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/develop'
