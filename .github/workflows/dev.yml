@@ -1,4 +1,4 @@
-name: Testing
+name: Dev
 
 on:
   push:
@@ -38,7 +38,7 @@ jobs:
           path: ./dist/DatePoll-Frontend
           retention-days: 1
 
-  deploy-testing:
+  deploy-dev:
     needs: [build]
     name: Deploy testing
     runs-on: ubuntu-latest
